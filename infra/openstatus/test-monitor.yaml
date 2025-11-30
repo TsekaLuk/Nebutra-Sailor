@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://www.openstatus.dev/schema.json
+# Test Monitor - Verify OpenStatus CLI is working
+
+github-api:
+  name: "GitHub API (Test)"
+  description: "Test monitor to verify OpenStatus setup"
+  frequency: "10m"
+  active: true
+  regions: ["iad"]
+  kind: http
+  request:
+    url: https://api.github.com
+    method: GET
+    headers:
+      Accept: application/json
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200

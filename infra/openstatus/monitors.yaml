@@ -1,0 +1,160 @@
+# yaml-language-server: $schema=https://www.openstatus.dev/schema.json
+# OpenStatus Monitors Configuration
+# Deploy: openstatus monitors apply -f infra/openstatus/monitors.yaml
+
+# ============================================
+# Public Services - Critical (1m frequency)
+# ============================================
+
+landing-page:
+  name: "Landing Page"
+  description: "Main marketing website"
+  frequency: "1m"
+  active: true
+  regions: ["ams", "iad", "sfo", "hkg", "syd"]
+  kind: http
+  request:
+    url: https://nebutra.com
+    method: GET
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200
+
+web-app:
+  name: "Web App"
+  description: "Main SaaS dashboard"
+  frequency: "1m"
+  active: true
+  regions: ["ams", "iad", "sfo", "hkg", "syd"]
+  kind: http
+  request:
+    url: https://app.nebutra.com
+    method: GET
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200
+
+# ============================================
+# API Gateway - Critical
+# ============================================
+
+api-gateway:
+  name: "API Gateway"
+  description: "BFF API health endpoint"
+  frequency: "1m"
+  active: true
+  regions: ["ams", "iad", "sfo", "hkg", "syd"]
+  retry: 2
+  kind: http
+  request:
+    url: https://api.nebutra.com/misc/health
+    method: GET
+    headers:
+      Accept: application/json
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200
+    - kind: header
+      key: content-type
+      compare: contains
+      target: "application/json"
+
+api-gateway-deep:
+  name: "API Gateway - Deep Health"
+  description: "Full health check with DB/Redis"
+  frequency: "5m"
+  active: true
+  regions: ["iad"]
+  retry: 1
+  kind: http
+  request:
+    url: https://api.nebutra.com/health
+    method: GET
+    headers:
+      Accept: application/json
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200
+
+# ============================================
+# Microservices (5m frequency)
+# ============================================
+
+ai-service:
+  name: "AI Service"
+  description: "AI/LLM microservice"
+  frequency: "5m"
+  active: false # Enable when deployed
+  regions: ["iad"]
+  kind: http
+  request:
+    url: https://ai.nebutra.com/health
+    method: GET
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200
+
+content-service:
+  name: "Content Service"
+  description: "Content management microservice"
+  frequency: "5m"
+  active: false # Enable when deployed
+  regions: ["iad"]
+  kind: http
+  request:
+    url: https://content.nebutra.com/health
+    method: GET
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200
+
+recsys-service:
+  name: "RecSys Service"
+  description: "Recommendation system"
+  frequency: "5m"
+  active: false # Enable when deployed
+  regions: ["iad"]
+  kind: http
+  request:
+    url: https://recsys.nebutra.com/health
+    method: GET
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200
+
+ecommerce-service:
+  name: "E-commerce Service"
+  description: "Shopify sync service"
+  frequency: "5m"
+  active: false # Enable when deployed
+  regions: ["iad"]
+  kind: http
+  request:
+    url: https://ecommerce.nebutra.com/health
+    method: GET
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200
+
+web3-service:
+  name: "Web3 Service"
+  description: "Blockchain indexer"
+  frequency: "5m"
+  active: false # Enable when deployed
+  regions: ["iad"]
+  kind: http
+  request:
+    url: https://web3.nebutra.com/health
+    method: GET
+  assertions:
+    - kind: statusCode
+      compare: eq
+      target: 200

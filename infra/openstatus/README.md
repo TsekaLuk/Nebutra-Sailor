@@ -4,43 +4,68 @@ Uptime monitoring and status page for Nebutra Sailor.
 
 ## Quick Start
 
-### 1. Setup OpenStatus Account
+### 1. Create OpenStatus Account
+
+1. 访问 [OpenStatus](https://www.openstatus.dev/) 注册账号
+2. 创建 Workspace
+3. 在 Dashboard 中创建 Status Page (例如: "Nebutra")
+
+### 2. Install CLI
 
 ```bash
-# Install CLI
-npm install -g openstatus
+# macOS (推荐)
+curl -sSL https://instl.sh/openstatushq/cli/macos | bash
 
-# Login
-openstatus login
+# 或使用 Homebrew
+brew install openstatusHQ/cli/openstatus --cask
+
+# Windows
+curl -sSL https://instl.sh/openstatushq/cli/windows | bash
+
+# Linux
+curl -sSL https://instl.sh/openstatushq/cli/linux | bash
 ```
 
-### 2. Deploy Configuration
+### 3. Get API Token
+
+1. 在 OpenStatus Dashboard 点击右上角头像 → **Settings**
+2. 找到 **API Keys** 部分
+3. 点击 **Create API Key**
+4. 复制生成的 Token (格式: `os_xxxxxx`)
+
+### 4. Configure Environment
 
 ```bash
-# Preview changes
-openstatus config diff --file infra/openstatus/openstatus.yaml
+# 设置环境变量 (临时)
+export OPENSTATUS_API_TOKEN=os_your_token_here
 
-# Deploy
-openstatus config push --file infra/openstatus/openstatus.yaml
+# 或添加到 .env.local (持久化)
+echo 'OPENSTATUS_API_TOKEN="os_your_token_here"' >> .env.local
 ```
 
-### 3. Configure Environment Variables
+### 5. Deploy Monitors
 
-Add these to your `.env`:
+```bash
+# 部署测试 monitor (验证配置)
+openstatus monitors apply -c infra/openstatus/test-monitor.yaml -y
+
+# 查看已创建的 monitors
+openstatus monitors list
+
+# 部署正式 monitors (服务部署后)
+openstatus monitors apply -c infra/openstatus/monitors.yaml -y
+```
+
+### 6. (Optional) Configure Alerts
+
+Add to `.env.local`:
 
 ```env
-# Service URLs (for monitoring targets)
-LANDING_PAGE_URL=https://nebutra.com
-WEB_APP_URL=https://app.nebutra.com
-API_GATEWAY_URL=https://api.nebutra.com
-AI_SERVICE_URL=https://ai.nebutra.com
-CONTENT_SERVICE_URL=https://content.nebutra.com
-RECSYS_SERVICE_URL=https://recsys.nebutra.com
-ECOMMERCE_SERVICE_URL=https://ecommerce.nebutra.com
-WEB3_SERVICE_URL=https://web3.nebutra.com
-
-# Notifications
+# Slack 告警 (可选)
 SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxx
+
+# Discord 告警 (可选)
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxx
 ```
 
 ## Using Status Components
@@ -80,18 +105,18 @@ export function Footer() {
 
 ## Monitors
 
-| Monitor | Endpoint | Frequency | Regions |
-|---------|----------|-----------|---------|
-| Landing Page | / | 1m | Global |
-| Web App | / | 1m | Global |
-| API Gateway | /misc/health | 1m | Global |
-| AI Service | /health | 5m | US-East |
-| Content Service | /health | 5m | US-East |
-| RecSys Service | /health | 5m | US-East |
-| E-commerce Service | /health | 5m | US-East |
-| Web3 Service | /health | 5m | US-East |
-| Database | /system/status | 1m | US-East |
-| Redis | /system/status | 1m | US-East |
+| Monitor            | Endpoint       | Frequency | Regions |
+| ------------------ | -------------- | --------- | ------- |
+| Landing Page       | /              | 1m        | Global  |
+| Web App            | /              | 1m        | Global  |
+| API Gateway        | /misc/health   | 1m        | Global  |
+| AI Service         | /health        | 5m        | US-East |
+| Content Service    | /health        | 5m        | US-East |
+| RecSys Service     | /health        | 5m        | US-East |
+| E-commerce Service | /health        | 5m        | US-East |
+| Web3 Service       | /health        | 5m        | US-East |
+| Database           | /system/status | 1m        | US-East |
+| Redis              | /system/status | 1m        | US-East |
 
 ## Status Page
 
@@ -124,21 +149,68 @@ The `/system/status` endpoint provides detailed status for OpenStatus assertions
 }
 ```
 
+## CLI Commands Reference
+
+```bash
+# 查看帮助
+openstatus --help
+openstatus monitors --help
+
+# 列出所有 monitors
+openstatus monitors list
+
+# 部署/更新 monitors
+openstatus monitors apply -c <config-file> -y
+
+# 获取单个 monitor 信息
+openstatus monitors info <monitor-id>
+
+# 手动触发 monitor
+openstatus monitors trigger <monitor-id>
+
+# 导入现有 monitors 到 YAML
+openstatus monitors import
+```
+
 ## Files
 
 ```
 infra/openstatus/
-├── README.md           # This file
-├── config.ts           # TypeScript configuration
-└── openstatus.yaml     # Monitoring-as-Code config
+├── README.md             # This documentation
+├── config.ts             # TypeScript configuration (legacy)
+├── monitors.yaml         # Production monitors config
+├── test-monitor.yaml     # Test monitor for verification
+└── openstatus.yaml       # Full config (alternative format)
 
 packages/status/
 ├── src/
 │   ├── index.ts
-│   ├── types.ts        # TypeScript types
-│   ├── api.ts          # OpenStatus API client
+│   ├── types.ts          # TypeScript types
+│   ├── api.ts            # OpenStatus API client
 │   └── components/
-│       ├── status-badge.tsx  # Compact badge
-│       └── status-widget.tsx # Full widget
+│       ├── status-badge.tsx   # Compact badge component
+│       └── status-widget.tsx  # Full widget component
 └── package.json
 ```
+
+## Troubleshooting
+
+### CLI 安装失败
+
+```bash
+# 使用备用安装方式
+brew tap openstatusHQ/cli
+brew install openstatus
+```
+
+### Token 无效
+
+1. 确认 Token 格式正确 (`os_` 开头)
+2. 检查 Token 是否过期
+3. 确认环境变量已设置: `echo $OPENSTATUS_API_TOKEN`
+
+### Monitor 部署失败
+
+1. 检查 YAML 格式是否正确
+2. 确认 URL 可访问
+3. 查看详细错误: `openstatus monitors apply -c <file> --debug`
