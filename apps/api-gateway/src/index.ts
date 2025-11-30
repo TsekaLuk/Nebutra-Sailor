@@ -12,12 +12,6 @@ const app = new Hono();
 
 // Global middlewares
 app.use("*", logger());
-
-// Block indexing for all API responses
-app.use("*", async (c, next) => {
-  await next();
-  c.header("X-Robots-Tag", "noindex, nofollow, noarchive");
-});
 app.use(
   "*",
   cors({

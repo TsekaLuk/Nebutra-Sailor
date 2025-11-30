@@ -1,46 +1,45 @@
-# Nebutra - All crawling prohibited
+# Nebutra - SEO-friendly robots.txt
 # https://nebutra.com
 
-User-agent: *
-Disallow: /
-
-# Block all known bots explicitly
+# Allow major search engines
 User-agent: Googlebot
-Disallow: /
+Allow: /
 
 User-agent: Bingbot
-Disallow: /
+Allow: /
 
 User-agent: Baiduspider
-Disallow: /
+Allow: /
 
 User-agent: YandexBot
-Disallow: /
+Allow: /
 
 User-agent: DuckDuckBot
-Disallow: /
+Allow: /
 
-User-agent: Sogou
-Disallow: /
+User-agent: Applebot
+Allow: /
 
-User-agent: Bytespider
-Disallow: /
+# Allow social media crawlers for sharing previews
+User-agent: facebookexternalhit
+Allow: /
 
-User-agent: PetalBot
-Disallow: /
+User-agent: Twitterbot
+Allow: /
 
-User-agent: AhrefsBot
-Disallow: /
+User-agent: LinkedInBot
+Allow: /
 
-User-agent: SemrushBot
-Disallow: /
+User-agent: Slackbot
+Allow: /
 
-User-agent: MJ12bot
-Disallow: /
+User-agent: TelegramBot
+Allow: /
 
-User-agent: DotBot
-Disallow: /
+User-agent: WhatsApp
+Allow: /
 
+# Block AI training crawlers
 User-agent: GPTBot
 Disallow: /
 
@@ -59,11 +58,43 @@ Disallow: /
 User-agent: Google-Extended
 Disallow: /
 
-User-agent: FacebookBot
+User-agent: Bytespider
 Disallow: /
 
-User-agent: Applebot
+User-agent: Diffbot
 Disallow: /
 
-# No sitemap - content is private
-# Sitemap: none
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+# Block aggressive SEO crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+# Default: allow other well-behaved bots
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Crawl rate limit
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://nebutra.com/sitemap.xml

@@ -11,15 +11,42 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Nebutra - Enterprise SaaS Platform",
-  description: "Build your next AI-native SaaS application",
+  description: "Build your next AI-native SaaS application with multi-tenant architecture, AI features, and global scalability.",
+  keywords: ["SaaS", "AI", "enterprise", "multi-tenant", "platform", "startup"],
+  authors: [{ name: "Nebutra" }],
+  creator: "Nebutra",
+  metadataBase: new URL("https://nebutra.com"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://nebutra.com",
+    siteName: "Nebutra",
+    title: "Nebutra - Enterprise SaaS Platform",
+    description: "Build your next AI-native SaaS application with multi-tenant architecture, AI features, and global scalability.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Nebutra - Enterprise SaaS Platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nebutra - Enterprise SaaS Platform",
+    description: "Build your next AI-native SaaS application",
+    images: ["/og-image.png"],
+  },
   robots: {
-    index: false,
-    follow: false,
-    nocache: true,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };
