@@ -1,0 +1,167 @@
+version: "3.8"
+
+# Nebutra-Sailor Local Development Stack
+# Run: docker-compose up -d
+
+services:
+  # ============================================
+  # Infrastructure
+  # ============================================
+  
+  # PostgreSQL (Supabase alternative for local dev)
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: nebutra-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nebutra
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/supabase/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./infra/supabase/policies.sql:/docker-entrypoint-initdb.d/02-policies.sql
+      - ./infra/supabase/seed.sql:/docker-entrypoint-initdb.d/03-seed.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis (Upstash alternative for local dev)
+  redis:
+    image: redis:7-alpine
+    container_name: nebutra-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # Python Microservices
+  # ============================================
+  
+  ai-service:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.python
+      args:
+        SERVICE: ai
+    container_name: nebutra-ai
+    ports:
+      - "8001:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/nebutra
+      - REDIS_URL=redis://redis:6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  content-service:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.python
+      args:
+        SERVICE: content
+    container_name: nebutra-content
+    ports:
+      - "8002:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/nebutra
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  recsys-service:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.python
+      args:
+        SERVICE: recsys
+    container_name: nebutra-recsys
+    ports:
+      - "8003:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/nebutra
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  ecommerce-service:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.python
+      args:
+        SERVICE: ecommerce
+    container_name: nebutra-ecommerce
+    ports:
+      - "8004:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/nebutra
+      - REDIS_URL=redis://redis:6379
+      - SHOPIFY_API_KEY=${SHOPIFY_API_KEY}
+      - SHOPIFY_API_SECRET=${SHOPIFY_API_SECRET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  web3-service:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.python
+      args:
+        SERVICE: web3
+    container_name: nebutra-web3
+    ports:
+      - "8005:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/nebutra
+      - REDIS_URL=redis://redis:6379
+      - ALCHEMY_API_KEY=${ALCHEMY_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ============================================
+  # Observability (optional)
+  # ============================================
+  
+  # Jaeger for distributed tracing
+  jaeger:
+    image: jaegertracing/all-in-one:1.51
+    container_name: nebutra-jaeger
+    ports:
+      - "16686:16686"  # UI
+      - "4317:4317"    # OTLP gRPC
+      - "4318:4318"    # OTLP HTTP
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    profiles:
+      - observability
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  default:
+    name: nebutra-network
