@@ -48,5 +48,9 @@ target
 apps/*/public/brand
 apps/*/public/favicon.ico
 
+# White-label customization (fork users)
+brand.config.ts
+brand.config/
+
 # Misc
 *.tsbuildinfo

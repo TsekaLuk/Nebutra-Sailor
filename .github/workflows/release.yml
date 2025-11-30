@@ -1,0 +1,132 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: "Release type (patch, minor, major, or specific version)"
+        required: false
+        default: ""
+      dry_run:
+        description: "Dry run (no actual release)"
+        required: false
+        default: "false"
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    # Only run on main branch pushes or manual triggers
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run tests before release
+        run: pnpm test
+        env:
+          CI: true
+
+      # Check if there are releasable commits
+      - name: Check for releasable commits
+        id: check_commits
+        run: |
+          # Get commits since last tag
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            COMMITS=$(git log --oneline --format="%s" | head -20)
+          else
+            COMMITS=$(git log --oneline --format="%s" ${LAST_TAG}..HEAD)
+          fi
+          
+          # Check for conventional commit types that trigger release
+          if echo "$COMMITS" | grep -qE "^(feat|fix|perf|refactor|revert)(\(.+\))?:"; then
+            echo "has_releasable_commits=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_releasable_commits=false" >> $GITHUB_OUTPUT
+          fi
+
+      # Create release (only if there are releasable commits or manual trigger)
+      - name: Create Release
+        if: steps.check_commits.outputs.has_releasable_commits == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          RELEASE_ARGS=""
+          
+          # Add release type if specified
+          if [ -n "${{ github.event.inputs.release_type }}" ]; then
+            RELEASE_ARGS="--release-as ${{ github.event.inputs.release_type }}"
+          fi
+          
+          # Add dry-run flag if specified
+          if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
+            RELEASE_ARGS="$RELEASE_ARGS --dry-run"
+          fi
+          
+          pnpm release $RELEASE_ARGS
+
+      - name: Push changes and tags
+        if: steps.check_commits.outputs.has_releasable_commits == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" != "true" ]; then
+            git push --follow-tags origin main
+          fi
+
+      # Create GitHub Release
+      - name: Get release version
+        if: (steps.check_commits.outputs.has_releasable_commits == 'true' || github.event_name == 'workflow_dispatch') && github.event.inputs.dry_run != 'true'
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        if: (steps.check_commits.outputs.has_releasable_commits == 'true' || github.event_name == 'workflow_dispatch') && github.event.inputs.dry_run != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          name: Release v${{ steps.get_version.outputs.version }}
+          body_path: changelog/CHANGELOG.md
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip release notification
+        if: steps.check_commits.outputs.has_releasable_commits == 'false' && github.event_name != 'workflow_dispatch'
+        run: |
+          echo "No releasable commits found. Skipping release."
+          echo "Only commits with types: feat, fix, perf, refactor, revert trigger releases."

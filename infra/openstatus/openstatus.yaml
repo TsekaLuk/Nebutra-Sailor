@@ -1,0 +1,218 @@
+# OpenStatus Monitoring-as-Code Configuration
+# https://docs.openstatus.dev/monitoring-as-code
+#
+# Deploy: openstatus config push --file infra/openstatus/openstatus.yaml
+
+version: "1"
+
+# ============================================
+# Monitors
+# ============================================
+monitors:
+  # Critical - Public facing
+  - name: Landing Page
+    url: ${LANDING_PAGE_URL}
+    description: Main marketing website
+    periodicity: 1m
+    regions:
+      - ams  # Amsterdam
+      - iad  # Virginia
+      - sfo  # San Francisco
+      - hkg  # Hong Kong
+      - syd  # Sydney
+    assertions:
+      status: 200
+      latency: 3000
+    tags:
+      - public
+      - critical
+
+  - name: Web App
+    url: ${WEB_APP_URL}
+    description: Main SaaS dashboard
+    periodicity: 1m
+    regions:
+      - ams
+      - iad
+      - sfo
+      - hkg
+      - syd
+    assertions:
+      status: 200
+      latency: 3000
+    tags:
+      - public
+      - critical
+
+  # Critical - API
+  - name: API Gateway
+    url: ${API_GATEWAY_URL}/misc/health
+    description: BFF API health endpoint
+    periodicity: 1m
+    regions:
+      - ams
+      - iad
+      - sfo
+      - hkg
+      - syd
+    assertions:
+      status: 200
+      latency: 1000
+      body:
+        jsonPath:
+          path: $.status
+          value: healthy
+    tags:
+      - api
+      - critical
+
+  - name: API Gateway - Deep Health
+    url: ${API_GATEWAY_URL}/health
+    description: Full health check with dependencies
+    periodicity: 5m
+    regions:
+      - iad
+    assertions:
+      status: 200
+      latency: 5000
+    tags:
+      - api
+      - internal
+
+  # Microservices
+  - name: AI Service
+    url: ${AI_SERVICE_URL}/health
+    description: AI/LLM microservice
+    periodicity: 5m
+    regions:
+      - iad
+    assertions:
+      status: 200
+      latency: 2000
+    tags:
+      - microservice
+      - ai
+
+  - name: Content Service
+    url: ${CONTENT_SERVICE_URL}/health
+    description: Content management microservice
+    periodicity: 5m
+    regions:
+      - iad
+    assertions:
+      status: 200
+      latency: 2000
+    tags:
+      - microservice
+      - content
+
+  - name: RecSys Service
+    url: ${RECSYS_SERVICE_URL}/health
+    description: Recommendation system
+    periodicity: 5m
+    regions:
+      - iad
+    assertions:
+      status: 200
+      latency: 2000
+    tags:
+      - microservice
+      - ml
+
+  - name: E-commerce Service
+    url: ${ECOMMERCE_SERVICE_URL}/health
+    description: E-commerce/Shopify sync
+    periodicity: 5m
+    regions:
+      - iad
+    assertions:
+      status: 200
+      latency: 2000
+    tags:
+      - microservice
+      - ecommerce
+
+  - name: Web3 Service
+    url: ${WEB3_SERVICE_URL}/health
+    description: Blockchain indexer
+    periodicity: 5m
+    regions:
+      - iad
+    assertions:
+      status: 200
+      latency: 3000
+    tags:
+      - microservice
+      - web3
+
+  # Infrastructure
+  - name: Database
+    url: ${API_GATEWAY_URL}/system/status
+    description: PostgreSQL connectivity
+    periodicity: 1m
+    regions:
+      - iad
+    assertions:
+      status: 200
+      body:
+        jsonPath:
+          path: $.checks.database.status
+          value: pass
+    tags:
+      - infrastructure
+      - database
+
+  - name: Redis Cache
+    url: ${API_GATEWAY_URL}/system/status
+    description: Redis/Upstash connectivity
+    periodicity: 1m
+    regions:
+      - iad
+    assertions:
+      status: 200
+      body:
+        jsonPath:
+          path: $.checks.redis.status
+          value: pass
+    tags:
+      - infrastructure
+      - cache
+
+# ============================================
+# Status Page
+# ============================================
+pages:
+  - name: Nebutra Sailor Status
+    slug: nebutra
+    description: Real-time status and incident history for Nebutra Sailor platform
+    monitors:
+      - Landing Page
+      - Web App
+      - API Gateway
+      - AI Service
+      - Content Service
+      - RecSys Service
+      - E-commerce Service
+      - Web3 Service
+      - Database
+      - Redis Cache
+    # customDomain: status.nebutra.com  # Uncomment when ready
+
+# ============================================
+# Notifications
+# ============================================
+notifications:
+  - name: Slack Alerts
+    provider: slack
+    data:
+      url: ${SLACK_WEBHOOK_URL}
+    
+  - name: Email Alerts
+    provider: email
+    data:
+      email: ops@nebutra.com
+
+  # - name: PagerDuty
+  #   provider: pagerduty
+  #   data:
+  #     key: ${PAGERDUTY_KEY}
