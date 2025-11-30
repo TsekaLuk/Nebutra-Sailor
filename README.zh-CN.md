@@ -46,7 +46,7 @@
 <br />
 <br />
 
-## 📖 简介
+## 简介
 
 Nebutra Sailor 是一个企业级、AI 原生的 SaaS 单体仓库架构，专为构建现代多租户平台而设计。它为内容社区、推荐系统、电商集成和 Web3 应用提供了经过实战检验的基础设施。
 
@@ -70,7 +70,7 @@ Nebula • Nurture • Ultra • Future
 - **实战成效** — 交付项目中，报表时间降幅 >70%、洞察交付提速 4×；运营效率提升 ~50%。
 - **面向创始人与团队** — 从 PoC 到上线的工程范式，兼顾速度与可靠性。
 
-## ✨ 亮点
+## 亮点
 
 <table>
   <tr>
@@ -109,24 +109,11 @@ Nebula • Nurture • Ultra • Future
   </tr>
 </table>
 
-## 🎨 设计语言
-
-<p>
-  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#6366f1;border:1px solid #e5e7eb"></span>
-  <span style="font-size:12px;margin-right:12px">主色 • Indigo 500</span>
-  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;border:1px solid #e5e7eb"></span>
-  <span style="font-size:12px;margin-right:12px">强调 • Teal 500</span>
-  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#18181b;border:1px solid #e5e7eb"></span>
-  <span style="font-size:12px;margin-right:12px">中性 • Zinc 900</span>
-</p>
-
-<br />
-
-## 🛠️ 技术栈
+## 技术栈
 
 <table>
 <tr>
-<td><strong>🎨 前端</strong></td>
+<td><strong>前端</strong></td>
 <td>
   <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_17-black?style=flat-square&logo=next.js" alt="Next.js" /></a>
   <a href="https://react.dev/"><img src="https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" /></a>
@@ -135,14 +122,14 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>🔐 认证</strong></td>
+<td><strong>认证</strong></td>
 <td>
   <a href="https://clerk.com/"><img src="https://img.shields.io/badge/Clerk-6C47FF?style=flat-square&logo=clerk&logoColor=white" alt="Clerk" /></a>
   <img src="https://img.shields.io/badge/多租户组织-gray?style=flat-square" alt="Multi-tenant" />
 </td>
 </tr>
 <tr>
-<td><strong>⚙️ BFF 层</strong></td>
+<td><strong>BFF 层</strong></td>
 <td>
   <a href="https://hono.dev/"><img src="https://img.shields.io/badge/Hono-E36002?style=flat-square&logo=hono&logoColor=white" alt="Hono" /></a>
   <a href="https://www.prisma.io/"><img src="https://img.shields.io/badge/Prisma_7-2D3748?style=flat-square&logo=prisma&logoColor=white" alt="Prisma" /></a>
@@ -150,7 +137,7 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>🗄️ 数据库</strong></td>
+<td><strong>数据库</strong></td>
 <td>
   <a href="https://supabase.com/"><img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" /></a>
   <img src="https://img.shields.io/badge/pgvector-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="pgvector" />
@@ -158,14 +145,14 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>⚡ 缓存</strong></td>
+<td><strong>缓存</strong></td>
 <td>
   <a href="https://upstash.com/"><img src="https://img.shields.io/badge/Upstash_Redis-00E9A3?style=flat-square&logo=upstash&logoColor=black" alt="Upstash" /></a>
   <img src="https://img.shields.io/badge/限流-gray?style=flat-square" alt="Rate Limiting" />
 </td>
 </tr>
 <tr>
-<td><strong>🤖 AI</strong></td>
+<td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
@@ -173,25 +160,25 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>💳 支付</strong></td>
+<td><strong>支付</strong></td>
 <td>
   <a href="https://stripe.com/"><img src="https://img.shields.io/badge/Stripe-008CDD?style=flat-square&logo=stripe&logoColor=white" alt="Stripe" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>📧 邮件</strong></td>
+<td><strong>邮件</strong></td>
 <td>
   <a href="https://resend.com/"><img src="https://img.shields.io/badge/Resend-black?style=flat-square" alt="Resend" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>📝 CMS</strong></td>
+<td><strong>CMS</strong></td>
 <td>
   <a href="https://sanity.io/"><img src="https://img.shields.io/badge/Sanity-F03E2F?style=flat-square&logo=sanity&logoColor=white" alt="Sanity" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>🛡️ CDN/安全</strong></td>
+<td><strong>CDN / 安全</strong></td>
 <td>
   <a href="https://cloudflare.com/"><img src="https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white" alt="Cloudflare" /></a>
   <img src="https://img.shields.io/badge/WAF-gray?style=flat-square" alt="WAF" />
@@ -200,20 +187,20 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>🔄 工作流</strong></td>
+<td><strong>工作流</strong></td>
 <td>
   <a href="https://inngest.com/"><img src="https://img.shields.io/badge/Inngest-6366F1?style=flat-square" alt="Inngest" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>📊 监控</strong></td>
+<td><strong>可观测性</strong></td>
 <td>
   <a href="https://sentry.io/"><img src="https://img.shields.io/badge/Sentry-362D59?style=flat-square&logo=sentry&logoColor=white" alt="Sentry" /></a>
   <a href="https://opentelemetry.io/"><img src="https://img.shields.io/badge/OpenTelemetry-425CC7?style=flat-square&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>🚀 部署</strong></td>
+<td><strong>部署</strong></td>
 <td>
   <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel" alt="Vercel" /></a>
   <a href="https://turbo.build/"><img src="https://img.shields.io/badge/Turborepo-EF4444?style=flat-square&logo=turborepo&logoColor=white" alt="Turborepo" /></a>
@@ -223,7 +210,7 @@ Nebula • Nurture • Ultra • Future
 
 <br />
 
-## 📂 项目结构
+## 项目结构
 
 ```
 Nebutra-Sailor/
@@ -261,7 +248,7 @@ Nebutra-Sailor/
 
 <br />
 
-## 🚀 快速开始
+## 快速开始
 
 ### 环境要求
 
@@ -288,7 +275,7 @@ cp .env.example .env
 pnpm db:generate && pnpm dev
 ```
 
-### 💻 常用命令
+### 常用命令
 
 | 命令 | 说明 |
 |------|------|
@@ -301,39 +288,39 @@ pnpm db:generate && pnpm dev
 
 <br />
 
-## 🤝 参与贡献
+## 参与贡献
 
 我们欢迎所有贡献者！以下是参与方式：
 
 | | |
 |---|---|
-| 🐛 **报告 Bug** | 遇到问题请[提交 Issue](https://github.com/TsekaLuk/Nebutra-Sailor/issues) |
-| 💡 **功能建议** | 通过 Issue 提出新功能建议 |
-| 🔧 **提交 PR** | 提交 Pull Request 添加功能或修复 Bug |
+| **报告 Bug** | [提交 Issue](https://github.com/TsekaLuk/Nebutra-Sailor/issues) |
+| **功能建议** | 通过 Issue 提出 |
+| **提交 PR** | 添加功能或修复 Bug |
 
 ### 开发流程
 
 ```
-1️⃣ Fork 本仓库
-2️⃣ 创建功能分支 (git checkout -b feat/amazing-feature)
-3️⃣ 提交更改 (git commit -m 'feat: 添加精彩功能')
-4️⃣ 推送分支 (git push origin feat/amazing-feature)
-5️⃣ 发起 Pull Request
+1. Fork 本仓库
+2. 创建功能分支 (git checkout -b feat/amazing-feature)
+3. 提交更改 (git commit -m 'feat: 添加精彩功能')
+4. 推送分支 (git push origin feat/amazing-feature)
+5. 发起 Pull Request
 ```
 
 <br />
 
-## 📄 许可证
+## 许可证
 
 本项目采用 **MIT 许可证 + 公共条款**。
 
 | | |
 |---|---|
-| ✅ **免费使用** | 个人项目、学习和内部工具 |
-| ✅ **可自由修改** | 创建衍生作品 |
-| ✅ **可自由分发** | 需注明出处 |
-| ⚠️ **商业使用需开源** | 商业产品完整源代码必须以相同许可条款公开 |
-| 🏢 **豁免** | 无锡云毓智能科技有限公司、Nebutra Intelligence 及其关联组织 |
+| **免费使用** | 个人项目、学习和内部工具 |
+| **可自由修改** | 创建衍生作品 |
+| **可自由分发** | 需注明出处 |
+| **商业使用** | 需开源 |
+| **豁免** | 无锡云毓智能科技有限公司及关联组织 |
 
 如需商业授权，请与我们联系。
 
@@ -354,7 +341,7 @@ pnpm db:generate && pnpm dev
   <br />
   <br />
   <p>
-    <strong>🦄 每一次提交，都在创造未来</strong>
+    <strong>每一次提交，都在创造未来。</strong>
   </p>
   <p>
     <sub>出品 <a href="https://nebutra.com"><strong>Nebutra Intelligence</strong></a> · © 2024-至今 <strong>无锡云毓智能科技有限公司</strong></sub>

@@ -45,7 +45,7 @@
 <br />
 <br />
 
-## 📚 Introduction
+## Introduction
 
 Nebutra Sailor is an enterprise-grade, AI-native SaaS monorepo architecture designed for building modern multi-tenant platforms. It provides a battle-tested foundation for content communities, recommendation systems, e-commerce integrations, and Web3 applications.
 
@@ -69,7 +69,7 @@ Nebula • Nurture • Ultra • Future
 - **Proven impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights, and ~50% gains in operational efficiency via traceable dashboards.
 - **For builders** — PoC‑to‑production patterns that balance velocity with reliability.
 
-## ✨ Highlights
+## Highlights
 
 <table>
   <tr>
@@ -108,24 +108,11 @@ Nebula • Nurture • Ultra • Future
   </tr>
 </table>
 
-## 🎨 Design language
-
-<p>
-  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#6366f1;border:1px solid #e5e7eb"></span>
-  <span style="font-size:12px;margin-right:12px">Primary • Indigo 500</span>
-  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;border:1px solid #e5e7eb"></span>
-  <span style="font-size:12px;margin-right:12px">Accent • Teal 500</span>
-  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#18181b;border:1px solid #e5e7eb"></span>
-  <span style="font-size:12px;margin-right:12px">Neutral • Zinc 900</span>
-</p>
-
-<br />
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 <table>
 <tr>
-<td><strong>🎨 Frontend</strong></td>
+<td><strong>Frontend</strong></td>
 <td>
   <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js_17-black?style=flat-square&logo=next.js" alt="Next.js" /></a>
   <a href="https://react.dev/"><img src="https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" /></a>
@@ -134,14 +121,14 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>🔐 Auth</strong></td>
+<td><strong>Auth</strong></td>
 <td>
   <a href="https://clerk.com/"><img src="https://img.shields.io/badge/Clerk-6C47FF?style=flat-square&logo=clerk&logoColor=white" alt="Clerk" /></a>
   <img src="https://img.shields.io/badge/Multi--tenant_Orgs-gray?style=flat-square" alt="Multi-tenant" />
 </td>
 </tr>
 <tr>
-<td><strong>⚙️ BFF</strong></td>
+<td><strong>BFF</strong></td>
 <td>
   <a href="https://hono.dev/"><img src="https://img.shields.io/badge/Hono-E36002?style=flat-square&logo=hono&logoColor=white" alt="Hono" /></a>
   <a href="https://www.prisma.io/"><img src="https://img.shields.io/badge/Prisma_7-2D3748?style=flat-square&logo=prisma&logoColor=white" alt="Prisma" /></a>
@@ -149,7 +136,7 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>🗄️ Database</strong></td>
+<td><strong>Database</strong></td>
 <td>
   <a href="https://supabase.com/"><img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" /></a>
   <img src="https://img.shields.io/badge/pgvector-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="pgvector" />
@@ -157,14 +144,14 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>⚡ Cache</strong></td>
+<td><strong>Cache</strong></td>
 <td>
   <a href="https://upstash.com/"><img src="https://img.shields.io/badge/Upstash_Redis-00E9A3?style=flat-square&logo=upstash&logoColor=black" alt="Upstash" /></a>
   <img src="https://img.shields.io/badge/Rate_Limiting-gray?style=flat-square" alt="Rate Limiting" />
 </td>
 </tr>
 <tr>
-<td><strong>🤖 AI</strong></td>
+<td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
@@ -172,25 +159,25 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>💳 Payments</strong></td>
+<td><strong>Payments</strong></td>
 <td>
   <a href="https://stripe.com/"><img src="https://img.shields.io/badge/Stripe-008CDD?style=flat-square&logo=stripe&logoColor=white" alt="Stripe" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>📧 Email</strong></td>
+<td><strong>Email</strong></td>
 <td>
   <a href="https://resend.com/"><img src="https://img.shields.io/badge/Resend-black?style=flat-square" alt="Resend" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>📝 CMS</strong></td>
+<td><strong>CMS</strong></td>
 <td>
   <a href="https://sanity.io/"><img src="https://img.shields.io/badge/Sanity-F03E2F?style=flat-square&logo=sanity&logoColor=white" alt="Sanity" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>🛡️ CDN/Security</strong></td>
+<td><strong>CDN / Security</strong></td>
 <td>
   <a href="https://cloudflare.com/"><img src="https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white" alt="Cloudflare" /></a>
   <img src="https://img.shields.io/badge/WAF-gray?style=flat-square" alt="WAF" />
@@ -199,20 +186,20 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
-<td><strong>🔄 Workflows</strong></td>
+<td><strong>Workflows</strong></td>
 <td>
   <a href="https://inngest.com/"><img src="https://img.shields.io/badge/Inngest-6366F1?style=flat-square" alt="Inngest" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>📊 Monitoring</strong></td>
+<td><strong>Observability</strong></td>
 <td>
   <a href="https://sentry.io/"><img src="https://img.shields.io/badge/Sentry-362D59?style=flat-square&logo=sentry&logoColor=white" alt="Sentry" /></a>
   <a href="https://opentelemetry.io/"><img src="https://img.shields.io/badge/OpenTelemetry-425CC7?style=flat-square&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" /></a>
 </td>
 </tr>
 <tr>
-<td><strong>🚀 Deployment</strong></td>
+<td><strong>Deployment</strong></td>
 <td>
   <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel" alt="Vercel" /></a>
   <a href="https://turbo.build/"><img src="https://img.shields.io/badge/Turborepo-EF4444?style=flat-square&logo=turborepo&logoColor=white" alt="Turborepo" /></a>
@@ -221,7 +208,7 @@ Nebula • Nurture • Ultra • Future
 </table>
 <br />
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 Nebutra-Sailor/
@@ -259,7 +246,7 @@ Nebutra-Sailor/
 
 <br />
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -286,7 +273,7 @@ cp .env.example .env
 pnpm db:generate && pnpm dev
 ```
 
-### 💻 Commands
+### Commands
 
 | Command | Description |
 |---------|-------------|
@@ -299,39 +286,41 @@ pnpm db:generate && pnpm dev
 
 <br />
 
-## 🤝 Contributing
+## Contributing
 
 We love our contributors! Here's how you can help:
 
 | | |
 |---|---|
-| 🐛 **Report Bugs** | [Open an issue](https://github.com/TsekaLuk/Nebutra-Sailor/issues) if you encounter a bug |
-| 💡 **Feature Requests** | Suggest new features via issues |
-| 🔧 **Pull Requests** | Submit PRs to add features or fix bugs |
+| **Report Bugs** | [Open an issue](https://github.com/TsekaLuk/Nebutra-Sailor/issues) |
+| **Feature Requests** | Suggest new features via issues |
+| **Pull Requests** | Submit PRs for features or fixes |
 
 ### Development Workflow
 
 ```
-1️⃣ Fork the repository
-2️⃣ Create a feature branch (git checkout -b feat/amazing-feature)
-3️⃣ Commit your changes (git commit -m 'feat: add amazing feature')
-4️⃣ Push to the branch (git push origin feat/amazing-feature)
-5️⃣ Open a Pull Request
+1. Fork the repository
+2. Create a feature branch (git checkout -b feat/amazing-feature)
+3. Commit your changes (git commit -m 'feat: add amazing feature')
+4. Push to the branch (git push origin feat/amazing-feature)
+5. Open a Pull Request
 ```
 
 <br />
 
-## 📄 License
+## License
 
 This project is licensed under the **MIT License with Commons Clause**.
 
 ### What this means:
 
-- ✅ **Free to use** for personal projects, learning, and internal tools
-- ✅ **Free to modify** and create derivative works
-- ✅ **Free to distribute** with attribution
-- ⚠️ **Commercial use requires open source** — If you use this repository in a commercial product, the complete source code of your product must be made publicly available under the same license terms
-- 🏢 **Exemption** — Wuxi Yunyu Intelligent Technology Co., Ltd. (无锡云毓智能科技有限公司), Nebutra Intelligence, and their affiliated organizations are exempt from the commercial open-source requirement
+| | |
+|---|---|
+| **Free to use** | Personal projects, learning, internal tools |
+| **Free to modify** | Create derivative works |
+| **Free to distribute** | With attribution |
+| **Commercial use** | Requires open source |
+| **Exemption** | Wuxi Yunyu Intelligent Technology Co., Ltd. and affiliates |
 
 For commercial licensing inquiries, please contact us.
 
@@ -352,7 +341,7 @@ For commercial licensing inquiries, please contact us.
   <br />
   <br />
   <p>
-    <strong>🦄 Shipping the future, one commit at a time</strong>
+    <strong>Shipping the future, one commit at a time.</strong>
   </p>
   <p>
     <sub>Made by <a href="https://nebutra.com"><strong>Nebutra Intelligence</strong></a> · © 2024-present <strong>Wuxi Yunyu Intelligent Technology Co., Ltd.</strong></sub>
