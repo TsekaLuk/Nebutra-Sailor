@@ -174,6 +174,43 @@ Key variables needed across apps:
 - `STRIPE_*` - Billing
 - `OPENAI_API_KEY` / `GOOGLE_VERTEX_*` - AI services
 
+## MCP / Smithery Integration (`packages/mcp/`)
+
+Model Context Protocol support for AI agent tool calling:
+
+### Architecture
+```
+Agent → MCPClient → ServerRegistry → Internal/External MCP Servers
+                  ↓
+            Middleware (rate-limit, audit, access-control)
+```
+
+### Key Components
+- **MCPClient:** Execute tools across registered servers (`src/client/`)
+- **ServerRegistry:** Manage MCP server registration and access control (`src/registry/`)
+- **Middleware:** Rate limiting, audit logging, access control (`src/middleware/`)
+- **Internal Servers:** Pre-configured wrappers for Nebutra services (`src/server/`)
+
+### Plan-Based Access Control
+- `FREE`: Basic tools (AI generate, content)
+- `PRO`: + Recommendations, E-commerce
+- `ENTERPRISE`: + Web3, all tools
+
+### Usage
+```typescript
+import { mcpClient, registerInternalServers } from "@nebutra/mcp";
+
+// Initialize
+registerInternalServers();
+
+// Execute tool with tenant context
+const result = await mcpClient.executeTool(
+  "generate_text",
+  { prompt: "Hello" },
+  { requestId: "req-1", tenantId: "org-1", plan: "PRO" }
+);
+```
+
 ## Observability
 
 - **Monitoring:** OpenStatus (`/system/status` endpoint)
