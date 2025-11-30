@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm turbo build --filter=@nebutra/studio",
+  "installCommand": "pnpm install",
+  "outputDirectory": "dist",
+  "framework": null
+}
