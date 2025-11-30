@@ -44,5 +44,9 @@ venv
 # Rust
 target
 
+# Brand assets (synced from packages/brand)
+apps/*/public/brand
+apps/*/public/favicon.ico
+
 # Misc
 *.tsbuildinfo

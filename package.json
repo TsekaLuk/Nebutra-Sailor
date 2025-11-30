@@ -5,7 +5,7 @@
   "description": "Enterprise-grade SaaS monorepo for AI-native, multi-tenant platforms",
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build",
+    "build": "pnpm brand:sync && turbo run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
@@ -14,7 +14,8 @@
     "db:push": "turbo run db:push",
     "db:studio": "pnpm --filter @nebutra/db db:studio",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "turbo run clean && rm -rf node_modules",
+    "brand:sync": "pnpm --filter @nebutra/brand sync"
   },
   "keywords": ["saas", "monorepo", "nextjs", "ai", "multi-tenant"],
   "author": "Nebutra",

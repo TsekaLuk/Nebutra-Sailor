@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 3001",
-    "build": "next build",
+    "build": "pnpm --filter @nebutra/brand sync && next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
