@@ -287,6 +287,26 @@ pnpm db:generate && pnpm dev
 | `pnpm typecheck` | Type check all packages |
 | `pnpm db:studio` | Open Prisma Studio |
 | `pnpm brand:sync` | Sync brand assets to apps |
+| `pnpm brand:init` | Initialize white-label branding |
+| `pnpm brand:apply` | Apply custom branding |
+
+<br />
+
+## White-label
+
+Fork this repo and customize it for your own brand:
+
+```bash
+# Interactive setup wizard
+pnpm brand:init
+
+# Add your logos to brand.config/assets/
+
+# Apply your branding
+pnpm brand:apply
+```
+
+See [WHITELABEL.md](WHITELABEL.md) for full documentation.
 
 <br />
 

@@ -289,6 +289,26 @@ pnpm db:generate && pnpm dev
 | `pnpm typecheck` | 类型检查 |
 | `pnpm db:studio` | 打开 Prisma Studio |
 | `pnpm brand:sync` | 同步品牌资产到各应用 |
+| `pnpm brand:init` | 初始化白标品牌 |
+| `pnpm brand:apply` | 应用自定义品牌 |
+
+<br />
+
+## 白标定制
+
+Fork 本仓库并自定义为你的品牌：
+
+```bash
+# 交互式设置向导
+pnpm brand:init
+
+# 将 logo 放入 brand.config/assets/
+
+# 应用品牌
+pnpm brand:apply
+```
+
+详见 [WHITELABEL.md](WHITELABEL.md)。
 
 <br />
 
