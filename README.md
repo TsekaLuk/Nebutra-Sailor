@@ -196,6 +196,14 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
+<td><strong>Analytics</strong></td>
+<td>
+  <a href="https://dub.co/"><img src="https://img.shields.io/badge/Dub-000000?style=flat-square" alt="Dub" /></a>
+  <img src="https://img.shields.io/badge/Link_Attribution-gray?style=flat-square" alt="Link Attribution" />
+  <img src="https://img.shields.io/badge/Conversions-gray?style=flat-square" alt="Conversions" />
+</td>
+</tr>
+<tr>
 <td><strong>Observability</strong></td>
 <td>
   <a href="https://sentry.io/"><img src="https://img.shields.io/badge/Sentry-362D59?style=flat-square&logo=sentry&logoColor=white" alt="Sentry" /></a>
@@ -241,7 +249,8 @@ Nebutra-Sailor/
 │   ├── alerting/          # Multi-channel alerting
 │   ├── audit/             # Compliance audit logging
 │   ├── health/            # Health check utilities
-│   └── status/            # OpenStatus integration
+│   ├── status/            # OpenStatus integration
+│   └── analytics/         # Dub-powered link tracking & conversions
 ├── services/
 │   ├── ai/                # Python FastAPI - LLM, embeddings
 │   ├── content/           # Python FastAPI - posts, feed
@@ -285,7 +294,8 @@ Each component has its own README with setup instructions and API documentation:
   <a href="packages/rate-limit/">Rate Limit</a> · 
   <a href="packages/event-bus/">Event Bus</a> · 
   <a href="packages/saga/">Saga</a> · 
-  <a href="packages/mcp/">MCP</a>
+  <a href="packages/mcp/">MCP</a> · 
+  <a href="packages/analytics/">Analytics</a>
 </td>
 </tr>
 <tr>
