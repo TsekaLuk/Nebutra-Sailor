@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ============================================
+// Multi-Tenant Core Models
+// ============================================
+
+model Organization {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique @map("clerk_id")
+  name      String
+  slug      String   @unique
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  members     OrganizationMember[]
+  contents    Content[]
+  tenantUsage TenantUsage[]
+
+  @@map("organizations")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique @map("clerk_id")
+  email     String   @unique
+  name      String?
+  avatarUrl String?  @map("avatar_url")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  organizations OrganizationMember[]
+  contents      Content[]
+
+  @@map("users")
+}
+
+model OrganizationMember {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  userId         String   @map("user_id")
+  role           Role     @default(MEMBER)
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@map("organization_members")
+}
+
+// ============================================
+// Content Models
+// ============================================
+
+model Content {
+  id             String        @id @default(cuid())
+  organizationId String        @map("organization_id")
+  authorId       String        @map("author_id")
+  title          String
+  body           String
+  status         ContentStatus @default(DRAFT)
+  publishedAt    DateTime?     @map("published_at")
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  // Vector embedding for AI search (stored separately in pgvector)
+  embeddingId String? @map("embedding_id")
+
+  // Relations
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  author       User         @relation(fields: [authorId], references: [id])
+
+  @@index([organizationId])
+  @@index([authorId])
+  @@index([status])
+  @@map("contents")
+}
+
+// ============================================
+// Usage & Billing Models
+// ============================================
+
+model TenantUsage {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  month          String   // Format: YYYY-MM
+  apiCalls       Int      @default(0) @map("api_calls")
+  aiTokens       Int      @default(0) @map("ai_tokens")
+  storage        BigInt   @default(0) // bytes
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, month])
+  @@map("tenant_usage")
+}
+
+// ============================================
+// Enums
+// ============================================
+
+enum Plan {
+  FREE
+  PRO
+  ENTERPRISE
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
