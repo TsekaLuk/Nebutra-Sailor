@@ -5,6 +5,8 @@ import { logger } from "hono/logger";
 
 import { healthRoutes } from "./routes/misc/health.js";
 import { statusRoutes } from "./routes/system/status.js";
+import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
+import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
 
 const app = new Hono();
 
@@ -23,7 +25,20 @@ app.use(
   })
 );
 
-// Health & Status routes
+// Tenant context extraction (before rate limiting)
+app.use("*", tenantContextMiddleware);
+
+// Rate limiting (skip for health/status endpoints)
+app.use("/api/*", async (c, next) => {
+  const path = new URL(c.req.url).pathname;
+  // Skip rate limiting for health and status endpoints
+  if (path.startsWith("/api/misc") || path.startsWith("/api/system")) {
+    return next();
+  }
+  return rateLimitMiddleware(c, next);
+});
+
+// Health & Status routes (public, no rate limiting)
 app.route("/api/misc", healthRoutes);
 app.route("/api/system", statusRoutes);
 

@@ -23,6 +23,9 @@ importers:
       '@hono/node-server':
         specifier: ^1.13.0
         version: 1.19.6(hono@4.10.7)
+      '@nebutra/rate-limit':
+        specifier: workspace:*
+        version: link:../../packages/rate-limit
       hono:
         specifier: ^4.6.0
         version: 4.10.7
@@ -129,6 +132,12 @@ importers:
       tsx:
         specifier: ^4.19.0
         version: 4.20.6
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  packages/rate-limit:
+    devDependencies:
       typescript:
         specifier: ^5
         version: 5.9.3
