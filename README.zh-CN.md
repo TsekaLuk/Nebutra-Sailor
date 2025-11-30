@@ -149,7 +149,7 @@ Nebula • Nurture • Ultra • Future
 <tr>
 <td><strong>缓存</strong></td>
 <td>
-  <a href="https://upstash.com/"><img src="https://img.shields.io/badge/Upstash_Redis-00E9A3?style=flat-square&logo=upstash&logoColor=black" alt="Upstash" /></a>
+  <a href="https://upstash.com/"><img src="https://img.shields.io/badge/Upstash_Redis-00E9A3?style=flat-square&logo=redis&logoColor=white" alt="Upstash" /></a>
   <img src="https://img.shields.io/badge/限流-gray?style=flat-square" alt="Rate Limiting" />
 </td>
 </tr>
@@ -177,7 +177,7 @@ Nebula • Nurture • Ultra • Future
 <tr>
 <td><strong>CMS</strong></td>
 <td>
-  <a href="https://sanity.io/"><img src="https://img.shields.io/badge/Sanity-F03E2F?style=flat-square&logo=sanity&logoColor=white" alt="Sanity" /></a>
+  <a href="https://sanity.io/"><img src="https://img.shields.io/badge/Sanity-F03E2F?style=flat-square" alt="Sanity" /></a>
 </td>
 </tr>
 <tr>
@@ -199,7 +199,7 @@ Nebula • Nurture • Ultra • Future
 <tr>
 <td><strong>分析</strong></td>
 <td>
-  <a href="https://dub.co/"><img src="https://img.shields.io/badge/Dub-000000?style=flat-square" alt="Dub" /></a>
+  <a href="https://dub.co/"><img src="https://img.shields.io/badge/Dub-000000?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQxIDAtOC0zLjU5LTgtOHMzLjU5LTggOC04IDggMy41OSA4IDgtMy41OSA4LTggOHoiLz48L3N2Zz4=" alt="Dub" /></a>
   <img src="https://img.shields.io/badge/链接归因-gray?style=flat-square" alt="Link Attribution" />
   <img src="https://img.shields.io/badge/转化追踪-gray?style=flat-square" alt="Conversions" />
 </td>
