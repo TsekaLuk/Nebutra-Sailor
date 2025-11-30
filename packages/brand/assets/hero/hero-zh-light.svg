@@ -1,0 +1,31 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EFF6FF"/>
+      <stop offset="1" stop-color="#ECFEFF"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 60) rotate(45) scale(320 200)">
+      <stop offset="0" stop-color="#6366F1" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="420" rx="24" fill="url(#g1)"/>
+  <rect x="40" y="40" width="1120" height="340" rx="20" fill="#ffffff" stroke="#E5E7EB"/>
+  <ellipse cx="900" cy="100" rx="280" ry="160" fill="url(#glow)"/>
+  <g transform="translate(80,120)">
+    <rect x="0" y="-60" width="64" height="64" rx="12" fill="#EEF2FF" stroke="#E0E7FF"/>
+    <path d="M16 0 V-40 h12 l28 35 V-40 h12 V0 h-12 L28 -24 V0 H16z" fill="#6366F1"/>
+    <circle cx="50" cy="-8" r="6" fill="#14B8A6"/>
+  </g>
+  <text x="180" y="160" fill="#0F172A" font-family="Inter, ui-sans-serif, system-ui" font-weight="800" font-size="38">Nebutra Sailor</text>
+  <text x="180" y="202" fill="#334155" font-family="Inter, ui-sans-serif, system-ui" font-weight="600" font-size="20">开源的企业级 AI 原生 SaaS 平台</text>
+  <g transform="translate(180,240)">
+    <rect x="0" y="0" width="220" height="44" rx="10" fill="#6366F1"/>
+    <text x="20" y="28" fill="#ffffff" font-size="16" font-family="Inter" font-weight="600">pnpm dev</text>
+    <rect x="240" y="0" width="260" height="44" rx="10" fill="#F1F5F9"/>
+    <text x="260" y="28" fill="#0F172A" font-size="16" font-family="Inter" font-weight="600">阅读使用文档</text>
+  </g>
+  <g transform="translate(180,310)" fill="#64748B" font-family="Inter" font-size="14">
+    <text>AI 原生 • 多租户 • 企业级工程</text>
+  </g>
+</svg>
