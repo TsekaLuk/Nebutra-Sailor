@@ -53,6 +53,26 @@ Nebutra Sailor is an enterprise-grade, AI-native SaaS monorepo architecture desi
 
 Built with the latest technologies including Next.js 17, React 19, and Prisma 7, Sailor embraces an "AI-first" philosophy with native support for LLMs, vector search, and intelligent workflows.
 
+### Brand Vision
+Nebula • Nurture • Ultra • Future
+- Nebula: Aggregate data, tools, and intelligence into usable products.
+- Nurture: Incubate AI-native apps via automated toolchains and “digital employees.”
+- Ultra: Ship reliable engineering and value-first outcomes.
+- Future: Make AI productivity accessible to everyone.
+
+### YC-style Pitch (at a glance)
+- Problem — Teams struggle to turn AI capabilities into measurable business value: tooling sprawl, slow delivery, and high integration costs.
+- Solution — An AI-first, multi-tenant SaaS foundation with RLS, vector search, MCP agents, and production patterns that ship fast and safely.
+- What we build — AI product design, LLM app development, data analytics/visualization, full‑stack web. From PoC to production.
+- Why now — AI platform costs are dropping while enterprise demand for measurable outcomes is rising; teams need a reliable blueprint, not just models.
+- Moats — End-to-end delivery (design→data→frontend→backend→infra), opinionated patterns, and a brand system that scales (brand package, UI kit, MCP tools).
+- Selected case studies —
+  - Automated analytics: cut monthly reporting time by >70% and 4× faster insight delivery.
+  - Vertical ERP modernization: +50% operational efficiency with traceable, real-time dashboards.
+- Business model — Services (project-based) → Productized SaaS (subscriptions) → Ecosystem revenue (APIs, integrations).
+- Roadmap — 0→1 PoCs → multi-tenant SaaS baselines → domain-specific agents → enterprise rollouts.
+- Call to action — Build with us. hello@nebutra.com
+
 ### Why Sailor?
 
 - **🚀 Production-Ready** — Battle-tested architecture patterns used in real enterprise deployments
