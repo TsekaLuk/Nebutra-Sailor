@@ -157,6 +157,7 @@ Nebula • Nurture • Ultra • Future
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
   <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square" alt="Anthropic" />
+  <img src="https://img.shields.io/badge/SiliconFlow-6366F1?style=flat-square" alt="SiliconFlow" />
 </td>
 </tr>
 <tr>
@@ -220,9 +221,12 @@ Nebutra-Sailor/
 │   ├── studio/            # Sanity CMS (studio.nebutra.com)
 │   └── api-gateway/       # BFF 层 (api.nebutra.com)
 ├── packages/
+│   ├── 21st/              # shadcn/ui + 21st.dev 组件
+│   ├── ai-providers/      # 多供应商 AI SDK (OpenAI, SiliconFlow)
 │   ├── brand/             # 统一品牌资产与组件
 │   ├── ui/                # Lobe UI + Lobe Icons + 设计系统
 │   ├── db/                # Prisma 7 Schema 与客户端
+│   ├── sanity/            # Sanity CMS 客户端与 Schema
 │   ├── captcha/           # Cloudflare Turnstile 集成
 │   ├── storage/           # R2/S3 存储客户端
 │   ├── cache/             # Redis 缓存策略
