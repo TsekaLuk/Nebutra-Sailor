@@ -239,7 +239,7 @@ export class OpenAIProvider extends BaseAIProvider {
 
     return {
       created: response.created,
-      data: response.data.map((d) => ({
+      data: (response.data || []).map((d) => ({
         url: d.url,
         b64Json: d.b64_json,
         revisedPrompt: d.revised_prompt,

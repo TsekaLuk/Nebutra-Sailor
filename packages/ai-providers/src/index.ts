@@ -105,6 +105,18 @@ export {
   OPENAI_MODELS,
 } from "./providers/openai.js";
 
+export {
+  OpenRouterProvider,
+  OPENROUTER_MODELS,
+  OPENROUTER_VARIANTS,
+  type OpenRouterConfig,
+  type OpenRouterProviderPreferences,
+  type OpenRouterChatRequest,
+  type OpenRouterModelInfo,
+  type OpenRouterGeneration,
+  type OpenRouterRateLimit,
+} from "./providers/openrouter.js";
+
 // Configuration
 export {
   DEFAULT_MODELS,

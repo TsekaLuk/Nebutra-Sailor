@@ -289,17 +289,21 @@ export class SiliconFlowProvider extends BaseAIProvider {
     });
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
+      const error = await response.json().catch(() => ({})) as { message?: string };
       throw new Error(
         `SiliconFlow rerank error: ${response.status} ${error.message || response.statusText}`
       );
     }
 
-    const data = await response.json();
+    const data = await response.json() as {
+      results: Array<{ index: number; document?: { text: string }; relevance_score: number }>;
+      model: string;
+      usage?: { total_tokens: number };
+    };
 
     return {
       object: "list",
-      results: data.results.map((r: { index: number; document?: { text: string }; relevance_score: number }) => ({
+      results: data.results.map((r) => ({
         index: r.index,
         document: r.document,
         relevanceScore: r.relevance_score,
@@ -326,7 +330,7 @@ export class SiliconFlowProvider extends BaseAIProvider {
 
     return {
       created: response.created,
-      data: response.data.map((d) => ({
+      data: (response.data || []).map((d) => ({
         url: d.url,
         b64Json: d.b64_json,
         revisedPrompt: d.revised_prompt,
@@ -360,7 +364,7 @@ export class SiliconFlowProvider extends BaseAIProvider {
       throw new Error(`Failed to get user info: ${response.status}`);
     }
 
-    const data = await response.json();
+    const data = await response.json() as { data?: { balance?: number; status?: string } };
     return {
       balance: data.data?.balance || 0,
       status: data.data?.status || "unknown",
@@ -429,7 +433,7 @@ export class SiliconFlowProvider extends BaseAIProvider {
             },
           })),
         },
-        finishReason: c.finish_reason as "stop" | "length" | "tool_calls" | null,
+        finishReason: c.finish_reason as "stop" | "length" | "tool_calls" | "content_filter" | null,
       })),
     };
   }

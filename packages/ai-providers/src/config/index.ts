@@ -7,6 +7,7 @@
 import type { ProviderName } from "../types.js";
 import { SILICONFLOW_MODELS } from "../providers/siliconflow.js";
 import { OPENAI_MODELS } from "../providers/openai.js";
+import { OPENROUTER_MODELS } from "../providers/openrouter.js";
 import type { ProviderModel } from "../providers/base.js";
 
 // ============================================
@@ -30,6 +31,10 @@ export const DEFAULT_MODELS: Record<ProviderName, { chat: string; embedding: str
     chat: "gemini-1.5-flash",
     embedding: "text-embedding-004",
   },
+  openrouter: {
+    chat: "openai/gpt-4o-mini",
+    embedding: "openai/text-embedding-3-small",
+  },
 };
 
 // ============================================
@@ -41,6 +46,7 @@ const MODEL_REGISTRY: Record<ProviderName, ProviderModel[]> = {
   openai: OPENAI_MODELS,
   anthropic: [], // TODO: Add Anthropic models
   google: [], // TODO: Add Google models
+  openrouter: OPENROUTER_MODELS,
 };
 
 /**
@@ -132,6 +138,11 @@ export interface EnvironmentConfig {
     apiKey?: string;
     organization?: string;
   };
+  openrouter?: {
+    apiKey?: string;
+    httpReferer?: string;
+    appTitle?: string;
+  };
   defaultProvider?: ProviderName;
 }
 
@@ -147,6 +158,11 @@ export function loadConfigFromEnv(): EnvironmentConfig {
     openai: {
       apiKey: process.env.OPENAI_API_KEY,
       organization: process.env.OPENAI_ORGANIZATION,
+    },
+    openrouter: {
+      apiKey: process.env.OPENROUTER_API_KEY,
+      httpReferer: process.env.OPENROUTER_HTTP_REFERER,
+      appTitle: process.env.OPENROUTER_APP_TITLE,
     },
     defaultProvider: (process.env.DEFAULT_AI_PROVIDER as ProviderName) || "siliconflow",
   };

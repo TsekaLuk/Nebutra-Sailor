@@ -4,7 +4,7 @@ import { z } from "zod";
 // Provider Types
 // ============================================
 
-export type ProviderName = "siliconflow" | "openai" | "anthropic" | "google";
+export type ProviderName = "siliconflow" | "openai" | "anthropic" | "google" | "openrouter";
 
 export interface ProviderConfig {
   apiKey: string;
@@ -99,7 +99,7 @@ export interface ChatCompletionChunk {
       content?: string;
       toolCalls?: ToolCall[];
     };
-    finishReason: "stop" | "length" | "tool_calls" | null;
+    finishReason: "stop" | "length" | "tool_calls" | "content_filter" | null;
   }>;
 }
 
