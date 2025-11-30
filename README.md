@@ -3,17 +3,13 @@
 </div>
 
 <div align="center">
-  <br />
   <a href="https://nebutra.com">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="packages/brand/assets/logo/logo-inverse.svg" width="280">
-      <source media="(prefers-color-scheme: light)" srcset="packages/brand/assets/logo/logo-horizontal-en.svg" width="280">
-      <img alt="Nebutra" src="packages/brand/assets/logo/logo-horizontal-en.svg" width="280">
+      <source media="(prefers-color-scheme: dark)" srcset="packages/brand/assets/hero/hero-dark.svg" />
+      <source media="(prefers-color-scheme: light)" srcset="packages/brand/assets/hero/hero-light.svg" />
+      <img alt="Nebutra Sailor – The open‑source enterprise SaaS platform for AI‑native apps" src="packages/brand/assets/hero/hero-light.svg" width="100%" />
     </picture>
   </a>
-  <br />
-  <br />
-  <h3>The Open-Source Enterprise SaaS Platform</h3>
   <br />
   <p>
     <a href="https://nebutra.com"><strong>Website</strong></a> · 
@@ -22,7 +18,6 @@
     <a href="#-getting-started"><strong>Quick Start</strong></a> · 
     <a href="#-contributing"><strong>Contributing</strong></a>
   </p>
-  <br />
   <p>
     <a href="https://github.com/TsekaLuk/Nebutra-Sailor/stargazers">
       <img src="https://img.shields.io/github/stars/TsekaLuk/Nebutra-Sailor?style=for-the-badge&logo=github&color=6366f1&logoColor=fff" alt="GitHub Stars" />
@@ -34,7 +29,7 @@
       <img src="https://img.shields.io/badge/license-MIT%20%2B%20Commons%20Clause-6366f1?style=for-the-badge" alt="License" />
     </a>
   </p>
-  <p>
+</div>
     <a href="https://twitter.com/nebutra">
       <img src="https://img.shields.io/twitter/follow/nebutra?style=flat-square&logo=x&color=18181b&logoColor=fff" alt="Twitter" />
     </a>
@@ -60,19 +55,6 @@ Nebula • Nurture • Ultra • Future
 - Ultra: Ship reliable engineering and value-first outcomes.
 - Future: Make AI productivity accessible to everyone.
 
-### YC-style Pitch (at a glance)
-- Problem — Teams struggle to turn AI capabilities into measurable business value: tooling sprawl, slow delivery, and high integration costs.
-- Solution — An AI-first, multi-tenant SaaS foundation with RLS, vector search, MCP agents, and production patterns that ship fast and safely.
-- What we build — AI product design, LLM app development, data analytics/visualization, full‑stack web. From PoC to production.
-- Why now — AI platform costs are dropping while enterprise demand for measurable outcomes is rising; teams need a reliable blueprint, not just models.
-- Moats — End-to-end delivery (design→data→frontend→backend→infra), opinionated patterns, and a brand system that scales (brand package, UI kit, MCP tools).
-- Selected case studies —
-  - Automated analytics: cut monthly reporting time by >70% and 4× faster insight delivery.
-  - Vertical ERP modernization: +50% operational efficiency with traceable, real-time dashboards.
-- Business model — Services (project-based) → Productized SaaS (subscriptions) → Ecosystem revenue (APIs, integrations).
-- Roadmap — 0→1 PoCs → multi-tenant SaaS baselines → domain-specific agents → enterprise rollouts.
-- Call to action — Build with us. hello@nebutra.com
-
 ### Why Sailor?
 
 - **🚀 Production-Ready** — Battle-tested architecture patterns used in real enterprise deployments
@@ -81,6 +63,58 @@ Nebula • Nurture • Ultra • Future
 - **⚡ Modern Stack** — Next.js 17, React 19, TypeScript 5.6+, TailwindCSS 4.0
 - **🔌 Extensible** — Modular microservices architecture with event-driven communication
 - **🌍 Global-Ready** — i18n, CDN, edge caching, and multi-region deployment support
+- **Proven impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights, and ~50% gains in operational efficiency via traceable dashboards.
+- **For builders** — PoC‑to‑production patterns that balance velocity with reliability.
+
+## ✨ Highlights
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/ai.svg" width="28" alt="AI" /><br />
+      <strong>AI‑native</strong>
+      <br />LLMs, vector search, MCP agents. First‑class patterns for modern AI apps.
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/tenants.svg" width="28" alt="Tenants" /><br />
+      <strong>Multi‑tenant by default</strong>
+      <br />Tenant context, RLS, scoped caching and rate limits baked in.
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/enterprise.svg" width="28" alt="Enterprise" /><br />
+      <strong>Enterprise‑ready</strong>
+      <br />Cloudflare WAF/R2, Inngest workflows, Sentry/Otel, Vercel deployments.
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Workflows" /><br />
+      <strong>Workflows</strong>
+      <br />Background jobs, cron, events with Inngest and event bus.
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/security.svg" width="28" alt="Security" /><br />
+      <strong>Security</strong>
+      <br />RLS, WAF, Turnstile, isolation by tenant.
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/toolkit.svg" width="28" alt="Toolkit" /><br />
+      <strong>Toolkit</strong>
+      <br />UI kit, brand package, dev scripts, and presets.
+    </td>
+  </tr>
+</table>
+
+## 🎨 Design language
+
+<p>
+  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#6366f1;border:1px solid #e5e7eb"></span>
+  <span style="font-size:12px;margin-right:12px">Primary • Indigo 500</span>
+  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;border:1px solid #e5e7eb"></span>
+  <span style="font-size:12px;margin-right:12px">Accent • Teal 500</span>
+  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#18181b;border:1px solid #e5e7eb"></span>
+  <span style="font-size:12px;margin-right:12px">Neutral • Zinc 900</span>
+</p>
 
 <br />
 

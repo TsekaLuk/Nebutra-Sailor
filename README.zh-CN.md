@@ -3,17 +3,13 @@
 </div>
 
 <div align="center">
-  <br />
   <a href="https://nebutra.com">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="packages/brand/assets/logo/logo-inverse.svg" width="280">
-      <source media="(prefers-color-scheme: light)" srcset="packages/brand/assets/logo/logo-horizontal-zh.svg" width="280">
-      <img alt="Nebutra" src="packages/brand/assets/logo/logo-horizontal-zh.svg" width="280">
+      <source media="(prefers-color-scheme: dark)" srcset="packages/brand/assets/hero/hero-zh-dark.svg" />
+      <source media="(prefers-color-scheme: light)" srcset="packages/brand/assets/hero/hero-zh-light.svg" />
+      <img alt="Nebutra Sailor – 开源的企业级 AI 原生 SaaS 平台" src="packages/brand/assets/hero/hero-zh-light.svg" width="100%" />
     </picture>
   </a>
-  <br />
-  <br />
-  <h3>开源的企业级 AI 原生 SaaS 平台</h3>
   <br />
   <p>
     <a href="https://nebutra.com"><strong>官网</strong></a> · 
@@ -60,19 +56,6 @@ Nebula • Nurture • Ultra • Future
 - Ultra（臻于至善）：以工程可靠与价值交付为核心。
 - Future（引领未来）：让 AI 生产力普惠每个人。
 
-### 一页式路演摘要（YC风格）
-- 痛点 — AI 工具繁多且割裂，企业难以把能力转化为可衡量的业务价值。
-- 解决方案 — AI‑First 的多租户基座：RLS、向量检索、MCP Agent、生产级工程范式，快速且安全落地。
-- 我们提供 — AI 产品设计、LLM 应用开发、数据分析与可视化、全栈 Web，从 PoC 到上线交付。
-- 为什么是现在 — 模型成本下降、企业对“可量化产出”的需求上升；市场需要可复用的工程蓝本而非概念炒作。
-- 技术壁垒 — 端到端交付（设计→数据→前后端→基础设施），标准化工程模式，品牌与 UI 体系可规模化复用。
-- 代表案例 —
-  - 自动化分析：报表时间降幅 >70%，洞察交付提速 4×。
-  - 垂直 ERP 现代化：运营效率提升 ~50%，全链路可追溯可视化。
-- 商业模式 — 服务（项目制）→ 产品化 SaaS（订阅）→ 生态收入（API / 集成）。
-- 路线图 — 0→1 PoC → 多租户 SaaS 基线 → 领域 Agent → 企业级规模化部署。
-- 行动召唤 — 一起把 AI 变成生产力：hello@nebutra.com
-
 ### 为什么选择 Sailor？
 
 - **🚀 生产就绪** — 经过实际企业部署验证的架构模式
@@ -81,6 +64,58 @@ Nebula • Nurture • Ultra • Future
 - **⚡ 现代技术栈** — Next.js 17、React 19、TypeScript 5.6+、TailwindCSS 4.0
 - **🔌 可扩展** — 模块化微服务架构，事件驱动通信
 - **🌍 全球化** — 国际化、CDN、边缘缓存、多区域部署支持
+- **实战成效** — 交付项目中，报表时间降幅 >70%、洞察交付提速 4×；运营效率提升 ~50%。
+- **面向创始人与团队** — 从 PoC 到上线的工程范式，兼顾速度与可靠性。
+
+## ✨ 亮点
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/ai.svg" width="28" alt="AI" /><br />
+      <strong>AI 原生</strong>
+      <br />内置 LLM、向量检索、MCP Agents，现代 AI 应用的一等公民。
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/tenants.svg" width="28" alt="Tenants" /><br />
+      <strong>多租户为先</strong>
+      <br />租户上下文、RLS、缓存与限流按租户隔离。
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/enterprise.svg" width="28" alt="Enterprise" /><br />
+      <strong>企业级工程</strong>
+      <br />Cloudflare WAF/R2、Inngest 工作流、Sentry/Otel、Vercel 部署。
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Workflows" /><br />
+      <strong>工作流</strong>
+      <br />后台任务、定时、事件总线。
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/security.svg" width="28" alt="Security" /><br />
+      <strong>安全</strong>
+      <br />RLS、WAF、Turnstile、多租户隔离。
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/toolkit.svg" width="28" alt="Toolkit" /><br />
+      <strong>工具集</strong>
+      <br />UI 套件、品牌包、脚本与预设。
+    </td>
+  </tr>
+</table>
+
+## 🎨 设计语言
+
+<p>
+  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#6366f1;border:1px solid #e5e7eb"></span>
+  <span style="font-size:12px;margin-right:12px">主色 • Indigo 500</span>
+  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;border:1px solid #e5e7eb"></span>
+  <span style="font-size:12px;margin-right:12px">强调 • Teal 500</span>
+  <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#18181b;border:1px solid #e5e7eb"></span>
+  <span style="font-size:12px;margin-right:12px">中性 • Zinc 900</span>
+</p>
 
 <br />
 
