@@ -352,10 +352,10 @@ For commercial licensing inquiries, please contact us.
   <br />
   <br />
   <p>
-    <sub>Built with ❤️ by <a href="https://nebutra.com"><strong>Nebutra Intelligence</strong></a></sub>
+    <strong>🦄 Shipping the future, one commit at a time</strong>
   </p>
   <p>
-    <sub>© 2024-present <strong>Wuxi Yunyu Intelligent Technology Co., Ltd.</strong></sub>
+    <sub>Made by <a href="https://nebutra.com"><strong>Nebutra Intelligence</strong></a> · © 2024-present <strong>Wuxi Yunyu Intelligent Technology Co., Ltd.</strong></sub>
   </p>
   <br />
   <p>

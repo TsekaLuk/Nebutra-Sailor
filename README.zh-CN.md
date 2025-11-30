@@ -354,10 +354,10 @@ pnpm db:generate && pnpm dev
   <br />
   <br />
   <p>
-    <sub>由 <a href="https://nebutra.com"><strong>Nebutra Intelligence</strong></a> 用 ❤️ 构建</sub>
+    <strong>🦄 每一次提交，都在创造未来</strong>
   </p>
   <p>
-    <sub>© 2024-至今 <strong>无锡云毓智能科技有限公司</strong></sub>
+    <sub>出品 <a href="https://nebutra.com"><strong>Nebutra Intelligence</strong></a> · © 2024-至今 <strong>无锡云毓智能科技有限公司</strong></sub>
   </p>
   <br />
   <p>
