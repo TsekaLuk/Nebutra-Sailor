@@ -16,10 +16,19 @@ app.use(
   "*",
   cors({
     origin: [
+      // Local development
       "http://localhost:3000",
       "http://localhost:3001",
+      "http://localhost:3003",
+      // Production domains
+      "https://nebutra.com",
+      "https://www.nebutra.com",
+      "https://app.nebutra.com",
+      "https://studio.nebutra.com",
+      // Environment overrides
       process.env.LANDING_URL || "",
       process.env.WEB_URL || "",
+      process.env.STUDIO_URL || "",
     ].filter(Boolean),
     credentials: true,
   })

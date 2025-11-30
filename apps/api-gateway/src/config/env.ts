@@ -26,7 +26,16 @@ const envSchema = z.object({
   // Frontend URLs
   LANDING_URL: z.string().optional(),
   WEB_URL: z.string().optional(),
+  STUDIO_URL: z.string().optional(),
 });
+
+// Production domain constants
+export const DOMAINS = {
+  landing: "https://nebutra.com",
+  app: "https://app.nebutra.com",
+  api: "https://api.nebutra.com",
+  studio: "https://studio.nebutra.com",
+} as const;
 
 export type Env = z.infer<typeof envSchema>;
 
