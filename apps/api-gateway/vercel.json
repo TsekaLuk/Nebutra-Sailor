@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm turbo build --filter=api-gateway",
+"buildCommand": "pnpm turbo build --filter=@nebutra/api-gateway",
   "installCommand": "pnpm install",
   "outputDirectory": "dist",
   "regions": ["iad1"],

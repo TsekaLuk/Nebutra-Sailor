@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "pnpm turbo build --filter=landing-page",
+"buildCommand": "pnpm turbo build --filter=@nebutra/landing-page",
   "installCommand": "pnpm install",
   "outputDirectory": ".next",
   "regions": ["iad1"],
