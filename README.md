@@ -52,7 +52,9 @@ Nebutra Sailor is an enterprise-grade, AI-native SaaS monorepo architecture desi
 Built with the latest technologies including Next.js 17, React 19, and Prisma 7, Sailor embraces an "AI-first" philosophy with native support for LLMs, vector search, and intelligent workflows.
 
 ### Brand Vision
+
 Nebula • Nurture • Ultra • Future
+
 - Nebula: Aggregate data, tools, and intelligence into usable products.
 - Nurture: Incubate AI-native apps via automated toolchains and “digital employees.”
 - Ultra: Ship reliable engineering and value-first outcomes.
@@ -231,7 +233,14 @@ Nebutra-Sailor/
 │   ├── rate-limit/        # Multi-tenant rate limiting
 │   ├── event-bus/         # Cross-service messaging
 │   ├── saga/              # Distributed transactions
-│   └── mcp/               # Model Context Protocol for AI agents
+│   ├── mcp/               # Model Context Protocol for AI agents
+│   ├── config/            # Shared configuration utilities
+│   ├── errors/            # Standardized error handling
+│   ├── feature-flags/     # Feature flag management
+│   ├── alerting/          # Multi-channel alerting
+│   ├── audit/             # Compliance audit logging
+│   ├── health/            # Health check utilities
+│   └── status/            # OpenStatus integration
 ├── services/
 │   ├── ai/                # Python FastAPI - LLM, embeddings
 │   ├── content/           # Python FastAPI - posts, feed
@@ -240,13 +249,54 @@ Nebutra-Sailor/
 │   └── web3/              # Python - blockchain indexer
 ├── infra/
 │   ├── cloudflare/        # CDN, WAF, R2 configs
-│   ├── database/          # RLS policies
-│   ├── terraform/         # IaC
+│   ├── docker/            # Container configurations
 │   ├── k8s/               # Kubernetes manifests
+│   ├── railway/           # Railway deployment
+│   ├── terraform/         # IaC configurations
 │   ├── inngest/           # Workflow definitions
 │   └── observability/     # Logging, tracing, metrics
 └── docs/                  # Architecture documentation
 ```
+
+<br />
+
+## Documentation
+
+Each component has its own README with setup instructions and API documentation:
+
+<table>
+<tr>
+<td><strong>Services</strong></td>
+<td>
+  <a href="services/ai/">AI</a> · 
+  <a href="services/content/">Content</a> · 
+  <a href="services/recsys/">RecSys</a> · 
+  <a href="services/ecommerce/">E-commerce</a> · 
+  <a href="services/web3/">Web3</a>
+</td>
+</tr>
+<tr>
+<td><strong>Packages</strong></td>
+<td>
+  <a href="packages/db/">DB</a> · 
+  <a href="packages/cache/">Cache</a> · 
+  <a href="packages/rate-limit/">Rate Limit</a> · 
+  <a href="packages/event-bus/">Event Bus</a> · 
+  <a href="packages/saga/">Saga</a> · 
+  <a href="packages/mcp/">MCP</a>
+</td>
+</tr>
+<tr>
+<td><strong>Infrastructure</strong></td>
+<td>
+  <a href="infra/docker/">Docker</a> · 
+  <a href="infra/k8s/">Kubernetes</a> · 
+  <a href="infra/terraform/">Terraform</a> · 
+  <a href="infra/inngest/">Inngest</a> · 
+  <a href="infra/observability/">Observability</a>
+</td>
+</tr>
+</table>
 
 <br />
 
@@ -279,16 +329,16 @@ pnpm db:generate && pnpm dev
 
 ### Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start all apps in dev mode |
-| `pnpm build` | Build all packages (auto-syncs brand assets) |
-| `pnpm lint` | Lint all packages |
-| `pnpm typecheck` | Type check all packages |
-| `pnpm db:studio` | Open Prisma Studio |
-| `pnpm brand:sync` | Sync brand assets to apps |
-| `pnpm brand:init` | Initialize white-label branding |
-| `pnpm brand:apply` | Apply custom branding |
+| Command            | Description                                  |
+| ------------------ | -------------------------------------------- |
+| `pnpm dev`         | Start all apps in dev mode                   |
+| `pnpm build`       | Build all packages (auto-syncs brand assets) |
+| `pnpm lint`        | Lint all packages                            |
+| `pnpm typecheck`   | Type check all packages                      |
+| `pnpm db:studio`   | Open Prisma Studio                           |
+| `pnpm brand:sync`  | Sync brand assets to apps                    |
+| `pnpm brand:init`  | Initialize white-label branding              |
+| `pnpm brand:apply` | Apply custom branding                        |
 
 <br />
 
@@ -314,11 +364,11 @@ See [WHITELABEL.md](WHITELABEL.md) for full documentation.
 
 We love our contributors! Here's how you can help:
 
-| | |
-|---|---|
-| **Report Bugs** | [Open an issue](https://github.com/TsekaLuk/Nebutra-Sailor/issues) |
-| **Feature Requests** | Suggest new features via issues |
-| **Pull Requests** | Submit PRs for features or fixes |
+|                      |                                                                    |
+| -------------------- | ------------------------------------------------------------------ |
+| **Report Bugs**      | [Open an issue](https://github.com/TsekaLuk/Nebutra-Sailor/issues) |
+| **Feature Requests** | Suggest new features via issues                                    |
+| **Pull Requests**    | Submit PRs for features or fixes                                   |
 
 ### Development Workflow
 
@@ -338,13 +388,13 @@ This project is licensed under the **MIT License with Commons Clause**.
 
 ### What this means:
 
-| | |
-|---|---|
-| **Free to use** | Personal projects, learning, internal tools |
-| **Free to modify** | Create derivative works |
-| **Free to distribute** | With attribution |
-| **Commercial use** | Requires open source |
-| **Exemption** | Wuxi Yunyu Intelligent Technology Co., Ltd. and affiliates |
+|                        |                                                            |
+| ---------------------- | ---------------------------------------------------------- |
+| **Free to use**        | Personal projects, learning, internal tools                |
+| **Free to modify**     | Create derivative works                                    |
+| **Free to distribute** | With attribution                                           |
+| **Commercial use**     | Requires open source                                       |
+| **Exemption**          | Wuxi Yunyu Intelligent Technology Co., Ltd. and affiliates |
 
 For commercial licensing inquiries, please contact us.
 
