@@ -1,112 +1,13 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
-
-// ============================================
-// Multi-Tenant Core Models
-// ============================================
-
-model Organization {
-  id        String   @id @default(cuid())
-  clerkId   String   @unique @map("clerk_id")
-  name      String
-  slug      String   @unique
-  plan      Plan     @default(FREE)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  members     OrganizationMember[]
-  contents    Content[]
-  tenantUsage TenantUsage[]
-
-  @@map("organizations")
-}
-
-model User {
-  id        String   @id @default(cuid())
-  clerkId   String   @unique @map("clerk_id")
-  email     String   @unique
-  name      String?
-  avatarUrl String?  @map("avatar_url")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  organizations OrganizationMember[]
-  contents      Content[]
-
-  @@map("users")
-}
-
-model OrganizationMember {
-  id             String   @id @default(cuid())
-  organizationId String   @map("organization_id")
-  userId         String   @map("user_id")
-  role           Role     @default(MEMBER)
-  createdAt      DateTime @default(now()) @map("created_at")
-
-  // Relations
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([organizationId, userId])
-  @@map("organization_members")
-}
-
-// ============================================
-// Content Models
-// ============================================
-
-model Content {
-  id             String        @id @default(cuid())
-  organizationId String        @map("organization_id")
-  authorId       String        @map("author_id")
-  title          String
-  body           String
-  status         ContentStatus @default(DRAFT)
-  publishedAt    DateTime?     @map("published_at")
-  createdAt      DateTime      @default(now()) @map("created_at")
-  updatedAt      DateTime      @updatedAt @map("updated_at")
-
-  // Vector embedding for AI search (stored separately in pgvector)
-  embeddingId String? @map("embedding_id")
-
-  // Relations
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  author       User         @relation(fields: [authorId], references: [id])
-
-  @@index([organizationId])
-  @@index([authorId])
-  @@index([status])
-  @@map("contents")
-}
-
-// ============================================
-// Usage & Billing Models
-// ============================================
-
-model TenantUsage {
-  id             String   @id @default(cuid())
-  organizationId String   @map("organization_id")
-  month          String   // Format: YYYY-MM
-  apiCalls       Int      @default(0) @map("api_calls")
-  aiTokens       Int      @default(0) @map("ai_tokens")
-  storage        BigInt   @default(0) // bytes
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-
-  @@unique([organizationId, month])
-  @@map("tenant_usage")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [vector, uuid_ossp(map: "uuid-ossp")]
 }
 
 // ============================================
@@ -123,10 +24,322 @@ enum Role {
   OWNER
   ADMIN
   MEMBER
+  VIEWER
 }
 
 enum ContentStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum IntegrationType {
+  SHOPIFY
+  SHOPLINE
+  STRIPE
+  CUSTOM
+}
+
+enum NftStatus {
+  MINTING
+  MINTED
+  LISTED
+  SOLD
+  BURNED
+}
+
+// ============================================
+// Multi-Tenant Core
+// ============================================
+
+model Organization {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique @map("clerk_id")
+  name      String
+  slug      String   @unique
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  members      OrganizationMember[]
+  contents     Content[]
+  tenantUsage  TenantUsage[]
+  products     Product[]
+  orders       Order[]
+  integrations Integration[]
+  wallets      Wallet[]
+  nfts         Nft[]
+
+  @@map("organizations")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique @map("clerk_id")
+  email     String   @unique
+  name      String?
+  avatarUrl String?  @map("avatar_url")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  organizations OrganizationMember[]
+  contents      Content[]
+  orders        Order[]
+  activities    UserActivity[]
+  wallets       Wallet[]
+
+  @@map("users")
+}
+
+model OrganizationMember {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  userId         String   @map("user_id")
+  role           Role     @default(MEMBER)
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@map("organization_members")
+}
+
+// ============================================
+// Content
+// ============================================
+
+model Content {
+  id             String        @id @default(cuid())
+  organizationId String        @map("organization_id")
+  authorId       String        @map("author_id")
+  title          String
+  slug           String?
+  body           String        @db.Text
+  status         ContentStatus @default(DRAFT)
+  publishedAt    DateTime?     @map("published_at")
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  organization Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  author       User                  @relation(fields: [authorId], references: [id])
+  embeddings   ContentEmbedding[]
+  translations ContentTranslation[]
+
+  @@unique([organizationId, slug])
+  @@index([organizationId])
+  @@index([authorId])
+  @@index([status])
+  @@map("contents")
+}
+
+model ContentTranslation {
+  id        String   @id @default(cuid())
+  contentId String   @map("content_id")
+  locale    String   @db.VarChar(10)
+  title     String
+  body      String?  @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, locale])
+  @@map("content_translations")
+}
+
+// ============================================
+// Embeddings (pgvector)
+// ============================================
+
+model ContentEmbedding {
+  id        String                      @id @default(cuid())
+  contentId String                      @map("content_id")
+  embedding Unsupported("vector(1536)")
+  model     String                      @default("text-embedding-3-small")
+  createdAt DateTime                    @default(now()) @map("created_at")
+
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@index([contentId])
+  @@map("content_embeddings")
+}
+
+// ============================================
+// E-Commerce
+// ============================================
+
+model Product {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  externalId     String?  @map("external_id")
+  name           String
+  description    String?  @db.Text
+  price          Decimal  @db.Decimal(10, 2)
+  currency       String   @default("USD") @db.VarChar(3)
+  inventory      Int      @default(0)
+  imageUrl       String?  @map("image_url")
+  metadata       Json?    @default("{}")
+  isActive       Boolean  @default(true) @map("is_active")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  orderItems   OrderItem[]
+
+  @@unique([organizationId, externalId])
+  @@index([organizationId])
+  @@map("products")
+}
+
+model Order {
+  id             String      @id @default(cuid())
+  organizationId String      @map("organization_id")
+  userId         String      @map("user_id")
+  externalId     String?     @map("external_id")
+  status         OrderStatus @default(PENDING)
+  totalAmount    Decimal     @db.Decimal(10, 2)
+  currency       String      @default("USD") @db.VarChar(3)
+  shippingInfo   Json?       @map("shipping_info")
+  metadata       Json?       @default("{}")
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id])
+  items        OrderItem[]
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String  @map("order_id")
+  productId String  @map("product_id")
+  quantity  Int
+  unitPrice Decimal @db.Decimal(10, 2)
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@map("order_items")
+}
+
+model Integration {
+  id             String          @id @default(cuid())
+  organizationId String          @map("organization_id")
+  type           IntegrationType
+  name           String
+  credentials    Json            @default("{}") // Encrypt in app layer
+  settings       Json            @default("{}")
+  isActive       Boolean         @default(true) @map("is_active")
+  lastSyncAt     DateTime?       @map("last_sync_at")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, type, name])
+  @@map("integrations")
+}
+
+// ============================================
+// Web3
+// ============================================
+
+model Wallet {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  userId         String   @map("user_id")
+  address        String   @db.VarChar(42)
+  chainId        Int      @map("chain_id")
+  isPrimary      Boolean  @default(false) @map("is_primary")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nfts         Nft[]
+
+  @@unique([address, chainId])
+  @@index([userId])
+  @@map("wallets")
+}
+
+model Nft {
+  id             String    @id @default(cuid())
+  organizationId String    @map("organization_id")
+  walletId       String    @map("wallet_id")
+  contractAddr   String    @map("contract_addr") @db.VarChar(42)
+  tokenId        String    @map("token_id")
+  chainId        Int       @map("chain_id")
+  name           String?
+  description    String?   @db.Text
+  imageUrl       String?   @map("image_url")
+  metadata       Json?     @default("{}")
+  status         NftStatus @default(MINTING)
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  wallet       Wallet       @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  @@unique([contractAddr, tokenId, chainId])
+  @@index([walletId])
+  @@map("nfts")
+}
+
+// ============================================
+// User Activity & Analytics
+// ============================================
+
+model UserActivity {
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  action     String   @db.VarChar(50)
+  entityType String?  @map("entity_type") @db.VarChar(50)
+  entityId   String?  @map("entity_id")
+  metadata   Json?    @default("{}")
+  ipAddress  String?  @map("ip_address") @db.VarChar(45)
+  userAgent  String?  @map("user_agent")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("user_activities")
+}
+
+// ============================================
+// Usage & Billing
+// ============================================
+
+model TenantUsage {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  month          String   // Format: YYYY-MM
+  apiCalls       Int      @default(0) @map("api_calls")
+  aiTokens       Int      @default(0) @map("ai_tokens")
+  storage        BigInt   @default(0) // bytes
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, month])
+  @@map("tenant_usage")
 }
