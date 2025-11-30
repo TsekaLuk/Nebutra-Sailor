@@ -66,8 +66,8 @@ Nebula • Nurture • Ultra • Future
 - **⚡ Modern Stack** — Next.js 17, React 19, TypeScript 5.6+, TailwindCSS 4.0
 - **🔌 Extensible** — Modular microservices architecture with event-driven communication
 - **🌍 Global-Ready** — i18n, CDN, edge caching, and multi-region deployment support
-- **Proven impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights, and ~50% gains in operational efficiency via traceable dashboards.
-- **For builders** — PoC‑to‑production patterns that balance velocity with reliability.
+- **📊 Proven Impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights, and ~50% gains in operational efficiency via traceable dashboards.
+- **👷 For Builders** — PoC‑to‑production patterns that balance velocity with reliability.
 
 ## Highlights
 
