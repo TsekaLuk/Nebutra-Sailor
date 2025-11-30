@@ -12,6 +12,16 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Nebutra - Enterprise SaaS Platform",
   description: "Build your next AI-native SaaS application",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
 };
 
 const hasClerkKey = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
