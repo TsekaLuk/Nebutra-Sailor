@@ -5,11 +5,14 @@
 <div align="center">
   <a href="https://nebutra.com">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="packages/brand/assets/hero/hero-zh-dark.svg" />
-      <source media="(prefers-color-scheme: light)" srcset="packages/brand/assets/hero/hero-zh-light.svg" />
-      <img alt="Nebutra Sailor – 开源的企业级 AI 原生 SaaS 平台" src="packages/brand/assets/hero/hero-zh-light.svg" width="100%" />
+      <source media="(prefers-color-scheme: dark)" srcset="packages/brand/assets/logo/logo-inverse.svg" />
+      <source media="(prefers-color-scheme: light)" srcset="packages/brand/assets/logo/logo-horizontal-zh.svg" />
+      <img alt="Nebutra" src="packages/brand/assets/logo/logo-horizontal-zh.svg" width="320" />
     </picture>
   </a>
+  <br />
+  <br />
+  <h3>开源的企业级 AI 原生 SaaS 平台</h3>
   <br />
   <p>
     <a href="https://nebutra.com"><strong>官网</strong></a> · 

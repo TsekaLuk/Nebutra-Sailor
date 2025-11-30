@@ -5,11 +5,14 @@
 <div align="center">
   <a href="https://nebutra.com">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="packages/brand/assets/hero/hero-dark.svg" />
-      <source media="(prefers-color-scheme: light)" srcset="packages/brand/assets/hero/hero-light.svg" />
-      <img alt="Nebutra Sailor – The open‑source enterprise SaaS platform for AI‑native apps" src="packages/brand/assets/hero/hero-light.svg" width="100%" />
+      <source media="(prefers-color-scheme: dark)" srcset="packages/brand/assets/logo/logo-inverse.svg" />
+      <source media="(prefers-color-scheme: light)" srcset="packages/brand/assets/logo/logo-horizontal-en.svg" />
+      <img alt="Nebutra" src="packages/brand/assets/logo/logo-horizontal-en.svg" width="320" />
     </picture>
   </a>
+  <br />
+  <br />
+  <h3>The Open-Source Enterprise SaaS Platform</h3>
   <br />
   <p>
     <a href="https://nebutra.com"><strong>Website</strong></a> · 

@@ -1,26 +1,33 @@
-@import "tailwindcss";
+/**
+ * Nebutra Landing Page - Global Styles
+ * 
+ * This file imports the @nebutra/21st theme system which provides:
+ * - CSS variables for light/dark themes
+ * - Tailwind CSS 4 theme configuration
+ * - Animation keyframes
+ * - Base styles
+ */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Import 21st.dev compatible theme from @nebutra/21st */
+@import "@nebutra/21st/styles/globals.css";
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Custom overrides for landing page */
+@layer base {
+  /* Smooth page transitions */
+  html {
+    scroll-behavior: smooth;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Custom font configuration */
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headings use the same font family */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
 }
