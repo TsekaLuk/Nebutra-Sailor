@@ -6,6 +6,10 @@ Enterprise-grade infrastructure configuration for Nebutra-Sailor.
 
 ```
 infra/
+├── cloudflare/         # CDN, WAF, R2 storage, Edge rules
+│   ├── wrangler.toml   # Wrangler CLI config
+│   ├── r2/             # R2 bucket configs
+│   └── rules/          # Cache & WAF rules
 ├── database/           # Database configs (RLS policies)
 ├── terraform/          # Cloud infrastructure as code
 │   ├── main.tf
