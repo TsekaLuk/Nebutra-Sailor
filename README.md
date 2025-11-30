@@ -67,7 +67,7 @@ Nebula • Nurture • Ultra • Future
 - **🔌 Extensible** — Modular microservices architecture with event-driven communication
 - **🌍 Global-Ready** — i18n, CDN, edge caching, and multi-region deployment support
 - **📊 Proven Impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights, and ~50% gains in operational efficiency via traceable dashboards.
-- **👷 For Builders** — PoC‑to‑production patterns that balance velocity with reliability.
+- **🦄 For Unicorns** — PoC‑to‑production patterns that balance velocity with reliability.
 
 ## Highlights
 
