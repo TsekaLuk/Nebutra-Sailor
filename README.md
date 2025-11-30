@@ -192,6 +192,7 @@ Nebula • Nurture • Ultra • Future
 <td><strong>Workflows</strong></td>
 <td>
   <a href="https://inngest.com/"><img src="https://img.shields.io/badge/Inngest-6366F1?style=flat-square" alt="Inngest" /></a>
+  <a href="https://n8n.io/"><img src="https://img.shields.io/badge/n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white" alt="n8n" /></a>
 </td>
 </tr>
 <tr>
@@ -253,7 +254,8 @@ Nebutra-Sailor/
 │   ├── k8s/               # Kubernetes manifests
 │   ├── railway/           # Railway deployment
 │   ├── terraform/         # IaC configurations
-│   ├── inngest/           # Workflow definitions
+│   ├── inngest/           # TypeScript workflow definitions
+│   ├── n8n/               # Visual workflow automation
 │   └── observability/     # Logging, tracing, metrics
 └── docs/                  # Architecture documentation
 ```
@@ -293,6 +295,7 @@ Each component has its own README with setup instructions and API documentation:
   <a href="infra/k8s/">Kubernetes</a> · 
   <a href="infra/terraform/">Terraform</a> · 
   <a href="infra/inngest/">Inngest</a> · 
+  <a href="infra/n8n/">n8n</a> · 
   <a href="infra/observability/">Observability</a>
 </td>
 </tr>

@@ -193,6 +193,7 @@ Nebula • Nurture • Ultra • Future
 <td><strong>工作流</strong></td>
 <td>
   <a href="https://inngest.com/"><img src="https://img.shields.io/badge/Inngest-6366F1?style=flat-square" alt="Inngest" /></a>
+  <a href="https://n8n.io/"><img src="https://img.shields.io/badge/n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white" alt="n8n" /></a>
 </td>
 </tr>
 <tr>
@@ -255,7 +256,8 @@ Nebutra-Sailor/
 │   ├── k8s/               # Kubernetes 清单
 │   ├── railway/           # Railway 部署
 │   ├── terraform/         # IaC 配置
-│   ├── inngest/           # 工作流定义
+│   ├── inngest/           # TypeScript 工作流定义
+│   ├── n8n/               # 可视化工作流自动化
 │   └── observability/     # 日志、链路追踪、指标
 └── docs/                  # 架构文档
 ```
@@ -295,6 +297,7 @@ Nebutra-Sailor/
   <a href="infra/k8s/">Kubernetes</a> · 
   <a href="infra/terraform/">Terraform</a> · 
   <a href="infra/inngest/">Inngest</a> · 
+  <a href="infra/n8n/">n8n</a> · 
   <a href="infra/observability/">可观测性</a>
 </td>
 </tr>
