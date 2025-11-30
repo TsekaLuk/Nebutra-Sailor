@@ -1,0 +1,26 @@
+{
+  "name": "@nebutra/captcha",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./react": "./src/react/index.ts",
+    "./server": "./src/server/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  }
+}
