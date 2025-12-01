@@ -36,7 +36,7 @@ export function ErrorState({
   retryLabel = "Try again",
   className,
   ...props
-}: ErrorStateProps) {
+}: ErrorStateProps): React.JSX.Element {
   const displayMessage = message || error?.message || "An unexpected error occurred.";
   const AlertGlyph = AlertIcon as unknown as React.ComponentType<{ size?: number }>;
 
