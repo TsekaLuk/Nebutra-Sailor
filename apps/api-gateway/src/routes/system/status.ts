@@ -145,12 +145,9 @@ statusRoutes.get("/ping", (c) => {
 async function checkDatabase(): Promise<StatusResponse["checks"][0]> {
   const start = Date.now();
   try {
-    // In production, this would use Prisma to ping the database
-    // const prisma = new PrismaClient();
-    // await prisma.$queryRaw`SELECT 1`;
-
-    // Simulate for now
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    // Dynamic import to avoid issues when DB is not configured
+    const { prisma } = await import("@nebutra/db");
+    await prisma.$queryRaw`SELECT 1`;
 
     return {
       name: "database",
@@ -170,12 +167,13 @@ async function checkDatabase(): Promise<StatusResponse["checks"][0]> {
 async function checkRedis(): Promise<StatusResponse["checks"][0]> {
   const start = Date.now();
   try {
-    // In production, this would ping Redis
-    // const redis = new Redis(process.env.UPSTASH_REDIS_REST_URL);
-    // await redis.ping();
-
-    // Simulate for now
-    await new Promise((resolve) => setTimeout(resolve, 5));
+    // Dynamic import to avoid issues when Redis is not configured
+    const { redis } = await import("@nebutra/cache");
+    if (redis) {
+      await redis.ping();
+    } else {
+      throw new Error("Redis client not configured");
+    }
 
     return {
       name: "redis",

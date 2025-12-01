@@ -343,3 +343,158 @@ model TenantUsage {
   @@unique([organizationId, month])
   @@map("tenant_usage")
 }
+
+// ============================================
+// AI Service Tracking
+// ============================================
+
+enum AIProvider {
+  OPENAI
+  ANTHROPIC
+  GOOGLE
+  SILICONFLOW
+  CUSTOM
+}
+
+enum AIRequestType {
+  GENERATE
+  EMBED
+  TRANSLATE
+  CHAT
+}
+
+model AIRequest {
+  id             String        @id @default(cuid())
+  organizationId String        @map("organization_id")
+  userId         String?       @map("user_id")
+  type           AIRequestType
+  provider       AIProvider
+  model          String
+  inputTokens    Int           @default(0) @map("input_tokens")
+  outputTokens   Int           @default(0) @map("output_tokens")
+  latencyMs      Int?          @map("latency_ms")
+  cost           Decimal?      @db.Decimal(10, 6)
+  metadata       Json?         @default("{}")
+  createdAt      DateTime      @default(now()) @map("created_at")
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([provider, model])
+  @@map("ai_requests")
+}
+
+// ============================================
+// Recommendation System
+// ============================================
+
+model UserPreference {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  userId         String   @map("user_id")
+  category       String   @db.VarChar(50)
+  weight         Float    @default(1.0)
+  metadata       Json?    @default("{}")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@unique([organizationId, userId, category])
+  @@index([userId])
+  @@map("user_preferences")
+}
+
+model Recommendation {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  userId         String   @map("user_id")
+  itemType       String   @map("item_type") @db.VarChar(50) // content, product, nft
+  itemId         String   @map("item_id")
+  score          Float
+  reason         String?  @db.VarChar(100) // collaborative, content-based, trending
+  shown          Boolean  @default(false)
+  clicked        Boolean  @default(false)
+  createdAt      DateTime @default(now()) @map("created_at")
+  expiresAt      DateTime @map("expires_at")
+
+  @@index([organizationId, userId])
+  @@index([itemType, itemId])
+  @@index([expiresAt])
+  @@map("recommendations")
+}
+
+// ============================================
+// Feature Flags
+// ============================================
+
+enum FeatureFlagType {
+  BOOLEAN
+  PERCENTAGE
+  JSON
+}
+
+model FeatureFlag {
+  id          String          @id @default(cuid())
+  key         String          @unique @db.VarChar(100)
+  name        String
+  description String?
+  type        FeatureFlagType @default(BOOLEAN)
+  value       Json            @default("false")
+  isEnabled   Boolean         @default(false) @map("is_enabled")
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+
+  overrides FeatureFlagOverride[]
+
+  @@map("feature_flags")
+}
+
+model FeatureFlagOverride {
+  id             String   @id @default(cuid())
+  flagId         String   @map("flag_id")
+  organizationId String?  @map("organization_id")
+  userId         String?  @map("user_id")
+  value          Json
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  flag FeatureFlag @relation(fields: [flagId], references: [id], onDelete: Cascade)
+
+  @@unique([flagId, organizationId, userId])
+  @@map("feature_flag_overrides")
+}
+
+// ============================================
+// Audit Logging
+// ============================================
+
+enum AuditAction {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  EXPORT
+  IMPORT
+}
+
+model AuditLog {
+  id             String      @id @default(cuid())
+  organizationId String?     @map("organization_id")
+  userId         String?     @map("user_id")
+  action         AuditAction
+  entityType     String      @map("entity_type") @db.VarChar(50)
+  entityId       String?     @map("entity_id")
+  oldValue       Json?       @map("old_value")
+  newValue       Json?       @map("new_value")
+  ipAddress      String?     @map("ip_address") @db.VarChar(45)
+  userAgent      String?     @map("user_agent")
+  metadata       Json?       @default("{}")
+  createdAt      DateTime    @default(now()) @map("created_at")
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

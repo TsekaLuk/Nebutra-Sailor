@@ -14,7 +14,9 @@
     "hono": "^4.6.0",
     "@hono/node-server": "^1.13.0",
     "zod": "^3.23.0",
-    "@nebutra/rate-limit": "workspace:*"
+    "@nebutra/db": "workspace:*",
+    "@nebutra/rate-limit": "workspace:*",
+    "@nebutra/cache": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20",
