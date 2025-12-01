@@ -1,0 +1,53 @@
+{
+  "name": "@nebutra/billing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Billing & Monetization infrastructure for Nebutra - Stripe integration, subscriptions, usage, credits",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./stripe": {
+      "import": "./dist/stripe/index.js",
+      "types": "./dist/stripe/index.d.ts"
+    },
+    "./subscriptions": {
+      "import": "./dist/subscriptions/index.js",
+      "types": "./dist/subscriptions/index.d.ts"
+    },
+    "./usage": {
+      "import": "./dist/usage/index.js",
+      "types": "./dist/usage/index.d.ts"
+    },
+    "./credits": {
+      "import": "./dist/credits/index.js",
+      "types": "./dist/credits/index.d.ts"
+    },
+    "./entitlements": {
+      "import": "./dist/entitlements/index.js",
+      "types": "./dist/entitlements/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "stripe": "^17.4.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@nebutra/db": "workspace:*",
+    "@types/node": "^24.10.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "@nebutra/db": "workspace:*"
+  }
+}

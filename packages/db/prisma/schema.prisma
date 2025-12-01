@@ -463,6 +463,338 @@ model FeatureFlagOverride {
 }
 
 // ============================================
+// Billing & Monetization
+// ============================================
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  UNPAID
+  TRIALING
+  PAUSED
+  INCOMPLETE
+}
+
+enum BillingInterval {
+  MONTHLY
+  YEARLY
+  WEEKLY
+  ONE_TIME
+}
+
+enum InvoiceStatus {
+  DRAFT
+  OPEN
+  PAID
+  VOID
+  UNCOLLECTIBLE
+}
+
+enum PaymentMethodType {
+  CARD
+  BANK_TRANSFER
+  ALIPAY
+  WECHAT_PAY
+  CRYPTO
+}
+
+enum CreditTransactionType {
+  PURCHASE
+  USAGE
+  REFUND
+  ADJUSTMENT
+  EXPIRATION
+  BONUS
+}
+
+enum UsageType {
+  API_CALL
+  AI_TOKEN
+  STORAGE
+  COMPUTE
+  BANDWIDTH
+  CUSTOM
+}
+
+// Price/Plan Configuration
+model PricingPlan {
+  id           String          @id @default(cuid())
+  stripeId     String?         @unique @map("stripe_id")
+  name         String
+  description  String?
+  plan         Plan            // FREE, PRO, ENTERPRISE
+  interval     BillingInterval @default(MONTHLY)
+  amount       Decimal         @db.Decimal(10, 2)
+  currency     String          @default("USD") @db.VarChar(3)
+  trialDays    Int             @default(0) @map("trial_days")
+  isActive     Boolean         @default(true) @map("is_active")
+  features     Json            @default("[]") // Feature list included
+  limits       Json            @default("{}") // Usage limits: {apiCalls: 10000, aiTokens: 100000}
+  metadata     Json            @default("{}")
+  createdAt    DateTime        @default(now()) @map("created_at")
+  updatedAt    DateTime        @updatedAt @map("updated_at")
+
+  subscriptions Subscription[]
+  invoiceItems  InvoiceItem[]
+
+  @@map("pricing_plans")
+}
+
+// Subscription Management
+model Subscription {
+  id                   String             @id @default(cuid())
+  stripeId             String?            @unique @map("stripe_id")
+  organizationId       String             @map("organization_id")
+  pricingPlanId        String             @map("pricing_plan_id")
+  status               SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart   DateTime           @map("current_period_start")
+  currentPeriodEnd     DateTime           @map("current_period_end")
+  cancelAtPeriodEnd    Boolean            @default(false) @map("cancel_at_period_end")
+  canceledAt           DateTime?          @map("canceled_at")
+  trialStart           DateTime?          @map("trial_start")
+  trialEnd             DateTime?          @map("trial_end")
+  metadata             Json               @default("{}")
+  createdAt            DateTime           @default(now()) @map("created_at")
+  updatedAt            DateTime           @updatedAt @map("updated_at")
+
+  pricingPlan  PricingPlan @relation(fields: [pricingPlanId], references: [id])
+  invoices     Invoice[]
+  usageRecords UsageRecord[]
+
+  @@index([organizationId])
+  @@index([status])
+  @@map("subscriptions")
+}
+
+// Invoice Management
+model Invoice {
+  id               String        @id @default(cuid())
+  stripeId         String?       @unique @map("stripe_id")
+  organizationId   String        @map("organization_id")
+  subscriptionId   String?       @map("subscription_id")
+  number           String        @unique
+  status           InvoiceStatus @default(DRAFT)
+  subtotal         Decimal       @db.Decimal(10, 2)
+  tax              Decimal       @default(0) @db.Decimal(10, 2)
+  total            Decimal       @db.Decimal(10, 2)
+  amountPaid       Decimal       @default(0) @map("amount_paid") @db.Decimal(10, 2)
+  amountDue        Decimal       @map("amount_due") @db.Decimal(10, 2)
+  currency         String        @default("USD") @db.VarChar(3)
+  dueDate          DateTime?     @map("due_date")
+  paidAt           DateTime?     @map("paid_at")
+  invoicePdf       String?       @map("invoice_pdf")
+  hostedInvoiceUrl String?       @map("hosted_invoice_url")
+  billingReason    String?       @map("billing_reason") // subscription_create, subscription_cycle, manual
+  metadata         Json          @default("{}")
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+  items        InvoiceItem[]
+  payments     Payment[]
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([dueDate])
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id            String   @id @default(cuid())
+  invoiceId     String   @map("invoice_id")
+  pricingPlanId String?  @map("pricing_plan_id")
+  description   String
+  quantity      Int      @default(1)
+  unitAmount    Decimal  @map("unit_amount") @db.Decimal(10, 4)
+  amount        Decimal  @db.Decimal(10, 2)
+  currency      String   @default("USD") @db.VarChar(3)
+  periodStart   DateTime @map("period_start")
+  periodEnd     DateTime @map("period_end")
+  metadata      Json     @default("{}")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  invoice     Invoice      @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  pricingPlan PricingPlan? @relation(fields: [pricingPlanId], references: [id])
+
+  @@map("invoice_items")
+}
+
+// Payment Records
+model Payment {
+  id                String            @id @default(cuid())
+  stripeId          String?           @unique @map("stripe_id")
+  organizationId    String            @map("organization_id")
+  invoiceId         String?           @map("invoice_id")
+  amount            Decimal           @db.Decimal(10, 2)
+  currency          String            @default("USD") @db.VarChar(3)
+  status            String            @db.VarChar(20) // succeeded, pending, failed
+  paymentMethodType PaymentMethodType @map("payment_method_type")
+  paymentMethodId   String?           @map("payment_method_id")
+  failureCode       String?           @map("failure_code")
+  failureMessage    String?           @map("failure_message")
+  refundedAmount    Decimal           @default(0) @map("refunded_amount") @db.Decimal(10, 2)
+  metadata          Json              @default("{}")
+  createdAt         DateTime          @default(now()) @map("created_at")
+
+  invoice       Invoice?       @relation(fields: [invoiceId], references: [id])
+  paymentMethod PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
+
+  @@index([organizationId])
+  @@index([status])
+  @@map("payments")
+}
+
+// Payment Methods
+model PaymentMethod {
+  id             String            @id @default(cuid())
+  stripeId       String?           @unique @map("stripe_id")
+  organizationId String            @map("organization_id")
+  type           PaymentMethodType
+  isDefault      Boolean           @default(false) @map("is_default")
+  lastFour       String?           @map("last_four") @db.VarChar(4)
+  brand          String?           @db.VarChar(20) // visa, mastercard, etc.
+  expiryMonth    Int?              @map("expiry_month")
+  expiryYear     Int?              @map("expiry_year")
+  billingDetails Json?             @map("billing_details") // name, address, email
+  metadata       Json              @default("{}")
+  createdAt      DateTime          @default(now()) @map("created_at")
+  updatedAt      DateTime          @updatedAt @map("updated_at")
+
+  payments Payment[]
+
+  @@index([organizationId])
+  @@map("payment_methods")
+}
+
+// Usage Tracking (detailed)
+model UsageRecord {
+  id             String    @id @default(cuid())
+  organizationId String    @map("organization_id")
+  subscriptionId String?   @map("subscription_id")
+  userId         String?   @map("user_id")
+  type           UsageType
+  quantity       BigInt
+  unitCost       Decimal?  @map("unit_cost") @db.Decimal(10, 8) // cost per unit
+  totalCost      Decimal?  @map("total_cost") @db.Decimal(10, 6)
+  resource       String?   @db.VarChar(100) // specific resource: gpt-4o, bge-m3, etc.
+  metadata       Json      @default("{}")
+  recordedAt     DateTime  @default(now()) @map("recorded_at")
+
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+
+  @@index([organizationId, recordedAt])
+  @@index([type])
+  @@index([resource])
+  @@map("usage_records")
+}
+
+// Aggregated Usage (for billing)
+model UsageAggregate {
+  id             String    @id @default(cuid())
+  organizationId String    @map("organization_id")
+  type           UsageType
+  period         String    // YYYY-MM or YYYY-MM-DD
+  quantity       BigInt
+  cost           Decimal   @db.Decimal(10, 4)
+  currency       String    @default("USD") @db.VarChar(3)
+  metadata       Json      @default("{}")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@unique([organizationId, type, period])
+  @@map("usage_aggregates")
+}
+
+// Credits System
+model CreditBalance {
+  id             String   @id @default(cuid())
+  organizationId String   @unique @map("organization_id")
+  balance        Decimal  @default(0) @db.Decimal(10, 4)
+  currency       String   @default("USD") @db.VarChar(3)
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  transactions CreditTransaction[]
+
+  @@map("credit_balances")
+}
+
+model CreditTransaction {
+  id              String                @id @default(cuid())
+  creditBalanceId String                @map("credit_balance_id")
+  type            CreditTransactionType
+  amount          Decimal               @db.Decimal(10, 4)
+  balanceAfter    Decimal               @map("balance_after") @db.Decimal(10, 4)
+  description     String?
+  expiresAt       DateTime?             @map("expires_at")
+  relatedId       String?               @map("related_id") // payment_id, usage_record_id, etc.
+  metadata        Json                  @default("{}")
+  createdAt       DateTime              @default(now()) @map("created_at")
+
+  creditBalance CreditBalance @relation(fields: [creditBalanceId], references: [id], onDelete: Cascade)
+
+  @@index([creditBalanceId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("credit_transactions")
+}
+
+// Feature Entitlements
+model Entitlement {
+  id             String    @id @default(cuid())
+  organizationId String    @map("organization_id")
+  feature        String    @db.VarChar(100) // ai.chat, ai.embeddings, web3.nft, etc.
+  isEnabled      Boolean   @default(true) @map("is_enabled")
+  limitValue     BigInt?   @map("limit_value") // null = unlimited
+  usedValue      BigInt    @default(0) @map("used_value")
+  resetPeriod    String?   @map("reset_period") // monthly, daily, null = never
+  lastResetAt    DateTime? @map("last_reset_at")
+  expiresAt      DateTime? @map("expires_at")
+  source         String    @db.VarChar(20) // plan, addon, trial, custom
+  metadata       Json      @default("{}")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@unique([organizationId, feature])
+  @@index([feature])
+  @@map("entitlements")
+}
+
+// Stripe Customer Mapping
+model StripeCustomer {
+  id             String   @id @default(cuid())
+  organizationId String   @unique @map("organization_id")
+  stripeId       String   @unique @map("stripe_id")
+  email          String?
+  name           String?
+  currency       String   @default("USD") @db.VarChar(3)
+  taxExempt      String   @default("none") @map("tax_exempt") @db.VarChar(20)
+  metadata       Json     @default("{}")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("stripe_customers")
+}
+
+// Webhook Events (for idempotency)
+model WebhookEvent {
+  id             String    @id @default(cuid())
+  provider       String    @db.VarChar(20) // stripe, paypal, etc.
+  eventId        String    @map("event_id")
+  eventType      String    @map("event_type")
+  payload        Json
+  processedAt    DateTime? @map("processed_at")
+  errorMessage   String?   @map("error_message")
+  retryCount     Int       @default(0) @map("retry_count")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  @@unique([provider, eventId])
+  @@index([eventType])
+  @@index([processedAt])
+  @@map("webhook_events")
+}
+
+// ============================================
 // Audit Logging
 // ============================================
 
