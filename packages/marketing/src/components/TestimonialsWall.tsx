@@ -80,7 +80,13 @@ function SourceBadge({
   const name = TESTIMONIAL_SOURCE_NAMES[source];
 
   const content = (
-    <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+    <span
+      className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs"
+      style={{
+        backgroundColor: "var(--marketing-canvas-subtle)",
+        color: "var(--marketing-fg-muted)",
+      }}
+    >
       <span aria-hidden="true">{icon}</span>
       <span>{name}</span>
     </span>
@@ -133,10 +139,20 @@ function TestimonialCard({
   return (
     <div
       className={clsx(
-        "flex flex-col rounded-xl border bg-white p-5 shadow-sm transition-shadow hover:shadow-md",
-        "dark:border-gray-700 dark:bg-gray-900",
-        featured && "ring-2 ring-blue-500/50",
+        "flex flex-col rounded-xl p-5 transition-shadow",
+        featured && "ring-2 ring-[var(--marketing-accent-emphasis)]/50",
       )}
+      style={{
+        backgroundColor: "var(--marketing-card-bg)",
+        border: "1px solid var(--marketing-card-border)",
+        boxShadow: "var(--marketing-card-shadow)",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "var(--marketing-card-shadow-hover)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "var(--marketing-card-shadow)";
+      }}
     >
       {/* Header */}
       <div className="mb-4 flex items-start justify-between">
@@ -148,16 +164,29 @@ function TestimonialCard({
               className="h-10 w-10 rounded-full object-cover"
             />
           ) : (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-sm font-bold text-white">
+            <div
+              className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold"
+              style={{
+                background:
+                  "linear-gradient(135deg, var(--marketing-accent-fg), var(--marketing-ph-primary))",
+                color: "var(--marketing-fg-on-emphasis)",
+              }}
+            >
               {authorName.charAt(0).toUpperCase()}
             </div>
           )}
           <div>
-            <p className="font-semibold text-gray-900 dark:text-white">
+            <p
+              className="font-semibold"
+              style={{ color: "var(--marketing-fg-default)" }}
+            >
               {authorName}
             </p>
             {(authorRole || authorCompany) && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p
+                className="text-sm"
+                style={{ color: "var(--marketing-fg-muted)" }}
+              >
                 {authorRole}
                 {authorRole && authorCompany && " at "}
                 {authorCompany}
@@ -179,13 +208,19 @@ function TestimonialCard({
       )}
 
       {/* Content */}
-      <blockquote className="flex-1 text-gray-700 dark:text-gray-300">
+      <blockquote
+        className="flex-1"
+        style={{ color: "var(--marketing-fg-muted)" }}
+      >
         <p className="leading-relaxed">&ldquo;{content}&rdquo;</p>
       </blockquote>
 
       {/* Footer */}
       {date && (
-        <p className="mt-4 text-xs text-gray-400">
+        <p
+          className="mt-4 text-xs"
+          style={{ color: "var(--marketing-fg-subtle)" }}
+        >
           {new Date(date).toLocaleDateString("en-US", {
             year: "numeric",
             month: "short",
@@ -330,8 +365,20 @@ function TestimonialsMarquee({
       </div>
 
       {/* Gradient overlays */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent dark:from-gray-950" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent dark:from-gray-950" />
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-20"
+        style={{
+          background:
+            "linear-gradient(to right, var(--marketing-canvas-default), transparent)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-20"
+        style={{
+          background:
+            "linear-gradient(to left, var(--marketing-canvas-default), transparent)",
+        }}
+      />
 
       <style
         dangerouslySetInnerHTML={{

@@ -1,4 +1,6 @@
 import { defineConfig } from "tsup";
+import { copyFileSync, mkdirSync, existsSync } from "fs";
+import { dirname, join } from "path";
 
 export default defineConfig({
   entry: {
@@ -15,4 +17,19 @@ export default defineConfig({
   clean: true,
   external: ["react", "react-dom", "next"],
   treeshake: true,
+  onSuccess: async () => {
+    // Copy CSS tokens to dist/styles
+    const srcPath = join(process.cwd(), "src/styles/tokens.css");
+    const distDir = join(process.cwd(), "dist/styles");
+    const distPath = join(distDir, "tokens.css");
+
+    if (!existsSync(distDir)) {
+      mkdirSync(distDir, { recursive: true });
+    }
+
+    if (existsSync(srcPath)) {
+      copyFileSync(srcPath, distPath);
+      console.log("✓ Copied tokens.css to dist/styles/");
+    }
+  },
 });

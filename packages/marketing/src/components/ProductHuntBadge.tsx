@@ -130,25 +130,6 @@ export function ProductHuntBadge({
 }: ProductHuntBadgeProps) {
   const postUrl = getProductHuntUrl(postSlug);
   const config = sizeConfig[size];
-  const isDark = theme === "dark";
-
-  const bgColor = isDark
-    ? "bg-gray-900 hover:bg-gray-800"
-    : theme === "neutral"
-      ? "bg-gray-100 hover:bg-gray-200"
-      : "bg-white hover:bg-gray-50";
-
-  const textColor = isDark
-    ? "text-white"
-    : theme === "neutral"
-      ? "text-gray-700"
-      : "text-gray-900";
-
-  const borderColor = isDark
-    ? "border-gray-700"
-    : theme === "neutral"
-      ? "border-gray-300"
-      : "border-gray-200";
 
   return (
     <a
@@ -156,14 +137,22 @@ export function ProductHuntBadge({
       target={openInNewTab ? "_blank" : undefined}
       rel={openInNewTab ? "noopener noreferrer" : undefined}
       className={clsx(
-        "inline-flex items-center gap-3 rounded-lg border transition-all duration-200",
-        "shadow-sm hover:shadow-md",
+        "inline-flex items-center gap-3 rounded-lg transition-all duration-200",
         config.padding,
-        bgColor,
-        textColor,
-        borderColor,
         className,
       )}
+      style={{
+        backgroundColor: "var(--marketing-card-bg)",
+        border: "1px solid var(--marketing-card-border)",
+        boxShadow: "var(--marketing-card-shadow)",
+        color: "var(--marketing-fg-default)",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "var(--marketing-card-shadow-hover)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "var(--marketing-card-shadow)";
+      }}
       aria-label={altText || `View on Product Hunt`}
     >
       <ProductHuntIcon size={config.iconSize} />
@@ -172,11 +161,8 @@ export function ProductHuntBadge({
           Featured on
         </span>
         <span
-          className={clsx(
-            "font-bold leading-tight",
-            config.fontSize,
-            "text-[#DA552F]",
-          )}
+          className={clsx("font-bold leading-tight", config.fontSize)}
+          style={{ color: "var(--marketing-ph-primary)" }}
         >
           Product Hunt
         </span>
@@ -197,7 +183,6 @@ export function ProductHuntUpvoteBadge({
 }: ProductHuntBadgeProps) {
   const postUrl = getProductHuntUrl(postSlug);
   const config = sizeConfig[size];
-  const isDark = theme === "dark";
 
   return (
     <a
@@ -209,11 +194,19 @@ export function ProductHuntUpvoteBadge({
         "shadow-md hover:shadow-lg active:scale-95",
         config.padding,
         config.fontSize,
-        isDark
-          ? "bg-[#DA552F] text-white hover:bg-[#c44a29]"
-          : "bg-[#DA552F] text-white hover:bg-[#c44a29]",
         className,
       )}
+      style={{
+        backgroundColor: "var(--marketing-ph-primary)",
+        color: "var(--marketing-fg-on-emphasis)",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor =
+          "var(--marketing-ph-primary-hover)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = "var(--marketing-ph-primary)";
+      }}
       aria-label="Support us on Product Hunt"
     >
       <ProductHuntIcon size={config.iconSize} />
@@ -249,7 +242,6 @@ export function ProductHuntTextBadge({
   openInNewTab = true,
 }: ProductHuntBadgeProps) {
   const postUrl = getProductHuntUrl(postSlug);
-  const isDark = theme === "dark";
 
   return (
     <a
@@ -258,11 +250,15 @@ export function ProductHuntTextBadge({
       rel={openInNewTab ? "noopener noreferrer" : undefined}
       className={clsx(
         "inline-flex items-center gap-1.5 text-sm font-medium transition-colors",
-        isDark
-          ? "text-gray-300 hover:text-[#DA552F]"
-          : "text-gray-600 hover:text-[#DA552F]",
         className,
       )}
+      style={{ color: "var(--marketing-fg-muted)" }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.color = "var(--marketing-ph-primary)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.color = "var(--marketing-fg-muted)";
+      }}
     >
       <ProductHuntIcon size={16} />
       <span>Check us out on Product Hunt</span>

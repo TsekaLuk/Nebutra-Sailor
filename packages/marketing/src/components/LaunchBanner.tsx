@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { clsx } from "clsx";
 import type { LaunchBannerProps } from "../types";
-import { PRODUCT_HUNT_COLORS } from "../config";
 
 // ============================================
 // Countdown Hook
@@ -137,30 +136,35 @@ function CloseButton({ onClick }: { onClick: () => void }) {
 }
 
 // ============================================
-// Theme Styles
+// Theme Styles (using CSS variables)
 // ============================================
 
-const themeStyles = {
-  "product-hunt": {
-    background: `bg-[${PRODUCT_HUNT_COLORS.primary}]`,
-    text: "text-white",
-    button: "bg-white text-[#DA552F] hover:bg-gray-100",
-    // Fallback for dynamic color
-    style: { backgroundColor: PRODUCT_HUNT_COLORS.primary },
-  },
-  brand: {
-    background: "bg-blue-600",
-    text: "text-white",
-    button: "bg-white text-blue-600 hover:bg-blue-50",
-    style: {},
-  },
-  neutral: {
-    background: "bg-gray-900",
-    text: "text-white",
-    button: "bg-white text-gray-900 hover:bg-gray-100",
-    style: {},
-  },
-} as const;
+const getThemeStyles = (theme: "product-hunt" | "brand" | "neutral") => {
+  const styles = {
+    "product-hunt": {
+      background: "var(--marketing-ph-primary)",
+      text: "var(--marketing-fg-on-emphasis)",
+      buttonBg: "var(--marketing-canvas-default)",
+      buttonText: "var(--marketing-ph-primary)",
+      buttonHoverBg: "var(--marketing-canvas-subtle)",
+    },
+    brand: {
+      background: "var(--marketing-accent-emphasis)",
+      text: "var(--marketing-fg-on-emphasis)",
+      buttonBg: "var(--marketing-canvas-default)",
+      buttonText: "var(--marketing-accent-fg)",
+      buttonHoverBg: "var(--marketing-canvas-subtle)",
+    },
+    neutral: {
+      background: "var(--marketing-canvas-inset)",
+      text: "var(--marketing-fg-on-emphasis)",
+      buttonBg: "var(--marketing-canvas-default)",
+      buttonText: "var(--marketing-fg-default)",
+      buttonHoverBg: "var(--marketing-canvas-subtle)",
+    },
+  };
+  return styles[theme];
+};
 
 // ============================================
 // Banner Variants
@@ -183,7 +187,7 @@ export function LaunchBannerTop({
 }: LaunchBannerProps) {
   const [isDismissed, setIsDismissed] = useState(false);
   const countdown = useCountdown(showCountdown ? countdownEndDate : undefined);
-  const styles = themeStyles[theme];
+  const styles = getThemeStyles(theme);
 
   const handleDismiss = useCallback(() => {
     setIsDismissed(true);
@@ -194,13 +198,11 @@ export function LaunchBannerTop({
 
   return (
     <div
-      className={clsx(
-        "fixed inset-x-0 top-0 z-50",
-        styles.background,
-        styles.text,
-        className,
-      )}
-      style={styles.style}
+      className={clsx("fixed inset-x-0 top-0 z-50", className)}
+      style={{
+        backgroundColor: styles.background,
+        color: styles.text,
+      }}
       role="banner"
       aria-label="Launch announcement"
     >
@@ -222,10 +224,17 @@ export function LaunchBannerTop({
             href={ctaLink}
             target="_blank"
             rel="noopener noreferrer"
-            className={clsx(
-              "rounded-full px-4 py-1.5 text-sm font-semibold transition-colors",
-              styles.button,
-            )}
+            className="rounded-full px-4 py-1.5 text-sm font-semibold transition-colors"
+            style={{
+              backgroundColor: styles.buttonBg,
+              color: styles.buttonText,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = styles.buttonHoverBg;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = styles.buttonBg;
+            }}
           >
             {ctaText}
           </a>
@@ -254,7 +263,7 @@ export function LaunchBannerFloating({
 }: LaunchBannerProps) {
   const [isDismissed, setIsDismissed] = useState(false);
   const countdown = useCountdown(showCountdown ? countdownEndDate : undefined);
-  const styles = themeStyles[theme];
+  const styles = getThemeStyles(theme);
 
   const handleDismiss = useCallback(() => {
     setIsDismissed(true);
@@ -267,11 +276,12 @@ export function LaunchBannerFloating({
     <div
       className={clsx(
         "fixed bottom-4 right-4 z-50 max-w-sm rounded-xl p-4 shadow-2xl",
-        styles.background,
-        styles.text,
         className,
       )}
-      style={styles.style}
+      style={{
+        backgroundColor: styles.background,
+        color: styles.text,
+      }}
       role="banner"
       aria-label="Launch announcement"
     >
@@ -307,7 +317,10 @@ export function LaunchBannerFloating({
         </div>
 
         {showCountdown && (
-          <div className="rounded-lg bg-black/10 p-2">
+          <div
+            className="rounded-lg p-2"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
+          >
             <CountdownDisplay countdown={countdown} />
           </div>
         )}
@@ -316,10 +329,17 @@ export function LaunchBannerFloating({
           href={ctaLink}
           target="_blank"
           rel="noopener noreferrer"
-          className={clsx(
-            "block rounded-lg px-4 py-2 text-center font-semibold transition-colors",
-            styles.button,
-          )}
+          className="block rounded-lg px-4 py-2 text-center font-semibold transition-colors"
+          style={{
+            backgroundColor: styles.buttonBg,
+            color: styles.buttonText,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = styles.buttonHoverBg;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = styles.buttonBg;
+          }}
         >
           {ctaText}
         </a>
@@ -342,17 +362,15 @@ export function LaunchBannerInline({
   className,
 }: LaunchBannerProps) {
   const countdown = useCountdown(showCountdown ? countdownEndDate : undefined);
-  const styles = themeStyles[theme];
+  const styles = getThemeStyles(theme);
 
   return (
     <div
-      className={clsx(
-        "rounded-xl p-6",
-        styles.background,
-        styles.text,
-        className,
-      )}
-      style={styles.style}
+      className={clsx("rounded-xl p-6", className)}
+      style={{
+        backgroundColor: styles.background,
+        color: styles.text,
+      }}
       role="banner"
       aria-label="Launch announcement"
     >
@@ -373,10 +391,17 @@ export function LaunchBannerInline({
             href={ctaLink}
             target="_blank"
             rel="noopener noreferrer"
-            className={clsx(
-              "rounded-lg px-6 py-2.5 font-semibold transition-colors",
-              styles.button,
-            )}
+            className="rounded-lg px-6 py-2.5 font-semibold transition-colors"
+            style={{
+              backgroundColor: styles.buttonBg,
+              color: styles.buttonText,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = styles.buttonHoverBg;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = styles.buttonBg;
+            }}
           >
             {ctaText}
           </a>

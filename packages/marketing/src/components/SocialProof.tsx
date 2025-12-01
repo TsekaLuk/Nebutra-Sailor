@@ -192,16 +192,22 @@ function StatItem({
 }: StatItemProps) {
   return (
     <div className="flex items-center gap-2">
-      <span className="text-blue-600 dark:text-blue-400">{icon}</span>
+      <span style={{ color: "var(--marketing-accent-fg)" }}>{icon}</span>
       <div className="flex flex-col">
-        <span className="text-xl font-bold text-gray-900 dark:text-white">
+        <span
+          className="text-xl font-bold"
+          style={{ color: "var(--marketing-fg-default)" }}
+        >
           {animated ? (
             <AnimatedNumber value={value} format={format} />
           ) : (
             format(value)
           )}
         </span>
-        <span className="text-xs text-gray-500 dark:text-gray-400">
+        <span
+          className="text-xs"
+          style={{ color: "var(--marketing-fg-muted)" }}
+        >
           {label}
         </span>
       </div>
@@ -248,8 +254,15 @@ function SocialProofBarMinimal({
       )}
     >
       {items.map(({ value, label, format }) => (
-        <span key={label} className="text-sm text-gray-600 dark:text-gray-400">
-          <span className="font-bold text-gray-900 dark:text-white">
+        <span
+          key={label}
+          className="text-sm"
+          style={{ color: "var(--marketing-fg-muted)" }}
+        >
+          <span
+            className="font-bold"
+            style={{ color: "var(--marketing-fg-default)" }}
+          >
             {animated ? (
               <AnimatedNumber value={value} format={format || formatNumber} />
             ) : (
@@ -279,9 +292,17 @@ function SocialProofBarBadges({
       )}
     >
       {stats.users && (
-        <div className="flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 dark:bg-blue-950">
+        <div
+          className="flex items-center gap-2 rounded-full px-4 py-2"
+          style={{
+            backgroundColor: "var(--marketing-stat-users-bg)",
+          }}
+        >
           {StatIcons.users}
-          <span className="font-semibold text-blue-700 dark:text-blue-300">
+          <span
+            className="font-semibold"
+            style={{ color: "var(--marketing-stat-users-fg)" }}
+          >
             {animated ? (
               <AnimatedNumber value={stats.users} format={formatNumber} />
             ) : (
@@ -293,18 +314,36 @@ function SocialProofBarBadges({
       )}
 
       {stats.rating && (
-        <div className="flex items-center gap-2 rounded-full bg-yellow-50 px-4 py-2 dark:bg-yellow-950">
-          <span className="text-yellow-500">{StatIcons.rating}</span>
-          <span className="font-semibold text-yellow-700 dark:text-yellow-300">
+        <div
+          className="flex items-center gap-2 rounded-full px-4 py-2"
+          style={{
+            backgroundColor: "var(--marketing-stat-rating-bg)",
+          }}
+        >
+          <span style={{ color: "var(--marketing-stat-rating-fg)" }}>
+            {StatIcons.rating}
+          </span>
+          <span
+            className="font-semibold"
+            style={{ color: "var(--marketing-stat-rating-fg)" }}
+          >
             {formatRating(stats.rating)} rating
           </span>
         </div>
       )}
 
       {stats.productHuntUpvotes && (
-        <div className="flex items-center gap-2 rounded-full bg-orange-50 px-4 py-2 dark:bg-orange-950">
+        <div
+          className="flex items-center gap-2 rounded-full px-4 py-2"
+          style={{
+            backgroundColor: "var(--marketing-stat-upvotes-bg)",
+          }}
+        >
           {StatIcons.productHuntUpvotes}
-          <span className="font-semibold text-orange-700 dark:text-orange-300">
+          <span
+            className="font-semibold"
+            style={{ color: "var(--marketing-stat-upvotes-fg)" }}
+          >
             {animated ? (
               <AnimatedNumber
                 value={stats.productHuntUpvotes}
@@ -319,9 +358,17 @@ function SocialProofBarBadges({
       )}
 
       {stats.githubStars && (
-        <div className="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 dark:bg-gray-800">
+        <div
+          className="flex items-center gap-2 rounded-full px-4 py-2"
+          style={{
+            backgroundColor: "var(--marketing-stat-stars-bg)",
+          }}
+        >
           {StatIcons.githubStars}
-          <span className="font-semibold text-gray-700 dark:text-gray-300">
+          <span
+            className="font-semibold"
+            style={{ color: "var(--marketing-stat-stars-fg)" }}
+          >
             {animated ? (
               <AnimatedNumber value={stats.githubStars} format={formatNumber} />
             ) : (

@@ -4,6 +4,13 @@
  * Marketing infrastructure for Nebutra - Product Hunt integration,
  * testimonials, social proof, and attribution tracking.
  *
+ * ## CSS Setup
+ *
+ * Import the CSS tokens for proper theming:
+ * ```tsx
+ * import "@nebutra/marketing/styles/tokens.css";
+ * ```
+ *
  * @example
  * ```tsx
  * import {

@@ -27,7 +27,9 @@
     "./config": {
       "types": "./dist/config/index.d.ts",
       "import": "./dist/config/index.js"
-    }
+    },
+    "./styles/tokens.css": "./dist/styles/tokens.css",
+    "./styles/*": "./dist/styles/*"
   },
   "files": [
     "dist",
