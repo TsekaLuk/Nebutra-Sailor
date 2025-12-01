@@ -32,6 +32,7 @@ The white-label system updates the following:
 | **README.zh-CN.md** | Chinese version with same updates |
 | **packages/brand/src/metadata.ts** | Brand constants, colors, domains |
 | **packages/brand/assets/** | Logo files, favicons |
+| **packages/design-system/** | Typography, theme tokens, colors |
 | **package.json files** | NPM scope (`@nebutra` → `@yourbrand`) |
 | **.env.example** | Domain URLs |
 
@@ -198,6 +199,124 @@ colors: {
 ```
 
 **Tip:** Use [Tailwind Color Generator](https://uicolors.app/) to generate a full scale from a single color.
+
+## Typography Customization
+
+The design system uses open-source fonts by default:
+
+| Purpose | Default Font | License |
+|---------|--------------|--------|
+| **UI / Body** | Inter | OFL 1.1 |
+| **Headings** | Inter | OFL 1.1 |
+| **Code** | JetBrains Mono | OFL 1.1 |
+| **CJK** | Noto Sans SC | OFL 1.1 |
+
+### Using Custom Brand Fonts
+
+To replace with your own fonts:
+
+#### 1. Update Typography Tokens
+
+Edit `packages/design-system/src/typography/tokens.ts`:
+
+```typescript
+// Replace the font family constants
+export const FONT_FAMILY_PRIMARY =
+  '"YourBrandFont", "Inter", -apple-system, sans-serif';
+
+export const FONT_FAMILY_HEADING =
+  '"YourDisplayFont", "Inter", -apple-system, sans-serif';
+```
+
+#### 2. Update CSS Variables
+
+Edit `packages/design-system/src/typography/fonts.css`:
+
+```css
+:root {
+  --font-primary: "YourBrandFont", "Inter", -apple-system, sans-serif;
+  --font-heading: "YourDisplayFont", "Inter", -apple-system, sans-serif;
+  /* ... */
+}
+```
+
+#### 3. Add Font Files (Self-Hosted)
+
+If self-hosting fonts, add them to `public/fonts/` and update the `@font-face` declarations:
+
+```css
+@font-face {
+  font-family: 'YourBrandFont';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/YourBrandFont-Regular.woff2') format('woff2');
+}
+```
+
+#### 4. Or Use Google Fonts
+
+Update the font imports in `fonts.css`:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=YourBrandFont:wght@400;500;600;700&display=swap');
+```
+
+### Typography Token Structure
+
+The design system exposes these typography tokens:
+
+| Token | Usage |
+|-------|-------|
+| `fontFamilies.primary` | Body text, UI elements |
+| `fontFamilies.heading` | Titles, headlines |
+| `fontFamilies.mono` | Code, technical content |
+| `fontFamilies.cjk` | Chinese/Japanese/Korean text |
+| `fontSizes.*` | xs, sm, base, lg, xl, 2xl-8xl |
+| `typeStyles.*` | h1-h6, body, caption, code, button |
+
+See [Typography Documentation](docs/TYPOGRAPHY.md) for full details.
+
+## Design System Customization
+
+The design system (`@nebutra/design-system`) is the single source of truth for all UI styling.
+
+### Architecture
+
+```
+design-system/
+├── theme/          # Colors, spacing, breakpoints (extend Primer)
+├── typography/     # Font families, type scale, presets
+├── primitives/     # Layout, accessibility patterns
+└── components/     # Primer re-exports + custom components
+```
+
+### Theme Overrides
+
+Create brand-specific theme overrides in `packages/design-system/src/theme/brand.ts`:
+
+```typescript
+import { createTheme } from "./default";
+
+export const brandTheme = createTheme("light", {
+  colors: {
+    accent: {
+      fg: "#6366f1",      // Your brand primary
+      emphasis: "#4f46e5",
+    },
+  },
+});
+```
+
+### Component Layer Strategy
+
+| Layer | Package | Purpose |
+|-------|---------|--------|
+| **SSOT** | `@yourbrand/design-system` | Base tokens, Primer components |
+| **Brand** | `@yourbrand/custom-ui` | Domain-specific, promoted components |
+| **Experimental** | `@yourbrand/21st` | Prototypes, external library wrappers |
+
+See [Component Library Policy](docs/COMPONENT-LIBRARY-POLICY.md) for governance rules.
 
 ## Manual Customization
 
