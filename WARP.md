@@ -112,6 +112,7 @@ Nebutra-Sailor/
 │   ├── ai/                 # Python FastAPI - LLM, embeddings, translate
 │   ├── billing/            # Python FastAPI - billing service
 │   ├── content/            # Python FastAPI - posts, feed, comments
+│   ├── third-party/        # Python FastAPI - third-party data service (PH, etc.)
 │   ├── recsys/             # Python - recall/rank pipeline
 │   ├── ecommerce/          # Python - Shopify/Shopline sync
 │   └── web3/               # Python - blockchain indexer, listeners
@@ -225,6 +226,7 @@ services/{name}/
 - `recsys/` - Recall/rank recommendation pipeline (port 8004)
 - `ecommerce/` - Shopify/Shopline sync (port 8005)
 - `web3/` - Blockchain indexer, listeners (port 8006)
+- `third-party/` - Third-party data service (port 8007)
 
 Run a service locally:
 
@@ -242,6 +244,7 @@ Background jobs and cron tasks:
 - `recsys_refresh.ts` - Recommendation model updates
 - `ecommerce_sync.ts` - Shopify inventory sync
 - `daily_digest_email.ts` - User notifications
+- `producthunt_sync.ts` - Product Hunt data sync (trending, topics)
 
 ## Database
 
@@ -350,6 +353,60 @@ import {
 // Track PH visitors
 const { isFromProductHunt, source, campaign } = useAttribution();
 ```
+
+## Third-Party Data Service (`services/third-party/`)
+
+Third-party data fetching with caching, rate limiting, and data transformation.
+
+### Product Hunt Integration
+
+Access Product Hunt data through a simplified REST API:
+
+```
+GET  /api/v1/producthunt/posts           # List posts
+GET  /api/v1/producthunt/posts/trending  # Trending posts (cached 30min)
+GET  /api/v1/producthunt/posts/{slug}    # Single post detail
+GET  /api/v1/producthunt/topics          # All topics (cached 24h)
+GET  /api/v1/producthunt/collections     # Collections (cached 24h)
+POST /api/v1/producthunt/cache/warm      # Pre-warm cache
+DELETE /api/v1/producthunt/cache         # Invalidate cache
+```
+
+### Architecture
+
+```
+services/third-party/
+├── app/main.py              # FastAPI entry
+├── clients/producthunt.py   # GraphQL client with retries
+├── services/producthunt.py  # Business logic + caching
+├── models/producthunt.py    # Pydantic models
+└── utils/
+    ├── config.py            # Environment config
+    └── redis_client.py      # Cache manager
+```
+
+### Features
+
+- **GraphQL Client:** PH API v2 with automatic retries and exponential backoff
+- **Redis Caching:** Configurable TTL per data type (posts: 1h, trending: 30min, topics: 24h)
+- **Graceful Degradation:** Returns stale cache on rate limit or API errors
+- **Inngest Jobs:** Scheduled sync for trending posts (every 30min), topics (daily)
+
+### Setup
+
+```bash
+cd services/third-party
+cp .env.example .env
+# Add PRODUCT_HUNT_DEV_TOKEN from https://www.producthunt.com/v2/oauth/applications
+uvicorn app.main:app --reload --port 8007
+```
+
+### Environment Variables
+
+- `PRODUCT_HUNT_DEV_TOKEN` - PH developer token (required)
+- `UPSTASH_REDIS_URL` - Redis connection
+- `PH_CACHE_TTL_TRENDING` - Cache TTL for trending (default: 1800s)
+- `PH_CACHE_TTL_POSTS` - Cache TTL for posts (default: 3600s)
 
 ## Observability
 

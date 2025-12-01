@@ -1,24 +1,53 @@
 export { inngest } from "./client";
-export { autoTranslate } from "./auto_translate";
-export { recsysRefresh, userProfileUpdate } from "./recsys_refresh";
-export { inventorySync, processShopifyOrder } from "./ecommerce_sync";
-export { dailyDigestEmail, weeklyTenantReport } from "./daily_digest_email";
-export { dailyDbBackup, onDemandBackup } from "./db_backup";
+
+import { autoTranslate } from "./auto_translate";
+import { recsysRefresh, userProfileUpdate } from "./recsys_refresh";
+import { inventorySync, processShopifyOrder } from "./ecommerce_sync";
+import { dailyDigestEmail, weeklyTenantReport } from "./daily_digest_email";
+import { dailyDbBackup, onDemandBackup } from "./db_backup";
+import {
+  phTrendingSync,
+  phTopicsSync,
+  phCacheWarm,
+  phFullSync,
+} from "./producthunt_sync";
+
+// Re-export all functions
+export {
+  autoTranslate,
+  recsysRefresh,
+  userProfileUpdate,
+  inventorySync,
+  processShopifyOrder,
+  dailyDigestEmail,
+  weeklyTenantReport,
+  dailyDbBackup,
+  onDemandBackup,
+  phTrendingSync,
+  phTopicsSync,
+  phCacheWarm,
+  phFullSync,
+};
 
 // Export all functions for Inngest serve
 export const functions = [
   // AI/Translation
-  require("./auto_translate").autoTranslate,
+  autoTranslate,
   // Recommendations
-  require("./recsys_refresh").recsysRefresh,
-  require("./recsys_refresh").userProfileUpdate,
+  recsysRefresh,
+  userProfileUpdate,
   // E-commerce
-  require("./ecommerce_sync").inventorySync,
-  require("./ecommerce_sync").processShopifyOrder,
+  inventorySync,
+  processShopifyOrder,
   // Notifications
-  require("./daily_digest_email").dailyDigestEmail,
-  require("./daily_digest_email").weeklyTenantReport,
+  dailyDigestEmail,
+  weeklyTenantReport,
   // Infrastructure
-  require("./db_backup").dailyDbBackup,
-  require("./db_backup").onDemandBackup,
+  dailyDbBackup,
+  onDemandBackup,
+  // Third-party
+  phTrendingSync,
+  phTopicsSync,
+  phCacheWarm,
+  phFullSync,
 ];

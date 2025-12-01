@@ -92,6 +92,66 @@ Complete design and implementation guidelines for landing pages, marketing sites
 | Add new UTM tracking logic            | `packages/marketing/`                     | Generic utility function             |
 | apps/web needs PH Badge               | Import from `@nebutra/marketing` directly | Or create web-specific wrapper       |
 
+### Frontend vs Backend Layer Relationship
+
+> **⚠️ Important: packages/marketing vs services/third-party**
+>
+> Marketing infrastructure spans **both frontend and backend**. Understanding this separation is critical.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  FRONTEND: packages/marketing/ (React/TypeScript)                            │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  Purpose: UI display + client-side interactions                              │
+│  Runs in: Browser (client-side)                                              │
+│                                                                              │
+│  • React Components (PHBadge, LaunchBanner, Testimonials, SocialProof)       │
+│  • React Hooks (useAttribution, useCountdown, useLaunchBannerState)          │
+│  • Client-side Utils (UTM parsing, event tracking, source detection)         │
+│  • Static config (colors, constants, URL builders)                           │
+│                                                                              │
+│  Consumers: apps/landing-page, apps/web                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+                              │
+                              │ Optional: fetch dynamic data (via api-gateway)
+                              ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  BACKEND: services/third-party/ (Python/FastAPI)                             │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  Purpose: Third-party API data fetching + caching + sync                     │
+│  Runs on: Server (Railway/Docker)                                            │
+│                                                                              │
+│  • GraphQL/REST API clients (Product Hunt, future: Twitter, HN, GitHub)      │
+│  • Redis caching layer (TTL, stale fallback, rate limit protection)          │
+│  • Inngest cron jobs (scheduled data sync every 30min/daily)                 │
+│  • Data transformation and normalization                                     │
+│                                                                              │
+│  Consumers: api-gateway, internal services                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Key Differences:**
+
+| Aspect      | packages/marketing          | services/third-party        |
+| ----------- | --------------------------- | --------------------------- |
+| Language    | TypeScript/React            | Python/FastAPI              |
+| Runtime     | Browser (client)            | Server (Railway)            |
+| Data Source | Static config, localStorage | External APIs (PH, etc.)    |
+| Caching     | Browser (localStorage)      | Redis (Upstash)             |
+| Purpose     | Display UI, track events    | Fetch & cache external data |
+| API Keys    | None (client-safe)          | Server-side secrets         |
+
+**When to Use Which:**
+
+| Use Case                        | Use                                             |
+| ------------------------------- | ----------------------------------------------- |
+| Display PH badge/banner on page | `packages/marketing`                            |
+| Track UTM params in browser     | `packages/marketing`                            |
+| Fetch trending PH products list | `services/third-party`                          |
+| Cache PH API responses          | `services/third-party`                          |
+| Show testimonials from CMS      | `packages/marketing` + Sanity                   |
+| Show live PH upvote counts      | `services/third-party` → api-gateway → frontend |
+
 ### Design System Layer Diagram
 
 ```
