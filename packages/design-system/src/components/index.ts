@@ -55,7 +55,6 @@ export {
   ActionList,
   NavList,
   TreeView,
-  TabNav,
   UnderlineNav,
   Breadcrumbs,
   Pagination,
@@ -102,7 +101,6 @@ export {
 export {
   ThemeProvider,
   BaseStyles,
-  SSRProvider,
   useTheme,
 } from "@primer/react";
 

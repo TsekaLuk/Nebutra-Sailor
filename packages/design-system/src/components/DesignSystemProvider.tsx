@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
-import { ThemeProvider, BaseStyles, SSRProvider } from "@primer/react";
+import { ThemeProvider, BaseStyles } from "@primer/react";
 import { lightTheme, darkTheme, type ThemeMode } from "../theme";
 
 // ============================================
@@ -124,16 +124,13 @@ export function DesignSystemProvider({
 
   return (
     <DesignSystemContext.Provider value={contextValue}>
-      <SSRProvider>
-        <ThemeProvider
-          colorMode={resolvedMode === "dark" ? "night" : "day"}
-          dayScheme="light"
-          nightScheme="dark"
-        >
-          {/* Cast children to satisfy Primer's React 18 types with React 19 */}
-          <BaseStyles>{children as React.ReactElement}</BaseStyles>
-        </ThemeProvider>
-      </SSRProvider>
+      <ThemeProvider
+        colorMode={resolvedMode === "dark" ? "night" : "day"}
+        dayScheme="light"
+        nightScheme="dark"
+      >
+        <BaseStyles>{children}</BaseStyles>
+      </ThemeProvider>
     </DesignSystemContext.Provider>
   );
 }
