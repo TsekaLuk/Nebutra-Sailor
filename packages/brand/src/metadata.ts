@@ -1,12 +1,28 @@
 /**
  * Nebutra Brand Metadata
  * Central source of truth for brand identity
+ * 
+ * Based on: 云毓智能品牌视觉识别手册 (Nebutra Brand Visual Identity Manual)
  */
 
 export const brand = {
+  // Brand names
   name: "Nebutra",
+  nameCn: "云毓智能",
+  nameFull: "无锡云毓智能科技有限公司",
+  nameFullEn: "Wuxi Nebutra Intelligent Technology Co., Ltd.",
+  
   tagline: "Enterprise SaaS Platform",
+  taglineCn: "智能数据·云端孕育",
   description: "AI-native enterprise platform for multi-tenant systems",
+  descriptionCn: "致力于将分散数据在云端整合、处理，并转化为有价值产品与服务",
+  
+  // Brand story
+  story: {
+    concept: "Logo以首字母N的基础造型概念为主要设计框架，通过几何正负空间构建隐形'N'，形成近似六边形的稳定结构",
+    colorMeaning: "蓝绿渐变体现未来感与科技锋芒，'云'代表云端平台，'毓'寓意孕育与转化",
+    values: ["创新", "可靠", "无限潜力", "前瞻性", "突破精神"],
+  },
   
   // Official domains
   domains: {
@@ -27,45 +43,61 @@ export const brand = {
 } as const;
 
 /**
- * Brand Colors
- * Primary palette derived from design system
+ * Brand Colors - 云毓智能品牌色彩规范
+ * 
+ * 云毓蓝 (Nebutra Blue): #0033FE - 象征科技与信任
+ * 云毓青 (Nebutra Cyan): #0BF1C3 - 象征数据流动与智能交互
  */
 export const colors = {
-  // Primary brand colors
+  // 云毓蓝 - Primary brand color
+  // 蓝色象征科技与信任，契合云毓智能在AI-SaaS与云端数据智能领域的专业定位
   primary: {
-    50: "#eef2ff",
-    100: "#e0e7ff",
-    200: "#c7d2fe",
-    300: "#a5b4fc",
-    400: "#818cf8",
-    500: "#6366f1", // Main primary
-    600: "#4f46e5",
-    700: "#4338ca",
-    800: "#3730a3",
-    900: "#312e81",
-    950: "#1e1b4b",
+    50: "#e6ebff",
+    100: "#ccd7ff",
+    200: "#99afff",
+    300: "#6687ff",
+    400: "#335ffe",
+    500: "#0033FE", // 云毓蓝 Main (VI标准色)
+    600: "#0029cb",
+    700: "#001f98",
+    800: "#001466",
+    900: "#000a33",
+    950: "#00051a",
   },
   
-  // Secondary / Accent
+  // 云毓青 - Secondary / Accent
+  // 青色的通透感象征信息的清晰与算法的灵动
   accent: {
-    50: "#f0fdfa",
-    100: "#ccfbf1",
-    200: "#99f6e4",
-    300: "#5eead4",
-    400: "#2dd4bf",
-    500: "#14b8a6", // Main accent
-    600: "#0d9488",
-    700: "#0f766e",
-    800: "#115e59",
-    900: "#134e4a",
-    950: "#042f2e",
+    50: "#e7fef8",
+    100: "#cffdf1",
+    200: "#9ffbe3",
+    300: "#6ff9d5",
+    400: "#3df5c9",
+    500: "#0BF1C3", // 云毓青 Main (VI标准色)
+    600: "#09c19c",
+    700: "#079175",
+    800: "#05614e",
+    900: "#023027",
+    950: "#011814",
   },
   
-  // Semantic colors
+  // 黑白 - Black & White (VI标准)
+  white: "#FFFFFF",
+  black: "#000000",
+  
+  // 品牌渐变 - 线性渐变与角度渐变
+  gradient: {
+    primary: "linear-gradient(135deg, #0033FE 0%, #0BF1C3 100%)",
+    primaryReverse: "linear-gradient(135deg, #0BF1C3 0%, #0033FE 100%)",
+    primaryVertical: "linear-gradient(180deg, #0033FE 0%, #0BF1C3 100%)",
+    primaryRadial: "radial-gradient(circle, #0BF1C3 0%, #0033FE 100%)",
+  },
+  
+  // Semantic colors (based on brand palette)
   success: "#22c55e",
   warning: "#f59e0b",
   error: "#ef4444",
-  info: "#3b82f6",
+  info: "#0033FE", // 使用品牌蓝
   
   // Neutrals
   neutral: {
@@ -85,21 +117,32 @@ export const colors = {
 } as const;
 
 /**
- * Typography
+ * Typography - 品牌标准字体
+ * 
+ * 中文: vivo Sans (Light/Regular/Medium/DemiBold/Bold)
+ * 英文: Poppins (Regular/Medium/SemiBold)
  */
 export const typography = {
   fontFamily: {
-    sans: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    // 中文字体 - vivo Sans 为主，系统字体为后备
+    cn: '"vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif',
+    // 英文字体 - Poppins 为主
+    en: '"Poppins", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    // 默认组合 (英文优先，中文后备)
+    sans: '"Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", sans-serif',
+    // 代码字体
     mono: '"JetBrains Mono", "Fira Code", Consolas, monospace',
-    display: '"Cal Sans", "Inter", sans-serif',
+    // 展示字体 (标题/Hero)
+    display: '"Poppins", "vivo Sans", sans-serif',
   },
   
-  // Font weights
+  // Font weights - 基于 VI 手册字重规范
   fontWeight: {
-    normal: 400,
-    medium: 500,
-    semibold: 600,
-    bold: 700,
+    light: 300,      // vivo Sans Light
+    normal: 400,     // vivo Sans Regular / Poppins Regular
+    medium: 500,     // vivo Sans Medium / Poppins Medium
+    semibold: 600,   // vivo Sans DemiBold / Poppins SemiBold
+    bold: 700,       // vivo Sans Bold
   },
 } as const;
 
