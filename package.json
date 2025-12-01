@@ -1,6 +1,6 @@
 {
   "name": "nebutra-sailor",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "private": true,
   "description": "Enterprise-grade SaaS monorepo for AI-native, multi-tenant platforms",
   "scripts": {
@@ -51,7 +51,9 @@
       "react-avatar-editor": "^14.0.0"
     },
     "peerDependencyRules": {
-      "ignoreMissing": ["styled-components"],
+      "ignoreMissing": [
+        "styled-components"
+      ],
       "allowedVersions": {
         "react": "19",
         "react-dom": "19"
