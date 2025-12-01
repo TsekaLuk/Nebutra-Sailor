@@ -4,6 +4,14 @@
  * Marketing infrastructure for Nebutra - Product Hunt integration,
  * testimonials, social proof, and attribution tracking.
  *
+ * @todo Redesign components before PH launch:
+ *   - ProductHuntBadge: Improve visual hierarchy and integrate with 21st.dev design tokens
+ *   - SocialProofBar: Better typography and spacing, add animation polish
+ *   - TestimonialsWall: Redesign cards to match landing page aesthetic
+ *   - LaunchBanner: More subtle, less intrusive design
+ *   - Consider using Framer Motion for micro-interactions
+ *   - Ensure all components work seamlessly with dark mode
+ *
  * ## CSS Setup
  *
  * Import the CSS tokens for proper theming:
