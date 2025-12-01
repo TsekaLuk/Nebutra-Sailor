@@ -1,6 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/no-html-link-for-pages */
 import { Metadata } from "next";
+import Link from "next/link";
+import Link from "next/link";
 import { locales } from "@/lib/i18n/locales";
 
 export const metadata: Metadata = {
@@ -174,15 +174,15 @@ export default async function FAQPage() {
           Still have questions?
         </h2>
         <p className="mt-2 text-gray-600 dark:text-gray-300">
-          Can't find what you're looking for? Our team is here to help.
+          Cannot find what you are looking for? Our team is here to help.
         </p>
         <div className="mt-6 flex justify-center gap-4">
-          <a
+          <Link
             href="/contact"
             className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
           >
             Contact Support
-          </a>
+          </Link>
           <a
             href="mailto:support@nebutra.com"
             className="rounded-lg border border-gray-300 dark:border-gray-600 px-6 py-3 font-semibold text-gray-700 dark:text-gray-200 transition hover:bg-gray-100 dark:hover:bg-gray-700"

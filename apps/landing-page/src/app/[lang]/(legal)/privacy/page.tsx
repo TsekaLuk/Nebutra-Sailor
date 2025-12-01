@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Metadata } from "next";
 import { locales } from "@/lib/i18n/locales";
 
@@ -23,9 +22,10 @@ export default async function PrivacyPolicyPage() {
       </p>
 
       <p>
-        At Nebutra ("Company," "we," "us," or "our"), we are committed to protecting your privacy. 
-        This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
-        when you use our website, applications, and services (collectively, the "Services").
+        At Nebutra (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), we are
+        committed to protecting your privacy. This Privacy Policy explains how we collect, use,
+        disclose, and safeguard your information when you use our website, applications, and services
+        (collectively, the &quot;Services&quot;).
       </p>
 
       <h2>1. Information We Collect</h2>
@@ -100,7 +100,7 @@ export default async function PrivacyPolicyPage() {
 
       <h3>4.4 Marketing Communications</h3>
       <p>
-        You can opt out of marketing emails by clicking "unsubscribe" in any marketing email or 
+        You can opt out of marketing emails by clicking &quot;unsubscribe&quot; in any marketing email or
         updating your preferences.
       </p>
 

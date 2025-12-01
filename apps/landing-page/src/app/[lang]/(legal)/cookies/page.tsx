@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/no-html-link-for-pages */
 import { Metadata } from "next";
+import Link from "next/link";
 import { locales } from "@/lib/i18n/locales";
 
 export const metadata: Metadata = {
@@ -24,7 +23,7 @@ export default async function CookiePolicyPage() {
       </p>
 
       <p>
-        This Cookie Policy explains how Nebutra, Inc. ("Nebutra," "we," "us," or "our") uses 
+        This Cookie Policy explains how Nebutra, Inc. (&quot;Nebutra,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) uses 
         cookies and similar tracking technologies on our website and services.
       </p>
 
@@ -171,13 +170,13 @@ export default async function CookiePolicyPage() {
       <h2>Managing Your Cookie Preferences</h2>
 
       <h3>Cookie Consent Banner</h3>
-      <p>When you first visit our website, you'll see a cookie consent banner that allows you to:</p>
+      <p>When you first visit our website, you will see a cookie consent banner that allows you to:</p>
       <ul>
         <li><strong>Accept All:</strong> Enable all cookie categories</li>
         <li><strong>Reject All:</strong> Disable all optional cookies (necessary cookies remain)</li>
         <li><strong>Customize:</strong> Choose specific cookie categories to enable</li>
       </ul>
-      <p>You can change your preferences at any time by clicking "Cookie Settings" in the footer.</p>
+      <p>You can change your preferences at any time by clicking &quot;Cookie Settings&quot; in the footer.</p>
 
       <h3>Browser Settings</h3>
       <p>Most web browsers allow you to control cookies through their settings:</p>
@@ -216,7 +215,7 @@ export default async function CookiePolicyPage() {
 
       <p>
         For more information about how we collect and process your data, please see our{" "}
-        <a href="/privacy">Privacy Policy</a>.
+        <Link href="/privacy">Privacy Policy</Link>.
       </p>
     </article>
   );

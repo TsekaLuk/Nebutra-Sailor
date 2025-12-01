@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/no-html-link-for-pages */
 import { Metadata } from "next";
+import Link from "next/link";
 import { locales } from "@/lib/i18n/locales";
 
 export const metadata: Metadata = {
@@ -35,7 +34,7 @@ export default async function AboutPage() {
           intelligence with robust multi-tenant architecture.
         </p>
         <p>
-          We're building the infrastructure that allows businesses to leverage AI for content creation, 
+          We are building the infrastructure that allows businesses to leverage AI for content creation, 
           personalized recommendations, e-commerce optimization, and community building—all in one 
           unified platform.
         </p>
@@ -55,7 +54,7 @@ export default async function AboutPage() {
           />
           <ValueCard
             title="Customer Success"
-            description="Your success is our success. We're committed to providing the tools and support you need to grow."
+            description="Your success is our success. We are committed to providing the tools and support you need to grow."
           />
           <ValueCard
             title="Security by Design"
@@ -101,15 +100,15 @@ export default async function AboutPage() {
           Want to learn more?
         </h2>
         <p className="mt-2 text-gray-600 dark:text-gray-300">
-          We'd love to hear from you. Reach out to discuss how Nebutra can help your business.
+          We would love to hear from you. Reach out to discuss how Nebutra can help your business.
         </p>
         <div className="mt-6 flex justify-center gap-4">
-          <a
+          <Link
             href="/contact"
             className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
           >
             Contact Us
-          </a>
+          </Link>
           <a
             href="mailto:hello@nebutra.com"
             className="rounded-lg border border-gray-300 dark:border-gray-600 px-6 py-3 font-semibold text-gray-700 dark:text-gray-200 transition hover:bg-gray-100 dark:hover:bg-gray-700"

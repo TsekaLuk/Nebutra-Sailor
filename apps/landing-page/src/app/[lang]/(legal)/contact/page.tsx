@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/no-html-link-for-pages */
 import { Metadata } from "next";
+import Link from "next/link";
 import { locales } from "@/lib/i18n/locales";
 
 export const metadata: Metadata = {
@@ -54,7 +53,7 @@ export default async function ContactPage() {
           Contact Us
         </h1>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-          We'd love to hear from you. Choose the best way to reach us.
+          We would love to hear from you. Choose the best way to reach us.
         </p>
       </section>
 
@@ -197,9 +196,9 @@ export default async function ContactPage() {
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             By submitting this form, you agree to our{" "}
-            <a href="/privacy" className="text-blue-600 hover:underline">
+            <Link href="/privacy" className="text-blue-600 hover:underline">
               Privacy Policy
-            </a>
+            </Link>
             .
           </p>
         </form>

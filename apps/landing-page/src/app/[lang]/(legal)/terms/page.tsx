@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/no-html-link-for-pages */
 import { Metadata } from "next";
+import Link from "next/link";
 import { locales } from "@/lib/i18n/locales";
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default async function TermsOfServicePage() {
 
       <p>
         By accessing or using our Services, you agree to be bound by these Terms and our{" "}
-        <a href="/privacy">Privacy Policy</a>. If you do not agree to these Terms, do not use our Services.
+        <Link href="/privacy">Privacy Policy</Link>. If you do not agree to these Terms, do not use our Services.
       </p>
 
       <h2>1. Acceptance of Terms</h2>
@@ -83,7 +83,7 @@ export default async function TermsOfServicePage() {
       <h3>4.2 Payment</h3>
       <ul>
         <li>Subscriptions are billed in advance on a monthly or annual basis</li>
-        <li>All fees are non-refundable except as stated in our <a href="/refund">Refund Policy</a></li>
+        <li>All fees are non-refundable except as stated in our <Link href="/refund">Refund Policy</Link></li>
         <li>You authorize us to charge your payment method for applicable fees</li>
         <li>We use Stripe for secure payment processing</li>
       </ul>

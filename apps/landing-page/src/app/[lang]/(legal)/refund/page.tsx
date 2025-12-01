@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
 import { Metadata } from "next";
+import Link from "next/link";
 import { locales } from "@/lib/i18n/locales";
 
 export const metadata: Metadata = {
@@ -149,7 +149,7 @@ export default async function RefundPolicyPage() {
       <hr />
 
       <p>
-        This policy is part of our <a href="/terms">Terms of Service</a>. By using Nebutra, 
+        This policy is part of our <Link href="/terms">Terms of Service</Link>. By using Nebutra, 
         you agree to these refund terms.
       </p>
     </article>
