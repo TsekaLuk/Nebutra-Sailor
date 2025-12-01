@@ -33,6 +33,7 @@ Complete navigation to all project documentation.
 | [captcha](../packages/captcha/README.md)             | CAPTCHA verification           |
 | [config](../packages/config/README.md)               | Shared configuration           |
 | [db](../packages/db/README.md)                       | Prisma schema and client       |
+| [design-system](../packages/design-system/README.md) | Primer-based UI system         |
 | [errors](../packages/errors/README.md)               | Error handling                 |
 | [event-bus](../packages/event-bus/README.md)         | Cross-service events           |
 | [feature-flags](../packages/feature-flags/README.md) | Feature flag management        |
