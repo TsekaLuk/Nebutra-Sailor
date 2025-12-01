@@ -46,8 +46,16 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "^18",
-      "@types/react-dom": "^18"
+      "@types/react": "^19",
+      "@types/react-dom": "^19",
+      "react-avatar-editor": "^14.0.0"
+    },
+    "peerDependencyRules": {
+      "ignoreMissing": ["styled-components"],
+      "allowedVersions": {
+        "react": "19",
+        "react-dom": "19"
+      }
     }
   },
   "devDependencies": {
@@ -61,6 +69,7 @@
     "commitizen": "^4.3.1",
     "conventional-changelog-cli": "^5.0.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^9.39.1",
     "husky": "^9.1.7",
     "jsdom": "^26.0.0",
     "lint-staged": "^15.4.3",

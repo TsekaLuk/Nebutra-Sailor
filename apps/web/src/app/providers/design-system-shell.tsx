@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  Box,
   Button,
   DesignSystemProvider,
   Header,
@@ -30,14 +29,14 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
         {hasClerkKey && (
           <Header.Item>
             <SignedOut>
-              <Box sx={{ display: "flex", gap: 2 }}>
+              <div className="flex gap-2">
                 <SignInButton mode="modal">
                   <Button variant="invisible">Sign In</Button>
                 </SignInButton>
                 <SignUpButton mode="modal">
                   <Button variant="primary">Sign Up</Button>
                 </SignUpButton>
-              </Box>
+              </div>
             </SignedOut>
             <SignedIn>
               <UserButton
@@ -50,9 +49,9 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
           </Header.Item>
         )}
       </Header>
-      <Box as="main" sx={{ minHeight: "calc(100vh - 64px)" }}>
+      <main className="min-h-[calc(100vh-64px)]">
         {children}
-      </Box>
+      </main>
     </DesignSystemProvider>
   );
 }

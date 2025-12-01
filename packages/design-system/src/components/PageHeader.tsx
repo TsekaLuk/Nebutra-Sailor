@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { Box, Heading, Text, Breadcrumbs, type BoxProps } from "@primer/react";
+import { Heading, Text, Breadcrumbs } from "@primer/react";
 import { clsx } from "clsx";
 
-export interface PageHeaderProps extends BoxProps {
+export interface PageHeaderProps {
   title: string;
   description?: string;
   actions?: React.ReactNode;
@@ -20,21 +20,17 @@ export function PageHeader({
   breadcrumbs,
   className,
   children,
-  ...props
 }: PageHeaderProps) {
   return (
-    <Box
-      as="header"
-      className={clsx("ds-page-header", className)}
-      pb={4}
-      mb={4}
-      borderBottomWidth={1}
-      borderBottomStyle="solid"
-      borderBottomColor="border.default"
-      {...props}
+    <header
+      className={clsx(
+        "ds-page-header",
+        "pb-4 mb-4 border-b border-gray-200 dark:border-gray-700",
+        className
+      )}
     >
       {breadcrumbs && breadcrumbs.length > 0 && (
-        <Breadcrumbs sx={{ mb: 2 }}>
+        <Breadcrumbs className="mb-2">
           {breadcrumbs.map((item, index) => (
             <Breadcrumbs.Item
               key={index}
@@ -47,27 +43,21 @@ export function PageHeader({
         </Breadcrumbs>
       )}
 
-      <Box
-        display="flex"
-        flexDirection={["column", "row"]}
-        justifyContent="space-between"
-        alignItems={["flex-start", "center"]}
-        gap={3}
-      >
-        <Box>
-          <Heading as="h1" sx={{ fontSize: 4, fontWeight: "bold" }}>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <div>
+          <Heading as="h1" className="text-2xl font-bold">
             {title}
           </Heading>
           {description && (
-            <Text as="p" color="fg.muted" sx={{ mt: 1 }}>
+            <Text as="p" className="text-gray-500 mt-1">
               {description}
             </Text>
           )}
-        </Box>
-        {actions && <Box flexShrink={0}>{actions}</Box>}
-      </Box>
+        </div>
+        {actions && <div className="shrink-0">{actions}</div>}
+      </div>
 
       {children}
-    </Box>
+    </header>
   );
 }

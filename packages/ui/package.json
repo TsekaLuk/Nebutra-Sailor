@@ -11,12 +11,13 @@
   },
   "scripts": {},
   "dependencies": {
-    "@lobehub/icons": "^1.35.0",
-    "@lobehub/ui": "^1.164.0",
+    "@lobehub/icons": "^2.43.1",
+    "@lobehub/ui": "^2.18.3",
     "antd": "^5.22.0",
     "antd-style": "^3.7.0",
     "lucide-react": "^0.460.0",
-    "react": "^19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",

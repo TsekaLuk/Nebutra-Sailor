@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { Box, Spinner, Text, type BoxProps } from "@primer/react";
+import { Spinner, Text } from "@primer/react";
 import { clsx } from "clsx";
 
-export interface LoadingStateProps extends BoxProps {
+export interface LoadingStateProps {
   size?: "small" | "medium" | "large";
   message?: string;
   className?: string;
@@ -14,24 +14,21 @@ export function LoadingState({
   size = "medium",
   message,
   className,
-  ...props
 }: LoadingStateProps) {
   return (
-    <Box
-      className={clsx("ds-loading-state", className)}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      py={6}
-      {...props}
+    <div
+      className={clsx(
+        "ds-loading-state",
+        "flex flex-col items-center justify-center py-6",
+        className
+      )}
     >
       <Spinner size={size} />
       {message && (
-        <Text as="p" color="fg.muted" sx={{ mt: 2 }}>
+        <Text as="p" className="text-gray-500 mt-2">
           {message}
         </Text>
       )}
-    </Box>
+    </div>
   );
 }

@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { Box, Heading, Text, type BoxProps } from "@primer/react";
+import { Heading, Text } from "@primer/react";
 import { clsx } from "clsx";
 
-export interface EmptyStateProps extends BoxProps {
+export interface EmptyStateProps {
   icon?: React.ReactNode;
   title: string;
   description?: string;
@@ -18,34 +18,29 @@ export function EmptyState({
   description,
   actions,
   className,
-  ...props
 }: EmptyStateProps) {
   return (
-    <Box
-      className={clsx("ds-empty-state", className)}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      textAlign="center"
-      py={8}
-      px={4}
-      {...props}
+    <div
+      className={clsx(
+        "ds-empty-state",
+        "flex flex-col items-center justify-center text-center py-8 px-4",
+        className
+      )}
     >
       {icon && (
-        <Box color="fg.muted" mb={3} sx={{ "& svg": { width: 48, height: 48 } }}>
+        <div className="text-gray-500 mb-3 [&_svg]:w-12 [&_svg]:h-12">
           {icon}
-        </Box>
+        </div>
       )}
-      <Heading as="h3" sx={{ fontSize: 2, fontWeight: "semibold", mb: 1 }}>
+      <Heading as="h3" className="text-base font-semibold mb-1">
         {title}
       </Heading>
       {description && (
-        <Text as="p" color="fg.muted" sx={{ maxWidth: "400px", mb: 3 }}>
+        <Text as="p" className="text-gray-500 max-w-md mb-3">
           {description}
         </Text>
       )}
-      {actions && <Box mt={2}>{actions}</Box>}
-    </Box>
+      {actions && <div className="mt-2">{actions}</div>}
+    </div>
   );
 }

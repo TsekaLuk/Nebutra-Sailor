@@ -1,22 +1,21 @@
 "use client";
 
 import React from "react";
-import { Box, type BoxProps } from "@primer/react";
 import { clsx } from "clsx";
 
-export interface ContainerProps extends Omit<BoxProps, "maxWidth"> {
+export interface ContainerProps {
   size?: "sm" | "md" | "lg" | "xl" | "full";
   centered?: boolean;
   className?: string;
   children: React.ReactNode;
 }
 
-const sizeMap = {
-  sm: "544px",
-  md: "768px",
-  lg: "1012px",
-  xl: "1280px",
-  full: "100%",
+const sizeClassMap = {
+  sm: "max-w-xl",
+  md: "max-w-3xl",
+  lg: "max-w-5xl",
+  xl: "max-w-7xl",
+  full: "max-w-full",
 } as const;
 
 export function Container({
@@ -24,18 +23,19 @@ export function Container({
   centered = true,
   className,
   children,
-  ...props
 }: ContainerProps) {
   return (
-    <Box
-      className={clsx("ds-container", `ds-container--${size}`, className)}
-      width="100%"
-      maxWidth={sizeMap[size]}
-      mx={centered ? "auto" : undefined}
-      px={[3, 4, 5]}
-      {...props}
+    <div
+      className={clsx(
+        "ds-container",
+        `ds-container--${size}`,
+        "w-full px-4 sm:px-6 lg:px-8",
+        sizeClassMap[size],
+        centered && "mx-auto",
+        className
+      )}
     >
       {children}
-    </Box>
+    </div>
   );
 }

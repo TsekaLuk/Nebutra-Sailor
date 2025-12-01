@@ -12,7 +12,6 @@
 
 // Layout
 export {
-  Box,
   PageLayout,
   SplitPageLayout,
   Stack,

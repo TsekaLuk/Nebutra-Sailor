@@ -2,11 +2,9 @@
 
 import React from "react";
 import {
-  Box,
   Heading as PrimerHeading,
   Text,
   Button as PrimerButton,
-  type BoxProps,
 } from "@primer/react";
 import { AlertIcon } from "@primer/octicons-react";
 import { clsx } from "clsx";
@@ -17,7 +15,7 @@ const Heading = PrimerHeading as any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Button = PrimerButton as any;
 
-export interface ErrorStateProps extends BoxProps {
+export interface ErrorStateProps {
   title?: string;
   message?: string;
   error?: Error | null;
@@ -33,30 +31,25 @@ export function ErrorState({
   onRetry,
   retryLabel = "Try again",
   className,
-  ...props
 }: ErrorStateProps): React.JSX.Element {
   const displayMessage = message || error?.message || "An unexpected error occurred.";
   const AlertGlyph = AlertIcon as unknown as React.ComponentType<{ size?: number }>;
 
   return (
-    <Box
-      className={clsx("ds-error-state", className)}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      textAlign="center"
-      py={8}
-      px={4}
-      {...props}
+    <div
+      className={clsx(
+        "ds-error-state",
+        "flex flex-col items-center justify-center text-center py-8 px-4",
+        className
+      )}
     >
-      <Box color="danger.fg" mb={3}>
+      <div className="text-red-500 mb-3">
         <AlertGlyph size={48} />
-      </Box>
-      <Heading as="h2" sx={{ fontSize: 2, fontWeight: "semibold", mb: 1 }}>
+      </div>
+      <Heading as="h2" className="text-base font-semibold mb-1">
         {title}
       </Heading>
-      <Text as="p" color="fg.muted" sx={{ maxWidth: "400px", mb: 3 }}>
+      <Text as="p" className="text-gray-500 max-w-md mb-3">
         {displayMessage}
       </Text>
       {onRetry && (
@@ -64,6 +57,6 @@ export function ErrorState({
           {retryLabel}
         </Button>
       )}
-    </Box>
+    </div>
   );
 }

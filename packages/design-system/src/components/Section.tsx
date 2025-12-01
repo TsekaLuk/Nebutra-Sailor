@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { Box, Heading, Text, type BoxProps } from "@primer/react";
+import { Heading, Text } from "@primer/react";
 import { clsx } from "clsx";
 
-export interface SectionProps extends BoxProps {
+export interface SectionProps {
   title?: string;
   description?: string;
   actions?: React.ReactNode;
@@ -18,40 +18,31 @@ export function Section({
   actions,
   className,
   children,
-  ...props
 }: SectionProps) {
   return (
-    <Box
-      as="section"
-      className={clsx("ds-section", className)}
-      mb={6}
-      {...props}
+    <section
+      className={clsx("ds-section", "mb-6", className)}
     >
       {(title || description || actions) && (
-        <Box
-          display="flex"
-          flexDirection={["column", "row"]}
-          justifyContent="space-between"
-          alignItems={["flex-start", "center"]}
-          mb={4}
-          gap={3}
+        <div
+          className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3"
         >
-          <Box>
+          <div>
             {title && (
-              <Heading as="h2" sx={{ fontSize: 3, fontWeight: "semibold" }}>
+              <Heading as="h2" className="text-lg font-semibold">
                 {title}
               </Heading>
             )}
             {description && (
-              <Text as="p" color="fg.muted" sx={{ mt: 1 }}>
+              <Text as="p" className="text-fg-muted mt-1">
                 {description}
               </Text>
             )}
-          </Box>
-          {actions && <Box flexShrink={0}>{actions}</Box>}
-        </Box>
+          </div>
+          {actions && <div className="shrink-0">{actions}</div>}
+        </div>
       )}
       {children}
-    </Box>
+    </section>
   );
 }

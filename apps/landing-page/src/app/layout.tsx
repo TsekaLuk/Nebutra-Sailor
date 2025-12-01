@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { DesignSystemProvider, Box } from "@nebutra/design-system";
+import { DesignSystemProvider } from "@nebutra/design-system";
 import { AuthButtons } from "@/components/AuthButtons";
 import "./globals.css";
 
@@ -57,23 +57,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <DesignSystemProvider>
-          <Box
-            as="header"
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              p: 3,
-              gap: 2,
-              height: 64,
-              position: "absolute",
-              top: 0,
-              right: 0,
-              zIndex: 50,
-            }}
-          >
+          <header className="flex justify-end items-center p-3 gap-2 h-16 absolute top-0 right-0 z-50">
             {hasClerkKey && <AuthButtons />}
-          </Box>
+          </header>
           {children}
         </DesignSystemProvider>
       </body>
