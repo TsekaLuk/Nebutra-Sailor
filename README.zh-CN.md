@@ -1,5 +1,5 @@
 <div align="right">
-  <a href="README.md">English</a> | <strong>简体中文</strong>
+  <a href="README.md">English</a> | <strong>简体中文</strong> | <a href="README.ja.md">日本語</a>
 </div>
 
 <div align="center">
@@ -67,10 +67,12 @@ Nebula • Nurture • Ultra • Future
 - **🤖 AI 原生** — 内置 LLM、Embeddings、RAG 和 AI Agent（MCP）支持
 - **🏢 多租户** — 开箱即用的行级安全、租户隔离和租户定制
 - **⚡ 现代技术栈** — Next.js 17、React 19、TypeScript 5.6+、TailwindCSS 4.0
+- **💳 计费内置** — 数据库驱动的计划配置、Stripe 计费、用量计量、功能权限
+- **📋 合规基础设施** — Cookie 同意、隐私控制、GDPR/CCPA 合规基础设施
 - **🔌 可扩展** — 模块化微服务架构，事件驱动通信
 - **🌍 全球化** — 国际化、CDN、边缘缓存、多区域部署支持
-- **📊 实战成效** — 交付项目中，报表时间降幅 >70%、洞察交付提速 4×；运营效率提升 ~50%。
-- **🦄 面向独角兽** — 从 PoC 到上线的工程范式，兼顾速度与可靠性。
+- **📊 实战成效** — 交付项目中，报表时间降幅 >70%、洞察交付提速 4×
+- **🦄 面向独角兽** — 从 PoC 到上线的工程范式，兼顾速度与可靠性
 
 ## 亮点
 
@@ -95,18 +97,18 @@ Nebula • Nurture • Ultra • Future
   <tr>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Workflows" /><br />
-      <strong>工作流</strong>
-      <br />后台任务、定时、事件总线。
+      <strong>计费与变现</strong>
+      <br />数据库驱动计划、Stripe 计费、用量计量、功能门控。
     </td>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/security.svg" width="28" alt="Security" /><br />
-      <strong>安全</strong>
-      <br />RLS、WAF、Turnstile、多租户隔离。
+      <strong>安全与合规</strong>
+      <br />RLS、WAF、Turnstile、GDPR/CCPA、Cookie 同意。
     </td>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/toolkit.svg" width="28" alt="Toolkit" /><br />
-      <strong>工具集</strong>
-      <br />UI 套件、品牌包、脚本与预设。
+      <strong>营销 UI 套件</strong>
+      <br />Hero、Features、Pricing、Testimonials 等转化优化组件。
     </td>
   </tr>
 </table>
