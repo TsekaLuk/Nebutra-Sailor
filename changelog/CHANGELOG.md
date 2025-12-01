@@ -5,6 +5,32 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.2.0...v1.3.0) (2025-12-01)
+
+### 🆕 Features
+
+- **billing:** database-driven plan configuration ([e26a0b8](https://github.com/TsekaLuk/Nebutra-Sailor/commit/e26a0b8a587346b5c55ecfa8ec41be699c3d2ce5))
+- **brand:** update with VI manual specifications ([05b51b3](https://github.com/TsekaLuk/Nebutra-Sailor/commit/05b51b31316f7bd5a43972841c7e9ec356e7f5d2)), closes [#0033](https://github.com/TsekaLuk/Nebutra-Sailor/issues/0033) [#0BF1C3](https://github.com/TsekaLuk/Nebutra-Sailor/issues/0BF1C3)
+- **custom-ui:** add marketing module skeleton ([a6f91bf](https://github.com/TsekaLuk/Nebutra-Sailor/commit/a6f91bf86a3e3433361203851151ccad54304d9f))
+- **design-system:** add marketing infrastructure spec and tokens ([9b43b83](https://github.com/TsekaLuk/Nebutra-Sailor/commit/9b43b83e3123c2bdadcaf92c221ccc661934104f))
+- **legal:** Add Legal & Compliance infrastructure ([8c7be73](https://github.com/TsekaLuk/Nebutra-Sailor/commit/8c7be73bfa8e17df2545de15d74a4ce19592e0c5))
+
+### 🐛 Bug Fixes
+
+- **docs:** replace broken badge icons with native emoji h3 headers ([2eec35e](https://github.com/TsekaLuk/Nebutra-Sailor/commit/2eec35ec92e647f5087b639715f387a6303c1cb7))
+- **docs:** sync Japanese README Tech Stack with English version ([b330d5d](https://github.com/TsekaLuk/Nebutra-Sailor/commit/b330d5db76ff9bb331616f52be0eb411ba162d86))
+- unblock builds (consent types, web 404) ([205920c](https://github.com/TsekaLuk/Nebutra-Sailor/commit/205920c910dab69b656116da164a98c606366537))
+
+### 📚 Documentation
+
+- add company positioning statement to readmes ([57caa27](https://github.com/TsekaLuk/Nebutra-Sailor/commit/57caa275ef751ee13dfd470186624f6687f11d84))
+- add hero taglines, manifesto, and updated footers (en/zh/ja) ([52c8235](https://github.com/TsekaLuk/Nebutra-Sailor/commit/52c82355046722f627705afea2c97d576dd169a9))
+- add Japanese README for better SEO/GEO coverage ([a531788](https://github.com/TsekaLuk/Nebutra-Sailor/commit/a53178807773cb7d28dd146b4c195c1cf32a85ed))
+- center focus grid in readmes (en/zh/ja) ([1a66021](https://github.com/TsekaLuk/Nebutra-Sailor/commit/1a66021998978433d242168cf7347dc8b3590f23))
+- redesign company and features sections with html tables ([def2158](https://github.com/TsekaLuk/Nebutra-Sailor/commit/def215836f931655999d2b75155584eeb63cbaab))
+- set brand heading to 'nebutra intelligence' (en/zh/ja) ([46cff33](https://github.com/TsekaLuk/Nebutra-Sailor/commit/46cff33edc3fcfb01fe06ee86c567a05b2ce41b6))
+- update README with billing, legal, marketing UI features ([a848709](https://github.com/TsekaLuk/Nebutra-Sailor/commit/a848709b62cd749a56fbea85bd8a1ddd1216d5cc))
+
 ## [1.2.0](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.1.1...v1.2.0) (2025-12-01)
 
 ### 🆕 Features
