@@ -7,37 +7,63 @@ This document defines the governance rules for managing UI components across Neb
 Nebutra uses a **layered component architecture** built on GitHub's Primer Design System:
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                 External Libraries                   │
-│         (21st.dev, HeroUI, community UI)            │
-│                   [Experimental]                     │
-└──────────────────────┬──────────────────────────────┘
-                       │ Review & Promote
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│              @nebutra/custom-ui                      │
-│         (Brand-specific, domain UI)                 │
-│                    [Stable]                          │
-└──────────────────────┬──────────────────────────────┘
-                       │ Depends on
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│            @nebutra/design-system                    │
-│          (SSOT: Primer + Typography)                │
-│                    [Stable]                          │
-├─────────────────────────────────────────────────────┤
-│  Primer React │ typography/ │ theme/brand (future)  │
-│  (components) │ (fonts)     │ (brand overrides)     │
-└─────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                      External Libraries                            │
+│              (21st.dev, HeroUI, Magic UI, etc.)                    │
+│                       [Experimental]                                │
+└─────────────────────────────────┬───────────────────────────────────┘
+                                │ Review & Promote
+                                ▼
+┌──────────────────────┐  ┌─────────────────┐  ┌────────────────────┐
+│  @nebutra/custom-ui  │  │  @nebutra/21st  │  │    @nebutra/ui     │
+│  (Brand/Domain UI)   │  │  (Experimental) │  │  (shadcn-style)    │
+│       [Stable]       │  │    [Beta]       │  │     [Stable]       │
+└──────────┬───────────┘  └────────┬────────┘  └──────────┬─────────┘
+           │                       │                       │
+           └───────────────────────┼───────────────────────┘
+                               Depends on
+                                ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│               @nebutra/design-system (SSOT)                        │
+│                         [Stable]                                    │
+├─────────────────┬─────────────────┬─────────────────┬────────────────┤
+│  theme/           │  typography/    │  primitives/    │  components/   │
+│  ├─ default       │  ├─ tokens      │  ├─ layout      │  ├─ Box        │
+│  ├─ brand         │  ├─ fonts       │  ├─ spacing     │  ├─ Button     │
+│  └─ marketing ★   │  └─ fonts.css   │  └─ a11y        │  └─ Card       │
+└─────────────────┴─────────────────┴─────────────────┴────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    @primer/react                                    │
+│             (GitHub Primer Design System)                          │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Key Relationships
 
-| Layer | Foundation | Typography | Brand Customization |
+| Layer | Foundation | Typography | Brand/Marketing |
 |-------|-----------|------------|---------------------|
-| **design-system** | Primer React | Open-source fonts (Inter, JetBrains Mono) | theme/brand.ts overrides |
+| **design-system** | Primer React | Open-source fonts (Inter, JetBrains Mono) | theme/brand.ts + theme/marketing.ts |
 | **custom-ui** | ↑ inherits | ↑ inherits | Domain-specific styles |
+| **ui** | ↑ inherits | ↑ inherits | shadcn-style patterns |
 | **21st/External** | May differ | Must adapt | Requires integration |
+
+### Theme Modules (★ = new)
+
+| Module | Purpose | Usage |
+|--------|---------|-------|
+| `theme/default` | Primer baseline tokens (colors, spacing, shadows) | All apps - always loaded |
+| `theme/brand` | Brand color overrides for white-label | Multi-tenant customization |
+| `theme/marketing` ★ | Extended tokens for marketing pages | Landing pages, hero sections |
+
+**Marketing tokens include:**
+- Large typography scales (display: 3-6rem, responsive)
+- Gradient presets (primary, mesh, aurora, glass)
+- Glass/Blur effects (glassmorphism, frosted)
+- Extended spacing (section: 64-160px)
+- Glow and shadow effects
+- Transition timing presets
 
 ## Component Sources
 

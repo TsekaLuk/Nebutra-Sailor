@@ -25,6 +25,20 @@ export {
   type BrandTheme,
 } from "./brand";
 
+// Marketing-specific tokens (landing pages, hero sections)
+export {
+  marketingTokens,
+  marketingSpacing,
+  marketingTypography,
+  marketingGradients,
+  marketingEffects,
+  marketingRadii,
+  marketingTransitions,
+  marketingZIndex,
+  generateMarketingCSSVars,
+  type MarketingTokens,
+} from "./marketing";
+
 // Theme types
 export type ThemeMode = "light" | "dark" | "auto";
 

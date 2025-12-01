@@ -72,6 +72,7 @@ Complete navigation to all project documentation.
 | [UI Guidelines](./UI-GUIDELINES.md)                   | Design tokens, styles, usage     |
 | [Typography](./TYPOGRAPHY.md)                         | Font stacks, type scale, loading |
 | [Component Library Policy](./COMPONENT-LIBRARY-POLICY.md) | External component governance |
+| [Marketing Infrastructure](./MARKETING-INFRASTRUCTURE.md) | Landing page & marketing spec |
 
 ## Other
 

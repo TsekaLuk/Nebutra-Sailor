@@ -104,6 +104,7 @@ src/
 ├── theme/              # Colors, spacing, breakpoints (Primer tokens)
 │   ├── default.ts      # Primer baseline tokens
 │   ├── brand.ts        # Brand override layer
+│   ├── marketing.ts    # ★ Marketing-specific tokens (gradients, effects)
 │   └── index.ts
 ├── typography/         # Font system (SSOT for all text styling)
 │   ├── tokens.ts       # fontFamilies, fontSizes, typeStyles
@@ -131,17 +132,27 @@ src/
 ### Module Relationships
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    @nebutra/design-system                   │
-├─────────────┬─────────────┬─────────────┬──────────────────┤
-│   theme/    │ typography/ │ primitives/ │   components/    │
-│  (Primer)   │  (Fonts)    │  (Layout)   │    (UI)          │
-├─────────────┴─────────────┴─────────────┴──────────────────┤
-│                     @primer/react                           │
-└─────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────┐
+│                    @nebutra/design-system                        │
+├────────────────┬─────────────┬─────────────┬─────────────────────┤
+│  theme/          │ typography/ │ primitives/ │   components/         │
+│  ├─ default      │  (Fonts)    │  (Layout)   │    (UI)               │
+│  ├─ brand        │             │             │                       │
+│  └─ marketing ★  │             │             │                       │
+├────────────────┴─────────────┴─────────────┴─────────────────────┤
+│                     @primer/react                                │
+└────────────────────────────────────────────────────────────────────┘
 ```
 
-- **theme/** - Extends Primer color/spacing tokens, adds brand overrides
+### Theme Modules
+
+| Module | Purpose | Use Case |
+|--------|---------|----------|
+| `theme/default` | Primer baseline tokens | All apps - always loaded |
+| `theme/brand` | Brand color overrides | White-label, multi-tenant |
+| `theme/marketing` ★ | Extended marketing tokens | Landing pages, hero sections |
+
+- **theme/** - Extends Primer color/spacing tokens, adds brand + marketing overrides
 - **typography/** - Independent font system using open-source fonts
 - **primitives/** - Layout/a11y patterns that work with Primer's `sx` prop
 - **components/** - Re-exports Primer components + Nebutra-specific ones
@@ -194,8 +205,36 @@ Currently using open-source fonts (Inter, JetBrains Mono). When brand fonts are 
 2. Update `fontFamilies.heading` in `tokens.ts`
 3. Components automatically inherit changes
 
+## Marketing Tokens
+
+Extended tokens for high-impact marketing pages:
+
+```tsx
+import {
+  marketingTokens,
+  marketingGradients,
+  marketingEffects,
+  marketingTypography,
+} from "@nebutra/design-system";
+
+// Use gradient background
+<Box sx={{ background: marketingGradients.mesh }} />
+
+// Use glassmorphism effect
+<Card sx={marketingEffects.glass} />
+
+// Use large display typography
+<Heading sx={marketingTypography.display}>Hero Title</Heading>
+
+// Use section spacing
+<Section sx={{ paddingY: marketingTokens.spacing.section.lg }} />
+```
+
+See [Marketing Infrastructure](../../docs/MARKETING-INFRASTRUCTURE.md) for full specification.
+
 ## Related
 
+- [Marketing Infrastructure](../../docs/MARKETING-INFRASTRUCTURE.md)
 - [Typography System](../../docs/TYPOGRAPHY.md)
 - [UI Guidelines](../../docs/UI-GUIDELINES.md)
 - [Component Library Policy](../../docs/COMPONENT-LIBRARY-POLICY.md)

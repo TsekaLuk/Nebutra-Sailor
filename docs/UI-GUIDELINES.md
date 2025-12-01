@@ -5,35 +5,64 @@ This document defines the design system usage, visual standards, and component g
 ## Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     Apps (landing-page, web)                     │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
-│  │ @nebutra/    │  │ @nebutra/    │  │ External/Experimental │  │
-│  │ custom-ui    │  │ 21st         │  │ (HeroUI, etc.)        │  │
-│  │ (Brand)      │  │ (Experimental)│  │                      │  │
-│  └──────┬───────┘  └──────┬───────┘  └──────────┬───────────┘  │
-│         │                 │                      │              │
-│         └─────────────────┼──────────────────────┘              │
-│                           │                                      │
-│                           ▼                                      │
-│              ┌────────────────────────┐                         │
-│              │  @nebutra/design-system │ ← Single Source of     │
-│              │  (SSOT / Primer-based)  │   Truth (SSOT)         │
-│              └────────────────────────┘                         │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         Apps (Consumer Layer)                                │
+│  ┌─────────────────────┐              ┌─────────────────────┐               │
+│  │    landing-page     │              │        web          │               │
+│  │    (Marketing)      │              │    (Dashboard)      │               │
+│  └──────────┬──────────┘              └──────────┬──────────┘               │
+│             │                                    │                          │
+├─────────────┼────────────────────────────────────┼──────────────────────────┤
+│             │         UI Extension Layer         │                          │
+│             ▼                                    ▼                          │
+│  ┌──────────────────┐  ┌──────────────┐  ┌──────────────────────┐          │
+│  │  @nebutra/       │  │ @nebutra/    │  │ @nebutra/ui          │          │
+│  │  custom-ui       │  │ 21st         │  │ (shadcn-style)       │          │
+│  │  (Brand/Domain)  │  │ (Experiment) │  │                      │          │
+│  └────────┬─────────┘  └──────┬───────┘  └──────────┬───────────┘          │
+│           │                   │                      │                      │
+│           └───────────────────┼──────────────────────┘                      │
+│                               ▼                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                    SSOT (Single Source of Truth)                            │
+│                                                                             │
+│              ┌──────────────────────────────────────────┐                   │
+│              │        @nebutra/design-system            │                   │
+│              ├──────────────────────────────────────────┤                   │
+│              │  theme/        │ typography/  │ primitives/                  │
+│              │  ├─ default    │ ├─ tokens    │ ├─ layout                    │
+│              │  ├─ brand      │ ├─ fonts     │ ├─ spacing                   │
+│              │  └─ marketing ★│ └─ fonts.css │ └─ a11y                      │
+│              ├──────────────────────────────────────────┤                   │
+│              │  components/   │ icons/       │ hooks/                       │
+│              └──────────────────────────────────────────┘                   │
+│                               │                                             │
+│                               ▼                                             │
+│              ┌──────────────────────────────────────────┐                   │
+│              │            @primer/react                 │                   │
+│              │      (GitHub Primer Design System)       │                   │
+│              └──────────────────────────────────────────┘                   │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Layer Responsibilities
 
-| Layer | Purpose | When to Use |
-|-------|---------|-------------|
-| **design-system** | SSOT for tokens, primitives, base components | Always - foundation for all UI |
-| **custom-ui** | Brand-specific, domain-specific, complex UI | Production features, dashboards, domain logic |
-| **21st** | Experimental, high-UX components | Prototypes, landing pages, feature experiments |
-| **External** | Third-party UI libraries | Quick validation, one-off needs |
+| Layer | Package | Purpose | When to Use |
+|-------|---------|---------|-------------|
+| **Foundation** | `@primer/react` | GitHub's base UI library | Never import directly |
+| **SSOT** | `@nebutra/design-system` | Tokens, primitives, base components | Always - foundation for all UI |
+| **Extensions** | `@nebutra/ui` | shadcn/ui style general components | Common UI patterns |
+| | `@nebutra/custom-ui` | Brand-specific, domain-specific UI | Production features, dashboards |
+| | `@nebutra/21st` | Experimental, high-UX components | Prototypes, landing pages |
+| **External** | HeroUI, Magic UI, etc. | Third-party UI libraries | Quick validation, one-off needs |
+
+### Theme Module Structure
+
+| Module | Purpose | Use Case |
+|--------|---------|----------|
+| `theme/default` | Primer baseline tokens | All apps |
+| `theme/brand` | Brand color overrides | White-label, customization |
+| `theme/marketing` ★ | Marketing-specific tokens (gradients, effects, large typography) | Landing pages, hero sections |
 
 ## Design Tokens
 
