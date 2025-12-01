@@ -62,42 +62,37 @@ Nebula • Nurture • Ultra • Future
 
 ### About the Company
 
-<table>
-<tr>
-<td width="100%">
-<br />
-<p align="center">
-  <strong>Wuxi Yunyu Intelligent Technology Co., Ltd.</strong><br />
+<div align="center">
+  <h4>Wuxi Yunyu Intelligent Technology Co., Ltd.</h4>
   <sub>无锡云毓智能科技有限公司</sub>
-</p>
-<p align="center">
-  AI-native startup committed to incubating the next generation of unicorn products<br />
-  Pioneering <strong>Vibe-Coding</strong> — AI Agents × Automated Workflows × Human Creativity
-</p>
+  <br /><br />
+  <p>
+    AI-native startup committed to incubating the next generation of unicorn products<br />
+    Pioneering <strong>Vibe-Coding</strong> — AI Agents × Automated Workflows × Human Creativity
+  </p>
+</div>
+
 <br />
-</td>
-</tr>
-</table>
 
 <table>
 <tr>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🚀-0033FE?style=for-the-badge" alt="Global" /><br />
+<td align="center" width="25%">
+  <h3>🚀</h3>
   <strong>Global First</strong><br />
   <sub>Day 1 worldwide markets</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🤖-0033FE?style=for-the-badge" alt="AI" /><br />
+<td align="center" width="25%">
+  <h3>🤖</h3>
   <strong>AI-Native</strong><br />
   <sub>LLMs · Agents · Automation</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🎨-0033FE?style=for-the-badge" alt="Brand" /><br />
+<td align="center" width="25%">
+  <h3>🎨</h3>
   <strong>Brand-Driven SaaS</strong><br />
   <sub>Tech + Design + Strategy</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🦄-0033FE?style=for-the-badge" alt="Unicorn" /><br />
+<td align="center" width="25%">
+  <h3>🦄</h3>
   <strong>Unicorn Incubation</strong><br />
   <sub>PoC → Scalable Business</sub>
 </td>

@@ -45,42 +45,37 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 
 ### 会社について
 
-<table>
-<tr>
-<td width="100%">
-<br />
-<p align="center">
-  <strong>無錪雲毓智能科技有限公司</strong><br />
+<div align="center">
+  <h4>無錪雲毓智能科技有限公司</h4>
   <sub>Wuxi Yunyu Intelligent Technology Co., Ltd.</sub>
-</p>
-<p align="center">
-  次世代ユニコーンプロダクトの創出に取り組む AI ネイティブスタートアップ<br />
-  <strong>Vibe-Coding</strong> 開発哲学を先駆け — AI エージェント × 自動化ワークフロー × 人間の創造性
-</p>
+  <br /><br />
+  <p>
+    次世代ユニコーンプロダクトの創出に取り組む AI ネイティブスタートアップ<br />
+    <strong>Vibe-Coding</strong> 開発哲学を先駆け — AI エージェント × 自動化ワークフロー × 人間の創造性
+  </p>
+</div>
+
 <br />
-</td>
-</tr>
-</table>
 
 <table>
 <tr>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🚀-0033FE?style=for-the-badge" alt="Global" /><br />
+<td align="center" width="25%">
+  <h3>🚀</h3>
   <strong>グローバル化</strong><br />
   <sub>Day 1 から世界市場へ</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🤖-0033FE?style=for-the-badge" alt="AI" /><br />
+<td align="center" width="25%">
+  <h3>🤖</h3>
   <strong>AI ネイティブ</strong><br />
-  <sub>LLM・エージェント・自動化</sub>
+  <sub>LLM · エージェント · 自動化</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🎨-0033FE?style=for-the-badge" alt="Brand" /><br />
+<td align="center" width="25%">
+  <h3>🎨</h3>
   <strong>ブランド駆動 SaaS</strong><br />
   <sub>技術 + デザイン + 戦略</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🦄-0033FE?style=for-the-badge" alt="Unicorn" /><br />
+<td align="center" width="25%">
+  <h3>🦄</h3>
   <strong>ユニコーン創出</strong><br />
   <sub>PoC → スケーラブル事業</sub>
 </td>

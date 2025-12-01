@@ -63,42 +63,37 @@ Nebula • Nurture • Ultra • Future
 
 ### 关于公司
 
-<table>
-<tr>
-<td width="100%">
-<br />
-<p align="center">
-  <strong>无锡云毓智能科技有限公司</strong><br />
+<div align="center">
+  <h4>无锡云毓智能科技有限公司</h4>
   <sub>Wuxi Yunyu Intelligent Technology Co., Ltd.</sub>
-</p>
-<p align="center">
-  AI 原生初创企业，致力于孵化下一代独角兽产品<br />
-  开创 <strong>Vibe-Coding</strong> 开发理念 — AI 智能体 × 自动化工作流 × 人类创造力
-</p>
+  <br /><br />
+  <p>
+    AI 原生初创企业，致力于孵化下一代独角兽产品<br />
+    开创 <strong>Vibe-Coding</strong> 开发理念 — AI 智能体 × 自动化工作流 × 人类创造力
+  </p>
+</div>
+
 <br />
-</td>
-</tr>
-</table>
 
 <table>
 <tr>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🚀-0033FE?style=for-the-badge" alt="Global" /><br />
+<td align="center" width="25%">
+  <h3>🚀</h3>
   <strong>软件出海</strong><br />
   <sub>Day 1 面向全球市场</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🤖-0033FE?style=for-the-badge" alt="AI" /><br />
+<td align="center" width="25%">
+  <h3>🤖</h3>
   <strong>AI 原生架构</strong><br />
-  <sub>LLM・智能体・自动化</sub>
+  <sub>LLM · 智能体 · 自动化</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🎨-0033FE?style=for-the-badge" alt="Brand" /><br />
+<td align="center" width="25%">
+  <h3>🎨</h3>
   <strong>品牌驱动 SaaS</strong><br />
   <sub>技术 + 设计 + 策划</sub>
 </td>
-<td width="25%" align="center">
-  <img src="https://img.shields.io/badge/🦄-0033FE?style=for-the-badge" alt="Unicorn" /><br />
+<td align="center" width="25%">
+  <h3>🦄</h3>
   <strong>独角兽孵化</strong><br />
   <sub>PoC → 规模化业务</sub>
 </td>
