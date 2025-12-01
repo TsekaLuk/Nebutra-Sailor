@@ -989,3 +989,127 @@ model AuditLog {
   @@index([createdAt])
   @@map("audit_logs")
 }
+
+// ============================================
+// Legal & Compliance
+// ============================================
+
+enum ConsentType {
+  EXPLICIT  // User explicitly clicked "I agree"
+  IMPLICIT  // Continued use implies consent
+  OPT_IN    // User opted in
+  OPT_OUT   // User opted out
+}
+
+enum LegalDocumentType {
+  PRIVACY_POLICY
+  TERMS_OF_SERVICE
+  COOKIE_POLICY
+  REFUND_POLICY
+  ACCEPTABLE_USE
+  DATA_PROCESSING
+  SLA
+  CUSTOM
+}
+
+// Legal Document Versions (tracked for compliance)
+model LegalDocument {
+  id           String            @id @default(cuid())
+  slug         String            @db.VarChar(100) // privacy-policy, terms-of-service
+  type         LegalDocumentType
+  locale       String            @default("en") @db.VarChar(10)
+  version      String            @db.VarChar(20) // v1.0.0 (semver)
+  title        String
+  summary      String?           // Brief description of document
+  contentHash  String?           @map("content_hash") @db.VarChar(64) // SHA-256 of content
+  effectiveAt  DateTime          @map("effective_at")
+  expiresAt    DateTime?         @map("expires_at")
+  changelog    Json              @default("[]") // Array of changes
+  metadata     Json              @default("{}")
+  isActive     Boolean           @default(true) @map("is_active")
+  isRequired   Boolean           @default(true) @map("is_required") // Must user consent?
+  createdAt    DateTime          @default(now()) @map("created_at")
+  updatedAt    DateTime          @updatedAt @map("updated_at")
+
+  consents UserConsent[]
+
+  @@unique([slug, version, locale])
+  @@index([type, isActive])
+  @@index([locale])
+  @@map("legal_documents")
+}
+
+// User Consent Records (audit trail for legal compliance)
+model UserConsent {
+  id               String      @id @default(cuid())
+  userId           String?     @map("user_id") // Clerk user ID
+  organizationId   String?     @map("organization_id") // Clerk org ID
+  visitorId        String?     @map("visitor_id") // Anonymous visitor fingerprint
+  documentId       String      @map("document_id")
+  documentSlug     String      @map("document_slug") @db.VarChar(100)
+  documentVersion  String      @map("document_version") @db.VarChar(20)
+  consentType      ConsentType @default(EXPLICIT) @map("consent_type")
+  consentGiven     Boolean     @default(true) @map("consent_given")
+  ipAddress        String?     @map("ip_address") @db.VarChar(45)
+  userAgent        String?     @map("user_agent")
+  consentContext   String?     @map("consent_context") @db.VarChar(100) // signup, checkout, settings
+  metadata         Json        @default("{}")
+  consentedAt      DateTime    @default(now()) @map("consented_at")
+  withdrawnAt      DateTime?   @map("withdrawn_at") // If consent was withdrawn
+
+  document LegalDocument @relation(fields: [documentId], references: [id])
+
+  @@index([userId])
+  @@index([organizationId])
+  @@index([visitorId])
+  @@index([documentSlug, documentVersion])
+  @@index([consentedAt])
+  @@map("user_consents")
+}
+
+// Cookie Consent (GDPR/CCPA compliance)
+model CookieConsent {
+  id             String    @id @default(cuid())
+  visitorId      String    @map("visitor_id") // Anonymous visitor fingerprint
+  userId         String?   @map("user_id") // If logged in
+  necessary      Boolean   @default(true) // Always required, cannot be disabled
+  functional     Boolean   @default(false) // Preferences, language, etc.
+  analytics      Boolean   @default(false) // Google Analytics, Mixpanel, etc.
+  marketing      Boolean   @default(false) // Ads, retargeting, etc.
+  thirdParty     Boolean   @default(false) @map("third_party") // Third-party embeds
+  ipAddress      String?   @map("ip_address") @db.VarChar(45)
+  userAgent      String?   @map("user_agent")
+  metadata       Json      @default("{}") // Store specific cookie names/categories
+  consentedAt    DateTime  @default(now()) @map("consented_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+  expiresAt      DateTime  @map("expires_at") // Cookie consent expires (e.g., 1 year)
+
+  @@unique([visitorId])
+  @@index([userId])
+  @@index([consentedAt])
+  @@map("cookie_consents")
+}
+
+// Contact Form Submissions
+model ContactSubmission {
+  id             String   @id @default(cuid())
+  name           String
+  email          String
+  company        String?
+  phone          String?
+  subject        String   @db.VarChar(200)
+  message        String   @db.Text
+  category       String   @default("general") @db.VarChar(50) // general, sales, support, legal, privacy
+  status         String   @default("new") @db.VarChar(20) // new, in_progress, resolved, spam
+  ipAddress      String?  @map("ip_address") @db.VarChar(45)
+  userAgent      String?  @map("user_agent")
+  metadata       Json     @default("{}")
+  createdAt      DateTime @default(now()) @map("created_at")
+  respondedAt    DateTime? @map("responded_at")
+
+  @@index([email])
+  @@index([category])
+  @@index([status])
+  @@index([createdAt])
+  @@map("contact_submissions")
+}

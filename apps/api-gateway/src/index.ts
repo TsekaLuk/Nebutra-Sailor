@@ -5,6 +5,7 @@ import { logger } from "hono/logger";
 
 import { healthRoutes } from "./routes/misc/health.js";
 import { statusRoutes } from "./routes/system/status.js";
+import { consentRoutes } from "./routes/legal/consent.js";
 import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
 import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
 
@@ -50,6 +51,9 @@ app.use("/api/*", async (c, next) => {
 // Health & Status routes (public, no rate limiting)
 app.route("/api/misc", healthRoutes);
 app.route("/api/system", statusRoutes);
+
+// Legal & Consent routes (v1 API)
+app.route("/api/v1/legal", consentRoutes);
 
 // Root route
 app.get("/", (c) => {
