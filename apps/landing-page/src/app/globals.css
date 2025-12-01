@@ -4,7 +4,6 @@
  * This file imports:
  * 1. Typography CSS variables from design-system (SSOT for fonts)
  * 2. Theme system from @nebutra/21st (colors, Tailwind config)
- * 3. Marketing component tokens from @nebutra/marketing
  */
 
 /* Typography SSOT - must be imported first to define --font-* variables */
@@ -12,9 +11,6 @@
 
 /* Import 21st.dev compatible theme from @nebutra/21st */
 @import "@nebutra/21st/styles/globals.css";
-
-/* Marketing component tokens (PH badges, testimonials, social proof) */
-@import "@nebutra/marketing/styles/tokens.css";
 
 /* Custom overrides for landing page */
 @layer base {
