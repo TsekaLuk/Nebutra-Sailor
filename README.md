@@ -60,6 +60,17 @@ Nebula • Nurture • Ultra • Future
 - Ultra: Ship reliable engineering and value-first outcomes.
 - Future: Make AI productivity accessible to everyone.
 
+### About the Company
+
+**Wuxi Yunyu Intelligent Technology Co., Ltd.** (无锡云毓智能科技有限公司) is an AI-native startup committed to incubating the next generation of unicorn products. We pioneer the **Vibe-Coding** development philosophy — where AI agents, automated workflows, and human creativity converge to ship software at unprecedented velocity.
+
+Our focus:
+
+- 🚀 **Software Globalization** — Building products for worldwide markets from day one
+- 🤖 **AI-Native Architecture** — Every system designed with LLMs, agents, and automation at its core
+- 🎨 **Brand-Driven SaaS** — Combining cutting-edge technology with thoughtful design and positioning
+- 🦄 **Unicorn Incubation** — PoC-to-production patterns that transform ideas into scalable businesses
+
 ### Why Sailor?
 
 - **🚀 Production-Ready** — Battle-tested architecture patterns used in real enterprise deployments
