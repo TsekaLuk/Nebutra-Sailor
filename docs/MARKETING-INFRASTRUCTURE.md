@@ -152,6 +152,125 @@ Complete design and implementation guidelines for landing pages, marketing sites
 | Show testimonials from CMS      | `packages/marketing` + Sanity                   |
 | Show live PH upvote counts      | `services/third-party` → api-gateway → frontend |
 
+### Product Hunt Infrastructure: Complete Three-Layer Architecture
+
+> **⚠️ Critical: Understanding the PH Module Separation**
+>
+> Product Hunt integration spans **three distinct layers** with different purposes. Do not confuse them.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 1: Launch Operations (marketing/producthunt/)                         │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  Purpose: Strategy, planning, copywriting, execution checklists              │
+│  Type: Documentation & Templates (NOT code)                                  │
+│  Audience: Growth team, founders, marketing                                  │
+│                                                                              │
+│  ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐             │
+│  │ strategy/        │ │ copy/            │ │ checklists/      │             │
+│  │ LAUNCH_PLAN.md   │ │ PRODUCT_COPY.md  │ │ PRE_LAUNCH.md    │             │
+│  │ Timeline T-30    │ │ Taglines         │ │ LAUNCH_DAY.md    │             │
+│  │ Audience         │ │ Descriptions     │ │ POST_LAUNCH.md   │             │
+│  │ Outreach list    │ │ Maker Comment    │ │ Hour-by-hour     │             │
+│  └──────────────────┘ │ Social templates │ └──────────────────┘             │
+│                       │ FAQ responses    │                                   │
+│  ┌──────────────────┐ └──────────────────┘ ┌──────────────────┐             │
+│  │ analytics/       │                       │ config/          │             │
+│  │ METRICS.md       │                       │ producthunt.ts   │             │
+│  │ KPI tracking     │                       │ UTM helpers      │             │
+│  │ ROI analysis     │                       │ GraphQL queries  │             │
+│  └──────────────────┘                       └──────────────────┘             │
+│                                                                              │
+│  Traits: Human-readable, version-controlled, no runtime execution            │
+└─────────────────────────────────────────────────────────────────────────────┘
+                              │
+                              │ References (copy, config values)
+                              ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 2: Frontend Components (packages/marketing/)                          │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  Purpose: React UI components, client-side hooks, browser utilities          │
+│  Type: TypeScript/React library                                              │
+│  Runs in: Browser (client-side)                                              │
+│                                                                              │
+│  • ProductHuntBadge, LaunchBanner, TestimonialsWall, SocialProofBar          │
+│  • useAttribution, useCountdown, useProductHuntSource, useLaunchBannerState  │
+│  • UTM parsing, event tracking, source detection                             │
+│  • Static config (colors, PH URLs, constants)                                │
+│                                                                              │
+│  Consumers: apps/landing-page, apps/web                                      │
+│  Traits: No API keys, client-safe, reusable across apps                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+                              │
+                              │ fetch() via api-gateway (optional, for live data)
+                              ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 3: Backend API Service (services/third-party/)                        │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  Purpose: External API integration, caching, scheduled sync                  │
+│  Type: Python/FastAPI microservice                                           │
+│  Runs on: Server (Railway/Docker)                                            │
+│                                                                              │
+│  • GraphQL client for PH API v2 (with retries, rate limit handling)          │
+│  • Redis caching layer (TTL: trending=30min, posts=1h, topics=24h)           │
+│  • Inngest cron jobs (trending sync every 30min, topics daily)               │
+│  • REST endpoints: /api/v1/producthunt/posts, /trending, /topics             │
+│                                                                              │
+│  Consumers: api-gateway (proxies to frontend), internal services             │
+│  Traits: Server-side secrets, rate limit protection, graceful degradation    │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Layer Comparison:**
+
+| Aspect          | marketing/producthunt/        | packages/marketing/         | services/third-party/         |
+| --------------- | ----------------------------- | --------------------------- | ----------------------------- |
+| **Type**        | Documentation                 | React library               | Python microservice           |
+| **Language**    | Markdown, TypeScript config   | TypeScript/React            | Python/FastAPI                |
+| **Runtime**     | None (static docs)            | Browser                     | Server (Railway)              |
+| **Purpose**     | Launch planning & execution   | UI display & tracking       | API data fetching & caching   |
+| **Audience**    | Growth team, founders         | Developers, apps            | Backend services              |
+| **Contains**    | Strategy, copy, checklists    | Components, hooks, utils    | API clients, cron jobs, cache |
+| **API Keys**    | Reference only (.env.example) | None (client-safe)          | Server-side secrets           |
+| **Data Source** | Manual input                  | Static config, localStorage | External APIs (PH GraphQL)    |
+
+**Decision Matrix: Which Layer to Modify?**
+
+| Scenario                            | Modify                   |
+| ----------------------------------- | ------------------------ |
+| Write launch day tagline            | `marketing/producthunt/` |
+| Prepare Twitter thread copy         | `marketing/producthunt/` |
+| Update pre-launch checklist         | `marketing/producthunt/` |
+| Change PH badge color/style         | `packages/marketing/`    |
+| Add countdown timer hook            | `packages/marketing/`    |
+| Track UTM params on landing page    | `packages/marketing/`    |
+| Fetch trending products from PH API | `services/third-party/`  |
+| Change cache TTL for PH data        | `services/third-party/`  |
+| Add new PH API endpoint             | `services/third-party/`  |
+| Display live upvote count on site   | All three (end-to-end)   |
+
+**End-to-End Data Flow Example (Live Upvote Count):**
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ services/       │    │ apps/           │    │ packages/       │
+│ third-party/    │───▶│ api-gateway/    │───▶│ marketing/      │
+│                 │    │                 │    │                 │
+│ Fetch from PH   │    │ Proxy endpoint  │    │ <SocialProofBar │
+│ Cache in Redis  │    │ /api/ph/post    │    │   upvotes={X}>  │
+│ Return JSON     │    │ Forward data    │    │ Render count    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+
+┌─────────────────┐
+│ marketing/      │
+│ producthunt/    │
+│                 │
+│ Document where  │
+│ to display and  │
+│ launch strategy │
+└─────────────────┘
+```
+
 ### Design System Layer Diagram
 
 ```
