@@ -4,6 +4,7 @@
  * This file imports:
  * 1. Typography CSS variables from design-system (SSOT for fonts)
  * 2. Theme system from @nebutra/21st (colors, Tailwind config)
+ * 3. HeroUI plugin for additional components
  */
 
 /* Typography SSOT - must be imported first to define --font-* variables */
@@ -12,6 +13,9 @@
 /* Import 21st.dev compatible theme from @nebutra/21st */
 @import "@nebutra/21st/styles/globals.css";
 @import "tw-animate-css";
+
+/* HeroUI Tailwind plugin */
+@plugin "../../hero.ts";
 /*---break---
  */
 @custom-variant dark (&:is(.dark *));

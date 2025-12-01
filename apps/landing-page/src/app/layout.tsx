@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DesignSystemProvider } from "@nebutra/design-system";
 import { AuthButtons } from "@/components/AuthButtons";
+import { Providers } from "./providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Nebutra - Enterprise SaaS Platform",
-  description: "Build your next AI-native SaaS application with multi-tenant architecture, AI features, and global scalability.",
+  description:
+    "Build your next AI-native SaaS application with multi-tenant architecture, AI features, and global scalability.",
   keywords: ["SaaS", "AI", "enterprise", "multi-tenant", "platform", "startup"],
   authors: [{ name: "Nebutra" }],
   creator: "Nebutra",
@@ -17,7 +19,8 @@ export const metadata: Metadata = {
     url: "https://nebutra.com",
     siteName: "Nebutra",
     title: "Nebutra - Enterprise SaaS Platform",
-    description: "Build your next AI-native SaaS application with multi-tenant architecture, AI features, and global scalability.",
+    description:
+      "Build your next AI-native SaaS application with multi-tenant architecture, AI features, and global scalability.",
     images: [
       {
         url: "/og-image.png",
@@ -54,14 +57,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const content = (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <DesignSystemProvider>
-          <header className="flex justify-end items-center p-3 gap-2 h-16 absolute top-0 right-0 z-50">
-            {hasClerkKey && <AuthButtons />}
-          </header>
-          {children}
-        </DesignSystemProvider>
+        <Providers>
+          <DesignSystemProvider>
+            <header className="flex justify-end items-center p-3 gap-2 h-16 absolute top-0 right-0 z-50">
+              {hasClerkKey && <AuthButtons />}
+            </header>
+            {children}
+          </DesignSystemProvider>
+        </Providers>
       </body>
     </html>
   );
