@@ -5,6 +5,12 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.1.1...v1.2.0) (2025-12-01)
+
+### 🆕 Features
+
+- **billing:** add billing & monetization infrastructure ([a1618a0](https://github.com/TsekaLuk/Nebutra-Sailor/commit/a1618a031dd3f466cbff1f410cda897cab56c9ca))
+
 ## [1.1.1](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.1.0...v1.1.1) (2025-12-01)
 
 ### 🐛 Bug Fixes
