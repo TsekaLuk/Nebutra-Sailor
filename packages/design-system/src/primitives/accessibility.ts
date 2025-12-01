@@ -4,12 +4,14 @@
  * Utilities and patterns for building accessible UI.
  */
 
-import type { SystemStyleObject } from "@primer/react";
+import type { CSSProperties } from "react";
+
+type StyleObject = CSSProperties & Record<string, unknown>;
 
 /**
  * Visually hidden but accessible to screen readers
  */
-export const visuallyHidden: SystemStyleObject = {
+export const visuallyHidden: StyleObject = {
   position: "absolute",
   width: "1px",
   height: "1px",
@@ -24,7 +26,7 @@ export const visuallyHidden: SystemStyleObject = {
 /**
  * Focus ring styles for keyboard navigation
  */
-export const focusRing: SystemStyleObject = {
+export const focusRing: StyleObject = {
   outline: "2px solid",
   outlineColor: "accent.fg",
   outlineOffset: "2px",
@@ -33,7 +35,7 @@ export const focusRing: SystemStyleObject = {
 /**
  * Skip link for keyboard users
  */
-export const skipLinkStyle: SystemStyleObject = {
+export const skipLinkStyle: StyleObject = {
   ...visuallyHidden,
   "&:focus": {
     position: "fixed",

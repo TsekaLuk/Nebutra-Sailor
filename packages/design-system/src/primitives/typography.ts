@@ -1,13 +1,20 @@
 /**
- * Typography Primitives
+ * Typography Primitives (Legacy)
  *
- * Font sizes, line heights, and text styles.
+ * @deprecated Use `@nebutra/design-system/typography` instead.
+ * This module is kept for Primer compatibility and will be removed in v2.
+ *
+ * Migration:
+ * - fontSizes → use typography.fontSizes (rem-based)
+ * - fontFamilies → use typography.fontFamilies
+ * - textStyles → use typography.typeStyles
  */
 
-import type { SystemStyleObject } from "@primer/react";
+import type { CSSProperties } from "react";
 
 /**
- * Font size scale (Primer-compatible)
+ * @deprecated Use typography.fontSizes instead
+ * Primer-compatible numeric scale (kept for backwards compatibility)
  */
 export const fontSizes = {
   0: 12,
@@ -22,7 +29,7 @@ export const fontSizes = {
 } as const;
 
 /**
- * Line height scale
+ * @deprecated Use typography.lineHeights instead
  */
 export const lineHeights = {
   condensed: 1.25,
@@ -31,7 +38,7 @@ export const lineHeights = {
 } as const;
 
 /**
- * Font weights
+ * @deprecated Use typography.fontWeights instead
  */
 export const fontWeights = {
   light: 300,
@@ -42,7 +49,7 @@ export const fontWeights = {
 } as const;
 
 /**
- * Font families
+ * @deprecated Use typography.fontFamilies instead
  */
 export const fontFamilies = {
   normal:
@@ -50,58 +57,53 @@ export const fontFamilies = {
   mono: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
 } as const;
 
+type PrimerStyleObject = Record<string, string | number | CSSProperties>;
+
 /**
- * Pre-defined text styles
+ * @deprecated Use typography.typeStyles instead
+ * Pre-defined text styles (Primer sx format)
  */
 export const textStyles = {
-  /** Page title */
   h1: {
     fontSize: 6,
     fontWeight: "bold",
     lineHeight: "condensed",
   },
-  /** Section title */
   h2: {
     fontSize: 5,
     fontWeight: "bold",
     lineHeight: "condensed",
   },
-  /** Subsection title */
   h3: {
     fontSize: 4,
     fontWeight: "semibold",
     lineHeight: "condensed",
   },
-  /** Card title */
   h4: {
     fontSize: 3,
     fontWeight: "semibold",
     lineHeight: "default",
   },
-  /** Body text */
   body: {
     fontSize: 1,
     fontWeight: "normal",
     lineHeight: "default",
   },
-  /** Small text */
   small: {
     fontSize: 0,
     fontWeight: "normal",
     lineHeight: "default",
   },
-  /** Code/mono text */
   code: {
     fontSize: 1,
     fontFamily: "mono",
   },
-  /** Caption */
   caption: {
     fontSize: 0,
     fontWeight: "normal",
     lineHeight: "default",
     color: "fg.muted",
   },
-} as const satisfies Record<string, SystemStyleObject>;
+} as const satisfies Record<string, PrimerStyleObject>;
 
 export type TextStyle = keyof typeof textStyles;

@@ -1,12 +1,15 @@
 /**
  * UI Primitives
  *
- * Low-level layout, spacing, typography, and accessibility primitives
- * that form the foundation of all UI components.
+ * Low-level layout, spacing, and accessibility primitives.
+ *
+ * Note: For typography, use the dedicated `typography/` module instead.
  */
 
 export * from "./layout";
 export * from "./spacing";
-export * from "./typography";
 export * from "./accessibility";
 export * from "./responsive";
+
+// Legacy typography (deprecated - use typography/ module)
+export { textStyles, type TextStyle } from "./typography";

@@ -4,7 +4,9 @@
  * Core layout utilities and patterns.
  */
 
-import type { SystemStyleObject } from "@primer/react";
+import type { CSSProperties } from "react";
+
+type StyleObject = Record<string, string | number | CSSProperties | (string | number)[]>;
 
 /**
  * Common flex layouts
@@ -39,7 +41,7 @@ export const flexLayouts = {
     alignItems: "center",
     justifyContent: "center",
   },
-} as const satisfies Record<string, SystemStyleObject>;
+} as const satisfies Record<string, StyleObject>;
 
 /**
  * Grid layout helpers
@@ -65,7 +67,7 @@ export const gridLayouts = {
     gridTemplateColumns: ["1fr", "1fr 1fr", "1fr 1fr 1fr 1fr"],
     gap: 3,
   },
-} as const satisfies Record<string, SystemStyleObject>;
+} as const satisfies Record<string, StyleObject>;
 
 /**
  * Container max-widths (matches Primer breakpoints)
