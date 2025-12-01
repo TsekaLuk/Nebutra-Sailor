@@ -517,28 +517,187 @@ enum UsageType {
   CUSTOM
 }
 
-// Price/Plan Configuration
+// ============================================
+// Dynamic Plan Configuration (Unicorn SaaS Pattern)
+// ============================================
+
+// Feature Definitions - All possible features in the system
+model FeatureDefinition {
+  id          String   @id @default(cuid())
+  key         String   @unique @db.VarChar(100) // ai.chat, ai.embeddings, web3.nft
+  name        String
+  description String?
+  category    String   @db.VarChar(50) // ai, content, recsys, ecommerce, web3
+  valueType   String   @default("boolean") @map("value_type") @db.VarChar(20) // boolean, number, unlimited
+  defaultValue Json    @default("false") @map("default_value")
+  metadata    Json     @default("{}")
+  isActive    Boolean  @default(true) @map("is_active")
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  planFeatures PlanFeature[]
+
+  @@index([category])
+  @@map("feature_definitions")
+}
+
+// Usage Limit Definitions - All possible usage metrics
+model UsageLimitDefinition {
+  id           String   @id @default(cuid())
+  key          String   @unique @db.VarChar(50) // ai_tokens, api_calls, storage_bytes
+  name         String
+  description  String?
+  unit         String   @db.VarChar(20) // tokens, calls, bytes, minutes
+  resetPeriod  String   @default("monthly") @map("reset_period") @db.VarChar(20) // monthly, daily, never
+  overageRate  Decimal? @map("overage_rate") @db.Decimal(10, 8) // cost per unit over limit
+  metadata     Json     @default("{}")
+  isActive     Boolean  @default(true) @map("is_active")
+  sortOrder    Int      @default(0) @map("sort_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  planLimits     PlanUsageLimit[]
+  customerLimits CustomerUsageLimit[]
+
+  @@map("usage_limit_definitions")
+}
+
+// Price/Plan Configuration (Versioned)
 model PricingPlan {
   id           String          @id @default(cuid())
   stripeId     String?         @unique @map("stripe_id")
   name         String
+  slug         String          @unique @db.VarChar(50) // free, pro, enterprise
   description  String?
   plan         Plan            // FREE, PRO, ENTERPRISE
   interval     BillingInterval @default(MONTHLY)
   amount       Decimal         @db.Decimal(10, 2)
   currency     String          @default("USD") @db.VarChar(3)
   trialDays    Int             @default(0) @map("trial_days")
+  
+  // Versioning for grandfathering
+  version       String         @default("v1") @db.VarChar(20)
+  effectiveFrom DateTime       @default(now()) @map("effective_from")
+  effectiveTo   DateTime?      @map("effective_to")
+  
+  // Inheritance
+  basePlanId   String?         @map("base_plan_id")
+  basePlan     PricingPlan?    @relation("PlanInheritance", fields: [basePlanId], references: [id])
+  derivedPlans PricingPlan[]   @relation("PlanInheritance")
+  
+  // Status
   isActive     Boolean         @default(true) @map("is_active")
-  features     Json            @default("[]") // Feature list included
-  limits       Json            @default("{}") // Usage limits: {apiCalls: 10000, aiTokens: 100000}
+  isPublic     Boolean         @default(true) @map("is_public") // show on pricing page
+  
+  // Legacy JSON fields (for migration, prefer relations)
+  features     Json            @default("[]") // Deprecated: use planFeatures
+  limits       Json            @default("{}") // Deprecated: use planLimits
   metadata     Json            @default("{}")
+  
   createdAt    DateTime        @default(now()) @map("created_at")
   updatedAt    DateTime        @updatedAt @map("updated_at")
 
-  subscriptions Subscription[]
-  invoiceItems  InvoiceItem[]
+  // Relations
+  subscriptions    Subscription[]
+  invoiceItems     InvoiceItem[]
+  planFeatures     PlanFeature[]
+  planLimits       PlanUsageLimit[]
+  grandfatheredOrgs CustomerPlanVersion[]
 
+  @@unique([slug, version])
+  @@index([plan, isActive])
   @@map("pricing_plans")
+}
+
+// Plan Features - Many-to-many with values
+model PlanFeature {
+  id           String   @id @default(cuid())
+  planId       String   @map("plan_id")
+  featureId    String   @map("feature_id")
+  value        Json     // true, false, or specific value
+  isEnabled    Boolean  @default(true) @map("is_enabled")
+  metadata     Json     @default("{}")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  plan    PricingPlan       @relation(fields: [planId], references: [id], onDelete: Cascade)
+  feature FeatureDefinition @relation(fields: [featureId], references: [id], onDelete: Cascade)
+
+  @@unique([planId, featureId])
+  @@map("plan_features")
+}
+
+// Plan Usage Limits
+model PlanUsageLimit {
+  id           String   @id @default(cuid())
+  planId       String   @map("plan_id")
+  limitId      String   @map("limit_id")
+  limitValue   BigInt   @map("limit_value") // -1 = unlimited
+  overageRate  Decimal? @map("overage_rate") @db.Decimal(10, 8) // override default
+  metadata     Json     @default("{}")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  plan       PricingPlan           @relation(fields: [planId], references: [id], onDelete: Cascade)
+  limitDef   UsageLimitDefinition  @relation(fields: [limitId], references: [id], onDelete: Cascade)
+
+  @@unique([planId, limitId])
+  @@map("plan_usage_limits")
+}
+
+// ============================================
+// Customer Overrides (Grandfathering & Custom Deals)
+// ============================================
+
+// Customer-specific plan version lock (grandfathering)
+model CustomerPlanVersion {
+  id             String    @id @default(cuid())
+  organizationId String    @map("organization_id")
+  planId         String    @map("plan_id")
+  reason         String?   // "Legacy customer", "Enterprise deal", "Beta tester"
+  approvedBy     String?   @map("approved_by") // admin user id
+  expiresAt      DateTime? @map("expires_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  plan PricingPlan @relation(fields: [planId], references: [id])
+
+  @@unique([organizationId])
+  @@map("customer_plan_versions")
+}
+
+// Customer-specific feature overrides
+model CustomerFeatureOverride {
+  id             String    @id @default(cuid())
+  organizationId String    @map("organization_id")
+  featureKey     String    @map("feature_key") @db.VarChar(100)
+  value          Json      // override value
+  reason         String?   // "Sales deal", "Support escalation"
+  approvedBy     String?   @map("approved_by")
+  expiresAt      DateTime? @map("expires_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@unique([organizationId, featureKey])
+  @@index([featureKey])
+  @@map("customer_feature_overrides")
+}
+
+// Customer-specific usage limit overrides
+model CustomerUsageLimit {
+  id             String    @id @default(cuid())
+  organizationId String    @map("organization_id")
+  limitId        String    @map("limit_id")
+  limitValue     BigInt    @map("limit_value") // -1 = unlimited
+  overageRate    Decimal?  @map("overage_rate") @db.Decimal(10, 8)
+  reason         String?   // "Enterprise deal", "Promo"
+  approvedBy     String?   @map("approved_by")
+  expiresAt      DateTime? @map("expires_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  limitDef UsageLimitDefinition @relation(fields: [limitId], references: [id])
+
+  @@unique([organizationId, limitId])
+  @@map("customer_usage_limits")
 }
 
 // Subscription Management

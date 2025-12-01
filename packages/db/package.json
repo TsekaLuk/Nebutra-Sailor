@@ -9,12 +9,15 @@
     ".": "./src/index.ts",
     "./client": "./src/client.ts"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "scripts": {
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "db:seed": "tsx prisma/seed.ts",
+    "db:seed": "prisma db seed",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

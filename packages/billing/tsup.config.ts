@@ -8,6 +8,7 @@ export default defineConfig({
     "src/usage/index.ts",
     "src/credits/index.ts",
     "src/entitlements/index.ts",
+    "src/config/index.ts",
   ],
   format: ["esm"],
   dts: true,

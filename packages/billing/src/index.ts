@@ -157,3 +157,15 @@ export {
   FEATURES,
   PLAN_FEATURES,
 } from "./entitlements/index.js";
+
+// Plan Config (Database-driven)
+export {
+  PlanConfigService,
+  initPlanConfig,
+  getPlanConfig,
+  type PlanConfig,
+  type FeatureValue,
+  type LimitConfig,
+  type ResolvedConfig,
+  type CacheAdapter,
+} from "./config/index.js";
