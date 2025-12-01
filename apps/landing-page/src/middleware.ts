@@ -1,13 +1,12 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
 // Check if Clerk is configured
 const hasClerkKey = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 export default hasClerkKey
   ? clerkMiddleware()
-  : function noopMiddleware(_req: NextRequest) {
+  : function noopMiddleware() {
       return NextResponse.next();
     };
 

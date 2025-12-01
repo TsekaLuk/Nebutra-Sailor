@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { Metadata } from "next";
 import { locales } from "@/lib/i18n/locales";
 
