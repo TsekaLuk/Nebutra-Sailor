@@ -3,7 +3,7 @@
 import React from "react";
 import {
   Heading as PrimerHeading,
-  Text,
+  Text as PrimerText,
   Button as PrimerButton,
 } from "@primer/react";
 import { AlertIcon } from "@primer/octicons-react";
@@ -12,6 +12,8 @@ import { clsx } from "clsx";
 // Type assertions for React 19 compatibility with @primer/react
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Heading = PrimerHeading as any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Text = PrimerText as any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Button = PrimerButton as any;
 
@@ -32,15 +34,18 @@ export function ErrorState({
   retryLabel = "Try again",
   className,
 }: ErrorStateProps): React.JSX.Element {
-  const displayMessage = message || error?.message || "An unexpected error occurred.";
-  const AlertGlyph = AlertIcon as unknown as React.ComponentType<{ size?: number }>;
+  const displayMessage =
+    message || error?.message || "An unexpected error occurred.";
+  const AlertGlyph = AlertIcon as unknown as React.ComponentType<{
+    size?: number;
+  }>;
 
   return (
     <div
       className={clsx(
         "ds-error-state",
         "flex flex-col items-center justify-center text-center py-8 px-4",
-        className
+        className,
       )}
     >
       <div className="text-red-500 mb-3">
