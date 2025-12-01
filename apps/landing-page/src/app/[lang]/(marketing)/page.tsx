@@ -17,17 +17,17 @@ export default async function LocalizedHomePage({ params }: Props) {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Hero Section */}
-      <main className="flex flex-1 flex-col items-center justify-center px-4 pt-16 text-center">
-        <h1 className="mb-6 text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 pt-16 text-center lg:px-8">
+        <h1 className="mb-6 text-4xl font-bold tracking-tight text-fg-default md:text-5xl lg:text-6xl">
           {t("hero.title", locale)}
         </h1>
-        <p className="mb-8 max-w-2xl text-xl text-gray-600">
+        <p className="mb-10 max-w-3xl text-lg text-fg-muted md:text-xl lg:text-2xl">
           {t("hero.subtitle", locale)}
         </p>
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <Link
             href="/sign-up"
-            className="rounded-lg bg-blue-600 px-8 py-4 text-lg font-semibold text-white transition hover:bg-blue-700"
+            className="rounded-md bg-accent-emphasis px-8 py-3 text-base font-semibold text-fg-onEmphasis transition hover:opacity-90 md:px-10 md:py-4 md:text-lg"
           >
             {t("hero.cta", locale)}
           </Link>
