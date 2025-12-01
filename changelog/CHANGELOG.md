@@ -5,6 +5,17 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.3.0...v1.3.1) (2025-12-01)
+
+### 🐛 Bug Fixes
+
+- clean legal pages lint + error state typing ([dca11a6](https://github.com/TsekaLuk/Nebutra-Sailor/commit/dca11a6d256a1922d6cf7ddf376b24744a81498c))
+- **design-system:** annotate ErrorState return type ([70c8c17](https://github.com/TsekaLuk/Nebutra-Sailor/commit/70c8c1732fed9ab99097576cc1c904a5e0ce20a1))
+
+### ♻️ Code Refactoring
+
+- use canonical Tailwind class shrink-0 ([2cfafd8](https://github.com/TsekaLuk/Nebutra-Sailor/commit/2cfafd821684d64a804ae26d2ec4f82b1415b634))
+
 ## [1.3.0](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.2.0...v1.3.0) (2025-12-01)
 
 ### 🆕 Features
