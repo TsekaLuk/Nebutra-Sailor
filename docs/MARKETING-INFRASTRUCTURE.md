@@ -19,6 +19,81 @@ Complete design and implementation guidelines for landing pages, marketing sites
 
 ## Architecture Overview
 
+### Package vs App Component Relationship (Important)
+
+> **⚠️ Required Reading for Vibe Coding Developers**
+>
+> Marketing components in this project are split into **two layers** with different responsibilities. Do not confuse them:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  Layer 1: Shared Infrastructure (packages/marketing)                         │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  📦 @nebutra/marketing                                                       │
+│  Location: packages/marketing/                                               │
+│  Purpose: Generic, reusable marketing toolkit, decoupled from business       │
+│                                                                              │
+│  ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐             │
+│  │ Components       │ │ Hooks            │ │ Utils            │             │
+│  │ (Atomic)         │ │ (State Logic)    │ │ (Utilities)      │             │
+│  │                  │ │                  │ │                  │             │
+│  │ • PHBadge        │ │ • useAttribution │ │ • parseUTMParams │             │
+│  │ • LaunchBanner   │ │ • useCountdown   │ │ • trackEvent     │             │
+│  │ • Testimonials   │ │ • useLaunchState │ │ • detectSource   │             │
+│  │ • SocialProof    │ │ ...              │ │ ...              │             │
+│  └──────────────────┘ └──────────────────┘ └──────────────────┘             │
+│                                                                              │
+│  Traits: No product assumptions, no business config, reusable by all apps   │
+└─────────────────────────────────────────────────────────────────────────────┘
+                              ▲
+                              │ import (consume only, do not modify)
+                              │
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  Layer 2: App Integration (apps/landing-page/src/components/marketing)       │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  📁 Landing Page Wrapper Layer                                               │
+│  Location: apps/landing-page/src/components/marketing/                       │
+│  Purpose: Compose @nebutra/marketing components, add business config         │
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │ ProductHuntSection.tsx                                                │   │
+│  │ - Composes: PHBadge + SocialProofBar                                  │   │
+│  │ - Fixed: Nebutra product config, layout styling                       │   │
+│  ├──────────────────────────────────────────────────────────────────────┤   │
+│  │ TestimonialsSection.tsx                                               │   │
+│  │ - Composes: TestimonialsWall + title/subtitle                         │   │
+│  │ - Provides: sampleTestimonials example data                           │   │
+│  ├──────────────────────────────────────────────────────────────────────┤   │
+│  │ LaunchBannerWrapper.tsx                                               │   │
+│  │ - Wraps: LaunchBanner + useLaunchBannerState                          │   │
+│  │ - Adds: show/hide logic, dismissal persistence                        │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                                                              │
+│  Traits: Business-specific, contains Nebutra config, landing-page only      │
+└─────────────────────────────────────────────────────────────────────────────┘
+                              ▲
+                              │ import
+                              │
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  Layer 3: Pages (apps/landing-page/src/app/)                                 │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  Page composition layer, assembles Section components                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### When to Modify Which Layer?
+
+| Scenario                              | Modify                                    | Notes                                |
+| ------------------------------------- | ----------------------------------------- | ------------------------------------ |
+| Add new marketing component type      | `packages/marketing/`                     | e.g., new PressSection component     |
+| Change PH Badge style/behavior        | `packages/marketing/`                     | Affects all apps using the component |
+| Adjust landing page PH section layout | `landing-page/components/marketing/`      | Landing page only                    |
+| Change landing page product config    | `landing-page/components/marketing/`      | e.g., modify postSlug                |
+| Add new UTM tracking logic            | `packages/marketing/`                     | Generic utility function             |
+| apps/web needs PH Badge               | Import from `@nebutra/marketing` directly | Or create web-specific wrapper       |
+
+### Design System Layer Diagram
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           apps/landing-page                                  │
@@ -33,6 +108,7 @@ Complete design and implementation guidelines for landing pages, marketing sites
 │                           ▼                 ▼                               │
 │              ┌────────────────────────────────────────┐                     │
 │              │     @nebutra/design-system (SSOT)      │                     │
+│              │     @nebutra/marketing (PH/Social)     │                     │
 │              │     @nebutra/custom-ui (Marketing)     │                     │
 │              │     @nebutra/21st (Experimental)       │                     │
 │              └────────────────────────────────────────┘                     │
@@ -108,12 +184,12 @@ apps/landing-page/
 
 ### Layer Usage for Marketing
 
-| Layer | Package | Use Cases |
-|-------|---------|-----------|
-| **Foundation** | `@nebutra/design-system` | Tokens, primitives, base components |
-| **Marketing UI** | `@nebutra/custom-ui` | Hero, Feature cards, Pricing tables |
-| **Experimental** | `@nebutra/21st` | 3D effects, advanced animations, prototypes |
-| **External** | HeroUI, Magic UI | One-off high-impact visuals |
+| Layer            | Package                  | Use Cases                                   |
+| ---------------- | ------------------------ | ------------------------------------------- |
+| **Foundation**   | `@nebutra/design-system` | Tokens, primitives, base components         |
+| **Marketing UI** | `@nebutra/custom-ui`     | Hero, Feature cards, Pricing tables         |
+| **Experimental** | `@nebutra/21st`          | 3D effects, advanced animations, prototypes |
+| **External**     | HeroUI, Magic UI         | One-off high-impact visuals                 |
 
 ### Token Extensions for Marketing
 
@@ -124,10 +200,10 @@ export const marketingTokens = {
   // Extended spacing for marketing layouts
   spacing: {
     section: {
-      sm: "64px",   // 4rem - Mobile section padding
-      md: "96px",   // 6rem - Tablet
-      lg: "128px",  // 8rem - Desktop
-      xl: "160px",  // 10rem - Large screens
+      sm: "64px", // 4rem - Mobile section padding
+      md: "96px", // 6rem - Tablet
+      lg: "128px", // 8rem - Desktop
+      xl: "160px", // 10rem - Large screens
     },
     hero: {
       minHeight: "100vh",
@@ -160,8 +236,10 @@ export const marketingTokens = {
   // Gradient presets
   gradients: {
     primary: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%)",
-    subtle: "linear-gradient(180deg, rgba(99,102,241,0.1) 0%, transparent 100%)",
-    glass: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+    subtle:
+      "linear-gradient(180deg, rgba(99,102,241,0.1) 0%, transparent 100%)",
+    glass:
+      "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
     mesh: `
       radial-gradient(at 40% 20%, hsla(280,100%,70%,0.3) 0px, transparent 50%),
       radial-gradient(at 80% 0%, hsla(189,100%,56%,0.3) 0px, transparent 50%),
@@ -201,21 +279,21 @@ export const marketingTokens = {
 
 ### Module List & Requirements
 
-| Module | Priority | Content Source | Animation |
-|--------|----------|----------------|-----------|
-| **Navbar** | Required | Config + i18n | Scroll-based |
-| **AnnouncementBar** | Optional | CMS/Config | Dismissible |
-| **Hero** | Required | i18n + CMS | Entrance + Parallax |
-| **BrandStory** | Optional | i18n | Scroll-reveal |
-| **Features** | Required | Config + i18n | Stagger-in |
-| **UseCases** | Recommended | CMS + i18n | Tab/Carousel |
-| **SocialProof** | Required | Config | Logo carousel |
-| **InteractiveDemo** | Optional | Component | Interactive |
-| **Pricing** | Required | Config | Hover effects |
-| **Testimonials** | Recommended | CMS | Carousel |
-| **FAQ** | Required | i18n/CMS | Accordion |
-| **FinalCTA** | Required | i18n | Entrance |
-| **Footer** | Required | Config + i18n | None |
+| Module              | Priority    | Content Source | Animation           |
+| ------------------- | ----------- | -------------- | ------------------- |
+| **Navbar**          | Required    | Config + i18n  | Scroll-based        |
+| **AnnouncementBar** | Optional    | CMS/Config     | Dismissible         |
+| **Hero**            | Required    | i18n + CMS     | Entrance + Parallax |
+| **BrandStory**      | Optional    | i18n           | Scroll-reveal       |
+| **Features**        | Required    | Config + i18n  | Stagger-in          |
+| **UseCases**        | Recommended | CMS + i18n     | Tab/Carousel        |
+| **SocialProof**     | Required    | Config         | Logo carousel       |
+| **InteractiveDemo** | Optional    | Component      | Interactive         |
+| **Pricing**         | Required    | Config         | Hover effects       |
+| **Testimonials**    | Recommended | CMS            | Carousel            |
+| **FAQ**             | Required    | i18n/CMS       | Accordion           |
+| **FinalCTA**        | Required    | i18n           | Entrance            |
+| **Footer**          | Required    | Config + i18n  | None                |
 
 ### Module Interface
 
@@ -404,10 +482,10 @@ import { Variants } from "framer-motion";
 
 // Easing presets
 export const easing = {
-  default: [0.25, 0.1, 0.25, 1],      // Smooth
-  emphasized: [0.4, 0, 0.2, 1],       // Material emphasized
-  decelerate: [0, 0, 0.2, 1],         // Enter
-  accelerate: [0.4, 0, 1, 1],         // Exit
+  default: [0.25, 0.1, 0.25, 1], // Smooth
+  emphasized: [0.4, 0, 0.2, 1], // Material emphasized
+  decelerate: [0, 0, 0.2, 1], // Enter
+  accelerate: [0.4, 0, 1, 1], // Exit
   spring: { type: "spring", stiffness: 300, damping: 30 },
 };
 
@@ -597,22 +675,28 @@ export const heroSchema = z.object({
       text: z.string(),
       href: z.string(),
     }),
-    secondary: z.object({
+    secondary: z
+      .object({
+        text: z.string(),
+        href: z.string(),
+      })
+      .optional(),
+  }),
+  announcement: z
+    .object({
       text: z.string(),
       href: z.string(),
-    }).optional(),
-  }),
-  announcement: z.object({
-    text: z.string(),
-    href: z.string(),
-    badge: z.string().optional(),
-  }).optional(),
-  media: z.object({
-    type: z.enum(["image", "video", "3d"]),
-    src: z.string(),
-    alt: z.string(),
-    poster: z.string().optional(),
-  }).optional(),
+      badge: z.string().optional(),
+    })
+    .optional(),
+  media: z
+    .object({
+      type: z.enum(["image", "video", "3d"]),
+      src: z.string(),
+      alt: z.string(),
+      poster: z.string().optional(),
+    })
+    .optional(),
 });
 
 // Feature item
@@ -635,11 +719,13 @@ export const pricingPlanSchema = z.object({
     yearly: z.number(),
     currency: z.string().default("USD"),
   }),
-  features: z.array(z.object({
-    text: z.string(),
-    included: z.boolean(),
-    tooltip: z.string().optional(),
-  })),
+  features: z.array(
+    z.object({
+      text: z.string(),
+      included: z.boolean(),
+      tooltip: z.string().optional(),
+    }),
+  ),
   cta: z.object({
     text: z.string(),
     href: z.string(),
@@ -683,13 +769,13 @@ import type { Locale } from "@/lib/i18n/locales";
 export async function getContent<T>(
   type: string,
   locale: Locale,
-  fallback: T
+  fallback: T,
 ): Promise<T> {
   try {
     // Try CMS first
     const cmsContent = await sanityClient.fetch(
       `*[_type == $type && language == $locale][0]`,
-      { type, locale }
+      { type, locale },
     );
     if (cmsContent) return cmsContent;
 
@@ -724,14 +810,17 @@ export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = "en";
 
-export const localeConfig: Record<Locale, {
-  name: string;
-  nativeName: string;
-  direction: "ltr" | "rtl";
-  dateFormat: string;
-  numberFormat: Intl.NumberFormatOptions;
-  fontStack?: string; // Override font for specific locales
-}> = {
+export const localeConfig: Record<
+  Locale,
+  {
+    name: string;
+    nativeName: string;
+    direction: "ltr" | "rtl";
+    dateFormat: string;
+    numberFormat: Intl.NumberFormatOptions;
+    fontStack?: string; // Override font for specific locales
+  }
+> = {
   en: {
     name: "English",
     nativeName: "English",
@@ -785,7 +874,7 @@ export async function getDictionary(locale: Locale) {
 export function getTranslation(
   dictionary: Record<string, any>,
   key: string,
-  params?: Record<string, string | number>
+  params?: Record<string, string | number>,
 ): string {
   const value = key.split(".").reduce((obj, k) => obj?.[k], dictionary);
 
@@ -798,7 +887,7 @@ export function getTranslation(
 
   return Object.entries(params).reduce(
     (str, [k, v]) => str.replace(`{{${k}}}`, String(v)),
-    value
+    value,
   );
 }
 ```
@@ -818,7 +907,7 @@ interface TranslateOptions {
 
 export async function translateText(
   text: string,
-  options: TranslateOptions
+  options: TranslateOptions,
 ): Promise<string> {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/ai/translate`,
@@ -831,7 +920,7 @@ export async function translateText(
         targetLang: options.to,
         context: options.context || "marketing",
       }),
-    }
+    },
   );
 
   if (!response.ok) throw new Error("Translation failed");
@@ -847,14 +936,14 @@ export async function translateText(
 
 ### Performance Budgets
 
-| Metric | Target | Maximum |
-|--------|--------|---------|
-| LCP (Largest Contentful Paint) | < 2.0s | < 2.5s |
-| FID (First Input Delay) | < 50ms | < 100ms |
-| CLS (Cumulative Layout Shift) | < 0.05 | < 0.1 |
-| TTI (Time to Interactive) | < 3.0s | < 3.8s |
-| Total Bundle Size (JS) | < 150KB | < 200KB |
-| First Load JS | < 80KB | < 100KB |
+| Metric                         | Target  | Maximum |
+| ------------------------------ | ------- | ------- |
+| LCP (Largest Contentful Paint) | < 2.0s  | < 2.5s  |
+| FID (First Input Delay)        | < 50ms  | < 100ms |
+| CLS (Cumulative Layout Shift)  | < 0.05  | < 0.1   |
+| TTI (Time to Interactive)      | < 3.0s  | < 3.8s  |
+| Total Bundle Size (JS)         | < 150KB | < 200KB |
+| First Load JS                  | < 80KB  | < 100KB |
 
 ### Image Optimization
 
@@ -920,7 +1009,7 @@ interface SEOConfig {
 export function generateMetadata(
   config: SEOConfig,
   locale: Locale,
-  path: string = ""
+  path: string = "",
 ): Metadata {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://nebutra.com";
   const url = `${baseUrl}/${locale}${path}`;
@@ -933,9 +1022,9 @@ export function generateMetadata(
     alternates: {
       canonical: url,
       languages: {
-        "en": `${baseUrl}/en${path}`,
-        "zh": `${baseUrl}/zh${path}`,
-        "ja": `${baseUrl}/ja${path}`,
+        en: `${baseUrl}/en${path}`,
+        zh: `${baseUrl}/zh${path}`,
+        ja: `${baseUrl}/ja${path}`,
         // ... other locales
       },
     },
@@ -961,7 +1050,10 @@ export function generateMetadata(
 }
 
 // Structured data (JSON-LD)
-export function generateStructuredData(type: "Organization" | "Product" | "FAQPage", data: any) {
+export function generateStructuredData(
+  type: "Organization" | "Product" | "FAQPage",
+  data: any,
+) {
   return {
     __html: JSON.stringify({
       "@context": "https://schema.org",
@@ -1023,7 +1115,7 @@ export const events = {
 export function trackCTA(
   ctaId: string,
   location: string,
-  metadata?: Record<string, any>
+  metadata?: Record<string, any>,
 ) {
   track(events.ctaClick, {
     cta_id: ctaId,
@@ -1045,7 +1137,10 @@ export function trackScrollDepth(percentage: number) {
 }
 
 // Track pricing interaction
-export function trackPricing(action: "view" | "select" | "compare", planId?: string) {
+export function trackPricing(
+  action: "view" | "select" | "compare",
+  planId?: string,
+) {
   track(action === "view" ? events.pricingView : events.planSelect, {
     action,
     plan_id: planId,
@@ -1064,15 +1159,20 @@ export function trackPricing(action: "view" | "select" | "compare", planId?: str
   data-analytics-variant="signup"
 >
   Get Started
-</Button>
+</Button>;
 
 // Auto-track via event delegation
 useEffect(() => {
   const handler = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
-    const analyticsId = target.closest("[data-analytics]")?.getAttribute("data-analytics");
+    const analyticsId = target
+      .closest("[data-analytics]")
+      ?.getAttribute("data-analytics");
     if (analyticsId) {
-      trackCTA(analyticsId, target.getAttribute("data-analytics-location") || "unknown");
+      trackCTA(
+        analyticsId,
+        target.getAttribute("data-analytics-location") || "unknown",
+      );
     }
   };
   document.addEventListener("click", handler);
@@ -1145,11 +1245,7 @@ export const skipLink: React.CSSProperties = {
 
 export function SkipLink() {
   return (
-    <a
-      href="#main-content"
-      style={skipLink}
-      className="skip-link"
-    >
+    <a href="#main-content" style={skipLink} className="skip-link">
       Skip to main content
     </a>
   );
@@ -1163,7 +1259,7 @@ export function SkipLink() {
     {children}
   </main>
   <Footer />
-</body>
+</body>;
 ```
 
 ---
@@ -1204,7 +1300,7 @@ export async function generateMetadata({ params }: Props) {
       title: dict.meta.home.title,
       description: dict.meta.home.description,
     },
-    params.lang
+    params.lang,
   );
 }
 
@@ -1277,7 +1373,7 @@ export const SectionBase = forwardRef<HTMLElement, SectionBaseProps>(
       background = "default",
       animate = true,
     },
-    ref
+    ref,
   ) => {
     const motionSafe = useMotionSafe();
 
@@ -1330,7 +1426,7 @@ export const SectionBase = forwardRef<HTMLElement, SectionBaseProps>(
         {content}
       </motion.div>
     );
-  }
+  },
 );
 
 SectionBase.displayName = "SectionBase";
@@ -1374,7 +1470,11 @@ export const pricingPlans: PricingPlan[] = [
       { text: "API access", included: true },
       { text: "Custom domains", included: true },
     ],
-    cta: { text: "Start Free Trial", href: "/signup?plan=pro", variant: "primary" },
+    cta: {
+      text: "Start Free Trial",
+      href: "/signup?plan=pro",
+      variant: "primary",
+    },
     popular: true,
     badge: "Most Popular",
   },
@@ -1399,7 +1499,7 @@ export const pricingPlans: PricingPlan[] = [
 export function formatPrice(
   amount: number,
   currency: string,
-  locale: string
+  locale: string,
 ): string {
   return new Intl.NumberFormat(locale, {
     style: "currency",
@@ -1414,6 +1514,7 @@ export function formatPrice(
 ## Checklist for New Marketing Pages
 
 ### Before Development
+
 - [ ] Define page purpose and primary conversion goal
 - [ ] List required sections/modules
 - [ ] Identify content sources (CMS vs static)
@@ -1421,6 +1522,7 @@ export function formatPrice(
 - [ ] Define analytics events to track
 
 ### During Development
+
 - [ ] Use design-system tokens (no hard-coded values)
 - [ ] Implement responsive breakpoints
 - [ ] Add loading states (Suspense boundaries)
@@ -1430,6 +1532,7 @@ export function formatPrice(
 - [ ] Add alt text to all images
 
 ### Before Launch
+
 - [ ] Test all breakpoints (mobile, tablet, desktop)
 - [ ] Run Lighthouse audit (target: 90+ all categories)
 - [ ] Test keyboard navigation
