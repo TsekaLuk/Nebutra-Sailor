@@ -20,13 +20,10 @@
     "db:generate": {
       "cache": true,
       "inputs": ["packages/db/prisma/schema.prisma"],
-      "outputs": ["packages/db/node_modules/.prisma/**"]
+      "outputs": ["node_modules/.pnpm/@prisma+client*/**"]
     },
     "test": {
       "dependsOn": ["^build"]
-    },
-    "db:generate": {
-      "cache": false
     },
     "db:migrate": {
       "cache": false
