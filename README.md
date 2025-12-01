@@ -13,6 +13,7 @@
   <br />
   <br />
   <h3>The Open-Source Enterprise SaaS Platform</h3>
+  <p><em>In uncertainty, we make entrepreneurial growth democratic, intelligent, and lightweight—ultimately measurable and traceable.</em></p>
   <br />
   <p>
     <a href="https://nebutra.com"><strong>Website</strong></a> · 
@@ -70,6 +71,7 @@ Nebula • Nurture • Ultra • Future
     AI-native startup committed to incubating the next generation of unicorn products<br />
     Pioneering <strong>Vibe-Coding</strong> — AI Agents × Automated Workflows × Human Creativity
   </p>
+  <p align="center">Technology can be copied and products imitated; a deep understanding of change is the only reliable moat.</p>
 </div>
 
 <br />
@@ -98,6 +100,11 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 </table>
+
+#### Manifesto
+
+- In an age of acceleration, technical moats don’t last. The real moat is sustained imagination, sharp trend‑sensing, rapid error‑correction, and the execution to turn ideas into reality faster.
+- Conservative choices feel safe but are the bolder bet: not changing is betting the world won’t. The only constant is change.
 
 ### Why Sailor?
 
@@ -515,7 +522,7 @@ For commercial licensing inquiries, please contact us.
   <br />
   <br />
   <p>
-    <strong>Shipping the future, one commit at a time.</strong>
+<strong>Every release, growth goes live.</strong>
   </p>
   <p>
     <sub>Made by <a href="https://nebutra.com"><strong>Nebutra Intelligence</strong></a> · © 2024-present <strong>Wuxi Yunyu Intelligent Technology Co., Ltd.</strong></sub>

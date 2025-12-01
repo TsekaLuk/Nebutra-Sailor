@@ -13,6 +13,7 @@
   <br />
   <br />
   <h3>开源的企业级 AI 原生 SaaS 平台</h3>
+  <p><em>在不确定中，让创业增长民主化、智能化、轻量化——最终有迹可循。</em></p>
   <br />
   <p>
     <a href="https://nebutra.com"><strong>官网</strong></a> · 
@@ -71,6 +72,7 @@ Nebula • Nurture • Ultra • Future
     AI 原生初创企业，致力于孵化下一代独角兽产品<br />
     开创 <strong>Vibe-Coding</strong> 开发理念 — AI 智能体 × 自动化工作流 × 人类创造力
   </p>
+  <p align="center">技术可复制、产品可模仿；对变化的深刻理解，才是唯一可靠的护城河。</p>
 </div>
 
 <br />
@@ -99,6 +101,11 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 </table>
+
+#### 愿景宣言（Manifesto）
+
+- 在加速度时代，技术壁垒难以恒久。真正的壁垒，是持续创新的想象力、对趋势的洞察力、对错误的敏捷纠错力，以及把想法更快落地的执行力。
+- 保守决策看似稳妥，实则更激进：不改变，就是押注世界不变；而世界唯一不变的，是变化。
 
 ### 为什么选择 Sailor？
 
@@ -512,7 +519,7 @@ pnpm brand:apply
   <br />
   <br />
   <p>
-    <strong>每一次提交，都在创造未来。</strong>
+<strong>每一次上线，都是增长在场。</strong>
   </p>
   <p>
     <sub>出品 <a href="https://nebutra.com"><strong>Nebutra Intelligence</strong></a> · © 2024-至今 <strong>无锡云毓智能科技有限公司</strong></sub>
