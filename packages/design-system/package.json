@@ -8,6 +8,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./theme": "./src/theme/index.ts",
+    "./typography": "./src/typography/index.ts",
+    "./typography/fonts.css": "./src/typography/fonts.css",
     "./components": "./src/components/index.ts",
     "./icons": "./src/icons/index.ts",
     "./utils": "./src/utils/index.ts",

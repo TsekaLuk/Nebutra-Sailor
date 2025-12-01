@@ -1,14 +1,44 @@
 /**
- * Font Imports
+ * Font Imports & CSS Variables
  *
- * Import web fonts via Google Fonts CDN.
- * For self-hosting, replace with @font-face declarations.
+ * SSOT for typography CSS variables across Nebutra packages.
+ *
+ * Import this file to get:
+ * - Font CSS custom properties (--font-*)
+ * - Google Fonts imports
+ * - Font smoothing defaults
  *
  * Fonts:
- * - Inter: Primary UI and body text
- * - JetBrains Mono: Code and monospace
- * - Noto Sans SC: Chinese (CJK) fallback
+ * - Inter: Primary UI and body text (OFL license)
+ * - JetBrains Mono: Code and monospace (OFL license)
+ * - Noto Sans SC: Chinese (CJK) fallback (OFL license)
  */
+
+/* ============================================
+   CSS Custom Properties (SSOT)
+   ============================================ */
+
+:root {
+  /* Primary font stack - UI and body text */
+  --font-primary: "Inter", "Public Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Heading font stack (same as primary, can be customized for brand) */
+  --font-heading: "Inter", "Public Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Monospace font stack - code and technical content */
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular,
+    "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* CJK font stack - Chinese/Japanese/Korean */
+  --font-cjk: "Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+  /* Aliases for Tailwind/shadcn compatibility */
+  --font-sans: var(--font-primary);
+  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+}
 
 /* ============================================
    Google Fonts Import
