@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
-import { DesignSystemProvider, Box, Button } from "@nebutra/design-system";
+import { ClerkProvider } from "@clerk/nextjs";
+import { DesignSystemProvider, Box } from "@nebutra/design-system";
+import { AuthButtons } from "@/components/AuthButtons";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -78,21 +72,7 @@ export default function RootLayout({
               zIndex: 50,
             }}
           >
-            {hasClerkKey && (
-              <>
-                <SignedOut>
-                  <SignInButton mode="modal">
-                    <Button variant="invisible">Sign In</Button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <Button variant="primary">Get Started</Button>
-                  </SignUpButton>
-                </SignedOut>
-                <SignedIn>
-                  <UserButton afterSignOutUrl="/" />
-                </SignedIn>
-              </>
-            )}
+            {hasClerkKey && <AuthButtons />}
           </Box>
           {children}
         </DesignSystemProvider>
