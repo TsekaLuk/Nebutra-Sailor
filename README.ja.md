@@ -108,6 +108,16 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 </td>
 </tr>
 <tr>
+<td><strong>UI / デザイン</strong></td>
+<td>
+  <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
+  <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
+  <img src="https://img.shields.io/badge/Inter-000?style=flat-square" alt="Inter" />
+  <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square" alt="JetBrains Mono" />
+  <img src="https://img.shields.io/badge/デザイントークン-gray?style=flat-square" alt="Design Tokens" />
+</td>
+</tr>
+<tr>
 <td><strong>認証</strong></td>
 <td>
   <a href="https://clerk.com/"><img src="https://img.shields.io/badge/Clerk-6C47FF?style=flat-square&logo=clerk&logoColor=white" alt="Clerk" /></a>
@@ -127,24 +137,68 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 <td>
   <a href="https://supabase.com/"><img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" /></a>
   <img src="https://img.shields.io/badge/pgvector-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="pgvector" />
+  <img src="https://img.shields.io/badge/リアルタイム-gray?style=flat-square" alt="Realtime" />
   <img src="https://img.shields.io/badge/RLS-gray?style=flat-square" alt="RLS" />
+</td>
+</tr>
+<tr>
+<td><strong>キャッシュ</strong></td>
+<td>
+  <a href="https://upstash.com/"><img src="https://img.shields.io/badge/Upstash_Redis-00E9A3?style=flat-square&logo=redis&logoColor=white" alt="Upstash" /></a>
+  <img src="https://img.shields.io/badge/レート制限-gray?style=flat-square" alt="Rate Limiting" />
 </td>
 </tr>
 <tr>
 <td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
+  <a href="https://openrouter.ai/"><img src="https://img.shields.io/badge/OpenRouter-6366F1?style=flat-square" alt="OpenRouter" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
   <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square" alt="Anthropic" />
+  <img src="https://img.shields.io/badge/Google_AI-4285F4?style=flat-square&logo=google&logoColor=white" alt="Google AI" />
+  <img src="https://img.shields.io/badge/SiliconFlow-6366F1?style=flat-square" alt="SiliconFlow" />
 </td>
 </tr>
 <tr>
-<td><strong>インフラ</strong></td>
+<td><strong>決済</strong></td>
+<td>
+  <a href="https://stripe.com/"><img src="https://img.shields.io/badge/Stripe-008CDD?style=flat-square&logo=stripe&logoColor=white" alt="Stripe" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>メール</strong></td>
+<td>
+  <a href="https://resend.com/"><img src="https://img.shields.io/badge/Resend-black?style=flat-square" alt="Resend" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>CMS</strong></td>
+<td>
+  <a href="https://sanity.io/"><img src="https://img.shields.io/badge/Sanity-F03E2F?style=flat-square" alt="Sanity" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>CDN / セキュリティ</strong></td>
 <td>
   <a href="https://cloudflare.com/"><img src="https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white" alt="Cloudflare" /></a>
-  <a href="https://upstash.com/"><img src="https://img.shields.io/badge/Upstash-00E9A3?style=flat-square&logo=upstash&logoColor=black" alt="Upstash" /></a>
+  <img src="https://img.shields.io/badge/WAF-gray?style=flat-square" alt="WAF" />
+  <img src="https://img.shields.io/badge/R2_Storage-gray?style=flat-square" alt="R2" />
+  <img src="https://img.shields.io/badge/Turnstile-gray?style=flat-square" alt="Turnstile" />
+</td>
+</tr>
+<tr>
+<td><strong>ワークフロー</strong></td>
+<td>
   <a href="https://inngest.com/"><img src="https://img.shields.io/badge/Inngest-6366F1?style=flat-square" alt="Inngest" /></a>
-  <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel" alt="Vercel" /></a>
+  <a href="https://n8n.io/"><img src="https://img.shields.io/badge/n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white" alt="n8n" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>アナリティクス</strong></td>
+<td>
+  <a href="https://dub.co/"><img src="https://img.shields.io/badge/Dub-000000?style=flat-square" alt="Dub" /></a>
+  <img src="https://img.shields.io/badge/リンク帰属-gray?style=flat-square" alt="Link Attribution" />
+  <img src="https://img.shields.io/badge/コンバージョン-gray?style=flat-square" alt="Conversions" />
 </td>
 </tr>
 <tr>
@@ -152,6 +206,13 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 <td>
   <a href="https://sentry.io/"><img src="https://img.shields.io/badge/Sentry-362D59?style=flat-square&logo=sentry&logoColor=white" alt="Sentry" /></a>
   <a href="https://opentelemetry.io/"><img src="https://img.shields.io/badge/OpenTelemetry-425CC7?style=flat-square&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>デプロイ</strong></td>
+<td>
+  <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel" alt="Vercel" /></a>
+  <a href="https://turbo.build/"><img src="https://img.shields.io/badge/Turborepo-EF4444?style=flat-square&logo=turborepo&logoColor=white" alt="Turborepo" /></a>
 </td>
 </tr>
 </table>
