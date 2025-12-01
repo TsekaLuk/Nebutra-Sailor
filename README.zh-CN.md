@@ -143,6 +143,7 @@ Nebula • Nurture • Ultra • Future
 <td>
   <a href="https://supabase.com/"><img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" /></a>
   <img src="https://img.shields.io/badge/pgvector-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="pgvector" />
+  <img src="https://img.shields.io/badge/实时订阅-gray?style=flat-square" alt="Realtime" />
   <img src="https://img.shields.io/badge/RLS-gray?style=flat-square" alt="RLS" />
 </td>
 </tr>
@@ -157,8 +158,10 @@ Nebula • Nurture • Ultra • Future
 <td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
+  <a href="https://openrouter.ai/"><img src="https://img.shields.io/badge/OpenRouter-6366F1?style=flat-square" alt="OpenRouter" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
   <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square" alt="Anthropic" />
+  <img src="https://img.shields.io/badge/Google_AI-4285F4?style=flat-square&logo=google&logoColor=white" alt="Google AI" />
   <img src="https://img.shields.io/badge/SiliconFlow-6366F1?style=flat-square" alt="SiliconFlow" />
 </td>
 </tr>
@@ -233,10 +236,11 @@ Nebutra-Sailor/
 │   └── api-gateway/       # BFF 层 (api.nebutra.com)
 ├── packages/
 │   ├── 21st/              # shadcn/ui + 21st.dev 组件
-│   ├── ai-providers/      # 多供应商 AI SDK (OpenAI, SiliconFlow)
+│   ├── ai-providers/      # 多供应商 AI SDK (OpenRouter, OpenAI 等)
 │   ├── brand/             # 统一品牌资产与组件
 │   ├── ui/                # Lobe UI + Lobe Icons + 设计系统
 │   ├── db/                # Prisma 7 Schema 与客户端
+│   ├── supabase/          # Supabase 实时订阅、存储、Edge Functions
 │   ├── sanity/            # Sanity CMS 客户端与 Schema
 │   ├── captcha/           # Cloudflare Turnstile 集成
 │   ├── storage/           # R2/S3 存储客户端

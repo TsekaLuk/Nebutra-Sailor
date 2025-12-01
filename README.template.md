@@ -129,24 +129,68 @@ Built with the latest technologies including Next.js 17, React 19, and Prisma 7,
 <td>
   <a href="https://supabase.com/"><img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" /></a>
   <img src="https://img.shields.io/badge/pgvector-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="pgvector" />
+  <img src="https://img.shields.io/badge/Realtime-gray?style=flat-square" alt="Realtime" />
   <img src="https://img.shields.io/badge/RLS-gray?style=flat-square" alt="RLS" />
+</td>
+</tr>
+<tr>
+<td><strong>Cache</strong></td>
+<td>
+  <a href="https://upstash.com/"><img src="https://img.shields.io/badge/Upstash_Redis-00E9A3?style=flat-square&logo=redis&logoColor=white" alt="Upstash" /></a>
+  <img src="https://img.shields.io/badge/Rate_Limiting-gray?style=flat-square" alt="Rate Limiting" />
 </td>
 </tr>
 <tr>
 <td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
+  <a href="https://openrouter.ai/"><img src="https://img.shields.io/badge/OpenRouter-6366F1?style=flat-square" alt="OpenRouter" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
   <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square" alt="Anthropic" />
+  <img src="https://img.shields.io/badge/Google_AI-4285F4?style=flat-square&logo=google&logoColor=white" alt="Google AI" />
+  <img src="https://img.shields.io/badge/SiliconFlow-6366F1?style=flat-square" alt="SiliconFlow" />
 </td>
 </tr>
 <tr>
-<td><strong>Infra</strong></td>
+<td><strong>Payments</strong></td>
+<td>
+  <a href="https://stripe.com/"><img src="https://img.shields.io/badge/Stripe-008CDD?style=flat-square&logo=stripe&logoColor=white" alt="Stripe" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>
+  <a href="https://resend.com/"><img src="https://img.shields.io/badge/Resend-black?style=flat-square" alt="Resend" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>CMS</strong></td>
+<td>
+  <a href="https://sanity.io/"><img src="https://img.shields.io/badge/Sanity-F03E2F?style=flat-square" alt="Sanity" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>CDN / Security</strong></td>
 <td>
   <a href="https://cloudflare.com/"><img src="https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white" alt="Cloudflare" /></a>
-  <a href="https://upstash.com/"><img src="https://img.shields.io/badge/Upstash-00E9A3?style=flat-square&logo=upstash&logoColor=black" alt="Upstash" /></a>
+  <img src="https://img.shields.io/badge/WAF-gray?style=flat-square" alt="WAF" />
+  <img src="https://img.shields.io/badge/R2_Storage-gray?style=flat-square" alt="R2" />
+  <img src="https://img.shields.io/badge/Turnstile-gray?style=flat-square" alt="Turnstile" />
+</td>
+</tr>
+<tr>
+<td><strong>Workflows</strong></td>
+<td>
   <a href="https://inngest.com/"><img src="https://img.shields.io/badge/Inngest-6366F1?style=flat-square" alt="Inngest" /></a>
-  <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel" alt="Vercel" /></a>
+  <a href="https://n8n.io/"><img src="https://img.shields.io/badge/n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white" alt="n8n" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>Analytics</strong></td>
+<td>
+  <a href="https://dub.co/"><img src="https://img.shields.io/badge/Dub-000000?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQxIDAtOC0zLjU5LTgtOHMzLjU5LTggOC04IDggMy41OSA4IDgtMy41OSA4LTggOHoiLz48L3N2Zz4=" alt="Dub" /></a>
+  <img src="https://img.shields.io/badge/Link_Attribution-gray?style=flat-square" alt="Link Attribution" />
+  <img src="https://img.shields.io/badge/Conversions-gray?style=flat-square" alt="Conversions" />
 </td>
 </tr>
 <tr>
@@ -154,6 +198,13 @@ Built with the latest technologies including Next.js 17, React 19, and Prisma 7,
 <td>
   <a href="https://sentry.io/"><img src="https://img.shields.io/badge/Sentry-362D59?style=flat-square&logo=sentry&logoColor=white" alt="Sentry" /></a>
   <a href="https://opentelemetry.io/"><img src="https://img.shields.io/badge/OpenTelemetry-425CC7?style=flat-square&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" /></a>
+</td>
+</tr>
+<tr>
+<td><strong>Deployment</strong></td>
+<td>
+  <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel" alt="Vercel" /></a>
+  <a href="https://turbo.build/"><img src="https://img.shields.io/badge/Turborepo-EF4444?style=flat-square&logo=turborepo&logoColor=white" alt="Turborepo" /></a>
 </td>
 </tr>
 </table>
@@ -189,13 +240,86 @@ pnpm db:generate && pnpm dev
 
 ### Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start all apps in dev mode |
-| `pnpm build` | Build all packages |
-| `pnpm lint` | Lint all packages |
-| `pnpm typecheck` | Type check all packages |
-| `pnpm db:studio` | Open Prisma Studio |
+| Command            | Description                                  |
+| ------------------ | -------------------------------------------- |
+| `pnpm dev`         | Start all apps in dev mode                   |
+| `pnpm build`       | Build all packages (auto-syncs brand assets) |
+| `pnpm lint`        | Lint all packages                            |
+| `pnpm typecheck`   | Type check all packages                      |
+| `pnpm db:studio`   | Open Prisma Studio                           |
+| `pnpm brand:sync`  | Sync brand assets to apps                    |
+| `pnpm brand:init`  | Initialize white-label branding              |
+| `pnpm brand:apply` | Apply custom branding                        |
+
+<br />
+
+## Project Structure
+
+```
+{{repo.name}}/
+├── apps/
+│   ├── landing-page/      # Marketing site
+│   ├── web/               # Main SaaS dashboard
+│   ├── studio/            # Sanity CMS
+│   └── api-gateway/       # BFF layer
+├── packages/
+│   ├── 21st/              # shadcn/ui + 21st.dev components
+│   ├── ai-providers/      # Multi-provider AI SDK (OpenRouter, OpenAI, etc)
+│   ├── brand/             # Centralized brand assets & components
+│   ├── ui/                # Lobe UI + Lobe Icons + Design System
+│   ├── db/                # Prisma 7 schema & client
+│   ├── supabase/          # Supabase Realtime, Storage, Edge Functions
+│   ├── sanity/            # Sanity CMS client & schemas
+│   ├── captcha/           # Cloudflare Turnstile integration
+│   ├── storage/           # R2/S3 storage client
+│   ├── cache/             # Redis caching strategies
+│   ├── rate-limit/        # Multi-tenant rate limiting
+│   ├── event-bus/         # Cross-service messaging
+│   ├── saga/              # Distributed transactions
+│   ├── mcp/               # Model Context Protocol for AI agents
+│   ├── config/            # Shared configuration utilities
+│   ├── errors/            # Standardized error handling
+│   ├── feature-flags/     # Feature flag management
+│   ├── alerting/          # Multi-channel alerting
+│   ├── audit/             # Compliance audit logging
+│   ├── health/            # Health check utilities
+│   ├── status/            # OpenStatus integration
+│   └── analytics/         # Dub-powered link tracking & conversions
+├── services/
+│   ├── ai/                # Python FastAPI - LLM, embeddings
+│   ├── content/           # Python FastAPI - posts, feed
+│   ├── recsys/            # Python - recommendation engine
+│   ├── ecommerce/         # Python - Shopify/Shopline sync
+│   └── web3/              # Python - blockchain indexer
+├── infra/
+│   ├── cloudflare/        # CDN, WAF, R2 configs
+│   ├── docker/            # Container configurations
+│   ├── k8s/               # Kubernetes manifests
+│   ├── railway/           # Railway deployment
+│   ├── terraform/         # IaC configurations
+│   ├── inngest/           # TypeScript workflow definitions
+│   ├── n8n/               # Visual workflow automation
+│   └── observability/     # Logging, tracing, metrics
+└── docs/                  # Architecture documentation
+```
+
+<br />
+
+## White-label
+
+Fork this repo and customize it for your own brand:
+
+```bash
+# Interactive setup wizard
+pnpm brand:init
+
+# Add your logos to brand.config/assets/
+
+# Apply your branding
+pnpm brand:apply
+```
+
+See [WHITELABEL.md](WHITELABEL.md) for full documentation.
 
 <br />
 

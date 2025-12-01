@@ -142,6 +142,7 @@ Nebula • Nurture • Ultra • Future
 <td>
   <a href="https://supabase.com/"><img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" /></a>
   <img src="https://img.shields.io/badge/pgvector-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="pgvector" />
+  <img src="https://img.shields.io/badge/Realtime-gray?style=flat-square" alt="Realtime" />
   <img src="https://img.shields.io/badge/RLS-gray?style=flat-square" alt="RLS" />
 </td>
 </tr>
@@ -156,8 +157,10 @@ Nebula • Nurture • Ultra • Future
 <td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
+  <a href="https://openrouter.ai/"><img src="https://img.shields.io/badge/OpenRouter-6366F1?style=flat-square" alt="OpenRouter" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
   <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square" alt="Anthropic" />
+  <img src="https://img.shields.io/badge/Google_AI-4285F4?style=flat-square&logo=google&logoColor=white" alt="Google AI" />
   <img src="https://img.shields.io/badge/SiliconFlow-6366F1?style=flat-square" alt="SiliconFlow" />
 </td>
 </tr>
@@ -231,10 +234,11 @@ Nebutra-Sailor/
 │   └── api-gateway/       # BFF layer (api.nebutra.com)
 ├── packages/
 │   ├── 21st/              # shadcn/ui + 21st.dev components
-│   ├── ai-providers/      # Multi-provider AI SDK (OpenAI, SiliconFlow)
+│   ├── ai-providers/      # Multi-provider AI SDK (OpenRouter, OpenAI, etc)
 │   ├── brand/             # Centralized brand assets & components
 │   ├── ui/                # Lobe UI + Lobe Icons + Design System
 │   ├── db/                # Prisma 7 schema & client
+│   ├── supabase/          # Supabase Realtime, Storage, Edge Functions
 │   ├── sanity/            # Sanity CMS client & schemas
 │   ├── captcha/           # Cloudflare Turnstile integration
 │   ├── storage/           # R2/S3 storage client
@@ -290,11 +294,13 @@ Each component has its own README with setup instructions and API documentation:
 <td><strong>Packages</strong></td>
 <td>
   <a href="packages/db/">DB</a> · 
+  <a href="packages/supabase/">Supabase</a> · 
   <a href="packages/cache/">Cache</a> · 
   <a href="packages/rate-limit/">Rate Limit</a> · 
   <a href="packages/event-bus/">Event Bus</a> · 
   <a href="packages/saga/">Saga</a> · 
   <a href="packages/mcp/">MCP</a> · 
+  <a href="packages/ai-providers/">AI Providers</a> · 
   <a href="packages/analytics/">Analytics</a>
 </td>
 </tr>
