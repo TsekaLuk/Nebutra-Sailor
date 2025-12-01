@@ -45,27 +45,76 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 
 ### 会社について
 
-**無錫雲毓智能科技有限公司**（Wuxi Yunyu Intelligent Technology Co., Ltd.）は、次世代ユニコーンプロダクトの創出に取り組む AI ネイティブスタートアップです。**Vibe-Coding** 開発哲学を先駆け — AI エージェント、自動化ワークフロー、人間の創造性を融合し、かつてない速度でソフトウェアを提供します。
+<table>
+<tr>
+<td width="100%">
+<br />
+<p align="center">
+  <strong>無錪雲毓智能科技有限公司</strong><br />
+  <sub>Wuxi Yunyu Intelligent Technology Co., Ltd.</sub>
+</p>
+<p align="center">
+  次世代ユニコーンプロダクトの創出に取り組む AI ネイティブスタートアップ<br />
+  <strong>Vibe-Coding</strong> 開発哲学を先駆け — AI エージェント × 自動化ワークフロー × 人間の創造性
+</p>
+<br />
+</td>
+</tr>
+</table>
 
-私たちの注力分野：
-
-- 🚀 **ソフトウェアグローバル化** — 初日からグローバル市場向けのプロダクト構築
-- 🤖 **AI ネイティブアーキテクチャ** — LLM、エージェント、自動化を核とした全システム設計
-- 🎨 **ブランド駆動型 SaaS** — 最先端技術と洗練されたデザイン・ポジショニングの融合
-- 🦄 **ユニコーン創出** — アイデアをスケーラブルなビジネスに変える PoC から本番への道筋
+<table>
+<tr>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🚀-0033FE?style=for-the-badge" alt="Global" /><br />
+  <strong>グローバル化</strong><br />
+  <sub>Day 1 から世界市場へ</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🤖-0033FE?style=for-the-badge" alt="AI" /><br />
+  <strong>AI ネイティブ</strong><br />
+  <sub>LLM・エージェント・自動化</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🎨-0033FE?style=for-the-badge" alt="Brand" /><br />
+  <strong>ブランド駆動 SaaS</strong><br />
+  <sub>技術 + デザイン + 戦略</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🦄-0033FE?style=for-the-badge" alt="Unicorn" /><br />
+  <strong>ユニコーン創出</strong><br />
+  <sub>PoC → スケーラブル事業</sub>
+</td>
+</tr>
+</table>
 
 ### なぜ Sailor を選ぶのか？
 
-- **🚀 本番環境対応** — 実際のエンタープライズ導入で実証されたアーキテクチャパターン
-- **🤖 AI ネイティブ** — LLM、Embeddings、RAG、AI エージェント（MCP）の組み込みサポート
-- **🏢 マルチテナント** — 行レベルセキュリティ、テナント分離、テナント別カスタマイズを標準装備
-- **⚡ モダンスタック** — Next.js 17、React 19、TypeScript 5.6+、TailwindCSS 4.0
-- **💳 課金機能内蔵** — データベース駆動のプラン設定、Stripe 連携、使用量計測、機能権限管理
-- **📋 法務・コンプライアンス** — Cookie 同意、プライバシー制御、GDPR/CCPA 対応基盤
-- **🔌 拡張性** — モジュラーマイクロサービスアーキテクチャ、イベント駆動通信
-- **🌍 グローバル対応** — i18n、CDN、エッジキャッシュ、マルチリージョンデプロイ
-- **📊 実績** — 導入プロジェクトでレポート作成時間 70%以上削減、インサイト提供 4 倍速
-- **🦄 ユニコーン志向** — PoC から本番までの速度と信頼性を両立するパターン
+<table>
+<tr>
+<td width="50%">
+
+|     | 特徴               | 説明                             |
+| :-: | :----------------- | :------------------------------- |
+| 🚀  | **本番環境対応**   | エンタープライズ実証済みパターン |
+| 🤖  | **AI ネイティブ**  | LLM・Embeddings・RAG・MCP Agent  |
+| 🏢  | **マルチテナント** | RLS・テナント分離・カスタマイズ  |
+| ⚡  | **モダンスタック** | Next.js 17・React 19・TS 5.6+    |
+| 💳  | **課金機能内蔵**   | Stripe・使用量計測・機能権限     |
+
+</td>
+<td width="50%">
+
+|     | 特徴                       | 説明                           |
+| :-: | :------------------------- | :----------------------------- |
+| 📋  | **法務・コンプライアンス** | GDPR/CCPA・Cookie 同意         |
+| 🔌  | **拡張性**                 | マイクロサービス・イベント駆動 |
+| 🌍  | **グローバル対応**         | i18n・CDN・エッジキャッシュ    |
+| 📊  | **実績**                   | レポート -70%・インサイト 4×   |
+| 🦄  | **ユニコーン志向**         | 速度と信頼性を両立             |
+
+</td>
+</tr>
+</table>
 
 ## ハイライト
 

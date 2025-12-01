@@ -63,27 +63,76 @@ Nebula • Nurture • Ultra • Future
 
 ### 关于公司
 
-**无锡云毓智能科技有限公司**（Wuxi Yunyu Intelligent Technology Co., Ltd.）是一家 AI 原生初创企业，致力于孵化下一代独角兽产品。我们开创 **Vibe-Coding** 开发理念 — 让 AI 智能体、自动化工作流与人类创造力融合，以前所未有的速度交付软件。
+<table>
+<tr>
+<td width="100%">
+<br />
+<p align="center">
+  <strong>无锡云毓智能科技有限公司</strong><br />
+  <sub>Wuxi Yunyu Intelligent Technology Co., Ltd.</sub>
+</p>
+<p align="center">
+  AI 原生初创企业，致力于孵化下一代独角兽产品<br />
+  开创 <strong>Vibe-Coding</strong> 开发理念 — AI 智能体 × 自动化工作流 × 人类创造力
+</p>
+<br />
+</td>
+</tr>
+</table>
 
-我们的核心方向：
-
-- 🚀 **软件出海** — 从第一天起就面向全球市场构建产品
-- 🤖 **AI 原生架构** — 每个系统都以 LLM、智能体和自动化为核心设计
-- 🎨 **品牌驱动 SaaS** — 将前沿技术与精心设计的品牌策划相结合
-- 🦄 **独角兽孵化** — 从 PoC 到生产的工程范式，将创意转化为可规模化的业务
+<table>
+<tr>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🚀-0033FE?style=for-the-badge" alt="Global" /><br />
+  <strong>软件出海</strong><br />
+  <sub>Day 1 面向全球市场</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🤖-0033FE?style=for-the-badge" alt="AI" /><br />
+  <strong>AI 原生架构</strong><br />
+  <sub>LLM・智能体・自动化</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🎨-0033FE?style=for-the-badge" alt="Brand" /><br />
+  <strong>品牌驱动 SaaS</strong><br />
+  <sub>技术 + 设计 + 策划</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🦄-0033FE?style=for-the-badge" alt="Unicorn" /><br />
+  <strong>独角兽孵化</strong><br />
+  <sub>PoC → 规模化业务</sub>
+</td>
+</tr>
+</table>
 
 ### 为什么选择 Sailor？
 
-- **🚀 生产就绪** — 经过实际企业部署验证的架构模式
-- **🤖 AI 原生** — 内置 LLM、Embeddings、RAG 和 AI Agent（MCP）支持
-- **🏢 多租户** — 开箱即用的行级安全、租户隔离和租户定制
-- **⚡ 现代技术栈** — Next.js 17、React 19、TypeScript 5.6+、TailwindCSS 4.0
-- **💳 计费内置** — 数据库驱动的计划配置、Stripe 计费、用量计量、功能权限
-- **📋 合规基础设施** — Cookie 同意、隐私控制、GDPR/CCPA 合规基础设施
-- **🔌 可扩展** — 模块化微服务架构，事件驱动通信
-- **🌍 全球化** — 国际化、CDN、边缘缓存、多区域部署支持
-- **📊 实战成效** — 交付项目中，报表时间降幅 >70%、洞察交付提速 4×
-- **🦄 面向独角兽** — 从 PoC 到上线的工程范式，兼顾速度与可靠性
+<table>
+<tr>
+<td width="50%">
+
+|     | 特性           | 说明                            |
+| :-: | :------------- | :------------------------------ |
+| 🚀  | **生产就绪**   | 企业部署验证的架构模式          |
+| 🤖  | **AI 原生**    | LLM・Embeddings・RAG・MCP Agent |
+| 🏢  | **多租户**     | RLS・租户隔离・租户定制         |
+| ⚡  | **现代技术栈** | Next.js 17・React 19・TS 5.6+   |
+| 💳  | **计费内置**   | Stripe・用量计量・功能权限      |
+
+</td>
+<td width="50%">
+
+|     | 特性             | 说明                   |
+| :-: | :--------------- | :--------------------- |
+| 📋  | **合规基础设施** | GDPR/CCPA・Cookie 同意 |
+| 🔌  | **可扩展**       | 微服务・事件驱动通信   |
+| 🌍  | **全球化**       | i18n・CDN・边缘缓存    |
+| 📊  | **实战成效**     | 报表 -70%・洞察 4×     |
+| 🦄  | **面向独角兽**   | 速度与可靠性兼顾       |
+
+</td>
+</tr>
+</table>
 
 ## 亮点
 

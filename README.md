@@ -62,27 +62,76 @@ Nebula • Nurture • Ultra • Future
 
 ### About the Company
 
-**Wuxi Yunyu Intelligent Technology Co., Ltd.** (无锡云毓智能科技有限公司) is an AI-native startup committed to incubating the next generation of unicorn products. We pioneer the **Vibe-Coding** development philosophy — where AI agents, automated workflows, and human creativity converge to ship software at unprecedented velocity.
+<table>
+<tr>
+<td width="100%">
+<br />
+<p align="center">
+  <strong>Wuxi Yunyu Intelligent Technology Co., Ltd.</strong><br />
+  <sub>无锡云毓智能科技有限公司</sub>
+</p>
+<p align="center">
+  AI-native startup committed to incubating the next generation of unicorn products<br />
+  Pioneering <strong>Vibe-Coding</strong> — AI Agents × Automated Workflows × Human Creativity
+</p>
+<br />
+</td>
+</tr>
+</table>
 
-Our focus:
-
-- 🚀 **Software Globalization** — Building products for worldwide markets from day one
-- 🤖 **AI-Native Architecture** — Every system designed with LLMs, agents, and automation at its core
-- 🎨 **Brand-Driven SaaS** — Combining cutting-edge technology with thoughtful design and positioning
-- 🦄 **Unicorn Incubation** — PoC-to-production patterns that transform ideas into scalable businesses
+<table>
+<tr>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🚀-0033FE?style=for-the-badge" alt="Global" /><br />
+  <strong>Global First</strong><br />
+  <sub>Day 1 worldwide markets</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🤖-0033FE?style=for-the-badge" alt="AI" /><br />
+  <strong>AI-Native</strong><br />
+  <sub>LLMs · Agents · Automation</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🎨-0033FE?style=for-the-badge" alt="Brand" /><br />
+  <strong>Brand-Driven SaaS</strong><br />
+  <sub>Tech + Design + Strategy</sub>
+</td>
+<td width="25%" align="center">
+  <img src="https://img.shields.io/badge/🦄-0033FE?style=for-the-badge" alt="Unicorn" /><br />
+  <strong>Unicorn Incubation</strong><br />
+  <sub>PoC → Scalable Business</sub>
+</td>
+</tr>
+</table>
 
 ### Why Sailor?
 
-- **🚀 Production-Ready** — Battle-tested architecture patterns used in real enterprise deployments
-- **🤖 AI-Native** — Built-in support for LLMs, embeddings, RAG, and AI agents via MCP
-- **🏢 Multi-Tenant** — Row-level security, tenant isolation, and per-tenant customization out of the box
-- **⚡ Modern Stack** — Next.js 17, React 19, TypeScript 5.6+, TailwindCSS 4.0
-- **💳 Billing Built-in** — Database-driven plans, Stripe integration, usage metering, and feature entitlements
-- **📋 Legal & Compliance** — Cookie consent, privacy controls, GDPR/CCPA compliance infrastructure
-- **🔌 Extensible** — Modular microservices architecture with event-driven communication
-- **🌍 Global-Ready** — i18n, CDN, edge caching, and multi-region deployment support
-- **📊 Proven Impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights
-- **🦄 For Unicorns** — PoC‑to‑production patterns that balance velocity with reliability.
+<table>
+<tr>
+<td width="50%">
+
+|     | Feature              | Description                            |
+| :-: | :------------------- | :------------------------------------- |
+| 🚀  | **Production-Ready** | Battle-tested enterprise patterns      |
+| 🤖  | **AI-Native**        | LLM · Embeddings · RAG · MCP Agent     |
+| 🏢  | **Multi-Tenant**     | RLS · Isolation · Customization        |
+| ⚡  | **Modern Stack**     | Next.js 17 · React 19 · TS 5.6+        |
+| 💳  | **Billing Built-in** | Stripe · Usage metering · Entitlements |
+
+</td>
+<td width="50%">
+
+|     | Feature                | Description                  |
+| :-: | :--------------------- | :--------------------------- |
+| 📋  | **Legal & Compliance** | GDPR/CCPA · Cookie consent   |
+| 🔌  | **Extensible**         | Microservices · Event-driven |
+| 🌍  | **Global-Ready**       | i18n · CDN · Edge caching    |
+| 📊  | **Proven Impact**      | Reports -70% · Insights 4×   |
+| 🦄  | **For Unicorns**       | Velocity + Reliability       |
+
+</td>
+</tr>
+</table>
 
 ## Highlights
 
