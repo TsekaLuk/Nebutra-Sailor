@@ -5,6 +5,12 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.1.0...v1.1.1) (2025-12-01)
+
+### 🐛 Bug Fixes
+
+- add tsup config for custom-ui package ([d12cc80](https://github.com/TsekaLuk/Nebutra-Sailor/commit/d12cc80e0cb6c954f747511452eb2adb4b819ca8))
+
 ## 1.1.0 (2025-12-01)
 
 ### 🆕 Features
