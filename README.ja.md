@@ -59,6 +59,7 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 
 <br />
 
+<div align="center">
 <table>
 <tr>
 <td align="center" width="25%">
@@ -83,6 +84,7 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 </td>
 </tr>
 </table>
+</div>
 
 #### マニフェスト
 

@@ -77,6 +77,7 @@ Nebula • Nurture • Ultra • Future
 
 <br />
 
+<div align="center">
 <table>
 <tr>
 <td align="center" width="25%">
@@ -101,6 +102,7 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 </table>
+</div>
 
 #### 愿景宣言（Manifesto）
 
