@@ -36,8 +36,10 @@
   </p>
   <p>
     <a href="https://twitter.com/nebutra">
-      <img src="https://img.shields.io/twitter/follow/nebutra?style=flat-square&logo=x&color=18181b&logoColor=fff" alt="Twitter" />
+      <img src="https://img.shields.io/twitter/follow/nebutra?style=flat-square&logo=x&color=18181b&logoColor=fff" alt="X" />
     </a>
+  </p>
+  <p>
     <a href="https://discord.gg/nebutra">
       <img src="https://img.shields.io/discord/000000000000000000?style=flat-square&logo=discord&color=5865F2&logoColor=fff&label=Discord" alt="Discord" />
     </a>
