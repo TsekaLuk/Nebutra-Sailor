@@ -18,10 +18,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^7.0.0"
+    "@prisma/client": "^6.0.0"
   },
   "devDependencies": {
-    "prisma": "^7.0.0",
+    "prisma": "^6.0.0",
     "tsx": "^4.19.0",
     "typescript": "^5"
   }

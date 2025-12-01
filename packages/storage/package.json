@@ -7,9 +7,7 @@
     ".": "./src/index.ts",
     "./r2": "./src/r2.ts"
   },
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
+  "scripts": {},
   "dependencies": {
     "@aws-sdk/client-s3": "^3.650.0",
     "@aws-sdk/s3-request-presigner": "^3.650.0"

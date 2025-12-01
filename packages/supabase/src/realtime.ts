@@ -25,20 +25,9 @@ export function subscribeToTable<T extends Record<string, unknown>>(
   const client = getSupabaseClient();
   const { table, schema = "public", event = "*", filter, onInsert, onUpdate, onDelete, onChange } = options;
 
-  const channelConfig: Parameters<typeof client.channel>[1] = {
-    config: {
-      postgres_changes: [
-        {
-          event,
-          schema,
-          table,
-          filter,
-        },
-      ],
-    },
-  };
-
-  const channel = client.channel(`${schema}:${table}`, channelConfig);
+  // Note: postgres_changes config is deprecated in newer Supabase SDK.
+  // Use .on() method instead to subscribe to postgres changes.
+  const channel = client.channel(`${schema}:${table}`);
 
   channel.on(
     "postgres_changes" as never,

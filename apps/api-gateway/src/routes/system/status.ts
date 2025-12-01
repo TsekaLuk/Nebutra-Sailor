@@ -57,12 +57,12 @@ statusRoutes.get("/status", async (c) => {
     checkService("web3", process.env.WEB3_SERVICE_URL),
   ]);
 
-  const serviceStatuses = {
-    ai: "unknown" as const,
-    content: "unknown" as const,
-    recsys: "unknown" as const,
-    ecommerce: "unknown" as const,
-    web3: "unknown" as const,
+  const serviceStatuses: StatusResponse["services"] = {
+    ai: "unknown",
+    content: "unknown",
+    recsys: "unknown",
+    ecommerce: "unknown",
+    web3: "unknown",
   };
 
   serviceChecks.forEach((result, index) => {

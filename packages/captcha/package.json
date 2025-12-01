@@ -8,9 +8,7 @@
     "./react": "./src/react/index.ts",
     "./server": "./src/server/index.ts"
   },
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
+  "scripts": {},
   "dependencies": {
     "react": "^19.0.0"
   },

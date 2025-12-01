@@ -110,8 +110,8 @@ export interface AnalyticsQuery {
   domain?: string;
   /** Tenant ID */
   tenantId?: string;
-  /** Time interval */
-  interval?: "1h" | "24h" | "7d" | "30d" | "90d" | "1y" | "all";
+  /** Time interval (note: dub SDK v0.40+ removed 1h interval) */
+  interval?: "24h" | "7d" | "30d" | "90d" | "1y" | "all";
   /** Start date */
   start?: Date | string;
   /** End date */

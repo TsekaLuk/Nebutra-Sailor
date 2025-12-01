@@ -9,9 +9,7 @@
     "./theme": "./src/theme/index.ts",
     "./components": "./src/components/index.ts"
   },
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
+  "scripts": {},
   "dependencies": {
     "@lobehub/icons": "^1.35.0",
     "@lobehub/ui": "^1.164.0",

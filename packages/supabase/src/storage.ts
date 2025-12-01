@@ -162,11 +162,20 @@ export async function copy(bucket: string, fromPath: string, toPath: string): Pr
  */
 export async function createBucket(
   name: string,
-  options?: { public?: boolean; fileSizeLimit?: number; allowedMimeTypes?: string[] }
+  options?: { public?: boolean; fileSizeLimit?: number | string; allowedMimeTypes?: string[] }
 ): Promise<void> {
   const client = getSupabaseServer();
 
-  const { error } = await client.storage.createBucket(name, options);
+  // Supabase SDK requires 'public' to be explicitly set
+  const bucketOptions = options
+    ? {
+        public: options.public ?? false,
+        fileSizeLimit: options.fileSizeLimit,
+        allowedMimeTypes: options.allowedMimeTypes,
+      }
+    : { public: false };
+
+  const { error } = await client.storage.createBucket(name, bucketOptions);
 
   if (error) {
     throw new Error(`Create bucket failed: ${error.message}`);

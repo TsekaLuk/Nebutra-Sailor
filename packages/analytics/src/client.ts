@@ -1,4 +1,5 @@
 import { Dub } from "dub";
+import type { CountryCode } from "dub/models/components";
 import type {
   AnalyticsConfig,
   MultiTenantConfig,
@@ -138,8 +139,12 @@ export class AnalyticsClient {
         pageSize: options?.pageSize,
       });
 
-      const links = response.map((l) => this.mapLink(l, options?.tenantId));
-      return { links, count: links.length };
+      // Collect all links from the PageIterator
+      const collectedLinks: Link[] = [];
+      for await (const page of response) {
+        collectedLinks.push(this.mapLink(page, options?.tenantId));
+      }
+      return { links: collectedLinks, count: collectedLinks.length };
     },
 
     /**
@@ -160,15 +165,25 @@ export class AnalyticsClient {
    * Get analytics data
    */
   async getAnalytics(query: AnalyticsQuery): Promise<AnalyticsResult> {
+    // Map interval types (dub SDK v0.40+ uses different interval names)
+    const mapInterval = (
+      interval?: AnalyticsQuery["interval"]
+    ): "24h" | "7d" | "30d" | "90d" | "1y" | "all" | undefined => {
+      if (!interval) return undefined;
+      // "ytd" and "all_unfiltered" are also valid but not exposed in our types
+      return interval as "24h" | "7d" | "30d" | "90d" | "1y" | "all";
+    };
+
     const params = {
       domain: query.domain,
       linkId: Array.isArray(query.linkId)
         ? query.linkId.join(",")
         : query.linkId,
-      interval: query.interval,
+      interval: mapInterval(query.interval),
       start: query.start?.toString(),
       end: query.end?.toString(),
-      country: query.country,
+      // Cast country to CountryCode (ISO 3166-1 alpha-2)
+      country: query.country as CountryCode | undefined,
       device: query.device,
       browser: query.browser,
       os: query.os,
@@ -181,21 +196,21 @@ export class AnalyticsClient {
         ? this.dub.analytics.retrieve({
             ...params,
             event: "clicks",
-            groupBy: "country",
+            groupBy: "countries",
           })
         : null,
       query.groupBy?.includes("device")
         ? this.dub.analytics.retrieve({
             ...params,
             event: "clicks",
-            groupBy: "device",
+            groupBy: "devices",
           })
         : null,
       query.groupBy?.includes("browser")
         ? this.dub.analytics.retrieve({
             ...params,
             event: "clicks",
-            groupBy: "browser",
+            groupBy: "browsers",
           })
         : null,
     ]);
@@ -263,16 +278,20 @@ export class AnalyticsClient {
 
     /**
      * Attribute a conversion to a click
+     * Note: dub SDK v0.40+ changed track.sale API - clickId is no longer a parameter.
+     * Attribution is done via customerId which should be previously tracked via track.lead.
      */
     attribute: async (input: AttributeConversionInput): Promise<void> => {
       if (input.value) {
         await this.dub.track.sale({
-          clickId: input.clickId,
           eventName: input.eventName,
           customerId: input.customerId || "",
           amount: Math.round(input.value * 100), // Convert to cents
           currency: input.currency || "USD",
-          paymentProcessor: "custom",
+          // Use stripe as default processor (dub SDK v0.40+ requires stripe|shopify|paddle)
+          paymentProcessor: "stripe",
+          // Store clickId in metadata for reference
+          metadata: { clickId: input.clickId, ...input.metadata },
         });
       } else {
         await this.dub.track.lead({

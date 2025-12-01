@@ -15,7 +15,8 @@
     "zod": "^3.23.0",
     "@nebutra/db": "workspace:*",
     "@nebutra/rate-limit": "workspace:*",
-    "@nebutra/cache": "workspace:*"
+    "@nebutra/cache": "workspace:*",
+    "@nebutra/health": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20",
