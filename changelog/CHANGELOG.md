@@ -5,6 +5,17 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.3.1...v1.3.2) (2025-12-01)
+
+### 🐛 Bug Fixes
+
+- extract Clerk auth to client component for React 19 compatibility ([79b7ecb](https://github.com/TsekaLuk/Nebutra-Sailor/commit/79b7ecb067ab98dcaecb2bc14dec063a75a40e6d))
+
+### 📚 Documentation
+
+- center social links on separate lines ([0bbace7](https://github.com/TsekaLuk/Nebutra-Sailor/commit/0bbace714ab010d2cac2a63c68077dcca4378452))
+- fix X/Discord badges - separate lines, centered ([9df8fe0](https://github.com/TsekaLuk/Nebutra-Sailor/commit/9df8fe0032186fae8333b5cbf779c6a6f9b4dc5c))
+
 ## [1.3.1](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.3.0...v1.3.1) (2025-12-01)
 
 ### 🐛 Bug Fixes
