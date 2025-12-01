@@ -4,7 +4,7 @@ This document defines the governance rules for managing UI components across Neb
 
 ## Overview
 
-Nebutra uses a **layered component architecture**:
+Nebutra uses a **layered component architecture** built on GitHub's Primer Design System:
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -23,10 +23,21 @@ Nebutra uses a **layered component architecture**:
                        ▼
 ┌─────────────────────────────────────────────────────┐
 │            @nebutra/design-system                    │
-│       (SSOT: tokens, primitives, base UI)           │
+│          (SSOT: Primer + Typography)                │
 │                    [Stable]                          │
+├─────────────────────────────────────────────────────┤
+│  Primer React │ typography/ │ theme/brand (future)  │
+│  (components) │ (fonts)     │ (brand overrides)     │
 └─────────────────────────────────────────────────────┘
 ```
+
+### Key Relationships
+
+| Layer | Foundation | Typography | Brand Customization |
+|-------|-----------|------------|---------------------|
+| **design-system** | Primer React | Open-source fonts (Inter, JetBrains Mono) | theme/brand.ts overrides |
+| **custom-ui** | ↑ inherits | ↑ inherits | Domain-specific styles |
+| **21st/External** | May differ | Must adapt | Requires integration |
 
 ## Component Sources
 
@@ -34,15 +45,26 @@ Nebutra uses a **layered component architecture**:
 
 **Status**: Always use first
 
-The foundation layer providing:
-- Design tokens (colors, spacing, typography)
-- UI primitives (layout, accessibility)
-- Base components (Button, Box, Text, etc.)
+The foundation layer built on **Primer React** providing:
+- **Theme tokens** - colors, spacing, shadows, radii (Primer defaults + brand overrides)
+- **Typography system** - Inter, JetBrains Mono, CJK fonts with rem-based scale
+- **UI primitives** - layout, accessibility, responsive patterns
+- **Base components** - Button, Box, Text, etc. (Primer re-exports)
+
+**Internal Modules**:
+| Module | Purpose |
+|--------|--------|
+| `theme/` | Primer color tokens, spacing, breakpoints |
+| `typography/` | Font stacks, type scale, typeStyles presets |
+| `primitives/` | Layout patterns, a11y utilities |
+| `components/` | Primer + custom components |
 
 **Rules**:
 - ✅ Always import base components from here
 - ✅ All custom components must use design-system tokens
+- ✅ Use `typography/` for all font-related values
 - ❌ Never override design-system tokens inline
+- ❌ Never import directly from `@primer/react` in apps
 
 ### 2. @nebutra/custom-ui (Brand Layer)
 
@@ -355,6 +377,7 @@ Quarterly review of:
 ## Related
 
 - [UI Guidelines](./UI-GUIDELINES.md) - Design token and style rules
-- [@nebutra/design-system](../packages/design-system/README.md)
-- [@nebutra/custom-ui](../packages/custom-ui/README.md)
-- [@nebutra/21st](../packages/21st/README.md)
+- [Typography](./TYPOGRAPHY.md) - Font system and text styles
+- [@nebutra/design-system](../packages/design-system/README.md) - Primer-based SSOT
+- [@nebutra/custom-ui](../packages/custom-ui/README.md) - Brand-specific components
+- [@nebutra/21st](../packages/21st/README.md) - Experimental components

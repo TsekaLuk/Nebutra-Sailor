@@ -101,40 +101,81 @@ import { SearchIcon, IconSettings, iconSizes } from "@nebutra/design-system";
 
 ```
 src/
-├── theme/
+├── theme/              # Colors, spacing, breakpoints (Primer tokens)
 │   ├── default.ts      # Primer baseline tokens
-│   ├── brand.ts        # Brand override layer (TODO)
+│   ├── brand.ts        # Brand override layer
 │   └── index.ts
-├── components/
-│   ├── index.ts        # Primer re-exports + custom components
+├── typography/         # Font system (SSOT for all text styling)
+│   ├── tokens.ts       # fontFamilies, fontSizes, typeStyles
+│   ├── fonts.ts        # Font loading utilities
+│   ├── fonts.css       # Google Fonts imports
+│   └── index.ts
+├── primitives/         # Layout, spacing, a11y utilities
+│   ├── layout.ts
+│   ├── spacing.ts
+│   ├── accessibility.ts
+│   ├── responsive.ts
+│   └── typography.ts   # [DEPRECATED] Use typography/ instead
+├── components/         # Primer re-exports + custom components
+│   ├── index.ts
 │   ├── DesignSystemProvider.tsx
 │   ├── Card.tsx
-│   ├── Container.tsx
 │   └── ...
-├── icons/
-│   └── index.ts        # Octicons re-exports
-├── utils/
-│   └── index.ts        # cn(), breakpoints, etc.
-├── hooks/
-│   └── index.ts        # useDesignSystem, useTheme
+├── icons/              # Octicons re-exports
+├── utils/              # cn(), breakpoints, etc.
+├── hooks/              # useDesignSystem, useTheme
+├── governance/         # Component lifecycle types
 └── index.ts
 ```
 
-## Brand Customization (Future)
+### Module Relationships
 
-When ready to apply Nebutra branding:
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    @nebutra/design-system                   │
+├─────────────┬─────────────┬─────────────┬──────────────────┤
+│   theme/    │ typography/ │ primitives/ │   components/    │
+│  (Primer)   │  (Fonts)    │  (Layout)   │    (UI)          │
+├─────────────┴─────────────┴─────────────┴──────────────────┤
+│                     @primer/react                           │
+└─────────────────────────────────────────────────────────────┘
+```
+
+- **theme/** - Extends Primer color/spacing tokens, adds brand overrides
+- **typography/** - Independent font system using open-source fonts
+- **primitives/** - Layout/a11y patterns that work with Primer's `sx` prop
+- **components/** - Re-exports Primer components + Nebutra-specific ones
+
+## Typography System
+
+The design system includes a comprehensive font system:
+
+```tsx
+import {
+  fontFamilies,    // Font stacks (Inter, JetBrains Mono, CJK)
+  fontSizes,       // Type scale in rem (xs to 8xl)
+  typeStyles,      // Pre-built styles (h1, body, code, etc.)
+  getGoogleFontsUrl,
+} from "@nebutra/design-system";
+
+// Use font family
+<Box sx={{ fontFamily: fontFamilies.primary }}>Text</Box>
+
+// Use type preset
+<Heading sx={typeStyles.h1}>Title</Heading>
+```
+
+See [Typography Documentation](../../docs/TYPOGRAPHY.md) for full details.
+
+## Brand Customization
+
+Brand customization happens at two levels:
+
+### 1. Colors & Spacing (theme/brand.ts)
 
 ```ts
-// theme/brand.ts
-export const brandColors = {
-  primary: {
-    50: "#eef2ff",
-    // ... define brand palette
-    900: "#1e1b4b",
-  },
-};
+import { createTheme, brandColors } from "@nebutra/design-system";
 
-// Use createTheme with overrides
 const customTheme = createTheme("light", {
   colors: {
     accent: {
@@ -142,16 +183,21 @@ const customTheme = createTheme("light", {
       emphasis: brandColors.primary[500],
     },
   },
-  typography: {
-    fontFamily: {
-      normal: '"Inter", sans-serif',
-    },
-  },
 });
 ```
 
+### 2. Typography (future brand fonts)
+
+Currently using open-source fonts (Inter, JetBrains Mono). When brand fonts are ready:
+
+1. Add font files to `typography/`
+2. Update `fontFamilies.heading` in `tokens.ts`
+3. Components automatically inherit changes
+
 ## Related
 
+- [Typography System](../../docs/TYPOGRAPHY.md)
+- [UI Guidelines](../../docs/UI-GUIDELINES.md)
+- [Component Library Policy](../../docs/COMPONENT-LIBRARY-POLICY.md)
 - [Primer React](https://primer.style/react)
 - [Primer Primitives](https://primer.style/primitives)
-- [Octicons](https://primer.style/octicons)
