@@ -9,6 +9,7 @@ export interface PageHeaderProps extends BoxProps {
   description?: string;
   actions?: React.ReactNode;
   breadcrumbs?: Array<{ label: string; href?: string }>;
+  className?: string;
   children?: React.ReactNode;
 }
 

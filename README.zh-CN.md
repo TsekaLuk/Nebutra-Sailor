@@ -128,6 +128,8 @@ Nebula • Nurture • Ultra • Future
 <td>
   <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
   <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
+  <img src="https://img.shields.io/badge/Inter-000?style=flat-square" alt="Inter" />
+  <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square" alt="JetBrains Mono" />
   <img src="https://img.shields.io/badge/设计令牌-gray?style=flat-square" alt="Design Tokens" />
 </td>
 </tr>
@@ -243,10 +245,11 @@ Nebutra-Sailor/
 │   ├── studio/            # Sanity CMS (studio.nebutra.com)
 │   └── api-gateway/       # BFF 层 (api.nebutra.com)
 ├── packages/
-│   ├── 21st/              # shadcn/ui + 21st.dev 组件
+│   ├── 21st/              # shadcn/ui + 21st.dev 实验性组件
 │   ├── ai-providers/      # 多供应商 AI SDK (OpenRouter, OpenAI 等)
 │   ├── brand/             # 统一品牌资产与组件
-│   ├── design-system/     # 基于 Primer 的 UI 系统，支持品牌扩展
+│   ├── custom-ui/         # 品牌特定、已审核的 UI 组件
+│   ├── design-system/     # SSOT: Primer + 字体系统 + 主题令牌
 │   ├── ui/                # Lobe UI + Lobe Icons + 设计系统
 │   ├── db/                # Prisma 7 Schema 与客户端
 │   ├── supabase/          # Supabase 实时订阅、存储、Edge Functions
@@ -304,6 +307,9 @@ Nebutra-Sailor/
 <tr>
 <td><strong>公共包</strong></td>
 <td>
+  <a href="packages/design-system/">Design System</a> · 
+  <a href="packages/custom-ui/">Custom UI</a> · 
+  <a href="packages/21st/">21st</a> · 
   <a href="packages/db/">DB</a> · 
   <a href="packages/cache/">Cache</a> · 
   <a href="packages/rate-limit/">Rate Limit</a> · 
@@ -311,6 +317,14 @@ Nebutra-Sailor/
   <a href="packages/saga/">Saga</a> · 
   <a href="packages/mcp/">MCP</a> · 
   <a href="packages/analytics/">Analytics</a>
+</td>
+</tr>
+<tr>
+<td><strong>设计文档</strong></td>
+<td>
+  <a href="docs/UI-GUIDELINES.md">UI 规范</a> · 
+  <a href="docs/TYPOGRAPHY.md">字体系统</a> · 
+  <a href="docs/COMPONENT-LIBRARY-POLICY.md">组件库策略</a>
 </td>
 </tr>
 <tr>

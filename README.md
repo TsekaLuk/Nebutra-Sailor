@@ -127,6 +127,8 @@ Nebula • Nurture • Ultra • Future
 <td>
   <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
   <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
+  <img src="https://img.shields.io/badge/Inter-000?style=flat-square" alt="Inter" />
+  <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square" alt="JetBrains Mono" />
   <img src="https://img.shields.io/badge/Design_Tokens-gray?style=flat-square" alt="Design Tokens" />
 </td>
 </tr>
@@ -241,10 +243,11 @@ Nebutra-Sailor/
 │   ├── studio/            # Sanity CMS (studio.nebutra.com)
 │   └── api-gateway/       # BFF layer (api.nebutra.com)
 ├── packages/
-│   ├── 21st/              # shadcn/ui + 21st.dev components
+│   ├── 21st/              # shadcn/ui + 21st.dev experimental components
 │   ├── ai-providers/      # Multi-provider AI SDK (OpenRouter, OpenAI, etc)
 │   ├── brand/             # Centralized brand assets & components
-│   ├── design-system/     # Primer-based UI system with brand extensibility
+│   ├── custom-ui/         # Brand-specific, promoted UI components
+│   ├── design-system/     # SSOT: Primer + Typography + Theme tokens
 │   ├── ui/                # Lobe UI + Lobe Icons + Design System
 │   ├── db/                # Prisma 7 schema & client
 │   ├── supabase/          # Supabase Realtime, Storage, Edge Functions
@@ -303,6 +306,8 @@ Each component has its own README with setup instructions and API documentation:
 <td><strong>Packages</strong></td>
 <td>
   <a href="packages/design-system/">Design System</a> · 
+  <a href="packages/custom-ui/">Custom UI</a> · 
+  <a href="packages/21st/">21st</a> · 
   <a href="packages/db/">DB</a> · 
   <a href="packages/supabase/">Supabase</a> · 
   <a href="packages/cache/">Cache</a> · 
@@ -312,6 +317,14 @@ Each component has its own README with setup instructions and API documentation:
   <a href="packages/mcp/">MCP</a> · 
   <a href="packages/ai-providers/">AI Providers</a> · 
   <a href="packages/analytics/">Analytics</a>
+</td>
+</tr>
+<tr>
+<td><strong>Design Docs</strong></td>
+<td>
+  <a href="docs/UI-GUIDELINES.md">UI Guidelines</a> · 
+  <a href="docs/TYPOGRAPHY.md">Typography</a> · 
+  <a href="docs/COMPONENT-LIBRARY-POLICY.md">Component Policy</a>
 </td>
 </tr>
 <tr>

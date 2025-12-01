@@ -9,6 +9,7 @@ export interface CardProps extends Omit<BoxProps, "as"> {
   padding?: "none" | "sm" | "md" | "lg";
   interactive?: boolean;
   as?: React.ElementType;
+  className?: string;
   children: React.ReactNode;
 }
 

@@ -11,6 +11,7 @@ export interface ErrorStateProps extends BoxProps {
   error?: Error | null;
   onRetry?: () => void;
   retryLabel?: string;
+  className?: string;
 }
 
 export function ErrorState({
@@ -23,6 +24,7 @@ export function ErrorState({
   ...props
 }: ErrorStateProps) {
   const displayMessage = message || error?.message || "An unexpected error occurred.";
+  const AlertGlyph = AlertIcon as unknown as React.ComponentType<{ size?: number }>;
 
   return (
     <Box
@@ -37,7 +39,7 @@ export function ErrorState({
       {...props}
     >
       <Box color="danger.fg" mb={3}>
-        <AlertIcon size={48} />
+        <AlertGlyph size={48} />
       </Box>
       <Heading as="h3" sx={{ fontSize: 2, fontWeight: "semibold", mb: 1 }}>
         {title}

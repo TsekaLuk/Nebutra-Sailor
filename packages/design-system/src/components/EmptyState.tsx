@@ -9,6 +9,7 @@ export interface EmptyStateProps extends BoxProps {
   title: string;
   description?: string;
   actions?: React.ReactNode;
+  className?: string;
 }
 
 export function EmptyState({

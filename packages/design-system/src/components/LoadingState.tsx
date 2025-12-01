@@ -7,6 +7,7 @@ import { clsx } from "clsx";
 export interface LoadingStateProps extends BoxProps {
   size?: "small" | "medium" | "large";
   message?: string;
+  className?: string;
 }
 
 export function LoadingState({

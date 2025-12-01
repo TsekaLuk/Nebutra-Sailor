@@ -16,7 +16,6 @@ export {
   PageLayout,
   SplitPageLayout,
   Stack,
-  Grid,
 } from "@primer/react";
 
 // Typography
@@ -77,7 +76,6 @@ export {
 // Feedback
 export {
   Flash,
-  Banner,
   Spinner,
   ProgressBar,
   Tooltip,

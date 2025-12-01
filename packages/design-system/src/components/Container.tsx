@@ -7,6 +7,7 @@ import { clsx } from "clsx";
 export interface ContainerProps extends Omit<BoxProps, "maxWidth"> {
   size?: "sm" | "md" | "lg" | "xl" | "full";
   centered?: boolean;
+  className?: string;
   children: React.ReactNode;
 }
 

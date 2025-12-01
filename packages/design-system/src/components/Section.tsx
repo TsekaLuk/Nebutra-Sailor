@@ -9,6 +9,7 @@ export interface SectionProps extends BoxProps {
   description?: string;
   actions?: React.ReactNode;
   children: React.ReactNode;
+  className?: string;
 }
 
 export function Section({
