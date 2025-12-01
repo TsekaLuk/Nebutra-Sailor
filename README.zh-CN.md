@@ -65,8 +65,8 @@ Nebula • Nurture • Ultra • Future
 ### 关于公司
 
 <div align="center">
-  <h4>无锡云毓智能科技有限公司</h4>
-  <sub>Wuxi Yunyu Intelligent Technology Co., Ltd.</sub>
+  <h4>Nebutra Intelligence</h4>
+  <sub>无锡云毓智能科技有限公司（Wuxi Yunyu Intelligent Technology Co., Ltd.）</sub>
   <br /><br />
   <p>
     AI 原生初创企业，致力于孵化下一代独角兽产品<br />

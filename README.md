@@ -64,8 +64,8 @@ Nebula • Nurture • Ultra • Future
 ### About the Company
 
 <div align="center">
-  <h4>Wuxi Yunyu Intelligent Technology Co., Ltd.</h4>
-  <sub>无锡云毓智能科技有限公司</sub>
+  <h4>Nebutra Intelligence</h4>
+  <sub>Wuxi Yunyu Intelligent Technology Co., Ltd.（无锡云毓智能科技有限公司）</sub>
   <br /><br />
   <p>
     AI-native startup committed to incubating the next generation of unicorn products<br />

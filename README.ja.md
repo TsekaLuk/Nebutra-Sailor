@@ -47,8 +47,8 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 ### 会社について
 
 <div align="center">
-<h4>無錫雲毓智能科技有限公司</h4>
-  <sub>Wuxi Yunyu Intelligent Technology Co., Ltd.</sub>
+<h4>Nebutra Intelligence</h4>
+  <sub>無錫雲毓智能科技有限公司（Wuxi Yunyu Intelligent Technology Co., Ltd.）</sub>
   <br /><br />
   <p>
     次世代ユニコーンプロダクトの創出に取り組む AI ネイティブスタートアップ<br />
