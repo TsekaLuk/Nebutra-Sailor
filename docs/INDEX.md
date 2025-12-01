@@ -32,6 +32,7 @@ Complete navigation to all project documentation.
 | [cache](../packages/cache/README.md)                 | Redis caching strategies       |
 | [captcha](../packages/captcha/README.md)             | CAPTCHA verification           |
 | [config](../packages/config/README.md)               | Shared configuration           |
+| [custom-ui](../packages/custom-ui/README.md)         | Brand-specific UI components   |
 | [db](../packages/db/README.md)                       | Prisma schema and client       |
 | [design-system](../packages/design-system/README.md) | Primer-based UI system         |
 | [errors](../packages/errors/README.md)               | Error handling                 |
@@ -63,6 +64,13 @@ Complete navigation to all project documentation.
 | [openstatus](../infra/openstatus/README.md)       | Status monitoring         |
 | [railway](../infra/railway/README.md)             | Railway deployment        |
 | [terraform](../infra/terraform/README.md)         | IaC definitions           |
+
+## Design System
+
+| Document                                              | Description                      |
+| ----------------------------------------------------- | -------------------------------- |
+| [UI Guidelines](./UI-GUIDELINES.md)                   | Design tokens, styles, usage     |
+| [Component Library Policy](./COMPONENT-LIBRARY-POLICY.md) | External component governance |
 
 ## Other
 

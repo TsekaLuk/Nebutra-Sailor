@@ -1,0 +1,50 @@
+{
+  "name": "@nebutra/custom-ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Brand-specific UI components built on top of @nebutra/design-system - domain-specific, complex, and high-density UI",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js"
+    },
+    "./layouts/*": {
+      "types": "./dist/layouts/*.d.ts",
+      "import": "./dist/layouts/*.js"
+    },
+    "./widgets/*": {
+      "types": "./dist/widgets/*.d.ts",
+      "import": "./dist/widgets/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@nebutra/design-system": "workspace:*",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^19.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.6.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  }
+}

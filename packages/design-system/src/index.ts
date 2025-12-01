@@ -9,6 +9,9 @@
 // Theme
 export * from "./theme";
 
+// Primitives
+export * from "./primitives";
+
 // Components
 export * from "./components";
 
@@ -20,3 +23,6 @@ export * from "./utils";
 
 // Hooks
 export * from "./hooks";
+
+// Governance
+export * from "./governance";
