@@ -24,3 +24,6 @@ export * from "./widgets";
 
 // Types - Shared type definitions
 export * from "./types";
+
+// Marketing - Landing page and marketing site components
+export * as marketing from "./marketing";

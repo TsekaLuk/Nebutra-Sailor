@@ -21,6 +21,14 @@
     "./widgets/*": {
       "types": "./dist/widgets/*.d.ts",
       "import": "./dist/widgets/*.js"
+    },
+    "./marketing": {
+      "types": "./dist/marketing/index.d.ts",
+      "import": "./dist/marketing/index.js"
+    },
+    "./marketing/*": {
+      "types": "./dist/marketing/*.d.ts",
+      "import": "./dist/marketing/*.js"
     }
   },
   "files": [
