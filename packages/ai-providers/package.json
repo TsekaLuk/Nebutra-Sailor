@@ -26,7 +26,6 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src/",
     "clean": "rm -rf dist",
     "test": "vitest"
   },

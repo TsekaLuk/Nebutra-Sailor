@@ -9,8 +9,7 @@
     "./server": "./src/server/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint src/"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^19.0.0"

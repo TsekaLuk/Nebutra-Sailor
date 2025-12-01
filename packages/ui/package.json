@@ -10,8 +10,7 @@
     "./components": "./src/components/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint src/"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@lobehub/icons": "^1.35.0",
