@@ -142,7 +142,7 @@ export default async function FAQPage() {
               >
                 <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-gray-900 dark:text-white">
                   {faq.q}
-                  <span className="ml-4 flex-shrink-0 transition group-open:rotate-180">
+                  <span className="ml-4 shrink-0 transition group-open:rotate-180">
                     <svg
                       className="h-5 w-5 text-gray-500"
                       fill="none"
