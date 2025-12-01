@@ -110,6 +110,93 @@ CREATE POLICY "tenant_isolation" ON tenant_usage
   WITH CHECK (organization_id = auth.tenant_id());
 
 -- ============================================
+-- AI Requests
+-- ============================================
+ALTER TABLE ai_requests ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "tenant_isolation" ON ai_requests
+  FOR ALL
+  USING (organization_id = auth.tenant_id())
+  WITH CHECK (organization_id = auth.tenant_id());
+
+-- ============================================
+-- User Preferences (RecSys)
+-- ============================================
+ALTER TABLE user_preferences ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "tenant_isolation" ON user_preferences
+  FOR ALL
+  USING (organization_id = auth.tenant_id())
+  WITH CHECK (organization_id = auth.tenant_id());
+
+-- ============================================
+-- Recommendations (RecSys)
+-- ============================================
+ALTER TABLE recommendations ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "tenant_isolation" ON recommendations
+  FOR ALL
+  USING (organization_id = auth.tenant_id())
+  WITH CHECK (organization_id = auth.tenant_id());
+
+-- ============================================
+-- Feature Flags (Global - no tenant isolation)
+-- ============================================
+ALTER TABLE feature_flags ENABLE ROW LEVEL SECURITY;
+
+-- Feature flags are global, readable by all authenticated users
+CREATE POLICY "read_all" ON feature_flags
+  FOR SELECT
+  USING (true);
+
+-- Only admins can modify (enforced at app level)
+CREATE POLICY "admin_write" ON feature_flags
+  FOR ALL
+  USING (auth.role() = 'service_role')
+  WITH CHECK (auth.role() = 'service_role');
+
+-- ============================================
+-- Feature Flag Overrides (Tenant-scoped)
+-- ============================================
+ALTER TABLE feature_flag_overrides ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "tenant_isolation" ON feature_flag_overrides
+  FOR ALL
+  USING (
+    organization_id IS NULL OR organization_id = auth.tenant_id()
+  )
+  WITH CHECK (
+    organization_id IS NULL OR organization_id = auth.tenant_id()
+  );
+
+-- ============================================
+-- Audit Logs (Tenant-scoped, read-only for users)
+-- ============================================
+ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;
+
+-- Tenants can only read their own audit logs
+CREATE POLICY "tenant_read" ON audit_logs
+  FOR SELECT
+  USING (
+    organization_id IS NULL OR organization_id = auth.tenant_id()
+  );
+
+-- Only service role can write audit logs
+CREATE POLICY "service_write" ON audit_logs
+  FOR INSERT
+  WITH CHECK (auth.role() = 'service_role');
+
+-- ============================================
+-- Helper function: Set tenant context
+-- ============================================
+CREATE OR REPLACE FUNCTION set_tenant_context(tenant_id TEXT)
+RETURNS VOID AS $$
+BEGIN
+  PERFORM set_config('app.current_tenant_id', tenant_id, true);
+END;
+$$ LANGUAGE plpgsql;
+
+-- ============================================
 -- Service role bypass (for backend services)
 -- ============================================
 -- Backend services should use service_role key which bypasses RLS
