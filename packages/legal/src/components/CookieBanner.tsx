@@ -59,7 +59,7 @@ export interface CookieBannerTranslations {
 const defaultTranslations: CookieBannerTranslations = {
   title: "We value your privacy",
   description:
-    "We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.",
+    'We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.',
   acceptAll: "Accept All",
   rejectAll: "Reject All",
   customize: "Customize",

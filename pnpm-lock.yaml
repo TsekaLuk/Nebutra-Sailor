@@ -72,6 +72,9 @@ importers:
       '@hono/node-server':
         specifier: ^1.13.0
         version: 1.19.6(hono@4.10.7)
+      '@hono/zod-validator':
+        specifier: ^0.7.5
+        version: 0.7.5(hono@4.10.7)(zod@3.25.76)
       '@nebutra/cache':
         specifier: workspace:*
         version: link:../../packages/cache
@@ -91,6 +94,9 @@ importers:
         specifier: ^3.23.0
         version: 3.25.76
     devDependencies:
+      '@prisma/client':
+        specifier: ^7.0.0
+        version: 7.0.1(prisma@7.0.1(@types/react@18.3.27)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3))(typescript@5.9.3)
       '@types/node':
         specifier: ^20
         version: 20.19.25
@@ -2613,6 +2619,12 @@ packages:
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
+
+  '@hono/zod-validator@0.7.5':
+    resolution: {integrity: sha512-n4l4hutkfYU07PzRUHBOVzUEn38VSfrh+UVE5d0w4lyfWDOEhzxIupqo5iakRiJL44c3vTuFJBvcmUl8b9agIA==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.25.0 || ^4.0.0
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -14114,6 +14126,11 @@ snapshots:
   '@hono/node-server@1.19.6(hono@4.10.7)':
     dependencies:
       hono: 4.10.7
+
+  '@hono/zod-validator@0.7.5(hono@4.10.7)(zod@3.25.76)':
+    dependencies:
+      hono: 4.10.7
+      zod: 3.25.76
 
   '@humanfs/core@0.19.1': {}
 

@@ -2,8 +2,12 @@ import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { prisma } from "@nebutra/db";
+import type { Prisma } from "@prisma/client";
 
-export const consentRoutes = new Hono();
+type ConsentEnv = {
+  Variables: { userId?: string; organizationId?: string };
+};
+export const consentRoutes = new Hono<ConsentEnv>();
 
 // ============================================
 // Validation Schemas
@@ -70,7 +74,7 @@ consentRoutes.post("/consent", zValidator("json", recordConsentSchema), async (c
         ipAddress: c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
         userAgent: c.req.header("user-agent"),
         consentContext: data.context,
-        metadata: data.metadata || {},
+        metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
       },
     });
 

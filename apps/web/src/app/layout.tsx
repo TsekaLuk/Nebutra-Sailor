@@ -7,7 +7,6 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import { DesignSystemProvider, Box, Header, Button } from "@nebutra/design-system";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,40 +34,32 @@ export default function RootLayout({
   const content = (
     <html lang="en">
       <body className="antialiased">
-        <DesignSystemProvider>
-          <Header>
-            <Header.Item full>
-              <span className="text-xl font-bold">Nebutra</span>
-            </Header.Item>
-            {hasClerkKey && (
-              <Header.Item>
-                <SignedOut>
-                  <Box sx={{ display: "flex", gap: 2 }}>
-                    <SignInButton mode="modal">
-                      <Button variant="invisible">Sign In</Button>
-                    </SignInButton>
-                    <SignUpButton mode="modal">
-                      <Button variant="primary">Sign Up</Button>
-                    </SignUpButton>
-                  </Box>
-                </SignedOut>
-                <SignedIn>
-                  <UserButton
-                    afterSignOutUrl="/"
-                    appearance={{
-                      elements: {
-                        avatarBox: "h-9 w-9",
-                      },
-                    }}
-                  />
-                </SignedIn>
-              </Header.Item>
-            )}
-          </Header>
-          <Box as="main" sx={{ minHeight: "calc(100vh - 64px)" }}>
-            {children}
-          </Box>
-        </DesignSystemProvider>
+        <header className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+          <span className="text-xl font-bold">Nebutra</span>
+          {hasClerkKey && (
+            <div className="flex items-center gap-2">
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <button className="text-sm font-medium text-gray-700 underline">Sign In</button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: { avatarBox: "h-9 w-9" },
+                  }}
+                />
+              </SignedIn>
+            </div>
+          )}
+        </header>
+        <main className="min-h-[calc(100vh-64px)]">{children}</main>
       </body>
     </html>
   );

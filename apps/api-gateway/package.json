@@ -12,6 +12,7 @@
   "dependencies": {
     "hono": "^4.6.0",
     "@hono/node-server": "^1.13.0",
+    "@hono/zod-validator": "^0.7.5",
     "zod": "^3.23.0",
     "@nebutra/db": "workspace:*",
     "@nebutra/rate-limit": "workspace:*",
@@ -19,6 +20,7 @@
     "@nebutra/health": "workspace:*"
   },
   "devDependencies": {
+    "@prisma/client": "^7.0.0",
     "@types/node": "^20",
     "tsx": "^4.19.0",
     "typescript": "^5"
