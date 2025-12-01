@@ -60,6 +60,7 @@ export {
   UnderlineNav,
   Breadcrumbs,
   Pagination,
+  Header,
 } from "@primer/react";
 
 // Data Display

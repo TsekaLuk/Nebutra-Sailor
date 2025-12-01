@@ -7,6 +7,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { DesignSystemProvider, Box, Header, Button } from "@nebutra/design-system";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,24 +35,22 @@ export default function RootLayout({
   const content = (
     <html lang="en">
       <body className="antialiased">
-        <header className="flex justify-between items-center px-6 py-4 border-b border-gray-200 bg-white">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-gray-900">Nebutra</span>
-          </div>
-          <nav className="flex items-center gap-4">
+        <DesignSystemProvider>
+          <Header>
+            <Header.Item full>
+              <span className="text-xl font-bold">Nebutra</span>
+            </Header.Item>
             {hasClerkKey && (
-              <>
+              <Header.Item>
                 <SignedOut>
-                  <SignInButton mode="modal">
-                    <button className="text-sm font-medium text-gray-700 hover:text-gray-900">
-                      Sign In
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <button className="bg-blue-600 text-white rounded-lg font-medium text-sm px-4 py-2 hover:bg-blue-700">
-                      Sign Up
-                    </button>
-                  </SignUpButton>
+                  <Box sx={{ display: "flex", gap: 2 }}>
+                    <SignInButton mode="modal">
+                      <Button variant="invisible">Sign In</Button>
+                    </SignInButton>
+                    <SignUpButton mode="modal">
+                      <Button variant="primary">Sign Up</Button>
+                    </SignUpButton>
+                  </Box>
                 </SignedOut>
                 <SignedIn>
                   <UserButton
@@ -63,11 +62,13 @@ export default function RootLayout({
                     }}
                   />
                 </SignedIn>
-              </>
+              </Header.Item>
             )}
-          </nav>
-        </header>
-        <main className="min-h-[calc(100vh-65px)]">{children}</main>
+          </Header>
+          <Box as="main" sx={{ minHeight: "calc(100vh - 64px)" }}>
+            {children}
+          </Box>
+        </DesignSystemProvider>
       </body>
     </html>
   );

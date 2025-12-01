@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.20.0",
     "@nebutra/21st": "workspace:*",
+    "@nebutra/design-system": "workspace:*",
     "@nebutra/sanity": "workspace:*",
     "next": "16.0.5",
     "react": "19.2.0",
