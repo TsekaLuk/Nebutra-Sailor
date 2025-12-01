@@ -52,10 +52,14 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
   <br /><br />
   <p>
     次世代ユニコーンプロダクトの創出に取り組む AI ネイティブスタートアップ<br />
-    <strong>Vibe-Coding</strong> 開発哲学を先駆け — AI エージェント × 自動化ワークフロー × 人間の創造性
+    <strong>Vibe Business</strong> を先駆け — Vibe Coding から Vibe 起業へ
   </p>
   <p align="center">技術は複製でき、製品は模倣される。変化への深い理解こそ、唯一信頼できる堀だ。</p>
 </div>
+
+> **Vibe Coding** は「作る」問題を解決し、**Vibe Business** は「稼ぐ」問題を解決する。
+>
+> 0 から 90 は簡単—AI がコードを書く。本当の挑戦は残りの 10%：セキュリティ、アーキテクチャ、スケーラビリティ、そしてデモを収益を生むプロダクトにすること。
 
 <br />
 
@@ -70,17 +74,17 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 <td align="center" width="25%">
   <h3>🤖</h3>
   <strong>AI ネイティブ</strong><br />
-  <sub>LLM · エージェント · 自動化</sub>
+  <sub>LLM · Multi-Agent · MCP</sub>
 </td>
 <td align="center" width="25%">
-  <h3>🎨</h3>
-  <strong>ブランド駆動 SaaS</strong><br />
-  <sub>技術 + デザイン + 戦略</sub>
+  <h3>💼</h3>
+  <strong>Vibe Business</strong><br />
+  <sub>Demo → 収益 · 高速出荷</sub>
 </td>
 <td align="center" width="25%">
   <h3>🦄</h3>
   <strong>ユニコーン創出</strong><br />
-  <sub>PoC → スケーラブル事業</sub>
+  <sub>一人会社 Ready</sub>
 </td>
 </tr>
 </table>
@@ -92,6 +96,8 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 - 保守的な選択は一見安全だが、実はより攻めの賭けだ。変わらないことは世界が変わらないと賭けること。唯一の不変は変化。
 
 ### なぜ Sailor を選ぶのか？
+
+**Vibe Business 時代のために**：Sailor は「AI で作れる」と「収益を生むプロダクトを出荷できる」のギャップを埋める。
 
 <table>
 <tr>
@@ -108,13 +114,13 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 </td>
 <td width="50%">
 
-|     | 特徴                       | 説明                           |
-| :-: | :------------------------- | :----------------------------- |
-| 📋  | **法務・コンプライアンス** | GDPR/CCPA・Cookie 同意         |
-| 🔌  | **拡張性**                 | マイクロサービス・イベント駆動 |
-| 🌍  | **グローバル対応**         | i18n・CDN・エッジキャッシュ    |
-| 📊  | **実績**                   | レポート -70%・インサイト 4×   |
-| 🦄  | **ユニコーン志向**         | 速度と信頼性を両立             |
+|     | 特徴                       | 説明                            |
+| :-: | :------------------------- | :------------------------------ |
+| 📋  | **法務・コンプライアンス** | GDPR/CCPA・Cookie 同意          |
+| 🔐  | **セキュリティ優先**       | WAF・RLS・Prompt Injection 防御 |
+| 🌍  | **グローバル対応**         | i18n・CDN・エッジキャッシュ     |
+| 👤  | **一人会社 Ready**         | Multi-Agent・自動化 CI/CD       |
+| 🦄  | **ユニコーン志向**         | Demo → プロダクト → 収益        |
 
 </td>
 </tr>

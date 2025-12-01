@@ -72,10 +72,14 @@ Nebula • Nurture • Ultra • Future
   <br /><br />
   <p>
     AI 原生初创企业，致力于孵化下一代独角兽产品<br />
-    开创 <strong>Vibe-Coding</strong> 开发理念 — AI 智能体 × 自动化工作流 × 人类创造力
+    开创 <strong>Vibe Business</strong> 理念 — 从氛围编程到氛围创业
   </p>
   <p align="center">技术可复制、产品可模仿；对变化的深刻理解，才是唯一可靠的护城河。</p>
 </div>
+
+> **Vibe Coding** 解决「做出来」的问题；**Vibe Business** 解决「赚到钱」的问题。
+>
+> 从 0 到 90 很容易——AI 帮你写代码。真正的挑战在最后 10%：安全、架构、可扩展性，以及把 Demo 变成能产生收入的产品。
 
 <br />
 
@@ -90,17 +94,17 @@ Nebula • Nurture • Ultra • Future
 <td align="center" width="25%">
   <h3>🤖</h3>
   <strong>AI 原生架构</strong><br />
-  <sub>LLM · 智能体 · 自动化</sub>
+  <sub>LLM · Multi-Agent · MCP</sub>
 </td>
 <td align="center" width="25%">
-  <h3>🎨</h3>
-  <strong>品牌驱动 SaaS</strong><br />
-  <sub>技术 + 设计 + 策划</sub>
+  <h3>💼</h3>
+  <strong>Vibe Business</strong><br />
+  <sub>Demo → 收入 · 快速交付</sub>
 </td>
 <td align="center" width="25%">
   <h3>🦄</h3>
   <strong>独角兽孵化</strong><br />
-  <sub>PoC → 规模化业务</sub>
+  <sub>一人公司 Ready</sub>
 </td>
 </tr>
 </table>
@@ -112,6 +116,8 @@ Nebula • Nurture • Ultra • Future
 - 保守决策看似稳妥，实则更激进：不改变，就是押注世界不变；而世界唯一不变的，是变化。
 
 ### 为什么选择 Sailor？
+
+**面向 Vibe Business 时代**：Sailor 填补了「我能用 AI 做出来」和「我能交付一个盈利产品」之间的鸿沟。
 
 <table>
 <tr>
@@ -128,13 +134,13 @@ Nebula • Nurture • Ultra • Future
 </td>
 <td width="50%">
 
-|     | 特性             | 说明                   |
-| :-: | :--------------- | :--------------------- |
-| 📋  | **合规基础设施** | GDPR/CCPA・Cookie 同意 |
-| 🔌  | **可扩展**       | 微服务・事件驱动通信   |
-| 🌍  | **全球化**       | i18n・CDN・边缘缓存    |
-| 📊  | **实战成效**     | 报表 -70%・洞察 4×     |
-| 🦄  | **面向独角兽**   | 速度与可靠性兼顾       |
+|     | 特性               | 说明                            |
+| :-: | :----------------- | :------------------------------ |
+| 📋  | **合规基础设施**   | GDPR/CCPA・Cookie 同意          |
+| 🔐  | **安全优先**       | WAF・RLS・Prompt Injection 防护 |
+| 🌍  | **全球化**         | i18n・CDN・边缘缓存             |
+| 👤  | **一人公司 Ready** | Multi-Agent・自动化 CI/CD       |
+| 🦄  | **面向独角兽**     | Demo → 产品 → 收入              |
 
 </td>
 </tr>

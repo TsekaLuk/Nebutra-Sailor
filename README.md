@@ -71,10 +71,14 @@ Nebula • Nurture • Ultra • Future
   <br /><br />
   <p>
     AI-native startup committed to incubating the next generation of unicorn products<br />
-    Pioneering <strong>Vibe-Coding</strong> — AI Agents × Automated Workflows × Human Creativity
+    Pioneering <strong>Vibe Business</strong> — From Vibe Coding to Vibe Entrepreneurship
   </p>
   <p align="center">Technology can be copied and products imitated; a deep understanding of change is the only reliable moat.</p>
 </div>
+
+> **Vibe Coding** solves the problem of _building it_; **Vibe Business** solves the problem of _making it profitable_.
+>
+> Going from 0 to 90 is easy—AI handles the coding. The real challenge is the last 10%: security, architecture, scalability, and turning a demo into a product that generates revenue.
 
 <br />
 
@@ -89,17 +93,17 @@ Nebula • Nurture • Ultra • Future
 <td align="center" width="25%">
   <h3>🤖</h3>
   <strong>AI-Native</strong><br />
-  <sub>LLMs · Agents · Automation</sub>
+  <sub>LLMs · Multi-Agent · MCP</sub>
 </td>
 <td align="center" width="25%">
-  <h3>🎨</h3>
-  <strong>Brand-Driven SaaS</strong><br />
-  <sub>Tech + Design + Strategy</sub>
+  <h3>💼</h3>
+  <strong>Vibe Business</strong><br />
+  <sub>Demo → Revenue · Ship Fast</sub>
 </td>
 <td align="center" width="25%">
   <h3>🦄</h3>
   <strong>Unicorn Incubation</strong><br />
-  <sub>PoC → Scalable Business</sub>
+  <sub>One-Person Company Ready</sub>
 </td>
 </tr>
 </table>
@@ -111,6 +115,8 @@ Nebula • Nurture • Ultra • Future
 - Conservative choices feel safe but are the bolder bet: not changing is betting the world won’t. The only constant is change.
 
 ### Why Sailor?
+
+**For the Vibe Business era**: Sailor bridges the gap between _"I can build it with AI"_ and _"I can ship a profitable product"_.
 
 <table>
 <tr>
@@ -127,13 +133,13 @@ Nebula • Nurture • Ultra • Future
 </td>
 <td width="50%">
 
-|     | Feature                | Description                  |
-| :-: | :--------------------- | :--------------------------- |
-| 📋  | **Legal & Compliance** | GDPR/CCPA · Cookie consent   |
-| 🔌  | **Extensible**         | Microservices · Event-driven |
-| 🌍  | **Global-Ready**       | i18n · CDN · Edge caching    |
-| 📊  | **Proven Impact**      | Reports -70% · Insights 4×   |
-| 🦄  | **For Unicorns**       | Velocity + Reliability       |
+|     | Feature                | Description                      |
+| :-: | :--------------------- | :------------------------------- |
+| 📋  | **Legal & Compliance** | GDPR/CCPA · Cookie consent       |
+| 🔐  | **Security-First**     | WAF · RLS · Prompt Injection防护 |
+| 🌍  | **Global-Ready**       | i18n · CDN · Edge caching        |
+| 👤  | **One-Person Ready**   | Multi-Agent · Automated CI/CD    |
+| 🦄  | **For Unicorns**       | Demo → Product → Revenue         |
 
 </td>
 </tr>
