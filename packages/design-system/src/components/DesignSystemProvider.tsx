@@ -130,7 +130,8 @@ export function DesignSystemProvider({
           dayScheme="light"
           nightScheme="dark"
         >
-          <BaseStyles>{children}</BaseStyles>
+          {/* Cast children to satisfy Primer's React 18 types with React 19 */}
+          <BaseStyles>{children as React.ReactElement}</BaseStyles>
         </ThemeProvider>
       </SSRProvider>
     </DesignSystemContext.Provider>

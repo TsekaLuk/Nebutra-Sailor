@@ -15,6 +15,20 @@
  */
 
 /* ============================================
+   Google Fonts Import (MUST be first)
+   ============================================ */
+
+/* Inter - Primary font for UI and body text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* JetBrains Mono - Monospace font for code */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* Noto Sans SC - Chinese (Simplified) fallback
+   Only import if CJK support is needed */
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap'); */
+
+/* ============================================
    CSS Custom Properties (SSOT)
    ============================================ */
 
@@ -39,20 +53,6 @@
   --font-sans: var(--font-primary);
   --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 }
-
-/* ============================================
-   Google Fonts Import
-   ============================================ */
-
-/* Inter - Primary font for UI and body text */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* JetBrains Mono - Monospace font for code */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-/* Noto Sans SC - Chinese (Simplified) fallback
-   Only import if CJK support is needed */
-/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap'); */
 
 /* ============================================
    Font Smoothing & Rendering
