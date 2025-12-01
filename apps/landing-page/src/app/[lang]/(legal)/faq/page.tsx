@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Link from "next/link";
 import { locales } from "@/lib/i18n/locales";
 
 export const metadata: Metadata = {
