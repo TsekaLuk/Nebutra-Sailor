@@ -66,9 +66,11 @@ Nebula • Nurture • Ultra • Future
 - **🤖 AI-Native** — Built-in support for LLMs, embeddings, RAG, and AI agents via MCP
 - **🏢 Multi-Tenant** — Row-level security, tenant isolation, and per-tenant customization out of the box
 - **⚡ Modern Stack** — Next.js 17, React 19, TypeScript 5.6+, TailwindCSS 4.0
+- **💳 Billing Built-in** — Database-driven plans, Stripe integration, usage metering, and feature entitlements
+- **📋 Legal & Compliance** — Cookie consent, privacy controls, GDPR/CCPA compliance infrastructure
 - **🔌 Extensible** — Modular microservices architecture with event-driven communication
 - **🌍 Global-Ready** — i18n, CDN, edge caching, and multi-region deployment support
-- **📊 Proven Impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights, and ~50% gains in operational efficiency via traceable dashboards.
+- **📊 Proven Impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights
 - **🦄 For Unicorns** — PoC‑to‑production patterns that balance velocity with reliability.
 
 ## Highlights
@@ -94,18 +96,18 @@ Nebula • Nurture • Ultra • Future
   <tr>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Workflows" /><br />
-      <strong>Workflows</strong>
-      <br />Background jobs, cron, events with Inngest and event bus.
+      <strong>Billing & Monetization</strong>
+      <br />Database-driven plans, Stripe billing, usage metering, feature gates.
     </td>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/security.svg" width="28" alt="Security" /><br />
-      <strong>Security</strong>
-      <br />RLS, WAF, Turnstile, isolation by tenant.
+      <strong>Security & Compliance</strong>
+      <br />RLS, WAF, Turnstile, GDPR/CCPA, cookie consent.
     </td>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/toolkit.svg" width="28" alt="Toolkit" /><br />
-      <strong>Toolkit</strong>
-      <br />UI kit, brand package, dev scripts, and presets.
+      <strong>Marketing UI Kit</strong>
+      <br />Hero, Features, Pricing, Testimonials — conversion-optimized components.
     </td>
   </tr>
 </table>
@@ -245,9 +247,11 @@ Nebutra-Sailor/
 ├── packages/
 │   ├── 21st/              # shadcn/ui + 21st.dev experimental components
 │   ├── ai-providers/      # Multi-provider AI SDK (OpenRouter, OpenAI, etc)
-│   ├── brand/             # Centralized brand assets & components
-│   ├── custom-ui/         # Brand-specific, promoted UI components
-│   ├── design-system/     # SSOT: Primer + Typography + Theme tokens
+│   ├── billing/           # Stripe billing, plans, usage metering
+│   ├── brand/             # Brand assets, guidelines & programmatic tokens
+│   ├── custom-ui/         # Marketing UI components (Hero, Pricing, etc.)
+│   ├── design-system/     # Design tokens, marketing themes, Primer base
+│   ├── legal/             # Cookie consent, privacy, GDPR/CCPA compliance
 │   ├── ui/                # Lobe UI + Lobe Icons + Design System
 │   ├── db/                # Prisma 7 schema & client
 │   ├── supabase/          # Supabase Realtime, Storage, Edge Functions
@@ -305,15 +309,14 @@ Each component has its own README with setup instructions and API documentation:
 <tr>
 <td><strong>Packages</strong></td>
 <td>
+  <a href="packages/billing/">Billing</a> · 
+  <a href="packages/legal/">Legal</a> · 
   <a href="packages/design-system/">Design System</a> · 
-  <a href="packages/custom-ui/">Custom UI</a> · 
-  <a href="packages/21st/">21st</a> · 
+  <a href="packages/custom-ui/">Marketing UI</a> · 
+  <a href="packages/brand/">Brand</a> · 
   <a href="packages/db/">DB</a> · 
-  <a href="packages/supabase/">Supabase</a> · 
   <a href="packages/cache/">Cache</a> · 
   <a href="packages/rate-limit/">Rate Limit</a> · 
-  <a href="packages/event-bus/">Event Bus</a> · 
-  <a href="packages/saga/">Saga</a> · 
   <a href="packages/mcp/">MCP</a> · 
   <a href="packages/ai-providers/">AI Providers</a> · 
   <a href="packages/analytics/">Analytics</a>

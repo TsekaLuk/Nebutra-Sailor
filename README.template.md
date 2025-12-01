@@ -53,6 +53,8 @@ Built with the latest technologies including Next.js 17, React 19, and Prisma 7,
 - **🤖 AI-Native** — Built-in support for LLMs, embeddings, RAG, and AI agents via MCP
 - **🏢 Multi-Tenant** — Row-level security, tenant isolation, and per-tenant customization out of the box
 - **⚡ Modern Stack** — Next.js 17, React 19, TypeScript 5.6+, TailwindCSS 4.0
+- **💳 Billing Built-in** — Database-driven plans, Stripe integration, usage metering, and feature entitlements
+- **📋 Legal & Compliance** — Cookie consent, privacy controls, GDPR/CCPA compliance infrastructure
 - **🔌 Extensible** — Modular microservices architecture with event-driven communication
 - **🌍 Global-Ready** — i18n, CDN, edge caching, and multi-region deployment support
 - **📊 Proven Impact** — Delivered projects have shown >70% reduction in manual reporting time with 4× faster insights
@@ -81,18 +83,18 @@ Built with the latest technologies including Next.js 17, React 19, and Prisma 7,
   <tr>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Workflows" /><br />
-      <strong>Workflows</strong>
-      <br />Background jobs, cron, events with Inngest and event bus.
+      <strong>Billing & Monetization</strong>
+      <br />Database-driven plans, Stripe billing, usage metering, feature gates.
     </td>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/security.svg" width="28" alt="Security" /><br />
-      <strong>Security</strong>
-      <br />RLS, WAF, Turnstile, isolation by tenant.
+      <strong>Security & Compliance</strong>
+      <br />RLS, WAF, Turnstile, GDPR/CCPA, cookie consent.
     </td>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/toolkit.svg" width="28" alt="Toolkit" /><br />
-      <strong>Toolkit</strong>
-      <br />UI kit, brand package, dev scripts, and presets.
+      <strong>Marketing UI Kit</strong>
+      <br />Hero, Features, Pricing, Testimonials — conversion-optimized components.
     </td>
   </tr>
 </table>
@@ -273,8 +275,11 @@ pnpm db:generate && pnpm dev
 ├── packages/
 │   ├── 21st/              # shadcn/ui + 21st.dev components
 │   ├── ai-providers/      # Multi-provider AI SDK (OpenRouter, OpenAI, etc)
-│   ├── brand/             # Centralized brand assets & components
-│   ├── design-system/     # Primer-based UI system with brand extensibility
+│   ├── billing/           # Stripe billing, plans, usage metering
+│   ├── brand/             # Brand assets, guidelines & programmatic tokens
+│   ├── custom-ui/         # Marketing UI components (Hero, Pricing, etc.)
+│   ├── design-system/     # Design tokens, marketing themes, Primer base
+│   ├── legal/             # Cookie consent, privacy, GDPR/CCPA compliance
 │   ├── ui/                # Lobe UI + Lobe Icons + Design System
 │   ├── db/                # Prisma 7 schema & client
 │   ├── supabase/          # Supabase Realtime, Storage, Edge Functions
