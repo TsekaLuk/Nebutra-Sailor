@@ -305,6 +305,28 @@ importers:
         specifier: ^3.2.1
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.10.1)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.2)
 
+  packages/analytics:
+    dependencies:
+      dub:
+        specifier: ^0.40.0
+        version: 0.40.1(zod@3.25.76)
+    devDependencies:
+      "@types/node":
+        specifier: ^20.10.0
+        version: 20.19.25
+      "@types/react":
+        specifier: ^18.2.0
+        version: 18.3.27
+      react:
+        specifier: ^19.0.0
+        version: 19.2.0
+      tsup:
+        specifier: ^8.0.0
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+
   packages/audit:
     devDependencies:
       "@types/node":
@@ -9901,6 +9923,14 @@ packages:
         integrity: sha512-sCm11ak2oY6DglEPpCB8TixLjWAxd3kJTs6UIcSasNYxXdFPV+YKlye92c8H4kKFqV5qYMIh7d+cYecEg0dIkA==,
       }
     engines: { node: ">=6" }
+
+  dub@0.40.1:
+    resolution:
+      {
+        integrity: sha512-o7+Kw2d09Cuc4f1AssyGrTdN0VPtbQT8OqiiAv5qq6sggc+FrwQlIWgDkLtd59iPxDgltVRLrrOcqPaFRXOAAw==,
+      }
+    peerDependencies:
+      zod: ">= 3"
 
   dunder-proto@1.0.1:
     resolution:
@@ -25951,6 +25981,10 @@ snapshots:
     dependencies:
       find-up: 3.0.0
       minimatch: 3.1.2
+
+  dub@0.40.1(zod@3.25.76):
+    dependencies:
+      zod: 3.25.76
 
   dunder-proto@1.0.1:
     dependencies:
