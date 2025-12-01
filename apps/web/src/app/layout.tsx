@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
+import { DesignSystemShell } from "./providers/design-system-shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,32 +28,7 @@ export default function RootLayout({
   const content = (
     <html lang="en">
       <body className="antialiased">
-        <header className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
-          <span className="text-xl font-bold">Nebutra</span>
-          {hasClerkKey && (
-            <div className="flex items-center gap-2">
-              <SignedOut>
-                <SignInButton mode="modal">
-                  <button className="text-sm font-medium text-gray-700 underline">Sign In</button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white">
-                    Sign Up
-                  </button>
-                </SignUpButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton
-                  afterSignOutUrl="/"
-                  appearance={{
-                    elements: { avatarBox: "h-9 w-9" },
-                  }}
-                />
-              </SignedIn>
-            </div>
-          )}
-        </header>
-        <main className="min-h-[calc(100vh-64px)]">{children}</main>
+        <DesignSystemShell hasClerkKey={hasClerkKey}>{children}</DesignSystemShell>
       </body>
     </html>
   );
