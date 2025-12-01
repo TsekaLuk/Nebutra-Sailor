@@ -38,6 +38,7 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
+    "@prisma/client": "^7.0.0",
     "stripe": "^17.4.0",
     "zod": "^3.23.0"
   },
