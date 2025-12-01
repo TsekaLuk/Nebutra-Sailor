@@ -2,7 +2,19 @@
 
 import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
 import { ThemeProvider, BaseStyles } from "@primer/react";
+import { StyleSheetManager } from "styled-components";
+import isPropValid from "@emotion/is-prop-valid";
 import { lightTheme, darkTheme, type ThemeMode } from "../theme";
+
+// Filter function for styled-components to prevent unknown props from being passed to DOM
+const shouldForwardProp = (propName: string, target: unknown) => {
+  // Always allow valid HTML attributes
+  if (typeof target === "string") {
+    return isPropValid(propName);
+  }
+  // For custom components, forward all props
+  return true;
+};
 
 // ============================================
 // Context
@@ -124,13 +136,15 @@ export function DesignSystemProvider({
 
   return (
     <DesignSystemContext.Provider value={contextValue}>
-      <ThemeProvider
-        colorMode={resolvedMode === "dark" ? "night" : "day"}
-        dayScheme="light"
-        nightScheme="dark"
-      >
-        <BaseStyles>{children}</BaseStyles>
-      </ThemeProvider>
+      <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+        <ThemeProvider
+          colorMode={resolvedMode === "dark" ? "night" : "day"}
+          dayScheme="light"
+          nightScheme="dark"
+        >
+          <BaseStyles>{children}</BaseStyles>
+        </ThemeProvider>
+      </StyleSheetManager>
     </DesignSystemContext.Provider>
   );
 }

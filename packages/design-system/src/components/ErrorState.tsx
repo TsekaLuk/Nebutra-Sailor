@@ -11,13 +11,11 @@ import {
 import { AlertIcon } from "@primer/octicons-react";
 import { clsx } from "clsx";
 
-// Thin wrappers to satisfy React 19 JSXElementConstructor expectations
-const Heading: React.FC<React.ComponentProps<typeof PrimerHeading>> = (props) => (
-  <PrimerHeading {...props} />
-);
-const Button: React.FC<React.ComponentProps<typeof PrimerButton>> = (props) => (
-  <PrimerButton {...props} />
-);
+// Type assertions for React 19 compatibility with @primer/react
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Heading = PrimerHeading as any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Button = PrimerButton as any;
 
 export interface ErrorStateProps extends BoxProps {
   title?: string;
