@@ -49,4 +49,4 @@ export type {
   // Audit
   AuditLog,
   AuditAction,
-} from "@prisma/client";
+} from "./generated/prisma/client.js";
