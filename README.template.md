@@ -110,6 +110,14 @@ Built with the latest technologies including Next.js 17, React 19, and Prisma 7,
 </td>
 </tr>
 <tr>
+<td><strong>UI / Design</strong></td>
+<td>
+  <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
+  <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
+  <img src="https://img.shields.io/badge/Design_Tokens-gray?style=flat-square" alt="Design Tokens" />
+</td>
+</tr>
+<tr>
 <td><strong>Auth</strong></td>
 <td>
   <a href="https://clerk.com/"><img src="https://img.shields.io/badge/Clerk-6C47FF?style=flat-square&logo=clerk&logoColor=white" alt="Clerk" /></a>
@@ -266,6 +274,7 @@ pnpm db:generate && pnpm dev
 │   ├── 21st/              # shadcn/ui + 21st.dev components
 │   ├── ai-providers/      # Multi-provider AI SDK (OpenRouter, OpenAI, etc)
 │   ├── brand/             # Centralized brand assets & components
+│   ├── design-system/     # Primer-based UI system with brand extensibility
 │   ├── ui/                # Lobe UI + Lobe Icons + Design System
 │   ├── db/                # Prisma 7 schema & client
 │   ├── supabase/          # Supabase Realtime, Storage, Edge Functions

@@ -124,6 +124,14 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
+<td><strong>UI / 设计</strong></td>
+<td>
+  <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
+  <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
+  <img src="https://img.shields.io/badge/设计令牌-gray?style=flat-square" alt="Design Tokens" />
+</td>
+</tr>
+<tr>
 <td><strong>认证</strong></td>
 <td>
   <a href="https://clerk.com/"><img src="https://img.shields.io/badge/Clerk-6C47FF?style=flat-square&logo=clerk&logoColor=white" alt="Clerk" /></a>
@@ -238,6 +246,7 @@ Nebutra-Sailor/
 │   ├── 21st/              # shadcn/ui + 21st.dev 组件
 │   ├── ai-providers/      # 多供应商 AI SDK (OpenRouter, OpenAI 等)
 │   ├── brand/             # 统一品牌资产与组件
+│   ├── design-system/     # 基于 Primer 的 UI 系统，支持品牌扩展
 │   ├── ui/                # Lobe UI + Lobe Icons + 设计系统
 │   ├── db/                # Prisma 7 Schema 与客户端
 │   ├── supabase/          # Supabase 实时订阅、存储、Edge Functions
