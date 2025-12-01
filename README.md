@@ -531,9 +531,15 @@ For commercial licensing inquiries, please contact us.
   </p>
   <br />
   <p>
-    <a href="https://nebutra.com">Website</a> ·
-    <a href="https://twitter.com/nebutra">Twitter</a> ·
-    <a href="https://discord.gg/nebutra">Discord</a> ·
+    <a href="https://nebutra.com">Website</a>
+  </p>
+  <p>
+    <a href="https://twitter.com/nebutra">Twitter</a>
+  </p>
+  <p>
+    <a href="https://discord.gg/nebutra">Discord</a>
+  </p>
+  <p>
     <a href="mailto:hello@nebutra.com">Contact</a>
   </p>
 </div>

@@ -528,9 +528,15 @@ pnpm brand:apply
   </p>
   <br />
   <p>
-    <a href="https://nebutra.com">官网</a> ·
-    <a href="https://twitter.com/nebutra">Twitter</a> ·
-    <a href="https://discord.gg/nebutra">Discord</a> ·
+    <a href="https://nebutra.com">官网</a>
+  </p>
+  <p>
+    <a href="https://twitter.com/nebutra">Twitter</a>
+  </p>
+  <p>
+    <a href="https://discord.gg/nebutra">Discord</a>
+  </p>
+  <p>
     <a href="mailto:hello@nebutra.com">联系我们</a>
   </p>
 </div>
