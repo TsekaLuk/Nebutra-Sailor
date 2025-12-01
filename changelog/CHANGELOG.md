@@ -5,6 +5,12 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.5](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.3.4...v1.3.5) (2025-12-01)
+
+### 🐛 Bug Fixes
+
+- add missing eslint dependencies for lint-staged ([4507a88](https://github.com/TsekaLuk/Nebutra-Sailor/commit/4507a88e36992886118860aedffe8e809307ae74))
+
 ## [1.3.4](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.3.3...v1.3.4) (2025-12-01)
 
 ### 🐛 Bug Fixes
