@@ -80,26 +80,52 @@ Use the spacing scale (based on 4px unit):
 
 ### Typography
 
-Use the text style presets:
+The typography system provides comprehensive font management with open-source fonts:
+
+**Font Stacks:**
+- **Primary:** Inter, Public Sans, system fallbacks
+- **Monospace:** JetBrains Mono, Fira Code, system mono
+- **CJK:** Source Han Sans SC, Noto Sans CJK SC, PingFang SC
 
 ```tsx
-import { textStyles } from "@nebutra/design-system";
+import { typeStyles, fontFamilies, TYPE_SCALE } from "@nebutra/design-system";
 
-// Page title
-<Heading sx={textStyles.h1}>Dashboard</Heading>
+// Pre-defined type styles (recommended)
+<Heading sx={typeStyles.display}>Hero Title</Heading>
+<Text sx={typeStyles.body}>Body content</Text>
+<Text sx={typeStyles.caption}>Secondary info</Text>
+<code style={typeStyles.code}>const x = 1;</code>
 
-// Body text
-<Text sx={textStyles.body}>Content here</Text>
+// Direct token usage
+<Box sx={{
+  fontFamily: fontFamilies.primary,
+  fontSize: TYPE_SCALE.lg,
+}}>
+  Custom styled text
+</Box>
 ```
 
-**Text Style Scale:**
-- `h1` - Page titles (40px)
-- `h2` - Section titles (32px)
-- `h3` - Subsection titles (24px)
-- `h4` - Card titles (20px)
-- `body` - Body text (14px)
-- `small` - Small text (12px)
-- `caption` - Muted captions (12px)
+**Type Scale (rem-based):**
+| Token | Size | Usage |
+|-------|------|-------|
+| `xs` | 0.75rem | Fine print |
+| `sm` | 0.875rem | Captions, labels |
+| `base` | 1rem | Body text |
+| `lg` | 1.125rem | Emphasized body |
+| `xl` - `4xl` | 1.25-2.25rem | Headings |
+| `5xl` - `8xl` | 3-6rem | Display titles |
+
+**Font Loading:**
+```tsx
+// In _app.tsx or layout.tsx
+import '@nebutra/design-system/typography/fonts.css';
+
+// Or with Next.js font optimization
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'], variable: '--font-primary' });
+```
+
+> 📖 **Full documentation:** See [TYPOGRAPHY.md](./TYPOGRAPHY.md) for complete font stacks, loading strategies, CJK support, and performance best practices.
 
 ### Breakpoints
 

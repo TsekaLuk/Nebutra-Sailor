@@ -229,23 +229,49 @@ export const semanticColorsDark = {
 // Typography
 // ============================================
 
+/**
+ * Typography configuration using open-source fonts.
+ *
+ * Primary: Inter - designed for screen legibility
+ * Heading: Inter (can be swapped for brand font)
+ * Mono: JetBrains Mono - developer-friendly
+ * CJK: Noto Sans SC - Chinese/Japanese/Korean support
+ *
+ * All fonts are SIL Open Font License (OFL) - free for commercial use.
+ */
 export const typography = {
   fontFamily: {
+    /** Primary UI and body text */
+    primary:
+      '"Inter", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+    /** Headings and titles (can be customized for brand) */
+    heading:
+      '"Inter", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+    /** Code and monospace */
+    mono:
+      '"JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
+    /** CJK (Chinese/Japanese/Korean) fallback */
+    cjk:
+      '"Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif',
+    /** System fonts (no web font loading) */
+    system:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+    /** Legacy alias for backwards compatibility */
     normal:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-    mono: 'ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, "Liberation Mono", monospace',
+      '"Inter", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
   },
 
   fontSize: {
-    xs: "12px",
-    sm: "14px",
-    base: "16px",
-    lg: "18px",
-    xl: "20px",
-    "2xl": "24px",
-    "3xl": "32px",
-    "4xl": "40px",
-    "5xl": "48px",
+    xs: "0.75rem",   // 12px
+    sm: "0.875rem",  // 14px
+    base: "1rem",    // 16px
+    lg: "1.125rem",  // 18px
+    xl: "1.25rem",   // 20px
+    "2xl": "1.5rem",   // 24px
+    "3xl": "1.875rem", // 30px
+    "4xl": "2.25rem",  // 36px
+    "5xl": "3rem",     // 48px
+    "6xl": "3.75rem",  // 60px
   },
 
   fontWeight: {
@@ -257,9 +283,24 @@ export const typography = {
   },
 
   lineHeight: {
+    none: 1,
+    tight: 1.25,
+    snug: 1.375,
+    normal: 1.5,
+    relaxed: 1.625,
+    loose: 1.75,
+    /** Legacy aliases */
     condensed: 1.25,
     default: 1.5,
-    relaxed: 1.75,
+  },
+
+  letterSpacing: {
+    tighter: "-0.05em",
+    tight: "-0.025em",
+    normal: "0",
+    wide: "0.025em",
+    wider: "0.05em",
+    widest: "0.1em",
   },
 } as const;
 

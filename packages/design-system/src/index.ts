@@ -9,6 +9,9 @@
 // Theme
 export * from "./theme";
 
+// Typography
+export * from "./typography";
+
 // Primitives
 export * from "./primitives";
 
