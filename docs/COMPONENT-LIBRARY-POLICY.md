@@ -46,6 +46,8 @@ Nebutra uses a **layered component architecture** built on GitHub's Primer Desig
 **Status**: Always use first
 
 The foundation layer built on **Primer React** providing:
+
+> **Compatibility Note**: Runtime is React 19, but TypeScript type definitions are locked to `@types/react@18` via pnpm overrides for Primer React compatibility. This is a temporary measure until Primer React fully supports React 19 types. All React 19 features (Server Components, Actions, `use()`, etc.) work as expected.
 - **Theme tokens** - colors, spacing, shadows, radii (Primer defaults + brand overrides)
 - **Typography system** - Inter, JetBrains Mono, CJK fonts with rem-based scale
 - **UI primitives** - layout, accessibility, responsive patterns
