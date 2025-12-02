@@ -21,3 +21,10 @@ export {
   type EmptyStateProps,
   type EmptyStateAction,
 } from "./empty-state";
+
+// Onboarding Checklist
+export {
+  OnboardingChecklist,
+  type OnboardingChecklistProps,
+  type ChecklistItem,
+} from "./onboarding-checklist";

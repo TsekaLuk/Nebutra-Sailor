@@ -162,3 +162,59 @@ export {
   type ThemeSwitcherProps,
   type ThemeSwitcherValue,
 } from "./theme-switcher";
+export {
+  GradientAnimatedText,
+  type GradientAnimatedTextProps,
+  type GradientVariant,
+  type GradientTheme,
+} from "./gradient-animated-text";
+export {
+  DitheringShader,
+  DITHERING_SHAPES,
+  DITHERING_TYPES,
+  type DitheringShaderProps,
+  type DitheringShaderShape,
+  type DitheringShaderType,
+} from "./dithering-shader";
+export {
+  GitHubCalendar,
+  type GitHubCalendarProps,
+  type ContributionDay,
+} from "./github-calendar";
+export { StarsCanvas, type StarsCanvasProps } from "./stars-canvas";
+export { WaveAnimation, type WaveAnimationProps } from "./wave-animation";
+export { TextShimmer, type TextShimmerProps } from "./text-shimmer";
+export {
+  Announcement,
+  AnnouncementTag,
+  AnnouncementTitle,
+  type AnnouncementProps,
+  type AnnouncementTagProps,
+  type AnnouncementTitleProps,
+} from "./announcement";
+export { WordFadeIn, type WordFadeInProps } from "./word-fade-in";
+export { VideoPlayer, type VideoPlayerProps } from "./video-player";
+export { TextScramble, type TextScrambleProps } from "./text-scramble";
+export { BubbleText, type BubbleTextProps } from "./bubble-text";
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "./dialog";
+export { TextLoop, type TextLoopProps } from "./text-loop";
+export {
+  ColorBadge,
+  colorBadgeVariants,
+  colorBadgeSizes,
+  type ColorBadgeProps,
+  type ColorBadgeVariant,
+  type ColorBadgeSize,
+} from "./color-badge";
+export { Awards, type AwardsComponentProps } from "./awards";

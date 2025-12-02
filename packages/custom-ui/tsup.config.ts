@@ -16,5 +16,6 @@ export default defineConfig({
     "@clerk/nextjs",
     "motion",
     "motion/react",
+    "date-fns",
   ],
 });

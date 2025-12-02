@@ -188,12 +188,7 @@ export type {
 } from "./feature-cards-section";
 
 // Bento Cards (plus-icon grid)
-export {
-  BentoCards,
-  PlusCard,
-  PlusIcon,
-  CornerPlusIcons,
-} from "./bento-cards";
+export { BentoCards, PlusCard, PlusIcon, CornerPlusIcons } from "./bento-cards";
 export type {
   BentoCardsProps,
   BentoCardItem,
@@ -207,6 +202,20 @@ export {
   SystemStatusButton,
   DEFAULT_SOCIAL_LINKS,
 } from "./footer-links";
+
+// Animated Headline (cycling gradient text)
+export { AnimatedHeadline } from "./animated-headline";
+export type {
+  AnimatedHeadlineProps,
+  AnimatedHeadlineWord,
+} from "./animated-headline";
+
+// Cosmic Spectrum (scroll-animated spectrum)
+export { CosmicSpectrum, COSMIC_SPECTRUM_COLORS } from "./cosmic-spectrum";
+export type {
+  CosmicSpectrumProps,
+  CosmicSpectrumColorTheme,
+} from "./cosmic-spectrum";
 export type {
   FooterLink,
   FooterDropdown,
@@ -218,3 +227,11 @@ export type {
   SystemStatus,
   SystemStatusButtonProps,
 } from "./footer-links";
+
+// Smooth Scroll Hero (parallax clip-path reveal)
+export { SmoothScrollHero } from "./smooth-scroll-hero";
+export type { SmoothScrollHeroProps } from "./smooth-scroll-hero";
+
+// Award Badge (Product Hunt awards with 3D effect)
+export { AwardBadge, AWARD_BADGE_TITLES } from "./award-badge";
+export type { AwardBadgeProps, AwardBadgeType } from "./award-badge";

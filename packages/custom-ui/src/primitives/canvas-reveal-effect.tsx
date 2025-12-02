@@ -1,5 +1,6 @@
-// @ts-expect-error - react-three-fiber JSX types incompatible with React 19
-// Note: Type checking disabled due to @react-three/fiber JSX type incompatibilities
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+// Note: Type checking disabled due to @react-three/fiber JSX type incompatibilities with React 19
 // The component works correctly at runtime
 "use client";
 
@@ -207,7 +208,11 @@ interface ShaderMaterialProps {
   maxFps?: number;
 }
 
-function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) {
+function ShaderMaterial({
+  source,
+  uniforms,
+  maxFps = 60,
+}: ShaderMaterialProps) {
   const { size } = useThree();
   const ref = useRef<THREE.Mesh>(null);
   let lastFrameTime = 0;
@@ -226,7 +231,8 @@ function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) 
   });
 
   const getUniforms = () => {
-    const preparedUniforms: Record<string, { value: unknown; type?: string }> = {};
+    const preparedUniforms: Record<string, { value: unknown; type?: string }> =
+      {};
 
     for (const uniformName in uniforms) {
       const uniform = uniforms[uniformName];
@@ -247,7 +253,7 @@ function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) 
         case "uniform3fv":
           preparedUniforms[uniformName] = {
             value: (uniform.value as number[][]).map((v) =>
-              new THREE.Vector3().fromArray(v)
+              new THREE.Vector3().fromArray(v),
             ),
             type: "3fv",
           };
@@ -293,7 +299,6 @@ function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) 
       blendSrc: THREE.SrcAlphaFactor,
       blendDst: THREE.OneFactor,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size.width, size.height, source]);
 
   return (
