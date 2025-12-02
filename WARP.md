@@ -424,6 +424,51 @@ uvicorn app.main:app --reload --port 8007
 - Sync command: `pnpm brand:sync`
 - Documentation: `WHITELABEL.md`
 
+## External UI Component Integration
+
+When integrating external UI components (21st.dev, HeroUI, MagicUI, etc.) into the codebase, **ALL components MUST pass Primer compliance review** before merging.
+
+### Primer Compliance Checklist
+
+| Category          | Requirement                                    | Example                                             |
+| ----------------- | ---------------------------------------------- | --------------------------------------------------- |
+| **Colors**        | Use semantic tokens only                       | `text-foreground`, `bg-background`, `border-border` |
+| **Spacing**       | Use Tailwind spacing scale (4px base)          | `p-4`, `gap-2`, `space-y-8`                         |
+| **Typography**    | Use design system scale (rem)                  | `text-sm`, `text-base`, `text-xl` to `text-6xl` max |
+| **Font Size**     | Max display size: 6xl (3.75rem/60px)           | Avoid `text-7xl`, `text-8xl`                        |
+| **Accessibility** | ARIA labels, focus-visible, 44px touch targets | `aria-label`, `focus-visible:ring-2`                |
+| **Responsive**    | Mobile-first breakpoints                       | `sm:`, `md:`, `lg:`, `xl:`                          |
+
+### Exemptions
+
+The following may be exempted from strict compliance:
+
+- **Artistic/decorative elements** (background patterns, gradients, particle effects)
+- **Oversized typography** for Hero/display text when it's intentional design (7xl, 8xl in landing pages)
+- **Fixed-dimension cards** where design requires specific sizes
+- **Animation keyframes** and transition values
+
+### Integration Workflow
+
+1. **Copy component** to `apps/{app}/src/components/ui/`
+2. **Replace hardcoded values** with semantic tokens
+3. **Add ARIA attributes** for interactive elements
+4. **Add focus-visible styles** to buttons/links
+5. **Update mock data** to repo-relevant content
+6. **Register in registry** if component has variants
+7. **Run typecheck** to verify no errors
+
+### Landing Page Testimonials Registry
+
+Testimonials variants are registered in `apps/landing-page/src/components/ui/testimonials/registry.tsx`:
+
+```typescript
+import { Testimonials } from "@/components/ui/testimonials/registry";
+
+// Available variants: "stagger" | "marquee3d" | "grid"
+<Testimonials variant="grid" items={testimonialItems} />
+```
+
 ## Documentation
 
 Key docs in `docs/` directory:

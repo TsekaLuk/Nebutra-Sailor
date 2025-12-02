@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import type { TestimonialsCommonProps } from "./types";
-import { StaggerTestimonials as InternalStagger } from "@/components/ui/stagger-testimonials";
+import { StaggerTestimonials } from "../stagger-testimonials";
 
 export function StaggerTestimonialsAdapter({
   items,
@@ -26,6 +26,6 @@ export function StaggerTestimonialsAdapter({
   );
 
   return (
-    <InternalStagger items={mapped} height={height} className={className} />
+    <StaggerTestimonials items={mapped} height={height} className={className} />
   );
 }

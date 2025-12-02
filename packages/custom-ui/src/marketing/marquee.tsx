@@ -1,5 +1,7 @@
+"use client";
+
 import React, { ComponentPropsWithoutRef, useRef } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../utils/cn";
 
 interface MarqueeProps extends ComponentPropsWithoutRef<"div"> {
   /** Optional CSS class name to apply custom styles */
@@ -83,3 +85,5 @@ export function Marquee({
     </div>
   );
 }
+
+export type { MarqueeProps };

@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../utils/cn";
 
 const SQRT_5000 = Math.sqrt(5000);
 
 // Repo-specific mock data for Nebutra-Sailor
-const testimonials = [
+const defaultTestimonials = [
   {
     tempId: 0,
     testimonial:
@@ -85,93 +85,18 @@ const testimonials = [
     imgSrc:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=60",
   },
-  {
-    tempId: 10,
-    testimonial:
-      "pgvector embeddings + Supabase made search features straightforward.",
-    by: "Pete, Sales Director at RevenueRockets",
-    imgSrc:
-      "https://images.unsplash.com/photo-1541534401786-2077eed87a62?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 11,
-    testimonial:
-      "New hires grok the repo in 10 minutes thanks to clear docs and patterns.",
-    by: "Marina, HR Manager at TalentForge",
-    imgSrc:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 12,
-    testimonial:
-      "Third‑party service for Product Hunt data is a lifesaver for launch ops.",
-    by: "Olivia, Customer Success Manager at ClientCare",
-    imgSrc:
-      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 13,
-    testimonial:
-      "Turbo + caching reduced our CI times dramatically—devs actually enjoy builds.",
-    by: "Raj, Operations Manager at StreamlineSolutions",
-    imgSrc:
-      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 14,
-    testimonial:
-      "API Gateway gives us retries, circuit breaker, and service discovery out‑of‑box.",
-    by: "Lila, Workflow Specialist at ProcessPro",
-    imgSrc:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 15,
-    testimonial:
-      "We scaled usage 10x—Supabase + Redis handled it without rewrites.",
-    by: "Trevor, Scaling Officer at GrowthGurus",
-    imgSrc:
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 16,
-    testimonial:
-      "Saga orchestrations for e‑commerce flows just clicked in this repo.",
-    by: "Naomi, Innovation Lead at FutureTech",
-    imgSrc:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 17,
-    testimonial:
-      "Billing, analytics, emails… integrations are all pre‑wired. Massive ROI.",
-    by: "Victor, Finance Analyst at ProfitPeak",
-    imgSrc:
-      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 18,
-    testimonial:
-      "Dark mode + semantic tokens keep brand accessible and consistent.",
-    by: "Yuki, Tech Lead at BalancedTech",
-    imgSrc:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=60",
-  },
-  {
-    tempId: 19,
-    testimonial:
-      "Monorepo DX is superb—lint, typecheck, release tooling all there.",
-    by: "Zoe, Performance Manager at ReliableSystems",
-    imgSrc:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=60",
-  },
 ];
 
-type InternalItem = (typeof testimonials)[number];
+export type StaggerTestimonialItem = {
+  tempId: number;
+  testimonial: string;
+  by: string;
+  imgSrc: string;
+};
 
 interface TestimonialCardProps {
   position: number;
-  testimonial: InternalItem;
+  testimonial: StaggerTestimonialItem;
   handleMove: (steps: number) => void;
   cardSize: number;
 }
@@ -246,14 +171,25 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   );
 };
 
-export const StaggerTestimonials: React.FC<{
-  items?: InternalItem[];
+export interface StaggerTestimonialsProps {
+  items?: StaggerTestimonialItem[];
   height?: number;
   className?: string;
-}> = ({ items, height = 600, className }) => {
+}
+
+export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
+  items,
+  height = 600,
+  className,
+}) => {
   const [cardSize, setCardSize] = useState(365);
-  const [testimonialsList, setTestimonialsList] = useState<InternalItem[]>(
-    (items ?? testimonials).map((t, i) => ({ ...t, tempId: t.tempId ?? i })),
+  const [testimonialsList, setTestimonialsList] = useState<
+    StaggerTestimonialItem[]
+  >(
+    (items ?? defaultTestimonials).map((t, i) => ({
+      ...t,
+      tempId: t.tempId ?? i,
+    })),
   );
 
   const handleMove = (steps: number) => {

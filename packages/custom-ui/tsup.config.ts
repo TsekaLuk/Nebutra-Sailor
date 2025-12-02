@@ -7,5 +7,12 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
-  external: ["react", "react-dom", "@nebutra/design-system"],
+  external: [
+    "react",
+    "react-dom",
+    "@nebutra/design-system",
+    "next",
+    "next/link",
+    "@clerk/nextjs",
+  ],
 });
