@@ -14,5 +14,7 @@ export default defineConfig({
     "next",
     "next/link",
     "@clerk/nextjs",
+    "motion",
+    "motion/react",
   ],
 });

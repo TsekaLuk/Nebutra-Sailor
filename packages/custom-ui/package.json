@@ -52,28 +52,43 @@
     "@nebutra/design-system": "workspace:*",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-avatar": "^1.1.0",
+    "@radix-ui/react-dropdown-menu": "^2.1.0",
     "@radix-ui/react-slot": "^1.2.0",
     "@radix-ui/react-tooltip": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cobe": "^0.6.3",
+    "dotted-map": "^2.2.2",
+    "embla-carousel-react": "^8.6.0",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.460.0",
+    "motion": "^12.23.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwind-merge": "^2.5.0"
+    "react-use-measure": "^2.1.7",
+    "recharts": "^2.15.0",
+    "tailwind-merge": "^2.5.0",
+"usehooks-ts": "^3.1.0",
+    "@paper-design/shaders-react": "^0.0.67"
+  },
+  "optionalDependencies": {
+    "@react-three/fiber": "^8.0.0",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
     "@types/react": "^19.0.0",
+    "@types/recharts": "^2.0.1",
+    "@types/three": "^0.170.0",
     "next": "^16.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.6.0"
   },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0",
+    "@clerk/nextjs": ">=5.0.0",
     "next": ">=14.0.0",
-    "@clerk/nextjs": ">=5.0.0"
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "peerDependenciesMeta": {
     "@clerk/nextjs": {

@@ -15,5 +15,9 @@
 // export { TenantSwitcher } from "./TenantSwitcher";
 // export { PricingCard } from "./PricingCard";
 
-// Placeholder export to prevent empty module error
-export const CUSTOM_COMPONENTS_VERSION = "0.1.0";
+// Empty State
+export {
+  EmptyState,
+  type EmptyStateProps,
+  type EmptyStateAction,
+} from "./empty-state";

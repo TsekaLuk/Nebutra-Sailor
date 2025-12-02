@@ -448,15 +448,41 @@ The following may be exempted from strict compliance:
 - **Fixed-dimension cards** where design requires specific sizes
 - **Animation keyframes** and transition values
 
+### Component Integration Principles
+
+When integrating components into `@nebutra/custom-ui`, follow these principles:
+
+1. **Atomic Decomposition** - Break down complex components into composable atomic units
+   - Separate container/content patterns (e.g., `NoisePatternCard` + `NoisePatternCardBody`)
+   - Extract reusable decorative elements (e.g., `DecorativeGrid`, `GridPattern`)
+   - Keep animation variants as separate configs
+
+2. **De-demo-ification** - Remove all demo/example data
+   - Props should receive data, not hardcode it
+   - Default values only for optional props (e.g., `placeholder`, `buttonText`)
+   - Export `DEFAULT_*` constants separately if needed for reference
+
+3. **Pure Export** - Only export component logic and styles
+   - No demo wrappers or example pages
+   - No hardcoded URLs, content, or assets
+   - All text should be configurable via props
+
+4. **UX Scenario Documentation** - Add JSDoc comments describing:
+   - Primary use cases and business scenarios
+   - Innovative composition patterns
+   - Integration with other components
+
 ### Integration Workflow
 
-1. **Copy component** to `apps/{app}/src/components/ui/`
-2. **Replace hardcoded values** with semantic tokens
-3. **Add ARIA attributes** for interactive elements
-4. **Add focus-visible styles** to buttons/links
-5. **Update mock data** to repo-relevant content
-6. **Register in registry** if component has variants
-7. **Run typecheck** to verify no errors
+1. **Copy component** to `packages/custom-ui/src/{primitives|marketing}/`
+2. **Atomic decomposition** - Split into composable units
+3. **Replace hardcoded values** with semantic tokens
+4. **Add ARIA attributes** for interactive elements
+5. **Add focus-visible styles** to buttons/links
+6. **Remove demo data** - Components receive all data via props
+7. **Add TypeScript interfaces** with JSDoc comments
+8. **Export from index.ts** with proper types
+9. **Run `pnpm build`** in packages/custom-ui to verify
 
 ### Landing Page Testimonials Registry
 

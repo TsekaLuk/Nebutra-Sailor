@@ -105,3 +105,116 @@ export type {
   PricingCardProps,
   PricingPlan,
 } from "./pricing-section";
+
+// Upgrade Banner
+export { UpgradeBanner } from "./upgrade-banner";
+export type { UpgradeBannerProps } from "./upgrade-banner";
+
+// Banner (with Grid pattern)
+export { Banner } from "./banner";
+export type { BannerProps } from "./banner";
+
+// CTA Section (with decorative borders)
+export { CTASection } from "./cta-section";
+export type { CTASectionProps } from "./cta-section";
+
+// Customers Section (logo cloud with animation)
+export { CustomersSection } from "./customers-section";
+export type { CustomersSectionProps, CustomerLogo } from "./customers-section";
+
+// Logo Cloud Slider (infinite slider)
+export { LogoCloudSlider } from "./logo-cloud";
+export type { LogoCloudSliderProps, Logo } from "./logo-cloud";
+
+// Features Grid (gradient cards)
+export {
+  FeaturesGrid,
+  DecorativeGrid,
+  DEFAULT_FEATURES,
+} from "./features-grid";
+export type { FeaturesGridProps, FeatureItem } from "./features-grid";
+
+// Feature Carousel
+export { FeatureCarousel } from "./feature-carousel";
+export type { FeatureCarouselProps, CarouselSlide } from "./feature-carousel";
+
+// Logo Cloud Grid (decorative grid layout)
+export { LogoCloudGrid } from "./logo-cloud-grid";
+export type { LogoCloudGridProps, LogoCloudGridLogo } from "./logo-cloud-grid";
+
+// Feature Split Section (two-column layout)
+export { FeatureSplitSection } from "./feature-split-section";
+export type {
+  FeatureSplitSectionProps,
+  FeatureSplitItem,
+} from "./feature-split-section";
+
+// Database REST API Visualization
+export { DatabaseRestApi } from "./database-rest-api";
+export type { DatabaseRestApiProps } from "./database-rest-api";
+
+// Features Showcase (image + feature grid)
+export { FeaturesShowcase } from "./features-showcase";
+export type {
+  FeaturesShowcaseProps,
+  ShowcaseFeature,
+} from "./features-showcase";
+
+// Features Bento (6-card bento grid)
+export { FeaturesBentoSection } from "./features-bento";
+export type {
+  FeaturesBentoSectionProps,
+  BentoStatCard,
+  BentoFeatureCard,
+  BentoTeamMember,
+} from "./features-bento";
+
+// Featured Dashboard Section (2x2 grid layout)
+export {
+  FeaturedDashboardSection,
+  DashboardPanelHeader,
+} from "./featured-dashboard-section";
+export type {
+  FeaturedDashboardSectionProps,
+  DashboardPanelHeaderProps,
+} from "./featured-dashboard-section";
+
+// Feature Cards Section (bento-style with circular UI)
+export { FeatureCardsSection, CircularUIRow } from "./feature-cards-section";
+export type {
+  FeatureCardsSectionProps,
+  FeatureCardItem,
+  CircularUIRowProps,
+} from "./feature-cards-section";
+
+// Bento Cards (plus-icon grid)
+export {
+  BentoCards,
+  PlusCard,
+  PlusIcon,
+  CornerPlusIcons,
+} from "./bento-cards";
+export type {
+  BentoCardsProps,
+  BentoCardItem,
+  PlusCardProps,
+} from "./bento-cards";
+
+// Footer Components (atomic footer building blocks)
+export {
+  FooterLinkColumn,
+  FooterSocialLinks,
+  SystemStatusButton,
+  DEFAULT_SOCIAL_LINKS,
+} from "./footer-links";
+export type {
+  FooterLink,
+  FooterDropdown,
+  FooterDropdownItem,
+  FooterLinkGroup,
+  FooterSocialLink,
+  FooterLinkColumnProps,
+  FooterSocialLinksProps,
+  SystemStatus,
+  SystemStatusButtonProps,
+} from "./footer-links";

@@ -13,5 +13,5 @@
 // export { MarketingLayout } from "./MarketingLayout";
 // export { LandingLayout } from "./LandingLayout";
 
-// Placeholder export
-export const CUSTOM_LAYOUTS_VERSION = "0.1.0";
+// Bento Grid
+export { BentoGrid, type BentoGridProps, type BentoItem } from "./bento-grid";
