@@ -146,6 +146,18 @@
     0% { opacity: 0; }
     100% { opacity: 1; }
   }
+
+  /* SnippetStatus copy animations */
+  @keyframes snippet-fade-in {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes snippet-fade-out {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.5); }
+  }
+  --animate-snippet-fade-in: snippet-fade-in 0.2s ease-out forwards;
+  --animate-snippet-fade-out: snippet-fade-out 0.2s ease-out forwards;
 }
 /*---break---
  */

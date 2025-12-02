@@ -21,5 +21,7 @@ export default defineConfig({
     "@internationalized/date",
     "@heroui/checkbox",
     "@heroui/slider",
+    "@heroui/progress",
+    "@heroui/switch",
   ],
 });

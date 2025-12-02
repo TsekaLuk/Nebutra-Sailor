@@ -348,6 +348,55 @@ export {
   type HeroCardFooterProps,
 } from "./hero-card";
 export { HeroSkeleton, type HeroSkeletonProps } from "./hero-skeleton";
+export {
+  CodeBlock,
+  type CodeBlockProps,
+  type CodeBlockFile,
+} from "./code-block";
+export {
+  HeroPopover,
+  HeroPopoverTrigger,
+  HeroPopoverContent,
+  type HeroPopoverProps,
+  type HeroPopoverTriggerProps,
+  type HeroPopoverContentProps,
+  type HeroPopoverPlacement,
+  type HeroPopoverColor,
+  type HeroPopoverBackdrop,
+} from "./hero-popover";
+export {
+  Drawer,
+  DrawerPortal,
+  DrawerOverlay,
+  DrawerTrigger,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+  type DrawerProps,
+  type DrawerDirection,
+  type DrawerTriggerProps,
+  type DrawerPortalProps,
+  type DrawerCloseProps,
+  type DrawerOverlayProps,
+  type DrawerContentProps,
+  type DrawerHeaderProps,
+  type DrawerBodyProps,
+  type DrawerFooterProps,
+  type DrawerTitleProps,
+  type DrawerDescriptionProps,
+} from "./drawer";
+export {
+  HeroSelect,
+  HeroSelectItem,
+  HeroSelectSection,
+  type HeroSelectProps,
+  type HeroSelectItemProps,
+  type HeroSelectSectionProps,
+} from "./hero-select";
 export { FlickeringGrid, type FlickeringGridProps } from "./flickering-grid";
 export { WarpBackground, type WarpBackgroundProps } from "./warp-background";
 export {
@@ -403,3 +452,147 @@ export {
   type SliderRadius,
   type SliderOrientation,
 } from "./slider";
+export { Spinner, type SpinnerProps, type SpinnerVariant } from "./spinner";
+export {
+  Skeleton,
+  SkeletonText,
+  SkeletonAvatar,
+  SkeletonCard,
+  type SkeletonProps,
+} from "./skeleton";
+export { Separator } from "./separator";
+export {
+  GithubInlineDiff,
+  type GithubInlineDiffProps,
+  type DiffLine,
+  type DiffLineKind,
+  type DiffComment,
+} from "./github-inline-diff";
+export {
+  ReactionChip,
+  ReactionBadge,
+  MessageWithReactions,
+  type ReactionChipProps,
+  type ReactionBadgeProps,
+  type MessageWithReactionsProps,
+} from "./reaction-chip";
+export {
+  SnippetStatus,
+  type SnippetStatusProps,
+  type SnippetStatusType,
+} from "./snippet-status";
+export {
+  Progress,
+  type ProgressProps,
+  type ProgressColor,
+  type ProgressSize,
+  type ProgressRadius,
+} from "./progress";
+export {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+  type BreadcrumbProps,
+  type BreadcrumbListProps,
+  type BreadcrumbItemProps,
+  type BreadcrumbLinkProps,
+  type BreadcrumbPageProps,
+  type BreadcrumbSeparatorProps,
+  type BreadcrumbEllipsisProps,
+} from "./breadcrumb";
+export {
+  Alert,
+  AlertContent,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  AlertToolbar,
+  alertVariants,
+  type AlertProps,
+  type AlertIconProps,
+  type AlertTitleProps,
+  type AlertDescriptionProps,
+  type AlertContentProps,
+  type AlertToolbarProps,
+  type AlertVariant,
+  type AlertAppearance,
+  type AlertSize,
+} from "./alert";
+export {
+  Switch,
+  type SwitchProps,
+  type SwitchColor,
+  type SwitchSize,
+  type ThumbIconProps,
+} from "./switch";
+export {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  tabsListVariants,
+  tabsTriggerVariants,
+  tabsContentVariants,
+  type TabsProps,
+  type TabsListProps,
+  type TabsTriggerProps,
+  type TabsContentProps,
+  type TabsVariant,
+  type TabsSize,
+  type TabsShape,
+} from "./tabs";
+export { Label, labelVariants, type LabelProps } from "./label";
+export {
+  Sheet,
+  SheetTrigger,
+  SheetClose,
+  SheetPortal,
+  SheetOverlay,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+  type SheetProps,
+  type SheetTriggerProps,
+  type SheetCloseProps,
+  type SheetPortalProps,
+  type SheetOverlayProps,
+  type SheetContentProps,
+  type SheetHeaderProps,
+  type SheetFooterProps,
+  type SheetTitleProps,
+  type SheetDescriptionProps,
+  type SheetSide,
+} from "./sheet";
+export {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+  type CommandProps,
+  type CommandDialogProps,
+  type CommandInputProps,
+  type CommandListProps,
+  type CommandEmptyProps,
+  type CommandGroupProps,
+  type CommandSeparatorProps,
+  type CommandItemProps,
+  type CommandShortcutProps,
+} from "./command";
+export {
+  MultipleSelector,
+  useDebounce,
+  type MultipleSelectorProps,
+  type MultipleSelectorOption,
+  type MultipleSelectorRef,
+} from "./multiple-selector";
