@@ -16,6 +16,7 @@
     "@nebutra/design-system": "workspace:*",
     "@nebutra/marketing": "workspace:*",
     "@nebutra/sanity": "workspace:*",
+    "@radix-ui/react-avatar": "^1.1.11",
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.2",
     "lucide-react": "^0.460.0",
