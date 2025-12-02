@@ -35,8 +35,8 @@
     </a>
   </p>
   <p>
-    <a href="https://twitter.com/nebutra">
-      <img src="https://img.shields.io/twitter/follow/nebutra?style=flat-square&logo=x&color=18181b&logoColor=fff" alt="X" />
+    <a href="https://x.com/nebutra">
+      <img src="https://img.shields.io/badge/follow-nebutra-18181b?style=flat-square&logo=x&logoColor=fff" alt="X" />
     </a>
   </p>
   <p>
@@ -80,6 +80,8 @@ Nebula • Nurture • Ultra • Future
 > **Vibe Coding** 解决「做出来」的问题；**Vibe Business** 解决「赚到钱」的问题。
 >
 > 从 0 到 90 很容易——AI 帮你写代码。真正的挑战在最后 10%：安全、架构、可扩展性，以及把 Demo 变成能产生收入的产品。
+>
+> **增长黑客** × **AI 原生**：数据驱动实验、病毒循环、转化优化——现在由智能自动化全面加速。
 
 <br />
 
@@ -539,7 +541,7 @@ pnpm brand:apply
     <a href="https://nebutra.com">官网</a>
   </p>
   <p>
-    <a href="https://twitter.com/nebutra">Twitter</a>
+    <a href="https://x.com/nebutra">X</a>
   </p>
   <p>
     <a href="https://discord.gg/nebutra">Discord</a>

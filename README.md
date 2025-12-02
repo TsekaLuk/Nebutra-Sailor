@@ -34,8 +34,8 @@
     </a>
   </p>
   <p>
-    <a href="https://twitter.com/nebutra">
-      <img src="https://img.shields.io/twitter/follow/nebutra?style=flat-square&logo=x&color=18181b&logoColor=fff" alt="X" />
+    <a href="https://x.com/nebutra">
+      <img src="https://img.shields.io/badge/follow-nebutra-18181b?style=flat-square&logo=x&logoColor=fff" alt="X" />
     </a>
   </p>
   <p>
@@ -79,6 +79,8 @@ Nebula • Nurture • Ultra • Future
 > **Vibe Coding** solves the problem of _building it_; **Vibe Business** solves the problem of _making it profitable_.
 >
 > Going from 0 to 90 is easy—AI handles the coding. The real challenge is the last 10%: security, architecture, scalability, and turning a demo into a product that generates revenue.
+>
+> **Growth Hacking** meets **AI-Native**: Data-driven experimentation, viral loops, and conversion optimization—now supercharged by intelligent automation.
 
 <br />
 
@@ -542,7 +544,7 @@ For commercial licensing inquiries, please contact us.
     <a href="https://nebutra.com">Website</a>
   </p>
   <p>
-    <a href="https://twitter.com/nebutra">Twitter</a>
+    <a href="https://x.com/nebutra">X</a>
   </p>
   <p>
     <a href="https://discord.gg/nebutra">Discord</a>

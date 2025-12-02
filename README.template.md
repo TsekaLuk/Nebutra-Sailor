@@ -54,6 +54,8 @@ Built with the latest technologies including Next.js 17, React 19, and Prisma 7,
 > **Vibe Coding** solves the problem of _building it_; **Vibe Business** solves the problem of _making it profitable_.
 >
 > Going from 0 to 90 is easy—AI handles the coding. The real challenge is the last 10%: security, architecture, scalability, and turning a demo into a product that generates revenue.
+>
+> **Growth Hacking** meets **AI-Native**: Data-driven experimentation, viral loops, and conversion optimization—now supercharged by intelligent automation.
 
 - **🚀 Production-Ready** — Battle-tested architecture patterns used in real enterprise deployments
 - **🤖 AI-Native** — Built-in support for LLMs, Multi-Agent, and AI agents via MCP
