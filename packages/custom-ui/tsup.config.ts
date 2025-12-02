@@ -17,5 +17,9 @@ export default defineConfig({
     "motion",
     "motion/react",
     "date-fns",
+    "@heroui/calendar",
+    "@internationalized/date",
+    "@heroui/checkbox",
+    "@heroui/slider",
   ],
 });

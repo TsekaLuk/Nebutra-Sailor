@@ -28,3 +28,12 @@ export {
   type OnboardingChecklistProps,
   type ChecklistItem,
 } from "./onboarding-checklist";
+
+// Team Chat
+export {
+  TeamChat,
+  type TeamChatProps,
+  type ChatMessage,
+  type ChatSender,
+  type ChatReaction,
+} from "./team-chat";

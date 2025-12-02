@@ -194,6 +194,37 @@ export {
 } from "./announcement";
 export { WordFadeIn, type WordFadeInProps } from "./word-fade-in";
 export { VideoPlayer, type VideoPlayerProps } from "./video-player";
+export {
+  AgentPlan,
+  type AgentPlanProps,
+  type AgentTask,
+  type AgentSubtask,
+  type TaskStatus,
+  type TaskPriority,
+} from "./agent-plan";
+export {
+  BentoGrid,
+  BentoCard,
+  type BentoGridProps,
+  type BentoCardProps,
+} from "./bento-grid";
+export { ProgressiveBlur, type ProgressiveBlurProps } from "./progressive-blur";
+export {
+  Confetti,
+  ConfettiButton,
+  type ConfettiProps,
+  type ConfettiButtonProps,
+  type ConfettiRef,
+  type ConfettiApi,
+} from "./confetti";
+export { AuroraText, type AuroraTextProps } from "./aurora-text";
+export {
+  ScrollVelocityContainer,
+  ScrollVelocityRow,
+  wrap as scrollVelocityWrap,
+  type ScrollVelocityContainerProps,
+  type ScrollVelocityRowProps,
+} from "./scroll-velocity";
 export { TextScramble, type TextScrambleProps } from "./text-scramble";
 export { BubbleText, type BubbleTextProps } from "./bubble-text";
 export {
@@ -208,6 +239,29 @@ export {
   DialogTitle,
   DialogDescription,
 } from "./dialog";
+export {
+  StatusBadge,
+  statusBadgeVariants,
+  type StatusBadgeProps,
+} from "./status-badge";
+export {
+  Terminal,
+  TypingAnimation,
+  AnimatedSpan,
+  type TerminalProps,
+  type TypingAnimationProps,
+  type AnimatedSpanProps,
+} from "./terminal";
+export {
+  XPostCard,
+  ClientXPostCard,
+  XPostSkeleton,
+  type XPostCardProps,
+} from "./x-post-card";
+export {
+  AnimatedShinyText,
+  type AnimatedShinyTextProps,
+} from "./animated-shiny-text";
 export { TextLoop, type TextLoopProps } from "./text-loop";
 export {
   ColorBadge,
@@ -218,3 +272,134 @@ export {
   type ColorBadgeSize,
 } from "./color-badge";
 export { Awards, type AwardsComponentProps } from "./awards";
+export {
+  Loader,
+  CircularLoader,
+  ClassicLoader,
+  PulseLoader,
+  PulseDotLoader,
+  DotsLoader,
+  TypingLoader,
+  WaveLoader,
+  BarsLoader,
+  TerminalLoader,
+  TextBlinkLoader,
+  TextShimmerLoader,
+  TextDotsLoader,
+  type LoaderProps,
+  type LoaderSizeProps,
+  type TextLoaderProps,
+} from "./loader";
+export {
+  AnimatedList,
+  AnimatedListItem,
+  type AnimatedListProps,
+  type AnimatedListItemProps,
+} from "./animated-list";
+export {
+  DottedMap,
+  type DottedMapProps,
+  type DottedMapMarker,
+} from "./dotted-map";
+export { MagicCard, type MagicCardProps } from "./magic-card";
+export { VideoText, type VideoTextProps } from "./video-text";
+export { Safari, type SafariProps, type SafariMode } from "./safari";
+export { LightRays, type LightRaysProps } from "./light-rays";
+export { DateInput, type DateInputProps } from "./date-input";
+export {
+  AvatarCircles,
+  type AvatarCirclesProps,
+  type AvatarCircleItem,
+} from "./avatar-circles";
+export { AnimatedBeam, type AnimatedBeamProps } from "./animated-beam";
+export {
+  LineShadowText,
+  LINE_SHADOW_CSS,
+  type LineShadowTextProps,
+} from "./line-shadow-text";
+export {
+  AnimatedGradientText,
+  ANIMATED_GRADIENT_CSS,
+  type AnimatedGradientTextProps,
+} from "./animated-gradient-text";
+export { IphoneMockup, type IphoneMockupProps } from "./iphone-mockup";
+export {
+  Snippet,
+  type SnippetProps,
+  type SnippetVariant,
+  type SnippetColor,
+  type SnippetSize,
+  type SnippetRadius,
+} from "./snippet";
+export {
+  Highlighter,
+  type HighlighterProps,
+  type HighlighterAction,
+} from "./highlighter";
+export { DotPattern, type DotPatternProps } from "./dot-pattern";
+export {
+  HeroCard,
+  HeroCardHeader,
+  HeroCardBody,
+  HeroCardFooter,
+  type HeroCardProps,
+  type HeroCardHeaderProps,
+  type HeroCardBodyProps,
+  type HeroCardFooterProps,
+} from "./hero-card";
+export { HeroSkeleton, type HeroSkeletonProps } from "./hero-skeleton";
+export { FlickeringGrid, type FlickeringGridProps } from "./flickering-grid";
+export { WarpBackground, type WarpBackgroundProps } from "./warp-background";
+export {
+  Calendar,
+  // Date utilities
+  CalendarDate,
+  CalendarDateTime,
+  ZonedDateTime,
+  today,
+  getLocalTimeZone,
+  parseDate,
+  parseDateTime,
+  parseZonedDateTime,
+  parseAbsolute,
+  parseAbsoluteToLocal,
+  isWeekend,
+  isToday,
+  isSameDay,
+  isSameMonth,
+  isSameYear,
+  getDayOfWeek,
+  now,
+  startOfWeek,
+  startOfMonth,
+  startOfYear,
+  endOfWeek,
+  endOfMonth,
+  endOfYear,
+  // Types
+  type CalendarProps,
+  type DateValue,
+  type SupportedCalendars,
+  type FirstDayOfWeek,
+  type CalendarColor,
+} from "./calendar";
+export {
+  CheckboxGroup,
+  Checkbox,
+  type CheckboxGroupProps,
+  type CheckboxProps,
+  type CheckboxColor,
+  type CheckboxSize,
+  type CheckboxRadius,
+  type CheckboxGroupOrientation,
+} from "./checkbox-group";
+export {
+  Slider,
+  type SliderProps,
+  type SliderValue,
+  type SliderStepMark,
+  type SliderColor,
+  type SliderSize,
+  type SliderRadius,
+  type SliderOrientation,
+} from "./slider";

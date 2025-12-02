@@ -49,6 +49,12 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@heroui/calendar": "^2.2.27",
+    "@heroui/card": "^2.2.25",
+    "@heroui/checkbox": "^2.3.27",
+    "@heroui/date-input": "^2.3.27",
+    "@heroui/slider": "^2.4.24",
+    "@internationalized/date": "^3.10.0",
     "@nebutra/design-system": "workspace:*",
     "@paper-design/shaders-react": "^0.0.67",
     "@radix-ui/react-accordion": "^1.2.0",
@@ -57,6 +63,7 @@
     "@radix-ui/react-dropdown-menu": "^2.1.0",
     "@radix-ui/react-slot": "^1.2.0",
     "@radix-ui/react-tooltip": "^1.1.0",
+    "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cobe": "^0.6.3",
@@ -68,8 +75,11 @@
     "motion": "^12.23.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-tweet": "^3.2.0",
     "react-use-measure": "^2.1.7",
     "recharts": "^2.15.0",
+    "rough-notation": "^0.5.1",
+    "svg-dotted-map": "^2.0.1",
     "tailwind-merge": "^2.5.0",
     "usehooks-ts": "^3.1.0"
   },
@@ -78,6 +88,7 @@
     "three": "^0.170.0"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20.14.0",
     "@types/react": "^19.0.0",
     "@types/recharts": "^2.0.1",
