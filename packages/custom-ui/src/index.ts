@@ -33,6 +33,13 @@ export { Heading } from "./primitives/heading";
 export type { HeadingProps } from "./primitives/heading";
 export { BorderTrail } from "./primitives/border-trail";
 export type { BorderTrailProps } from "./primitives/border-trail";
+export { MagicCard } from "./primitives/magic-card";
+export type { MagicCardProps } from "./primitives/magic-card";
+export { AvatarCircles } from "./primitives/avatar-circles";
+export type {
+  AvatarCirclesProps,
+  AvatarCircleItem,
+} from "./primitives/avatar-circles";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Patterns - Compound components

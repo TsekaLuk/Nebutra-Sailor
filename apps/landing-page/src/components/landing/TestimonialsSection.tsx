@@ -3,7 +3,12 @@
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { testimonialsContent } from "@/lib/landing-content";
-import { ThemedSection, useScrollDwell, DwellHint } from "@nebutra/custom-ui";
+import {
+  ThemedSection,
+  useScrollDwell,
+  DwellHint,
+  AvatarCircles,
+} from "@nebutra/custom-ui";
 import { useRef, useCallback, useState } from "react";
 
 /**
@@ -130,6 +135,21 @@ export function TestimonialsSection() {
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">
             {headline}
           </h2>
+          {/* Social proof avatars */}
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <AvatarCircles
+              size={36}
+              numPeople={500}
+              avatarUrls={items.slice(0, 4).map((t, i) => ({
+                imageUrl: `https://i.pravatar.cc/150?u=${t.author.replace(/ /g, "")}`,
+                profileUrl: "#",
+                alt: t.author,
+              }))}
+            />
+            <span className="text-sm text-muted-foreground">
+              Trusted by 500+ teams
+            </span>
+          </div>
         </motion.div>
 
         {/* Testimonials Grid with 3D cards */}

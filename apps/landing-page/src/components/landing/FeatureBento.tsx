@@ -9,6 +9,7 @@ import {
   ThemedSection,
   useScrollDwell,
   DwellHint,
+  MagicCard,
 } from "@nebutra/custom-ui";
 import { useRef, useCallback } from "react";
 
@@ -105,52 +106,57 @@ export function FeatureBento() {
                 variants={itemVariants}
                 className={cn(isLarge && "lg:col-span-1 lg:row-span-2")}
               >
-                <Card
-                  variant="gradient"
-                  className="group relative h-full overflow-hidden border-border/10 transition-all hover:border-border/20"
+                <MagicCard
+                  className="h-full rounded-2xl"
+                  gradientColor="hsl(var(--card))"
+                  gradientFrom="hsl(var(--primary))"
+                  gradientTo="hsl(var(--accent))"
+                  gradientOpacity={0.15}
                 >
-                  {/* Glow effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-primary)]/5 to-[var(--brand-accent)]/5 opacity-0 transition-opacity group-hover:opacity-100" />
+                  <Card
+                    variant="gradient"
+                    className="group relative h-full overflow-hidden border-0 bg-transparent"
+                  >
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <Card.Header>
+                        <Card.Icon
+                          size="lg"
+                          className="bg-gradient-to-br from-[var(--brand-primary)]/20 to-[var(--brand-accent)]/20"
+                        >
+                          <Icon className="h-6 w-6 text-[var(--brand-accent)]" />
+                        </Card.Icon>
+                      </Card.Header>
 
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <Card.Header>
-                      <Card.Icon
-                        size="lg"
-                        className="bg-gradient-to-br from-[var(--brand-primary)]/20 to-[var(--brand-accent)]/20"
-                      >
-                        <Icon className="h-6 w-6 text-[var(--brand-accent)]" />
-                      </Card.Icon>
-                    </Card.Header>
+                      <Card.Body>
+                        <Card.Title className="text-xl">
+                          {feature.title}
+                        </Card.Title>
+                        <Card.Description className="mt-2">
+                          {feature.description}
+                        </Card.Description>
 
-                    <Card.Body>
-                      <Card.Title className="text-xl">
-                        {feature.title}
-                      </Card.Title>
-                      <Card.Description className="mt-2">
-                        {feature.description}
-                      </Card.Description>
+                        {/* Feature list if available */}
+                        {"features" in feature && feature.features && (
+                          <ul className="mt-4 space-y-2">
+                            {feature.features.map((item: string) => (
+                              <li
+                                key={item}
+                                className="flex items-center gap-2 text-sm text-muted-foreground/80"
+                              >
+                                <span className="h-1 w-1 rounded-full bg-[var(--brand-accent)]" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </Card.Body>
+                    </div>
 
-                      {/* Feature list if available */}
-                      {"features" in feature && feature.features && (
-                        <ul className="mt-4 space-y-2">
-                          {feature.features.map((item: string) => (
-                            <li
-                              key={item}
-                              className="flex items-center gap-2 text-sm text-muted-foreground/80"
-                            >
-                              <span className="h-1 w-1 rounded-full bg-[var(--brand-accent)]" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </Card.Body>
-                  </div>
-
-                  {/* Decorative corner */}
-                  <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full bg-gradient-to-br from-[var(--brand-primary)]/10 to-transparent blur-2xl" />
-                </Card>
+                    {/* Decorative corner */}
+                    <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full bg-gradient-to-br from-[var(--brand-primary)]/10 to-transparent blur-2xl" />
+                  </Card>
+                </MagicCard>
               </motion.div>
             );
           })}
