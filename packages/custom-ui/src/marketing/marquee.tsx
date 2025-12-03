@@ -1,23 +1,46 @@
 "use client";
 
-import React, { ComponentPropsWithoutRef, useRef, useMemo } from "react";
+import React, {
+  ComponentPropsWithoutRef,
+  useRef,
+  useMemo,
+  useEffect,
+} from "react";
 import { cn } from "../utils/cn";
 
 /**
- * Marquee animation keyframes - injected via style tag
- * Using a unique ID to prevent duplicate style injection
+ * Marquee animation keyframes
+ * Injected into document head via useEffect to ensure proper loading
  */
 const MARQUEE_STYLE_ID = "nebutra-marquee-keyframes";
 const marqueeStyles = `
 @keyframes nebutra-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100% - var(--gap))); }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% - var(--gap, 1rem))); }
 }
 @keyframes nebutra-marquee-vertical {
-  from { transform: translateY(0); }
-  to { transform: translateY(calc(-100% - var(--gap))); }
+  0% { transform: translateY(0); }
+  100% { transform: translateY(calc(-100% - var(--gap, 1rem))); }
 }
 `;
+
+/**
+ * Hook to inject marquee styles into document head
+ */
+function useMarqueeStyles() {
+  useEffect(() => {
+    // Check if styles already exist
+    if (
+      typeof document !== "undefined" &&
+      !document.getElementById(MARQUEE_STYLE_ID)
+    ) {
+      const styleEl = document.createElement("style");
+      styleEl.id = MARQUEE_STYLE_ID;
+      styleEl.textContent = marqueeStyles;
+      document.head.appendChild(styleEl);
+    }
+  }, []);
+}
 
 interface MarqueeProps extends ComponentPropsWithoutRef<"div"> {
   /** Optional CSS class name to apply custom styles */
@@ -56,65 +79,54 @@ export function Marquee({
 }: MarqueeProps) {
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  // Memoize animation style to prevent unnecessary re-renders
-  const animationStyle = useMemo<React.CSSProperties>(
-    () => ({
-      animation: vertical
-        ? "nebutra-marquee-vertical var(--duration, 40s) linear infinite"
-        : "nebutra-marquee var(--duration, 40s) linear infinite",
-      animationDirection: reverse ? "reverse" : "normal",
-    }),
-    [vertical, reverse],
-  );
+  // Inject styles into document head
+  useMarqueeStyles();
 
-  // Memoize children rendering
-  const marqueeContent = useMemo(
-    () =>
-      Array.from({ length: repeat }, (_, i) => (
+  // Animation name based on direction
+  const animationName = vertical
+    ? "nebutra-marquee-vertical"
+    : "nebutra-marquee";
+
+  return (
+    <div
+      {...props}
+      ref={marqueeRef}
+      data-slot="marquee"
+      className={cn(
+        "group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)]",
+        vertical ? "flex-col" : "flex-row",
+        className,
+      )}
+      style={
+        {
+          "--duration": "40s",
+          ...props.style,
+        } as React.CSSProperties
+      }
+      aria-label={ariaLabel}
+      aria-live={ariaLive}
+      role={ariaRole}
+      tabIndex={0}
+    >
+      {Array.from({ length: repeat }, (_, i) => (
         <div
           key={i}
           className={cn(
-            !vertical
-              ? "flex-row [gap:var(--gap)]"
-              : "flex-col [gap:var(--gap)]",
             "flex shrink-0 justify-around",
+            vertical
+              ? "flex-col [gap:var(--gap)]"
+              : "flex-row [gap:var(--gap)]",
             pauseOnHover && "group-hover:[animation-play-state:paused]",
           )}
-          style={animationStyle}
+          style={{
+            animation: `${animationName} var(--duration, 40s) linear infinite`,
+            animationDirection: reverse ? "reverse" : "normal",
+          }}
         >
           {children}
         </div>
-      )),
-    [repeat, children, vertical, pauseOnHover, animationStyle],
-  );
-
-  return (
-    <>
-      {/* Inject keyframes - only once per page */}
-      <style
-        id={MARQUEE_STYLE_ID}
-        dangerouslySetInnerHTML={{ __html: marqueeStyles }}
-      />
-      <div
-        {...props}
-        ref={marqueeRef}
-        data-slot="marquee"
-        className={cn(
-          "group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]",
-          {
-            "flex-row": !vertical,
-            "flex-col": vertical,
-          },
-          className,
-        )}
-        aria-label={ariaLabel}
-        aria-live={ariaLive}
-        role={ariaRole}
-        tabIndex={0}
-      >
-        {marqueeContent}
-      </div>
-    </>
+      ))}
+    </div>
   );
 }
 

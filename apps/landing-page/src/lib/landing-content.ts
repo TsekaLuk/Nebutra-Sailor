@@ -133,8 +133,8 @@ export const techStackLogos: TechLogo[] = [
   {
     name: "Inngest",
     svgl: {
-      light: "inngest-dark.svg", // Dark inngest for light bg
-      dark: "inngest-light.svg", // Light inngest for dark bg
+      light: "inngest-light.svg", // currentColor adapts to light bg
+      dark: "inngest-dark.svg", // White inngest for dark bg
     },
   },
   {
