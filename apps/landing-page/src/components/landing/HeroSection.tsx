@@ -5,6 +5,14 @@ import { motion } from "framer-motion";
 import { Copy, Github, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { heroContent } from "@/lib/landing-content";
+import {
+  OrbSystem,
+  GridPattern,
+  DotMatrix,
+  GradientBlur,
+  TextSparkline,
+  CursorTrail,
+} from "@nebutra/custom-ui";
 
 /**
  * HeroSection - Immersive hero with gradient background and command box
@@ -22,25 +30,59 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-background">
+      {/* Cursor Trail - follows mouse in hero area */}
+      <CursorTrail
+        containerOnly
+        color="hsl(var(--accent))"
+        particleCount={10}
+        cursorSize={10}
+        particleSize={4}
+        stiffness={400}
+        damping={35}
+      />
       {/* Gradient Background - uses brand colors */}
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-primary)]/20 via-background to-[var(--brand-accent)]/10" />
 
-      {/* Grid Pattern Overlay */}
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: "64px 64px",
-        }}
+      {/* Grid Pattern Overlay - using custom-ui component */}
+      <GridPattern
+        className="absolute inset-0 z-0"
+        color="currentColor"
+        size={64}
+        strokeWidth={0.5}
+        fade="radial"
       />
 
-      {/* Radial glow - brand gradient */}
-      <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2">
-        <div className="h-[600px] w-[600px] rounded-full bg-gradient-to-r from-[var(--brand-primary)]/30 to-[var(--brand-accent)]/20 blur-[120px]" />
+      {/* Dot Matrix - subtle micro-density texture */}
+      <DotMatrix
+        className="absolute inset-0 z-0"
+        dotSize={1}
+        gap={24}
+        color="currentColor"
+        opacity={0.03}
+      />
+
+      {/* Particle Orb System - evolved from simple radial glow */}
+      <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 z-0">
+        <OrbSystem
+          size={400}
+          primaryColor="hsl(var(--primary))"
+          secondaryColor="hsl(var(--accent))"
+          showNoise={true}
+          showShell={true}
+          showParticles={true}
+          coreProps={{ breathDuration: 4 }}
+          shellProps={{ ringCount: 3, rotationDuration: 25 }}
+          particlesProps={{ particleCount: 12 }}
+        />
       </div>
+
+      {/* Ambient gradient blur behind orb */}
+      <GradientBlur
+        className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 z-0 opacity-20"
+        color="primary"
+        size="xl"
+        blur="xl"
+      />
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6">
@@ -67,16 +109,23 @@ export function HeroSection() {
           {heroContent.preHeadline}
         </motion.p>
 
-        {/* Main Headline with Animation */}
+        {/* Main Headline with Animation + TextSparkline effect */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8 text-center"
         >
-          <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            <HeadlineAnimator words={[...heroContent.headlineWords]} />
-          </h1>
+          <TextSparkline
+            glowColor="hsl(var(--accent))"
+            glowIntensity={0.3}
+            duration={4}
+            delay={1}
+          >
+            <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
+              <HeadlineAnimator words={[...heroContent.headlineWords]} />
+            </h1>
+          </TextSparkline>
         </motion.div>
 
         {/* Command Box */}

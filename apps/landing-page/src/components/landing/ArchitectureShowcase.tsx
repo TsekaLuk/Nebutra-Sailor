@@ -5,6 +5,7 @@ import { Folder, FolderOpen, FileCode } from "lucide-react";
 import { useState } from "react";
 import { architectureContent } from "@/lib/landing-content";
 import { cn } from "@/lib/utils";
+import { ThemedSection } from "@nebutra/custom-ui";
 
 /**
  * ArchitectureShowcase - File tree visualization of project structure
@@ -15,7 +16,7 @@ export function ArchitectureShowcase() {
   const { headline, tagline, structure } = architectureContent;
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-background via-card to-background py-24 md:py-32">
+    <ThemedSection theme="architecture" className="py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         {/* Header */}
         <motion.div
@@ -65,7 +66,7 @@ export function ArchitectureShowcase() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </ThemedSection>
   );
 }
 

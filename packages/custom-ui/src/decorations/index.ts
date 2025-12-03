@@ -3,3 +3,33 @@ export type { GridPatternProps } from "./GridPattern";
 
 export { GradientBlur, AmbientBackground } from "./GradientBlur";
 export type { GradientBlurProps, AmbientBackgroundProps } from "./GradientBlur";
+
+// Micro-Density Patterns
+export {
+  DotMatrix,
+  CrossPattern,
+  FloatingSpots,
+  type DotMatrixProps,
+  type CrossPatternProps,
+  type FloatingSpotsProps,
+} from "./patterns";
+
+// Particle Systems
+export {
+  OrbSystem,
+  OrbCore,
+  OrbShell,
+  OrbNoiseLayer,
+  OrbParticles,
+  type OrbSystemProps,
+  type OrbCoreProps,
+  type OrbShellProps,
+  type OrbNoiseLayerProps,
+  type OrbParticlesProps,
+} from "./particles/OrbSystem";
+
+export {
+  TextSparkline,
+  type TextSparklineProps,
+} from "./particles/TextSparkline";
+export { CursorTrail, type CursorTrailProps } from "./particles/CursorTrail";

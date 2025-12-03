@@ -1,5 +1,7 @@
 import { Locale, locales, isValidLocale } from "@/lib/i18n/locales";
 import {
+  LandingPageWrapper,
+  TrackedSection,
   Navbar,
   HeroSection,
   TrustRibbon,
@@ -29,48 +31,70 @@ export default async function LocalizedHomePage({ params }: Props) {
   const locale: Locale = isValidLocale(lang) ? lang : "en";
 
   return (
-    <main className="min-h-screen bg-background">
-      {/* Navigation */}
-      <Navbar />
+    <LandingPageWrapper>
+      <main className="min-h-screen bg-background">
+        {/* Navigation */}
+        <Navbar />
 
-      {/* 1. Immersive Hero */}
-      <HeroSection />
+        {/* 1. Immersive Hero */}
+        <TrackedSection id="hero" label="Home">
+          <HeroSection />
+        </TrackedSection>
 
-      {/* 2. Trust Ribbon - Tech Logos */}
-      <TrustRibbon />
+        {/* 2. Trust Ribbon - Tech Logos */}
+        <TrustRibbon />
 
-      {/* 3. Split Narrative - Problem/Solution */}
-      <SplitNarrative />
+        {/* 3. Split Narrative - Problem/Solution */}
+        <TrackedSection id="solution" label="Solution">
+          <SplitNarrative />
+        </TrackedSection>
 
-      {/* 4. Architecture Showcase - File Tree */}
-      <ArchitectureShowcase />
+        {/* 4. Architecture Showcase - File Tree */}
+        <TrackedSection id="architecture" label="Architecture">
+          <ArchitectureShowcase />
+        </TrackedSection>
 
-      {/* 5. Feature Bento Grid */}
-      <FeatureBento />
+        {/* 5. Feature Bento Grid */}
+        <TrackedSection id="features" label="Features">
+          <FeatureBento />
+        </TrackedSection>
 
-      {/* 6. Stats Break */}
-      <StatsBreak />
+        {/* 6. Stats Break */}
+        <StatsBreak />
 
-      {/* 7. Terminal Demo */}
-      <TerminalDemo />
+        {/* 7. Terminal Demo */}
+        <TrackedSection id="demo" label="Demo">
+          <TerminalDemo />
+        </TrackedSection>
 
-      {/* 8. Testimonials */}
-      <TestimonialsSection />
+        {/* 8. Testimonials */}
+        <TrackedSection id="testimonials" label="Testimonials">
+          <TestimonialsSection />
+        </TrackedSection>
 
-      {/* 9. Company Vision */}
-      <VisionSection />
+        {/* 9. Company Vision */}
+        <TrackedSection id="vision" label="Vision">
+          <VisionSection />
+        </TrackedSection>
 
-      {/* 10. Pricing */}
-      <PricingSection />
+        {/* 10. Pricing */}
+        <TrackedSection id="pricing" label="Pricing">
+          <PricingSection />
+        </TrackedSection>
 
-      {/* 11. FAQ */}
-      <FAQSection />
+        {/* 11. FAQ */}
+        <TrackedSection id="faq" label="FAQ">
+          <FAQSection />
+        </TrackedSection>
 
-      {/* 12. Final CTA */}
-      <FinalCTA />
+        {/* 12. Final CTA */}
+        <TrackedSection id="get-started" label="Get Started">
+          <FinalCTA />
+        </TrackedSection>
 
-      {/* 13. Footer */}
-      <FooterMinimal />
-    </main>
+        {/* 13. Footer */}
+        <FooterMinimal />
+      </main>
+    </LandingPageWrapper>
   );
 }

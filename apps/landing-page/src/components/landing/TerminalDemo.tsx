@@ -5,6 +5,7 @@ import { Copy, Check, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { terminalDemoContent } from "@/lib/landing-content";
 import { cn } from "@/lib/utils";
+import { ThemedSection } from "@nebutra/custom-ui";
 
 /**
  * TerminalDemo - Interactive terminal experience
@@ -23,11 +24,8 @@ export function TerminalDemo() {
   };
 
   return (
-    <section className="relative w-full bg-background py-24 md:py-32">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-card/50 via-background to-card/50" />
-
-      <div className="relative z-10 mx-auto max-w-4xl px-6">
+    <ThemedSection theme="terminal" className="py-24 md:py-32">
+      <div className="mx-auto max-w-4xl px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -134,7 +132,7 @@ export function TerminalDemo() {
           </a>
         </motion.div>
       </div>
-    </section>
+    </ThemedSection>
   );
 }
 
