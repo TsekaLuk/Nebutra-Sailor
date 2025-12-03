@@ -2,15 +2,19 @@
  * Nebutra Landing Page - Global Styles
  * 
  * This file imports:
- * 1. Typography CSS variables from design-system (SSOT for fonts)
- * 2. Theme system from @nebutra/custom-ui (colors, Tailwind config)
- * 3. HeroUI plugin for additional components
+ * 1. Tailwind CSS v4 (must be first)
+ * 2. Typography CSS variables from design-system (SSOT for fonts)
+ * 3. Theme system from @nebutra/custom-ui (colors, Tailwind config)
+ * 4. HeroUI plugin for additional components
  */
+
+/* Tailwind CSS v4 - must be imported first */
+@import "tailwindcss";
 
 /* Typography SSOT - must be imported first to define --font-* variables */
 @import "@nebutra/design-system/typography/fonts.css";
 
-/* Import 21st.dev compatible theme from @nebutra/custom-ui */
+/* Import theme variables from @nebutra/custom-ui */
 @import "@nebutra/custom-ui/styles/globals.css";
 @import "tw-animate-css";
 
