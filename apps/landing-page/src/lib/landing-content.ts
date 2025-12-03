@@ -57,96 +57,105 @@ export interface TechLogo {
   };
 }
 
+/**
+ * SVGL naming convention:
+ * - `_light.svg` = logo designed for LIGHT backgrounds (dark colored logo)
+ * - `_dark.svg` = logo designed for DARK backgrounds (light colored logo)
+ *
+ * Our config:
+ * - `light` property = what to show on LIGHT theme backgrounds
+ * - `dark` property = what to show on DARK theme backgrounds
+ */
 export const techStackLogos: TechLogo[] = [
   {
     name: "Next.js",
     svgl: {
-      light: "nextjs_icon_dark.svg",
-      dark: "nextjs_icon_dark.svg", // Same for dark bg
+      light: "nextjs_icon_dark.svg", // Black N on light bg
+      dark: "nextjs_icon_light.svg", // White N on dark bg
     },
   },
   {
     name: "React",
     svgl: {
-      light: "react_light.svg",
-      dark: "react_dark.svg",
+      light: "react_dark.svg", // Dark react logo for light bg
+      dark: "react_light.svg", // Light react logo for dark bg
     },
   },
   {
     name: "TypeScript",
     svgl: {
-      light: "typescript.svg",
+      light: "typescript.svg", // Blue TS works on both
       dark: "typescript.svg",
     },
   },
   {
     name: "Prisma",
     svgl: {
-      light: "prisma.svg",
-      dark: "prisma_dark.svg",
+      light: "prisma.svg", // Dark prisma for light bg
+      dark: "prisma_dark.svg", // White prisma for dark bg
     },
   },
   {
     name: "Supabase",
     svgl: {
-      light: "supabase.svg",
+      light: "supabase.svg", // Green works on both
       dark: "supabase.svg",
     },
   },
   {
     name: "Stripe",
     svgl: {
-      light: "stripe.svg",
-      dark: "stripe.svg",
+      light: "stripe.svg", // Purple stripe works on light
+      dark: "stripe_dark.svg", // White stripe for dark bg
     },
   },
   {
     name: "Clerk",
     svgl: {
-      light: "clerk-icon-light.svg",
-      dark: "clerk-icon-dark.svg",
+      light: "clerk-icon-dark.svg", // Dark clerk icon for light bg
+      dark: "clerk-icon-light.svg", // Light clerk icon for dark bg
     },
   },
   {
     name: "Vercel",
     svgl: {
-      light: "vercel.svg",
-      dark: "vercel_dark.svg",
+      light: "vercel.svg", // Black triangle for light bg
+      dark: "vercel_dark.svg", // White triangle for dark bg
     },
   },
   {
     name: "Cloudflare",
     svgl: {
-      light: "cloudflare.svg",
+      light: "cloudflare.svg", // Orange CF works on both
       dark: "cloudflare.svg",
     },
   },
   {
     name: "Inngest",
     svgl: {
-      light: "inngest-light.svg",
-      dark: "inngest-dark.svg",
+      light: "inngest-dark.svg", // Dark inngest for light bg
+      dark: "inngest-light.svg", // Light inngest for dark bg
     },
   },
   {
     name: "TailwindCSS",
     svgl: {
-      light: "tailwindcss.svg",
+      light: "tailwindcss.svg", // Cyan TW works on both
       dark: "tailwindcss.svg",
     },
   },
   {
     name: "Redis",
     svgl: {
-      light: "redis.svg",
+      light: "redis.svg", // Red redis works on both
       dark: "redis.svg",
     },
   },
   {
     name: "Hono",
     svgl: {
-      light: "hono.svg",
-      dark: "hono.svg",
+      light: "hono.svg", // Orange flame works on light
+      dark: "hono_dark.svg", // Try dark variant if exists
     },
   },
 ];

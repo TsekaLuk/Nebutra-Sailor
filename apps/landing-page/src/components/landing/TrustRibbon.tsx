@@ -1,17 +1,33 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { Marquee } from "@nebutra/custom-ui/marketing";
 import { techStackLogos, getLogoUrl } from "@/lib/landing-content";
 
 /**
  * TrustRibbon - Infinite scrolling tech stack logos
  *
+ * Logos automatically switch between light/dark variants based on theme.
+ *
  * @see DESIGN.md Section 2
  */
 export function TrustRibbon() {
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Use appropriate logo variant based on theme
+  // Dark theme = use logos designed for dark backgrounds (light colored logos)
+  // Light theme = use logos designed for light backgrounds (dark colored logos)
+  const logoTheme = mounted && resolvedTheme === "light" ? "light" : "dark";
+
   const logos = techStackLogos.map((logo) => ({
     name: logo.name,
-    url: getLogoUrl(logo, "dark"),
+    url: getLogoUrl(logo, logoTheme),
   }));
 
   return (
