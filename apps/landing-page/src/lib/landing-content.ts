@@ -131,13 +131,6 @@ export const techStackLogos: TechLogo[] = [
     },
   },
   {
-    name: "Inngest",
-    svgl: {
-      light: "inngest-light.svg", // currentColor adapts to light bg
-      dark: "inngest-dark.svg", // White inngest for dark bg
-    },
-  },
-  {
     name: "TailwindCSS",
     svgl: {
       light: "tailwindcss.svg", // Cyan TW works on both

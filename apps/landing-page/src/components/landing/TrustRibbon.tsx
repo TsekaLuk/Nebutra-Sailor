@@ -37,27 +37,19 @@ export function TrustRibbon() {
       <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent" />
 
       <Marquee pauseOnHover className="[--duration:40s]">
-        {logos.map((logo) => {
-          // Inngest uses currentColor which doesn't work in <img> tags
-          // In light mode, apply invert filter to make it visible
-          const needsInvert = logoTheme === "light" && logo.name === "Inngest";
-
-          return (
-            <div
-              key={logo.name}
-              className="mx-8 flex items-center justify-center grayscale transition-all duration-300 hover:grayscale-0"
-            >
-              <img
-                src={logo.url}
-                alt={logo.name}
-                className={`h-8 w-auto opacity-60 transition-opacity hover:opacity-100 ${
-                  needsInvert ? "invert" : ""
-                }`}
-                loading="lazy"
-              />
-            </div>
-          );
-        })}
+        {logos.map((logo) => (
+          <div
+            key={logo.name}
+            className="mx-8 flex items-center justify-center grayscale transition-all duration-300 hover:grayscale-0"
+          >
+            <img
+              src={logo.url}
+              alt={logo.name}
+              className="h-8 w-auto opacity-60 transition-opacity hover:opacity-100"
+              loading="lazy"
+            />
+          </div>
+        ))}
       </Marquee>
     </section>
   );
