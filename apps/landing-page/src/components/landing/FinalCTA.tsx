@@ -65,7 +65,8 @@ export function FinalCTA() {
             </code>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-2 rounded-lg bg-neutral-900 dark:bg-white px-5 py-2.5 text-sm font-medium text-white dark:text-neutral-900 transition-all hover:opacity-90"
+              className="flex items-center gap-2 rounded-lg bg-neutral-900 px-5 py-2.5 text-sm font-medium transition-all hover:opacity-90"
+              style={{ color: "white" }}
             >
               <Copy className="h-4 w-4" />
               {copied ? "Copied!" : "Copy"}
@@ -83,7 +84,8 @@ export function FinalCTA() {
         >
           <a
             href="https://docs.nebutra.com/sailor/getting-started"
-            className="inline-flex items-center gap-2 rounded-full bg-neutral-900 dark:bg-white px-8 py-3.5 font-medium text-white dark:text-neutral-900 transition-all hover:opacity-90 group"
+            className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-8 py-3.5 font-medium transition-all hover:opacity-90 group"
+            style={{ color: "white" }}
           >
             Start Building
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
