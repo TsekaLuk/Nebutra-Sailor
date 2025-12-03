@@ -12,6 +12,7 @@
     "strictNullChecks": true,
     "noEmit": true,
     "skipLibCheck": true,
+    "preserveSymlinks": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
