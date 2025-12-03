@@ -12,7 +12,6 @@
   "dependencies": {
     "@clerk/nextjs": "^6.20.0",
     "@heroui/react": "^2.8.5",
-    "@nebutra/21st": "workspace:*",
     "@nebutra/brand": "workspace:*",
     "@nebutra/custom-ui": "workspace:*",
     "@nebutra/design-system": "workspace:*",
