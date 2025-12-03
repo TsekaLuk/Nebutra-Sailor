@@ -181,26 +181,6 @@ export function MultiTenantVisual() {
 export function AINativeVisual() {
   return (
     <div className="relative h-full w-full p-4">
-      {/* Provider 节点指示器 */}
-      <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5">
-        <div className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 border border-emerald-500/20">
-          <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[9px] font-medium text-emerald-400">
-            openai
-          </span>
-        </div>
-        <div className="flex items-center gap-1 rounded-full bg-blue-500/10 px-2 py-0.5 border border-blue-500/20">
-          <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-          <span className="text-[9px] font-medium text-blue-400">
-            anthropic
-          </span>
-        </div>
-        <div className="flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 border border-amber-500/20">
-          <div className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-          <span className="text-[9px] font-medium text-amber-400">google</span>
-        </div>
-      </div>
-
       {/* Terminal: 真实 config 代码 */}
       <Terminal variant="glass" className="h-full">
         <Terminal.Header title="ai.config.ts" />
