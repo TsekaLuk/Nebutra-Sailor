@@ -3,15 +3,15 @@
  * 
  * This file imports:
  * 1. Typography CSS variables from design-system (SSOT for fonts)
- * 2. Theme system from @nebutra/21st (colors, Tailwind config)
+ * 2. Theme system from @nebutra/custom-ui (colors, Tailwind config)
  * 3. HeroUI plugin for additional components
  */
 
 /* Typography SSOT - must be imported first to define --font-* variables */
 @import "@nebutra/design-system/typography/fonts.css";
 
-/* Import 21st.dev compatible theme from @nebutra/21st */
-@import "@nebutra/21st/styles/globals.css";
+/* Import 21st.dev compatible theme from @nebutra/custom-ui */
+@import "@nebutra/custom-ui/styles/globals.css";
 @import "tw-animate-css";
 
 /* HeroUI Tailwind plugin */
@@ -22,7 +22,7 @@
 
 /* ==============================================
  * Nebutra Brand Color Aliases
- * Maps new @nebutra/21st variables to legacy names
+ * Maps new @nebutra/custom-ui variables to legacy names
  * ============================================== */
 :root {
   /* Legacy aliases for backward compatibility */
@@ -168,6 +168,13 @@
   }
   --animate-snippet-fade-in: snippet-fade-in 0.2s ease-out forwards;
   --animate-snippet-fade-out: snippet-fade-out 0.2s ease-out forwards;
+
+  /* InputOTP caret animation */
+  @keyframes caret-blink {
+    0%, 70%, 100% { opacity: 1; }
+    20%, 50% { opacity: 0; }
+  }
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
 }
 /*---break---
  */
