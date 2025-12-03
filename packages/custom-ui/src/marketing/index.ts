@@ -235,3 +235,17 @@ export type { SmoothScrollHeroProps } from "./smooth-scroll-hero";
 // Award Badge (Product Hunt awards with 3D effect)
 export { AwardBadge, AWARD_BADGE_TITLES } from "./award-badge";
 export type { AwardBadgeProps, AwardBadgeType } from "./award-badge";
+
+// Terminal Control Section (animated code diff showcase)
+export {
+  TerminalControlSectionAnimated,
+  CodeDiff,
+  DEFAULT_TERMINAL_ITEMS,
+} from "./terminal-control-section-animated";
+export type {
+  TerminalControlSectionAnimatedProps,
+  CodeDiffProps,
+  DiffBlock,
+  DiffLine,
+  BulletItem,
+} from "./terminal-control-section-animated";

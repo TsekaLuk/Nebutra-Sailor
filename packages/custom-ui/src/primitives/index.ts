@@ -596,3 +596,22 @@ export {
   type MultipleSelectorOption,
   type MultipleSelectorRef,
 } from "./multiple-selector";
+export {
+  TreeProvider,
+  TreeView,
+  TreeNode,
+  TreeNodeTrigger,
+  TreeNodeContent,
+  TreeExpander,
+  TreeIcon,
+  TreeLabel,
+  TreeLines,
+  type TreeProviderProps,
+  type TreeViewProps,
+  type TreeNodeProps,
+  type TreeNodeTriggerProps,
+  type TreeNodeContentProps,
+  type TreeExpanderProps,
+  type TreeIconProps,
+  type TreeLabelProps,
+} from "./tree";
