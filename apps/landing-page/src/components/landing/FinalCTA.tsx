@@ -90,22 +90,8 @@ export function FinalCTA() {
               onClick={handleCopy}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="relative flex items-center gap-2 rounded-lg bg-[image:var(--brand-gradient)] px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90"
+              className="flex items-center gap-2 rounded-lg bg-[image:var(--brand-gradient)] px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90"
             >
-              {/* Pulse ring on CTA */}
-              <motion.span
-                className="absolute inset-0 rounded-lg bg-[image:var(--brand-gradient)] -z-10"
-                animate={{
-                  scale: [1, 1.15, 1],
-                  opacity: [0.5, 0, 0.5],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                aria-hidden="true"
-              />
               <Copy className="h-4 w-4" />
               {copied ? "Copied!" : ctaPrimary}
             </motion.button>
