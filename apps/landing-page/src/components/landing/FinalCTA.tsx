@@ -1,50 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Copy, Github, Star, GitFork, MessageCircle } from "lucide-react";
+import { Copy, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { finalCtaContent } from "@/lib/landing-content";
-import { ThemedSection, DotMatrix } from "@nebutra/custom-ui";
 
 /**
- * PulseGlow - Animated pulsing glow effect for CTA emphasis
- * Per DESIGN.md Section 11.4 "Action Climax"
- */
-function PulseGlow() {
-  return (
-    <motion.div
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-      animate={{
-        scale: [1, 1.2, 1],
-        opacity: [0.3, 0.5, 0.3],
-      }}
-      transition={{
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-      aria-hidden="true"
-    >
-      <div className="h-[500px] w-[500px] rounded-full bg-gradient-to-r from-[var(--brand-primary)]/30 to-[var(--brand-accent)]/30 blur-[120px]" />
-    </motion.div>
-  );
-}
-
-/**
- * FinalCTA - Action climax with pulse and glow effects
+ * FinalCTA - Minimal Vercel-style final call to action
  *
- * @see DESIGN.md Section 12 & Section 11.4 "Action Climax"
+ * Design: Large headline, command box, stats in a row, lots of whitespace
  */
 export function FinalCTA() {
   const [copied, setCopied] = useState(false);
-  const {
-    headline,
-    headlineHighlight,
-    commandPlaceholder,
-    ctaPrimary,
-    ctaSecondary,
-    stats,
-  } = finalCtaContent;
+  const { commandPlaceholder, stats } = finalCtaContent;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(commandPlaceholder);
@@ -53,65 +21,72 @@ export function FinalCTA() {
   };
 
   return (
-    <ThemedSection theme="cta" className="py-24 md:py-32">
-      {/* Animated Pulse Glow */}
-      <PulseGlow />
+    <section className="relative w-full bg-background py-32 md:py-40">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--brand-primary)]/20 to-[var(--brand-accent)]/15 blur-[100px]" />
+        </div>
+      </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
         {/* Headline */}
-        <motion.div
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
+          className="text-3xl font-bold text-foreground md:text-5xl lg:text-6xl"
         >
-          <h2 className="text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
-            {headline}
-            <br />
-            <span className="bg-[image:var(--brand-gradient)] bg-clip-text text-transparent">
-              {headlineHighlight}
-            </span>
-          </h2>
-        </motion.div>
+          Ready to ship?
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ delay: 0.1 }}
+          className="mt-6 text-lg text-muted-foreground md:text-xl"
+        >
+          Get started in under 5 minutes.
+        </motion.p>
 
         {/* Command Box */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.1 }}
-          className="mx-auto mt-10 max-w-lg"
+          transition={{ delay: 0.2 }}
+          className="mx-auto mt-10 max-w-xl"
         >
-          <div className="group relative flex items-center rounded-xl border border-border/10 bg-foreground/5 p-1 backdrop-blur-sm transition-all hover:border-border/20 hover:bg-foreground/10">
-            <code className="flex-1 px-4 py-3 font-mono text-sm text-foreground/90 md:text-base">
-              <span className="text-[var(--brand-accent)]">$</span>{" "}
+          <div className="group relative flex items-center rounded-xl border border-border/50 bg-card/50 p-1.5 backdrop-blur-sm transition-all hover:border-border">
+            <code className="flex-1 px-5 py-3.5 font-mono text-sm text-foreground md:text-base">
+              <span className="text-muted-foreground">$</span>{" "}
               {commandPlaceholder}
             </code>
-            <motion.button
+            <button
               onClick={handleCopy}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 rounded-lg bg-[image:var(--brand-gradient)] px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90"
+              className="flex items-center gap-2 rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-all hover:bg-foreground/90"
             >
               <Copy className="h-4 w-4" />
-              {copied ? "Copied!" : ctaPrimary}
-            </motion.button>
+              {copied ? "Copied!" : "Copy"}
+            </button>
           </div>
         </motion.div>
 
-        {/* CTAs */}
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ delay: 0.2 }}
-          className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          transition={{ delay: 0.3 }}
+          className="mt-8"
         >
           <a
-            href="https://github.com/TsekaLuk/Nebutra-Sailor"
-            className="inline-flex items-center gap-2 rounded-lg border border-border/20 bg-foreground/5 px-6 py-3 font-medium text-foreground transition-all hover:bg-foreground/10"
+            href="https://docs.nebutra.com/sailor/getting-started"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-3.5 font-medium text-background transition-all hover:bg-foreground/90 group"
           >
-            <Github className="h-5 w-5" />
-            {ctaSecondary}
+            Start Building
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
         </motion.div>
 
@@ -120,27 +95,24 @@ export function FinalCTA() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-8"
+          transition={{ delay: 0.4 }}
+          className="mt-16 flex flex-wrap items-center justify-center gap-12 text-muted-foreground"
         >
-          <div className="flex items-center gap-2 text-muted-foreground/80">
-            <Star className="h-5 w-5" />
-            <span>{stats.stars} stars</span>
+          <div className="text-center">
+            <p className="text-3xl font-bold text-foreground">{stats.stars}</p>
+            <p className="mt-1 text-sm">GitHub Stars</p>
           </div>
-          <div className="flex items-center gap-2 text-muted-foreground/80">
-            <GitFork className="h-5 w-5" />
-            <span>{stats.forks} forks</span>
+          <div className="text-center">
+            <p className="text-3xl font-bold text-foreground">{stats.forks}</p>
+            <p className="mt-1 text-sm">Forks</p>
           </div>
-          <a
-            href="https://discord.gg/nebutra"
-            className="flex items-center gap-2 text-muted-foreground/80 transition-colors hover:text-foreground"
-          >
-            <MessageCircle className="h-5 w-5" />
-            <span>{stats.discordLabel}</span>
-          </a>
+          <div className="text-center">
+            <p className="text-3xl font-bold text-foreground">500+</p>
+            <p className="mt-1 text-sm">Teams</p>
+          </div>
         </motion.div>
       </div>
-    </ThemedSection>
+    </section>
   );
 }
 

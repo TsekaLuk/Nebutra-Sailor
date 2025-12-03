@@ -1,145 +1,49 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
 import { testimonialsContent } from "@/lib/landing-content";
-import { ThemedSection, AvatarCircles } from "@nebutra/custom-ui";
-import { useState } from "react";
 
 /**
- * 3D card hover effect for depth gallery per DESIGN.md Section 11.5
- */
-function Testimonial3DCard({
-  testimonial,
-  index,
-}: {
-  testimonial: (typeof testimonialsContent.items)[number];
-  index: number;
-}) {
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    // Limit rotation to ±8 degrees for subtle effect
-    setRotateY(((x - centerX) / centerX) * 8);
-    setRotateX(-((y - centerY) / centerY) * 8);
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: 0.1 * index }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-        transformStyle: "preserve-3d",
-        transition: "transform 0.1s ease-out",
-      }}
-      className="group relative overflow-hidden rounded-2xl border border-border/10 bg-card/50 p-6 transition-all hover:border-border/20 hover:shadow-xl"
-    >
-      {/* Depth shadow layer */}
-      <div
-        className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 blur-xl transition-opacity group-hover:opacity-100"
-        style={{ transform: "translateZ(-20px)" }}
-        aria-hidden="true"
-      />
-
-      {/* Quote Icon */}
-      <Quote className="absolute right-4 top-4 h-8 w-8 text-foreground/5" />
-
-      {/* Quote */}
-      <p className="relative z-10 mb-6 text-lg text-foreground/80">
-        &ldquo;{testimonial.quote}&rdquo;
-      </p>
-
-      {/* Author */}
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-primary)]/20 to-[var(--brand-accent)]/20">
-          <span className="text-sm font-medium text-foreground">
-            {testimonial.author
-              .split(" ")
-              .map((n) => n[0])
-              .join("")}
-          </span>
-        </div>
-        <div>
-          <p className="font-medium text-foreground">{testimonial.author}</p>
-          <p className="text-sm text-muted-foreground/80">
-            {testimonial.role} @ {testimonial.company}
-          </p>
-        </div>
-      </div>
-
-      {/* Hover glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-primary)]/5 to-[var(--brand-accent)]/5 opacity-0 transition-opacity group-hover:opacity-100" />
-    </motion.div>
-  );
-}
-
-/**
- * TestimonialsSection - Social proof with 3D perspective cards
+ * TestimonialsSection - Single large quote, Vercel style
  *
- * @see DESIGN.md Section 8 & Section 11.5 "Depth Gallery"
+ * Design: One prominent testimonial, centered, maximum whitespace
  */
 export function TestimonialsSection() {
-  const { headline, items } = testimonialsContent;
+  // Pick the most impactful testimonial
+  const featured = testimonialsContent.items[0];
 
   return (
-    <ThemedSection theme="testimonials" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
+    <section className="relative w-full bg-background py-32 md:py-40">
+      {/* Subtle top border */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <motion.blockquote
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <p className="text-2xl font-medium text-foreground leading-relaxed md:text-3xl lg:text-4xl">
+            &ldquo;{featured.quote}&rdquo;
+          </p>
+        </motion.blockquote>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="mb-16 text-center"
+          transition={{ delay: 0.1 }}
+          className="mt-10"
         >
-          <h2 className="text-3xl font-bold text-foreground md:text-4xl">
-            {headline}
-          </h2>
-          {/* Social proof avatars */}
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <AvatarCircles
-              size={36}
-              numPeople={500}
-              avatarUrls={items.slice(0, 4).map((t, i) => ({
-                imageUrl: `https://i.pravatar.cc/150?u=${t.author.replace(/ /g, "")}`,
-                profileUrl: "#",
-                alt: t.author,
-              }))}
-            />
-            <span className="text-sm text-muted-foreground">
-              Trusted by 500+ teams
-            </span>
-          </div>
+          <p className="text-base font-medium text-foreground">
+            {featured.author}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {featured.role}, {featured.company}
+          </p>
         </motion.div>
-
-        {/* Testimonials Grid with 3D cards */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {items.map((testimonial, index) => (
-            <Testimonial3DCard
-              key={testimonial.author}
-              testimonial={testimonial}
-              index={index}
-            />
-          ))}
-        </div>
       </div>
-    </ThemedSection>
+    </section>
   );
 }
 

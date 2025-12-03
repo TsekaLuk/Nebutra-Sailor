@@ -5,15 +5,9 @@ import {
   Navbar,
   HeroSection,
   TrustRibbon,
-  SplitNarrative,
-  ArchitectureShowcase,
-  FeatureBento,
-  StatsBreak,
+  FeatureStack,
   TerminalDemo,
   TestimonialsSection,
-  VisionSection,
-  PricingSection,
-  FAQSection,
   FinalCTA,
   FooterMinimal,
 } from "@/components/landing";
@@ -26,6 +20,18 @@ interface Props {
   params: Promise<{ lang: string }>;
 }
 
+/**
+ * Landing Page - Vercel-style minimal design
+ *
+ * Sections:
+ * 1. Hero - Large headline + command box + glow
+ * 2. Trust Ribbon - Logo marquee
+ * 3. Features - Vertical stack with alternating layout
+ * 4. Terminal Demo - Interactive demo
+ * 5. Testimonial - Single large quote
+ * 6. CTA - Final call to action with stats
+ * 7. Footer
+ */
 export default async function LocalizedHomePage({ params }: Props) {
   const { lang } = await params;
   const locale: Locale = isValidLocale(lang) ? lang : "en";
@@ -36,63 +42,35 @@ export default async function LocalizedHomePage({ params }: Props) {
         {/* Navigation */}
         <Navbar />
 
-        {/* 1. Immersive Hero */}
+        {/* 1. Hero */}
         <TrackedSection id="hero" label="Home">
           <HeroSection />
         </TrackedSection>
 
-        {/* 2. Trust Ribbon - Tech Logos */}
+        {/* 2. Trust Ribbon */}
         <TrustRibbon />
 
-        {/* 3. Split Narrative - Problem/Solution */}
-        <TrackedSection id="solution" label="Solution">
-          <SplitNarrative />
-        </TrackedSection>
-
-        {/* 4. Architecture Showcase - File Tree */}
-        <TrackedSection id="architecture" label="Architecture">
-          <ArchitectureShowcase />
-        </TrackedSection>
-
-        {/* 5. Feature Bento Grid */}
+        {/* 3. Features - Vertical stack */}
         <TrackedSection id="features" label="Features">
-          <FeatureBento />
+          <FeatureStack />
         </TrackedSection>
 
-        {/* 6. Stats Break */}
-        <StatsBreak />
-
-        {/* 7. Terminal Demo */}
+        {/* 4. Terminal Demo */}
         <TrackedSection id="demo" label="Demo">
           <TerminalDemo />
         </TrackedSection>
 
-        {/* 8. Testimonials */}
+        {/* 5. Testimonial */}
         <TrackedSection id="testimonials" label="Testimonials">
           <TestimonialsSection />
         </TrackedSection>
 
-        {/* 9. Company Vision */}
-        <TrackedSection id="vision" label="Vision">
-          <VisionSection />
-        </TrackedSection>
-
-        {/* 10. Pricing */}
-        <TrackedSection id="pricing" label="Pricing">
-          <PricingSection />
-        </TrackedSection>
-
-        {/* 11. FAQ */}
-        <TrackedSection id="faq" label="FAQ">
-          <FAQSection />
-        </TrackedSection>
-
-        {/* 12. Final CTA */}
+        {/* 6. CTA */}
         <TrackedSection id="get-started" label="Get Started">
           <FinalCTA />
         </TrackedSection>
 
-        {/* 13. Footer */}
+        {/* 7. Footer */}
         <FooterMinimal />
       </main>
     </LandingPageWrapper>
