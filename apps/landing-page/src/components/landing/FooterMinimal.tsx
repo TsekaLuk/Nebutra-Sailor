@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Github, Twitter, MessageCircle } from "lucide-react";
 import { Logo } from "@nebutra/brand";
+import { useTheme } from "next-themes";
 import { footerContent } from "@/lib/landing-content";
 
 const SOCIAL_ICONS = {
@@ -17,6 +19,14 @@ const SOCIAL_ICONS = {
  */
 export function FooterMinimal() {
   const { brand, links, social, copyright, status } = footerContent;
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <footer className="relative w-full border-t border-border/5 bg-background py-12">
@@ -24,7 +34,7 @@ export function FooterMinimal() {
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           {/* Brand - Using @nebutra/brand Logo */}
           <div className="flex items-center gap-3">
-            <Logo variant="inverse" size={100} />
+            <Logo variant="en" size={120} inverted={isDark} />
             <span className="text-sm text-muted-foreground/60">
               {brand.byline}
             </span>

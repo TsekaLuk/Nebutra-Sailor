@@ -2,180 +2,194 @@
 
 import * as React from "react";
 
-export type LogoVariant = 
-  | "color" 
-  | "inverse" 
-  | "mono" 
-  | "en" 
-  | "zh" 
+export type LogoVariant =
+  | "color"
+  | "inverse"
+  | "mono"
+  | "en"
+  | "zh"
   | "zh-en"
   | "horizontal-en"
   | "horizontal-zh"
   | "vertical-en"
   | "vertical-zh";
 
-export interface LogoProps extends React.SVGProps<SVGSVGElement> {
+export interface LogoProps {
   /**
    * Logo variant
-   * @default "color"
+   * @default "en" (Nebutra with English wordmark)
    */
   variant?: LogoVariant;
-  
+
   /**
-   * Logo size (width)
+   * Logo size (width in pixels)
    * @default 120
    */
   size?: number;
-  
+
   /**
    * Custom className
    */
   className?: string;
+
+  /**
+   * Invert colors for dark backgrounds.
+   * When true, black becomes white (useful for dark mode).
+   *
+   * Note: For pure white logomark, use variant="inverse" instead.
+   */
+  inverted?: boolean;
 }
 
 /**
+ * Map variant to SVG file path (relative to /brand in public folder)
+ */
+const LOGO_FILES: Record<LogoVariant, string> = {
+  color: "/brand/logo-color.svg",
+  inverse: "/brand/logo-inverse.svg",
+  mono: "/brand/logo-mono.svg",
+  en: "/brand/logo-en.svg",
+  zh: "/brand/logo-zh.svg",
+  "zh-en": "/brand/logo-zh-en.svg",
+  "horizontal-en": "/brand/logo-horizontal-en.svg",
+  "horizontal-zh": "/brand/logo-horizontal-zh.svg",
+  "vertical-en": "/brand/logo-vertical-en.svg",
+  "vertical-zh": "/brand/logo-vertical-zh.svg",
+};
+
+/**
+ * Aspect ratios for different logo variants
+ * width:height ratio (e.g. 5.25 means width is 5.25x height)
+ */
+const ASPECT_RATIOS: Record<LogoVariant, number> = {
+  color: 1.07, // 535.71 x 500 ≈ 1.07
+  inverse: 1.07, // 535.71 x 500 ≈ 1.07
+  mono: 1.07, // Same as color/inverse
+  en: 5.25, // 544.21 x 103.74 ≈ 5.25 (horizontal text)
+  zh: 3.5, // Estimated for Chinese wordmark
+  "zh-en": 4.0, // Estimated for bilingual
+  "horizontal-en": 5.25, // Similar to "en"
+  "horizontal-zh": 4.5, // Estimated
+  "vertical-en": 0.8, // Taller than wide
+  "vertical-zh": 0.8, // Taller than wide
+};
+
+/**
  * Nebutra Logo Component
- * 
- * Renders an inline SVG logo. For static assets, import from @nebutra/brand/assets/*
- * 
+ *
+ * Renders the official Nebutra brand logo from SVG assets.
+ * Assets are synced to apps via `pnpm brand:sync`.
+ *
  * @example
  * ```tsx
- * <Logo variant="color" size={120} />
- * <Logo variant="inverse" className="h-8 w-auto" />
+ * // Logomark only (square icon)
+ * <Logo variant="inverse" size={40} />
+ *
+ * // Full logo with English wordmark
+ * <Logo variant="en" size={150} />
+ *
+ * // Chinese wordmark
+ * <Logo variant="zh" size={120} />
  * ```
  */
-export function Logo({ 
-  variant = "color", 
+export function Logo({
+  variant = "en",
   size = 120,
   className,
-  ...props 
+  inverted = false,
 }: LogoProps) {
-  // Primary color based on variant
-  const primaryColor = variant === "inverse" ? "#ffffff" : "#6366f1";
-  const secondaryColor = variant === "mono" ? "#71717a" : "#14b8a6";
-  
-  // Calculate height based on aspect ratio (roughly 1:0.25 for horizontal)
-  const aspectRatio = variant.includes("horizontal") ? 4 : 
-                      variant.includes("vertical") ? 0.5 : 1;
-  const height = size / aspectRatio;
-  
+  const aspectRatio = ASPECT_RATIOS[variant];
+  const height = Math.round(size / aspectRatio);
+  const src = LOGO_FILES[variant];
+
+  // For dark backgrounds, invert black to white
+  const filterStyle = inverted ? { filter: "brightness(0) invert(1)" } : {};
+
   return (
-    <svg
+    <img
+      src={src}
+      alt="Nebutra"
       width={size}
       height={height}
-      viewBox="0 0 120 30"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-label="Nebutra Logo"
-      role="img"
-      {...props}
-    >
-      {/* Stylized "N" mark */}
-      <path
-        d="M4 24V6h4l10 12V6h4v18h-4L8 12v12H4z"
-        fill={primaryColor}
-      />
-      
-      {/* Accent dot */}
-      <circle
-        cx="26"
-        cy="22"
-        r="3"
-        fill={secondaryColor}
-      />
-      
-      {/* "ebutra" text */}
-      <text
-        x="32"
-        y="22"
-        fontFamily="Inter, sans-serif"
-        fontSize="16"
-        fontWeight="600"
-        fill={primaryColor}
-      >
-        ebutra
-      </text>
-    </svg>
+      style={{ width: size, height, ...filterStyle }}
+    />
   );
 }
 
 /**
- * Logomark only (without text)
+ * Logomark only (the abstract icon without text)
+ *
+ * This uses the "color" or "inverse" variant which is just the icon.
+ *
+ * @example
+ * ```tsx
+ * <Logomark variant="inverse" size={32} />
+ * ```
  */
 export function Logomark({
   size = 32,
   className,
   variant = "color",
-  ...props
-}: Omit<LogoProps, "variant"> & { variant?: "color" | "inverse" | "mono" }) {
-  const primaryColor = variant === "inverse" ? "#ffffff" : "#6366f1";
-  const accentColor = variant === "mono" ? "#71717a" : "#14b8a6";
-  
+  inverted = false,
+}: {
+  size?: number;
+  className?: string;
+  variant?: "color" | "inverse" | "mono";
+  inverted?: boolean;
+}) {
+  const src = LOGO_FILES[variant];
+
+  // For dark backgrounds, invert black to white (unless using "inverse" variant which is already white)
+  const filterStyle =
+    inverted && variant !== "inverse"
+      ? { filter: "brightness(0) invert(1)" }
+      : {};
+
   return (
-    <svg
+    <img
+      src={src}
+      alt="Nebutra"
       width={size}
       height={size}
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-label="Nebutra"
-      role="img"
-      {...props}
-    >
-      {/* Stylized "N" mark */}
-      <path
-        d="M6 26V6h5l10 14V6h5v20h-5L11 12v14H6z"
-        fill={primaryColor}
-      />
-      
-      {/* Accent dot */}
-      <circle
-        cx="26"
-        cy="24"
-        r="3"
-        fill={accentColor}
-      />
-    </svg>
+      style={{ width: size, height: size, ...filterStyle }}
+    />
   );
 }
 
 /**
- * Wordmark only (text without logomark)
+ * Wordmark only (text "Nebutra" without the icon)
+ *
+ * Uses the "en" variant which has the full wordmark.
+ * For icon + text, use Logo with variant="en".
  */
 export function Wordmark({
   size = 100,
   className,
-  variant = "color",
-  ...props
-}: Omit<LogoProps, "variant"> & { variant?: "color" | "inverse" | "mono" }) {
-  const color = variant === "inverse" ? "#ffffff" : 
-                variant === "mono" ? "#18181b" : "#6366f1";
-  
+  variant = "en",
+  inverted = false,
+}: {
+  size?: number;
+  className?: string;
+  variant?: "en" | "zh" | "zh-en";
+  inverted?: boolean;
+}) {
+  const aspectRatio = ASPECT_RATIOS[variant];
+  const height = Math.round(size / aspectRatio);
+  const src = LOGO_FILES[variant];
+
+  const filterStyle = inverted ? { filter: "brightness(0) invert(1)" } : {};
+
   return (
-    <svg
+    <img
+      src={src}
+      alt="Nebutra"
       width={size}
-      height={size * 0.25}
-      viewBox="0 0 100 25"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      height={height}
       className={className}
-      aria-label="Nebutra"
-      role="img"
-      {...props}
-    >
-      <text
-        x="0"
-        y="20"
-        fontFamily="Inter, sans-serif"
-        fontSize="22"
-        fontWeight="700"
-        fill={color}
-      >
-        Nebutra
-      </text>
-    </svg>
+      style={{ width: size, height, ...filterStyle }}
+    />
   );
 }
 

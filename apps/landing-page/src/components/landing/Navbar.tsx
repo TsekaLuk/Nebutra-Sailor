@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Menu, X, Github } from "lucide-react";
 import { Logo, Logomark } from "@nebutra/brand";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -20,6 +21,13 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  // Avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +36,9 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Determine if we need inverted (white) logo based on theme
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <motion.nav
@@ -42,12 +53,21 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        {/* Logo */}
+        {/* Logo - uses real brand SVG assets */}
         <a href="/" className="flex items-center gap-2">
           {/* Mobile: Show logomark only */}
-          <Logomark size={32} variant="inverse" className="md:hidden" />
-          {/* Desktop: Show full logo */}
-          <Logo variant="inverse" size={120} className="hidden md:block" />
+          <Logomark
+            size={32}
+            variant={isDark ? "inverse" : "color"}
+            className="md:hidden"
+          />
+          {/* Desktop: Show full logo with wordmark */}
+          <Logo
+            variant="en"
+            size={150}
+            inverted={isDark}
+            className="hidden md:block"
+          />
         </a>
 
         {/* Desktop Navigation */}
