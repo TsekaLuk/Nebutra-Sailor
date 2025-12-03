@@ -13,110 +13,170 @@
    CSS Variables - Light Theme (Default)
    ============================================ */
 :root {
+  /* ===========================================
+     Nebutra Brand Color Scales
+     Source: @nebutra/brand/src/guidelines/color.ts
+     =========================================== */
+  
+  /* 云毓蓝 (Nebutra Blue) - Primary Brand Color Scale */
+  --nebutra-blue-50:  #f0f4ff;
+  --nebutra-blue-100: #dbe4ff;
+  --nebutra-blue-200: #bac8ff;
+  --nebutra-blue-300: #91a7ff;
+  --nebutra-blue-400: #5c7cfa;
+  --nebutra-blue-500: #0033FE;  /* Base brand color */
+  --nebutra-blue-600: #002ad4;
+  --nebutra-blue-700: #0021ab;
+  --nebutra-blue-800: #001882;
+  --nebutra-blue-900: #000f59;
+  --nebutra-blue-950: #000830;
+  
+  /* 云毓青 (Nebutra Cyan) - Accent Brand Color Scale */
+  --nebutra-cyan-50:  #e6fff8;
+  --nebutra-cyan-100: #b3ffec;
+  --nebutra-cyan-200: #80ffe0;
+  --nebutra-cyan-300: #4dfcd4;
+  --nebutra-cyan-400: #1af7c8;
+  --nebutra-cyan-500: #0BF1C3;  /* Base brand color */
+  --nebutra-cyan-600: #09c9a3;
+  --nebutra-cyan-700: #07a183;
+  --nebutra-cyan-800: #057963;
+  --nebutra-cyan-900: #035143;
+  --nebutra-cyan-950: #012923;
+  
+  /* Extended Neutral Colors (blue undertone) */
+  --nebutra-neutral-50:  #f8fafc;
+  --nebutra-neutral-100: #f1f5f9;
+  --nebutra-neutral-200: #e2e8f0;
+  --nebutra-neutral-300: #cbd5e1;
+  --nebutra-neutral-400: #94a3b8;
+  --nebutra-neutral-500: #64748b;
+  --nebutra-neutral-600: #475569;
+  --nebutra-neutral-700: #334155;
+  --nebutra-neutral-800: #1e293b;
+  --nebutra-neutral-900: #0f172a;
+  --nebutra-neutral-950: #020617;
+  
+  /* Brand Gradients */
+  --brand-gradient: linear-gradient(135deg, var(--nebutra-blue-500) 0%, var(--nebutra-cyan-500) 100%);
+  --brand-gradient-reverse: linear-gradient(135deg, var(--nebutra-cyan-500) 0%, var(--nebutra-blue-500) 100%);
+  --brand-gradient-vertical: linear-gradient(180deg, var(--nebutra-blue-500) 0%, var(--nebutra-cyan-500) 100%);
+  --brand-gradient-radial: radial-gradient(circle, var(--nebutra-cyan-500) 0%, var(--nebutra-blue-500) 100%);
+  
+  /* ===========================================
+     Semantic Theme Variables (Light Mode)
+     =========================================== */
+  
   /* Background & Foreground */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --background: 210 40% 98%;  /* nebutra-neutral-50 as HSL */
+  --foreground: 222 47% 11%;  /* nebutra-neutral-900 */
 
   /* Card */
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 222 47% 11%;
 
   /* Popover */
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
+  --popover-foreground: 222 47% 11%;
 
-  /* Primary - Nebutra Blue */
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
+  /* Primary - Nebutra Blue 500 */
+  --primary: 228 100% 50%;  /* #0033FE */
+  --primary-foreground: 0 0% 100%;
 
-  /* Secondary - Nebutra Purple */
-  --secondary: 270 91% 65%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  /* Secondary - Nebutra Cyan 500 */
+  --secondary: 168 91% 49%;  /* #0BF1C3 */
+  --secondary-foreground: 222 47% 11%;
 
-  /* Muted */
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  /* Muted - Neutral scale */
+  --muted: 210 40% 96%;  /* nebutra-neutral-100 */
+  --muted-foreground: 215 25% 45%;  /* nebutra-neutral-500 */
 
-  /* Accent */
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  /* Accent - Light blue tint */
+  --accent: 228 100% 97%;  /* nebutra-blue-50 */
+  --accent-foreground: 228 100% 50%;  /* nebutra-blue-500 */
 
   /* Destructive */
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
 
-  /* Success */
-  --success: 160 84% 39%;
-  --success-foreground: 210 40% 98%;
+  /* Success - Derived from cyan */
+  --success: 168 84% 39%;
+  --success-foreground: 0 0% 100%;
 
   /* Warning */
   --warning: 38 92% 50%;
-  --warning-foreground: 222.2 47.4% 11.2%;
+  --warning-foreground: 222 47% 11%;
 
   /* Border, Input, Ring */
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
+  --border: 214 32% 91%;  /* nebutra-neutral-200 */
+  --input: 214 32% 91%;
+  --ring: 228 100% 50%;  /* nebutra-blue-500 */
 
   /* Border Radius */
   --radius: 0.5rem;
 
   /* Sidebar (for dashboard layouts) */
-  --sidebar: 0 0% 98%;
-  --sidebar-foreground: 240 5.3% 26.1%;
-  --sidebar-primary: 221.2 83.2% 53.3%;
+  --sidebar: 210 40% 98%;  /* nebutra-neutral-50 */
+  --sidebar-foreground: 215 25% 27%;
+  --sidebar-primary: 228 100% 50%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 240 4.8% 95.9%;
-  --sidebar-accent-foreground: 240 5.9% 10%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 221.2 83.2% 53.3%;
+  --sidebar-accent: 228 100% 97%;
+  --sidebar-accent-foreground: 228 100% 50%;
+  --sidebar-border: 214 32% 91%;
+  --sidebar-ring: 228 100% 50%;
 
   /* Chart colors (for data visualization) */
-  --chart-1: 221.2 83.2% 53.3%;
-  --chart-2: 270 91% 65%;
-  --chart-3: 160 84% 39%;
-  --chart-4: 38 92% 50%;
-  --chart-5: 0 84.2% 60.2%;
+  --chart-1: 228 100% 50%;   /* nebutra-blue */
+  --chart-2: 168 91% 49%;    /* nebutra-cyan */
+  --chart-3: 228 100% 70%;   /* nebutra-blue-300 */
+  --chart-4: 168 91% 70%;    /* nebutra-cyan-300 */
+  --chart-5: 228 100% 35%;   /* nebutra-blue-700 */
 }
 
 /* ============================================
    CSS Variables - Dark Theme
    ============================================ */
 .dark {
+  /* Brand scales remain same - only semantic tokens change */
+  
+  /* ===========================================
+     Semantic Theme Variables (Dark Mode)
+     =========================================== */
+  
   /* Background & Foreground */
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
+  --background: 222 47% 4%;  /* nebutra-neutral-950 */
+  --foreground: 210 40% 98%;  /* nebutra-neutral-50 */
 
-  /* Card */
-  --card: 222.2 84% 4.9%;
+  /* Card - slightly lighter than background */
+  --card: 222 47% 7%;  /* between 950 and 900 */
   --card-foreground: 210 40% 98%;
 
   /* Popover */
-  --popover: 222.2 84% 4.9%;
+  --popover: 222 47% 7%;
   --popover-foreground: 210 40% 98%;
 
-  /* Primary - Nebutra Blue (brighter for dark mode) */
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
+  /* Primary - Nebutra Blue 400 (brighter for dark mode) */
+  --primary: 228 95% 67%;  /* #5c7cfa - nebutra-blue-400 */
+  --primary-foreground: 222 47% 4%;
 
-  /* Secondary - Nebutra Purple */
-  --secondary: 270 95% 75%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  /* Secondary - Nebutra Cyan 400 */
+  --secondary: 168 96% 54%;  /* #1af7c8 - nebutra-cyan-400 */
+  --secondary-foreground: 222 47% 4%;
 
-  /* Muted */
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
+  /* Muted - Dark neutral */
+  --muted: 217 33% 17%;  /* nebutra-neutral-800 */
+  --muted-foreground: 215 20% 65%;  /* nebutra-neutral-400 */
 
-  /* Accent */
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
+  /* Accent - Dark blue */
+  --accent: 228 100% 12%;  /* dark nebutra-blue */
+  --accent-foreground: 228 95% 67%;  /* nebutra-blue-400 */
 
   /* Destructive */
-  --destructive: 0 62.8% 30.6%;
+  --destructive: 0 63% 31%;
   --destructive-foreground: 210 40% 98%;
 
   /* Success */
-  --success: 160 60% 45%;
+  --success: 168 60% 45%;  /* cyan-ish green */
   --success-foreground: 210 40% 98%;
 
   /* Warning */
@@ -124,32 +184,80 @@
   --warning-foreground: 210 40% 98%;
 
   /* Border, Input, Ring */
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 48%;
+  --border: 217 33% 17%;  /* nebutra-neutral-800 */
+  --input: 217 33% 17%;
+  --ring: 228 95% 67%;  /* nebutra-blue-400 */
 
   /* Sidebar */
-  --sidebar: 240 5.9% 10%;
-  --sidebar-foreground: 240 4.8% 95.9%;
-  --sidebar-primary: 217.2 91.2% 59.8%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 240 3.7% 15.9%;
-  --sidebar-accent-foreground: 240 4.8% 95.9%;
-  --sidebar-border: 240 3.7% 15.9%;
-  --sidebar-ring: 217.2 91.2% 59.8%;
+  --sidebar: 222 47% 6%;
+  --sidebar-foreground: 210 40% 96%;
+  --sidebar-primary: 228 95% 67%;
+  --sidebar-primary-foreground: 222 47% 4%;
+  --sidebar-accent: 228 100% 12%;
+  --sidebar-accent-foreground: 228 95% 67%;
+  --sidebar-border: 217 33% 17%;
+  --sidebar-ring: 228 95% 67%;
 
-  /* Chart colors */
-  --chart-1: 217.2 91.2% 59.8%;
-  --chart-2: 270 95% 75%;
-  --chart-3: 160 60% 45%;
-  --chart-4: 38 80% 45%;
-  --chart-5: 0 62.8% 50%;
+  /* Chart colors - brighter for dark mode */
+  --chart-1: 228 95% 67%;   /* nebutra-blue-400 */
+  --chart-2: 168 96% 54%;   /* nebutra-cyan-400 */
+  --chart-3: 228 100% 82%;  /* nebutra-blue-200 */
+  --chart-4: 168 100% 75%;  /* nebutra-cyan-200 */
+  --chart-5: 228 100% 50%;  /* nebutra-blue-500 */
 }
 
 /* ============================================
    Tailwind CSS 4 Theme Configuration
    ============================================ */
 @theme inline {
+  /* ===========================================
+     Nebutra Brand Color Palette for Tailwind
+     Usage: bg-nebutra-blue-500, text-nebutra-cyan-300, etc.
+     =========================================== */
+  
+  /* Nebutra Blue Scale */
+  --color-nebutra-blue-50:  var(--nebutra-blue-50);
+  --color-nebutra-blue-100: var(--nebutra-blue-100);
+  --color-nebutra-blue-200: var(--nebutra-blue-200);
+  --color-nebutra-blue-300: var(--nebutra-blue-300);
+  --color-nebutra-blue-400: var(--nebutra-blue-400);
+  --color-nebutra-blue-500: var(--nebutra-blue-500);
+  --color-nebutra-blue-600: var(--nebutra-blue-600);
+  --color-nebutra-blue-700: var(--nebutra-blue-700);
+  --color-nebutra-blue-800: var(--nebutra-blue-800);
+  --color-nebutra-blue-900: var(--nebutra-blue-900);
+  --color-nebutra-blue-950: var(--nebutra-blue-950);
+  
+  /* Nebutra Cyan Scale */
+  --color-nebutra-cyan-50:  var(--nebutra-cyan-50);
+  --color-nebutra-cyan-100: var(--nebutra-cyan-100);
+  --color-nebutra-cyan-200: var(--nebutra-cyan-200);
+  --color-nebutra-cyan-300: var(--nebutra-cyan-300);
+  --color-nebutra-cyan-400: var(--nebutra-cyan-400);
+  --color-nebutra-cyan-500: var(--nebutra-cyan-500);
+  --color-nebutra-cyan-600: var(--nebutra-cyan-600);
+  --color-nebutra-cyan-700: var(--nebutra-cyan-700);
+  --color-nebutra-cyan-800: var(--nebutra-cyan-800);
+  --color-nebutra-cyan-900: var(--nebutra-cyan-900);
+  --color-nebutra-cyan-950: var(--nebutra-cyan-950);
+  
+  /* Nebutra Neutral Scale */
+  --color-nebutra-neutral-50:  var(--nebutra-neutral-50);
+  --color-nebutra-neutral-100: var(--nebutra-neutral-100);
+  --color-nebutra-neutral-200: var(--nebutra-neutral-200);
+  --color-nebutra-neutral-300: var(--nebutra-neutral-300);
+  --color-nebutra-neutral-400: var(--nebutra-neutral-400);
+  --color-nebutra-neutral-500: var(--nebutra-neutral-500);
+  --color-nebutra-neutral-600: var(--nebutra-neutral-600);
+  --color-nebutra-neutral-700: var(--nebutra-neutral-700);
+  --color-nebutra-neutral-800: var(--nebutra-neutral-800);
+  --color-nebutra-neutral-900: var(--nebutra-neutral-900);
+  --color-nebutra-neutral-950: var(--nebutra-neutral-950);
+  
+  /* ===========================================
+     Semantic Theme Colors (mapped from CSS vars)
+     =========================================== */
+  
   /* Map CSS variables to Tailwind theme */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));

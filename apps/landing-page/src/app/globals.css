@@ -21,40 +21,13 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ==============================================
- * Nebutra Brand CSS Variables
- * Source of truth: @nebutra/brand/src/metadata.ts
+ * Nebutra Brand Color Aliases
+ * Maps new @nebutra/21st variables to legacy names
  * ============================================== */
 :root {
-  /* 云毓蓝 (Nebutra Blue) - Primary brand color */
-  --brand-primary: #0033FE;
-  --brand-primary-50: #e6ebff;
-  --brand-primary-100: #ccd7ff;
-  --brand-primary-200: #99afff;
-  --brand-primary-300: #6687ff;
-  --brand-primary-400: #335ffe;
-  --brand-primary-500: #0033FE;
-  --brand-primary-600: #0029cb;
-  --brand-primary-700: #001f98;
-  --brand-primary-800: #001466;
-  --brand-primary-900: #000a33;
-
-  /* 云毓青 (Nebutra Cyan) - Accent color */
-  --brand-accent: #0BF1C3;
-  --brand-accent-50: #e7fef8;
-  --brand-accent-100: #cffdf1;
-  --brand-accent-200: #9ffbe3;
-  --brand-accent-300: #6ff9d5;
-  --brand-accent-400: #3df5c9;
-  --brand-accent-500: #0BF1C3;
-  --brand-accent-600: #09c19c;
-  --brand-accent-700: #079175;
-  --brand-accent-800: #05614e;
-  --brand-accent-900: #023027;
-
-  /* Brand gradients */
-  --brand-gradient: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
-  --brand-gradient-reverse: linear-gradient(135deg, var(--brand-accent) 0%, var(--brand-primary) 100%);
-  --brand-gradient-vertical: linear-gradient(180deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
+  /* Legacy aliases for backward compatibility */
+  --brand-primary: var(--nebutra-blue-500);
+  --brand-accent: var(--nebutra-cyan-500);
 }
 
 /* Custom overrides for landing page */

@@ -1,8 +1,8 @@
 /**
  * Brand Guidelines - 品牌使用规范
- * 
+ *
  * Based on: 云毓智能品牌视觉识别手册 (Nebutra Brand Visual Identity Manual)
- * 
+ *
  * This module provides programmatic access to brand guidelines for:
  * - Design system integration
  * - Automated compliance checking
@@ -31,13 +31,18 @@ export {
   colorProhibitedUses,
   allowedColorCombinations,
   generateColorScale,
+  // Complete color scales
+  nebutraBlueScale,
+  nebutraCyanScale,
+  nebutraNeutralScale,
+  semanticColors,
 } from "./color";
 
 export type { ColorProhibitedUse, AllowedColorCombination } from "./color";
 
 /**
  * Complete Brand Guidelines Object
- * 
+ *
  * Unified export for easy consumption
  */
 export const brandGuidelines = {
@@ -52,7 +57,7 @@ export const brandGuidelines = {
       digital: { minHeightPx: 35 },
     },
   },
-  
+
   // Colors
   colors: {
     primary: {
@@ -65,7 +70,7 @@ export const brandGuidelines = {
     },
     gradient: "linear-gradient(135deg, #0033FE 0%, #0BF1C3 100%)",
   },
-  
+
   // Typography
   typography: {
     cn: "vivo Sans",
