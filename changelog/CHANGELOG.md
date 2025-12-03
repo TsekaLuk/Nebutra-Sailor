@@ -5,6 +5,46 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.3.5...v1.4.0) (2025-12-03)
+
+### 🆕 Features
+
+- **config:** add product hunt launch infrastructure ([86f68da](https://github.com/TsekaLuk/Nebutra-Sailor/commit/86f68dacc83bfa22477fb7a8919815eb1469e563))
+- **custom-ui:** add new primitives and marketing components ([0d3febc](https://github.com/TsekaLuk/Nebutra-Sailor/commit/0d3febc202ff3e78fc45d1c9ec25b1192b170716))
+- **custom-ui:** add UI components from 21st.dev integration ([5a54f44](https://github.com/TsekaLuk/Nebutra-Sailor/commit/5a54f44aa164af4d3d40a6f4d7fda11810d45b89))
+- **custom-ui:** migrate 21st.dev components to shared package ([db74e6e](https://github.com/TsekaLuk/Nebutra-Sailor/commit/db74e6eba5858d783226903a6577f51e06e0a036))
+- **infra:** add third-party data service for product hunt integration ([052167a](https://github.com/TsekaLuk/Nebutra-Sailor/commit/052167a995143ea360ba69c94203b31945a2419d))
+- **landing-page:** add 3d-testimonails marquee + card/avatar components ([6d924eb](https://github.com/TsekaLuk/Nebutra-Sailor/commit/6d924ebe89e8fe76f28d3906a5f278ebb07eabf0))
+- **landing-page:** add comprehensive design spec and content system ([82d53bd](https://github.com/TsekaLuk/Nebutra-Sailor/commit/82d53bd4d0be2b424678705bdc11b34d792699b9))
+- **landing-page:** add heroui component library support ([8ae4e99](https://github.com/TsekaLuk/Nebutra-Sailor/commit/8ae4e990fa55520845b0212dffc1e99e5daf72f7))
+- **landing-page:** add magicui/shadcn component support ([ad32539](https://github.com/TsekaLuk/Nebutra-Sailor/commit/ad32539f66b7db93565777b49e0a26eb762d292b))
+- **landing-page:** implement all 13 landing page sections ([4167dac](https://github.com/TsekaLuk/Nebutra-Sailor/commit/4167dac43bc58712ea851e78966ff6b47f114904))
+- **landing-page:** testimonials registry + stagger props support ([d96af79](https://github.com/TsekaLuk/Nebutra-Sailor/commit/d96af79191a9147e51e2e703148aca55d190f02c))
+- **ui:** add heroui components and new primitives ([e55cd26](https://github.com/TsekaLuk/Nebutra-Sailor/commit/e55cd26399fde4822db20673eb1a21b27345a489))
+- **ui:** add marketing package with product hunt integration ([f14f15a](https://github.com/TsekaLuk/Nebutra-Sailor/commit/f14f15ad83702f4ff86bb110bf23525890320822))
+- **ui:** add progress, breadcrumb, alert, switch, tabs primitives ([a8e358e](https://github.com/TsekaLuk/Nebutra-Sailor/commit/a8e358eac6293eb97081721ca6301388f5f95968))
+- **ui:** add tree and terminal-control-section-animated components ([cc6eab5](https://github.com/TsekaLuk/Nebutra-Sailor/commit/cc6eab54294d122e13aa52176288f653fe83a11e))
+- upgrade to Prisma 7 best practices ([f6b94fa](https://github.com/TsekaLuk/Nebutra-Sailor/commit/f6b94faffad8833a5e756d5afa1a96f16b3aa671))
+
+### 🐛 Bug Fixes
+
+- add db:generate to prerelease script for CI ([ae1353d](https://github.com/TsekaLuk/Nebutra-Sailor/commit/ae1353d51a599e20c0d6fac590acff7addfd2e77))
+- **api-gateway:** resolve typescript errors for fetch response and prisma imports ([e07698f](https://github.com/TsekaLuk/Nebutra-Sailor/commit/e07698f525d5853d062bb02a144f32762f553bdf))
+- **db:** import prismaclient from @nebutra/db in billing package ([807674a](https://github.com/TsekaLuk/Nebutra-Sailor/commit/807674ac67b22609607fc3dc89dd747a9139f00b))
+- **db:** resolve prisma 7 ts2742 error with pnpm ([28f0ac0](https://github.com/TsekaLuk/Nebutra-Sailor/commit/28f0ac025ba905eebc1cdab1dd7f674ba3f5f349)), closes [prisma/prisma#28581](https://github.com/prisma/prisma/issues/28581)
+- **landing-page:** apply primer typography scale for better pc layout ([504f55f](https://github.com/TsekaLuk/Nebutra-Sailor/commit/504f55fcff9f74184911869d96a7c4fa3753fb34))
+- remove unsupported prisma format from lint-staged ([c6255bc](https://github.com/TsekaLuk/Nebutra-Sailor/commit/c6255bc9b38d04a423aca3dd10268d39646ff657))
+- resolve Text variable conflict in ErrorState.tsx ([6c98804](https://github.com/TsekaLuk/Nebutra-Sailor/commit/6c9880400f27310fdd5efcf9a8fdf5f7314516c7))
+- **ui:** use design-system css variables for marketing components ([c7b0b8b](https://github.com/TsekaLuk/Nebutra-Sailor/commit/c7b0b8b1ff351cc9e1aa889e6d60c6466aed0062))
+
+### 📚 Documentation
+
+- add growth hacking concept and rename twitter to x ([6f0dff9](https://github.com/TsekaLuk/Nebutra-Sailor/commit/6f0dff9f4147d12da3ce14a2d68e9d23650722e2))
+- add Prisma 7 development guide to @nebutra/db README ([0fccd23](https://github.com/TsekaLuk/Nebutra-Sailor/commit/0fccd23ae7f5de22c26560d51d0c7ec77246dd44))
+- add three-layer product hunt architecture relationship ([5d09d09](https://github.com/TsekaLuk/Nebutra-Sailor/commit/5d09d0994e283c7ea3ae0a0420a8920f2422431b))
+- integrate vibe business concept ([1fbba65](https://github.com/TsekaLuk/Nebutra-Sailor/commit/1fbba657199df6216954ea48ef2334e614bc6744))
+- **ui:** add todo for marketing components redesign ([9926154](https://github.com/TsekaLuk/Nebutra-Sailor/commit/9926154527398c8cbc8fdc30e0ed9737fffd93dd))
+
 ## [1.3.5](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.3.4...v1.3.5) (2025-12-01)
 
 ### 🐛 Bug Fixes
