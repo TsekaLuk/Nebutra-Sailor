@@ -1,28 +1,29 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { StaggerTestimonials } from "@nebutra/custom-ui/marketing";
-import type { StaggerTestimonialItem } from "@nebutra/custom-ui/marketing";
+import { GridTestimonials } from "@nebutra/custom-ui/marketing";
+import type { TestimonialItem } from "@nebutra/custom-ui/marketing";
 import { testimonialsContent } from "@/lib/landing-content";
 
 /**
- * Transform landing-content testimonials to StaggerTestimonials format
+ * Transform landing-content testimonials to GridTestimonials format
  */
-const testimonialItems: StaggerTestimonialItem[] =
-  testimonialsContent.items.map((item, index) => ({
-    tempId: index,
-    testimonial: item.quote,
-    by: `${item.author}, ${item.role} at ${item.company}`,
-    imgSrc: `https://i.pravatar.cc/150?u=${item.author.replace(/ /g, "")}-${index}`,
-  }));
+const testimonialItems: TestimonialItem[] = testimonialsContent.items.map(
+  (item) => ({
+    author: item.author,
+    title: item.role,
+    company: item.company,
+    quote: item.quote,
+    avatarUrl: `https://i.pravatar.cc/150?u=${item.author.replace(/ /g, "")}`,
+  }),
+);
 
 /**
- * TestimonialsSection - Interactive staggered testimonials carousel
+ * TestimonialsSection - Clean grid layout testimonials
  *
- * Uses StaggerTestimonials from @nebutra/custom-ui for:
- * - Staggered card layout with depth
- * - Click-to-navigate interaction
- * - Smooth card transitions
+ * Uses GridTestimonials from @nebutra/custom-ui for:
+ * - Responsive 3-column grid
+ * - Dashed border cards with grid pattern overlay
+ * - Staggered fade-in animation
  */
 export function TestimonialsSection() {
   return (
@@ -30,23 +31,12 @@ export function TestimonialsSection() {
       {/* Subtle top border */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
 
-      {/* Section header */}
-      <div className="mx-auto max-w-4xl px-6 pt-24 pb-8 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-3xl font-bold text-foreground md:text-4xl"
-        >
-          {testimonialsContent.headline}
-        </motion.h2>
-      </div>
-
-      {/* Staggered testimonials carousel */}
-      <StaggerTestimonials
+      <GridTestimonials
         items={testimonialItems}
-        height={550}
-        className="bg-transparent"
+        title={testimonialsContent.headline}
+        description="See how teams are building faster with Nebutra Sailor."
+        showHeader={true}
+        className="py-24"
       />
     </section>
   );
