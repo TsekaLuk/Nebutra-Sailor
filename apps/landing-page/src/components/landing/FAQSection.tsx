@@ -16,7 +16,7 @@ export function FAQSection() {
   const { items } = faqContent;
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-black to-zinc-950 py-24 md:py-32">
+    <section className="relative w-full bg-gradient-to-b from-background to-card py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-6">
         {/* Header */}
         <motion.div
@@ -25,7 +25,7 @@ export function FAQSection() {
           viewport={{ once: true, margin: "-100px" }}
           className="mb-12 text-center"
         >
-          <h2 className="text-3xl font-bold text-white md:text-4xl">
+          <h2 className="text-3xl font-bold text-foreground md:text-4xl">
             Frequently Asked Questions
           </h2>
         </motion.div>
@@ -39,16 +39,18 @@ export function FAQSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.05 * index }}
-              className="overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50"
+              className="overflow-hidden rounded-xl border border-border/10 bg-card/50"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="flex w-full items-center justify-between p-6 text-left"
               >
-                <span className="font-medium text-white">{item.question}</span>
+                <span className="font-medium text-foreground">
+                  {item.question}
+                </span>
                 <ChevronDown
                   className={cn(
-                    "h-5 w-5 text-white/50 transition-transform",
+                    "h-5 w-5 text-muted-foreground/80 transition-transform",
                     openIndex === index && "rotate-180",
                   )}
                 />
@@ -61,7 +63,7 @@ export function FAQSection() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <p className="border-t border-white/10 px-6 py-4 text-sm text-white/60">
+                    <p className="border-t border-border/10 px-6 py-4 text-sm text-muted-foreground">
                       {item.answer}
                     </p>
                   </motion.div>

@@ -10,7 +10,7 @@ import { statsContent } from "@/lib/landing-content";
  */
 export function StatsBreak() {
   return (
-    <section className="relative w-full border-y border-white/5 bg-gradient-to-r from-[#0033FE]/5 via-black to-[#0BF1C3]/5 py-16 md:py-24">
+    <section className="relative w-full border-y border-border/5 bg-gradient-to-r from-[var(--brand-primary)]/5 via-background to-[var(--brand-accent)]/5 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {statsContent.map((stat, index) => (
@@ -23,16 +23,18 @@ export function StatsBreak() {
               className="text-center"
             >
               <div className="flex items-baseline justify-center gap-1">
-                <span className="bg-gradient-to-r from-[#0033FE] to-[#0BF1C3] bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
+                <span className="bg-[image:var(--brand-gradient)] bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
                   {stat.value}
                 </span>
                 {stat.unit && (
-                  <span className="text-2xl font-bold text-white/40 md:text-3xl">
+                  <span className="text-2xl font-bold text-muted-foreground/60 md:text-3xl">
                     {stat.unit}
                   </span>
                 )}
               </div>
-              <p className="mt-2 text-sm text-white/50">{stat.label}</p>
+              <p className="mt-2 text-sm text-muted-foreground/80">
+                {stat.label}
+              </p>
             </motion.div>
           ))}
         </div>

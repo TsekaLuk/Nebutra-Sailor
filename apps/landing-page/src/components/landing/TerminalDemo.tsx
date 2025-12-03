@@ -23,9 +23,9 @@ export function TerminalDemo() {
   };
 
   return (
-    <section className="relative w-full bg-black py-24 md:py-32">
+    <section className="relative w-full bg-background py-24 md:py-32">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/50 via-black to-zinc-950/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-card/50 via-background to-card/50" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6">
         {/* Header */}
@@ -35,7 +35,7 @@ export function TerminalDemo() {
           viewport={{ once: true, margin: "-100px" }}
           className="mb-12 text-center"
         >
-          <h2 className="text-3xl font-bold text-white md:text-4xl">
+          <h2 className="text-3xl font-bold text-foreground md:text-4xl">
             {headline}
           </h2>
         </motion.div>
@@ -46,30 +46,34 @@ export function TerminalDemo() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ delay: 0.1 }}
-          className="overflow-hidden rounded-xl border border-white/10 bg-zinc-900/90 shadow-2xl"
+          className="overflow-hidden rounded-xl border border-border/10 bg-card/90 shadow-2xl"
         >
           {/* Terminal Header */}
-          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+          <div className="flex items-center justify-between border-b border-border/10 px-4 py-3">
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded-full bg-red-500/80" />
               <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
               <div className="h-3 w-3 rounded-full bg-green-500/80" />
             </div>
-            <span className="font-mono text-xs text-white/40">zsh</span>
+            <span className="font-mono text-xs text-muted-foreground/60">
+              zsh
+            </span>
           </div>
 
           {/* Terminal Body */}
           <div className="p-6">
             {/* Command Line */}
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[#0BF1C3]">$</span>
-              <code className="flex-1 font-mono text-white">{command}</code>
+              <span className="font-mono text-[var(--brand-accent)]">$</span>
+              <code className="flex-1 font-mono text-foreground">
+                {command}
+              </code>
               <button
                 onClick={handleCopy}
-                className="rounded-md p-2 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+                className="rounded-md p-2 text-muted-foreground/80 transition-colors hover:bg-foreground/10 hover:text-foreground"
               >
                 {copied ? (
-                  <Check className="h-4 w-4 text-[#0BF1C3]" />
+                  <Check className="h-4 w-4 text-[var(--brand-accent)]" />
                 ) : (
                   <Copy className="h-4 w-4" />
                 )}
@@ -88,13 +92,15 @@ export function TerminalDemo() {
                   className="flex items-center gap-3 font-mono text-sm"
                 >
                   {step.status === "done" ? (
-                    <Check className="h-4 w-4 text-[#0BF1C3]" />
+                    <Check className="h-4 w-4 text-[var(--brand-accent)]" />
                   ) : (
-                    <Loader2 className="h-4 w-4 animate-spin text-[#0033FE]" />
+                    <Loader2 className="h-4 w-4 animate-spin text-[var(--brand-primary)]" />
                   )}
                   <span
                     className={cn(
-                      step.status === "done" ? "text-white/60" : "text-white",
+                      step.status === "done"
+                        ? "text-muted-foreground"
+                        : "text-foreground",
                     )}
                   >
                     {step.text}
@@ -115,14 +121,14 @@ export function TerminalDemo() {
         >
           <button
             onClick={handleCopy}
-            className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-6 py-3 font-medium text-white transition-all hover:bg-white/20"
+            className="inline-flex items-center gap-2 rounded-lg bg-foreground/10 px-6 py-3 font-medium text-foreground transition-all hover:bg-foreground/20"
           >
             <Copy className="h-4 w-4" />
             {ctaPrimary}
           </button>
           <a
             href="https://github.com/nebutra/sailor"
-            className="text-white/60 transition-colors hover:text-white"
+            className="text-muted-foreground transition-colors hover:text-foreground"
           >
             {ctaSecondary}
           </a>

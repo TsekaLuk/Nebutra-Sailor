@@ -21,9 +21,9 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-black">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0033FE]/20 via-black to-[#0BF1C3]/10" />
+    <section className="relative min-h-screen w-full overflow-hidden bg-background">
+      {/* Gradient Background - uses brand colors */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-primary)]/20 via-background to-[var(--brand-accent)]/10" />
 
       {/* Grid Pattern Overlay */}
       <div
@@ -37,9 +37,9 @@ export function HeroSection() {
         }}
       />
 
-      {/* Radial glow */}
+      {/* Radial glow - brand gradient */}
       <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2">
-        <div className="h-[600px] w-[600px] rounded-full bg-gradient-to-r from-[#0033FE]/30 to-[#0BF1C3]/20 blur-[120px]" />
+        <div className="h-[600px] w-[600px] rounded-full bg-gradient-to-r from-[var(--brand-primary)]/30 to-[var(--brand-accent)]/20 blur-[120px]" />
       </div>
 
       {/* Content */}
@@ -51,8 +51,8 @@ export function HeroSection() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 backdrop-blur-sm">
-            <span className="h-2 w-2 rounded-full bg-[#0BF1C3]" />
+          <span className="inline-flex items-center gap-2 rounded-full border border-border/10 bg-foreground/5 px-4 py-2 text-sm text-muted-foreground backdrop-blur-sm">
+            <span className="h-2 w-2 rounded-full bg-[var(--brand-accent)]" />
             {heroContent.badge}
           </span>
         </motion.div>
@@ -62,7 +62,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-4 text-lg text-white/60 md:text-xl"
+          className="mb-4 text-lg text-muted-foreground md:text-xl"
         >
           {heroContent.preHeadline}
         </motion.p>
@@ -74,7 +74,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8 text-center"
         >
-          <h1 className="text-4xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
             <HeadlineAnimator words={[...heroContent.headlineWords]} />
           </h1>
         </motion.div>
@@ -86,13 +86,14 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-8 w-full max-w-lg"
         >
-          <div className="group relative flex items-center rounded-xl border border-white/10 bg-white/5 p-1 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10">
-            <code className="flex-1 px-4 py-3 font-mono text-sm text-white/90 md:text-base">
-              <span className="text-[#0BF1C3]">$</span> {heroContent.command}
+          <div className="group relative flex items-center rounded-xl border border-border/10 bg-foreground/5 p-1 backdrop-blur-sm transition-all hover:border-border/20 hover:bg-foreground/10">
+            <code className="flex-1 px-4 py-3 font-mono text-sm text-foreground/90 md:text-base">
+              <span className="text-[var(--brand-accent)]">$</span>{" "}
+              {heroContent.command}
             </code>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-white/20"
+              className="flex items-center gap-2 rounded-lg bg-foreground/10 px-4 py-2 text-sm font-medium text-foreground transition-all hover:bg-foreground/20"
             >
               <Copy className="h-4 w-4" />
               {copied ? "Copied!" : "Copy"}
@@ -109,13 +110,13 @@ export function HeroSection() {
         >
           <a
             href="https://docs.nebutra.com/sailor/getting-started"
-            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#0033FE] to-[#0BF1C3] px-6 py-3 font-semibold text-white transition-all hover:opacity-90"
+            className="inline-flex items-center gap-2 rounded-lg bg-[image:var(--brand-gradient)] px-6 py-3 font-semibold text-white transition-all hover:opacity-90"
           >
             {heroContent.ctaPrimary}
           </a>
           <a
             href="https://github.com/nebutra/sailor"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 font-semibold text-white transition-all hover:bg-white/10"
+            className="inline-flex items-center gap-2 rounded-lg border border-border/20 bg-foreground/5 px-6 py-3 font-semibold text-foreground transition-all hover:bg-foreground/10"
           >
             <Github className="h-5 w-5" />
             {heroContent.ctaSecondary}
@@ -129,7 +130,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <div className="flex flex-col items-center gap-2 text-white/40">
+          <div className="flex flex-col items-center gap-2 text-muted-foreground/60">
             <span className="text-sm">{heroContent.scrollHint}</span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
@@ -170,7 +171,7 @@ function HeadlineAnimator({ words }: { words: string[] }) {
           }}
           transition={{ duration: 0.5 }}
           className={cn(
-            "bg-gradient-to-r from-[#0033FE] to-[#0BF1C3] bg-clip-text text-transparent",
+            "bg-[image:var(--brand-gradient)] bg-clip-text text-transparent",
             index !== currentIndex && "absolute inset-0",
           )}
         >

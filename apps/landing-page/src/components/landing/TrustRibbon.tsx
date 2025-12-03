@@ -15,10 +15,10 @@ export function TrustRibbon() {
   }));
 
   return (
-    <section className="relative w-full overflow-hidden border-y border-white/5 bg-black/50 py-8 backdrop-blur-sm">
+    <section className="relative w-full overflow-hidden border-y border-border/5 bg-background/50 py-8 backdrop-blur-sm">
       {/* Gradient overlays for fade effect */}
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-black to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-black to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent" />
 
       <Marquee pauseOnHover className="[--duration:40s]">
         {logos.map((logo) => (

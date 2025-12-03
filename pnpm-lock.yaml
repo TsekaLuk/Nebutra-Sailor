@@ -137,6 +137,9 @@ importers:
       "@nebutra/21st":
         specifier: workspace:*
         version: link:../../packages/21st
+      "@nebutra/brand":
+        specifier: workspace:*
+        version: link:../../packages/brand
       "@nebutra/custom-ui":
         specifier: workspace:*
         version: link:../../packages/custom-ui
