@@ -21,32 +21,31 @@ Complete navigation to all project documentation.
 
 ## Packages
 
-| Package                                              | Description                    |
-| ---------------------------------------------------- | ------------------------------ |
-| [21st](../packages/21st/README.md)                   | 21st.dev component integration |
-| [ai-providers](../packages/ai-providers/README.md)   | AI provider abstractions       |
-| [alerting](../packages/alerting/README.md)           | Alert management               |
-| [analytics](../packages/analytics/README.md)         | Dub-powered link analytics     |
-| [audit](../packages/audit/README.md)                 | Audit logging                  |
-| [brand](../packages/brand/README.md)                 | White-label customization      |
-| [cache](../packages/cache/README.md)                 | Redis caching strategies       |
-| [captcha](../packages/captcha/README.md)             | CAPTCHA verification           |
-| [config](../packages/config/README.md)               | Shared configuration           |
-| [custom-ui](../packages/custom-ui/README.md)         | Brand-specific UI components   |
-| [db](../packages/db/README.md)                       | Prisma schema and client       |
-| [design-system](../packages/design-system/README.md) | Primer-based UI system         |
-| [errors](../packages/errors/README.md)               | Error handling                 |
-| [event-bus](../packages/event-bus/README.md)         | Cross-service events           |
-| [feature-flags](../packages/feature-flags/README.md) | Feature flag management        |
-| [health](../packages/health/README.md)               | Health check utilities         |
-| [mcp](../packages/mcp/README.md)                     | Model Context Protocol         |
-| [rate-limit](../packages/rate-limit/README.md)       | Multi-tenant rate limiting     |
-| [saga](../packages/saga/README.md)                   | Distributed transactions       |
-| [sanity](../packages/sanity/README.md)               | Sanity CMS integration         |
-| [status](../packages/status/README.md)               | Status page utilities          |
-| [storage](../packages/storage/README.md)             | File storage abstraction       |
-| [supabase](../packages/supabase/README.md)           | Realtime, Storage, Edge Funcs  |
-| [ui](../packages/ui/README.md)                       | Shared UI components           |
+| Package                                              | Description                   |
+| ---------------------------------------------------- | ----------------------------- |
+| [ai-providers](../packages/ai-providers/README.md)   | AI provider abstractions      |
+| [alerting](../packages/alerting/README.md)           | Alert management              |
+| [analytics](../packages/analytics/README.md)         | Dub-powered link analytics    |
+| [audit](../packages/audit/README.md)                 | Audit logging                 |
+| [brand](../packages/brand/README.md)                 | White-label customization     |
+| [cache](../packages/cache/README.md)                 | Redis caching strategies      |
+| [captcha](../packages/captcha/README.md)             | CAPTCHA verification          |
+| [config](../packages/config/README.md)               | Shared configuration          |
+| [custom-ui](../packages/custom-ui/README.md)         | Brand-specific UI components  |
+| [db](../packages/db/README.md)                       | Prisma schema and client      |
+| [design-system](../packages/design-system/README.md) | Primer-based UI system        |
+| [errors](../packages/errors/README.md)               | Error handling                |
+| [event-bus](../packages/event-bus/README.md)         | Cross-service events          |
+| [feature-flags](../packages/feature-flags/README.md) | Feature flag management       |
+| [health](../packages/health/README.md)               | Health check utilities        |
+| [mcp](../packages/mcp/README.md)                     | Model Context Protocol        |
+| [rate-limit](../packages/rate-limit/README.md)       | Multi-tenant rate limiting    |
+| [saga](../packages/saga/README.md)                   | Distributed transactions      |
+| [sanity](../packages/sanity/README.md)               | Sanity CMS integration        |
+| [status](../packages/status/README.md)               | Status page utilities         |
+| [storage](../packages/storage/README.md)             | File storage abstraction      |
+| [supabase](../packages/supabase/README.md)           | Realtime, Storage, Edge Funcs |
+| [ui](../packages/ui/README.md)                       | Shared UI components          |
 
 ## Infrastructure
 

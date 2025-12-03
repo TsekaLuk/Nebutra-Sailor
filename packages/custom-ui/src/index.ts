@@ -51,6 +51,8 @@ export { BentoGrid, BentoCard } from "./primitives/bento-grid";
 export type { BentoGridProps, BentoCardProps } from "./primitives/bento-grid";
 export { Badge, badgeVariants } from "./primitives/badge";
 export type { BadgeProps } from "./primitives/badge";
+export { Snippet } from "./primitives/snippet";
+export type { SnippetProps } from "./primitives/snippet";
 export { FlickeringGrid } from "./primitives/flickering-grid";
 export type { FlickeringGridProps } from "./primitives/flickering-grid";
 export { DotPattern } from "./primitives/dot-pattern";

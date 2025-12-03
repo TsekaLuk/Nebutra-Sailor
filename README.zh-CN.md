@@ -321,10 +321,9 @@ Nebutra-Sailor/
 │   ├── studio/            # Sanity CMS (studio.nebutra.com)
 │   └── api-gateway/       # BFF 层 (api.nebutra.com)
 ├── packages/
-│   ├── 21st/              # shadcn/ui + 21st.dev 实验性组件
+│   ├── custom-ui/         # shadcn/ui + HeroUI/MagicUI 组件库
 │   ├── ai-providers/      # 多供应商 AI SDK (OpenRouter, OpenAI 等)
 │   ├── brand/             # 统一品牌资产与组件
-│   ├── custom-ui/         # 品牌特定、已审核的 UI 组件
 │   ├── design-system/     # SSOT: Primer + 字体系统 + 主题令牌
 │   ├── ui/                # Lobe UI + Lobe Icons + 设计系统
 │   ├── db/                # Prisma 7 Schema 与客户端
@@ -385,8 +384,7 @@ Nebutra-Sailor/
 <td>
   <a href="packages/design-system/">Design System</a> · 
   <a href="packages/custom-ui/">Custom UI</a> · 
-  <a href="packages/21st/">21st</a> · 
-  <a href="packages/db/">DB</a> · 
+  <a href="packages/db/">DB</a> ·
   <a href="packages/cache/">Cache</a> · 
   <a href="packages/rate-limit/">Rate Limit</a> · 
   <a href="packages/event-bus/">Event Bus</a> · 

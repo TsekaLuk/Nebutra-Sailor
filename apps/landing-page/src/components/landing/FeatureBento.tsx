@@ -1,22 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, Bot, CreditCard, Globe } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { bentoFeatures, bentoSectionContent } from "@/lib/landing-content";
-import { BentoGrid, BentoCard } from "@nebutra/custom-ui";
 import {
   MultiTenantVisual,
   AINativeVisual,
   BillingVisual,
   GlobalEdgeVisual,
 } from "./feature-visuals";
-
-const ICONS = {
-  "🏢": Building2,
-  "🤖": Bot,
-  "💳": CreditCard,
-  "🌍": Globe,
-};
 
 /** Map feature keys to their visual components */
 const VISUALS: Record<string, React.ReactNode> = {
@@ -26,27 +18,134 @@ const VISUALS: Record<string, React.ReactNode> = {
   globalEdge: <GlobalEdgeVisual />,
 };
 
-/** Grid span classes for Micro-Landing Card layout */
-const GRID_SPANS: Record<string, string> = {
-  multiTenant: "lg:col-span-2 lg:row-span-2", // Primary card (2x2)
-  aiNative: "lg:row-span-2", // Tall card (1x2)
-  billing: "lg:col-span-1", // Standard card (1x1)
-  globalEdge: "lg:col-span-2", // Wide card (2x1)
+/**
+ * Asymmetric Bento Layout:
+ *
+ * ┌─────────────────┬──────────────────────┐
+ * │   Multi-Tenant  │      AI Layer        │
+ * │   (col-span-1   │   (col-span-2        │
+ * │    row-span-2)  │    row-span-1)       │
+ * ├─────────────────┼───────────┬──────────┤
+ * │   (continues)   │  Billing  │ Global   │
+ * │                 │ (1×1)     │ Edge     │
+ * │                 │           │ (1×1)    │
+ * └─────────────────┴───────────┴──────────┘
+ */
+const GRID_CONFIG: Record<
+  string,
+  { span: string; order: number; minHeight: string }
+> = {
+  multiTenant: {
+    span: "md:col-span-1 md:row-span-2",
+    order: 1,
+    minHeight: "min-h-[480px]",
+  },
+  aiNative: {
+    span: "md:col-span-2 md:row-span-1",
+    order: 2,
+    minHeight: "min-h-[280px]",
+  },
+  billing: {
+    span: "md:col-span-1 md:row-span-1",
+    order: 3,
+    minHeight: "min-h-[280px]",
+  },
+  globalEdge: {
+    span: "md:col-span-1 md:row-span-1",
+    order: 4,
+    minHeight: "min-h-[280px]",
+  },
 };
 
 /**
- * FeatureBento - Micro-Landing Card grid
+ * MicroLandingBentoCard - Individual card with 5-layer structure
+ */
+function MicroLandingBentoCard({
+  featureKey,
+  feature,
+}: {
+  featureKey: string;
+  feature: (typeof bentoFeatures)[keyof typeof bentoFeatures];
+}) {
+  const config = GRID_CONFIG[featureKey] || {
+    span: "",
+    order: 99,
+    minHeight: "min-h-[280px]",
+  };
+  const visual = VISUALS[featureKey];
+  const isPrimary = featureKey === "multiTenant";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: config.order * 0.1 }}
+      className={`
+        group relative flex flex-col overflow-hidden rounded-xl
+        border border-border bg-card
+        transition-all duration-300
+        hover:border-border/80 hover:shadow-lg hover:shadow-primary/5
+        ${config.span} ${config.minHeight}
+      `}
+      style={{ order: config.order }}
+    >
+      {/* Hero + Context Layer */}
+      <div className="relative z-10 p-5 pb-0">
+        <h3
+          className={`font-semibold leading-snug text-foreground ${
+            isPrimary ? "text-lg md:text-xl" : "text-base md:text-lg"
+          }`}
+        >
+          {feature.title}
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          {feature.description}
+        </p>
+      </div>
+
+      {/* Proof Layer - Visual Component */}
+      <div className="relative z-10 flex-1 mt-4">{visual}</div>
+
+      {/* Action Layer - CTA */}
+      <div className="relative z-10 p-5 pt-0">
+        <a
+          href="#"
+          className="group/cta inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+        >
+          {feature.cta}
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/cta:translate-x-0.5" />
+        </a>
+      </div>
+
+      {/* Hover overlay */}
+      <div className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 bg-gradient-to-t from-primary/[0.02] to-transparent" />
+    </motion.div>
+  );
+}
+
+/**
+ * FeatureBento - High-granularity Asymmetric Bento Grid
  *
- * Each card follows the Micro-Landing design pattern:
- * - Hero (Tension): Opinionated hook in title
- * - Context: Problem statement in description
- * - Proof: Visual demonstration using audited primitives
- * - CTA: Specific action
+ * Each card is a "Micro Landing Page" with:
+ * - Hero: Opinionated tension statement
+ * - Context: Pain point description
+ * - Proof: Hard evidence (code, metrics, semantic graphics)
+ * - Action: Micro-CTA
  *
  * @see apps/landing-page/DESIGN.md#12-micro-landing-card-design-system
  */
 export function FeatureBento() {
-  const features = Object.entries(bentoFeatures);
+  const features = Object.entries(bentoFeatures) as [
+    string,
+    (typeof bentoFeatures)[keyof typeof bentoFeatures],
+  ][];
+
+  // Sort by order
+  const sortedFeatures = features.sort(
+    (a, b) =>
+      (GRID_CONFIG[a[0]]?.order || 99) - (GRID_CONFIG[b[0]]?.order || 99),
+  );
 
   return (
     <section className="relative w-full bg-background py-24 md:py-32">
@@ -66,27 +165,16 @@ export function FeatureBento() {
           </p>
         </motion.div>
 
-        {/* Bento Grid - Micro-Landing Cards */}
-        <BentoGrid className="lg:grid-cols-3">
-          {features.map(([key, feature]) => {
-            const Icon = ICONS[feature.icon as keyof typeof ICONS] || Building2;
-            const background = VISUALS[key];
-            const gridSpan = GRID_SPANS[key] || "";
-
-            return (
-              <BentoCard
-                key={key}
-                name={feature.title}
-                description={feature.description}
-                Icon={Icon}
-                background={background}
-                className={gridSpan}
-                href="#"
-                cta={feature.cta}
-              />
-            );
-          })}
-        </BentoGrid>
+        {/* Asymmetric Bento Grid */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:auto-rows-fr">
+          {sortedFeatures.map(([key, feature]) => (
+            <MicroLandingBentoCard
+              key={key}
+              featureKey={key}
+              feature={feature}
+            />
+          ))}
+        </div>
 
         {/* Footer - Confidence, not marketing speak */}
         <motion.p

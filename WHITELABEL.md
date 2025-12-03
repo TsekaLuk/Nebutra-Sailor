@@ -26,15 +26,15 @@ pnpm dev
 
 The white-label system updates the following:
 
-| Component | Changes |
-|-----------|---------|
-| **README.md** | Brand name, tagline, repository URLs, badges |
-| **README.zh-CN.md** | Chinese version with same updates |
-| **packages/brand/src/metadata.ts** | Brand constants, colors, domains |
-| **packages/brand/assets/** | Logo files, favicons |
-| **packages/design-system/** | Typography, theme tokens, colors |
-| **package.json files** | NPM scope (`@nebutra` → `@yourbrand`) |
-| **.env.example** | Domain URLs |
+| Component                          | Changes                                      |
+| ---------------------------------- | -------------------------------------------- |
+| **README.md**                      | Brand name, tagline, repository URLs, badges |
+| **README.zh-CN.md**                | Chinese version with same updates            |
+| **packages/brand/src/metadata.ts** | Brand constants, colors, domains             |
+| **packages/brand/assets/**         | Logo files, favicons                         |
+| **packages/design-system/**        | Typography, theme tokens, colors             |
+| **package.json files**             | NPM scope (`@nebutra` → `@yourbrand`)        |
+| **.env.example**                   | Domain URLs                                  |
 
 ## Configuration Options
 
@@ -138,22 +138,22 @@ brand.config/
 
 ### Logo Specifications
 
-| Asset | Dimensions | Format | Usage |
-|-------|------------|--------|-------|
-| `logo-color.svg` | Any | SVG | Primary logo |
-| `logo-inverse.svg` | Any | SVG | Dark mode / dark backgrounds |
-| `logo-mono.svg` | Any | SVG | Monochrome contexts |
-| `logo-horizontal-*.svg` | ~320×80 | SVG | README header |
+| Asset                   | Dimensions | Format | Usage                        |
+| ----------------------- | ---------- | ------ | ---------------------------- |
+| `logo-color.svg`        | Any        | SVG    | Primary logo                 |
+| `logo-inverse.svg`      | Any        | SVG    | Dark mode / dark backgrounds |
+| `logo-mono.svg`         | Any        | SVG    | Monochrome contexts          |
+| `logo-horizontal-*.svg` | ~320×80    | SVG    | README header                |
 
 ### Favicon Specifications
 
-| Asset | Dimensions | Format |
-|-------|------------|--------|
-| `favicon.ico` | 32×32 | ICO |
-| `favicon.svg` | Any | SVG |
-| `apple-touch-icon.png` | 180×180 | PNG |
-| `android-chrome-192x192.png` | 192×192 | PNG |
-| `android-chrome-512x512.png` | 512×512 | PNG |
+| Asset                        | Dimensions | Format |
+| ---------------------------- | ---------- | ------ |
+| `favicon.ico`                | 32×32      | ICO    |
+| `favicon.svg`                | Any        | SVG    |
+| `apple-touch-icon.png`       | 180×180    | PNG    |
+| `android-chrome-192x192.png` | 192×192    | PNG    |
+| `android-chrome-512x512.png` | 512×512    | PNG    |
 
 ## Feature Toggles
 
@@ -163,16 +163,17 @@ Disable features you don't need in your deployment:
 features: {
   // Disable blockchain features
   web3: false,
-  
+
   // Disable e-commerce integration
   ecommerce: false,
-  
+
   // Disable recommendation system
   recsys: false,
 }
 ```
 
 When a feature is disabled:
+
 - Related services won't be built
 - Documentation references are adjusted
 - Environment variables are commented out
@@ -204,12 +205,12 @@ colors: {
 
 The design system uses open-source fonts by default:
 
-| Purpose | Default Font | License |
-|---------|--------------|--------|
-| **UI / Body** | Inter | OFL 1.1 |
-| **Headings** | Inter | OFL 1.1 |
-| **Code** | JetBrains Mono | OFL 1.1 |
-| **CJK** | Noto Sans SC | OFL 1.1 |
+| Purpose       | Default Font   | License |
+| ------------- | -------------- | ------- |
+| **UI / Body** | Inter          | OFL 1.1 |
+| **Headings**  | Inter          | OFL 1.1 |
+| **Code**      | JetBrains Mono | OFL 1.1 |
+| **CJK**       | Noto Sans SC   | OFL 1.1 |
 
 ### Using Custom Brand Fonts
 
@@ -246,11 +247,11 @@ If self-hosting fonts, add them to `public/fonts/` and update the `@font-face` d
 
 ```css
 @font-face {
-  font-family: 'YourBrandFont';
+  font-family: "YourBrandFont";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/YourBrandFont-Regular.woff2') format('woff2');
+  src: url("/fonts/YourBrandFont-Regular.woff2") format("woff2");
 }
 ```
 
@@ -259,21 +260,21 @@ If self-hosting fonts, add them to `public/fonts/` and update the `@font-face` d
 Update the font imports in `fonts.css`:
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=YourBrandFont:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=YourBrandFont:wght@400;500;600;700&display=swap");
 ```
 
 ### Typography Token Structure
 
 The design system exposes these typography tokens:
 
-| Token | Usage |
-|-------|-------|
-| `fontFamilies.primary` | Body text, UI elements |
-| `fontFamilies.heading` | Titles, headlines |
-| `fontFamilies.mono` | Code, technical content |
-| `fontFamilies.cjk` | Chinese/Japanese/Korean text |
-| `fontSizes.*` | xs, sm, base, lg, xl, 2xl-8xl |
-| `typeStyles.*` | h1-h6, body, caption, code, button |
+| Token                  | Usage                              |
+| ---------------------- | ---------------------------------- |
+| `fontFamilies.primary` | Body text, UI elements             |
+| `fontFamilies.heading` | Titles, headlines                  |
+| `fontFamilies.mono`    | Code, technical content            |
+| `fontFamilies.cjk`     | Chinese/Japanese/Korean text       |
+| `fontSizes.*`          | xs, sm, base, lg, xl, 2xl-8xl      |
+| `typeStyles.*`         | h1-h6, body, caption, code, button |
 
 See [Typography Documentation](docs/TYPOGRAPHY.md) for full details.
 
@@ -301,7 +302,7 @@ import { createTheme } from "./default";
 export const brandTheme = createTheme("light", {
   colors: {
     accent: {
-      fg: "#6366f1",      // Your brand primary
+      fg: "#6366f1", // Your brand primary
       emphasis: "#4f46e5",
     },
   },
@@ -310,11 +311,11 @@ export const brandTheme = createTheme("light", {
 
 ### Component Layer Strategy
 
-| Layer | Package | Purpose |
-|-------|---------|--------|
-| **SSOT** | `@yourbrand/design-system` | Base tokens, Primer components |
-| **Brand** | `@yourbrand/custom-ui` | Domain-specific, promoted components |
-| **Experimental** | `@yourbrand/21st` | Prototypes, external library wrappers |
+| Layer            | Package                    | Purpose                               |
+| ---------------- | -------------------------- | ------------------------------------- |
+| **SSOT**         | `@yourbrand/design-system` | Base tokens, Primer components        |
+| **Brand**        | `@yourbrand/custom-ui`     | Domain-specific, promoted components  |
+| **Experimental** | `@yourbrand/custom-ui`     | Prototypes, external library wrappers |
 
 See [Component Library Policy](docs/COMPONENT-LIBRARY-POLICY.md) for governance rules.
 
@@ -325,6 +326,7 @@ Some elements require manual updates:
 ### Hero Banners
 
 The README uses hero banners from `packages/brand/assets/hero/`. Create your own:
+
 - `hero-light.svg` (1200×420)
 - `hero-dark.svg` (1200×420)
 - `hero-zh-light.svg` (Chinese, 1200×420)
@@ -333,6 +335,7 @@ The README uses hero banners from `packages/brand/assets/hero/`. Create your own
 ### Feature Icons
 
 Custom icons in `packages/brand/assets/icons/`:
+
 - `ai.svg`
 - `tenants.svg`
 - `enterprise.svg`
@@ -398,5 +401,6 @@ pnpm install
 ## Support
 
 For questions about white-labeling:
+
 - Open an issue on [GitHub](https://github.com/TsekaLuk/Nebutra-Sailor/issues)
 - Tag with `white-label` label

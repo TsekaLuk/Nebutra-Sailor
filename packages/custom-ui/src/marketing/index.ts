@@ -52,7 +52,7 @@ export { LogoCloud } from "./components/LogoCloud";
 export { StatsCounter } from "./components/StatsCounter";
 
 // =============================================================================
-// 21st.dev Migrated Components
+// HeroUI/MagicUI Migrated Components
 // =============================================================================
 
 // Decorative

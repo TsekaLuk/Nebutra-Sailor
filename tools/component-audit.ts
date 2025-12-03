@@ -27,7 +27,7 @@ const CONFIG = {
   approvedPackages: [
     "@nebutra/design-system",
     "@nebutra/custom-ui",
-    "@nebutra/21st",
+    "@nebutra/custom-ui",
   ],
 
   // Pre-approved external libraries
@@ -43,20 +43,10 @@ const CONFIG = {
   ],
 
   // Libraries requiring approval
-  requiresApproval: [
-    "@heroui",
-    "@mui",
-    "@chakra-ui",
-    "antd",
-    "@mantine",
-  ],
+  requiresApproval: ["@heroui", "@mui", "@chakra-ui", "antd", "@mantine"],
 
   // Not recommended
-  notRecommended: [
-    "bootstrap",
-    "semantic-ui",
-    "foundation-sites",
-  ],
+  notRecommended: ["bootstrap", "semantic-ui", "foundation-sites"],
 
   // Deprecated patterns to check
   deprecatedPatterns: [
@@ -247,8 +237,9 @@ function runAudit(): AuditResult {
     summary: {
       filesScanned,
       externalImports: allImports.length,
-      requiresApproval: allImports.filter((i) => i.status === "requires-approval")
-        .length,
+      requiresApproval: allImports.filter(
+        (i) => i.status === "requires-approval",
+      ).length,
       notRecommended: allImports.filter((i) => i.status === "not-recommended")
         .length,
       deprecatedUsage: allDeprecated.length,
@@ -260,9 +251,15 @@ function runAudit(): AuditResult {
 function formatReport(result: AuditResult): string {
   const lines: string[] = [];
 
-  lines.push("╔══════════════════════════════════════════════════════════════╗");
-  lines.push("║              COMPONENT AUDIT REPORT                          ║");
-  lines.push("╚══════════════════════════════════════════════════════════════╝");
+  lines.push(
+    "╔══════════════════════════════════════════════════════════════╗",
+  );
+  lines.push(
+    "║              COMPONENT AUDIT REPORT                          ║",
+  );
+  lines.push(
+    "╚══════════════════════════════════════════════════════════════╝",
+  );
   lines.push("");
 
   // Summary
@@ -283,10 +280,10 @@ function formatReport(result: AuditResult): string {
 
     const byStatus = {
       "requires-approval": result.externalImports.filter(
-        (i) => i.status === "requires-approval"
+        (i) => i.status === "requires-approval",
       ),
       "not-recommended": result.externalImports.filter(
-        (i) => i.status === "not-recommended"
+        (i) => i.status === "not-recommended",
       ),
       unknown: result.externalImports.filter((i) => i.status === "unknown"),
     };

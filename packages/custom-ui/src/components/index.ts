@@ -3,7 +3,7 @@
  *
  * Brand-specific components that extend or wrap design-system primitives.
  * Components here are either:
- * - Promoted from external libraries (21st.dev, HeroUI, etc.) after review
+ * - Promoted from external libraries (HeroUI/MagicUI, HeroUI, etc.) after review
  * - Domain-specific implementations (commerce, Web3, multi-tenant)
  * - Complex/composite components built from design-system primitives
  */

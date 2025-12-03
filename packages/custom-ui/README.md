@@ -8,7 +8,7 @@ This package contains UI components that are:
 
 1. **Domain-specific** - Commerce, Web3, multi-tenant, dashboard widgets
 2. **High-density/Complex** - Data grids, charts, activity feeds
-3. **Promoted** - Components from external libraries (21st.dev, HeroUI) that passed review and were absorbed
+3. **Promoted** - Components from external libraries (HeroUI/MagicUI, HeroUI) that passed review and were absorbed
 4. **Brand-customized** - Wrappers with Nebutra-specific styling and behavior
 
 ## Architecture
@@ -138,7 +138,7 @@ Components in this package follow a strict lifecycle:
 
 ## Promoting External Components
 
-When an external component (from 21st.dev, HeroUI, etc.) is ready to be absorbed:
+When an external component (from HeroUI/MagicUI, HeroUI, etc.) is ready to be absorbed:
 
 1. Review passes (see `docs/COMPONENT-LIBRARY-POLICY.md`)
 2. Create wrapper in this package
@@ -149,6 +149,5 @@ When an external component (from 21st.dev, HeroUI, etc.) is ready to be absorbed
 ## Related
 
 - [@nebutra/design-system](../design-system/) - Base design system
-- [@nebutra/21st](../21st/) - 21st.dev compatible experimental components
 - [UI Guidelines](../../docs/UI-GUIDELINES.md)
 - [Component Library Policy](../../docs/COMPONENT-LIBRARY-POLICY.md)

@@ -3,14 +3,14 @@
  * 
  * This file imports:
  * 1. Typography CSS variables from design-system (SSOT for fonts)
- * 2. Theme system from @nebutra/21st (colors, Tailwind config)
+ * 2. Theme system from @nebutra/custom-ui (colors, Tailwind config)
  */
 
 /* Typography SSOT - must be imported first to define --font-* variables */
 @import "@nebutra/design-system/typography/fonts.css";
 
-/* Import 21st.dev compatible theme from @nebutra/21st */
-@import "@nebutra/21st/styles/globals.css";
+/* Import 21st.dev compatible theme from @nebutra/custom-ui */
+@import "@nebutra/custom-ui/styles/globals.css";
 
 /* Custom overrides for web app (dashboard) */
 @layer base {

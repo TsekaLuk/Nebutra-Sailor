@@ -82,8 +82,8 @@ Nebutra-Sailor/
 │   ├── studio/             # Sanity CMS Studio
 │   └── api-gateway/        # BFF: rate-limit, circuit breaker, Prisma 7
 ├── packages/               # Shared libraries
-│   ├── ui/                 # shadcn/ui extended components
-│   ├── custom-ui/          # Custom UI components (21st.dev)
+│   ├── ui/                 # Lobe-style UI components
+│   ├── custom-ui/          # Brand-specific & shadcn-style UI components
 │   ├── design-system/      # Design tokens, Framer Motion presets
 │   ├── brand/              # White-label brand configuration
 │   ├── db/                 # Prisma schema and client
@@ -426,7 +426,7 @@ uvicorn app.main:app --reload --port 8007
 
 ## External UI Component Integration
 
-When integrating external UI components (21st.dev, HeroUI, MagicUI, etc.) into the codebase, **ALL components MUST pass Primer compliance review** before merging.
+When integrating external UI components (HeroUI, MagicUI, etc.) into the codebase, **ALL components MUST pass Primer compliance review** before merging.
 
 ### Primer Compliance Checklist
 

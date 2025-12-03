@@ -11,3 +11,5 @@ export {
 } from "./useScrollDwell";
 
 export { DwellHint, type DwellHintProps } from "./DwellHint";
+
+export { useMediaQuery } from "./use-media-query";

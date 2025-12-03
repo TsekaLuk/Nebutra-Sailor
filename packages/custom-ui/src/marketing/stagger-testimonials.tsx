@@ -73,7 +73,7 @@ const defaultTestimonials = [
   },
   {
     tempId: 8,
-    testimonial: "21st.dev + shadcn structure made our marketing pages fly.",
+    testimonial: "shadcn structure made our marketing pages fly.",
     by: "Fernando, UX Designer at UserFirst",
     imgSrc:
       "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&q=60",

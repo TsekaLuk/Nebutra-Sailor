@@ -16,7 +16,7 @@ export type ComponentSource =
   | "design-system" // From @nebutra/design-system (SSOT)
   | "custom" // Built in-house for @nebutra/custom-ui
   | "promoted" // Promoted from external library
-  | "experimental"; // Still experimental, from @nebutra/21st or external
+  | "experimental"; // Still experimental, from @nebutra/custom-ui or external
 
 /**
  * Component lifecycle status
@@ -123,7 +123,7 @@ export type ComponentRegistry = Record<string, RegistryEntry>;
  */
 export function filterByStatus(
   registry: ComponentRegistry,
-  status: ComponentStatus
+  status: ComponentStatus,
 ): RegistryEntry[] {
   return Object.values(registry).filter((entry) => entry.status === status);
 }
@@ -133,7 +133,7 @@ export function filterByStatus(
  */
 export function filterBySource(
   registry: ComponentRegistry,
-  source: ComponentSource
+  source: ComponentSource,
 ): RegistryEntry[] {
   return Object.values(registry).filter((entry) => entry.source === source);
 }
@@ -142,7 +142,7 @@ export function filterBySource(
  * Get all deprecated components
  */
 export function getDeprecatedComponents(
-  registry: ComponentRegistry
+  registry: ComponentRegistry,
 ): RegistryEntry[] {
   return filterByStatus(registry, "deprecated");
 }
@@ -151,7 +151,7 @@ export function getDeprecatedComponents(
  * Get all experimental components
  */
 export function getExperimentalComponents(
-  registry: ComponentRegistry
+  registry: ComponentRegistry,
 ): RegistryEntry[] {
   return filterByStatus(registry, "experimental");
 }
@@ -165,7 +165,7 @@ export function getExperimentalComponents(
  */
 export function warnIfDeprecated(
   meta: ComponentMeta,
-  componentName?: string
+  componentName?: string,
 ): void {
   if (process.env.NODE_ENV === "development" && meta.status === "deprecated") {
     const message = getDeprecationMessage(meta);
@@ -180,14 +180,14 @@ export function warnIfDeprecated(
  */
 export function warnIfExperimental(
   meta: ComponentMeta,
-  componentName?: string
+  componentName?: string,
 ): void {
   if (
     process.env.NODE_ENV === "development" &&
     meta.status === "experimental"
   ) {
     console.warn(
-      `[Design System] ${meta.name || componentName} is experimental and not recommended for production use.`
+      `[Design System] ${meta.name || componentName} is experimental and not recommended for production use.`,
     );
   }
 }

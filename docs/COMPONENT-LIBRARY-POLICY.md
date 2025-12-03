@@ -9,19 +9,19 @@ Nebutra uses a **layered component architecture** built on GitHub's Primer Desig
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                      External Libraries                            │
-│              (21st.dev, HeroUI, Magic UI, etc.)                    │
+│                (HeroUI, Magic UI, etc.)                            │
 │                       [Experimental]                                │
-└─────────────────────────────────┬───────────────────────────────────┘
+└───────────────────────────────┬─────────────────────────────────────┘
                                 │ Review & Promote
                                 ▼
-┌──────────────────────┐  ┌─────────────────┐  ┌────────────────────┐
-│  @nebutra/custom-ui  │  │  @nebutra/21st  │  │    @nebutra/ui     │
-│  (Brand/Domain UI)   │  │  (Experimental) │  │  (shadcn-style)    │
-│       [Stable]       │  │    [Beta]       │  │     [Stable]       │
-└──────────┬───────────┘  └────────┬────────┘  └──────────┬─────────┘
-           │                       │                       │
-           └───────────────────────┼───────────────────────┘
-                               Depends on
+┌──────────────────────────────────────────┐  ┌────────────────────┐
+│  @nebutra/custom-ui                      │  │    @nebutra/ui     │
+│  (Brand/Domain + shadcn-style)           │  │  (Lobe-style)      │
+│       [Stable]                           │  │     [Stable]       │
+└─────────────────────┬────────────────────┘  └──────────┬─────────┘
+                      │                               │
+                      └───────────────────────────────┘
+                            Depends on
                                 ▼
 ┌─────────────────────────────────────────────────────────────────────┐
 │               @nebutra/design-system (SSOT)                        │
@@ -42,22 +42,23 @@ Nebutra uses a **layered component architecture** built on GitHub's Primer Desig
 
 ### Key Relationships
 
-| Layer | Foundation | Typography | Brand/Marketing |
-|-------|-----------|------------|---------------------|
+| Layer             | Foundation   | Typography                                | Brand/Marketing                     |
+| ----------------- | ------------ | ----------------------------------------- | ----------------------------------- |
 | **design-system** | Primer React | Open-source fonts (Inter, JetBrains Mono) | theme/brand.ts + theme/marketing.ts |
-| **custom-ui** | ↑ inherits | ↑ inherits | Domain-specific styles |
-| **ui** | ↑ inherits | ↑ inherits | shadcn-style patterns |
-| **21st/External** | May differ | Must adapt | Requires integration |
+| **custom-ui**     | ↑ inherits   | ↑ inherits                                | Domain + shadcn-style               |
+| **ui**            | ↑ inherits   | ↑ inherits                                | Lobe-style patterns                 |
+| **External**      | May differ   | Must adapt                                | Requires integration                |
 
 ### Theme Modules (★ = new)
 
-| Module | Purpose | Usage |
-|--------|---------|-------|
-| `theme/default` | Primer baseline tokens (colors, spacing, shadows) | All apps - always loaded |
-| `theme/brand` | Brand color overrides for white-label | Multi-tenant customization |
-| `theme/marketing` ★ | Extended tokens for marketing pages | Landing pages, hero sections |
+| Module              | Purpose                                           | Usage                        |
+| ------------------- | ------------------------------------------------- | ---------------------------- |
+| `theme/default`     | Primer baseline tokens (colors, spacing, shadows) | All apps - always loaded     |
+| `theme/brand`       | Brand color overrides for white-label             | Multi-tenant customization   |
+| `theme/marketing` ★ | Extended tokens for marketing pages               | Landing pages, hero sections |
 
 **Marketing tokens include:**
+
 - Large typography scales (display: 3-6rem, responsive)
 - Gradient presets (primary, mesh, aurora, glass)
 - Glass/Blur effects (glassmorphism, frosted)
@@ -74,6 +75,7 @@ Nebutra uses a **layered component architecture** built on GitHub's Primer Desig
 The foundation layer built on **Primer React** providing:
 
 > **Compatibility Note**: Runtime is React 19, but TypeScript type definitions are locked to `@types/react@18` via pnpm overrides for Primer React compatibility. This is a temporary measure until Primer React fully supports React 19 types. All React 19 features (Server Components, Actions, `use()`, etc.) work as expected.
+
 - **Theme tokens** - colors, spacing, shadows, radii (Primer defaults + brand overrides)
 - **Typography system** - Inter, JetBrains Mono, CJK fonts with rem-based scale
 - **UI primitives** - layout, accessibility, responsive patterns
@@ -88,6 +90,7 @@ The foundation layer built on **Primer React** providing:
 | `components/` | Primer + custom components |
 
 **Rules**:
+
 - ✅ Always import base components from here
 - ✅ All custom components must use design-system tokens
 - ✅ Use `typography/` for all font-related values
@@ -99,35 +102,23 @@ The foundation layer built on **Primer React** providing:
 **Status**: Use for production features
 
 Contains:
+
 - Domain-specific components (TenantSwitcher, PricingCard)
 - Promoted components from external libraries
 - Complex/composite UI (dashboards, data grids)
 
 **Rules**:
+
 - ✅ Use for reusable, production-ready UI
 - ✅ Components must pass full review
 - ❌ No experimental or unreviewed components
 
-### 3. @nebutra/21st (Experimental)
-
-**Status**: Use for prototypes and experiments
-
-Provides:
-- 21st.dev compatible components
-- shadcn/ui style implementations
-- High-UX experimental patterns
-
-**Rules**:
-- ✅ Use for landing pages, marketing
-- ✅ Use for feature experiments
-- ⚠️ Not for core product UI without promotion
-- ❌ Don't depend on for critical paths
-
-### 4. External Libraries (HeroUI, etc.)
+### 3. External Libraries (HeroUI, etc.)
 
 **Status**: Use sparingly, with approval
 
 **Rules**:
+
 - ⚠️ Requires team approval before use
 - ⚠️ Must document in component registry
 - ✅ OK for one-off needs
@@ -144,7 +135,7 @@ flowchart TD
     B -->|No| D{Exists in custom-ui?}
     D -->|Yes| E[Use custom-ui]
     D -->|No| F{Is it experimental/prototype?}
-    F -->|Yes| G[Use 21st or external]
+    F -->|Yes| G[Use external library]
     F -->|No| H{Worth building?}
     H -->|Yes| I[Build in custom-ui]
     H -->|No| J[Request approval for external]
@@ -155,6 +146,7 @@ flowchart TD
 Before promoting an external component to `custom-ui`:
 
 #### 1. Visual Consistency
+
 - [ ] Uses design-system color tokens
 - [ ] Uses design-system spacing scale
 - [ ] Uses design-system typography
@@ -162,6 +154,7 @@ Before promoting an external component to `custom-ui`:
 - [ ] Matches overall visual style
 
 #### 2. Accessibility
+
 - [ ] Semantic HTML structure
 - [ ] Proper ARIA attributes
 - [ ] Keyboard navigable
@@ -170,6 +163,7 @@ Before promoting an external component to `custom-ui`:
 - [ ] Touch targets ≥ 44px
 
 #### 3. Responsiveness
+
 - [ ] Works on mobile (xs, sm)
 - [ ] Works on tablet (md)
 - [ ] Works on desktop (lg, xl)
@@ -177,6 +171,7 @@ Before promoting an external component to `custom-ui`:
 - [ ] Text remains readable
 
 #### 4. Performance
+
 - [ ] Bundle size impact < 10KB gzipped
 - [ ] No render-blocking issues
 - [ ] Lazy-loadable if large
@@ -184,12 +179,14 @@ Before promoting an external component to `custom-ui`:
 - [ ] Efficient re-renders
 
 #### 5. Theming
+
 - [ ] Supports light mode
 - [ ] Supports dark mode
 - [ ] Uses theme context
 - [ ] No hard-coded colors
 
 #### 6. Code Quality
+
 - [ ] TypeScript types complete
 - [ ] Props are well-documented
 - [ ] No console warnings
@@ -284,7 +281,7 @@ export function OldComponent(props) {
   if (process.env.NODE_ENV === "development") {
     console.warn(
       "OldComponent is deprecated. Use NewComponent instead. " +
-      "See migration guide: docs/migrations/old-to-new.md"
+        "See migration guide: docs/migrations/old-to-new.md",
     );
   }
   // ... component code
@@ -303,34 +300,34 @@ export function OldComponent(props) {
 
 These libraries can be used without additional approval:
 
-| Library | Use Case | Notes |
-|---------|----------|-------|
-| @radix-ui/* | Primitives | Via @nebutra/21st |
-| framer-motion | Animation | Production-ready |
-| lucide-react | Icons | Fallback icons |
-| recharts | Charts | Data visualization |
-| @tanstack/react-table | Tables | Complex data grids |
+| Library               | Use Case   | Notes                  |
+| --------------------- | ---------- | ---------------------- |
+| @radix-ui/\*          | Primitives | Via @nebutra/custom-ui |
+| framer-motion         | Animation  | Production-ready       |
+| lucide-react          | Icons      | Fallback icons         |
+| recharts              | Charts     | Data visualization     |
+| @tanstack/react-table | Tables     | Complex data grids     |
 
 ### Requires Approval
 
 Request approval before using:
 
-| Library | Review Focus |
-|---------|--------------|
-| HeroUI | Bundle size, theme compat |
+| Library     | Review Focus                |
+| ----------- | --------------------------- |
+| HeroUI      | Bundle size, theme compat   |
 | Material UI | Bundle size, style conflict |
-| Chakra UI | Style conflict, overlap |
-| Ant Design | Bundle size, style conflict |
+| Chakra UI   | Style conflict, overlap     |
+| Ant Design  | Bundle size, style conflict |
 
 ### Not Recommended
 
 Avoid these unless absolutely necessary:
 
-| Library | Reason |
-|---------|--------|
-| Bootstrap | Style conflicts |
+| Library     | Reason                 |
+| ----------- | ---------------------- |
+| Bootstrap   | Style conflicts        |
 | Semantic UI | Outdated, large bundle |
-| Foundation | Style conflicts |
+| Foundation  | Style conflicts        |
 
 ## Component Registry
 
@@ -373,6 +370,7 @@ pnpm run component-audit
 ### Manual Review
 
 Quarterly review of:
+
 - Component usage patterns
 - Bundle size trends
 - Accessibility compliance
@@ -382,19 +380,21 @@ Quarterly review of:
 
 ### Q: Can I quickly use an external component for a prototype?
 
-**A**: Yes, use `@nebutra/21st` or external libraries for prototypes. Just don't ship to production without review.
+**A**: Yes, use `@nebutra/custom-ui` or external libraries for prototypes. Just don't ship to production without review.
 
 ### Q: What if design-system doesn't have what I need?
 
-**A**: 
+**A**:
+
 1. Check if `custom-ui` has it
-2. Check if `21st` has a suitable experimental version
+2. Check external libraries (HeroUI, MagicUI, etc.)
 3. Request addition to design-system (for base components)
 4. Build in custom-ui (for domain-specific)
 
 ### Q: How long does promotion take?
 
 **A**: Typically 1-2 sprints:
+
 - Week 1: Review and wrapper creation
 - Week 2: Migration and documentation
 
@@ -407,5 +407,4 @@ Quarterly review of:
 - [UI Guidelines](./UI-GUIDELINES.md) - Design token and style rules
 - [Typography](./TYPOGRAPHY.md) - Font system and text styles
 - [@nebutra/design-system](../packages/design-system/README.md) - Primer-based SSOT
-- [@nebutra/custom-ui](../packages/custom-ui/README.md) - Brand-specific components
-- [@nebutra/21st](../packages/21st/README.md) - Experimental components
+- [@nebutra/custom-ui](../packages/custom-ui/README.md) - Brand-specific & shadcn-style components

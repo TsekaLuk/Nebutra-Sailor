@@ -281,11 +281,10 @@ pnpm db:generate && pnpm dev
 │   ├── studio/            # Sanity CMS
 │   └── api-gateway/       # BFF layer
 ├── packages/
-│   ├── 21st/              # shadcn/ui + 21st.dev components
+│   ├── custom-ui/         # Brand-specific & shadcn-style UI components
 │   ├── ai-providers/      # Multi-provider AI SDK (OpenRouter, OpenAI, etc)
 │   ├── billing/           # Stripe billing, plans, usage metering
 │   ├── brand/             # Brand assets, guidelines & programmatic tokens
-│   ├── custom-ui/         # Marketing UI components (Hero, Pricing, etc.)
 │   ├── design-system/     # Design tokens, marketing themes, Primer base
 │   ├── legal/             # Cookie consent, privacy, GDPR/CCPA compliance
 │   ├── ui/                # Lobe UI + Lobe Icons + Design System

@@ -15,14 +15,14 @@ This document defines the design system usage, visual standards, and component g
 ├─────────────┼────────────────────────────────────┼──────────────────────────┤
 │             │         UI Extension Layer         │                          │
 │             ▼                                    ▼                          │
-│  ┌──────────────────┐  ┌──────────────┐  ┌──────────────────────┐          │
-│  │  @nebutra/       │  │ @nebutra/    │  │ @nebutra/ui          │          │
-│  │  custom-ui       │  │ 21st         │  │ (shadcn-style)       │          │
-│  │  (Brand/Domain)  │  │ (Experiment) │  │                      │          │
-│  └────────┬─────────┘  └──────┬───────┘  └──────────┬───────────┘          │
-│           │                   │                      │                      │
-│           └───────────────────┼──────────────────────┘                      │
-│                               ▼                                             │
+│  ┌────────────────────────────────────┐  ┌──────────────────────┐          │
+│  │  @nebutra/custom-ui               │  │ @nebutra/ui          │          │
+│  │  (Brand/Domain + shadcn-style)    │  │ (Lobe-style)         │          │
+│  └──────────────────┬─────────────────┘  └──────────┬───────────┘          │
+│                     │                               │                      │
+│                     └───────────────────────────────┘                      │
+│                                    │                                       │
+│                                    ▼                                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                    SSOT (Single Source of Truth)                            │
 │                                                                             │
@@ -51,9 +51,8 @@ This document defines the design system usage, visual standards, and component g
 | -------------- | ------------------------ | ----------------------------------- | ------------------------------- |
 | **Foundation** | `@primer/react`          | GitHub's base UI library            | Never import directly           |
 | **SSOT**       | `@nebutra/design-system` | Tokens, primitives, base components | Always - foundation for all UI  |
-| **Extensions** | `@nebutra/ui`            | shadcn/ui style general components  | Common UI patterns              |
-|                | `@nebutra/custom-ui`     | Brand-specific, domain-specific UI  | Production features, dashboards |
-|                | `@nebutra/21st`          | Experimental, high-UX components    | Prototypes, landing pages       |
+| **Extensions** | `@nebutra/ui`            | Lobe-style general components       | Common UI patterns              |
+|                | `@nebutra/custom-ui`     | Brand/domain + shadcn-style UI      | Production features, dashboards |
 | **External**   | HeroUI, Magic UI, etc.   | Third-party UI libraries            | Quick validation, one-off needs |
 
 ### Theme Module Structure
@@ -196,7 +195,7 @@ import {
 
 ### When to Use External Components
 
-External components (21st.dev, HeroUI) are appropriate for:
+External components (HeroUI, MagicUI, etc.) are appropriate for:
 
 1. **Prototyping** - Quick UI validation
 2. **Landing pages** - High-visual-impact marketing
@@ -435,5 +434,4 @@ apps/landing-page/public/logos/
 
 - [Component Library Policy](./COMPONENT-LIBRARY-POLICY.md) - External component rules
 - [@nebutra/design-system](../packages/design-system/README.md) - Base design system
-- [@nebutra/custom-ui](../packages/custom-ui/README.md) - Brand-specific components
-- [@nebutra/21st](../packages/21st/README.md) - Experimental components
+- [@nebutra/custom-ui](../packages/custom-ui/README.md) - Brand-specific & shadcn-style components

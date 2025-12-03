@@ -289,7 +289,7 @@ Complete design and implementation guidelines for landing pages, marketing sites
 │              │     @nebutra/design-system (SSOT)      │                     │
 │              │     @nebutra/marketing (PH/Social)     │                     │
 │              │     @nebutra/custom-ui (Marketing)     │                     │
-│              │     @nebutra/21st (Experimental)       │                     │
+│              │     @nebutra/custom-ui (Experimental)       │                     │
 │              └────────────────────────────────────────┘                     │
 │                                                                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -367,7 +367,7 @@ apps/landing-page/
 | ---------------- | ------------------------ | ------------------------------------------- |
 | **Foundation**   | `@nebutra/design-system` | Tokens, primitives, base components         |
 | **Marketing UI** | `@nebutra/custom-ui`     | Hero, Feature cards, Pricing tables         |
-| **Experimental** | `@nebutra/21st`          | 3D effects, advanced animations, prototypes |
+| **Experimental** | `@nebutra/custom-ui`     | 3D effects, advanced animations, prototypes |
 | **External**     | HeroUI, Magic UI         | One-off high-impact visuals                 |
 
 ### Token Extensions for Marketing

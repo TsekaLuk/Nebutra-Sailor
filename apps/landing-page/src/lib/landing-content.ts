@@ -251,34 +251,34 @@ export const architectureContent = {
 export const bentoFeatures = {
   multiTenant: {
     icon: "🏢",
-    // Hero (Tension): opinionated hook, ≤50 chars
-    title: "Multi-tenancy isn't table structure—it's permission boundaries.",
-    // Context: 1-2 sentences describing the problem
+    // Hero (Tension): opinionated hook
+    title: "Multi-tenancy is a permission boundary—NOT a tenant_id column.",
+    // Context: pain point with specific failure modes
     description:
-      "90% of SaaS teams stumble on data isolation: RLS misconfigured, tenant_id forgotten, cache leaking across orgs.",
+      "90% of SaaS teams stumble on RLS misconfig, cache leaks, cross-org access. One line of policy prevents them all.",
     // CTA: specific action
-    cta: "View isolation strategy",
+    cta: "View permission map",
   },
   aiNative: {
     icon: "🤖",
     title: "Calling OpenAI is easy. Failover is hard.",
     description:
-      "Quotas, multi-provider routing, observability, rate limits—you need an AI service layer, not an SDK wrapper.",
-    cta: "View AI service template",
+      "Rate limits, provider outages, cost spikes—you need a service layer with auto-failover, not an SDK wrapper.",
+    cta: "View AI config",
   },
   billing: {
     icon: "💳",
     title: "Subscription + Usage = Easy to abandon.",
     description:
-      "Stripe integrated, entitlements forgotten. Usage tracked, quotas missing.",
+      "Stripe integrated but entitlements missing. Usage tracked but quotas ignored. We handle both.",
     cta: "View billing model",
   },
   globalEdge: {
     icon: "🌍",
     title: "Global deployment isn't just CDN.",
     description:
-      "Edge Functions, region-aware routing, latency-based failover—this is true global architecture.",
-    cta: "View deployment architecture",
+      "Edge Functions, region routing, latency failover—sub-30ms everywhere.",
+    cta: "View edge architecture",
   },
 } as const;
 

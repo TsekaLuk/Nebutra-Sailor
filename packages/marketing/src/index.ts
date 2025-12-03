@@ -5,7 +5,7 @@
  * testimonials, social proof, and attribution tracking.
  *
  * @todo Redesign components before PH launch:
- *   - ProductHuntBadge: Improve visual hierarchy and integrate with 21st.dev design tokens
+ *   - ProductHuntBadge: Improve visual hierarchy and integrate with HeroUI/MagicUI design tokens
  *   - SocialProofBar: Better typography and spacing, add animation polish
  *   - TestimonialsWall: Redesign cards to match landing page aesthetic
  *   - LaunchBanner: More subtle, less intrusive design
