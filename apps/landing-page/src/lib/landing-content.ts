@@ -71,7 +71,7 @@ export const techStackLogos: TechLogo[] = [
     name: "Next.js",
     svgl: {
       light: "nextjs_icon_dark.svg", // Black N on light bg
-      dark: "nextjs_icon_light.svg", // White N on dark bg
+      dark: "nextjs_logo_light.svg", // White logo for dark bg (icon_light doesn't exist)
     },
   },
   {
@@ -147,8 +147,8 @@ export const techStackLogos: TechLogo[] = [
   {
     name: "Hono",
     svgl: {
-      light: "hono.svg", // Orange flame works on light
-      dark: "hono_dark.svg", // Try dark variant if exists
+      light: "hono.svg", // Orange flame works on both backgrounds
+      dark: "hono.svg", // No dark variant exists, orange works on dark bg
     },
   },
 ];

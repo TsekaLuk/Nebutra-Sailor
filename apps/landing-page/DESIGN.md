@@ -1,8 +1,8 @@
 # Nebutra Sailor — Landing Page Design Specification
 
-> **Version:** 1.0.0  
-> **Last Updated:** 2024-12-03  
-> **Design Philosophy:** Silicon Valley Unicorn Aesthetic (Vercel / Linear / Cursor)
+> **Version:** 2.0.0  
+> **Last Updated:** 2025-12-03  
+> **Design Philosophy:** High-Granularity DOM UI (Vercel / Supabase / OpenAI)
 
 ---
 
@@ -17,6 +17,7 @@
 7. [Mental Model](#7-mental-model)
 8. [Content Guidelines](#8-content-guidelines)
 9. [Implementation Notes](#9-implementation-notes)
+10. [High-Granularity UI Architecture](#10-high-granularity-ui-architecture)
 
 ---
 
@@ -827,6 +828,602 @@ For visual mockups during development:
 | Dashboard   | `dashboard,saas,interface` |
 | Team/Vision | `team,startup,office`      |
 | Global      | `world,map,technology`     |
+
+---
+
+## 10. High-Granularity UI Architecture
+
+> **Goal:** Evolve from "Template-Grade" UI to "Vercel/Supabase-Grade" high-granularity DOM structure.
+
+### 10.1 Atomic Design Component Hierarchy
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           DESIGN SYSTEM LAYERS                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │ LAYER 3: ORGANISMS (Section-level)                                  │    │
+│  │ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐    │    │
+│  │ │ HeroSection │ │FeatureBento│ │ PricingGrid │ │TestimonialWall│   │    │
+│  │ │  Composes   │ │  Composes   │ │  Composes   │ │  Composes   │    │    │
+│  │ │  Molecules  │ │  Molecules  │ │  Molecules  │ │  Molecules  │    │    │
+│  │ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘    │    │
+│  └────────┼───────────────┼───────────────┼───────────────┼───────────┘    │
+│           │               │               │               │                 │
+│  ┌────────▼───────────────▼───────────────▼───────────────▼───────────┐    │
+│  │ LAYER 2: MOLECULES (Reusable patterns)                             │    │
+│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ │    │
+│  │  │CommandBox│ │ Terminal │ │FeatureCard│ │PriceCard │ │QuoteCard │ │    │
+│  │  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ │    │
+│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐             │    │
+│  │  │ CTAGroup │ │ StatCard │ │ NavGroup │ │ FAQItem  │             │    │
+│  │  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘             │    │
+│  └───────┼────────────┼────────────┼────────────┼─────────────────────┘    │
+│          │            │            │            │                          │
+│  ┌───────▼────────────▼────────────▼────────────▼─────────────────────┐    │
+│  │ LAYER 1: ATOMS (Primitive building blocks)                         │    │
+│  │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ │    │
+│  │  │ Box │ │Stack│ │Flex │ │Text │ │Icon │ │Badge│ │Button│ │Link │ │    │
+│  │  └─────┘ └─────┘ └─────┘ └─────┘ └─────┘ └─────┘ └─────┘ └─────┘ │    │
+│  │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐         │    │
+│  │  │Card │ │Input│ │Divider│ │Avatar│ │Pill│ │Glow │ │Grid │         │    │
+│  │  └─────┘ └─────┘ └─────┘ └─────┘ └─────┘ └─────┘ └─────┘         │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
+│                                                                              │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │ LAYER 0: TOKENS (Design foundation)                                 │    │
+│  │  Colors │ Spacing │ Typography │ Shadows │ Radii │ Motion │ Z-index │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.2 Component File Structure
+
+```
+packages/custom-ui/src/
+├── tokens/
+│   ├── spacing.ts          # --space-1 to --space-16
+│   ├── colors.ts           # Semantic color tokens
+│   ├── typography.ts       # Font scales
+│   ├── shadows.ts          # Elevation system
+│   ├── radii.ts            # Border radius
+│   └── motion.ts           # Animation presets
+│
+├── primitives/             # ATOMS
+│   ├── Box.tsx             # Layout primitive with spacing props
+│   ├── Stack.tsx           # Vertical stack (VStack)
+│   ├── Flex.tsx            # Horizontal flex (HStack)
+│   ├── Text.tsx            # Typography with variants
+│   ├── Heading.tsx         # h1-h6 semantic headings
+│   ├── Icon.tsx            # Icon wrapper with sizing
+│   ├── Button.tsx          # Button variants
+│   ├── Badge.tsx           # Status/label badges
+│   ├── Pill.tsx            # Rounded tags
+│   ├── Divider.tsx         # Horizontal/vertical separator
+│   ├── Avatar.tsx          # User avatars
+│   ├── Image.tsx           # Optimized image wrapper
+│   └── Link.tsx            # Styled anchor
+│
+├── patterns/               # MOLECULES
+│   ├── Card/
+│   │   ├── Card.tsx        # Base card container
+│   │   ├── CardHeader.tsx  # Card header slot
+│   │   ├── CardBody.tsx    # Card body slot
+│   │   ├── CardFooter.tsx  # Card footer slot
+│   │   └── index.ts        # Compound export
+│   ├── Terminal/
+│   │   ├── Terminal.tsx    # Terminal container
+│   │   ├── TerminalHeader.tsx
+│   │   ├── TerminalBody.tsx
+│   │   └── TerminalLine.tsx
+│   ├── CommandBox.tsx      # Copy-able command input
+│   ├── FeatureCard.tsx     # Feature grid card
+│   ├── PriceCard.tsx       # Pricing tier card
+│   ├── QuoteCard.tsx       # Testimonial card
+│   ├── StatCard.tsx        # Metric display
+│   ├── CTAGroup.tsx        # Button group for CTAs
+│   ├── NavGroup.tsx        # Navigation link group
+│   └── FAQItem.tsx         # Accordion FAQ item
+│
+├── decorations/            # Background/Visual elements
+│   ├── GridPattern.tsx     # CSS grid background
+│   ├── DotPattern.tsx      # Dot matrix pattern
+│   ├── NoiseTexture.tsx    # Noise overlay
+│   ├── GradientBlur.tsx    # Ambient glow
+│   ├── FloatingOrb.tsx     # Animated orb decoration
+│   └── GlowEffect.tsx      # Hover glow effect
+│
+└── layouts/                # Section containers
+    ├── SectionContainer.tsx  # Standard section wrapper
+    ├── SplitLayout.tsx       # 50/50 split
+    ├── BentoGrid.tsx         # Asymmetric grid
+    └── CenteredContent.tsx   # Centered narrow content
+```
+
+### 10.3 Compound Card Pattern
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ CARD ANATOMY                                                │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │ CardHeader                                           │   │
+│  │ ┌─────────────────────────────────────────────────┐ │   │
+│  │ │ ┌──────┐                          ┌───────────┐ │ │   │
+│  │ │ │ Icon │  Title                   │   Badge   │ │ │   │
+│  │ │ └──────┘                          └───────────┘ │ │   │
+│  │ │           Subtitle / Meta                       │ │   │
+│  │ └─────────────────────────────────────────────────┘ │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                         ↓ gap-4                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │ CardBody                                            │   │
+│  │   Description text or rich content area             │   │
+│  │   Can contain lists, images, or nested components   │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                         ↓ gap-4                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │ CardFooter                                          │   │
+│  │ ┌───────────────┐                    ┌───────────┐ │   │
+│  │ │  Action Link  │                    │  Button   │ │   │
+│  │ └───────────────┘                    └───────────┘ │   │
+│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │ CardGlow (absolute positioned hover effect)         │   │
+│  └─────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Usage Example:**
+
+```tsx
+// ❌ BEFORE: Flat structure
+<motion.div className="group relative overflow-hidden rounded-2xl border...">
+  <div className="mb-4 flex h-12 w-12 items-center justify-center...">
+    <Icon className="h-6 w-6 text-accent" />
+  </div>
+  <h3 className="mb-2 text-xl font-semibold...">{title}</h3>
+  <p className="text-sm text-muted-foreground">{description}</p>
+</motion.div>
+
+// ✅ AFTER: Compound structure
+<Card variant="elevated" size="md" withGlow>
+  <Card.Header>
+    <Card.Icon icon={Icon} />
+    <Badge variant="subtle">New</Badge>
+  </Card.Header>
+  <Card.Body>
+    <Card.Title>{title}</Card.Title>
+    <Card.Description>{description}</Card.Description>
+  </Card.Body>
+  <Card.Footer>
+    <Link href="#">Learn more →</Link>
+  </Card.Footer>
+</Card>
+```
+
+### 10.4 Visual Depth Layers
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         VISUAL DEPTH LAYERS                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  Z-INDEX: 50   OVERLAY       Modal / Dropdown / Tooltip                     │
+│                              shadow-2xl + backdrop-blur-xl                   │
+│                                          ↑                                   │
+│  Z-INDEX: 40   NAVIGATION    Navbar / Floating elements                     │
+│                              shadow-lg + backdrop-blur-lg                    │
+│                                          ↑                                   │
+│  Z-INDEX: 20   ELEVATED      Cards / Interactive elements                   │
+│                              shadow-md + bg-card/80                          │
+│                                          ↑                                   │
+│  Z-INDEX: 10   AMBIENT       Glow effects / Decorative orbs                 │
+│                              blur-[100px] + opacity-30                       │
+│                                          ↑                                   │
+│  Z-INDEX: 1    PATTERN       Grid / Dots / Noise texture                    │
+│                              opacity-5 to opacity-20                         │
+│                                          ↑                                   │
+│  Z-INDEX: 0    BASE          Background gradient                            │
+│                              from-background via-card to-background          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Section Background Template:**
+
+```tsx
+<section className="relative overflow-hidden">
+  {/* Layer 0: Base gradient */}
+  <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
+
+  {/* Layer 1: Pattern */}
+  <GridPattern className="absolute inset-0 opacity-[0.02]" />
+
+  {/* Layer 2: Ambient glow */}
+  <div className="absolute left-1/4 top-1/3 h-[500px] w-[500px] rounded-full bg-primary/20 blur-[120px]" />
+  <div className="absolute right-1/4 bottom-1/3 h-[400px] w-[400px] rounded-full bg-accent/15 blur-[100px]" />
+
+  {/* Layer 3: Content */}
+  <div className="relative z-10">
+    <SectionContainer>{/* Elevated cards */}</SectionContainer>
+  </div>
+</section>
+```
+
+### 10.5 Spacing Token System
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           SPACING SCALE (4px base)                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  TOKEN        VALUE    USE CASE                                              │
+│  ──────────────────────────────────────────────────────────                  │
+│  --space-0    0        Reset                                                 │
+│  --space-1    4px      Inline spacing, icon gaps                            │
+│  --space-2    8px      Tight element spacing                                │
+│  --space-3    12px     Compact padding                                      │
+│  --space-4    16px     Standard padding (p-4)                               │
+│  --space-6    24px     Card padding, form gaps                              │
+│  --space-8    32px     Section content gaps                                 │
+│  --space-12   48px     Section vertical padding (mobile)                    │
+│  --space-16   64px     Section vertical padding (tablet)                    │
+│  --space-24   96px     Section vertical padding (desktop)                   │
+│  --space-32   128px    Hero section padding                                 │
+│                                                                              │
+│  SEMANTIC ALIASES:                                                           │
+│  ──────────────────────────────────────────────────────────                  │
+│  --section-y-sm      py-12 / py-16     (Compact: Trust Ribbon, Stats)       │
+│  --section-y-md      py-16 / py-24     (Standard: Most sections)            │
+│  --section-y-lg      py-24 / py-32     (Emphasis: Hero, Vision, CTA)        │
+│  --card-padding      p-6               (Card internal padding)              │
+│  --card-gap          gap-4             (Card content gap)                   │
+│  --content-gap       gap-8             (Section content gap)                │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.6 Vertical Rhythm Pattern
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        SECTION RHYTHM PATTERN                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  HERO                     py: 100vh       Full viewport, immersive          │
+│                                                                              │
+│  TRUST RIBBON             py: 6 (24px)    Compact, transitional             │
+│                                                                              │
+│  SPLIT NARRATIVE          py: 16/24       Standard content                  │
+│                                                                              │
+│  ARCHITECTURE             py: 16/24       Standard content                  │
+│                                                                              │
+│  FEATURE BENTO            py: 16/24       Standard content                  │
+│                                                                              │
+│  STATS BREAK              py: 12 (48px)   Visual breather                   │
+│                                                                              │
+│  TERMINAL DEMO            py: 16/24       Standard content                  │
+│                                                                              │
+│  TESTIMONIALS             py: 16/24       Standard content                  │
+│                                                                              │
+│  VISION                   py: 24/32       Larger breathing room             │
+│                                                                              │
+│  PRICING                  py: 16/24       Standard content                  │
+│                                                                              │
+│  FAQ                      py: 16/24       Standard content                  │
+│                                                                              │
+│  FINAL CTA                py: 24/32       Climax emphasis                   │
+│                                                                              │
+│  FOOTER                   py: 12          Compact                           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.7 Typography Scale
+
+```tsx
+// packages/custom-ui/src/tokens/typography.ts
+
+export const typography = {
+  // Font sizes (rem)
+  sizes: {
+    xs: "0.75rem", // 12px
+    sm: "0.875rem", // 14px
+    base: "1rem", // 16px
+    lg: "1.125rem", // 18px
+    xl: "1.25rem", // 20px
+    "2xl": "1.5rem", // 24px
+    "3xl": "1.875rem", // 30px
+    "4xl": "2.25rem", // 36px
+    "5xl": "3rem", // 48px
+    "6xl": "3.75rem", // 60px
+    "7xl": "4.5rem", // 72px - Hero only
+  },
+
+  // Semantic text styles
+  styles: {
+    "display-1": { size: "7xl", weight: "bold", leading: "tight" },
+    "display-2": { size: "5xl", weight: "bold", leading: "tight" },
+    "heading-1": { size: "4xl", weight: "semibold", leading: "tight" },
+    "heading-2": { size: "3xl", weight: "semibold", leading: "snug" },
+    "heading-3": { size: "2xl", weight: "semibold", leading: "snug" },
+    "heading-4": { size: "xl", weight: "semibold", leading: "normal" },
+    "body-lg": { size: "lg", weight: "normal", leading: "relaxed" },
+    body: { size: "base", weight: "normal", leading: "relaxed" },
+    "body-sm": { size: "sm", weight: "normal", leading: "normal" },
+    caption: { size: "xs", weight: "medium", leading: "normal" },
+    code: { size: "sm", weight: "normal", leading: "relaxed", font: "mono" },
+  },
+};
+```
+
+### 10.8 Motion Token System
+
+```tsx
+// packages/custom-ui/src/tokens/motion.ts
+
+export const motion = {
+  // Duration scale
+  duration: {
+    instant: "0ms",
+    fast: "150ms",
+    normal: "300ms",
+    slow: "500ms",
+    slower: "700ms",
+  },
+
+  // Easing functions
+  easing: {
+    linear: "linear",
+    easeIn: "cubic-bezier(0.4, 0, 1, 1)",
+    easeOut: "cubic-bezier(0, 0, 0.2, 1)",
+    easeInOut: "cubic-bezier(0.4, 0, 0.2, 1)",
+    spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+  },
+
+  // Framer Motion variants
+  variants: {
+    fadeInUp: {
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+    },
+    fadeInLeft: {
+      initial: { opacity: 0, x: -20 },
+      animate: { opacity: 1, x: 0 },
+    },
+    fadeInRight: {
+      initial: { opacity: 0, x: 20 },
+      animate: { opacity: 1, x: 0 },
+    },
+    scaleIn: {
+      initial: { opacity: 0, scale: 0.95 },
+      animate: { opacity: 1, scale: 1 },
+    },
+    staggerContainer: {
+      animate: { transition: { staggerChildren: 0.1 } },
+    },
+  },
+
+  // Interactive states
+  interactive: {
+    hover: { scale: 1.02, transition: { duration: 0.2 } },
+    tap: { scale: 0.98 },
+    hoverLift: { y: -4, transition: { duration: 0.2 } },
+  },
+};
+```
+
+### 10.9 Micro-interaction Catalog
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        MICRO-INTERACTION CATALOG                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  1. BUTTON STATES                                                            │
+│     Default → Hover (scale:1.02, shadow-lg, translateY:-2)                  │
+│            → Active (scale:0.98)                                            │
+│            → Loading (spinner animation)                                    │
+│            → Disabled (opacity:0.5)                                         │
+│                                                                              │
+│  2. CARD HOVER                                                               │
+│     Default → Hover                                                         │
+│     - translateY: -4px                                                      │
+│     - shadow-lg → shadow-xl                                                 │
+│     - border: 10% → 20% opacity                                             │
+│     - Glow overlay fades in                                                 │
+│                                                                              │
+│  3. LINK UNDERLINE                                                           │
+│     Default → Hover                                                         │
+│     - Underline slides in from left                                         │
+│     - after:scaleX-0 → after:scaleX-100                                     │
+│     - transform-origin: left                                                │
+│                                                                              │
+│  4. COPY BUTTON FEEDBACK                                                     │
+│     Click → Success                                                         │
+│     - Icon morphs (Copy → Check)                                            │
+│     - scale + rotate animation                                              │
+│     - Returns after 2s                                                      │
+│                                                                              │
+│  5. ACCORDION EXPAND                                                         │
+│     Collapsed → Expanded                                                    │
+│     - Chevron rotates 180°                                                  │
+│     - Content height animates from 0                                        │
+│     - Background subtly changes                                             │
+│                                                                              │
+│  6. SCROLL-TRIGGERED REVEAL                                                  │
+│     Below viewport → In viewport                                            │
+│     - opacity: 0 → 1                                                        │
+│     - y: 30px → 0                                                           │
+│     - viewport={{ once: true, margin: "-100px" }}                           │
+│                                                                              │
+│  7. MARQUEE PAUSE                                                            │
+│     Normal: Continuous scroll                                               │
+│     Hover: Pause + Logo highlight (grayscale-0, opacity-100)                │
+│                                                                              │
+│  8. NAVBAR SCROLL TRANSFORM                                                  │
+│     At top: bg-transparent                                                  │
+│     Scrolled: bg-background/80 + backdrop-blur-lg + border-bottom           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.10 Shadow Token System
+
+```tsx
+// packages/custom-ui/src/tokens/shadows.ts
+
+export const shadows = {
+  // Elevation levels
+  sm: "0 1px 2px rgba(0, 0, 0, 0.05)",
+  md: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  xl: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+  "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+
+  // Colored shadows for brand elements
+  glow: {
+    primary: "0 0 40px rgba(var(--primary-rgb), 0.3)",
+    accent: "0 0 40px rgba(var(--accent-rgb), 0.3)",
+    card: "0 8px 30px rgba(0, 0, 0, 0.12)",
+  },
+
+  // Interactive states
+  hover: "0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.12)",
+  active: "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)",
+};
+```
+
+### 10.11 Container Width System
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         CONTAINER WIDTH SYSTEM                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  max-w-3xl    768px    FAQ, focused content                                 │
+│  max-w-4xl    896px    Terminal demo, centered                              │
+│  max-w-5xl    1024px   Architecture, Pricing, Vision                        │
+│  max-w-6xl    1152px   Stats grid                                           │
+│  max-w-7xl    1280px   Full width grids, Bento, Feature sections            │
+│                                                                              │
+│  SEMANTIC ALIASES:                                                           │
+│  ──────────────────────────────────────────────────────────                  │
+│  --container-narrow   max-w-3xl   (768px)  Copy-focused content             │
+│  --container-medium   max-w-5xl   (1024px) Standard sections                │
+│  --container-wide     max-w-7xl   (1280px) Full layouts                     │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.12 Implementation Roadmap
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        IMPLEMENTATION ROADMAP                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  PHASE 1: Token Foundation (Week 1)                     Priority: CRITICAL  │
+│  ────────────────────────────────────────────────────────────────────────── │
+│  □ Create tokens/spacing.ts with spacing scale                              │
+│  □ Create tokens/typography.ts with text styles                             │
+│  □ Create tokens/shadows.ts with elevation system                           │
+│  □ Create tokens/motion.ts with animation presets                           │
+│  □ Update tailwind.config.ts to consume tokens                              │
+│  □ Update globals.css with CSS custom properties                            │
+│                                                                              │
+│  PHASE 2: Primitives Layer (Week 1-2)                   Priority: CRITICAL  │
+│  ────────────────────────────────────────────────────────────────────────── │
+│  □ Create primitives/Box.tsx with spacing/padding props                     │
+│  □ Create primitives/Stack.tsx (vertical stack)                             │
+│  □ Create primitives/Flex.tsx (horizontal flex)                             │
+│  □ Create primitives/Text.tsx with typography variants                      │
+│  □ Create primitives/Heading.tsx (h1-h6)                                    │
+│  □ Create primitives/Badge.tsx, Pill.tsx                                    │
+│  □ Create primitives/Icon.tsx wrapper                                       │
+│                                                                              │
+│  PHASE 3: Pattern Components (Week 2-3)                 Priority: HIGH      │
+│  ────────────────────────────────────────────────────────────────────────── │
+│  □ Create patterns/Card/ compound component                                 │
+│  □ Create patterns/Terminal/ compound component                             │
+│  □ Create patterns/CommandBox.tsx                                           │
+│  □ Create patterns/FeatureCard.tsx                                          │
+│  □ Create patterns/CTAGroup.tsx                                             │
+│  □ Create layouts/SectionContainer.tsx                                      │
+│                                                                              │
+│  PHASE 4: Decoration Layer (Week 3)                     Priority: MEDIUM    │
+│  ────────────────────────────────────────────────────────────────────────── │
+│  □ Create decorations/GridPattern.tsx                                       │
+│  □ Create decorations/DotPattern.tsx                                        │
+│  □ Create decorations/GradientBlur.tsx                                      │
+│  □ Create decorations/NoiseTexture.tsx                                      │
+│  □ Integrate decorations into section backgrounds                           │
+│                                                                              │
+│  PHASE 5: Section Refactor (Week 3-4)                   Priority: HIGH      │
+│  ────────────────────────────────────────────────────────────────────────── │
+│  □ Refactor HeroSection using new primitives/patterns                       │
+│  □ Refactor FeatureBento using Card compound                                │
+│  □ Refactor SplitNarrative using Terminal component                         │
+│  □ Refactor all sections with SectionContainer                              │
+│  □ Apply consistent vertical rhythm                                         │
+│  □ Add section anchor IDs for navigation                                    │
+│                                                                              │
+│  PHASE 6: Motion & Polish (Week 4)                      Priority: MEDIUM    │
+│  ────────────────────────────────────────────────────────────────────────── │
+│  □ Implement standardized motion variants                                   │
+│  □ Add micro-interactions to all interactive elements                       │
+│  □ Add scroll-triggered reveals                                             │
+│  □ Performance optimization (code splitting, lazy load)                     │
+│  □ Accessibility audit (ARIA, focus states, contrast)                       │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.13 Quick Reference Card
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          QUICK REFERENCE CARD                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  SPACING (Section padding)                                                   │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  Compact:    py-6 / py-8       (Trust Ribbon, Stats Break)                  │
+│  Standard:   py-16 / py-24     (Most content sections)                      │
+│  Emphasis:   py-24 / py-32     (Hero, Vision, Final CTA)                    │
+│                                                                              │
+│  CARD STYLES                                                                 │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  Base:       border-border/10 bg-card/50                                    │
+│  Elevated:   border-border/10 bg-card/80 shadow-lg                          │
+│  Glass:      border-white/10 bg-white/5 backdrop-blur-xl                    │
+│  Highlight:  border-accent/30 bg-gradient-to-br from-primary/5 to-accent/5  │
+│                                                                              │
+│  TYPOGRAPHY                                                                  │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  Display:    text-5xl md:text-6xl lg:text-7xl font-bold                     │
+│  Heading 1:  text-3xl md:text-4xl font-bold                                 │
+│  Heading 2:  text-2xl md:text-3xl font-semibold                             │
+│  Heading 3:  text-xl font-semibold                                          │
+│  Body:       text-base text-muted-foreground                                │
+│  Caption:    text-sm text-muted-foreground/80                               │
+│                                                                              │
+│  MOTION                                                                      │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  Reveal:     initial={{ opacity: 0, y: 20 }}                                │
+│              whileInView={{ opacity: 1, y: 0 }}                             │
+│              viewport={{ once: true, margin: "-100px" }}                    │
+│              transition={{ duration: 0.5 }}                                 │
+│                                                                              │
+│  Stagger:    transition={{ delay: 0.1 * index }}                            │
+│                                                                              │
+│  Hover:      whileHover={{ y: -4, scale: 1.02 }}                            │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
