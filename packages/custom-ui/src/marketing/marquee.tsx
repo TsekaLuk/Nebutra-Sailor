@@ -1,17 +1,19 @@
 "use client";
 
-import React, { ComponentPropsWithoutRef, useRef } from "react";
+import React, { ComponentPropsWithoutRef, useRef, useMemo } from "react";
 import { cn } from "../utils/cn";
 
 /**
  * Marquee animation keyframes - injected via style tag
+ * Using a unique ID to prevent duplicate style injection
  */
+const MARQUEE_STYLE_ID = "nebutra-marquee-keyframes";
 const marqueeStyles = `
-@keyframes marquee {
+@keyframes nebutra-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-100% - var(--gap))); }
 }
-@keyframes marquee-vertical {
+@keyframes nebutra-marquee-vertical {
   from { transform: translateY(0); }
   to { transform: translateY(calc(-100% - var(--gap))); }
 }
@@ -54,18 +56,45 @@ export function Marquee({
 }: MarqueeProps) {
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  // Animation style for the inner elements
-  const animationStyle: React.CSSProperties = {
-    animation: vertical
-      ? "marquee-vertical var(--duration, 40s) linear infinite"
-      : "marquee var(--duration, 40s) linear infinite",
-    animationDirection: reverse ? "reverse" : "normal",
-  };
+  // Memoize animation style to prevent unnecessary re-renders
+  const animationStyle = useMemo<React.CSSProperties>(
+    () => ({
+      animation: vertical
+        ? "nebutra-marquee-vertical var(--duration, 40s) linear infinite"
+        : "nebutra-marquee var(--duration, 40s) linear infinite",
+      animationDirection: reverse ? "reverse" : "normal",
+    }),
+    [vertical, reverse],
+  );
+
+  // Memoize children rendering
+  const marqueeContent = useMemo(
+    () =>
+      Array.from({ length: repeat }, (_, i) => (
+        <div
+          key={i}
+          className={cn(
+            !vertical
+              ? "flex-row [gap:var(--gap)]"
+              : "flex-col [gap:var(--gap)]",
+            "flex shrink-0 justify-around",
+            pauseOnHover && "group-hover:[animation-play-state:paused]",
+          )}
+          style={animationStyle}
+        >
+          {children}
+        </div>
+      )),
+    [repeat, children, vertical, pauseOnHover, animationStyle],
+  );
 
   return (
     <>
-      {/* Inject keyframes */}
-      <style dangerouslySetInnerHTML={{ __html: marqueeStyles }} />
+      {/* Inject keyframes - only once per page */}
+      <style
+        id={MARQUEE_STYLE_ID}
+        dangerouslySetInnerHTML={{ __html: marqueeStyles }}
+      />
       <div
         {...props}
         ref={marqueeRef}
@@ -83,28 +112,7 @@ export function Marquee({
         role={ariaRole}
         tabIndex={0}
       >
-        {React.useMemo(
-          () => (
-            <>
-              {Array.from({ length: repeat }, (_, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    !vertical
-                      ? "flex-row [gap:var(--gap)]"
-                      : "flex-col [gap:var(--gap)]",
-                    "flex shrink-0 justify-around",
-                    pauseOnHover && "group-hover:[animation-play-state:paused]",
-                  )}
-                  style={animationStyle}
-                >
-                  {children}
-                </div>
-              ))}
-            </>
-          ),
-          [repeat, children, vertical, pauseOnHover, animationStyle],
-        )}
+        {marqueeContent}
       </div>
     </>
   );
