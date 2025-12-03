@@ -7,6 +7,13 @@ import { Logo, Logomark } from "@nebutra/brand";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -71,7 +78,7 @@ export function Navbar() {
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -83,17 +90,32 @@ export function Navbar() {
             </a>
           ))}
           <ThemeToggle />
-          <a
-            href="https://docs.nebutra.com/sailor/getting-started"
-            className="rounded-lg bg-[image:var(--brand-gradient)] px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90"
-          >
-            Get Started
-          </a>
+
+          {/* Auth Buttons */}
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                Sign In
+              </button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <button className="rounded-lg bg-[image:var(--brand-gradient)] px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90">
+                Get Started
+              </button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
         </div>
 
-        {/* Mobile: Theme Toggle + Menu Button */}
+        {/* Mobile: Theme Toggle + User + Menu Button */}
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
+          {/* Show UserButton if signed in */}
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -129,12 +151,28 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="https://docs.nebutra.com/sailor/getting-started"
-              className="mt-2 rounded-lg bg-[image:var(--brand-gradient)] px-4 py-3 text-center font-medium text-white transition-all hover:opacity-90"
-            >
-              Get Started
-            </a>
+
+            {/* Mobile Auth Buttons */}
+            <SignedOut>
+              <div className="flex flex-col gap-3 mt-2 pt-4 border-t border-border/10">
+                <SignInButton mode="modal">
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full rounded-lg border border-border px-4 py-3 text-center font-medium text-foreground transition-all hover:bg-muted"
+                  >
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full rounded-lg bg-[image:var(--brand-gradient)] px-4 py-3 text-center font-medium text-white transition-all hover:opacity-90"
+                  >
+                    Get Started
+                  </button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
           </div>
         </motion.div>
       )}

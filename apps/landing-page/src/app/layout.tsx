@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DesignSystemProvider } from "@nebutra/design-system";
-import { AuthButtons } from "@/components/AuthButtons";
 import { Providers } from "./providers";
 import "./globals.css";
 
@@ -61,12 +60,7 @@ export default function RootLayout({
       <body className="antialiased">
         <Providers>
           <DesignSystemProvider>
-            {/* Auth buttons positioned in top-right, Navbar is handled per-page */}
-            {hasClerkKey && (
-              <div className="fixed top-4 right-4 z-[60]">
-                <AuthButtons />
-              </div>
-            )}
+            {/* AuthButtons are now integrated in Navbar component */}
             {children}
           </DesignSystemProvider>
         </Providers>
