@@ -249,3 +249,7 @@ export type {
   DiffLine,
   BulletItem,
 } from "./terminal-control-section-animated";
+
+// Globe (animated SVG illustration)
+export { Globe } from "./globe";
+export type { GlobeProps } from "./globe";

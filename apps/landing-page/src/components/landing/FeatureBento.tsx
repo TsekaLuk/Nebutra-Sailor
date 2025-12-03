@@ -3,8 +3,7 @@
 import { motion } from "framer-motion";
 import { Building2, Bot, CreditCard, Globe } from "lucide-react";
 import { bentoFeatures } from "@/lib/landing-content";
-import { cn } from "@/lib/utils";
-import { ThemedSection } from "@nebutra/custom-ui";
+import { BentoGrid, BentoCard } from "@nebutra/custom-ui";
 import {
   MultiTenantVisual,
   AINativeVisual,
@@ -20,47 +19,34 @@ const ICONS = {
 };
 
 /** Map feature keys to their visual components */
-const VISUALS: Record<string, React.ComponentType> = {
-  multiTenant: MultiTenantVisual,
-  aiNative: AINativeVisual,
-  billing: BillingVisual,
-  globalEdge: GlobalEdgeVisual,
+const VISUALS: Record<string, React.ReactNode> = {
+  multiTenant: <MultiTenantVisual />,
+  aiNative: <AINativeVisual />,
+  billing: <BillingVisual />,
+  globalEdge: <GlobalEdgeVisual />,
+};
+
+/** Grid span classes for bento layout */
+const GRID_SPANS: Record<string, string> = {
+  multiTenant: "lg:col-span-2 lg:row-span-2",
+  aiNative: "lg:row-span-2",
+  billing: "lg:col-span-1",
+  globalEdge: "lg:col-span-2",
 };
 
 /**
- * Stagger pop-in animation variants
- */
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1],
-    },
-  },
-};
-
-/**
- * FeatureBento - Supabase-style bento grid with atomic visualizations
+ * FeatureBento - Feature grid using audited BentoGrid/BentoCard components
  *
- * Each card has a unique semantic visualization built from atomic components.
+ * Each card uses the primitives library's BentoCard with:
+ * - Background slot for atomic visualizations
+ * - Icon with hover animation
+ * - Hover-reveal CTA
  */
 export function FeatureBento() {
   const features = Object.entries(bentoFeatures);
 
   return (
-    <ThemedSection theme="features" className="py-24 md:py-32">
+    <section className="relative w-full bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
@@ -77,72 +63,27 @@ export function FeatureBento() {
           </p>
         </motion.div>
 
-        {/* Bento Grid - Supabase style layout */}
-        <motion.div
-          className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {features.map(([key, feature], index) => {
+        {/* Bento Grid using audited component */}
+        <BentoGrid className="lg:grid-cols-3">
+          {features.map(([key, feature]) => {
             const Icon = ICONS[feature.icon as keyof typeof ICONS] || Building2;
-            const Visual = VISUALS[key];
-            // First two cards span 2 rows on large screens
-            const isLarge = index === 0 || index === 1;
+            const background = VISUALS[key];
+            const gridSpan = GRID_SPANS[key] || "";
 
             return (
-              <motion.div
+              <BentoCard
                 key={key}
-                variants={itemVariants}
-                className={cn(
-                  "group rounded-2xl border border-border/10 bg-card/30 backdrop-blur-sm transition-colors hover:border-border/20",
-                  isLarge && "lg:row-span-2",
-                )}
-              >
-                {/* Card Content */}
-                <div className="flex h-full flex-col p-6">
-                  {/* Icon + Title */}
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border/20 bg-card/50">
-                      <Icon className="h-4 w-4 text-[var(--brand-accent)]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground">
-                        {feature.title}
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Visual - fills remaining space */}
-                  {Visual && (
-                    <div className="mt-4 flex-1">
-                      <Visual />
-                    </div>
-                  )}
-
-                  {/* Feature list for billing card */}
-                  {"features" in feature && feature.features && !Visual && (
-                    <ul className="mt-4 space-y-2">
-                      {feature.features.map((item: string) => (
-                        <li
-                          key={item}
-                          className="flex items-center gap-2 text-sm text-muted-foreground/80"
-                        >
-                          <span className="h-1 w-1 rounded-full bg-[var(--brand-accent)]" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </motion.div>
+                name={feature.title}
+                description={feature.description}
+                Icon={Icon}
+                background={background}
+                className={gridSpan}
+                href="#"
+                cta="Learn more"
+              />
             );
           })}
-        </motion.div>
+        </BentoGrid>
 
         {/* Bottom tagline */}
         <motion.p
@@ -158,7 +99,8 @@ export function FeatureBento() {
           </span>
         </motion.p>
       </div>
-    </ThemedSection>
+    </section>
   );
 }
+
 FeatureBento.displayName = "FeatureBento";

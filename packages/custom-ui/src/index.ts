@@ -42,6 +42,8 @@ export type {
 } from "./primitives/avatar-circles";
 export { AnimatedBeam } from "./primitives/animated-beam";
 export type { AnimatedBeamProps } from "./primitives/animated-beam";
+export { BentoGrid, BentoCard } from "./primitives/bento-grid";
+export type { BentoGridProps, BentoCardProps } from "./primitives/bento-grid";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Patterns - Compound components
