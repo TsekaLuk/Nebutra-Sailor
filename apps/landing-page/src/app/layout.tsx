@@ -61,9 +61,12 @@ export default function RootLayout({
       <body className="antialiased">
         <Providers>
           <DesignSystemProvider>
-            <header className="flex justify-end items-center p-3 gap-2 h-16 absolute top-0 right-0 z-50">
-              {hasClerkKey && <AuthButtons />}
-            </header>
+            {/* Auth buttons positioned in top-right, Navbar is handled per-page */}
+            {hasClerkKey && (
+              <div className="fixed top-4 right-4 z-[60]">
+                <AuthButtons />
+              </div>
+            )}
             {children}
           </DesignSystemProvider>
         </Providers>

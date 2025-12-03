@@ -1,5 +1,6 @@
 import { Locale, locales, isValidLocale } from "@/lib/i18n/locales";
 import {
+  Navbar,
   HeroSection,
   TrustRibbon,
   SplitNarrative,
@@ -28,7 +29,10 @@ export default async function LocalizedHomePage({ params }: Props) {
   const locale: Locale = isValidLocale(lang) ? lang : "en";
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
+      {/* Navigation */}
+      <Navbar />
+
       {/* 1. Immersive Hero */}
       <HeroSection />
 

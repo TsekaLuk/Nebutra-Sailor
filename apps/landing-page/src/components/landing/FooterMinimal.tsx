@@ -1,6 +1,7 @@
 "use client";
 
 import { Github, Twitter, MessageCircle } from "lucide-react";
+import { Logo } from "@nebutra/brand";
 import { footerContent } from "@/lib/landing-content";
 
 const SOCIAL_ICONS = {
@@ -21,11 +22,9 @@ export function FooterMinimal() {
     <footer className="relative w-full border-t border-border/5 bg-background py-12">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
-          {/* Brand */}
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-foreground">
-              {brand.name}
-            </span>
+          {/* Brand - Using @nebutra/brand Logo */}
+          <div className="flex items-center gap-3">
+            <Logo variant="inverse" size={100} />
             <span className="text-sm text-muted-foreground/60">
               {brand.byline}
             </span>

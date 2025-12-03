@@ -13,6 +13,7 @@
 // Section Components
 // =============================================================================
 
+export { Navbar } from "./Navbar";
 export { HeroSection } from "./HeroSection";
 export { TrustRibbon } from "./TrustRibbon";
 export { SplitNarrative } from "./SplitNarrative";
@@ -32,6 +33,7 @@ export { FooterMinimal } from "./FooterMinimal";
 // =============================================================================
 
 export const LANDING_SECTIONS = [
+  "Navbar",
   "HeroSection",
   "TrustRibbon",
   "SplitNarrative",
