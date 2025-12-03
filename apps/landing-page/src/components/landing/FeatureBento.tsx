@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Building2, Bot, CreditCard, Globe } from "lucide-react";
-import { bentoFeatures } from "@/lib/landing-content";
+import { bentoFeatures, bentoSectionContent } from "@/lib/landing-content";
 import { BentoGrid, BentoCard } from "@nebutra/custom-ui";
 import {
   MultiTenantVisual,
@@ -26,21 +26,24 @@ const VISUALS: Record<string, React.ReactNode> = {
   globalEdge: <GlobalEdgeVisual />,
 };
 
-/** Grid span classes for bento layout */
+/** Grid span classes for Micro-Landing Card layout */
 const GRID_SPANS: Record<string, string> = {
-  multiTenant: "lg:col-span-2 lg:row-span-2",
-  aiNative: "lg:row-span-2",
-  billing: "lg:col-span-1",
-  globalEdge: "lg:col-span-2",
+  multiTenant: "lg:col-span-2 lg:row-span-2", // Primary card (2x2)
+  aiNative: "lg:row-span-2", // Tall card (1x2)
+  billing: "lg:col-span-1", // Standard card (1x1)
+  globalEdge: "lg:col-span-2", // Wide card (2x1)
 };
 
 /**
- * FeatureBento - Feature grid using audited BentoGrid/BentoCard components
+ * FeatureBento - Micro-Landing Card grid
  *
- * Each card uses the primitives library's BentoCard with:
- * - Background slot for atomic visualizations
- * - Icon with hover animation
- * - Hover-reveal CTA
+ * Each card follows the Micro-Landing design pattern:
+ * - Hero (Tension): Opinionated hook in title
+ * - Context: Problem statement in description
+ * - Proof: Visual demonstration using audited primitives
+ * - CTA: Specific action
+ *
+ * @see apps/landing-page/DESIGN.md#12-micro-landing-card-design-system
  */
 export function FeatureBento() {
   const features = Object.entries(bentoFeatures);
@@ -48,7 +51,7 @@ export function FeatureBento() {
   return (
     <section className="relative w-full bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
+        {/* Header - Opinionated, not descriptive */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,14 +59,14 @@ export function FeatureBento() {
           className="mb-16 text-center"
         >
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">
-            Everything you need to ship fast
+            {bentoSectionContent.headline}
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Production-ready features, out of the box
+          <p className="mt-4 text-xl font-medium text-primary">
+            {bentoSectionContent.subheadline}
           </p>
         </motion.div>
 
-        {/* Bento Grid using audited component */}
+        {/* Bento Grid - Micro-Landing Cards */}
         <BentoGrid className="lg:grid-cols-3">
           {features.map(([key, feature]) => {
             const Icon = ICONS[feature.icon as keyof typeof ICONS] || Building2;
@@ -79,13 +82,13 @@ export function FeatureBento() {
                 background={background}
                 className={gridSpan}
                 href="#"
-                cta="Learn more"
+                cta={feature.cta}
               />
             );
           })}
         </BentoGrid>
 
-        {/* Bottom tagline */}
+        {/* Footer - Confidence, not marketing speak */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -93,9 +96,9 @@ export function FeatureBento() {
           transition={{ delay: 0.5 }}
           className="mt-12 text-center text-lg text-muted-foreground"
         >
-          Use one or all.{" "}
+          {bentoSectionContent.footer}{" "}
           <span className="text-foreground">
-            Best of breed products. Integrated as a platform.
+            {bentoSectionContent.footerHighlight}
           </span>
         </motion.p>
       </div>

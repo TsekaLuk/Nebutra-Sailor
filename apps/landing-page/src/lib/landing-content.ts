@@ -239,43 +239,55 @@ export const architectureContent = {
 } as const;
 
 // =============================================================================
-// Feature Bento Grid
+// Feature Bento Grid (Micro-Landing Card Design)
 // =============================================================================
 
+/**
+ * Micro-Landing Card content follows the TENSION → SOLUTION → PROOF → ACTION pattern.
+ * Each card is a compressed "micro landing page" with opinionated copy.
+ *
+ * @see apps/landing-page/DESIGN.md#12-micro-landing-card-design-system
+ */
 export const bentoFeatures = {
   multiTenant: {
     icon: "🏢",
-    title: "Multi-Tenant by Default",
+    // Hero (Tension): opinionated hook, ≤50 chars
+    title: "Multi-tenancy isn't table structure—it's permission boundaries.",
+    // Context: 1-2 sentences describing the problem
     description:
-      "Clerk Orgs + Supabase RLS. Tenant context middleware. Scoped caching & rate-limiting.",
-    visual: "architecture", // indicates which visualization to show
+      "90% of SaaS teams stumble on data isolation: RLS misconfigured, tenant_id forgotten, cache leaking across orgs.",
+    // CTA: specific action
+    cta: "View isolation strategy",
   },
   aiNative: {
     icon: "🤖",
-    title: "AI-Native Architecture",
+    title: "Calling OpenAI is easy. Failover is hard.",
     description:
-      "Vercel AI SDK + pgvector + MCP Agents. Multi-provider support out of the box.",
-    visual: "chat", // AI chat demo
+      "Quotas, multi-provider routing, observability, rate limits—you need an AI service layer, not an SDK wrapper.",
+    cta: "View AI service template",
   },
   billing: {
     icon: "💳",
-    title: "Billing Out of the Box",
+    title: "Subscription + Usage = Easy to abandon.",
     description:
-      "Stripe subscriptions. Usage-based metering. Feature entitlements. Invoice generation.",
-    features: [
-      "Subscriptions",
-      "Usage metering",
-      "Feature entitlements",
-      "Invoice generation",
-    ],
+      "Stripe integrated, entitlements forgotten. Usage tracked, quotas missing.",
+    cta: "View billing model",
   },
   globalEdge: {
     icon: "🌍",
-    title: "Global Edge",
+    title: "Global deployment isn't just CDN.",
     description:
-      "Vercel + Cloudflare + Upstash. Deploy worldwide, cache at the edge.",
-    visual: "worldMap", // world map with edge dots
+      "Edge Functions, region-aware routing, latency-based failover—this is true global architecture.",
+    cta: "View deployment architecture",
   },
+} as const;
+
+/** Section header/footer content */
+export const bentoSectionContent = {
+  headline: "The 10% that takes 90% of your time.",
+  subheadline: "Already done.",
+  footer: "Every feature is battle-tested in production.",
+  footerHighlight: "Pick what you need. Skip what you don't.",
 } as const;
 
 // =============================================================================

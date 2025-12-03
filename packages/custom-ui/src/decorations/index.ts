@@ -16,19 +16,6 @@ export {
 
 // Particle Systems
 export {
-  OrbSystem,
-  OrbCore,
-  OrbShell,
-  OrbNoiseLayer,
-  OrbParticles,
-  type OrbSystemProps,
-  type OrbCoreProps,
-  type OrbShellProps,
-  type OrbNoiseLayerProps,
-  type OrbParticlesProps,
-} from "./particles/OrbSystem";
-
-export {
   TextSparkline,
   type TextSparklineProps,
 } from "./particles/TextSparkline";

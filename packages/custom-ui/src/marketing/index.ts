@@ -253,3 +253,7 @@ export type {
 // Globe (animated SVG illustration)
 export { Globe } from "./globe";
 export type { GlobeProps } from "./globe";
+
+// Highlight Card (animated metrics card with color themes)
+export { HighlightCard, HIGHLIGHT_CARD_THEMES } from "./highlight-card";
+export type { HighlightCardProps, HighlightCardColor } from "./highlight-card";

@@ -1439,38 +1439,7 @@ export const shadows = {
 │                         HERO PARTICLE DECOMPOSITION                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│  CURRENT: Monolithic Orb                                                     │
-│  ────────────────────────────────────────────────────────────────────────── │
-│                       ╭─────────────────╮                                   │
-│                       │   Gradient Orb  │                                   │
-│                       │   (single div)  │                                   │
-│                       ╰─────────────────╯                                   │
-│                                                                              │
-│  EVOLVED: Particle Orb System                                                │
-│  ────────────────────────────────────────────────────────────────────────── │
-│                                                                              │
-│                    ┌─────────────────────────┐                              │
-│                   ╱│     OrbNoiseLayer       │╲  ← Subtle noise texture     │
-│                  ╱ │   (animated grain)      │ ╲                            │
-│                 ╱  └─────────────────────────┘  ╲                           │
-│                ╱   ┌─────────────────────────┐   ╲                          │
-│               │    │       OrbCore           │    │ ← Pulsing inner glow    │
-│               │    │  (radial gradient +     │    │                         │
-│               │    │   breathing animation)  │    │                         │
-│               │    └─────────────────────────┘    │                         │
-│                ╲   ┌─────────────────────────┐   ╱                          │
-│                 ╲  │      OrbShell           │  ╱  ← Rotating orbit rings   │
-│                  ╲ │   (dashed SVG circles)  │ ╱                            │
-│                   ╲│                         │╱                             │
-│                    └─────────────────────────┘                              │
-│                              │                                               │
-│                    ╭─────────────────────╮                                  │
-│                    │   OrbParticles      │  ← Floating micro-dots           │
-│                    │ (8-12 animated dots │    orbiting the core             │
-│                    │  on circular paths) │                                  │
-│                    ╰─────────────────────╯                                  │
-│                                                                              │
-│  Additional Particles:                                                       │
+│  Particle Effects:
 │  ────────────────────────────────────────────────────────────────────────── │
 │  • TextSparkline      Behind headline, subtle glow line animation           │
 │  • CursorTrail        Light trail following mouse movement                  │
@@ -1485,12 +1454,6 @@ export const shadows = {
 ```tsx
 // packages/custom-ui/src/decorations/particles/
 particles/
-├── OrbSystem/
-│   ├── OrbCore.tsx         // Inner pulsing gradient
-│   ├── OrbShell.tsx        // Rotating orbit rings (SVG)
-│   ├── OrbNoiseLayer.tsx   // Grain texture overlay
-│   ├── OrbParticles.tsx    // Floating micro-dots
-│   └── index.tsx           // Compound OrbSystem component
 ├── TextSparkline.tsx       // Behind-text glow animation
 ├── CursorTrail.tsx         // Mouse follower particles
 ├── ScrollParticles.tsx     // Scroll-reactive micro-dots
@@ -2032,12 +1995,12 @@ function useScrollDwell(
 │    ▲                                                                         │
 │    │                                                                         │
 │ HI │  ┌─────────────────────┐   ┌─────────────────────┐                     │
-│ GH │  │  P0: DO FIRST       │   │  P1: DO NEXT        │                     │
+│    │  │  P0: DO FIRST       │   │  P1: DO NEXT        │                     │
 │    │  │                     │   │                     │                     │
-│    │  │  • OrbSystem        │   │  • Section Territ.  │                     │
-│    │  │  • Motion Signatures│   │  • Scroll-Dwell     │                     │
-│    │  │  • Micro-Density    │   │  • Narrative Lines  │                     │
-│    │  │    Patterns         │   │  • Semantic Motion  │                     │
+│    │  │  • Motion Signatures│   │  • Section Territ.  │                     │
+│    │  │  • Micro-Density    │   │  • Scroll-Dwell     │                     │
+│    │  │    Patterns         │   │  • Narrative Lines  │                     │
+│    │  │  • CursorTrail      │   │  • Semantic Motion  │                     │
 │    │  └─────────────────────┘   └─────────────────────┘                     │
 │    │                                                                         │
 │ ME │  ┌─────────────────────┐   ┌─────────────────────┐                     │
@@ -2062,6 +2025,372 @@ function useScrollDwell(
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 12. Micro-Landing Card Design System
+
+> Build each bento-card as a "micro landing page"
+
+### 12.1 Concept Definition
+
+#### What is a Micro-Landing Card?
+
+Unlike standard feature-cards (scannable "line items"), a Micro-Landing Card contains a complete "story arc":
+
+```
+Hook → Context → Proof → CTA
+```
+
+Each card delivers a self-contained value proposition.
+
+#### Naming
+
+- **English**: Micro-Landing Card / Micro-Landing Bento
+- **Alternative**: Narrative Bento Card
+
+### 12.2 DOM Structure (Compound Component)
+
+```tsx
+<MicroLandingCard>
+  <Card.Hero /> // Hook zone: 1-line strong statement with clear opinion
+  <Card.Context /> // Background zone: 1-2 sentence problem statement
+  <Card.Proof /> // Evidence zone: numbers / code / diagrams / logos
+  <Card.CTA /> // Action zone: text-link / icon-button / tag
+  <Card.Deco /> // Decoration zone: semantically-related visual elements
+</MicroLandingCard>
+```
+
+#### Granularity Benefits
+
+1. **Structured Narrative**: DOM is not `<div>title</div><p>desc</p>`, but functional fragments composing a micro-page
+2. **A/B Testing Ready**: Swap only Card.Hero or Card.Proof content
+3. **AI Generation Friendly**: Each slot can be AI-generated independently
+
+### 12.3 Micro-Story Framework
+
+Each card follows this micro-story structure:
+
+| Layer        | Description                                    | Character Limit        |
+| ------------ | ---------------------------------------------- | ---------------------- |
+| **TENSION**  | What pitfall do most teams hit in this domain? | ≤50 chars              |
+| **SOLUTION** | What dirty work does Sailor handle for you?    | 1-2 sentences          |
+| **PROOF**    | A concrete technical signal                    | Visual / Code / Number |
+| **ACTION**   | Next step the user can take                    | ≤30 chars              |
+
+### 12.4 Four Card Designs
+
+#### 12.4.1 Multi-Tenant Architecture
+
+**Grid Position**: `lg:col-span-2 lg:row-span-2` (Primary Card)
+
+**Micro-Story**:
+
+| Layer              | Content                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------ |
+| **TENSION (Hero)** | "Multi-tenancy isn't table structure—it's permission boundaries."                    |
+| **CONTEXT**        | 90% of SaaS teams stumble on data isolation: RLS misconfigured, tenant_id forgotten. |
+| **PROOF**          | Architecture flow: `Clerk Org → TenantContext → Supabase RLS`                        |
+| **CTA**            | "View isolation strategy →"                                                          |
+
+**Deco Design**:
+
+- **Semantic**: Tenant isolation = boundaries / partitions / node separation
+- **Visual**: `AnimatedBeam` flow path: Clerk icon → Middleware → Database icon
+- **Background**: Faded `DotPattern` suggesting data points
+
+**Available Primitives**:
+
+- `AnimatedBeam` - Data flow animation
+- `DotPattern` - Dot matrix background
+- Custom SVG node icons
+
+```tsx
+// Deco structure example
+<Card.Deco>
+  <div className="relative">
+    <DotPattern className="opacity-20" />
+    <div className="absolute inset-0 flex items-center justify-between px-8">
+      <ClerkIcon ref={fromRef} />
+      <MiddlewareIcon ref={midRef} />
+      <DatabaseIcon ref={toRef} />
+    </div>
+    <AnimatedBeam
+      containerRef={containerRef}
+      fromRef={fromRef}
+      toRef={midRef}
+    />
+    <AnimatedBeam containerRef={containerRef} fromRef={midRef} toRef={toRef} />
+  </div>
+</Card.Deco>
+```
+
+#### 12.4.2 AI-Native Architecture
+
+**Grid Position**: `lg:row-span-2` (Tall Card)
+
+**Micro-Story**:
+
+| Layer              | Content                                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------------------- |
+| **TENSION (Hero)** | "Calling OpenAI is easy. Failover is hard."                                                          |
+| **CONTEXT**        | Quotas, multi-provider, observability, rate limits—you need an AI service layer, not an SDK wrapper. |
+| **PROOF**          | Code snippet: multi-provider config + fallback                                                       |
+| **CTA**            | "View AI template →"                                                                                 |
+
+**Deco Design**:
+
+- **Semantic**: AI = intelligence / flow / multi-path
+- **Visual**: `Terminal` component showing AI config code
+- **Effect**: `BorderTrail` surrounding effect, suggesting AI "liveliness"
+
+**Available Primitives**:
+
+- `Terminal` + `TypingAnimation` - Code display
+- `BorderTrail` - Flowing border effect
+
+```tsx
+// Deco structure example
+<Card.Deco>
+  <div className="relative">
+    <BorderTrail
+      size={80}
+      className="bg-gradient-to-r from-primary/50 to-purple-500/50"
+    />
+    <Terminal className="scale-75 origin-top-left">
+      <TypingAnimation duration={30}>
+        providers: ["openai", "anthropic", "vertex"]
+      </TypingAnimation>
+      <AnimatedSpan>fallback: "anthropic"</AnimatedSpan>
+      <AnimatedSpan>rateLimit: {`{ rpm: 60, tpm: 100000 }`}</AnimatedSpan>
+    </Terminal>
+  </div>
+</Card.Deco>
+```
+
+#### 12.4.3 Unified Billing
+
+**Grid Position**: `lg:col-span-1` (Standard Card)
+
+**Micro-Story**:
+
+| Layer              | Content                                                                   |
+| ------------------ | ------------------------------------------------------------------------- |
+| **TENSION (Hero)** | "Subscription + Usage = Easy to abandon."                                 |
+| **CONTEXT**        | Stripe integrated, entitlements forgotten; usage tracked, quotas missing. |
+| **PROOF**          | Relationship diagram: `Plan → Entitlement → Feature Flag`                 |
+| **CTA**            | "View billing model →"                                                    |
+
+**Deco Design**:
+
+- **Semantic**: Billing = hierarchy / relationships / flow
+- **Visual**: Simplified hierarchy diagram: three nodes vertically aligned
+- **Effect**: `AnimatedBeam` connecting nodes
+
+**Available Primitives**:
+
+- `AnimatedBeam` - Node connections
+- Custom SVG nodes (Plan / Entitlement / Flag)
+
+```tsx
+// Deco structure example
+<Card.Deco>
+  <div className="relative h-full flex flex-col items-center justify-center gap-4">
+    <PlanNode ref={planRef} />
+    <EntitlementNode ref={entRef} />
+    <FlagNode ref={flagRef} />
+    <AnimatedBeam fromRef={planRef} toRef={entRef} curvature={-20} />
+    <AnimatedBeam fromRef={entRef} toRef={flagRef} curvature={20} />
+  </div>
+</Card.Deco>
+```
+
+#### 12.4.4 Global Edge Deployment
+
+**Grid Position**: `lg:col-span-2` (Wide Card)
+
+**Micro-Story**:
+
+| Layer              | Content                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| **TENSION (Hero)** | "Global deployment isn't just CDN."                                                            |
+| **CONTEXT**        | Edge Functions, region-aware routing, latency-based failover—this is true global architecture. |
+| **PROOF**          | World map + connection lines / latency numbers                                                 |
+| **CTA**            | "View deployment architecture →"                                                               |
+
+**Deco Design**:
+
+- **Semantic**: Global = map / nodes / connections
+- **Visual**: `DottedMap` or `Globe` component
+- **Markers**: Key nodes (US / EU / APAC)
+
+**Available Primitives**:
+
+- `DottedMap` - Dotted world map
+- `Globe` - 3D globe (if performance allows)
+- `AnimatedBeam` - Inter-node connections
+
+```tsx
+// Deco structure example
+<Card.Deco>
+  <DottedMap
+    markers={[
+      { lat: 37.7749, lng: -122.4194, label: "US West" },
+      { lat: 51.5074, lng: -0.1278, label: "EU" },
+      { lat: 35.6762, lng: 139.6503, label: "APAC" },
+    ]}
+    className="opacity-60"
+  />
+</Card.Deco>
+```
+
+### 12.5 Component Implementation Spec
+
+#### File Structure
+
+```
+packages/custom-ui/src/primitives/micro-landing-card/
+├── index.ts                    # Exports
+├── micro-landing-card.tsx      # Main container
+├── card-hero.tsx               # Hero slot
+├── card-context.tsx            # Context slot
+├── card-proof.tsx              # Proof slot
+├── card-cta.tsx                # CTA slot
+├── card-deco.tsx               # Deco slot
+└── types.ts                    # Type definitions
+```
+
+#### Type Definitions
+
+```typescript
+interface MicroLandingCardProps {
+  /** Grid span class (e.g., "lg:col-span-2 lg:row-span-2") */
+  className?: string;
+  /** Card theme variant */
+  variant?: "default" | "highlight" | "subtle";
+  /** Link destination */
+  href?: string;
+  children: React.ReactNode;
+}
+
+interface CardHeroProps {
+  children: React.ReactNode;
+  /** Max 50 characters recommended */
+  className?: string;
+}
+
+interface CardContextProps {
+  children: React.ReactNode;
+  /** 1-2 sentences max */
+  className?: string;
+}
+
+interface CardProofProps {
+  /** Visual proof: code, diagram, metrics */
+  children: React.ReactNode;
+  className?: string;
+}
+
+interface CardCTAProps {
+  children: React.ReactNode;
+  href?: string;
+  onClick?: () => void;
+  className?: string;
+}
+
+interface CardDecoProps {
+  /** Decorative visual elements */
+  children: React.ReactNode;
+  /** Position: "background" | "inline" */
+  position?: "background" | "inline";
+  className?: string;
+}
+```
+
+#### Style Spec
+
+```css
+/* Hero */
+.card-hero {
+  @apply text-lg font-semibold text-foreground;
+  /* Strong opinion, sharp edge */
+}
+
+/* Context */
+.card-context {
+  @apply text-sm text-muted-foreground leading-relaxed;
+  /* Concise background explanation */
+}
+
+/* Proof */
+.card-proof {
+  @apply relative overflow-hidden;
+  /* Visual evidence area */
+}
+
+/* CTA */
+.card-cta {
+  @apply text-sm font-medium text-primary hover:underline;
+  /* Lightweight action */
+}
+
+/* Deco */
+.card-deco {
+  @apply absolute inset-0 pointer-events-none;
+  /* Decoration layer, non-blocking */
+}
+```
+
+### 12.6 Implementation Phases
+
+#### Phase 1: Component Skeleton
+
+1. Create `MicroLandingCard` compound component
+2. Implement 5 sub-components (Hero / Context / Proof / CTA / Deco)
+3. Export to `@nebutra/custom-ui`
+
+#### Phase 2: Deco Implementation
+
+1. Multi-Tenant: `AnimatedBeam` flow diagram
+2. AI-Native: `Terminal` + `BorderTrail`
+3. Billing: Node relationship diagram
+4. Global: `DottedMap` world map
+
+#### Phase 3: Landing Page Integration
+
+1. Replace existing `FeatureBento` implementation
+2. Fill in Micro-Story copy
+3. Debug animation timing and interactions
+
+### 12.7 Design Principles
+
+#### High Information Density, Not Crowded
+
+- Every piece of information has breathing room
+- Clear visual hierarchy: Hero > Context > Proof > CTA
+
+#### Semantically-Related Decoration
+
+- Deco is not random geometric shapes
+- Must be strongly related to card theme
+
+#### Opinionated Copy
+
+- Hero must have attitude, not feature description
+- Example: ❌ "Multi-tenant support" → ✅ "Multi-tenancy isn't table structure—it's permission boundaries."
+
+#### Restrained Animation
+
+- Animation serves understanding, not showing off
+- Only use animation in Proof and Deco zones
+- Hero / Context / CTA remain static
+
+### 12.8 References
+
+- Vercel Homepage Feature Cards
+- Supabase Database Bento
+- Linear Product Pages
+- Stripe Developer Documentation
 
 ---
 

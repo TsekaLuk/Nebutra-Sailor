@@ -6,7 +6,6 @@ import { Copy, Github, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { heroContent } from "@/lib/landing-content";
 import {
-  OrbSystem,
   GridPattern,
   DotMatrix,
   GradientBlur,
@@ -61,22 +60,7 @@ export function HeroSection() {
         opacity={0.03}
       />
 
-      {/* Particle Orb System - evolved from simple radial glow */}
-      <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 z-0">
-        <OrbSystem
-          size={400}
-          primaryColor="hsl(var(--primary))"
-          secondaryColor="hsl(var(--accent))"
-          showNoise={true}
-          showShell={true}
-          showParticles={true}
-          coreProps={{ breathDuration: 4 }}
-          shellProps={{ ringCount: 3, rotationDuration: 25 }}
-          particlesProps={{ particleCount: 12 }}
-        />
-      </div>
-
-      {/* Ambient gradient blur behind orb */}
+      {/* Ambient gradient blur */}
       <GradientBlur
         className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 z-0 opacity-20"
         color="primary"

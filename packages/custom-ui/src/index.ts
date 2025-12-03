@@ -44,6 +44,28 @@ export { AnimatedBeam } from "./primitives/animated-beam";
 export type { AnimatedBeamProps } from "./primitives/animated-beam";
 export { BentoGrid, BentoCard } from "./primitives/bento-grid";
 export type { BentoGridProps, BentoCardProps } from "./primitives/bento-grid";
+export { Badge, badgeVariants } from "./primitives/badge";
+export type { BadgeProps } from "./primitives/badge";
+export { FlickeringGrid } from "./primitives/flickering-grid";
+export type { FlickeringGridProps } from "./primitives/flickering-grid";
+export { DotPattern } from "./primitives/dot-pattern";
+export type { DotPatternProps } from "./primitives/dot-pattern";
+export { DottedMap } from "./primitives/dotted-map";
+export type { DottedMapProps, DottedMapMarker } from "./primitives/dotted-map";
+export { ShineBorder } from "./primitives/shine-border";
+export type { ShineBorderProps } from "./primitives/shine-border";
+// Note: Terminal compound component is exported from ./patterns
+// These are the simple animation primitives for Terminal content
+export {
+  Terminal as SimpleTerminal,
+  TypingAnimation,
+  AnimatedSpan,
+} from "./primitives/terminal";
+export type {
+  TerminalProps as SimpleTerminalProps,
+  TypingAnimationProps,
+  AnimatedSpanProps,
+} from "./primitives/terminal";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Patterns - Compound components
