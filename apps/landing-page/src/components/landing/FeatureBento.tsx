@@ -4,14 +4,13 @@ import { motion } from "framer-motion";
 import { Building2, Bot, CreditCard, Globe } from "lucide-react";
 import { bentoFeatures } from "@/lib/landing-content";
 import { cn } from "@/lib/utils";
+import { ThemedSection } from "@nebutra/custom-ui";
 import {
-  Card,
-  ThemedSection,
-  useScrollDwell,
-  DwellHint,
-  MagicCard,
-} from "@nebutra/custom-ui";
-import { useRef, useCallback } from "react";
+  MultiTenantVisual,
+  AINativeVisual,
+  BillingVisual,
+  GlobalEdgeVisual,
+} from "./feature-visuals";
 
 const ICONS = {
   "🏢": Building2,
@@ -20,59 +19,49 @@ const ICONS = {
   "🌍": Globe,
 };
 
+/** Map feature keys to their visual components */
+const VISUALS: Record<string, React.ComponentType> = {
+  multiTenant: MultiTenantVisual,
+  aiNative: AINativeVisual,
+  billing: BillingVisual,
+  globalEdge: GlobalEdgeVisual,
+};
+
 /**
- * Stagger pop-in animation variants per DESIGN.md Section 11.4
+ * Stagger pop-in animation variants
  */
 const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.1,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 20,
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1],
     },
   },
 };
 
 /**
- * FeatureBento - Asymmetric feature grid using Card compound component
+ * FeatureBento - Supabase-style bento grid with atomic visualizations
  *
- * @see DESIGN.md Section 5 & Section 10 & Section 11.4
+ * Each card has a unique semantic visualization built from atomic components.
  */
 export function FeatureBento() {
   const features = Object.entries(bentoFeatures);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Dwell hint state
-  const handleDwell = useCallback(() => {}, []);
-  const { isDwelling } = useScrollDwell(sectionRef, {
-    threshold: 1200,
-    cooldown: 8000,
-    onDwell: handleDwell,
-  });
 
   return (
-    <ThemedSection ref={sectionRef} theme="features" className="py-24 md:py-32">
+    <ThemedSection theme="features" className="py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Dwell Hint */}
-        <DwellHint
-          show={isDwelling}
-          message="Every feature is battle-tested in production."
-          position="bottom"
-        />
-
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -88,7 +77,7 @@ export function FeatureBento() {
           </p>
         </motion.div>
 
-        {/* Bento Grid with stagger animation */}
+        {/* Bento Grid - Supabase style layout */}
         <motion.div
           className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
@@ -98,72 +87,78 @@ export function FeatureBento() {
         >
           {features.map(([key, feature], index) => {
             const Icon = ICONS[feature.icon as keyof typeof ICONS] || Building2;
+            const Visual = VISUALS[key];
+            // First two cards span 2 rows on large screens
             const isLarge = index === 0 || index === 1;
 
             return (
               <motion.div
                 key={key}
                 variants={itemVariants}
-                className={cn(isLarge && "lg:col-span-1 lg:row-span-2")}
+                className={cn(
+                  "group rounded-2xl border border-border/10 bg-card/30 backdrop-blur-sm transition-colors hover:border-border/20",
+                  isLarge && "lg:row-span-2",
+                )}
               >
-                <MagicCard
-                  className="h-full rounded-2xl"
-                  gradientColor="hsl(var(--card))"
-                  gradientFrom="hsl(var(--primary))"
-                  gradientTo="hsl(var(--accent))"
-                  gradientOpacity={0.15}
-                >
-                  <Card
-                    variant="gradient"
-                    className="group relative h-full overflow-hidden border-0 bg-transparent"
-                  >
-                    {/* Content */}
-                    <div className="relative z-10">
-                      <Card.Header>
-                        <Card.Icon
-                          size="lg"
-                          className="bg-gradient-to-br from-[var(--brand-primary)]/20 to-[var(--brand-accent)]/20"
-                        >
-                          <Icon className="h-6 w-6 text-[var(--brand-accent)]" />
-                        </Card.Icon>
-                      </Card.Header>
-
-                      <Card.Body>
-                        <Card.Title className="text-xl">
-                          {feature.title}
-                        </Card.Title>
-                        <Card.Description className="mt-2">
-                          {feature.description}
-                        </Card.Description>
-
-                        {/* Feature list if available */}
-                        {"features" in feature && feature.features && (
-                          <ul className="mt-4 space-y-2">
-                            {feature.features.map((item: string) => (
-                              <li
-                                key={item}
-                                className="flex items-center gap-2 text-sm text-muted-foreground/80"
-                              >
-                                <span className="h-1 w-1 rounded-full bg-[var(--brand-accent)]" />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </Card.Body>
+                {/* Card Content */}
+                <div className="flex h-full flex-col p-6">
+                  {/* Icon + Title */}
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border/20 bg-card/50">
+                      <Icon className="h-4 w-4 text-[var(--brand-accent)]" />
                     </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground">
+                        {feature.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
 
-                    {/* Decorative corner */}
-                    <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full bg-gradient-to-br from-[var(--brand-primary)]/10 to-transparent blur-2xl" />
-                  </Card>
-                </MagicCard>
+                  {/* Visual - fills remaining space */}
+                  {Visual && (
+                    <div className="mt-4 flex-1">
+                      <Visual />
+                    </div>
+                  )}
+
+                  {/* Feature list for billing card */}
+                  {"features" in feature && feature.features && !Visual && (
+                    <ul className="mt-4 space-y-2">
+                      {feature.features.map((item: string) => (
+                        <li
+                          key={item}
+                          className="flex items-center gap-2 text-sm text-muted-foreground/80"
+                        >
+                          <span className="h-1 w-1 rounded-full bg-[var(--brand-accent)]" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               </motion.div>
             );
           })}
         </motion.div>
+
+        {/* Bottom tagline */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 text-center text-lg text-muted-foreground"
+        >
+          Use one or all.{" "}
+          <span className="text-foreground">
+            Best of breed products. Integrated as a platform.
+          </span>
+        </motion.p>
       </div>
     </ThemedSection>
   );
 }
-
 FeatureBento.displayName = "FeatureBento";

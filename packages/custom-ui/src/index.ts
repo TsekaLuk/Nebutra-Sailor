@@ -40,6 +40,8 @@ export type {
   AvatarCirclesProps,
   AvatarCircleItem,
 } from "./primitives/avatar-circles";
+export { AnimatedBeam } from "./primitives/animated-beam";
+export type { AnimatedBeamProps } from "./primitives/animated-beam";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Patterns - Compound components
