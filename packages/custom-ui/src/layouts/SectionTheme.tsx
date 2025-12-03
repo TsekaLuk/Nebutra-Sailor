@@ -58,14 +58,12 @@ export const sectionThemes: Record<string, SectionThemeConfig> = {
     gradient: "bg-gradient-to-b from-primary/5 via-transparent to-transparent",
   },
 
-  // Architecture: "Terminal Matrix" - Monochrome with tight grid
-  // Note: Uses specific terminal green for artistic effect (exempt)
+  // Architecture: "Terminal Matrix" - Monochrome with subtle pattern
   architecture: {
     backgroundColor: "bg-zinc-950",
-    pattern: "grid",
-    patternColor: "#00FF41", // Terminal green - decorative exemption
-    patternOpacity: 0.05,
-    accentColor: "#00FF41",
+    pattern: "dots",
+    patternColor: "currentColor",
+    patternOpacity: 0.03,
   },
 
   // AI-Native: "Neon Network" - Dark with neon accents
@@ -141,13 +139,9 @@ export const sectionThemes: Record<string, SectionThemeConfig> = {
   },
 
   // Terminal: "Developer Immersion" - Code environment feel
-  // Note: Uses specific green for terminal effect (exempt)
   terminal: {
     backgroundColor: "bg-zinc-950",
-    pattern: "grid",
-    patternColor: "#22C55E", // Terminal green - decorative exemption
-    patternOpacity: 0.04,
-    accentColor: "#22C55E",
+    pattern: "none",
   },
 };
 

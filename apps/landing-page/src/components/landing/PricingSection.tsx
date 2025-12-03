@@ -4,19 +4,41 @@ import { motion } from "framer-motion";
 import { Check, Github } from "lucide-react";
 import { pricingContent } from "@/lib/landing-content";
 import { cn } from "@/lib/utils";
+import {
+  ThemedSection,
+  BorderTrail,
+  useScrollDwell,
+  DwellHint,
+} from "@nebutra/custom-ui";
+import { useRef, useCallback } from "react";
 
 /**
- * PricingSection - Pricing plans comparison
+ * PricingSection - Pricing plans with BorderTrail effect
  *
- * @see DESIGN.md Section 10
+ * @see DESIGN.md Section 10 & Section 11.5 "Symmetry Order"
  */
 export function PricingSection() {
   const { headline, plans, enterpriseNote, enterpriseCta, enterpriseHref } =
     pricingContent;
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Dwell hint state
+  const handleDwell = useCallback(() => {}, []);
+  const { isDwelling } = useScrollDwell(sectionRef, {
+    threshold: 1200,
+    cooldown: 8000,
+    onDwell: handleDwell,
+  });
 
   return (
-    <section className="relative w-full bg-background py-24 md:py-32">
+    <ThemedSection ref={sectionRef} theme="pricing" className="py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
+        {/* Dwell Hint */}
+        <DwellHint
+          show={isDwelling}
+          message="Most teams choose self-hosted. It's free forever."
+          position="bottom"
+        />
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -45,6 +67,18 @@ export function PricingSection() {
                   : "border-border/10 bg-card/50",
               )}
             >
+              {/* BorderTrail for highlighted card per DESIGN.md 11.5 */}
+              {plan.highlighted && (
+                <BorderTrail
+                  size={80}
+                  className="bg-gradient-to-r from-[var(--brand-primary)] via-[var(--brand-accent)] to-[var(--brand-primary)]"
+                  transition={{
+                    repeat: Infinity,
+                    duration: 4,
+                    ease: "linear",
+                  }}
+                />
+              )}
               {/* Badge */}
               {"badge" in plan && plan.badge && (
                 <span className="absolute right-4 top-4 rounded-full bg-[var(--brand-accent)]/20 px-3 py-1 text-xs font-medium text-[var(--brand-accent)]">
@@ -116,7 +150,7 @@ export function PricingSection() {
           </p>
         </motion.div>
       </div>
-    </section>
+    </ThemedSection>
   );
 }
 

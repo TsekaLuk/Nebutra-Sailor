@@ -4,11 +4,36 @@ import { motion } from "framer-motion";
 import { Copy, Github, Star, GitFork, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { finalCtaContent } from "@/lib/landing-content";
+import { ThemedSection, DotMatrix } from "@nebutra/custom-ui";
 
 /**
- * FinalCTA - Final call to action with command and stats
+ * PulseGlow - Animated pulsing glow effect for CTA emphasis
+ * Per DESIGN.md Section 11.4 "Action Climax"
+ */
+function PulseGlow() {
+  return (
+    <motion.div
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      animate={{
+        scale: [1, 1.2, 1],
+        opacity: [0.3, 0.5, 0.3],
+      }}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+      aria-hidden="true"
+    >
+      <div className="h-[500px] w-[500px] rounded-full bg-gradient-to-r from-[var(--brand-primary)]/30 to-[var(--brand-accent)]/30 blur-[120px]" />
+    </motion.div>
+  );
+}
+
+/**
+ * FinalCTA - Action climax with pulse and glow effects
  *
- * @see DESIGN.md Section 12
+ * @see DESIGN.md Section 12 & Section 11.4 "Action Climax"
  */
 export function FinalCTA() {
   const [copied, setCopied] = useState(false);
@@ -28,26 +53,9 @@ export function FinalCTA() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-background py-24 md:py-32">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-primary)]/10 via-background to-[var(--brand-accent)]/10" />
-
-      {/* Grid Pattern */}
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)
-          `,
-          backgroundSize: "48px 48px",
-        }}
-      />
-
-      {/* Glow */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="h-[400px] w-[400px] rounded-full bg-gradient-to-r from-[var(--brand-primary)]/20 to-[var(--brand-accent)]/20 blur-[100px]" />
-      </div>
+    <ThemedSection theme="cta" className="py-24 md:py-32">
+      {/* Animated Pulse Glow */}
+      <PulseGlow />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
         {/* Headline */}
@@ -78,13 +86,29 @@ export function FinalCTA() {
               <span className="text-[var(--brand-accent)]">$</span>{" "}
               {commandPlaceholder}
             </code>
-            <button
+            <motion.button
               onClick={handleCopy}
-              className="flex items-center gap-2 rounded-lg bg-[image:var(--brand-gradient)] px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative flex items-center gap-2 rounded-lg bg-[image:var(--brand-gradient)] px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90"
             >
+              {/* Pulse ring on CTA */}
+              <motion.span
+                className="absolute inset-0 rounded-lg bg-[image:var(--brand-gradient)] -z-10"
+                animate={{
+                  scale: [1, 1.15, 1],
+                  opacity: [0.5, 0, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                aria-hidden="true"
+              />
               <Copy className="h-4 w-4" />
               {copied ? "Copied!" : ctaPrimary}
-            </button>
+            </motion.button>
           </div>
         </motion.div>
 
@@ -130,7 +154,7 @@ export function FinalCTA() {
           </a>
         </motion.div>
       </div>
-    </section>
+    </ThemedSection>
   );
 }
 

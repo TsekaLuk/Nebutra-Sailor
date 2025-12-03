@@ -33,3 +33,7 @@ export {
   type TextSparklineProps,
 } from "./particles/TextSparkline";
 export { CursorTrail, type CursorTrailProps } from "./particles/CursorTrail";
+export {
+  AnimatedCounter,
+  type AnimatedCounterProps,
+} from "./particles/AnimatedCounter";

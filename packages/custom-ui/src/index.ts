@@ -31,6 +31,8 @@ export { Text } from "./primitives/text";
 export type { TextProps } from "./primitives/text";
 export { Heading } from "./primitives/heading";
 export type { HeadingProps } from "./primitives/heading";
+export { BorderTrail } from "./primitives/border-trail";
+export type { BorderTrailProps } from "./primitives/border-trail";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Patterns - Compound components

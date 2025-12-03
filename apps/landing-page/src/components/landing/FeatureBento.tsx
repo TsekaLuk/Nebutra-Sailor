@@ -4,7 +4,13 @@ import { motion } from "framer-motion";
 import { Building2, Bot, CreditCard, Globe } from "lucide-react";
 import { bentoFeatures } from "@/lib/landing-content";
 import { cn } from "@/lib/utils";
-import { Card } from "@nebutra/custom-ui";
+import {
+  Card,
+  ThemedSection,
+  useScrollDwell,
+  DwellHint,
+} from "@nebutra/custom-ui";
+import { useRef, useCallback } from "react";
 
 const ICONS = {
   "🏢": Building2,
@@ -14,16 +20,58 @@ const ICONS = {
 };
 
 /**
+ * Stagger pop-in animation variants per DESIGN.md Section 11.4
+ */
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20,
+    },
+  },
+};
+
+/**
  * FeatureBento - Asymmetric feature grid using Card compound component
  *
- * @see DESIGN.md Section 5 & Section 10
+ * @see DESIGN.md Section 5 & Section 10 & Section 11.4
  */
 export function FeatureBento() {
   const features = Object.entries(bentoFeatures);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Dwell hint state
+  const handleDwell = useCallback(() => {}, []);
+  const { isDwelling } = useScrollDwell(sectionRef, {
+    threshold: 1200,
+    cooldown: 8000,
+    onDwell: handleDwell,
+  });
 
   return (
-    <section className="relative w-full bg-background py-24 md:py-32">
+    <ThemedSection ref={sectionRef} theme="features" className="py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
+        {/* Dwell Hint */}
+        <DwellHint
+          show={isDwelling}
+          message="Every feature is battle-tested in production."
+          position="bottom"
+        />
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,8 +87,14 @@ export function FeatureBento() {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {/* Bento Grid with stagger animation */}
+        <motion.div
+          className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {features.map(([key, feature], index) => {
             const Icon = ICONS[feature.icon as keyof typeof ICONS] || Building2;
             const isLarge = index === 0 || index === 1;
@@ -48,10 +102,7 @@ export function FeatureBento() {
             return (
               <motion.div
                 key={key}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: 0.1 * index }}
+                variants={itemVariants}
                 className={cn(isLarge && "lg:col-span-1 lg:row-span-2")}
               >
                 <Card
@@ -103,9 +154,9 @@ export function FeatureBento() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </ThemedSection>
   );
 }
 

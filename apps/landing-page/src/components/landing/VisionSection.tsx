@@ -1,13 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { visionContent } from "@/lib/landing-content";
+import { ThemedSection, useScrollDwell, DwellHint } from "@nebutra/custom-ui";
+import { useRef, useCallback, useEffect, useState } from "react";
+import { useInView } from "framer-motion";
 
 /**
- * VisionSection - Company vision and philosophy
+ * WeightShiftText - Text that morphs font weight on scroll/view
+ * Per DESIGN.md Section 11.5 "Contemplation Space"
+ */
+function WeightShiftText({ children }: { children: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const [weight, setWeight] = useState(300);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    // Animate weight: light → bold → light cycle
+    let frame = 0;
+    const interval = setInterval(() => {
+      frame++;
+      // Sine wave between 300-700 over 6 seconds
+      const w = 500 + Math.sin(frame * 0.05) * 200;
+      setWeight(Math.round(w));
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [isInView]);
+
+  return (
+    <span
+      ref={ref}
+      className="inline-block transition-all"
+      style={{
+        fontVariationSettings: `"wght" ${weight}`,
+        fontWeight: weight,
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
+/**
+ * VisionSection - Company vision with contemplation space design
  *
- * @see DESIGN.md Section 9
+ * @see DESIGN.md Section 9 & Section 11.5 "Contemplation Space"
  */
 export function VisionSection() {
   const {
@@ -23,10 +64,24 @@ export function VisionSection() {
     ctaHref,
   } = visionContent;
 
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Dwell hint state
+  const handleDwell = useCallback(() => {}, []);
+  const { isDwelling } = useScrollDwell(sectionRef, {
+    threshold: 1500,
+    cooldown: 8000,
+    onDwell: handleDwell,
+  });
+
   return (
-    <section className="relative w-full bg-background py-24 md:py-32">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-card/50 via-background to-card" />
+    <ThemedSection ref={sectionRef} theme="vision" className="py-24 md:py-32">
+      {/* Dwell Hint */}
+      <DwellHint
+        show={isDwelling}
+        message="Small teams. Big leverage."
+        position="bottom"
+      />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6">
         {/* Company Badge */}
@@ -87,7 +142,7 @@ export function VisionSection() {
           ))}
         </div>
 
-        {/* Vision Statement */}
+        {/* Vision Statement with weight-shift effect */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +154,7 @@ export function VisionSection() {
             {visionLabel}
           </p>
           <p className="font-mono text-lg text-[var(--brand-accent)] md:text-xl">
-            {visionStatement}
+            <WeightShiftText>{visionStatement}</WeightShiftText>
           </p>
         </motion.div>
 
@@ -140,7 +195,7 @@ export function VisionSection() {
           </a>
         </motion.div>
       </div>
-    </section>
+    </ThemedSection>
   );
 }
 

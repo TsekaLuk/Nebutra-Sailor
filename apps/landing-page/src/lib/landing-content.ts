@@ -70,8 +70,8 @@ export const techStackLogos: TechLogo[] = [
   {
     name: "Next.js",
     svgl: {
-      light: "nextjs_icon_dark.svg", // Black N on light bg
-      dark: "nextjs_logo_light.svg", // White logo for dark bg (icon_light doesn't exist)
+      light: "nextjs_logo_light.svg", // Black logo for light bg
+      dark: "nextjs_logo_dark.svg", // White logo for dark bg
     },
   },
   {
@@ -103,17 +103,10 @@ export const techStackLogos: TechLogo[] = [
     },
   },
   {
-    name: "Stripe",
-    svgl: {
-      light: "stripe.svg", // Purple stripe works on light
-      dark: "stripe_dark.svg", // White stripe for dark bg
-    },
-  },
-  {
     name: "Clerk",
     svgl: {
-      light: "clerk-icon-dark.svg", // Dark clerk icon for light bg
-      dark: "clerk-icon-light.svg", // Light clerk icon for dark bg
+      light: "clerk-icon-light.svg", // Dark icon for light bg (SVGL naming = target bg)
+      dark: "clerk-icon-dark.svg", // White icon for dark bg
     },
   },
   {
