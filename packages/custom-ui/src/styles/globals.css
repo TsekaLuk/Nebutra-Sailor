@@ -5,9 +5,10 @@
  * Import this in your app's globals.css or layout to enable theming.
  * 
  * Compatible with shadcn/ui and 21st.dev component conventions.
+ * 
+ * NOTE: Do NOT add @import "tailwindcss" here - this file is imported
+ * by apps that already have their own Tailwind configuration.
  */
-
-@import "tailwindcss";
 
 /* ============================================
    CSS Variables - Light Theme (Default)

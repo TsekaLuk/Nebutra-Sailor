@@ -37,6 +37,19 @@
     "./marketing/*": {
       "types": "./dist/marketing/*.d.ts",
       "import": "./dist/marketing/*.js"
+    },
+    "./styles/globals.css": "./src/styles/globals.css",
+    "./tailwind.preset": {
+      "types": "./dist/tailwind.preset.d.ts",
+      "import": "./dist/tailwind.preset.js"
+    },
+    "./lib/utils": {
+      "types": "./dist/utils/cn.d.ts",
+      "import": "./dist/utils/cn.js"
+    },
+    "./patterns": {
+      "types": "./dist/patterns/index.d.ts",
+      "import": "./dist/patterns/index.js"
     }
   },
   "files": [
@@ -80,6 +93,7 @@
     "dotted-map": "^2.2.2",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^11.0.0",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.460.0",
     "motion": "^12.23.25",
     "react": "^19.0.0",

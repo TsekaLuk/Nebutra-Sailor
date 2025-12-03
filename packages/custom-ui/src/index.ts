@@ -14,6 +14,11 @@
  */
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Utils
+// ─────────────────────────────────────────────────────────────────────────────
+export { cn } from "./utils/cn";
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Design Tokens
 // ─────────────────────────────────────────────────────────────────────────────
 export * from "./tokens";
@@ -54,6 +59,13 @@ export { DottedMap } from "./primitives/dotted-map";
 export type { DottedMapProps, DottedMapMarker } from "./primitives/dotted-map";
 export { ShineBorder } from "./primitives/shine-border";
 export type { ShineBorderProps } from "./primitives/shine-border";
+export { Globe } from "./primitives/globe";
+export type { GlobeProps, GlobeConfig, GlobeMarker } from "./primitives/globe";
+export { AnimatedList, AnimatedListItem } from "./primitives/animated-list";
+export type {
+  AnimatedListProps,
+  AnimatedListItemProps,
+} from "./primitives/animated-list";
 // Note: Terminal compound component is exported from ./patterns
 // These are the simple animation primitives for Terminal content
 export {

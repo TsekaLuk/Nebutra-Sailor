@@ -1,7 +1,14 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts", "src/primitives/index.ts", "src/marketing/index.ts"],
+  entry: [
+    "src/index.ts",
+    "src/primitives/index.ts",
+    "src/patterns/index.ts",
+    "src/marketing/index.ts",
+    "src/tailwind.preset.ts",
+    "src/utils/cn.ts",
+  ],
   format: ["esm"],
   dts: true,
   splitting: false,

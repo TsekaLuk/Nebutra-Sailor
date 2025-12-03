@@ -3,23 +3,29 @@
 import { useRef } from "react";
 import {
   AnimatedBeam,
-  Badge,
-  FlickeringGrid,
-  DotPattern,
-  BorderTrail,
-  SimpleTerminal,
-  TypingAnimation,
-  AnimatedSpan,
-  DottedMap,
-  ShineBorder,
+  MagicCard,
+  Globe,
+  AnimatedList,
+  cn,
 } from "@nebutra/custom-ui";
+import { Terminal } from "@nebutra/custom-ui/patterns";
+import {
+  Building2,
+  Shield,
+  Database,
+  CreditCard,
+  Zap,
+  AlertTriangle,
+  CheckCircle2,
+  Globe as GlobeIcon,
+} from "lucide-react";
 
-/**
+/* ════════════════════════════════════════════════════════════════════════════
  * Multi-Tenant Architecture Visual
  *
- * Deco: FlickeringGrid background + AnimatedBeam flow
- * Proof: Badge nodes showing Clerk → Context → RLS flow
- */
+ * 主视觉: MagicCard容器 + 3层架构堆叠
+ * 用实际的层次结构展示 Clerk → Context → RLS 的隔离边界
+ * ════════════════════════════════════════════════════════════════════════════ */
 export function MultiTenantVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
   const clerkRef = useRef<HTMLDivElement>(null);
@@ -27,220 +33,274 @@ export function MultiTenantVisual() {
   const rlsRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative h-full w-full min-h-[200px]">
-      {/* Background: FlickeringGrid */}
-      <FlickeringGrid
-        className="absolute inset-0 z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
-        squareSize={4}
-        gridGap={6}
-        color="rgb(0, 51, 254)"
-        maxOpacity={0.08}
-        flickerChance={0.15}
-      />
-
-      {/* Proof: Flow diagram with AnimatedBeam */}
-      <div
-        ref={containerRef}
-        className="relative z-10 flex h-full flex-col items-center justify-center gap-4 px-4 py-8"
-      >
-        {/* Horizontal flow on larger cards */}
-        <div className="flex items-center justify-center gap-4 md:gap-8">
-          <div ref={clerkRef}>
-            <Badge
-              variant="outline"
-              className="bg-background/80 backdrop-blur-sm"
-            >
-              Clerk Org
-            </Badge>
-          </div>
-          <div ref={ctxRef}>
-            <Badge
-              variant="outline"
-              className="bg-background/80 backdrop-blur-sm"
-            >
-              TenantContext
-            </Badge>
-          </div>
-          <div ref={rlsRef}>
-            <Badge variant="secondary" className="bg-primary/10">
-              Supabase RLS
-            </Badge>
-          </div>
-        </div>
-
-        {/* Animated Beams */}
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={clerkRef}
-          toRef={ctxRef}
-          gradientStartColor="#0033FE"
-          gradientStopColor="#0BF1C3"
-          pathColor="hsl(var(--border))"
-          pathOpacity={0.15}
-          duration={2.5}
-        />
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={ctxRef}
-          toRef={rlsRef}
-          gradientStartColor="#0BF1C3"
-          gradientStopColor="#0033FE"
-          pathColor="hsl(var(--border))"
-          pathOpacity={0.15}
-          duration={2.5}
-          delay={0.8}
-        />
-      </div>
-    </div>
-  );
-}
-
-/**
- * AI-Native Architecture Visual
- *
- * Deco: BorderTrail surrounding effect
- * Proof: Terminal with TypingAnimation showing config
- */
-export function AINativeVisual() {
-  return (
     <div className="relative h-full w-full min-h-[220px]">
-      {/* Border effect: BorderTrail */}
-      <BorderTrail
-        size={60}
-        className="bg-gradient-to-r from-purple-500/60 via-violet-500/60 to-blue-500/60"
-      />
-
-      {/* Proof: Terminal with code config */}
-      <div className="relative z-10 flex h-full items-center justify-center p-4">
-        <SimpleTerminal
-          className="w-full max-w-[280px] scale-[0.85] origin-center"
-          sequence
-        >
-          <TypingAnimation duration={35}>
-            providers: ["openai", "anthropic"]
-          </TypingAnimation>
-          <AnimatedSpan className="text-emerald-400">
-            fallback: "anthropic"
-          </AnimatedSpan>
-          <AnimatedSpan className="text-amber-400">
-            rateLimit: {"{ rpm: 60, tpm: 100k }"}
-          </AnimatedSpan>
-          <AnimatedSpan className="text-blue-400">
-            tracing: enabled
-          </AnimatedSpan>
-        </SimpleTerminal>
-      </div>
-    </div>
-  );
-}
-
-/**
- * Unified Billing Visual
- *
- * Deco: DotPattern background
- * Proof: Vertical node flow with AnimatedBeam
- */
-export function BillingVisual() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const planRef = useRef<HTMLDivElement>(null);
-  const entRef = useRef<HTMLDivElement>(null);
-  const flagRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <div className="relative h-full w-full min-h-[180px]">
-      {/* Background: DotPattern */}
-      <DotPattern
-        width={16}
-        height={16}
-        cr={1}
-        className="absolute inset-0 z-0 opacity-40 [mask-image:radial-gradient(200px_circle_at_center,white,transparent)]"
-      />
-
-      {/* Proof: Vertical node diagram */}
-      <div
-        ref={containerRef}
-        className="relative z-10 flex h-full flex-col items-center justify-center gap-3 py-6"
+      <MagicCard
+        className="h-full w-full rounded-xl"
+        gradientFrom="#0033FE"
+        gradientTo="#0BF1C3"
+        gradientColor="hsl(var(--muted))"
+        gradientOpacity={0.15}
       >
-        <div ref={planRef}>
-          <Badge className="bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30">
-            Plan
-          </Badge>
-        </div>
-        <div ref={entRef}>
-          <Badge className="bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30">
-            Entitlement
-          </Badge>
-        </div>
-        <div ref={flagRef}>
-          <Badge className="bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30">
-            Feature Flag
-          </Badge>
-        </div>
+        <div
+          ref={containerRef}
+          className="relative flex h-full flex-col items-center justify-center gap-3 p-6"
+        >
+          {/* Layer 1: Clerk Org */}
+          <div
+            ref={clerkRef}
+            className="flex items-center gap-2 rounded-lg border border-blue-500/30 bg-blue-500/10 px-4 py-2 backdrop-blur-sm"
+          >
+            <Building2 className="h-4 w-4 text-blue-400" />
+            <span className="text-sm font-medium text-blue-400">Clerk Org</span>
+          </div>
 
-        {/* Animated Beams - vertical flow */}
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={planRef}
-          toRef={entRef}
-          curvature={-25}
-          gradientStartColor="#10b981"
-          gradientStopColor="#3b82f6"
-          pathColor="hsl(var(--border))"
-          pathOpacity={0.15}
-          duration={2}
-        />
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={entRef}
-          toRef={flagRef}
-          curvature={25}
-          gradientStartColor="#3b82f6"
-          gradientStopColor="#f59e0b"
-          pathColor="hsl(var(--border))"
-          pathOpacity={0.15}
-          duration={2}
-          delay={0.6}
-        />
-      </div>
-    </div>
-  );
-}
-
-/**
- * Global Edge Deployment Visual
- *
- * Deco: ShineBorder edge glow
- * Proof: DottedMap with region markers
- */
-export function GlobalEdgeVisual() {
-  return (
-    <div className="relative h-full w-full min-h-[140px] overflow-hidden rounded-lg">
-      {/* Border effect: ShineBorder */}
-      <ShineBorder shineColor={["#0033FE", "#0BF1C3"]} borderWidth={1} />
-
-      {/* Proof: DottedMap with markers */}
-      <div className="relative z-10 flex h-full items-center justify-center p-4">
-        <div className="relative h-28 w-full max-w-[320px]">
-          <DottedMap
-            markers={[
-              { lat: 37.77, lng: -122.41, size: 0.6 }, // US West
-              { lat: 51.51, lng: -0.13, size: 0.6 }, // EU
-              { lat: 35.68, lng: 139.65, size: 0.6 }, // APAC
-              { lat: 1.35, lng: 103.82, size: 0.5 }, // Singapore
-            ]}
-            markerColor="#0BF1C3"
-            dotRadius={0.18}
-            className="opacity-60"
-          />
-
-          {/* Latency labels */}
-          <div className="absolute -bottom-1 left-0 right-0 flex justify-center gap-6">
-            <span className="text-[9px] text-muted-foreground/70">US 12ms</span>
-            <span className="text-[9px] text-muted-foreground/70">EU 18ms</span>
-            <span className="text-[9px] text-muted-foreground/70">
-              APAC 24ms
+          {/* Layer 2: Tenant Context */}
+          <div
+            ref={ctxRef}
+            className="flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 backdrop-blur-sm"
+          >
+            <Shield className="h-4 w-4 text-emerald-400" />
+            <span className="text-sm font-medium text-emerald-400">
+              TenantContext
             </span>
           </div>
+
+          {/* Layer 3: Supabase RLS */}
+          <div
+            ref={rlsRef}
+            className="flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-500/10 px-4 py-2 backdrop-blur-sm"
+          >
+            <Database className="h-4 w-4 text-violet-400" />
+            <span className="text-sm font-medium text-violet-400">
+              Supabase RLS
+            </span>
+          </div>
+
+          {/* Animated connection beams */}
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={clerkRef}
+            toRef={ctxRef}
+            curvature={-30}
+            gradientStartColor="#3b82f6"
+            gradientStopColor="#10b981"
+            pathColor="hsl(var(--border))"
+            pathOpacity={0.2}
+            duration={2}
+          />
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={ctxRef}
+            toRef={rlsRef}
+            curvature={30}
+            gradientStartColor="#10b981"
+            gradientStopColor="#8b5cf6"
+            pathColor="hsl(var(--border))"
+            pathOpacity={0.2}
+            duration={2}
+            delay={0.5}
+          />
+        </div>
+      </MagicCard>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+ * AI-Native Architecture Visual
+ *
+ * 主视觉: Terminal compound组件 + 真实的AI配置代码
+ * 展示多provider、failover、rate-limit配置
+ * ════════════════════════════════════════════════════════════════════════════ */
+export function AINativeVisual() {
+  return (
+    <div className="relative h-full w-full min-h-[240px] p-3">
+      <Terminal variant="glass" className="h-full">
+        <Terminal.Header title="ai.config.ts" />
+        <Terminal.Body className="text-xs">
+          <Terminal.Line prompt="//" output>
+            <span className="text-zinc-500">Multi-provider AI layer</span>
+          </Terminal.Line>
+          <Terminal.Line prompt="const">
+            <span className="text-violet-400">config</span>
+            <span className="text-zinc-500"> = </span>
+            <span className="text-amber-400">{"{ "}</span>
+          </Terminal.Line>
+          <Terminal.Line prompt=" ">
+            <span className="text-blue-400">providers</span>
+            <span className="text-zinc-500">: </span>
+            <span className="text-emerald-400">
+              [{'"openai", "anthropic", "google"'}]
+            </span>
+            <span className="text-zinc-500">,</span>
+          </Terminal.Line>
+          <Terminal.Line prompt=" " highlight>
+            <span className="text-blue-400">fallback</span>
+            <span className="text-zinc-500">: </span>
+            <span className="text-emerald-400">{'"anthropic"'}</span>
+            <span className="text-zinc-500">,</span>
+          </Terminal.Line>
+          <Terminal.Line prompt=" ">
+            <span className="text-blue-400">rateLimit</span>
+            <span className="text-zinc-500">: </span>
+            <span className="text-amber-400">{"{ "}</span>
+            <span className="text-zinc-400">rpm: </span>
+            <span className="text-orange-400">60</span>
+            <span className="text-zinc-500">, </span>
+            <span className="text-zinc-400">tpm: </span>
+            <span className="text-orange-400">100_000</span>
+            <span className="text-amber-400">{" }"}</span>
+            <span className="text-zinc-500">,</span>
+          </Terminal.Line>
+          <Terminal.Line prompt=" ">
+            <span className="text-blue-400">tracing</span>
+            <span className="text-zinc-500">: </span>
+            <span className="text-emerald-400">true</span>
+          </Terminal.Line>
+          <Terminal.Line prompt="">
+            <span className="text-amber-400">{"};"}</span>
+          </Terminal.Line>
+        </Terminal.Body>
+      </Terminal>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+ * Unified Billing Visual
+ *
+ * 主视觉: AnimatedList + 实时通知卡片
+ * 展示订阅事件、用量告警、扣费通知的实时流
+ * ════════════════════════════════════════════════════════════════════════════ */
+
+interface NotificationItemProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  time: string;
+  color: string;
+}
+
+function NotificationItem({
+  icon,
+  title,
+  description,
+  time,
+  color,
+}: NotificationItemProps) {
+  return (
+    <div className="flex items-start gap-3 rounded-lg border border-border/50 bg-card/80 p-3 backdrop-blur-sm">
+      <div className={cn("rounded-full p-1.5", color)}>{icon}</div>
+      <div className="flex-1 min-w-0">
+        <p className="text-xs font-medium text-foreground truncate">{title}</p>
+        <p className="text-[10px] text-muted-foreground truncate">
+          {description}
+        </p>
+      </div>
+      <span className="text-[10px] text-muted-foreground/60 whitespace-nowrap">
+        {time}
+      </span>
+    </div>
+  );
+}
+
+const billingNotifications = [
+  {
+    icon: <CheckCircle2 className="h-3 w-3 text-emerald-500" />,
+    title: "Subscription activated",
+    description: "Pro plan • $49/mo",
+    time: "now",
+    color: "bg-emerald-500/10",
+  },
+  {
+    icon: <Zap className="h-3 w-3 text-amber-500" />,
+    title: "Usage threshold: 80%",
+    description: "API calls quota warning",
+    time: "2m",
+    color: "bg-amber-500/10",
+  },
+  {
+    icon: <CreditCard className="h-3 w-3 text-blue-500" />,
+    title: "Invoice paid",
+    description: "$127.00 charged",
+    time: "1h",
+    color: "bg-blue-500/10",
+  },
+  {
+    icon: <AlertTriangle className="h-3 w-3 text-red-500" />,
+    title: "Quota exceeded",
+    description: "Storage limit reached",
+    time: "3h",
+    color: "bg-red-500/10",
+  },
+];
+
+export function BillingVisual() {
+  return (
+    <div className="relative h-full w-full min-h-[220px] overflow-hidden p-3">
+      {/* 渐变遮罩 - 底部淡出 */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 h-16 bg-gradient-to-t from-background to-transparent" />
+
+      <AnimatedList delay={2000} className="gap-2">
+        {billingNotifications.map((notification, idx) => (
+          <NotificationItem key={idx} {...notification} />
+        ))}
+      </AnimatedList>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+ * Global Edge Deployment Visual
+ *
+ * 主视觉: 3D Globe + edge节点标记
+ * 展示全球边缘部署的实时延迟数据
+ * ════════════════════════════════════════════════════════════════════════════ */
+export function GlobalEdgeVisual() {
+  return (
+    <div className="relative h-full w-full min-h-[200px] overflow-hidden">
+      {/* Globe */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <Globe
+          className="!relative !w-[180px] !h-[180px] opacity-80"
+          config={{
+            width: 360,
+            height: 360,
+            phi: 0.3,
+            theta: 0.2,
+            dark: 1,
+            diffuse: 1.2,
+            mapSamples: 20000,
+            mapBrightness: 6,
+            baseColor: [0.15, 0.15, 0.2],
+            markerColor: [0.04, 0.95, 0.76], // #0BF1C3
+            glowColor: [0.1, 0.1, 0.15],
+            markers: [
+              { location: [37.77, -122.41], size: 0.08 }, // SF
+              { location: [51.51, -0.13], size: 0.08 }, // London
+              { location: [35.68, 139.65], size: 0.08 }, // Tokyo
+              { location: [1.35, 103.82], size: 0.06 }, // Singapore
+              { location: [-33.87, 151.21], size: 0.05 }, // Sydney
+            ],
+          }}
+          rotationSpeed={0.003}
+        />
+      </div>
+
+      {/* Latency overlay */}
+      <div className="absolute bottom-3 left-0 right-0 z-10 flex justify-center gap-4">
+        <div className="flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 backdrop-blur-sm border border-border/50">
+          <GlobeIcon className="h-3 w-3 text-emerald-400" />
+          <span className="text-[10px] font-medium text-emerald-400">US</span>
+          <span className="text-[10px] text-muted-foreground">12ms</span>
+        </div>
+        <div className="flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 backdrop-blur-sm border border-border/50">
+          <span className="text-[10px] font-medium text-blue-400">EU</span>
+          <span className="text-[10px] text-muted-foreground">18ms</span>
+        </div>
+        <div className="flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 backdrop-blur-sm border border-border/50">
+          <span className="text-[10px] font-medium text-violet-400">APAC</span>
+          <span className="text-[10px] text-muted-foreground">24ms</span>
         </div>
       </div>
     </div>

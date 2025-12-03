@@ -627,6 +627,21 @@ export {
   type InteractiveCardProps,
 } from "./interactive-card";
 export {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+  type InputOTPProps,
+  type InputOTPGroupProps,
+  type InputOTPSlotProps,
+  type InputOTPSeparatorProps,
+} from "./input-otp";
+export {
+  Enable2FACard,
+  type Enable2FACardProps,
+  type Enable2FAStep,
+} from "./enable-2fa-card";
+export {
   AnimatedHikeCard,
   type AnimatedHikeCardProps,
   type Stat as AnimatedHikeCardStat,
