@@ -485,7 +485,6 @@ export const finalCtaContent = {
 export const footerContent = {
   brand: {
     name: "Sailor",
-    byline: "by Nebutra",
   },
   links: [
     { label: "Product", href: "/features" },

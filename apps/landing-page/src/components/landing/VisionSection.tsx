@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { visionContent } from "@/lib/landing-content";
 import { ThemedSection, useScrollDwell, DwellHint } from "@nebutra/custom-ui";
 import { useRef, useCallback, useEffect, useState } from "react";
@@ -188,10 +187,9 @@ export function VisionSection() {
         >
           <a
             href={ctaHref}
-            className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+            className="text-muted-foreground transition-colors hover:text-foreground"
           >
             {cta}
-            <ArrowRight className="h-4 w-4" />
           </a>
         </motion.div>
       </div>
