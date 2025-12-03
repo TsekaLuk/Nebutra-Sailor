@@ -67,12 +67,20 @@ Complete navigation to all project documentation.
 
 ## Design System
 
-| Document                                              | Description                      |
-| ----------------------------------------------------- | -------------------------------- |
-| [UI Guidelines](./UI-GUIDELINES.md)                   | Design tokens, styles, usage     |
-| [Typography](./TYPOGRAPHY.md)                         | Font stacks, type scale, loading |
-| [Component Library Policy](./COMPONENT-LIBRARY-POLICY.md) | External component governance |
-| [Marketing Infrastructure](./MARKETING-INFRASTRUCTURE.md) | Landing page & marketing spec |
+| Document                                                  | Description                      |
+| --------------------------------------------------------- | -------------------------------- |
+| [UI Guidelines](./UI-GUIDELINES.md)                       | Design tokens, styles, usage     |
+| [Typography](./TYPOGRAPHY.md)                             | Font stacks, type scale, loading |
+| [Component Library Policy](./COMPONENT-LIBRARY-POLICY.md) | External component governance    |
+| [Marketing Infrastructure](./MARKETING-INFRASTRUCTURE.md) | Landing page & marketing spec    |
+
+## External Resources
+
+| Resource     | URL                                        | Description                                            |
+| ------------ | ------------------------------------------ | ------------------------------------------------------ |
+| SVGL         | [svgl.app](https://svgl.app)               | 300+ MIT-licensed tech SVG logos (dark/light variants) |
+| Simple Icons | [simpleicons.org](https://simpleicons.org) | Fallback icon CDN                                      |
+| Primer       | [primer.style](https://primer.style)       | GitHub's design system (foundation)                    |
 
 ## Other
 
