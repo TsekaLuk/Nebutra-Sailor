@@ -9,7 +9,7 @@
  * - Multi-tenant caching
  */
 
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@nebutra/db";
 
 // ============================================
 // Types
@@ -243,10 +243,13 @@ export class PlanConfigService {
       limits[override.limitDef.key] = {
         limit: Number(override.limitValue),
         unit: override.limitDef.unit,
-        resetPeriod: override.limitDef.resetPeriod as "monthly" | "daily" | "never",
+        resetPeriod: override.limitDef.resetPeriod as
+          | "monthly"
+          | "daily"
+          | "never",
         overageRate: override.overageRate
           ? Number(override.overageRate)
-          : limits[override.limitDef.key]?.overageRate ?? null,
+          : (limits[override.limitDef.key]?.overageRate ?? null),
       };
       overriddenLimits.push(override.limitDef.key);
     }
@@ -326,7 +329,7 @@ export class PlanConfigService {
     });
 
     // Deduplicate by slug (keep latest version)
-    const uniquePlans = new Map<string, typeof plans[0]>();
+    const uniquePlans = new Map<string, (typeof plans)[0]>();
     for (const plan of plans) {
       if (!uniquePlans.has(plan.slug)) {
         uniquePlans.set(plan.slug, plan);
@@ -334,7 +337,7 @@ export class PlanConfigService {
     }
 
     const configs = Array.from(uniquePlans.values()).map((p) =>
-      this.formatPlanConfig(p)
+      this.formatPlanConfig(p),
     );
     await this.cache.set(cacheKey, JSON.stringify(configs), this.cacheTTL);
 
@@ -344,7 +347,10 @@ export class PlanConfigService {
   /**
    * Check if organization has feature access
    */
-  async hasFeature(organizationId: string, featureKey: string): Promise<boolean> {
+  async hasFeature(
+    organizationId: string,
+    featureKey: string,
+  ): Promise<boolean> {
     const config = await this.getConfig(organizationId);
     return config.features[featureKey]?.enabled ?? false;
   }
@@ -354,7 +360,7 @@ export class PlanConfigService {
    */
   async getLimit(
     organizationId: string,
-    limitKey: string
+    limitKey: string,
   ): Promise<LimitConfig | null> {
     const config = await this.getConfig(organizationId);
     return config.limits[limitKey] ?? null;
@@ -367,7 +373,7 @@ export class PlanConfigService {
     organizationId: string,
     limitKey: string,
     currentUsage: number,
-    additionalUsage = 0
+    additionalUsage = 0,
   ): Promise<{
     allowed: boolean;
     limit: number;
