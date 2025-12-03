@@ -65,7 +65,7 @@ export function FinalCTA() {
             </code>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-2 rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-all hover:bg-foreground/90"
+              className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-accent)] px-5 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90"
             >
               <Copy className="h-4 w-4" />
               {copied ? "Copied!" : "Copy"}
@@ -83,7 +83,7 @@ export function FinalCTA() {
         >
           <a
             href="https://docs.nebutra.com/sailor/getting-started"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-3.5 font-medium text-background transition-all hover:bg-foreground/90 group"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-accent)] px-8 py-3.5 font-medium text-white shadow-lg shadow-[var(--brand-primary)]/25 transition-all hover:opacity-90 group"
           >
             Start Building
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
