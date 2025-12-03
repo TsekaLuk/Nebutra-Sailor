@@ -3,13 +3,8 @@
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { testimonialsContent } from "@/lib/landing-content";
-import {
-  ThemedSection,
-  useScrollDwell,
-  DwellHint,
-  AvatarCircles,
-} from "@nebutra/custom-ui";
-import { useRef, useCallback, useState } from "react";
+import { ThemedSection, AvatarCircles } from "@nebutra/custom-ui";
+import { useState } from "react";
 
 /**
  * 3D card hover effect for depth gallery per DESIGN.md Section 11.5
@@ -102,29 +97,10 @@ function Testimonial3DCard({
  */
 export function TestimonialsSection() {
   const { headline, items } = testimonialsContent;
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Dwell hint state
-  const handleDwell = useCallback(() => {}, []);
-  const { isDwelling } = useScrollDwell(sectionRef, {
-    threshold: 1200,
-    cooldown: 8000,
-    onDwell: handleDwell,
-  });
 
   return (
-    <ThemedSection
-      ref={sectionRef}
-      theme="testimonials"
-      className="py-24 md:py-32"
-    >
+    <ThemedSection theme="testimonials" className="py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Dwell Hint */}
-        <DwellHint
-          show={isDwelling}
-          message="Real teams. Real results."
-          position="bottom"
-        />
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
