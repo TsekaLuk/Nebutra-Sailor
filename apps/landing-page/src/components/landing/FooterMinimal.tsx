@@ -18,7 +18,7 @@ const SOCIAL_ICONS = {
  * @see DESIGN.md Section 13
  */
 export function FooterMinimal() {
-  const { brand, links, social, copyright, status } = footerContent;
+  const { links, social, copyright, status } = footerContent;
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
 
@@ -35,9 +35,6 @@ export function FooterMinimal() {
           {/* Brand - Using @nebutra/brand Logo */}
           <div className="flex items-center gap-3">
             <Logo variant="en" size={120} inverted={isDark} />
-            <span className="text-sm text-muted-foreground/60">
-              {brand.byline}
-            </span>
           </div>
 
           {/* Links */}
