@@ -5,6 +5,12 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.4.0...v1.4.1) (2025-12-03)
+
+### ♻️ Code Refactoring
+
+- **landing-page:** use @nebutra/brand css variables and semantic tokens ([5b0235f](https://github.com/TsekaLuk/Nebutra-Sailor/commit/5b0235f8ee6dd42148f6428fe45e5c724695a38b)), closes [#0033](https://github.com/TsekaLuk/Nebutra-Sailor/issues/0033) [FE/#0BF1C3](https://github.com/FE/Nebutra-Sailor/issues/0BF1C3)
+
 ## [1.4.0](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.3.5...v1.4.0) (2025-12-03)
 
 ### 🆕 Features
