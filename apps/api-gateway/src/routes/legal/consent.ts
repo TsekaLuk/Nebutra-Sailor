@@ -1,8 +1,7 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
-import { prisma } from "@nebutra/db";
-import type { Prisma } from "@prisma/client";
+import { prisma, Prisma } from "@nebutra/db";
 
 type ConsentEnv = {
   Variables: { userId?: string; organizationId?: string };
@@ -16,7 +15,9 @@ export const consentRoutes = new Hono<ConsentEnv>();
 const recordConsentSchema = z.object({
   documentSlug: z.string().min(1),
   documentVersion: z.string().optional(),
-  consentType: z.enum(["EXPLICIT", "IMPLICIT", "OPT_IN", "OPT_OUT"]).default("EXPLICIT"),
+  consentType: z
+    .enum(["EXPLICIT", "IMPLICIT", "OPT_IN", "OPT_OUT"])
+    .default("EXPLICIT"),
   context: z.string().optional(),
   visitorId: z.string().min(1),
   metadata: z.record(z.unknown()).optional(),
@@ -40,56 +41,61 @@ const cookieConsentSchema = z.object({
  * POST /api/v1/legal/consent
  * Record user consent for a legal document
  */
-consentRoutes.post("/consent", zValidator("json", recordConsentSchema), async (c) => {
-  const data = c.req.valid("json");
-  const userId = c.get("userId") as string | undefined;
-  const organizationId = c.get("organizationId") as string | undefined;
+consentRoutes.post(
+  "/consent",
+  zValidator("json", recordConsentSchema),
+  async (c) => {
+    const data = c.req.valid("json");
+    const userId = c.get("userId") as string | undefined;
+    const organizationId = c.get("organizationId") as string | undefined;
 
-  try {
-    // Get the latest active document version
-    const document = await prisma.legalDocument.findFirst({
-      where: {
-        slug: data.documentSlug,
-        isActive: true,
-        ...(data.documentVersion && { version: data.documentVersion }),
-      },
-      orderBy: { effectiveAt: "desc" },
-    });
+    try {
+      // Get the latest active document version
+      const document = await prisma.legalDocument.findFirst({
+        where: {
+          slug: data.documentSlug,
+          isActive: true,
+          ...(data.documentVersion && { version: data.documentVersion }),
+        },
+        orderBy: { effectiveAt: "desc" },
+      });
 
-    if (!document) {
-      return c.json({ error: "Document not found" }, 404);
+      if (!document) {
+        return c.json({ error: "Document not found" }, 404);
+      }
+
+      // Create consent record
+      const consent = await prisma.userConsent.create({
+        data: {
+          userId,
+          organizationId,
+          visitorId: data.visitorId,
+          documentId: document.id,
+          documentSlug: document.slug,
+          documentVersion: document.version,
+          consentType: data.consentType,
+          consentGiven: true,
+          ipAddress:
+            c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
+          userAgent: c.req.header("user-agent"),
+          consentContext: data.context,
+          metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
+        },
+      });
+
+      return c.json({
+        success: true,
+        consentId: consent.id,
+        documentSlug: consent.documentSlug,
+        documentVersion: consent.documentVersion,
+        consentedAt: consent.consentedAt,
+      });
+    } catch (error) {
+      console.error("Failed to record consent:", error);
+      return c.json({ error: "Failed to record consent" }, 500);
     }
-
-    // Create consent record
-    const consent = await prisma.userConsent.create({
-      data: {
-        userId,
-        organizationId,
-        visitorId: data.visitorId,
-        documentId: document.id,
-        documentSlug: document.slug,
-        documentVersion: document.version,
-        consentType: data.consentType,
-        consentGiven: true,
-        ipAddress: c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-        userAgent: c.req.header("user-agent"),
-        consentContext: data.context,
-        metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
-      },
-    });
-
-    return c.json({
-      success: true,
-      consentId: consent.id,
-      documentSlug: consent.documentSlug,
-      documentVersion: consent.documentVersion,
-      consentedAt: consent.consentedAt,
-    });
-  } catch (error) {
-    console.error("Failed to record consent:", error);
-    return c.json({ error: "Failed to record consent" }, 500);
-  }
-});
+  },
+);
 
 /**
  * GET /api/v1/legal/consent/status
@@ -133,7 +139,8 @@ consentRoutes.get("/consent/status", async (c) => {
     });
 
     const hasConsented = !!consent;
-    const needsReconsent = hasConsented && consent.documentVersion !== currentDocument.version;
+    const needsReconsent =
+      hasConsented && consent.documentVersion !== currentDocument.version;
 
     return c.json({
       hasConsented,
@@ -196,60 +203,66 @@ consentRoutes.delete("/consent", async (c) => {
  * POST /api/v1/legal/cookie-consent
  * Record cookie consent preferences
  */
-consentRoutes.post("/cookie-consent", zValidator("json", cookieConsentSchema), async (c) => {
-  const data = c.req.valid("json");
-  const userId = c.get("userId") as string | undefined;
+consentRoutes.post(
+  "/cookie-consent",
+  zValidator("json", cookieConsentSchema),
+  async (c) => {
+    const data = c.req.valid("json");
+    const userId = c.get("userId") as string | undefined;
 
-  // Calculate expiry (1 year from now)
-  const expiresAt = new Date();
-  expiresAt.setFullYear(expiresAt.getFullYear() + 1);
+    // Calculate expiry (1 year from now)
+    const expiresAt = new Date();
+    expiresAt.setFullYear(expiresAt.getFullYear() + 1);
 
-  try {
-    // Upsert cookie consent (create or update by visitorId)
-    const consent = await prisma.cookieConsent.upsert({
-      where: { visitorId: data.visitorId },
-      create: {
-        visitorId: data.visitorId,
-        userId,
-        necessary: true, // Always true
-        functional: data.preferences.functional,
-        analytics: data.preferences.analytics,
-        marketing: data.preferences.marketing,
-        thirdParty: data.preferences.thirdParty,
-        ipAddress: c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-        userAgent: c.req.header("user-agent"),
-        expiresAt,
-      },
-      update: {
-        userId,
-        functional: data.preferences.functional,
-        analytics: data.preferences.analytics,
-        marketing: data.preferences.marketing,
-        thirdParty: data.preferences.thirdParty,
-        ipAddress: c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-        userAgent: c.req.header("user-agent"),
-        expiresAt,
-      },
-    });
+    try {
+      // Upsert cookie consent (create or update by visitorId)
+      const consent = await prisma.cookieConsent.upsert({
+        where: { visitorId: data.visitorId },
+        create: {
+          visitorId: data.visitorId,
+          userId,
+          necessary: true, // Always true
+          functional: data.preferences.functional,
+          analytics: data.preferences.analytics,
+          marketing: data.preferences.marketing,
+          thirdParty: data.preferences.thirdParty,
+          ipAddress:
+            c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
+          userAgent: c.req.header("user-agent"),
+          expiresAt,
+        },
+        update: {
+          userId,
+          functional: data.preferences.functional,
+          analytics: data.preferences.analytics,
+          marketing: data.preferences.marketing,
+          thirdParty: data.preferences.thirdParty,
+          ipAddress:
+            c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
+          userAgent: c.req.header("user-agent"),
+          expiresAt,
+        },
+      });
 
-    return c.json({
-      success: true,
-      consentId: consent.id,
-      preferences: {
-        necessary: consent.necessary,
-        functional: consent.functional,
-        analytics: consent.analytics,
-        marketing: consent.marketing,
-        thirdParty: consent.thirdParty,
-      },
-      consentedAt: consent.consentedAt,
-      expiresAt: consent.expiresAt,
-    });
-  } catch (error) {
-    console.error("Failed to record cookie consent:", error);
-    return c.json({ error: "Failed to record cookie consent" }, 500);
-  }
-});
+      return c.json({
+        success: true,
+        consentId: consent.id,
+        preferences: {
+          necessary: consent.necessary,
+          functional: consent.functional,
+          analytics: consent.analytics,
+          marketing: consent.marketing,
+          thirdParty: consent.thirdParty,
+        },
+        consentedAt: consent.consentedAt,
+        expiresAt: consent.expiresAt,
+      });
+    } catch (error) {
+      console.error("Failed to record cookie consent:", error);
+      return c.json({ error: "Failed to record cookie consent" }, 500);
+    }
+  },
+);
 
 /**
  * GET /api/v1/legal/cookie-consent
@@ -335,12 +348,15 @@ consentRoutes.get("/documents", async (c) => {
     });
 
     // Deduplicate by slug (keep latest version)
-    const uniqueDocs = documents.reduce((acc, doc) => {
-      if (!acc[doc.slug]) {
-        acc[doc.slug] = doc;
-      }
-      return acc;
-    }, {} as Record<string, typeof documents[0]>);
+    const uniqueDocs = documents.reduce(
+      (acc, doc) => {
+        if (!acc[doc.slug]) {
+          acc[doc.slug] = doc;
+        }
+        return acc;
+      },
+      {} as Record<string, (typeof documents)[0]>,
+    );
 
     return c.json({
       documents: Object.values(uniqueDocs),
@@ -393,43 +409,59 @@ const contactFormSchema = z.object({
   phone: z.string().optional(),
   subject: z.string().min(1).max(200),
   message: z.string().min(1),
-  category: z.enum(["general", "sales", "support", "legal", "privacy", "partnership", "press"]).default("general"),
+  category: z
+    .enum([
+      "general",
+      "sales",
+      "support",
+      "legal",
+      "privacy",
+      "partnership",
+      "press",
+    ])
+    .default("general"),
 });
 
 /**
  * POST /api/v1/legal/contact
  * Submit a contact form
  */
-consentRoutes.post("/contact", zValidator("json", contactFormSchema), async (c) => {
-  const data = c.req.valid("json");
+consentRoutes.post(
+  "/contact",
+  zValidator("json", contactFormSchema),
+  async (c) => {
+    const data = c.req.valid("json");
 
-  try {
-    const submission = await prisma.contactSubmission.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        company: data.company,
-        phone: data.phone,
-        subject: data.subject,
-        message: data.message,
-        category: data.category,
-        status: "new",
-        ipAddress: c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-        userAgent: c.req.header("user-agent"),
-      },
-    });
+    try {
+      const submission = await prisma.contactSubmission.create({
+        data: {
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          phone: data.phone,
+          subject: data.subject,
+          message: data.message,
+          category: data.category,
+          status: "new",
+          ipAddress:
+            c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
+          userAgent: c.req.header("user-agent"),
+        },
+      });
 
-    // TODO: Send notification email via Resend
+      // TODO: Send notification email via Resend
 
-    return c.json({
-      success: true,
-      submissionId: submission.id,
-      message: "Your message has been received. We will respond within 1-2 business days.",
-    });
-  } catch (error) {
-    console.error("Failed to submit contact form:", error);
-    return c.json({ error: "Failed to submit contact form" }, 500);
-  }
-});
+      return c.json({
+        success: true,
+        submissionId: submission.id,
+        message:
+          "Your message has been received. We will respond within 1-2 business days.",
+      });
+    } catch (error) {
+      console.error("Failed to submit contact form:", error);
+      return c.json({ error: "Failed to submit contact form" }, 500);
+    }
+  },
+);
 
 export default consentRoutes;
