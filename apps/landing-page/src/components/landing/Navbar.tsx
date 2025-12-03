@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X, Github } from "lucide-react";
 import { Logo, Logomark } from "@nebutra/brand";
@@ -35,7 +36,7 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
 
-  // Avoid hydration mismatch
+  // Avoid hydration mismatch - standard Next.js pattern
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -65,7 +66,7 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         {/* Logo - uses real brand SVG assets */}
-        <a href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           {/* Mobile: Show logomark only */}
           <Logomark
             size={32}
@@ -79,7 +80,7 @@ export function Navbar() {
             inverted={isDark}
             className="hidden md:block"
           />
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-6 md:flex">

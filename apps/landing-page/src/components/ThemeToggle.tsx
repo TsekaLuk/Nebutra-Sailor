@@ -12,7 +12,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Avoid hydration mismatch
+  // Avoid hydration mismatch - standard Next.js pattern
   useEffect(() => {
     setMounted(true);
   }, []);
