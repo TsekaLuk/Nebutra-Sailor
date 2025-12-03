@@ -1,12 +1,13 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/primitives/index.ts", "src/marketing/index.ts"],
   format: ["esm"],
   dts: true,
   splitting: false,
   sourcemap: true,
   clean: true,
+  noExternal: ["../types/three-fiber"],
   external: [
     "react",
     "react-dom",
@@ -23,5 +24,7 @@ export default defineConfig({
     "@heroui/slider",
     "@heroui/progress",
     "@heroui/switch",
+    "three",
+    "@react-three/fiber",
   ],
 });

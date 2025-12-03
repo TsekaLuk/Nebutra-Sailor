@@ -11,7 +11,7 @@ import * as THREE from "three";
 import { cn } from "../utils/cn";
 
 // Type declarations for react-three-fiber JSX elements
-import "../types/three-fiber";
+// Note: See ../types/three-fiber.d.ts for JSX type definitions
 
 export interface CanvasRevealEffectProps {
   /** Animation speed (0.1 = slower, 1.0 = faster) */
