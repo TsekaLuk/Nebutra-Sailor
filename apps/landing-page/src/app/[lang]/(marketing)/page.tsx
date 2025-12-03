@@ -4,9 +4,9 @@ import {
   TrackedSection,
   Navbar,
   HeroSection,
-  TrustRibbon,
-  FeatureStack,
-  TerminalDemo,
+  FeatureGrid,
+  DarkFeatureSection,
+  ToolkitGrid,
   TestimonialsSection,
   FinalCTA,
   FooterMinimal,
@@ -21,15 +21,15 @@ interface Props {
 }
 
 /**
- * Landing Page - Vercel-style minimal design
+ * Landing Page - Vercel-style design with grid lines
  *
  * Sections:
- * 1. Hero - Large headline + command box + glow
- * 2. Trust Ribbon - Logo marquee
- * 3. Features - Vertical stack with alternating layout
- * 4. Terminal Demo - Interactive demo
- * 5. Testimonial - Single large quote
- * 6. CTA - Final call to action with stats
+ * 1. Hero - Headline + dual CTA buttons
+ * 2. Feature Grid - 3-column cards
+ * 3. Dark Feature Section - Security features
+ * 4. Toolkit Grid - 2x3 feature cards
+ * 5. Testimonial - Quote with grid layout
+ * 6. CTA - Final call to action
  * 7. Footer
  */
 export default async function LocalizedHomePage({ params }: Props) {
@@ -47,23 +47,21 @@ export default async function LocalizedHomePage({ params }: Props) {
           <HeroSection />
         </TrackedSection>
 
-        {/* 2. Trust Ribbon */}
-        <TrustRibbon />
-
-        {/* 3. Features - Vertical stack */}
-        <TrackedSection id="features" label="Features">
-          <FeatureStack />
-        </TrackedSection>
-
-        {/* 4. Terminal Demo */}
-        <TrackedSection id="demo" label="Demo">
-          <TerminalDemo />
-        </TrackedSection>
-
-        {/* 5. Testimonial */}
+        {/* 2. Testimonial (moved up for impact) */}
         <TrackedSection id="testimonials" label="Testimonials">
           <TestimonialsSection />
         </TrackedSection>
+
+        {/* 3. Feature Grid */}
+        <TrackedSection id="features" label="Features">
+          <FeatureGrid />
+        </TrackedSection>
+
+        {/* 4. Dark Feature Section */}
+        <DarkFeatureSection />
+
+        {/* 5. Toolkit Grid */}
+        <ToolkitGrid />
 
         {/* 6. CTA */}
         <TrackedSection id="get-started" label="Get Started">

@@ -1,7 +1,7 @@
 /**
  * Landing Page Section Components
  *
- * Vercel-style minimal design with vertical stacked sections.
+ * Vercel-style design with grid lines and structured sections.
  *
  * @see src/lib/landing-content.ts for content constants
  */
@@ -13,14 +13,14 @@
 export { LandingPageWrapper, TrackedSection } from "./LandingPageWrapper";
 
 // =============================================================================
-// Active Section Components (Vercel-style redesign)
+// Active Section Components (Vercel-style redesign v2)
 // =============================================================================
 
 export { Navbar } from "./Navbar";
 export { HeroSection } from "./HeroSection";
-export { TrustRibbon } from "./TrustRibbon";
-export { FeatureStack } from "./FeatureStack";
-export { TerminalDemo } from "./TerminalDemo";
+export { FeatureGrid } from "./FeatureGrid";
+export { DarkFeatureSection } from "./DarkFeatureSection";
+export { ToolkitGrid } from "./ToolkitGrid";
 export { TestimonialsSection } from "./TestimonialsSection";
 export { FinalCTA } from "./FinalCTA";
 export { FooterMinimal } from "./FooterMinimal";
@@ -29,6 +29,9 @@ export { FooterMinimal } from "./FooterMinimal";
 // Legacy Components (kept for reference, not used in current design)
 // =============================================================================
 
+export { TrustRibbon } from "./TrustRibbon";
+export { FeatureStack } from "./FeatureStack";
+export { TerminalDemo } from "./TerminalDemo";
 export { SplitNarrative } from "./SplitNarrative";
 export { ArchitectureShowcase } from "./ArchitectureShowcase";
 export { FeatureBento } from "./FeatureBento";
@@ -44,9 +47,9 @@ export { FAQSection } from "./FAQSection";
 export const LANDING_SECTIONS = [
   "Navbar",
   "HeroSection",
-  "TrustRibbon",
-  "FeatureStack",
-  "TerminalDemo",
+  "FeatureGrid",
+  "DarkFeatureSection",
+  "ToolkitGrid",
   "TestimonialsSection",
   "FinalCTA",
   "FooterMinimal",
