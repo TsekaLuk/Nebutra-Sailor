@@ -97,7 +97,7 @@ export function FinalCTA() {
           className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <a
-            href="https://github.com/nebutra/sailor"
+            href="https://github.com/TsekaLuk/Nebutra-Sailor"
             className="inline-flex items-center gap-2 rounded-lg border border-border/20 bg-foreground/5 px-6 py-3 font-medium text-foreground transition-all hover:bg-foreground/10"
           >
             <Github className="h-5 w-5" />

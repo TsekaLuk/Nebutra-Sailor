@@ -416,7 +416,7 @@ export const pricingContent = {
         "Community support",
       ],
       cta: "Clone on GitHub",
-      ctaHref: "https://github.com/nebutra/sailor",
+      ctaHref: "https://github.com/TsekaLuk/Nebutra-Sailor",
       ctaIcon: "github",
       highlighted: false,
     },
@@ -504,7 +504,7 @@ export const footerContent = {
   links: [
     { label: "Product", href: "/features" },
     { label: "Docs", href: "https://docs.nebutra.com/sailor" },
-    { label: "GitHub", href: "https://github.com/nebutra/sailor" },
+    { label: "GitHub", href: "https://github.com/TsekaLuk/Nebutra-Sailor" },
     { label: "Discord", href: "https://discord.gg/nebutra" },
   ],
   social: [

@@ -127,7 +127,7 @@ export function TerminalDemo() {
             {ctaPrimary}
           </button>
           <a
-            href="https://github.com/nebutra/sailor"
+            href="https://github.com/TsekaLuk/Nebutra-Sailor"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             {ctaSecondary}

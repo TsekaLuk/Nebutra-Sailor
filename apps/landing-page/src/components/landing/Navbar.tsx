@@ -19,7 +19,11 @@ const navLinks = [
   { label: "Features", href: "#features" },
   { label: "Pricing", href: "#pricing" },
   { label: "Docs", href: "https://docs.nebutra.com" },
-  { label: "GitHub", href: "https://github.com/nebutra/sailor", icon: Github },
+  {
+    label: "GitHub",
+    href: "https://github.com/TsekaLuk/Nebutra-Sailor",
+    icon: Github,
+  },
 ];
 
 /**

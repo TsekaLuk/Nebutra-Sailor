@@ -1,8 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Copy, Github, ChevronDown } from "lucide-react";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { heroContent } from "@/lib/landing-content";
 
@@ -115,7 +115,7 @@ export function HeroSection() {
             {heroContent.ctaPrimary}
           </a>
           <a
-            href="https://github.com/nebutra/sailor"
+            href="https://github.com/TsekaLuk/Nebutra-Sailor"
             className="inline-flex items-center gap-2 rounded-lg border border-border/20 bg-foreground/5 px-6 py-3 font-semibold text-foreground transition-all hover:bg-foreground/10"
           >
             <Github className="h-5 w-5" />
@@ -147,37 +147,67 @@ export function HeroSection() {
 
 /**
  * Animated headline word cycler
+ *
+ * Uses visibility API to pause animation when tab is not visible,
+ * preventing animation desync issues.
  */
 function HeadlineAnimator({ words }: { words: string[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
 
-  // Auto-cycle through words
-  useState(() => {
+  // Handle visibility change to pause/resume animation
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsVisible(!document.hidden);
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  // Auto-cycle through words (only when visible)
+  useEffect(() => {
+    if (!isVisible) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % words.length);
     }, 3000);
+
     return () => clearInterval(interval);
-  });
+  }, [words.length, isVisible]);
 
   return (
-    <span className="relative inline-block">
-      {words.map((word, index) => (
-        <motion.span
-          key={word}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{
-            opacity: index === currentIndex ? 1 : 0,
-            y: index === currentIndex ? 0 : 20,
-          }}
-          transition={{ duration: 0.5 }}
-          className={cn(
-            "bg-[image:var(--brand-gradient)] bg-clip-text text-transparent",
-            index !== currentIndex && "absolute inset-0",
-          )}
-        >
-          {word}
-        </motion.span>
-      ))}
+    <span className="relative inline-block min-h-[1.2em]">
+      {words.map((word, index) => {
+        const isCurrent = index === currentIndex;
+        return (
+          <motion.span
+            key={word}
+            initial={false}
+            animate={{
+              opacity: isCurrent ? 1 : 0,
+              y: isCurrent ? 0 : 20,
+              position: isCurrent ? "relative" : "absolute",
+            }}
+            transition={{
+              duration: 0.5,
+              ease: "easeOut",
+            }}
+            className={cn(
+              "bg-[image:var(--brand-gradient)] bg-clip-text text-transparent whitespace-nowrap",
+              !isCurrent && "left-0 top-0 pointer-events-none",
+            )}
+            style={{
+              // Ensure proper stacking
+              zIndex: isCurrent ? 1 : 0,
+            }}
+          >
+            {word}
+          </motion.span>
+        );
+      })}
     </span>
   );
 }
