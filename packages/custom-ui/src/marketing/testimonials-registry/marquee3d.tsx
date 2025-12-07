@@ -6,6 +6,10 @@ import { Marquee } from "../marquee";
 import { Card, CardContent } from "../../primitives/card";
 import { Avatar, AvatarImage, AvatarFallback } from "../../primitives/avatar";
 
+/**
+ * TestimonialCard - Standard design from reference
+ * w-50 (200px), Avatar size-9 (36px), proper spacing
+ */
 function TestimonialCard({
   img,
   name,
@@ -20,28 +24,23 @@ function TestimonialCard({
   country?: string;
 }) {
   return (
-    <Card
-      className="w-44 sm:w-52 md:w-56 shrink-0"
-      role="article"
-      aria-label={`Testimonial from ${name}`}
-    >
-      <CardContent className="p-2.5 sm:p-3">
-        <div className="flex items-center gap-2">
-          <Avatar className="size-5 shrink-0">
+    <Card className="w-50">
+      <CardContent>
+        <div className="flex items-center gap-2.5">
+          <Avatar className="size-9">
             <AvatarImage src={img} alt={username} />
             <AvatarFallback>{name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
-          <div className="flex flex-col min-w-0">
-            <figcaption className="text-[11px] sm:text-xs font-medium text-foreground flex items-center gap-1 truncate">
-              {name}{" "}
-              {country ? <span className="text-[10px]">{country}</span> : null}
+          <div className="flex flex-col">
+            <figcaption className="text-sm font-medium text-foreground flex items-center gap-1">
+              {name} {country && <span className="text-xs">{country}</span>}
             </figcaption>
-            <p className="text-[10px] font-medium text-muted-foreground truncate">
+            <p className="text-xs font-medium text-muted-foreground">
               {username}
             </p>
           </div>
         </div>
-        <blockquote className="mt-2 text-[11px] sm:text-xs text-secondary-foreground line-clamp-3 sm:line-clamp-4 leading-relaxed">
+        <blockquote className="mt-3 text-sm text-secondary-foreground">
           {body}
         </blockquote>
       </CardContent>
@@ -56,9 +55,7 @@ export function Marquee3DTestimonials({
 }: TestimonialsCommonProps) {
   // map unified items to card props; provide sensible fallbacks
   const mapped = (items ?? []).map((x, i) => ({
-    img:
-      x.avatarUrl ??
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=60",
+    img: x.avatarUrl ?? "https://randomuser.me/api/portraits/women/32.jpg",
     name: x.author,
     username: x.company
       ? `@${x.company.toLowerCase().replace(/\s+/g, "")}`
@@ -69,50 +66,64 @@ export function Marquee3DTestimonials({
 
   if (mapped.length === 0) return null;
 
-  // Responsive column count: 2 on mobile, 3 on tablet, 4 on desktop
-  // We create 4 columns and hide extras via CSS
-  const cols = 4;
-  const perCol = Math.ceil(mapped.length / cols);
-  const columns: (typeof mapped)[] = Array.from({ length: cols }, (_, c) =>
-    mapped.slice(c * perCol, (c + 1) * perCol),
-  );
-
   return (
     <div
       className={cn(
-        "border border-border rounded-lg relative flex w-full max-w-[1000px] items-center justify-center overflow-hidden [perspective:300px]",
+        "border border-border rounded-lg relative flex h-96 w-full max-w-[800px] flex-row items-center justify-center overflow-hidden gap-1.5 [perspective:300px]",
         className,
       )}
-      style={{ height }}
+      style={height ? { height } : undefined}
     >
       <div
-        className="flex flex-row items-center gap-2 sm:gap-3 md:gap-4"
+        className="flex flex-row items-center gap-4"
         style={{
           transform:
             "translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)",
         }}
       >
-        {columns.map((col, idx) => (
-          <Marquee
-            key={idx}
-            vertical
-            pauseOnHover
-            className={cn(
-              "[--duration:40s] [--gap:0.75rem]",
-              // Hide 3rd and 4th columns on mobile, show 3rd on tablet, all on desktop
-              idx === 2 && "hidden sm:flex",
-              idx === 3 && "hidden md:flex",
-            )}
-            reverse={idx % 2 === 1}
-            repeat={3}
-          >
-            {col.map((r, i) => (
-              <TestimonialCard key={`${idx}-${i}-${r.username}`} {...r} />
-            ))}
-          </Marquee>
-        ))}
+        {/* Vertical Marquee (downwards) */}
+        <Marquee vertical pauseOnHover repeat={3} className="[--duration:40s]">
+          {mapped.map((review) => (
+            <TestimonialCard key={`col1-${review.username}`} {...review} />
+          ))}
+        </Marquee>
+        {/* Vertical Marquee (upwards) */}
+        <Marquee
+          vertical
+          pauseOnHover
+          reverse
+          repeat={3}
+          className="[--duration:40s]"
+        >
+          {mapped.map((review) => (
+            <TestimonialCard key={`col2-${review.username}`} {...review} />
+          ))}
+        </Marquee>
+        {/* Vertical Marquee (downwards) */}
+        <Marquee
+          vertical
+          pauseOnHover
+          repeat={3}
+          className="[--duration:40s] hidden sm:flex"
+        >
+          {mapped.map((review) => (
+            <TestimonialCard key={`col3-${review.username}`} {...review} />
+          ))}
+        </Marquee>
+        {/* Vertical Marquee (upwards) */}
+        <Marquee
+          vertical
+          pauseOnHover
+          reverse
+          repeat={3}
+          className="[--duration:40s] hidden md:flex"
+        >
+          {mapped.map((review) => (
+            <TestimonialCard key={`col4-${review.username}`} {...review} />
+          ))}
+        </Marquee>
 
-        {/* gradient masks */}
+        {/* Gradient overlays */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-background" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background" />
         <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background" />
