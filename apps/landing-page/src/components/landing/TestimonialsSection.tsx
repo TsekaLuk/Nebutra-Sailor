@@ -9,7 +9,8 @@ import { testimonialsContent } from "@/lib/landing-content";
  * Transform landing-content testimonials to TestimonialItem format
  */
 const testimonialItems: TestimonialItem[] = testimonialsContent.items.map(
-  (item) => ({
+  (item, index) => ({
+    id: `testimonial-${index}`,
     author: item.author,
     title: item.role,
     company: item.company,
