@@ -21,18 +21,18 @@ function TestimonialCard({
 }) {
   return (
     <Card
-      className="w-56 shrink-0"
+      className="w-44 sm:w-52 md:w-56 shrink-0"
       role="article"
       aria-label={`Testimonial from ${name}`}
     >
-      <CardContent className="p-3">
+      <CardContent className="p-2.5 sm:p-3">
         <div className="flex items-center gap-2">
-          <Avatar className="size-7 shrink-0">
+          <Avatar className="size-6 sm:size-7 shrink-0">
             <AvatarImage src={img} alt={username} />
             <AvatarFallback>{name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col min-w-0">
-            <figcaption className="text-xs font-medium text-foreground flex items-center gap-1 truncate">
+            <figcaption className="text-[11px] sm:text-xs font-medium text-foreground flex items-center gap-1 truncate">
               {name}{" "}
               {country ? <span className="text-[10px]">{country}</span> : null}
             </figcaption>
@@ -41,7 +41,7 @@ function TestimonialCard({
             </p>
           </div>
         </div>
-        <blockquote className="mt-2 text-xs text-secondary-foreground line-clamp-4 leading-relaxed">
+        <blockquote className="mt-2 text-[11px] sm:text-xs text-secondary-foreground line-clamp-3 sm:line-clamp-4 leading-relaxed">
           {body}
         </blockquote>
       </CardContent>
@@ -69,7 +69,8 @@ export function Marquee3DTestimonials({
 
   if (mapped.length === 0) return null;
 
-  // Split into 4 roughly equal columns
+  // Responsive column count: 2 on mobile, 3 on tablet, 4 on desktop
+  // We create 4 columns and hide extras via CSS
   const cols = 4;
   const perCol = Math.ceil(mapped.length / cols);
   const columns: (typeof mapped)[] = Array.from({ length: cols }, (_, c) =>
@@ -79,24 +80,28 @@ export function Marquee3DTestimonials({
   return (
     <div
       className={cn(
-        "border border-border rounded-lg relative flex w-full max-w-[1000px] items-center justify-center overflow-hidden gap-1.5 [perspective:300px]",
+        "border border-border rounded-lg relative flex w-full max-w-[1000px] items-center justify-center overflow-hidden [perspective:200px] sm:[perspective:250px] md:[perspective:300px]",
         className,
       )}
       style={{ height }}
     >
       <div
-        className="flex flex-row items-center gap-4"
-        style={{
-          transform:
-            "translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)",
-        }}
+        className="flex flex-row items-center gap-2 sm:gap-3 md:gap-4
+          [transform:translateX(-50px)_translateZ(-50px)_rotateX(15deg)_rotateY(-8deg)_rotateZ(15deg)]
+          sm:[transform:translateX(-80px)_translateZ(-80px)_rotateX(18deg)_rotateY(-9deg)_rotateZ(18deg)]
+          md:[transform:translateX(-100px)_translateZ(-100px)_rotateX(20deg)_rotateY(-10deg)_rotateZ(20deg)]"
       >
         {columns.map((col, idx) => (
           <Marquee
             key={idx}
             vertical
             pauseOnHover
-            className="[--duration:40s]"
+            className={cn(
+              "[--duration:40s]",
+              // Hide 3rd and 4th columns on mobile, show 3rd on tablet, all on desktop
+              idx === 2 && "hidden sm:flex",
+              idx === 3 && "hidden md:flex",
+            )}
             reverse={idx % 2 === 1}
             repeat={3}
           >
