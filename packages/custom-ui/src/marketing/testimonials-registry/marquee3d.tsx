@@ -7,8 +7,8 @@ import { Card, CardContent } from "../../primitives/card";
 import { Avatar, AvatarImage, AvatarFallback } from "../../primitives/avatar";
 
 /**
- * TestimonialCard - Standard design from reference
- * w-50 (200px), Avatar size-9 (36px), proper spacing
+ * TestimonialCard - Matches original 3D testimonials design
+ * Dark card with proper padding, smaller avatar, country flag
  */
 function TestimonialCard({
   img,
@@ -24,15 +24,15 @@ function TestimonialCard({
   country?: string;
 }) {
   return (
-    <Card className="w-50">
-      <CardContent>
+    <Card className="w-52 shrink-0">
+      <CardContent className="p-4">
         <div className="flex items-center gap-2.5">
-          <Avatar className="size-9">
+          <Avatar className="size-8">
             <AvatarImage src={img} alt={username} />
             <AvatarFallback>{name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <figcaption className="text-sm font-medium text-foreground flex items-center gap-1">
+            <figcaption className="text-sm font-medium text-foreground flex items-center gap-1.5">
               {name} {country && <span className="text-xs">{country}</span>}
             </figcaption>
             <p className="text-xs font-medium text-muted-foreground">
@@ -40,7 +40,7 @@ function TestimonialCard({
             </p>
           </div>
         </div>
-        <blockquote className="mt-3 text-sm text-secondary-foreground">
+        <blockquote className="mt-3 text-sm text-secondary-foreground leading-relaxed">
           {body}
         </blockquote>
       </CardContent>

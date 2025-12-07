@@ -19,6 +19,7 @@ infra/
 │   ├── base/           # Base resources
 │   └── overlays/       # Environment overlays
 ├── inngest/            # Background job workflows
+├── pusher/             # Real-time communication (Pusher/Soketi)
 ├── observability/      # Monitoring, logging, tracing
 ├── openstatus/         # Uptime monitoring
 └── scripts/            # Deployment & maintenance scripts
@@ -63,11 +64,11 @@ kubectl apply -k infra/k8s/overlays/prod
 
 ## Environments
 
-| Environment | Purpose | Database | Deploy |
-|------------|---------|----------|--------|
-| `dev` | Local development | Supabase (free tier) | Manual |
-| `staging` | Pre-production testing | Supabase (pro) | PR merge |
-| `prod` | Production | Supabase/RDS | Release tag |
+| Environment | Purpose                | Database             | Deploy      |
+| ----------- | ---------------------- | -------------------- | ----------- |
+| `dev`       | Local development      | Supabase (free tier) | Manual      |
+| `staging`   | Pre-production testing | Supabase (pro)       | PR merge    |
+| `prod`      | Production             | Supabase/RDS         | Release tag |
 
 ## Security Notes
 
