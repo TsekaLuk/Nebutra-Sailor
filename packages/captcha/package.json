@@ -10,7 +10,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "react": "^19.0.0"
+    "react": "^19.2.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",

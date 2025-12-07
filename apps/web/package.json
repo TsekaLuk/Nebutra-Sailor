@@ -13,9 +13,9 @@
     "@clerk/nextjs": "^6.35.5",
     "@nebutra/custom-ui": "workspace:*",
     "@nebutra/design-system": "workspace:*",
-    "next": "16.0.5",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "next": "16.0.7",
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

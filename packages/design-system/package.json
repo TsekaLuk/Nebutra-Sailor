@@ -22,12 +22,12 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "@primer/octicons-react": "^19.0.0",
     "@primer/primitives": "^10.0.0",
     "@primer/react": "^38.3.0",
-    "clsx": "^2.1.0"
+    "clsx": "^2.1.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
