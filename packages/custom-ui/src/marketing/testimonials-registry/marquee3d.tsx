@@ -27,7 +27,7 @@ function TestimonialCard({
     >
       <CardContent className="p-2.5 sm:p-3">
         <div className="flex items-center gap-2">
-          <Avatar className="size-6 sm:size-7 shrink-0">
+          <Avatar className="size-5 shrink-0">
             <AvatarImage src={img} alt={username} />
             <AvatarFallback>{name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
