@@ -15,7 +15,7 @@ const testimonialItems: TestimonialItem[] = testimonialsContent.items.map(
     title: item.role,
     company: item.company,
     quote: item.quote,
-    avatarUrl: `https://i.pravatar.cc/150?u=${item.author.replace(/ /g, "")}`,
+    avatarUrl: item.avatar,
   }),
 );
 

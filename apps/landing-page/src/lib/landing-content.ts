@@ -322,6 +322,10 @@ export const terminalDemoContent = {
 // Testimonials
 // =============================================================================
 
+/**
+ * Testimonials with high-quality randomuser.me avatars
+ * Using seed parameter for consistent, professional-looking photos
+ */
 export const testimonialsContent = {
   headline: "Builders ship faster with Sailor",
   items: [
@@ -331,7 +335,7 @@ export const testimonialsContent = {
       author: "Sarah Chen",
       role: "CTO",
       company: "TechStartup",
-      avatar: "/avatars/sarah.jpg",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
     },
     {
       quote:
@@ -339,15 +343,15 @@ export const testimonialsContent = {
       author: "Alex Rivera",
       role: "Founder",
       company: "DevAgency",
-      avatar: "/avatars/alex.jpg",
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
     },
     {
       quote:
         "The billing integration saved us 2 months of development time. Stripe subscriptions, usage metering, all handled.",
-      author: "Mike Johnson",
+      author: "Michael Torres",
       role: "Solo Founder",
       company: "IndieHacker",
-      avatar: "/avatars/mike.jpg",
+      avatar: "https://randomuser.me/api/portraits/men/75.jpg",
     },
     {
       quote:
@@ -355,7 +359,71 @@ export const testimonialsContent = {
       author: "Emma Liu",
       role: "Engineering Lead",
       company: "StartupCo",
-      avatar: "/avatars/emma.jpg",
+      avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    },
+    {
+      quote:
+        "The AI provider abstraction is brilliant. We switched from OpenAI to Claude in 10 minutes without touching business logic.",
+      author: "David Park",
+      role: "Tech Lead",
+      company: "AI Ventures",
+      avatar: "https://randomuser.me/api/portraits/men/52.jpg",
+    },
+    {
+      quote:
+        "Row-level security out of the box. No more 3am incidents from tenant data leaks. Sleep better now.",
+      author: "Jessica Wang",
+      role: "Security Engineer",
+      company: "SecureStack",
+      avatar: "https://randomuser.me/api/portraits/women/26.jpg",
+    },
+    {
+      quote:
+        "Went from Vercel hobby to enterprise clients in 6 weeks. The white-label system is chef's kiss.",
+      author: "Marcus Johnson",
+      role: "Founder & CEO",
+      company: "WhiteLabel.io",
+      avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+    },
+    {
+      quote:
+        "Our agency uses Sailor for every client project now. Consistent architecture, faster delivery, happier clients.",
+      author: "Nina Patel",
+      role: "Agency Owner",
+      company: "Digital Craft",
+      avatar: "https://randomuser.me/api/portraits/women/79.jpg",
+    },
+    {
+      quote:
+        "The monorepo structure is exactly how we'd set it up ourselves—but without 2 weeks of bikeshedding.",
+      author: "Thomas Mueller",
+      role: "Staff Engineer",
+      company: "ScaleUp GmbH",
+      avatar: "https://randomuser.me/api/portraits/men/86.jpg",
+    },
+    {
+      quote:
+        "Inngest workflows + Stripe webhooks = automated everything. Our ops team went from 3 people to 1.",
+      author: "Rachel Kim",
+      role: "Head of Ops",
+      company: "AutomateHQ",
+      avatar: "https://randomuser.me/api/portraits/women/45.jpg",
+    },
+    {
+      quote:
+        "First time shipping a B2B SaaS. Sailor's patterns taught me more than any course. Now running at $20k MRR.",
+      author: "James Wilson",
+      role: "Indie Maker",
+      company: "SoloSaaS",
+      avatar: "https://randomuser.me/api/portraits/men/46.jpg",
+    },
+    {
+      quote:
+        "Edge functions, Redis caching, rate limiting—the performance layer is production-grade from day one.",
+      author: "Sophia Martinez",
+      role: "Performance Engineer",
+      company: "SpeedStack",
+      avatar: "https://randomuser.me/api/portraits/women/33.jpg",
     },
   ],
 } as const;
