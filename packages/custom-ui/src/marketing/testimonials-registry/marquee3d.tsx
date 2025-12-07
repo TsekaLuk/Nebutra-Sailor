@@ -21,27 +21,27 @@ function TestimonialCard({
 }) {
   return (
     <Card
-      className="w-48"
+      className="w-56 shrink-0"
       role="article"
       aria-label={`Testimonial from ${name}`}
     >
-      <CardContent>
-        <div className="flex items-center gap-2.5">
-          <Avatar className="size-9">
+      <CardContent className="p-3">
+        <div className="flex items-center gap-2">
+          <Avatar className="size-7 shrink-0">
             <AvatarImage src={img} alt={username} />
             <AvatarFallback>{name?.[0] ?? "?"}</AvatarFallback>
           </Avatar>
-          <div className="flex flex-col">
-            <figcaption className="text-sm font-medium text-foreground flex items-center gap-1">
+          <div className="flex flex-col min-w-0">
+            <figcaption className="text-xs font-medium text-foreground flex items-center gap-1 truncate">
               {name}{" "}
-              {country ? <span className="text-xs">{country}</span> : null}
+              {country ? <span className="text-[10px]">{country}</span> : null}
             </figcaption>
-            <p className="text-xs font-medium text-muted-foreground">
+            <p className="text-[10px] font-medium text-muted-foreground truncate">
               {username}
             </p>
           </div>
         </div>
-        <blockquote className="mt-3 text-sm text-secondary-foreground">
+        <blockquote className="mt-2 text-xs text-secondary-foreground line-clamp-4 leading-relaxed">
           {body}
         </blockquote>
       </CardContent>
