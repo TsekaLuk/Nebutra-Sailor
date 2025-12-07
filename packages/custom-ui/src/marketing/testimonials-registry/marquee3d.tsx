@@ -97,7 +97,7 @@ export function Marquee3DTestimonials({
             vertical
             pauseOnHover
             className={cn(
-              "[--duration:40s]",
+              "[--duration:40s] [--gap:0.75rem]",
               // Hide 3rd and 4th columns on mobile, show 3rd on tablet, all on desktop
               idx === 2 && "hidden sm:flex",
               idx === 3 && "hidden md:flex",
