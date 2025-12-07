@@ -241,6 +241,15 @@ Nebula • Nurture • Ultra • Future
 </td>
 </tr>
 <tr>
+<td><strong>实时通信</strong></td>
+<td>
+  <a href="https://pusher.com/"><img src="https://img.shields.io/badge/Pusher-300D4F?style=flat-square&logo=pusher&logoColor=white" alt="Pusher" /></a>
+  <a href="https://soketi.app/"><img src="https://img.shields.io/badge/Soketi-4F46E5?style=flat-square" alt="Soketi" /></a>
+  <img src="https://img.shields.io/badge/在线状态频道-gray?style=flat-square" alt="Presence" />
+  <img src="https://img.shields.io/badge/私有频道-gray?style=flat-square" alt="Private Channels" />
+</td>
+</tr>
+<tr>
 <td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
@@ -358,6 +367,7 @@ Nebutra-Sailor/
 │   ├── terraform/         # IaC 配置
 │   ├── inngest/           # TypeScript 工作流定义
 │   ├── n8n/               # 可视化工作流自动化
+│   ├── pusher/            # 实时通信 (Pusher/Soketi)
 │   └── observability/     # 日志、链路追踪、指标
 └── docs/                  # 架构文档
 ```
@@ -409,6 +419,7 @@ Nebutra-Sailor/
   <a href="infra/terraform/">Terraform</a> · 
   <a href="infra/inngest/">Inngest</a> · 
   <a href="infra/n8n/">n8n</a> · 
+  <a href="infra/pusher/">Pusher</a> · 
   <a href="infra/observability/">可观测性</a>
 </td>
 </tr>

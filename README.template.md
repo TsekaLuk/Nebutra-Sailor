@@ -159,6 +159,15 @@ Built with the latest technologies including Next.js 17, React 19, and Prisma 7,
 </td>
 </tr>
 <tr>
+<td><strong>Real-time</strong></td>
+<td>
+  <a href="https://pusher.com/"><img src="https://img.shields.io/badge/Pusher-300D4F?style=flat-square&logo=pusher&logoColor=white" alt="Pusher" /></a>
+  <a href="https://soketi.app/"><img src="https://img.shields.io/badge/Soketi-4F46E5?style=flat-square" alt="Soketi" /></a>
+  <img src="https://img.shields.io/badge/Presence_Channels-gray?style=flat-square" alt="Presence" />
+  <img src="https://img.shields.io/badge/Private_Channels-gray?style=flat-square" alt="Private Channels" />
+</td>
+</tr>
+<tr>
 <td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
@@ -320,6 +329,7 @@ pnpm db:generate && pnpm dev
 │   ├── terraform/         # IaC configurations
 │   ├── inngest/           # TypeScript workflow definitions
 │   ├── n8n/               # Visual workflow automation
+│   ├── pusher/            # Real-time communication (Pusher/Soketi)
 │   └── observability/     # Logging, tracing, metrics
 └── docs/                  # Architecture documentation
 ```

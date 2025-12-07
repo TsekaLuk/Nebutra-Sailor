@@ -161,6 +161,15 @@ Next.js 17、React 19、Prisma 7 など最新技術で構築され、LLM、ベ�
 </td>
 </tr>
 <tr>
+<td><strong>リアルタイム</strong></td>
+<td>
+  <a href="https://pusher.com/"><img src="https://img.shields.io/badge/Pusher-300D4F?style=flat-square&logo=pusher&logoColor=white" alt="Pusher" /></a>
+  <a href="https://soketi.app/"><img src="https://img.shields.io/badge/Soketi-4F46E5?style=flat-square" alt="Soketi" /></a>
+  <img src="https://img.shields.io/badge/プレゼンスチャンネル-gray?style=flat-square" alt="Presence" />
+  <img src="https://img.shields.io/badge/プライベートチャンネル-gray?style=flat-square" alt="Private Channels" />
+</td>
+</tr>
+<tr>
 <td><strong>AI</strong></td>
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
