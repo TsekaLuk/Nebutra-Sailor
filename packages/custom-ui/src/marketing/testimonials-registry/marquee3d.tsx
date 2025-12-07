@@ -80,16 +80,17 @@ export function Marquee3DTestimonials({
   return (
     <div
       className={cn(
-        "border border-border rounded-lg relative flex w-full max-w-[1000px] items-center justify-center overflow-hidden [perspective:200px] sm:[perspective:250px] md:[perspective:300px]",
+        "border border-border rounded-lg relative flex w-full max-w-[1000px] items-center justify-center overflow-hidden [perspective:300px] sm:[perspective:400px] md:[perspective:500px]",
         className,
       )}
-      style={{ height }}
+      style={{ height, transformStyle: "preserve-3d" }}
     >
       <div
-        className="flex flex-row items-center gap-2 sm:gap-3 md:gap-4
-          [transform:translateX(-50px)_translateZ(-50px)_rotateX(15deg)_rotateY(-8deg)_rotateZ(15deg)]
-          sm:[transform:translateX(-80px)_translateZ(-80px)_rotateX(18deg)_rotateY(-9deg)_rotateZ(18deg)]
-          md:[transform:translateX(-100px)_translateZ(-100px)_rotateX(20deg)_rotateY(-10deg)_rotateZ(20deg)]"
+        className="flex flex-row items-center gap-2 sm:gap-3 md:gap-4 [transform-style:preserve-3d]"
+        style={{
+          transform:
+            "translateX(-80px) translateY(0) translateZ(-50px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)",
+        }}
       >
         {columns.map((col, idx) => (
           <Marquee
