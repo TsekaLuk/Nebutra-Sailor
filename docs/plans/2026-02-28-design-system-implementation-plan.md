@@ -144,19 +144,35 @@ export const primitiveColors = {
   neutral900: "#0f172a",
   neutral950: "#020617",
 
-  // Semantic raw colors
+  // Semantic raw colors (per VI manual §Color Specifications)
   red500: "#ef4444",
   red600: "#dc2626",
-  green500: "#10b981",
-  green600: "#059669",
+  green500: "#22c55e", // VI manual specifies #22c55e for success
+  green600: "#16a34a",
   amber500: "#f59e0b",
   amber600: "#d97706",
-  sky500: "#0ea5e9",
-  sky600: "#0284c7",
+  // NOTE: info color = brand blue (#0033FE), NOT sky — per VI manual
 
   white: "#ffffff",
   black: "#000000",
 } as const;
+
+// ─── Brand Gradients (VI manual §Brand Gradients) ────────────────────────────
+// These are first-class tokens. Primary gradient is the Nebutra signature mark.
+export const primitiveGradients = {
+  /** Hero, primary CTA buttons, logo fills */
+  primary: "linear-gradient(135deg, #0033FE 0%, #0BF1C3 100%)",
+  /** Hover states, secondary elements */
+  reverse: "linear-gradient(135deg, #0BF1C3 0%, #0033FE 100%)",
+  /** Vertical layout dividers, page sections */
+  vertical: "linear-gradient(180deg, #0033FE 0%, #0BF1C3 100%)",
+  /** Background halos, focus glow effects */
+  radial: "radial-gradient(circle, #0BF1C3 0%, #0033FE 100%)",
+  /** Subtle background tint for dark mode cards */
+  darkCard: "linear-gradient(135deg, #020617 0%, #0a1628 100%)",
+} as const;
+
+export type PrimitiveGradient = keyof typeof primitiveGradients;
 
 // ─── Spacing Scale ───────────────────────────────────────────────────────────
 export const primitiveSpacing = {
@@ -237,10 +253,18 @@ export const primitiveFocusRing = {
   offset: 2,
 } as const;
 
-// ─── Font Family ─────────────────────────────────────────────────────────────
+// ─── Font Family (per VI manual §Typography) ─────────────────────────────────
+// VI specifies Poppins as English primary, vivo Sans → PingFang SC for Chinese.
 export const primitiveFontFamily = {
-  sans: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-  mono: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace',
+  /** English primary — Poppins (Regular 400 / Medium 500 / SemiBold 600) */
+  sans: '"Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif',
+  /** Chinese primary — vivo Sans with system fallbacks */
+  cnSans:
+    '"vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif',
+  /** Display / hero text — Poppins only (no CJK needed for headlines) */
+  display: '"Poppins", sans-serif',
+  /** Code / monospace */
+  mono: '"JetBrains Mono", "Fira Code", ui-monospace, Consolas, monospace',
 } as const;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -266,6 +290,7 @@ export type PrimitiveFontSize = keyof typeof primitiveFontSize;
  */
 import {
   primitiveColors,
+  primitiveGradients,
   primitiveRadius,
   primitiveTransition,
   primitiveFocusRing,
@@ -298,12 +323,15 @@ export interface SemanticColorScale {
 }
 
 export const semanticLight: SemanticColorScale = {
-  background: primitiveColors.neutral50,
+  // VI: White (#FFFFFF) is the canonical light background, not neutral-50
+  background: primitiveColors.white,
   foreground: primitiveColors.neutral900,
   card: primitiveColors.white,
   cardForeground: primitiveColors.neutral900,
+  // VI: Primary = 云毓蓝 #0033FE (Brand Blue)
   primary: primitiveColors.blue500,
   primaryForeground: primitiveColors.white,
+  // VI: Secondary = 云毓青 #0BF1C3 (Brand Cyan)
   secondary: primitiveColors.cyan500,
   secondaryForeground: primitiveColors.neutral900,
   muted: primitiveColors.neutral100,
@@ -312,29 +340,30 @@ export const semanticLight: SemanticColorScale = {
   accentForeground: primitiveColors.blue500,
   destructive: primitiveColors.red500,
   destructiveForeground: primitiveColors.white,
-  success: primitiveColors.green500,
+  success: primitiveColors.green500, // #22c55e per VI manual
   successForeground: primitiveColors.white,
   warning: primitiveColors.amber500,
   warningForeground: primitiveColors.neutral900,
-  info: primitiveColors.sky500,
+  info: primitiveColors.blue500, // VI: Info = brand blue, not sky
   infoForeground: primitiveColors.white,
   border: primitiveColors.neutral200,
   input: primitiveColors.neutral200,
-  ring: primitiveColors.blue500,
+  ring: primitiveColors.blue500, // Focus ring = brand blue
 } as const;
 
 export const semanticDark: SemanticColorScale = {
-  background: primitiveColors.neutral950,
+  // VI: Dark background uses deepest neutral with blue undertone
+  background: primitiveColors.neutral950, // #020617
   foreground: primitiveColors.neutral50,
-  card: primitiveColors.neutral900,
+  card: primitiveColors.neutral900, // #0f172a
   cardForeground: primitiveColors.neutral50,
-  primary: primitiveColors.blue400,
+  primary: primitiveColors.blue400, // Lighter blue for dark contrast
   primaryForeground: primitiveColors.neutral950,
   secondary: primitiveColors.cyan400,
   secondaryForeground: primitiveColors.neutral950,
   muted: primitiveColors.neutral800,
   mutedForeground: primitiveColors.neutral400,
-  accent: "#0a1628", // dark blue tint
+  accent: "#0a1628", // Deep brand-blue tinted surface
   accentForeground: primitiveColors.blue400,
   destructive: primitiveColors.red600,
   destructiveForeground: primitiveColors.neutral50,
@@ -342,21 +371,41 @@ export const semanticDark: SemanticColorScale = {
   successForeground: primitiveColors.neutral50,
   warning: primitiveColors.amber600,
   warningForeground: primitiveColors.neutral50,
-  info: primitiveColors.sky600,
-  infoForeground: primitiveColors.neutral50,
+  info: primitiveColors.blue400, // Lighter brand blue for dark
+  infoForeground: primitiveColors.neutral950,
   border: primitiveColors.neutral800,
   input: primitiveColors.neutral800,
   ring: primitiveColors.blue400,
 } as const;
 
+// ─── Gradient Semantic Tokens ─────────────────────────────────────────────────
+// Consumed by Tailwind preset as CSS custom properties.
+// VI: The Blue→Cyan gradient is Nebutra's most distinctive visual signature.
+export const semanticGradients = {
+  /** Primary CTA buttons, logo accents, hero sections */
+  brand: primitiveGradients.primary,
+  /** Hover state override for gradient buttons */
+  brandHover: primitiveGradients.reverse,
+  /** Page section dividers, feature highlight strips */
+  section: primitiveGradients.vertical,
+  /** Background glow effects, focus halos */
+  glow: primitiveGradients.radial,
+} as const;
+
 /** Global refinements consumed by globals.css */
 export const semanticGlobals = {
-  defaultRadius: primitiveRadius.md, // 6px (Geist default)
+  defaultRadius: primitiveRadius.md, // 6px
   transitionDuration: primitiveTransition.duration.fast, // 150ms
   transitionEasing: primitiveTransition.easing.default, // ease-out
   focusRingWidth: primitiveFocusRing.width, // 2px
   focusRingOffset: primitiveFocusRing.offset, // 2px
-  borderColor: "hsl(240 5.9% 90%)", // precise neutral as per spec
+  borderColor: "hsl(240 5.9% 90%)",
+  // VI: Primary font is Poppins for English, vivo Sans for CN
+  fontSans:
+    '"Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif',
+  fontCnSans:
+    '"vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif',
+  fontMono: '"JetBrains Mono", "Fira Code", ui-monospace, Consolas, monospace',
 } as const;
 
 export type SemanticTheme = "light" | "dark";

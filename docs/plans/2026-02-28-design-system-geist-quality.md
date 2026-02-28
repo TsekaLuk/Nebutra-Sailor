@@ -1,8 +1,9 @@
 # Design System — Geist Quality Upgrade
 
 **Date:** 2026-02-28
-**Status:** Approved
+**Status:** Approved — VI-Revised 2026-02-28
 **Scope:** `packages/custom-ui`, `apps/storybook` (new), `apps/docs-hub`
+**VI Reference:** `packages/brand/assets/vi/full.md` — 云毓智能 VI 手册
 
 ## Problem
 
@@ -23,6 +24,57 @@ The existing design system has 129+ components with strong coverage but falls sh
 - Extracting tokens into a separate `@nebutra/tokens` package (Phase 2)
 - Migrating all 129 components in one go (incremental, starting with 5)
 - Replacing Radix UI or existing dependency stack
+
+---
+
+## VI Manual Aesthetic Decisions
+
+> Source: `packages/brand/assets/vi/full.md` — reviewed 2026-02-28
+
+### Colors
+
+| Role               | Value         | VI Reference                                   |
+| ------------------ | ------------- | ---------------------------------------------- |
+| Primary (云毓蓝)   | `#0033FE`     | Brand Blue — technology & trust                |
+| Secondary (云毓青) | `#0BF1C3`     | Brand Cyan — data flow & intelligence          |
+| Success            | `#22c55e`     | VI manual specifies this exact value           |
+| Warning            | `#f59e0b`     | Standard amber                                 |
+| Error/Destructive  | `#ef4444`     | Standard red                                   |
+| **Info**           | **`#0033FE`** | **VI: Info = Brand Blue (not sky blue)**       |
+| Light background   | `#FFFFFF`     | VI presentations use pure white, not off-white |
+| Dark background    | `#020617`     | neutral-950 with blue undertone                |
+
+### Typography
+
+| Role            | Primary Font   | Fallback Chain                             | VI Reference          |
+| --------------- | -------------- | ------------------------------------------ | --------------------- |
+| English body/UI | Poppins        | vivo Sans, system sans-serif               | VI typography 400/600 |
+| Chinese body/UI | vivo Sans      | PingFang SC, Microsoft YaHei, Noto Sans SC | VI typography         |
+| Monospace       | JetBrains Mono | Fira Code, ui-monospace, Consolas          | Existing spec         |
+| Display/Hero    | Poppins only   | sans-serif                                 | VI: pure Poppins      |
+
+> **Changed from original plan:** Inter was replaced by Poppins per VI manual.
+
+### Brand Gradients
+
+VI defines 4 gradient presets as first-class brand assets. These enter `primitive.ts` as `primitiveGradients`:
+
+| Name       | Value                       | Usage                           |
+| ---------- | --------------------------- | ------------------------------- |
+| `primary`  | `135deg, #0033FE → #0BF1C3` | Primary CTA buttons, hero, logo |
+| `reverse`  | `135deg, #0BF1C3 → #0033FE` | Hover states                    |
+| `vertical` | `180deg, #0033FE → #0BF1C3` | Section dividers                |
+| `radial`   | `circle, #0BF1C3 → #0033FE` | Background halos, glow effects  |
+
+### Component Aesthetic Implications
+
+**Button (primary variant):** Uses `primitiveGradients.primary` (Blue→Cyan) instead of solid blue. Hover transitions to `primitiveGradients.reverse`. This is the VI's hero CTA treatment.
+
+**Focus ring:** Brand Blue `#0033FE` — unifies accessibility with brand identity.
+
+**Dark mode cards:** Use `#0a1628` (blue-tinted dark surface) instead of neutral gray, consistent with the brand's "deep tech" feel.
+
+**Logo safety zone:** When embedding Logo component, enforce min height 35px digital / 6mm print per VI spec.
 
 ---
 
