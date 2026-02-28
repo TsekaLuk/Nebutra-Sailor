@@ -11,28 +11,13 @@
 // ============================================
 
 // Layout
-export {
-  PageLayout,
-  SplitPageLayout,
-  Stack,
-} from "@primer/react";
+export { PageLayout, SplitPageLayout, Stack } from "@primer/react";
 
 // Typography
-export {
-  Text,
-  Heading,
-  Label,
-  LabelGroup,
-  Truncate,
-} from "@primer/react";
+export { Text, Heading, Label, LabelGroup, Truncate } from "@primer/react";
 
 // Buttons
-export {
-  Button,
-  IconButton,
-  ButtonGroup,
-  LinkButton,
-} from "@primer/react";
+export { Button, IconButton, ButtonGroup, LinkButton } from "@primer/react";
 
 // Form Controls
 export {
@@ -72,36 +57,19 @@ export {
 } from "@primer/react";
 
 // Feedback
-export {
-  Flash,
-  Spinner,
-  ProgressBar,
-  Tooltip,
-  Popover,
-} from "@primer/react";
+export { Flash, Spinner, ProgressBar, Tooltip, Popover } from "@primer/react";
 
 // Overlays
-export {
-  Dialog,
-  AnchoredOverlay,
-  Overlay,
-} from "@primer/react";
+export { Dialog, AnchoredOverlay, Overlay } from "@primer/react";
 
 // Data
-export {
-  DataTable,
-  Table,
-} from "@primer/react/experimental";
+export { DataTable, Table } from "@primer/react/experimental";
 
 // ============================================
 // Primer React - Provider Components
 // ============================================
 
-export {
-  ThemeProvider,
-  BaseStyles,
-  useTheme,
-} from "@primer/react";
+export { ThemeProvider, BaseStyles, useTheme } from "@primer/react";
 
 // ============================================
 // Custom Component Wrappers

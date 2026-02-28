@@ -24,7 +24,7 @@ export function EmptyState({
       className={clsx(
         "ds-empty-state",
         "flex flex-col items-center justify-center text-center py-8 px-4",
-        className
+        className,
       )}
     >
       {icon && (

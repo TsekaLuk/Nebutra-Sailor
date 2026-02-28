@@ -20,7 +20,7 @@ export function LoadingState({
       className={clsx(
         "ds-loading-state",
         "flex flex-col items-center justify-center py-6",
-        className
+        className,
       )}
     >
       <Spinner size={size} />

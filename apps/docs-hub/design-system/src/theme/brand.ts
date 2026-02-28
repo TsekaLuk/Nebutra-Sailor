@@ -63,9 +63,10 @@ export interface BrandOverrides {
  */
 export function createTheme(
   mode: "light" | "dark" = "light",
-  overrides?: BrandOverrides
+  overrides?: BrandOverrides,
 ): DefaultTheme {
-  const baseColors = mode === "light" ? semanticColorsLight : semanticColorsDark;
+  const baseColors =
+    mode === "light" ? semanticColorsLight : semanticColorsDark;
 
   return {
     ...defaultTheme,

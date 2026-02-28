@@ -53,7 +53,8 @@ export const fonts: Record<string, FontConfig> = {
     italic: true,
     display: "swap",
     variable: true,
-    googleFontsParam: "Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500",
+    googleFontsParam:
+      "Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500",
     license: "OFL",
     licenseUrl: "https://github.com/uswds/public-sans/blob/develop/LICENSE.md",
   },
@@ -66,7 +67,8 @@ export const fonts: Record<string, FontConfig> = {
     variable: true,
     googleFontsParam: "JetBrains+Mono:wght@400;500;700",
     license: "OFL",
-    licenseUrl: "https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt",
+    licenseUrl:
+      "https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt",
   },
 
   sourceHanSans: {
@@ -77,7 +79,8 @@ export const fonts: Record<string, FontConfig> = {
     variable: false,
     googleFontsParam: "Noto+Sans+SC:wght@400;500;700",
     license: "OFL",
-    licenseUrl: "https://github.com/adobe-fonts/source-han-sans/blob/master/LICENSE.txt",
+    licenseUrl:
+      "https://github.com/adobe-fonts/source-han-sans/blob/master/LICENSE.txt",
   },
 };
 
@@ -102,25 +105,17 @@ export function getGoogleFontsUrl(fontKeys: (keyof typeof fonts)[]): string {
 /**
  * Default fonts to load
  */
-export const defaultFonts: (keyof typeof fonts)[] = [
-  "inter",
-  "jetbrainsMono",
-];
+export const defaultFonts: (keyof typeof fonts)[] = ["inter", "jetbrainsMono"];
 
 /**
  * Fonts for CJK (Chinese) support
  */
-export const cjkFonts: (keyof typeof fonts)[] = [
-  "sourceHanSans",
-];
+export const cjkFonts: (keyof typeof fonts)[] = ["sourceHanSans"];
 
 /**
  * All fonts including CJK
  */
-export const allFonts: (keyof typeof fonts)[] = [
-  ...defaultFonts,
-  ...cjkFonts,
-];
+export const allFonts: (keyof typeof fonts)[] = [...defaultFonts, ...cjkFonts];
 
 // ============================================
 // Font Loading Utilities
@@ -129,14 +124,18 @@ export const allFonts: (keyof typeof fonts)[] = [
 /**
  * Generate preload link elements for critical fonts
  */
-export function getFontPreloadLinks(fontKeys: (keyof typeof fonts)[]): string[] {
-  return fontKeys.map((key) => {
-    const font = fonts[key];
-    if (!font) return "";
-    
-    const url = getGoogleFontsUrl([key]);
-    return `<link rel="preload" href="${url}" as="style" crossorigin>`;
-  }).filter(Boolean);
+export function getFontPreloadLinks(
+  fontKeys: (keyof typeof fonts)[],
+): string[] {
+  return fontKeys
+    .map((key) => {
+      const font = fonts[key];
+      if (!font) return "";
+
+      const url = getGoogleFontsUrl([key]);
+      return `<link rel="preload" href="${url}" as="style" crossorigin>`;
+    })
+    .filter(Boolean);
 }
 
 /**
@@ -145,7 +144,7 @@ export function getFontPreloadLinks(fontKeys: (keyof typeof fonts)[]): string[] 
 export function getGoogleFontsLink(fontKeys: (keyof typeof fonts)[]): string {
   const url = getGoogleFontsUrl(fontKeys);
   if (!url) return "";
-  
+
   return `<link rel="stylesheet" href="${url}">`;
 }
 
@@ -157,7 +156,7 @@ export async function areFontsLoaded(fontFamilies: string[]): Promise<boolean> {
 
   try {
     await Promise.all(
-      fontFamilies.map((family) => document.fonts.load(`16px "${family}"`))
+      fontFamilies.map((family) => document.fonts.load(`16px "${family}"`)),
     );
     return true;
   } catch {
@@ -170,7 +169,7 @@ export async function areFontsLoaded(fontFamilies: string[]): Promise<boolean> {
  */
 export async function waitForFonts(
   fontFamilies: string[],
-  timeout = 3000
+  timeout = 3000,
 ): Promise<boolean> {
   if (typeof document === "undefined") return false;
 

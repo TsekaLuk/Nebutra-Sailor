@@ -103,16 +103,13 @@ export const marketingTypography = {
 
 export const marketingGradients = {
   /** Primary brand gradient */
-  primary:
-    "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%)",
+  primary: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%)",
 
   /** Secondary gradient (cooler tones) */
-  secondary:
-    "linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #6366f1 100%)",
+  secondary: "linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #6366f1 100%)",
 
   /** Subtle background gradient */
-  subtle:
-    "linear-gradient(180deg, rgba(99,102,241,0.1) 0%, transparent 100%)",
+  subtle: "linear-gradient(180deg, rgba(99,102,241,0.1) 0%, transparent 100%)",
 
   /** Glass effect gradient */
   glass:

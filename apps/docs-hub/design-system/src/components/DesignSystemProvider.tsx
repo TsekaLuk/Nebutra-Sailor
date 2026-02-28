@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
 import { ThemeProvider, BaseStyles } from "@primer/react";
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
@@ -27,7 +33,9 @@ interface DesignSystemContextValue {
   resolvedMode: "light" | "dark";
 }
 
-const DesignSystemContext = createContext<DesignSystemContextValue | null>(null);
+const DesignSystemContext = createContext<DesignSystemContextValue | null>(
+  null,
+);
 
 // ============================================
 // Hook
@@ -63,7 +71,9 @@ export function DesignSystemProvider({
   enableSystemPreference = true,
 }: DesignSystemProviderProps) {
   const [mode, setModeState] = useState<ThemeMode>(defaultMode);
-  const [systemPreference, setSystemPreference] = useState<"light" | "dark">("light");
+  const [systemPreference, setSystemPreference] = useState<"light" | "dark">(
+    "light",
+  );
 
   // Detect system preference
   useEffect(() => {
@@ -112,7 +122,7 @@ export function DesignSystemProvider({
   };
 
   // Select theme based on resolved mode
-  const theme = resolvedMode === "dark" ? darkTheme : lightTheme;
+  const _theme = resolvedMode === "dark" ? darkTheme : lightTheme;
 
   // Context value
   const contextValue = useMemo(
@@ -122,7 +132,7 @@ export function DesignSystemProvider({
       toggleMode,
       resolvedMode,
     }),
-    [mode, resolvedMode]
+    [mode, resolvedMode],
   );
 
   // Apply data attribute for CSS

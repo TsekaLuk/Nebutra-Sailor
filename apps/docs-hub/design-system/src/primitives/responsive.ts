@@ -62,13 +62,9 @@ export function responsive<T>(values: {
   lg?: T;
   xl?: T;
 }): T[] {
-  return [
-    values.xs,
-    values.sm,
-    values.md,
-    values.lg,
-    values.xl,
-  ].filter((v) => v !== undefined) as T[];
+  return [values.xs, values.sm, values.md, values.lg, values.xl].filter(
+    (v) => v !== undefined,
+  ) as T[];
 }
 
 /**

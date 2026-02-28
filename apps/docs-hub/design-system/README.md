@@ -23,11 +23,7 @@ pnpm add @nebutra/design-system
 import { DesignSystemProvider } from "@nebutra/design-system";
 
 export default function Layout({ children }) {
-  return (
-    <DesignSystemProvider>
-      {children}
-    </DesignSystemProvider>
-  );
+  return <DesignSystemProvider>{children}</DesignSystemProvider>;
 }
 ```
 
@@ -69,11 +65,7 @@ import { useDesignSystem } from "@nebutra/design-system";
 function ThemeToggle() {
   const { mode, toggleMode, resolvedMode } = useDesignSystem();
 
-  return (
-    <Button onClick={toggleMode}>
-      Current: {resolvedMode}
-    </Button>
-  );
+  return <Button onClick={toggleMode}>Current: {resolvedMode}</Button>;
 }
 ```
 
@@ -88,14 +80,14 @@ import { SearchIcon, IconSettings, iconSizes } from "@nebutra/design-system";
 
 ## Exports
 
-| Export | Description |
-| ------ | ----------- |
-| `@nebutra/design-system` | All exports |
-| `@nebutra/design-system/theme` | Theme tokens and utilities |
-| `@nebutra/design-system/components` | UI components |
-| `@nebutra/design-system/icons` | Octicons re-exports |
-| `@nebutra/design-system/utils` | Utility functions |
-| `@nebutra/design-system/hooks` | React hooks |
+| Export                              | Description                |
+| ----------------------------------- | -------------------------- |
+| `@nebutra/design-system`            | All exports                |
+| `@nebutra/design-system/theme`      | Theme tokens and utilities |
+| `@nebutra/design-system/components` | UI components              |
+| `@nebutra/design-system/icons`      | Octicons re-exports        |
+| `@nebutra/design-system/utils`      | Utility functions          |
+| `@nebutra/design-system/hooks`      | React hooks                |
 
 ## Architecture
 
@@ -146,10 +138,10 @@ src/
 
 ### Theme Modules
 
-| Module | Purpose | Use Case |
-|--------|---------|----------|
-| `theme/default` | Primer baseline tokens | All apps - always loaded |
-| `theme/brand` | Brand color overrides | White-label, multi-tenant |
+| Module              | Purpose                   | Use Case                     |
+| ------------------- | ------------------------- | ---------------------------- |
+| `theme/default`     | Primer baseline tokens    | All apps - always loaded     |
+| `theme/brand`       | Brand color overrides     | White-label, multi-tenant    |
 | `theme/marketing` ★ | Extended marketing tokens | Landing pages, hero sections |
 
 - **theme/** - Extends Primer color/spacing tokens, adds brand + marketing overrides

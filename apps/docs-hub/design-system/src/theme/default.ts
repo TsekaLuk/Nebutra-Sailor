@@ -248,11 +248,9 @@ export const typography = {
     heading:
       '"Inter", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
     /** Code and monospace */
-    mono:
-      '"JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
+    mono: '"JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
     /** CJK (Chinese/Japanese/Korean) fallback */
-    cjk:
-      '"Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif',
+    cjk: '"Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif',
     /** System fonts (no web font loading) */
     system:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
@@ -262,16 +260,16 @@ export const typography = {
   },
 
   fontSize: {
-    xs: "0.75rem",   // 12px
-    sm: "0.875rem",  // 14px
-    base: "1rem",    // 16px
-    lg: "1.125rem",  // 18px
-    xl: "1.25rem",   // 20px
-    "2xl": "1.5rem",   // 24px
+    xs: "0.75rem", // 12px
+    sm: "0.875rem", // 14px
+    base: "1rem", // 16px
+    lg: "1.125rem", // 18px
+    xl: "1.25rem", // 20px
+    "2xl": "1.5rem", // 24px
     "3xl": "1.875rem", // 30px
-    "4xl": "2.25rem",  // 36px
-    "5xl": "3rem",     // 48px
-    "6xl": "3.75rem",  // 60px
+    "4xl": "2.25rem", // 36px
+    "5xl": "3rem", // 48px
+    "6xl": "3.75rem", // 60px
   },
 
   fontWeight: {

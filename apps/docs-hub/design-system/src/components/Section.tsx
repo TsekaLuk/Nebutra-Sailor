@@ -20,13 +20,9 @@ export function Section({
   children,
 }: SectionProps) {
   return (
-    <section
-      className={clsx("ds-section", "mb-6", className)}
-    >
+    <section className={clsx("ds-section", "mb-6", className)}>
       {(title || description || actions) && (
-        <div
-          className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3"
-        >
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
           <div>
             {title && (
               <Heading as="h2" className="text-lg font-semibold">

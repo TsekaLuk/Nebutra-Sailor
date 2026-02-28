@@ -165,7 +165,7 @@ export function getExperimentalComponents(
  */
 export function warnIfDeprecated(
   meta: ComponentMeta,
-  componentName?: string,
+  _componentName?: string,
 ): void {
   if (process.env.NODE_ENV === "development" && meta.status === "deprecated") {
     const message = getDeprecationMessage(meta);

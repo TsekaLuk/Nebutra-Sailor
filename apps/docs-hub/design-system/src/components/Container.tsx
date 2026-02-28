@@ -32,7 +32,7 @@ export function Container({
         "w-full px-4 sm:px-6 lg:px-8",
         sizeClassMap[size],
         centered && "mx-auto",
-        className
+        className,
       )}
     >
       {children}

@@ -51,7 +51,6 @@ function WeightShiftText({ children }: { children: string }) {
  */
 export function VisionSection() {
   const {
-    companyName,
     headline,
     headlineHighlight,
     description,

@@ -193,19 +193,19 @@ export function AINativeVisual() {
           <Terminal.Line prompt=" ">
             <span className="text-blue-400">providers</span>
             <span className="text-zinc-500">: [</span>
-            <span className="text-emerald-400">"openai"</span>
+            <span className="text-emerald-400">&quot;openai&quot;</span>
             <span className="text-zinc-500">, </span>
-            <span className="text-emerald-400">"anthropic"</span>
+            <span className="text-emerald-400">&quot;anthropic&quot;</span>
             <span className="text-zinc-500">, </span>
-            <span className="text-emerald-400">"google"</span>
+            <span className="text-emerald-400">&quot;google&quot;</span>
             <span className="text-zinc-500">],</span>
           </Terminal.Line>
           <Terminal.Line prompt=" " highlight>
             <span className="text-blue-400">fallback</span>
             <span className="text-zinc-500">: </span>
-            <span className="text-emerald-400">"anthropic"</span>
+            <span className="text-emerald-400">&quot;anthropic&quot;</span>
             <span className="text-zinc-500">,</span>
-            <span className="text-zinc-600 ml-2">// auto-failover</span>
+            <span className="text-zinc-600 ml-2">{/* auto-failover */}</span>
           </Terminal.Line>
           <Terminal.Line prompt=" ">
             <span className="text-blue-400">rateLimit</span>

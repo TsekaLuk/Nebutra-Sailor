@@ -26,7 +26,7 @@ export function PageHeader({
       className={clsx(
         "ds-page-header",
         "pb-4 mb-4 border-b border-gray-200 dark:border-gray-700",
-        className
+        className,
       )}
     >
       {breadcrumbs && breadcrumbs.length > 0 && (

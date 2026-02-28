@@ -1,4 +1,4 @@
-import { Locale, locales, isValidLocale } from "@/lib/i18n/locales";
+import { locales } from "@/lib/i18n/locales";
 import {
   LandingPageWrapper,
   TrackedSection,
@@ -33,8 +33,8 @@ interface Props {
  * 7. Footer
  */
 export default async function LocalizedHomePage({ params }: Props) {
-  const { lang } = await params;
-  const locale: Locale = isValidLocale(lang) ? lang : "en";
+  // Await params for Next.js 15 async dynamic routes
+  await params;
 
   return (
     <LandingPageWrapper>
