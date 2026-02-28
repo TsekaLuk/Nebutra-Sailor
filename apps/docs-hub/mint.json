@@ -37,6 +37,7 @@
         "design-system/foundations/color",
         "design-system/foundations/typography",
         "design-system/foundations/theming",
+        "design-system/foundations/token-manager",
         "design-system/foundations/tailwind",
         "design-system/foundations/icons",
         "design-system/foundations/copywriting"
