@@ -7,9 +7,9 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0070F3",
-    "light": "#3291FF",
-    "dark": "#0761D1",
+    "primary": "#6366f1",
+    "light": "#818cf8",
+    "dark": "#4f46e5",
     "background": {
       "light": "#FFFFFF",
       "dark": "#0A0A0A"
@@ -37,7 +37,6 @@
         "design-system/foundations/color",
         "design-system/foundations/typography",
         "design-system/foundations/theming",
-        "design-system/foundations/token-manager",
         "design-system/foundations/tailwind",
         "design-system/foundations/icons",
         "design-system/foundations/copywriting"
@@ -140,6 +139,10 @@
         "design-system/atom-components/tooltip",
         "design-system/atom-components/tree-view"
       ]
+    },
+    {
+      "group": "Tooling",
+      "pages": ["design-system/tooling/token-manager"]
     }
   ],
   "footerSocials": {

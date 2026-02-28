@@ -5,57 +5,113 @@ description: "Install and consume the design system in your app."
 
 ## Installation
 
-The design system is a workspace package. Add it to your app's `package.json`:
+<Steps>
+  <Step title="Add the dependency">
+    The design system is a workspace package. Add it to your app's `package.json`:
 
-```json
-{
-  "dependencies": {
-    "@nebutra/design-system": "workspace:*"
-  }
-}
-```
+    ```json
+    {
+      "dependencies": {
+        "@nebutra/design-system": "workspace:*"
+      }
+    }
+    ```
 
-Then run `pnpm install` from the repo root.
+    Then install from the repo root:
 
-## Setup
+    ```bash
+    pnpm install
+    ```
+  </Step>
 
-Wrap your app with `DesignSystemProvider`:
+  <Step title="Wrap your app with DesignSystemProvider">
+    Add the provider to your root layout. This sets up theme context and CSS variables.
 
-```tsx
-import { DesignSystemProvider } from "@nebutra/design-system"
+    ```tsx
+    // app/layout.tsx (Next.js App Router)
+    import { DesignSystemProvider } from "@nebutra/design-system";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return <DesignSystemProvider>{children}</DesignSystemProvider>
-}
-```
+    export default function RootLayout({ children }: { children: React.ReactNode }) {
+      return (
+        <html>
+          <body>
+            <DesignSystemProvider>{children}</DesignSystemProvider>
+          </body>
+        </html>
+      );
+    }
+    ```
+  </Step>
 
-## Importing components
+  <Step title="Import and use components">
+    All exports are available from the single package entry point:
 
-```tsx
-import { Button, Card, PageHeader } from "@nebutra/design-system"
-import { fontFamilies, typeStyles } from "@nebutra/design-system/typography"
-import { marketingGradients } from "@nebutra/design-system/theme"
-```
+    ```tsx
+    import { Button, Card, Badge } from "@nebutra/design-system";
 
-## Theme mode
+    export function MyPage() {
+      return (
+        <Card>
+          <Badge variant="secondary">New</Badge>
+          <Button>Get started</Button>
+        </Card>
+      );
+    }
+    ```
+  </Step>
+</Steps>
 
-```tsx
-import { useDesignSystem } from "@nebutra/design-system"
-
-function ThemeToggle() {
-  const { toggleMode, resolvedMode } = useDesignSystem()
-  return <button onClick={toggleMode}>Mode: {resolvedMode}</button>
-}
-```
-
-## Available exports
+## Available Export Paths
 
 | Import path | Contents |
 |---|---|
-| `@nebutra/design-system` | All exports (components, hooks, utils) |
+| `@nebutra/design-system` | All components, hooks, and utilities |
 | `@nebutra/design-system/theme` | Color tokens, brand overrides, marketing tokens |
-| `@nebutra/design-system/typography` | Font families, type scale, presets |
-| `@nebutra/design-system/components` | UI components |
+| `@nebutra/design-system/typography` | Font families, type scale, fluid presets |
+| `@nebutra/design-system/components` | UI components only |
 | `@nebutra/design-system/icons` | Octicons re-exports |
-| `@nebutra/design-system/utils` | Utility functions (`cn`, breakpoints) |
+| `@nebutra/design-system/utils` | `cn`, breakpoint helpers |
 | `@nebutra/design-system/hooks` | `useDesignSystem`, `useTheme` |
+
+## Theme Mode
+
+Use `useDesignSystem` to read and toggle the current color mode:
+
+```tsx
+import { useDesignSystem } from "@nebutra/design-system";
+
+function ThemeToggle() {
+  const { toggleMode, resolvedMode } = useDesignSystem();
+  return (
+    <button onClick={toggleMode}>
+      {resolvedMode === "dark" ? "Light mode" : "Dark mode"}
+    </button>
+  );
+}
+```
+
+## Brand Overrides
+
+Apply brand-specific colors and typography without touching global tokens:
+
+```tsx
+import { createTheme, DesignSystemProvider } from "@nebutra/design-system";
+
+const brandTheme = createTheme("light", {
+  colors: {
+    accent: {
+      fg: "#your-brand-color",
+      emphasis: "#your-brand-emphasis",
+    },
+  },
+  typography: {
+    fontFamily: {
+      normal: '"YourBrandFont", Inter, sans-serif',
+    },
+  },
+});
+
+<DesignSystemProvider theme={brandTheme}>{children}</DesignSystemProvider>
+```
+
+See [Theming](/design-system/foundations/theming) for the full `BrandOverrides` interface.

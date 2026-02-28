@@ -1,12 +1,48 @@
+/**
+ * Property-based tests for design token usage invariants.
+ *
+ * Property 3a: Structural completeness — required src/ subdirectories exist.
+ * Property 3b: No colorPrimitives imports — components must use semantic tokens only.
+ * Property 3c: No hardcoded hex values in component files.
+ */
+
 import { describe, it, expect } from "vitest";
 import * as fc from "fast-check";
-import { readdirSync, statSync } from "node:fs";
-import { resolve, dirname, extname, join } from "node:path";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { resolve, dirname, extname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
 const DESIGN_SYSTEM_SRC = resolve(ROOT, "apps/docs-hub/design-system/src");
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+const EXCLUDED_DIRS = new Set(["node_modules", ".next", "dist", ".turbo"]);
+
+function collectTsFiles(dir: string, files: string[] = []): string[] {
+  let entries: ReturnType<typeof readdirSync>;
+  try {
+    entries = readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return files;
+  }
+  for (const entry of entries) {
+    if (EXCLUDED_DIRS.has(entry.name)) continue;
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      collectTsFiles(full, files);
+    } else if (entry.isFile()) {
+      const ext = extname(entry.name);
+      if (ext === ".ts" || ext === ".tsx") {
+        files.push(full);
+      }
+    }
+  }
+  return files;
+}
 
 const REQUIRED_SUBDIRS = [
   "theme",
@@ -14,48 +50,48 @@ const REQUIRED_SUBDIRS = [
   "primitives",
   "components",
 ] as const;
-type RequiredSubdir = (typeof REQUIRED_SUBDIRS)[number];
+type _RequiredSubdir = (typeof REQUIRED_SUBDIRS)[number];
 
-function subdirExists(subdir: RequiredSubdir): boolean {
-  try {
-    const full = resolve(DESIGN_SYSTEM_SRC, subdir);
-    const stat = statSync(full);
-    return stat.isDirectory();
-  } catch {
-    return false;
-  }
-}
+/**
+ * Files with pre-approved hardcoded color usage.
+ * Each entry must include a justification comment.
+ */
+const HARDCODED_HEX_EXEMPTIONS = new Set([
+  // Syntax highlighting palette — language token colors cannot map to semantic UI tokens
+  resolve(ROOT, "packages/custom-ui/src/primitives/code-block.tsx"),
+]);
 
-function getTypeScriptFilesInSubdir(subdir: RequiredSubdir): string[] {
-  const full = resolve(DESIGN_SYSTEM_SRC, subdir);
-  try {
-    const entries = readdirSync(full, { withFileTypes: true });
-    return entries
-      .filter(
-        (e) =>
-          e.isFile() &&
-          (extname(e.name) === ".ts" || extname(e.name) === ".tsx"),
-      )
-      .map((e) => join(full, e.name));
-  } catch {
-    return [];
-  }
-}
+/** All TS/TSX files under design-system/src/ (excluding tokens — those import primitives by design) */
+const DS_COMPONENT_FILES = collectTsFiles(DESIGN_SYSTEM_SRC).filter(
+  (f) =>
+    !f.includes(`${DESIGN_SYSTEM_SRC}/theme/`) &&
+    !f.includes(`${DESIGN_SYSTEM_SRC}/tokens/`),
+);
 
-describe("Property 3: Token Structure Completeness", () => {
+/** All TS/TSX files under packages/custom-ui/src/ */
+const CUSTOM_UI_FILES = collectTsFiles(resolve(ROOT, "packages/custom-ui/src"));
+
+/** Combined consumer component files */
+const ALL_COMPONENT_FILES = [...DS_COMPONENT_FILES, ...CUSTOM_UI_FILES];
+
+// ---------------------------------------------------------------------------
+// Property 3a: Structural completeness
+// ---------------------------------------------------------------------------
+
+describe("Property 3a: Token Structure Completeness", () => {
   it("design-system/src/ contains all required subdirectories", () => {
-    expect(REQUIRED_SUBDIRS.length).toBeGreaterThan(0);
-
     fc.assert(
       fc.property(fc.constantFrom(...REQUIRED_SUBDIRS), (subdir) => {
-        const exists = subdirExists(subdir);
-        if (!exists) {
+        const full = resolve(DESIGN_SYSTEM_SRC, subdir);
+        let stat: ReturnType<typeof statSync>;
+        try {
+          stat = statSync(full);
+        } catch {
           throw new Error(
-            `Required subdirectory "apps/docs-hub/design-system/src/${subdir}" does not exist. ` +
-              `The design system must maintain this structural invariant.`,
+            `Required directory "apps/docs-hub/design-system/src/${subdir}" is missing.`,
           );
         }
-        return true;
+        expect(stat.isDirectory()).toBe(true);
       }),
       { numRuns: REQUIRED_SUBDIRS.length },
     );
@@ -64,16 +100,116 @@ describe("Property 3: Token Structure Completeness", () => {
   it("each required subdirectory has at least one TypeScript file", () => {
     fc.assert(
       fc.property(fc.constantFrom(...REQUIRED_SUBDIRS), (subdir) => {
-        const files = getTypeScriptFilesInSubdir(subdir);
-        if (files.length === 0) {
-          throw new Error(
-            `Required subdirectory "apps/docs-hub/design-system/src/${subdir}" exists but contains no TypeScript (.ts or .tsx) files. ` +
-              `Each design system module must have at least one implementation file.`,
-          );
-        }
-        return true;
+        const files = collectTsFiles(resolve(DESIGN_SYSTEM_SRC, subdir));
+        expect(
+          files.length,
+          `apps/docs-hub/design-system/src/${subdir}/ has no .ts/.tsx files`,
+        ).toBeGreaterThan(0);
       }),
       { numRuns: REQUIRED_SUBDIRS.length },
+    );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Property 3b: No colorPrimitives imports in component files
+// ---------------------------------------------------------------------------
+
+describe("Property 3b: No Direct colorPrimitives Imports", () => {
+  it("should have component files to scan", () => {
+    expect(
+      ALL_COMPONENT_FILES.length,
+      "Expected at least one component file to scan",
+    ).toBeGreaterThan(0);
+  });
+
+  it("no component file imports or destructures colorPrimitives directly", () => {
+    if (ALL_COMPONENT_FILES.length === 0) return;
+
+    const arbFile = fc.constantFrom(...ALL_COMPONENT_FILES);
+
+    fc.assert(
+      fc.property(arbFile, (filePath) => {
+        const content = readFileSync(filePath, "utf-8");
+        const relPath = relative(ROOT, filePath);
+
+        // Detect: `import { colorPrimitives } from ...`
+        const importPattern = /\bimport\b[^;]*\bcolorPrimitives\b/;
+        expect(
+          importPattern.test(content),
+          `"${relPath}" imports colorPrimitives directly. ` +
+            `Use semantic tokens (e.g. semanticColorsLight.accent.fg) instead.`,
+        ).toBe(false);
+
+        // Detect: `colorPrimitives.blue[5]` or `colorPrimitives['gray']`
+        const usagePattern = /\bcolorPrimitives\s*[.[]/;
+        expect(
+          usagePattern.test(content),
+          `"${relPath}" accesses colorPrimitives directly. ` +
+            `Reference semantic tokens only.`,
+        ).toBe(false);
+      }),
+      { numRuns: Math.min(ALL_COMPONENT_FILES.length * 2, 300) },
+    );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Property 3c: No hardcoded hex values in component files
+// ---------------------------------------------------------------------------
+
+/**
+ * Regex for hardcoded hex colors in CSS/JS style object notation only.
+ *
+ * Detects (CSS property syntax with colon):
+ *   color: "#1f2328"
+ *   backgroundColor: "#fff"
+ *   stroke: '#0969da'
+ *
+ * Does NOT flag:
+ *   fill="#e2e8f0"    ← SVG HTML attribute (uses =, not :) — acceptable in illustrations
+ *   // #0969da        ← comments
+ *   '#0969da'         ← bare string in theme/token definition files
+ */
+const HARDCODED_HEX_PATTERN =
+  /(?:color|fill|stroke|background|backgroundColor)\s*:\s*["']#[0-9a-fA-F]{3,8}["']/;
+
+describe("Property 3c: No Hardcoded Hex Values in Components", () => {
+  it("no component file uses hardcoded hex color values in style props", () => {
+    if (ALL_COMPONENT_FILES.length === 0) return;
+
+    const arbFile = fc.constantFrom(...ALL_COMPONENT_FILES);
+
+    fc.assert(
+      fc.property(arbFile, (filePath) => {
+        // Skip pre-approved exemptions
+        if (HARDCODED_HEX_EXEMPTIONS.has(filePath)) return;
+
+        const content = readFileSync(filePath, "utf-8");
+        const relPath = relative(ROOT, filePath);
+
+        // Strip comment lines before testing
+        const withoutComments = content
+          .split("\n")
+          .filter((line) => !line.trimStart().startsWith("//"))
+          .join("\n");
+
+        if (HARDCODED_HEX_PATTERN.test(withoutComments)) {
+          const lines = withoutComments.split("\n");
+          const offendingLines = lines
+            .map((line, i) => ({ line, num: i + 1 }))
+            .filter(({ line }) => HARDCODED_HEX_PATTERN.test(line))
+            .map(
+              ({ line, num }) => `  line ${num}: ${line.trim().slice(0, 120)}`,
+            );
+
+          throw new Error(
+            `"${relPath}" contains hardcoded hex color values:\n${offendingLines.join("\n")}\n` +
+              `Use Tailwind semantic utilities (e.g. text-foreground) or CSS variables instead.`,
+          );
+        }
+      }),
+      { numRuns: Math.min(ALL_COMPONENT_FILES.length * 2, 300) },
     );
   });
 });

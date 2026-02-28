@@ -154,14 +154,18 @@ The `BrandOverrides` interface accepts:
 Always consume colors through semantic tokens, never raw hex values or primitives.
 
 ```tsx
-// Correct — semantic token via CSS variable
-<div style={{ color: "var(--fgColor-default)" }} />
-
 // Correct — Tailwind utility mapped to semantic token
 <p className="text-foreground" />
+<div className="bg-background border-border" />
 
-// Wrong — hardcoded hex bypasses theming
+// Correct — CSS variable in a CSS Module or styled component (not inline style)
+// .container { color: var(--fgColor-default); }
+
+// Wrong — inline style (violates no-inline-CSS rule)
 <div style={{ color: "#1f2328" }} />
+
+// Wrong — raw arbitrary value bypasses semantic layer
+<p className="text-[#6e7781]" />
 ```
 
 ## Do / Don't

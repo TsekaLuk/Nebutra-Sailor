@@ -12,186 +12,285 @@ Use the form pattern whenever you collect structured data from a user and need t
 - Authentication forms (sign-in, sign-up)
 - Confirmation dialogs that require typed input
 
-Do not apply this pattern to single-field quick-edits. For a single toggle or a single select that saves on change, use the bare atom component (`ToggleSwitch`, `Select`) without form scaffolding.
+Do not apply this pattern to single-field quick-edits. For a single toggle or a single select that saves on change, use the bare atom component (`Switch`, `Select`) without form scaffolding.
 
 ## Structure
 
 ```
-<form> (or FormControl root)
-  └── Section (logical grouping with title)
-       ├── FormControl (label + input + validation message)
-       │    ├── FormControl.Label
-       │    ├── Input | Textarea | Select | Checkbox | RadioGroup
-       │    ├── FormControl.Caption (hint text)
-       │    └── FormControl.Validation (error message)
-       ├── FormControl (repeat per field)
-       └── ButtonGroup (submit + cancel, bottom of section)
+<Form> (react-hook-form + zod)
+  └── FormField (one per field)
+       └── FormItem
+            ├── FormLabel
+            ├── FormControl
+            │    └── Input | Textarea | Select | Checkbox | RadioGroup
+            ├── FormDescription (hint text)
+            └── FormMessage (validation error)
+  └── Button type="submit"
 ```
-
-For multi-step flows, wrap each step in its own `Section`. Render step controls (`Previous` / `Next`) inside each section's action slot.
 
 ## Composition
 
-### FormControl
+### Basic Field
 
-`FormControl` from `@primer/react` owns the label–input relationship. Always use it instead of a bare `<label>` element.
+Every field follows the same `FormField → FormItem → FormControl` structure. `FormMessage` renders the validation error automatically from the schema.
 
 ```tsx
-import { FormControl, TextInput, Button } from "@nebutra/design-system";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+  Input,
+  Button,
+} from "@nebutra/design-system";
 
-<FormControl>
-  <FormControl.Label>API key name</FormControl.Label>
-  <TextInput
-    placeholder="e.g. production-server"
-    value={name}
-    onChange={(e) => setName(e.target.value)}
-  />
-  <FormControl.Caption>
-    Used to identify this key in audit logs.
-  </FormControl.Caption>
-</FormControl>
+const schema = z.object({
+  name: z.string().min(1, "Name is required"),
+});
+
+export function CreateKeyForm({ onSubmit }: { onSubmit: (v: z.infer<typeof schema>) => void }) {
+  const form = useForm({ resolver: zodResolver(schema) });
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>API key name</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g. production-server" {...field} />
+              </FormControl>
+              <FormDescription>
+                Used to identify this key in audit logs.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Create key</Button>
+      </form>
+    </Form>
+  );
+}
 ```
 
 ### Validation
 
-Surface field-level errors using `FormControl.Validation` paired with `validationStatus` on the input.
+Schema is the single source of validation truth. `FormMessage` surfaces errors automatically — no manual error state needed.
 
 ```tsx
-<FormControl>
-  <FormControl.Label>Email</FormControl.Label>
-  <TextInput
-    type="email"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    validationStatus={errors.email ? "error" : undefined}
-  />
-  {errors.email && (
-    <FormControl.Validation variant="error">
-      {errors.email}
-    </FormControl.Validation>
+const schema = z.object({
+  email: z.string().email("Enter a valid email address"),
+  age: z.number().min(18, "Must be 18 or older"),
+});
+```
+
+Validate on `onBlur` for new forms. Switch to `onChange` after first submission for real-time correction feedback.
+
+```tsx
+const form = useForm({
+  resolver: zodResolver(schema),
+  mode: "onBlur",
+});
+```
+
+### Select Field
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@nebutra/design-system";
+
+<FormField
+  control={form.control}
+  name="permission"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Permission</FormLabel>
+      <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <FormControl>
+          <SelectTrigger>
+            <SelectValue placeholder="Select a permission" />
+          </SelectTrigger>
+        </FormControl>
+        <SelectContent>
+          <SelectItem value="read">Read only</SelectItem>
+          <SelectItem value="write">Read + write</SelectItem>
+        </SelectContent>
+      </Select>
+      <FormMessage />
+    </FormItem>
   )}
-</FormControl>
+/>
 ```
 
-Validate on blur for new forms. Validate on change once a field has been submitted with an error (real-time correction UX).
-
-### Grouping with Section
-
-Separate logically distinct concerns into labelled sections. This aids scanability on long settings pages.
+### Checkbox Field
 
 ```tsx
-import { Section } from "@nebutra/design-system";
+import { Checkbox } from "@nebutra/design-system";
 
-<Section title="Personal information">
-  {/* name, email fields */}
-</Section>
-
-<Section title="Security">
-  {/* password, 2FA fields */}
-</Section>
+<FormField
+  control={form.control}
+  name="acceptTerms"
+  render={({ field }) => (
+    <FormItem className="flex items-start gap-3">
+      <FormControl>
+        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+      </FormControl>
+      <div>
+        <FormLabel>Accept terms and conditions</FormLabel>
+        <FormMessage />
+      </div>
+    </FormItem>
+  )}
+/>
 ```
 
-### Submit and cancel
+### Submit and Cancel
 
-Place submit/cancel controls at the end of the form (or section for multi-step). Destructive actions (`Delete`, `Revoke`) go in separate sections with a `Flash` warning above the button.
+Place submit/cancel at the end of the form. Destructive actions go in a separate section with an explicit warning above the button.
 
 ```tsx
-import { Button, ButtonGroup } from "@nebutra/design-system";
-
-<ButtonGroup>
-  <Button variant="primary" type="submit" disabled={isSubmitting}>
-    {isSubmitting ? "Saving…" : "Save changes"}
+<div className="flex gap-2 pt-4">
+  <Button type="submit" disabled={form.formState.isSubmitting}>
+    {form.formState.isSubmitting ? "Saving…" : "Save changes"}
   </Button>
-  <Button variant="invisible" onClick={onCancel}>
+  <Button type="button" variant="ghost" onClick={onCancel}>
     Cancel
   </Button>
-</ButtonGroup>
+</div>
 ```
 
-### Required fields
+### Required Fields
 
-Mark required fields with `FormControl.Label required`. Do not use asterisk-only conventions without a legend explaining the symbol.
+Annotate the label directly — do not rely on asterisk-only conventions without an explanatory legend.
 
 ```tsx
-<FormControl required>
-  <FormControl.Label>Organization name</FormControl.Label>
-  <TextInput … />
-</FormControl>
+<FormItem>
+  <FormLabel>
+    Organization name <span aria-hidden="true" className="text-destructive">*</span>
+  </FormLabel>
+  <FormControl>
+    <Input required {...field} />
+  </FormControl>
+  <FormMessage />
+</FormItem>
 ```
 
-### Complex input types
+### Complex Input Types
 
 | Use case | Component |
 |---|---|
 | Long text | `Textarea` |
 | Single choice from a list | `Select` or `RadioGroup` |
-| Binary on/off | `Checkbox` or `ToggleSwitch` |
-| Multi-selection | `CheckboxGroup` or `multi-select` fragment |
+| Binary on/off | `Checkbox` or `Switch` |
+| Multi-selection | `multi-select` fragment |
 | Date | `DatePicker` |
 | OTP / pin | `InputOtp` |
-| Token input | `TextInputWithTokens` |
 
 ## Examples
 
-### Create API key form
+### Create API Key Form
 
 ```tsx
-import { FormControl, TextInput, Select, Button } from "@nebutra/design-system";
-import { Section } from "@nebutra/design-system";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import {
+  Form, FormField, FormItem, FormLabel, FormControl, FormMessage,
+  Input, Button,
+  Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
+} from "@nebutra/design-system";
 
-function CreateKeyForm({ onSubmit, onCancel }: Props) {
-  const [name, setName] = useState("");
-  const [permission, setPermission] = useState("read");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+const schema = z.object({
+  name: z.string().min(1, "Key name is required"),
+  permission: z.enum(["read", "write"]),
+});
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const errs: Record<string, string> = {};
-    if (!name.trim()) errs.name = "Key name is required.";
-    if (Object.keys(errs).length) { setErrors(errs); return; }
-    onSubmit({ name, permission });
-  };
+type FormValues = z.infer<typeof schema>;
+
+export function CreateKeyForm({
+  onSubmit,
+  onCancel,
+}: {
+  onSubmit: (v: FormValues) => void;
+  onCancel: () => void;
+}) {
+  const form = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: "", permission: "read" },
+  });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Section title="Key details">
-        <FormControl required>
-          <FormControl.Label>Name</FormControl.Label>
-          <TextInput
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            validationStatus={errors.name ? "error" : undefined}
-          />
-          {errors.name && (
-            <FormControl.Validation variant="error">
-              {errors.name}
-            </FormControl.Validation>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g. production-server" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
-        </FormControl>
+        />
 
-        <FormControl>
-          <FormControl.Label>Permission</FormControl.Label>
-          <Select value={permission} onChange={(e) => setPermission(e.target.value)}>
-            <Select.Option value="read">Read only</Select.Option>
-            <Select.Option value="write">Read + write</Select.Option>
-          </Select>
-        </FormControl>
+        <FormField
+          control={form.control}
+          name="permission"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Permission</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="read">Read only</SelectItem>
+                  <SelectItem value="write">Read + write</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <ButtonGroup>
-          <Button variant="primary" type="submit">Create key</Button>
-          <Button variant="invisible" onClick={onCancel}>Cancel</Button>
-        </ButtonGroup>
-      </Section>
-    </form>
+        <div className="flex gap-2 pt-2">
+          <Button type="submit">Create key</Button>
+          <Button type="button" variant="ghost" onClick={onCancel}>
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }
 ```
 
 ## Related Components
 
-- [Data Input fragment](/fragment-components/data-input) — reusable controlled field wrapper
-- [Form Item Layout fragment](/fragment-components/form-item-layout) — horizontal label-field layout
-- [Text Confirm Dialog fragment](/fragment-components/text-confirm-dialog) — type-to-confirm destructive action
-- [Field](/atom-components/field) — bare field layout atom
-- [Input](/atom-components/input) — unstyled input primitive
-- [Combobox](/atom-components/combobox) — searchable select
+- [Data Input fragment](/design-system/fragment-components/data-input) — reusable controlled field wrapper
+- [Form Item Layout fragment](/design-system/fragment-components/form-item-layout) — horizontal label-field layout
+- [Text Confirm Dialog fragment](/design-system/fragment-components/text-confirm-dialog) — type-to-confirm destructive action
+- [Field](/design-system/atom-components/field) — bare field layout atom
+- [Input](/design-system/atom-components/input) — text input primitive
+- [Combobox](/design-system/atom-components/combobox) — searchable select
+- [Form](/design-system/atom-components/form) — Form atom (react-hook-form primitives)
