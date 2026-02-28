@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DesignSystemProvider } from "@nebutra/design-system";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -28,7 +29,9 @@ export default function RootLayout({
   const content = (
     <html lang="en">
       <body className="antialiased">
-        <DesignSystemProvider>{children}</DesignSystemProvider>
+        <DesignSystemProvider>
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </DesignSystemProvider>
       </body>
     </html>
   );
