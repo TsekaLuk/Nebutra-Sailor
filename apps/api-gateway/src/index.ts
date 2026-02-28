@@ -3,6 +3,7 @@ import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
 import { logger as honoLogger } from "hono/logger";
 import { logger, initOtel } from "@nebutra/logger";
+import { setAlertErrorHandler, initializeFromEnv } from "@nebutra/alerting";
 
 import { healthRoutes } from "./routes/misc/health.js";
 import { statusRoutes } from "./routes/system/status.js";
@@ -12,6 +13,15 @@ import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
 import { env, DOMAINS } from "./config/env.js";
 
 initOtel({ serviceName: "api-gateway" });
+
+// Wire logger into alerting error handler
+setAlertErrorHandler((ctx, err) => logger.error(ctx, err));
+
+// Register alerting channels from environment
+const registeredChannels = initializeFromEnv();
+if (registeredChannels.length > 0) {
+  logger.info("Alerting channels registered", { channels: registeredChannels });
+}
 
 const app = new Hono();
 

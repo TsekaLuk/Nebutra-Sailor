@@ -97,6 +97,9 @@ importers:
       "@hono/zod-validator":
         specifier: ^0.7.5
         version: 0.7.5(hono@4.10.7)(zod@3.25.76)
+      "@nebutra/alerting":
+        specifier: workspace:*
+        version: link:../../packages/alerting
       "@nebutra/cache":
         specifier: workspace:*
         version: link:../../packages/cache

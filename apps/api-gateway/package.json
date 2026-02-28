@@ -15,6 +15,7 @@
   "dependencies": {
     "@hono/node-server": "^1.13.0",
     "@hono/zod-validator": "^0.7.5",
+    "@nebutra/alerting": "workspace:*",
     "@nebutra/cache": "workspace:*",
     "@nebutra/db": "workspace:*",
     "@nebutra/health": "workspace:*",
