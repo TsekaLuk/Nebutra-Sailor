@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { DesignSystemShell } from "./providers/design-system-shell";
+import { DesignSystemProvider } from "@nebutra/design-system";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -28,12 +28,11 @@ export default function RootLayout({
   const content = (
     <html lang="en">
       <body className="antialiased">
-        <DesignSystemShell hasClerkKey={hasClerkKey}>{children}</DesignSystemShell>
+        <DesignSystemProvider>{children}</DesignSystemProvider>
       </body>
     </html>
   );
 
-  // Skip ClerkProvider if keys not configured (for build without env)
   if (!hasClerkKey) {
     return content;
   }

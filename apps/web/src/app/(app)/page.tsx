@@ -19,9 +19,7 @@ export default async function DashboardPage() {
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">
             Dashboard
           </h1>
-          {orgName && (
-            <p className="mt-1 text-sm text-gray-500">{orgName}</p>
-          )}
+          {orgName && <p className="mt-1 text-sm text-gray-500">{orgName}</p>}
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

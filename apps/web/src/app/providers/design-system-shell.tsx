@@ -1,11 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  Button,
-  DesignSystemProvider,
-  Header,
-} from "@nebutra/design-system";
+import { Button, Header } from "@nebutra/design-system";
 import {
   SignInButton,
   SignUpButton,
@@ -21,7 +17,7 @@ interface Props {
 
 export function DesignSystemShell({ children, hasClerkKey }: Props) {
   return (
-    <DesignSystemProvider>
+    <>
       <Header>
         <Header.Item full>
           <span className="text-xl font-bold">Nebutra</span>
@@ -49,9 +45,7 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
           </Header.Item>
         )}
       </Header>
-      <main className="min-h-[calc(100vh-64px)]">
-        {children}
-      </main>
-    </DesignSystemProvider>
+      <main className="min-h-[calc(100vh-64px)]">{children}</main>
+    </>
   );
 }
