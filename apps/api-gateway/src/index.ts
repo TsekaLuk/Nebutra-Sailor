@@ -8,31 +8,41 @@ import { statusRoutes } from "./routes/system/status.js";
 import { consentRoutes } from "./routes/legal/consent.js";
 import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
 import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
+import { env, DOMAINS } from "./config/env.js";
 
 const app = new Hono();
+
+// Build CORS allowlist from constants + env overrides
+const corsOrigins = [
+  // Auto-include localhost in non-production environments
+  ...(env.NODE_ENV !== "production"
+    ? [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://localhost:3003",
+      ]
+    : []),
+  // Production domains — update DOMAINS in config/env.ts to rebrand
+  DOMAINS.landing,
+  `https://www.${new URL(DOMAINS.landing).hostname}`,
+  DOMAINS.app,
+  DOMAINS.studio,
+  // Per-deployment overrides
+  env.LANDING_URL,
+  env.WEB_URL,
+  env.STUDIO_URL,
+  // Arbitrary extra origins (e.g. Vercel preview URLs)
+  ...(env.CORS_ORIGINS?.split(",").map((s) => s.trim()) ?? []),
+].filter(Boolean) as string[];
 
 // Global middlewares
 app.use("*", logger());
 app.use(
   "*",
   cors({
-    origin: [
-      // Local development
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:3003",
-      // Production domains
-      "https://nebutra.com",
-      "https://www.nebutra.com",
-      "https://app.nebutra.com",
-      "https://studio.nebutra.com",
-      // Environment overrides
-      process.env.LANDING_URL || "",
-      process.env.WEB_URL || "",
-      process.env.STUDIO_URL || "",
-    ].filter(Boolean),
+    origin: corsOrigins,
     credentials: true,
-  })
+  }),
 );
 
 // Tenant context extraction (before rate limiting)
@@ -77,13 +87,13 @@ app.onError((err, c) => {
       error: "Internal Server Error",
       message: process.env.NODE_ENV === "development" ? err.message : undefined,
     },
-    500
+    500,
   );
 });
 
 const port = parseInt(process.env.PORT || "3002", 10);
 
-console.log(`🚀 API Gateway starting on http://localhost:${port}`);
+console.warn(`API Gateway starting on http://localhost:${port}`);
 
 serve({
   fetch: app.fetch,

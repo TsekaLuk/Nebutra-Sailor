@@ -27,6 +27,8 @@ const envSchema = z.object({
   LANDING_URL: z.string().optional(),
   WEB_URL: z.string().optional(),
   STUDIO_URL: z.string().optional(),
+  // Additional allowed CORS origins (comma-separated)
+  CORS_ORIGINS: z.string().optional(),
 });
 
 // Production domain constants
