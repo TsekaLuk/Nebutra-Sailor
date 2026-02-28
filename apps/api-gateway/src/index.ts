@@ -3,8 +3,10 @@ import { serve } from "@hono/node-server";
 import { bodyLimit } from "hono/body-limit";
 import { cors } from "hono/cors";
 import { logger as honoLogger } from "hono/logger";
+import { requestId } from "hono/request-id";
 import { logger, initOtel } from "@nebutra/logger";
 import { setAlertErrorHandler, initializeFromEnv } from "@nebutra/alerting";
+import { prisma } from "@nebutra/db";
 
 import { healthRoutes } from "./routes/misc/health.js";
 import { statusRoutes } from "./routes/system/status.js";
@@ -50,6 +52,7 @@ const corsOrigins = [
 ].filter(Boolean) as string[];
 
 // Global middlewares
+app.use("*", requestId());
 app.use("*", honoLogger());
 app.use(
   "*",
@@ -118,9 +121,31 @@ const port = parseInt(process.env.PORT || "3002", 10);
 
 logger.info("API Gateway started", { port });
 
-serve({
-  fetch: app.fetch,
-  port,
+const server = serve({ fetch: app.fetch, port }, (info) => {
+  logger.info(`API Gateway listening on port ${info.port}`);
 });
+
+// Graceful shutdown
+const shutdown = async (signal: string) => {
+  logger.info(`Received ${signal}, starting graceful shutdown...`);
+  server.close(async () => {
+    logger.info("HTTP server closed");
+    try {
+      await prisma.$disconnect();
+      logger.info("Database connection closed");
+    } catch (err) {
+      logger.error("Error during shutdown", err);
+    }
+    process.exit(0);
+  });
+  // Force exit after 10s if graceful shutdown hangs
+  setTimeout(() => {
+    logger.error("Forced shutdown after timeout");
+    process.exit(1);
+  }, 10_000);
+};
+
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT", () => shutdown("SIGINT"));
 
 export default app;
