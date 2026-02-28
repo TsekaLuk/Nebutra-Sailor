@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DesignSystemProvider } from "@nebutra/design-system";
 import { Providers } from "./providers";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -60,8 +61,7 @@ export default function RootLayout({
       <body className="antialiased">
         <Providers>
           <DesignSystemProvider>
-            {/* AuthButtons are now integrated in Navbar component */}
-            {children}
+            <ErrorBoundary>{children}</ErrorBoundary>
           </DesignSystemProvider>
         </Providers>
       </body>
