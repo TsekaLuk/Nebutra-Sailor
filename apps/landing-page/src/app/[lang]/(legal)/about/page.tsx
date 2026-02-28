@@ -1,14 +1,15 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { locales } from "@/lib/i18n/locales";
+import { routing } from "@/i18n/routing";
 
 export const metadata: Metadata = {
   title: "About Us | Nebutra",
-  description: "Learn about Nebutra's mission, team, and vision for the future of enterprise SaaS.",
+  description:
+    "Learn about Nebutra's mission, team, and vision for the future of enterprise SaaS.",
 };
 
 export function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
+  return routing.locales.map((locale) => ({ lang: locale }));
 }
 
 export default async function AboutPage() {
@@ -28,21 +29,24 @@ export default async function AboutPage() {
       <section className="prose prose-gray dark:prose-invert max-w-none">
         <h2>Our Mission</h2>
         <p>
-          At Nebutra, we believe that every business deserves access to powerful, AI-native tools 
-          that were once only available to tech giants. Our mission is to democratize enterprise 
-          software by building a comprehensive SaaS platform that combines the latest in artificial 
+          At Nebutra, we believe that every business deserves access to
+          powerful, AI-native tools that were once only available to tech
+          giants. Our mission is to democratize enterprise software by building
+          a comprehensive SaaS platform that combines the latest in artificial
           intelligence with robust multi-tenant architecture.
         </p>
         <p>
-          We are building the infrastructure that allows businesses to leverage AI for content creation, 
-          personalized recommendations, e-commerce optimization, and community building—all in one 
-          unified platform.
+          We are building the infrastructure that allows businesses to leverage
+          AI for content creation, personalized recommendations, e-commerce
+          optimization, and community building—all in one unified platform.
         </p>
       </section>
 
       {/* Values Section */}
       <section>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Our Values</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          Our Values
+        </h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <ValueCard
             title="Innovation First"
@@ -85,11 +89,15 @@ export default async function AboutPage() {
           </div>
           <div>
             <dt className="font-semibold">Headquarters</dt>
-            <dd className="text-gray-600 dark:text-gray-400">San Francisco, California</dd>
+            <dd className="text-gray-600 dark:text-gray-400">
+              San Francisco, California
+            </dd>
           </div>
           <div>
             <dt className="font-semibold">Jurisdiction</dt>
-            <dd className="text-gray-600 dark:text-gray-400">Delaware, United States</dd>
+            <dd className="text-gray-600 dark:text-gray-400">
+              Delaware, United States
+            </dd>
           </div>
         </dl>
       </section>
@@ -100,7 +108,8 @@ export default async function AboutPage() {
           Want to learn more?
         </h2>
         <p className="mt-2 text-gray-600 dark:text-gray-300">
-          We would love to hear from you. Reach out to discuss how Nebutra can help your business.
+          We would love to hear from you. Reach out to discuss how Nebutra can
+          help your business.
         </p>
         <div className="mt-6 flex justify-center gap-4">
           <Link
@@ -121,11 +130,19 @@ export default async function AboutPage() {
   );
 }
 
-function ValueCard({ title, description }: { title: string; description: string }) {
+function ValueCard({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
   return (
     <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-6">
       <h3 className="font-semibold text-gray-900 dark:text-white">{title}</h3>
-      <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{description}</p>
+      <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        {description}
+      </p>
     </div>
   );
 }

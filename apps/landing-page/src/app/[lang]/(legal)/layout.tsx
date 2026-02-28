@@ -1,13 +1,18 @@
 import { ReactNode } from "react";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 interface LegalLayoutProps {
   children: ReactNode;
   params: Promise<{ lang: string }>;
 }
 
-export default async function LegalLayout({ children, params }: LegalLayoutProps) {
+export default async function LegalLayout({
+  children,
+  params,
+}: LegalLayoutProps) {
   const { lang } = await params;
+  const t = await getTranslations({ locale: lang, namespace: "legal" });
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -26,13 +31,13 @@ export default async function LegalLayout({ children, params }: LegalLayoutProps
                 href={`/${lang}`}
                 className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
-                Home
+                {t("nav.home")}
               </Link>
               <Link
                 href={`/${lang}/contact`}
                 className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
-                Contact
+                {t("nav.contact")}
               </Link>
             </nav>
           </div>
@@ -53,29 +58,29 @@ export default async function LegalLayout({ children, params }: LegalLayoutProps
                 href={`/${lang}/privacy`}
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
-                Privacy Policy
+                {t("footer.privacy")}
               </Link>
               <Link
                 href={`/${lang}/terms`}
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
-                Terms of Service
+                {t("footer.terms")}
               </Link>
               <Link
                 href={`/${lang}/cookies`}
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
-                Cookie Policy
+                {t("footer.cookies")}
               </Link>
               <Link
                 href={`/${lang}/refund`}
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
-                Refund Policy
+                {t("footer.refund")}
               </Link>
             </nav>
             <p className="text-sm text-gray-400 dark:text-gray-500">
-              © {new Date().getFullYear()} Nebutra, Inc. All rights reserved.
+              {t("footer.copyright")}
             </p>
           </div>
         </div>

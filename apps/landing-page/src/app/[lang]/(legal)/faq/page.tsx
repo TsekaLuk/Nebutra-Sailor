@@ -1,14 +1,15 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { locales } from "@/lib/i18n/locales";
+import { routing } from "@/i18n/routing";
 
 export const metadata: Metadata = {
   title: "FAQ | Nebutra",
-  description: "Frequently asked questions about Nebutra's platform, pricing, and services.",
+  description:
+    "Frequently asked questions about Nebutra's platform, pricing, and services.",
 };
 
 export function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
+  return routing.locales.map((locale) => ({ lang: locale }));
 }
 
 const faqs = [

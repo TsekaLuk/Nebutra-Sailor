@@ -1,14 +1,15 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { locales } from "@/lib/i18n/locales";
+import { routing } from "@/i18n/routing";
 
 export const metadata: Metadata = {
   title: "Contact Us | Nebutra",
-  description: "Get in touch with Nebutra for sales, support, or general inquiries.",
+  description:
+    "Get in touch with Nebutra for sales, support, or general inquiries.",
 };
 
 export function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
+  return routing.locales.map((locale) => ({ lang: locale }));
 }
 
 const contacts = [
@@ -211,12 +212,16 @@ export default async function ContactPage() {
         </h2>
         <div className="space-y-4 text-gray-600 dark:text-gray-400">
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white">Nebutra, Inc.</h3>
+            <h3 className="font-semibold text-gray-900 dark:text-white">
+              Nebutra, Inc.
+            </h3>
             <p>San Francisco, California</p>
             <p>United States</p>
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white">Social Media</h3>
+            <h3 className="font-semibold text-gray-900 dark:text-white">
+              Social Media
+            </h3>
             <div className="flex gap-4 mt-2">
               <a
                 href="https://twitter.com/nebutra"
