@@ -24,6 +24,12 @@
       "inputs": ["$TURBO_DEFAULT$", "vitest.config*"],
       "outputs": ["coverage/**"]
     },
+    "test:watch": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "vitest.config*"],
+      "cache": false,
+      "persistent": true
+    },
     "db:generate": {
       "cache": true,
       "inputs": ["packages/db/prisma/schema.prisma"],

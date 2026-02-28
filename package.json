@@ -9,6 +9,7 @@
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
     "test:coverage": "turbo run test -- --coverage",
     "test:arch": "vitest run --config vitest.arch.config.ts",
     "check-env": "npx tsx infra/scripts/check-env.ts",
