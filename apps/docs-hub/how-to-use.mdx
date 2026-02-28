@@ -1,0 +1,61 @@
+---
+title: "How to Use"
+description: "Install and consume the design system in your app."
+---
+
+## Installation
+
+The design system is a workspace package. Add it to your app's `package.json`:
+
+```json
+{
+  "dependencies": {
+    "@nebutra/design-system": "workspace:*"
+  }
+}
+```
+
+Then run `pnpm install` from the repo root.
+
+## Setup
+
+Wrap your app with `DesignSystemProvider`:
+
+```tsx
+import { DesignSystemProvider } from "@nebutra/design-system"
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <DesignSystemProvider>{children}</DesignSystemProvider>
+}
+```
+
+## Importing components
+
+```tsx
+import { Button, Card, PageHeader } from "@nebutra/design-system"
+import { fontFamilies, typeStyles } from "@nebutra/design-system/typography"
+import { marketingGradients } from "@nebutra/design-system/theme"
+```
+
+## Theme mode
+
+```tsx
+import { useDesignSystem } from "@nebutra/design-system"
+
+function ThemeToggle() {
+  const { toggleMode, resolvedMode } = useDesignSystem()
+  return <button onClick={toggleMode}>Mode: {resolvedMode}</button>
+}
+```
+
+## Available exports
+
+| Import path | Contents |
+|---|---|
+| `@nebutra/design-system` | All exports (components, hooks, utils) |
+| `@nebutra/design-system/theme` | Color tokens, brand overrides, marketing tokens |
+| `@nebutra/design-system/typography` | Font families, type scale, presets |
+| `@nebutra/design-system/components` | UI components |
+| `@nebutra/design-system/icons` | Octicons re-exports |
+| `@nebutra/design-system/utils` | Utility functions (`cn`, breakpoints) |
+| `@nebutra/design-system/hooks` | `useDesignSystem`, `useTheme` |

@@ -1,0 +1,35 @@
+---
+title: "Introduction"
+description: "Nebutra Design System — a unified UI foundation extracted from production Nebutra applications."
+---
+
+## What is this?
+
+The Nebutra Design System is an abstraction of the UI patterns, tokens, and components already proven in our production applications. It is not a new design language — it is a formalisation of what already exists.
+
+**This documentation is the single source of truth.** No parallel design documents or verbal conventions exist.
+
+## What it covers
+
+<CardGroup cols={2}>
+  <Card title="Foundations" icon="palette" href="/foundations/color">
+    Color, typography, spacing, theming, and accessibility guidelines.
+  </Card>
+  <Card title="UI Patterns" icon="layout-grid" href="/ui-patterns/introduction">
+    High-level patterns for forms, tables, navigation, and modality.
+  </Card>
+  <Card title="Fragment Components" icon="puzzle" href="/fragment-components/introduction">
+    Composed UI blocks used across pages.
+  </Card>
+  <Card title="Atom Components" icon="circle" href="/atom-components/introduction">
+    Primitive building blocks: buttons, inputs, badges, and more.
+  </Card>
+</CardGroup>
+
+## Principles
+
+- **Source of truth** — Specs originate from existing implementations, never invented
+- **Reuse first** — Existing atoms are catalogued and promoted, not duplicated
+- **Abstract, don't refactor** — New code follows the system; old code migrates gradually
+- **No inline CSS** — Tokens, Tailwind classes, or component Props only
+- **Minimal scope** — Only high-frequency, cross-page UI is formalised
