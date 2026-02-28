@@ -1,9 +1,10 @@
-import { SignUp } from "@clerk/nextjs";
+import { AuthSplitLayout } from "@/components/auth/auth-split-layout";
+import { SignUpForm } from "@/components/auth/sign-up-form";
 
 export default function SignUpPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <SignUp />
-    </div>
+    <AuthSplitLayout>
+      <SignUpForm />
+    </AuthSplitLayout>
   );
 }

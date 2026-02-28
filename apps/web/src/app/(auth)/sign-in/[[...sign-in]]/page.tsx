@@ -1,9 +1,10 @@
-import { SignIn } from "@clerk/nextjs";
+import { AuthSplitLayout } from "@/components/auth/auth-split-layout";
+import { SignInForm } from "@/components/auth/sign-in-form";
 
 export default function SignInPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <SignIn />
-    </div>
+    <AuthSplitLayout>
+      <SignInForm />
+    </AuthSplitLayout>
   );
 }
