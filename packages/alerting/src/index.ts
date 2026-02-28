@@ -26,6 +26,25 @@ export interface AlertChannel {
 }
 
 // ============================================
+// Error Handler
+// ============================================
+
+type AlertErrorHandler = (context: string, error: unknown) => void;
+
+let _errorHandler: AlertErrorHandler = () => {};
+
+/**
+ * Configure a handler for internal alerting errors.
+ * Defaults to a no-op. Wire this to your logging solution.
+ *
+ * @example
+ * setAlertErrorHandler((ctx, err) => logger.error(ctx, err));
+ */
+export function setAlertErrorHandler(handler: AlertErrorHandler): void {
+  _errorHandler = handler;
+}
+
+// ============================================
 // Alert Channel Registry
 // ============================================
 
@@ -90,7 +109,8 @@ export function createSlackChannel(webhookUrl: string): AlertChannel {
           body: JSON.stringify(slackPayload),
         });
         return response.ok;
-      } catch {
+      } catch (error) {
+        _errorHandler("Slack alert failed", error);
         return false;
       }
     },
@@ -143,7 +163,8 @@ export function createDiscordChannel(webhookUrl: string): AlertChannel {
           body: JSON.stringify(discordPayload),
         });
         return response.ok;
-      } catch {
+      } catch (error) {
+        _errorHandler("Discord alert failed", error);
         return false;
       }
     },
@@ -179,7 +200,8 @@ export function createWebhookChannel(
           body: JSON.stringify(body),
         });
         return response.ok;
-      } catch {
+      } catch (error) {
+        _errorHandler(`Webhook alert (${name}) failed`, error);
         return false;
       }
     },
@@ -208,7 +230,8 @@ export async function sendAlert(
       try {
         const success = await channel.send(enrichedPayload);
         results.set(name, success);
-      } catch {
+      } catch (error) {
+        _errorHandler(`Alert channel ${name} failed`, error);
         results.set(name, false);
       }
     },
@@ -242,7 +265,8 @@ export async function sendAlertTo(
     try {
       const success = await channel.send(enrichedPayload);
       results.set(name, success);
-    } catch {
+    } catch (error) {
+      _errorHandler(`Alert channel ${name} failed`, error);
       results.set(name, false);
     }
   });
@@ -334,12 +358,35 @@ export function trackError(
       `High Error Rate: ${service}`,
       `Error rate threshold exceeded: ${data.count} errors in ${config.windowMs / 1000}s`,
       service,
-    ).catch(() => undefined);
+    ).catch((error: unknown) => {
+      _errorHandler("trackError alert dispatch failed", error);
+    });
 
     return true;
   }
 
   return false;
+}
+
+/**
+ * Remove all registered channels. Useful for testing and re-initialization.
+ */
+export function clearChannels(): void {
+  channels.clear();
+}
+
+/**
+ * Get names of all registered channels.
+ */
+export function getRegisteredChannelNames(): string[] {
+  return Array.from(channels.keys());
+}
+
+/**
+ * Reset error rate tracking counters. Useful for testing.
+ */
+export function resetErrorCounts(): void {
+  errorCounts.clear();
 }
 
 // ============================================
