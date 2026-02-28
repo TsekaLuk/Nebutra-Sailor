@@ -1,0 +1,143 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Nebutra Design System",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0070F3",
+    "light": "#3291FF",
+    "dark": "#0761D1",
+    "background": {
+      "light": "#FFFFFF",
+      "dark": "#0A0A0A"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/Nebutra-SaaS-Lab/Nebutra-Sailor"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction", "how-to-use", "contributing"]
+    },
+    {
+      "group": "Foundations",
+      "pages": [
+        "foundations/accessibility",
+        "foundations/color",
+        "foundations/typography",
+        "foundations/theming",
+        "foundations/tailwind",
+        "foundations/icons",
+        "foundations/copywriting"
+      ]
+    },
+    {
+      "group": "UI Patterns",
+      "pages": [
+        "ui-patterns/introduction",
+        "ui-patterns/charts",
+        "ui-patterns/empty-states",
+        "ui-patterns/forms",
+        "ui-patterns/layout",
+        "ui-patterns/modality",
+        "ui-patterns/navigation",
+        "ui-patterns/tables"
+      ]
+    },
+    {
+      "group": "Fragment Components",
+      "pages": [
+        "fragment-components/introduction",
+        "fragment-components/admonition",
+        "fragment-components/assistant-chat",
+        "fragment-components/confirmation-modal",
+        "fragment-components/data-input",
+        "fragment-components/empty-state",
+        "fragment-components/filter-bar",
+        "fragment-components/form-item-layout",
+        "fragment-components/info-tooltip",
+        "fragment-components/inner-side-menu",
+        "fragment-components/logs-bar-chart",
+        "fragment-components/metric-card",
+        "fragment-components/modal",
+        "fragment-components/multi-select",
+        "fragment-components/page-container",
+        "fragment-components/page-header",
+        "fragment-components/page-section",
+        "fragment-components/table-of-contents",
+        "fragment-components/text-confirm-dialog"
+      ]
+    },
+    {
+      "group": "Atom Components",
+      "pages": [
+        "atom-components/introduction",
+        "atom-components/accordion",
+        "atom-components/alert",
+        "atom-components/alert-dialog",
+        "atom-components/aspect-ratio",
+        "atom-components/avatar",
+        "atom-components/badge",
+        "atom-components/breadcrumb",
+        "atom-components/button",
+        "atom-components/calendar",
+        "atom-components/card",
+        "atom-components/carousel",
+        "atom-components/checkbox",
+        "atom-components/collapsible",
+        "atom-components/combobox",
+        "atom-components/command",
+        "atom-components/command-menu",
+        "atom-components/context-menu",
+        "atom-components/date-picker",
+        "atom-components/dialog",
+        "atom-components/drawer",
+        "atom-components/dropdown-menu",
+        "atom-components/expanding-textarea",
+        "atom-components/field",
+        "atom-components/form",
+        "atom-components/hover-card",
+        "atom-components/input",
+        "atom-components/input-otp",
+        "atom-components/label",
+        "atom-components/menubar",
+        "atom-components/mermaid",
+        "atom-components/nav-menu",
+        "atom-components/navigation-menu",
+        "atom-components/pagination",
+        "atom-components/popover",
+        "atom-components/progress",
+        "atom-components/radio-group",
+        "atom-components/radio-group-card",
+        "atom-components/radio-group-stacked",
+        "atom-components/resizable",
+        "atom-components/scroll-area",
+        "atom-components/select",
+        "atom-components/separator",
+        "atom-components/sheet",
+        "atom-components/sidebar",
+        "atom-components/skeleton",
+        "atom-components/slider",
+        "atom-components/sonner",
+        "atom-components/switch",
+        "atom-components/table",
+        "atom-components/tabs",
+        "atom-components/textarea",
+        "atom-components/toggle",
+        "atom-components/toggle-group",
+        "atom-components/tooltip",
+        "atom-components/tree-view"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/Nebutra-SaaS-Lab/Nebutra-Sailor"
+  }
+}
