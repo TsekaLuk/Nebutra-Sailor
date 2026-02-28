@@ -1,0 +1,131 @@
+---
+title: Icons
+description: Primer Octicons re-exported with semantic aliases and a standardized size scale.
+---
+
+## Overview
+
+Icons are managed in `apps/docs-hub/design-system/src/icons/index.ts`. The system re-exports all GitHub Primer Octicons from `@primer/octicons-react` and provides semantic alias names and a standardized size scale.
+
+There is no custom icon set at this time. All iconography comes from the Octicons library, which is MIT licensed and optimized for UI use at 16px and 24px.
+
+## Design Rationale
+
+Using a single upstream icon library (Primer Octicons) avoids icon sprawl — a common problem where different parts of an application import icons from multiple sources with inconsistent sizing, stroke widths, and visual weight.
+
+Semantic aliases (`IconAlert`, `IconCheck`, `IconSearch`) decouple components from Octicons API surface. If the upstream library or icon name changes, only the alias map needs updating.
+
+## Icon Aliases
+
+The following semantic aliases are exported alongside the full Octicons library:
+
+| Alias | Octicons source | Common use |
+|---|---|---|
+| `IconAlert` | `AlertIcon` | Warnings, destructive actions |
+| `IconCheck` | `CheckIcon` | Success states, confirmations |
+| `IconChevronDown` | `ChevronDownIcon` | Dropdowns, accordions |
+| `IconChevronRight` | `ChevronRightIcon` | Navigation, list items |
+| `IconSettings` | `GearIcon` | Settings, configuration |
+| `IconHome` | `HomeIcon` | Navigation, root link |
+| `IconUser` | `PersonIcon` | User profile, authentication |
+| `IconPlus` | `PlusIcon` | Add actions, creation |
+| `IconSearch` | `SearchIcon` | Search inputs, filtering |
+| `IconClose` | `XIcon` | Dismiss, close, remove |
+
+Import either the alias or the direct Octicons name — both are exported from the same entry point.
+
+```tsx
+import { IconSearch, IconClose } from "@nebutra/design-system/icons";
+
+// Or use the full Octicons library directly
+import { StarIcon, RepoIcon } from "@nebutra/design-system/icons";
+```
+
+## Size Scale
+
+All icons accept a `size` prop. Use the `iconSizes` scale for consistency.
+
+| Token | Value (px) | Use for |
+|---|---|---|
+| `iconSizes.sm` | 16 | Inline icons, tight UI |
+| `iconSizes.md` | 20 | Default icon size in buttons, inputs |
+| `iconSizes.lg` | 24 | Standalone icons, nav items |
+| `iconSizes.xl` | 32 | Feature illustrations, empty states |
+
+```tsx
+import { IconSearch, iconSizes } from "@nebutra/design-system/icons";
+
+// Fixed size using scale token
+<IconSearch size={iconSizes.md} />
+
+// Or pass a literal (if the token value is not needed in JS)
+<IconSearch size={20} />
+```
+
+<Tip>
+Primer Octicons are designed at 16px and 24px. The `sm` and `lg` sizes will render crisply at all pixel densities. The `md` (20px) and `xl` (32px) sizes scale well but are not native sizes — verify sharpness on high-DPI displays.
+</Tip>
+
+## Usage Guidelines
+
+### In buttons
+
+```tsx
+import { IconPlus, iconSizes } from "@nebutra/design-system/icons";
+
+<button className="flex items-center gap-2">
+  <IconPlus size={iconSizes.sm} />
+  Add item
+</button>
+```
+
+### With accessible labels
+
+Icons used without adjacent text must have an accessible label.
+
+```tsx
+import { IconClose, iconSizes } from "@nebutra/design-system/icons";
+
+// Wrong — no label for assistive technology
+<button><IconClose size={iconSizes.sm} /></button>
+
+// Correct — aria-label on the button
+<button aria-label="Close dialog">
+  <IconClose size={iconSizes.sm} aria-hidden="true" />
+</button>
+```
+
+### Color inheritance
+
+Octicons render as SVGs and inherit `currentColor` by default. Set the icon color via the parent element's `color` property.
+
+```tsx
+// Icon inherits text color from parent
+<span className="text-accent-fg">
+  <IconCheck size={iconSizes.sm} />
+</span>
+```
+
+## TypeScript
+
+```ts
+import type { IconSize } from "@nebutra/design-system/icons";
+
+interface Props {
+  size?: IconSize; // "sm" | "md" | "lg" | "xl"
+}
+```
+
+## Do / Don't
+
+**Do** import icons exclusively from `@nebutra/design-system/icons`. Do not add `@primer/octicons-react` as a direct dependency in app packages.
+
+**Do** use the semantic alias names (`IconSearch`, `IconClose`) in application code. Reserve direct Octicons imports for cases where no alias exists.
+
+**Do** pass `aria-hidden="true"` on decorative icons and provide an accessible label on the parent interactive element.
+
+**Don't** use icons smaller than `iconSizes.sm` (16px). At sub-16px sizes, SVG path detail is lost and the icon becomes inaccessible.
+
+**Don't** scale icons with CSS transforms or `width`/`height` style overrides. Always use the `size` prop to ensure the SVG viewport and path rendering stay correct.
+
+**Don't** add a separate icon library (Heroicons, Lucide, Feather) alongside Octicons without first evaluating whether Octicons provides an equivalent. Mixed icon styles break visual consistency.

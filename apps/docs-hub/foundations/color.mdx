@@ -1,0 +1,179 @@
+---
+title: Color
+description: Three-layer color architecture built on Primer primitives, semantic tokens, and marketing overrides.
+---
+
+## Overview
+
+The color system uses a three-layer architecture that separates concerns across scale, semantics, and context.
+
+| Layer | Source | Purpose |
+|---|---|---|
+| **Primitives** | `default.ts → colorPrimitives` | Raw palette — gray, blue, green, yellow, red, purple (each 0–9) |
+| **Semantic** | `default.ts → semanticColorsLight / semanticColorsDark` | Role-based tokens used by all UI components |
+| **Marketing** | `marketing.ts → marketingGradients / marketingEffects` | High-impact visual tokens for landing pages only |
+
+Brand overrides live in `brand.ts → createTheme()`. The `BrandOverrides` interface accepts partial semantic color maps, so only the tokens that change need to be specified.
+
+## Design Rationale
+
+Semantic tokens decouple visual decisions from component code. A component that references `canvas.default` automatically responds to dark mode — no conditional logic required. Primitives are never referenced directly in components; they exist solely to feed the semantic layer.
+
+The marketing layer is isolated by design. Gradient and glassmorphism tokens are unsuitable for application UI and should never leak into shared components.
+
+## Primitive Palette
+
+### Gray
+
+| Step | Hex | Usage |
+|---|---|---|
+| `gray.0` | `#f6f8fa` | Subtle backgrounds |
+| `gray.2` | `#d0d7de` | Default borders |
+| `gray.5` | `#6e7781` | Subtle foreground |
+| `gray.7` | `#424a53` | Muted text |
+| `gray.9` | `#24292f` | Near-black |
+
+### Blue (Primary)
+
+| Step | Hex |
+|---|---|
+| `blue.4` | `#218bff` |
+| `blue.5` | `#0969da` |
+| `blue.6` | `#0550ae` |
+
+Full palettes for `green`, `yellow`, `red`, and `purple` follow the same 0–9 step scale. See `src/theme/default.ts → colorPrimitives`.
+
+## Semantic Token Reference
+
+Semantic tokens are the only colors components should use directly.
+
+### Canvas (Backgrounds)
+
+| Token | Light | Dark |
+|---|---|---|
+| `canvas.default` | `#ffffff` | `#0d1117` |
+| `canvas.overlay` | `#ffffff` | `#161b22` |
+| `canvas.inset` | `#f6f8fa` | `#010409` |
+| `canvas.subtle` | `#f6f8fa` | `#161b22` |
+
+### Foreground (Text)
+
+| Token | Light | Dark |
+|---|---|---|
+| `fg.default` | `#1f2328` | `#e6edf3` |
+| `fg.muted` | `#656d76` | `#8b949e` |
+| `fg.subtle` | `#6e7781` | `#6e7681` |
+| `fg.onEmphasis` | `#ffffff` | `#ffffff` |
+
+### Border
+
+| Token | Light | Dark |
+|---|---|---|
+| `border.default` | `#d0d7de` | `#30363d` |
+| `border.muted` | `#d8dee4` | `#21262d` |
+| `border.subtle` | `rgba(27,31,36,0.15)` | `rgba(240,246,252,0.1)` |
+
+### Accent (Primary Actions)
+
+| Token | Light | Dark |
+|---|---|---|
+| `accent.fg` | `#0969da` | `#58a6ff` |
+| `accent.emphasis` | `#0969da` | `#1f6feb` |
+| `accent.muted` | `rgba(84,174,255,0.4)` | `rgba(56,139,253,0.4)` |
+| `accent.subtle` | `#ddf4ff` | `rgba(56,139,253,0.15)` |
+
+### Status Colors
+
+| Group | Token | Light fg | Dark fg |
+|---|---|---|---|
+| Success | `success.fg` | `#1a7f37` | `#3fb950` |
+| Warning | `attention.fg` | `#9a6700` | `#d29922` |
+| Danger | `danger.fg` | `#d1242f` | `#f85149` |
+| Neutral | `neutral.emphasis` | `#6e7781` | `#6e7681` |
+
+## Marketing Color Tokens
+
+<Warning>
+Marketing tokens are for landing page surfaces only. Never import `marketingGradients` or `marketingEffects` into shared component code.
+</Warning>
+
+### Gradients (`marketingGradients`)
+
+| Name | Value |
+|---|---|
+| `primary` | `linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%)` |
+| `secondary` | `linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #6366f1 100%)` |
+| `subtle` | `linear-gradient(180deg, rgba(99,102,241,0.1) 0%, transparent 100%)` |
+| `glass` | `linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)` |
+| `text` | `linear-gradient(135deg, #6366f1 0%, #d946ef 100%)` |
+| `mesh` | Three-stop radial mesh (purple/cyan/rose) |
+| `aurora` | Elliptical aurora (purple/cyan/pink) |
+| `meshDark` | Dark-mode variant of mesh |
+
+### Effects (`marketingEffects`)
+
+| Name | Description |
+|---|---|
+| `glass` | `backdrop-filter: blur(12px)` + white border |
+| `glassDark` | `backdrop-filter: blur(12px)` + dark border |
+| `frosted` | `blur(20px) saturate(180%)` |
+| `glow` | `box-shadow: 0 0 60px rgba(99,102,241,0.3)` |
+| `glowStrong` | `box-shadow: 0 0 80px rgba(99,102,241,0.5)` |
+| `cardShadow` | Standard card elevation |
+| `cardShadowElevated` | Elevated card (hover state) |
+| `hoverLift` | `translateY(-4px)` + elevated shadow |
+
+## Creating a Brand Theme
+
+```ts
+import { createTheme } from "@nebutra/design-system/theme/brand";
+
+const brandTheme = createTheme("light", {
+  colors: {
+    accent: {
+      fg: "#your-brand-color",
+      emphasis: "#your-brand-emphasis",
+    },
+  },
+  typography: {
+    fontFamily: {
+      normal: '"YourBrandFont", Inter, sans-serif',
+    },
+  },
+});
+```
+
+The `BrandOverrides` interface accepts:
+- `colors` — partial `semanticColorsLight` map
+- `typography.fontFamily` — `normal`, `mono`, `display`
+- `radii` — partial radii map
+- `shadows` — arbitrary shadow record
+
+## Usage Guidelines
+
+Always consume colors through semantic tokens, never raw hex values or primitives.
+
+```tsx
+// Correct — semantic token via CSS variable
+<div style={{ color: "var(--fgColor-default)" }} />
+
+// Correct — Tailwind utility mapped to semantic token
+<p className="text-foreground" />
+
+// Wrong — hardcoded hex bypasses theming
+<div style={{ color: "#1f2328" }} />
+```
+
+## Do / Don't
+
+**Do** reference `canvas`, `fg`, `border`, `accent`, `success`, `attention`, `danger`, and `neutral` tokens for all UI surfaces.
+
+**Do** isolate marketing gradient and glow effects to `apps/landing-page` components only.
+
+**Do** use `createTheme()` to apply brand overrides rather than overwriting CSS variables manually.
+
+**Don't** import `colorPrimitives` values (`gray.5`, `blue.4`) in component files — use semantic aliases.
+
+**Don't** add new one-off color values to component styles. Add them to the semantic layer first.
+
+**Don't** use marketing gradients on interactive controls (buttons, inputs, selects).
