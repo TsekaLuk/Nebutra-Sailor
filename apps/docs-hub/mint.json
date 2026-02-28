@@ -33,12 +33,14 @@
     {
       "group": "Foundations",
       "pages": [
-        "design-system/foundations/accessibility",
+        "design-system/foundations/brand",
         "design-system/foundations/color",
         "design-system/foundations/typography",
+        "design-system/foundations/grid",
         "design-system/foundations/theming",
         "design-system/foundations/tailwind",
         "design-system/foundations/icons",
+        "design-system/foundations/accessibility",
         "design-system/foundations/copywriting"
       ]
     },
