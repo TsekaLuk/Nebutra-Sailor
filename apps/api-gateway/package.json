@@ -7,22 +7,27 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "hono": "^4.6.0",
     "@hono/node-server": "^1.13.0",
     "@hono/zod-validator": "^0.7.5",
-    "zod": "^3.23.0",
-    "@nebutra/db": "workspace:*",
-    "@nebutra/rate-limit": "workspace:*",
     "@nebutra/cache": "workspace:*",
-    "@nebutra/health": "workspace:*"
+    "@nebutra/db": "workspace:*",
+    "@nebutra/health": "workspace:*",
+    "@nebutra/rate-limit": "workspace:*",
+    "hono": "^4.6.0",
+    "zod": "^3.23.0"
   },
   "devDependencies": {
     "@prisma/client": "^7.0.0",
     "@types/node": "^20",
+    "@vitest/coverage-v8": "^4.0.18",
     "tsx": "^4.19.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.18"
   }
 }
