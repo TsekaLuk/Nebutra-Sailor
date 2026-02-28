@@ -1,7 +1,8 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
-import { logger } from "hono/logger";
+import { logger as honoLogger } from "hono/logger";
+import { logger, initOtel } from "@nebutra/logger";
 
 import { healthRoutes } from "./routes/misc/health.js";
 import { statusRoutes } from "./routes/system/status.js";
@@ -9,6 +10,8 @@ import { consentRoutes } from "./routes/legal/consent.js";
 import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
 import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
 import { env, DOMAINS } from "./config/env.js";
+
+initOtel({ serviceName: "api-gateway" });
 
 const app = new Hono();
 
@@ -36,7 +39,7 @@ const corsOrigins = [
 ].filter(Boolean) as string[];
 
 // Global middlewares
-app.use("*", logger());
+app.use("*", honoLogger());
 app.use(
   "*",
   cors({
@@ -81,7 +84,7 @@ app.notFound((c) => {
 
 // Error handler
 app.onError((err, c) => {
-  console.error("Error:", err);
+  logger.error("Unhandled error", err, { path: c.req.path });
   return c.json(
     {
       error: "Internal Server Error",
@@ -93,7 +96,7 @@ app.onError((err, c) => {
 
 const port = parseInt(process.env.PORT || "3002", 10);
 
-console.warn(`API Gateway starting on http://localhost:${port}`);
+logger.info("API Gateway started", { port });
 
 serve({
   fetch: app.fetch,

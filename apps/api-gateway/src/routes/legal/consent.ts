@@ -2,6 +2,9 @@ import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { prisma, Prisma } from "@nebutra/db";
+import { logger } from "@nebutra/logger";
+
+const log = logger.child({ service: "consent" });
 
 type ConsentEnv = {
   Variables: { userId?: string; organizationId?: string };
@@ -91,7 +94,7 @@ consentRoutes.post(
         consentedAt: consent.consentedAt,
       });
     } catch (error) {
-      console.error("Failed to record consent:", error);
+      log.error("Failed to record consent", error);
       return c.json({ error: "Failed to record consent" }, 500);
     }
   },
@@ -150,7 +153,7 @@ consentRoutes.get("/consent/status", async (c) => {
       lastConsentedAt: consent?.consentedAt,
     });
   } catch (error) {
-    console.error("Failed to get consent status:", error);
+    log.error("Failed to get consent status", error);
     return c.json({ error: "Failed to get consent status" }, 500);
   }
 });
@@ -190,7 +193,7 @@ consentRoutes.delete("/consent", async (c) => {
       withdrawnCount: result.count,
     });
   } catch (error) {
-    console.error("Failed to withdraw consent:", error);
+    log.error("Failed to withdraw consent", error);
     return c.json({ error: "Failed to withdraw consent" }, 500);
   }
 });
@@ -258,7 +261,7 @@ consentRoutes.post(
         expiresAt: consent.expiresAt,
       });
     } catch (error) {
-      console.error("Failed to record cookie consent:", error);
+      log.error("Failed to record cookie consent", error);
       return c.json({ error: "Failed to record cookie consent" }, 500);
     }
   },
@@ -309,7 +312,7 @@ consentRoutes.get("/cookie-consent", async (c) => {
       expiresAt: consent.expiresAt,
     });
   } catch (error) {
-    console.error("Failed to get cookie consent:", error);
+    log.error("Failed to get cookie consent", error);
     return c.json({ error: "Failed to get cookie consent" }, 500);
   }
 });
@@ -362,7 +365,7 @@ consentRoutes.get("/documents", async (c) => {
       documents: Object.values(uniqueDocs),
     });
   } catch (error) {
-    console.error("Failed to list documents:", error);
+    log.error("Failed to list documents", error);
     return c.json({ error: "Failed to list documents" }, 500);
   }
 });
@@ -393,7 +396,7 @@ consentRoutes.get("/documents/:slug", async (c) => {
 
     return c.json({ document });
   } catch (error) {
-    console.error("Failed to get document:", error);
+    log.error("Failed to get document", error);
     return c.json({ error: "Failed to get document" }, 500);
   }
 });
@@ -458,7 +461,7 @@ consentRoutes.post(
           "Your message has been received. We will respond within 1-2 business days.",
       });
     } catch (error) {
-      console.error("Failed to submit contact form:", error);
+      log.error("Failed to submit contact form", error);
       return c.json({ error: "Failed to submit contact form" }, 500);
     }
   },

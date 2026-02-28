@@ -18,6 +18,7 @@
     "@nebutra/cache": "workspace:*",
     "@nebutra/db": "workspace:*",
     "@nebutra/health": "workspace:*",
+    "@nebutra/logger": "workspace:*",
     "@nebutra/rate-limit": "workspace:*",
     "hono": "^4.6.0",
     "zod": "^3.23.0"

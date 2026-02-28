@@ -106,6 +106,9 @@ importers:
       "@nebutra/health":
         specifier: workspace:*
         version: link:../../packages/health
+      "@nebutra/logger":
+        specifier: workspace:*
+        version: link:../../packages/logger
       "@nebutra/rate-limit":
         specifier: workspace:*
         version: link:../../packages/rate-limit
