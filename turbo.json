@@ -34,6 +34,10 @@
     },
     "db:push": {
       "cache": false
+    },
+    "e2e": {
+      "dependsOn": ["^build"],
+      "cache": false
     }
   }
 }

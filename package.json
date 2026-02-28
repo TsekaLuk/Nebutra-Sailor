@@ -29,7 +29,10 @@
     "release:patch": "commit-and-tag-version --release-as patch",
     "release:dry": "commit-and-tag-version --dry-run",
     "changelog": "conventional-changelog -p angular -i changelog/CHANGELOG.md -s",
-    "changelog:all": "conventional-changelog -p angular -i changelog/CHANGELOG.md -s -r 0"
+    "changelog:all": "conventional-changelog -p angular -i changelog/CHANGELOG.md -s -r 0",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:ci": "playwright test --reporter=github"
   },
   "keywords": [
     "saas",
