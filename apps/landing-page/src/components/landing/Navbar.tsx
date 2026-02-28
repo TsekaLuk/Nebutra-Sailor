@@ -7,8 +7,9 @@ import { Menu, X, Github } from "lucide-react";
 import { Logo, Logomark } from "@nebutra/brand";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import { env } from "@/lib/env";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3001";
+const APP_URL = env.NEXT_PUBLIC_APP_URL;
 
 /**
  * Navbar - Fixed navigation with brand logo

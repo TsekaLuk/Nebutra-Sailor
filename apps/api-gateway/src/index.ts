@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
+import { bodyLimit } from "hono/body-limit";
 import { cors } from "hono/cors";
 import { logger as honoLogger } from "hono/logger";
 import { logger, initOtel } from "@nebutra/logger";
@@ -55,6 +56,15 @@ app.use(
   cors({
     origin: corsOrigins,
     credentials: true,
+  }),
+);
+app.use(
+  "*",
+  bodyLimit({
+    maxSize: 1 * 1024 * 1024, // 1MB
+    onError: (c) => {
+      return c.json({ error: "Request body too large" }, 413);
+    },
   }),
 );
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { techStackLogos, getLogoUrl } from "@/lib/landing-content";
 
@@ -22,12 +23,15 @@ export async function LogoStrip() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
           {logos.map((logo) => (
-            <img
+            <Image
               key={logo.name}
               src={logo.url}
               alt={logo.name}
+              width={0}
+              height={28}
               className="h-7 w-auto opacity-30 grayscale transition-all duration-300 hover:opacity-60 hover:grayscale-0"
-              loading="lazy"
+              style={{ width: "auto" }}
+              unoptimized={false}
             />
           ))}
         </div>

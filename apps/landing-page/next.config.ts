@@ -28,6 +28,15 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=31536000; includeSubDomains; preload",
+  },
+  {
+    key: "Content-Security-Policy",
+    value:
+      "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://svgl.app https://cdn.simpleicons.org; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';",
+  },
 ];
 
 const nextConfig: NextConfig = {
@@ -38,6 +47,12 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
     ];
+  },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "svgl.app", pathname: "/library/**" },
+      { protocol: "https", hostname: "cdn.simpleicons.org" },
+    ],
   },
 };
 

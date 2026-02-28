@@ -7,14 +7,14 @@ const envSchema = z.object({
   PORT: z.string().default("3002"),
 
   // Database
-  DATABASE_URL: z.string().optional(),
+  DATABASE_URL: z.string().url(),
 
   // Redis
   UPSTASH_REDIS_URL: z.string().optional(),
   UPSTASH_REDIS_TOKEN: z.string().optional(),
 
   // Clerk
-  CLERK_SECRET_KEY: z.string().optional(),
+  CLERK_SECRET_KEY: z.string().min(1),
 
   // Service URLs
   AI_SERVICE_URL: z.string().optional(),
