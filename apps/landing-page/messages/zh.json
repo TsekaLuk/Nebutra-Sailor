@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "features": "功能",
+    "pricing": "定价",
+    "docs": "文档",
+    "github": "GitHub",
+    "signIn": "登录",
+    "getStarted": "立即开始"
+  },
+  "hero": {
+    "badge": "MIT 许可 · 生产就绪",
+    "headline1": "快速交付您的 SaaS",
+    "headline2": "以周计，而非月计。",
+    "subheadline": "生产就绪的 Monorepo，内置多租户、AI 基础设施、计费及一切所需。",
+    "copyLabel": "复制",
+    "copiedLabel": "已复制！",
+    "ctaGetStarted": "立即开始",
+    "ctaViewGitHub": "在 GitHub 上查看 →"
+  },
+  "features": {
+    "sectionTitle": "从第一天起就为生产环境而生。",
+    "item0": {
+      "title": "原生多租户",
+      "description": "行级安全、组织隔离和租户路由内置于每一层。没有事后拼凑。"
+    },
+    "item1": {
+      "title": "AI 原生基础设施",
+      "description": "对 OpenAI、Anthropic 和 Gemini 的提供商抽象。无需更改应用代码即可切换模型。"
+    },
+    "item2": {
+      "title": "计费已就绪",
+      "description": "Stripe 订阅、用量计量和 Webhook 处理 — 生产就绪，非演示版。"
+    }
+  },
+  "cta": {
+    "heading": "准备好发布了吗？",
+    "subheading": "5 分钟内即可上手。",
+    "copyLabel": "复制",
+    "copiedLabel": "已复制！",
+    "startBuilding": "开始构建"
+  },
+  "footer": {
+    "links": {
+      "product": "产品",
+      "docs": "文档",
+      "github": "GitHub",
+      "discord": "Discord"
+    },
+    "copyright": "© 2024 Nebutra Intelligence",
+    "statusOnline": "在线"
+  },
+  "logoStrip": {
+    "tagline": "基于您信赖的技术栈构建"
+  },
+  "legal": {
+    "nav": {
+      "home": "首页",
+      "contact": "联系我们"
+    },
+    "footer": {
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "cookies": "Cookie 政策",
+      "refund": "退款政策",
+      "copyright": "Nebutra, Inc. 版权所有。"
+    }
+  },
+  "metadata": {
+    "title": "Nebutra Sailor — 开源企业级 SaaS 框架",
+    "description": "以周计交付 SaaS，内置多租户、计费、认证和 AI。生产就绪，MIT 许可。"
+  }
+}

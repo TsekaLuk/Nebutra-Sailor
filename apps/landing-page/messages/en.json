@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "docs": "Docs",
+    "github": "GitHub",
+    "signIn": "Sign In",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "badge": "MIT Licensed · Production-Ready",
+    "headline1": "Ship your SaaS",
+    "headline2": "in weeks, not months.",
+    "subheadline": "Production-ready monorepo with multi-tenancy, AI infrastructure, billing, and everything you need to launch.",
+    "copyLabel": "Copy",
+    "copiedLabel": "Copied!",
+    "ctaGetStarted": "Get Started",
+    "ctaViewGitHub": "View on GitHub →"
+  },
+  "features": {
+    "sectionTitle": "Built for production from day one.",
+    "item0": {
+      "title": "Multi-tenant from day one",
+      "description": "Row-level security, org isolation, and tenant routing built into every layer. No bolted-on afterthoughts."
+    },
+    "item1": {
+      "title": "AI-native infrastructure",
+      "description": "Provider abstraction over OpenAI, Anthropic, and Gemini. Swap models without changing your application code."
+    },
+    "item2": {
+      "title": "Billing wired up",
+      "description": "Stripe subscriptions, usage meters, and webhook handlers — production-ready, not demo-ware."
+    }
+  },
+  "cta": {
+    "heading": "Ready to ship?",
+    "subheading": "Get started in under 5 minutes.",
+    "copyLabel": "Copy",
+    "copiedLabel": "Copied!",
+    "startBuilding": "Start Building"
+  },
+  "footer": {
+    "links": {
+      "product": "Product",
+      "docs": "Docs",
+      "github": "GitHub",
+      "discord": "Discord"
+    },
+    "copyright": "© 2024 Nebutra Intelligence",
+    "statusOnline": "Online"
+  },
+  "logoStrip": {
+    "tagline": "Built on the stack you already trust"
+  },
+  "legal": {
+    "nav": {
+      "home": "Home",
+      "contact": "Contact"
+    },
+    "footer": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy",
+      "refund": "Refund Policy",
+      "copyright": "Nebutra, Inc. All rights reserved."
+    }
+  },
+  "metadata": {
+    "title": "Nebutra Sailor — The Open-Source Enterprise SaaS Framework",
+    "description": "Ship your SaaS in weeks, not months. Multi-tenancy, billing, auth, and AI built in. Production-ready, MIT licensed."
+  }
+}

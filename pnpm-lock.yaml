@@ -222,6 +222,9 @@ importers:
       next:
         specifier: 16.0.7
         version: 16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.58.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      next-intl:
+        specifier: ^3.26.5
+        version: 3.26.5(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.58.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -3968,6 +3971,12 @@ packages:
     resolution:
       {
         integrity: sha512-H13E9Xl+PxBd8D5/6TVUluSpxGNvFSlN/b3coUp0e0JpuWXXnQDiavIpY3NnvSp4xhEMoXyyBvVfdFX8jglOHQ==,
+      }
+
+  "@formatjs/intl-localematcher@0.5.10":
+    resolution:
+      {
+        integrity: sha512-af3qATX+m4Rnd9+wHcjJ4w2ijq+rAVP3CCinJQvFv1kgSu1W6jypUmvleJxcewdxmutM8dmIRZFxO/IQBZmP2Q==,
       }
 
   "@formatjs/intl-localematcher@0.6.2":
@@ -18950,6 +18959,15 @@ packages:
       }
     engines: { node: ">= 0.4.0" }
 
+  next-intl@3.26.5:
+    resolution:
+      {
+        integrity: sha512-EQlCIfY0jOhRldiFxwSXG+ImwkQtDEfQeSOEQp6ieAGSLWGlgjdb/Ck/O7wMfC430ZHGeUKVKax8KGusTPKCgg==,
+      }
+    peerDependencies:
+      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+
   next-mdx-remote-client@1.1.6:
     resolution:
       {
@@ -24078,6 +24096,14 @@ packages:
     peerDependencies:
       react: ">=17.0.0"
 
+  use-intl@3.26.5:
+    resolution:
+      {
+        integrity: sha512-OdsJnC/znPvHCHLQH/duvQNXnP1w0hPfS+tkSi3mAbfjYBGh4JnyfdwkQBfIVf7t8gs9eSX/CntxUMvtKdG2MQ==,
+      }
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+
   use-isomorphic-layout-effect@1.2.1:
     resolution:
       {
@@ -27535,6 +27561,10 @@ snapshots:
   "@formatjs/icu-skeleton-parser@1.8.16":
     dependencies:
       "@formatjs/ecma402-abstract": 2.3.6
+      tslib: 2.8.1
+
+  "@formatjs/intl-localematcher@0.5.10":
+    dependencies:
       tslib: 2.8.1
 
   "@formatjs/intl-localematcher@0.6.2":
@@ -39269,6 +39299,14 @@ snapshots:
 
   netmask@2.0.2: {}
 
+  next-intl@3.26.5(next@16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.58.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1):
+    dependencies:
+      "@formatjs/intl-localematcher": 0.5.10
+      negotiator: 1.0.0
+      next: 16.0.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.58.2)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      react: 19.2.1
+      use-intl: 3.26.5(react@19.2.1)
+
   next-mdx-remote-client@1.1.6(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.3))(react@19.2.3)(unified@11.0.5):
     dependencies:
       "@babel/code-frame": 7.29.0
@@ -43095,6 +43133,12 @@ snapshots:
 
   use-hot-module-reload@2.0.0(react@19.2.1):
     dependencies:
+      react: 19.2.1
+
+  use-intl@3.26.5(react@19.2.1):
+    dependencies:
+      "@formatjs/fast-memoize": 2.2.7
+      intl-messageformat: 10.7.18
       react: 19.2.1
 
   use-isomorphic-layout-effect@1.2.1(@types/react@19.2.7)(react@19.2.1):
