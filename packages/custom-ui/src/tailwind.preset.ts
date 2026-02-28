@@ -1,76 +1,100 @@
 /**
- * @nebutra/custom-ui - Tailwind CSS 4 Preset
+ * @nebutra/custom-ui — Tailwind CSS 4 Preset
  *
- * This preset provides Nebutra's design tokens mapped to Tailwind utilities.
- * Import this in your app's CSS or tailwind.config to use the theme.
+ * Consumes primitive design tokens from tokens/primitive.ts.
+ * All values are sourced from the VI manual (packages/brand/assets/vi/full.md).
  *
- * For Tailwind CSS 4, use @import in your CSS:
- * @source "@nebutra/custom-ui/styles/globals.css"
+ * Usage (Tailwind CSS 4, CSS import):
+ *   @source "@nebutra/custom-ui/styles/globals.css"
  *
- * Or configure in your postcss:
- * import { nebutraPreset } from "@nebutra/custom-ui/tailwind.preset"
+ * Usage (legacy tailwind.config.js):
+ *   import { nebutraPreset } from "@nebutra/custom-ui/tailwind.preset"
+ *   export default { presets: [nebutraPreset] }
  */
 
-/**
- * Design tokens from @nebutra/ui mapped to CSS-in-JS format
- * These can be used for programmatic access to theme values
- */
+import {
+  primitiveColors,
+  primitiveGradients,
+  primitiveRadius,
+  primitiveShadow,
+  primitiveFontFamily,
+  primitiveFontSize,
+  primitiveFontWeight,
+} from "./tokens/primitive";
+
+// ─── Brand Color Palette ──────────────────────────────────────────────────────
+// Source: 云毓智能 VI 手册 — these are the correct Nebutra values, NOT generic
+// blue (#3B82F6) or purple (#A855F7) which were incorrectly present before.
+
 export const nebutraColors = {
-  // Primary - Blue
-  primary: {
-    50: "#EFF6FF",
-    100: "#DBEAFE",
-    200: "#BFDBFE",
-    300: "#93C5FD",
-    400: "#60A5FA",
-    500: "#3B82F6",
-    600: "#2563EB",
-    700: "#1D4ED8",
-    800: "#1E40AF",
-    900: "#1E3A8A",
-    950: "#172554",
-    DEFAULT: "#3B82F6",
-    foreground: "#F8FAFC",
+  // 云毓蓝 (Nebutra Blue) — primary brand color — VI: #0033FE
+  blue: {
+    50: primitiveColors.blue50,
+    100: primitiveColors.blue100,
+    200: primitiveColors.blue200,
+    300: primitiveColors.blue300,
+    400: primitiveColors.blue400,
+    500: primitiveColors.blue500,
+    600: primitiveColors.blue600,
+    700: primitiveColors.blue700,
+    800: primitiveColors.blue800,
+    900: primitiveColors.blue900,
+    950: primitiveColors.blue950,
+    DEFAULT: primitiveColors.blue500,
+    foreground: primitiveColors.white,
   },
 
-  // Secondary - Purple
-  secondary: {
-    50: "#FAF5FF",
-    100: "#F3E8FF",
-    200: "#E9D5FF",
-    300: "#D8B4FE",
-    400: "#C084FC",
-    500: "#A855F7",
-    600: "#9333EA",
-    700: "#7C3AED",
-    800: "#6B21A8",
-    900: "#581C87",
-    950: "#3B0764",
-    DEFAULT: "#A855F7",
-    foreground: "#1E293B",
+  // 云毓青 (Nebutra Cyan) — secondary brand color — VI: #0BF1C3
+  cyan: {
+    50: primitiveColors.cyan50,
+    100: primitiveColors.cyan100,
+    200: primitiveColors.cyan200,
+    300: primitiveColors.cyan300,
+    400: primitiveColors.cyan400,
+    500: primitiveColors.cyan500,
+    600: primitiveColors.cyan600,
+    700: primitiveColors.cyan700,
+    800: primitiveColors.cyan800,
+    900: primitiveColors.cyan900,
+    950: primitiveColors.cyan950,
+    DEFAULT: primitiveColors.cyan500,
+    foreground: primitiveColors.neutral900,
   },
 
-  // Neutral - Slate
+  // Neutral (blue-undertone gray scale)
   neutral: {
-    50: "#F8FAFC",
-    100: "#F1F5F9",
-    200: "#E2E8F0",
-    300: "#CBD5E1",
-    400: "#94A3B8",
-    500: "#64748B",
-    600: "#475569",
-    700: "#334155",
-    800: "#1E293B",
-    900: "#0F172A",
-    950: "#020617",
+    50: primitiveColors.neutral50,
+    100: primitiveColors.neutral100,
+    200: primitiveColors.neutral200,
+    300: primitiveColors.neutral300,
+    400: primitiveColors.neutral400,
+    500: primitiveColors.neutral500,
+    600: primitiveColors.neutral600,
+    700: primitiveColors.neutral700,
+    800: primitiveColors.neutral800,
+    900: primitiveColors.neutral900,
+    950: primitiveColors.neutral950,
   },
 
-  // Semantic colors
-  success: "#10B981",
-  warning: "#F59E0B",
-  error: "#EF4444",
-  info: "#3B82F6",
+  // Semantic colors — VI §Color Specifications
+  success: primitiveColors.green500, // #22c55e — VI specifies this exact value
+  warning: primitiveColors.amber500, // #f59e0b
+  error: primitiveColors.red500, // #ef4444
+  info: primitiveColors.blue500, // #0033FE — VI: Info = Brand Blue
 } as const;
+
+// ─── Brand Gradients ──────────────────────────────────────────────────────────
+// VI §Brand Gradients — these are first-class brand assets
+
+export const nebutraGradients = {
+  brand: primitiveGradients.primary,
+  brandHover: primitiveGradients.reverse,
+  section: primitiveGradients.vertical,
+  glow: primitiveGradients.radial,
+  darkCard: primitiveGradients.darkCard,
+} as const;
+
+// ─── Spacing ──────────────────────────────────────────────────────────────────
 
 export const nebutraSpacing = {
   xs: "0.25rem", // 4px
@@ -82,61 +106,77 @@ export const nebutraSpacing = {
   "3xl": "4rem", // 64px
 } as const;
 
+// ─── Border Radius ────────────────────────────────────────────────────────────
+// Consumed directly from primitive tokens (px → rem conversion)
+
 export const nebutraBorderRadius = {
   none: "0",
-  sm: "0.25rem", // 4px
-  md: "0.375rem", // 6px
-  lg: "0.5rem", // 8px
-  xl: "0.75rem", // 12px
-  "2xl": "1rem", // 16px
+  sm: `${primitiveRadius.sm / 16}rem`, // 4px → 0.25rem
+  md: `${primitiveRadius.md / 16}rem`, // 6px → 0.375rem
+  lg: `${primitiveRadius.lg / 16}rem`, // 8px → 0.5rem
+  xl: `${primitiveRadius.xl / 16}rem`, // 12px → 0.75rem
+  "2xl": `${primitiveRadius["2xl"] / 16}rem`, // 16px → 1rem
   full: "9999px",
 } as const;
 
+// ─── Shadows ──────────────────────────────────────────────────────────────────
+
 export const nebutraShadows = {
-  sm: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-  md: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-  lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
-  xl: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+  none: primitiveShadow.none,
+  sm: primitiveShadow.sm,
+  md: primitiveShadow.md,
+  lg: primitiveShadow.lg,
+  xl: primitiveShadow.xl,
+  brandGlow: primitiveShadow.brandGlow,
 } as const;
+
+// ─── Typography — VI §Typography ─────────────────────────────────────────────
 
 export const nebutraTypography = {
   fontFamily: {
-    sans: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    mono: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace',
+    sans: primitiveFontFamily.sans,
+    cn: primitiveFontFamily.cnSans,
+    display: primitiveFontFamily.display,
+    mono: primitiveFontFamily.mono,
   },
   fontSize: {
-    xs: "0.75rem", // 12px
-    sm: "0.875rem", // 14px
-    base: "1rem", // 16px
-    lg: "1.125rem", // 18px
-    xl: "1.25rem", // 20px
-    "2xl": "1.5rem", // 24px
-    "3xl": "1.875rem", // 30px
-    "4xl": "2.25rem", // 36px
+    xs: `${primitiveFontSize.xs / 16}rem`, // 12px
+    sm: `${primitiveFontSize.sm / 16}rem`, // 14px
+    base: `${primitiveFontSize.base / 16}rem`, // 16px
+    lg: `${primitiveFontSize.lg / 16}rem`, // 18px
+    xl: `${primitiveFontSize.xl / 16}rem`, // 20px
+    "2xl": `${primitiveFontSize["2xl"] / 16}rem`, // 24px
+    "3xl": `${primitiveFontSize["3xl"] / 16}rem`, // 30px
+    "4xl": `${primitiveFontSize["4xl"] / 16}rem`, // 36px
+  },
+  fontWeight: {
+    light: String(primitiveFontWeight.light),
+    normal: String(primitiveFontWeight.normal),
+    medium: String(primitiveFontWeight.medium),
+    semibold: String(primitiveFontWeight.semibold),
+    bold: String(primitiveFontWeight.bold),
   },
 } as const;
 
-/**
- * Animation keyframes for components
- * These are defined in globals.css and can be referenced here
- */
+// ─── Animations ───────────────────────────────────────────────────────────────
+
 export const nebutraAnimations = {
   "accordion-down": "accordion-down 0.2s ease-out",
   "accordion-up": "accordion-up 0.2s ease-out",
-  "fade-in": "fade-in 0.2s ease-out",
-  "fade-out": "fade-out 0.2s ease-out",
+  "fade-in": "fade-in 0.15s ease-out",
+  "fade-out": "fade-out 0.15s ease-out",
   "slide-in-from-top": "slide-in-from-top 0.3s ease-out",
   "slide-in-from-bottom": "slide-in-from-bottom 0.3s ease-out",
   "slide-in-from-left": "slide-in-from-left 0.3s ease-out",
   "slide-in-from-right": "slide-in-from-right 0.3s ease-out",
   spin: "spin 1s linear infinite",
+  spinner: "spinner 0.6s linear infinite", // Button loading state
   pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
   bounce: "bounce 1s infinite",
 } as const;
 
-/**
- * Full Nebutra preset combining all design tokens
- */
+// ─── Full Preset ──────────────────────────────────────────────────────────────
+
 export const nebutraPreset = {
   colors: nebutraColors,
   spacing: nebutraSpacing,
@@ -144,6 +184,7 @@ export const nebutraPreset = {
   boxShadow: nebutraShadows,
   fontFamily: nebutraTypography.fontFamily,
   fontSize: nebutraTypography.fontSize,
+  fontWeight: nebutraTypography.fontWeight,
   animation: nebutraAnimations,
 } as const;
 
