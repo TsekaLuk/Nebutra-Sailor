@@ -33,6 +33,10 @@ const meta = {
       description: "Size preset — maps to 32/40/48px heights",
     },
     disabled: { control: "boolean" },
+    loading: {
+      control: "boolean",
+      description: "Show loading spinner + disable",
+    },
     asChild: { table: { disable: true } },
   },
 } satisfies Meta<typeof Button>;
@@ -82,6 +86,28 @@ export const Sizes: Story = {
 
 export const Disabled: Story = {
   args: { children: "Button", disabled: true },
+};
+
+export const Loading: Story = {
+  args: { children: "Saving…", loading: true, variant: "default" },
+};
+
+export const LoadingVariants: Story = {
+  name: "Loading States",
+  render: () => (
+    <div className="flex flex-wrap items-center gap-3">
+      <Button loading>Saving…</Button>
+      <Button loading variant="outline">
+        Uploading…
+      </Button>
+      <Button loading size="sm">
+        Loading
+      </Button>
+      <Button loading size="lg">
+        Processing…
+      </Button>
+    </div>
+  ),
 };
 
 // ─── All Variants Showcase ────────────────────────────────────────────────────

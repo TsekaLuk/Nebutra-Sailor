@@ -21,7 +21,16 @@ export {
   CardDescription,
   CardContent,
 } from "./card";
-export { Avatar, AvatarImage, AvatarFallback } from "./avatar";
+export {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  AvatarGroup,
+  type AvatarProps,
+  type AvatarFallbackProps,
+  type AvatarGroupProps,
+  type AvatarGroupItem,
+} from "./avatar";
 export {
   Tooltip,
   TooltipTrigger,
