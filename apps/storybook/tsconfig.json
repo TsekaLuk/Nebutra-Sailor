@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "noEmit": true
+  },
+  "include": [".storybook/**/*", "src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
