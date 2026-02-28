@@ -5,11 +5,6 @@ const envSchema = z.object({
     .enum(["development", "production", "test"])
     .default("development"),
 
-  // Clerk auth (optional — app renders without it)
-  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().optional(),
-  NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().default("/sign-in"),
-  NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().default("/sign-up"),
-
   // Content / CMS
   NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().default("wyfqr24v"),
   NEXT_PUBLIC_SANITY_DATASET: z.string().default("production"),

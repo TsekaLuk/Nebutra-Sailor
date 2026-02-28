@@ -1,13 +1,9 @@
 import { locales } from "@/lib/i18n/locales";
 import {
-  LandingPageWrapper,
-  TrackedSection,
   Navbar,
   HeroSection,
-  TrustRibbon,
-  FeatureStack,
-  TerminalDemo,
-  TestimonialsSection,
+  LogoStrip,
+  FeatureCards,
   FinalCTA,
   FooterMinimal,
 } from "@/components/landing";
@@ -21,58 +17,27 @@ interface Props {
 }
 
 /**
- * Landing Page - Vercel-style minimal design
+ * Landing Page — minimal dark design
  *
  * Sections:
- * 1. Hero - Large headline + command box + glow
- * 2. Trust Ribbon - Logo marquee
- * 3. Features - Vertical stack with alternating layout
- * 4. Terminal Demo - Interactive demo
- * 5. Testimonial - Single large quote
- * 6. CTA - Final call to action with stats
- * 7. Footer
+ * 1. Navbar   – fixed, transparent → frosted on scroll
+ * 2. Hero     – full-viewport, black bg, indigo glow, grid overlay
+ * 3. LogoStrip – static 8 tech logos
+ * 4. Features – 3 glass cards with code snippets
+ * 5. FinalCTA – closing command box + CTA
+ * 6. Footer
  */
 export default async function LocalizedHomePage({ params }: Props) {
-  // Await params for Next.js 15 async dynamic routes
   await params;
 
   return (
-    <LandingPageWrapper>
-      <main className="min-h-screen bg-background">
-        {/* Navigation */}
-        <Navbar />
-
-        {/* 1. Hero */}
-        <TrackedSection id="hero" label="Home">
-          <HeroSection />
-        </TrackedSection>
-
-        {/* 2. Trust Ribbon */}
-        <TrustRibbon />
-
-        {/* 3. Features - Vertical stack */}
-        <TrackedSection id="features" label="Features">
-          <FeatureStack />
-        </TrackedSection>
-
-        {/* 4. Terminal Demo */}
-        <TrackedSection id="demo" label="Demo">
-          <TerminalDemo />
-        </TrackedSection>
-
-        {/* 5. Testimonial */}
-        <TrackedSection id="testimonials" label="Testimonials">
-          <TestimonialsSection />
-        </TrackedSection>
-
-        {/* 6. CTA */}
-        <TrackedSection id="get-started" label="Get Started">
-          <FinalCTA />
-        </TrackedSection>
-
-        {/* 7. Footer */}
-        <FooterMinimal />
-      </main>
-    </LandingPageWrapper>
+    <main className="min-h-screen bg-black">
+      <Navbar />
+      <HeroSection />
+      <LogoStrip />
+      <FeatureCards />
+      <FinalCTA />
+      <FooterMinimal />
+    </main>
   );
 }

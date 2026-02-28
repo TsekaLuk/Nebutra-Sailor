@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
 import { DesignSystemProvider } from "@nebutra/design-system";
 import { Providers } from "./providers";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -49,14 +48,12 @@ export const metadata: Metadata = {
   },
 };
 
-const hasClerkKey = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const content = (
+  return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
         <Providers>
@@ -67,11 +64,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-
-  // Skip ClerkProvider if keys not configured (for build without env)
-  if (!hasClerkKey) {
-    return content;
-  }
-
-  return <ClerkProvider>{content}</ClerkProvider>;
 }

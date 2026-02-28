@@ -1,11 +1,9 @@
 /**
  * Nebutra Landing Page - Global Styles
- * 
- * This file imports:
+ *
  * 1. Tailwind CSS v4 (must be first)
  * 2. Typography CSS variables from design-system (SSOT for fonts)
  * 3. Theme system from @nebutra/custom-ui (colors, Tailwind config)
- * 4. HeroUI plugin for additional components
  */
 
 /* Tailwind CSS v4 - must be imported first */
@@ -17,9 +15,6 @@
 /* Import theme variables from @nebutra/custom-ui */
 @import "@nebutra/custom-ui/styles/globals.css";
 @import "tw-animate-css";
-
-/* HeroUI Tailwind plugin */
-@plugin "../../hero.ts";
 /*---break---
  */
 @custom-variant dark (&:is(.dark *));
@@ -189,4 +184,12 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Landing page utility: subtle dot-grid overlay */
+.bg-grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
 }

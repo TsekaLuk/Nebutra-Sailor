@@ -1,8 +1,6 @@
 "use client";
 
-import { HeroUIProvider } from "@heroui/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { useRouter } from "next/navigation";
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -10,21 +8,16 @@ interface ProvidersProps {
 
 /**
  * Client-side providers wrapper
- * Includes:
- * - next-themes for light/dark/system theme support
- * - HeroUI for component library support
+ * Dark-only mode — no theme toggle on the marketing site
  */
 export function Providers({ children }: ProvidersProps) {
-  const router = useRouter();
-
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      forcedTheme="dark"
       disableTransitionOnChange
     >
-      <HeroUIProvider navigate={router.push}>{children}</HeroUIProvider>
+      {children}
     </NextThemesProvider>
   );
 }

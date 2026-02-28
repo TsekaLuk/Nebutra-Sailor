@@ -3,39 +3,35 @@
 import { motion } from "framer-motion";
 import { Copy, ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { finalCtaContent } from "@/lib/landing-content";
+import { heroContent } from "@/lib/landing-content";
 
 /**
- * FinalCTA - Minimal Vercel-style final call to action
- *
- * Design: Large headline, command box, stats in a row, lots of whitespace
+ * FinalCTA - Minimal closing call to action
  */
 export function FinalCTA() {
   const [copied, setCopied] = useState(false);
-  const { commandPlaceholder, stats } = finalCtaContent;
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(commandPlaceholder);
+    await navigator.clipboard.writeText(heroContent.command);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <section className="relative w-full bg-background py-32 md:py-40">
+    <section className="relative w-full bg-black py-32 md:py-40">
       {/* Ambient glow */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--brand-primary)]/20 to-[var(--brand-accent)]/15 blur-[100px]" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/15 to-indigo-400/10 blur-[100px]" />
         </div>
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-        {/* Headline */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-3xl font-bold text-foreground md:text-5xl lg:text-6xl"
+          className="text-3xl font-bold text-white md:text-5xl lg:text-6xl"
         >
           Ready to ship?
         </motion.h2>
@@ -45,7 +41,7 @@ export function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ delay: 0.1 }}
-          className="mt-6 text-lg text-muted-foreground md:text-xl"
+          className="mt-6 text-lg text-white/50 md:text-xl"
         >
           Get started in under 5 minutes.
         </motion.p>
@@ -58,15 +54,14 @@ export function FinalCTA() {
           transition={{ delay: 0.2 }}
           className="mx-auto mt-10 max-w-xl"
         >
-          <div className="group relative flex items-center rounded-xl border border-border/50 bg-card/50 p-1.5 backdrop-blur-sm transition-all hover:border-border">
-            <code className="flex-1 px-5 py-3.5 font-mono text-sm text-foreground md:text-base">
-              <span className="text-muted-foreground">$</span>{" "}
-              {commandPlaceholder}
+          <div className="group relative flex items-center rounded-xl border border-white/[0.08] bg-white/[0.04] p-1.5 transition-all hover:border-white/[0.15]">
+            <code className="flex-1 px-5 py-3.5 font-mono text-sm text-white md:text-base">
+              <span className="text-white/40">$</span> {heroContent.command}
             </code>
             <button
+              type="button"
               onClick={handleCopy}
-              className="flex items-center gap-2 rounded-lg bg-neutral-900 px-5 py-2.5 text-sm font-medium transition-all hover:opacity-90"
-              style={{ color: "white" }}
+              className="flex items-center gap-2 rounded-lg bg-white/[0.08] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/[0.12] cursor-pointer"
             >
               <Copy className="h-4 w-4" />
               {copied ? "Copied!" : "Copy"}
@@ -84,34 +79,11 @@ export function FinalCTA() {
         >
           <a
             href="https://docs.nebutra.com/sailor/getting-started"
-            className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-8 py-3.5 font-medium transition-all hover:opacity-90 group"
-            style={{ color: "white" }}
+            className="inline-flex items-center gap-2 rounded-full bg-indigo-500 px-8 py-3.5 font-medium text-white transition-colors hover:bg-indigo-400 group"
           >
             Start Building
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-12 text-muted-foreground"
-        >
-          <div className="text-center">
-            <p className="text-3xl font-bold text-foreground">{stats.stars}</p>
-            <p className="mt-1 text-sm">GitHub Stars</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl font-bold text-foreground">{stats.forks}</p>
-            <p className="mt-1 text-sm">Forks</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl font-bold text-foreground">500+</p>
-            <p className="mt-1 text-sm">Teams</p>
-          </div>
         </motion.div>
       </div>
     </section>
