@@ -1097,3 +1097,673 @@ MDX stubs are created in this plan. Content population is a separate ongoing eff
 | P2       | Fragment: Page Header, Page Section, Modal | `custom-ui/src/components/`, app code                       |
 | P2       | UI Patterns: Forms, Tables, Layout         | `apps/web/src/`                                             |
 | P3       | Remaining atoms and fragments              | `custom-ui/src/primitives/`                                 |
+
+---
+
+## Phase 4 — Architecture Testing (Anti-Drift)
+
+> **Inspired by:** `Synapse-Quant/tests/architecture/` — Vitest + fast-check property-based tests
+
+**Goal:** Prevent design system drift by enforcing structural invariants in CI. Tests run via `pnpm test:arch` and block merges on failure.
+
+**Tech stack:** Vitest, fast-check, Node.js fs
+
+### Task 12: Scaffold architecture test suite
+
+**Files:**
+
+- Create: `tests/architecture/` (repo root)
+- Create: `vitest.arch.config.ts` (repo root)
+- Modify: root `package.json` — add `"test:arch"` script
+
+**Step 1: Create vitest.arch.config.ts**
+
+```ts
+import { defineConfig } from "vitest/config";
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: "node",
+    include: ["tests/architecture/**/*.test.ts"],
+    testTimeout: 30000,
+  },
+});
+```
+
+**Step 2: Add script to root package.json**
+
+```json
+"test:arch": "vitest run --config vitest.arch.config.ts"
+```
+
+**Step 3: Install test dependencies**
+
+```bash
+pnpm add -D -w vitest fast-check
+```
+
+**Step 4: Commit**
+
+```bash
+git add vitest.arch.config.ts package.json pnpm-lock.yaml
+git commit -m "feat(arch-tests): scaffold architecture test suite with vitest + fast-check"
+```
+
+---
+
+### Task 13: docs-coverage — every MDX page has a real export
+
+**Files:**
+
+- Create: `tests/architecture/docs-coverage.test.ts`
+
+**What it tests:** Every `.mdx` file under `apps/docs-hub/atom-components/` and `apps/docs-hub/fragment-components/` (excluding `introduction.mdx`) has a named export in `packages/custom-ui/src/primitives/index.ts` or `apps/docs-hub/design-system/src/index.ts`.
+
+```ts
+import { describe, it, expect } from "vitest";
+import * as fc from "fast-check";
+import { readdirSync, readFileSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, "../..");
+
+function mdxToComponentName(filename: string): string {
+  return filename
+    .replace(/\.mdx$/, "")
+    .split("-")
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join("");
+}
+
+const atomDir = resolve(ROOT, "apps/docs-hub/atom-components");
+const atomMdx = readdirSync(atomDir).filter(
+  (f) => f.endsWith(".mdx") && f !== "introduction.mdx",
+);
+
+const primitivesBarrel = readFileSync(
+  resolve(ROOT, "packages/custom-ui/src/primitives/index.ts"),
+  "utf-8",
+);
+const designSystemBarrel = readFileSync(
+  resolve(ROOT, "apps/docs-hub/design-system/src/index.ts"),
+  "utf-8",
+);
+const combinedBarrel = primitivesBarrel + "\n" + designSystemBarrel;
+
+describe("Property: docs-coverage", () => {
+  it("every atom MDX page has a corresponding export", () => {
+    if (atomMdx.length === 0) return;
+    const arbFile = fc.constantFrom(...atomMdx);
+
+    fc.assert(
+      fc.property(arbFile, (file) => {
+        const componentName = mdxToComponentName(file);
+        const exportPattern = new RegExp(
+          `export\\s+(?:type\\s+)?\\{[^}]*\\b${componentName}\\b[^}]*\\}`,
+        );
+        expect(
+          exportPattern.test(combinedBarrel),
+          `"${componentName}" (from ${file}) not found in primitives or design-system barrel`,
+        ).toBe(true);
+      }),
+      { numRuns: 50 },
+    );
+  });
+});
+```
+
+**Step: Commit**
+
+```bash
+git add tests/architecture/docs-coverage.test.ts
+git commit -m "feat(arch-tests): add docs-coverage property test"
+```
+
+---
+
+### Task 14: no-inline-css — no style={{}} in design-system components
+
+**Files:**
+
+- Create: `tests/architecture/no-inline-css.test.ts`
+
+**What it tests:** No `.tsx` file in `apps/docs-hub/design-system/src/components/` or `packages/custom-ui/src/primitives/` contains inline `style={{` patterns.
+
+```ts
+import { describe, it, expect } from "vitest";
+import * as fc from "fast-check";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { resolve, dirname, extname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, "../..");
+
+const EXCLUDED_DIRS = new Set(["node_modules", "dist", ".next", ".turbo"]);
+
+function collectTsxFiles(dir: string, files: string[] = []): string[] {
+  let entries: string[];
+  try {
+    entries = readdirSync(dir);
+  } catch {
+    return files;
+  }
+  for (const entry of entries) {
+    if (EXCLUDED_DIRS.has(entry)) continue;
+    const full = resolve(dir, entry);
+    try {
+      const stat = statSync(full);
+      if (stat.isDirectory()) collectTsxFiles(full, files);
+      else if ([".tsx", ".ts"].includes(extname(entry))) files.push(full);
+    } catch {
+      continue;
+    }
+  }
+  return files;
+}
+
+const SCANNED_DIRS = [
+  resolve(ROOT, "apps/docs-hub/design-system/src/components"),
+  resolve(ROOT, "packages/custom-ui/src/primitives"),
+];
+
+const componentFiles = SCANNED_DIRS.flatMap((d) => collectTsxFiles(d));
+
+// Inline CSS pattern: style={{ ... }} or style={styleObject}
+// We flag the literal `style={{` pattern as the most common violation
+const INLINE_STYLE_PATTERN = /\bstyle=\{\{/;
+
+describe("Property: no-inline-css", () => {
+  it("no design-system component uses inline style={{}}", () => {
+    if (componentFiles.length === 0) return;
+    const arbFile = fc.constantFrom(...componentFiles);
+
+    fc.assert(
+      fc.property(arbFile, (file) => {
+        const content = readFileSync(file, "utf-8");
+        const lines = content.split("\n");
+        const violations = lines
+          .map((line, i) => ({ line, num: i + 1 }))
+          .filter(({ line }) => INLINE_STYLE_PATTERN.test(line));
+
+        expect(
+          violations.length,
+          `Inline style found in ${file}:\n` +
+            violations
+              .map(({ line, num }) => `  L${num}: ${line.trim()}`)
+              .join("\n"),
+        ).toBe(0);
+      }),
+      { numRuns: componentFiles.length * 5 },
+    );
+  });
+});
+```
+
+**Step: Commit**
+
+```bash
+git add tests/architecture/no-inline-css.test.ts
+git commit -m "feat(arch-tests): add no-inline-css property test"
+```
+
+---
+
+### Task 15: token-usage — no hardcoded hex values in components
+
+**Files:**
+
+- Create: `tests/architecture/token-usage.test.ts`
+
+**What it tests:** No `.tsx` file in design-system or custom-ui components contains hardcoded hex color literals (`#RRGGBB` or `#RGB`).
+
+```ts
+import { describe, it, expect } from "vitest";
+import * as fc from "fast-check";
+import { readFileSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+// reuse collectTsxFiles from no-inline-css.test.ts pattern
+// (copy helper or extract to shared utility)
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, "../..");
+
+// Hex color pattern: #RGB or #RRGGBB (not in comments or strings inside token files)
+const HEX_COLOR_PATTERN = /#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})\b/;
+
+// Files that are ALLOWED to contain hex values (token definition files)
+const ALLOWED_FILES = new Set([
+  "theme/default.ts",
+  "theme/brand.ts",
+  "theme/marketing.ts",
+  "tokens/index.ts",
+  "tailwind.preset.ts",
+]);
+
+function isAllowed(filePath: string): boolean {
+  return [...ALLOWED_FILES].some((allowed) => filePath.includes(allowed));
+}
+
+// ... collect files and run property test
+// Flag any hex color found in component files (not token files)
+```
+
+**Step: Commit**
+
+```bash
+git add tests/architecture/token-usage.test.ts
+git commit -m "feat(arch-tests): add token-usage property test for hardcoded hex detection"
+```
+
+---
+
+### Task 16: dependency-flow — workspace package dependency rules
+
+**Files:**
+
+- Create: `tests/architecture/dependency-flow.test.ts`
+
+**What it tests:** Nebutra workspace packages follow the unidirectional dependency flow:
+
+```
+design-system → (no @nebutra/* deps)
+custom-ui     → design-system
+ui            → (external only)
+web           → design-system, custom-ui, ui
+landing-page  → design-system, custom-ui, ui
+docs-hub      → design-system (via nested package)
+```
+
+Pattern: direct adaptation of `Synapse-Quant/tests/architecture/dependency-flow.test.ts` — replace `@synapse-quant/` with `@nebutra/` and update package paths.
+
+**Step: Commit**
+
+```bash
+git add tests/architecture/dependency-flow.test.ts
+git commit -m "feat(arch-tests): add dependency-flow property test"
+```
+
+---
+
+### Task 17: Verify all arch tests pass
+
+```bash
+pnpm test:arch
+```
+
+Expected: All tests pass. Fix any violations before merging.
+
+**Step: Commit any fixes + final commit**
+
+```bash
+git commit -m "feat(arch-tests): all architecture tests passing"
+```
+
+---
+
+## Phase 5 — Design Token Variable Manager
+
+**Goal:** Accept designer inputs from multiple sources (Figma, Framer, Lottie, CSS) and transform them into the design system's token format. Claude-assisted semantic disambiguation.
+
+### Task 18: Scaffold token ingestion module
+
+**Files:**
+
+- Create: `apps/docs-hub/design-system/src/tokens/schema.ts`
+- Create: `apps/docs-hub/design-system/src/tokens/ingestion/figma.ts`
+- Create: `apps/docs-hub/design-system/src/tokens/ingestion/framer.ts`
+- Create: `apps/docs-hub/design-system/src/tokens/ingestion/lottie.ts`
+- Create: `apps/docs-hub/design-system/src/tokens/ingestion/css.ts`
+- Create: `apps/docs-hub/design-system/src/tokens/transformer.ts`
+- Create: `apps/docs-hub/design-system/src/tokens/index.ts`
+
+**Step 1: Create unified DesignToken schema**
+
+`tokens/schema.ts`:
+
+```ts
+/**
+ * Unified design token schema.
+ *
+ * All ingestion adapters (Figma, Framer, Lottie, CSS) output this shape.
+ * The transformer maps DesignToken[] to brand.ts / marketing.ts format.
+ */
+
+export type TokenCategory =
+  | "color"
+  | "typography"
+  | "spacing"
+  | "shadow"
+  | "radius"
+  | "animation"
+  | "unknown";
+
+export type TokenSource = "figma" | "framer" | "lottie" | "css" | "manual";
+
+export interface DesignToken {
+  /** Semantic name provided by designer (e.g. "primary-blue", "hero-gradient") */
+  name: string;
+  /** Raw value as delivered (hex, rem, px, JSON, etc.) */
+  rawValue: string;
+  /** Category inferred or declared */
+  category: TokenCategory;
+  /** Source system */
+  source: TokenSource;
+  /** Optional: Figma/Framer description or comment */
+  description?: string;
+  /** Optional: nested path in the source (e.g. "Colors/Primary/500") */
+  path?: string[];
+}
+
+/** Input format for Figma Tokens JSON (Tokens Studio) */
+export interface FigmaTokensInput {
+  [group: string]: Record<
+    string,
+    { value: string; type: string; description?: string }
+  >;
+}
+
+/** Input format for Framer Variables JSON */
+export interface FramerVariablesInput {
+  variables: Array<{
+    name: string;
+    type: string;
+    values: { default: string | number };
+  }>;
+}
+
+/** Transformer output — maps to design system token format */
+export interface TransformerOutput {
+  brandOverrides: Partial<Record<string, string>>;
+  marketingTokens: Partial<Record<string, string>>;
+  unknownTokens: DesignToken[];
+}
+```
+
+**Step 2: Create Figma ingestion adapter**
+
+`tokens/ingestion/figma.ts`:
+
+```ts
+import type { DesignToken, FigmaTokensInput } from "../schema.js";
+
+/**
+ * Parse Figma Tokens Studio JSON export into unified DesignToken[].
+ *
+ * @param input - Raw parsed JSON from Tokens Studio export
+ * @returns Flat array of DesignToken objects
+ */
+export function parseFigmaTokens(input: FigmaTokensInput): DesignToken[] {
+  const tokens: DesignToken[] = [];
+
+  for (const [group, entries] of Object.entries(input)) {
+    for (const [name, token] of Object.entries(entries)) {
+      tokens.push({
+        name: `${group}/${name}`,
+        rawValue: String(token.value),
+        category: inferFigmaCategory(token.type),
+        source: "figma",
+        description: token.description,
+        path: [group, name],
+      });
+    }
+  }
+
+  return tokens;
+}
+
+function inferFigmaCategory(type: string): DesignToken["category"] {
+  switch (type.toLowerCase()) {
+    case "color":
+      return "color";
+    case "fontsize":
+    case "fontfamily":
+    case "fontweight":
+    case "lineheight":
+    case "typography":
+      return "typography";
+    case "spacing":
+    case "sizing":
+      return "spacing";
+    case "boxshadow":
+      return "shadow";
+    case "borderradius":
+      return "radius";
+    case "other":
+    default:
+      return "unknown";
+  }
+}
+```
+
+**Step 3: Create CSS ingestion adapter**
+
+`tokens/ingestion/css.ts`:
+
+```ts
+import type { DesignToken } from "../schema.js";
+
+/**
+ * Parse CSS custom properties into unified DesignToken[].
+ *
+ * Accepts a CSS string containing --variable: value; declarations.
+ */
+export function parseCSSTokens(cssSource: string): DesignToken[] {
+  const tokens: DesignToken[] = [];
+  // Match CSS custom property declarations
+  const pattern = /--([\w-]+)\s*:\s*([^;]+);/g;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(cssSource)) !== null) {
+    const [, name, rawValue] = match;
+    tokens.push({
+      name,
+      rawValue: rawValue.trim(),
+      category: inferCSSCategory(name, rawValue.trim()),
+      source: "css",
+    });
+  }
+
+  return tokens;
+}
+
+function inferCSSCategory(
+  name: string,
+  value: string,
+): DesignToken["category"] {
+  if (
+    /color|bg|background|fg|text|border/.test(name) ||
+    /^#|^rgb|^hsl/.test(value)
+  )
+    return "color";
+  if (/font|text|type/.test(name)) return "typography";
+  if (/space|gap|margin|padding|size/.test(name)) return "spacing";
+  if (/shadow/.test(name)) return "shadow";
+  if (/radius|round/.test(name)) return "radius";
+  return "unknown";
+}
+```
+
+**Step 4: Create stubs for Framer and Lottie adapters**
+
+`tokens/ingestion/framer.ts` and `tokens/ingestion/lottie.ts` — minimal typed stubs following the same pattern as figma.ts.
+
+**Step 5: Create transformer**
+
+`tokens/transformer.ts`:
+
+```ts
+import type { DesignToken, TransformerOutput } from "./schema.js";
+
+/**
+ * Transform unified DesignToken[] into design system format.
+ *
+ * Tokens with clear semantic mapping → brandOverrides or marketingTokens.
+ * Tokens with ambiguous semantics → unknownTokens (requires Claude disambiguation).
+ */
+export function transformTokens(tokens: DesignToken[]): TransformerOutput {
+  const brandOverrides: Record<string, string> = {};
+  const marketingTokens: Record<string, string> = {};
+  const unknownTokens: DesignToken[] = [];
+
+  for (const token of tokens) {
+    const mapped = tryMapToBrand(token);
+    if (mapped) {
+      brandOverrides[mapped.key] = mapped.value;
+      continue;
+    }
+
+    const mappedMarketing = tryMapToMarketing(token);
+    if (mappedMarketing) {
+      marketingTokens[mappedMarketing.key] = mappedMarketing.value;
+      continue;
+    }
+
+    unknownTokens.push(token);
+  }
+
+  return { brandOverrides, marketingTokens, unknownTokens };
+}
+
+function tryMapToBrand(
+  token: DesignToken,
+): { key: string; value: string } | null {
+  // Primary/accent colors → brandColors.primary
+  if (
+    token.category === "color" &&
+    /primary|accent|brand/.test(token.name.toLowerCase())
+  ) {
+    return { key: `colors.accent.fg`, value: token.rawValue };
+  }
+  return null;
+}
+
+function tryMapToMarketing(
+  token: DesignToken,
+): { key: string; value: string } | null {
+  // Gradients → marketingGradients
+  if (token.category === "color" && /gradient/.test(token.name.toLowerCase())) {
+    return { key: `gradients.${token.name}`, value: token.rawValue };
+  }
+  return null;
+}
+```
+
+**Step 6: Export from tokens/index.ts**
+
+```ts
+export { parseFigmaTokens } from "./ingestion/figma.js";
+export { parseCSSTokens } from "./ingestion/css.js";
+export { transformTokens } from "./transformer.js";
+export type {
+  DesignToken,
+  TokenCategory,
+  TokenSource,
+  TransformerOutput,
+} from "./schema.js";
+```
+
+**Step 7: Commit**
+
+```bash
+git add apps/docs-hub/design-system/src/tokens/
+git commit -m "feat(design-system): add token ingestion module (figma, css, framer, lottie adapters + transformer)"
+```
+
+---
+
+### Task 19: Add token-manager MDX documentation page
+
+**Files:**
+
+- Create: `apps/docs-hub/foundations/token-manager.mdx`
+- Modify: `apps/docs-hub/mint.json` — add to Foundations navigation
+
+**token-manager.mdx** content:
+
+````mdx
+---
+title: "Token Manager"
+description: "Import design tokens from Figma, Framer, Lottie, and CSS into the design system."
+---
+
+## Overview
+
+The token manager accepts designer-provided files from multiple sources and transforms them into
+the design system's token format. Ambiguous mappings are flagged for Claude-assisted disambiguation.
+
+## Supported Sources
+
+| Source                | Format        | Import function           |
+| --------------------- | ------------- | ------------------------- |
+| Figma Tokens Studio   | JSON          | `parseFigmaTokens(json)`  |
+| Framer Variables      | JSON          | `parseFramerTokens(json)` |
+| Lottie animations     | JSON          | `parseLottieTokens(json)` |
+| CSS custom properties | `.css` string | `parseCSSTokens(css)`     |
+
+## Workflow
+
+1. Designer exports from Figma / Framer / Lottie
+2. Run the appropriate parser to get `DesignToken[]`
+3. Run `transformTokens()` to map to brand / marketing format
+4. Review `unknownTokens` — ask Claude to disambiguate semantic intent
+5. Apply resulting overrides to `theme/brand.ts` or `theme/marketing.ts`
+
+## Usage
+
+```ts
+import {
+  parseFigmaTokens,
+  transformTokens,
+} from "@nebutra/design-system/tokens";
+
+const tokens = parseFigmaTokens(figmaExportJson);
+const { brandOverrides, marketingTokens, unknownTokens } =
+  transformTokens(tokens);
+
+// unknownTokens require Claude disambiguation:
+// "Is 'hero-blue' meant to be accent.fg or a marketing gradient?"
+```
+````
+
+## Claude-Assisted Disambiguation
+
+When `unknownTokens` is non-empty, pass them to Claude:
+
+```ts
+const prompt = `
+These design tokens have ambiguous semantic intent.
+Map each to either: brandOverrides, marketingTokens, or skip.
+Tokens: ${JSON.stringify(unknownTokens, null, 2)}
+Design system structure: brand.ts exports BrandOverrides with colors.accent.fg, colors.accent.emphasis...
+`;
+```
+
+````
+
+**Step: Commit**
+
+```bash
+git add apps/docs-hub/foundations/token-manager.mdx apps/docs-hub/mint.json
+git commit -m "feat(docs-hub): add token-manager foundations page + update mint.json navigation"
+````
+
+---
+
+## Updated Verification Checklist
+
+After all phases complete:
+
+- [ ] `pnpm test:arch` passes with zero failures
+- [ ] `docs-coverage` test: every MDX atom page has a barrel export
+- [ ] `no-inline-css` test: zero inline style={{}} in design-system components
+- [ ] `token-usage` test: zero hardcoded hex values in component files
+- [ ] `dependency-flow` test: all workspace packages follow the flow rules
+- [ ] Token ingestion: `parseFigmaTokens`, `parseCSSTokens` return valid `DesignToken[]`
+- [ ] Token transformer: `transformTokens` correctly routes color tokens
+- [ ] `token-manager.mdx` page renders in Mintlify dev server
