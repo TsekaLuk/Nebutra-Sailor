@@ -68,22 +68,31 @@ consentRoutes.post(
       }
 
       // Create consent record
+      const consentData: Parameters<
+        typeof prisma.userConsent.create
+      >[0]["data"] = {
+        visitorId: data.visitorId,
+        documentId: document.id,
+        documentSlug: document.slug,
+        documentVersion: document.version,
+        consentType: data.consentType,
+        consentGiven: true,
+        consentContext: data.context ?? null,
+        metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
+      };
+
+      if (userId) consentData.userId = userId;
+      if (organizationId) consentData.organizationId = organizationId;
+
+      const ipAddress =
+        c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
+      if (ipAddress) consentData.ipAddress = ipAddress;
+
+      const userAgent = c.req.header("user-agent");
+      if (userAgent) consentData.userAgent = userAgent;
+
       const consent = await prisma.userConsent.create({
-        data: {
-          userId,
-          organizationId,
-          visitorId: data.visitorId,
-          documentId: document.id,
-          documentSlug: document.slug,
-          documentVersion: document.version,
-          consentType: data.consentType,
-          consentGiven: true,
-          ipAddress:
-            c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-          userAgent: c.req.header("user-agent"),
-          consentContext: data.context,
-          metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
-        },
+        data: consentData,
       });
 
       return c.json({
@@ -219,32 +228,43 @@ consentRoutes.post(
 
     try {
       // Upsert cookie consent (create or update by visitorId)
+      const createData: Parameters<
+        typeof prisma.cookieConsent.upsert
+      >[0]["create"] = {
+        visitorId: data.visitorId,
+        necessary: true, // Always true
+        functional: data.preferences.functional,
+        analytics: data.preferences.analytics,
+        marketing: data.preferences.marketing,
+        thirdParty: data.preferences.thirdParty,
+        expiresAt,
+      };
+      if (userId) createData.userId = userId;
+
+      const ipAddress =
+        c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
+      if (ipAddress) createData.ipAddress = ipAddress;
+
+      const userAgent = c.req.header("user-agent");
+      if (userAgent) createData.userAgent = userAgent;
+
+      const updateData: Parameters<
+        typeof prisma.cookieConsent.upsert
+      >[0]["update"] = {
+        functional: data.preferences.functional,
+        analytics: data.preferences.analytics,
+        marketing: data.preferences.marketing,
+        thirdParty: data.preferences.thirdParty,
+        expiresAt,
+      };
+      if (userId) updateData.userId = userId;
+      if (ipAddress) updateData.ipAddress = ipAddress;
+      if (userAgent) updateData.userAgent = userAgent;
+
       const consent = await prisma.cookieConsent.upsert({
         where: { visitorId: data.visitorId },
-        create: {
-          visitorId: data.visitorId,
-          userId,
-          necessary: true, // Always true
-          functional: data.preferences.functional,
-          analytics: data.preferences.analytics,
-          marketing: data.preferences.marketing,
-          thirdParty: data.preferences.thirdParty,
-          ipAddress:
-            c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-          userAgent: c.req.header("user-agent"),
-          expiresAt,
-        },
-        update: {
-          userId,
-          functional: data.preferences.functional,
-          analytics: data.preferences.analytics,
-          marketing: data.preferences.marketing,
-          thirdParty: data.preferences.thirdParty,
-          ipAddress:
-            c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-          userAgent: c.req.header("user-agent"),
-          expiresAt,
-        },
+        create: createData,
+        update: updateData,
       });
 
       return c.json({
@@ -440,15 +460,17 @@ consentRoutes.post(
         data: {
           name: data.name,
           email: data.email,
-          company: data.company,
-          phone: data.phone,
+          company: data.company ?? null,
+          phone: data.phone ?? null,
           subject: data.subject,
           message: data.message,
           category: data.category,
           status: "new",
           ipAddress:
-            c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-          userAgent: c.req.header("user-agent"),
+            c.req.header("x-forwarded-for") ??
+            c.req.header("x-real-ip") ??
+            null,
+          userAgent: c.req.header("user-agent") ?? null,
         },
       });
 
