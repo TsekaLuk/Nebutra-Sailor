@@ -644,3 +644,172 @@ html {
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
+
+/* ============================================
+   Named Typography Utility Classes
+   Geist-style: size encoded in class name,
+   state variants as suffixes (-strong/-mono/-tabular)
+
+   Categories:
+     text-heading-{72|64|56|48|40|32|24|20|16|14}
+     text-button-{16|14|12}
+     text-label-{20|18|16|14|13|12}
+     text-label-{size}-strong / -mono / -tabular
+     text-copy-{24|20|18|16|14|13}
+     text-copy-{size}-strong / -mono
+
+   Fonts: Poppins for heading/button (--font-display),
+          Poppins stack for label/copy (--font-sans),
+          JetBrains Mono for mono variants (--font-mono)
+   ============================================ */
+
+/* ---- Heading ---- */
+@utility text-heading-72 {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+@utility text-heading-64 {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+@utility text-heading-56 {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+@utility text-heading-48 {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+@utility text-heading-40 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+@utility text-heading-32 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+@utility text-heading-24 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+@utility text-heading-20 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+@utility text-heading-16 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  font-weight: 600;
+}
+@utility text-heading-14 {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+/* ---- Button ---- */
+@utility text-button-16 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+@utility text-button-14 {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+@utility text-button-12 {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  font-weight: 500;
+}
+
+/* ---- Label (base) ---- */
+@utility text-label-20 { font-family: var(--font-sans); font-size: 1.25rem;   line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-18 { font-family: var(--font-sans); font-size: 1.125rem;  line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-16 { font-family: var(--font-sans); font-size: 1rem;      line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-14 { font-family: var(--font-sans); font-size: 0.875rem;  line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-13 { font-family: var(--font-sans); font-size: 0.8125rem; line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-12 { font-family: var(--font-sans); font-size: 0.75rem;   line-height: 1.25; letter-spacing: 0.01em; font-weight: 500; }
+
+/* ---- Label — Strong ---- */
+@utility text-label-20-strong { font-family: var(--font-sans); font-size: 1.25rem;   line-height: 1.25; letter-spacing: 0;      font-weight: 600; }
+@utility text-label-18-strong { font-family: var(--font-sans); font-size: 1.125rem;  line-height: 1.25; letter-spacing: 0;      font-weight: 600; }
+@utility text-label-16-strong { font-family: var(--font-sans); font-size: 1rem;      line-height: 1.25; letter-spacing: 0;      font-weight: 600; }
+@utility text-label-14-strong { font-family: var(--font-sans); font-size: 0.875rem;  line-height: 1.25; letter-spacing: 0;      font-weight: 600; }
+@utility text-label-13-strong { font-family: var(--font-sans); font-size: 0.8125rem; line-height: 1.25; letter-spacing: 0;      font-weight: 600; }
+@utility text-label-12-strong { font-family: var(--font-sans); font-size: 0.75rem;   line-height: 1.25; letter-spacing: 0.01em; font-weight: 600; }
+
+/* ---- Label — Mono ---- */
+@utility text-label-20-mono { font-family: var(--font-mono); font-size: 1.25rem;   line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-18-mono { font-family: var(--font-mono); font-size: 1.125rem;  line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-16-mono { font-family: var(--font-mono); font-size: 1rem;      line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-14-mono { font-family: var(--font-mono); font-size: 0.875rem;  line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-13-mono { font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.25; letter-spacing: 0;      font-weight: 500; }
+@utility text-label-12-mono { font-family: var(--font-mono); font-size: 0.75rem;   line-height: 1.25; letter-spacing: 0.01em; font-weight: 500; }
+
+/* ---- Label — Tabular (numeric data) ---- */
+@utility text-label-20-tabular { font-family: var(--font-sans); font-size: 1.25rem;   line-height: 1.25; letter-spacing: 0;      font-weight: 500; font-variant-numeric: tabular-nums; }
+@utility text-label-18-tabular { font-family: var(--font-sans); font-size: 1.125rem;  line-height: 1.25; letter-spacing: 0;      font-weight: 500; font-variant-numeric: tabular-nums; }
+@utility text-label-16-tabular { font-family: var(--font-sans); font-size: 1rem;      line-height: 1.25; letter-spacing: 0;      font-weight: 500; font-variant-numeric: tabular-nums; }
+@utility text-label-14-tabular { font-family: var(--font-sans); font-size: 0.875rem;  line-height: 1.25; letter-spacing: 0;      font-weight: 500; font-variant-numeric: tabular-nums; }
+@utility text-label-13-tabular { font-family: var(--font-sans); font-size: 0.8125rem; line-height: 1.25; letter-spacing: 0;      font-weight: 500; font-variant-numeric: tabular-nums; }
+@utility text-label-12-tabular { font-family: var(--font-sans); font-size: 0.75rem;   line-height: 1.25; letter-spacing: 0.01em; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* ---- Copy (base) ---- */
+@utility text-copy-24 { font-family: var(--font-sans); font-size: 1.5rem;    line-height: 1.6; letter-spacing: -0.005em; font-weight: 400; }
+@utility text-copy-20 { font-family: var(--font-sans); font-size: 1.25rem;   line-height: 1.6; letter-spacing: -0.005em; font-weight: 400; }
+@utility text-copy-18 { font-family: var(--font-sans); font-size: 1.125rem;  line-height: 1.6; letter-spacing: 0;         font-weight: 400; }
+@utility text-copy-16 { font-family: var(--font-sans); font-size: 1rem;      line-height: 1.6; letter-spacing: 0;         font-weight: 400; }
+@utility text-copy-14 { font-family: var(--font-sans); font-size: 0.875rem;  line-height: 1.5; letter-spacing: 0;         font-weight: 400; }
+@utility text-copy-13 { font-family: var(--font-sans); font-size: 0.8125rem; line-height: 1.5; letter-spacing: 0;         font-weight: 400; }
+
+/* ---- Copy — Strong ---- */
+@utility text-copy-24-strong { font-family: var(--font-sans); font-size: 1.5rem;    line-height: 1.6; letter-spacing: -0.005em; font-weight: 600; }
+@utility text-copy-20-strong { font-family: var(--font-sans); font-size: 1.25rem;   line-height: 1.6; letter-spacing: -0.005em; font-weight: 600; }
+@utility text-copy-18-strong { font-family: var(--font-sans); font-size: 1.125rem;  line-height: 1.6; letter-spacing: 0;         font-weight: 600; }
+@utility text-copy-16-strong { font-family: var(--font-sans); font-size: 1rem;      line-height: 1.6; letter-spacing: 0;         font-weight: 600; }
+@utility text-copy-14-strong { font-family: var(--font-sans); font-size: 0.875rem;  line-height: 1.5; letter-spacing: 0;         font-weight: 600; }
+@utility text-copy-13-strong { font-family: var(--font-sans); font-size: 0.8125rem; line-height: 1.5; letter-spacing: 0;         font-weight: 600; }
+
+/* ---- Copy — Mono ---- */
+@utility text-copy-24-mono { font-family: var(--font-mono); font-size: 1.5rem;    line-height: 1.6; letter-spacing: -0.005em; font-weight: 400; }
+@utility text-copy-20-mono { font-family: var(--font-mono); font-size: 1.25rem;   line-height: 1.6; letter-spacing: -0.005em; font-weight: 400; }
+@utility text-copy-18-mono { font-family: var(--font-mono); font-size: 1.125rem;  line-height: 1.6; letter-spacing: 0;         font-weight: 400; }
+@utility text-copy-16-mono { font-family: var(--font-mono); font-size: 1rem;      line-height: 1.6; letter-spacing: 0;         font-weight: 400; }
+@utility text-copy-14-mono { font-family: var(--font-mono); font-size: 0.875rem;  line-height: 1.5; letter-spacing: 0;         font-weight: 400; }
+@utility text-copy-13-mono { font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.5; letter-spacing: 0;         font-weight: 400; }

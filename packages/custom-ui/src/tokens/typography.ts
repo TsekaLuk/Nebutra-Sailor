@@ -37,7 +37,8 @@ export const lineHeights = {
 } as const;
 
 /**
- * Semantic text styles - maps to Tailwind classes
+ * Semantic text styles — legacy aliases (kept for backward compat)
+ * Prefer the named scale below for new code.
  */
 export const textStyles = {
   // Display styles (Hero headlines)
@@ -60,6 +61,31 @@ export const textStyles = {
   code: "font-mono text-sm leading-relaxed",
   label: "text-sm font-medium leading-normal",
 } as const;
+
+/**
+ * Named Typography Scale — Geist-style
+ *
+ * Each entry corresponds to a @utility class in globals.css.
+ * Use these as className values directly — no component wrapper needed.
+ *
+ * Heading:  text-heading-{72|64|56|48|40|32|24|20|16|14}
+ * Button:   text-button-{16|14|12}
+ * Label:    text-label-{20|18|16|14|13|12}
+ *           text-label-{size}-strong / -mono / -tabular
+ * Copy:     text-copy-{24|20|18|16|14|13}
+ *           text-copy-{size}-strong / -mono
+ */
+export const headingScale = [72, 64, 56, 48, 40, 32, 24, 20, 16, 14] as const;
+export const buttonScale = [16, 14, 12] as const;
+export const labelScale = [20, 18, 16, 14, 13, 12] as const;
+export const copyScale = [24, 20, 18, 16, 14, 13] as const;
+
+export type HeadingSize = (typeof headingScale)[number];
+export type ButtonSize = (typeof buttonScale)[number];
+export type LabelSize = (typeof labelScale)[number];
+export type CopySize = (typeof copyScale)[number];
+export type LabelVariant = "strong" | "mono" | "tabular";
+export type CopyVariant = "strong" | "mono";
 
 /**
  * Text color presets
