@@ -1,3 +1,4 @@
+import { context, trace } from "@opentelemetry/api";
 import pino from "pino";
 import type { Logger, Meta } from "./types.js";
 
@@ -32,19 +33,38 @@ function serializeError(error: unknown): Meta {
   return { err: error };
 }
 
+// Returns the active OTel traceId, or undefined when no span is active or OTel
+// is not initialized. The try/catch guards against unexpected runtime errors.
+function getTraceId(): string | undefined {
+  try {
+    const span = trace.getSpan(context.active());
+    const id = span?.spanContext().traceId;
+    return id && id !== "00000000000000000000000000000000" ? id : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 function makeLogger(base: pino.Logger): Logger {
   return {
     debug(msg, meta) {
-      base.debug(meta ?? {}, msg);
+      const traceId = getTraceId();
+      base.debug({ ...meta, ...(traceId ? { traceId } : {}) }, msg);
     },
     info(msg, meta) {
-      base.info(meta ?? {}, msg);
+      const traceId = getTraceId();
+      base.info({ ...meta, ...(traceId ? { traceId } : {}) }, msg);
     },
     warn(msg, meta) {
-      base.warn(meta ?? {}, msg);
+      const traceId = getTraceId();
+      base.warn({ ...meta, ...(traceId ? { traceId } : {}) }, msg);
     },
     error(msg, error, meta) {
-      base.error({ ...serializeError(error), ...meta }, msg);
+      const traceId = getTraceId();
+      base.error(
+        { ...serializeError(error), ...meta, ...(traceId ? { traceId } : {}) },
+        msg,
+      );
     },
     child(bindings) {
       return makeLogger(base.child(bindings));
