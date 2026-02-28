@@ -1,24 +1,11 @@
 ---
 title: "Input"
-description: "Single-line text input field extending all native HTML input attributes."
+description: "Single-line text input field. h-10 (40px) locked per component tokens. Focus ring uses brand-blue."
 ---
 
-## Demo
-
-```tsx
-import { Input } from "@nebutra/custom-ui/primitives"
-
-export function InputDemo() {
-  return (
-    <div className="space-y-4 w-80">
-      <Input type="text" placeholder="Enter your name" />
-      <Input type="email" placeholder="Enter your email" />
-      <Input type="password" placeholder="Enter password" />
-      <Input type="text" disabled placeholder="Disabled input" />
-    </div>
-  )
-}
-```
+<Note>
+  **Storybook** — Interactive demo with all types: `apps/storybook` → **Primitives / Input**
+</Note>
 
 ## Usage
 
@@ -26,36 +13,58 @@ export function InputDemo() {
 import { Input } from "@nebutra/custom-ui/primitives"
 ```
 
-## Props
-
-`Input` extends all native `React.InputHTMLAttributes<HTMLInputElement>` props.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `type` | `string` | `"text"` | HTML input type (`text`, `email`, `password`, `number`, etc.) |
-| `placeholder` | `string` | — | Placeholder text shown when empty |
-| `disabled` | `boolean` | `false` | Disables the input |
-| `className` | `string` | — | Additional CSS classes |
-| `value` | `string \| number` | — | Controlled value |
-| `defaultValue` | `string \| number` | — | Uncontrolled default value |
-| `onChange` | `React.ChangeEventHandler<HTMLInputElement>` | — | Change event handler |
-| `ref` | `React.Ref<HTMLInputElement>` | — | Forwarded ref |
-
 ## Examples
+
+### Basic
+
+```tsx
+<Input placeholder="Enter value…" />
+```
 
 ### With Label
 
 ```tsx
-import { Label } from "@nebutra/custom-ui/primitives"
-import { Input } from "@nebutra/custom-ui/primitives"
-
-<div className="space-y-2">
-  <Label htmlFor="email">Email</Label>
-  <Input id="email" type="email" placeholder="you@example.com" />
+<div className="flex flex-col gap-1.5">
+  <label className="text-sm font-medium" htmlFor="email">
+    Email address
+  </label>
+  <Input id="email" type="email" placeholder="hello@nebutra.com" />
 </div>
 ```
 
-### Controlled Input
+### With Error State
+
+```tsx
+<div className="flex flex-col gap-1.5">
+  <label className="text-sm font-medium" htmlFor="error-input">
+    Email address
+  </label>
+  <Input
+    id="error-input"
+    type="email"
+    defaultValue="not-an-email"
+    className="border-destructive focus-visible:ring-destructive"
+    aria-invalid="true"
+    aria-describedby="email-error"
+  />
+  <p id="email-error" className="text-xs text-destructive">
+    Please enter a valid email address.
+  </p>
+</div>
+```
+
+### Search with Icon
+
+```tsx
+import { Search } from "lucide-react"
+
+<div className="relative">
+  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+  <Input className="pl-9" placeholder="Search…" />
+</div>
+```
+
+### Controlled
 
 ```tsx
 const [value, setValue] = useState("")
@@ -63,42 +72,39 @@ const [value, setValue] = useState("")
 <Input
   value={value}
   onChange={(e) => setValue(e.target.value)}
-  placeholder="Type something..."
+  placeholder="Type something…"
 />
 ```
 
-### File Input
+### Disabled
 
 ```tsx
-<Input type="file" accept="image/*" />
+<Input placeholder="Cannot be edited" disabled />
 ```
 
-### Search Input
+## Props
 
-```tsx
-import { Search } from "lucide-react"
+`Input` extends all native `React.InputHTMLAttributes<HTMLInputElement>`.
 
-<div className="relative">
-  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-  <Input className="pl-9" placeholder="Search..." />
-</div>
-```
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `string` | `"text"` | HTML input type (`text`, `email`, `password`, `number`, `search`, etc.) |
+| `placeholder` | `string` | — | Placeholder text |
+| `disabled` | `boolean` | `false` | Disables the input |
+| `className` | `string` | — | Additional CSS classes |
+| `value` | `string \| number` | — | Controlled value |
+| `defaultValue` | `string \| number` | — | Uncontrolled default value |
+| `onChange` | `ChangeEventHandler<HTMLInputElement>` | — | Change handler |
+| `ref` | `Ref<HTMLInputElement>` | — | Forwarded ref |
 
-### With Error State
+## Design Tokens
 
-```tsx
-<div className="space-y-2">
-  <Input
-    className="border-destructive focus-visible:ring-destructive"
-    placeholder="Invalid value"
-  />
-  <p className="text-sm text-destructive">This field is required.</p>
-</div>
-```
+Height locked to `h-10` (40px) from `inputTokens.height`.
+Focus ring: `--focus-ring` — brand-blue 2px ring, 2px offset.
 
 ## Accessibility
 
-- Renders a native `<input>` element — full browser and screen reader support.
-- Always pair with a visible `<Label>` or use `aria-label` for screen reader identification.
-- Focus ring is visible via `focus-visible:ring-2` for keyboard navigation.
-- `disabled` state sets `cursor-not-allowed` and reduces opacity to communicate unavailability.
+- Renders native `<input>` — always pair with a visible `<label>` or `aria-label`.
+- Use `aria-invalid="true"` + `aria-describedby` to associate error messages.
+- Disabled state sets `cursor-not-allowed` and reduces opacity.
+- Focus ring is always visible for keyboard navigation.

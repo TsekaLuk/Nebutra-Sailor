@@ -1,34 +1,11 @@
 ---
 title: "Avatar"
-description: "User profile image component with automatic fallback to initials, built on Radix UI."
+description: "User profile image with automatic fallback to initials. Built on Radix UI Avatar primitive."
 ---
 
-## Demo
-
-```tsx
-import { Avatar, AvatarImage, AvatarFallback } from "@nebutra/custom-ui/primitives"
-
-export function AvatarDemo() {
-  return (
-    <div className="flex gap-4 items-center">
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>SC</AvatarFallback>
-      </Avatar>
-
-      <Avatar>
-        <AvatarImage src="/broken-image.jpg" alt="Broken image" />
-        <AvatarFallback>JD</AvatarFallback>
-      </Avatar>
-
-      <Avatar className="h-14 w-14">
-        <AvatarImage src="https://github.com/shadcn.png" alt="Large avatar" />
-        <AvatarFallback>LG</AvatarFallback>
-      </Avatar>
-    </div>
-  )
-}
-```
+<Note>
+  **Storybook** — Interactive demo with size controls: `apps/storybook` → **Primitives / Avatar**
+</Note>
 
 ## Usage
 
@@ -36,64 +13,64 @@ export function AvatarDemo() {
 import { Avatar, AvatarImage, AvatarFallback } from "@nebutra/custom-ui/primitives"
 ```
 
-## Props
-
-### Avatar
-
-Extends `@radix-ui/react-avatar` `Root` props.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | — | Additional CSS classes. Use to override default `h-10 w-10` size |
-| `children` | `ReactNode` | — | `AvatarImage` and/or `AvatarFallback` |
-
-Default size is `40×40px` (`h-10 w-10`) with a circular shape (`rounded-full`).
-
-### AvatarImage
-
-Extends `@radix-ui/react-avatar` `Image` props.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `src` | `string` | — | Image URL |
-| `alt` | `string` | — | **Required.** Alt text for screen readers |
-| `className` | `string` | — | Additional CSS classes |
-
-The image is hidden automatically if it fails to load, revealing `AvatarFallback`.
-
-### AvatarFallback
-
-Extends `@radix-ui/react-avatar` `Fallback` props.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `delayMs` | `number` | — | Delay before showing fallback (prevents flash on fast image loads) |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Fallback content (typically 1–2 initials) |
-
 ## Examples
 
-### Size Variants
+### Basic
 
 ```tsx
-<Avatar className="h-6 w-6">
-  <AvatarFallback className="text-xs">XS</AvatarFallback>
-</Avatar>
-
-<Avatar className="h-8 w-8">
-  <AvatarFallback className="text-xs">SM</AvatarFallback>
-</Avatar>
-
 <Avatar>
-  <AvatarFallback>MD</AvatarFallback>
-</Avatar>
-
-<Avatar className="h-14 w-14">
-  <AvatarFallback className="text-lg">LG</AvatarFallback>
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback>SC</AvatarFallback>
 </Avatar>
 ```
 
-### Avatar with User Data
+### Size Variants
+
+Default is `40×40px`. Override with className:
+
+```tsx
+<Avatar className="h-5 w-5">   {/* xs — 20px */}
+  <AvatarFallback className="text-[10px]">XS</AvatarFallback>
+</Avatar>
+
+<Avatar className="h-8 w-8">   {/* sm — 32px */}
+  <AvatarFallback className="text-xs">SM</AvatarFallback>
+</Avatar>
+
+<Avatar>                          {/* md — 40px (default) */}
+  <AvatarFallback>MD</AvatarFallback>
+</Avatar>
+
+<Avatar className="h-14 w-14"> {/* lg — 56px */}
+  <AvatarFallback>LG</AvatarFallback>
+</Avatar>
+
+<Avatar className="h-20 w-20"> {/* xl — 80px */}
+  <AvatarFallback className="text-xl">XL</AvatarFallback>
+</Avatar>
+```
+
+### Avatar Group
+
+Stack avatars with `border-background` to separate them visually:
+
+```tsx
+<div className="flex -space-x-2">
+  {users.map((user) => (
+    <Avatar key={user.id} className="h-8 w-8 border-2 border-background">
+      <AvatarImage src={user.avatar} alt={user.name} />
+      <AvatarFallback>{user.initials}</AvatarFallback>
+    </Avatar>
+  ))}
+  <Avatar className="h-8 w-8 border-2 border-background">
+    <AvatarFallback className="bg-muted text-muted-foreground text-xs">
+      +{remaining}
+    </AvatarFallback>
+  </Avatar>
+</div>
+```
+
+### From User Data
 
 ```tsx
 function UserAvatar({ user }: { user: { name: string; image?: string } }) {
@@ -113,31 +90,41 @@ function UserAvatar({ user }: { user: { name: string; image?: string } }) {
 }
 ```
 
-### Avatar Group
+## Props
 
-```tsx
-<div className="flex -space-x-2">
-  {users.map((user) => (
-    <Avatar key={user.id} className="h-8 w-8 border-2 border-background">
-      <AvatarImage src={user.image} alt={user.name} />
-      <AvatarFallback>{user.initials}</AvatarFallback>
-    </Avatar>
-  ))}
-</div>
-```
+### Avatar
 
-### With Delay Fallback
+Extends `@radix-ui/react-avatar` Root props.
 
-```tsx
-<Avatar>
-  <AvatarImage src={profileImageUrl} alt="Profile" />
-  <AvatarFallback delayMs={600}>AB</AvatarFallback>
-</Avatar>
-```
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Use to set size — e.g. `h-8 w-8` for 32px |
+| `children` | `ReactNode` | — | `AvatarImage` and/or `AvatarFallback` |
+
+Default size: `40×40px` (`h-10 w-10`), circular (`rounded-full`).
+
+### AvatarImage
+
+Extends `@radix-ui/react-avatar` Image props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | — | Image URL |
+| `alt` | `string` | — | **Required.** Alt text for screen readers |
+| `className` | `string` | — | Additional CSS classes |
+
+### AvatarFallback
+
+Renders when the image fails to load or while loading.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `delayMs` | `number` | `600` | Delay before showing fallback — prevents flash on fast loads |
+| `className` | `string` | — | Override `bg-muted` for custom colors |
+| `children` | `ReactNode` | — | 1–2 letter initials |
 
 ## Accessibility
 
-- `AvatarImage` renders an `<img>` element — always provide a descriptive `alt` attribute.
-- When the image fails to load, `AvatarFallback` is shown — ensure the fallback initials are meaningful.
-- The root element has `role="img"` semantics via Radix UI.
-- Avoid using avatars as the sole means of identifying a user — combine with visible name text.
+- Always provide a meaningful `alt` on `AvatarImage`.
+- When the avatar triggers an action (e.g., opens a user menu), wrap in `<button>` with `aria-label`.
+- Ensure fallback background has sufficient contrast against initials text.

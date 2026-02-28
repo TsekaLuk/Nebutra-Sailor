@@ -1,75 +1,45 @@
 ---
 title: "Button"
-description: "Interactive click target with six visual variants and four size options."
+description: "Interactive click target with six visual variants and four size options. Primary uses VI brand blue #0033FE."
 ---
 
-## Demo
-
-```tsx
-import { Button } from "@nebutra/design-system"
-
-export function ButtonDemo() {
-  return (
-    <div className="flex flex-wrap gap-3">
-      <Button>Default</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="destructive">Destructive</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="link">Link</Button>
-    </div>
-  )
-}
-```
+<Note>
+  **Storybook** — Interactive demo with controls: `apps/storybook` → **Primitives / Button**
+</Note>
 
 ## Usage
 
 ```tsx
-import { Button } from "@nebutra/design-system"
+import { Button } from "@nebutra/custom-ui/primitives"
 ```
 
-## Props
-
-`Button` extends all native `React.ButtonHTMLAttributes<HTMLButtonElement>` props.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"default"` | Visual style variant |
-| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"default"` | Size of the button |
-| `asChild` | `boolean` | `false` | Merge props onto the immediate child (via Radix `Slot`) |
-| `className` | `string` | — | Additional CSS classes |
-| `disabled` | `boolean` | `false` | Disables the button and prevents interaction |
-| `children` | `ReactNode` | — | Button label content |
-
-### Size Reference
-
-| Size | Height | Padding |
-|------|--------|---------|
-| `sm` | `36px` | `px-3` |
-| `default` | `40px` | `px-4 py-2` |
-| `lg` | `44px` | `px-8` |
-| `icon` | `40×40px` | — |
-
 ## Examples
+
+### Variants
+
+```tsx
+<Button variant="default">Default</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="destructive">Delete</Button>
+<Button variant="link">Learn more</Button>
+```
 
 ### Sizes
 
 ```tsx
-<Button size="sm">Small</Button>
-<Button size="default">Default</Button>
-<Button size="lg">Large</Button>
-<Button size="icon">
-  <PlusIcon />
-</Button>
+<Button size="sm">Small</Button>       {/* h-9 — 36px */}
+<Button size="default">Default</Button> {/* h-10 — 40px */}
+<Button size="lg">Large</Button>       {/* h-11 — 44px */}
+<Button size="icon"><PlusIcon /></Button> {/* 40×40px */}
 ```
 
-### As Child (Link)
-
-Use `asChild` to render the button's styles on a child element, such as a router link:
+### As Child (polymorphic)
 
 ```tsx
 import Link from "next/link"
-import { Button } from "@nebutra/design-system"
+import { Button } from "@nebutra/custom-ui/primitives"
 
 <Button asChild>
   <Link href="/dashboard">Go to Dashboard</Link>
@@ -81,9 +51,9 @@ import { Button } from "@nebutra/design-system"
 ```tsx
 import { Loader2 } from "lucide-react"
 
-<Button disabled>
+<Button disabled aria-busy="true">
   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-  Please wait
+  Saving…
 </Button>
 ```
 
@@ -98,17 +68,36 @@ import { Mail } from "lucide-react"
 </Button>
 ```
 
-### Destructive Confirmation
+## Props
 
-```tsx
-<Button variant="destructive" onClick={handleDelete}>
-  Delete Account
-</Button>
-```
+`Button` extends all native `React.ButtonHTMLAttributes<HTMLButtonElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"default"` | Visual style variant |
+| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"default"` | Size preset |
+| `asChild` | `boolean` | `false` | Merge props onto the immediate child via Radix `Slot` |
+| `disabled` | `boolean` | `false` | Disables the button |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Button label content |
+
+### Size Reference
+
+| Size | Height | Horizontal Padding |
+|------|--------|--------------------|
+| `sm` | 36px | 12px |
+| `default` | 40px | 16px |
+| `lg` | 44px | 32px |
+| `icon` | 40×40px | — |
+
+## Design Tokens
+
+Primary variant consumes `--color-primary` (VI: `#0033FE` 云毓蓝).
+Focus ring uses `--focus-ring` — brand-blue, 2px width, 2px offset.
 
 ## Accessibility
 
-- Renders as a native `<button>` element by default — inherits full keyboard and screen reader support.
-- When using `asChild` with non-button elements, ensure the child supports keyboard activation.
-- Disabled state sets `pointer-events: none` and `opacity: 50%` — also sets the HTML `disabled` attribute.
-- Visible focus ring via `focus-visible:ring-2` for keyboard navigation.
+- Renders as native `<button>` — keyboard accessible by default.
+- Set `aria-busy="true"` and `disabled` together during loading states.
+- For icon-only buttons (`size="icon"`), always provide `aria-label`.
+- Focus ring is always visible — never suppressed for keyboard users.

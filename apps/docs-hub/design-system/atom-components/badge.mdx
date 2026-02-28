@@ -1,24 +1,11 @@
 ---
 title: "Badge"
-description: "Small status indicator labels with four semantic variants."
+description: "Compact label for status, category, or count. Pill shape with xs font and semibold weight."
 ---
 
-## Demo
-
-```tsx
-import { Badge } from "@nebutra/custom-ui/primitives"
-
-export function BadgeDemo() {
-  return (
-    <div className="flex flex-wrap gap-2">
-      <Badge>Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="destructive">Destructive</Badge>
-      <Badge variant="outline">Outline</Badge>
-    </div>
-  )
-}
-```
+<Note>
+  **Storybook** — Interactive demo with all variants: `apps/storybook` → **Primitives / Badge**
+</Note>
 
 ## Usage
 
@@ -26,19 +13,9 @@ export function BadgeDemo() {
 import { Badge } from "@nebutra/custom-ui/primitives"
 ```
 
-## Props
-
-`Badge` extends `React.HTMLAttributes<HTMLDivElement>`.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `"default" \| "secondary" \| "destructive" \| "outline"` | `"default"` | Visual style and semantic meaning |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Badge label content |
-
 ## Examples
 
-### Semantic Status Badges
+### Variants
 
 ```tsx
 <Badge variant="default">Active</Badge>
@@ -47,15 +24,22 @@ import { Badge } from "@nebutra/custom-ui/primitives"
 <Badge variant="outline">Beta</Badge>
 ```
 
-### In Context — Table Row Status
+### Semantic Status
 
 ```tsx
-<TableRow>
-  <TableCell>Invoice #1024</TableCell>
-  <TableCell>
-    <Badge variant="default">Paid</Badge>
-  </TableCell>
-</TableRow>
+<Badge className="bg-success text-success-foreground border-transparent">Success</Badge>
+<Badge className="bg-warning text-warning-foreground border-transparent">Warning</Badge>
+<Badge className="bg-info text-info-foreground border-transparent">Info</Badge>
+<Badge variant="destructive">Error</Badge>
+```
+
+### With Status Dot
+
+```tsx
+<Badge variant="outline" className="gap-1.5">
+  <span className="h-1.5 w-1.5 rounded-full bg-success" />
+  Live
+</Badge>
 ```
 
 ### With Icon
@@ -69,19 +53,45 @@ import { CircleCheck } from "lucide-react"
 </Badge>
 ```
 
-### Count Badge
+### In Table Rows
+
+```tsx
+<TableRow>
+  <TableCell>Invoice #1024</TableCell>
+  <TableCell>
+    <Badge variant="default">Paid</Badge>
+  </TableCell>
+</TableRow>
+```
+
+### Notification Count
 
 ```tsx
 <div className="relative inline-flex">
   <Bell className="h-5 w-5" />
-  <Badge className="absolute -top-2 -right-2 h-4 w-4 p-0 text-[10px] flex items-center justify-center">
+  <Badge className="absolute -top-2 -right-2 h-4 w-4 p-0 text-[10px] flex items-center justify-center rounded-full">
     3
   </Badge>
 </div>
 ```
 
+## Props
+
+`Badge` extends `React.HTMLAttributes<HTMLDivElement>`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "secondary" \| "destructive" \| "outline"` | `"default"` | Visual style variant |
+| `className` | `string` | — | Use for semantic status colors (`bg-success`, `bg-warning`, etc.) |
+| `children` | `ReactNode` | — | Badge label |
+
+## Design Tokens
+
+Font: `text-xs` (12px), `font-semibold` (600) from `badgeTokens`.
+Shape: `rounded-full` pill, `px-2.5 py-0.5` padding.
+
 ## Accessibility
 
-- Renders as a `<div>` — not interactive by default.
-- For status information, consider adding `aria-label` to clarify context.
-- When used as a notification count, wrap in a container with `aria-live="polite"` for dynamic updates.
+- Renders as `<div>` — not interactive by default.
+- For dynamic status information, add `aria-live="polite"` to the parent container.
+- When used as a notification count, combine with `aria-label` on the triggering element.
