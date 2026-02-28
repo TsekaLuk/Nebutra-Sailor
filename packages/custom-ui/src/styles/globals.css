@@ -63,7 +63,64 @@
   --brand-gradient-reverse: linear-gradient(135deg, var(--nebutra-cyan-500) 0%, var(--nebutra-blue-500) 100%);
   --brand-gradient-vertical: linear-gradient(180deg, var(--nebutra-blue-500) 0%, var(--nebutra-cyan-500) 100%);
   --brand-gradient-radial: radial-gradient(circle, var(--nebutra-cyan-500) 0%, var(--nebutra-blue-500) 100%);
-  
+
+  /* ===========================================
+     12-Step Functional Color Scales (Light Mode)
+
+     Geist-style state-aware semantics:
+       1–2   Backgrounds (app bg, subtle bg)
+       3–5   Component backgrounds (default / hover / active)
+       6–8   Borders (subtle / default / hover)
+       9–10  Solid fills (default / hover)
+       11    Low-contrast text / secondary text
+       12    High-contrast text / primary text
+
+     Built entirely from 云毓VI brand colors.
+     Dark mode values are overridden in .dark below.
+     =========================================== */
+
+  /* Neutral — UI chrome, surfaces, text hierarchy */
+  --neutral-1:  #ffffff;                       /* app background */
+  --neutral-2:  var(--nebutra-neutral-50);     /* subtle background */
+  --neutral-3:  var(--nebutra-neutral-100);    /* component bg default */
+  --neutral-4:  var(--nebutra-neutral-200);    /* component bg hover */
+  --neutral-5:  var(--nebutra-neutral-300);    /* component bg active */
+  --neutral-6:  var(--nebutra-neutral-200);    /* subtle border */
+  --neutral-7:  var(--nebutra-neutral-300);    /* default border */
+  --neutral-8:  var(--nebutra-neutral-400);    /* hovered border */
+  --neutral-9:  var(--nebutra-neutral-500);    /* solid fill */
+  --neutral-10: var(--nebutra-neutral-600);    /* solid fill hover */
+  --neutral-11: var(--nebutra-neutral-700);    /* secondary text */
+  --neutral-12: var(--nebutra-neutral-900);    /* primary text */
+
+  /* 云毓蓝 Blue — primary accent */
+  --blue-1:  var(--nebutra-blue-50);
+  --blue-2:  var(--nebutra-blue-100);
+  --blue-3:  var(--nebutra-blue-200);          /* component bg default */
+  --blue-4:  var(--nebutra-blue-300);          /* component bg hover */
+  --blue-5:  var(--nebutra-blue-400);          /* component bg active */
+  --blue-6:  var(--nebutra-blue-200);          /* subtle border */
+  --blue-7:  var(--nebutra-blue-300);          /* default border */
+  --blue-8:  var(--nebutra-blue-400);          /* hovered border */
+  --blue-9:  var(--nebutra-blue-500);          /* solid fill — main brand accent */
+  --blue-10: var(--nebutra-blue-600);          /* solid fill hover */
+  --blue-11: var(--nebutra-blue-700);          /* secondary text */
+  --blue-12: var(--nebutra-blue-900);          /* primary text */
+
+  /* 云毓青 Cyan — secondary accent */
+  --cyan-1:  var(--nebutra-cyan-50);
+  --cyan-2:  var(--nebutra-cyan-100);
+  --cyan-3:  var(--nebutra-cyan-200);          /* component bg default */
+  --cyan-4:  var(--nebutra-cyan-300);          /* component bg hover */
+  --cyan-5:  var(--nebutra-cyan-400);          /* component bg active */
+  --cyan-6:  var(--nebutra-cyan-200);          /* subtle border */
+  --cyan-7:  var(--nebutra-cyan-300);          /* default border */
+  --cyan-8:  var(--nebutra-cyan-400);          /* hovered border */
+  --cyan-9:  var(--nebutra-cyan-500);          /* solid fill — main brand accent */
+  --cyan-10: var(--nebutra-cyan-600);          /* solid fill hover */
+  --cyan-11: var(--nebutra-cyan-700);          /* secondary text */
+  --cyan-12: var(--nebutra-cyan-900);          /* primary text */
+
   /* ===========================================
      Semantic Theme Variables (Light Mode)
      =========================================== */
@@ -152,7 +209,54 @@
    ============================================ */
 .dark {
   /* Brand scales remain same - only semantic tokens change */
-  
+
+  /* ===========================================
+     12-Step Functional Color Scales (Dark Mode)
+     Inverted from light: step 1 = darkest, step 12 = lightest
+     =========================================== */
+
+  /* Neutral */
+  --neutral-1:  var(--nebutra-neutral-950);    /* app background */
+  --neutral-2:  var(--nebutra-neutral-900);    /* subtle background */
+  --neutral-3:  var(--nebutra-neutral-800);    /* component bg default */
+  --neutral-4:  var(--nebutra-neutral-700);    /* component bg hover */
+  --neutral-5:  var(--nebutra-neutral-600);    /* component bg active */
+  --neutral-6:  var(--nebutra-neutral-800);    /* subtle border */
+  --neutral-7:  var(--nebutra-neutral-700);    /* default border */
+  --neutral-8:  var(--nebutra-neutral-600);    /* hovered border */
+  --neutral-9:  var(--nebutra-neutral-400);    /* solid fill */
+  --neutral-10: var(--nebutra-neutral-300);    /* solid fill hover */
+  --neutral-11: var(--nebutra-neutral-200);    /* secondary text */
+  --neutral-12: var(--nebutra-neutral-50);     /* primary text */
+
+  /* 云毓蓝 Blue */
+  --blue-1:  var(--nebutra-blue-950);
+  --blue-2:  var(--nebutra-blue-900);
+  --blue-3:  var(--nebutra-blue-800);          /* component bg default */
+  --blue-4:  var(--nebutra-blue-700);          /* component bg hover */
+  --blue-5:  var(--nebutra-blue-600);          /* component bg active */
+  --blue-6:  var(--nebutra-blue-800);          /* subtle border */
+  --blue-7:  var(--nebutra-blue-700);          /* default border */
+  --blue-8:  var(--nebutra-blue-600);          /* hovered border */
+  --blue-9:  var(--nebutra-blue-400);          /* solid fill — brighter on dark bg */
+  --blue-10: var(--nebutra-blue-300);          /* solid fill hover */
+  --blue-11: var(--nebutra-blue-200);          /* secondary text */
+  --blue-12: var(--nebutra-blue-100);          /* primary text */
+
+  /* 云毓青 Cyan */
+  --cyan-1:  var(--nebutra-cyan-950);
+  --cyan-2:  var(--nebutra-cyan-900);
+  --cyan-3:  var(--nebutra-cyan-800);          /* component bg default */
+  --cyan-4:  var(--nebutra-cyan-700);          /* component bg hover */
+  --cyan-5:  var(--nebutra-cyan-600);          /* component bg active */
+  --cyan-6:  var(--nebutra-cyan-800);          /* subtle border */
+  --cyan-7:  var(--nebutra-cyan-700);          /* default border */
+  --cyan-8:  var(--nebutra-cyan-600);          /* hovered border */
+  --cyan-9:  var(--nebutra-cyan-400);          /* solid fill — brighter on dark bg */
+  --cyan-10: var(--nebutra-cyan-300);          /* solid fill hover */
+  --cyan-11: var(--nebutra-cyan-200);          /* secondary text */
+  --cyan-12: var(--nebutra-cyan-100);          /* primary text */
+
   /* ===========================================
      Semantic Theme Variables (Dark Mode)
      =========================================== */
@@ -327,7 +431,51 @@
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
-  
+
+  /* ===========================================
+     12-Step Functional Scales → Tailwind classes
+     Usage: bg-neutral-3, hover:bg-blue-4, border-cyan-7, text-neutral-11
+     =========================================== */
+
+  --color-neutral-1:  var(--neutral-1);
+  --color-neutral-2:  var(--neutral-2);
+  --color-neutral-3:  var(--neutral-3);
+  --color-neutral-4:  var(--neutral-4);
+  --color-neutral-5:  var(--neutral-5);
+  --color-neutral-6:  var(--neutral-6);
+  --color-neutral-7:  var(--neutral-7);
+  --color-neutral-8:  var(--neutral-8);
+  --color-neutral-9:  var(--neutral-9);
+  --color-neutral-10: var(--neutral-10);
+  --color-neutral-11: var(--neutral-11);
+  --color-neutral-12: var(--neutral-12);
+
+  --color-blue-1:  var(--blue-1);
+  --color-blue-2:  var(--blue-2);
+  --color-blue-3:  var(--blue-3);
+  --color-blue-4:  var(--blue-4);
+  --color-blue-5:  var(--blue-5);
+  --color-blue-6:  var(--blue-6);
+  --color-blue-7:  var(--blue-7);
+  --color-blue-8:  var(--blue-8);
+  --color-blue-9:  var(--blue-9);
+  --color-blue-10: var(--blue-10);
+  --color-blue-11: var(--blue-11);
+  --color-blue-12: var(--blue-12);
+
+  --color-cyan-1:  var(--cyan-1);
+  --color-cyan-2:  var(--cyan-2);
+  --color-cyan-3:  var(--cyan-3);
+  --color-cyan-4:  var(--cyan-4);
+  --color-cyan-5:  var(--cyan-5);
+  --color-cyan-6:  var(--cyan-6);
+  --color-cyan-7:  var(--cyan-7);
+  --color-cyan-8:  var(--cyan-8);
+  --color-cyan-9:  var(--cyan-9);
+  --color-cyan-10: var(--cyan-10);
+  --color-cyan-11: var(--cyan-11);
+  --color-cyan-12: var(--cyan-12);
+
   /* Border radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
