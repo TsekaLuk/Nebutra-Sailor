@@ -5,20 +5,25 @@ const isDev = process.env.NODE_ENV === "development";
 const isTest = process.env.NODE_ENV === "test";
 
 const pinoInstance = pino({
-  level: process.env.LOG_LEVEL ?? (isDev ? "debug" : "info"),
   ...(isTest
-    ? { enabled: false }
-    : isDev
-      ? {
-          transport: {
-            target: "pino-pretty",
-            options: { colorize: true, translateTime: "SYS:HH:MM:ss" },
-          },
-        }
-      : {}),
+    ? { level: "silent" }
+    : {
+        level: process.env.LOG_LEVEL ?? (isDev ? "debug" : "info"),
+        ...(isDev
+          ? {
+              transport: {
+                target: "pino-pretty",
+                options: { colorize: true, translateTime: "SYS:HH:MM:ss" },
+              },
+            }
+          : {}),
+      }),
 });
 
 function serializeError(error: unknown): Meta {
+  if (error == null) {
+    return {};
+  }
   if (error instanceof Error) {
     return {
       err: { message: error.message, stack: error.stack, name: error.name },
