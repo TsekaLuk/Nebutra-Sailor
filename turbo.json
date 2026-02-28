@@ -12,18 +12,22 @@
       "persistent": true
     },
     "lint": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "eslint.config*", ".eslintrc*"]
     },
     "typecheck": {
-      "dependsOn": ["^build", "db:generate"]
+      "dependsOn": ["^build", "db:generate"],
+      "inputs": ["$TURBO_DEFAULT$", "tsconfig*.json"]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "vitest.config*"],
+      "outputs": ["coverage/**"]
     },
     "db:generate": {
       "cache": true,
       "inputs": ["packages/db/prisma/schema.prisma"],
       "outputs": ["node_modules/.pnpm/@prisma+client*/**"]
-    },
-    "test": {
-      "dependsOn": ["^build"]
     },
     "db:migrate": {
       "cache": false
