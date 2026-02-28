@@ -138,6 +138,8 @@ model Content {
   @@index([organizationId])
   @@index([authorId])
   @@index([status])
+  @@index([organizationId, status])
+  @@index([organizationId, publishedAt])
   @@map("contents")
 }
 
@@ -220,6 +222,8 @@ model Order {
   @@index([organizationId])
   @@index([userId])
   @@index([status])
+  @@index([organizationId, status])
+  @@index([organizationId, userId])
   @@map("orders")
 }
 
@@ -274,6 +278,7 @@ model Wallet {
 
   @@unique([address, chainId])
   @@index([userId])
+  @@index([userId, organizationId])
   @@map("wallets")
 }
 
@@ -297,6 +302,7 @@ model Nft {
 
   @@unique([contractAddr, tokenId, chainId])
   @@index([walletId])
+  @@index([organizationId, status])
   @@map("nfts")
 }
 
@@ -320,6 +326,7 @@ model UserActivity {
   @@index([userId])
   @@index([action])
   @@index([createdAt])
+  @@index([userId, createdAt])
   @@map("user_activities")
 }
 
@@ -380,6 +387,7 @@ model AIRequest {
   @@index([userId])
   @@index([createdAt])
   @@index([provider, model])
+  @@index([organizationId, createdAt])
   @@map("ai_requests")
 }
 
@@ -722,6 +730,7 @@ model Subscription {
 
   @@index([organizationId])
   @@index([status])
+  @@index([organizationId, status])
   @@map("subscriptions")
 }
 
@@ -755,6 +764,8 @@ model Invoice {
   @@index([organizationId])
   @@index([status])
   @@index([dueDate])
+  @@index([organizationId, status])
+  @@index([organizationId, createdAt])
   @@map("invoices")
 }
 
@@ -800,6 +811,8 @@ model Payment {
 
   @@index([organizationId])
   @@index([status])
+  @@index([organizationId, status])
+  @@index([organizationId, createdAt])
   @@map("payments")
 }
 
@@ -986,6 +999,8 @@ model AuditLog {
   @@index([entityType, entityId])
   @@index([action])
   @@index([createdAt])
+  @@index([organizationId, createdAt])
+  @@index([organizationId, userId])
   @@map("audit_logs")
 }
 
@@ -1035,6 +1050,8 @@ model LegalDocument {
   @@unique([slug, version, locale])
   @@index([type, isActive])
   @@index([locale])
+  @@index([slug, isActive, effectiveAt])
+  @@index([locale, isActive, effectiveAt])
   @@map("legal_documents")
 }
 
@@ -1063,6 +1080,7 @@ model UserConsent {
   @@index([visitorId])
   @@index([documentSlug, documentVersion])
   @@index([consentedAt])
+  @@index([documentSlug, consentGiven, withdrawnAt])
   @@map("user_consents")
 }
 
@@ -1086,6 +1104,7 @@ model CookieConsent {
   @@unique([visitorId])
   @@index([userId])
   @@index([consentedAt])
+  @@index([userId, expiresAt])
   @@map("cookie_consents")
 }
 

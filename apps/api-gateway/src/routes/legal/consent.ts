@@ -3,6 +3,7 @@ import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { prisma, Prisma } from "@nebutra/db";
 import { logger } from "@nebutra/logger";
+import { DatabaseError, NotFoundError, toApiError } from "@nebutra/errors";
 
 const log = logger.child({ service: "consent" });
 
@@ -64,7 +65,8 @@ consentRoutes.post(
       });
 
       if (!document) {
-        return c.json({ error: "Document not found" }, 404);
+        const notFound = new NotFoundError("LegalDocument", data.documentSlug);
+        return c.json(toApiError(notFound), notFound.statusCode);
       }
 
       // Create consent record
@@ -103,8 +105,12 @@ consentRoutes.post(
         consentedAt: consent.consentedAt,
       });
     } catch (error) {
-      log.error("Failed to record consent", error);
-      return c.json({ error: "Failed to record consent" }, 500);
+      const dbError = new DatabaseError(
+        "record consent",
+        error instanceof Error ? error : undefined,
+      );
+      log.error("Failed to record consent", { error, userId, organizationId });
+      return c.json(toApiError(dbError), dbError.statusCode);
     }
   },
 );
@@ -133,7 +139,8 @@ consentRoutes.get("/consent/status", async (c) => {
     });
 
     if (!currentDocument) {
-      return c.json({ error: "Document not found" }, 404);
+      const notFound = new NotFoundError("LegalDocument", documentSlug);
+      return c.json(toApiError(notFound), notFound.statusCode);
     }
 
     // Find user's latest consent for this document
@@ -162,8 +169,17 @@ consentRoutes.get("/consent/status", async (c) => {
       lastConsentedAt: consent?.consentedAt,
     });
   } catch (error) {
-    log.error("Failed to get consent status", error);
-    return c.json({ error: "Failed to get consent status" }, 500);
+    const dbError = new DatabaseError(
+      "get consent status",
+      error instanceof Error ? error : undefined,
+    );
+    log.error("Failed to get consent status", {
+      error,
+      documentSlug,
+      userId,
+      visitorId,
+    });
+    return c.json(toApiError(dbError), dbError.statusCode);
   }
 });
 
@@ -202,8 +218,17 @@ consentRoutes.delete("/consent", async (c) => {
       withdrawnCount: result.count,
     });
   } catch (error) {
-    log.error("Failed to withdraw consent", error);
-    return c.json({ error: "Failed to withdraw consent" }, 500);
+    const dbError = new DatabaseError(
+      "withdraw consent",
+      error instanceof Error ? error : undefined,
+    );
+    log.error("Failed to withdraw consent", {
+      error,
+      documentSlug,
+      userId,
+      visitorId,
+    });
+    return c.json(toApiError(dbError), dbError.statusCode);
   }
 });
 
@@ -281,8 +306,16 @@ consentRoutes.post(
         expiresAt: consent.expiresAt,
       });
     } catch (error) {
-      log.error("Failed to record cookie consent", error);
-      return c.json({ error: "Failed to record cookie consent" }, 500);
+      const dbError = new DatabaseError(
+        "record cookie consent",
+        error instanceof Error ? error : undefined,
+      );
+      log.error("Failed to record cookie consent", {
+        error,
+        userId,
+        visitorId: data.visitorId,
+      });
+      return c.json(toApiError(dbError), dbError.statusCode);
     }
   },
 );
@@ -332,8 +365,12 @@ consentRoutes.get("/cookie-consent", async (c) => {
       expiresAt: consent.expiresAt,
     });
   } catch (error) {
-    log.error("Failed to get cookie consent", error);
-    return c.json({ error: "Failed to get cookie consent" }, 500);
+    const dbError = new DatabaseError(
+      "get cookie consent",
+      error instanceof Error ? error : undefined,
+    );
+    log.error("Failed to get cookie consent", { error, visitorId, userId });
+    return c.json(toApiError(dbError), dbError.statusCode);
   }
 });
 
@@ -385,8 +422,12 @@ consentRoutes.get("/documents", async (c) => {
       documents: Object.values(uniqueDocs),
     });
   } catch (error) {
-    log.error("Failed to list documents", error);
-    return c.json({ error: "Failed to list documents" }, 500);
+    const dbError = new DatabaseError(
+      "list legal documents",
+      error instanceof Error ? error : undefined,
+    );
+    log.error("Failed to list documents", { error, locale, type });
+    return c.json(toApiError(dbError), dbError.statusCode);
   }
 });
 
@@ -411,13 +452,18 @@ consentRoutes.get("/documents/:slug", async (c) => {
     });
 
     if (!document) {
-      return c.json({ error: "Document not found" }, 404);
+      const notFound = new NotFoundError("LegalDocument", slug);
+      return c.json(toApiError(notFound), notFound.statusCode);
     }
 
     return c.json({ document });
   } catch (error) {
-    log.error("Failed to get document", error);
-    return c.json({ error: "Failed to get document" }, 500);
+    const dbError = new DatabaseError(
+      "get legal document",
+      error instanceof Error ? error : undefined,
+    );
+    log.error("Failed to get document", { error, slug, locale, version });
+    return c.json(toApiError(dbError), dbError.statusCode);
   }
 });
 
@@ -483,8 +529,16 @@ consentRoutes.post(
           "Your message has been received. We will respond within 1-2 business days.",
       });
     } catch (error) {
-      log.error("Failed to submit contact form", error);
-      return c.json({ error: "Failed to submit contact form" }, 500);
+      const dbError = new DatabaseError(
+        "submit contact form",
+        error instanceof Error ? error : undefined,
+      );
+      log.error("Failed to submit contact form", {
+        error,
+        email: data.email,
+        category: data.category,
+      });
+      return c.json(toApiError(dbError), dbError.statusCode);
     }
   },
 );
