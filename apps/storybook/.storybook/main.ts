@@ -45,6 +45,8 @@ const config: StorybookConfig = {
         __dirname,
         "../../../packages/custom-ui/src",
       ),
+      // Point @nebutra/icons at built dist for type safety
+      "@nebutra/icons": join(__dirname, "../../../packages/icons/src/index.ts"),
     };
     return config;
   },
