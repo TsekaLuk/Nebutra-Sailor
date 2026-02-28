@@ -29,14 +29,20 @@ const envSchema = z.object({
   STUDIO_URL: z.string().optional(),
   // Additional allowed CORS origins (comma-separated)
   CORS_ORIGINS: z.string().optional(),
+
+  // Domain overrides
+  DOMAIN_LANDING: z.string().url().optional(),
+  DOMAIN_APP: z.string().url().optional(),
+  DOMAIN_API: z.string().url().optional(),
+  DOMAIN_STUDIO: z.string().url().optional(),
 });
 
-// Production domain constants
+// Production domain constants (overridable via environment variables)
 export const DOMAINS = {
-  landing: "https://nebutra.com",
-  app: "https://app.nebutra.com",
-  api: "https://api.nebutra.com",
-  studio: "https://studio.nebutra.com",
+  landing: process.env.DOMAIN_LANDING ?? "https://nebutra.com",
+  app: process.env.DOMAIN_APP ?? "https://app.nebutra.com",
+  api: process.env.DOMAIN_API ?? "https://api.nebutra.com",
+  studio: process.env.DOMAIN_STUDIO ?? "https://studio.nebutra.com",
 } as const;
 
 export type Env = z.infer<typeof envSchema>;

@@ -11,6 +11,12 @@ export default defineConfig({
       reporter: ["text", "json", "html"],
       exclude: ["node_modules/", "src/**/*.{test,spec}.ts", "src/__tests__/**"],
       include: ["src/**/*.ts"],
+      thresholds: {
+        lines: 70,
+        functions: 70,
+        branches: 60,
+        statements: 70,
+      },
     },
   },
   resolve: {

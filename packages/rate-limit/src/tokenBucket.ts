@@ -12,7 +12,7 @@ export interface RateLimitResult {
 }
 
 // Plan-based rate limits
-export const PLAN_LIMITS: Record<string, TokenBucketConfig> = {
+export const PLAN_LIMITS = {
   FREE: {
     maxTokens: 100,
     refillRate: 10,
@@ -28,35 +28,49 @@ export const PLAN_LIMITS: Record<string, TokenBucketConfig> = {
     refillRate: 1000,
     refillInterval: 1000,
   },
-};
+} as const;
 
 // API weight for different endpoints
-export const API_WEIGHTS: Record<string, number> = {
+export const API_WEIGHTS = {
   // Light operations
   "GET:/api/content/feed": 1,
   "GET:/api/content/post": 1,
-  
+
   // Medium operations
   "POST:/api/content/post": 5,
   "PUT:/api/content/post": 3,
-  
+
   // Heavy operations (AI)
   "POST:/api/ai/generate": 20,
   "POST:/api/ai/embed": 10,
   "POST:/api/ai/translate": 15,
-  
+
   // Default
   default: 2,
-};
+} as const;
 
 export function getApiWeight(method: string, path: string): number {
   const key = `${method}:${path}`;
-  return API_WEIGHTS[key] ?? API_WEIGHTS.default;
+  const weight = API_WEIGHTS[key as keyof typeof API_WEIGHTS];
+  return weight ?? API_WEIGHTS.default;
+}
+
+// Fixed prefix for all rate-limit keys to prevent collisions with other services
+const KEY_PREFIX = "sailor:rate-limit";
+
+/**
+ * Build a namespaced Redis/storage key from raw segments.
+ * Usage: buildKey(orgId, userId, ip)  →  "sailor:rate-limit:org:user:ip"
+ */
+export function buildKey(...segments: string[]): string {
+  return [KEY_PREFIX, ...segments].join(":");
 }
 
 /**
  * In-memory token bucket implementation
- * In production, use Redis for distributed rate limiting
+ * In production, use Redis for distributed rate limiting.
+ * All keys should be created via `buildKey()` to ensure the
+ * "sailor:rate-limit" namespace prefix is always applied.
  */
 export class TokenBucket {
   private buckets: Map<string, { tokens: number; lastRefill: number }> =
@@ -65,24 +79,25 @@ export class TokenBucket {
   constructor(private config: TokenBucketConfig) {}
 
   async consume(key: string, tokens: number = 1): Promise<RateLimitResult> {
+    const namespacedKey = buildKey(key);
     const now = Date.now();
-    let bucket = this.buckets.get(key);
+    let bucket = this.buckets.get(namespacedKey);
 
     if (!bucket) {
       bucket = { tokens: this.config.maxTokens, lastRefill: now };
-      this.buckets.set(key, bucket);
+      this.buckets.set(namespacedKey, bucket);
     }
 
     // Refill tokens based on time elapsed
     const elapsed = now - bucket.lastRefill;
     const refillAmount = Math.floor(
-      (elapsed / this.config.refillInterval) * this.config.refillRate
+      (elapsed / this.config.refillInterval) * this.config.refillRate,
     );
 
     if (refillAmount > 0) {
       bucket.tokens = Math.min(
         this.config.maxTokens,
-        bucket.tokens + refillAmount
+        bucket.tokens + refillAmount,
       );
       bucket.lastRefill = now;
     }
@@ -100,7 +115,7 @@ export class TokenBucket {
     // Not enough tokens
     const tokensNeeded = tokens - bucket.tokens;
     const waitTime = Math.ceil(
-      (tokensNeeded / this.config.refillRate) * this.config.refillInterval
+      (tokensNeeded / this.config.refillRate) * this.config.refillInterval,
     );
 
     return {
@@ -126,7 +141,18 @@ export class TokenBucket {
  * Create a rate limiter for a specific plan
  */
 export function createRateLimiter(plan: string): TokenBucket {
-  const config = PLAN_LIMITS[plan] ?? PLAN_LIMITS.FREE;
+  let config: TokenBucketConfig;
+
+  if (plan === "FREE") {
+    config = PLAN_LIMITS.FREE;
+  } else if (plan === "PRO") {
+    config = PLAN_LIMITS.PRO;
+  } else if (plan === "ENTERPRISE") {
+    config = PLAN_LIMITS.ENTERPRISE;
+  } else {
+    config = PLAN_LIMITS.FREE;
+  }
+
   return new TokenBucket(config);
 }
 
