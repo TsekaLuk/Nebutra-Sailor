@@ -90,8 +90,7 @@ export function createSlackChannel(webhookUrl: string): AlertChannel {
           body: JSON.stringify(slackPayload),
         });
         return response.ok;
-      } catch (error) {
-        console.error("Slack alert failed:", error);
+      } catch {
         return false;
       }
     },
@@ -144,8 +143,7 @@ export function createDiscordChannel(webhookUrl: string): AlertChannel {
           body: JSON.stringify(discordPayload),
         });
         return response.ok;
-      } catch (error) {
-        console.error("Discord alert failed:", error);
+      } catch {
         return false;
       }
     },
@@ -162,7 +160,7 @@ export function createWebhookChannel(
   options: {
     headers?: Record<string, string>;
     transformPayload?: (payload: AlertPayload) => unknown;
-  } = {}
+  } = {},
 ): AlertChannel {
   return {
     name,
@@ -181,8 +179,7 @@ export function createWebhookChannel(
           body: JSON.stringify(body),
         });
         return response.ok;
-      } catch (error) {
-        console.error(`Webhook alert (${name}) failed:`, error);
+      } catch {
         return false;
       }
     },
@@ -196,7 +193,9 @@ export function createWebhookChannel(
 /**
  * Send alert to all registered channels
  */
-export async function sendAlert(payload: AlertPayload): Promise<Map<string, boolean>> {
+export async function sendAlert(
+  payload: AlertPayload,
+): Promise<Map<string, boolean>> {
   const results = new Map<string, boolean>();
   const enrichedPayload = {
     ...payload,
@@ -204,15 +203,16 @@ export async function sendAlert(payload: AlertPayload): Promise<Map<string, bool
     environment: payload.environment || process.env.NODE_ENV,
   };
 
-  const promises = Array.from(channels.entries()).map(async ([name, channel]) => {
-    try {
-      const success = await channel.send(enrichedPayload);
-      results.set(name, success);
-    } catch (error) {
-      console.error(`Alert channel ${name} failed:`, error);
-      results.set(name, false);
-    }
-  });
+  const promises = Array.from(channels.entries()).map(
+    async ([name, channel]) => {
+      try {
+        const success = await channel.send(enrichedPayload);
+        results.set(name, success);
+      } catch {
+        results.set(name, false);
+      }
+    },
+  );
 
   await Promise.allSettled(promises);
   return results;
@@ -223,7 +223,7 @@ export async function sendAlert(payload: AlertPayload): Promise<Map<string, bool
  */
 export async function sendAlertTo(
   channelNames: string[],
-  payload: AlertPayload
+  payload: AlertPayload,
 ): Promise<Map<string, boolean>> {
   const results = new Map<string, boolean>();
   const enrichedPayload = {
@@ -242,8 +242,7 @@ export async function sendAlertTo(
     try {
       const success = await channel.send(enrichedPayload);
       results.set(name, success);
-    } catch (error) {
-      console.error(`Alert channel ${name} failed:`, error);
+    } catch {
       results.set(name, false);
     }
   });
@@ -256,19 +255,35 @@ export async function sendAlertTo(
 // Convenience Functions
 // ============================================
 
-export function alertInfo(title: string, message: string, service?: string): Promise<Map<string, boolean>> {
+export function alertInfo(
+  title: string,
+  message: string,
+  service?: string,
+): Promise<Map<string, boolean>> {
   return sendAlert({ title, message, severity: "info", service });
 }
 
-export function alertWarning(title: string, message: string, service?: string): Promise<Map<string, boolean>> {
+export function alertWarning(
+  title: string,
+  message: string,
+  service?: string,
+): Promise<Map<string, boolean>> {
   return sendAlert({ title, message, severity: "warning", service });
 }
 
-export function alertError(title: string, message: string, service?: string): Promise<Map<string, boolean>> {
+export function alertError(
+  title: string,
+  message: string,
+  service?: string,
+): Promise<Map<string, boolean>> {
   return sendAlert({ title, message, severity: "error", service });
 }
 
-export function alertCritical(title: string, message: string, service?: string): Promise<Map<string, boolean>> {
+export function alertCritical(
+  title: string,
+  message: string,
+  service?: string,
+): Promise<Map<string, boolean>> {
   return sendAlert({ title, message, severity: "critical", service });
 }
 
@@ -282,11 +297,18 @@ interface ErrorRateConfig {
   cooldownMs: number;
 }
 
-const errorCounts = new Map<string, { count: number; windowStart: number; lastAlert: number }>();
+const errorCounts = new Map<
+  string,
+  { count: number; windowStart: number; lastAlert: number }
+>();
 
 export function trackError(
   service: string,
-  config: ErrorRateConfig = { windowMs: 60000, threshold: 10, cooldownMs: 300000 }
+  config: ErrorRateConfig = {
+    windowMs: 60000,
+    threshold: 10,
+    cooldownMs: 300000,
+  },
 ): boolean {
   const now = Date.now();
   const key = service;
@@ -300,7 +322,10 @@ export function trackError(
   errorCounts.set(key, data);
 
   // Check if we should alert
-  if (data.count >= config.threshold && now - data.lastAlert > config.cooldownMs) {
+  if (
+    data.count >= config.threshold &&
+    now - data.lastAlert > config.cooldownMs
+  ) {
     data.lastAlert = now;
     errorCounts.set(key, data);
 
@@ -308,8 +333,8 @@ export function trackError(
     alertError(
       `High Error Rate: ${service}`,
       `Error rate threshold exceeded: ${data.count} errors in ${config.windowMs / 1000}s`,
-      service
-    ).catch(console.error);
+      service,
+    ).catch(() => undefined);
 
     return true;
   }
@@ -370,17 +395,20 @@ function getSeverityEmoji(severity: AlertSeverity): string {
 // Initialize from Environment
 // ============================================
 
-export function initializeFromEnv(): void {
+export function initializeFromEnv(): string[] {
   const slackUrl = process.env.SLACK_WEBHOOK_URL;
   const discordUrl = process.env.DISCORD_WEBHOOK_URL;
+  const registered: string[] = [];
 
   if (slackUrl) {
     registerChannel(createSlackChannel(slackUrl));
-    console.log("Slack alerting channel registered");
+    registered.push("slack");
   }
 
   if (discordUrl) {
     registerChannel(createDiscordChannel(discordUrl));
-    console.log("Discord alerting channel registered");
+    registered.push("discord");
   }
+
+  return registered;
 }
