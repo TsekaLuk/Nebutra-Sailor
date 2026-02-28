@@ -1,4 +1,4 @@
-import { locales } from "@/lib/i18n/locales";
+import { routing } from "@/i18n/routing";
 import {
   Navbar,
   HeroSection,
@@ -9,11 +9,7 @@ import {
 } from "@/components/landing";
 
 export function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
-}
-
-interface Props {
-  params: Promise<{ lang: string }>;
+  return routing.locales.map((locale) => ({ lang: locale }));
 }
 
 /**
@@ -26,10 +22,11 @@ interface Props {
  * 4. Features – 3 glass cards with code snippets
  * 5. FinalCTA – closing command box + CTA
  * 6. Footer
+ *
+ * Locale context is provided by the parent [lang]/layout.tsx via NextIntlClientProvider.
+ * Components call useTranslations() / getTranslations() directly.
  */
-export default async function LocalizedHomePage({ params }: Props) {
-  await params;
-
+export default function LocalizedHomePage() {
   return (
     <main className="min-h-screen bg-black">
       <Navbar />
