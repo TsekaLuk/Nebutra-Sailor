@@ -1,0 +1,91 @@
+---
+title: "Calendar"
+description: "Date selection component built on React Day Picker with full keyboard navigation."
+---
+
+## Demo
+
+```tsx
+import { useState } from "react"
+import { Calendar } from "@nebutra/custom-ui/primitives"
+
+export function CalendarDemo() {
+  const [date, setDate] = useState<Date | undefined>(new Date())
+
+  return (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      className="rounded-md border"
+    />
+  )
+}
+```
+
+## Usage
+
+```tsx
+import { Calendar } from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+`Calendar` extends `React Day Picker` (`DayPicker`) props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `"single" \| "multiple" \| "range"` | `"single"` | Selection mode |
+| `selected` | `Date \| Date[] \| DateRange` | — | Controlled selected date(s) |
+| `onSelect` | `(date: Date \| undefined) => void` | — | Callback when a date is selected |
+| `disabled` | `Matcher \| Matcher[]` | — | Dates to disable (e.g., past dates, specific dates) |
+| `fromDate` | `Date` | — | Start of selectable date range |
+| `toDate` | `Date` | — | End of selectable date range |
+| `showOutsideDays` | `boolean` | `true` | Show days from adjacent months |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### Range Selection
+
+```tsx
+import { DateRange } from "react-day-picker"
+
+const [range, setRange] = useState<DateRange | undefined>()
+
+<Calendar
+  mode="range"
+  selected={range}
+  onSelect={setRange}
+  numberOfMonths={2}
+/>
+```
+
+### Disabled Past Dates
+
+```tsx
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  disabled={{ before: new Date() }}
+/>
+```
+
+### Multiple Selection
+
+```tsx
+<Calendar
+  mode="multiple"
+  selected={selectedDates}
+  onSelect={setSelectedDates}
+/>
+```
+
+## Accessibility
+
+- Built on React Day Picker — follows WCAG date picker accessibility guidelines.
+- Full keyboard navigation: arrow keys to move between days, `Enter`/`Space` to select.
+- Month/year navigation buttons have descriptive `aria-label` attributes.
+- Selected dates have `aria-selected="true"`.
+- Disabled dates have `aria-disabled="true"`.

@@ -1,0 +1,128 @@
+---
+title: "Command Menu"
+description: "Application-level command palette triggered by keyboard shortcut (⌘K)."
+---
+
+## Demo
+
+```tsx
+import { useEffect, useState } from "react"
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from "@nebutra/custom-ui/primitives"
+
+export function CommandMenuDemo() {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        setOpen((prev) => !prev)
+      }
+    }
+    document.addEventListener("keydown", down)
+    return () => document.removeEventListener("keydown", down)
+  }, [])
+
+  return (
+    <>
+      <p className="text-sm text-muted-foreground">
+        Press{" "}
+        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+          <span className="text-xs">⌘</span>K
+        </kbd>
+      </p>
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput placeholder="Type a command or search..." />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Navigation">
+            <CommandItem onSelect={() => { setOpen(false); router.push("/dashboard") }}>
+              Dashboard
+            </CommandItem>
+            <CommandItem onSelect={() => { setOpen(false); router.push("/settings") }}>
+              Settings
+            </CommandItem>
+          </CommandGroup>
+          <CommandSeparator />
+          <CommandGroup heading="Actions">
+            <CommandItem onSelect={() => { setOpen(false); createNewProject() }}>
+              New Project
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
+    </>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandSeparator,
+  CommandShortcut,
+} from "@nebutra/custom-ui/primitives"
+```
+
+<Info>
+  `CommandMenu` is a usage pattern built on top of `CommandDialog`. Register the
+  global keyboard shortcut at your app root (e.g., in a layout component) and
+  lift the `open` state via context or state management.
+</Info>
+
+## Props
+
+### CommandDialog
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | **Required.** Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | **Required.** Callback when open state changes |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Command palette content |
+
+## Examples
+
+### With Context-Aware Results
+
+```tsx
+function useCommandMenu() {
+  const [open, setOpen] = useState(false)
+  const toggle = useCallback(() => setOpen((v) => !v), [])
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault()
+        toggle()
+      }
+    }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [toggle])
+
+  return { open, setOpen }
+}
+```
+
+## Accessibility
+
+- `CommandDialog` renders with `role="dialog"` and `aria-modal="true"`.
+- Focus is trapped within the dialog while open.
+- Closing via `Escape` returns focus to the trigger or last focused element.
+- `CommandInput` has `aria-label="Search commands"` for screen readers.

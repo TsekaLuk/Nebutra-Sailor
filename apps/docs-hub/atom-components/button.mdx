@@ -1,0 +1,114 @@
+---
+title: "Button"
+description: "Interactive click target with six visual variants and four size options."
+---
+
+## Demo
+
+```tsx
+import { Button } from "@nebutra/custom-ui/primitives"
+
+export function ButtonDemo() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button>Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="destructive">Destructive</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="link">Link</Button>
+    </div>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import { Button } from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+`Button` extends all native `React.ButtonHTMLAttributes<HTMLButtonElement>` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"default"` | Visual style variant |
+| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"default"` | Size of the button |
+| `asChild` | `boolean` | `false` | Merge props onto the immediate child (via Radix `Slot`) |
+| `className` | `string` | — | Additional CSS classes |
+| `disabled` | `boolean` | `false` | Disables the button and prevents interaction |
+| `children` | `ReactNode` | — | Button label content |
+
+### Size Reference
+
+| Size | Height | Padding |
+|------|--------|---------|
+| `sm` | `36px` | `px-3` |
+| `default` | `40px` | `px-4 py-2` |
+| `lg` | `44px` | `px-8` |
+| `icon` | `40×40px` | — |
+
+## Examples
+
+### Sizes
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>
+<Button size="icon">
+  <PlusIcon />
+</Button>
+```
+
+### As Child (Link)
+
+Use `asChild` to render the button's styles on a child element, such as a router link:
+
+```tsx
+import Link from "next/link"
+import { Button } from "@nebutra/custom-ui/primitives"
+
+<Button asChild>
+  <Link href="/dashboard">Go to Dashboard</Link>
+</Button>
+```
+
+### Loading State
+
+```tsx
+import { Loader2 } from "lucide-react"
+
+<Button disabled>
+  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+  Please wait
+</Button>
+```
+
+### With Icon
+
+```tsx
+import { Mail } from "lucide-react"
+
+<Button>
+  <Mail className="mr-2 h-4 w-4" />
+  Login with Email
+</Button>
+```
+
+### Destructive Confirmation
+
+```tsx
+<Button variant="destructive" onClick={handleDelete}>
+  Delete Account
+</Button>
+```
+
+## Accessibility
+
+- Renders as a native `<button>` element by default — inherits full keyboard and screen reader support.
+- When using `asChild` with non-button elements, ensure the child supports keyboard activation.
+- Disabled state sets `pointer-events: none` and `opacity: 50%` — also sets the HTML `disabled` attribute.
+- Visible focus ring via `focus-visible:ring-2` for keyboard navigation.

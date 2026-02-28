@@ -1,0 +1,94 @@
+---
+title: "Date Picker"
+description: "Calendar-based date input combining Popover and Calendar for inline date selection."
+---
+
+## Demo
+
+```tsx
+import { useState } from "react"
+import { format } from "date-fns"
+import { CalendarIcon } from "lucide-react"
+import { Button } from "@nebutra/custom-ui/primitives"
+import { Calendar } from "@nebutra/custom-ui/primitives"
+import { Popover, PopoverContent, PopoverTrigger } from "@nebutra/custom-ui/primitives"
+import { cn } from "@nebutra/design-system/utils"
+
+export function DatePickerDemo() {
+  const [date, setDate] = useState<Date>()
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          className={cn("w-56 justify-start text-left font-normal", !date && "text-muted-foreground")}
+        >
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {date ? format(date, "PPP") : "Pick a date"}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0">
+        <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import { Calendar } from "@nebutra/custom-ui/primitives"
+import { Popover, PopoverContent, PopoverTrigger } from "@nebutra/custom-ui/primitives"
+```
+
+<Info>
+  Date Picker is a pattern composed from `Popover` + `Calendar`. There is no
+  standalone `DatePicker` export. Install `date-fns` for date formatting.
+</Info>
+
+## Props
+
+### Calendar (inside Date Picker)
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `"single" \| "range" \| "multiple"` | `"single"` | Selection mode |
+| `selected` | `Date \| undefined` | — | Selected date |
+| `onSelect` | `(date: Date \| undefined) => void` | — | Callback on date selection |
+| `disabled` | `Matcher \| Matcher[]` | — | Disabled date conditions |
+| `initialFocus` | `boolean` | `false` | Auto-focus calendar when opened |
+| `fromDate` | `Date` | — | Earliest selectable date |
+| `toDate` | `Date` | — | Latest selectable date |
+
+## Examples
+
+### Date Range Picker
+
+```tsx
+const [range, setRange] = useState<DateRange | undefined>()
+
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline" className="w-72 justify-start text-left font-normal">
+      <CalendarIcon className="mr-2 h-4 w-4" />
+      {range?.from ? (
+        range.to ? (
+          `${format(range.from, "LLL dd")} - ${format(range.to, "LLL dd, y")}`
+        ) : format(range.from, "LLL dd, y")
+      ) : "Pick a date range"}
+    </Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-auto p-0" align="start">
+    <Calendar mode="range" selected={range} onSelect={setRange} numberOfMonths={2} initialFocus />
+  </PopoverContent>
+</Popover>
+```
+
+## Accessibility
+
+- Trigger button communicates selection state to screen readers.
+- `Calendar` inside the popover uses full keyboard navigation.
+- `initialFocus` ensures the calendar receives focus when opened for keyboard users.
+- Popover closes on `Escape` and returns focus to the trigger.

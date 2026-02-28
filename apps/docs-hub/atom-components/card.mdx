@@ -1,0 +1,148 @@
+---
+title: "Card"
+description: "Content grouping container with header, body, and footer sub-components."
+---
+
+## Demo
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@nebutra/custom-ui/primitives"
+import { Button } from "@nebutra/custom-ui/primitives"
+
+export function CardDemo() {
+  return (
+    <Card className="w-[380px]">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-muted-foreground">
+          Fill out the details below to get started with your new project.
+        </p>
+      </CardContent>
+      <CardFooter className="flex justify-end gap-2">
+        <Button variant="outline">Cancel</Button>
+        <Button>Create</Button>
+      </CardFooter>
+    </Card>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+All card sub-components extend `React.HTMLAttributes<HTMLDivElement>` (or `HTMLHeadingElement` for `CardTitle`).
+
+### Card
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Card content |
+
+The default Card has a `rounded-lg border border-border bg-card text-card-foreground shadow-sm` base style.
+
+### CardHeader
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Header content (typically `CardTitle` + `CardDescription`) |
+
+### CardTitle
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Title text |
+
+Renders as an `<h3>` element.
+
+### CardDescription
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Descriptive text |
+
+### CardContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Main body content |
+
+### CardFooter
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Footer content (typically action buttons) |
+
+## Examples
+
+### Stats Card
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardDescription>Total Revenue</CardDescription>
+    <CardTitle className="text-4xl">$45,231.89</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+  </CardContent>
+</Card>
+```
+
+### Feature Card
+
+```tsx
+<Card className="p-6">
+  <div className="flex items-center gap-3 mb-4">
+    <Zap className="h-5 w-5 text-primary" />
+    <CardTitle className="text-base">Fast Deployments</CardTitle>
+  </div>
+  <p className="text-sm text-muted-foreground">
+    Deploy to production in seconds with zero downtime.
+  </p>
+</Card>
+```
+
+### Card Without Header
+
+```tsx
+<Card>
+  <CardContent className="pt-6">
+    <p>Content-only card with no header.</p>
+  </CardContent>
+</Card>
+```
+
+## Accessibility
+
+- Renders as a `<div>` — no semantic role by default.
+- Use `CardTitle` which renders an `<h3>` to maintain heading hierarchy.
+- For interactive cards, wrap in a link or add `role="article"` as appropriate.
+- The `CardDescription` paired with `CardTitle` provides context for screen readers.

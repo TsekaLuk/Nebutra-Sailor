@@ -1,0 +1,104 @@
+---
+title: "Input"
+description: "Single-line text input field extending all native HTML input attributes."
+---
+
+## Demo
+
+```tsx
+import { Input } from "@nebutra/custom-ui/primitives"
+
+export function InputDemo() {
+  return (
+    <div className="space-y-4 w-80">
+      <Input type="text" placeholder="Enter your name" />
+      <Input type="email" placeholder="Enter your email" />
+      <Input type="password" placeholder="Enter password" />
+      <Input type="text" disabled placeholder="Disabled input" />
+    </div>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import { Input } from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+`Input` extends all native `React.InputHTMLAttributes<HTMLInputElement>` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `string` | `"text"` | HTML input type (`text`, `email`, `password`, `number`, etc.) |
+| `placeholder` | `string` | — | Placeholder text shown when empty |
+| `disabled` | `boolean` | `false` | Disables the input |
+| `className` | `string` | — | Additional CSS classes |
+| `value` | `string \| number` | — | Controlled value |
+| `defaultValue` | `string \| number` | — | Uncontrolled default value |
+| `onChange` | `React.ChangeEventHandler<HTMLInputElement>` | — | Change event handler |
+| `ref` | `React.Ref<HTMLInputElement>` | — | Forwarded ref |
+
+## Examples
+
+### With Label
+
+```tsx
+import { Label } from "@nebutra/custom-ui/primitives"
+import { Input } from "@nebutra/custom-ui/primitives"
+
+<div className="space-y-2">
+  <Label htmlFor="email">Email</Label>
+  <Input id="email" type="email" placeholder="you@example.com" />
+</div>
+```
+
+### Controlled Input
+
+```tsx
+const [value, setValue] = useState("")
+
+<Input
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+  placeholder="Type something..."
+/>
+```
+
+### File Input
+
+```tsx
+<Input type="file" accept="image/*" />
+```
+
+### Search Input
+
+```tsx
+import { Search } from "lucide-react"
+
+<div className="relative">
+  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+  <Input className="pl-9" placeholder="Search..." />
+</div>
+```
+
+### With Error State
+
+```tsx
+<div className="space-y-2">
+  <Input
+    className="border-destructive focus-visible:ring-destructive"
+    placeholder="Invalid value"
+  />
+  <p className="text-sm text-destructive">This field is required.</p>
+</div>
+```
+
+## Accessibility
+
+- Renders a native `<input>` element — full browser and screen reader support.
+- Always pair with a visible `<Label>` or use `aria-label` for screen reader identification.
+- Focus ring is visible via `focus-visible:ring-2` for keyboard navigation.
+- `disabled` state sets `cursor-not-allowed` and reduces opacity to communicate unavailability.
