@@ -75,32 +75,48 @@ export {
   lineHeights,
   textStyles,
   textColors,
+  // Named scale (Geist-style)
+  headingScale,
+  buttonScale,
+  labelScale,
+  copyScale,
   type FontSize,
   type FontWeight,
   type LineHeight,
   type TextStyle,
   type TextColor,
+  type HeadingSize,
+  type ButtonSize,
+  type LabelSize,
+  type CopySize,
+  type LabelVariant,
+  type CopyVariant,
 } from "./typography";
 
 // Shadows
 export {
-  shadows,
-  glowShadows,
-  interactiveShadows,
+  shadowScale,
+  shadowBrandScale,
   shadowClasses,
+  shadowVars,
   type ShadowLevel,
-  type GlowType,
+  type ShadowBrand,
+  type ShadowKey,
 } from "./shadows";
 
 // Motion
 export {
   durations,
   easings,
+  motionVars,
   transitions,
   motionVariants,
+  sectionMotions,
+  staggerContainers,
   interactiveVariants,
   viewportSettings,
   staggerDelay,
   type Duration,
   type Easing,
+  type MotionVar,
 } from "./motion";
