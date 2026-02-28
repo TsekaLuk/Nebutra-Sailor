@@ -15,6 +15,46 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
+  # ── Detect which apps/packages changed ──────────────────────────────────
+  detect-changes:
+    name: Detect Changed Apps
+    runs-on: ubuntu-latest
+    outputs:
+      web: ${{ steps.filter.outputs.web }}
+      api-gateway: ${{ steps.filter.outputs.api-gateway }}
+      landing-page: ${{ steps.filter.outputs.landing-page }}
+      studio: ${{ steps.filter.outputs.studio }}
+      docs-hub: ${{ steps.filter.outputs.docs-hub }}
+      packages: ${{ steps.filter.outputs.packages }}
+      db: ${{ steps.filter.outputs.db }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            web:
+              - 'apps/web/**'
+              - 'packages/**'
+            api-gateway:
+              - 'apps/api-gateway/**'
+              - 'packages/**'
+            landing-page:
+              - 'apps/landing-page/**'
+              - 'packages/**'
+            studio:
+              - 'apps/studio/**'
+              - 'packages/**'
+            docs-hub:
+              - 'apps/docs-hub/**'
+              - 'packages/**'
+            packages:
+              - 'packages/**'
+            db:
+              - 'packages/db/**'
+
+  # ── Commit message validation (PRs only) ────────────────────────────────
   commitlint:
     name: Lint Commit Messages
     runs-on: ubuntu-latest
@@ -40,12 +80,15 @@ jobs:
       - name: Validate PR commits
         run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
+  # ── Lint & type-check (affected packages only) ──────────────────────────
   lint-typecheck:
     name: Lint & Typecheck
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -62,12 +105,13 @@ jobs:
       - name: Generate Prisma Client
         run: pnpm db:generate
 
-      - name: Lint
-        run: pnpm lint
+      - name: Lint (affected)
+        run: pnpm turbo lint --filter=...[HEAD^1]...
 
-      - name: Typecheck
-        run: pnpm typecheck
+      - name: Typecheck (affected)
+        run: pnpm turbo typecheck --filter=...[HEAD^1]...
 
+  # ── Build (affected packages only) ──────────────────────────────────────
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -75,6 +119,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -91,12 +137,12 @@ jobs:
       - name: Generate Prisma Client
         run: pnpm db:generate
 
-      - name: Build
-        run: pnpm build
+      - name: Build (affected)
+        run: pnpm turbo build --filter=...[HEAD^1]...
         env:
-          # Add minimal env vars needed for build
           SKIP_ENV_VALIDATION: true
 
+  # ── Tests (affected packages only) ──────────────────────────────────────
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -104,6 +150,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -117,18 +165,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run tests
-        run: pnpm test
+      - name: Run tests (affected)
+        run: pnpm turbo test --filter=...[HEAD^1]...
         env:
           CI: true
 
-  # Database schema validation (optional, for PRs touching db)
+  # ── Database schema validation (only when db/ changed) ──────────────────
   db-check:
     name: Database Schema Check
     runs-on: ubuntu-latest
-    if: |
-      contains(github.event.pull_request.changed_files, 'packages/db') ||
-      contains(github.event.pull_request.changed_files, 'prisma')
+    needs: detect-changes
+    if: needs.detect-changes.outputs.db == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -147,3 +194,56 @@ jobs:
 
       - name: Validate Prisma schema
         run: pnpm db:generate
+
+  # ── Security scanning ────────────────────────────────────────────────────
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit dependencies (high severity)
+        run: pnpm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Check for secrets with Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ── Deploy jobs ──────────────────────────────────────────────────────────
+  # Add a deploy job per app here, gated by detect-changes output.
+  # Each job only runs when its own app directory (or shared packages) changed.
+  #
+  # Template:
+  #
+  #   deploy-web:
+  #     name: Deploy Web
+  #     runs-on: ubuntu-latest
+  #     needs: [detect-changes, build]
+  #     if: needs.detect-changes.outputs.web == 'true'
+  #     environment: production
+  #     steps:
+  #       - uses: actions/checkout@v4
+  #       - name: Deploy
+  #         run: <your deploy command>
+  #
+  #   deploy-api-gateway:
+  #     name: Deploy API Gateway
+  #     runs-on: ubuntu-latest
+  #     needs: [detect-changes, build]
+  #     if: needs.detect-changes.outputs.api-gateway == 'true'
+  #     steps: ...
