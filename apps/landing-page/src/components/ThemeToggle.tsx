@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useMount } from "@/hooks/useMount";
 import { Moon, Sun, Monitor } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -10,12 +10,7 @@ import { cn } from "@/lib/utils";
  */
 export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Avoid hydration mismatch - standard Next.js pattern
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMount();
 
   if (!mounted) {
     return (

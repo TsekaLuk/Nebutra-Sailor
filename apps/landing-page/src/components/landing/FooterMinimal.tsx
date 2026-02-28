@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMount } from "@/hooks/useMount";
 import { Github, Twitter, MessageCircle } from "lucide-react";
 import { Logo } from "@nebutra/brand";
 import { useTheme } from "next-themes";
@@ -19,12 +19,8 @@ const SOCIAL_ICONS = {
  */
 export function FooterMinimal() {
   const { links, social, copyright, status } = footerContent;
-  const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMount();
 
   const isDark = mounted && resolvedTheme === "dark";
 

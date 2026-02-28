@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMount } from "@/hooks/useMount";
 import { useTheme } from "next-themes";
 import { Marquee } from "@nebutra/custom-ui/marketing";
 import { techStackLogos, getLogoUrl } from "@/lib/landing-content";
@@ -13,12 +13,8 @@ import { techStackLogos, getLogoUrl } from "@/lib/landing-content";
  * @see DESIGN.md Section 2
  */
 export function TrustRibbon() {
-  const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMount();
 
   // Use appropriate logo variant based on theme
   // Dark theme = use logos designed for dark backgrounds (light colored logos)

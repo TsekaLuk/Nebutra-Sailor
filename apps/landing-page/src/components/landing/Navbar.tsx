@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useMount } from "@/hooks/useMount";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X, Github } from "lucide-react";
@@ -33,13 +34,8 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
-
-  // Avoid hydration mismatch - standard Next.js pattern
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMount();
 
   useEffect(() => {
     const handleScroll = () => {
