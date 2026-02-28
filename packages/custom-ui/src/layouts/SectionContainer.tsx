@@ -67,7 +67,7 @@ const SectionContainerRoot = React.forwardRef<
   ) => {
     return (
       <Component
-        ref={ref as React.Ref<HTMLElement>}
+        ref={ref as React.Ref<HTMLDivElement>}
         className={cn(
           "relative w-full",
           !noPadding && "px-4 sm:px-6 lg:px-8",
