@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Compact label for status, category, or count. Pill shape, xs font, semibold weight per badge tokens.",
+          "Compact label for status, category, or count. Pill shape, xs font, semibold weight. Includes semantic status variants and dot prop.",
       },
     },
   },
@@ -17,8 +17,21 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "secondary", "destructive", "outline"],
+      options: [
+        "default",
+        "secondary",
+        "destructive",
+        "outline",
+        "success",
+        "warning",
+        "info",
+        "error",
+      ],
       description: "Visual style — maps to semantic color tokens",
+    },
+    dot: {
+      control: "boolean",
+      description: "Show a 6×6px status dot before the label",
     },
   },
 } satisfies Meta<typeof Badge>;
@@ -26,7 +39,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// ─── Variants ─────────────────────────────────────────────────────────────────
+// ─── Core Variants ────────────────────────────────────────────────────────────
 
 export const Default: Story = {
   args: { children: "Default", variant: "default" },
@@ -44,56 +57,78 @@ export const Outline: Story = {
   args: { children: "Outline", variant: "outline" },
 };
 
-// ─── Semantic Status ──────────────────────────────────────────────────────────
+// ─── Semantic Status Variants ─────────────────────────────────────────────────
 
-export const SemanticStatus: Story = {
-  name: "Semantic Status",
-  render: () => (
-    <div className="flex flex-wrap gap-2">
-      <Badge className="bg-success text-success-foreground border-transparent">
-        Success
-      </Badge>
-      <Badge className="bg-warning text-warning-foreground border-transparent">
-        Warning
-      </Badge>
-      <Badge className="bg-info text-info-foreground border-transparent">
-        Info
-      </Badge>
-      <Badge variant="destructive">Error</Badge>
-    </div>
-  ),
+export const Success: Story = {
+  args: { children: "Success", variant: "success" },
 };
 
-// ─── All Variants Showcase ────────────────────────────────────────────────────
-
-export const AllVariants: Story = {
-  name: "All Variants",
-  render: () => (
-    <div className="flex flex-wrap gap-2">
-      <Badge variant="default">Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="destructive">Destructive</Badge>
-      <Badge variant="outline">Outline</Badge>
-    </div>
-  ),
+export const Warning: Story = {
+  args: { children: "Warning", variant: "warning" },
 };
 
-// ─── With Content ─────────────────────────────────────────────────────────────
+export const Info: Story = {
+  args: { children: "Info", variant: "info" },
+};
+
+export const Error: Story = {
+  args: { children: "Error", variant: "error" },
+};
+
+// ─── Dot Variant ──────────────────────────────────────────────────────────────
 
 export const WithDot: Story = {
   name: "Status Dot",
   render: () => (
     <div className="flex flex-wrap gap-2">
-      {[
-        { label: "Live", color: "bg-success" },
-        { label: "Pending", color: "bg-warning" },
-        { label: "Offline", color: "bg-muted-foreground" },
-      ].map(({ label, color }) => (
-        <Badge key={label} variant="outline" className="gap-1.5">
-          <span className={`h-1.5 w-1.5 rounded-full ${color}`} />
-          {label}
+      <Badge variant="success" dot>
+        Live
+      </Badge>
+      <Badge variant="warning" dot>
+        Pending
+      </Badge>
+      <Badge variant="error" dot>
+        Failed
+      </Badge>
+      <Badge variant="outline" dot>
+        Offline
+      </Badge>
+    </div>
+  ),
+};
+
+// ─── All Variants ─────────────────────────────────────────────────────────────
+
+export const AllVariants: Story = {
+  name: "All Variants",
+  render: () => (
+    <div className="flex flex-col gap-3">
+      <div className="flex flex-wrap gap-2">
+        <Badge variant="default">Default</Badge>
+        <Badge variant="secondary">Secondary</Badge>
+        <Badge variant="destructive">Destructive</Badge>
+        <Badge variant="outline">Outline</Badge>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="info">Info</Badge>
+        <Badge variant="error">Error</Badge>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <Badge variant="success" dot>
+          Live
         </Badge>
-      ))}
+        <Badge variant="warning" dot>
+          Pending
+        </Badge>
+        <Badge variant="info" dot>
+          Syncing
+        </Badge>
+        <Badge variant="error" dot>
+          Failed
+        </Badge>
+      </div>
     </div>
   ),
 };
