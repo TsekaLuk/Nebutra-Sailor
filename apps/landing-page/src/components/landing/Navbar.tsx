@@ -6,27 +6,29 @@ import { motion } from "framer-motion";
 import { Menu, X, Github } from "lucide-react";
 import { Logo, Logomark } from "@nebutra/brand";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3001";
-
-const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Docs", href: "https://docs.nebutra.com" },
-  {
-    label: "GitHub",
-    href: "https://github.com/TsekaLuk/Nebutra-Sailor",
-    icon: Github,
-  },
-];
 
 /**
  * Navbar - Fixed navigation with brand logo
  * Dark-only — no theme toggle, plain auth links to web app
  */
 export function Navbar() {
+  const t = useTranslations("nav");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { label: t("features"), href: "#features" },
+    { label: t("pricing"), href: "#pricing" },
+    { label: t("docs"), href: "https://docs.nebutra.com" },
+    {
+      label: t("github"),
+      href: "https://github.com/TsekaLuk/Nebutra-Sailor",
+      icon: Github,
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,13 +74,13 @@ export function Navbar() {
             href={`${APP_URL}/sign-in`}
             className="text-sm text-white/60 transition-colors hover:text-white"
           >
-            Sign In
+            {t("signIn")}
           </a>
           <a
             href={`${APP_URL}/sign-up`}
             className="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-400"
           >
-            Get Started
+            {t("getStarted")}
           </a>
         </div>
 
@@ -125,14 +127,14 @@ export function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full rounded-lg border border-white/[0.1] px-4 py-3 text-center text-sm font-medium text-white/70 transition-all hover:border-white/20 hover:text-white"
               >
-                Sign In
+                {t("signIn")}
               </a>
               <a
                 href={`${APP_URL}/sign-up`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full rounded-lg bg-indigo-500 px-4 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-indigo-400"
               >
-                Get Started
+                {t("getStarted")}
               </a>
             </div>
           </div>

@@ -2,57 +2,51 @@
 
 import { motion } from "framer-motion";
 import { Server, Zap, CreditCard } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const features = [
-  {
-    icon: Server,
-    title: "Multi-tenant from day one",
-    description:
-      "Row-level security, org isolation, and tenant routing built into every layer. No bolted-on afterthoughts.",
-    code: [
-      "-- Every query scoped to org",
-      "ALTER TABLE resources ENABLE ROW LEVEL SECURITY;",
-      "",
-      "CREATE POLICY tenant_isolation ON resources",
-      "  USING (org_id = current_setting('app.org_id')::uuid);",
-    ],
-  },
-  {
-    icon: Zap,
-    title: "AI-native infrastructure",
-    description:
-      "Provider abstraction over OpenAI, Anthropic, and Gemini. Swap models without changing your application code.",
-    code: [
-      "// One interface, any provider",
-      "const ai = createAI({",
-      "  provider: env.AI_PROVIDER,  // 'openai' | 'anthropic'",
-      "  model: env.AI_MODEL,",
-      "});",
-      "",
-      "const result = await ai.complete(prompt);",
-    ],
-  },
-  {
-    icon: CreditCard,
-    title: "Billing wired up",
-    description:
-      "Stripe subscriptions, usage meters, and webhook handlers — production-ready, not demo-ware.",
-    code: [
-      "// Protect routes by plan",
-      "export const config = {",
-      "  plans: {",
-      "    starter: { seats: 5, api: 10_000 },",
-      "    pro: { seats: 25, api: 100_000 },",
-      "  },",
-      "};",
-    ],
-  },
+const featureCodes = [
+  [
+    "-- Every query scoped to org",
+    "ALTER TABLE resources ENABLE ROW LEVEL SECURITY;",
+    "",
+    "CREATE POLICY tenant_isolation ON resources",
+    "  USING (org_id = current_setting('app.org_id')::uuid);",
+  ],
+  [
+    "// One interface, any provider",
+    "const ai = createAI({",
+    "  provider: env.AI_PROVIDER,  // 'openai' | 'anthropic'",
+    "  model: env.AI_MODEL,",
+    "});",
+    "",
+    "const result = await ai.complete(prompt);",
+  ],
+  [
+    "// Protect routes by plan",
+    "export const config = {",
+    "  plans: {",
+    "    starter: { seats: 5, api: 10_000 },",
+    "    pro: { seats: 25, api: 100_000 },",
+    "  },",
+    "};",
+  ],
 ] as const;
+
+const featureIcons = [Server, Zap, CreditCard] as const;
 
 /**
  * FeatureCards - 3 glass cards with inline code previews
  */
 export function FeatureCards() {
+  const t = useTranslations("features");
+
+  const features = ([0, 1, 2] as const).map((i) => ({
+    icon: featureIcons[i],
+    title: t(`item${i}.title`),
+    description: t(`item${i}.description`),
+    code: featureCodes[i],
+  }));
+
   return (
     <section id="features" className="w-full bg-black py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
@@ -62,7 +56,7 @@ export function FeatureCards() {
           viewport={{ once: true, margin: "-80px" }}
           className="mb-16 text-center text-3xl font-bold tracking-tight text-white md:text-4xl"
         >
-          Built for production from day one.
+          {t("sectionTitle")}
         </motion.h2>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -70,7 +64,7 @@ export function FeatureCards() {
             const Icon = feature.icon;
             return (
               <motion.div
-                key={feature.title}
+                key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}

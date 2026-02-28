@@ -3,6 +3,7 @@
 import { Github, Twitter, MessageCircle } from "lucide-react";
 import { Logo } from "@nebutra/brand";
 import { footerContent } from "@/lib/landing-content";
+import { useTranslations } from "next-intl";
 
 const SOCIAL_ICONS = {
   x: Twitter,
@@ -14,7 +15,18 @@ const SOCIAL_ICONS = {
  * FooterMinimal - Minimal footer (dark-only)
  */
 export function FooterMinimal() {
-  const { links, social, copyright, status } = footerContent;
+  const t = useTranslations("footer");
+  const { social, status } = footerContent;
+
+  const links = [
+    { label: t("links.product"), href: "/features" },
+    { label: t("links.docs"), href: "https://docs.nebutra.com/sailor" },
+    {
+      label: t("links.github"),
+      href: "https://github.com/TsekaLuk/Nebutra-Sailor",
+    },
+    { label: t("links.discord"), href: "https://discord.gg/nebutra" },
+  ];
 
   return (
     <footer className="relative w-full border-t border-white/[0.05] bg-black py-12">
@@ -60,7 +72,7 @@ export function FooterMinimal() {
 
         {/* Bottom Row */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/[0.05] pt-8 md:flex-row">
-          <p className="text-sm text-white/30">{copyright}</p>
+          <p className="text-sm text-white/30">{t("copyright")}</p>
 
           {/* Status indicator */}
           <a
@@ -68,7 +80,7 @@ export function FooterMinimal() {
             className="flex items-center gap-2 text-sm text-white/40 transition-colors hover:text-white"
           >
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
-            {status.label}
+            {t("statusOnline")}
           </a>
         </div>
       </div>

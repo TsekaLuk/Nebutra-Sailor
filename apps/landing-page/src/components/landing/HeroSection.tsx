@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, ArrowRight } from "lucide-react";
 import { heroContent } from "@/lib/landing-content";
+import { useTranslations } from "next-intl";
 
 /**
  * HeroSection - Full-viewport hero with pure black background
@@ -14,6 +15,7 @@ import { heroContent } from "@/lib/landing-content";
  * - Framer Motion entrance stagger (no per-element animations below)
  */
 export function HeroSection() {
+  const t = useTranslations("hero");
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -44,7 +46,7 @@ export function HeroSection() {
           className="mb-8"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-4 py-1.5 text-xs text-white/60 tracking-wide">
-            {heroContent.badge}
+            {t("badge")}
           </span>
         </motion.div>
 
@@ -55,10 +57,10 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="max-w-4xl text-center text-4xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1]"
         >
-          Ship your SaaS
+          {t("headline1")}
           <br />
           <span className="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">
-            in weeks, not months.
+            {t("headline2")}
           </span>
         </motion.h1>
 
@@ -69,8 +71,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-8 max-w-2xl text-center text-lg text-white/50 md:text-xl"
         >
-          Production-ready monorepo with multi-tenancy, AI infrastructure,
-          billing, and everything you need to launch.
+          {t("subheadline")}
         </motion.p>
 
         {/* Command Box */}
@@ -90,7 +91,7 @@ export function HeroSection() {
               className="flex items-center gap-2 rounded-lg bg-white/[0.08] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/[0.12] cursor-pointer"
             >
               <Copy className="h-4 w-4" />
-              {copied ? "Copied!" : "Copy"}
+              {copied ? t("copiedLabel") : t("copyLabel")}
             </button>
           </div>
         </motion.div>
@@ -106,14 +107,14 @@ export function HeroSection() {
             href="https://docs.nebutra.com/sailor/getting-started"
             className="inline-flex items-center gap-2 rounded-full bg-indigo-500 px-8 py-3.5 font-medium text-white transition-colors hover:bg-indigo-400 group"
           >
-            Get Started
+            {t("ctaGetStarted")}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
           <a
             href="https://github.com/TsekaLuk/Nebutra-Sailor"
             className="inline-flex items-center gap-2 text-sm font-medium text-white/50 transition-colors hover:text-white"
           >
-            View on GitHub →
+            {t("ctaViewGitHub")}
           </a>
         </motion.div>
       </div>
