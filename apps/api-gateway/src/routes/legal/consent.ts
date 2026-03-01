@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import type { ContentfulStatusCode } from "hono/utils/http-status";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { prisma, Prisma } from "@nebutra/db";
@@ -66,7 +67,10 @@ consentRoutes.post(
 
       if (!document) {
         const notFound = new NotFoundError("LegalDocument", data.documentSlug);
-        return c.json(toApiError(notFound), notFound.statusCode);
+        return c.json(
+          toApiError(notFound),
+          notFound.statusCode as ContentfulStatusCode,
+        );
       }
 
       // Create consent record
@@ -110,7 +114,10 @@ consentRoutes.post(
         error instanceof Error ? error : undefined,
       );
       log.error("Failed to record consent", { error, userId, organizationId });
-      return c.json(toApiError(dbError), dbError.statusCode);
+      return c.json(
+        toApiError(dbError),
+        dbError.statusCode as ContentfulStatusCode,
+      );
     }
   },
 );
@@ -140,7 +147,10 @@ consentRoutes.get("/consent/status", async (c) => {
 
     if (!currentDocument) {
       const notFound = new NotFoundError("LegalDocument", documentSlug);
-      return c.json(toApiError(notFound), notFound.statusCode);
+      return c.json(
+        toApiError(notFound),
+        notFound.statusCode as ContentfulStatusCode,
+      );
     }
 
     // Find user's latest consent for this document
@@ -179,7 +189,10 @@ consentRoutes.get("/consent/status", async (c) => {
       userId,
       visitorId,
     });
-    return c.json(toApiError(dbError), dbError.statusCode);
+    return c.json(
+      toApiError(dbError),
+      dbError.statusCode as ContentfulStatusCode,
+    );
   }
 });
 
@@ -228,7 +241,10 @@ consentRoutes.delete("/consent", async (c) => {
       userId,
       visitorId,
     });
-    return c.json(toApiError(dbError), dbError.statusCode);
+    return c.json(
+      toApiError(dbError),
+      dbError.statusCode as ContentfulStatusCode,
+    );
   }
 });
 
@@ -315,7 +331,10 @@ consentRoutes.post(
         userId,
         visitorId: data.visitorId,
       });
-      return c.json(toApiError(dbError), dbError.statusCode);
+      return c.json(
+        toApiError(dbError),
+        dbError.statusCode as ContentfulStatusCode,
+      );
     }
   },
 );
@@ -370,7 +389,10 @@ consentRoutes.get("/cookie-consent", async (c) => {
       error instanceof Error ? error : undefined,
     );
     log.error("Failed to get cookie consent", { error, visitorId, userId });
-    return c.json(toApiError(dbError), dbError.statusCode);
+    return c.json(
+      toApiError(dbError),
+      dbError.statusCode as ContentfulStatusCode,
+    );
   }
 });
 
@@ -427,7 +449,10 @@ consentRoutes.get("/documents", async (c) => {
       error instanceof Error ? error : undefined,
     );
     log.error("Failed to list documents", { error, locale, type });
-    return c.json(toApiError(dbError), dbError.statusCode);
+    return c.json(
+      toApiError(dbError),
+      dbError.statusCode as ContentfulStatusCode,
+    );
   }
 });
 
@@ -453,7 +478,10 @@ consentRoutes.get("/documents/:slug", async (c) => {
 
     if (!document) {
       const notFound = new NotFoundError("LegalDocument", slug);
-      return c.json(toApiError(notFound), notFound.statusCode);
+      return c.json(
+        toApiError(notFound),
+        notFound.statusCode as ContentfulStatusCode,
+      );
     }
 
     return c.json({ document });
@@ -463,7 +491,10 @@ consentRoutes.get("/documents/:slug", async (c) => {
       error instanceof Error ? error : undefined,
     );
     log.error("Failed to get document", { error, slug, locale, version });
-    return c.json(toApiError(dbError), dbError.statusCode);
+    return c.json(
+      toApiError(dbError),
+      dbError.statusCode as ContentfulStatusCode,
+    );
   }
 });
 
@@ -538,7 +569,10 @@ consentRoutes.post(
         email: data.email,
         category: data.category,
       });
-      return c.json(toApiError(dbError), dbError.statusCode);
+      return c.json(
+        toApiError(dbError),
+        dbError.statusCode as ContentfulStatusCode,
+      );
     }
   },
 );

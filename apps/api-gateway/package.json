@@ -13,15 +13,20 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@clerk/backend": "^2.33.0",
     "@hono/node-server": "^1.13.0",
     "@hono/zod-validator": "^0.7.5",
     "@nebutra/alerting": "workspace:*",
     "@nebutra/cache": "workspace:*",
     "@nebutra/db": "workspace:*",
+    "@nebutra/errors": "workspace:*",
     "@nebutra/health": "workspace:*",
     "@nebutra/logger": "workspace:*",
     "@nebutra/rate-limit": "workspace:*",
     "hono": "^4.6.0",
+    "inngest": "^3.52.4",
+    "stripe": "^17.7.0",
+    "svix": "^1.86.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {

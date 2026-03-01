@@ -11,6 +11,11 @@ import { prisma } from "@nebutra/db";
 import { healthRoutes } from "./routes/misc/health.js";
 import { statusRoutes } from "./routes/system/status.js";
 import { consentRoutes } from "./routes/legal/consent.js";
+import {
+  stripeWebhookRoutes,
+  clerkWebhookRoutes,
+} from "./routes/webhooks/index.js";
+import { inngestHandler } from "./inngest/index.js";
 import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
 import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
 import { env, DOMAINS } from "./config/env.js";
@@ -74,11 +79,15 @@ app.use(
 // Tenant context extraction (before rate limiting)
 app.use("*", tenantContextMiddleware);
 
-// Rate limiting (skip for health/status endpoints)
+// Rate limiting (skip for health/status/webhook/inngest endpoints)
 app.use("/api/*", async (c, next) => {
   const path = new URL(c.req.url).pathname;
-  // Skip rate limiting for health and status endpoints
-  if (path.startsWith("/api/misc") || path.startsWith("/api/system")) {
+  if (
+    path.startsWith("/api/misc") ||
+    path.startsWith("/api/system") ||
+    path.startsWith("/api/webhooks") ||
+    path.startsWith("/api/inngest")
+  ) {
     return next();
   }
   return rateLimitMiddleware(c, next);
@@ -90,6 +99,13 @@ app.route("/api/system", statusRoutes);
 
 // Legal & Consent routes (v1 API)
 app.route("/api/v1/legal", consentRoutes);
+
+// Webhook routes (raw body — bypass rate limiting)
+app.route("/api/webhooks", stripeWebhookRoutes);
+app.route("/api/webhooks", clerkWebhookRoutes);
+
+// Inngest background job handler (GET for SDK handshake, POST/PUT for execution)
+app.on(["GET", "POST", "PUT"], "/api/inngest", (c) => inngestHandler(c));
 
 // Root route
 app.get("/", (c) => {

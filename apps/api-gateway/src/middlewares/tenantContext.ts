@@ -1,8 +1,11 @@
+import { verifyToken } from "@clerk/backend";
 import { Context, Next } from "hono";
+import { logger } from "@nebutra/logger";
 
 export interface TenantContext {
   userId?: string;
   organizationId?: string;
+  role?: string;
   plan: string;
   ip: string;
 }
@@ -14,29 +17,50 @@ declare module "hono" {
 }
 
 /**
- * Extract tenant context from request headers
- * In production, this would validate Clerk JWT and extract org info
+ * Extract and verify Clerk JWT from Authorization header, then populate tenant context.
+ * If no token is present or verification fails the request is treated as unauthenticated
+ * (no userId / organizationId). Downstream `requireAuth` / `requireOrganization` guards
+ * are responsible for rejecting requests that need authentication.
  */
 export async function tenantContextMiddleware(c: Context, next: Next) {
-  // Get IP from various headers (handle proxies)
+  // Extract client IP (handle proxies)
   const ip =
     c.req.header("x-forwarded-for")?.split(",")[0]?.trim() ||
     c.req.header("x-real-ip") ||
     "unknown";
 
-  // In production, extract these from Clerk JWT
-  // For now, use headers for development
-  const userId = c.req.header("x-user-id");
-  const organizationId = c.req.header("x-organization-id");
-  const plan = c.req.header("x-plan") || "FREE";
-
   const tenant: TenantContext = {
-    plan,
+    plan: "FREE",
     ip,
   };
 
-  if (userId) tenant.userId = userId;
-  if (organizationId) tenant.organizationId = organizationId;
+  const authHeader = c.req.header("authorization");
+  const token = authHeader?.startsWith("Bearer ")
+    ? authHeader.slice(7)
+    : undefined;
+
+  if (token) {
+    try {
+      const payload = await verifyToken(token, {
+        secretKey: process.env.CLERK_SECRET_KEY!,
+      });
+
+      const userId = payload.sub;
+      const organizationId =
+        typeof payload.org_id === "string" ? payload.org_id : undefined;
+      const role =
+        typeof payload.org_role === "string" ? payload.org_role : undefined;
+
+      if (userId) tenant.userId = userId;
+      if (organizationId) tenant.organizationId = organizationId;
+      if (role) tenant.role = role;
+    } catch (error) {
+      // Log the error but treat the request as unauthenticated — do not throw.
+      logger.warn("JWT verification failed, treating as unauthenticated", {
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
 
   c.set("tenant", tenant);
 
