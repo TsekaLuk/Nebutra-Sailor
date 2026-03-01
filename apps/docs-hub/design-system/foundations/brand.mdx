@@ -1,248 +1,139 @@
 ---
-title: "Brand Assets"
-description: "Nebutra (云毓智能) visual identity standards — logo, color, typography, and gradients. Sourced from the official VI manual."
+title: "Brand Overview"
+description: "Nebutra (云毓智能) visual identity foundations — mission, philosophy, logo, and quick reference to the complete brand VI manual."
 ---
 
 <Note>
-  All values on this page are sourced directly from the **云毓智能 品牌视觉识别手册 (Nebutra Brand Visual Identity Manual)**.
+  All values in the Brand VI manual are sourced directly from the **云毓智能 品牌视觉识别手册 (Nebutra Brand Visual Identity Manual)**.
   They are the definitive specification — do not substitute with generic alternatives.
 </Note>
 
+## Brand Identity
+
+| Attribute | Value |
+|-----------|-------|
+| **Name (EN)** | Nebutra |
+| **Name (CN)** | 云毓智能 |
+| **Legal Entity** | 无锡云毓智能科技有限公司 |
+| **Tagline (EN)** | Enterprise SaaS Platform |
+| **Tagline (CN)** | 智能数据 · 云端孕育 |
+
+### Mission
+
+Nebutra builds enterprise SaaS infrastructure that transforms raw data into intelligent, cloud-native outcomes. The brand embodies the convergence of precision engineering and organic intelligence — technology that nurtures growth.
+
+---
+
+## Visual Philosophy: Hexagonal Intelligence — 六角智能
+
+The Nebutra visual identity is rooted in the **hexagon** — the most efficient tessellation found in nature (honeycombs, molecular structures, crystalline lattices). The hexagonal N logo represents structured intelligence emerging from interconnected nodes.
+
+Five principles govern every visual decision:
+
+1. **Dark-first** — all surfaces default to dark mode; light is the adaptation
+2. **Gradient as signature** — the Blue-to-Cyan gradient is a first-class brand asset, not decoration
+3. **Motion with meaning** — every animation maps to a data metaphor (emerge, flow, pulse)
+4. **Texture for depth** — grain, noise, and glassmorphism add analog warmth to digital surfaces
+5. **Systematic precision** — every value is tokenized and shipped as code
+
+---
+
 ## Logo
 
-The Nebutra logo uses the letter **N** as its foundational form — not displayed literally, but constructed through positive and negative geometric space to create an implied hexagonal structure. The Blue→Cyan gradient fill gives it a forward-looking, technology-driven character.
+The Nebutra logo uses the letter **N** as its foundational form — constructed through positive and negative geometric space to create an implied hexagonal structure. The Blue-to-Cyan gradient fill gives it a forward-looking, technology-driven character.
 
 ### Logo Components
 
-Two implementations are available. Choose based on your context:
-
 | Component | Package | How it loads | When to use |
 |-----------|---------|-------------|-------------|
-| `Logo` / `Logomark` / `Wordmark` | `@nebutra/brand` | `<img src="/brand/logo-*.svg">` | When the public folder is available (web app, Next.js app dir) |
-| `LogomarkSVG` / `WordmarkEnSVG` / `LogoEnSVG` | `@nebutra/brand` | Inline SVG paths (`fill="currentColor"`) | No public folder needed; color via Tailwind `text-*`; email, PDF, Storybook |
-
-#### File-based (img)
+| `Logo` / `Logomark` / `Wordmark` | `@nebutra/brand` | `<img src="/brand/logo-*.svg">` | Web app with public folder (Next.js) |
+| `LogomarkSVG` / `WordmarkEnSVG` / `LogoEnSVG` | `@nebutra/brand` | Inline SVG (`fill="currentColor"`) | No public folder; color via Tailwind `text-*`; email, PDF, Storybook |
 
 ```tsx
 import { Logo, Logomark, Wordmark } from "@nebutra/brand"
 
-// Hexagonal N icon, 32px, white on dark background
+// Hexagonal N icon
 <Logomark variant="inverse" size={32} />
 
-// Full logo with English wordmark, 150px wide, inverted to white
+// Full logo with English wordmark
 <Logo variant="en" size={150} inverted />
 ```
-
-#### Inline SVG (`fill="currentColor"`)
 
 ```tsx
 import { LogomarkSVG, WordmarkEnSVG, LogoEnSVG } from "@nebutra/brand"
 
-// Icon only — color via CSS
+// Inline SVG — color controlled via CSS
 <LogomarkSVG className="text-white w-8 h-8" />
-
-// Wordmark only — "Nebutra" text
-<WordmarkEnSVG className="text-white" width={150} />
-
-// Full logo (icon + wordmark side-by-side)
 <LogoEnSVG className="text-white" width={160} />
-
-// On a dark background (Navbar example)
-<LogoEnSVG className="text-white" aria-label="Nebutra" width={140} />
-
-// Framer Motion color animation
-<motion.div>
-  <LogomarkSVG className="text-indigo-400" width={32} />
-</motion.div>
 ```
 
-<Warning>
-  **Landing page is forced dark** — always use `text-white` for inline SVG logos.
-  Never conditionally swap between `text-black` and `text-white` based on theme on the landing page.
-</Warning>
+### Clearance and Minimum Size
 
-### Clearance & Minimum Size
-
-- **Minimum clearance**: All sides ≥ ¼ of the logo height
-- **Print minimum height**: ≥ 6 mm
-- **Digital minimum height**: ≥ 35 px
-
-### Usage Rules
+- **Minimum clearance**: all sides >= 1/4 of logo height
+- **Digital minimum height**: >= 35 px
+- **Print minimum height**: >= 6 mm
 
 <Warning>
-  **Do not** distort, rotate, recolor, add drop shadows, or place on low-contrast backgrounds.
-  **Do not** use the reverse (white) logo on light or complex backgrounds.
+  Do not distort, rotate, recolor, add drop shadows, or place on low-contrast backgrounds.
   Always use the provided brand gradient — never substitute with a solid color.
+  See [Brand Guidelines](/design-system/foundations/brand-guidelines) for the complete list of prohibited uses.
 </Warning>
 
 ---
 
-## Brand Colors
+## Quick Reference
 
-### Primary — 云毓蓝 (Nebutra Blue)
-
-The core brand color. Represents technology, trust, and cloud intelligence.
+### Brand Colors
 
 <CardGroup cols={2}>
-  <Card title="云毓蓝 500" icon="square">
-    **HEX** `#0033FE`
-    **RGB** `0, 51, 254`
-    **Usage** Primary buttons, active states, focus rings, links
+  <Card title="Primary — 云毓蓝" icon="square">
+    **HEX** `#0033FE` · **RGB** `0, 51, 254` · **HSL** `228°, 100%, 50%`
   </Card>
-  <Card title="云毓蓝 Scale" icon="palette">
-    50 → `#f0f4ff`  100 → `#dbe4ff`
-    200 → `#bac8ff`  300 → `#91a7ff`
-    400 → `#5c7cfa`  **500 → `#0033FE`** ← brand
-    600 → `#002ad4`  700 → `#0021ab`
-    800 → `#001882`  900 → `#000f59`
-    950 → `#000830`
+  <Card title="Accent — 云毓青" icon="square">
+    **HEX** `#0BF1C3` · **RGB** `11, 241, 195` · **HSL** `168°, 91%, 49%`
   </Card>
 </CardGroup>
 
-### Secondary — 云毓青 (Nebutra Cyan)
-
-The primary accent color. Represents data flow, algorithmic intelligence, and information clarity.
-
-<CardGroup cols={2}>
-  <Card title="云毓青 500" icon="square">
-    **HEX** `#0BF1C3`
-    **RGB** `11, 241, 195`
-    **Usage** Accent highlights, gradient endpoint, data visualisation
-  </Card>
-  <Card title="云毓青 Scale" icon="palette">
-    50 → `#e6fff8`  100 → `#b3ffec`
-    200 → `#80ffe0`  300 → `#4dfcd4`
-    400 → `#1af7c8`  **500 → `#0BF1C3`** ← brand
-    600 → `#09c9a3`  700 → `#07a183`
-    800 → `#057963`  900 → `#035143`
-    950 → `#012923`
-  </Card>
-</CardGroup>
-
-### Neutral Scale
-
-Blue-undertone gray scale — used for text, surfaces, and borders.
-
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `neutral-50` | `#f8fafc` | Page background (light) |
-| `neutral-100` | `#f1f5f9` | Muted background |
-| `neutral-200` | `#e2e8f0` | Border, input |
-| `neutral-400` | `#94a3b8` | Muted text |
-| `neutral-500` | `#64748b` | Secondary text |
-| `neutral-700` | `#334155` | Dark text |
-| `neutral-900` | `#0f172a` | Foreground (light mode) |
-| `neutral-950` | `#020617` | Dark background (dark mode) |
-
----
-
-## Brand Gradients
-
-The **Blue→Cyan linear gradient** is Nebutra's most distinctive visual signature. It is a **first-class brand asset** — used on hero sections, primary CTAs, and logo fills.
-
-<CardGroup cols={2}>
-  <Card title="Brand (Primary)" icon="arrow-right">
-    `linear-gradient(135deg, #0033FE 0%, #0BF1C3 100%)`
-    **Usage** Hero sections, primary CTA buttons, logo gradient fill
-  </Card>
-  <Card title="Brand Hover (Reverse)" icon="arrow-left">
-    `linear-gradient(135deg, #0BF1C3 0%, #0033FE 100%)`
-    **Usage** Hover state on gradient interactive elements
-  </Card>
-  <Card title="Section (Vertical)" icon="arrow-down">
-    `linear-gradient(180deg, #0033FE 0%, #0BF1C3 100%)`
-    **Usage** Page section dividers, feature highlight strips
-  </Card>
-  <Card title="Glow (Radial)" icon="circle">
-    `radial-gradient(circle, #0BF1C3 0%, #0033FE 100%)`
-    **Usage** Background halo effects, focus glow, radial emphasis
-  </Card>
-</CardGroup>
-
-### Using Gradients in Code
-
-```tsx
-// CSS custom properties (defined in globals.css)
-<div style={{ background: 'var(--gradient-brand)' }} />
-
-// Tailwind (via @theme inline in globals.css)
-<div className="bg-[var(--gradient-brand)]" />
-
-// Button — apply gradient as primary
-<Button className="bg-[linear-gradient(135deg,#0033FE_0%,#0BF1C3_100%)] text-white border-0">
-  Get Started
-</Button>
-```
-
----
-
-## Typography
-
-### English — Poppins (Primary)
-
-Poppins is the primary brand typeface for all English UI text, headlines, and marketing copy.
-
-| Weight | Name | Use case |
-|--------|------|----------|
-| 400 | Poppins Regular | Body copy, descriptions |
-| 500 | Poppins Medium | Labels, navigation, captions |
-| 600 | Poppins SemiBold | Subheadings, button labels |
-| 700 | Poppins Bold | Main headings, hero copy |
-
-### Chinese — vivo Sans (Primary)
-
-vivo Sans is the primary brand typeface for all Chinese UI text. Falls back to system CJK fonts.
-
-| Weight | Name |
-|--------|------|
-| 300 | vivo Sans Light |
-| 400 | vivo Sans Regular |
-| 500 | vivo Sans Medium |
-| 600 | vivo Sans DemiBold |
-| 700 | vivo Sans Bold |
-
-### Font Stack (Code)
+### Brand Gradient
 
 ```css
-/* English / Default */
-font-family: "Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei",
-             "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
-
-/* Chinese UI */
-font-family: "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-
-/* Display / Hero headlines */
-font-family: "Poppins", sans-serif;
-
-/* Code / Monospace */
-font-family: "JetBrains Mono", "Fira Code", ui-monospace, Consolas, monospace;
+background: linear-gradient(135deg, #0033FE 0%, #0BF1C3 100%);
 ```
 
-```tsx
-// Tailwind usage
-<h1 className="font-display">Hero Headline</h1>
-<p className="font-sans">Body copy</p>
-<p className="font-cn">中文正文</p>
-<code className="font-mono">const x = 1</code>
+### Typography Stack
+
 ```
+"Geist", "Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif
+```
+
+| Role | Font | Weights |
+|------|------|---------|
+| Display / Headlines | Geist Sans | Variable 100-900 |
+| Body EN | Poppins | 400, 500, 600, 700 |
+| Body CN | vivo Sans | 300-700 |
+| Code | JetBrains Mono / Fira Code | 400, 700 |
 
 ---
 
-## Semantic Colors
+## Brand VI Manual — Detail Pages
 
-These are derived from the VI manual and mapped to CSS variables for theming.
-
-| Role | Light | Dark | Source |
-|------|-------|------|--------|
-| Primary | `#0033FE` | `#5c7cfa` | VI: 云毓蓝 |
-| Secondary | `#0BF1C3` | `#1af7c8` | VI: 云毓青 |
-| Success | `#22c55e` | `#16a34a` | VI: specified exact value |
-| Warning | `#f59e0b` | `#d97706` | VI: §Color Specifications |
-| Info | `#0033FE` | `#5c7cfa` | VI: Info = Brand Blue |
-| Destructive | `#ef4444` | `#dc2626` | Standard |
-| Background | `#ffffff` | `#020617` | VI: white light / neutral-950 dark |
-
-<Warning>
-  **Info = Brand Blue** — The VI manual explicitly specifies that the Info semantic color uses `#0033FE` (cloud blue), not a sky/teal color.
-  This is a common mistake — do not use `sky-500` or `#06b6d4` for info states.
-</Warning>
+<CardGroup cols={2}>
+  <Card title="Color System" icon="palette" href="/design-system/foundations/brand-colors">
+    Complete 11-step blue and cyan scales, neutral palette, semantic colors, accessibility, and code references.
+  </Card>
+  <Card title="Typography System" icon="type" href="/design-system/foundations/brand-typography">
+    Geist Display, Poppins, vivo Sans, JetBrains Mono — type scale, CJK rhythm, and code examples.
+  </Card>
+  <Card title="Gradients & Textures" icon="paintbrush" href="/design-system/foundations/brand-gradients">
+    Brand gradients, grain textures, mesh/neural noise backgrounds, and performance considerations.
+  </Card>
+  <Card title="Motion Language" icon="play" href="/design-system/foundations/brand-motion">
+    Emerge, Flow, and Pulse core motions — easing curves, spring configs, and Framer Motion code.
+  </Card>
+  <Card title="Visual Patterns & DNA" icon="hexagon" href="/design-system/foundations/brand-patterns">
+    Hexagonal grids, dot patterns, glassmorphism, dark-first design, and pattern combinations.
+  </Card>
+  <Card title="Brand Guidelines" icon="shield-check" href="/design-system/foundations/brand-guidelines">
+    Do's and don'ts — logo, color, typography, motion, gradient, dark mode, and accessibility rules.
+  </Card>
+</CardGroup>
