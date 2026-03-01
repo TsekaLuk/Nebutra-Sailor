@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import type { Locale } from "@/i18n/routing";
 
 interface LegalLayoutProps {
   children: ReactNode;
@@ -12,7 +13,10 @@ export default async function LegalLayout({
   params,
 }: LegalLayoutProps) {
   const { lang } = await params;
-  const t = await getTranslations({ locale: lang, namespace: "legal" });
+  const t = await getTranslations({
+    locale: lang as Locale,
+    namespace: "legal",
+  });
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">

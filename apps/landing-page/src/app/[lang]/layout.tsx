@@ -2,7 +2,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 
 interface LangLayoutProps {
   children: React.ReactNode;
@@ -29,7 +29,10 @@ export async function generateMetadata({
     return {};
   }
 
-  const t = await getTranslations({ locale: lang, namespace: "metadata" });
+  const t = await getTranslations({
+    locale: lang as Locale,
+    namespace: "metadata",
+  });
 
   return {
     title: t("title"),
@@ -61,7 +64,7 @@ export default async function LangLayout({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider locale={lang} messages={messages}>
+    <NextIntlClientProvider locale={lang as Locale} messages={messages}>
       {children}
     </NextIntlClientProvider>
   );

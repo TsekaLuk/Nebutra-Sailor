@@ -1,12 +1,12 @@
-import en from "../../messages/en.json";
+import type en from "../../messages/en.json";
+import type { routing } from "../i18n/routing";
 
-type Messages = typeof en;
-
-declare global {
-  // Augments next-intl with our EN message shape for compile-time key validation.
-  // TypeScript will error if you use a key that doesn't exist in en.json.
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  interface IntlMessages extends Messages {}
+// next-intl v4 scoped type augmentation.
+// Provides compile-time key validation for translation keys
+// and strict locale typing across the app.
+declare module "next-intl" {
+  interface AppConfig {
+    Messages: typeof en;
+    Locale: (typeof routing.locales)[number];
+  }
 }
-
-export {};

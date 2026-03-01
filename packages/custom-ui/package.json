@@ -72,6 +72,7 @@
     "@heroui/skeleton": "^2.2.10",
     "@heroui/slider": "^2.4.28",
     "@heroui/switch": "^2.2.24",
+    "@heroui/theme": "^2.4.26",
     "@internationalized/date": "^3.10.0",
     "@nebutra/design-system": "workspace:*",
     "@paper-design/shaders-react": "^0.0.67",
