@@ -64,7 +64,9 @@ export class AppError extends Error {
     this.code = options.code;
     this.statusCode = options.statusCode || getDefaultStatusCode(options.code);
     this.isOperational = options.isOperational ?? true;
-    this.metadata = options.metadata;
+    if (options.metadata !== undefined) {
+      this.metadata = options.metadata;
+    }
     this.timestamp = new Date().toISOString();
 
     if (options.cause) {
@@ -98,10 +100,12 @@ export class ValidationError extends AppError {
       code: ERROR_CODES.VALIDATION_ERROR,
       message,
       statusCode: 400,
-      metadata: fields ? { fields } : undefined,
+      ...(fields !== undefined && { metadata: { fields } }),
     });
     this.name = "ValidationError";
-    this.fields = fields;
+    if (fields !== undefined) {
+      this.fields = fields;
+    }
   }
 }
 
@@ -121,7 +125,9 @@ export class ForbiddenError extends AppError {
 
 export class NotFoundError extends AppError {
   constructor(resource = "Resource", id?: string) {
-    const message = id ? `${resource} with id '${id}' not found` : `${resource} not found`;
+    const message = id
+      ? `${resource} with id '${id}' not found`
+      : `${resource} not found`;
     super({ code: ERROR_CODES.NOT_FOUND, message, statusCode: 404 });
     this.name = "NotFoundError";
   }
@@ -142,10 +148,12 @@ export class RateLimitError extends AppError {
       code: ERROR_CODES.RATE_LIMITED,
       message: "Too many requests",
       statusCode: 429,
-      metadata: retryAfter ? { retryAfter } : undefined,
+      ...(retryAfter !== undefined && { metadata: { retryAfter } }),
     });
     this.name = "RateLimitError";
-    this.retryAfter = retryAfter;
+    if (retryAfter !== undefined) {
+      this.retryAfter = retryAfter;
+    }
   }
 }
 
@@ -167,7 +175,7 @@ export class ExternalServiceError extends AppError {
       code: ERROR_CODES.EXTERNAL_SERVICE_ERROR,
       message: `External service '${service}' failed`,
       statusCode: 502,
-      cause,
+      ...(cause !== undefined && { cause }),
       metadata: { service },
     });
     this.name = "ExternalServiceError";
@@ -180,7 +188,7 @@ export class DatabaseError extends AppError {
       code: ERROR_CODES.DATABASE_ERROR,
       message: `Database operation '${operation}' failed`,
       statusCode: 500,
-      cause,
+      ...(cause !== undefined && { cause }),
       isOperational: false,
       metadata: { operation },
     });
@@ -201,15 +209,18 @@ export interface ApiErrorResponse {
   requestId?: string;
 }
 
-export function toApiError(error: unknown, requestId?: string): ApiErrorResponse {
+export function toApiError(
+  error: unknown,
+  requestId?: string,
+): ApiErrorResponse {
   if (error instanceof AppError) {
     return {
       error: {
         code: error.code,
         message: error.message,
-        details: error.metadata,
+        ...(error.metadata !== undefined && { details: error.metadata }),
       },
-      requestId,
+      ...(requestId !== undefined && { requestId }),
     };
   }
 
@@ -219,7 +230,7 @@ export function toApiError(error: unknown, requestId?: string): ApiErrorResponse
       code: ERROR_CODES.INTERNAL_ERROR,
       message: "An unexpected error occurred",
     },
-    requestId,
+    ...(requestId !== undefined && { requestId }),
   };
 }
 
@@ -234,8 +245,13 @@ export function getStatusCode(error: unknown): number {
 // Error Middleware for Hono
 // ============================================
 
+interface HonoContext {
+  req: { header: (name: string) => string | undefined };
+  json: (data: unknown, status?: number) => unknown;
+}
+
 export function errorHandler() {
-  return async (c: any, next: () => Promise<void>) => {
+  return async (c: HonoContext, next: () => Promise<void>) => {
     try {
       await next();
     } catch (error) {
@@ -245,9 +261,9 @@ export function errorHandler() {
 
       // Log non-operational errors
       if (error instanceof AppError && !error.isOperational) {
-        console.error("Non-operational error:", error);
+        process.stderr.write(`Non-operational error: ${String(error)}\n`);
       } else if (!(error instanceof AppError)) {
-        console.error("Unexpected error:", error);
+        process.stderr.write(`Unexpected error: ${String(error)}\n`);
       }
 
       return c.json(response, statusCode);
@@ -299,7 +315,7 @@ function getDefaultStatusCode(code: ErrorCode): number {
  */
 export function tryCatch<T>(
   fn: () => Promise<T>,
-  errorHandler?: (error: unknown) => T | Promise<T>
+  errorHandler?: (error: unknown) => T | Promise<T>,
 ): Promise<T> {
   return fn().catch((error) => {
     if (errorHandler) {
@@ -327,7 +343,7 @@ export function assert(condition: unknown, message: string): asserts condition {
 export function assertFound<T>(
   value: T | null | undefined,
   resource: string,
-  id?: string
+  id?: string,
 ): asserts value is T {
   if (value === null || value === undefined) {
     throw new NotFoundError(resource, id);
