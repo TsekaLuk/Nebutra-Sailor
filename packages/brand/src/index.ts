@@ -9,6 +9,10 @@
 export { Logo, Logomark, Wordmark } from "./components/Logo";
 export type { LogoProps, LogoVariant } from "./components/Logo";
 
+// Inline SVG components (no public folder required, fill="currentColor")
+export { LogomarkSVG, WordmarkEnSVG, LogoEnSVG } from "./components/LogoSVG";
+export type { LogoEnSVGProps } from "./components/LogoSVG";
+
 // Metadata & Constants
 export {
   brand,
