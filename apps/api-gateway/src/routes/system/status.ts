@@ -69,6 +69,8 @@ statusRoutes.get("/status", async (c) => {
     const services = ["ai", "content", "recsys", "ecommerce", "web3"] as const;
     const serviceName = services[index];
 
+    if (!serviceName) return;
+
     if (result.status === "fulfilled") {
       checks.push(result.value);
       serviceStatuses[serviceName] =
@@ -86,7 +88,7 @@ statusRoutes.get("/status", async (c) => {
   // Count failures
   const failedServices = checks.filter(
     (check) =>
-      check.status === "fail" && !["database", "redis"].includes(check.name)
+      check.status === "fail" && !["database", "redis"].includes(check.name),
   ).length;
 
   if (failedServices >= 3 && overallStatus === "healthy") {
@@ -192,7 +194,7 @@ async function checkRedis(): Promise<StatusResponse["checks"][0]> {
 
 async function checkService(
   name: string,
-  url?: string
+  url?: string,
 ): Promise<StatusResponse["checks"][0]> {
   const start = Date.now();
 

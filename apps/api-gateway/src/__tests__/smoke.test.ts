@@ -26,14 +26,16 @@ describe("API Gateway Smoke Tests", () => {
     });
 
     it("should run memory health check", async () => {
-      const { createMemoryCheck, runHealthChecks } = await import("@nebutra/health");
+      const { createMemoryCheck, runHealthChecks } =
+        await import("@nebutra/health");
       const memoryChecker = createMemoryCheck(1024); // 1GB threshold
       const result = await runHealthChecks([memoryChecker]);
 
       expect(result.status).toBeDefined();
       expect(["healthy", "degraded", "unhealthy"]).toContain(result.status);
-      expect(result.checks.memory).toBeDefined();
-      expect(result.checks.memory.status).toBe("pass");
+      const memoryCheck = result.checks["memory"];
+      expect(memoryCheck).toBeDefined();
+      expect(memoryCheck?.status).toBe("pass");
     });
   });
 
@@ -63,7 +65,10 @@ describe("API Gateway Smoke Tests", () => {
 describe("Utility Functions", () => {
   it("should create HTTP check correctly", async () => {
     const { createHttpCheck } = await import("@nebutra/health");
-    const checker = createHttpCheck("test-endpoint", "https://httpbin.org/status/200");
+    const checker = createHttpCheck(
+      "test-endpoint",
+      "https://httpbin.org/status/200",
+    );
 
     expect(checker.name).toBe("test-endpoint");
     expect(typeof checker.check).toBe("function");

@@ -22,7 +22,11 @@ export interface HealthCheckResult {
 
 export interface HealthChecker {
   name: string;
-  check: () => Promise<{ status: "pass" | "fail" | "warn"; latency_ms: number; message?: string }>;
+  check: () => Promise<{
+    status: "pass" | "fail" | "warn";
+    latency_ms: number;
+    message?: string;
+  }>;
 }
 
 // ============================================
@@ -42,7 +46,12 @@ export function registerHealthCheck(checker: HealthChecker): void {
 /**
  * Database health check using Prisma
  */
-export function createDatabaseCheck(prisma: { $queryRaw: (query: any) => Promise<any> }): HealthChecker {
+export function createDatabaseCheck(prisma: {
+  $queryRaw: (
+    query: TemplateStringsArray,
+    ...values: unknown[]
+  ) => Promise<unknown>;
+}): HealthChecker {
   return {
     name: "database",
     check: async () => {
@@ -57,7 +66,10 @@ export function createDatabaseCheck(prisma: { $queryRaw: (query: any) => Promise
         return {
           status: "fail",
           latency_ms: Date.now() - start,
-          message: error instanceof Error ? error.message : "Database connection failed",
+          message:
+            error instanceof Error
+              ? error.message
+              : "Database connection failed",
         };
       }
     },
@@ -67,23 +79,33 @@ export function createDatabaseCheck(prisma: { $queryRaw: (query: any) => Promise
 /**
  * Redis health check using Upstash
  */
-export function createRedisCheck(redis: { ping: () => Promise<string> }): HealthChecker {
+export function createRedisCheck(redis: {
+  ping: () => Promise<string>;
+}): HealthChecker {
   return {
     name: "redis",
     check: async () => {
       const start = Date.now();
       try {
         const pong = await redis.ping();
-        return {
+        const result: {
+          status: "pass" | "fail" | "warn";
+          latency_ms: number;
+          message?: string;
+        } = {
           status: pong === "PONG" ? "pass" : "warn",
           latency_ms: Date.now() - start,
-          message: pong !== "PONG" ? `Unexpected response: ${pong}` : undefined,
         };
+        if (pong !== "PONG") {
+          result.message = `Unexpected response: ${pong}`;
+        }
+        return result;
       } catch (error) {
         return {
           status: "fail",
           latency_ms: Date.now() - start,
-          message: error instanceof Error ? error.message : "Redis connection failed",
+          message:
+            error instanceof Error ? error.message : "Redis connection failed",
         };
       }
     },
@@ -96,7 +118,7 @@ export function createRedisCheck(redis: { ping: () => Promise<string> }): Health
 export function createHttpCheck(
   name: string,
   url: string,
-  options: { timeout?: number; expectedStatus?: number } = {}
+  options: { timeout?: number; expectedStatus?: number } = {},
 ): HealthChecker {
   const { timeout = 5000, expectedStatus = 200 } = options;
 
@@ -178,7 +200,7 @@ export function createMemoryCheck(thresholdMB: number = 512): HealthChecker {
 // ============================================
 
 export async function runHealthChecks(
-  additionalCheckers: HealthChecker[] = []
+  additionalCheckers: HealthChecker[] = [],
 ): Promise<HealthCheckResult> {
   const allCheckers = [...checkers, ...additionalCheckers];
   const results: HealthCheckResult["checks"] = {};
@@ -190,10 +212,11 @@ export async function runHealthChecks(
       } catch (error) {
         results[checker.name] = {
           status: "fail",
-          message: error instanceof Error ? error.message : "Check threw exception",
+          message:
+            error instanceof Error ? error.message : "Check threw exception",
         };
       }
-    })
+    }),
   );
 
   // Determine overall status
@@ -206,25 +229,40 @@ export async function runHealthChecks(
     overallStatus = "degraded";
   }
 
-  return {
+  const result: HealthCheckResult = {
     status: overallStatus,
     timestamp: new Date().toISOString(),
-    version: process.env.npm_package_version,
     checks: results,
   };
+
+  const version = process.env.npm_package_version;
+  if (version) {
+    result.version = version;
+  }
+
+  return result;
 }
 
 // ============================================
 // Hono/Express Middleware
 // ============================================
 
+interface HonoLike {
+  json: (data: unknown, status?: number) => unknown;
+}
+
 /**
  * Health check endpoint handler for Hono
  */
 export function healthEndpoint(checkers: HealthChecker[] = []) {
-  return async (c: any) => {
+  return async (c: HonoLike) => {
     const result = await runHealthChecks(checkers);
-    const statusCode = result.status === "healthy" ? 200 : result.status === "degraded" ? 200 : 503;
+    const statusCode =
+      result.status === "healthy"
+        ? 200
+        : result.status === "degraded"
+          ? 200
+          : 503;
 
     return c.json(result, statusCode);
   };
@@ -234,7 +272,7 @@ export function healthEndpoint(checkers: HealthChecker[] = []) {
  * Liveness probe (simple ping)
  */
 export function livenessEndpoint() {
-  return (c: any) => {
+  return (c: HonoLike) => {
     return c.json({ status: "ok", timestamp: new Date().toISOString() });
   };
 }
@@ -243,7 +281,7 @@ export function livenessEndpoint() {
  * Readiness probe (with dependency checks)
  */
 export function readinessEndpoint(checkers: HealthChecker[] = []) {
-  return async (c: any) => {
+  return async (c: HonoLike) => {
     const result = await runHealthChecks(checkers);
     const statusCode = result.status === "unhealthy" ? 503 : 200;
 
@@ -252,7 +290,7 @@ export function readinessEndpoint(checkers: HealthChecker[] = []) {
         ready: result.status !== "unhealthy",
         checks: result.checks,
       },
-      statusCode
+      statusCode,
     );
   };
 }

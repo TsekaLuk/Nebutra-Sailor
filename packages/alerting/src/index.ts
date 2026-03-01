@@ -228,7 +228,21 @@ export async function sendAlert(
   const promises = Array.from(channels.entries()).map(
     async ([name, channel]) => {
       try {
-        const success = await channel.send(enrichedPayload);
+        const finalPayload: AlertPayload = {
+          title: enrichedPayload.title,
+          message: enrichedPayload.message,
+          severity: enrichedPayload.severity,
+        };
+        if (enrichedPayload.service)
+          finalPayload.service = enrichedPayload.service;
+        if (enrichedPayload.timestamp)
+          finalPayload.timestamp = enrichedPayload.timestamp;
+        if (enrichedPayload.environment)
+          finalPayload.environment = enrichedPayload.environment;
+        if (enrichedPayload.metadata)
+          finalPayload.metadata = enrichedPayload.metadata;
+
+        const success = await channel.send(finalPayload);
         results.set(name, success);
       } catch (error) {
         _errorHandler(`Alert channel ${name} failed`, error);
@@ -263,7 +277,21 @@ export async function sendAlertTo(
     }
 
     try {
-      const success = await channel.send(enrichedPayload);
+      const finalPayload: AlertPayload = {
+        title: enrichedPayload.title,
+        message: enrichedPayload.message,
+        severity: enrichedPayload.severity,
+      };
+      if (enrichedPayload.service)
+        finalPayload.service = enrichedPayload.service;
+      if (enrichedPayload.timestamp)
+        finalPayload.timestamp = enrichedPayload.timestamp;
+      if (enrichedPayload.environment)
+        finalPayload.environment = enrichedPayload.environment;
+      if (enrichedPayload.metadata)
+        finalPayload.metadata = enrichedPayload.metadata;
+
+      const success = await channel.send(finalPayload);
       results.set(name, success);
     } catch (error) {
       _errorHandler(`Alert channel ${name} failed`, error);
@@ -284,7 +312,9 @@ export function alertInfo(
   message: string,
   service?: string,
 ): Promise<Map<string, boolean>> {
-  return sendAlert({ title, message, severity: "info", service });
+  const payload: AlertPayload = { title, message, severity: "info" };
+  if (service) payload.service = service;
+  return sendAlert(payload);
 }
 
 export function alertWarning(
@@ -292,7 +322,9 @@ export function alertWarning(
   message: string,
   service?: string,
 ): Promise<Map<string, boolean>> {
-  return sendAlert({ title, message, severity: "warning", service });
+  const payload: AlertPayload = { title, message, severity: "warning" };
+  if (service) payload.service = service;
+  return sendAlert(payload);
 }
 
 export function alertError(
@@ -300,7 +332,9 @@ export function alertError(
   message: string,
   service?: string,
 ): Promise<Map<string, boolean>> {
-  return sendAlert({ title, message, severity: "error", service });
+  const payload: AlertPayload = { title, message, severity: "error" };
+  if (service) payload.service = service;
+  return sendAlert(payload);
 }
 
 export function alertCritical(
@@ -308,7 +342,9 @@ export function alertCritical(
   message: string,
   service?: string,
 ): Promise<Map<string, boolean>> {
-  return sendAlert({ title, message, severity: "critical", service });
+  const payload: AlertPayload = { title, message, severity: "critical" };
+  if (service) payload.service = service;
+  return sendAlert(payload);
 }
 
 // ============================================

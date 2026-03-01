@@ -13,7 +13,7 @@ export type MCPMiddlewareNext = () => Promise<ToolExecutionResult>;
 
 export type MCPMiddleware = (
   ctx: MCPMiddlewareContext,
-  next: MCPMiddlewareNext
+  next: MCPMiddlewareNext,
 ) => Promise<ToolExecutionResult>;
 
 /**
@@ -56,20 +56,20 @@ export function createAuditMiddleware(options: {
   onLog: (entry: AuditLogEntry) => void | Promise<void>;
 }): MCPMiddleware {
   return async (ctx, next) => {
-    const startTime = Date.now();
     const result = await next();
 
     const entry: AuditLogEntry = {
       timestamp: new Date().toISOString(),
       requestId: ctx.requestId,
-      tenantId: ctx.tenantId,
-      userId: ctx.userId,
       toolName: ctx.toolName,
       arguments: ctx.arguments,
       success: result.success,
       duration: result.duration,
-      error: result.error,
     };
+
+    if (ctx.tenantId) entry.tenantId = ctx.tenantId;
+    if (ctx.userId) entry.userId = ctx.userId;
+    if (result.error) entry.error = result.error;
 
     // Don't block on audit logging
     Promise.resolve(options.onLog(entry)).catch(console.error);
@@ -128,7 +128,7 @@ export function createAccessControlMiddleware(options: {
  * Compose multiple middlewares
  */
 export function composeMCPMiddleware(
-  middlewares: MCPMiddleware[]
+  middlewares: MCPMiddleware[],
 ): MCPMiddleware {
   return async (ctx, finalNext) => {
     let index = -1;

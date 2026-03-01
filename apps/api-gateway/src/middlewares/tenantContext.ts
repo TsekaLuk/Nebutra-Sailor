@@ -31,11 +31,12 @@ export async function tenantContextMiddleware(c: Context, next: Next) {
   const plan = c.req.header("x-plan") || "FREE";
 
   const tenant: TenantContext = {
-    userId,
-    organizationId,
     plan,
     ip,
   };
+
+  if (userId) tenant.userId = userId;
+  if (organizationId) tenant.organizationId = organizationId;
 
   c.set("tenant", tenant);
 
@@ -49,7 +50,10 @@ export async function requireAuth(c: Context, next: Next) {
   const tenant = c.get("tenant");
 
   if (!tenant?.userId) {
-    return c.json({ error: "Unauthorized", message: "Authentication required" }, 401);
+    return c.json(
+      { error: "Unauthorized", message: "Authentication required" },
+      401,
+    );
   }
 
   await next();
@@ -64,7 +68,7 @@ export async function requireOrganization(c: Context, next: Next) {
   if (!tenant?.organizationId) {
     return c.json(
       { error: "Forbidden", message: "Organization membership required" },
-      403
+      403,
     );
   }
 
