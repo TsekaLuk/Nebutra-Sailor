@@ -34,6 +34,12 @@
       "group": "Foundations",
       "pages": [
         "design-system/foundations/brand",
+        "design-system/foundations/brand-colors",
+        "design-system/foundations/brand-typography",
+        "design-system/foundations/brand-gradients",
+        "design-system/foundations/brand-motion",
+        "design-system/foundations/brand-patterns",
+        "design-system/foundations/brand-guidelines",
         "design-system/foundations/color",
         "design-system/foundations/typography",
         "design-system/foundations/grid",
