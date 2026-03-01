@@ -70,6 +70,7 @@
     "@heroui/progress": "^2.2.22",
     "@heroui/select": "^2.4.16",
     "@heroui/skeleton": "^2.2.10",
+    "@heroui/slider": "^2.4.28",
     "@heroui/switch": "^2.2.24",
     "@internationalized/date": "^3.10.0",
     "@nebutra/design-system": "workspace:*",
