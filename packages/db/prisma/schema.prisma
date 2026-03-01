@@ -524,6 +524,14 @@ enum UsageType {
   CUSTOM
 }
 
+enum UsageLedgerSource {
+  API
+  WORKFLOW
+  WEBHOOK
+  SYSTEM
+  BACKFILL
+}
+
 // ============================================
 // Dynamic Plan Configuration (Unicorn SaaS Pattern)
 // ============================================
@@ -727,6 +735,7 @@ model Subscription {
   pricingPlan  PricingPlan @relation(fields: [pricingPlanId], references: [id])
   invoices     Invoice[]
   usageRecords UsageRecord[]
+  usageLedgerEntries UsageLedgerEntry[]
 
   @@index([organizationId])
   @@index([status])
@@ -858,6 +867,36 @@ model UsageRecord {
   @@index([type])
   @@index([resource])
   @@map("usage_records")
+}
+
+// Immutable usage ledger (idempotent append-only records)
+model UsageLedgerEntry {
+  id             String            @id @default(cuid())
+  organizationId String            @map("organization_id")
+  subscriptionId String?           @map("subscription_id")
+  userId         String?           @map("user_id")
+  idempotencyKey String            @map("idempotency_key") @db.VarChar(191)
+  eventId        String?           @map("event_id") @db.VarChar(191)
+  source         UsageLedgerSource @default(API)
+  type           UsageType
+  resource       String?           @db.VarChar(100)
+  quantity       BigInt
+  unit           String            @default("unit") @db.VarChar(32)
+  unitCost       Decimal?          @map("unit_cost") @db.Decimal(10, 8)
+  totalCost      Decimal?          @map("total_cost") @db.Decimal(10, 6)
+  currency       String            @default("USD") @db.VarChar(3)
+  occurredAt     DateTime          @map("occurred_at")
+  recordedAt     DateTime          @default(now()) @map("recorded_at")
+  ingestVersion  String            @default("v1") @map("ingest_version") @db.VarChar(16)
+  metadata       Json              @default("{}")
+
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+
+  @@unique([organizationId, idempotencyKey])
+  @@index([organizationId, occurredAt])
+  @@index([organizationId, type, occurredAt])
+  @@index([eventId])
+  @@map("usage_ledger_entries")
 }
 
 // Aggregated Usage (for billing)

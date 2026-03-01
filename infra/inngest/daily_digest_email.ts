@@ -15,7 +15,7 @@ export const dailyDigestEmail = inngest.createFunction(
     // Step 1: Get users who opted in for daily digest
     const users = await step.run("get-digest-subscribers", async () => {
       const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/users?digestEnabled=true`
+        `${process.env.API_GATEWAY_URL}/users?digestEnabled=true`,
       );
       return response.json();
     });
@@ -30,21 +30,21 @@ export const dailyDigestEmail = inngest.createFunction(
 
       await step.run(`send-digest-batch-${i}`, async () => {
         const results = await Promise.allSettled(
-          batch.map(async (user: any) => {
+          batch.map(async (user: { id: string; email: string }) => {
             // Get personalized recommendations for user
             const recommendations = await fetch(
               `${process.env.RECSYS_SERVICE_URL}/recommend/${user.id}?limit=5`,
               {
-                headers: { "x-tenant-id": user.tenantId },
-              }
+                headers: { "x-organization-id": user.tenantId },
+              },
             ).then((r) => r.json());
 
             // Get recent activity summary
             const activity = await fetch(
               `${process.env.API_GATEWAY_URL}/users/${user.id}/activity/summary?since=24h`,
               {
-                headers: { "x-tenant-id": user.tenantId },
-              }
+                headers: { "x-organization-id": user.tenantId },
+              },
             ).then((r) => r.json());
 
             // Send email
@@ -52,7 +52,7 @@ export const dailyDigestEmail = inngest.createFunction(
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-tenant-id": user.tenantId,
+                "x-organization-id": user.tenantId,
               },
               body: JSON.stringify({
                 template: "daily-digest",
@@ -64,18 +64,22 @@ export const dailyDigestEmail = inngest.createFunction(
                 },
               }),
             });
-          })
+          }),
         );
 
-        const batchSent = results.filter((r) => r.status === "fulfilled").length;
-        const batchErrors = results.filter((r) => r.status === "rejected").length;
+        const batchSent = results.filter(
+          (r) => r.status === "fulfilled",
+        ).length;
+        const batchErrors = results.filter(
+          (r) => r.status === "rejected",
+        ).length;
         sent += batchSent;
         errors += batchErrors;
       });
     }
 
     return { sent, errors, total: users.length };
-  }
+  },
 );
 
 /**
@@ -93,7 +97,7 @@ export const weeklyTenantReport = inngest.createFunction(
     // Step 1: Get all tenants
     const tenants = await step.run("get-tenants", async () => {
       const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/system/tenants`
+        `${process.env.API_GATEWAY_URL}/api/system/tenants`,
       );
       return response.json();
     });
@@ -107,24 +111,24 @@ export const weeklyTenantReport = inngest.createFunction(
         async () => {
           const [usage, analytics, billing] = await Promise.all([
             fetch(
-              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/usage/weekly`
+              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/usage/weekly`,
             ).then((r) => r.json()),
             fetch(
-              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/analytics/weekly`
+              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/analytics/weekly`,
             ).then((r) => r.json()),
             fetch(
-              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/billing/summary`
+              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/billing/summary`,
             ).then((r) => r.json()),
           ]);
 
           return { usage, analytics, billing };
-        }
+        },
       );
 
       // Step 3: Send report to admin
       await step.run(`send-report-${tenant.id}`, async () => {
         const admins = await fetch(
-          `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/admins`
+          `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/admins`,
         ).then((r) => r.json());
 
         for (const admin of admins) {
@@ -132,7 +136,7 @@ export const weeklyTenantReport = inngest.createFunction(
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "x-tenant-id": tenant.id,
+              "x-organization-id": tenant.id,
             },
             body: JSON.stringify({
               template: "weekly-report",
@@ -147,5 +151,5 @@ export const weeklyTenantReport = inngest.createFunction(
     }
 
     return { sent: reports.length };
-  }
+  },
 );

@@ -68,7 +68,11 @@ export function ExpandableTabs({
   };
 
   const TabSeparator = () => (
-    <div className="mx-1 h-[24px] w-[1.2px] bg-border" aria-hidden="true" />
+    <div
+      className="mx-1 h-[24px] w-[1.2px] bg-border"
+      role="presentation"
+      aria-hidden="true"
+    />
   );
 
   return (
@@ -76,7 +80,7 @@ export function ExpandableTabs({
       ref={outsideClickRef}
       className={cn(
         "flex flex-wrap items-center gap-2 rounded-2xl border border-border bg-background p-1 shadow-sm",
-        className
+        className,
       )}
       role="tablist"
       aria-label="Navigation tabs"
@@ -88,26 +92,22 @@ export function ExpandableTabs({
 
         const Icon = tab.icon;
         const isSelected = selected === index;
+        const tabClassName = cn(
+          "relative rounded-xl py-2 text-sm font-medium transition-colors duration-300",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          isSelected
+            ? cn("bg-muted", activeColor)
+            : "text-muted-foreground hover:bg-muted hover:text-foreground",
+        );
 
-        return (
-          <motion.button
-            key={tab.title}
+        const tabContent = (
+          <motion.span
             variants={buttonVariants}
             initial={false}
             animate="animate"
             custom={isSelected}
-            onClick={() => handleSelect(index)}
             transition={transition}
-            role="tab"
-            aria-selected={isSelected}
-            aria-controls={`tabpanel-${index}`}
-            className={cn(
-              "relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-              isSelected
-                ? cn("bg-muted", activeColor)
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            )}
+            className="flex items-center"
           >
             <Icon size={20} aria-hidden="true" />
             <AnimatePresence initial={false}>
@@ -124,7 +124,29 @@ export function ExpandableTabs({
                 </motion.span>
               )}
             </AnimatePresence>
-          </motion.button>
+          </motion.span>
+        );
+
+        return isSelected ? (
+          <button
+            key={tab.title}
+            onClick={() => handleSelect(index)}
+            role="tab"
+            aria-selected="true"
+            className={tabClassName}
+          >
+            {tabContent}
+          </button>
+        ) : (
+          <button
+            key={tab.title}
+            onClick={() => handleSelect(index)}
+            role="tab"
+            aria-selected="false"
+            className={tabClassName}
+          >
+            {tabContent}
+          </button>
         );
       })}
     </div>

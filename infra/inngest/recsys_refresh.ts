@@ -15,7 +15,7 @@ export const recsysRefresh = inngest.createFunction(
     // Step 1: Get list of active tenants
     const tenants = await step.run("get-active-tenants", async () => {
       const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/system/tenants/active`
+        `${process.env.API_GATEWAY_URL}/api/system/tenants/active`,
       );
       return response.json();
     });
@@ -32,12 +32,12 @@ export const recsysRefresh = inngest.createFunction(
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-tenant-id": tenant.id,
+                "x-organization-id": tenant.id,
               },
-            }
+            },
           );
           return response.json();
-        }
+        },
       );
       results.push({ tenantId: tenant.id, ...result });
     }
@@ -46,13 +46,13 @@ export const recsysRefresh = inngest.createFunction(
     await step.run("refresh-cf-model", async () => {
       const response = await fetch(
         `${process.env.RECSYS_SERVICE_URL}/refresh/collaborative`,
-        { method: "POST" }
+        { method: "POST" },
       );
       return response.json();
     });
 
     return { refreshed: results.length, results };
-  }
+  },
 );
 
 /**
@@ -70,7 +70,7 @@ export const userProfileUpdate = inngest.createFunction(
     // Step 1: Get users with recent activity
     const users = await step.run("get-active-users", async () => {
       const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/users/recently-active?since=1h`
+        `${process.env.API_GATEWAY_URL}/users/recently-active?since=1h`,
       );
       return response.json();
     });
@@ -85,12 +85,14 @@ export const userProfileUpdate = inngest.createFunction(
         await fetch(`${process.env.RECSYS_SERVICE_URL}/profiles/batch-update`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userIds: batch.map((u: any) => u.id) }),
+          body: JSON.stringify({
+            userIds: batch.map((u: { id: string }) => u.id),
+          }),
         });
       });
       processed += batch.length;
     }
 
     return { processed };
-  }
+  },
 );

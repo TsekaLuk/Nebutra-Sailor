@@ -260,9 +260,9 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
           )}
 
           {/* Calendar Grid */}
-          <div className="flex gap-1">
+          <div className="flex gap-1" role="grid">
             {weeksArray.map((week, weekIndex) => (
-              <div key={weekIndex} className="flex flex-col gap-1">
+              <div key={weekIndex} className="flex flex-col gap-1" role="row">
                 {week.days.map((day, dayIndex) => {
                   const contribution = contributions.find((c) =>
                     isSameDay(new Date(c.date), day),

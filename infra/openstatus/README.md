@@ -105,18 +105,18 @@ export function Footer() {
 
 ## Monitors
 
-| Monitor            | Endpoint       | Frequency | Regions |
-| ------------------ | -------------- | --------- | ------- |
-| Landing Page       | /              | 1m        | Global  |
-| Web App            | /              | 1m        | Global  |
-| API Gateway        | /misc/health   | 1m        | Global  |
-| AI Service         | /health        | 5m        | US-East |
-| Content Service    | /health        | 5m        | US-East |
-| RecSys Service     | /health        | 5m        | US-East |
-| E-commerce Service | /health        | 5m        | US-East |
-| Web3 Service       | /health        | 5m        | US-East |
-| Database           | /system/status | 1m        | US-East |
-| Redis              | /system/status | 1m        | US-East |
+| Monitor            | Endpoint           | Frequency | Regions |
+| ------------------ | ------------------ | --------- | ------- |
+| Landing Page       | /                  | 1m        | Global  |
+| Web App            | /                  | 1m        | Global  |
+| API Gateway        | /api/misc/health   | 1m        | Global  |
+| AI Service         | /health            | 5m        | US-East |
+| Content Service    | /health            | 5m        | US-East |
+| RecSys Service     | /health            | 5m        | US-East |
+| E-commerce Service | /health            | 5m        | US-East |
+| Web3 Service       | /health            | 5m        | US-East |
+| Database           | /api/system/status | 1m        | US-East |
+| Redis              | /api/system/status | 1m        | US-East |
 
 ## Status Page
 
@@ -136,16 +136,14 @@ To use custom domain (e.g., `status.nebutra.com`):
 
 ## Internal Health Endpoint
 
-The `/system/status` endpoint provides detailed status for OpenStatus assertions:
+The `/api/system/status` endpoint provides detailed status for OpenStatus assertions:
 
 ```json
 {
   "status": "healthy",
   "timestamp": "2024-01-01T00:00:00.000Z",
-  "checks": {
-    "database": { "status": "pass", "latency_ms": 5 },
-    "redis": { "status": "pass", "latency_ms": 2 }
-  }
+  "database": "connected",
+  "redis": "connected"
 }
 ```
 

@@ -102,6 +102,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Architecture smoke checks
+        run: |
+          python3 -m compileall -q services
+          pnpm test:arch
+
       - name: Generate Prisma Client
         run: pnpm db:generate
 

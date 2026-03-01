@@ -29,7 +29,7 @@ export function FooterMinimal() {
   ];
 
   return (
-    <footer className="relative w-full border-t border-white/[0.05] bg-black py-12">
+    <footer className="relative w-full border-t border-white/5 bg-black py-12">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           {/* Brand */}
@@ -71,7 +71,7 @@ export function FooterMinimal() {
         </div>
 
         {/* Bottom Row */}
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/[0.05] pt-8 md:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
           <p className="text-sm text-white/30">{t("copyright")}</p>
 
           {/* Status indicator */}

@@ -34,6 +34,30 @@ export async function tenantContextMiddleware(c: Context, next: Next) {
     ip,
   };
 
+  // Header-based fallback for service-to-service calls.
+  // Canonical headers:
+  //   - x-user-id
+  //   - x-organization-id
+  // Legacy compatibility:
+  //   - x-tenant-id (mapped to organizationId)
+  const headerUserId =
+    c.req.header("x-user-id") || c.req.header("x_user_id") || undefined;
+  const headerOrganizationId =
+    c.req.header("x-organization-id") ||
+    c.req.header("x_organization_id") ||
+    c.req.header("x-tenant-id") ||
+    c.req.header("x_tenant_id") ||
+    undefined;
+  const headerRole =
+    c.req.header("x-role") || c.req.header("x_role") || undefined;
+  const headerPlan =
+    c.req.header("x-plan") || c.req.header("x_plan") || undefined;
+
+  if (headerUserId) tenant.userId = headerUserId;
+  if (headerOrganizationId) tenant.organizationId = headerOrganizationId;
+  if (headerRole) tenant.role = headerRole;
+  if (headerPlan) tenant.plan = headerPlan;
+
   const authHeader = c.req.header("authorization");
   const token = authHeader?.startsWith("Bearer ")
     ? authHeader.slice(7)

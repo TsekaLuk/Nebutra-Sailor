@@ -1,7 +1,7 @@
 /**
  * OpenStatus Configuration
  * https://www.openstatus.dev/
- * 
+ *
  * This file defines the monitoring configuration for Nebutra-Sailor.
  * OpenStatus provides uptime monitoring and status pages.
  */
@@ -43,7 +43,7 @@ export const monitors: MonitorConfig[] = [
   // Landing Page
   {
     name: "Landing Page",
-    url: "${LANDING_PAGE_URL}",
+    url: "${LANDING_URL}",
     description: "Main marketing website",
     periodicity: "1m",
     regions: ["ams", "iad", "sfo", "hkg", "syd"],
@@ -56,7 +56,7 @@ export const monitors: MonitorConfig[] = [
   // Web App
   {
     name: "Web App",
-    url: "${WEB_APP_URL}",
+    url: "${WEB_URL}",
     description: "Main SaaS dashboard",
     periodicity: "1m",
     regions: ["ams", "iad", "sfo", "hkg", "syd"],
@@ -69,7 +69,7 @@ export const monitors: MonitorConfig[] = [
   // API Gateway Health
   {
     name: "API Gateway",
-    url: "${API_GATEWAY_URL}/misc/health",
+    url: "${API_GATEWAY_URL}/api/misc/health",
     description: "BFF API health endpoint",
     periodicity: "1m",
     regions: ["ams", "iad", "sfo", "hkg", "syd"],
@@ -150,7 +150,7 @@ export const monitors: MonitorConfig[] = [
   // Database (via API Gateway)
   {
     name: "Database",
-    url: "${API_GATEWAY_URL}/system/status",
+    url: "${API_GATEWAY_URL}/api/system/status",
     description: "Database connectivity check",
     periodicity: "1m",
     regions: ["iad"],
@@ -165,7 +165,7 @@ export const monitors: MonitorConfig[] = [
   // Redis (via API Gateway)
   {
     name: "Redis Cache",
-    url: "${API_GATEWAY_URL}/system/status",
+    url: "${API_GATEWAY_URL}/api/system/status",
     description: "Redis connectivity check",
     periodicity: "1m",
     regions: ["iad"],
@@ -184,7 +184,8 @@ export const monitors: MonitorConfig[] = [
 export const statusPage: StatusPageConfig = {
   slug: "nebutra-sailor",
   title: "Nebutra Sailor Status",
-  description: "Real-time status and incident history for Nebutra Sailor platform",
+  description:
+    "Real-time status and incident history for Nebutra Sailor platform",
   monitors: [
     "landing-page",
     "web-app",

@@ -7,7 +7,7 @@
 
 // Components
 export { Logo, Logomark, Wordmark } from "./components/Logo";
-export type { LogoProps, LogoVariant } from "./components/Logo";
+export type { LogoProps, LogoVariant, LogoEdition } from "./components/Logo";
 
 // Inline SVG components (no public folder required, fill="currentColor")
 export { LogomarkSVG, WordmarkEnSVG, LogoEnSVG } from "./components/LogoSVG";
@@ -19,6 +19,7 @@ export {
   colors,
   typography,
   logoAssets,
+  fontAssets,
   faviconAssets,
   ogImageDimensions,
 } from "./metadata";
@@ -31,6 +32,7 @@ export {
   logoSafetyZone,
   logoMinSize,
   logoVariants,
+  logoEditions,
   logoColorUsage,
   logoProhibitedUses,
   logoGrid,

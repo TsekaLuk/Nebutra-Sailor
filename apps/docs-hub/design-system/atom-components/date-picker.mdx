@@ -1,94 +1,113 @@
 ---
 title: "Date Picker"
-description: "Calendar-based date input combining Popover and Calendar for inline date selection."
+description: "Popover-based date selection combining DateInput + Calendar. Supports single date and date range."
 ---
 
-## Demo
+<Note>
+  Live examples and prop controls are available in [Storybook → Primitives/DatePicker](http://localhost:6006/?path=/docs/primitives-datepicker--docs).
+</Note>
 
-```tsx
-import { useState } from "react"
-import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
-import { Button } from "@nebutra/custom-ui/primitives"
-import { Calendar } from "@nebutra/custom-ui/primitives"
-import { Popover, PopoverContent, PopoverTrigger } from "@nebutra/custom-ui/primitives"
-import { cn } from "@nebutra/design-system/utils"
+## Overview
 
-export function DatePickerDemo() {
-  const [date, setDate] = useState<Date>()
-
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn("w-56 justify-start text-left font-normal", !date && "text-muted-foreground")}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : "Pick a date"}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
-      </PopoverContent>
-    </Popover>
-  )
-}
-```
+`DatePicker` and `DateRangePicker` are popover-based date selection components powered by HeroUI. They combine a keyboard-editable date input with a calendar dropdown.
 
 ## Usage
 
 ```tsx
-import { Calendar } from "@nebutra/custom-ui/primitives"
-import { Popover, PopoverContent, PopoverTrigger } from "@nebutra/custom-ui/primitives"
+import { DatePicker, DateRangePicker } from "@nebutra/custom-ui/primitives";
 ```
-
-<Info>
-  Date Picker is a pattern composed from `Popover` + `Calendar`. There is no
-  standalone `DatePicker` export. Install `date-fns` for date formatting.
-</Info>
-
-## Props
-
-### Calendar (inside Date Picker)
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `mode` | `"single" \| "range" \| "multiple"` | `"single"` | Selection mode |
-| `selected` | `Date \| undefined` | — | Selected date |
-| `onSelect` | `(date: Date \| undefined) => void` | — | Callback on date selection |
-| `disabled` | `Matcher \| Matcher[]` | — | Disabled date conditions |
-| `initialFocus` | `boolean` | `false` | Auto-focus calendar when opened |
-| `fromDate` | `Date` | — | Earliest selectable date |
-| `toDate` | `Date` | — | Latest selectable date |
 
 ## Examples
 
-### Date Range Picker
+### Single Date
 
 ```tsx
-const [range, setRange] = useState<DateRange | undefined>()
-
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline" className="w-72 justify-start text-left font-normal">
-      <CalendarIcon className="mr-2 h-4 w-4" />
-      {range?.from ? (
-        range.to ? (
-          `${format(range.from, "LLL dd")} - ${format(range.to, "LLL dd, y")}`
-        ) : format(range.from, "LLL dd, y")
-      ) : "Pick a date range"}
-    </Button>
-  </PopoverTrigger>
-  <PopoverContent className="w-auto p-0" align="start">
-    <Calendar mode="range" selected={range} onSelect={setRange} numberOfMonths={2} initialFocus />
-  </PopoverContent>
-</Popover>
+<DatePicker label="Event date" />
 ```
+
+### Date Range
+
+```tsx
+<DateRangePicker label="Trip dates" />
+```
+
+### Controlled
+
+```tsx
+import { parseDate } from "@nebutra/custom-ui/primitives";
+import { useState } from "react";
+
+const [date, setDate] = useState(parseDate("2024-04-04"));
+
+<DatePicker label="Date" value={date} onChange={setDate} />
+```
+
+### With Min/Max
+
+```tsx
+import { today, getLocalTimeZone } from "@nebutra/custom-ui/primitives";
+
+<DateRangePicker
+  label="Period"
+  minValue={today(getLocalTimeZone())}
+  maxValue={today(getLocalTimeZone()).add({ months: 3 })}
+/>
+```
+
+### Variants
+
+```tsx
+<DatePicker label="Default" />
+<DatePicker label="Bordered" variant="bordered" />
+<DatePicker label="Underlined" variant="underlined" />
+<DatePicker label="Faded" variant="faded" />
+```
+
+### Two Visible Months
+
+```tsx
+<DateRangePicker label="Stay" visibleMonths={2} />
+```
+
+## Props
+
+### DatePicker
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Input label |
+| `value` | `DateValue` | — | Controlled value |
+| `defaultValue` | `DateValue` | — | Uncontrolled default |
+| `onChange` | `(value: DateValue) => void` | — | Change callback |
+| `variant` | `"flat" \| "bordered" \| "faded" \| "underlined"` | `"flat"` | Visual style |
+| `minValue` | `DateValue` | — | Earliest selectable date |
+| `maxValue` | `DateValue` | — | Latest selectable date |
+| `granularity` | `"day" \| "hour" \| "minute" \| "second"` | `"day"` | Segment detail level |
+| `selectorButtonPlacement` | `"start" \| "end"` | `"end"` | Calendar icon placement |
+| `isDisabled` | `boolean` | `false` | Disable interaction |
+| `isRequired` | `boolean` | `false` | Mark as required |
+| `description` | `string` | — | Helper text below input |
+| `errorMessage` | `string` | — | Error text below input |
+
+### DateRangePicker
+
+Same props as DatePicker, plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `RangeValue<DateValue>` | — | Controlled range value |
+| `onChange` | `(value: RangeValue<DateValue>) => void` | — | Range change callback |
+| `visibleMonths` | `number` | `1` | Number of months shown |
 
 ## Accessibility
 
-- Trigger button communicates selection state to screen readers.
-- `Calendar` inside the popover uses full keyboard navigation.
-- `initialFocus` ensures the calendar receives focus when opened for keyboard users.
-- Popover closes on `Escape` and returns focus to the trigger.
+- Keyboard-editable date segments (Tab between year/month/day)
+- Calendar popup with full arrow key navigation
+- Screen reader announcements for date changes
+- Focus management between input and popover
+
+## See Also
+
+- [Calendar](/design-system/atom-components/calendar) — Standalone calendar grid
+- [CalendarPicker](/design-system/atom-components/calendar-picker) — Geist-style date range picker with presets
+- [DateInput](/design-system/atom-components/date-input) — Standalone date input without popover

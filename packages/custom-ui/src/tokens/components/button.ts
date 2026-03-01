@@ -14,6 +14,13 @@ import {
 
 export const buttonTokens = {
   size: {
+    tiny: {
+      height: primitiveSizing.tiny, // 24px
+      paddingX: primitiveSpacing[2], // 8px
+      borderRadius: primitiveRadius.sm, // 4px
+      fontSize: 11, // Geist tiny — between xs(12) and 10
+      iconSize: 12,
+    },
     sm: {
       height: primitiveSizing.sm, // 32px
       paddingX: primitiveSpacing[3], // 12px
@@ -43,6 +50,7 @@ export const buttonTokens = {
   },
   /** Loading spinner icon sizes match font size */
   spinner: {
+    tiny: 12,
     sm: 14,
     md: 16,
     lg: 18,

@@ -86,7 +86,7 @@ export {
   type TextStyle,
   type TextColor,
   type HeadingSize,
-  type ButtonSize,
+  type ButtonSize as ButtonTextSize,
   type LabelSize,
   type CopySize,
   type LabelVariant,

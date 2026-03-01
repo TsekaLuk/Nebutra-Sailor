@@ -86,25 +86,43 @@ export function ReactionChip({
     >
       {emojis.map((em) => {
         const isActive = selected === em;
-        return (
+        const btnClassName = cn(
+          "rounded-full p-1 text-base leading-none",
+          "transition-transform duration-150 ease-out",
+          "hover:scale-110 focus:scale-110 focus:outline-none",
+          isActive && "bg-muted ring-1 ring-border dark:bg-muted/70",
+        );
+        const handleMouseDown = (evt: React.MouseEvent) => evt.preventDefault();
+        const handleBtnClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
+          const btn = evt.currentTarget;
+          onSelect(em);
+          setTimeout(() => btn.blur(), 0);
+        };
+        const label = `React with ${em}`;
+
+        return isActive ? (
           <button
             key={em}
             type="button"
-            onMouseDown={(evt) => evt.preventDefault()}
-            onClick={(evt) => {
-              const btn = evt.currentTarget as HTMLButtonElement;
-              onSelect(em);
-              setTimeout(() => btn.blur(), 0);
-            }}
-            aria-pressed={isActive}
-            className={cn(
-              "rounded-full p-1 text-base leading-none",
-              "transition-transform duration-150 ease-out",
-              "hover:scale-110 focus:scale-110 focus:outline-none",
-              isActive && "bg-muted ring-1 ring-border dark:bg-muted/70",
-            )}
-            aria-label={`React with ${em}`}
-            title={`React with ${em}`}
+            onMouseDown={handleMouseDown}
+            onClick={handleBtnClick}
+            aria-pressed="true"
+            className={btnClassName}
+            aria-label={label}
+            title={label}
+          >
+            {em}
+          </button>
+        ) : (
+          <button
+            key={em}
+            type="button"
+            onMouseDown={handleMouseDown}
+            onClick={handleBtnClick}
+            aria-pressed="false"
+            className={btnClassName}
+            aria-label={label}
+            title={label}
           >
             {em}
           </button>

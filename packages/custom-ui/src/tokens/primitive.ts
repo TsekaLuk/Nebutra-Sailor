@@ -107,6 +107,8 @@ export type PrimitiveSpacing = keyof typeof primitiveSpacing;
 
 export const primitiveSizing = {
   xs: 20,
+  /** Geist button-specific size (24px). Larger than xs by design. */
+  tiny: 24,
   sm: 32,
   md: 40,
   lg: 48,

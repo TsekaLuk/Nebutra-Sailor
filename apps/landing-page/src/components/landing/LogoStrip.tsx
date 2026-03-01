@@ -16,7 +16,7 @@ export async function LogoStrip() {
   }));
 
   return (
-    <section className="w-full border-y border-white/[0.05] bg-black py-10">
+    <section className="w-full border-y border-white/5 bg-black py-10">
       <div className="mx-auto max-w-5xl px-6">
         <p className="mb-8 text-center text-xs uppercase tracking-widest text-white/30">
           {t("tagline")}

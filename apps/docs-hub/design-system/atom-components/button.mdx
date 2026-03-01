@@ -1,6 +1,6 @@
 ---
 title: "Button"
-description: "Interactive click target with six visual variants and four size options. Primary uses VI brand blue #0033FE."
+description: "Interactive click target with eight visual variants, five size options, shape control, prefix/suffix icon slots, and shadow elevation. Primary uses VI brand blue #0033FE."
 ---
 
 <Note>
@@ -10,7 +10,7 @@ description: "Interactive click target with six visual variants and four size op
 ## Usage
 
 ```tsx
-import { Button } from "@nebutra/custom-ui/primitives"
+import { Button, ButtonLink } from "@nebutra/custom-ui/primitives"
 ```
 
 ## Examples
@@ -22,50 +22,73 @@ import { Button } from "@nebutra/custom-ui/primitives"
 <Button variant="outline">Outline</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="ghost">Ghost</Button>
+<Button variant="tertiary">Tertiary</Button>
 <Button variant="destructive">Delete</Button>
+<Button variant="warning">Warning</Button>
 <Button variant="link">Learn more</Button>
 ```
 
 ### Sizes
 
 ```tsx
-<Button size="sm">Small</Button>       {/* h-9 — 36px */}
+<Button size="tiny">Tiny</Button>       {/* h-6 — 24px */}
+<Button size="sm">Small</Button>        {/* h-8 — 32px */}
 <Button size="default">Default</Button> {/* h-10 — 40px */}
-<Button size="lg">Large</Button>       {/* h-11 — 44px */}
-<Button size="icon"><PlusIcon /></Button> {/* 40×40px */}
+<Button size="lg">Large</Button>        {/* h-12 — 48px */}
+```
+
+### Shapes
+
+```tsx
+<Button shape="square" aria-label="Add"><PlusIcon /></Button>
+<Button shape="circle" aria-label="Settings"><GearIcon /></Button>
+<Button shape="circle" size="sm" aria-label="Search"><SearchIcon /></Button>
+```
+
+### Prefix & Suffix Icons
+
+Icons are auto-sized to match the button's size tier (12/14/16/18px).
+
+```tsx
+import { Mail, ArrowRight, Search } from "lucide-react"
+
+<Button prefix={<Mail />}>Login with Email</Button>
+<Button suffix={<ArrowRight />}>Continue</Button>
+<Button prefix={<Search />} suffix={<Command />}>Search</Button>
+```
+
+### Shadow
+
+```tsx
+<Button shadow="sm">Small shadow</Button>
+<Button shadow>Default shadow (md)</Button>
+<Button shadow="lg">Large shadow</Button>
 ```
 
 ### As Child (polymorphic)
 
 ```tsx
 import Link from "next/link"
-import { Button } from "@nebutra/custom-ui/primitives"
 
 <Button asChild>
   <Link href="/dashboard">Go to Dashboard</Link>
 </Button>
 ```
 
+### ButtonLink
+
+Renders as a native `<a>` element with button styling. Accepts all anchor attributes.
+
+```tsx
+<ButtonLink href="/docs" variant="outline">Documentation</ButtonLink>
+<ButtonLink href="/signup" suffix={<ArrowRight />}>Get Started</ButtonLink>
+```
+
 ### Loading State
 
 ```tsx
-import { Loader2 } from "lucide-react"
-
-<Button disabled aria-busy="true">
-  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-  Saving…
-</Button>
-```
-
-### With Icon
-
-```tsx
-import { Mail } from "lucide-react"
-
-<Button>
-  <Mail className="mr-2 h-4 w-4" />
-  Login with Email
-</Button>
+<Button loading>Saving…</Button>
+<Button loading variant="outline">Uploading…</Button>
 ```
 
 ## Props
@@ -74,30 +97,42 @@ import { Mail } from "lucide-react"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"default"` | Visual style variant |
-| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"default"` | Size preset |
+| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link" \| "tertiary" \| "warning"` | `"default"` | Visual style variant |
+| `size` | `"tiny" \| "sm" \| "default" \| "lg" \| "icon"` | `"default"` | Size preset |
+| `shape` | `"default" \| "square" \| "circle"` | `"default"` | Button shape — `square` and `circle` set equal width/height |
+| `prefix` | `ReactNode` | — | Icon or element rendered before children (auto-sized) |
+| `suffix` | `ReactNode` | — | Icon or element rendered after children (auto-sized) |
+| `shadow` | `boolean \| "sm" \| "md" \| "lg"` | — | Elevation shadow level. `true` = `"md"` |
 | `asChild` | `boolean` | `false` | Merge props onto the immediate child via Radix `Slot` |
+| `loading` | `boolean` | `false` | Show spinner and disable interaction |
 | `disabled` | `boolean` | `false` | Disables the button |
 | `className` | `string` | — | Additional CSS classes |
 | `children` | `ReactNode` | — | Button label content |
 
 ### Size Reference
 
-| Size | Height | Horizontal Padding |
-|------|--------|--------------------|
-| `sm` | 36px | 12px |
-| `default` | 40px | 16px |
-| `lg` | 44px | 32px |
-| `icon` | 40×40px | — |
+| Size | Height | Horizontal Padding | Icon Size |
+|------|--------|--------------------|-----------|
+| `tiny` | 24px | 8px | 12px |
+| `sm` | 32px | 12px | 14px |
+| `default` | 40px | 16px | 16px |
+| `lg` | 48px | 20px | 18px |
+| `icon` | 40×40px | — | 16px |
+
+### ButtonLink Props
+
+`ButtonLink` extends all native `React.AnchorHTMLAttributes<HTMLAnchorElement>` and accepts the same `variant`, `size`, `shape`, `prefix`, `suffix`, `shadow`, and `loading` props as `Button`.
 
 ## Design Tokens
 
 Primary variant consumes `--color-primary` (VI: `#0033FE` 云毓蓝).
+Warning variant consumes `--warning` (amber-500).
 Focus ring uses `--focus-ring` — brand-blue, 2px width, 2px offset.
 
 ## Accessibility
 
 - Renders as native `<button>` — keyboard accessible by default.
-- Set `aria-busy="true"` and `disabled` together during loading states.
-- For icon-only buttons (`size="icon"`), always provide `aria-label`.
+- Set `loading` prop for loading states — it applies `aria-busy="true"` and `disabled` automatically.
+- For icon-only buttons (`shape="square"` or `shape="circle"` without text), always provide `aria-label`.
 - Focus ring is always visible — never suppressed for keyboard users.
+- `ButtonLink` renders as `<a>` — use `href` for navigation targets.

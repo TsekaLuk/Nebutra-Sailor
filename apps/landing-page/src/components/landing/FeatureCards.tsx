@@ -69,7 +69,7 @@ export function FeatureCards() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ delay: i * 0.1 }}
-                className="group flex flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-colors hover:border-white/[0.15]"
+                className="group flex flex-col rounded-2xl border border-white/8 bg-white/3 p-6 transition-colors hover:border-white/15"
               >
                 <Icon className="mb-4 h-5 w-5 text-indigo-400" />
                 <h3 className="mb-2 font-semibold text-white">
@@ -80,7 +80,7 @@ export function FeatureCards() {
                 </p>
 
                 {/* Code preview */}
-                <div className="mt-auto rounded-xl border border-white/[0.06] bg-black/40 p-4">
+                <div className="mt-auto rounded-xl border border-white/6 bg-black/40 p-4">
                   <pre className="overflow-x-auto font-mono text-[11px] leading-relaxed text-white/60">
                     {feature.code.map((line, j) => (
                       <span key={j} className="block">

@@ -113,15 +113,15 @@ export function StatusBadge({
               "-ml-0.5 size-4 shrink-0",
               iconColorClasses[status || "default"],
             )}
-            aria-hidden={true}
+            aria-hidden="true"
           />
         )}
         {leftLabel}
       </span>
-      <span className="h-4 w-px bg-border" aria-hidden={true} />
+      <span className="h-4 w-px bg-border" aria-hidden="true" />
       <span className="inline-flex items-center gap-1.5 text-muted-foreground">
         {RightIcon && (
-          <RightIcon className="-ml-0.5 size-4 shrink-0" aria-hidden={true} />
+          <RightIcon className="-ml-0.5 size-4 shrink-0" aria-hidden="true" />
         )}
         {rightLabel}
       </span>

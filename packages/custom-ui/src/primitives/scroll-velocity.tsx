@@ -258,16 +258,25 @@ function ScrollVelocityRowImpl({
         className="inline-flex transform-gpu select-none items-center will-change-transform"
         style={{ x }}
       >
-        {Array.from({ length: numCopies }).map((_, i) => (
-          <div
-            key={i}
-            ref={i === 0 ? blockRef : null}
-            aria-hidden={i !== 0}
-            className="inline-flex shrink-0 items-center"
-          >
-            {children}
-          </div>
-        ))}
+        {Array.from({ length: numCopies }).map((_, i) =>
+          i === 0 ? (
+            <div
+              key={i}
+              ref={blockRef}
+              className="inline-flex shrink-0 items-center"
+            >
+              {children}
+            </div>
+          ) : (
+            <div
+              key={i}
+              aria-hidden="true"
+              className="inline-flex shrink-0 items-center"
+            >
+              {children}
+            </div>
+          ),
+        )}
       </motion.div>
     </div>
   );

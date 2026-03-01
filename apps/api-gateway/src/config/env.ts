@@ -31,6 +31,9 @@ const envSchema = z.object({
   RECSYS_SERVICE_URL: z.string().optional(),
   ECOMMERCE_SERVICE_URL: z.string().optional(),
   WEB3_SERVICE_URL: z.string().optional(),
+  BILLING_SERVICE_URL: z.string().optional(),
+  EVENT_INGEST_SERVICE_URL: z.string().optional(),
+  INTERNAL_API_KEY: z.string().optional(),
 
   // Frontend URLs
   LANDING_URL: z.string().optional(),

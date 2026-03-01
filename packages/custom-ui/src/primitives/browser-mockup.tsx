@@ -1,98 +1,160 @@
 "use client";
 
 import * as React from "react";
-import Image, { type StaticImageData } from "next/image";
+import { useState, useCallback, useRef, useEffect } from "react";
+import { ArrowLeft, ArrowRight, RotateCw, Copy, Check } from "lucide-react";
 import { cn } from "../utils/cn";
 
-export interface BrowserMockupProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Image source URL or StaticImageData */
-  image?: StaticImageData | string;
-  /** Alt text for the image */
+const COPIED_FEEDBACK_MS = 1500;
+
+// =============================================================================
+// Types
+// =============================================================================
+
+export interface BrowserProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** URL displayed in the address bar */
+  address?: string;
+  /** Convenience prop: render an <img> when no children are provided */
+  imageSrc?: string;
+  /** Alt text for the image (only used with imageSrc) */
   imageAlt?: string;
-  /** URL to display in the address bar (decorative) */
-  url?: string;
-  /** Custom placeholder when no image is provided */
-  placeholder?: React.ReactNode;
-  /** Image width */
-  imageWidth?: number;
-  /** Image height */
-  imageHeight?: number;
+  /** Arbitrary content rendered in the browser viewport */
+  children?: React.ReactNode;
 }
 
+/** @deprecated Use BrowserProps instead */
+export type BrowserMockupProps = BrowserProps;
+
+// =============================================================================
+// Component
+// =============================================================================
+
 /**
- * BrowserMockup - Safari-style browser window frame
+ * Browser - Geist-style browser window frame
  *
- * A decorative browser window frame for displaying screenshots, demos, or previews.
- * Includes traffic light buttons and address bar styling.
+ * A decorative browser chrome for showcasing websites, screenshots, demos, or
+ * arbitrary content. Features traffic-light buttons, navigation icons,
+ * an address bar with copy-to-clipboard, and a flexible content area.
  *
- * @example
+ * @example Children mode (arbitrary JSX)
  * ```tsx
- * <BrowserMockup
- *   image="/screenshots/dashboard.png"
- *   url="https://example.com"
- * />
+ * <Browser address="vercel.com">
+ *   <div className="p-6">Hello World</div>
+ * </Browser>
+ * ```
+ *
+ * @example Image convenience mode
+ * ```tsx
+ * <Browser address="example.com" imageSrc="/screenshot.png" />
  * ```
  */
-export function BrowserMockup({
-  image,
+export function Browser({
+  address,
+  imageSrc,
   imageAlt = "Preview",
-  url,
-  placeholder,
-  imageWidth = 800,
-  imageHeight = 450,
+  children,
   className,
   ...props
-}: BrowserMockupProps) {
+}: BrowserProps) {
+  const [copied, setCopied] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  const handleCopy = useCallback(async () => {
+    if (!address) return;
+    try {
+      await navigator.clipboard.writeText(address);
+      setCopied(true);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setCopied(false), COPIED_FEEDBACK_MS);
+    } catch {
+      // Clipboard API may be blocked in some contexts
+    }
+  }, [address]);
+
   return (
     <div
       className={cn(
-        "min-w-[700px] rounded-xl border border-zinc-200 dark:border-zinc-800 bg-muted shadow-md overflow-hidden",
-        className
+        "rounded-xl border border-zinc-200 bg-white shadow-sm overflow-hidden dark:border-zinc-800 dark:bg-zinc-950",
+        className,
       )}
       {...props}
     >
-      {/* Browser top bar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800">
+      {/* ── Toolbar ────────────────────────────────────────────────── */}
+      <div className="flex items-center gap-3 border-b border-zinc-200 bg-zinc-100 px-4 py-2.5 dark:border-zinc-800 dark:bg-zinc-900">
         {/* Traffic lights */}
-        <div className="flex items-center space-x-2">
-          <span className="w-3 h-3 bg-red-400 rounded-full" aria-hidden="true" />
-          <span className="w-3 h-3 bg-yellow-400 rounded-full" aria-hidden="true" />
-          <span className="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true" />
+        <div className="flex items-center gap-1.5" aria-hidden="true">
+          <span className="size-3 rounded-full bg-[#FF5F57]" />
+          <span className="size-3 rounded-full bg-[#FEBC2E]" />
+          <span className="size-3 rounded-full bg-[#28C840]" />
+        </div>
+
+        {/* Navigation buttons */}
+        <div className="flex items-center gap-1" aria-hidden="true">
+          <span className="flex size-6 items-center justify-center rounded text-zinc-400 dark:text-zinc-500">
+            <ArrowLeft className="size-3.5" />
+          </span>
+          <span className="flex size-6 items-center justify-center rounded text-zinc-400 dark:text-zinc-500">
+            <ArrowRight className="size-3.5" />
+          </span>
+          <span className="flex size-6 items-center justify-center rounded text-zinc-400 dark:text-zinc-500">
+            <RotateCw className="size-3.5" />
+          </span>
         </div>
 
         {/* Address bar */}
-        <div className="flex-1 mx-4 bg-gray-200 dark:bg-zinc-800 rounded-md h-5 max-w-md flex items-center justify-center">
-          {url && (
-            <span className="text-xs text-muted-foreground truncate px-2">
-              {url}
-            </span>
+        <div className="flex flex-1 items-center justify-center gap-2 rounded-md bg-white/80 px-3 py-1 dark:bg-zinc-800">
+          {address ? (
+            <>
+              <span className="flex-1 truncate text-center text-xs text-zinc-500 dark:text-zinc-400">
+                {address}
+              </span>
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="flex-shrink-0 rounded p-0.5 text-zinc-400 transition-colors hover:text-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:text-zinc-500 dark:hover:text-zinc-300"
+                aria-label={copied ? "Copied" : "Copy address"}
+              >
+                {copied ? (
+                  <Check className="size-3" />
+                ) : (
+                  <Copy className="size-3" />
+                )}
+              </button>
+            </>
+          ) : (
+            <span className="h-3" />
           )}
         </div>
-
-        {/* Right side placeholder */}
-        <div className="w-4 h-4" />
       </div>
 
-      {/* Content area */}
-      <div className="bg-gray-100 dark:bg-zinc-800 aspect-video flex items-center justify-center">
-        {image ? (
-          <Image
-            src={image}
-            alt={imageAlt}
-            width={imageWidth}
-            height={imageHeight}
-            className="object-contain max-h-full max-w-full"
-          />
-        ) : (
-          placeholder || (
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              No preview image
+      {/* ── Content area ───────────────────────────────────────────── */}
+      <div className="bg-white dark:bg-zinc-950">
+        {children ??
+          (imageSrc ? (
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              loading="lazy"
+              decoding="async"
+              className="block w-full"
+            />
+          ) : (
+            <div className="flex aspect-video items-center justify-center bg-zinc-50 text-sm text-zinc-400 dark:bg-zinc-900 dark:text-zinc-600">
+              No content
             </div>
-          )
-        )}
+          ))}
       </div>
     </div>
   );
 }
 
-BrowserMockup.displayName = "BrowserMockup";
+Browser.displayName = "Browser";
+
+/** @deprecated Use Browser instead */
+export const BrowserMockup = Browser;

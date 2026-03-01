@@ -1,16 +1,21 @@
 import { getAuth, getUser } from "@/lib/auth";
+import { getGrowthSummary } from "@/lib/warehouse/gold";
 
 const hasClerkKey = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 export default async function DashboardPage() {
   let userName = "User";
   let orgName = "";
+  let tenantId = process.env.DEFAULT_DASHBOARD_TENANT_ID || "demo_org";
 
   if (hasClerkKey) {
     const [authState, user] = await Promise.all([getAuth(), getUser()]);
     userName = user?.firstName || "User";
     orgName = (authState.sessionClaims?.org_name as string) || "";
+    tenantId = authState.orgId || tenantId;
   }
+
+  const summary = await getGrowthSummary(tenantId);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -20,6 +25,10 @@ export default async function DashboardPage() {
             Dashboard
           </h1>
           {orgName && <p className="mt-1 text-sm text-gray-500">{orgName}</p>}
+          <p className="mt-1 text-sm text-gray-500">
+            Gold snapshot: {summary.day || "No data yet"} · tenant{" "}
+            {summary.tenantId}
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -33,17 +42,56 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          {/* Quick Stats */}
+          {/* Gold Metrics */}
           <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="text-sm font-medium text-gray-500">API Calls</h3>
-            <p className="mt-2 text-3xl font-bold text-gray-900">0</p>
-            <p className="mt-1 text-sm text-gray-500">This month</p>
+            <h3 className="text-sm font-medium text-gray-500">Total Events</h3>
+            <p className="mt-2 text-3xl font-bold text-gray-900">
+              {summary.totalEvents.toLocaleString()}
+            </p>
+            <p className="mt-1 text-sm text-gray-500">Latest day</p>
           </div>
 
           <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="text-sm font-medium text-gray-500">AI Tokens</h3>
-            <p className="mt-2 text-3xl font-bold text-gray-900">0</p>
-            <p className="mt-1 text-sm text-gray-500">This month</p>
+            <h3 className="text-sm font-medium text-gray-500">Active Users</h3>
+            <p className="mt-2 text-3xl font-bold text-gray-900">
+              {summary.activeUsers.toLocaleString()}
+            </p>
+            <p className="mt-1 text-sm text-gray-500">Latest day</p>
+          </div>
+
+          <div className="rounded-lg bg-white p-6 shadow">
+            <h3 className="text-sm font-medium text-gray-500">Signups</h3>
+            <p className="mt-2 text-3xl font-bold text-gray-900">
+              {summary.signups.toLocaleString()}
+            </p>
+            <p className="mt-1 text-sm text-gray-500">Latest day</p>
+          </div>
+
+          <div className="rounded-lg bg-white p-6 shadow">
+            <h3 className="text-sm font-medium text-gray-500">Activations</h3>
+            <p className="mt-2 text-3xl font-bold text-gray-900">
+              {summary.activations.toLocaleString()}
+            </p>
+            <p className="mt-1 text-sm text-gray-500">Latest day</p>
+          </div>
+
+          <div className="rounded-lg bg-white p-6 shadow">
+            <h3 className="text-sm font-medium text-gray-500">Conversions</h3>
+            <p className="mt-2 text-3xl font-bold text-gray-900">
+              {summary.conversions.toLocaleString()}
+            </p>
+            <p className="mt-1 text-sm text-gray-500">Latest day</p>
+          </div>
+
+          <div className="rounded-lg bg-white p-6 shadow">
+            <h3 className="text-sm font-medium text-gray-500">Revenue</h3>
+            <p className="mt-2 text-3xl font-bold text-gray-900">
+              $
+              {summary.revenue.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}
+            </p>
+            <p className="mt-1 text-sm text-gray-500">Latest day (USD)</p>
           </div>
         </div>
 

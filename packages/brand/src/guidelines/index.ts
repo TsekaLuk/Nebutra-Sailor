@@ -14,6 +14,7 @@ export {
   logoSafetyZone,
   logoMinSize,
   logoVariants,
+  logoEditions,
   logoColorUsage,
   logoProhibitedUses,
   logoGrid,

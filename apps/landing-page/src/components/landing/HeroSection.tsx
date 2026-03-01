@@ -32,7 +32,7 @@ export function HeroSection() {
       {/* Indigo ambient glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/20 to-indigo-400/10 blur-[140px]" />
+          <div className="absolute inset-0 rounded-full bg-linear-to-r from-indigo-500/20 to-indigo-400/10 blur-[140px]" />
         </div>
       </div>
 
@@ -45,7 +45,7 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-4 py-1.5 text-xs text-white/60 tracking-wide">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-4 py-1.5 text-xs text-white/60 tracking-wide">
             {t("badge")}
           </span>
         </motion.div>
@@ -59,7 +59,7 @@ export function HeroSection() {
         >
           {t("headline1")}
           <br />
-          <span className="bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">
             {t("headline2")}
           </span>
         </motion.h1>
@@ -81,14 +81,14 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-12 w-full max-w-xl"
         >
-          <div className="group relative flex items-center rounded-xl border border-white/[0.08] bg-white/[0.04] p-1.5 transition-all hover:border-white/[0.15]">
+          <div className="group relative flex items-center rounded-xl border border-white/8 bg-white/4 p-1.5 transition-all hover:border-white/15">
             <code className="flex-1 px-5 py-3.5 font-mono text-sm text-white md:text-base">
               <span className="text-white/40">$</span> {heroContent.command}
             </code>
             <button
               type="button"
               onClick={handleCopy}
-              className="flex items-center gap-2 rounded-lg bg-white/[0.08] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/[0.12] cursor-pointer"
+              className="flex items-center gap-2 rounded-lg bg-white/8 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/12 cursor-pointer"
             >
               <Copy className="h-4 w-4" />
               {copied ? t("copiedLabel") : t("copyLabel")}

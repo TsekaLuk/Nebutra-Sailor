@@ -50,4 +50,12 @@ export type {
   // Audit
   AuditLog,
   AuditAction,
+
+  // Billing
+  Subscription,
+  UsageRecord,
+  UsageAggregate,
+  UsageLedgerEntry,
+  UsageType,
+  UsageLedgerSource,
 } from "./generated/prisma/client.js";

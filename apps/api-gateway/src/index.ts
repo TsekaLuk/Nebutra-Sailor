@@ -11,6 +11,7 @@ import { prisma } from "@nebutra/db";
 import { healthRoutes } from "./routes/misc/health.js";
 import { statusRoutes } from "./routes/system/status.js";
 import { consentRoutes } from "./routes/legal/consent.js";
+import { eventRoutes } from "./routes/events/index.js";
 import {
   stripeWebhookRoutes,
   clerkWebhookRoutes,
@@ -85,6 +86,8 @@ app.use("/api/*", async (c, next) => {
   if (
     path.startsWith("/api/misc") ||
     path.startsWith("/api/system") ||
+    path.startsWith("/misc") ||
+    path.startsWith("/system") ||
     path.startsWith("/api/webhooks") ||
     path.startsWith("/api/inngest")
   ) {
@@ -96,9 +99,13 @@ app.use("/api/*", async (c, next) => {
 // Health & Status routes (public, no rate limiting)
 app.route("/api/misc", healthRoutes);
 app.route("/api/system", statusRoutes);
+// Backward-compatible aliases (legacy monitors/workflows)
+app.route("/misc", healthRoutes);
+app.route("/system", statusRoutes);
 
 // Legal & Consent routes (v1 API)
 app.route("/api/v1/legal", consentRoutes);
+app.route("/api/v1/events", eventRoutes);
 
 // Webhook routes (raw body — bypass rate limiting)
 app.route("/api/webhooks", stripeWebhookRoutes);

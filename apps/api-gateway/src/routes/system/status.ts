@@ -14,6 +14,8 @@ interface StatusResponse {
     recsys: "available" | "unavailable" | "unknown";
     ecommerce: "available" | "unavailable" | "unknown";
     web3: "available" | "unavailable" | "unknown";
+    billing: "available" | "unavailable" | "unknown";
+    eventIngest: "available" | "unavailable" | "unknown";
   };
   uptime: number;
   checks: Array<{
@@ -28,7 +30,7 @@ const startTime = Date.now();
 
 /**
  * Comprehensive status endpoint for OpenStatus monitoring
- * GET /system/status
+ * GET /api/system/status
  */
 statusRoutes.get("/status", async (c) => {
   const checks: StatusResponse["checks"] = [];
@@ -55,6 +57,8 @@ statusRoutes.get("/status", async (c) => {
     checkService("recsys", process.env.RECSYS_SERVICE_URL),
     checkService("ecommerce", process.env.ECOMMERCE_SERVICE_URL),
     checkService("web3", process.env.WEB3_SERVICE_URL),
+    checkService("billing", process.env.BILLING_SERVICE_URL),
+    checkService("eventIngest", process.env.EVENT_INGEST_SERVICE_URL),
   ]);
 
   const serviceStatuses: StatusResponse["services"] = {
@@ -63,10 +67,20 @@ statusRoutes.get("/status", async (c) => {
     recsys: "unknown",
     ecommerce: "unknown",
     web3: "unknown",
+    billing: "unknown",
+    eventIngest: "unknown",
   };
 
   serviceChecks.forEach((result, index) => {
-    const services = ["ai", "content", "recsys", "ecommerce", "web3"] as const;
+    const services = [
+      "ai",
+      "content",
+      "recsys",
+      "ecommerce",
+      "web3",
+      "billing",
+      "eventIngest",
+    ] as const;
     const serviceName = services[index];
 
     if (!serviceName) return;
@@ -118,7 +132,7 @@ statusRoutes.get("/status", async (c) => {
 
 /**
  * Readiness check for Kubernetes
- * GET /system/ready
+ * GET /api/system/ready
  */
 statusRoutes.get("/ready", async (c) => {
   const dbCheck = await checkDatabase();
@@ -132,7 +146,7 @@ statusRoutes.get("/ready", async (c) => {
 
 /**
  * Liveness check for Kubernetes
- * GET /system/live
+ * GET /api/system/live
  */
 statusRoutes.get("/live", (c) => {
   return c.json({ live: true });

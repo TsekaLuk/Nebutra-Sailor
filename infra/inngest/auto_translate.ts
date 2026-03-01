@@ -20,9 +20,9 @@ export const autoTranslate = inngest.createFunction(
         `${process.env.API_GATEWAY_URL}/content/${contentId}`,
         {
           headers: {
-            "x-tenant-id": tenantId,
+            "x-organization-id": tenantId,
           },
-        }
+        },
       );
       return response.json();
     });
@@ -37,19 +37,19 @@ export const autoTranslate = inngest.createFunction(
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-tenant-id": tenantId,
+                "x-organization-id": tenantId,
               },
               body: JSON.stringify({
                 text: content.body,
                 sourceLang: sourceLanguage,
                 targetLang,
               }),
-            }
+            },
           );
           const data = await response.json();
           return { language: targetLang, text: data.text };
         });
-      })
+      }),
     );
 
     // Step 3: Save translations
@@ -60,13 +60,13 @@ export const autoTranslate = inngest.createFunction(
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-tenant-id": tenantId,
+            "x-organization-id": tenantId,
           },
           body: JSON.stringify({ translations }),
-        }
+        },
       );
     });
 
     return { success: true, translatedTo: targetLanguages };
-  }
+  },
 );

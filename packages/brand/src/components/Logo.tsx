@@ -12,7 +12,27 @@ export type LogoVariant =
   | "horizontal-en"
   | "horizontal-zh"
   | "vertical-en"
-  | "vertical-zh";
+  | "vertical-zh"
+  | "horizontal-en-mono"
+  | "horizontal-zh-mono"
+  | "vertical-en-mono"
+  | "vertical-zh-mono";
+
+/**
+ * Logo edition: classic (v1.0) or compliant (v2.0)
+ *
+ * - classic: 经典版，"毓"字更美观，用于用户体验场景 (App/网站/产品)
+ * - compliant: 合规版，"毓"字符合商标规范，用于商务场景 (法律/商标/正式文件)
+ */
+export type LogoEdition = "classic" | "compliant";
+
+/** Variants that only exist in the compliant edition */
+const COMPLIANT_ONLY_VARIANTS: ReadonlySet<LogoVariant> = new Set([
+  "horizontal-en-mono",
+  "horizontal-zh-mono",
+  "vertical-en-mono",
+  "vertical-zh-mono",
+]);
 
 export interface LogoProps {
   /**
@@ -20,6 +40,16 @@ export interface LogoProps {
    * @default "en" (Nebutra with English wordmark)
    */
   variant?: LogoVariant;
+
+  /**
+   * Logo edition
+   * - "classic" (default): v1.0 经典版，更美观
+   * - "compliant": v2.0 合规版，符合商标规范
+   *
+   * Mono combination variants automatically use compliant edition.
+   * @default "classic"
+   */
+  edition?: LogoEdition;
 
   /**
    * Logo size (width in pixels)
@@ -42,20 +72,16 @@ export interface LogoProps {
 }
 
 /**
- * Map variant to SVG file path (relative to /brand in public folder)
+ * Resolve the public path for a logo variant + edition combination.
+ * Mono combination variants always route to the compliant directory.
  */
-const LOGO_FILES: Record<LogoVariant, string> = {
-  color: "/brand/logo-color.svg",
-  inverse: "/brand/logo-inverse.svg",
-  mono: "/brand/logo-mono.svg",
-  en: "/brand/logo-en.svg",
-  zh: "/brand/logo-zh.svg",
-  "zh-en": "/brand/logo-zh-en.svg",
-  "horizontal-en": "/brand/logo-horizontal-en.svg",
-  "horizontal-zh": "/brand/logo-horizontal-zh.svg",
-  "vertical-en": "/brand/logo-vertical-en.svg",
-  "vertical-zh": "/brand/logo-vertical-zh.svg",
-};
+function getLogoPath(variant: LogoVariant, edition: LogoEdition): string {
+  const dir =
+    edition === "compliant" || COMPLIANT_ONLY_VARIANTS.has(variant)
+      ? "/brand-compliant"
+      : "/brand";
+  return `${dir}/logo-${variant}.svg`;
+}
 
 /**
  * Aspect ratios for different logo variants
@@ -72,6 +98,10 @@ const ASPECT_RATIOS: Record<LogoVariant, number> = {
   "horizontal-zh": 4.5, // Estimated
   "vertical-en": 0.8, // Taller than wide
   "vertical-zh": 0.8, // Taller than wide
+  "horizontal-en-mono": 5.25, // Same as horizontal-en
+  "horizontal-zh-mono": 4.5, // Same as horizontal-zh
+  "vertical-en-mono": 0.8, // Same as vertical-en
+  "vertical-zh-mono": 0.8, // Same as vertical-zh
 };
 
 /**
@@ -94,13 +124,14 @@ const ASPECT_RATIOS: Record<LogoVariant, number> = {
  */
 export function Logo({
   variant = "en",
+  edition = "classic",
   size = 120,
   className,
   inverted = false,
 }: LogoProps) {
   const aspectRatio = ASPECT_RATIOS[variant];
   const height = Math.round(size / aspectRatio);
-  const src = LOGO_FILES[variant];
+  const src = getLogoPath(variant, edition);
 
   // For dark backgrounds, invert black to white
   const filterStyle = inverted ? { filter: "brightness(0) invert(1)" } : {};
@@ -131,14 +162,16 @@ export function Logomark({
   size = 32,
   className,
   variant = "color",
+  edition = "classic",
   inverted = false,
 }: {
   size?: number;
   className?: string;
   variant?: "color" | "inverse" | "mono";
+  edition?: LogoEdition;
   inverted?: boolean;
 }) {
-  const src = LOGO_FILES[variant];
+  const src = getLogoPath(variant, edition);
 
   // For dark backgrounds, invert black to white (unless using "inverse" variant which is already white)
   const filterStyle =
@@ -168,16 +201,18 @@ export function Wordmark({
   size = 100,
   className,
   variant = "en",
+  edition = "classic",
   inverted = false,
 }: {
   size?: number;
   className?: string;
   variant?: "en" | "zh" | "zh-en";
+  edition?: LogoEdition;
   inverted?: boolean;
 }) {
   const aspectRatio = ASPECT_RATIOS[variant];
   const height = Math.round(size / aspectRatio);
-  const src = LOGO_FILES[variant];
+  const src = getLogoPath(variant, edition);
 
   const filterStyle = inverted ? { filter: "brightness(0) invert(1)" } : {};
 

@@ -15,7 +15,7 @@ export const inventorySync = inngest.createFunction(
     // Step 1: Get tenants with Shopify integration
     const tenants = await step.run("get-shopify-tenants", async () => {
       const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/integrations/shopify/tenants`
+        `${process.env.API_GATEWAY_URL}/integrations/shopify/tenants`,
       );
       return response.json();
     });
@@ -31,13 +31,13 @@ export const inventorySync = inngest.createFunction(
             `${process.env.ECOMMERCE_SERVICE_URL}/shopify/products`,
             {
               headers: {
-                "x-tenant-id": tenant.id,
+                "x-organization-id": tenant.id,
                 "x-shopify-token": tenant.shopifyToken,
               },
-            }
+            },
           );
           return response.json();
-        }
+        },
       );
 
       // Step 3: Sync to local database
@@ -50,13 +50,13 @@ export const inventorySync = inngest.createFunction(
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-tenant-id": tenant.id,
+                "x-organization-id": tenant.id,
               },
               body: JSON.stringify({ products }),
-            }
+            },
           );
           return response.json();
-        }
+        },
       );
 
       results.push({
@@ -67,7 +67,7 @@ export const inventorySync = inngest.createFunction(
     }
 
     return { tenants: results.length, results };
-  }
+  },
 );
 
 /**
@@ -91,7 +91,7 @@ export const processShopifyOrder = inngest.createFunction(
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-tenant-id": tenantId,
+            "x-organization-id": tenantId,
           },
           body: JSON.stringify({
             externalId: order.id,
@@ -100,7 +100,7 @@ export const processShopifyOrder = inngest.createFunction(
             total: order.total_price,
             customer: order.customer,
           }),
-        }
+        },
       );
       return response.json();
     });
@@ -114,13 +114,13 @@ export const processShopifyOrder = inngest.createFunction(
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
-              "x-tenant-id": tenantId,
+              "x-organization-id": tenantId,
             },
             body: JSON.stringify({
               adjustment: -item.quantity,
               reason: `Order ${order.id}`,
             }),
-          }
+          },
         );
       }
     });
@@ -131,7 +131,7 @@ export const processShopifyOrder = inngest.createFunction(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-tenant-id": tenantId,
+          "x-organization-id": tenantId,
         },
         body: JSON.stringify({
           template: "order-confirmation",
@@ -142,5 +142,5 @@ export const processShopifyOrder = inngest.createFunction(
     });
 
     return { orderId: createdOrder.id, success: true };
-  }
+  },
 );

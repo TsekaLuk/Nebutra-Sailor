@@ -49,7 +49,7 @@ api-gateway:
   retry: 2
   kind: http
   request:
-    url: https://api.nebutra.com/misc/health
+    url: https://api.nebutra.com/api/misc/health
     method: GET
     headers:
       Accept: application/json
@@ -71,7 +71,7 @@ api-gateway-deep:
   retry: 1
   kind: http
   request:
-    url: https://api.nebutra.com/health
+    url: https://api.nebutra.com/api/system/status
     method: GET
     headers:
       Accept: application/json

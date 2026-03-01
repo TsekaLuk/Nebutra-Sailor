@@ -1,0 +1,112 @@
+---
+title: CodeBlock
+description: Multi-file tabbed code viewer with syntax highlighting, copy functionality, and auto-language detection.
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-codeblock--docs).
+</Note>
+
+## Overview
+
+`CodeBlock` renders a tabbed code viewer with full syntax highlighting powered by `react-syntax-highlighter` (Prism). It auto-detects the language from the file extension, adapts to light/dark mode, and provides copy-to-clipboard on a per-tab basis.
+
+## Installation
+
+```tsx
+import { CodeBlock } from "@nebutra/custom-ui/primitives";
+```
+
+`react-syntax-highlighter` is a peer dependency:
+
+```bash
+pnpm add react-syntax-highlighter @types/react-syntax-highlighter
+```
+
+## Usage
+
+### Single file
+
+```tsx
+<CodeBlock
+  files={[{
+    title: "hello.ts",
+    code: `const greeting = "Hello World";\nconsole.log(greeting);`
+  }]}
+/>
+```
+
+### Multiple files
+
+```tsx
+<CodeBlock
+  files={[
+    {
+      title: "theme.ts",
+      code: `export const theme = { primary: "#7C3AED" };`,
+      language: "typescript",
+    },
+    {
+      title: "styles.css",
+      code: `:root { --primary: #7C3AED; }`,
+      language: "css",
+    },
+  ]}
+  defaultTitle="theme.ts"
+/>
+```
+
+### With line numbers and custom height
+
+```tsx
+<CodeBlock
+  files={[{ title: "config.json", code: JSON.stringify(config, null, 2) }]}
+  maxHeight={300}
+  showLineNumbers
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `files` | `CodeBlockFile[]` | — | **Required.** Array of code files to display |
+| `defaultTitle` | `string` | `files[0].title` | Initially active file tab |
+| `className` | `string` | — | Additional CSS classes for the outer container |
+| `maxHeight` | `string \| number` | `400` | Max height of code area (number = px) |
+| `showLineNumbers` | `boolean` | `false` | Show line numbers |
+
+### CodeBlockFile
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `title` | `string` | File name shown in the tab |
+| `code` | `string` | Code content to display and copy |
+| `language` | `string` | Syntax highlighting language (auto-detected from extension if omitted) |
+
+## Auto-Detected Languages
+
+Language is inferred from file extension when `language` is not provided:
+
+| Extension | Language |
+|-----------|---------|
+| `.js` `.jsx` | javascript / jsx |
+| `.ts` `.tsx` | typescript / tsx |
+| `.html` | html |
+| `.css` `.scss` | css / scss |
+| `.json` | json |
+| `.md` | markdown |
+| `.py` | python |
+| `.go` | go |
+| `.rs` | rust |
+| `.sh` `.bash` `.zsh` | bash |
+| `.yaml` `.yml` | yaml |
+| `.sql` | sql |
+| `.graphql` `.gql` | graphql |
+
+## Notes
+
+- Light/dark theme is auto-detected via a `MutationObserver` watching for the `dark` class on `<html>`.
+- The light theme adapts Prism's nightOwl with design-system CSS variables.
+- File icons are shown in tabs: `FileCode` for JS/TS, `FileText` for CSS, `File` for others.
+- Tab labels are hidden on mobile (`hidden sm:inline`) to save space.

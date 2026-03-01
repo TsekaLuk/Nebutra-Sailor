@@ -1,0 +1,140 @@
+---
+title: "Choicebox"
+description: "Card-style selection control with radio (single) and checkbox (multi) modes. Larger tap target with title, description, and optional custom content."
+---
+
+<Note>
+  Live examples and prop controls are available in [Storybook → Primitives/Choicebox](http://localhost:6006/?path=/docs/primitives-choicebox--docs).
+</Note>
+
+## Overview
+
+`ChoiceboxGroup` is a compound component providing card-style selection items. Each item has a title, description, and optional custom content that appears when selected. Supports both radio (single-select) and checkbox (multi-select) modes.
+
+## Usage
+
+```tsx
+import { ChoiceboxGroup } from "@nebutra/custom-ui/primitives";
+```
+
+## Examples
+
+### Radio Mode (Single Select)
+
+```tsx
+const [value, setValue] = useState("trial");
+
+<ChoiceboxGroup
+  direction="row"
+  label="Select a plan"
+  type="radio"
+  value={value}
+  onChange={(v) => setValue(v as string)}
+>
+  <ChoiceboxGroup.Item
+    title="Pro Trial"
+    description="Free for two weeks"
+    value="trial"
+  />
+  <ChoiceboxGroup.Item
+    title="Pro"
+    description="Get started now"
+    value="pro"
+  />
+</ChoiceboxGroup>
+```
+
+### Checkbox Mode (Multi Select)
+
+```tsx
+const [value, setValue] = useState<string[]>([]);
+
+<ChoiceboxGroup
+  direction="row"
+  label="Select plans"
+  type="checkbox"
+  value={value}
+  onChange={(v) => setValue(v as string[])}
+>
+  <ChoiceboxGroup.Item title="Pro Trial" description="Free for two weeks" value="trial" />
+  <ChoiceboxGroup.Item title="Pro" description="Get started now" value="pro" />
+</ChoiceboxGroup>
+```
+
+### Disabled
+
+```tsx
+{/* Group-level disabled */}
+<ChoiceboxGroup disabled type="radio" label="..." ...>
+  <ChoiceboxGroup.Item title="..." value="..." />
+</ChoiceboxGroup>
+
+{/* Item-level disabled */}
+<ChoiceboxGroup type="checkbox" label="..." ...>
+  <ChoiceboxGroup.Item disabled title="Pro Trial" value="trial" />
+  <ChoiceboxGroup.Item title="Pro" value="pro" />
+</ChoiceboxGroup>
+```
+
+### Custom Content
+
+Custom content renders below title/description when the item is selected.
+
+```tsx
+<ChoiceboxGroup.Item title="Pro Trial" description="Free for two weeks" value="trial">
+  <div className="flex justify-center p-2">
+    <Badge variant="blue">14 days remaining</Badge>
+  </div>
+</ChoiceboxGroup.Item>
+```
+
+### Column Layout
+
+```tsx
+<ChoiceboxGroup direction="column" type="radio" label="Choose a tier" ...>
+  <ChoiceboxGroup.Item title="Starter" description="For personal projects" value="starter" />
+  <ChoiceboxGroup.Item title="Team" description="For small teams" value="team" />
+</ChoiceboxGroup>
+```
+
+## Props
+
+### ChoiceboxGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"radio" \| "checkbox"` | — | **Required.** Selection mode |
+| `direction` | `"row" \| "column"` | `"row"` | Layout direction |
+| `label` | `string` | — | **Required.** Accessible group label |
+| `showLabel` | `boolean` | `false` | Visually display the label |
+| `value` | `string \| string[]` | — | Controlled value |
+| `defaultValue` | `string \| string[]` | — | Uncontrolled default |
+| `onChange` | `(value: string \| string[]) => void` | — | Selection callback |
+| `disabled` | `boolean` | `false` | Disable all items |
+| `className` | `string` | — | Additional CSS classes |
+
+### ChoiceboxGroup.Item
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | — | **Required.** Primary label |
+| `description` | `string` | — | Secondary text |
+| `value` | `string` | — | **Required.** Item value |
+| `disabled` | `boolean` | `false` | Disable this item |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Custom content shown when selected |
+
+## Accessibility
+
+- Radio mode: `role="radiogroup"` on group, `role="radio"` on items
+- Checkbox mode: `role="group"` on group, `role="checkbox"` on items
+- `aria-checked` reflects selection state
+- `aria-disabled` on disabled items
+- Keyboard: Arrow keys navigate radio items (roving tabindex); Tab + Space/Enter for checkbox items
+- Focus ring: 2px primary color with 2px offset
+
+## See Also
+
+- [Checkbox](/design-system/atom-components/checkbox) — Standard checkbox control
+- [CheckboxGroup](/design-system/atom-components/checkbox-group) — Multi-select checkbox group
+- [Radio](/design-system/atom-components/radio) — Standard radio control

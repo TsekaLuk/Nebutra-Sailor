@@ -11,15 +11,15 @@ version: "1"
 monitors:
   # Critical - Public facing
   - name: Landing Page
-    url: ${LANDING_PAGE_URL}
+    url: ${LANDING_URL}
     description: Main marketing website
     periodicity: 1m
     regions:
-      - ams  # Amsterdam
-      - iad  # Virginia
-      - sfo  # San Francisco
-      - hkg  # Hong Kong
-      - syd  # Sydney
+      - ams # Amsterdam
+      - iad # Virginia
+      - sfo # San Francisco
+      - hkg # Hong Kong
+      - syd # Sydney
     assertions:
       status: 200
       latency: 3000
@@ -28,7 +28,7 @@ monitors:
       - critical
 
   - name: Web App
-    url: ${WEB_APP_URL}
+    url: ${WEB_URL}
     description: Main SaaS dashboard
     periodicity: 1m
     regions:
@@ -46,7 +46,7 @@ monitors:
 
   # Critical - API
   - name: API Gateway
-    url: ${API_GATEWAY_URL}/misc/health
+    url: ${API_GATEWAY_URL}/api/misc/health
     description: BFF API health endpoint
     periodicity: 1m
     regions:
@@ -61,13 +61,13 @@ monitors:
       body:
         jsonPath:
           path: $.status
-          value: healthy
+          value: ok
     tags:
       - api
       - critical
 
   - name: API Gateway - Deep Health
-    url: ${API_GATEWAY_URL}/health
+    url: ${API_GATEWAY_URL}/api/system/status
     description: Full health check with dependencies
     periodicity: 5m
     regions:
@@ -147,7 +147,7 @@ monitors:
 
   # Infrastructure
   - name: Database
-    url: ${API_GATEWAY_URL}/system/status
+    url: ${API_GATEWAY_URL}/api/system/status
     description: PostgreSQL connectivity
     periodicity: 1m
     regions:
@@ -156,14 +156,14 @@ monitors:
       status: 200
       body:
         jsonPath:
-          path: $.checks.database.status
-          value: pass
+          path: $.database
+          value: connected
     tags:
       - infrastructure
       - database
 
   - name: Redis Cache
-    url: ${API_GATEWAY_URL}/system/status
+    url: ${API_GATEWAY_URL}/api/system/status
     description: Redis/Upstash connectivity
     periodicity: 1m
     regions:
@@ -172,8 +172,8 @@ monitors:
       status: 200
       body:
         jsonPath:
-          path: $.checks.redis.status
-          value: pass
+          path: $.redis
+          value: connected
     tags:
       - infrastructure
       - cache
@@ -206,7 +206,7 @@ notifications:
     provider: slack
     data:
       url: ${SLACK_WEBHOOK_URL}
-    
+
   - name: Email Alerts
     provider: email
     data:

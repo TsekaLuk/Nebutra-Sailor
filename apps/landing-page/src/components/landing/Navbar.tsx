@@ -47,7 +47,7 @@ export function Navbar() {
       className={cn(
         "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-black/80 backdrop-blur-md border-b border-white/[0.06]"
+          ? "bg-black/80 backdrop-blur-md border-b border-white/6"
           : "bg-transparent",
       )}
     >
@@ -107,7 +107,7 @@ export function Navbar() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="border-t border-white/[0.06] bg-black/95 backdrop-blur-md md:hidden"
+          className="border-t border-white/6 bg-black/95 backdrop-blur-md md:hidden"
         >
           <div className="flex flex-col gap-4 px-6 py-4">
             {navLinks.map((link) => (
@@ -122,11 +122,11 @@ export function Navbar() {
               </a>
             ))}
 
-            <div className="flex flex-col gap-3 mt-2 pt-4 border-t border-white/[0.06]">
+            <div className="flex flex-col gap-3 mt-2 pt-4 border-t border-white/6">
               <a
                 href={`${APP_URL}/sign-in`}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full rounded-lg border border-white/[0.1] px-4 py-3 text-center text-sm font-medium text-white/70 transition-all hover:border-white/20 hover:text-white"
+                className="w-full rounded-lg border border-white/10 px-4 py-3 text-center text-sm font-medium text-white/70 transition-all hover:border-white/20 hover:text-white"
               >
                 {t("signIn")}
               </a>

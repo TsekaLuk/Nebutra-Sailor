@@ -4,7 +4,10 @@ import React from "react";
 import {
   Calendar as HeroUICalendar,
   CalendarProps as HeroUICalendarProps,
+  RangeCalendar as HeroUIRangeCalendar,
+  type RangeCalendarProps as HeroUIRangeCalendarProps,
 } from "@heroui/calendar";
+export type { RangeValue } from "@heroui/calendar";
 
 // =============================================================================
 // Re-export internationalized date utilities
@@ -161,6 +164,31 @@ export type CalendarProps = HeroUICalendarProps;
  */
 export const Calendar: React.FC<CalendarProps> = (props) => {
   return <HeroUICalendar {...props} />;
+};
+
+// =============================================================================
+// RangeCalendar
+// =============================================================================
+
+/**
+ * Props for RangeCalendar component
+ */
+export type RangeCalendarProps = HeroUIRangeCalendarProps;
+
+/**
+ * RangeCalendar - Date range selection on an inline calendar grid
+ *
+ * @example
+ * ```tsx
+ * import { RangeCalendar, today, getLocalTimeZone } from "@nebutra/custom-ui";
+ * import type { RangeValue, DateValue } from "@nebutra/custom-ui";
+ *
+ * const [range, setRange] = useState<RangeValue<DateValue>>();
+ * <RangeCalendar value={range} onChange={setRange} />
+ * ```
+ */
+export const RangeCalendar: React.FC<RangeCalendarProps> = (props) => {
+  return <HeroUIRangeCalendar {...props} />;
 };
 
 export default Calendar;

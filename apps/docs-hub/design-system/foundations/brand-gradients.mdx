@@ -161,15 +161,15 @@ For lightweight grain without a component dependency, use an inline SVG filter:
 
 ## Mesh Gradient
 
-### MeshGradientBackground
+### MeshGradientBg
 
 A WebGL-powered multi-point gradient that creates organic, flowing color fields. Use for immersive hero sections and feature landing pages.
 
 ```tsx
-import { MeshGradientBackground } from "@nebutra/custom-ui"
+import { MeshGradientBg } from "@nebutra/custom-ui"
 
 <section className="relative min-h-screen">
-  <MeshGradientBackground
+  <MeshGradientBg
     colors={["#0033FE", "#0BF1C3", "#002ad4", "#1af7c8"]}
     speed={0.003}
     className="absolute inset-0"
@@ -190,15 +190,15 @@ import { MeshGradientBackground } from "@nebutra/custom-ui"
 
 ## Neural Noise
 
-### NeuroNoiseBackground
+### NeuroNoiseBg
 
 A WebGL shader that generates brain-like organic noise patterns. Use for AI/ML-themed sections and deep-tech feature pages.
 
 ```tsx
-import { NeuroNoiseBackground } from "@nebutra/custom-ui"
+import { NeuroNoiseBg } from "@nebutra/custom-ui"
 
 <section className="relative h-[500px]">
-  <NeuroNoiseBackground
+  <NeuroNoiseBg
     scale={1.5}
     speed={0.002}
     colorA="#0033FE"
@@ -222,15 +222,15 @@ import { NeuroNoiseBackground } from "@nebutra/custom-ui"
 
 ## Waves
 
-### WavesBackground
+### WavesBg
 
 A WebGL shader that renders animated wave patterns. Use for data-flow and streaming metaphors.
 
 ```tsx
-import { WavesBackground } from "@nebutra/custom-ui"
+import { WavesBg } from "@nebutra/custom-ui"
 
 <section className="relative h-[400px]">
-  <WavesBackground
+  <WavesBg
     amplitude={30}
     frequency={0.02}
     speed={0.01}
@@ -311,7 +311,7 @@ import { DitheringBackground } from "@nebutra/custom-ui"
 
   {/* WebGL enhancement — lazy-loaded */}
   <Suspense fallback={null}>
-    <MeshGradientBackground className="absolute inset-0" />
+    <MeshGradientBg className="absolute inset-0" />
   </Suspense>
 </section>
 ```
@@ -328,7 +328,7 @@ function HeroBackground() {
     return <div className="bg-[var(--gradient-brand)]" />
   }
 
-  return <MeshGradientBackground />
+  return <MeshGradientBg />
 }
 ```
 

@@ -1,0 +1,25 @@
+name: nebutra_clickhouse
+version: 1.0.0
+config-version: 2
+
+profile: nebutra_clickhouse
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+
+target-path: target
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  nebutra_clickhouse:
+    +materialized: table
+    bronze:
+      +schema: bronze
+    silver:
+      +schema: silver
+    gold:
+      +schema: gold

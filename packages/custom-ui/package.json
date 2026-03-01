@@ -66,6 +66,7 @@
     "@heroui/card": "^2.2.25",
     "@heroui/checkbox": "^2.3.27",
     "@heroui/date-input": "^2.3.27",
+    "@heroui/date-picker": "^2.3.32",
     "@heroui/popover": "^2.3.18",
     "@heroui/progress": "^2.2.22",
     "@heroui/select": "^2.4.16",

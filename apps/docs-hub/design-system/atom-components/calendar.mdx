@@ -1,91 +1,139 @@
 ---
 title: "Calendar"
-description: "Date selection component built on React Day Picker with full keyboard navigation."
+description: "International date selection component with full keyboard navigation, date constraints, and range support."
 ---
 
-## Demo
+<Note>
+  Live examples and prop controls are available in [Storybook → Primitives/Calendar](http://localhost:6006/?path=/docs/primitives-calendar--docs).
+</Note>
 
-```tsx
-import { useState } from "react"
-import { Calendar } from "@nebutra/custom-ui/primitives"
+## Overview
 
-export function CalendarDemo() {
-  const [date, setDate] = useState<Date | undefined>(new Date())
-
-  return (
-    <Calendar
-      mode="single"
-      selected={date}
-      onSelect={setDate}
-      className="rounded-md border"
-    />
-  )
-}
-```
+`Calendar` and `RangeCalendar` are inline calendar grid components powered by HeroUI and `@internationalized/date`. They support 13 international calendar systems, date constraints, and full keyboard/ARIA accessibility.
 
 ## Usage
 
 ```tsx
-import { Calendar } from "@nebutra/custom-ui/primitives"
+import { Calendar, RangeCalendar, today, getLocalTimeZone } from "@nebutra/custom-ui/primitives";
+```
+
+## Examples
+
+### Basic
+
+```tsx
+<Calendar />
+```
+
+### Controlled
+
+```tsx
+import { today, getLocalTimeZone } from "@nebutra/custom-ui/primitives";
+
+const [date, setDate] = useState(today(getLocalTimeZone()));
+
+<Calendar value={date} onChange={setDate} />
+```
+
+### Month & Year Pickers
+
+```tsx
+<Calendar showMonthAndYearPickers />
+```
+
+### Multiple Months
+
+```tsx
+<Calendar visibleMonths={2} />
+```
+
+### Min/Max Constraints
+
+```tsx
+const tz = getLocalTimeZone();
+
+<Calendar
+  minValue={today(tz).subtract({ months: 1 })}
+  maxValue={today(tz).add({ months: 1 })}
+/>
+```
+
+### Weekends Unavailable
+
+```tsx
+import { isWeekend } from "@nebutra/custom-ui/primitives";
+
+<Calendar isDateUnavailable={(date) => isWeekend(date, "en-US")} />
+```
+
+## RangeCalendar
+
+For selecting a date range on an inline calendar grid.
+
+```tsx
+import type { RangeValue, DateValue } from "@nebutra/custom-ui/primitives";
+
+const [range, setRange] = useState<RangeValue<DateValue>>();
+
+<RangeCalendar value={range} onChange={setRange} />
+```
+
+### Range — Two Months
+
+```tsx
+<RangeCalendar visibleMonths={2} />
 ```
 
 ## Props
 
-`Calendar` extends `React Day Picker` (`DayPicker`) props.
+### Calendar
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `mode` | `"single" \| "multiple" \| "range"` | `"single"` | Selection mode |
-| `selected` | `Date \| Date[] \| DateRange` | — | Controlled selected date(s) |
-| `onSelect` | `(date: Date \| undefined) => void` | — | Callback when a date is selected |
-| `disabled` | `Matcher \| Matcher[]` | — | Dates to disable (e.g., past dates, specific dates) |
-| `fromDate` | `Date` | — | Start of selectable date range |
-| `toDate` | `Date` | — | End of selectable date range |
-| `showOutsideDays` | `boolean` | `true` | Show days from adjacent months |
-| `className` | `string` | — | Additional CSS classes |
+| `value` | `DateValue` | — | Controlled selected date |
+| `defaultValue` | `DateValue` | — | Uncontrolled default |
+| `onChange` | `(value: DateValue) => void` | — | Selection callback |
+| `minValue` | `DateValue` | — | Earliest selectable date |
+| `maxValue` | `DateValue` | — | Latest selectable date |
+| `isDateUnavailable` | `(date: DateValue) => boolean` | — | Predicate for unavailable dates |
+| `visibleMonths` | `number` | `1` | Number of months displayed |
+| `showMonthAndYearPickers` | `boolean` | `false` | Enable month/year dropdown selectors |
+| `isDisabled` | `boolean` | `false` | Disable all interaction |
+| `isReadOnly` | `boolean` | `false` | Read-only mode |
 
-## Examples
+### RangeCalendar
 
-### Range Selection
+Same props as Calendar, except:
 
-```tsx
-import { DateRange } from "react-day-picker"
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `RangeValue<DateValue>` | — | Selected date range |
+| `onChange` | `(value: RangeValue<DateValue>) => void` | — | Range change callback |
 
-const [range, setRange] = useState<DateRange | undefined>()
+## Date Utilities
 
-<Calendar
-  mode="range"
-  selected={range}
-  onSelect={setRange}
-  numberOfMonths={2}
-/>
-```
-
-### Disabled Past Dates
+Re-exported from `@internationalized/date` for convenience:
 
 ```tsx
-<Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-  disabled={{ before: new Date() }}
-/>
-```
-
-### Multiple Selection
-
-```tsx
-<Calendar
-  mode="multiple"
-  selected={selectedDates}
-  onSelect={setSelectedDates}
-/>
+import {
+  CalendarDate, CalendarDateTime, ZonedDateTime,
+  today, getLocalTimeZone, now,
+  parseDate, parseDateTime, parseZonedDateTime,
+  isWeekend, isToday, isSameDay, isSameMonth, isSameYear,
+  startOfWeek, startOfMonth, startOfYear,
+  endOfWeek, endOfMonth, endOfYear,
+} from "@nebutra/custom-ui/primitives";
 ```
 
 ## Accessibility
 
-- Built on React Day Picker — follows WCAG date picker accessibility guidelines.
-- Full keyboard navigation: arrow keys to move between days, `Enter`/`Space` to select.
-- Month/year navigation buttons have descriptive `aria-label` attributes.
-- Selected dates have `aria-selected="true"`.
-- Disabled dates have `aria-disabled="true"`.
+- Full keyboard navigation: arrow keys between days, Page Up/Down for months
+- ARIA labels and live regions for screen readers
+- Focus management and selection announcements
+- Disabled/unavailable dates have `aria-disabled="true"`
+
+## See Also
+
+- [DatePicker](/design-system/atom-components/date-picker) — Popover-based date picker
+- [CalendarPicker](/design-system/atom-components/calendar-picker) — Geist-style picker with presets
+- [DateInput](/design-system/atom-components/date-input) — Keyboard-editable date segments
