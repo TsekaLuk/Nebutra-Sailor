@@ -9,6 +9,7 @@ import { Input } from "@nebutra/custom-ui/primitives";
 import { Label } from "@nebutra/custom-ui/primitives";
 import { Separator } from "@nebutra/custom-ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
+import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 
 type Phase = "details" | "verify";
 
@@ -24,6 +25,7 @@ export function SignUpForm() {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
 
   async function handleDetailsSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -46,14 +48,7 @@ export function SignUpForm() {
 
       setPhase("verify");
     } catch (err: unknown) {
-      const clerkError = err as {
-        errors?: Array<{ longMessage?: string; message?: string }>;
-      };
-      setError(
-        clerkError.errors?.[0]?.longMessage ||
-          clerkError.errors?.[0]?.message ||
-          "Something went wrong. Please try again.",
-      );
+      setError(extractClerkErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -76,13 +71,8 @@ export function SignUpForm() {
         router.push("/onboarding");
       }
     } catch (err: unknown) {
-      const clerkError = err as {
-        errors?: Array<{ longMessage?: string; message?: string }>;
-      };
       setError(
-        clerkError.errors?.[0]?.longMessage ||
-          clerkError.errors?.[0]?.message ||
-          "Invalid code. Please try again.",
+        extractClerkErrorMessage(err, "Invalid code. Please try again."),
       );
     } finally {
       setLoading(false);
@@ -90,15 +80,18 @@ export function SignUpForm() {
   }
 
   async function handleResendCode() {
-    if (!isLoaded || !signUp) return;
+    if (!isLoaded || !signUp || resending) return;
 
     setError("");
+    setResending(true);
     try {
       await signUp.prepareEmailAddressVerification({
         strategy: "email_code",
       });
     } catch {
       setError("Failed to resend code. Please try again.");
+    } finally {
+      setResending(false);
     }
   }
 
@@ -152,9 +145,10 @@ export function SignUpForm() {
           <button
             type="button"
             onClick={handleResendCode}
-            className="font-medium text-indigo-600 hover:text-indigo-700"
+            disabled={resending}
+            className="font-medium text-indigo-600 hover:text-indigo-700 disabled:opacity-50"
           >
-            Resend code
+            {resending ? "Resending…" : "Resend code"}
           </button>
         </p>
       </div>

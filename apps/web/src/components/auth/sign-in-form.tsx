@@ -9,6 +9,7 @@ import { Input } from "@nebutra/custom-ui/primitives";
 import { Label } from "@nebutra/custom-ui/primitives";
 import { Separator } from "@nebutra/custom-ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
+import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 
 export function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -37,14 +38,7 @@ export function SignInForm() {
         router.push("/");
       }
     } catch (err: unknown) {
-      const clerkError = err as {
-        errors?: Array<{ longMessage?: string; message?: string }>;
-      };
-      setError(
-        clerkError.errors?.[0]?.longMessage ||
-          clerkError.errors?.[0]?.message ||
-          "Something went wrong. Please try again.",
-      );
+      setError(extractClerkErrorMessage(err));
     } finally {
       setLoading(false);
     }
