@@ -1,8 +1,9 @@
+import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { routing, type Locale } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
 
 interface LangLayoutProps {
   children: React.ReactNode;
@@ -25,14 +26,9 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  if (!routing.locales.includes(lang as (typeof routing.locales)[number])) {
-    return {};
-  }
+  if (!hasLocale(routing.locales, lang)) return {};
 
-  const t = await getTranslations({
-    locale: lang as Locale,
-    namespace: "metadata",
-  });
+  const t = await getTranslations({ locale: lang, namespace: "metadata" });
 
   return {
     title: t("title"),
@@ -55,17 +51,11 @@ export default async function LangLayout({
 }: LangLayoutProps) {
   const { lang } = await params;
 
-  if (!routing.locales.includes(lang as (typeof routing.locales)[number])) {
+  if (!hasLocale(routing.locales, lang)) {
     notFound();
   }
 
-  // Load all messages for this locale — passed to NextIntlClientProvider
-  // so every "use client" component in this subtree can call useTranslations()
-  const messages = await getMessages();
+  setRequestLocale(lang);
 
-  return (
-    <NextIntlClientProvider locale={lang as Locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
-  );
+  return <NextIntlClientProvider>{children}</NextIntlClientProvider>;
 }

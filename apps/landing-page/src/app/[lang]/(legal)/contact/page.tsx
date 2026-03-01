@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { routing } from "@/i18n/routing";
+import { setRequestLocale } from "next-intl/server";
+import { routing, type Locale } from "@/i18n/routing";
 
 export const metadata: Metadata = {
   title: "Contact Us | Nebutra",
@@ -45,7 +46,13 @@ const contacts = [
   },
 ];
 
-export default async function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  setRequestLocale(lang as Locale);
   return (
     <div className="space-y-12">
       {/* Header */}

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { routing } from "@/i18n/routing";
+import { setRequestLocale } from "next-intl/server";
+import { routing, type Locale } from "@/i18n/routing";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Nebutra",
@@ -11,7 +12,13 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  setRequestLocale(lang as Locale);
   return (
     <article className="prose prose-gray dark:prose-invert max-w-none">
       <h1>Privacy Policy</h1>

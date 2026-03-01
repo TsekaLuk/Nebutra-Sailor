@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { DesignSystemProvider } from "@nebutra/design-system";
 import { Providers } from "./providers";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -48,13 +49,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
         <Providers>
           <DesignSystemProvider>
