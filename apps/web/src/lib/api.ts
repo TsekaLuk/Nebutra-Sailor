@@ -16,7 +16,7 @@ class ApiError extends Error {
   constructor(
     public status: number,
     message: string,
-    public data?: unknown
+    public data?: unknown,
   ) {
     super(message);
     this.name = "ApiError";
@@ -25,7 +25,7 @@ class ApiError extends Error {
 
 async function request<T>(
   endpoint: string,
-  options: RequestOptions = {}
+  options: RequestOptions = {},
 ): Promise<T> {
   const { method = "GET", body, headers = {}, token } = options;
 
@@ -46,7 +46,11 @@ async function request<T>(
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
-    throw new ApiError(response.status, error.message || "Request failed", error);
+    throw new ApiError(
+      response.status,
+      error.message || "Request failed",
+      error,
+    );
   }
 
   // Handle 204 No Content
@@ -58,21 +62,74 @@ async function request<T>(
 }
 
 export const api = {
-  get: <T>(endpoint: string, options?: Omit<RequestOptions, "method" | "body">) =>
-    request<T>(endpoint, { ...options, method: "GET" }),
+  get: <T>(
+    endpoint: string,
+    options?: Omit<RequestOptions, "method" | "body">,
+  ) => request<T>(endpoint, { ...options, method: "GET" }),
 
-  post: <T>(endpoint: string, body?: unknown, options?: Omit<RequestOptions, "method" | "body">) =>
-    request<T>(endpoint, { ...options, method: "POST", body }),
+  post: <T>(
+    endpoint: string,
+    body?: unknown,
+    options?: Omit<RequestOptions, "method" | "body">,
+  ) => request<T>(endpoint, { ...options, method: "POST", body }),
 
-  put: <T>(endpoint: string, body?: unknown, options?: Omit<RequestOptions, "method" | "body">) =>
-    request<T>(endpoint, { ...options, method: "PUT", body }),
+  put: <T>(
+    endpoint: string,
+    body?: unknown,
+    options?: Omit<RequestOptions, "method" | "body">,
+  ) => request<T>(endpoint, { ...options, method: "PUT", body }),
 
-  patch: <T>(endpoint: string, body?: unknown, options?: Omit<RequestOptions, "method" | "body">) =>
-    request<T>(endpoint, { ...options, method: "PATCH", body }),
+  patch: <T>(
+    endpoint: string,
+    body?: unknown,
+    options?: Omit<RequestOptions, "method" | "body">,
+  ) => request<T>(endpoint, { ...options, method: "PATCH", body }),
 
-  delete: <T>(endpoint: string, options?: Omit<RequestOptions, "method" | "body">) =>
-    request<T>(endpoint, { ...options, method: "DELETE" }),
+  delete: <T>(
+    endpoint: string,
+    options?: Omit<RequestOptions, "method" | "body">,
+  ) => request<T>(endpoint, { ...options, method: "DELETE" }),
 };
+
+/**
+ * Server-side: returns an API client with Clerk JWT auto-injected.
+ * Use in Server Components, Route Handlers, and Server Actions.
+ */
+export async function getAuthenticatedApi() {
+  const { auth } = await import("@clerk/nextjs/server");
+  const { getToken } = await auth();
+  const token = (await getToken()) ?? undefined;
+
+  return {
+    get: <T>(
+      endpoint: string,
+      options?: Omit<RequestOptions, "method" | "body">,
+    ) => api.get<T>(endpoint, { ...options, token }),
+
+    post: <T>(
+      endpoint: string,
+      body?: unknown,
+      options?: Omit<RequestOptions, "method" | "body">,
+    ) => api.post<T>(endpoint, body, { ...options, token }),
+
+    put: <T>(
+      endpoint: string,
+      body?: unknown,
+      options?: Omit<RequestOptions, "method" | "body">,
+    ) => api.put<T>(endpoint, body, { ...options, token }),
+
+    patch: <T>(
+      endpoint: string,
+      body?: unknown,
+      options?: Omit<RequestOptions, "method" | "body">,
+    ) => api.patch<T>(endpoint, body, { ...options, token }),
+
+    delete: <T>(
+      endpoint: string,
+      options?: Omit<RequestOptions, "method" | "body">,
+    ) => api.delete<T>(endpoint, { ...options, token }),
+  };
+}
 
 export { ApiError };
 export default api;
