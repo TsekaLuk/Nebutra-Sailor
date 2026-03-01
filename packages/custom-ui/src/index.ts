@@ -40,11 +40,38 @@ export { BorderTrail } from "./primitives/border-trail";
 export type { BorderTrailProps } from "./primitives/border-trail";
 export { MagicCard } from "./primitives/magic-card";
 export type { MagicCardProps } from "./primitives/magic-card";
+export {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  AvatarGroup,
+} from "./primitives/avatar";
+export type {
+  AvatarProps,
+  AvatarFallbackProps,
+  AvatarGroupProps,
+  AvatarGroupItem,
+} from "./primitives/avatar";
 export { AvatarCircles } from "./primitives/avatar-circles";
 export type {
   AvatarCirclesProps,
   AvatarCircleItem,
 } from "./primitives/avatar-circles";
+export {
+  GitHubAvatar,
+  GitLabAvatar,
+  BitbucketAvatar,
+  AvatarWithIcon,
+  DiceBearAvatar,
+} from "./primitives/avatar-extended";
+export type {
+  GitHubAvatarProps,
+  GitLabAvatarProps,
+  BitbucketAvatarProps,
+  AvatarWithIconProps,
+  DiceBearAvatarProps,
+  DiceBearStyle,
+} from "./primitives/avatar-extended";
 export { AnimatedBeam } from "./primitives/animated-beam";
 export type { AnimatedBeamProps } from "./primitives/animated-beam";
 export { BentoGrid, BentoCard } from "./primitives/bento-grid";
