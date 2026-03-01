@@ -1,14 +1,23 @@
 /**
  * @nebutra/custom-ui - CSS Variables Theme System
- * 
+ *
  * This file provides CSS custom properties for theming components.
  * Import this in your app's globals.css or layout to enable theming.
- * 
+ *
  * Compatible with shadcn/ui and 21st.dev component conventions.
- * 
+ *
  * NOTE: Do NOT add @import "tailwindcss" here - this file is imported
  * by apps that already have their own Tailwind configuration.
  */
+
+/* Geist Sans — Display typeface */
+@font-face {
+  font-family: "Geist";
+  src: url("https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ============================================
    CSS Variables - Light Theme (Default)
@@ -465,6 +474,7 @@
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
+<<<<<<< HEAD
 
   /* ===========================================
      12-Step Functional Scales → Tailwind classes
@@ -569,6 +579,18 @@
   /* Info color mapping */
   --color-info: hsl(var(--info));
   --color-info-foreground: hsl(var(--info-foreground));
+
+  /* Border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  /* Font family — Geist Sans as display, Poppins for body */
+  --font-sans: "Geist", "Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Geist", "Poppins", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 /* ============================================

@@ -59,3 +59,17 @@ export type {
   AllowedColorCombination,
   BrandGuidelines,
 } from "./guidelines";
+
+// Brand Motion Language (品牌运动语言)
+export {
+  brandMotion,
+  brandEasing,
+  brandDuration,
+  brandSpring,
+  emerge,
+  flow,
+  pulse,
+  stagger,
+  interactive,
+  viewport,
+} from "./motion";
