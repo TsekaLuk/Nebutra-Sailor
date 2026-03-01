@@ -60,8 +60,10 @@ export interface DitheringThemeConfig {
   glow: string;
 }
 
-export interface DitheringBackgroundProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "style"> {
+export interface DitheringBackgroundProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "style"
+> {
   /** Theme mode: "light" | "dark" | "system" */
   themeMode?: ThemeMode;
   /** Visual intensity 0..1 */
@@ -93,8 +95,8 @@ export interface DitheringBackgroundProps
 const DEFAULT_DARK_CONFIG: DitheringThemeConfig = {
   bg: "#000000",
   back: "#00000000",
-  frontBase: "#614B00",
-  frontMix: "#A87C00",
+  frontBase: "#001882",
+  frontMix: "#0033FE",
   mixFactor: 0.35,
   baseSpeed: 0.28,
   speedMultiplier: 0.35,
@@ -102,14 +104,14 @@ const DEFAULT_DARK_CONFIG: DitheringThemeConfig = {
   pxSizeRange: 2,
   baseScale: 1.05,
   scaleRange: 0.15,
-  glow: "radial-gradient(60% 40% at 50% 40%, rgba(255,210,90,0.10), transparent 70%)",
+  glow: "radial-gradient(60% 40% at 50% 40%, rgba(0,51,254,0.10), transparent 70%)",
 };
 
 const DEFAULT_LIGHT_CONFIG: DitheringThemeConfig = {
   bg: "#F7FAFF",
   back: "#00000000",
-  frontBase: "#3956A3",
-  frontMix: "#7FA4FF",
+  frontBase: "#0033FE",
+  frontMix: "#5c7cfa",
   mixFactor: 0.35,
   baseSpeed: 0.22,
   speedMultiplier: 0.28,
@@ -117,7 +119,7 @@ const DEFAULT_LIGHT_CONFIG: DitheringThemeConfig = {
   pxSizeRange: 2,
   baseScale: 1.03,
   scaleRange: 0.12,
-  glow: "radial-gradient(60% 40% at 50% 40%, rgba(120,165,255,0.10), transparent 70%)",
+  glow: "radial-gradient(60% 40% at 50% 40%, rgba(0,51,254,0.10), transparent 70%)",
 };
 
 /**
@@ -200,7 +202,7 @@ export function DitheringBackground({
       front: mixColors(
         baseConfig.frontBase,
         baseConfig.frontMix,
-        t * baseConfig.mixFactor
+        t * baseConfig.mixFactor,
       ),
       bg: baseConfig.bg,
       speed: baseConfig.baseSpeed + t * baseConfig.speedMultiplier,
@@ -222,11 +224,11 @@ export function DitheringBackground({
       const y = (e.clientY / h) * 2 - 1;
       root.style.setProperty(
         "--parallax-x",
-        `${(-x * parallaxStrength).toFixed(2)}px`
+        `${(-x * parallaxStrength).toFixed(2)}px`,
       );
       root.style.setProperty(
         "--parallax-y",
-        `${(-y * parallaxStrength).toFixed(2)}px`
+        `${(-y * parallaxStrength).toFixed(2)}px`,
       );
     };
     window.addEventListener("mousemove", onMove);
@@ -238,7 +240,7 @@ export function DitheringBackground({
       id="dithering-bg-parallax"
       className={cn(
         "pointer-events-none fixed inset-0 -z-10 transition-colors duration-500",
-        className
+        className,
       )}
       style={{
         backgroundColor: config.bg,

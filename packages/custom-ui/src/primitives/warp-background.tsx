@@ -89,7 +89,10 @@ interface BeamProps {
  */
 const Beam: React.FC<BeamProps> = ({ width, x, delay, duration }) => {
   // Generate random hue and aspect ratio for variety
-  const hue = useMemo(() => Math.floor(Math.random() * 360), []);
+  const hue = useMemo(() => {
+    const brandHues = [210, 218, 228, 238, 168, 175, 185];
+    return brandHues[Math.floor(Math.random() * brandHues.length)];
+  }, []);
   const aspectRatio = useMemo(() => Math.floor(Math.random() * 10) + 1, []);
 
   return (
