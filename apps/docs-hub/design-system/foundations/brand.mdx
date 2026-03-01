@@ -12,6 +12,55 @@ description: "Nebutra (云毓智能) visual identity standards — logo, color, 
 
 The Nebutra logo uses the letter **N** as its foundational form — not displayed literally, but constructed through positive and negative geometric space to create an implied hexagonal structure. The Blue→Cyan gradient fill gives it a forward-looking, technology-driven character.
 
+### Logo Components
+
+Two implementations are available. Choose based on your context:
+
+| Component | Package | How it loads | When to use |
+|-----------|---------|-------------|-------------|
+| `Logo` / `Logomark` / `Wordmark` | `@nebutra/brand` | `<img src="/brand/logo-*.svg">` | When the public folder is available (web app, Next.js app dir) |
+| `LogomarkSVG` / `WordmarkEnSVG` / `LogoEnSVG` | `@nebutra/brand` | Inline SVG paths (`fill="currentColor"`) | No public folder needed; color via Tailwind `text-*`; email, PDF, Storybook |
+
+#### File-based (img)
+
+```tsx
+import { Logo, Logomark, Wordmark } from "@nebutra/brand"
+
+// Hexagonal N icon, 32px, white on dark background
+<Logomark variant="inverse" size={32} />
+
+// Full logo with English wordmark, 150px wide, inverted to white
+<Logo variant="en" size={150} inverted />
+```
+
+#### Inline SVG (`fill="currentColor"`)
+
+```tsx
+import { LogomarkSVG, WordmarkEnSVG, LogoEnSVG } from "@nebutra/brand"
+
+// Icon only — color via CSS
+<LogomarkSVG className="text-white w-8 h-8" />
+
+// Wordmark only — "Nebutra" text
+<WordmarkEnSVG className="text-white" width={150} />
+
+// Full logo (icon + wordmark side-by-side)
+<LogoEnSVG className="text-white" width={160} />
+
+// On a dark background (Navbar example)
+<LogoEnSVG className="text-white" aria-label="Nebutra" width={140} />
+
+// Framer Motion color animation
+<motion.div>
+  <LogomarkSVG className="text-indigo-400" width={32} />
+</motion.div>
+```
+
+<Warning>
+  **Landing page is forced dark** — always use `text-white` for inline SVG logos.
+  Never conditionally swap between `text-black` and `text-white` based on theme on the landing page.
+</Warning>
+
 ### Clearance & Minimum Size
 
 - **Minimum clearance**: All sides ≥ ¼ of the logo height
