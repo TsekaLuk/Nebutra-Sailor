@@ -1,0 +1,19 @@
+{
+  "$schema": "https://lingo.dev/schema/i18n.json",
+  "version": "1.10",
+  "locale": {
+    "source": "en",
+    "targets": ["zh", "ja", "ko", "es", "fr", "de"]
+  },
+  "buckets": {
+    "json": {
+      "include": ["messages/[locale].json"]
+    }
+  },
+  "provider": {
+    "id": "ollama",
+    "model": "qwen3:4b",
+    "baseUrl": "http://localhost:11434",
+    "prompt": "You are a professional translator. Translate the provided text from {source} to {target}. Keep brand names (Nebutra, Stripe, Clerk, etc.) untranslated. Preserve any technical terms. Output only the translation, nothing else."
+  }
+}

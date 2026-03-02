@@ -6,34 +6,31 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { seoContent } from "@/lib/landing-content";
 import "./globals.css";
 
+/**
+ * Root layout metadata — locale-independent defaults only.
+ * Locale-dependent title/description/OG are handled by [lang]/layout.tsx generateMetadata.
+ */
 export const metadata: Metadata = {
-  title: seoContent.title,
-  description: seoContent.description,
   keywords: [...seoContent.keywords],
   authors: [{ name: "Nebutra" }],
   creator: "Nebutra",
   metadataBase: new URL("https://nebutra.com"),
   openGraph: {
     type: "website",
-    locale: "en_US",
     url: "https://nebutra.com",
     siteName: "Nebutra Sailor",
-    title: seoContent.title,
-    description: seoContent.description,
     images: [
       {
         url: seoContent.ogImage,
         width: 1200,
         height: 630,
-        alt: seoContent.title,
+        alt: "Nebutra Sailor",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: seoContent.twitterHandle,
-    title: seoContent.title,
-    description: seoContent.description,
     images: [seoContent.ogImage],
   },
   robots: {

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
 interface LegalLayoutProps {
@@ -23,20 +23,20 @@ export default async function LegalLayout({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link
-              href={`/${lang}`}
+              href="/"
               className="text-xl font-bold text-gray-900 dark:text-white"
             >
               Nebutra
             </Link>
             <nav className="flex items-center space-x-6">
               <Link
-                href={`/${lang}`}
+                href="/"
                 className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
                 {t("nav.home")}
               </Link>
               <Link
-                href={`/${lang}/contact`}
+                href="/contact"
                 className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
                 {t("nav.contact")}
@@ -57,25 +57,25 @@ export default async function LegalLayout({
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
               <Link
-                href={`/${lang}/privacy`}
+                href="/privacy"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
                 {t("footer.privacy")}
               </Link>
               <Link
-                href={`/${lang}/terms`}
+                href="/terms"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
                 {t("footer.terms")}
               </Link>
               <Link
-                href={`/${lang}/cookies`}
+                href="/cookies"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
                 {t("footer.cookies")}
               </Link>
               <Link
-                href={`/${lang}/refund`}
+                href="/refund"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
                 {t("footer.refund")}

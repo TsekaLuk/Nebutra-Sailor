@@ -1,12 +1,22 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { hasLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "Refund Policy | Nebutra",
-  description: "Our refund and cancellation policies for Nebutra services.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(routing.locales, lang)) return {};
+  const t = await getTranslations({ locale: lang, namespace: "legalPages" });
+  return {
+    title: t("refund.title"),
+    description: t("refund.description"),
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
@@ -19,14 +29,16 @@ export default async function RefundPolicyPage({
 }) {
   const { lang } = await params;
   setRequestLocale(lang as Locale);
+  const t = await getTranslations("legalPages");
+
   return (
     <article className="prose prose-gray dark:prose-invert max-w-none">
-      <h1>Refund Policy</h1>
+      <h1>{t("refund.heading")}</h1>
 
       <p className="lead">
-        <strong>Effective Date:</strong> January 1, 2025
+        <strong>{t("refund.effectiveDate")}:</strong> January 1, 2025
         <br />
-        <strong>Last Updated:</strong> January 1, 2025
+        <strong>{t("refund.lastUpdated")}:</strong> January 1, 2025
       </p>
 
       <p>

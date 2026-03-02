@@ -1,50 +1,26 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { hasLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Nebutra",
-  description:
-    "Get in touch with Nebutra for sales, support, or general inquiries.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(routing.locales, lang)) return {};
+  const t = await getTranslations({ locale: lang, namespace: "legalPages" });
+  return {
+    title: t("contact.title"),
+    description: t("contact.description"),
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
-
-const contacts = [
-  {
-    title: "General Inquiries",
-    email: "hello@nebutra.com",
-    description: "For general questions about Nebutra",
-  },
-  {
-    title: "Sales",
-    email: "sales@nebutra.com",
-    description: "Talk to our sales team about enterprise solutions",
-  },
-  {
-    title: "Support",
-    email: "support@nebutra.com",
-    description: "Get help with your account or technical issues",
-  },
-  {
-    title: "Legal",
-    email: "legal@nebutra.com",
-    description: "Legal inquiries and compliance questions",
-  },
-  {
-    title: "Privacy",
-    email: "privacy@nebutra.com",
-    description: "Data privacy and GDPR requests",
-  },
-  {
-    title: "Security",
-    email: "security@nebutra.com",
-    description: "Report security vulnerabilities",
-  },
-];
 
 export default async function ContactPage({
   params,
@@ -53,15 +29,50 @@ export default async function ContactPage({
 }) {
   const { lang } = await params;
   setRequestLocale(lang as Locale);
+  const t = await getTranslations("legalPages");
+
+  const contacts = [
+    {
+      title: t("contact.contacts.general.title"),
+      email: "hello@nebutra.com",
+      description: t("contact.contacts.general.description"),
+    },
+    {
+      title: t("contact.contacts.sales.title"),
+      email: "sales@nebutra.com",
+      description: t("contact.contacts.sales.description"),
+    },
+    {
+      title: t("contact.contacts.support.title"),
+      email: "support@nebutra.com",
+      description: t("contact.contacts.support.description"),
+    },
+    {
+      title: t("contact.contacts.legal.title"),
+      email: "legal@nebutra.com",
+      description: t("contact.contacts.legal.description"),
+    },
+    {
+      title: t("contact.contacts.privacy.title"),
+      email: "privacy@nebutra.com",
+      description: t("contact.contacts.privacy.description"),
+    },
+    {
+      title: t("contact.contacts.security.title"),
+      email: "security@nebutra.com",
+      description: t("contact.contacts.security.description"),
+    },
+  ];
+
   return (
     <div className="space-y-12">
       {/* Header */}
       <section className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Contact Us
+          {t("contact.heading")}
         </h1>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-          We would love to hear from you. Choose the best way to reach us.
+          {t("contact.subheading")}
         </p>
       </section>
 
@@ -91,7 +102,7 @@ export default async function ContactPage({
       {/* Contact Form */}
       <section className="rounded-2xl border border-gray-200 dark:border-gray-700 p-8">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          Send us a message
+          {t("contact.formTitle")}
         </h2>
         <form className="space-y-6">
           <div className="grid gap-6 sm:grid-cols-2">
@@ -100,7 +111,7 @@ export default async function ContactPage({
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Name *
+                {t("contact.form.name")} *
               </label>
               <input
                 type="text"
@@ -115,7 +126,7 @@ export default async function ContactPage({
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Email *
+                {t("contact.form.email")} *
               </label>
               <input
                 type="email"
@@ -132,7 +143,7 @@ export default async function ContactPage({
                 htmlFor="company"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Company
+                {t("contact.form.company")}
               </label>
               <input
                 type="text"
@@ -146,7 +157,7 @@ export default async function ContactPage({
                 htmlFor="category"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Category *
+                {t("contact.form.category")} *
               </label>
               <select
                 id="category"
@@ -154,13 +165,27 @@ export default async function ContactPage({
                 required
                 className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-blue-500"
               >
-                <option value="general">General Inquiry</option>
-                <option value="sales">Sales</option>
-                <option value="support">Support</option>
-                <option value="legal">Legal</option>
-                <option value="privacy">Privacy</option>
-                <option value="partnership">Partnership</option>
-                <option value="press">Press</option>
+                <option value="general">
+                  {t("contact.form.categories.general")}
+                </option>
+                <option value="sales">
+                  {t("contact.form.categories.sales")}
+                </option>
+                <option value="support">
+                  {t("contact.form.categories.support")}
+                </option>
+                <option value="legal">
+                  {t("contact.form.categories.legal")}
+                </option>
+                <option value="privacy">
+                  {t("contact.form.categories.privacy")}
+                </option>
+                <option value="partnership">
+                  {t("contact.form.categories.partnership")}
+                </option>
+                <option value="press">
+                  {t("contact.form.categories.press")}
+                </option>
               </select>
             </div>
           </div>
@@ -169,7 +194,7 @@ export default async function ContactPage({
               htmlFor="subject"
               className="block text-sm font-medium text-gray-700 dark:text-gray-300"
             >
-              Subject *
+              {t("contact.form.subject")} *
             </label>
             <input
               type="text"
@@ -184,7 +209,7 @@ export default async function ContactPage({
               htmlFor="message"
               className="block text-sm font-medium text-gray-700 dark:text-gray-300"
             >
-              Message *
+              {t("contact.form.message")} *
             </label>
             <textarea
               id="message"
@@ -199,13 +224,13 @@ export default async function ContactPage({
               type="submit"
               className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
-              Send Message
+              {t("contact.form.submit")}
             </button>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            By submitting this form, you agree to our{" "}
+            {t("contact.form.privacyNotice")}{" "}
             <Link href="/privacy" className="text-blue-600 hover:underline">
-              Privacy Policy
+              {t("contact.form.privacyLink")}
             </Link>
             .
           </p>
@@ -215,7 +240,7 @@ export default async function ContactPage({
       {/* Office Info */}
       <section className="rounded-2xl bg-gray-50 dark:bg-gray-800 p-8">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-          Company Information
+          {t("contact.companyInfoTitle")}
         </h2>
         <div className="space-y-4 text-gray-600 dark:text-gray-400">
           <div>
@@ -227,7 +252,7 @@ export default async function ContactPage({
           </div>
           <div>
             <h3 className="font-semibold text-gray-900 dark:text-white">
-              Social Media
+              {t("contact.socialMedia")}
             </h3>
             <div className="flex gap-4 mt-2">
               <a
