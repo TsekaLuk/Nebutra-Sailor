@@ -41,78 +41,58 @@ checksums:
     legal/footer/cookies: 3729dde157adf062b3f07301ae3cd596
     legal/footer/refund: 74aa4e6958ec93a15d82c0229b986b3e
     legal/footer/copyright: a8f041b20850a37fb5b915bfc6aac77e
-    legalPages/about/title: ab06a3818fd9793601b287fbfbddd110
-    legalPages/about/description: 8b96b15f4455b675c53d7c063b8ae0aa
+    legalPages/about/title: ac754632fa6e4eda8928ef5bb5058d6e
+    legalPages/about/description: fd927ecdf7e4835262fd3bb7859f6206
     legalPages/about/heading: e9ee6c390328bc2b1d7d598f355eaf66
-    legalPages/about/subheading: 010c83fa8947901608af7f2f1dbe10ab
+    legalPages/about/subheading: 8261ba356cc8563b1da9f9f42346bbaf
     legalPages/about/missionTitle: 62ac4697c5d5225b326286cff919fe14
-    legalPages/about/missionP1: 074c15808920d5f04d272136d29c2706
-    legalPages/about/missionP2: 802c4b88e1284faafaa51351eb30a4bd
+    legalPages/about/missionP1: 5a3239024d0fe213f0596c2e48fb96eb
+    legalPages/about/missionP2: 6aae03c8978f7ec63db06587018a9d21
     legalPages/about/valuesTitle: 0ff017e4ce78b33c66f4c90a6306dee3
-    legalPages/about/values/0/title: 2c230dbf6d3915cb2af1d215b087502d
-    legalPages/about/values/0/description: 50985bcc43b5d7516a8f9228db792e48
-    legalPages/about/values/1/title: 917825c0de567dc45182ff968993efbf
-    legalPages/about/values/1/description: 63d45ba04f4501a7bc7045f6ec4b9f6c
-    legalPages/about/values/2/title: 2b0c99a5f57e1d16cf0a998f9bb116c4
-    legalPages/about/values/2/description: d2c140a2d41d4a55400fde13d200918c
-    legalPages/about/values/3/title: 60da3f51ac3701d57b1aef3aa7a7db57
-    legalPages/about/values/3/description: e3d8d906b01ad2143d51e50a0fef43af
-    legalPages/about/values/4/title: c92fd68120aa24e66363d9033403664a
-    legalPages/about/values/4/description: e2ccb4809bee6c47b07256f7430c5299
-    legalPages/about/values/5/title: f6f972c88334d40117b9b38b28eb9473
-    legalPages/about/values/5/description: 6c3f3efcb6c008c39e36220812840ba4
+    legalPages/about/values/0/title: 4b3345c597375f3f3e1b8d1878606247
+    legalPages/about/values/0/description: 3a9a8c3bd2704b08c2e2132125d25e8b
+    legalPages/about/values/1/title: e7b6f6bd7a4098346aa9f4aee868fe37
+    legalPages/about/values/1/description: f167bfb8bd20276929154bac87fc1ba1
+    legalPages/about/values/2/title: 086db3cfb20c65055c0c514afc786943
+    legalPages/about/values/2/description: fc7f02aad54ff687aabc818315933749
+    legalPages/about/values/3/title: c4083f1f5e38844c9acf0a71fefed1bf
+    legalPages/about/values/3/description: 2f79d9952aeab2798c87ca6905ef12b7
+    legalPages/about/values/4/title: 02711c519c298608cd0be3b1995f3e7d
+    legalPages/about/values/4/description: 1d139714ad92f65877a2d6608d43e896
+    legalPages/about/values/5/title: cc63239884b8465334793ff299f53fdd
+    legalPages/about/values/5/description: 1be4e1d2d505ec7cc5ff76c82da82138
     legalPages/about/companyInfoTitle: 1e6f40ee99785e1748f2261b7e58c8d2
     legalPages/about/companyInfo/legalName: 5318d872898d0e46eba0d11ba8e5a4a3
     legalPages/about/companyInfo/founded: 76e72d5b41ec02860335c83472891e26
     legalPages/about/companyInfo/headquarters: ead1e2374f4e59c93180fdca43b5b1d3
     legalPages/about/companyInfo/jurisdiction: 228117c85b4b668acc77c4fd65e2e78d
     legalPages/about/ctaHeading: 54cd972e9f5f7e25586efcb5fad8d93f
-    legalPages/about/ctaDescription: d093f0c0a6b2a3da932d82ca553c0a56
+    legalPages/about/ctaDescription: 022d570b16139743cf19c2c3511edd53
     legalPages/about/ctaButton: 2a75337dc9603915c4ec1d1905afb7b9
-    legalPages/privacy/title: 53c56298ecdf5882252dbbb1aaed4757
-    legalPages/privacy/description: 6fa449c806b579db4653338655cee04b
-    legalPages/privacy/heading: 7459744a63ef8af4e517a09024bd7c08
-    legalPages/privacy/effectiveDate: aab6741517742a24eb46f529ebb94bf6
-    legalPages/privacy/lastUpdated: 956353f0af47fe60f0f45ec25d129a01
-    legalPages/terms/title: 50afacbbb3dc105ba0517d7148cae2cf
-    legalPages/terms/description: 5815221ca66cb3b14bbbd0e1d3a5783b
-    legalPages/terms/heading: 5add91f519e39025708e54a7eb7a9fc5
-    legalPages/terms/effectiveDate: aab6741517742a24eb46f529ebb94bf6
-    legalPages/terms/lastUpdated: 956353f0af47fe60f0f45ec25d129a01
-    legalPages/cookies/title: 4a38ef7f8017fdd4398d1129ee733aad
-    legalPages/cookies/description: 4c1108b6a28685fc531dd717242ec53d
-    legalPages/cookies/heading: 3729dde157adf062b3f07301ae3cd596
-    legalPages/cookies/effectiveDate: aab6741517742a24eb46f529ebb94bf6
-    legalPages/cookies/lastUpdated: 956353f0af47fe60f0f45ec25d129a01
-    legalPages/refund/title: d0946761377f25fc031f2492190ad82c
-    legalPages/refund/description: 05b1054e5c456bb522b013bcc7956227
-    legalPages/refund/heading: 74aa4e6958ec93a15d82c0229b986b3e
-    legalPages/refund/effectiveDate: aab6741517742a24eb46f529ebb94bf6
-    legalPages/refund/lastUpdated: 956353f0af47fe60f0f45ec25d129a01
-    legalPages/contact/title: 633ada75ce4e193ecb87e202aaaeeb70
-    legalPages/contact/description: d81ee1e59103456a60847a145af4cea2
+    legalPages/contact/title: 2679cc580d8a93fb5f7529a2a8831201
+    legalPages/contact/description: 05ff5837fa9819f92f16755a3f480d82
     legalPages/contact/heading: 2a75337dc9603915c4ec1d1905afb7b9
-    legalPages/contact/subheading: 4dda84e9a5339dced659c5c261e38cd6
+    legalPages/contact/subheading: 5c0fc2465a6d7aa2d92159b26a748616
     legalPages/contact/contacts/general/title: b5d8e0ba00b93d34b260a3239a08a75c
-    legalPages/contact/contacts/general/description: 2f56f7ed754ca65c7cb56aa9aa67c6a8
+    legalPages/contact/contacts/general/description: e42b199d6dc00202f3b30d904913561e
     legalPages/contact/contacts/sales/title: 38758eb50094cd8190a71fe67be4d647
-    legalPages/contact/contacts/sales/description: 6cc2dd5e9332cef7a2e743fb18d24cc9
-    legalPages/contact/contacts/support/title: 55aab5fd0f31a9cb055a2edeeedfaf63
-    legalPages/contact/contacts/support/description: 2fbbbed0705f10d474eb2b484c899b9a
+    legalPages/contact/contacts/sales/description: eb09b4999e235d7dba64a640f337dc94
+    legalPages/contact/contacts/support/title: 3547dd2e544ad65db2a623e3e45a072c
+    legalPages/contact/contacts/support/description: e5b82adb075d450bdd0eeb93b0f56872
     legalPages/contact/contacts/legal/title: 00d3f08da61a21887009819cf93fb414
-    legalPages/contact/contacts/legal/description: d0ba832ca2e86c7896c8453cd805200f
+    legalPages/contact/contacts/legal/description: 1f74e4e798f45e13bdf7759222ce9f69
     legalPages/contact/contacts/privacy/title: 6007d5d5f6591c027b15bd49ab7a8c47
-    legalPages/contact/contacts/privacy/description: e7072658857e6bd97f6e70dfd178fe5f
+    legalPages/contact/contacts/privacy/description: 42c8ec67992f62213f554f6026e27f4e
     legalPages/contact/contacts/security/title: 4b34923fef858a2b9a4a914c3e822889
-    legalPages/contact/contacts/security/description: 56978d6ea8a97728e41ec17fa89d1155
-    legalPages/contact/formTitle: 08db83c7ec2609879aa2073a48b43bf6
+    legalPages/contact/contacts/security/description: d9a14725446f9ea23580e9507c0c4c28
+    legalPages/contact/formTitle: 614be172fbfad5cdb5c599be5f9ee8a7
     legalPages/contact/form/name: 9368b5a047572b6051f334af5aa76819
     legalPages/contact/form/email: e7f34943a0c2fb849db1839ff6ef5cb5
     legalPages/contact/form/company: 9e36d11fa82d1bd4563eef2abc4fcfba
     legalPages/contact/form/category: 1b0340cd175aa5a2be745a0d54908466
     legalPages/contact/form/categories/general: d3ce5b003ea5a109affd6597620763e8
     legalPages/contact/form/categories/sales: 38758eb50094cd8190a71fe67be4d647
-    legalPages/contact/form/categories/support: 55aab5fd0f31a9cb055a2edeeedfaf63
+    legalPages/contact/form/categories/support: 3547dd2e544ad65db2a623e3e45a072c
     legalPages/contact/form/categories/legal: 00d3f08da61a21887009819cf93fb414
     legalPages/contact/form/categories/privacy: 6007d5d5f6591c027b15bd49ab7a8c47
     legalPages/contact/form/categories/partnership: 1c424a9c1045c388d1d5560b41ea27d3
@@ -124,56 +104,76 @@ checksums:
     legalPages/contact/form/privacyLink: 7459744a63ef8af4e517a09024bd7c08
     legalPages/contact/companyInfoTitle: 1e6f40ee99785e1748f2261b7e58c8d2
     legalPages/contact/socialMedia: 2227508afb0d38a027e323207e47d4a2
-    legalPages/faq/title: 2e57c570761aed7b9130024d2dc9c1ed
-    legalPages/faq/description: 098aeda1047875b8ab6b86881d08e8e5
+    legalPages/cookies/title: cbc75dfcd533de8c8e05fbeed1c319c8
+    legalPages/cookies/description: 62a27ce6386b9b9815f09e50dc4e6f78
+    legalPages/cookies/heading: 3729dde157adf062b3f07301ae3cd596
+    legalPages/cookies/effectiveDate: aab6741517742a24eb46f529ebb94bf6
+    legalPages/cookies/lastUpdated: 956353f0af47fe60f0f45ec25d129a01
+    legalPages/faq/title: 339aafc8f1348d39436cbc72dee0a691
+    legalPages/faq/description: cc878bd3fbec233bdcd64d53f40cbe68
     legalPages/faq/heading: 212c5c784d5580b2f8b9481cb102cb4c
-    legalPages/faq/subheading: b524e3cf02c10c3db6d945167bd6f2f0
-    legalPages/faq/categories/0/name: b891e8f15579fc5d97bcaf3637f5ae59
-    legalPages/faq/categories/0/questions/__lingodotdev__obj__0/q: 13415a5a8b5f3f14f8bd353bf9acf9d6
-    legalPages/faq/categories/0/questions/__lingodotdev__obj__0/a: bd8692f3d4fc1b74b716ad5e76e3152d
-    legalPages/faq/categories/0/questions/__lingodotdev__obj__1/q: 097b473a32dfc82ef419e8ade75e30d8
-    legalPages/faq/categories/0/questions/__lingodotdev__obj__1/a: b6c5d09bbdb6f392dc2f7dc57b2a5232
-    legalPages/faq/categories/0/questions/__lingodotdev__obj__2/q: 79ab82a31e36c6f405a5d0c6e24f4e92
-    legalPages/faq/categories/0/questions/__lingodotdev__obj__2/a: 52871c1b6b73bc4a71a4ac813ea985eb
+    legalPages/faq/subheading: b7b3dc62072485315c067c414614c385
+    legalPages/faq/categories/0/name: fbd403146395526d68ac68d142a50e21
+    legalPages/faq/categories/0/questions/__lingodotdev__obj__0/q: c3ebcf9f19e1e1d0c74f6ef15e6af90d
+    legalPages/faq/categories/0/questions/__lingodotdev__obj__0/a: 1f398172d0a5bad02e23c432a5afe901
+    legalPages/faq/categories/0/questions/__lingodotdev__obj__1/q: 1ebf6ff72695e3e42bed95b14e389ec3
+    legalPages/faq/categories/0/questions/__lingodotdev__obj__1/a: 46ac3a11100dff6a1b7ecf090298f45e
+    legalPages/faq/categories/0/questions/__lingodotdev__obj__2/q: 3a9831425fcdc50f0f005ed0a8220f8d
+    legalPages/faq/categories/0/questions/__lingodotdev__obj__2/a: fff9fad930b203fb5a8d46321a5c0393
     legalPages/faq/categories/1/name: fe308eda1cd4f3c352262f68e6ce67e5
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__0/q: 752c56e32b85538a63d541dcec08a084
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__0/a: 1f1e8946c8eb87034a83cf3e70e04337
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__1/q: 32a4b1b342ad3db1bb31199930d28362
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__1/a: 65d8f8ebc76bb40f50c0cc94a13a894a
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__2/q: b7f4df2ccf9f954a530b7c672faa6bac
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__2/a: 98c7955cb1ca26198f6b53baf0e9088d
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__0/q: 97f334101e9a6870f3fc9bd542b04bf5
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__0/a: 8388381b33cdd9a4ccd71c63d94e51eb
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__1/q: b3b84d8b0e816f9057873ae57b16b4a7
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__1/a: c04a86120f3956eb1c2fa0c2e38c5b3a
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__2/q: e3794064de72cc37ca25144c1d7a388e
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__2/a: b695bcce25c5ddd960f209ce68d68523
     legalPages/faq/categories/1/questions/__lingodotdev__obj__3/q: 9878d99f01523ba09f1b0639edabe0bb
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__3/a: f025e92f4c4fe2f041c3b0d018357bf5
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__4/q: b1645bcb43d3609cc297c54a61106c4b
-    legalPages/faq/categories/1/questions/__lingodotdev__obj__4/a: 78cc3b55e6b091724e1371e813469d8d
-    legalPages/faq/categories/2/name: 0a9011a34ac368072cd7e3796efe2b08
-    legalPages/faq/categories/2/questions/__lingodotdev__obj__0/q: d68d299374ee1d23e004426fc9c33ee6
-    legalPages/faq/categories/2/questions/__lingodotdev__obj__0/a: 9f6ef1d590a404ee5740a294992ea979
-    legalPages/faq/categories/2/questions/__lingodotdev__obj__1/q: 8b55d9f0532ad5cc80cc92c2cc3cc93a
-    legalPages/faq/categories/2/questions/__lingodotdev__obj__1/a: e1dd3cd6e3cdabeaee01fabafa0135de
-    legalPages/faq/categories/2/questions/__lingodotdev__obj__2/q: 754b44b5ce01eaf7a8d8dff2873473e8
-    legalPages/faq/categories/2/questions/__lingodotdev__obj__2/a: 5c8669e8807d6ad633337f69c819c520
-    legalPages/faq/categories/2/questions/__lingodotdev__obj__3/q: 9279afdaa8b19777ed4b9fc38c307f77
-    legalPages/faq/categories/2/questions/__lingodotdev__obj__3/a: d115ef060b6935c6d8f9df64d803adfa
-    legalPages/faq/categories/3/name: 4307d1c55459b087e6f8997412ea040d
-    legalPages/faq/categories/3/questions/__lingodotdev__obj__0/q: 32ffdb9449fb4fd2f0e9f6b5e8582ea6
-    legalPages/faq/categories/3/questions/__lingodotdev__obj__0/a: 061a681a9133a005c1ae63e3e11ee5a0
-    legalPages/faq/categories/3/questions/__lingodotdev__obj__1/q: 540133cbbccb5b811b6939c0af66847a
-    legalPages/faq/categories/3/questions/__lingodotdev__obj__1/a: 90407ab546624189a522e00c17e75093
-    legalPages/faq/categories/3/questions/__lingodotdev__obj__2/q: a010256f588a969b47525dbf3b031209
-    legalPages/faq/categories/3/questions/__lingodotdev__obj__2/a: b942b2702ede6b0f942f5458d71e9219
-    legalPages/faq/categories/3/questions/__lingodotdev__obj__3/q: 239aab22f848c29ce7dad7b88081d6ce
-    legalPages/faq/categories/3/questions/__lingodotdev__obj__3/a: c523ecf97c76b2b9c0db5113e6125201
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__3/a: a914744bcc34466ee8cebe8c2dd53f79
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__4/q: 32a4b1b342ad3db1bb31199930d28362
+    legalPages/faq/categories/1/questions/__lingodotdev__obj__4/a: 920505b6d15b46f7653d189f200a6775
+    legalPages/faq/categories/2/name: d38aaa1087e99a28ecdbd51aa35faf2c
+    legalPages/faq/categories/2/questions/__lingodotdev__obj__0/q: 81be6eb89810008af9eaaffe02a169c2
+    legalPages/faq/categories/2/questions/__lingodotdev__obj__0/a: 65ee46055dca89d161b0ed778904a69f
+    legalPages/faq/categories/2/questions/__lingodotdev__obj__1/q: d425787f493c1f1ae6b8c0a10e6d5a12
+    legalPages/faq/categories/2/questions/__lingodotdev__obj__1/a: f7eafad1330b18abd1097c35674f0489
+    legalPages/faq/categories/2/questions/__lingodotdev__obj__2/q: ec47f717665a43d16be5c85c67438aca
+    legalPages/faq/categories/2/questions/__lingodotdev__obj__2/a: 5e91e582caea3aae91681f669d0cfba9
+    legalPages/faq/categories/2/questions/__lingodotdev__obj__3/q: 5ffc6c02e70fbf89399e4c8be464357d
+    legalPages/faq/categories/2/questions/__lingodotdev__obj__3/a: 2fa8b797b2d7d5605bcc51a38243a03b
+    legalPages/faq/categories/3/name: dab33ff2909fb602784cebc142da6dfe
+    legalPages/faq/categories/3/questions/__lingodotdev__obj__0/q: 01b4248b1df2c16899ce1fd00a0ec977
+    legalPages/faq/categories/3/questions/__lingodotdev__obj__0/a: f0b54f288a0e1606345dd8939120479d
+    legalPages/faq/categories/3/questions/__lingodotdev__obj__1/q: 7684a045074d43b8e9e900717e0b8adc
+    legalPages/faq/categories/3/questions/__lingodotdev__obj__1/a: bfb596596166a19fc4f588d05220c644
+    legalPages/faq/categories/3/questions/__lingodotdev__obj__2/q: 3127b17d2988436cd615091897f53b20
+    legalPages/faq/categories/3/questions/__lingodotdev__obj__2/a: cc884de49b37b229b0523b68843520b1
+    legalPages/faq/categories/3/questions/__lingodotdev__obj__3/q: 98612ab966c77b23f9443332c5130ff4
+    legalPages/faq/categories/3/questions/__lingodotdev__obj__3/a: e2f10108a12d51acbf693b5dad14ecdc
     legalPages/faq/categories/4/name: 55aab5fd0f31a9cb055a2edeeedfaf63
-    legalPages/faq/categories/4/questions/__lingodotdev__obj__0/q: a4d1633d52f044bb577261e48afa629e
-    legalPages/faq/categories/4/questions/__lingodotdev__obj__0/a: d3c9d28ab2759744455be6ccb5560f90
-    legalPages/faq/categories/4/questions/__lingodotdev__obj__1/q: 64ce196cc6080d86c3b055befd034cd2
-    legalPages/faq/categories/4/questions/__lingodotdev__obj__1/a: d56f11e7f8d88d362339fe3bb14cd42b
-    legalPages/faq/categories/4/questions/__lingodotdev__obj__2/q: c509a3eb828438d289fb7caa1e50f433
-    legalPages/faq/categories/4/questions/__lingodotdev__obj__2/a: f188784ff153498a244145fa975e3777
+    legalPages/faq/categories/4/questions/__lingodotdev__obj__0/q: 4f04fa6862b29537ce0f65f1b1d3c1dc
+    legalPages/faq/categories/4/questions/__lingodotdev__obj__0/a: 3bd383057eccea148d27bd3cd16dbb64
+    legalPages/faq/categories/4/questions/__lingodotdev__obj__1/q: 357dd0523b67f58369dd8287efaa8c87
+    legalPages/faq/categories/4/questions/__lingodotdev__obj__1/a: dfa00386ca81d46087e7daf473e340b6
+    legalPages/faq/categories/4/questions/__lingodotdev__obj__2/q: 232bed3cfb0b7657b90b0d6fd28a13be
+    legalPages/faq/categories/4/questions/__lingodotdev__obj__2/a: f602e9bfa52d84c46f6adb7eed37b4f0
     legalPages/faq/ctaHeading: ee729c08d2a801e54021ce5a2dadc395
-    legalPages/faq/ctaDescription: b0b0140c02e11bfe5e205f8de4a28ae0
-    legalPages/faq/ctaButton: fcbd9e317c7286b3e08752eb73eb1a81
-    legalPages/faq/ctaEmail: c5ef2d2c55c6a65b2b31321e3b9d5b5f
+    legalPages/faq/ctaDescription: 6b2505c3a10a0d226fadc832825068d3
+    legalPages/faq/ctaButton: 2a75337dc9603915c4ec1d1905afb7b9
+    legalPages/faq/ctaEmail: 947fb7c5c665079804df41c61161e722
+    legalPages/privacy/title: 524b9ea5f8712979e97d68dcd658bfd0
+    legalPages/privacy/description: 3ee4130ffffda5f5fe4b82e4ab01f09d
+    legalPages/privacy/heading: 7459744a63ef8af4e517a09024bd7c08
+    legalPages/privacy/effectiveDate: aab6741517742a24eb46f529ebb94bf6
+    legalPages/privacy/lastUpdated: 956353f0af47fe60f0f45ec25d129a01
+    legalPages/refund/title: fd8966d274ce64d023ef58f281fe432f
+    legalPages/refund/description: 79e255ce64abd9cfe83e4fc3eb32aaba
+    legalPages/refund/heading: 74aa4e6958ec93a15d82c0229b986b3e
+    legalPages/refund/effectiveDate: aab6741517742a24eb46f529ebb94bf6
+    legalPages/refund/lastUpdated: 956353f0af47fe60f0f45ec25d129a01
+    legalPages/terms/title: e28c95c44fc8e0527985f0ee1976a9ec
+    legalPages/terms/description: 0d6bae0da044c01a11af2e39584cdd44
+    legalPages/terms/heading: 5add91f519e39025708e54a7eb7a9fc5
+    legalPages/terms/effectiveDate: aab6741517742a24eb46f529ebb94bf6
+    legalPages/terms/lastUpdated: 956353f0af47fe60f0f45ec25d129a01
     metadata/title: 8c8f91f81bd5860204d43b473af68e01
     metadata/description: 39a178b9c0263195c01ac71ebde19848

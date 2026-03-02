@@ -78,6 +78,7 @@ Extends `@radix-ui/react-accordion` `Root` props.
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | — | Trigger label content |
+| `size` | `"default" \| "small"` | `"default"` | Size variant — `small` uses compact padding and 14px text |
 | `className` | `string` | — | Additional CSS classes |
 
 ### AccordionContent
@@ -85,6 +86,7 @@ Extends `@radix-ui/react-accordion` `Root` props.
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | — | Content displayed when the item is open |
+| `size` | `"default" \| "small"` | `"default"` | Size variant — matches the trigger's size |
 | `className` | `string` | — | Additional CSS classes |
 
 ## Examples
@@ -124,6 +126,21 @@ const [value, setValue] = useState<string>("item-1")
   <AccordionItem value="item-1" disabled>
     <AccordionTrigger>Disabled Section</AccordionTrigger>
     <AccordionContent>This will not open.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Small Size
+
+A compact variant with reduced padding and smaller text, matching the Geist Collapse `size="small"` variant.
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger size="small">Compact Question</AccordionTrigger>
+    <AccordionContent size="small">
+      Compact content with reduced padding.
+    </AccordionContent>
   </AccordionItem>
 </Accordion>
 ```

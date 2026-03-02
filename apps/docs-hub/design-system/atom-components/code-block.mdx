@@ -1,6 +1,6 @@
 ---
 title: CodeBlock
-description: Multi-file tabbed code viewer with syntax highlighting, copy functionality, and auto-language detection.
+description: Multi-file tabbed code viewer with syntax highlighting, line highlighting, diff decoration, clickable line references, and language switching.
 ---
 
 <Note>
@@ -10,6 +10,8 @@ description: Multi-file tabbed code viewer with syntax highlighting, copy functi
 ## Overview
 
 `CodeBlock` renders a tabbed code viewer with full syntax highlighting powered by `react-syntax-highlighter` (Prism). It auto-detects the language from the file extension, adapts to light/dark mode, and provides copy-to-clipboard on a per-tab basis.
+
+Geist-aligned features include highlighted lines, diff-style added/removed lines, clickable line references, and a language switcher dropdown.
 
 ## Installation
 
@@ -66,6 +68,62 @@ pnpm add react-syntax-highlighter @types/react-syntax-highlighter
 />
 ```
 
+### Highlighted lines
+
+Emphasize specific lines with an accent background and left border indicator.
+
+```tsx
+<CodeBlock
+  files={[{
+    title: "counter.tsx",
+    code: counterCode,
+    highlightedLines: [3, 4, 5],
+  }]}
+  showLineNumbers
+/>
+```
+
+### Diff lines (added / removed)
+
+Show diff-style green/red decoration with `+`/`-` gutter markers.
+
+```tsx
+<CodeBlock
+  files={[{
+    title: "counter.tsx",
+    code: diffCode,
+    addedLines: [5, 9, 10],
+    removedLines: [4],
+  }]}
+  showLineNumbers
+/>
+```
+
+### Referenced lines
+
+Click a line number to copy a `#L{n}` anchor to the clipboard.
+
+```tsx
+<CodeBlock
+  files={[{ title: "app.tsx", code: appCode }]}
+  showLineNumbers
+  enableLineReferences
+  onLineReference={(line) => console.log(`Referenced line ${line}`)}
+/>
+```
+
+### Language switcher
+
+Override the auto-detected language with a dropdown in the header.
+
+```tsx
+<CodeBlock
+  files={[{ title: "example.txt", code: someCode }]}
+  showLanguageSwitcher
+  languages={["typescript", "javascript", "python", "go"]}
+/>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -75,6 +133,10 @@ pnpm add react-syntax-highlighter @types/react-syntax-highlighter
 | `className` | `string` | — | Additional CSS classes for the outer container |
 | `maxHeight` | `string \| number` | `400` | Max height of code area (number = px) |
 | `showLineNumbers` | `boolean` | `false` | Show line numbers |
+| `enableLineReferences` | `boolean` | `false` | Click line numbers to copy `#L{n}` anchor |
+| `showLanguageSwitcher` | `boolean` | `false` | Show a language dropdown in the header |
+| `languages` | `string[]` | built-in list | Languages available in the switcher |
+| `onLineReference` | `(lineNumber: number) => void` | — | Callback when a line reference is clicked |
 
 ### CodeBlockFile
 
@@ -83,6 +145,9 @@ pnpm add react-syntax-highlighter @types/react-syntax-highlighter
 | `title` | `string` | File name shown in the tab |
 | `code` | `string` | Code content to display and copy |
 | `language` | `string` | Syntax highlighting language (auto-detected from extension if omitted) |
+| `highlightedLines` | `number[]` | Line numbers to highlight with accent background (1-indexed) |
+| `addedLines` | `number[]` | Line numbers marked as added with green background (1-indexed) |
+| `removedLines` | `number[]` | Line numbers marked as removed with red background (1-indexed) |
 
 ## Auto-Detected Languages
 
@@ -110,3 +175,6 @@ Language is inferred from file extension when `language` is not provided:
 - The light theme adapts Prism's nightOwl with design-system CSS variables.
 - File icons are shown in tabs: `FileCode` for JS/TS, `FileText` for CSS, `File` for others.
 - Tab labels are hidden on mobile (`hidden sm:inline`) to save space.
+- Highlighted and diff line styles use inline `rgba()` colors that adapt to light/dark mode.
+- Diff markers (`+`/`-`) are rendered via scoped CSS `::before` pseudo-elements.
+- The language switcher resets when switching between file tabs.

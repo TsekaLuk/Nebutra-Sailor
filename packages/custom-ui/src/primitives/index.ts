@@ -18,6 +18,7 @@ export {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
+  type AccordionSize,
 } from "./accordion";
 export {
   Card,

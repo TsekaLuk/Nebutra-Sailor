@@ -17,6 +17,8 @@ const meta = {
   argTypes: {
     showLineNumbers: { control: "boolean" },
     maxHeight: { control: "text" },
+    enableLineReferences: { control: "boolean" },
+    showLanguageSwitcher: { control: "boolean" },
   },
 } satisfies Meta<typeof CodeBlock>;
 
@@ -111,6 +113,129 @@ export const JsonOnly: Story = {
       <CodeBlock
         files={[{ title: "package.json", code: jsonCode }]}
         showLineNumbers
+      />
+    </div>
+  ),
+};
+
+// =============================================================================
+// Geist-aligned features
+// =============================================================================
+
+export const HighlightedLines: Story = {
+  render: () => (
+    <div className="w-[600px]">
+      <CodeBlock
+        files={[
+          {
+            title: "counter.tsx",
+            code: tsCode,
+            highlightedLines: [3, 4, 5],
+          },
+        ]}
+        showLineNumbers
+      />
+    </div>
+  ),
+};
+
+const diffCode = `import { useState } from "react";
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+  const [step, setStep] = useState(1);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Step: {step}</p>
+      <button onClick={() => setCount(count + step)}>
+        Increment by {step}
+      </button>
+      <button onClick={() => setCount(count - 1)}>
+        Decrement
+      </button>
+    </div>
+  );
+}`;
+
+export const DiffLines: Story = {
+  render: () => (
+    <div className="w-[600px]">
+      <CodeBlock
+        files={[
+          {
+            title: "counter.tsx",
+            code: diffCode,
+            addedLines: [5, 9, 10, 11, 13, 14],
+            removedLines: [4],
+          },
+        ]}
+        showLineNumbers
+      />
+    </div>
+  ),
+};
+
+export const HighlightedWithDiff: Story = {
+  render: () => (
+    <div className="w-[600px]">
+      <CodeBlock
+        files={[
+          {
+            title: "counter.tsx",
+            code: diffCode,
+            highlightedLines: [1, 2],
+            addedLines: [5, 9],
+            removedLines: [4],
+          },
+        ]}
+        showLineNumbers
+      />
+    </div>
+  ),
+};
+
+export const ReferencedLines: Story = {
+  render: () => (
+    <div className="w-[600px]">
+      <CodeBlock
+        files={[{ title: "counter.tsx", code: tsCode }]}
+        showLineNumbers
+        enableLineReferences
+      />
+    </div>
+  ),
+};
+
+export const WithLanguageSwitcher: Story = {
+  render: () => (
+    <div className="w-[600px]">
+      <CodeBlock
+        files={[{ title: "example.txt", code: tsCode }]}
+        showLineNumbers
+        showLanguageSwitcher
+      />
+    </div>
+  ),
+};
+
+export const AllFeatures: Story = {
+  render: () => (
+    <div className="w-[600px]">
+      <CodeBlock
+        files={[
+          {
+            title: "counter.tsx",
+            code: diffCode,
+            highlightedLines: [1, 2, 3],
+            addedLines: [5, 9],
+            removedLines: [4],
+          },
+          { title: "styles.css", code: cssCode },
+        ]}
+        showLineNumbers
+        enableLineReferences
+        showLanguageSwitcher
       />
     </div>
   ),
