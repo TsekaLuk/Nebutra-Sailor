@@ -1,6 +1,6 @@
 import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
@@ -29,7 +29,6 @@ export async function generateMetadata({
   if (!hasLocale(routing.locales, lang)) return {};
 
   const t = await getTranslations({ locale: lang, namespace: "metadata" });
-
   return {
     title: t("title"),
     description: t("description"),
@@ -55,7 +54,11 @@ export default async function LangLayout({
     notFound();
   }
 
-  setRequestLocale(lang);
+  const messages = await getMessages();
 
-  return <NextIntlClientProvider>{children}</NextIntlClientProvider>;
+  return (
+    <NextIntlClientProvider locale={lang} messages={messages}>
+      {children}
+    </NextIntlClientProvider>
+  );
 }
