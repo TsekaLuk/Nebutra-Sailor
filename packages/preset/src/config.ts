@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { getPreset } from "./presets";
 
 // ─── Enum Schemas ───
 
@@ -91,4 +92,15 @@ export interface ResolvedConfig {
 
 export function defineConfig(config: Partial<NebutraConfig>): NebutraConfig {
   return NebutraConfigSchema.parse(config);
+}
+
+export function resolveConfig(config: NebutraConfig): ResolvedConfig {
+  const preset = getPreset(config.preset);
+  return {
+    apps: { ...preset.apps, ...config.apps },
+    features: { ...preset.features, ...config.features },
+    theme: config.theme,
+    locales: config.locales,
+    defaultLocale: config.defaultLocale,
+  };
 }
