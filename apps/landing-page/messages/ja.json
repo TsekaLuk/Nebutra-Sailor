@@ -53,10 +53,7 @@
     "tagline": "Built on the stack you already trust"
   },
   "legal": {
-    "nav": {
-      "home": "Home",
-      "contact": "Contact"
-    },
+    "nav": { "home": "Home", "contact": "Contact" },
     "footer": {
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",

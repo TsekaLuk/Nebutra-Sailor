@@ -53,10 +53,7 @@
     "tagline": "基于您信赖的技术栈构建"
   },
   "legal": {
-    "nav": {
-      "home": "首页",
-      "contact": "联系我们"
-    },
+    "nav": { "home": "首页", "contact": "联系我们" },
     "footer": {
       "privacy": "隐私政策",
       "terms": "服务条款",
