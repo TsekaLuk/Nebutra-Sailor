@@ -33,7 +33,20 @@
     "changelog:all": "conventional-changelog -p angular -i changelog/CHANGELOG.md -s -r 0",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
-    "e2e:ci": "playwright test --reporter=github"
+    "e2e:ci": "playwright test --reporter=github",
+    "dev:ai-saas": "turbo run dev --filter=@nebutra/web --filter=@nebutra/landing-page --filter=@nebutra/api-gateway --filter=@nebutra/studio --filter=@nebutra/admin --filter=@nebutra/docs-hub",
+    "dev:marketing": "turbo run dev --filter=@nebutra/landing-page --filter=@nebutra/blog --filter=@nebutra/studio",
+    "dev:dashboard": "turbo run dev --filter=@nebutra/web --filter=@nebutra/admin --filter=@nebutra/api-gateway",
+    "dev:overseas": "turbo run dev --filter=@nebutra/web --filter=@nebutra/landing-page --filter=@nebutra/api-gateway --filter=@nebutra/blog",
+    "dev:growth": "turbo run dev --filter=@nebutra/web --filter=@nebutra/landing-page --filter=@nebutra/blog",
+    "dev:creative": "turbo run dev --filter=@nebutra/landing-page --filter=@nebutra/blog --filter=@nebutra/storybook",
+    "dev:blog": "turbo run dev --filter=@nebutra/landing-page --filter=@nebutra/blog",
+    "dev:community": "turbo run dev --filter=@nebutra/web --filter=@nebutra/api-gateway --filter=@nebutra/blog",
+    "dev:solo": "turbo run dev --filter=@nebutra/web --filter=@nebutra/landing-page --filter=@nebutra/admin --filter=@nebutra/blog",
+    "build:ai-saas": "turbo run build --filter=@nebutra/web --filter=@nebutra/landing-page --filter=@nebutra/api-gateway --filter=@nebutra/studio --filter=@nebutra/admin --filter=@nebutra/docs-hub",
+    "build:marketing": "turbo run build --filter=@nebutra/landing-page --filter=@nebutra/blog --filter=@nebutra/studio",
+    "build:dashboard": "turbo run build --filter=@nebutra/web --filter=@nebutra/admin --filter=@nebutra/api-gateway",
+    "preset:env": "tsx packages/preset/src/cli.ts"
   },
   "keywords": [
     "saas",
