@@ -8,15 +8,15 @@ interface ProvidersProps {
 
 /**
  * Client-side providers wrapper
- * Uses data-theme attribute for CSS-only multi-theme system.
- * Default theme is "neon" (dark AI SaaS aesthetic).
+ * Uses class attribute for dark/light/system theme switching via next-themes.
+ * Default theme is "dark" with OS preference detection enabled.
  */
 export function Providers({ children }: ProvidersProps) {
   return (
     <ThemeProvider
-      attribute="data-theme"
-      defaultTheme="neon"
-      themes={["neon", "gradient", "dark-dense", "minimal", "vibrant", "ocean"]}
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
       disableTransitionOnChange
     >
       {children}

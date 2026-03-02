@@ -8,12 +8,12 @@ import { Logo, Logomark } from "@nebutra/brand";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { env } from "@/lib/env";
+import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 
 const APP_URL = env.NEXT_PUBLIC_APP_URL;
 
 /**
- * Navbar - Fixed navigation with brand logo
- * Dark-only — no theme toggle, plain auth links to web app
+ * Navbar - Fixed navigation with brand logo and theme toggle
  */
 export function Navbar() {
   const t = useTranslations("nav");
@@ -71,6 +71,8 @@ export function Navbar() {
             </a>
           ))}
 
+          <ThemeSwitcher />
+
           <a
             href={`${APP_URL}/sign-in`}
             className="text-sm text-white/60 transition-colors hover:text-white"
@@ -85,8 +87,9 @@ export function Navbar() {
           </a>
         </div>
 
-        {/* Mobile: Menu Button */}
+        {/* Mobile: Theme + Menu Button */}
         <div className="flex items-center gap-2 md:hidden">
+          <ThemeSwitcher />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="rounded-lg p-2 text-white/60 transition-colors hover:text-white"
