@@ -1,313 +1,313 @@
 {
   "nav": {
-    "features": "Features",
-    "pricing": "Pricing",
-    "docs": "Docs",
+    "features": "機能",
+    "pricing": "料金",
+    "docs": "ドキュメント",
     "github": "GitHub",
-    "signIn": "Sign In",
-    "getStarted": "Get Started"
+    "signIn": "ログイン",
+    "getStarted": "はじめる"
   },
   "hero": {
-    "badge": "MIT Licensed · Production-Ready",
-    "headline1": "Ship your SaaS",
-    "headline2": "in weeks, not months.",
-    "subheadline": "Production-ready monorepo with multi-tenancy, AI infrastructure, billing, and everything you need to launch.",
-    "copyLabel": "Copy",
-    "copiedLabel": "Copied!",
-    "ctaGetStarted": "Get Started",
-    "ctaViewGitHub": "View on GitHub →"
+    "badge": "MITライセンス · プロダクション対応",
+    "headline1": "SaaSを",
+    "headline2": "数ヶ月ではなく数週間でリリース。",
+    "subheadline": "マルチテナンシー、AIインフラ、課金機能など、ローンチに必要なすべてを備えたプロダクション対応モノレポ。",
+    "copyLabel": "コピー",
+    "copiedLabel": "コピーしました！",
+    "ctaGetStarted": "はじめる",
+    "ctaViewGitHub": "GitHubで見る →"
   },
   "features": {
-    "sectionTitle": "Built for production from day one.",
+    "sectionTitle": "初日からプロダクション品質で構築。",
     "item0": {
-      "title": "Multi-tenant from day one",
-      "description": "Row-level security, org isolation, and tenant routing built into every layer. No bolted-on afterthoughts."
+      "title": "初日からマルチテナント対応",
+      "description": "行レベルセキュリティ、組織の分離、テナントルーティングがすべての層に組み込まれています。後付けの対策は不要です。"
     },
     "item1": {
-      "title": "AI-native infrastructure",
-      "description": "Provider abstraction over OpenAI, Anthropic, and Gemini. Swap models without changing your application code."
+      "title": "AIネイティブなインフラ",
+      "description": "OpenAI、Anthropic、Gemini上のプロバイダー抽象化。アプリケーションコードを変更せずにモデルを切り替えられます。"
     },
     "item2": {
-      "title": "Billing wired up",
-      "description": "Stripe subscriptions, usage meters, and webhook handlers — production-ready, not demo-ware."
+      "title": "課金機能が統合済み",
+      "description": "Stripeのサブスクリプション、使用量メーター、Webhookハンドラーがプロダクション対応で搭載 — デモ用ではありません。"
     }
   },
   "cta": {
-    "heading": "Ready to ship?",
-    "subheading": "Get started in under 5 minutes.",
-    "copyLabel": "Copy",
-    "copiedLabel": "Copied!",
-    "startBuilding": "Start Building"
+    "heading": "リリースの準備はできていますか？",
+    "subheading": "5分以内にはじめられます。",
+    "copyLabel": "コピー",
+    "copiedLabel": "コピーしました！",
+    "startBuilding": "構築を開始する"
   },
   "footer": {
     "links": {
-      "product": "Product",
-      "docs": "Docs",
+      "product": "プロダクト",
+      "docs": "ドキュメント",
       "github": "GitHub",
       "discord": "Discord"
     },
     "copyright": "© 2024 Nebutra Intelligence",
-    "statusOnline": "Online"
+    "statusOnline": "オンライン"
   },
   "logoStrip": {
-    "tagline": "Built on the stack you already trust"
+    "tagline": "すでに信頼しているスタックで構築"
   },
   "legal": {
-    "nav": { "home": "Home", "contact": "Contact" },
+    "nav": { "home": "ホーム", "contact": "お問い合わせ" },
     "footer": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
-      "cookies": "Cookie Policy",
-      "refund": "Refund Policy",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "cookies": "Cookieポリシー",
+      "refund": "返金ポリシー",
       "copyright": "Nebutra, Inc. All rights reserved."
     }
   },
   "legalPages": {
     "about": {
-      "title": "About Us — Nebutra",
-      "description": "Learn about Nebutra, our mission, values, and the team behind the open-source enterprise SaaS framework.",
-      "heading": "About Nebutra",
-      "subheading": "Building the future of enterprise SaaS — open-source, AI-native, and production-ready.",
-      "missionTitle": "Our Mission",
-      "missionP1": "Nebutra exists to eliminate the months of boilerplate work that every SaaS team faces. We believe the best way to build great products is to start with a great foundation.",
-      "missionP2": "Our open-source framework provides multi-tenancy, billing, authentication, and AI infrastructure out of the box — so teams can focus on what makes their product unique.",
-      "valuesTitle": "Our Values",
+      "title": "Nebutraについて — Nebutra",
+      "description": "Nebutraのミッション、価値観、そしてオープンソースエンタープライズSaaSフレームワークを支えるチームについてご紹介します。",
+      "heading": "Nebutraについて",
+      "subheading": "エンタープライズSaaSの未来を構築 — オープンソース、AIネイティブ、プロダクション対応。",
+      "missionTitle": "私たちのミッション",
+      "missionP1": "Nebutraは、すべてのSaaSチームが直面する数ヶ月にわたるボイラープレート作業をなくすために存在します。優れたプロダクトを構築する最良の方法は、優れた基盤からスタートすることだと信じています。",
+      "missionP2": "私たちのオープンソースフレームワークは、マルチテナンシー、課金、認証、AIインフラをすぐに利用できる形で提供します — チームが自社プロダクトのユニークな価値に集中できるよう。",
+      "valuesTitle": "私たちの価値観",
       "values": {
         "0": {
-          "title": "Open Source First",
-          "description": "We build in the open. Our core framework is MIT-licensed and always will be."
+          "title": "オープンソースファースト",
+          "description": "私たちはオープンに構築します。コアフレームワークはMITライセンスであり、今後も変わりません。"
         },
         "1": {
-          "title": "Production-Ready",
-          "description": "Every feature ships battle-tested. No demo-ware, no half-baked abstractions."
+          "title": "プロダクション対応",
+          "description": "すべての機能は実戦テスト済みでリリースされます。デモ用や中途半端な抽象化はありません。"
         },
         "2": {
-          "title": "Developer Experience",
-          "description": "Great DX is not optional. We obsess over APIs, docs, and error messages."
+          "title": "開発者体験",
+          "description": "優れたDXは任意ではありません。API、ドキュメント、エラーメッセージにこだわり続けます。"
         },
         "3": {
-          "title": "Security by Default",
-          "description": "Row-level security, encrypted secrets, and audit logs are built in from day one."
+          "title": "デフォルトでセキュア",
+          "description": "行レベルセキュリティ、暗号化されたシークレット、監査ログが初日から組み込まれています。"
         },
         "4": {
-          "title": "Community Driven",
-          "description": "Our roadmap is shaped by the developers who use Nebutra every day."
+          "title": "コミュニティ主導",
+          "description": "ロードマップは毎日Nebutraを使用する開発者によって形成されます。"
         },
         "5": {
-          "title": "Ship Fast, Ship Often",
-          "description": "We release frequently, iterate quickly, and never let perfect be the enemy of shipped."
+          "title": "素早く、頻繁にリリース",
+          "description": "私たちは頻繁にリリースし、素早くイテレーションし、完璧を出荷の敵にしません。"
         }
       },
-      "companyInfoTitle": "Company Information",
+      "companyInfoTitle": "会社情報",
       "companyInfo": {
-        "legalName": "Legal Name",
-        "founded": "Founded",
-        "headquarters": "Headquarters",
-        "jurisdiction": "Jurisdiction"
+        "legalName": "法人名",
+        "founded": "設立",
+        "headquarters": "本社所在地",
+        "jurisdiction": "管轄"
       },
-      "ctaHeading": "Want to learn more?",
-      "ctaDescription": "Get in touch with our team or explore our documentation.",
-      "ctaButton": "Contact Us"
+      "ctaHeading": "詳しく知りたいですか？",
+      "ctaDescription": "チームにお問い合わせいただくか、ドキュメントをご覧ください。",
+      "ctaButton": "お問い合わせ"
     },
     "contact": {
-      "title": "Contact Us — Nebutra",
-      "description": "Get in touch with the Nebutra team for sales, support, legal, or general inquiries.",
-      "heading": "Contact Us",
-      "subheading": "We'd love to hear from you. Reach out to the right team below.",
+      "title": "お問い合わせ — Nebutra",
+      "description": "営業、サポート、法務、またはその他のお問い合わせはNebutraチームまでご連絡ください。",
+      "heading": "お問い合わせ",
+      "subheading": "ご連絡をお待ちしております。以下の適切なチームまでお気軽にどうぞ。",
       "contacts": {
         "general": {
-          "title": "General Inquiries",
-          "description": "Questions about Nebutra, partnerships, or anything else."
+          "title": "一般的なお問い合わせ",
+          "description": "Nebutraに関するご質問、パートナーシップ、その他のご相談。"
         },
         "sales": {
-          "title": "Sales",
-          "description": "Pricing, enterprise plans, and custom deployments."
+          "title": "営業",
+          "description": "料金、エンタープライズプラン、カスタム導入について。"
         },
         "support": {
-          "title": "Technical Support",
-          "description": "Help with integration, bugs, or technical issues."
+          "title": "テクニカルサポート",
+          "description": "インテグレーション、バグ、技術的な問題についてのサポート。"
         },
         "legal": {
-          "title": "Legal",
-          "description": "Terms, licensing, and legal matters."
+          "title": "法務",
+          "description": "利用規約、ライセンス、法的事項について。"
         },
         "privacy": {
-          "title": "Privacy",
-          "description": "Data protection, GDPR, and privacy requests."
+          "title": "プライバシー",
+          "description": "データ保護、GDPR、プライバシーに関するリクエスト。"
         },
         "security": {
-          "title": "Security",
-          "description": "Vulnerability reports and security concerns."
+          "title": "セキュリティ",
+          "description": "脆弱性の報告とセキュリティに関する懸念事項。"
         }
       },
-      "formTitle": "Send Us a Message",
+      "formTitle": "メッセージを送る",
       "form": {
-        "name": "Name",
-        "email": "Email",
-        "company": "Company",
-        "category": "Category",
+        "name": "お名前",
+        "email": "メールアドレス",
+        "company": "会社名",
+        "category": "カテゴリー",
         "categories": {
-          "general": "General Inquiry",
-          "sales": "Sales",
-          "support": "Technical Support",
-          "legal": "Legal",
-          "privacy": "Privacy",
-          "partnership": "Partnership",
-          "press": "Press"
+          "general": "一般的なお問い合わせ",
+          "sales": "営業",
+          "support": "テクニカルサポート",
+          "legal": "法務",
+          "privacy": "プライバシー",
+          "partnership": "パートナーシップ",
+          "press": "プレス"
         },
-        "subject": "Subject",
-        "message": "Message",
-        "submit": "Send Message",
-        "privacyNotice": "By submitting this form, you agree to our",
-        "privacyLink": "Privacy Policy"
+        "subject": "件名",
+        "message": "メッセージ",
+        "submit": "メッセージを送信",
+        "privacyNotice": "このフォームを送信することで、当社の",
+        "privacyLink": "プライバシーポリシー"
       },
-      "companyInfoTitle": "Company Information",
-      "socialMedia": "Social Media"
+      "companyInfoTitle": "会社情報",
+      "socialMedia": "ソーシャルメディア"
     },
     "cookies": {
-      "title": "Cookie Policy — Nebutra",
-      "description": "Learn how Nebutra uses cookies and similar technologies on our website and services.",
-      "heading": "Cookie Policy",
-      "effectiveDate": "Effective Date",
-      "lastUpdated": "Last Updated"
+      "title": "Cookieポリシー — Nebutra",
+      "description": "NebutraがウェブサイトおよびサービスでどのようにCookieおよび類似技術を使用しているかをご確認ください。",
+      "heading": "Cookieポリシー",
+      "effectiveDate": "施行日",
+      "lastUpdated": "最終更新日"
     },
     "faq": {
-      "title": "FAQ — Nebutra",
-      "description": "Frequently asked questions about Nebutra, pricing, features, and support.",
-      "heading": "Frequently Asked Questions",
-      "subheading": "Find answers to common questions about Nebutra.",
+      "title": "よくある質問 — Nebutra",
+      "description": "Nebutraの料金、機能、サポートに関するよくある質問。",
+      "heading": "よくある質問",
+      "subheading": "Nebutraに関するよくある質問への回答をご覧ください。",
       "categories": {
         "0": {
-          "name": "Getting Started",
+          "name": "はじめに",
           "questions": {
             "0": {
-              "q": "What is Nebutra Sailor?",
-              "a": "Nebutra Sailor is an open-source, production-ready SaaS framework built with Next.js, featuring multi-tenancy, billing, authentication, and AI infrastructure out of the box."
+              "q": "Nebutra Sailorとは何ですか？",
+              "a": "Nebutra Sailorは、Next.jsで構築されたオープンソースのプロダクション対応SaaSフレームワークで、マルチテナンシー、課金、認証、AIインフラがすぐに利用できます。"
             },
             "1": {
-              "q": "Is Nebutra free to use?",
-              "a": "Yes, Nebutra Sailor is MIT-licensed and free to use. We also offer managed cloud plans for teams that want hosted infrastructure and premium support."
+              "q": "Nebutraは無料で使えますか？",
+              "a": "はい、Nebutra SailorはMITライセンスで無料でご利用いただけます。ホスト型インフラとプレミアムサポートを希望するチーム向けにマネージドクラウドプランもご提供しています。"
             },
             "2": {
-              "q": "How do I get started?",
-              "a": "Run our CLI command to scaffold a new project, then follow the quickstart guide in our documentation. You can be up and running in under 5 minutes."
+              "q": "どのようにはじめればよいですか？",
+              "a": "CLIコマンドを実行して新しいプロジェクトをスキャフォールドし、ドキュメントのクイックスタートガイドに従ってください。5分以内に起動して実行できます。"
             }
           }
         },
         "1": {
-          "name": "Pricing & Billing",
+          "name": "料金と課金",
           "questions": {
             "0": {
-              "q": "What plans are available?",
-              "a": "We offer Free, Starter, Pro, and Enterprise plans. Visit our pricing page for full details."
+              "q": "どのようなプランがありますか？",
+              "a": "Free、Starter、Pro、Enterpriseのプランをご用意しています。詳細は料金ページをご覧ください。"
             },
             "1": {
-              "q": "Can I change plans at any time?",
-              "a": "Yes, you can upgrade or downgrade your plan at any time. Upgrades take effect immediately, downgrades at the next billing cycle."
+              "q": "いつでもプランを変更できますか？",
+              "a": "はい、いつでもプランのアップグレードまたはダウングレードが可能です。アップグレードは即時に反映され、ダウングレードは次の請求サイクルから適用されます。"
             },
             "2": {
-              "q": "Do you offer annual billing?",
-              "a": "Yes, annual billing is available at a discount. Contact sales for enterprise pricing."
+              "q": "年間請求は利用できますか？",
+              "a": "はい、年間請求は割引価格でご利用いただけます。エンタープライズ料金については営業までお問い合わせください。"
             },
             "3": {
-              "q": "What payment methods do you accept?",
-              "a": "We accept all major credit cards through Stripe. Enterprise customers can pay via invoice."
+              "q": "どのような支払い方法に対応していますか？",
+              "a": "Stripe経由で主要なクレジットカードすべてに対応しています。エンタープライズのお客様は請求書払いも可能です。"
             },
             "4": {
-              "q": "Is there a free trial?",
-              "a": "Yes, all paid plans include a 14-day free trial. No credit card required."
+              "q": "無料トライアルはありますか？",
+              "a": "はい、すべての有料プランには14日間の無料トライアルが含まれています。クレジットカード不要です。"
             }
           }
         },
         "2": {
-          "name": "Features & Technical",
+          "name": "機能と技術",
           "questions": {
             "0": {
-              "q": "What AI providers are supported?",
-              "a": "We support OpenAI, Anthropic, and Google Gemini out of the box, with a unified API that lets you swap providers without code changes."
+              "q": "どのAIプロバイダーに対応していますか？",
+              "a": "OpenAI、Anthropic、Google Geminiをすぐにサポートしており、コード変更なしにプロバイダーを切り替えられる統一APIを提供しています。"
             },
             "1": {
-              "q": "How does multi-tenancy work?",
-              "a": "Multi-tenancy is built into every layer — from Postgres row-level security to middleware-based tenant routing and isolated org data."
+              "q": "マルチテナンシーはどのように機能しますか？",
+              "a": "マルチテナンシーはすべての層に組み込まれています — PostgreSQLの行レベルセキュリティから、ミドルウェアベースのテナントルーティング、組織データの分離まで。"
             },
             "2": {
-              "q": "Can I self-host Nebutra?",
-              "a": "Absolutely. Nebutra is designed for self-hosting. Deploy to any platform that supports Node.js and Postgres."
+              "q": "Nebutraをセルフホストできますか？",
+              "a": "もちろんです。Nebutraはセルフホスティング向けに設計されています。Node.jsとPostgresをサポートするあらゆるプラットフォームにデプロイできます。"
             },
             "3": {
-              "q": "What database does Nebutra use?",
-              "a": "Nebutra uses PostgreSQL (via Neon or Supabase) with Drizzle ORM for type-safe database access."
+              "q": "Nebutraはどのデータベースを使用しますか？",
+              "a": "NebutraはPostgreSQL（NeonまたはSupabase経由）とDrizzle ORMを使用し、型安全なデータベースアクセスを実現しています。"
             }
           }
         },
         "3": {
-          "name": "Security & Compliance",
+          "name": "セキュリティとコンプライアンス",
           "questions": {
             "0": {
-              "q": "Is my data secure?",
-              "a": "Yes. We implement encryption in transit and at rest, row-level security, audit logging, and regular security assessments."
+              "q": "データは安全ですか？",
+              "a": "はい。転送中および保存中の暗号化、行レベルセキュリティ、監査ログ、定期的なセキュリティ評価を実施しています。"
             },
             "1": {
-              "q": "Are you GDPR compliant?",
-              "a": "Yes. We provide data export, deletion, and consent management tools to help you comply with GDPR and other privacy regulations."
+              "q": "GDPRに準拠していますか？",
+              "a": "はい。GDPRおよびその他のプライバシー規制への準拠を支援するためのデータエクスポート、削除、同意管理ツールを提供しています。"
             },
             "2": {
-              "q": "Do you have SOC 2 certification?",
-              "a": "We are currently pursuing SOC 2 Type II certification. Contact us for our current security documentation."
+              "q": "SOC 2認証を取得していますか？",
+              "a": "現在、SOC 2 Type II認証の取得を進めています。現在のセキュリティドキュメントについてはお問い合わせください。"
             },
             "3": {
-              "q": "How do you handle data breaches?",
-              "a": "We have an incident response plan that includes notification within 72 hours, root cause analysis, and remediation steps."
+              "q": "データ漏洩が発生した場合、どのように対応しますか？",
+              "a": "72時間以内の通知、根本原因分析、および修復手順を含むインシデント対応計画を備えています。"
             }
           }
         },
         "4": {
-          "name": "Support",
+          "name": "サポート",
           "questions": {
             "0": {
-              "q": "How can I get help?",
-              "a": "Community support is available via Discord and GitHub Discussions. Paid plans include email and priority support."
+              "q": "サポートを受けるにはどうすればよいですか？",
+              "a": "コミュニティサポートはDiscordとGitHub Discussionsで利用できます。有料プランにはメールおよび優先サポートが含まれています。"
             },
             "1": {
-              "q": "What are your support hours?",
-              "a": "Community support is 24/7 via Discord. Paid support is available Monday-Friday, 9am-6pm PST."
+              "q": "サポートの対応時間はいつですか？",
+              "a": "コミュニティサポートはDiscordで24時間365日ご利用いただけます。有料サポートは月曜日から金曜日、PST午前9時から午後6時まで対応しています。"
             },
             "2": {
-              "q": "Do you offer consulting services?",
-              "a": "Yes, we offer architecture reviews, custom integrations, and migration assistance. Contact sales for details."
+              "q": "コンサルティングサービスはありますか？",
+              "a": "はい、アーキテクチャレビュー、カスタムインテグレーション、移行支援を提供しています。詳細については営業までお問い合わせください。"
             }
           }
         }
       },
-      "ctaHeading": "Still have questions?",
-      "ctaDescription": "Our team is happy to help. Reach out to us directly.",
-      "ctaButton": "Contact Us",
-      "ctaEmail": "Email Support"
+      "ctaHeading": "まだご質問がありますか？",
+      "ctaDescription": "チームが喜んでサポートいたします。直接ご連絡ください。",
+      "ctaButton": "お問い合わせ",
+      "ctaEmail": "メールサポート"
     },
     "privacy": {
-      "title": "Privacy Policy — Nebutra",
-      "description": "Learn how Nebutra collects, uses, and protects your personal information.",
-      "heading": "Privacy Policy",
-      "effectiveDate": "Effective Date",
-      "lastUpdated": "Last Updated"
+      "title": "プライバシーポリシー — Nebutra",
+      "description": "Nebutraがお客様の個人情報をどのように収集、使用、保護するかについてご確認ください。",
+      "heading": "プライバシーポリシー",
+      "effectiveDate": "施行日",
+      "lastUpdated": "最終更新日"
     },
     "refund": {
-      "title": "Refund Policy — Nebutra",
-      "description": "Understand Nebutra's refund policy for subscriptions and services.",
-      "heading": "Refund Policy",
-      "effectiveDate": "Effective Date",
-      "lastUpdated": "Last Updated"
+      "title": "返金ポリシー — Nebutra",
+      "description": "Nebutraのサブスクリプションおよびサービスに関する返金ポリシーをご確認ください。",
+      "heading": "返金ポリシー",
+      "effectiveDate": "施行日",
+      "lastUpdated": "最終更新日"
     },
     "terms": {
-      "title": "Terms of Service — Nebutra",
-      "description": "Read the terms and conditions for using Nebutra's services.",
-      "heading": "Terms of Service",
-      "effectiveDate": "Effective Date",
-      "lastUpdated": "Last Updated"
+      "title": "利用規約 — Nebutra",
+      "description": "Nebutraのサービスを利用するための利用規約をお読みください。",
+      "heading": "利用規約",
+      "effectiveDate": "施行日",
+      "lastUpdated": "最終更新日"
     }
   },
   "metadata": {
-    "title": "Nebutra Sailor — The Open-Source Enterprise SaaS Framework",
-    "description": "Ship your SaaS in weeks, not months. Multi-tenancy, billing, auth, and AI built in. Production-ready, MIT licensed."
+    "title": "Nebutra Sailor — オープンソースエンタープライズSaaSフレームワーク",
+    "description": "SaaSを数ヶ月ではなく数週間でリリース。マルチテナンシー、課金、認証、AIが組み込み済み。プロダクション対応、MITライセンス。"
   }
 }

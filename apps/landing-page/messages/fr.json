@@ -1,263 +1,263 @@
 {
   "nav": {
-    "features": "Features",
-    "pricing": "Pricing",
-    "docs": "Docs",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "docs": "Documentation",
     "github": "GitHub",
-    "signIn": "Sign In",
-    "getStarted": "Get Started"
+    "signIn": "Se connecter",
+    "getStarted": "Commencer"
   },
   "hero": {
-    "badge": "MIT Licensed · Production-Ready",
-    "headline1": "Ship your SaaS",
-    "headline2": "in weeks, not months.",
-    "subheadline": "Production-ready monorepo with multi-tenancy, AI infrastructure, billing, and everything you need to launch.",
-    "copyLabel": "Copy",
-    "copiedLabel": "Copied!",
-    "ctaGetStarted": "Get Started",
-    "ctaViewGitHub": "View on GitHub →"
+    "badge": "Licence MIT · Prêt pour la production",
+    "headline1": "Lancez votre SaaS",
+    "headline2": "en semaines, pas en mois.",
+    "subheadline": "Monorepo prêt pour la production avec multi-location, infrastructure IA, facturation et tout ce dont vous avez besoin pour lancer.",
+    "copyLabel": "Copier",
+    "copiedLabel": "Copié !",
+    "ctaGetStarted": "Commencer",
+    "ctaViewGitHub": "Voir sur GitHub →"
   },
   "features": {
-    "sectionTitle": "Built for production from day one.",
+    "sectionTitle": "Conçu pour la production dès le premier jour.",
     "item0": {
-      "title": "Multi-tenant from day one",
-      "description": "Row-level security, org isolation, and tenant routing built into every layer. No bolted-on afterthoughts."
+      "title": "Multi-location dès le premier jour",
+      "description": "Sécurité au niveau des lignes, isolation des organisations et routage par locataire intégrés à chaque couche. Sans compromis ni ajouts tardifs."
     },
     "item1": {
-      "title": "AI-native infrastructure",
-      "description": "Provider abstraction over OpenAI, Anthropic, and Gemini. Swap models without changing your application code."
+      "title": "Infrastructure native IA",
+      "description": "Abstraction de fournisseur sur OpenAI, Anthropic et Gemini. Changez de modèles sans modifier le code de votre application."
     },
     "item2": {
-      "title": "Billing wired up",
-      "description": "Stripe subscriptions, usage meters, and webhook handlers — production-ready, not demo-ware."
+      "title": "Facturation intégrée",
+      "description": "Abonnements Stripe, compteurs d'utilisation et gestionnaires de webhooks — prêts pour la production, pas pour la démo."
     }
   },
   "cta": {
-    "heading": "Ready to ship?",
-    "subheading": "Get started in under 5 minutes.",
-    "copyLabel": "Copy",
-    "copiedLabel": "Copied!",
-    "startBuilding": "Start Building"
+    "heading": "Prêt à lancer ?",
+    "subheading": "Démarrez en moins de 5 minutes.",
+    "copyLabel": "Copier",
+    "copiedLabel": "Copié !",
+    "startBuilding": "Commencer à construire"
   },
   "footer": {
     "links": {
-      "product": "Product",
-      "docs": "Docs",
+      "product": "Produit",
+      "docs": "Documentation",
       "github": "GitHub",
       "discord": "Discord"
     },
     "copyright": "© 2024 Nebutra Intelligence",
-    "statusOnline": "Online"
+    "statusOnline": "En ligne"
   },
   "logoStrip": {
-    "tagline": "Built on the stack you already trust"
+    "tagline": "Construit sur la stack en laquelle vous avez déjà confiance"
   },
   "legal": {
-    "nav": { "home": "Home", "contact": "Contact" },
+    "nav": { "home": "Accueil", "contact": "Contact" },
     "footer": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
-      "cookies": "Cookie Policy",
-      "refund": "Refund Policy",
-      "copyright": "Nebutra, Inc. All rights reserved."
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions d'utilisation",
+      "cookies": "Politique des cookies",
+      "refund": "Politique de remboursement",
+      "copyright": "Nebutra, Inc. Tous droits réservés."
     }
   },
   "legalPages": {
     "about": {
-      "title": "About Us — Nebutra",
-      "description": "Learn about Nebutra, our mission, values, and the team behind the open-source enterprise SaaS framework.",
-      "heading": "About Nebutra",
-      "subheading": "Building the future of enterprise SaaS — open-source, AI-native, and production-ready.",
-      "missionTitle": "Our Mission",
-      "missionP1": "Nebutra exists to eliminate the months of boilerplate work that every SaaS team faces. We believe the best way to build great products is to start with a great foundation.",
-      "missionP2": "Our open-source framework provides multi-tenancy, billing, authentication, and AI infrastructure out of the box — so teams can focus on what makes their product unique.",
-      "valuesTitle": "Our Values",
+      "title": "À propos — Nebutra",
+      "description": "Découvrez Nebutra, notre mission, nos valeurs et l'équipe derrière le framework SaaS d'entreprise open-source.",
+      "heading": "À propos de Nebutra",
+      "subheading": "Construire l'avenir du SaaS d'entreprise — open-source, natif IA et prêt pour la production.",
+      "missionTitle": "Notre mission",
+      "missionP1": "Nebutra existe pour éliminer les mois de travail de code répétitif auxquels chaque équipe SaaS est confrontée. Nous croyons que la meilleure façon de construire de grands produits est de partir d'une excellente base.",
+      "missionP2": "Notre framework open-source fournit la multi-location, la facturation, l'authentification et l'infrastructure IA clés en main — afin que les équipes puissent se concentrer sur ce qui rend leur produit unique.",
+      "valuesTitle": "Nos valeurs",
       "values": {
         "0": {
-          "title": "Open Source First",
-          "description": "We build in the open. Our core framework is MIT-licensed and always will be."
+          "title": "Open source avant tout",
+          "description": "Nous construisons en public. Notre framework principal est sous licence MIT et le restera toujours."
         },
         "1": {
-          "title": "Production-Ready",
-          "description": "Every feature ships battle-tested. No demo-ware, no half-baked abstractions."
+          "title": "Prêt pour la production",
+          "description": "Chaque fonctionnalité est testée en conditions réelles. Pas de démo, pas d'abstractions bâclées."
         },
         "2": {
-          "title": "Developer Experience",
-          "description": "Great DX is not optional. We obsess over APIs, docs, and error messages."
+          "title": "Expérience développeur",
+          "description": "Une excellente DX n'est pas optionnelle. Nous sommes obsédés par les API, la documentation et les messages d'erreur."
         },
         "3": {
-          "title": "Security by Default",
-          "description": "Row-level security, encrypted secrets, and audit logs are built in from day one."
+          "title": "Sécurité par défaut",
+          "description": "La sécurité au niveau des lignes, les secrets chiffrés et les journaux d'audit sont intégrés dès le premier jour."
         },
         "4": {
-          "title": "Community Driven",
-          "description": "Our roadmap is shaped by the developers who use Nebutra every day."
+          "title": "Guidé par la communauté",
+          "description": "Notre feuille de route est façonnée par les développeurs qui utilisent Nebutra au quotidien."
         },
         "5": {
-          "title": "Ship Fast, Ship Often",
-          "description": "We release frequently, iterate quickly, and never let perfect be the enemy of shipped."
+          "title": "Livrer vite, livrer souvent",
+          "description": "Nous publions fréquemment, itérons rapidement et ne laissons jamais le parfait être l'ennemi du livré."
         }
       },
-      "companyInfoTitle": "Company Information",
+      "companyInfoTitle": "Informations sur la société",
       "companyInfo": {
-        "legalName": "Legal Name",
-        "founded": "Founded",
-        "headquarters": "Headquarters",
-        "jurisdiction": "Jurisdiction"
+        "legalName": "Raison sociale",
+        "founded": "Fondée en",
+        "headquarters": "Siège social",
+        "jurisdiction": "Juridiction"
       },
-      "ctaHeading": "Want to learn more?",
-      "ctaDescription": "Get in touch with our team or explore our documentation.",
-      "ctaButton": "Contact Us"
+      "ctaHeading": "Vous souhaitez en savoir plus ?",
+      "ctaDescription": "Prenez contact avec notre équipe ou explorez notre documentation.",
+      "ctaButton": "Nous contacter"
     },
     "contact": {
-      "title": "Contact Us — Nebutra",
-      "description": "Get in touch with the Nebutra team for sales, support, legal, or general inquiries.",
-      "heading": "Contact Us",
-      "subheading": "We'd love to hear from you. Reach out to the right team below.",
+      "title": "Nous contacter — Nebutra",
+      "description": "Contactez l'équipe Nebutra pour les ventes, le support, les questions juridiques ou toute autre demande.",
+      "heading": "Nous contacter",
+      "subheading": "Nous serions ravis de vous entendre. Contactez la bonne équipe ci-dessous.",
       "contacts": {
         "general": {
-          "title": "General Inquiries",
-          "description": "Questions about Nebutra, partnerships, or anything else."
+          "title": "Demandes générales",
+          "description": "Questions sur Nebutra, partenariats ou tout autre sujet."
         },
         "sales": {
-          "title": "Sales",
-          "description": "Pricing, enterprise plans, and custom deployments."
+          "title": "Ventes",
+          "description": "Tarifs, plans entreprise et déploiements personnalisés."
         },
         "support": {
-          "title": "Technical Support",
-          "description": "Help with integration, bugs, or technical issues."
+          "title": "Support technique",
+          "description": "Aide à l'intégration, bogues ou problèmes techniques."
         },
         "legal": {
-          "title": "Legal",
-          "description": "Terms, licensing, and legal matters."
+          "title": "Juridique",
+          "description": "Conditions, licences et questions juridiques."
         },
         "privacy": {
-          "title": "Privacy",
-          "description": "Data protection, GDPR, and privacy requests."
+          "title": "Confidentialité",
+          "description": "Protection des données, RGPD et demandes relatives à la vie privée."
         },
         "security": {
-          "title": "Security",
-          "description": "Vulnerability reports and security concerns."
+          "title": "Sécurité",
+          "description": "Signalement de vulnérabilités et préoccupations en matière de sécurité."
         }
       },
-      "formTitle": "Send Us a Message",
+      "formTitle": "Envoyez-nous un message",
       "form": {
-        "name": "Name",
-        "email": "Email",
-        "company": "Company",
-        "category": "Category",
+        "name": "Nom",
+        "email": "E-mail",
+        "company": "Société",
+        "category": "Catégorie",
         "categories": {
-          "general": "General Inquiry",
-          "sales": "Sales",
-          "support": "Technical Support",
-          "legal": "Legal",
-          "privacy": "Privacy",
-          "partnership": "Partnership",
-          "press": "Press"
+          "general": "Demande générale",
+          "sales": "Ventes",
+          "support": "Support technique",
+          "legal": "Juridique",
+          "privacy": "Confidentialité",
+          "partnership": "Partenariat",
+          "press": "Presse"
         },
-        "subject": "Subject",
+        "subject": "Objet",
         "message": "Message",
-        "submit": "Send Message",
-        "privacyNotice": "By submitting this form, you agree to our",
-        "privacyLink": "Privacy Policy"
+        "submit": "Envoyer le message",
+        "privacyNotice": "En soumettant ce formulaire, vous acceptez notre",
+        "privacyLink": "Politique de confidentialité"
       },
-      "companyInfoTitle": "Company Information",
-      "socialMedia": "Social Media"
+      "companyInfoTitle": "Informations sur la société",
+      "socialMedia": "Réseaux sociaux"
     },
     "cookies": {
-      "title": "Cookie Policy — Nebutra",
-      "description": "Learn how Nebutra uses cookies and similar technologies on our website and services.",
-      "heading": "Cookie Policy",
-      "effectiveDate": "Effective Date",
-      "lastUpdated": "Last Updated"
+      "title": "Politique des cookies — Nebutra",
+      "description": "Découvrez comment Nebutra utilise les cookies et les technologies similaires sur notre site web et nos services.",
+      "heading": "Politique des cookies",
+      "effectiveDate": "Date d'entrée en vigueur",
+      "lastUpdated": "Dernière mise à jour"
     },
     "faq": {
       "title": "FAQ — Nebutra",
-      "description": "Frequently asked questions about Nebutra, pricing, features, and support.",
-      "heading": "Frequently Asked Questions",
-      "subheading": "Find answers to common questions about Nebutra.",
+      "description": "Questions fréquemment posées sur Nebutra, les tarifs, les fonctionnalités et le support.",
+      "heading": "Questions fréquemment posées",
+      "subheading": "Trouvez des réponses aux questions courantes sur Nebutra.",
       "categories": {
         "0": {
-          "name": "Getting Started",
+          "name": "Premiers pas",
           "questions": {
             "0": {
-              "q": "What is Nebutra Sailor?",
-              "a": "Nebutra Sailor is an open-source, production-ready SaaS framework built with Next.js, featuring multi-tenancy, billing, authentication, and AI infrastructure out of the box."
+              "q": "Qu'est-ce que Nebutra Sailor ?",
+              "a": "Nebutra Sailor est un framework SaaS open-source prêt pour la production, construit avec Next.js, comprenant la multi-location, la facturation, l'authentification et l'infrastructure IA clés en main."
             },
             "1": {
-              "q": "Is Nebutra free to use?",
-              "a": "Yes, Nebutra Sailor is MIT-licensed and free to use. We also offer managed cloud plans for teams that want hosted infrastructure and premium support."
+              "q": "Nebutra est-il gratuit ?",
+              "a": "Oui, Nebutra Sailor est sous licence MIT et gratuit à utiliser. Nous proposons également des plans cloud gérés pour les équipes souhaitant une infrastructure hébergée et un support premium."
             },
             "2": {
-              "q": "How do I get started?",
-              "a": "Run our CLI command to scaffold a new project, then follow the quickstart guide in our documentation. You can be up and running in under 5 minutes."
+              "q": "Comment démarrer ?",
+              "a": "Exécutez notre commande CLI pour créer un nouveau projet, puis suivez le guide de démarrage rapide dans notre documentation. Vous pouvez être opérationnel en moins de 5 minutes."
             }
           }
         },
         "1": {
-          "name": "Pricing & Billing",
+          "name": "Tarifs et facturation",
           "questions": {
             "0": {
-              "q": "What plans are available?",
-              "a": "We offer Free, Starter, Pro, and Enterprise plans. Visit our pricing page for full details."
+              "q": "Quels plans sont disponibles ?",
+              "a": "Nous proposons des plans Gratuit, Starter, Pro et Entreprise. Consultez notre page de tarifs pour tous les détails."
             },
             "1": {
-              "q": "Can I change plans at any time?",
-              "a": "Yes, you can upgrade or downgrade your plan at any time. Upgrades take effect immediately, downgrades at the next billing cycle."
+              "q": "Puis-je changer de plan à tout moment ?",
+              "a": "Oui, vous pouvez passer à un plan supérieur ou inférieur à tout moment. Les mises à niveau prennent effet immédiatement, les rétrogradations au prochain cycle de facturation."
             },
             "2": {
-              "q": "Do you offer annual billing?",
-              "a": "Yes, annual billing is available at a discount. Contact sales for enterprise pricing."
+              "q": "Proposez-vous une facturation annuelle ?",
+              "a": "Oui, la facturation annuelle est disponible avec une remise. Contactez les ventes pour les tarifs entreprise."
             },
             "3": {
-              "q": "What payment methods do you accept?",
-              "a": "We accept all major credit cards through Stripe. Enterprise customers can pay via invoice."
+              "q": "Quels modes de paiement acceptez-vous ?",
+              "a": "Nous acceptons toutes les principales cartes bancaires via Stripe. Les clients entreprise peuvent payer par facture."
             },
             "4": {
-              "q": "Is there a free trial?",
-              "a": "Yes, all paid plans include a 14-day free trial. No credit card required."
+              "q": "Y a-t-il un essai gratuit ?",
+              "a": "Oui, tous les plans payants incluent un essai gratuit de 14 jours. Aucune carte bancaire requise."
             }
           }
         },
         "2": {
-          "name": "Features & Technical",
+          "name": "Fonctionnalités et technique",
           "questions": {
             "0": {
-              "q": "What AI providers are supported?",
-              "a": "We support OpenAI, Anthropic, and Google Gemini out of the box, with a unified API that lets you swap providers without code changes."
+              "q": "Quels fournisseurs IA sont pris en charge ?",
+              "a": "Nous prenons en charge OpenAI, Anthropic et Google Gemini clés en main, avec une API unifiée vous permettant de changer de fournisseur sans modification du code."
             },
             "1": {
-              "q": "How does multi-tenancy work?",
-              "a": "Multi-tenancy is built into every layer — from Postgres row-level security to middleware-based tenant routing and isolated org data."
+              "q": "Comment fonctionne la multi-location ?",
+              "a": "La multi-location est intégrée à chaque couche — de la sécurité au niveau des lignes Postgres au routage par locataire basé sur les middlewares et aux données d'organisation isolées."
             },
             "2": {
-              "q": "Can I self-host Nebutra?",
-              "a": "Absolutely. Nebutra is designed for self-hosting. Deploy to any platform that supports Node.js and Postgres."
+              "q": "Puis-je héberger Nebutra moi-même ?",
+              "a": "Absolument. Nebutra est conçu pour l'auto-hébergement. Déployez sur toute plateforme prenant en charge Node.js et Postgres."
             },
             "3": {
-              "q": "What database does Nebutra use?",
-              "a": "Nebutra uses PostgreSQL (via Neon or Supabase) with Drizzle ORM for type-safe database access."
+              "q": "Quelle base de données Nebutra utilise-t-il ?",
+              "a": "Nebutra utilise PostgreSQL (via Neon ou Supabase) avec Drizzle ORM pour un accès à la base de données avec typage fort."
             }
           }
         },
         "3": {
-          "name": "Security & Compliance",
+          "name": "Sécurité et conformité",
           "questions": {
             "0": {
-              "q": "Is my data secure?",
-              "a": "Yes. We implement encryption in transit and at rest, row-level security, audit logging, and regular security assessments."
+              "q": "Mes données sont-elles sécurisées ?",
+              "a": "Oui. Nous mettons en œuvre le chiffrement en transit et au repos, la sécurité au niveau des lignes, la journalisation d'audit et des évaluations de sécurité régulières."
             },
             "1": {
-              "q": "Are you GDPR compliant?",
-              "a": "Yes. We provide data export, deletion, and consent management tools to help you comply with GDPR and other privacy regulations."
+              "q": "Êtes-vous conformes au RGPD ?",
+              "a": "Oui. Nous fournissons des outils d'exportation, de suppression et de gestion du consentement des données pour vous aider à vous conformer au RGPD et aux autres réglementations sur la vie privée."
             },
             "2": {
-              "q": "Do you have SOC 2 certification?",
-              "a": "We are currently pursuing SOC 2 Type II certification. Contact us for our current security documentation."
+              "q": "Avez-vous la certification SOC 2 ?",
+              "a": "Nous sommes actuellement en cours d'obtention de la certification SOC 2 Type II. Contactez-nous pour notre documentation de sécurité actuelle."
             },
             "3": {
-              "q": "How do you handle data breaches?",
-              "a": "We have an incident response plan that includes notification within 72 hours, root cause analysis, and remediation steps."
+              "q": "Comment gérez-vous les violations de données ?",
+              "a": "Nous disposons d'un plan de réponse aux incidents qui inclut une notification dans les 72 heures, une analyse des causes profondes et des mesures correctives."
             }
           }
         },
@@ -265,49 +265,49 @@
           "name": "Support",
           "questions": {
             "0": {
-              "q": "How can I get help?",
-              "a": "Community support is available via Discord and GitHub Discussions. Paid plans include email and priority support."
+              "q": "Comment puis-je obtenir de l'aide ?",
+              "a": "Le support communautaire est disponible via Discord et les discussions GitHub. Les plans payants incluent le support par e-mail et le support prioritaire."
             },
             "1": {
-              "q": "What are your support hours?",
-              "a": "Community support is 24/7 via Discord. Paid support is available Monday-Friday, 9am-6pm PST."
+              "q": "Quelles sont vos heures de support ?",
+              "a": "Le support communautaire est disponible 24h/24 et 7j/7 via Discord. Le support payant est disponible du lundi au vendredi, de 9h à 18h PST."
             },
             "2": {
-              "q": "Do you offer consulting services?",
-              "a": "Yes, we offer architecture reviews, custom integrations, and migration assistance. Contact sales for details."
+              "q": "Proposez-vous des services de conseil ?",
+              "a": "Oui, nous proposons des revues d'architecture, des intégrations personnalisées et une assistance à la migration. Contactez les ventes pour plus de détails."
             }
           }
         }
       },
-      "ctaHeading": "Still have questions?",
-      "ctaDescription": "Our team is happy to help. Reach out to us directly.",
-      "ctaButton": "Contact Us",
-      "ctaEmail": "Email Support"
+      "ctaHeading": "Vous avez encore des questions ?",
+      "ctaDescription": "Notre équipe est heureuse de vous aider. Contactez-nous directement.",
+      "ctaButton": "Nous contacter",
+      "ctaEmail": "Support par e-mail"
     },
     "privacy": {
-      "title": "Privacy Policy — Nebutra",
-      "description": "Learn how Nebutra collects, uses, and protects your personal information.",
-      "heading": "Privacy Policy",
-      "effectiveDate": "Effective Date",
-      "lastUpdated": "Last Updated"
+      "title": "Politique de confidentialité — Nebutra",
+      "description": "Découvrez comment Nebutra collecte, utilise et protège vos informations personnelles.",
+      "heading": "Politique de confidentialité",
+      "effectiveDate": "Date d'entrée en vigueur",
+      "lastUpdated": "Dernière mise à jour"
     },
     "refund": {
-      "title": "Refund Policy — Nebutra",
-      "description": "Understand Nebutra's refund policy for subscriptions and services.",
-      "heading": "Refund Policy",
-      "effectiveDate": "Effective Date",
-      "lastUpdated": "Last Updated"
+      "title": "Politique de remboursement — Nebutra",
+      "description": "Comprenez la politique de remboursement de Nebutra pour les abonnements et les services.",
+      "heading": "Politique de remboursement",
+      "effectiveDate": "Date d'entrée en vigueur",
+      "lastUpdated": "Dernière mise à jour"
     },
     "terms": {
-      "title": "Terms of Service — Nebutra",
-      "description": "Read the terms and conditions for using Nebutra's services.",
-      "heading": "Terms of Service",
-      "effectiveDate": "Effective Date",
-      "lastUpdated": "Last Updated"
+      "title": "Conditions d'utilisation — Nebutra",
+      "description": "Lisez les conditions générales d'utilisation des services de Nebutra.",
+      "heading": "Conditions d'utilisation",
+      "effectiveDate": "Date d'entrée en vigueur",
+      "lastUpdated": "Dernière mise à jour"
     }
   },
   "metadata": {
-    "title": "Nebutra Sailor — The Open-Source Enterprise SaaS Framework",
-    "description": "Ship your SaaS in weeks, not months. Multi-tenancy, billing, auth, and AI built in. Production-ready, MIT licensed."
+    "title": "Nebutra Sailor — Le framework SaaS d'entreprise open-source",
+    "description": "Lancez votre SaaS en semaines, pas en mois. Multi-location, facturation, authentification et IA intégrées. Prêt pour la production, sous licence MIT."
   }
 }
