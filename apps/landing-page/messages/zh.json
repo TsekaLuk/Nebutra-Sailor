@@ -53,7 +53,10 @@
     "tagline": "基于您信赖的技术栈构建"
   },
   "legal": {
-    "nav": { "home": "首页", "contact": "联系我们" },
+    "nav": {
+      "home": "首页",
+      "contact": "联系我们"
+    },
     "footer": {
       "privacy": "隐私政策",
       "terms": "服务条款",
@@ -65,37 +68,37 @@
   "legalPages": {
     "about": {
       "title": "关于我们 — Nebutra",
-      "description": "了解 Nebutra 的使命、价值观和开源企业级 SaaS 框架背后的团队。",
+      "description": "了解Nebutra，我们的使命、价值观以及支撑该开源企业SaaS框架的团队。",
       "heading": "关于 Nebutra",
-      "subheading": "构建企业 SaaS 的未来 — 开源、AI 原生、生产就绪。",
+      "subheading": "构建企业SaaS的未来 — 开源、AI原生且生产就绪。",
       "missionTitle": "我们的使命",
-      "missionP1": "Nebutra 致力于消除每个 SaaS 团队面临的数月样板工作。我们相信构建优秀产品的最佳方式是从一个优秀的基础开始。",
-      "missionP2": "我们的开源框架开箱即用地提供多租户、计费、认证和 AI 基础设施 — 让团队可以专注于使其产品独特的部分。",
+      "missionP1": "Nebutra的存在是为了消除每个SaaS团队所面临的数月冗余工作。我们认为，最好的方式是先建立一个优秀的基础来构建出色的产品。",
+      "missionP2": "我们的开源框架默认提供多租户、计费、身份验证和AI基础设施，因此团队可以专注于使产品独特之处。",
       "valuesTitle": "我们的价值观",
       "values": {
         "0": {
           "title": "开源优先",
-          "description": "我们在开放中构建。我们的核心框架采用 MIT 许可，永远如此。"
+          "description": "我们以开放的方式构建。我们的核心框架采用MIT许可证，始终如此。"
         },
         "1": {
           "title": "生产就绪",
-          "description": "每个功能都经过实战检验。没有演示版，没有半成品抽象。"
+          "description": "每个功能都经过严格测试。没有演示软件，没有半成品抽象。"
         },
         "2": {
-          "title": "开发者体验",
-          "description": "出色的开发者体验不是可选的。我们专注于 API、文档和错误消息。"
+          "title": "开发体验",
+          "description": "优秀的开发体验并非可选。我们专注于API、文档和错误信息。"
         },
         "3": {
           "title": "默认安全",
-          "description": "行级安全、加密密钥和审计日志从第一天起就内置其中。"
+          "description": "行级安全、加密密钥和审计日志从一开始就内置。"
         },
         "4": {
           "title": "社区驱动",
-          "description": "我们的路线图由每天使用 Nebutra 的开发者塑造。"
+          "description": "我们的路线图由每天使用Nebutra的开发者塑造。"
         },
         "5": {
-          "title": "快速交付",
-          "description": "我们频繁发布、快速迭代，绝不让完美成为交付的敌人。"
+          "title": "快速发布，频繁迭代",
+          "description": "我们频繁发布，快速迭代，从不让完美成为已发布的敌人。"
         }
       },
       "companyInfoTitle": "公司信息",
@@ -106,35 +109,41 @@
         "jurisdiction": "管辖区"
       },
       "ctaHeading": "想了解更多？",
-      "ctaDescription": "联系我们的团队或浏览文档。",
+      "ctaDescription": "与我们的团队联系，或探索我们的文档。",
       "ctaButton": "联系我们"
     },
     "contact": {
-      "title": "联系我们 — Nebutra",
-      "description": "联系 Nebutra 团队，了解销售、支持、法律或一般咨询。",
+      "title": "联系Nebutra",
+      "description": "与Nebutra团队联系以获取销售、支持、法律或一般咨询。",
       "heading": "联系我们",
-      "subheading": "我们很乐意收到您的来信。请联系下面合适的团队。",
+      "subheading": "我们很乐意与您联系。请在下方联系正确的团队。",
       "contacts": {
         "general": {
           "title": "一般咨询",
-          "description": "关于 Nebutra、合作伙伴关系或其他任何问题。"
+          "description": "有关Nebutra、合作伙伴或任何其他问题。"
         },
         "sales": {
           "title": "销售",
-          "description": "定价、企业计划和自定义部署。"
+          "description": "定价、企业计划和定制部署。"
         },
         "support": {
           "title": "技术支持",
-          "description": "集成、错误或技术问题的帮助。"
+          "description": "关于集成、问题或技术问题的帮助。"
         },
-        "legal": { "title": "法律", "description": "条款、许可和法律事务。" },
+        "legal": {
+          "title": "法律",
+          "description": "条款、许可和法律事务。"
+        },
         "privacy": {
           "title": "隐私",
-          "description": "数据保护、GDPR 和隐私请求。"
+          "description": "数据保护、GDPR和隐私请求。"
         },
-        "security": { "title": "安全", "description": "漏洞报告和安全问题。" }
+        "security": {
+          "title": "安全",
+          "description": "漏洞报告和安全问题。"
+        }
       },
-      "formTitle": "给我们发消息",
+      "formTitle": "发送消息",
       "form": {
         "name": "姓名",
         "email": "电子邮件",
@@ -159,32 +168,32 @@
       "socialMedia": "社交媒体"
     },
     "cookies": {
-      "title": "Cookie 政策 — Nebutra",
-      "description": "了解 Nebutra 如何在我们的网站和服务中使用 Cookie 及类似技术。",
+      "title": "Cookie政策 — Nebutra",
+      "description": "了解Nebutra如何在我们的网站和服务上使用cookie和类似技术。",
       "heading": "Cookie 政策",
       "effectiveDate": "生效日期",
       "lastUpdated": "最后更新"
     },
     "faq": {
       "title": "常见问题 — Nebutra",
-      "description": "关于 Nebutra 的常见问题，包括定价、功能和支持。",
+      "description": "关于Nebutra、定价、功能和支持的常见问题。",
       "heading": "常见问题",
-      "subheading": "查找关于 Nebutra 的常见问题解答。",
+      "subheading": "找到关于Nebutra的常见问题答案。",
       "categories": {
         "0": {
           "name": "入门指南",
           "questions": {
             "0": {
-              "q": "什么是 Nebutra Sailor？",
-              "a": "Nebutra Sailor 是一个开源的、生产就绪的 SaaS 框架，基于 Next.js 构建，内置多租户、计费、认证和 AI 基础设施。"
+              "q": "什么是Nebutra Sailor？",
+              "a": "Nebutra Sailor是一个开源的生产就绪SaaS框架，使用Next.js构建，具备多租户、计费、身份验证和AI基础设施。"
             },
             "1": {
-              "q": "Nebutra 免费使用吗？",
-              "a": "是的，Nebutra Sailor 采用 MIT 许可，免费使用。我们还为需要托管基础设施和高级支持的团队提供托管云计划。"
+              "q": "Nebutra是否免费使用？",
+              "a": "是的，Nebutra Sailor是MIT许可证，免费使用。我们还为希望托管基础设施和高级支持的团队提供托管云计划。"
             },
             "2": {
-              "q": "如何开始使用？",
-              "a": "运行我们的 CLI 命令来创建新项目，然后按照文档中的快速入门指南操作。您可以在 5 分钟内启动运行。"
+              "q": "我该如何开始？",
+              "a": "运行我们的CLI命令来创建新项目，然后遵循我们的文档中的快速入门指南。您可以在不到5分钟内完成。"
             }
           }
         },
@@ -193,44 +202,44 @@
           "questions": {
             "0": {
               "q": "有哪些计划？",
-              "a": "我们提供免费版、入门版、专业版和企业版计划。访问我们的定价页面了解详情。"
+              "a": "我们提供免费、入门、专业和企业计划。访问我们的定价页面获取详细信息。"
             },
             "1": {
-              "q": "可以随时更改计划吗？",
-              "a": "是的，您可以随时升级或降级计划。升级立即生效，降级在下一个计费周期生效。"
+              "q": "我可以随时更改计划吗？",
+              "a": "是的，您可以随时升级或降级您的计划。升级立即生效，降级将在下一次计费周期生效。"
             },
             "2": {
-              "q": "提供年付吗？",
-              "a": "是的，年付可享受折扣。企业定价请联系销售。"
+              "q": "你们提供年度计费吗？",
+              "a": "是的，年度计费在折扣价下提供。联系销售以获取企业定价。"
             },
             "3": {
               "q": "接受哪些付款方式？",
-              "a": "我们通过 Stripe 接受所有主要信用卡。企业客户可以通过发票付款。"
+              "a": "我们通过Stripe接受所有主要信用卡。企业客户可以通过发票支付。"
             },
             "4": {
-              "q": "有免费试用吗？",
-              "a": "是的，所有付费计划都包含 14 天免费试用。无需信用卡。"
+              "q": "有没有免费试用？",
+              "a": "是的，所有付费计划都包含14天免费试用。无需信用卡。"
             }
           }
         },
         "2": {
-          "name": "功能和技术",
+          "name": "功能与技术",
           "questions": {
             "0": {
-              "q": "支持哪些 AI 供应商？",
-              "a": "我们开箱即用地支持 OpenAI、Anthropic 和 Google Gemini，统一 API 让您无需更改代码即可切换供应商。"
+              "q": "支持哪些AI提供商？",
+              "a": "我们默认支持OpenAI、Anthropic和Google Gemini，通过统一API，您可以轻松更换提供商，无需代码更改。"
             },
             "1": {
-              "q": "多租户如何工作？",
-              "a": "多租户内置于每一层 — 从 Postgres 行级安全到基于中间件的租户路由和隔离的组织数据。"
+              "q": "多租户是如何工作的？",
+              "a": "多租户内置在每一层中 — 从Postgres行级安全到中间件基于租户路由和隔离的组织数据。"
             },
             "2": {
-              "q": "可以自托管 Nebutra 吗？",
-              "a": "当然可以。Nebutra 专为自托管设计。部署到任何支持 Node.js 和 Postgres 的平台。"
+              "q": "我可以自己托管Nebutra吗？",
+              "a": "当然可以。Nebutra专为自托管设计。部署到任何支持Node.js和Postgres的平台。"
             },
             "3": {
-              "q": "Nebutra 使用什么数据库？",
-              "a": "Nebutra 使用 PostgreSQL（通过 Neon 或 Supabase），配合 Drizzle ORM 进行类型安全的数据库访问。"
+              "q": "Nebutra使用什么数据库？",
+              "a": "Nebutra使用PostgreSQL（通过Neon或Supabase）并使用Drizzle ORM实现类型安全的数据库访问。"
             }
           }
         },
@@ -238,20 +247,20 @@
           "name": "安全与合规",
           "questions": {
             "0": {
-              "q": "我的数据安全吗？",
-              "a": "是的。我们实施传输中和静态加密、行级安全、审计日志和定期安全评估。"
+              "q": "我的数据是否安全？",
+              "a": "是的。我们实施了传输和静态的加密，行级安全，审计日志以及定期的安全评估。"
             },
             "1": {
-              "q": "你们符合 GDPR 吗？",
-              "a": "是的。我们提供数据导出、删除和同意管理工具，帮助您遵守 GDPR 和其他隐私法规。"
+              "q": "你们是否符合GDPR？",
+              "a": "是的。我们提供数据导出、删除和同意管理工具，帮助您符合GDPR和其他隐私法规。"
             },
             "2": {
-              "q": "你们有 SOC 2 认证吗？",
-              "a": "我们目前正在申请 SOC 2 Type II 认证。请联系我们获取当前的安全文档。"
+              "q": "你们有SOC 2认证吗？",
+              "a": "我们目前正在寻求SOC 2 Type II认证。请联系我们获取当前的安全文档。"
             },
             "3": {
               "q": "你们如何处理数据泄露？",
-              "a": "我们有事件响应计划，包括在 72 小时内通知、根本原因分析和补救措施。"
+              "a": "我们有24/7的Discord社区支持。企业支持可在周一至周五，太平洋时间上午9点至下午6点提供。"
             }
           }
         },
@@ -259,8 +268,8 @@
           "name": "支持",
           "questions": {
             "0": {
-              "q": "如何获取帮助？",
-              "a": "社区支持通过 Discord 和 GitHub Discussions 提供。付费计划包含电子邮件和优先支持。"
+              "q": "你们提供咨询服务吗？",
+              "a": "是的，我们提供架构审查、定制集成和迁移协助。请联系我们获取详情。"
             },
             "1": {
               "q": "支持时间是什么？",
@@ -274,27 +283,27 @@
         }
       },
       "ctaHeading": "还有问题？",
-      "ctaDescription": "我们的团队很乐意帮助。直接联系我们。",
-      "ctaButton": "联系我们",
-      "ctaEmail": "发送邮件"
+      "ctaDescription": "我们的团队很高兴帮助。请直接联系我们。",
+      "ctaButton": "联系Nebutra",
+      "ctaEmail": "邮件支持"
     },
     "privacy": {
       "title": "隐私政策 — Nebutra",
-      "description": "了解 Nebutra 如何收集、使用和保护您的个人信息。",
+      "description": "了解Nebutra如何收集、使用和保护您的个人资料。",
       "heading": "隐私政策",
       "effectiveDate": "生效日期",
       "lastUpdated": "最后更新"
     },
     "refund": {
       "title": "退款政策 — Nebutra",
-      "description": "了解 Nebutra 的订阅和服务退款政策。",
+      "description": "了解Nebutra的退款政策，包括订阅和服务。",
       "heading": "退款政策",
       "effectiveDate": "生效日期",
       "lastUpdated": "最后更新"
     },
     "terms": {
       "title": "服务条款 — Nebutra",
-      "description": "阅读使用 Nebutra 服务的条款和条件。",
+      "description": "阅读使用Nebutra服务的条款和条件。",
       "heading": "服务条款",
       "effectiveDate": "生效日期",
       "lastUpdated": "最后更新"

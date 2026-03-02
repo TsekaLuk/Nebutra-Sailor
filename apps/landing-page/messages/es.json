@@ -53,7 +53,10 @@
     "tagline": "Construido sobre el stack en el que ya confía"
   },
   "legal": {
-    "nav": { "home": "Inicio", "contact": "Contacto" },
+    "nav": {
+      "home": "Inicio",
+      "contact": "Contacto"
+    },
     "footer": {
       "privacy": "Política de privacidad",
       "terms": "Términos de servicio",

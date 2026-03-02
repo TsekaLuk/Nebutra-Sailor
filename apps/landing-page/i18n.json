@@ -12,7 +12,7 @@
   },
   "provider": {
     "id": "ollama",
-    "model": "qwen3:4b",
+    "model": "gemma3:1b",
     "baseUrl": "http://localhost:11434",
     "prompt": "You are a professional translator. Translate the provided text from {source} to {target}. Keep brand names (Nebutra, Stripe, Clerk, etc.) untranslated. Preserve any technical terms. Output only the translation, nothing else."
   }
