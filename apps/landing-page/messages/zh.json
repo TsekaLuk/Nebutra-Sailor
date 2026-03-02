@@ -62,6 +62,244 @@
       "copyright": "Nebutra, Inc. 版权所有。"
     }
   },
+  "legalPages": {
+    "about": {
+      "title": "关于我们 — Nebutra",
+      "description": "了解 Nebutra 的使命、价值观和开源企业级 SaaS 框架背后的团队。",
+      "heading": "关于 Nebutra",
+      "subheading": "构建企业 SaaS 的未来 — 开源、AI 原生、生产就绪。",
+      "missionTitle": "我们的使命",
+      "missionP1": "Nebutra 致力于消除每个 SaaS 团队面临的数月样板工作。我们相信构建优秀产品的最佳方式是从一个优秀的基础开始。",
+      "missionP2": "我们的开源框架开箱即用地提供多租户、计费、认证和 AI 基础设施 — 让团队可以专注于使其产品独特的部分。",
+      "valuesTitle": "我们的价值观",
+      "values": {
+        "0": {
+          "title": "开源优先",
+          "description": "我们在开放中构建。我们的核心框架采用 MIT 许可，永远如此。"
+        },
+        "1": {
+          "title": "生产就绪",
+          "description": "每个功能都经过实战检验。没有演示版，没有半成品抽象。"
+        },
+        "2": {
+          "title": "开发者体验",
+          "description": "出色的开发者体验不是可选的。我们专注于 API、文档和错误消息。"
+        },
+        "3": {
+          "title": "默认安全",
+          "description": "行级安全、加密密钥和审计日志从第一天起就内置其中。"
+        },
+        "4": {
+          "title": "社区驱动",
+          "description": "我们的路线图由每天使用 Nebutra 的开发者塑造。"
+        },
+        "5": {
+          "title": "快速交付",
+          "description": "我们频繁发布、快速迭代，绝不让完美成为交付的敌人。"
+        }
+      },
+      "companyInfoTitle": "公司信息",
+      "companyInfo": {
+        "legalName": "法律名称",
+        "founded": "成立时间",
+        "headquarters": "总部",
+        "jurisdiction": "管辖区"
+      },
+      "ctaHeading": "想了解更多？",
+      "ctaDescription": "联系我们的团队或浏览文档。",
+      "ctaButton": "联系我们"
+    },
+    "contact": {
+      "title": "联系我们 — Nebutra",
+      "description": "联系 Nebutra 团队，了解销售、支持、法律或一般咨询。",
+      "heading": "联系我们",
+      "subheading": "我们很乐意收到您的来信。请联系下面合适的团队。",
+      "contacts": {
+        "general": {
+          "title": "一般咨询",
+          "description": "关于 Nebutra、合作伙伴关系或其他任何问题。"
+        },
+        "sales": {
+          "title": "销售",
+          "description": "定价、企业计划和自定义部署。"
+        },
+        "support": {
+          "title": "技术支持",
+          "description": "集成、错误或技术问题的帮助。"
+        },
+        "legal": { "title": "法律", "description": "条款、许可和法律事务。" },
+        "privacy": {
+          "title": "隐私",
+          "description": "数据保护、GDPR 和隐私请求。"
+        },
+        "security": { "title": "安全", "description": "漏洞报告和安全问题。" }
+      },
+      "formTitle": "给我们发消息",
+      "form": {
+        "name": "姓名",
+        "email": "电子邮件",
+        "company": "公司",
+        "category": "类别",
+        "categories": {
+          "general": "一般咨询",
+          "sales": "销售",
+          "support": "技术支持",
+          "legal": "法律",
+          "privacy": "隐私",
+          "partnership": "合作伙伴",
+          "press": "媒体"
+        },
+        "subject": "主题",
+        "message": "消息",
+        "submit": "发送消息",
+        "privacyNotice": "提交此表单即表示您同意我们的",
+        "privacyLink": "隐私政策"
+      },
+      "companyInfoTitle": "公司信息",
+      "socialMedia": "社交媒体"
+    },
+    "cookies": {
+      "title": "Cookie 政策 — Nebutra",
+      "description": "了解 Nebutra 如何在我们的网站和服务中使用 Cookie 及类似技术。",
+      "heading": "Cookie 政策",
+      "effectiveDate": "生效日期",
+      "lastUpdated": "最后更新"
+    },
+    "faq": {
+      "title": "常见问题 — Nebutra",
+      "description": "关于 Nebutra 的常见问题，包括定价、功能和支持。",
+      "heading": "常见问题",
+      "subheading": "查找关于 Nebutra 的常见问题解答。",
+      "categories": {
+        "0": {
+          "name": "入门指南",
+          "questions": {
+            "0": {
+              "q": "什么是 Nebutra Sailor？",
+              "a": "Nebutra Sailor 是一个开源的、生产就绪的 SaaS 框架，基于 Next.js 构建，内置多租户、计费、认证和 AI 基础设施。"
+            },
+            "1": {
+              "q": "Nebutra 免费使用吗？",
+              "a": "是的，Nebutra Sailor 采用 MIT 许可，免费使用。我们还为需要托管基础设施和高级支持的团队提供托管云计划。"
+            },
+            "2": {
+              "q": "如何开始使用？",
+              "a": "运行我们的 CLI 命令来创建新项目，然后按照文档中的快速入门指南操作。您可以在 5 分钟内启动运行。"
+            }
+          }
+        },
+        "1": {
+          "name": "定价和计费",
+          "questions": {
+            "0": {
+              "q": "有哪些计划？",
+              "a": "我们提供免费版、入门版、专业版和企业版计划。访问我们的定价页面了解详情。"
+            },
+            "1": {
+              "q": "可以随时更改计划吗？",
+              "a": "是的，您可以随时升级或降级计划。升级立即生效，降级在下一个计费周期生效。"
+            },
+            "2": {
+              "q": "提供年付吗？",
+              "a": "是的，年付可享受折扣。企业定价请联系销售。"
+            },
+            "3": {
+              "q": "接受哪些付款方式？",
+              "a": "我们通过 Stripe 接受所有主要信用卡。企业客户可以通过发票付款。"
+            },
+            "4": {
+              "q": "有免费试用吗？",
+              "a": "是的，所有付费计划都包含 14 天免费试用。无需信用卡。"
+            }
+          }
+        },
+        "2": {
+          "name": "功能和技术",
+          "questions": {
+            "0": {
+              "q": "支持哪些 AI 供应商？",
+              "a": "我们开箱即用地支持 OpenAI、Anthropic 和 Google Gemini，统一 API 让您无需更改代码即可切换供应商。"
+            },
+            "1": {
+              "q": "多租户如何工作？",
+              "a": "多租户内置于每一层 — 从 Postgres 行级安全到基于中间件的租户路由和隔离的组织数据。"
+            },
+            "2": {
+              "q": "可以自托管 Nebutra 吗？",
+              "a": "当然可以。Nebutra 专为自托管设计。部署到任何支持 Node.js 和 Postgres 的平台。"
+            },
+            "3": {
+              "q": "Nebutra 使用什么数据库？",
+              "a": "Nebutra 使用 PostgreSQL（通过 Neon 或 Supabase），配合 Drizzle ORM 进行类型安全的数据库访问。"
+            }
+          }
+        },
+        "3": {
+          "name": "安全与合规",
+          "questions": {
+            "0": {
+              "q": "我的数据安全吗？",
+              "a": "是的。我们实施传输中和静态加密、行级安全、审计日志和定期安全评估。"
+            },
+            "1": {
+              "q": "你们符合 GDPR 吗？",
+              "a": "是的。我们提供数据导出、删除和同意管理工具，帮助您遵守 GDPR 和其他隐私法规。"
+            },
+            "2": {
+              "q": "你们有 SOC 2 认证吗？",
+              "a": "我们目前正在申请 SOC 2 Type II 认证。请联系我们获取当前的安全文档。"
+            },
+            "3": {
+              "q": "你们如何处理数据泄露？",
+              "a": "我们有事件响应计划，包括在 72 小时内通知、根本原因分析和补救措施。"
+            }
+          }
+        },
+        "4": {
+          "name": "支持",
+          "questions": {
+            "0": {
+              "q": "如何获取帮助？",
+              "a": "社区支持通过 Discord 和 GitHub Discussions 提供。付费计划包含电子邮件和优先支持。"
+            },
+            "1": {
+              "q": "支持时间是什么？",
+              "a": "社区支持通过 Discord 全天候提供。付费支持时间为周一至周五，太平洋时间上午 9 点至下午 6 点。"
+            },
+            "2": {
+              "q": "你们提供咨询服务吗？",
+              "a": "是的，我们提供架构审查、自定义集成和迁移协助。详情请联系销售。"
+            }
+          }
+        }
+      },
+      "ctaHeading": "还有问题？",
+      "ctaDescription": "我们的团队很乐意帮助。直接联系我们。",
+      "ctaButton": "联系我们",
+      "ctaEmail": "发送邮件"
+    },
+    "privacy": {
+      "title": "隐私政策 — Nebutra",
+      "description": "了解 Nebutra 如何收集、使用和保护您的个人信息。",
+      "heading": "隐私政策",
+      "effectiveDate": "生效日期",
+      "lastUpdated": "最后更新"
+    },
+    "refund": {
+      "title": "退款政策 — Nebutra",
+      "description": "了解 Nebutra 的订阅和服务退款政策。",
+      "heading": "退款政策",
+      "effectiveDate": "生效日期",
+      "lastUpdated": "最后更新"
+    },
+    "terms": {
+      "title": "服务条款 — Nebutra",
+      "description": "阅读使用 Nebutra 服务的条款和条件。",
+      "heading": "服务条款",
+      "effectiveDate": "生效日期",
+      "lastUpdated": "最后更新"
+    }
+  },
   "metadata": {
     "title": "Nebutra Sailor — 开源企业级 SaaS 框架",
     "description": "以周计交付 SaaS，内置多租户、计费、认证和 AI。生产就绪，MIT 许可。"

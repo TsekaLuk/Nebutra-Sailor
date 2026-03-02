@@ -62,6 +62,250 @@
       "copyright": "Nebutra, Inc. All rights reserved."
     }
   },
+  "legalPages": {
+    "about": {
+      "title": "About Us — Nebutra",
+      "description": "Learn about Nebutra, our mission, values, and the team behind the open-source enterprise SaaS framework.",
+      "heading": "About Nebutra",
+      "subheading": "Building the future of enterprise SaaS — open-source, AI-native, and production-ready.",
+      "missionTitle": "Our Mission",
+      "missionP1": "Nebutra exists to eliminate the months of boilerplate work that every SaaS team faces. We believe the best way to build great products is to start with a great foundation.",
+      "missionP2": "Our open-source framework provides multi-tenancy, billing, authentication, and AI infrastructure out of the box — so teams can focus on what makes their product unique.",
+      "valuesTitle": "Our Values",
+      "values": {
+        "0": {
+          "title": "Open Source First",
+          "description": "We build in the open. Our core framework is MIT-licensed and always will be."
+        },
+        "1": {
+          "title": "Production-Ready",
+          "description": "Every feature ships battle-tested. No demo-ware, no half-baked abstractions."
+        },
+        "2": {
+          "title": "Developer Experience",
+          "description": "Great DX is not optional. We obsess over APIs, docs, and error messages."
+        },
+        "3": {
+          "title": "Security by Default",
+          "description": "Row-level security, encrypted secrets, and audit logs are built in from day one."
+        },
+        "4": {
+          "title": "Community Driven",
+          "description": "Our roadmap is shaped by the developers who use Nebutra every day."
+        },
+        "5": {
+          "title": "Ship Fast, Ship Often",
+          "description": "We release frequently, iterate quickly, and never let perfect be the enemy of shipped."
+        }
+      },
+      "companyInfoTitle": "Company Information",
+      "companyInfo": {
+        "legalName": "Legal Name",
+        "founded": "Founded",
+        "headquarters": "Headquarters",
+        "jurisdiction": "Jurisdiction"
+      },
+      "ctaHeading": "Want to learn more?",
+      "ctaDescription": "Get in touch with our team or explore our documentation.",
+      "ctaButton": "Contact Us"
+    },
+    "contact": {
+      "title": "Contact Us — Nebutra",
+      "description": "Get in touch with the Nebutra team for sales, support, legal, or general inquiries.",
+      "heading": "Contact Us",
+      "subheading": "We'd love to hear from you. Reach out to the right team below.",
+      "contacts": {
+        "general": {
+          "title": "General Inquiries",
+          "description": "Questions about Nebutra, partnerships, or anything else."
+        },
+        "sales": {
+          "title": "Sales",
+          "description": "Pricing, enterprise plans, and custom deployments."
+        },
+        "support": {
+          "title": "Technical Support",
+          "description": "Help with integration, bugs, or technical issues."
+        },
+        "legal": {
+          "title": "Legal",
+          "description": "Terms, licensing, and legal matters."
+        },
+        "privacy": {
+          "title": "Privacy",
+          "description": "Data protection, GDPR, and privacy requests."
+        },
+        "security": {
+          "title": "Security",
+          "description": "Vulnerability reports and security concerns."
+        }
+      },
+      "formTitle": "Send Us a Message",
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "company": "Company",
+        "category": "Category",
+        "categories": {
+          "general": "General Inquiry",
+          "sales": "Sales",
+          "support": "Technical Support",
+          "legal": "Legal",
+          "privacy": "Privacy",
+          "partnership": "Partnership",
+          "press": "Press"
+        },
+        "subject": "Subject",
+        "message": "Message",
+        "submit": "Send Message",
+        "privacyNotice": "By submitting this form, you agree to our",
+        "privacyLink": "Privacy Policy"
+      },
+      "companyInfoTitle": "Company Information",
+      "socialMedia": "Social Media"
+    },
+    "cookies": {
+      "title": "Cookie Policy — Nebutra",
+      "description": "Learn how Nebutra uses cookies and similar technologies on our website and services.",
+      "heading": "Cookie Policy",
+      "effectiveDate": "Effective Date",
+      "lastUpdated": "Last Updated"
+    },
+    "faq": {
+      "title": "FAQ — Nebutra",
+      "description": "Frequently asked questions about Nebutra, pricing, features, and support.",
+      "heading": "Frequently Asked Questions",
+      "subheading": "Find answers to common questions about Nebutra.",
+      "categories": {
+        "0": {
+          "name": "Getting Started",
+          "questions": {
+            "0": {
+              "q": "What is Nebutra Sailor?",
+              "a": "Nebutra Sailor is an open-source, production-ready SaaS framework built with Next.js, featuring multi-tenancy, billing, authentication, and AI infrastructure out of the box."
+            },
+            "1": {
+              "q": "Is Nebutra free to use?",
+              "a": "Yes, Nebutra Sailor is MIT-licensed and free to use. We also offer managed cloud plans for teams that want hosted infrastructure and premium support."
+            },
+            "2": {
+              "q": "How do I get started?",
+              "a": "Run our CLI command to scaffold a new project, then follow the quickstart guide in our documentation. You can be up and running in under 5 minutes."
+            }
+          }
+        },
+        "1": {
+          "name": "Pricing & Billing",
+          "questions": {
+            "0": {
+              "q": "What plans are available?",
+              "a": "We offer Free, Starter, Pro, and Enterprise plans. Visit our pricing page for full details."
+            },
+            "1": {
+              "q": "Can I change plans at any time?",
+              "a": "Yes, you can upgrade or downgrade your plan at any time. Upgrades take effect immediately, downgrades at the next billing cycle."
+            },
+            "2": {
+              "q": "Do you offer annual billing?",
+              "a": "Yes, annual billing is available at a discount. Contact sales for enterprise pricing."
+            },
+            "3": {
+              "q": "What payment methods do you accept?",
+              "a": "We accept all major credit cards through Stripe. Enterprise customers can pay via invoice."
+            },
+            "4": {
+              "q": "Is there a free trial?",
+              "a": "Yes, all paid plans include a 14-day free trial. No credit card required."
+            }
+          }
+        },
+        "2": {
+          "name": "Features & Technical",
+          "questions": {
+            "0": {
+              "q": "What AI providers are supported?",
+              "a": "We support OpenAI, Anthropic, and Google Gemini out of the box, with a unified API that lets you swap providers without code changes."
+            },
+            "1": {
+              "q": "How does multi-tenancy work?",
+              "a": "Multi-tenancy is built into every layer — from Postgres row-level security to middleware-based tenant routing and isolated org data."
+            },
+            "2": {
+              "q": "Can I self-host Nebutra?",
+              "a": "Absolutely. Nebutra is designed for self-hosting. Deploy to any platform that supports Node.js and Postgres."
+            },
+            "3": {
+              "q": "What database does Nebutra use?",
+              "a": "Nebutra uses PostgreSQL (via Neon or Supabase) with Drizzle ORM for type-safe database access."
+            }
+          }
+        },
+        "3": {
+          "name": "Security & Compliance",
+          "questions": {
+            "0": {
+              "q": "Is my data secure?",
+              "a": "Yes. We implement encryption in transit and at rest, row-level security, audit logging, and regular security assessments."
+            },
+            "1": {
+              "q": "Are you GDPR compliant?",
+              "a": "Yes. We provide data export, deletion, and consent management tools to help you comply with GDPR and other privacy regulations."
+            },
+            "2": {
+              "q": "Do you have SOC 2 certification?",
+              "a": "We are currently pursuing SOC 2 Type II certification. Contact us for our current security documentation."
+            },
+            "3": {
+              "q": "How do you handle data breaches?",
+              "a": "We have an incident response plan that includes notification within 72 hours, root cause analysis, and remediation steps."
+            }
+          }
+        },
+        "4": {
+          "name": "Support",
+          "questions": {
+            "0": {
+              "q": "How can I get help?",
+              "a": "Community support is available via Discord and GitHub Discussions. Paid plans include email and priority support."
+            },
+            "1": {
+              "q": "What are your support hours?",
+              "a": "Community support is 24/7 via Discord. Paid support is available Monday-Friday, 9am-6pm PST."
+            },
+            "2": {
+              "q": "Do you offer consulting services?",
+              "a": "Yes, we offer architecture reviews, custom integrations, and migration assistance. Contact sales for details."
+            }
+          }
+        }
+      },
+      "ctaHeading": "Still have questions?",
+      "ctaDescription": "Our team is happy to help. Reach out to us directly.",
+      "ctaButton": "Contact Us",
+      "ctaEmail": "Email Support"
+    },
+    "privacy": {
+      "title": "Privacy Policy — Nebutra",
+      "description": "Learn how Nebutra collects, uses, and protects your personal information.",
+      "heading": "Privacy Policy",
+      "effectiveDate": "Effective Date",
+      "lastUpdated": "Last Updated"
+    },
+    "refund": {
+      "title": "Refund Policy — Nebutra",
+      "description": "Understand Nebutra's refund policy for subscriptions and services.",
+      "heading": "Refund Policy",
+      "effectiveDate": "Effective Date",
+      "lastUpdated": "Last Updated"
+    },
+    "terms": {
+      "title": "Terms of Service — Nebutra",
+      "description": "Read the terms and conditions for using Nebutra's services.",
+      "heading": "Terms of Service",
+      "effectiveDate": "Effective Date",
+      "lastUpdated": "Last Updated"
+    }
+  },
   "metadata": {
     "title": "Nebutra Sailor — The Open-Source Enterprise SaaS Framework",
     "description": "Ship your SaaS in weeks, not months. Multi-tenancy, billing, auth, and AI built in. Production-ready, MIT licensed."
