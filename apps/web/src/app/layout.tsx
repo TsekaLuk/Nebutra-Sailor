@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DesignSystemProvider } from "@nebutra/design-system";
+import { ThemeShell } from "./providers/theme-provider";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import "./globals.css";
 
@@ -27,11 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const content = (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <DesignSystemProvider>
-          <ErrorBoundary>{children}</ErrorBoundary>
-        </DesignSystemProvider>
+        <ThemeShell>
+          <DesignSystemProvider>
+            <ErrorBoundary>{children}</ErrorBoundary>
+          </DesignSystemProvider>
+        </ThemeShell>
       </body>
     </html>
   );

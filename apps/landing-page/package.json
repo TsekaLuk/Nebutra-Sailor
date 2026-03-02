@@ -7,7 +7,8 @@
     "build": "pnpm --filter @nebutra/brand sync && next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "translate": "npx lingo.dev@latest run"
   },
   "dependencies": {
     "@nebutra/brand": "workspace:*",
@@ -15,6 +16,7 @@
     "@nebutra/design-system": "workspace:*",
     "@nebutra/marketing": "workspace:*",
     "@nebutra/sanity": "workspace:*",
+    "@nebutra/theme": "workspace:*",
     "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

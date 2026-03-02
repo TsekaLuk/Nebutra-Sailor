@@ -9,6 +9,9 @@
 /* Tailwind CSS v4 - must be imported first */
 @import "tailwindcss";
 
+/* Theme engine — multi-theme tokens via data-theme selectors */
+@import "@nebutra/theme/themes.css";
+
 /* Typography SSOT - must be imported first to define --font-* variables */
 @import "@nebutra/design-system/typography/fonts.css";
 

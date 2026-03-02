@@ -2,16 +2,16 @@
 
 import { ThemeProvider } from "@nebutra/theme";
 
-interface ProvidersProps {
+interface ThemeShellProps {
   children: React.ReactNode;
 }
 
 /**
- * Client-side providers wrapper
+ * Client-side theme provider for the web app.
  * Uses data-theme attribute for CSS-only multi-theme system.
  * Default theme is "neon" (dark AI SaaS aesthetic).
  */
-export function Providers({ children }: ProvidersProps) {
+export function ThemeShell({ children }: ThemeShellProps) {
   return (
     <ThemeProvider
       attribute="data-theme"
