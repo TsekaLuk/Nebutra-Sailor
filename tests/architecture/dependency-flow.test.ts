@@ -22,6 +22,8 @@ const EXCLUDED_PACKAGES = new Set([
   "@nebutra/event-bus",
   "@nebutra/marketing",
   "@nebutra/sanity",
+  "@nebutra/theme",
+  "@nebutra/preset",
 ]);
 
 interface DependencyRule {
@@ -38,7 +40,7 @@ interface DependencyRule {
  *   @nebutra/ui             (packages/ui):                  none
  *   @nebutra/custom-ui      (packages/custom-ui):           @nebutra/design-system
  *   @nebutra/web            (apps/web):                     @nebutra/custom-ui, @nebutra/design-system
- *   @nebutra/landing-page   (apps/landing-page):            @nebutra/custom-ui, @nebutra/design-system (+ excluded tooling)
+ *   @nebutra/landing-page   (apps/landing-page):            @nebutra/custom-ui, @nebutra/design-system (+ excluded: brand, marketing, sanity, theme, preset)
  *   @nebutra/docs-hub       (apps/docs-hub):                none
  */
 const DEPENDENCY_RULES: DependencyRule[] = [
