@@ -34,6 +34,7 @@ const config = {
         "ui",
         "db",
         "design-system",
+        "theme",
         "rate-limit",
         "cache",
         "event-bus",
