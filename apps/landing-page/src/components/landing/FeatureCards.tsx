@@ -48,13 +48,16 @@ export function FeatureCards() {
   }));
 
   return (
-    <section id="features" className="w-full bg-black py-24 md:py-32">
+    <section
+      id="features"
+      className="w-full bg-gray-50 py-24 md:py-32 dark:bg-black"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          className="mb-16 text-center text-3xl font-bold tracking-tight text-white md:text-4xl"
+          className="mb-16 text-center text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-white"
         >
           {t("sectionTitle")}
         </motion.h2>
@@ -69,19 +72,19 @@ export function FeatureCards() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ delay: i * 0.1 }}
-                className="group flex flex-col rounded-2xl border border-white/8 bg-white/3 p-6 transition-colors hover:border-white/15"
+                className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-gray-300 dark:border-white/8 dark:bg-white/3 dark:hover:border-white/15"
               >
                 <Icon className="mb-4 h-5 w-5 text-indigo-400" />
-                <h3 className="mb-2 font-semibold text-white">
+                <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">
                   {feature.title}
                 </h3>
-                <p className="mb-6 text-sm leading-relaxed text-white/50">
+                <p className="mb-6 text-sm leading-relaxed text-gray-500 dark:text-white/50">
                   {feature.description}
                 </p>
 
                 {/* Code preview */}
-                <div className="mt-auto rounded-xl border border-white/6 bg-black/40 p-4">
-                  <pre className="overflow-x-auto font-mono text-[11px] leading-relaxed text-white/60">
+                <div className="mt-auto rounded-xl border border-gray-200 bg-gray-100 p-4 dark:border-white/6 dark:bg-black/40">
+                  <pre className="overflow-x-auto font-mono text-[11px] leading-relaxed text-gray-500 dark:text-white/60">
                     {feature.code.map((line, j) => (
                       <span key={j} className="block">
                         {line || "\u00a0"}

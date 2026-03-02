@@ -20,7 +20,7 @@ export function FinalCTA() {
   };
 
   return (
-    <section className="relative w-full bg-black py-32 md:py-40">
+    <section className="relative w-full bg-white py-32 md:py-40 dark:bg-black">
       {/* Ambient glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2">
@@ -33,7 +33,7 @@ export function FinalCTA() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-3xl font-bold text-white md:text-5xl lg:text-6xl"
+          className="text-3xl font-bold text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
         >
           {t("heading")}
         </motion.h2>
@@ -43,7 +43,7 @@ export function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ delay: 0.1 }}
-          className="mt-6 text-lg text-white/50 md:text-xl"
+          className="mt-6 text-lg text-gray-500 md:text-xl dark:text-white/50"
         >
           {t("subheading")}
         </motion.p>
@@ -56,14 +56,15 @@ export function FinalCTA() {
           transition={{ delay: 0.2 }}
           className="mx-auto mt-10 max-w-xl"
         >
-          <div className="group relative flex items-center rounded-xl border border-white/8 bg-white/4 p-1.5 transition-all hover:border-white/15">
-            <code className="flex-1 px-5 py-3.5 font-mono text-sm text-white md:text-base">
-              <span className="text-white/40">$</span> {heroContent.command}
+          <div className="group relative flex items-center rounded-xl border border-gray-200 bg-gray-50 p-1.5 transition-all hover:border-gray-300 dark:border-white/8 dark:bg-white/4 dark:hover:border-white/15">
+            <code className="flex-1 px-5 py-3.5 font-mono text-sm text-gray-800 md:text-base dark:text-white">
+              <span className="text-gray-400 dark:text-white/40">$</span>{" "}
+              {heroContent.command}
             </code>
             <button
               type="button"
               onClick={handleCopy}
-              className="flex items-center gap-2 rounded-lg bg-white/8 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/12 cursor-pointer"
+              className="flex items-center gap-2 rounded-lg bg-gray-200 px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-300 cursor-pointer dark:bg-white/8 dark:text-white dark:hover:bg-white/12"
             >
               <Copy className="h-4 w-4" />
               {copied ? t("copiedLabel") : t("copyLabel")}

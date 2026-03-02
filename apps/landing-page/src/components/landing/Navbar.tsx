@@ -47,15 +47,19 @@ export function Navbar() {
       className={cn(
         "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-black/80 backdrop-blur-md border-b border-white/6"
+          ? "bg-white/80 backdrop-blur-md border-b border-gray-200 dark:bg-black/80 dark:border-white/6"
           : "bg-transparent",
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Logomark size={32} variant="inverse" className="md:hidden" />
-          <Logo variant="en" size={150} inverted className="hidden md:block" />
+          <Logomark size={32} className="md:hidden dark:invert" />
+          <Logo
+            variant="en"
+            size={150}
+            className="hidden md:block dark:invert"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -64,7 +68,7 @@ export function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
+              className="flex items-center gap-2 text-sm text-gray-500 transition-colors hover:text-gray-900 dark:text-white/60 dark:hover:text-white"
             >
               {link.icon && <link.icon className="h-4 w-4" />}
               {link.label}
@@ -75,7 +79,7 @@ export function Navbar() {
 
           <a
             href={`${APP_URL}/sign-in`}
-            className="text-sm text-white/60 transition-colors hover:text-white"
+            className="text-sm text-gray-500 transition-colors hover:text-gray-900 dark:text-white/60 dark:hover:text-white"
           >
             {t("signIn")}
           </a>
@@ -92,7 +96,7 @@ export function Navbar() {
           <ThemeSwitcher />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="rounded-lg p-2 text-white/60 transition-colors hover:text-white"
+            className="rounded-lg p-2 text-gray-500 transition-colors hover:text-gray-900 dark:text-white/60 dark:hover:text-white"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -110,7 +114,7 @@ export function Navbar() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="border-t border-white/6 bg-black/95 backdrop-blur-md md:hidden"
+          className="border-t border-gray-200 bg-white/95 backdrop-blur-md md:hidden dark:border-white/6 dark:bg-black/95"
         >
           <div className="flex flex-col gap-4 px-6 py-4">
             {navLinks.map((link) => (
@@ -118,18 +122,18 @@ export function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center gap-2 text-white/70 transition-colors hover:text-white"
+                className="flex items-center gap-2 text-gray-500 transition-colors hover:text-gray-900 dark:text-white/70 dark:hover:text-white"
               >
                 {link.icon && <link.icon className="h-4 w-4" />}
                 {link.label}
               </a>
             ))}
 
-            <div className="flex flex-col gap-3 mt-2 pt-4 border-t border-white/6">
+            <div className="flex flex-col gap-3 mt-2 pt-4 border-t border-gray-200 dark:border-white/6">
               <a
                 href={`${APP_URL}/sign-in`}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full rounded-lg border border-white/10 px-4 py-3 text-center text-sm font-medium text-white/70 transition-all hover:border-white/20 hover:text-white"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-center text-sm font-medium text-gray-600 transition-all hover:border-gray-400 hover:text-gray-900 dark:border-white/10 dark:text-white/70 dark:hover:border-white/20 dark:hover:text-white"
               >
                 {t("signIn")}
               </a>

@@ -25,7 +25,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen w-full bg-black">
+    <section className="relative min-h-screen w-full bg-white dark:bg-black">
       {/* Subtle grid overlay */}
       <div className="absolute inset-0 bg-grid-overlay pointer-events-none" />
 
@@ -45,7 +45,7 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-4 py-1.5 text-xs text-white/60 tracking-wide">
+          <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-100 px-4 py-1.5 text-xs text-gray-500 tracking-wide dark:border-white/10 dark:bg-white/4 dark:text-white/60">
             {t("badge")}
           </span>
         </motion.div>
@@ -55,7 +55,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-4xl text-center text-4xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1]"
+          className="max-w-4xl text-center text-4xl font-bold tracking-tight text-gray-900 md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] dark:text-white"
         >
           {t("headline1")}
           <br />
@@ -69,7 +69,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 max-w-2xl text-center text-lg text-white/50 md:text-xl"
+          className="mt-8 max-w-2xl text-center text-lg text-gray-500 md:text-xl dark:text-white/50"
         >
           {t("subheadline")}
         </motion.p>
@@ -81,14 +81,15 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-12 w-full max-w-xl"
         >
-          <div className="group relative flex items-center rounded-xl border border-white/8 bg-white/4 p-1.5 transition-all hover:border-white/15">
-            <code className="flex-1 px-5 py-3.5 font-mono text-sm text-white md:text-base">
-              <span className="text-white/40">$</span> {heroContent.command}
+          <div className="group relative flex items-center rounded-xl border border-gray-200 bg-gray-50 p-1.5 transition-all hover:border-gray-300 dark:border-white/8 dark:bg-white/4 dark:hover:border-white/15">
+            <code className="flex-1 px-5 py-3.5 font-mono text-sm text-gray-800 md:text-base dark:text-white">
+              <span className="text-gray-400 dark:text-white/40">$</span>{" "}
+              {heroContent.command}
             </code>
             <button
               type="button"
               onClick={handleCopy}
-              className="flex items-center gap-2 rounded-lg bg-white/8 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/12 cursor-pointer"
+              className="flex items-center gap-2 rounded-lg bg-gray-200 px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-300 cursor-pointer dark:bg-white/8 dark:text-white dark:hover:bg-white/12"
             >
               <Copy className="h-4 w-4" />
               {copied ? t("copiedLabel") : t("copyLabel")}
@@ -112,7 +113,7 @@ export function HeroSection() {
           </a>
           <a
             href="https://github.com/TsekaLuk/Nebutra-Sailor"
-            className="inline-flex items-center gap-2 text-sm font-medium text-white/50 transition-colors hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-white/50 dark:hover:text-white"
           >
             {t("ctaViewGitHub")}
           </a>

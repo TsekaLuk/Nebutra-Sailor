@@ -16,9 +16,9 @@ export async function LogoStrip() {
   }));
 
   return (
-    <section className="w-full border-y border-white/5 bg-black py-10">
+    <section className="w-full border-y border-gray-200 bg-white py-10 dark:border-white/5 dark:bg-black">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-8 text-center text-xs uppercase tracking-widest text-white/30">
+        <p className="mb-8 text-center text-xs uppercase tracking-widest text-gray-400 dark:text-white/30">
           {t("tagline")}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
@@ -29,7 +29,7 @@ export async function LogoStrip() {
               alt={logo.name}
               width={0}
               height={28}
-              className="h-7 w-auto opacity-30 grayscale transition-all duration-300 hover:opacity-60 hover:grayscale-0"
+              className="h-7 w-auto opacity-50 grayscale transition-all duration-300 hover:opacity-80 hover:grayscale-0 invert dark:invert-0"
               style={{ width: "auto" }}
               unoptimized={false}
             />

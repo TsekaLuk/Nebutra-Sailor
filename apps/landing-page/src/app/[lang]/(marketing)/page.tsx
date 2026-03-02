@@ -22,7 +22,7 @@ export default async function LocalizedHomePage({
   setRequestLocale(lang as Locale);
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-white dark:bg-black">
       <Navbar />
       <HeroSection />
       <LogoStrip />
