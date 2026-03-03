@@ -15,18 +15,16 @@
  */
 
 /* ============================================
-   Google Fonts Import (MUST be first)
+   Google Fonts — load in each app's globals.css
+   ============================================
+   @import url() must precede ALL CSS rules (CSS spec §6.3).
+   This file is consumed after @import "tailwindcss" which inlines
+   CSS content, so URL imports cannot live here.
+   Each app must add these at the very top of its own globals.css:
+
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
    ============================================ */
-
-/* Inter - Primary font for UI and body text */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* JetBrains Mono - Monospace font for code */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-/* Noto Sans SC - Chinese (Simplified) fallback
-   Only import if CJK support is needed */
-/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap'); */
 
 /* ============================================
    CSS Custom Properties (SSOT)

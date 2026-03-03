@@ -1,12 +1,17 @@
 /**
  * Nebutra Landing Page - Global Styles
  *
- * 1. Tailwind CSS v4 (must be first)
- * 2. Typography CSS variables from design-system (SSOT for fonts)
- * 3. Theme system from @nebutra/custom-ui (colors, Tailwind config)
+ * 1. Google Fonts URLs (must be absolute first — CSS spec)
+ * 2. Tailwind CSS v4
+ * 3. Typography CSS variables from design-system (SSOT for fonts)
+ * 4. Theme system from @nebutra/custom-ui (colors, Tailwind config)
  */
 
-/* Tailwind CSS v4 - must be imported first */
+/* Google Fonts — must precede ALL other rules (CSS spec §6.3) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* Tailwind CSS v4 */
 @import "tailwindcss";
 
 /* Theme engine — multi-theme tokens via data-theme selectors */
