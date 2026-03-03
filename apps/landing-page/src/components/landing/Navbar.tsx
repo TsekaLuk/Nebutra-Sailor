@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { env } from "@/lib/env";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
+import { LocaleSwitcher } from "@/components/ui/locale-switcher";
 
 const APP_URL = env.NEXT_PUBLIC_APP_URL;
 
@@ -75,6 +76,7 @@ export function Navbar() {
             </a>
           ))}
 
+          <LocaleSwitcher />
           <ThemeSwitcher />
 
           <a
@@ -91,8 +93,9 @@ export function Navbar() {
           </a>
         </div>
 
-        {/* Mobile: Theme + Menu Button */}
-        <div className="flex items-center gap-2 md:hidden">
+        {/* Mobile: Locale + Theme + Menu Button */}
+        <div className="flex items-center gap-1 md:hidden">
+          <LocaleSwitcher />
           <ThemeSwitcher />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

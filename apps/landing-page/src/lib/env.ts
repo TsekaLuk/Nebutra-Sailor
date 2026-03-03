@@ -29,8 +29,7 @@ function validateEnv(): LandingEnv {
   return result.data;
 }
 
-// Only validate on the server side (avoid browser issues with process.env)
-export const env =
-  typeof window === "undefined"
-    ? validateEnv()
-    : (process.env as unknown as LandingEnv);
+// Validate on both server and client — all vars are NEXT_PUBLIC_* (safe in browser).
+// Zod defaults ensure server and client produce identical values, preventing
+// React hydration mismatches from divergent env reads.
+export const env = validateEnv();
