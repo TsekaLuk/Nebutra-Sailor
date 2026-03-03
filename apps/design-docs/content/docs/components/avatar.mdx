@@ -1,0 +1,246 @@
+---
+title: "Avatar"
+description: "User profile image with automatic fallback to initials. Includes git platform variants, icon badges, and DiceBear generated avatars."
+---
+
+## Import
+
+```tsx
+import {
+  // Base primitives
+  Avatar, AvatarImage, AvatarFallback, AvatarGroup,
+  // Git platform variants
+  GitHubAvatar, GitLabAvatar, BitbucketAvatar,
+  // Icon badge
+  AvatarWithIcon,
+  // Generated
+  DiceBearAvatar,
+} from "@nebutra/custom-ui"
+```
+
+---
+
+## Base Avatar
+
+### Basic
+
+```tsx
+<Avatar size="md">
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback size="md">SC</AvatarFallback>
+</Avatar>
+```
+
+### Size Variants
+
+Five sizes controlled by the `size` prop:
+
+| `size` | px | Class |
+|--------|-----|-------|
+| `xs` | 20 | `h-5 w-5` |
+| `sm` | 32 | `h-8 w-8` |
+| `md` | 40 | `h-10 w-10` (default) |
+| `lg` | 56 | `h-14 w-14` |
+| `xl` | 80 | `h-20 w-20` |
+
+```tsx
+<Avatar size="xs"><AvatarFallback size="xs">XS</AvatarFallback></Avatar>
+<Avatar size="sm"><AvatarFallback size="sm">SM</AvatarFallback></Avatar>
+<Avatar size="md"><AvatarFallback size="md">MD</AvatarFallback></Avatar>
+<Avatar size="lg"><AvatarFallback size="lg">LG</AvatarFallback></Avatar>
+<Avatar size="xl"><AvatarFallback size="xl">XL</AvatarFallback></Avatar>
+```
+
+### Placeholder
+
+When no image is available, `AvatarFallback` renders initials on a muted background:
+
+```tsx
+<Avatar size="md">
+  <AvatarFallback size="md">NB</AvatarFallback>
+</Avatar>
+```
+
+---
+
+## AvatarGroup
+
+Stacks avatars with automatic `+N` overflow indicator.
+
+```tsx
+<AvatarGroup
+  items={[
+    { src: "https://github.com/rauchg.png",    alt: "rauchg",  fallback: "RG" },
+    { src: "https://github.com/leerob.png",    alt: "leerob",  fallback: "LR" },
+    { src: "https://github.com/shuding.png",   alt: "shuding", fallback: "SH" },
+    { src: "https://github.com/almonk.png",    alt: "almonk",  fallback: "AL" },
+    { src: "https://github.com/sambecker.png", alt: "sambecker", fallback: "SB" },
+  ]}
+  max={4}
+  size="sm"
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `AvatarGroupItem[]` | — | Array of `{ src?, alt, fallback }` |
+| `max` | `number` | `4` | Max avatars before collapsing |
+| `size` | `AvatarSize` | `"sm"` | Size applied to all avatars |
+
+---
+
+## Git Platform Avatars
+
+One-line avatars that fetch images directly from the platform CDN. Initials are shown automatically if the load fails.
+
+### GitHub
+
+```tsx
+<GitHubAvatar username="rauchg" size="sm" />
+<GitHubAvatar username="leerob" size="sm" />
+<GitHubAvatar username="shuding" size="sm" />
+```
+
+URL format: `https://github.com/{username}.png?size={2×px}`
+
+### GitLab
+
+```tsx
+<GitLabAvatar username="leerob" size="sm" />
+```
+
+URL format: `https://gitlab.com/{username}.png`
+
+### Bitbucket
+
+```tsx
+<BitbucketAvatar username="evilrabbit" size="sm" />
+```
+
+URL format: `https://bitbucket.org/account/{username}/avatar`
+
+All three variants share the same props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `username` | `string` | — | Platform username / workspace slug |
+| `size` | `AvatarSize` | `"sm"` | Size preset |
+
+---
+
+## AvatarWithIcon
+
+Avatar with a small icon badge anchored to the bottom-right corner. Useful for showing connection status, role badges, or platform indicators.
+
+```tsx
+import { CheckCircleFill, ArrowCircleDown, ClockDashed } from "@nebutra/icons"
+
+<AvatarWithIcon
+  src="https://github.com/rauchg.png"
+  alt="rauchg"
+  icon={<CheckCircleFill size={14} />}
+  size="md"
+/>
+
+<AvatarWithIcon
+  src="https://github.com/leerob.png"
+  alt="leerob"
+  icon={<ArrowCircleDown size={14} />}
+  iconBackground="bg-blue-500"
+  size="md"
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `icon` | `ReactNode` | — | Icon element rendered in the badge |
+| `iconBackground` | `string` | `"bg-background"` | Tailwind bg class for the badge |
+| `src` | `string` | — | Avatar image URL |
+| `alt` | `string` | `"Avatar"` | Alt text for the image |
+| `fallback` | `string` | auto-initials | Fallback initials when image fails |
+| `size` | `AvatarSize` | `"md"` | Size preset |
+
+---
+
+## DiceBearAvatar
+
+Procedurally generated avatar via [DiceBear](https://www.dicebear.com/) — deterministic for the same `seed`. No npm package required; uses the free HTTP API.
+
+```tsx
+{/* Default: bottts-neutral robot */}
+<DiceBearAvatar seed="rauchg" size="md" />
+
+{/* Pixel art with rounded corners */}
+<DiceBearAvatar
+  seed="user@example.com"
+  avatarStyle="pixel-art"
+  options={{ radius: 50 }}
+  size="md"
+/>
+
+{/* Fun emoji for anonymous / guest users */}
+<DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
+
+{/* Bottts robot — good for AI agents / bots */}
+<DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="lg" />
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `seed` | `string` | — | Deterministic seed (username, email, UUID…) |
+| `avatarStyle` | `DiceBearStyle` | `"bottts-neutral"` | Avatar collection / style |
+| `options` | `Record<string, string \| number>` | `{}` | Extra DiceBear query params (`radius`, `backgroundColor`, etc.) |
+| `size` | `AvatarSize` | `"md"` | Size preset |
+
+### Available Styles
+
+```
+avataaars        avataaars-neutral   bottts          bottts-neutral
+identicon        lorelei             lorelei-neutral  notionists
+notionists-neutral  open-peeps      pixel-art        pixel-art-neutral
+shapes           thumbs             fun-emoji        micah
+miniavs          rings              croodles         croodles-neutral
+dylan            glass
+```
+
+<Tip>
+  Use `bottts-neutral` or `identicon` for system/bot entities.
+  Use `avataaars` or `lorelei` for human user placeholders.
+  Use `fun-emoji` for anonymous/guest sessions.
+</Tip>
+
+---
+
+## Props Reference
+
+### Avatar
+
+Extends `@radix-ui/react-avatar` Root props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Size preset |
+| `className` | `string` | — | Additional CSS classes |
+
+### AvatarImage
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `src` | `string` | Image URL |
+| `alt` | `string` | **Required.** Screen reader label |
+
+### AvatarFallback
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `AvatarSize` | `"md"` | Match parent Avatar size for correct font |
+| `delayMs` | `number` | `600` | Delay before showing — prevents flash on fast loads |
+
+---
+
+## Accessibility
+
+- Always provide a meaningful `alt` on `AvatarImage`.
+- When the avatar triggers an action (e.g., opens a user menu), wrap in `<button aria-label="...">`.
+- `AvatarFallback` background (`bg-muted`) meets 4.5:1 contrast against `text-muted-foreground`.
+- `DiceBearAvatar` SVGs are decorative — the `AvatarFallback` provides a text alternative.

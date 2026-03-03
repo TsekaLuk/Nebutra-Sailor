@@ -1,0 +1,89 @@
+---
+title: "Scroll Area"
+description: "Custom scrollable container with styled scrollbars, built on Radix UI."
+---
+
+## Demo
+
+```tsx
+import { ScrollArea } from "@nebutra/custom-ui/primitives"
+import { Separator } from "@nebutra/custom-ui/primitives"
+
+const tags = Array.from({ length: 50 }, (_, i) => `Tag ${i + 1}`)
+
+export function ScrollAreaDemo() {
+  return (
+    <ScrollArea className="h-72 w-48 rounded-md border">
+      <div className="p-4">
+        <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
+        {tags.map((tag, i) => (
+          <React.Fragment key={tag}>
+            <div className="text-sm">{tag}</div>
+            {i < tags.length - 1 && <Separator className="my-2" />}
+          </React.Fragment>
+        ))}
+      </div>
+    </ScrollArea>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import { ScrollArea, ScrollBar } from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+### ScrollArea
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"auto" \| "always" \| "scroll" \| "hover"` | `"hover"` | When to show the scrollbar |
+| `scrollHideDelay` | `number` | `600` | Delay in ms before hiding scroll bar |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Scrollable content |
+
+### ScrollBar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Scrollbar orientation |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### Horizontal Scroll Area
+
+```tsx
+<ScrollArea className="w-96 whitespace-nowrap rounded-md border">
+  <div className="flex w-max space-x-4 p-4">
+    {items.map((item) => (
+      <figure key={item.id} className="shrink-0">
+        <img src={item.image} className="h-40 w-40 rounded-md object-cover" />
+      </figure>
+    ))}
+  </div>
+  <ScrollBar orientation="horizontal" />
+</ScrollArea>
+```
+
+### Fixed Height Content List
+
+```tsx
+<ScrollArea className="h-96 rounded-md border">
+  {notifications.map((notif) => (
+    <div key={notif.id} className="p-4 border-b">
+      <p className="text-sm font-medium">{notif.title}</p>
+      <p className="text-xs text-muted-foreground">{notif.time}</p>
+    </div>
+  ))}
+</ScrollArea>
+```
+
+## Accessibility
+
+- Scroll area content is accessible to keyboard and screen reader users — native scrolling semantics are preserved.
+- The custom scrollbar is `aria-hidden="true"` — it is purely visual.
+- Focus remains on content elements within the scroll area, not the scrollbar itself.
