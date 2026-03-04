@@ -13,7 +13,7 @@ import type { SpacingScale } from "../tokens/spacing";
  * @see apps/landing-page/DESIGN.md Section 10.1
  */
 
-export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
+export interface BoxOwnProps {
   /** Render as a different element */
   as?: React.ElementType;
   /** Padding on all sides */
@@ -44,8 +44,18 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   mb?: SpacingScale;
   /** Margin left */
   ml?: SpacingScale;
+  className?: string;
   children?: React.ReactNode;
 }
+
+export type BoxProps<T extends React.ElementType = "div"> = BoxOwnProps &
+  Omit<React.ComponentPropsWithoutRef<T>, keyof BoxOwnProps>;
+
+type BoxRef<T extends React.ElementType> = React.ComponentPropsWithRef<T>["ref"];
+
+type BoxComponent = <T extends React.ElementType = "div">(
+  props: BoxProps<T> & { ref?: BoxRef<T> },
+) => React.ReactElement | null;
 
 // Maps spacing scale to Tailwind classes
 const spacingMap: Record<SpacingScale, string> = {
@@ -73,57 +83,63 @@ function getSpacingClass(
   return `${prefix}-${spacingMap[value]}`;
 }
 
-export const Box = React.forwardRef<HTMLElement, BoxProps>(
-  (
+type BoxInternalProps = BoxProps<React.ElementType>;
+
+const BoxBase = React.forwardRef<HTMLElement, BoxInternalProps>(function BoxInner(
+  {
+    as,
+    className,
+    p,
+    px,
+    py,
+    pt,
+    pr,
+    pb,
+    pl,
+    m,
+    mx,
+    my,
+    mt,
+    mr,
+    mb,
+    ml,
+    children,
+    ...props
+  }: BoxInternalProps,
+  ref,
+) {
+  const spacingClasses = cn(
+    // Padding
+    getSpacingClass("p", p),
+    getSpacingClass("px", px),
+    getSpacingClass("py", py),
+    getSpacingClass("pt", pt),
+    getSpacingClass("pr", pr),
+    getSpacingClass("pb", pb),
+    getSpacingClass("pl", pl),
+    // Margin
+    getSpacingClass("m", m),
+    getSpacingClass("mx", mx),
+    getSpacingClass("my", my),
+    getSpacingClass("mt", mt),
+    getSpacingClass("mr", mr),
+    getSpacingClass("mb", mb),
+    getSpacingClass("ml", ml),
+  );
+
+  const component = as ?? "div";
+
+  return React.createElement(
+    component,
     {
-      as: Component = "div",
-      className,
-      p,
-      px,
-      py,
-      pt,
-      pr,
-      pb,
-      pl,
-      m,
-      mx,
-      my,
-      mt,
-      mr,
-      mb,
-      ml,
-      children,
-      ...props
+      ...props,
+      ref,
+      className: cn(spacingClasses, className),
     },
-    ref,
-  ) => {
-    const spacingClasses = cn(
-      // Padding
-      getSpacingClass("p", p),
-      getSpacingClass("px", px),
-      getSpacingClass("py", py),
-      getSpacingClass("pt", pt),
-      getSpacingClass("pr", pr),
-      getSpacingClass("pb", pb),
-      getSpacingClass("pl", pl),
-      // Margin
-      getSpacingClass("m", m),
-      getSpacingClass("mx", mx),
-      getSpacingClass("my", my),
-      getSpacingClass("mt", mt),
-      getSpacingClass("mr", mr),
-      getSpacingClass("mb", mb),
-      getSpacingClass("ml", ml),
-    );
+    children,
+  );
+});
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Comp = Component as any;
-    return (
-      <Comp ref={ref} className={cn(spacingClasses, className)} {...props}>
-        {children}
-      </Comp>
-    );
-  },
-);
+BoxBase.displayName = "Box";
 
-Box.displayName = "Box";
+export const Box = BoxBase as unknown as BoxComponent;
