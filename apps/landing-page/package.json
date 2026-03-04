@@ -14,7 +14,6 @@
     "@lottiefiles/dotlottie-react": "^0.18.3",
     "@nebutra/brand": "workspace:*",
     "@nebutra/custom-ui": "workspace:*",
-    "@nebutra/design-system": "workspace:*",
     "@nebutra/marketing": "workspace:*",
     "@nebutra/sanity": "workspace:*",
     "@nebutra/theme": "workspace:*",

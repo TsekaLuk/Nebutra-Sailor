@@ -16,7 +16,6 @@
   "dependencies": {
     "@clerk/nextjs": "^6.35.5",
     "@nebutra/custom-ui": "workspace:*",
-    "@nebutra/design-system": "workspace:*",
     "@nebutra/theme": "workspace:*",
     "@t3-oss/env-nextjs": "^0.13.10",
     "@tanstack/react-query": "^5.90.21",

@@ -3,8 +3,7 @@
  *
  * 1. Google Fonts URLs (must be absolute first — CSS spec)
  * 2. Tailwind CSS v4
- * 3. Typography CSS variables from design-system (SSOT for fonts)
- * 4. Theme system from @nebutra/custom-ui (colors, Tailwind config)
+ * 3. Theme system from @nebutra/custom-ui (colors, Tailwind config)
  */
 
 /* Google Fonts — must precede ALL other rules (CSS spec §6.3) */
@@ -16,9 +15,6 @@
 
 /* Theme engine — multi-theme tokens via data-theme selectors */
 @import "@nebutra/theme/themes.css";
-
-/* Typography SSOT - must be imported first to define --font-* variables */
-@import "@nebutra/design-system/typography/fonts.css";
 
 /* Import theme variables from @nebutra/custom-ui */
 @import "@nebutra/custom-ui/styles/globals.css";

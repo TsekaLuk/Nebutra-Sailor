@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@nebutra/design-system/utils";
+import { cn } from "../utils/cn";
 import { LucideIcon } from "lucide-react";
 
 // =============================================================================

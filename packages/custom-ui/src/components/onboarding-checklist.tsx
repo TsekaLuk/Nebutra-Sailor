@@ -3,7 +3,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, PlayCircle } from "lucide-react";
-import { cn } from "@nebutra/design-system/utils";
+import { cn } from "../utils/cn";
 import { Dialog, DialogContent, DialogTrigger } from "../primitives/dialog";
 
 // =============================================================================

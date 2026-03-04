@@ -1,5 +1,7 @@
 import { defineConfig } from "tsup";
 
+const shouldEmitDts = process.env.CI !== "true" && process.env.VERCEL !== "1";
+
 export default defineConfig({
   entry: [
     "src/index.ts",
@@ -10,7 +12,7 @@ export default defineConfig({
     "src/utils/cn.ts",
   ],
   format: ["esm"],
-  dts: true,
+  dts: shouldEmitDts,
   splitting: false,
   sourcemap: true,
   clean: true,

@@ -86,19 +86,22 @@ export function FooterLinkColumn({ group, className }: FooterLinkColumnProps) {
   return (
     <div className={cn("space-y-3 text-sm", className)}>
       <span className="block font-medium">{group.title}</span>
-      {group.links.map((link, index) => (
-        <Link
-          key={index}
-          href={link.href}
-          target={link.external ? "_blank" : undefined}
-          rel={link.external ? "noopener noreferrer" : undefined}
-          className="text-muted-foreground hover:text-primary flex items-center gap-1 duration-150"
-        >
-          {link.icon && <link.icon className="h-3.5 w-3.5" />}
-          <span>{link.title}</span>
-          {link.external && <ExternalLink className="h-3.5 w-3.5" />}
-        </Link>
-      ))}
+      {group.links.map((link, index) => {
+        const Icon = link.icon;
+        return (
+          <Link
+            key={index}
+            href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            className="text-muted-foreground hover:text-primary flex items-center gap-1 duration-150"
+          >
+            {Icon && <Icon className="h-3.5 w-3.5" />}
+            <span>{link.title}</span>
+            {link.external && <ExternalLink className="h-3.5 w-3.5" />}
+          </Link>
+        );
+      })}
       {group.dropdown && (
         <DropdownMenu>
           <DropdownMenuTrigger className="text-muted-foreground hover:text-primary flex items-center gap-1 text-sm">
@@ -115,14 +118,16 @@ export function FooterLinkColumn({ group, className }: FooterLinkColumnProps) {
                     rel={item.external ? "noopener noreferrer" : undefined}
                   >
                     {item.title}
-                    {item.external && <ExternalLink className="ml-auto h-4 w-4" />}
+                    {item.external && (
+                      <ExternalLink className="ml-auto h-4 w-4" />
+                    )}
                   </Link>
                 </DropdownMenuItem>
               ) : (
                 <DropdownMenuItem key={index} className="h-10 px-4">
                   {item.title}
                 </DropdownMenuItem>
-              )
+              ),
             )}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -157,20 +162,23 @@ export function FooterSocialLinks({
   return (
     <div className={cn("space-y-3 text-sm", className)}>
       <span className="block font-medium">{title}</span>
-      {links.map((link, index) => (
-        <Link
-          key={index}
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted-foreground hover:text-primary block duration-150"
-        >
-          <span className="flex items-center gap-2">
-            <link.icon className="h-3.5 w-3.5" />
-            {link.name}
-          </span>
-        </Link>
-      ))}
+      {links.map((link, index) => {
+        const Icon = link.icon;
+        return (
+          <Link
+            key={index}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-primary block duration-150"
+          >
+            <span className="flex items-center gap-2">
+              <Icon className="h-3.5 w-3.5" />
+              {link.name}
+            </span>
+          </Link>
+        );
+      })}
     </div>
   );
 }
@@ -183,8 +191,7 @@ FooterSocialLinks.displayName = "FooterSocialLinks";
 
 export type SystemStatus = "normal" | "degraded" | "outage" | "maintenance";
 
-export interface SystemStatusButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface SystemStatusButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Current system status */
   status?: SystemStatus;
   /** Status text */
@@ -221,7 +228,7 @@ export function SystemStatusButton({
       <span
         className={cn(
           "block size-3 rounded-full border border-background",
-          config.color
+          config.color,
         )}
       />
       {displayText}
@@ -235,7 +242,7 @@ export function SystemStatusButton({
     status === "degraded" && "text-yellow-600 hover:text-yellow-600",
     status === "outage" && "text-red-600 hover:text-red-600",
     status === "maintenance" && "text-blue-600 hover:text-blue-600",
-    className
+    className,
   );
 
   if (href) {
@@ -247,7 +254,11 @@ export function SystemStatusButton({
   }
 
   return (
-    <button type="button" className={cn(baseClassName, "cursor-pointer")} {...props}>
+    <button
+      type="button"
+      className={cn(baseClassName, "cursor-pointer")}
+      {...props}
+    >
       {content}
     </button>
   );
