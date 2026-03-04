@@ -203,12 +203,16 @@ run_snapshot_once() {
         sleep 1
       done
 
-      CHROME_PATH=\$(find /ms-playwright -type f -path '*chrome-linux/chrome' | head -n 1 || true)
+      CHROME_PATH=\$(node -e 'const { chromium } = require(\"playwright\"); process.stdout.write(chromium.executablePath());' 2>/dev/null || true)
       if [[ -z "\$CHROME_PATH" ]]; then
-        CHROME_PATH=\$(command -v chromium || command -v chromium-browser || command -v google-chrome || true)
+        CHROME_PATH=\$(find /ms-playwright -type f -path '*chrome-linux/chrome' | head -n 1 || true)
       fi
       if [[ -z "\$CHROME_PATH" ]]; then
-        CHROME_PATH=\$(find / -type f -path '*/chrome-linux/chrome' 2>/dev/null | head -n 1 || true)
+        pnpm exec playwright install chromium >/tmp/playwright-install.log 2>&1 || true
+        CHROME_PATH=\$(node -e 'const { chromium } = require(\"playwright\"); process.stdout.write(chromium.executablePath());' 2>/dev/null || true)
+      fi
+      if [[ -z "\$CHROME_PATH" ]]; then
+        CHROME_PATH=\$(command -v chromium || command -v chromium-browser || command -v google-chrome || true)
       fi
       if [[ -z "\$CHROME_PATH" ]]; then
         echo Unable to resolve CHROME_PATH for Lighthouse. >&2
