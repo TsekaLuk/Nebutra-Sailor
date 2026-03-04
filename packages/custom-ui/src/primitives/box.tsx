@@ -116,10 +116,12 @@ export const Box = React.forwardRef<HTMLElement, BoxProps>(
       getSpacingClass("ml", ml),
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Comp = Component as any;
     return (
-      <Component ref={ref} className={cn(spacingClasses, className)} {...props}>
+      <Comp ref={ref} className={cn(spacingClasses, className)} {...props}>
         {children}
-      </Component>
+      </Comp>
     );
   },
 );
