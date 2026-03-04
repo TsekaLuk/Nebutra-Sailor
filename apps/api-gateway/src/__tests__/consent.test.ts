@@ -158,7 +158,10 @@ describe("POST /consent", () => {
     const body = await res.json();
 
     expect(res.status).toBe(404);
-    expect(body.error).toBe("Document not found");
+    expect(body.error).toMatchObject({
+      code: "NOT_FOUND",
+    });
+    expect(body.error.message).toContain("LegalDocument");
   });
 
   it("returns 400/422 when required field documentSlug is missing", async () => {
@@ -189,7 +192,10 @@ describe("POST /consent", () => {
     const body = await res.json();
 
     expect(res.status).toBe(500);
-    expect(body.error).toBe("Failed to record consent");
+    expect(body.error).toMatchObject({
+      code: "DATABASE_ERROR",
+      details: { operation: "record consent" },
+    });
   });
 
   it("forwards optional consentType default correctly", async () => {
@@ -235,7 +241,10 @@ describe("GET /consent/status", () => {
     const body = await res.json();
 
     expect(res.status).toBe(404);
-    expect(body.error).toBe("Document not found");
+    expect(body.error).toMatchObject({
+      code: "NOT_FOUND",
+    });
+    expect(body.error.message).toContain("LegalDocument");
   });
 
   it("returns 200 with hasConsented: false when no consent record exists", async () => {
@@ -310,7 +319,10 @@ describe("GET /consent/status", () => {
     const body = await res.json();
 
     expect(res.status).toBe(500);
-    expect(body.error).toBe("Failed to get consent status");
+    expect(body.error).toMatchObject({
+      code: "DATABASE_ERROR",
+      details: { operation: "get consent status" },
+    });
   });
 });
 
@@ -368,7 +380,10 @@ describe("DELETE /consent", () => {
     const body = await res.json();
 
     expect(res.status).toBe(500);
-    expect(body.error).toBe("Failed to withdraw consent");
+    expect(body.error).toMatchObject({
+      code: "DATABASE_ERROR",
+      details: { operation: "withdraw consent" },
+    });
   });
 });
 
@@ -451,7 +466,10 @@ describe("POST /cookie-consent", () => {
     const body = await res.json();
 
     expect(res.status).toBe(500);
-    expect(body.error).toBe("Failed to record cookie consent");
+    expect(body.error).toMatchObject({
+      code: "DATABASE_ERROR",
+      details: { operation: "record cookie consent" },
+    });
   });
 });
 
@@ -509,7 +527,10 @@ describe("GET /cookie-consent", () => {
     const body = await res.json();
 
     expect(res.status).toBe(500);
-    expect(body.error).toBe("Failed to get cookie consent");
+    expect(body.error).toMatchObject({
+      code: "DATABASE_ERROR",
+      details: { operation: "get cookie consent" },
+    });
   });
 });
 
@@ -568,7 +589,10 @@ describe("GET /documents", () => {
     const body = await res.json();
 
     expect(res.status).toBe(500);
-    expect(body.error).toBe("Failed to list documents");
+    expect(body.error).toMatchObject({
+      code: "DATABASE_ERROR",
+      details: { operation: "list legal documents" },
+    });
   });
 });
 
@@ -599,7 +623,10 @@ describe("GET /documents/:slug", () => {
     const body = await res.json();
 
     expect(res.status).toBe(404);
-    expect(body.error).toBe("Document not found");
+    expect(body.error).toMatchObject({
+      code: "NOT_FOUND",
+    });
+    expect(body.error.message).toContain("LegalDocument");
   });
 
   it("returns 500 when Prisma throws", async () => {
@@ -611,7 +638,10 @@ describe("GET /documents/:slug", () => {
     const body = await res.json();
 
     expect(res.status).toBe(500);
-    expect(body.error).toBe("Failed to get document");
+    expect(body.error).toMatchObject({
+      code: "DATABASE_ERROR",
+      details: { operation: "get legal document" },
+    });
   });
 });
 
@@ -672,6 +702,9 @@ describe("POST /contact", () => {
     const body = await res.json();
 
     expect(res.status).toBe(500);
-    expect(body.error).toBe("Failed to submit contact form");
+    expect(body.error).toMatchObject({
+      code: "DATABASE_ERROR",
+      details: { operation: "submit contact form" },
+    });
   });
 });
