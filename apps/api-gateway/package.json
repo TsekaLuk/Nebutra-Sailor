@@ -23,6 +23,7 @@
     "@nebutra/health": "workspace:*",
     "@nebutra/logger": "workspace:*",
     "@nebutra/rate-limit": "workspace:*",
+    "@nebutra/repositories": "workspace:*",
     "hono": "^4.6.0",
     "inngest": "^3.52.4",
     "stripe": "^17.7.0",

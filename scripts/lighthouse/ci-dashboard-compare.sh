@@ -187,7 +187,7 @@ run_snapshot_once() {
       pnpm install --frozen-lockfile --prefer-offline || pnpm install --no-frozen-lockfile --prefer-offline
       pnpm --filter @nebutra/design-system build
       pnpm --filter @nebutra/brand build
-      pnpm --filter @nebutra/custom-ui build
+      pnpm --filter @nebutra/custom-ui exec tsup --no-dts
       pnpm --filter @nebutra/brand sync
 
       cd apps/web
@@ -203,17 +203,17 @@ run_snapshot_once() {
         sleep 1
       done
 
-      CHROME_PATH=\$(node -e 'const { chromium } = require(\"playwright\"); process.stdout.write(chromium.executablePath());' 2>/dev/null || true)
+      CHROME_PATH=\$(ls /ms-playwright/chromium-*/chrome-linux/chrome 2>/dev/null | head -n 1 || true)
       if [[ -z "\$CHROME_PATH" ]]; then
-        CHROME_PATH=\$(find /ms-playwright -type f -path '*chrome-linux/chrome' | head -n 1 || true)
+        CHROME_PATH=\$(ls /ms-playwright/chromium_headless_shell-*/chrome-linux/headless_shell 2>/dev/null | head -n 1 || true)
       fi
       if [[ -z "\$CHROME_PATH" ]]; then
-        pnpm exec playwright install chromium >/tmp/playwright-install.log 2>&1 || true
-        CHROME_PATH=\$(node -e 'const { chromium } = require(\"playwright\"); process.stdout.write(chromium.executablePath());' 2>/dev/null || true)
+        CHROME_PATH=\$(find /ms-playwright -type f -name chrome 2>/dev/null | head -n 1 || true)
       fi
       if [[ -z "\$CHROME_PATH" ]]; then
         CHROME_PATH=\$(command -v chromium || command -v chromium-browser || command -v google-chrome || true)
       fi
+      echo Chrome path candidate: \$CHROME_PATH
       if [[ -z "\$CHROME_PATH" ]]; then
         echo Unable to resolve CHROME_PATH for Lighthouse. >&2
         exit 1

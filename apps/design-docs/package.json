@@ -11,17 +11,23 @@
   },
   "dependencies": {
     "@nebutra/custom-ui": "workspace:*",
-    "fumadocs-core": "^14.0.0",
-    "fumadocs-mdx": "^11.0.0",
-    "fumadocs-ui": "^14.0.0",
+    "framer-motion": "^11.0.0",
+    "fumadocs-core": "^16.6.9",
+    "fumadocs-mdx": "^14.2.9",
+    "fumadocs-ui": "^16.6.9",
+    "lucide-react": "^0.460.0",
+    "motion": "^11.0.0",
     "next": "^16.0.7",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/mdx": "^2.0.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4",
     "typescript": "^5.9.3"
   }
 }

@@ -69,20 +69,20 @@ export const Stack = React.forwardRef<HTMLDivElement, StackProps>(
     },
     ref,
   ) => {
-    return (
-      <Component
-        ref={ref}
-        className={cn(
+    return React.createElement(
+      Component,
+      {
+        ...props,
+        ref,
+        className: cn(
           "flex flex-col",
           gapMap[gap],
           alignMap[align],
           justifyMap[justify],
           className,
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
+        ),
+      },
+      children,
     );
   },
 );
