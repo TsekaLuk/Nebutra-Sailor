@@ -1,0 +1,206 @@
+---
+title: "Badge"
+description: "Compact label for status, category, or count. Supports 22 color variants, 3 sizes, icon slot, status dot, and link (asChild) mode."
+---
+
+import { BadgeDemo } from "@/components/previews/badge-demo";
+import { ComponentPreview } from "@/components/component-preview";
+
+<ComponentPreview>
+  <BadgeDemo />
+</ComponentPreview>
+
+## Import
+
+```tsx
+import { Badge } from "@nebutra/custom-ui/primitives"
+```
+
+---
+
+## Sizes
+
+Three sizes controlled by the `size` prop:
+
+| `size` | Font | Padding | Use case |
+|--------|------|---------|----------|
+| `sm` | 10px | `px-1.5 py-px` | Tight UI, table cells |
+| `md` | 12px | `px-2.5 py-0.5` | Default — most contexts |
+| `lg` | 14px | `px-3 py-1` | Prominent labels, hero sections |
+
+```tsx
+<Badge size="sm">Small</Badge>
+<Badge size="md">Medium</Badge>
+<Badge size="lg">Large</Badge>
+```
+
+---
+
+## Semantic Variants
+
+Status-driven variants using brand semantic tokens.
+
+```tsx
+<Badge variant="default">Active</Badge>
+<Badge variant="secondary">Draft</Badge>
+<Badge variant="outline">Beta</Badge>
+<Badge variant="success">Deployed</Badge>
+<Badge variant="warning">Degraded</Badge>
+<Badge variant="info">Info</Badge>
+<Badge variant="error">Failed</Badge>
+<Badge variant="destructive">Danger</Badge>
+```
+
+---
+
+## Color Variants
+
+Geist-style palette variants — solid and subtle (outline) for each hue.
+
+### Solid
+
+```tsx
+<Badge variant="gray">Gray</Badge>
+<Badge variant="blue">Blue</Badge>
+<Badge variant="purple">Purple</Badge>
+<Badge variant="amber">Amber</Badge>
+<Badge variant="red">Red</Badge>
+<Badge variant="pink">Pink</Badge>
+<Badge variant="green">Green</Badge>
+<Badge variant="teal">Teal</Badge>
+<Badge variant="inverted">Inverted</Badge>
+```
+
+### Subtle (outline)
+
+Transparent background with a colored border — use on colored surfaces.
+
+```tsx
+<Badge variant="gray-subtle">Gray</Badge>
+<Badge variant="blue-subtle">Blue</Badge>
+<Badge variant="purple-subtle">Purple</Badge>
+<Badge variant="amber-subtle">Amber</Badge>
+<Badge variant="red-subtle">Red</Badge>
+<Badge variant="pink-subtle">Pink</Badge>
+<Badge variant="green-subtle">Green</Badge>
+<Badge variant="teal-subtle">Teal</Badge>
+```
+
+---
+
+## With Icon
+
+Pass any ReactNode to the `icon` prop. The icon is auto-sized to 12×12px.
+
+```tsx
+import { CheckCircle, AlertTriangle, Zap, Globe } from "lucide-react"
+
+<Badge variant="success" icon={<CheckCircle />}>Verified</Badge>
+<Badge variant="warning" icon={<AlertTriangle />}>Review</Badge>
+<Badge variant="blue" icon={<Zap />}>Pro</Badge>
+<Badge variant="gray" icon={<Globe />}>Public</Badge>
+```
+
+---
+
+## With Status Dot
+
+The `dot` prop renders a 6×6px colored dot before the label. Works with semantic variants.
+
+```tsx
+<Badge variant="success" dot>Live</Badge>
+<Badge variant="warning" dot>Degraded</Badge>
+<Badge variant="error" dot>Down</Badge>
+<Badge variant="outline" dot>Pending</Badge>
+```
+
+---
+
+## Link Badge (asChild)
+
+Use `asChild` to render the badge as an anchor element for clickable badges.
+
+```tsx
+import Link from "next/link"
+
+<Badge asChild variant="blue-subtle">
+  <Link href="/changelog">v2.4.0</Link>
+</Badge>
+
+<Badge asChild variant="purple" size="sm">
+  <a href="https://docs.nebutra.com" target="_blank" rel="noopener noreferrer">
+    Docs ↗
+  </a>
+</Badge>
+```
+
+---
+
+## In Context
+
+### Table status column
+
+```tsx
+<TableRow>
+  <TableCell>Deploy #1024</TableCell>
+  <TableCell>
+    <Badge variant="success" dot>Success</Badge>
+  </TableCell>
+</TableRow>
+```
+
+### Notification count
+
+```tsx
+<div className="relative inline-flex">
+  <Bell className="h-5 w-5" />
+  <Badge
+    variant="red"
+    size="sm"
+    className="absolute -top-2 -right-2 h-4 w-4 justify-center p-0 text-[10px]"
+  >
+    3
+  </Badge>
+</div>
+```
+
+### Feature tag
+
+```tsx
+<h2 className="flex items-center gap-2">
+  AI Assistant
+  <Badge variant="purple" size="sm">Beta</Badge>
+</h2>
+```
+
+---
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | see below | `"default"` | Color / semantic variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset |
+| `icon` | `ReactNode` | — | Icon rendered before label, auto-sized to 12×12px |
+| `dot` | `boolean` | `false` | Renders a 6px status dot before label |
+| `asChild` | `boolean` | `false` | Renders as child element via Radix Slot |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Badge label |
+
+### Variant values
+
+**Semantic:** `default` `secondary` `destructive` `outline` `success` `warning` `info` `error`
+
+**Color (solid):** `gray` `blue` `purple` `amber` `red` `pink` `green` `teal` `inverted`
+
+**Color (subtle):** `gray-subtle` `blue-subtle` `purple-subtle` `amber-subtle` `red-subtle` `pink-subtle` `green-subtle` `teal-subtle`
+
+---
+
+## Accessibility
+
+- Renders as `<div>` by default — not interactive.
+- For clickable badges, use `asChild` with a native `<a>` or Next.js `<Link>`.
+- For dynamic status updates, add `aria-live="polite"` to the parent container.
+- When used as a notification count, pair with `aria-label` on the triggering element.
+- The `dot` and `icon` slots are `aria-hidden="true"` — label text provides the accessible name.

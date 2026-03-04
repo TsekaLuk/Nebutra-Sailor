@@ -1,0 +1,10 @@
+{
+  "title": "Design System",
+  "pages": [
+    "index",
+    "...components",
+    "...foundations",
+    "...patterns",
+    "...fragment-components"
+  ]
+}

@@ -1,0 +1,86 @@
+---
+title: "Textarea"
+description: "Multi-line text input field with consistent styling."
+---
+
+## Demo
+
+```tsx
+import { Textarea, Label } from "@nebutra/design-system";
+
+export default function Example() {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <Label htmlFor="message">Message</Label>
+      <Textarea
+        id="message"
+        placeholder="Write your message here..."
+        rows={4}
+      />
+    </div>
+  );
+}
+```
+
+## Usage
+
+```tsx
+import { Textarea } from "@nebutra/design-system";
+```
+
+## Props
+
+All props from native `<textarea>` are supported, plus:
+
+| Prop          | Type      | Default | Description                                      |
+| ------------- | --------- | ------- | ------------------------------------------------ |
+| `className`   | `string`  | —       | Additional CSS classes.                          |
+| `rows`        | `number`  | `3`     | Visible row count.                               |
+| `disabled`    | `boolean` | `false` | Disables the textarea.                           |
+| `placeholder` | `string`  | —       | Placeholder text.                                |
+| `readOnly`    | `boolean` | `false` | Makes the textarea read-only.                    |
+
+## Examples
+
+### With Character Count
+
+```tsx
+const [value, setValue] = useState("");
+
+<div className="flex flex-col gap-1">
+  <Textarea
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+    maxLength={500}
+  />
+  <span className="text-xs text-muted-foreground text-right">
+    {value.length}/500
+  </span>
+</div>
+```
+
+### Disabled
+
+```tsx
+<Textarea disabled value="This field is read-only" />
+```
+
+### In a Form
+
+```tsx
+<FormField name="bio">
+  <FormItem>
+    <FormLabel>Bio</FormLabel>
+    <FormControl>
+      <Textarea placeholder="Tell us about yourself" />
+    </FormControl>
+    <FormMessage />
+  </FormItem>
+</FormField>
+```
+
+## Accessibility
+
+Associates with `<Label>` via `htmlFor`/`id`. Supports `aria-describedby` for form error messages. Announces character limits when `maxLength` is set.
+
+For auto-growing behavior, use the `ExpandingTextarea` atom instead.

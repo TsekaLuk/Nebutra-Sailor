@@ -1,0 +1,69 @@
+---
+title: "Toggle"
+description: "A two-state button that can be toggled on or off."
+---
+
+## Demo
+
+```tsx
+import { Toggle } from "@nebutra/design-system";
+import { Bold } from "lucide-react";
+
+export default function Example() {
+  return (
+    <Toggle aria-label="Toggle bold">
+      <Bold className="size-4" />
+    </Toggle>
+  );
+}
+```
+
+## Usage
+
+```tsx
+import { Toggle } from "@nebutra/design-system";
+```
+
+## Props
+
+| Prop             | Type                          | Default     | Description                                      |
+| ---------------- | ----------------------------- | ----------- | ------------------------------------------------ |
+| `pressed`        | `boolean`                     | —           | Controlled pressed state.                        |
+| `defaultPressed` | `boolean`                     | `false`     | Initial pressed state (uncontrolled).            |
+| `onPressedChange`| `(pressed: boolean) => void`  | —           | Callback when pressed state changes.             |
+| `variant`        | `"default" \| "outline"`      | `"default"` | Visual variant.                                  |
+| `size`           | `"default" \| "sm" \| "lg"`   | `"default"` | Size variant.                                    |
+| `disabled`       | `boolean`                     | `false`     | Disables the toggle.                             |
+| `asChild`        | `boolean`                     | `false`     | Render as child element.                         |
+
+## Examples
+
+### Outline Variant
+
+```tsx
+<Toggle variant="outline" aria-label="Toggle italic">
+  <Italic className="size-4" />
+</Toggle>
+```
+
+### Controlled
+
+```tsx
+const [pressed, setPressed] = useState(false);
+
+<Toggle pressed={pressed} onPressedChange={setPressed}>
+  {pressed ? "On" : "Off"}
+</Toggle>
+```
+
+### Text Toggle
+
+```tsx
+<Toggle aria-label="Toggle underline" size="sm">
+  Underline
+</Toggle>
+```
+
+## Accessibility
+
+Toggle renders a `<button>` with `aria-pressed`. Provide an `aria-label` when the toggle contains only an icon. Keyboard: `Space` or `Enter` activates.
