@@ -187,7 +187,7 @@ run_snapshot_once() {
       pnpm install --frozen-lockfile --prefer-offline || pnpm install --no-frozen-lockfile --prefer-offline
       pnpm --filter @nebutra/design-system build
       pnpm --filter @nebutra/brand build
-      pnpm --filter @nebutra/custom-ui build
+      pnpm --filter @nebutra/custom-ui exec tsup --no-dts
       pnpm --filter @nebutra/brand sync
 
       cd apps/web
