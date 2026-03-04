@@ -197,7 +197,7 @@ run_snapshot_once() {
       trap 'kill \$APP_PID >/dev/null 2>&1 || true' EXIT
 
       for i in \$(seq 1 120); do
-        if curl -fsS 'http://127.0.0.1:${PORT}${TARGET_PATH}' >/dev/null; then
+        if curl -sS -o /dev/null 'http://127.0.0.1:${PORT}${TARGET_PATH}'; then
           break
         fi
         sleep 1
@@ -211,7 +211,7 @@ run_snapshot_once() {
         CHROME_PATH=\$(find / -type f -path '*/chrome-linux/chrome' 2>/dev/null | head -n 1 || true)
       fi
       if [[ -z "\$CHROME_PATH" ]]; then
-        echo "Unable to resolve CHROME_PATH for Lighthouse." >&2
+        echo Unable to resolve CHROME_PATH for Lighthouse. >&2
         exit 1
       fi
       export CHROME_PATH
