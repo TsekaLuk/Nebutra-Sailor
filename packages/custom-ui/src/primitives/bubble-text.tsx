@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { cn } from "@nebutra/design-system/utils";
+import { cn } from "../utils/cn";
 
 export interface BubbleTextProps {
   /** Text content to display */

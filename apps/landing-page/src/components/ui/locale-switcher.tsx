@@ -5,9 +5,9 @@ import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { locales } from "@/i18n/routing";
+import { locales, type Locale } from "@/i18n/routing";
 
-const LOCALE_LABELS: Record<string, string> = {
+const LOCALE_LABELS: Record<Locale, string> = {
   en: "EN",
   zh: "中文",
   ja: "日本語",
@@ -34,7 +34,7 @@ export function LocaleSwitcher() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSelect = (newLocale: string) => {
+  const handleSelect = (newLocale: Locale) => {
     router.push(pathname, { locale: newLocale });
     setIsOpen(false);
   };

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
-import { DesignSystemProvider } from "@nebutra/design-system";
 import { Providers } from "./providers";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { seoContent } from "@/lib/landing-content";
@@ -57,9 +56,7 @@ export default async function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
         <Providers>
-          <DesignSystemProvider>
-            <ErrorBoundary>{children}</ErrorBoundary>
-          </DesignSystemProvider>
+          <ErrorBoundary>{children}</ErrorBoundary>
         </Providers>
       </body>
     </html>

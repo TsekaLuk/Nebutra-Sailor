@@ -63,8 +63,11 @@ export const Text = React.forwardRef<HTMLElement, TextProps>(
     },
     ref,
   ) => {
+    // Keep polymorphic render simple for declaration emit (tsup dts).
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Comp = Component as any;
     return (
-      <Component
+      <Comp
         ref={ref}
         className={cn(
           textStyles[variant],
@@ -77,7 +80,7 @@ export const Text = React.forwardRef<HTMLElement, TextProps>(
         {...props}
       >
         {children}
-      </Component>
+      </Comp>
     );
   },
 );
