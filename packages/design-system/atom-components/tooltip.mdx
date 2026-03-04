@@ -1,0 +1,149 @@
+---
+title: "Tooltip"
+description: "Contextual hover information displayed in a floating popover, built on Radix UI."
+---
+
+## Demo
+
+```tsx
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "@nebutra/custom-ui/primitives"
+import { Button } from "@nebutra/custom-ui/primitives"
+
+export function TooltipDemo() {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline">Hover me</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>This is a tooltip</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "@nebutra/custom-ui/primitives"
+```
+
+<Info>
+  Wrap your app (or a section) in `TooltipProvider` to enable tooltip functionality.
+  Place it high in the component tree — typically in your root layout.
+</Info>
+
+## Props
+
+### TooltipProvider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `delayDuration` | `number` | `700` | Delay in ms before tooltip appears |
+| `skipDelayDuration` | `number` | `300` | How quickly a new tooltip opens when another is already open |
+| `disableHoverableContent` | `boolean` | `false` | Prevents the tooltip content from being hoverable |
+
+### Tooltip (Root)
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled default open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Callback when open state changes |
+| `delayDuration` | `number` | — | Override the provider's delay for this tooltip |
+
+### TooltipTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props onto the immediate child element |
+| `children` | `ReactNode` | — | The element that triggers the tooltip |
+
+### TooltipContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Preferred side to display |
+| `sideOffset` | `number` | `4` | Distance in px from the trigger |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment along the trigger |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Tooltip content |
+
+## Examples
+
+### Tooltip on Icon Button
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <Settings className="h-4 w-4" />
+        <span className="sr-only">Settings</span>
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Settings</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+### Custom Side and Offset
+
+```tsx
+<Tooltip>
+  <TooltipTrigger>Hover</TooltipTrigger>
+  <TooltipContent side="right" sideOffset={8}>
+    <p>Tooltip on the right</p>
+  </TooltipContent>
+</Tooltip>
+```
+
+### Instant Tooltip (No Delay)
+
+```tsx
+<Tooltip delayDuration={0}>
+  <TooltipTrigger asChild>
+    <Button>Instant</Button>
+  </TooltipTrigger>
+  <TooltipContent>Shows immediately</TooltipContent>
+</Tooltip>
+```
+
+### Rich Tooltip Content
+
+```tsx
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
+  </TooltipTrigger>
+  <TooltipContent className="max-w-xs">
+    <p className="font-medium mb-1">Pro tip</p>
+    <p className="text-xs text-muted-foreground">
+      You can configure advanced settings in the project preferences panel.
+    </p>
+  </TooltipContent>
+</Tooltip>
+```
+
+## Accessibility
+
+- Built on Radix UI Tooltip — follows the WAI-ARIA [Tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/).
+- Tooltip content is linked to the trigger via `aria-describedby`.
+- Opens on focus as well as hover — keyboard users can access tooltips.
+- Pressing `Escape` closes the tooltip.
+- Do not place essential, non-redundant information only in tooltips — they are not accessible on touch devices.

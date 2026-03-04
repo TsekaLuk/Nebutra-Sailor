@@ -1,0 +1,110 @@
+---
+title: "Grid"
+description: "Display elements in a grid layout with optional column and row guide lines."
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-grid--docs).
+</Note>
+
+## Overview
+
+`Grid.System` is a CSS grid container that renders 1px guide lines by using the container's `border` color as a background with `gap-px`. `Grid.Cell` is each item — its `bg-background` fill hides the guide behind it, creating the column/row indicator effect.
+
+Use `showGuides={false}` for a plain CSS grid without visual indicators.
+
+## Installation
+
+```tsx
+import { Grid } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Basic grid
+
+```tsx
+<Grid.System columns={3}>
+  <Grid.Cell><p>1</p></Grid.Cell>
+  <Grid.Cell><p>2</p></Grid.Cell>
+  <Grid.Cell><p>3</p></Grid.Cell>
+</Grid.System>
+```
+
+### Spanning cells
+
+```tsx
+<Grid.System columns={12}>
+  <Grid.Cell span={8}><p>main</p></Grid.Cell>
+  <Grid.Cell span={4}><p>sidebar</p></Grid.Cell>
+</Grid.System>
+```
+
+### Solid cells
+
+Solid cells use `bg-muted` and visually "fill" the cell, covering any guide intersection:
+
+```tsx
+<Grid.System columns={3}>
+  <Grid.Cell solid><p>1</p></Grid.Cell>
+  <Grid.Cell solid><p>2</p></Grid.Cell>
+  <Grid.Cell solid><p>3</p></Grid.Cell>
+</Grid.System>
+```
+
+### Hide row guides
+
+```tsx
+<Grid.System columns={3}>
+  <Grid.Cell hideRowGuides="top"><p>no top guide</p></Grid.Cell>
+  <Grid.Cell hideRowGuides="bottom"><p>no bottom guide</p></Grid.Cell>
+  <Grid.Cell hideRowGuides><p>no row guides</p></Grid.Cell>
+</Grid.System>
+```
+
+### Hide column guides
+
+```tsx
+<Grid.System columns={3}>
+  <Grid.Cell hideColumnGuides="left"><p>no left guide</p></Grid.Cell>
+  <Grid.Cell hideColumnGuides="right"><p>no right guide</p></Grid.Cell>
+  <Grid.Cell hideColumnGuides><p>no column guides</p></Grid.Cell>
+</Grid.System>
+```
+
+### No guides (plain CSS grid)
+
+```tsx
+<Grid.System columns={3} showGuides={false} className="gap-4">
+  <Grid.Cell><p>1</p></Grid.Cell>
+  <Grid.Cell><p>2</p></Grid.Cell>
+  <Grid.Cell><p>3</p></Grid.Cell>
+</Grid.System>
+```
+
+## Props
+
+### `Grid.System`
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `number` | `12` | Number of equal-width columns |
+| `rowHeight` | `string \| number` | — | CSS value for `grid-auto-rows` |
+| `showGuides` | `boolean` | `true` | Whether to render 1px guide lines |
+| `children` | `ReactNode` | — | `Grid.Cell` elements |
+| `className` | `string` | — | Additional CSS classes |
+
+### `Grid.Cell`
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `span` | `number` | — | Number of columns this cell spans |
+| `solid` | `boolean` | `false` | Fill with `bg-muted` (visually covers guides) |
+| `hideRowGuides` | `boolean \| "top" \| "bottom"` | — | Remove top/bottom guides on this cell |
+| `hideColumnGuides` | `boolean \| "left" \| "right"` | — | Remove left/right guides on this cell |
+| `children` | `ReactNode` | — | Cell content |
+| `className` | `string` | — | Additional CSS classes |
+
+## Implementation notes
+
+Guide lines are achieved with `gap-px` on the container and `bg-border` as its background. Each `Grid.Cell` fills with `bg-background` (or `bg-muted` for solid), making the 1px gaps visible as column/row guides. This avoids any overlay positioning or SVG tricks.

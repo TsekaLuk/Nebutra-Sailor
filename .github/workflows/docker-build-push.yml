@@ -1,0 +1,263 @@
+name: Docker Build & Push
+
+# Builds and pushes Docker images for all services to configured container registries.
+#
+# Supported registries (each is optional — only activated when the corresponding
+# secret is present):
+#   - GitHub Container Registry (ghcr.io) — always attempted if GITHUB_TOKEN is available
+#   - AWS Elastic Container Registry (ECR)        — requires AWS_ACCOUNT_ID + AWS_REGION
+#   - Alibaba Cloud Container Registry (Aliyun)   — requires ALIYUN_ACR_USERNAME + ALIYUN_ACR_PASSWORD
+#   - Tencent Cloud Container Registry (TCR)      — requires TENCENT_TCR_HOST + TENCENT_TCR_USERNAME + TENCENT_TCR_PASSWORD
+#
+# Tag strategy:
+#   main branch push  → :latest + :sha-<short-sha>
+#   tag push (v*)     → :<tag-name>  (e.g. v1.2.3)
+#   workflow_dispatch → :latest + :sha-<short-sha>  (on the chosen branch)
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for manual trigger"
+        required: false
+        default: "Manual build"
+
+# Prevent concurrent runs for the same ref — cancel in-flight runs when a new
+# push arrives so we don't waste runner minutes on stale builds.
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write  # Required to push to ghcr.io
+
+env:
+  # ── Turborepo remote cache ──────────────────────────────────────────────────
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+  # ── Registry base paths (populated from secrets at run time) ────────────────
+  GHCR_REGISTRY: ghcr.io/${{ github.repository_owner }}
+
+jobs:
+  # ============================================================================
+  # Job: build-push-node-apps
+  # Builds multi-platform images for the three Next.js / Node.js applications.
+  # ============================================================================
+  build-push-node-apps:
+    name: "Build Node app: ${{ matrix.app }}"
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false   # Don't cancel sibling jobs if one app fails
+      matrix:
+        app:
+          - web
+          - landing-page
+          - api-gateway
+
+    steps:
+      # ── Checkout ─────────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Docker Buildx (multi-platform builder) ───────────────────────────────
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: |
+            image=moby/buildkit:latest
+
+      # ── Registry logins (conditional — only when secrets are present) ────────
+
+      # GitHub Container Registry — always available via GITHUB_TOKEN
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # AWS ECR — requires AWS_ACCOUNT_ID and AWS_REGION secrets
+      - name: Configure AWS credentials
+        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_REGION != '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Log in to AWS ECR
+        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_REGION != '' }}
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Alibaba Cloud ACR — requires ALIYUN_ACR_USERNAME + ALIYUN_ACR_PASSWORD
+      - name: Log in to Aliyun Container Registry
+        if: ${{ secrets.ALIYUN_ACR_USERNAME != '' }}
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cn-hangzhou.aliyuncs.com
+          username: ${{ secrets.ALIYUN_ACR_USERNAME }}
+          password: ${{ secrets.ALIYUN_ACR_PASSWORD }}
+
+      # Tencent TCR — requires TENCENT_TCR_HOST + TENCENT_TCR_USERNAME + TENCENT_TCR_PASSWORD
+      - name: Log in to Tencent Container Registry
+        if: ${{ secrets.TENCENT_TCR_HOST != '' }}
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.TENCENT_TCR_HOST }}
+          username: ${{ secrets.TENCENT_TCR_USERNAME }}
+          password: ${{ secrets.TENCENT_TCR_PASSWORD }}
+
+      # ── Image metadata (tags + OCI labels) ──────────────────────────────────
+      # docker/metadata-action generates all required tags automatically:
+      #   - On main branch: latest + sha-<short-sha>
+      #   - On semver tag:  the tag itself (e.g. v1.2.3)
+      - name: Generate image metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.app }}
+            ${{ secrets.AWS_ACCOUNT_ID != '' && format('{0}.dkr.ecr.{1}.amazonaws.com/nebutra-{2}', secrets.AWS_ACCOUNT_ID, secrets.AWS_REGION, matrix.app) || '' }}
+            ${{ secrets.ALIYUN_ACR_USERNAME != '' && format('registry.cn-hangzhou.aliyuncs.com/nebutra/{0}', matrix.app) || '' }}
+            ${{ secrets.TENCENT_TCR_HOST != '' && format('{0}/nebutra/{1}', secrets.TENCENT_TCR_HOST, matrix.app) || '' }}
+          tags: |
+            # Tag with :latest on main branch pushes and manual triggers
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
+            # Tag with short SHA on branch pushes
+            type=sha,prefix=sha-,format=short,enable=${{ startsWith(github.ref, 'refs/heads/') }}
+            # Tag with semver version on tag pushes (e.g. v1.2.3 → 1.2.3, 1.2, 1)
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+          labels: |
+            org.opencontainers.image.title=nebutra-${{ matrix.app }}
+            org.opencontainers.image.vendor=Nebutra
+
+      # ── Build & push ─────────────────────────────────────────────────────────
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: apps/${{ matrix.app }}/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Use GHCR as the layer cache backend — avoids cold-cache on every run
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.app }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.app }}:buildcache,mode=max
+
+  # ============================================================================
+  # Job: build-push-python-services
+  # Builds multi-platform images for Python FastAPI microservices.
+  # All services share a single Dockerfile (infra/docker/Dockerfile.python)
+  # and are differentiated via the SERVICE build argument.
+  # ============================================================================
+  build-push-python-services:
+    name: "Build Python service: ${{ matrix.service }}"
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false   # Don't cancel sibling jobs if one service fails
+      matrix:
+        service:
+          - ai
+          - billing
+          - content
+          - ecommerce
+          - recsys
+          - event-ingest
+          - web3
+
+    steps:
+      # ── Checkout ─────────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Docker Buildx (multi-platform builder) ───────────────────────────────
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: |
+            image=moby/buildkit:latest
+
+      # ── Registry logins (conditional — only when secrets are present) ────────
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure AWS credentials
+        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_REGION != '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Log in to AWS ECR
+        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_REGION != '' }}
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Log in to Aliyun Container Registry
+        if: ${{ secrets.ALIYUN_ACR_USERNAME != '' }}
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cn-hangzhou.aliyuncs.com
+          username: ${{ secrets.ALIYUN_ACR_USERNAME }}
+          password: ${{ secrets.ALIYUN_ACR_PASSWORD }}
+
+      - name: Log in to Tencent Container Registry
+        if: ${{ secrets.TENCENT_TCR_HOST != '' }}
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.TENCENT_TCR_HOST }}
+          username: ${{ secrets.TENCENT_TCR_USERNAME }}
+          password: ${{ secrets.TENCENT_TCR_PASSWORD }}
+
+      # ── Image metadata ───────────────────────────────────────────────────────
+      - name: Generate image metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.service }}
+            ${{ secrets.AWS_ACCOUNT_ID != '' && format('{0}.dkr.ecr.{1}.amazonaws.com/nebutra-{2}', secrets.AWS_ACCOUNT_ID, secrets.AWS_REGION, matrix.service) || '' }}
+            ${{ secrets.ALIYUN_ACR_USERNAME != '' && format('registry.cn-hangzhou.aliyuncs.com/nebutra/{0}', matrix.service) || '' }}
+            ${{ secrets.TENCENT_TCR_HOST != '' && format('{0}/nebutra/{1}', secrets.TENCENT_TCR_HOST, matrix.service) || '' }}
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
+            type=sha,prefix=sha-,format=short,enable=${{ startsWith(github.ref, 'refs/heads/') }}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+          labels: |
+            org.opencontainers.image.title=nebutra-${{ matrix.service }}
+            org.opencontainers.image.vendor=Nebutra
+
+      # ── Build & push ─────────────────────────────────────────────────────────
+      # Uses the shared Dockerfile.python with SERVICE build arg to select
+      # the correct service directory inside services/<SERVICE>/
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: infra/docker/Dockerfile.python
+          platforms: linux/amd64,linux/arm64
+          push: true
+          build-args: |
+            SERVICE=${{ matrix.service }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Registry-backed layer cache using GHCR — shared across branches
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.service }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.service }}:buildcache,mode=max

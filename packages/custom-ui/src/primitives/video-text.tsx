@@ -92,8 +92,10 @@ export function VideoText({
 
   const dataUrlMask = `url("data:image/svg+xml,${encodeURIComponent(svgMask)}")`;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Comp = Component as any;
   return (
-    <Component className={cn("relative size-full", className)}>
+    <Comp className={cn("relative size-full", className)}>
       {/* Create a container that masks the video to only show within text */}
       <div
         className="absolute inset-0 flex items-center justify-center"
@@ -123,6 +125,6 @@ export function VideoText({
 
       {/* Add a backup text element for SEO/accessibility */}
       <span className="sr-only">{content}</span>
-    </Component>
+    </Comp>
   );
 }

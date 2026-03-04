@@ -47,6 +47,9 @@ export type {
   FeatureFlagOverride,
   FeatureFlagType,
 
+  // Webhooks
+  WebhookEvent,
+
   // Audit
   AuditLog,
   AuditAction,

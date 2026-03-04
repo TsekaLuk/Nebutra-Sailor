@@ -6,6 +6,7 @@ import {
   DocsTitle,
 } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
+import { useMDXComponents } from "../../../../mdx-components";
 
 interface PageProps {
   params: Promise<{ slug?: string[] }>;
@@ -17,13 +18,14 @@ export default async function Page({ params }: PageProps) {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const components = useMDXComponents({});
 
   return (
     <DocsPage toc={page.data.toc}>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <MDX />
+        <MDX components={components} />
       </DocsBody>
     </DocsPage>
   );

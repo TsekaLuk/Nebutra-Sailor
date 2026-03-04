@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useOrganizationList } from "@clerk/nextjs";
 import { Button } from "@nebutra/custom-ui/primitives";
 import { Input } from "@nebutra/custom-ui/primitives";
 import { Label } from "@nebutra/custom-ui/primitives";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { cn } from "@nebutra/custom-ui";
 
 interface CreateWorkspaceStepProps {
   onComplete: () => void;
@@ -27,12 +27,17 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
   const [slugEdited, setSlugEdited] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const workspaceNameRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (!slugEdited) {
       setSlug(slugify(name));
     }
   }, [name, slugEdited]);
+
+  useEffect(() => {
+    workspaceNameRef.current?.focus();
+  }, []);
 
   const slugValid =
     /^[a-z0-9][a-z0-9-]{1,46}[a-z0-9]$/.test(slug) || slug.length >= 3;
@@ -73,12 +78,12 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="workspace-name">Workspace name</Label>
           <Input
+            ref={workspaceNameRef}
             id="workspace-name"
             placeholder="e.g. Acme Corp"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            autoFocus
           />
         </div>
 

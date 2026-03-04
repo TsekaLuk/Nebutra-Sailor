@@ -1,11 +1,16 @@
 import { Hono } from "hono";
 import { Webhook } from "svix";
-import { prisma, Prisma } from "@nebutra/db";
+import { prisma, type Role } from "@nebutra/db";
 import { logger } from "@nebutra/logger";
+import {
+  UserRepository,
+  OrganizationRepository,
+  OrganizationMemberRepository,
+  WebhookEventRepository,
+  type JsonValue,
+} from "@nebutra/repositories";
 
 const log = logger.child({ service: "clerk-webhook" });
-
-export const clerkWebhookRoutes = new Hono();
 
 // ============================================
 // Clerk webhook event types
@@ -63,14 +68,22 @@ interface ClerkWebhookEvent {
 }
 
 // ============================================
+// Repository bundle type
+// ============================================
+
+export interface ClerkRepos {
+  userRepo: UserRepository;
+  orgRepo: OrganizationRepository;
+  memberRepo: OrganizationMemberRepository;
+  webhookEventRepo: WebhookEventRepository;
+}
+
+// ============================================
 // Role mapping
 // ============================================
 
-// Prisma Role enum: OWNER | ADMIN | MEMBER | VIEWER
-type PrismaRole = "OWNER" | "ADMIN" | "MEMBER" | "VIEWER";
-
-function mapClerkRole(clerkRole: string): PrismaRole {
-  const roleMap: Record<string, PrismaRole> = {
+function mapClerkRole(clerkRole: string): Role {
+  const roleMap: Record<string, Role> = {
     "org:owner": "OWNER",
     "org:admin": "ADMIN",
     "org:member": "MEMBER",
@@ -80,95 +93,103 @@ function mapClerkRole(clerkRole: string): PrismaRole {
 }
 
 // ============================================
-// Route handler
+// Factory function
 // ============================================
 
-clerkWebhookRoutes.post("/clerk", async (c) => {
-  const rawBody = await c.req.text();
-  const svixId = c.req.header("svix-id");
-  const svixTimestamp = c.req.header("svix-timestamp");
-  const svixSignature = c.req.header("svix-signature");
+export function createClerkWebhookRoutes(repos?: Partial<ClerkRepos>): Hono {
+  const resolvedRepos: ClerkRepos = {
+    userRepo: repos?.userRepo ?? new UserRepository(prisma),
+    orgRepo: repos?.orgRepo ?? new OrganizationRepository(prisma),
+    memberRepo: repos?.memberRepo ?? new OrganizationMemberRepository(prisma),
+    webhookEventRepo:
+      repos?.webhookEventRepo ?? new WebhookEventRepository(prisma),
+  };
 
-  if (!svixId || !svixTimestamp || !svixSignature) {
-    return c.json({ error: "Missing svix headers" }, 400);
-  }
+  const app = new Hono();
 
-  const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
-  if (!webhookSecret) {
-    log.error("CLERK_WEBHOOK_SECRET not configured");
-    return c.json({ error: "Webhook not configured" }, 500);
-  }
+  // ============================================
+  // Route handler
+  // ============================================
 
-  let payload: ClerkWebhookEvent;
-  try {
-    const wh = new Webhook(webhookSecret);
-    payload = wh.verify(rawBody, {
-      "svix-id": svixId,
-      "svix-timestamp": svixTimestamp,
-      "svix-signature": svixSignature,
-    }) as ClerkWebhookEvent;
-  } catch (err) {
-    log.error("Clerk webhook signature verification failed", err);
-    return c.json({ error: "Invalid signature" }, 400);
-  }
+  app.post("/clerk", async (c) => {
+    const rawBody = await c.req.text();
+    const svixId = c.req.header("svix-id");
+    const svixTimestamp = c.req.header("svix-timestamp");
+    const svixSignature = c.req.header("svix-signature");
 
-  // Idempotency check
-  const existingEvent = await prisma.webhookEvent.findUnique({
-    where: { provider_eventId: { provider: "clerk", eventId: svixId } },
-  });
+    if (!svixId || !svixTimestamp || !svixSignature) {
+      return c.json({ error: "Missing svix headers" }, 400);
+    }
 
-  if (existingEvent?.processedAt) {
-    log.info("Clerk event already processed, skipping", {
-      svixId,
-      type: payload.type,
-    });
-    return c.json({ received: true, skipped: true });
-  }
+    const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      log.error("CLERK_WEBHOOK_SECRET not configured");
+      return c.json({ error: "Webhook not configured" }, 500);
+    }
 
-  await prisma.webhookEvent.upsert({
-    where: { provider_eventId: { provider: "clerk", eventId: svixId } },
-    create: {
+    let payload: ClerkWebhookEvent;
+    try {
+      const wh = new Webhook(webhookSecret);
+      payload = wh.verify(rawBody, {
+        "svix-id": svixId,
+        "svix-timestamp": svixTimestamp,
+        "svix-signature": svixSignature,
+      }) as ClerkWebhookEvent;
+    } catch (err) {
+      log.error("Clerk webhook signature verification failed", err);
+      return c.json({ error: "Invalid signature" }, 400);
+    }
+
+    // Idempotency check
+    const existingEvent =
+      await resolvedRepos.webhookEventRepo.findByProviderAndEventId(
+        "clerk",
+        svixId,
+      );
+
+    if (existingEvent?.processedAt) {
+      log.info("Clerk event already processed, skipping", {
+        svixId,
+        type: payload.type,
+      });
+      return c.json({ received: true, skipped: true });
+    }
+
+    await resolvedRepos.webhookEventRepo.upsert({
       provider: "clerk",
       eventId: svixId,
       eventType: payload.type,
-      payload: payload as unknown as Prisma.InputJsonValue,
-    },
-    update: {},
-  });
-
-  // Respond immediately; process asynchronously
-  const response = c.json({ received: true });
-
-  handleClerkEvent(payload, prisma)
-    .then(async () => {
-      await prisma.webhookEvent.update({
-        where: { provider_eventId: { provider: "clerk", eventId: svixId } },
-        data: { processedAt: new Date() },
-      });
-    })
-    .catch(async (err: unknown) => {
-      log.error("Clerk event handler error", err, { type: payload.type });
-      await prisma.webhookEvent
-        .update({
-          where: { provider_eventId: { provider: "clerk", eventId: svixId } },
-          data: {
-            errorMessage: err instanceof Error ? err.message : "Unknown error",
-            retryCount: { increment: 1 },
-          },
-        })
-        .catch(() => {
-          // Best-effort — do not throw inside catch
-        });
+      payload: payload as unknown as JsonValue,
     });
 
-  return response;
-});
+    // Respond immediately; process asynchronously
+    const response = c.json({ received: true });
 
-// ============================================
-// Prisma type alias
-// ============================================
+    handleClerkEvent(payload, resolvedRepos)
+      .then(async () => {
+        await resolvedRepos.webhookEventRepo.markProcessed("clerk", svixId);
+      })
+      .catch(async (err: unknown) => {
+        log.error("Clerk event handler error", err, { type: payload.type });
+        await resolvedRepos.webhookEventRepo
+          .markFailed(
+            "clerk",
+            svixId,
+            err instanceof Error ? err.message : "Unknown error",
+          )
+          .catch(() => {
+            // Best-effort — do not throw inside catch
+          });
+      });
 
-type PrismaClient = typeof prisma;
+    return response;
+  });
+
+  return app;
+}
+
+// Backward-compat named export — keeps apps/api-gateway/src/routes/webhooks/index.ts unchanged
+export const clerkWebhookRoutes = createClerkWebhookRoutes();
 
 // ============================================
 // Event dispatcher
@@ -176,37 +197,50 @@ type PrismaClient = typeof prisma;
 
 async function handleClerkEvent(
   event: ClerkWebhookEvent,
-  db: PrismaClient,
+  repos: ClerkRepos,
 ): Promise<void> {
   switch (event.type) {
     case "user.created":
-      await handleUserCreated(event.data as ClerkUserData, db);
+      await handleUserCreated(event.data as ClerkUserData, repos.userRepo);
       break;
     case "user.updated":
-      await handleUserUpdated(event.data as ClerkUserData, db);
+      await handleUserUpdated(event.data as ClerkUserData, repos.userRepo);
       break;
     case "user.deleted":
-      await handleUserDeleted(event.data as ClerkUserData, db);
+      await handleUserDeleted(event.data as ClerkUserData, repos.userRepo);
       break;
     case "organization.created":
-      await handleOrganizationCreated(event.data as ClerkOrganizationData, db);
+      await handleOrganizationCreated(
+        event.data as ClerkOrganizationData,
+        repos.orgRepo,
+      );
       break;
     case "organization.updated":
-      await handleOrganizationUpdated(event.data as ClerkOrganizationData, db);
+      await handleOrganizationUpdated(
+        event.data as ClerkOrganizationData,
+        repos.orgRepo,
+      );
       break;
     case "organization.deleted":
-      await handleOrganizationDeleted(event.data as ClerkOrganizationData, db);
+      await handleOrganizationDeleted(
+        event.data as ClerkOrganizationData,
+        repos.orgRepo,
+      );
       break;
     case "organizationMembership.created":
       await handleMembershipCreated(
         event.data as ClerkOrganizationMembershipData,
-        db,
+        repos.orgRepo,
+        repos.userRepo,
+        repos.memberRepo,
       );
       break;
     case "organizationMembership.deleted":
       await handleMembershipDeleted(
         event.data as ClerkOrganizationMembershipData,
-        db,
+        repos.orgRepo,
+        repos.userRepo,
+        repos.memberRepo,
       );
       break;
     default:
@@ -232,19 +266,17 @@ function resolvePrimaryEmail(data: ClerkUserData): string {
 
 async function handleUserCreated(
   data: ClerkUserData,
-  db: PrismaClient,
+  repo: UserRepository,
 ): Promise<void> {
   const email = resolvePrimaryEmail(data);
   const name = resolveUserName(data);
   const avatarUrl = data.image_url ?? data.profile_image_url ?? null;
 
-  await db.user.create({
-    data: {
-      clerkId: data.id,
-      email,
-      ...(name !== null && { name }),
-      ...(avatarUrl !== null && { avatarUrl }),
-    },
+  await repo.create({
+    clerkId: data.id,
+    email,
+    ...(name !== null && { name }),
+    ...(avatarUrl !== null && { avatarUrl }),
   });
 
   log.info("User created", { clerkId: data.id, email });
@@ -252,32 +284,23 @@ async function handleUserCreated(
 
 async function handleUserUpdated(
   data: ClerkUserData,
-  db: PrismaClient,
+  repo: UserRepository,
 ): Promise<void> {
   const email = resolvePrimaryEmail(data);
   const name = resolveUserName(data);
   const avatarUrl = data.image_url ?? data.profile_image_url ?? null;
 
-  await db.user.update({
-    where: { clerkId: data.id },
-    data: {
-      email,
-      name,
-      avatarUrl,
-    },
-  });
+  await repo.updateByClerkId(data.id, { email, name, avatarUrl });
 
   log.info("User updated", { clerkId: data.id, email });
 }
 
 async function handleUserDeleted(
   data: ClerkUserData,
-  db: PrismaClient,
+  repo: UserRepository,
 ): Promise<void> {
   // Cascade deletes on OrganizationMember, Wallet, etc. are handled by DB constraints
-  await db.user.delete({
-    where: { clerkId: data.id },
-  });
+  await repo.deleteByClerkId(data.id);
 
   log.info("User deleted", { clerkId: data.id });
 }
@@ -288,14 +311,12 @@ async function handleUserDeleted(
 
 async function handleOrganizationCreated(
   data: ClerkOrganizationData,
-  db: PrismaClient,
+  repo: OrganizationRepository,
 ): Promise<void> {
-  await db.organization.create({
-    data: {
-      clerkId: data.id,
-      name: data.name,
-      slug: data.slug,
-    },
+  await repo.create({
+    clerkId: data.id,
+    name: data.name,
+    slug: data.slug,
   });
 
   log.info("Organization created", {
@@ -307,14 +328,11 @@ async function handleOrganizationCreated(
 
 async function handleOrganizationUpdated(
   data: ClerkOrganizationData,
-  db: PrismaClient,
+  repo: OrganizationRepository,
 ): Promise<void> {
-  await db.organization.update({
-    where: { clerkId: data.id },
-    data: {
-      name: data.name,
-      slug: data.slug,
-    },
+  await repo.updateByClerkId(data.id, {
+    name: data.name,
+    slug: data.slug,
   });
 
   log.info("Organization updated", { clerkId: data.id, name: data.name });
@@ -322,12 +340,10 @@ async function handleOrganizationUpdated(
 
 async function handleOrganizationDeleted(
   data: ClerkOrganizationData,
-  db: PrismaClient,
+  repo: OrganizationRepository,
 ): Promise<void> {
   // Cascade deletes on members, content, products, etc. handled by DB constraints
-  await db.organization.delete({
-    where: { clerkId: data.id },
-  });
+  await repo.deleteByClerkId(data.id);
 
   log.info("Organization deleted", { clerkId: data.id });
 }
@@ -338,15 +354,17 @@ async function handleOrganizationDeleted(
 
 async function handleMembershipCreated(
   data: ClerkOrganizationMembershipData,
-  db: PrismaClient,
+  orgRepo: OrganizationRepository,
+  userRepo: UserRepository,
+  memberRepo: OrganizationMemberRepository,
 ): Promise<void> {
   const orgClerkId = data.organization.id;
   const userClerkId = data.public_user_data.user_id;
   const role = mapClerkRole(data.role);
 
   const [organization, user] = await Promise.all([
-    db.organization.findUnique({ where: { clerkId: orgClerkId } }),
-    db.user.findUnique({ where: { clerkId: userClerkId } }),
+    orgRepo.findByClerkId(orgClerkId),
+    userRepo.findByClerkId(userClerkId),
   ]);
 
   if (!organization) {
@@ -365,19 +383,10 @@ async function handleMembershipCreated(
     return;
   }
 
-  await db.organizationMember.upsert({
-    where: {
-      organizationId_userId: {
-        organizationId: organization.id,
-        userId: user.id,
-      },
-    },
-    create: {
-      organizationId: organization.id,
-      userId: user.id,
-      role,
-    },
-    update: { role },
+  await memberRepo.upsert({
+    organizationId: organization.id,
+    userId: user.id,
+    role,
   });
 
   log.info("Organization membership created", {
@@ -389,14 +398,16 @@ async function handleMembershipCreated(
 
 async function handleMembershipDeleted(
   data: ClerkOrganizationMembershipData,
-  db: PrismaClient,
+  orgRepo: OrganizationRepository,
+  userRepo: UserRepository,
+  memberRepo: OrganizationMemberRepository,
 ): Promise<void> {
   const orgClerkId = data.organization.id;
   const userClerkId = data.public_user_data.user_id;
 
   const [organization, user] = await Promise.all([
-    db.organization.findUnique({ where: { clerkId: orgClerkId } }),
-    db.user.findUnique({ where: { clerkId: userClerkId } }),
+    orgRepo.findByClerkId(orgClerkId),
+    userRepo.findByClerkId(userClerkId),
   ]);
 
   if (!organization || !user) {
@@ -408,12 +419,7 @@ async function handleMembershipDeleted(
     return;
   }
 
-  await db.organizationMember.deleteMany({
-    where: {
-      organizationId: organization.id,
-      userId: user.id,
-    },
-  });
+  await memberRepo.deleteByOrganizationAndUser(organization.id, user.id);
 
   log.info("Organization membership deleted", {
     organizationId: organization.id,

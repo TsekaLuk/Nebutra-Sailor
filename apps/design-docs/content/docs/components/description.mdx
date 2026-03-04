@@ -1,0 +1,76 @@
+---
+title: "Description"
+description: "Displays a brief heading and subheading to communicate any additional information or context a user needs to continue."
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-description--docs).
+</Note>
+
+## Overview
+
+`Description` is a compact heading + subheading block. An optional `tooltip` prop renders an info icon next to the title — hovering or focusing it shows a `ContextCard` with additional context.
+
+## Installation
+
+```tsx
+import { Description } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Default
+
+```tsx
+import { Description } from "@nebutra/custom-ui/primitives"
+
+<Description
+  title="Section Title"
+  content="Data about this section."
+/>
+```
+
+### With tooltip
+
+```tsx
+<Description
+  title="Section Title"
+  content="Data about this section."
+  tooltip="Additional context about what this section refers to."
+/>
+```
+
+### Rich tooltip content
+
+The `tooltip` prop accepts any `ReactNode`:
+
+```tsx
+<Description
+  title="Deployment Region"
+  content="Where your workloads run."
+  tooltip={
+    <div className="flex flex-col gap-1">
+      <p className="font-medium">Region selection</p>
+      <p className="text-muted-foreground text-xs">
+        Choose the region closest to your users to reduce latency.
+      </p>
+    </div>
+  }
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | — | **Required.** Primary label / heading |
+| `content` | `string` | — | **Required.** Supporting text below the title |
+| `tooltip` | `ReactNode` | — | If provided, shows an info icon that reveals this content on hover |
+| `className` | `string` | — | Additional CSS classes for the wrapper |
+
+## Accessibility
+
+- Tooltip is built on `ContextCard` (Radix Tooltip) with a 200ms hover delay.
+- Keyboard accessible: focus the info icon to show the tooltip.
+- Screen readers announce tooltip content via `role="tooltip"`.
+- `Escape` dismisses the tooltip.

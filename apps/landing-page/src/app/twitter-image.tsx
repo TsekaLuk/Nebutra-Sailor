@@ -2,72 +2,59 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Nebutra - Enterprise SaaS Platform";
-export const size = { width: 1200, height: 600 };
+export const alt = "Nebutra Sailor - Enterprise SaaS Framework";
+export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
   return new ImageResponse(
-    (
-      <div
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#020617",
+        backgroundImage:
+          "radial-gradient(ellipse 76% 48% at 50% 40%, rgba(0,51,254,0.27) 0%, transparent 72%), radial-gradient(ellipse 58% 35% at 70% 72%, rgba(11,241,195,0.20) 0%, transparent 75%)",
+      }}
+    >
+      <span
         style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#0F172A",
-          backgroundImage:
-            "radial-gradient(circle at 25% 25%, #1E40AF 0%, transparent 50%), radial-gradient(circle at 75% 75%, #7C3AED 0%, transparent 50%)",
+          fontSize: 24,
+          color: "rgba(255,255,255,0.74)",
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          marginBottom: 22,
         }}
       >
-        {/* Logo/Brand */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 32,
-          }}
-        >
-          <div
-            style={{
-              width: 72,
-              height: 72,
-              borderRadius: 18,
-              background: "linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 20,
-            }}
-          >
-            <span style={{ fontSize: 44, color: "white", fontWeight: 700 }}>N</span>
-          </div>
-          <span
-            style={{
-              fontSize: 56,
-              fontWeight: 700,
-              color: "white",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Nebutra
-          </span>
-        </div>
-
-        {/* Tagline */}
-        <span
-          style={{
-            fontSize: 28,
-            color: "#94A3B8",
-          }}
-        >
-          AI-Native • Multi-Tenant • Global Scale
-        </span>
-      </div>
-    ),
-    { ...size }
+        Nebutra Sailor
+      </span>
+      <span
+        style={{
+          fontSize: 74,
+          fontWeight: 700,
+          color: "#ffffff",
+          letterSpacing: "-0.03em",
+          textAlign: "center",
+          lineHeight: 1.05,
+        }}
+      >
+        Open-Source Enterprise SaaS
+      </span>
+      <span
+        style={{
+          fontSize: 30,
+          color: "#a7f7e4",
+          textAlign: "center",
+          marginTop: 14,
+        }}
+      >
+        Build faster with multi-tenant + billing + AI foundations
+      </span>
+    </div>,
+    { ...size },
   );
 }

@@ -1,12 +1,12 @@
 "use client";
 
 import { MonitorIcon, MoonStarIcon, SunIcon } from "lucide-react";
-import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import type { JSX } from "react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { cn } from "@/lib/utils";
+import { useMount } from "@/hooks/useMount";
 
 function ThemeOption({
   icon,
@@ -22,7 +22,7 @@ function ThemeOption({
   return (
     <button
       className={cn(
-        "relative flex size-8 cursor-default items-center justify-center rounded-full transition-all [&_svg]:size-4",
+        "relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-all [&_svg]:size-4",
         isActive
           ? "text-zinc-950 dark:text-zinc-50"
           : "text-zinc-400 hover:text-zinc-950 dark:text-zinc-500 dark:hover:text-zinc-50",
@@ -35,11 +35,7 @@ function ThemeOption({
       {icon}
 
       {isActive && (
-        <motion.div
-          layoutId="theme-option"
-          transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
-          className="absolute inset-0 rounded-full border border-zinc-200 dark:border-zinc-700"
-        />
+        <span className="absolute inset-0 rounded-full border border-zinc-200 dark:border-zinc-700" />
       )}
     </button>
   );
@@ -53,22 +49,14 @@ const THEME_OPTIONS = [
 
 function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useMount();
 
   if (!isMounted) {
     return <div className="flex h-8 w-24" />;
   }
 
   return (
-    <motion.div
-      key={String(isMounted)}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+    <div
       className="inline-flex items-center overflow-hidden rounded-full bg-white ring-1 ring-zinc-200 ring-inset dark:bg-zinc-950 dark:ring-zinc-700"
       role="radiogroup"
       aria-label="Select color theme"
@@ -82,7 +70,7 @@ function ThemeSwitcher() {
           onClick={setTheme}
         />
       ))}
-    </motion.div>
+    </div>
   );
 }
 

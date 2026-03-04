@@ -1,90 +1,53 @@
 ---
 title: CheckboxGroup
-description: HeroUI CheckboxGroup wrapper for multi-select checkbox lists with validation.
+description: A layout wrapper for grouping multiple Checkbox items with accessible labeling.
 ---
 
 ## Overview
 
-`CheckboxGroup` and `Checkbox` wrap HeroUI's `@heroui/checkbox` package, providing a fully-accessible multi-select checkbox group with:
+`CheckboxGroup` is a simple layout wrapper that groups multiple `Checkbox` items with:
 
+- Accessible `role="group"` and `aria-label`
 - Vertical or horizontal orientation
-- Built-in validation and error messages
-- Color variants, sizes, and radii
-- Disabled states and fixed options
-- Controlled and uncontrolled modes
+- Optional visible label
 
 ## Usage
 
 ```tsx
 import { CheckboxGroup, Checkbox } from "@nebutra/custom-ui/primitives";
 
-// Basic
+// Vertical (default)
 <CheckboxGroup label="Select features">
-  <Checkbox value="analytics">Analytics</Checkbox>
-  <Checkbox value="api">API Access</Checkbox>
-  <Checkbox value="sso">SSO</Checkbox>
-</CheckboxGroup>
-
-// Controlled
-const [selected, setSelected] = useState(["analytics"]);
-
-<CheckboxGroup
-  label="Features"
-  value={selected}
-  onValueChange={setSelected}
->
-  <Checkbox value="analytics">Analytics</Checkbox>
-  <Checkbox value="api">API Access</Checkbox>
+  <Checkbox>Analytics</Checkbox>
+  <Checkbox>API Access</Checkbox>
+  <Checkbox>SSO</Checkbox>
 </CheckboxGroup>
 
 // Horizontal
 <CheckboxGroup orientation="horizontal" label="Options">
-  <Checkbox value="a">Option A</Checkbox>
-  <Checkbox value="b">Option B</Checkbox>
+  <Checkbox>Option A</Checkbox>
+  <Checkbox>Option B</Checkbox>
 </CheckboxGroup>
 
-// With validation
-<CheckboxGroup
-  label="Required"
-  isRequired
-  isInvalid={selected.length === 0}
-  errorMessage="Please select at least one option."
->
-  <Checkbox value="terms">Accept terms</Checkbox>
+// With disabled items
+<CheckboxGroup label="Plan features">
+  <Checkbox defaultChecked>100GB Storage</Checkbox>
+  <Checkbox>Unlimited users</Checkbox>
+  <Checkbox disabled>SSO (Enterprise only)</Checkbox>
 </CheckboxGroup>
 ```
 
 ## Props
 
-Both `CheckboxGroup` and `Checkbox` accept all HeroUI props directly.
-
-### Key `CheckboxGroup` props
+### CheckboxGroup
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `label` | `string` | — | Group label |
-| `description` | `string` | — | Helper text below the group |
-| `errorMessage` | `string` | — | Error message shown when `isInvalid` |
+| `label` | `string` | — | Accessible group label (also rendered visually) |
 | `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Layout direction |
-| `value` | `string[]` | — | Controlled selected values |
-| `defaultValue` | `string[]` | — | Initial selected values |
-| `onValueChange` | `(values: string[]) => void` | — | Selection change callback |
-| `isRequired` | `boolean` | `false` | Mark as required |
-| `isInvalid` | `boolean` | `false` | Show error state |
-| `isDisabled` | `boolean` | `false` | Disable all checkboxes |
+| `children` | `ReactNode` | — | Checkbox items |
+| `className` | `string` | — | Additional CSS classes |
 
-### Key `Checkbox` props
+### Checkbox
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | — | Option value |
-| `color` | `CheckboxColor` | `"primary"` | Checkbox accent color |
-| `size` | `CheckboxSize` | `"md"` | Size variant |
-| `radius` | `CheckboxRadius` | `"md"` | Border radius |
-| `isDisabled` | `boolean` | `false` | Disable this item |
-| `isSelected` | `boolean` | — | Controlled checked state |
-
-## Notes
-
-- This is a thin wrapper around `@heroui/checkbox` — all HeroUI props are supported
-- Requires HeroUI provider setup in your app
+See [Checkbox](/docs/components/checkbox) for full props.

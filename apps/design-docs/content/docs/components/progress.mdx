@@ -49,7 +49,7 @@ const [progress, setProgress] = useState(0)
 useEffect(() => {
   const timer = setInterval(() => {
     setProgress((prev) => {
-      if (prev >= 100) {
+      if (prev ≥ 100) {
         clearInterval(timer)
         return 100
       }

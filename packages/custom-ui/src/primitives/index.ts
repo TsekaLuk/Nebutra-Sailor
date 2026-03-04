@@ -1,7 +1,32 @@
 /**
- * Primitives - shadcn-compatible base components
+ * Primitives — foundational UI components for all apps.
  *
- * These are foundational UI components that can be used across all apps.
+ * ## Component library strategy
+ *
+ * This package contains two coexisting component layers:
+ *
+ * ### Radix UI (headless) — default choice
+ * Accessible, unstyled primitives. Use these for standard UI needs:
+ * - `Popover`, `Select`, `Dialog`, `Tooltip`, `DropdownMenu`, `Accordion`, `Tabs`, etc.
+ * Prefer Radix when the use case is covered — they integrate cleanly with Tailwind tokens.
+ *
+ * ### HeroUI (hero-* prefix) — extended use cases only
+ * Opinionated components with built-in animations, advanced interactions, and complex state.
+ * Use **only** when the Radix equivalent lacks the required feature:
+ *
+ * | Hero component    | Feature absent in Radix equivalent              |
+ * |-------------------|-------------------------------------------------|
+ * | `HeroPopover`     | Backdrop blur/opaque, showArrow, scale trigger  |
+ * | `HeroSelect`      | Multi-select with chips, virtualization, sections|
+ * | `HeroCard`        | isPressable (button semantics), isBlurred, ripple|
+ * | `HeroSkeleton`    | Shimmer animation (no Radix skeleton primitive)  |
+ * | `HeroSwitch`      | Built-in thumb icon, color variants              |
+ * | `HeroSlider`      | Range, step marks, output tooltip                |
+ * | `HeroProgress`    | Striped, animated, indeterminate variant          |
+ * | `HeroCheckboxGroup`| Selection with descriptions, per-item colors   |
+ * | `Calendar`, `DatePicker`, `DateInput` | No Radix equivalent           |
+ *
+ * Do NOT add new HeroUI wrappers if a Radix primitive can handle the case.
  */
 
 export {
@@ -38,6 +63,19 @@ export {
   type AvatarGroupProps,
   type AvatarGroupItem,
 } from "./avatar";
+export {
+  GitHubAvatar,
+  GitLabAvatar,
+  BitbucketAvatar,
+  AvatarWithIcon,
+  DiceBearAvatar,
+  type GitHubAvatarProps,
+  type GitLabAvatarProps,
+  type BitbucketAvatarProps,
+  type AvatarWithIconProps,
+  type DiceBearAvatarProps,
+  type DiceBearStyle,
+} from "./avatar-extended";
 export {
   Tooltip,
   TooltipTrigger,
@@ -386,6 +424,16 @@ export {
   type HeroPopoverBackdrop,
 } from "./hero-popover";
 export {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverAnchor,
+  type PopoverProps,
+  type PopoverTriggerProps,
+  type PopoverContentProps,
+  type PopoverAnchorProps,
+} from "./popover";
+export {
   Drawer,
   DrawerPortal,
   DrawerOverlay,
@@ -418,6 +466,18 @@ export {
   type HeroSelectItemProps,
   type HeroSelectSectionProps,
 } from "./hero-select";
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from "./select";
 export { FlickeringGrid, type FlickeringGridProps } from "./flickering-grid";
 export { WarpBackground, type WarpBackgroundProps } from "./warp-background";
 export {
@@ -473,10 +533,6 @@ export {
   Checkbox,
   type CheckboxGroupProps,
   type CheckboxProps,
-  type CheckboxColor,
-  type CheckboxSize,
-  type CheckboxRadius,
-  type CheckboxGroupOrientation,
 } from "./checkbox-group";
 export {
   ChoiceboxGroup,
@@ -632,6 +688,74 @@ export {
   type CommandShortcutProps,
 } from "./command";
 export {
+  Combobox,
+  comboboxTriggerVariants,
+  type ComboboxProps,
+  type ComboboxSize,
+  type ComboboxOption,
+  type ComboboxOptionProps,
+  type ComboboxInputProps,
+  type ComboboxEmptyProps,
+  type ComboboxGroupProps,
+} from "./combobox";
+export {
+  CommandMenu,
+  type CommandMenuRootProps,
+  type CommandMenuItemProps,
+} from "./command-menu";
+export {
+  ContextCard,
+  type ContextCardTriggerProps,
+  type ContextCardSide,
+} from "./context-card";
+export {
+  ContextMenu,
+  type ContextMenuItemProps,
+  type ContextMenuLabelProps,
+  type ContextMenuSeparatorProps,
+  type ContextMenuContentProps,
+} from "./context-menu";
+export {
+  AnimateIn,
+  AnimateInGroup,
+  type AnimateInProps,
+  type AnimateInGroupProps,
+} from "./animate-in";
+export { Description, type DescriptionProps } from "./description";
+export {
+  EmptyState,
+  type EmptyStateRootProps,
+  type EmptyStateIconProps,
+} from "./empty-state";
+export {
+  Entity,
+  type EntityProps,
+  type EntityContentProps,
+  type EntityListProps,
+} from "./entity";
+export {
+  ErrorMessage,
+  type ErrorMessageProps,
+  type ErrorObject,
+} from "./error-message";
+export {
+  Feedback,
+  type FeedbackProps,
+  type FeedbackPayload,
+} from "./feedback";
+export {
+  Gauge,
+  type GaugeProps,
+  type GaugeColorStop,
+} from "./gauge";
+export {
+  Grid,
+  type GridSystemProps,
+  type GridCellProps,
+} from "./grid-system";
+export { Kbd, type KbdProps } from "./kbd";
+export { LoadingDots, type LoadingDotsProps } from "./loading-dots";
+export {
   MultipleSelector,
   useDebounce,
   type MultipleSelectorProps,
@@ -688,6 +812,7 @@ export {
   type AnimatedHikeCardProps,
   type Stat as AnimatedHikeCardStat,
 } from "./animated-hike-card";
+export { Material, type MaterialProps } from "./material";
 export {
   PricingCard,
   PricingCardRoot,

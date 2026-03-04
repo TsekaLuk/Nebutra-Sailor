@@ -40,6 +40,19 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Required for Docker / self-hosted deployments.
+  // Produces a minimal standalone server bundle under .next/standalone.
+  output: "standalone",
+  // Workspace packages: src/-exporting packages need this for SWC to process
+  // TypeScript; dist/-exporting packages need it for "use client" detection.
+  transpilePackages: [
+    "@nebutra/brand",
+    "@nebutra/custom-ui",
+    "@nebutra/design-system",
+    "@nebutra/marketing",
+    "@nebutra/sanity",
+    "@nebutra/theme",
+  ],
   async headers() {
     return [
       {

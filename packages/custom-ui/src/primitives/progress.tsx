@@ -2,7 +2,11 @@
 
 import React from "react";
 import {
-  Progress as HeroUIProgress,
+  Progress as HeroUIProgressBase,
+} from "@heroui/progress";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HeroUIProgress = HeroUIProgressBase as any;
+import type {
   ProgressProps as HeroUIProgressProps,
 } from "@heroui/progress";
 

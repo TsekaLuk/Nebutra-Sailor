@@ -81,7 +81,7 @@ export default async function ContactPage({
         {contacts.map((contact) => (
           <div
             key={contact.email}
-            className="rounded-lg border border-gray-200 dark:border-gray-700 p-6 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+            className="rounded-lg border border-gray-200 p-6 transition-colors hover:border-[color:var(--blue-8)] dark:border-gray-700 dark:hover:border-[color:var(--blue-7)]"
           >
             <h3 className="font-semibold text-gray-900 dark:text-white">
               {contact.title}
@@ -91,7 +91,7 @@ export default async function ContactPage({
             </p>
             <a
               href={`mailto:${contact.email}`}
-              className="mt-4 inline-block text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+              className="mt-4 inline-block text-[color:var(--blue-11)] hover:text-[color:var(--blue-12)] dark:text-[color:var(--blue-9)] dark:hover:text-[color:var(--blue-10)]"
             >
               {contact.email}
             </a>
@@ -118,7 +118,7 @@ export default async function ContactPage({
                 id="name"
                 name="name"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               />
             </div>
             <div>
@@ -133,7 +133,7 @@ export default async function ContactPage({
                 id="email"
                 name="email"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               />
             </div>
           </div>
@@ -149,7 +149,7 @@ export default async function ContactPage({
                 type="text"
                 id="company"
                 name="company"
-                className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               />
             </div>
             <div>
@@ -163,7 +163,7 @@ export default async function ContactPage({
                 id="category"
                 name="category"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               >
                 <option value="general">
                   {t("contact.form.categories.general")}
@@ -201,7 +201,7 @@ export default async function ContactPage({
               id="subject"
               name="subject"
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
           </div>
           <div>
@@ -216,20 +216,23 @@ export default async function ContactPage({
               name="message"
               rows={5}
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
           </div>
           <div>
             <button
               type="submit"
-              className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="w-full rounded-lg bg-[color:var(--blue-9)] px-6 py-3 font-semibold text-white transition hover:bg-[color:var(--blue-10)] focus:outline-none focus:ring-2 focus:ring-[color:var(--blue-8)] focus:ring-offset-2"
             >
               {t("contact.form.submit")}
             </button>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {t("contact.form.privacyNotice")}{" "}
-            <Link href="/privacy" className="text-blue-600 hover:underline">
+            <Link
+              href="/privacy"
+              className="text-[color:var(--blue-11)] hover:underline dark:text-[color:var(--blue-9)]"
+            >
               {t("contact.form.privacyLink")}
             </Link>
             .
@@ -259,7 +262,7 @@ export default async function ContactPage({
                 href="https://twitter.com/nebutra"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-blue-500"
+                className="text-gray-500 hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
               >
                 Twitter
               </a>
@@ -267,7 +270,7 @@ export default async function ContactPage({
                 href="https://linkedin.com/company/nebutra"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-blue-500"
+                className="text-gray-500 hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
               >
                 LinkedIn
               </a>
@@ -275,7 +278,7 @@ export default async function ContactPage({
                 href="https://github.com/nebutra"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-blue-500"
+                className="text-gray-500 hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
               >
                 GitHub
               </a>

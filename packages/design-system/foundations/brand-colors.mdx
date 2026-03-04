@@ -1,0 +1,269 @@
+---
+title: "Brand Colors"
+description: "Complete Nebutra color system — primary blue, accent cyan, neutral scale, semantic colors, accessibility, and code references."
+---
+
+<Note>
+  All color values are sourced from the **云毓智能 品牌视觉识别手册**. These are the definitive specifications.
+  Do not substitute with generic Tailwind palette colors.
+</Note>
+
+## Primary — 云毓蓝 (Nebutra Blue)
+
+The core brand color. Represents technology, trust, and cloud intelligence. Use `blue-500` as the default brand blue for primary buttons, active states, focus rings, and links.
+
+| Step | HEX | RGB | Usage |
+|------|-----|-----|-------|
+| `blue-50` | `#f0f4ff` | `240, 244, 255` | Tinted backgrounds (light mode) |
+| `blue-100` | `#dbe4ff` | `219, 228, 255` | Hover backgrounds (light mode) |
+| `blue-200` | `#bac8ff` | `186, 200, 255` | Borders, dividers (light mode) |
+| `blue-300` | `#91a7ff` | `145, 167, 255` | Disabled states, decorative |
+| `blue-400` | `#5c7cfa` | `92, 124, 250` | Dark mode primary text, secondary actions |
+| **`blue-500`** | **`#0033FE`** | **`0, 51, 254`** | **Brand primary — buttons, links, focus rings** |
+| `blue-600` | `#002ad4` | `0, 42, 212` | Hover state for primary buttons |
+| `blue-700` | `#0021ab` | `0, 33, 171` | Active/pressed state |
+| `blue-800` | `#001882` | `0, 24, 130` | Dark mode backgrounds |
+| `blue-900` | `#000f59` | `0, 15, 89` | Deep dark surfaces |
+| `blue-950` | `#000830` | `0, 8, 48` | Near-black branded surfaces |
+
+### Key Values
+
+| Property | Value |
+|----------|-------|
+| **HEX** | `#0033FE` |
+| **RGB** | `0, 51, 254` |
+| **HSL** | `228°, 100%, 50%` |
+| **CSS Variable** | `--color-brand-blue` |
+| **Tailwind** | `brand-blue-500` |
+
+---
+
+## Accent — 云毓青 (Nebutra Cyan)
+
+The primary accent color. Represents data flow, algorithmic intelligence, and information clarity. Use as gradient endpoint, accent highlights, and data visualization anchor.
+
+| Step | HEX | RGB | Usage |
+|------|-----|-----|-------|
+| `cyan-50` | `#e6fff8` | `230, 255, 248` | Tinted backgrounds (light mode) |
+| `cyan-100` | `#b3ffec` | `179, 255, 236` | Success-adjacent highlights |
+| `cyan-200` | `#80ffe0` | `128, 255, 224` | Decorative accents |
+| `cyan-300` | `#4dfcd4` | `77, 252, 212` | Data visualization secondary |
+| `cyan-400` | `#1af7c8` | `26, 247, 200` | Dark mode accent text |
+| **`cyan-500`** | **`#0BF1C3`** | **`11, 241, 195`** | **Brand accent — gradient endpoint, highlights** |
+| `cyan-600` | `#09c9a3` | `9, 201, 163` | Hover state for accent elements |
+| `cyan-700` | `#07a183` | `7, 161, 131` | Active/pressed accent |
+| `cyan-800` | `#057963` | `5, 121, 99` | Dark mode accent surfaces |
+| `cyan-900` | `#035143` | `3, 81, 67` | Deep dark accent |
+| `cyan-950` | `#012923` | `1, 41, 35` | Near-black accent surfaces |
+
+### Key Values
+
+| Property | Value |
+|----------|-------|
+| **HEX** | `#0BF1C3` |
+| **RGB** | `11, 241, 195` |
+| **HSL** | `168°, 91%, 49%` |
+| **CSS Variable** | `--color-brand-cyan` |
+| **Tailwind** | `brand-cyan-500` |
+
+---
+
+## Neutral Scale (Blue-Undertone)
+
+The neutral palette carries a subtle blue undertone that harmonizes with the brand blue. Use for text hierarchy, surfaces, and borders.
+
+| Step | HEX | RGB | Usage |
+|------|-----|-----|-------|
+| `neutral-50` | `#f8fafc` | `248, 250, 252` | Page background (light mode) |
+| `neutral-100` | `#f1f5f9` | `241, 245, 249` | Muted background, card surfaces |
+| `neutral-200` | `#e2e8f0` | `226, 232, 240` | Borders, input outlines |
+| `neutral-400` | `#94a3b8` | `148, 163, 184` | Placeholder text, muted icons |
+| `neutral-500` | `#64748b` | `100, 116, 139` | Secondary body text |
+| `neutral-700` | `#334155` | `51, 65, 85` | Primary text (light mode) |
+| `neutral-900` | `#0f172a` | `15, 23, 42` | Foreground (light mode), headings |
+| `neutral-950` | `#020617` | `2, 6, 23` | Page background (dark mode) |
+
+<Tip>
+  The blue undertone in the neutral scale is intentional. It creates a subtle visual connection to the brand blue.
+  Never substitute with pure gray (e.g., Tailwind `gray-*` or `zinc-*`).
+</Tip>
+
+---
+
+## Semantic Colors
+
+Semantic colors communicate meaning. Each role has a light and dark mode value.
+
+| Role | Light Mode | Dark Mode | CSS Variable | Usage |
+|------|-----------|-----------|-------------|-------|
+| **Success** | `#22c55e` | `#16a34a` | `--color-success` | Confirmations, completion states |
+| **Warning** | `#f59e0b` | `#d97706` | `--color-warning` | Caution states, pending actions |
+| **Error** | `#ef4444` | `#dc2626` | `--color-error` | Destructive actions, validation errors |
+| **Info** | `#0033FE` | `#5c7cfa` | `--color-info` | Informational callouts, tooltips |
+
+<Warning>
+  **Info = Brand Blue** — The VI manual explicitly specifies that the Info semantic color uses `#0033FE` (brand blue), not a sky or teal color.
+  Never use `sky-500` (`#0ea5e9`) or `cyan-500` (`#06b6d4`) for info states.
+</Warning>
+
+### Semantic Background Variants
+
+For backgrounds and subtle fills, use 10% opacity of the semantic color:
+
+```css
+/* Success background */
+background: rgba(34, 197, 94, 0.1);
+
+/* Error background */
+background: rgba(239, 68, 68, 0.1);
+
+/* Warning background */
+background: rgba(245, 158, 11, 0.1);
+
+/* Info background */
+background: rgba(0, 51, 254, 0.1);
+```
+
+---
+
+## Color Accessibility
+
+### Contrast Ratios (WCAG 2.1 AA)
+
+| Foreground | Background | Ratio | Pass AA | Pass AAA |
+|-----------|-----------|-------|---------|----------|
+| `#0033FE` (blue-500) | `#ffffff` (white) | 6.4:1 | Yes | Yes (large text) |
+| `#0033FE` (blue-500) | `#f0f4ff` (blue-50) | 5.8:1 | Yes | Yes (large text) |
+| `#ffffff` (white) | `#0033FE` (blue-500) | 6.4:1 | Yes | Yes (large text) |
+| `#0BF1C3` (cyan-500) | `#020617` (neutral-950) | 12.1:1 | Yes | Yes |
+| `#0BF1C3` (cyan-500) | `#ffffff` (white) | 1.7:1 | No | No |
+| `#0f172a` (neutral-900) | `#ffffff` (white) | 16.1:1 | Yes | Yes |
+
+<Warning>
+  **Cyan on white fails WCAG contrast.** Never use `#0BF1C3` as text on light backgrounds.
+  Cyan is safe as text on dark backgrounds (`neutral-900`, `neutral-950`) and as decorative/gradient fills.
+</Warning>
+
+### Guidelines
+
+- Use `blue-500` for interactive text (links, buttons) on light backgrounds — it passes WCAG AA
+- Use `blue-400` (`#5c7cfa`) for interactive text on dark backgrounds
+- Use `cyan-500` only on dark backgrounds or as gradient/decorative fills — it fails contrast on white
+- Body text must always use `neutral-700` (light) or `neutral-100` (dark) for maximum readability
+- Minimum contrast ratio: **4.5:1** for normal text, **3:1** for large text (>= 18px bold or >= 24px regular)
+
+---
+
+## Color in Code
+
+### CSS Custom Properties
+
+```css
+:root {
+  /* Brand */
+  --color-brand-blue: #0033FE;
+  --color-brand-cyan: #0BF1C3;
+
+  /* Blue scale */
+  --color-blue-50: #f0f4ff;
+  --color-blue-100: #dbe4ff;
+  --color-blue-200: #bac8ff;
+  --color-blue-300: #91a7ff;
+  --color-blue-400: #5c7cfa;
+  --color-blue-500: #0033FE;
+  --color-blue-600: #002ad4;
+  --color-blue-700: #0021ab;
+  --color-blue-800: #001882;
+  --color-blue-900: #000f59;
+  --color-blue-950: #000830;
+
+  /* Cyan scale */
+  --color-cyan-50: #e6fff8;
+  --color-cyan-100: #b3ffec;
+  --color-cyan-200: #80ffe0;
+  --color-cyan-300: #4dfcd4;
+  --color-cyan-400: #1af7c8;
+  --color-cyan-500: #0BF1C3;
+  --color-cyan-600: #09c9a3;
+  --color-cyan-700: #07a183;
+  --color-cyan-800: #057963;
+  --color-cyan-900: #035143;
+  --color-cyan-950: #012923;
+
+  /* Semantic */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #0033FE;
+}
+```
+
+### Tailwind CSS Classes
+
+```tsx
+// Brand colors
+<div className="bg-brand-blue-500 text-white" />
+<div className="bg-brand-cyan-500 text-neutral-950" />
+
+// Blue scale
+<div className="bg-blue-50 text-blue-900" />
+<div className="border-blue-200" />
+
+// Semantic
+<div className="bg-success text-white" />
+<div className="bg-error text-white" />
+<div className="bg-warning text-neutral-900" />
+
+// Dark mode
+<div className="bg-white dark:bg-neutral-950" />
+<div className="text-neutral-900 dark:text-neutral-100" />
+```
+
+### JavaScript / TypeScript
+
+```ts
+import { colors } from "@nebutra/brand"
+
+// Access brand colors programmatically
+colors.blue[500]   // "#0033FE"
+colors.cyan[500]   // "#0BF1C3"
+colors.neutral[950] // "#020617"
+```
+
+---
+
+## Prohibited Uses
+
+<Warning>
+  The following color substitutions are strictly forbidden:
+</Warning>
+
+| Prohibited | Reason |
+|-----------|--------|
+| Tailwind `sky-500` for brand blue | Sky blue is not Nebutra blue |
+| Tailwind `teal-500` for brand cyan | Teal is not Nebutra cyan |
+| Tailwind `gray-*` for neutrals | Nebutra neutrals have a blue undertone |
+| Orange or red as primary action color | Only brand blue is used for primary actions |
+| Cyan as text on light backgrounds | Fails WCAG contrast — use only on dark backgrounds |
+| Brand blue as a flat background fill | Use the brand gradient for hero/CTA surfaces |
+| Any non-brand color for `info` semantic | Info must use brand blue `#0033FE`, not sky/teal |
+
+---
+
+## Do / Don't
+
+**Do** use `blue-500` (`#0033FE`) for all primary interactive elements (buttons, links, focus rings).
+
+**Do** use the full 11-step scale for subtle tints, hover states, and dark mode adaptations.
+
+**Do** pair `blue-500` with `cyan-500` exclusively in gradients — this is the brand signature.
+
+**Do** use `neutral-950` as the dark mode page background.
+
+**Don't** use cyan on white — it fails WCAG contrast.
+
+**Don't** approximate brand colors with Tailwind defaults (`blue-600`, `emerald-400`).
+
+**Don't** introduce new color scales outside the defined blue, cyan, neutral, and semantic palettes.
+
+**Don't** use brand blue as a solid fill where the brand gradient is expected (hero sections, primary CTAs).

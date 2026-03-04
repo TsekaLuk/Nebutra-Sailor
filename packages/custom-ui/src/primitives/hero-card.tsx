@@ -1,11 +1,13 @@
 "use client";
 
 import {
-  Card as HeroUICard,
+  Card as HeroUICardBase,
   CardHeader as HeroUICardHeader,
   CardBody as HeroUICardBody,
   CardFooter as HeroUICardFooter,
 } from "@heroui/card";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HeroUICard = HeroUICardBase as any;
 import type { CardProps as HeroUICardProps } from "@heroui/card";
 
 // PressEvent type from react-aria

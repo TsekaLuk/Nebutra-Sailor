@@ -19,7 +19,7 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationMap": true,
-    "incremental": true
+    "incremental": false
   },
   "exclude": ["node_modules", "dist", ".next", ".turbo"]
 }

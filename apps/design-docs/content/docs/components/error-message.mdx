@@ -1,0 +1,88 @@
+---
+title: "Error Message"
+description: "Good error design is clear, useful, and friendly. Designing concise and accurate error messages unblocks users and builds trust."
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-errormessage--docs).
+</Note>
+
+## Overview
+
+`ErrorMessage` renders an inline error indicator — a red alert icon, an optional label prefix, the message, and an optional action link. It maps to Geist's `<Error>` component (`ErrorMessage` is used as the export name to avoid shadowing the JavaScript built-in `Error`).
+
+## Installation
+
+```tsx
+import { ErrorMessage } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Default
+
+```tsx
+<ErrorMessage>This email address is already in use.</ErrorMessage>
+```
+
+### Custom label
+
+```tsx
+<ErrorMessage label="Email Error">
+  This email address is already in use.
+</ErrorMessage>
+```
+
+### Sizes
+
+```tsx
+<ErrorMessage size="small">This email is in use.</ErrorMessage>
+<ErrorMessage size="medium">This email is in use.</ErrorMessage>
+<ErrorMessage size="large">This email is in use.</ErrorMessage>
+```
+
+### With action link (error object)
+
+```tsx
+<ErrorMessage
+  error={{
+    message: "The request failed.",
+    action: "Contact Us",
+    link: "https://vercel.com/contact",
+  }}
+/>
+```
+
+### In a form field
+
+```tsx
+<div className="flex flex-col gap-1.5">
+  <label htmlFor="email">Email</label>
+  <input id="email" type="email" className="border-destructive ..." />
+  <ErrorMessage>This email address is already in use.</ErrorMessage>
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | Inline error text (use when not passing `error`) |
+| `label` | `string` | — | Optional label prefix shown before the message |
+| `size` | `"small" \| "medium" \| "large"` | `"medium"` | Font and icon size |
+| `error` | `ErrorObject` | — | Structured error — `message`, `action`, `link` |
+| `className` | `string` | — | Additional CSS classes |
+
+### `ErrorObject`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `message` | `string` | Error description |
+| `action` | `string` | Label for the action link |
+| `link` | `string` | href for the action link |
+
+## Accessibility
+
+- Renders with `role="alert"` so screen readers announce the error immediately.
+- The icon is `aria-hidden="true"` — the text provides the full context.
+- External action links include `rel="noopener noreferrer"`.

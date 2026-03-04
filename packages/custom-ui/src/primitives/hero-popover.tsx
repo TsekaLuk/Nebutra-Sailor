@@ -1,10 +1,12 @@
 "use client";
 
 import {
-  Popover as HeroUIPopover,
+  Popover as HeroUIPopoverBase,
   PopoverTrigger as HeroUIPopoverTrigger,
   PopoverContent as HeroUIPopoverContent,
 } from "@heroui/popover";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HeroUIPopover = HeroUIPopoverBase as any;
 import type { PopoverProps as HeroUIPopoverProps } from "@heroui/popover";
 import type { HTMLMotionProps } from "framer-motion";
 

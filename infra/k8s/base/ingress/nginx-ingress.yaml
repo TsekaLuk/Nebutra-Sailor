@@ -1,0 +1,88 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nebutra-ingress
+  namespace: nebutra
+  labels:
+    app.kubernetes.io/name: nebutra-ingress
+    app.kubernetes.io/component: ingress
+  annotations:
+    # Force HTTP → HTTPS redirect for all routes
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
+    # Increase proxy timeouts for slow AI/recsys responses
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "120"
+
+    # Increase body size limit for content uploads via api-gateway
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+
+    # Enable gzip compression for all text responses
+    nginx.ingress.kubernetes.io/enable-modsecurity: "false"
+
+    # cert-manager will provision and renew the TLS certificate automatically
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+    # Single wildcard cert covers all nebutra.com subdomains.
+    # cert-manager renews this automatically via the cluster issuer above.
+    - hosts:
+        - nebutra.com
+        - www.nebutra.com
+        - app.nebutra.com
+        - api.nebutra.com
+      secretName: nebutra-tls
+  rules:
+    # -------------------------------------------------------------------------
+    # Main application (authenticated SaaS dashboard)
+    # -------------------------------------------------------------------------
+    - host: app.nebutra.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 80
+
+    # -------------------------------------------------------------------------
+    # Marketing / landing page (apex + www)
+    # -------------------------------------------------------------------------
+    - host: nebutra.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: landing-page
+                port:
+                  number: 80
+
+    - host: www.nebutra.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: landing-page
+                port:
+                  number: 80
+
+    # -------------------------------------------------------------------------
+    # API gateway (all microservice traffic from external clients)
+    # -------------------------------------------------------------------------
+    - host: api.nebutra.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-gateway
+                port:
+                  number: 80

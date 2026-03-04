@@ -4,6 +4,8 @@ import { hasLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 
+const VALUE_ITEM_KEYS = ["0", "1", "2", "3", "4", "5"] as const;
+
 export async function generateMetadata({
   params,
 }: {
@@ -56,16 +58,16 @@ export default async function AboutPage({
           {t("about.valuesTitle")}
         </h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {([0, 1, 2, 3, 4, 5] as const).map((i) => (
+          {VALUE_ITEM_KEYS.map((valueKey) => (
             <div
-              key={i}
+              key={`about.values.${valueKey}`}
               className="rounded-lg border border-gray-200 dark:border-gray-700 p-6"
             >
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                {t(`about.values.${i}.title`)}
+                {t(`about.values.${valueKey}.title`)}
               </h3>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                {t(`about.values.${i}.description`)}
+                {t(`about.values.${valueKey}.description`)}
               </p>
             </div>
           ))}
@@ -116,7 +118,7 @@ export default async function AboutPage({
         <div className="mt-6 flex justify-center gap-4">
           <Link
             href="/contact"
-            className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+            className="rounded-lg bg-[color:var(--blue-9)] px-6 py-3 font-semibold text-white transition hover:bg-[color:var(--blue-10)]"
           >
             {t("about.ctaButton")}
           </Link>

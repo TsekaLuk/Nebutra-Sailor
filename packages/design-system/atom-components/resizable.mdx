@@ -1,0 +1,101 @@
+---
+title: "Resizable"
+description: "Draggable resize handles for split-pane panel layouts, built on react-resizable-panels."
+---
+
+## Demo
+
+```tsx
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@nebutra/custom-ui/primitives"
+
+export function ResizableDemo() {
+  return (
+    <ResizablePanelGroup
+      direction="horizontal"
+      className="max-w-md rounded-lg border h-40"
+    >
+      <ResizablePanel defaultSize={50}>
+        <div className="flex h-full items-center justify-center p-6">
+          <span className="font-semibold">One</span>
+        </div>
+      </ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel defaultSize={50}>
+        <div className="flex h-full items-center justify-center p-6">
+          <span className="font-semibold">Two</span>
+        </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+### ResizablePanelGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `direction` | `"horizontal" \| "vertical"` | — | **Required.** Split axis |
+| `onLayout` | `(sizes: number[]) => void` | — | Callback when panel sizes change |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | `ResizablePanel` and `ResizableHandle` elements |
+
+### ResizablePanel
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultSize` | `number` | — | Initial size as a percentage |
+| `minSize` | `number` | `0` | Minimum size as a percentage |
+| `maxSize` | `number` | `100` | Maximum size as a percentage |
+| `collapsible` | `boolean` | `false` | Whether the panel can be collapsed |
+| `collapsedSize` | `number` | `0` | Size when collapsed (percentage) |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Panel content |
+
+### ResizableHandle
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `withHandle` | `boolean` | `false` | Shows a visual drag handle indicator |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### Three Panel Layout
+
+```tsx
+<ResizablePanelGroup direction="horizontal" className="min-h-screen">
+  <ResizablePanel defaultSize={20} minSize={15}>
+    <Sidebar />
+  </ResizablePanel>
+  <ResizableHandle withHandle />
+  <ResizablePanel defaultSize={60}>
+    <MainContent />
+  </ResizablePanel>
+  <ResizableHandle withHandle />
+  <ResizablePanel defaultSize={20} minSize={15}>
+    <RightPanel />
+  </ResizablePanel>
+</ResizablePanelGroup>
+```
+
+## Accessibility
+
+- `ResizableHandle` has `role="separator"` with `aria-orientation`.
+- Keyboard: `ArrowLeft`/`ArrowRight` (or `ArrowUp`/`ArrowDown`) to resize, `Home`/`End` for min/max.
+- Each handle has `aria-label` describing the panels it separates.

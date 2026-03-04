@@ -104,30 +104,67 @@ function AvatarGroup({
   size = "sm",
   className,
 }: AvatarGroupProps) {
-  const visible = items.slice(0, max);
-  const remaining = items.length - max;
+  // Show max-1 real avatars; if items.length === max show last one too,
+  // if items.length > max show +N badge instead of last slot.
+  // Use built-in Tailwind z-index utilities (z-10..z-60) so they are
+  // guaranteed to exist without arbitrary-value scanning.
+  const Z = ["z-10","z-20","z-30","z-40","z-50","z-60"] as const;
+  const visibleCount = items.length >= max ? max - 1 : items.length;
+  const visible = items.slice(0, visibleCount);
+  const lastItem = items.length === max ? items[max - 1] : null;
+  const overflowCount = items.length > max ? items.length - max + 1 : 0;
+  const lastZ = Z[Math.min(max - 1, Z.length - 1)];
 
   return (
-    <div className={cn("flex -space-x-2", className)}>
-      {visible.map((item) => (
-        <Avatar
+    <div className={cn("flex items-center", className)}>
+      {visible.map((item, index) => (
+        // relative is required for z-index to take effect on non-flex-item contexts
+        <span
           key={item.alt}
-          size={size}
-          className="border-2 border-background"
+          className={cn(
+            "relative inline-flex items-center",
+            index !== 0 && "-ml-2",
+            Z[index],
+          )}
         >
-          {item.src && <AvatarImage src={item.src} alt={item.alt} />}
-          <AvatarFallback size={size}>{item.fallback}</AvatarFallback>
-        </Avatar>
-      ))}
-      {remaining > 0 && (
-        <Avatar size={size} className="border-2 border-background">
-          <AvatarFallback
+          <Avatar
             size={size}
-            className="bg-muted text-muted-foreground"
+            className="border border-black/[0.08] dark:border-white/[0.14] bg-background"
           >
-            +{remaining}
-          </AvatarFallback>
-        </Avatar>
+            {item.src && <AvatarImage src={item.src} alt={item.alt} />}
+            <AvatarFallback size={size}>{item.fallback}</AvatarFallback>
+          </Avatar>
+        </span>
+      ))}
+
+      {/* Exact limit: show the last real avatar */}
+      {lastItem && (
+        <span className={cn("relative inline-flex items-center -ml-2", lastZ)}>
+          <Avatar
+            size={size}
+            className="border border-black/[0.08] dark:border-white/[0.14] bg-background"
+          >
+            {lastItem.src && <AvatarImage src={lastItem.src} alt={lastItem.alt} />}
+            <AvatarFallback size={size}>{lastItem.fallback}</AvatarFallback>
+          </Avatar>
+        </span>
+      )}
+
+      {/* Over limit: +N overflow badge */}
+      {overflowCount > 0 && (
+        <span className={cn("relative inline-flex items-center -ml-2", lastZ)}>
+          <Avatar
+            size={size}
+            className="border border-black/[0.08] dark:border-white/[0.14]"
+          >
+            <AvatarFallback
+              size={size}
+              className="bg-gray-100 dark:bg-gray-800 text-[0.625rem] font-semibold leading-none text-gray-700 dark:text-gray-200"
+            >
+              +{overflowCount}
+            </AvatarFallback>
+          </Avatar>
+        </span>
       )}
     </div>
   );

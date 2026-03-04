@@ -146,6 +146,26 @@ When an external component (from HeroUI/MagicUI, HeroUI, etc.) is ready to be ab
 4. Update usage across apps
 5. Document migration path
 
+## Component Stories
+
+Each primitive has a co-located `*.stories.tsx` file (~100 files total) that serves as:
+
+- **Live documentation** of all component variants and props
+- **Visual regression** baseline (when Storybook is running)
+- **Interactive playground** for new developers
+
+**Status:** Stories exist but no Storybook runner app is set up yet.
+
+To add Storybook, create `apps/storybook/` as a new workspace app:
+
+```bash
+cd apps/storybook
+pnpm dlx storybook@latest init --skip-install
+# Point .storybook/main.ts addons source to packages/custom-ui/src
+```
+
+Until then, stories still compile and serve as inline documentation.
+
 ## Related
 
 - [@nebutra/design-system](../design-system/) - Base design system

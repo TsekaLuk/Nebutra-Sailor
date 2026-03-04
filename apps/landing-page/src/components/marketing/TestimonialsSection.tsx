@@ -2,9 +2,26 @@
 
 import {
   TestimonialsWall,
-  type Testimonial,
-  type TestimonialSource,
 } from "@nebutra/marketing";
+
+type TestimonialSource =
+  | "product-hunt"
+  | "twitter"
+  | "linkedin"
+  | "g2"
+  | "direct";
+
+interface Testimonial {
+  id: string;
+  authorName: string;
+  authorRole?: string;
+  authorCompany?: string;
+  content: string;
+  rating?: number;
+  source: TestimonialSource;
+  date?: string;
+  featured?: boolean;
+}
 
 interface TestimonialsSectionProps {
   title?: string;
@@ -51,6 +68,9 @@ export function TestimonialsSection({
           showSourceIcons
           showRatings
           scrollSpeed="normal"
+          maxItems={testimonials.length}
+          filterSource={[]}
+          className=""
         />
       </div>
     </section>

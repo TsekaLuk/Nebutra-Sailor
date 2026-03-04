@@ -70,8 +70,10 @@ export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
         ? displayStyle[level as 1 | 2]
         : levelToStyle[level];
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Comp = Component as any;
     return (
-      <Component
+      <Comp
         ref={ref}
         className={cn(
           styleClass,
@@ -82,7 +84,7 @@ export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
         {...props}
       >
         {children}
-      </Component>
+      </Comp>
     );
   },
 );

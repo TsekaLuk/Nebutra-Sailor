@@ -1,0 +1,78 @@
+---
+title: StatusBadge
+description: Two-part status indicator badge with left/right labels, icons, and status-based coloring.
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-statusbadge--docs).
+</Note>
+
+## Overview
+
+`StatusBadge` displays two labels separated by a thin vertical divider. The left side is bold (primary label) and the right side is muted (secondary label). Optional icons can precede each label and are colorized based on the `status` prop.
+
+## Installation
+
+```tsx
+import { StatusBadge } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+import { ShieldCheck, XCircle } from "lucide-react";
+
+<StatusBadge
+  leftIcon={ShieldCheck}
+  rightIcon={XCircle}
+  leftLabel="Protection"
+  rightLabel="SSO disabled"
+  status="success"
+/>
+```
+
+### Multiple statuses
+
+```tsx
+import { CheckCircle2, AlertCircle, XCircle } from "lucide-react";
+
+<div className="flex gap-2 flex-wrap">
+  <StatusBadge leftIcon={CheckCircle2} leftLabel="Live" rightLabel="v2.1.0" status="success" />
+  <StatusBadge leftIcon={AlertCircle} leftLabel="Degraded" rightLabel="3 incidents" status="warning" />
+  <StatusBadge leftIcon={XCircle} leftLabel="Outage" rightLabel="5 affected" status="error" />
+</div>
+```
+
+### No icons
+
+```tsx
+<StatusBadge leftLabel="Region" rightLabel="us-east-1" status="info" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `leftLabel` | `string` | — | **Required.** Primary label (bold, foreground) |
+| `rightLabel` | `string` | — | **Required.** Secondary label (muted) |
+| `leftIcon` | `LucideIcon` | — | Icon before left label |
+| `rightIcon` | `LucideIcon` | — | Icon before right label |
+| `status` | `"success" \| "error" \| "warning" \| "info" \| "default"` | `"default"` | Determines icon color |
+| `className` | `string` | — | Additional CSS classes |
+
+## Status Icon Colors
+
+| Status | Icon Color |
+|--------|-----------|
+| `success` | `text-emerald-600` (dark: `text-emerald-500`) |
+| `error` | `text-red-600` (dark: `text-red-500`) |
+| `warning` | `text-amber-600` (dark: `text-amber-500`) |
+| `info` | `text-blue-600` (dark: `text-blue-500`) |
+| `default` | `text-muted-foreground` |
+
+## Notes
+
+- The status only affects icon colors — the badge container always uses `bg-background` with a `border`.
+- The divider between labels is a `1px` wide `bg-border` element.

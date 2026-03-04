@@ -1,0 +1,41 @@
+---
+title: "Contribution Guidelines"
+description: "How to add or update components in the design system."
+---
+
+## Rules
+
+<Warning>
+  Do not introduce new visual styles not already present in the codebase. If a pattern does not exist in production, it does not belong in the Design System.
+</Warning>
+
+1. **Extract, don't invent** — All additions must be extracted from existing app implementations
+2. **No inline CSS** — Use Design Tokens, Tailwind classes, or component Props
+3. **No duplicate semantics** — Consolidate overlapping components before adding new ones
+4. **Document first** — Add the MDX page before or alongside the implementation
+
+## Adding a new atom component
+
+1. Identify it in `apps/docs-hub/design-system/src/` or `packages/custom-ui/src/primitives/`
+2. Ensure it has no semantic overlap with existing components
+3. Add `atom-components/<name>.mdx` with Demo / Usage / Props / Examples / Accessibility sections
+4. Export it from `@nebutra/design-system` if it belongs at that layer
+
+## Adding a new fragment component
+
+1. Identify the composed pattern in app code
+2. Add `fragment-components/<name>.mdx` with Demo / Usage / Props / Examples / Accessibility sections
+3. Ensure all constituent atoms are documented
+
+## Updating an existing component
+
+1. Update the MDX page
+2. Update the component source in `apps/docs-hub/design-system/src/`
+3. Run `pnpm --filter @nebutra/design-system build` to verify the build passes
+
+## Prohibited
+
+- ❌ New visual styles not present in production
+- ❌ Designing a "better version" of an existing component
+- ❌ Inline CSS in Design System components
+- ❌ Components with overlapping or ambiguous semantics

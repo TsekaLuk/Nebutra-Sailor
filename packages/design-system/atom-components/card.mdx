@@ -1,0 +1,138 @@
+---
+title: "Card"
+description: "Content container using compound component pattern. Five visual variants (default/elevated/bordered/ghost/gradient) and three padding presets."
+---
+
+<Note>
+  **Storybook** — Interactive demo with variant and padding controls: `apps/storybook` → **Patterns / Card**
+</Note>
+
+## Usage
+
+```tsx
+import { Card } from "@nebutra/custom-ui/patterns"
+```
+
+The Card uses a **compound component** API — subcomponents are accessed as `Card.Header`, `Card.Body`, etc.
+
+## Examples
+
+### Basic
+
+```tsx
+<Card variant="default" padding="md">
+  <Card.Header>
+    <Card.Title>Create project</Card.Title>
+  </Card.Header>
+  <Card.Body>
+    <Card.Description>
+      Fill out the details below to get started.
+    </Card.Description>
+  </Card.Body>
+  <Card.Footer className="flex justify-end gap-2">
+    <Button variant="outline">Cancel</Button>
+    <Button>Create</Button>
+  </Card.Footer>
+</Card>
+```
+
+### All Variants
+
+```tsx
+<Card variant="default" padding="md">...</Card>
+<Card variant="elevated" padding="md">...</Card>   {/* box shadow */}
+<Card variant="bordered" padding="md">...</Card>   {/* strong border, no shadow */}
+<Card variant="ghost" padding="md">...</Card>      {/* no border or shadow */}
+<Card variant="gradient" padding="md">...</Card>   {/* brand gradient border */}
+```
+
+### Padding Sizes
+
+```tsx
+<Card variant="bordered" padding="sm">...</Card>  {/* 16px */}
+<Card variant="bordered" padding="md">...</Card>  {/* 24px (default) */}
+<Card variant="bordered" padding="lg">...</Card>  {/* 32px */}
+<Card variant="bordered" padding="none">...</Card> {/* no padding */}
+```
+
+### Stats Card
+
+```tsx
+<Card variant="elevated" padding="md">
+  <Card.Header>
+    <Card.Title className="text-4xl">$45,231</Card.Title>
+    <Card.Description>Total Revenue</Card.Description>
+  </Card.Header>
+  <Card.Body>
+    <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+  </Card.Body>
+</Card>
+```
+
+### Feature Card with Icon
+
+```tsx
+<Card variant="bordered" padding="md">
+  <Card.Header>
+    <Card.Icon size="md">
+      <Zap className="h-5 w-5 text-primary" />
+    </Card.Icon>
+    <Card.Title>Fast Deployments</Card.Title>
+  </Card.Header>
+  <Card.Body>
+    <Card.Description>
+      Deploy to production in seconds with zero downtime.
+    </Card.Description>
+  </Card.Body>
+</Card>
+```
+
+### Gradient Featured Card
+
+```tsx
+<Card variant="gradient" padding="lg">
+  <Card.Header>
+    <Card.Title>Pro Plan</Card.Title>
+    <Card.Description>Everything you need to ship faster.</Card.Description>
+  </Card.Header>
+  <Card.Body>
+    <p className="text-3xl font-bold">$49<span className="text-base font-normal">/mo</span></p>
+  </Card.Body>
+  <Card.Footer>
+    <Button className="w-full">Get started</Button>
+  </Card.Footer>
+</Card>
+```
+
+## Props
+
+### Card
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "elevated" \| "bordered" \| "ghost" \| "gradient"` | `"default"` | Visual style |
+| `padding` | `"none" \| "sm" \| "md" \| "lg"` | `"md"` | Padding preset |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Card content via subcomponents |
+
+### Subcomponents
+
+| Component | Element | Description |
+|-----------|---------|-------------|
+| `Card.Header` | `div` | Top section — usually contains `Card.Icon` + `Card.Title` |
+| `Card.Body` | `div` | Main content area — `Card.Description` and other content |
+| `Card.Footer` | `div` | Bottom section — typically action buttons |
+| `Card.Icon` | `div` | Icon wrapper with `size` prop (`sm`, `md`, `lg`) |
+| `Card.Title` | `h3` | Card heading — maintains document heading hierarchy |
+| `Card.Description` | `p` | Descriptive text in `text-muted-foreground` |
+
+## Design Tokens
+
+Padding: `cardTokens.padding` — sm=16px, md=24px, lg=32px.
+Shadow scale: `cardTokens.shadow` — maps to `primitiveShadow.sm/md/lg`.
+
+## Accessibility
+
+- `Card.Title` renders as `<h3>` — maintain proper heading hierarchy in your page.
+- For interactive cards (e.g., clickable feature cards), wrap in `<a>` or `<button>`.
+- Use `role="article"` when cards represent discrete, standalone content items.

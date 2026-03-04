@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@nebutra/custom-ui/primitives";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { cn } from "@nebutra/custom-ui";
 
 interface Integration {
   id: string;

@@ -81,7 +81,7 @@ export function SignInForm() {
             <Label htmlFor="password">Password</Label>
             <Link
               href="/sign-in#/forgot-password"
-              className="text-xs text-indigo-600 hover:text-indigo-700"
+              className="text-xs text-[color:var(--blue-11)] hover:text-[color:var(--blue-12)]"
             >
               Forgot password?
             </Link>
@@ -111,7 +111,7 @@ export function SignInForm() {
         New to Nebutra?{" "}
         <Link
           href="/sign-up"
-          className="font-medium text-indigo-600 hover:text-indigo-700"
+          className="font-medium text-[color:var(--blue-11)] hover:text-[color:var(--blue-12)]"
         >
           Sign up
         </Link>

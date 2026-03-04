@@ -9,5 +9,8 @@ export { ProductHuntSection } from "./ProductHuntSection";
 export { TestimonialsSection, sampleTestimonials } from "./TestimonialsSection";
 export { LaunchBannerWrapper } from "./LaunchBannerWrapper";
 
-// Re-export commonly used types from @nebutra/marketing
-export type { Testimonial, SocialProofStats } from "@nebutra/marketing";
+export type SocialProofStats = {
+  users?: number;
+  rating?: number;
+  productHuntUpvotes?: number;
+};

@@ -1,0 +1,126 @@
+---
+title: "Material"
+description: "Surface elevation primitive. Expresses UI depth through shadow and background tokens."
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-material--docs).
+</Note>
+
+## Overview
+
+`Material` is a surface elevation primitive built on top of `Stack`. It maps a semantic `type` prop to the project's `@theme` shadow and background tokens — no hand-crafted values. Use it wherever you need to express visual depth: cards, dropdowns, dialogs, or full-screen overlays.
+
+## Installation
+
+```tsx
+import { Material } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Types
+
+All four elevation levels use tokens defined in `packages/theme/themes.css`.
+
+```tsx
+<Material type="card">
+  <div className="p-6">Card content</div>
+</Material>
+
+<Material type="menu">
+  <div className="py-1">Menu items</div>
+</Material>
+
+<Material type="modal">
+  <div className="p-6">Dialog content</div>
+</Material>
+
+<Material type="fullscreen">
+  <div className="p-6">Full-screen content</div>
+</Material>
+```
+
+### Card
+
+Default surface for page content. Applies `shadow-sm` and `bg-card`.
+
+```tsx
+<Material type="card" className="w-80">
+  <div className="p-6">
+    <h2 className="text-sm font-medium">Card title</h2>
+    <p className="text-xs text-muted-foreground mt-1">Supporting text</p>
+  </div>
+</Material>
+```
+
+### Menu
+
+Dropdown and popover surfaces. Applies `shadow-md` and `bg-popover`.
+
+```tsx
+<Material type="menu" className="w-56">
+  <div className="py-1">
+    <button type="button" className="w-full text-left px-3 py-2 text-sm hover:bg-muted">
+      Profile
+    </button>
+    <button type="button" className="w-full text-left px-3 py-2 text-sm hover:bg-muted">
+      Settings
+    </button>
+  </div>
+</Material>
+```
+
+### Modal
+
+Dialog and drawer surfaces. Applies `shadow-lg` and `bg-popover`.
+
+```tsx
+<Material type="modal" className="w-96">
+  <div className="p-6 flex flex-col gap-4">
+    <h2 className="text-sm font-semibold">Confirm action</h2>
+    <p className="text-xs text-muted-foreground">This cannot be undone.</p>
+    <div className="flex justify-end gap-2">
+      <Button variant="outline">Cancel</Button>
+      <Button>Confirm</Button>
+    </div>
+  </div>
+</Material>
+```
+
+### Fullscreen
+
+Full-screen overlay surface. Applies `shadow-none` and `bg-background`.
+
+```tsx
+<Material type="fullscreen" className="fixed inset-0">
+  <div className="p-8">Full-screen content</div>
+</Material>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"card" \| "menu" \| "modal" \| "fullscreen"` | `"card"` | Surface elevation level |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Surface content |
+| `ref` | `Ref<HTMLDivElement>` | — | Forwarded ref |
+
+All standard `div` HTML attributes are also supported.
+
+## Token Reference
+
+All values come from `packages/theme/themes.css` `@theme` block.
+
+| type | Shadow token | Background token |
+|------|-------------|-----------------|
+| `card` | `--shadow-sm` | `--color-card` |
+| `menu` | `--shadow-md` | `--color-popover` |
+| `modal` | `--shadow-lg` | `--color-popover` |
+| `fullscreen` | _(none)_ | `--color-background` |
+
+## Accessibility
+
+- `Material` renders a plain `<div>` — add semantic roles (`role="dialog"`, `role="menu"`, etc.) at the usage site as appropriate.
+- Shadow is a visual-only affordance; do not rely on it alone to convey state or hierarchy to assistive technologies.

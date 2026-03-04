@@ -1,0 +1,99 @@
+---
+title: "Collapsible"
+description: "Show and hide content with a toggle control, built on Radix UI."
+---
+
+## Demo
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@nebutra/custom-ui/primitives"
+import { Button } from "@nebutra/custom-ui/primitives"
+import { ChevronsUpDown } from "lucide-react"
+
+export function CollapsibleDemo() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-80 space-y-2">
+      <div className="flex items-center justify-between px-4">
+        <h4 className="text-sm font-semibold">Team Members</h4>
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <ChevronsUpDown className="h-4 w-4" />
+          </Button>
+        </CollapsibleTrigger>
+      </div>
+      <div className="rounded-md border px-4 py-2 text-sm">Alice Johnson</div>
+      <CollapsibleContent className="space-y-2">
+        <div className="rounded-md border px-4 py-2 text-sm">Bob Smith</div>
+        <div className="rounded-md border px-4 py-2 text-sm">Carol White</div>
+      </CollapsibleContent>
+    </Collapsible>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+### Collapsible (Root)
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled default open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Callback when open state changes |
+| `disabled` | `boolean` | `false` | Prevents toggle |
+| `className` | `string` | — | Additional CSS classes |
+
+### CollapsibleTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props onto immediate child |
+| `children` | `ReactNode` | — | Trigger element |
+
+### CollapsibleContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Collapsible body content |
+
+## Examples
+
+### Always-visible Header with Collapsible Body
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger className="flex w-full items-center justify-between py-2 font-medium">
+    Advanced Options
+    <ChevronDown className="h-4 w-4" />
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    <div className="space-y-2 pt-2">
+      <p className="text-sm text-muted-foreground">Advanced configuration here.</p>
+    </div>
+  </CollapsibleContent>
+</Collapsible>
+```
+
+## Accessibility
+
+- Built on Radix UI Collapsible.
+- `CollapsibleTrigger` has `aria-expanded` to communicate open/closed state.
+- `CollapsibleContent` has `aria-hidden="true"` when collapsed.
+- Use `CollapsibleTrigger` with descriptive text or `aria-label` for screen reader clarity.

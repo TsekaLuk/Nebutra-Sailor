@@ -1,20 +1,16 @@
 "use client";
+import { useState } from "react";
 import { Checkbox } from "@nebutra/custom-ui/primitives";
+
 export function CheckboxDemo() {
+  const [checked, setChecked] = useState(false);
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-2">
-        <Checkbox />
-        <label className="text-sm">Accept terms and conditions</label>
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox defaultSelected color="primary" />
-        <label className="text-sm">Subscribe to newsletter</label>
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox isDisabled />
-        <label className="text-sm text-muted-foreground">Disabled option</label>
-      </div>
+      <Checkbox checked={checked} onChange={(v: boolean) => setChecked(v)}>
+        Accept terms and conditions
+      </Checkbox>
+      <Checkbox checked>Subscribe to newsletter</Checkbox>
+      <Checkbox disabled>Disabled option</Checkbox>
     </div>
   );
 }

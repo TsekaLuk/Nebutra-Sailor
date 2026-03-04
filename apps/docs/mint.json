@@ -1,0 +1,105 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Nebutra Docs",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "topbarLinks": [
+    {
+      "name": "Design System",
+      "url": "https://ui.nebutra.com"
+    },
+    {
+      "name": "Status",
+      "url": "https://status.nebutra.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://app.nebutra.com"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    },
+    {
+      "name": "SDKs",
+      "url": "sdks"
+    },
+    {
+      "name": "Changelog",
+      "url": "changelog"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "",
+      "pages": ["introduction", "changelog"]
+    },
+    {
+      "group": "Quickstart",
+      "pages": [
+        "quickstart/nextjs",
+        "quickstart/react",
+        "quickstart/node",
+        "quickstart/python"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/authentication",
+        "guides/multi-tenancy",
+        "guides/webhooks",
+        "guides/rate-limits",
+        "guides/error-handling"
+      ]
+    },
+    {
+      "group": "Concepts",
+      "pages": [
+        "concepts/architecture",
+        "concepts/tenants",
+        "concepts/permissions",
+        "concepts/billing-model"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/overview",
+        "integrations/vercel",
+        "integrations/stripe",
+        "integrations/slack"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/overview",
+        "api-reference/authentication",
+        "api-reference/errors"
+      ]
+    },
+    {
+      "group": "SDKs",
+      "pages": [
+        "sdks/javascript",
+        "sdks/python"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/nebutra",
+    "twitter": "https://twitter.com/nebutra"
+  },
+  "openapi": "api-reference/openapi.yaml"
+}

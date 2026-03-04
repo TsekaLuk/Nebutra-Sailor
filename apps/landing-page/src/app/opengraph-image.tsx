@@ -17,123 +17,76 @@ export default async function Image() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#000000",
+        backgroundColor: "#020617",
         backgroundImage:
-          "radial-gradient(ellipse 80% 50% at 50% 40%, rgba(99,102,241,0.18) 0%, transparent 70%)",
+          "radial-gradient(ellipse 80% 50% at 50% 42%, rgba(0,51,254,0.28) 0%, transparent 72%), radial-gradient(ellipse 60% 40% at 72% 70%, rgba(11,241,195,0.22) 0%, transparent 75%)",
       }}
     >
-      {/* Subtle grid overlay */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+            "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
         }}
       />
 
-      {/* Badge */}
-      <div
+      <span
         style={{
-          display: "flex",
-          alignItems: "center",
-          border: "1px solid rgba(255,255,255,0.12)",
-          borderRadius: 999,
-          padding: "6px 20px",
-          marginBottom: 32,
-          background: "rgba(255,255,255,0.04)",
+          fontSize: 22,
+          color: "rgba(255,255,255,0.72)",
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          marginBottom: 22,
         }}
       >
-        <span
-          style={{
-            fontSize: 18,
-            color: "rgba(255,255,255,0.5)",
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-          }}
-        >
-          MIT Licensed · Production-Ready
-        </span>
-      </div>
+        Nebutra Sailor
+      </span>
 
-      {/* Title */}
-      <div
+      <span
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 16,
+          fontSize: 78,
+          fontWeight: 700,
+          color: "#ffffff",
+          letterSpacing: "-0.03em",
+          textAlign: "center",
+          lineHeight: 1.05,
         }}
       >
-        <span
-          style={{
-            fontSize: 72,
-            fontWeight: 700,
-            color: "#ffffff",
-            letterSpacing: "-0.03em",
-            textAlign: "center",
-            lineHeight: 1.1,
-          }}
-        >
-          Nebutra <span style={{ color: "#818cf8" }}>Sailor</span>
-        </span>
-        <span
-          style={{
-            fontSize: 28,
-            color: "rgba(255,255,255,0.45)",
-            textAlign: "center",
-            maxWidth: 700,
-            lineHeight: 1.5,
-          }}
-        >
-          {seoContent.description}
-        </span>
-      </div>
+        Ship your SaaS faster
+      </span>
+      <span
+        style={{
+          fontSize: 34,
+          color: "#8fdcff",
+          textAlign: "center",
+          marginTop: 10,
+        }}
+      >
+        Multi-tenant. AI-native. Production-ready.
+      </span>
 
-      {/* Command box */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          marginTop: 48,
-          background: "rgba(255,255,255,0.04)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          borderRadius: 12,
-          padding: "14px 28px",
+          marginTop: 42,
+          background: "rgba(2,6,23,0.82)",
+          border: "1px solid rgba(255,255,255,0.18)",
+          borderRadius: 14,
+          padding: "12px 28px",
         }}
       >
+        <span style={{ fontSize: 22, color: "rgba(255,255,255,0.42)", marginRight: 12 }}>$</span>
         <span
           style={{
-            fontSize: 22,
-            color: "rgba(255,255,255,0.3)",
-            marginRight: 12,
-          }}
-        >
-          $
-        </span>
-        <span
-          style={{
-            fontSize: 22,
-            color: "rgba(255,255,255,0.7)",
+            fontSize: 24,
+            color: "rgba(255,255,255,0.92)",
             fontFamily: "monospace",
           }}
         >
           npx create-sailor@latest
-        </span>
-      </div>
-
-      {/* URL */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 40,
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <span style={{ fontSize: 18, color: "rgba(255,255,255,0.2)" }}>
-          nebutra.com
         </span>
       </div>
     </div>,

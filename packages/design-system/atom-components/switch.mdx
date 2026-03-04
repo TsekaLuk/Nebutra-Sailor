@@ -1,0 +1,107 @@
+---
+title: "Switch"
+description: "Toggle on/off control for binary settings, built on Radix UI."
+---
+
+## Demo
+
+```tsx
+import { Switch } from "@nebutra/custom-ui/primitives"
+import { Label } from "@nebutra/custom-ui/primitives"
+
+export function SwitchDemo() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Switch id="airplane-mode" />
+      <Label htmlFor="airplane-mode">Airplane Mode</Label>
+    </div>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import { Switch } from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+Extends `@radix-ui/react-switch` `Root` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | — | Controlled checked state |
+| `defaultChecked` | `boolean` | `false` | Uncontrolled default checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | — | Callback when state changes |
+| `disabled` | `boolean` | `false` | Disables the switch |
+| `required` | `boolean` | `false` | Marks as required in form context |
+| `name` | `string` | — | Form field name |
+| `value` | `string` | `"on"` | Value submitted with form |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### Controlled Switch
+
+```tsx
+const [enabled, setEnabled] = useState(false)
+
+<div className="flex items-center space-x-2">
+  <Switch
+    id="notifications"
+    checked={enabled}
+    onCheckedChange={setEnabled}
+  />
+  <Label htmlFor="notifications">
+    {enabled ? "Notifications on" : "Notifications off"}
+  </Label>
+</div>
+```
+
+### Settings List
+
+```tsx
+<div className="space-y-4">
+  {settings.map((setting) => (
+    <div key={setting.id} className="flex items-center justify-between">
+      <div>
+        <Label htmlFor={setting.id}>{setting.label}</Label>
+        <p className="text-xs text-muted-foreground">{setting.description}</p>
+      </div>
+      <Switch
+        id={setting.id}
+        checked={setting.enabled}
+        onCheckedChange={(checked) => updateSetting(setting.id, checked)}
+      />
+    </div>
+  ))}
+</div>
+```
+
+### In a Form
+
+```tsx
+<FormField
+  control={form.control}
+  name="marketingEmails"
+  render={({ field }) => (
+    <FormItem className="flex items-center justify-between rounded-lg border p-4">
+      <div>
+        <FormLabel>Marketing emails</FormLabel>
+        <FormDescription>Receive our latest news and offers.</FormDescription>
+      </div>
+      <FormControl>
+        <Switch checked={field.value} onCheckedChange={field.onChange} />
+      </FormControl>
+    </FormItem>
+  )}
+/>
+```
+
+## Accessibility
+
+- Built on Radix UI Switch — has `role="switch"` with `aria-checked`.
+- Always pair with a `<Label>` linked via `htmlFor`/`id`.
+- Keyboard: `Space` toggles the switch.
+- Communicates state changes to screen readers via `aria-checked="true"` / `"false"`.
