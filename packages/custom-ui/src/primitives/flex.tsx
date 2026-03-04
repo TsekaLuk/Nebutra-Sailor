@@ -84,10 +84,12 @@ export const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
     },
     ref,
   ) => {
-    return (
-      <Component
-        ref={ref}
-        className={cn(
+    return React.createElement(
+      Component,
+      {
+        ...props,
+        ref,
+        className: cn(
           "flex",
           directionMap[direction],
           gapMap[gap],
@@ -95,11 +97,9 @@ export const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
           justifyMap[justify],
           wrap && "flex-wrap",
           className,
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
+        ),
+      },
+      children,
     );
   },
 );
