@@ -215,7 +215,7 @@ run_snapshot_once() {
         exit 1
       fi
       export CHROME_PATH
-      echo "Using CHROME_PATH=\$CHROME_PATH"
+      echo Using CHROME_PATH=\$CHROME_PATH
 
       pnpm dlx lighthouse 'http://127.0.0.1:${PORT}${TARGET_PATH}' \
         --chrome-flags='--headless --no-sandbox --disable-dev-shm-usage' \
