@@ -71,7 +71,8 @@
     "overrides": {
       "@types/react": "^19",
       "@types/react-dom": "^19",
-      "react-avatar-editor": "^14.0.0"
+      "react-avatar-editor": "^14.0.0",
+      "baseline-browser-mapping": "^2.10.0"
     },
     "peerDependencyRules": {
       "ignoreMissing": [
