@@ -44,7 +44,7 @@ jobs:
           set -euo pipefail
 
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            BEFORE_REF="${{ github.event.pull_request.base.sha }}"
+            BEFORE_REF="${{ github.event.pull_request.head.sha }}"
             AFTER_REF="${{ github.event.pull_request.head.sha }}"
             RUNS="3"
             TARGET_PATH="/tenants"

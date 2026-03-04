@@ -203,7 +203,19 @@ run_snapshot_once() {
         sleep 1
       done
 
-      export CHROME_PATH=\$(find /ms-playwright -type f -path '*chrome-linux/chrome' | head -n 1)
+      CHROME_PATH=\$(find /ms-playwright -type f -path '*chrome-linux/chrome' | head -n 1 || true)
+      if [[ -z "\$CHROME_PATH" ]]; then
+        CHROME_PATH=\$(command -v chromium || command -v chromium-browser || command -v google-chrome || true)
+      fi
+      if [[ -z "\$CHROME_PATH" ]]; then
+        CHROME_PATH=\$(find / -type f -path '*/chrome-linux/chrome' 2>/dev/null | head -n 1 || true)
+      fi
+      if [[ -z "\$CHROME_PATH" ]]; then
+        echo "Unable to resolve CHROME_PATH for Lighthouse." >&2
+        exit 1
+      fi
+      export CHROME_PATH
+      echo "Using CHROME_PATH=\$CHROME_PATH"
 
       pnpm dlx lighthouse 'http://127.0.0.1:${PORT}${TARGET_PATH}' \
         --chrome-flags='--headless --no-sandbox --disable-dev-shm-usage' \
