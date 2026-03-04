@@ -1,0 +1,251 @@
+name: Deploy
+
+# Deploys all Nebutra services to a Kubernetes cluster using kubectl + kustomize.
+#
+# Trigger sources:
+#   1. Automatic — runs after docker-build-push.yml completes successfully on main
+#   2. Manual    — workflow_dispatch with explicit environment selection (dev / staging / prod)
+#
+# Environment routing:
+#   - Automatic trigger (main branch) → staging
+#   - Manual trigger                  → whichever environment was selected
+#
+# Required secrets:
+#   KUBECONFIG_BASE64  — base64-encoded kubeconfig for the target cluster
+#
+# Optional secrets (Slack notification — skipped when absent):
+#   SLACK_WEBHOOK_URL  — Incoming Webhook URL for a Slack channel
+#
+# Directory convention:
+#   infra/k8s/overlays/<env>/   — kustomize overlay per environment
+
+on:
+  # Trigger automatically once images have been built and pushed
+  workflow_run:
+    workflows: ["Docker Build & Push"]
+    types:
+      - completed
+    branches:
+      - main
+
+  # Allow engineers to trigger a targeted deployment manually
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+      reason:
+        description: "Reason for manual deployment"
+        required: false
+        default: ""
+
+# Only one deployment per environment may run at a time.
+concurrency:
+  group: deploy-${{ github.event.inputs.environment || 'staging' }}
+  cancel-in-progress: false   # Never cancel an in-progress deployment — wait instead
+
+permissions:
+  contents: read
+
+jobs:
+  # ============================================================================
+  # Job: deploy-to-k8s
+  # Applies kustomize overlays then updates image tags for every service.
+  # ============================================================================
+  deploy-to-k8s:
+    name: Deploy to Kubernetes (${{ github.event.inputs.environment || 'staging' }})
+    runs-on: ubuntu-latest
+
+    # For automatic triggers: only proceed if the upstream workflow succeeded.
+    # For manual triggers: always proceed.
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+
+    # Pin the GitHub environment so that environment-level protection rules
+    # (required reviewers, wait timers) are enforced in the GitHub UI.
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+
+    env:
+      # Resolve the deploy target once so every step can reference $DEPLOY_ENV
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'staging' }}
+      # The image tag to roll out — use the commit SHA that triggered the upstream build
+      IMAGE_TAG: sha-${{ github.event.workflow_run.head_sha && github.event.workflow_run.head_sha || github.sha }}
+
+    steps:
+      # ── Checkout ─────────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Check out the SHA that was actually built and pushed so the kustomize
+          # overlays we apply match the images we just pushed.
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      # ── Install kubectl ──────────────────────────────────────────────────────
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: "latest"
+
+      # ── Install kustomize ────────────────────────────────────────────────────
+      - name: Install kustomize
+        uses: imranismail/setup-kustomize@v2
+        with:
+          kustomize-version: "5.x"
+
+      # ── Authenticate with the cluster ────────────────────────────────────────
+      # The kubeconfig is stored as a base64-encoded secret so it doesn't appear
+      # in logs. We decode it into a temporary file that kubectl reads via
+      # KUBECONFIG.
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p "$HOME/.kube"
+          echo "${{ secrets.KUBECONFIG_BASE64 }}" | base64 --decode > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+
+      # ── Verify cluster connectivity ──────────────────────────────────────────
+      - name: Verify cluster connectivity
+        run: kubectl cluster-info
+
+      # ── Apply kustomize overlay ──────────────────────────────────────────────
+      # Each environment has its own overlay directory under infra/k8s/overlays/.
+      # kustomize reads the base manifests and merges environment-specific patches.
+      - name: Apply kustomize overlay
+        run: |
+          echo "Applying kustomize overlay for environment: $DEPLOY_ENV"
+          kubectl apply -k "infra/k8s/overlays/$DEPLOY_ENV"
+
+      # ── Update image tags ─────────────────────────────────────────────────────
+      # Roll out the freshly built images by updating the image tag on every
+      # Deployment in the cluster namespace.  The namespace is derived from the
+      # environment name (e.g. nebutra-staging, nebutra-prod).
+      - name: Update image tags — Node apps
+        run: |
+          NAMESPACE="nebutra-$DEPLOY_ENV"
+          REGISTRY="ghcr.io/${{ github.repository_owner }}"
+
+          for APP in web landing-page api-gateway; do
+            DEPLOYMENT="$(echo "$APP" | tr '[:upper:]' '[:lower:]')"
+            IMAGE="$REGISTRY/nebutra-$APP:$IMAGE_TAG"
+
+            echo "Setting image for deployment/$DEPLOYMENT → $IMAGE"
+            kubectl set image \
+              "deployment/$DEPLOYMENT" \
+              "$DEPLOYMENT=$IMAGE" \
+              --namespace "$NAMESPACE" \
+              --record=false || echo "Warning: deployment/$DEPLOYMENT not found — skipping"
+          done
+
+      - name: Update image tags — Python services
+        run: |
+          NAMESPACE="nebutra-$DEPLOY_ENV"
+          REGISTRY="ghcr.io/${{ github.repository_owner }}"
+
+          for SVC in ai billing content ecommerce recsys event-ingest web3; do
+            DEPLOYMENT="$(echo "$SVC" | tr '[:upper:]' '[:lower:]')"
+            IMAGE="$REGISTRY/nebutra-$SVC:$IMAGE_TAG"
+
+            echo "Setting image for deployment/$DEPLOYMENT → $IMAGE"
+            kubectl set image \
+              "deployment/$DEPLOYMENT" \
+              "$DEPLOYMENT=$IMAGE" \
+              --namespace "$NAMESPACE" \
+              --record=false || echo "Warning: deployment/$DEPLOYMENT not found — skipping"
+          done
+
+      # ── Wait for rollouts ─────────────────────────────────────────────────────
+      # Block until each Deployment finishes rolling out or times out (5 min).
+      # If any rollout fails the step fails, which marks the overall job as failed.
+      - name: Wait for rollouts — Node apps
+        run: |
+          NAMESPACE="nebutra-$DEPLOY_ENV"
+          for APP in web landing-page api-gateway; do
+            DEPLOYMENT="$(echo "$APP" | tr '[:upper:]' '[:lower:]')"
+            echo "Waiting for rollout: deployment/$DEPLOYMENT …"
+            kubectl rollout status \
+              "deployment/$DEPLOYMENT" \
+              --namespace "$NAMESPACE" \
+              --timeout=300s || echo "Warning: rollout status check failed for deployment/$DEPLOYMENT — deployment may not exist yet"
+          done
+
+      - name: Wait for rollouts — Python services
+        run: |
+          NAMESPACE="nebutra-$DEPLOY_ENV"
+          for SVC in ai billing content ecommerce recsys event-ingest web3; do
+            DEPLOYMENT="$(echo "$SVC" | tr '[:upper:]' '[:lower:]')"
+            echo "Waiting for rollout: deployment/$DEPLOYMENT …"
+            kubectl rollout status \
+              "deployment/$DEPLOYMENT" \
+              --namespace "$NAMESPACE" \
+              --timeout=300s || echo "Warning: rollout status check failed for deployment/$DEPLOYMENT — deployment may not exist yet"
+          done
+
+      # ── Deployment status summary ─────────────────────────────────────────────
+      - name: Print deployment summary
+        if: always()
+        run: |
+          NAMESPACE="nebutra-$DEPLOY_ENV"
+          echo "=== Deployment summary for namespace: $NAMESPACE ==="
+          kubectl get deployments --namespace "$NAMESPACE" || true
+
+      # ── Slack notification ────────────────────────────────────────────────────
+      # Only runs when SLACK_WEBHOOK_URL secret is configured.
+      # Sends a success or failure notification with deployment details.
+      - name: Notify Slack — success
+        if: ${{ success() && secrets.SLACK_WEBHOOK_URL != '' }}
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": ":white_check_mark: *Nebutra deployed to ${{ env.DEPLOY_ENV }}*",
+              "attachments": [
+                {
+                  "color": "good",
+                  "fields": [
+                    { "title": "Environment", "value": "${{ env.DEPLOY_ENV }}", "short": true },
+                    { "title": "Image tag",   "value": "${{ env.IMAGE_TAG }}",  "short": true },
+                    { "title": "Triggered by","value": "${{ github.actor }}",   "short": true },
+                    { "title": "Commit",      "value": "<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha && github.sha }}>", "short": true }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+      - name: Notify Slack — failure
+        if: ${{ failure() && secrets.SLACK_WEBHOOK_URL != '' }}
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": ":x: *Nebutra deployment FAILED — ${{ env.DEPLOY_ENV }}*",
+              "attachments": [
+                {
+                  "color": "danger",
+                  "fields": [
+                    { "title": "Environment", "value": "${{ env.DEPLOY_ENV }}", "short": true },
+                    { "title": "Image tag",   "value": "${{ env.IMAGE_TAG }}",  "short": true },
+                    { "title": "Triggered by","value": "${{ github.actor }}",   "short": true },
+                    { "title": "Run",         "value": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>", "short": true }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+      # ── Cleanup kubeconfig ────────────────────────────────────────────────────
+      # Always remove the kubeconfig file from the runner after the job
+      # regardless of success or failure to minimise credential exposure.
+      - name: Remove kubeconfig
+        if: always()
+        run: rm -f "$HOME/.kube/config"

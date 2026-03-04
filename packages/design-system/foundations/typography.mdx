@@ -1,0 +1,150 @@
+---
+title: Typography
+description: Font families, type scale, and named presets from the design system typography tokens.
+---
+
+## Overview
+
+Typography is managed in `apps/docs-hub/design-system/src/typography/tokens.ts`. All font-related values — families, sizes, weights, line heights, letter spacing, and combined presets — are exported from that single file. Never hardcode font values in component styles.
+
+The system ships four font stacks and a 13-step type scale. Named `typeStyles` presets combine all properties for common semantic roles.
+
+## Font Families
+
+| Token | Stack | Use for |
+|---|---|---|
+| `fontFamilies.primary` | `"Inter", "Public Sans", -apple-system, …, sans-serif` | Body text, UI elements |
+| `fontFamilies.heading` | `"Inter", "Public Sans", -apple-system, …, sans-serif` | Headings and titles |
+| `fontFamilies.mono` | `"JetBrains Mono", "Fira Code", ui-monospace, …, monospace` | Code, technical content |
+| `fontFamilies.cjk` | `"Source Han Sans SC", "Source Han Sans", "Noto Sans CJK SC", …` | Chinese / Japanese / Korean fallback |
+| `fontFamilies.primaryCJK` | `primary` stack + `cjk` stack | Multilingual content |
+| `fontFamilies.system` | `-apple-system, BlinkMacSystemFont, …` | No web-font loading (fast fallback) |
+
+<Note>
+Inter and Public Sans are SIL Open Font License (OFL) — free for commercial use. JetBrains Mono is Apache 2.0. Source Han Sans is OFL. No proprietary fonts in the baseline.
+</Note>
+
+## Type Scale
+
+Base: `16px = 1rem`. Steps follow approximately a 1.25 modular ratio.
+
+| Token | rem | px | Suggested use |
+|---|---|---|---|
+| `fontSizes.xs` | `0.75rem` | 12 | Micro text, badges |
+| `fontSizes.sm` | `0.875rem` | 14 | Captions, labels, button text |
+| `fontSizes.base` | `1rem` | 16 | Body text |
+| `fontSizes.lg` | `1.125rem` | 18 | Lead paragraphs |
+| `fontSizes.xl` | `1.25rem` | 20 | Subtitles |
+| `fontSizes["2xl"]` | `1.5rem` | 24 | H4 |
+| `fontSizes["3xl"]` | `1.875rem` | 30 | H3 |
+| `fontSizes["4xl"]` | `2.25rem` | 36 | H2 |
+| `fontSizes["5xl"]` | `3rem` | 48 | H1 |
+| `fontSizes["6xl"]` | `3.75rem` | 60 | Display / Hero |
+| `fontSizes["7xl"]` | `4.5rem` | 72 | Large display |
+| `fontSizes["8xl"]` | `6rem` | 96 | Extra-large display |
+
+## Fluid Type Scale
+
+For responsive headings without breakpoint media queries, use the `fluidFontSizes` clamp values.
+
+| Token | Clamp expression | Range |
+|---|---|---|
+| `fluidFontSizes.display` | `clamp(2.25rem, 5vw + 1rem, 4.5rem)` | 36px → 72px |
+| `fluidFontSizes.h1` | `clamp(1.875rem, 4vw + 0.5rem, 3rem)` | 30px → 48px |
+| `fluidFontSizes.h2` | `clamp(1.5rem, 3vw + 0.5rem, 2.25rem)` | 24px → 36px |
+| `fluidFontSizes.h3` | `clamp(1.25rem, 2vw + 0.5rem, 1.875rem)` | 20px → 30px |
+| `fluidFontSizes.body` | `clamp(0.875rem, 1vw + 0.5rem, 1.125rem)` | 14px → 18px |
+
+## Font Weights
+
+| Token | Value |
+|---|---|
+| `fontWeights.thin` | 100 |
+| `fontWeights.extralight` | 200 |
+| `fontWeights.light` | 300 |
+| `fontWeights.normal` | 400 |
+| `fontWeights.medium` | 500 |
+| `fontWeights.semibold` | 600 |
+| `fontWeights.bold` | 700 |
+| `fontWeights.extrabold` | 800 |
+| `fontWeights.black` | 900 |
+
+Inter supports all weights as a variable font — no additional font file loading required per weight.
+
+## Line Heights
+
+| Token | Value | Use for |
+|---|---|---|
+| `lineHeights.none` | 1 | Single-line elements, icons |
+| `lineHeights.tight` | 1.25 | Large headings |
+| `lineHeights.snug` | 1.375 | Mid-size headings |
+| `lineHeights.normal` | 1.5 | Body text |
+| `lineHeights.relaxed` | 1.625 | Lead / comfortable reading |
+| `lineHeights.loose` | 1.75 | Small text |
+| `lineHeights.double` | 2 | Double-spaced |
+
+## Letter Spacing
+
+| Token | Value | Use for |
+|---|---|---|
+| `letterSpacing.tighter` | `-0.05em` | Very large display only |
+| `letterSpacing.tight` | `-0.025em` | Headings H1–H2 |
+| `letterSpacing.normal` | `0` | Body text |
+| `letterSpacing.wide` | `0.025em` | Button text |
+| `letterSpacing.wider` | `0.05em` | Small caps |
+| `letterSpacing.widest` | `0.1em` | All-caps labels |
+
+## `typeStyles` Presets
+
+`typeStyles` are the primary consumer API. Each entry combines `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`, and `letterSpacing` for a named semantic role.
+
+| Preset | Size | Weight | Line height | Letter spacing |
+|---|---|---|---|---|
+| `display` | `6xl` (3.75rem) | bold (700) | tight (1.25) | tight (−0.025em) |
+| `h1` | `5xl` (3rem) | bold (700) | tight (1.25) | tight (−0.025em) |
+| `h2` | `4xl` (2.25rem) | bold (700) | tight (1.25) | tight (−0.025em) |
+| `h3` | `3xl` (1.875rem) | semibold (600) | snug (1.375) | normal (0) |
+| `h4` | `2xl` (1.5rem) | semibold (600) | snug (1.375) | normal (0) |
+| `h5` | `xl` (1.25rem) | semibold (600) | normal (1.5) | normal (0) |
+| `h6` | `lg` (1.125rem) | semibold (600) | normal (1.5) | normal (0) |
+| `body` | `base` (1rem) | normal (400) | normal (1.5) | normal (0) |
+| `bodyLarge` | `lg` (1.125rem) | normal (400) | relaxed (1.625) | normal (0) |
+| `bodySmall` | `sm` (0.875rem) | normal (400) | normal (1.5) | normal (0) |
+| `caption` | `xs` (0.75rem) | normal (400) | normal (1.5) | wide (0.025em) |
+| `label` | `sm` (0.875rem) | medium (500) | tight (1.25) | normal (0) |
+| `button` | `sm` (0.875rem) | medium (500) | tight (1.25) | wide (0.025em) |
+| `code` | `sm` (0.875rem) — mono | normal (400) | normal (1.5) | normal (0) |
+| `codeBlock` | `sm` (0.875rem) — mono | normal (400) | relaxed (1.625) | normal (0) |
+| `overline` | `xs` (0.75rem) | semibold (600) | normal (1.5) | widest (0.1em) + uppercase |
+
+## Usage
+
+```tsx
+import { typeStyles } from "@nebutra/design-system/typography/tokens";
+
+// Spread a preset into inline styles
+<h1 style={typeStyles.h1}>Page title</h1>
+
+// Or reference individual tokens
+import { fontSizes, fontWeights, lineHeights } from "@nebutra/design-system/typography/tokens";
+
+<p style={{
+  fontSize: fontSizes.base,
+  fontWeight: fontWeights.normal,
+  lineHeight: lineHeights.normal,
+}}>Body text</p>
+```
+
+## Do / Don't
+
+**Do** use `typeStyles` presets for all named text roles. This ensures consistent rendering across the system.
+
+**Do** use `fluidFontSizes` clamp values for headings on marketing pages.
+
+**Do** reference `fontFamilies.primaryCJK` for any surface with user-generated content that may include CJK characters.
+
+**Don't** hardcode `font-size`, `font-weight`, or `font-family` values in component files.
+
+**Don't** use the `display` or `7xl`/`8xl` sizes inside application UI — they are reserved for marketing hero sections.
+
+**Don't** set `letter-spacing` on body paragraphs. Tracking adjustments belong only to headings, buttons, captions, and overlines.

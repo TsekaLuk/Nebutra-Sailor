@@ -54,9 +54,18 @@
  * @see https://www.heroui.com/docs/components/date-picker
  * @see https://www.heroui.com/docs/components/date-range-picker
  */
-export {
-  DatePicker,
-  DateRangePicker,
-  type DatePickerProps,
-  type DateRangePickerProps,
+import {
+  DatePicker as DatePickerBase,
+  DateRangePicker as DateRangePickerBase,
+} from "@heroui/date-picker";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const DatePicker = DatePickerBase as any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const DateRangePicker = DateRangePickerBase as any;
+
+export { DatePicker, DateRangePicker };
+
+export type {
+  DatePickerProps,
+  DateRangePickerProps,
 } from "@heroui/date-picker";

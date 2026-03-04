@@ -1,14 +1,30 @@
 "use client";
-import { HeroSelect, HeroSelectItem } from "@nebutra/custom-ui/primitives";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@nebutra/custom-ui/primitives";
+
 export function SelectDemo() {
   return (
-    <div className="max-w-xs">
-      <HeroSelect label="Framework" placeholder="Select a framework">
-        <HeroSelectItem key="react">React</HeroSelectItem>
-        <HeroSelectItem key="vue">Vue</HeroSelectItem>
-        <HeroSelectItem key="svelte">Svelte</HeroSelectItem>
-        <HeroSelectItem key="angular">Angular</HeroSelectItem>
-      </HeroSelect>
-    </div>
+    <Select>
+      <SelectTrigger className="w-[200px]">
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="orange">Orange</SelectItem>
+          <SelectItem value="grape">Grape</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 }

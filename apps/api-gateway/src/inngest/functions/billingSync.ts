@@ -1,7 +1,10 @@
 import { logger } from "@nebutra/logger";
 import { prisma } from "@nebutra/db";
 import type { Plan } from "@nebutra/db";
+import { OrganizationRepository } from "@nebutra/repositories";
 import { inngest } from "../client.js";
+
+const orgRepo = new OrganizationRepository(prisma);
 
 /**
  * Map a Stripe subscription status to an Organization plan.
@@ -70,10 +73,7 @@ export const processBillingEvent = inngest.createFunction(
       const targetPlan = resolvePlanFromStatus(status);
 
       await step.run("update-organization-plan", async () => {
-        await prisma.organization.update({
-          where: { id: organizationId },
-          data: { plan: targetPlan },
-        });
+        await orgRepo.updateById(organizationId, { plan: targetPlan });
 
         logger.info("Organization plan updated", {
           organizationId,

@@ -1,0 +1,99 @@
+---
+title: "Context Card"
+description: "Hover card that shows rich content on hover or focus. Supports top, bottom, left, and right placements."
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-contextcard--docs).
+</Note>
+
+## Overview
+
+`ContextCard` is a hover-activated card built on Radix Tooltip. Unlike a plain tooltip, it supports arbitrary `ReactNode` content — text, rich markup, images, or links. It automatically positions itself on the requested side with animation.
+
+## Installation
+
+```tsx
+import { ContextCard } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Default (all sides)
+
+```tsx
+import { ContextCard } from "@nebutra/custom-ui/primitives"
+
+<div className="flex flex-row items-center justify-around gap-8">
+  <ContextCard.Trigger
+    content="The Evil Rabbit Jumped over the Fence"
+    side="top"
+  >
+    <span>Top</span>
+  </ContextCard.Trigger>
+
+  <ContextCard.Trigger
+    content="The Evil Rabbit Jumped over the Fence"
+    side="bottom"
+  >
+    <span>Bottom</span>
+  </ContextCard.Trigger>
+
+  <ContextCard.Trigger
+    content="The Evil Rabbit Jumped over the Fence"
+    side="left"
+  >
+    <span>Left</span>
+  </ContextCard.Trigger>
+
+  <ContextCard.Trigger
+    content="The Evil Rabbit Jumped over the Fence"
+    side="right"
+  >
+    <span>Right</span>
+  </ContextCard.Trigger>
+</div>
+```
+
+### Rich content
+
+```tsx
+<ContextCard.Trigger
+  side="top"
+  content={
+    <div className="flex flex-col gap-1">
+      <p className="font-medium">Evil Rabbit</p>
+      <p className="text-muted-foreground text-xs">Jumped over the Fence</p>
+    </div>
+  }
+>
+  <span>Hover for details</span>
+</ContextCard.Trigger>
+```
+
+### On a button
+
+```tsx
+<ContextCard.Trigger content="Click to submit your form" side="bottom">
+  <Button>Submit</Button>
+</ContextCard.Trigger>
+```
+
+## Props
+
+### ContextCard.Trigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `content` | `ReactNode` | — | **Required.** Content shown inside the card |
+| `side` | `"top" \| "bottom" \| "left" \| "right"` | `"top"` | Which side the card appears on |
+| `sideOffset` | `number` | `8` | Distance from the trigger in pixels |
+| `children` | `ReactNode` | — | **Required.** The element that triggers the card |
+| `className` | `string` | — | Additional CSS classes for the card |
+
+## Accessibility
+
+- Built on Radix Tooltip with a 200ms hover delay.
+- Keyboard accessible: focus the trigger to show the card.
+- Screen readers announce the content via `role="tooltip"`.
+- `Escape` dismisses the card.

@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "The Open-Source Enterprise SaaS Framework",
     start_url: "/en",
     display: "standalone",
-    background_color: "#000000",
-    theme_color: "#6366f1",
+    background_color: "#020617",
+    theme_color: "#0033FE",
     icons: [
       {
         src: "/favicon.ico",

@@ -1,165 +1,164 @@
 "use client";
 
+/**
+ * Checkbox — 21st.dev Geist implementation
+ * Source: https://21st.dev / Geist Design System
+ *
+ * Uses --ds-gray-* / --ds-background-* CSS variables (registered in globals.css)
+ * mapped to Tailwind via `geist-gray-*` / `geist-background-*` theme colors.
+ */
+
 import React from "react";
-import {
-  CheckboxGroup as HeroUICheckboxGroup,
-  Checkbox as HeroUICheckbox,
-  CheckboxGroupProps as HeroUICheckboxGroupProps,
-  CheckboxProps as HeroUICheckboxProps,
-} from "@heroui/checkbox";
+import { cn } from "../utils/cn";
 
 // =============================================================================
 // Types
 // =============================================================================
 
-/**
- * Checkbox color variants
- */
-export type CheckboxColor =
-  | "default"
-  | "primary"
-  | "secondary"
-  | "success"
-  | "warning"
-  | "danger";
-
-/**
- * Checkbox size variants
- */
-export type CheckboxSize = "xs" | "sm" | "md" | "lg" | "xl";
-
-/**
- * Checkbox radius variants
- */
-export type CheckboxRadius =
-  | "none"
-  | "base"
-  | "xs"
-  | "sm"
-  | "md"
-  | "lg"
-  | "xl"
-  | "full";
-
-/**
- * Checkbox group orientation
- */
-export type CheckboxGroupOrientation = "vertical" | "horizontal";
-
-/**
- * Validation result type
- */
-export interface ValidationResult {
-  isInvalid: boolean;
-  validationErrors: string[];
-  validationDetails: Record<string, boolean>;
+export interface CheckboxProps {
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
+  disabled?: boolean;
+  indeterminate?: boolean;
+  children?: React.ReactNode;
+  className?: string;
 }
 
-/**
- * Props for CheckboxGroup component
- *
- * @description
- * A group of checkboxes allowing multiple selections from a list.
- * Supports validation, custom styling, and accessibility features.
- *
- * **UX Scenarios:**
- * - Multi-select forms (interests, preferences)
- * - Filter panels with multiple options
- * - Settings pages with toggleable options
- * - Survey/quiz multi-answer questions
- * - Permission/role selection
- *
- * **Accessibility:**
- * - Proper ARIA role and attributes
- * - Keyboard navigation (Tab, Space)
- * - Focus management
- * - Screen reader support
- */
-// Re-export HeroUI CheckboxGroupProps directly
-export type CheckboxGroupProps = HeroUICheckboxGroupProps;
-
-/**
- * Props for individual Checkbox component
- */
-// Re-export HeroUI CheckboxProps directly
-export type CheckboxProps = HeroUICheckboxProps;
+export interface CheckboxGroupProps {
+  /** Accessible group label */
+  label?: string;
+  /** Layout direction */
+  orientation?: "vertical" | "horizontal";
+  children: React.ReactNode;
+  className?: string;
+}
 
 // =============================================================================
-// Components
+// Checkbox indicator styles (Geist DS color logic)
 // =============================================================================
 
-/**
- * CheckboxGroup - Multi-select checkbox group
- *
- * @example
- * ```tsx
- * import { CheckboxGroup, Checkbox } from "@nebutra/custom-ui";
- *
- * // Basic usage
- * <CheckboxGroup label="Select cities">
- *   <Checkbox value="buenos-aires">Buenos Aires</Checkbox>
- *   <Checkbox value="sydney">Sydney</Checkbox>
- *   <Checkbox value="london">London</Checkbox>
- * </CheckboxGroup>
- *
- * // Controlled
- * const [selected, setSelected] = useState(["buenos-aires"]);
- * <CheckboxGroup
- *   label="Select cities"
- *   value={selected}
- *   onValueChange={setSelected}
- * >
- *   <Checkbox value="buenos-aires">Buenos Aires</Checkbox>
- *   <Checkbox value="sydney">Sydney</Checkbox>
- * </CheckboxGroup>
- *
- * // Horizontal layout
- * <CheckboxGroup orientation="horizontal" label="Options">
- *   <Checkbox value="a">Option A</Checkbox>
- *   <Checkbox value="b">Option B</Checkbox>
- * </CheckboxGroup>
- *
- * // With validation
- * <CheckboxGroup
- *   label="Required selection"
- *   isRequired
- *   isInvalid={selected.length === 0}
- *   errorMessage="Please select at least one option"
- * >
- *   ...
- * </CheckboxGroup>
- * ```
- */
-export const CheckboxGroup: React.FC<CheckboxGroupProps> = (props) => {
-  return <HeroUICheckboxGroup {...props} />;
+const getInputClasses = (
+  checked: boolean,
+  disabled: boolean,
+  indeterminate: boolean,
+) => {
+  let className =
+    "relative border w-4 h-4 duration-200 rounded inline-flex items-center justify-center";
+
+  if (disabled) {
+    if (!checked || indeterminate) {
+      className += " bg-geist-gray-100 border-geist-gray-500";
+      className += indeterminate
+        ? " stroke-geist-gray-500"
+        : " fill-geist-gray-100 stroke-geist-gray-100";
+    } else {
+      className +=
+        " bg-geist-gray-600 border-geist-gray-600 fill-geist-gray-600 stroke-geist-gray-100";
+    }
+  } else {
+    if (!checked || indeterminate) {
+      className +=
+        " bg-geist-background-100 border-geist-gray-700 group-hover:bg-geist-gray-200";
+      className += indeterminate
+        ? " stroke-geist-gray-700"
+        : " fill-geist-background-100 stroke-geist-background-100 group-hover:stroke-geist-gray-200 group-hover:fill-geist-gray-200";
+    } else {
+      className +=
+        " bg-geist-gray-1000 border-geist-gray-1000 fill-geist-gray-1000 stroke-geist-gray-100";
+    }
+  }
+
+  return className;
 };
 
-/**
- * Checkbox - Individual checkbox item
- *
- * @example
- * ```tsx
- * // Standalone usage
- * <Checkbox>Accept terms</Checkbox>
- *
- * // Within a group
- * <CheckboxGroup>
- *   <Checkbox value="option1">Option 1</Checkbox>
- *   <Checkbox value="option2" isDisabled>Option 2 (disabled)</Checkbox>
- * </CheckboxGroup>
- *
- * // Custom styling
- * <Checkbox
- *   color="success"
- *   size="lg"
- *   radius="full"
- * >
- *   Large success checkbox
- * </Checkbox>
- * ```
- */
-export const Checkbox: React.FC<CheckboxProps> = (props) => {
-  return <HeroUICheckbox {...props} />;
+// =============================================================================
+// Checkbox
+// =============================================================================
+
+export const Checkbox = ({
+  checked = false,
+  onChange,
+  disabled = false,
+  indeterminate = false,
+  children,
+  className,
+}: CheckboxProps) => {
+  return (
+    <div
+      className={cn(
+        "flex items-center cursor-pointer text-[13px] font-sans group",
+        disabled ? "text-geist-gray-500" : "text-geist-gray-1000",
+        className,
+      )}
+      onClick={() => onChange && !indeterminate && !disabled && onChange(!checked)}
+    >
+      <input
+        disabled={disabled}
+        type="checkbox"
+        checked={checked}
+        readOnly
+        aria-label={typeof children === "string" ? children : "checkbox"}
+        className="sr-only"
+      />
+      <span className={getInputClasses(checked, disabled, indeterminate)}>
+        <svg
+          className="shrink-0"
+          height="16"
+          viewBox="0 0 20 20"
+          width="16"
+        >
+          {indeterminate ? (
+            <line
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              x1="5"
+              x2="15"
+              y1="10"
+              y2="10"
+            />
+          ) : (
+            <path
+              d="M14 7L8.5 12.5L6 10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+          )}
+        </svg>
+      </span>
+      {children && <span className="ml-2">{children}</span>}
+    </div>
+  );
 };
+
+// =============================================================================
+// CheckboxGroup — simple layout wrapper
+// =============================================================================
+
+export function CheckboxGroup({
+  label,
+  orientation = "vertical",
+  children,
+  className,
+}: CheckboxGroupProps) {
+  return (
+    <div
+      role="group"
+      aria-label={label}
+      className={cn(
+        "flex",
+        orientation === "vertical"
+          ? "flex-col gap-3"
+          : "flex-row flex-wrap gap-4",
+        className,
+      )}
+    >
+      {label && <span className="text-sm font-medium">{label}</span>}
+      {children}
+    </div>
+  );
+}
+CheckboxGroup.displayName = "CheckboxGroup";
 
 export default CheckboxGroup;

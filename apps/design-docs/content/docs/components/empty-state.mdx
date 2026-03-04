@@ -1,0 +1,92 @@
+---
+title: "Empty State"
+description: "Fill spaces when no content has been added yet, or is temporarily empty due to the nature of the feature."
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-emptystate--docs).
+</Note>
+
+## Overview
+
+`EmptyState` is a compound component for zero-content views. It supports four design-framework variants — blank slate, informational (with CTAs), educational, and guide — all using the same API: icon, title, description, and optional action/link slots.
+
+## Installation
+
+```tsx
+import { EmptyState } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Blank Slate
+
+The most basic form — conveys the state without directing users to a specific action.
+
+```tsx
+import { EmptyState } from "@nebutra/custom-ui/primitives";
+import { ChartBarPeak } from "@nebutra/icons";
+
+<EmptyState.Root
+  icon={<EmptyState.Icon icon={<ChartBarPeak size={20} />} />}
+  title="Title"
+  description="A message conveying the state of the product."
+/>
+```
+
+### Informational
+
+Includes a primary CTA and a secondary link to guide users forward.
+
+```tsx
+<EmptyState.Root
+  icon={<EmptyState.Icon icon={<ChartBarPeak size={20} />} />}
+  title="No deployments yet"
+  description="Push to a connected branch or deploy manually to see activity here."
+  action={
+    <Button>Deploy now</Button>
+  }
+  link={
+    <a href="/docs/deployments" className="text-sm text-muted-foreground hover:text-foreground">
+      Learn more ↗
+    </a>
+  }
+/>
+```
+
+### No icon
+
+Minimal text-only variant for constrained spaces.
+
+```tsx
+<EmptyState.Root
+  title="No projects yet"
+  description="Create your first project to get started."
+  action={<Button>New Project</Button>}
+/>
+```
+
+## Props
+
+### `EmptyState.Root`
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | — | **Required.** Short heading naming the empty state |
+| `description` | `string` | — | **Required.** Supporting text explaining the state or next step |
+| `icon` | `ReactNode` | — | Use `<EmptyState.Icon icon={...} />` for consistent sizing |
+| `action` | `ReactNode` | — | Primary call-to-action (button or anchor) |
+| `link` | `ReactNode` | — | Secondary call-to-action (e.g. "Learn more" link) |
+| `className` | `string` | — | Additional CSS classes for the wrapper |
+
+### `EmptyState.Icon`
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `icon` | `ReactNode` | — | **Required.** Icon element (recommended size: 20px) |
+| `className` | `string` | — | Additional CSS classes for the icon wrapper |
+
+## Accessibility
+
+- The icon wrapper uses `aria-hidden="true"` on icon elements — all context is conveyed via `title` and `description` text.
+- Action elements should be standard `<button>` or `<a>` elements with appropriate labels.

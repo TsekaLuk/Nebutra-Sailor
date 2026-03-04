@@ -2,7 +2,11 @@
 
 import React from "react";
 import {
-  Slider as HeroUISlider,
+  Slider as HeroUISliderBase,
+} from "@heroui/slider";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HeroUISlider = HeroUISliderBase as any;
+import type {
   SliderProps as HeroUISliderProps,
 } from "@heroui/slider";
 

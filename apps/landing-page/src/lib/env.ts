@@ -1,35 +1,31 @@
+import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
-const envSchema = z.object({
-  NODE_ENV: z
-    .enum(["development", "production", "test"])
-    .default("development"),
+export const env = createEnv({
+  server: {
+    NODE_ENV: z
+      .enum(["development", "production", "test"])
+      .default("development"),
+  },
 
-  // Content / CMS
-  NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().default("wyfqr24v"),
-  NEXT_PUBLIC_SANITY_DATASET: z.string().default("production"),
-  NEXT_PUBLIC_SANITY_API_VERSION: z.string().default("2024-01-01"),
+  client: {
+    // Content / CMS
+    NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().default("wyfqr24v"),
+    NEXT_PUBLIC_SANITY_DATASET: z.string().default("production"),
+    NEXT_PUBLIC_SANITY_API_VERSION: z.string().default("2024-01-01"),
 
-  // URLs
-  NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3001"),
-  NEXT_PUBLIC_API_URL: z.string().url().default("http://localhost:3002"),
+    // URLs
+    NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3001"),
+    NEXT_PUBLIC_API_URL: z.string().url().default("http://localhost:3002"),
+  },
+
+  experimental__runtimeEnv: {
+    NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
 });
 
-export type LandingEnv = z.infer<typeof envSchema>;
-
-function validateEnv(): LandingEnv {
-  const result = envSchema.safeParse(process.env);
-
-  if (!result.success) {
-    console.error("Invalid landing-page environment variables:");
-    console.error(result.error.format());
-    throw new Error("Invalid environment variables");
-  }
-
-  return result.data;
-}
-
-// Validate on both server and client — all vars are NEXT_PUBLIC_* (safe in browser).
-// Zod defaults ensure server and client produce identical values, preventing
-// React hydration mismatches from divergent env reads.
-export const env = validateEnv();
+export default env;

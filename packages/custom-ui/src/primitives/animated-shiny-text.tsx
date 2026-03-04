@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentPropsWithoutRef, CSSProperties, useEffect } from "react";
-import { cn } from "@nebutra/design-system/utils";
+import { cn } from "../utils/cn";
 
 // =============================================================================
 // CSS Animation Injection

@@ -111,7 +111,7 @@ export default async function FAQPage({
         <div className="mt-6 flex justify-center gap-4">
           <Link
             href="/contact"
-            className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+            className="rounded-lg bg-[color:var(--blue-9)] px-6 py-3 font-semibold text-white transition hover:bg-[color:var(--blue-10)]"
           >
             {t("faq.ctaButton")}
           </Link>

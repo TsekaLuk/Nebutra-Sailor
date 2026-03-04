@@ -1,6 +1,8 @@
 "use client";
 
-import { Skeleton as HeroUISkeleton } from "@heroui/skeleton";
+import { Skeleton as HeroUISkeletonBase } from "@heroui/skeleton";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HeroUISkeleton = HeroUISkeletonBase as any;
 
 // =============================================================================
 // Types

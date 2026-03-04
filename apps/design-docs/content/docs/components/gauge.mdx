@@ -1,0 +1,111 @@
+---
+title: "Gauge"
+description: "A circular visual for conveying a percentage."
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-gauge--docs).
+</Note>
+
+## Overview
+
+`Gauge` renders an SVG donut ring that fills from 0–100%. It supports:
+- **Automatic color scale** — gray → amber → emerald based on value
+- **Custom color stops** — arbitrary thresholds with any CSS color
+- **Center label** — numeric or custom `ReactNode`
+- **Indeterminate** — spinning animation for unknown/loading state
+
+## Installation
+
+```tsx
+import { Gauge } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Default
+
+```tsx
+<Gauge value={72} size={48} />
+```
+
+### With label
+
+```tsx
+<Gauge value={72} size={64} label />
+```
+
+### Custom color range
+
+```tsx
+<Gauge
+  value={60}
+  size={64}
+  label
+  colors={[
+    { value: 0,  color: "#ef4444" },
+    { value: 50, color: "#f59e0b" },
+    { value: 80, color: "#22c55e" },
+  ]}
+/>
+```
+
+### Custom secondary (track) color
+
+```tsx
+<Gauge value={60} size={64} secondaryColor="#dbeafe" label />
+```
+
+### Arc priority
+
+Controls which arc renders on top when both arcs overlap:
+
+```tsx
+<Gauge value={60} arcPriority="value" />     {/* default */}
+<Gauge value={60} arcPriority="secondary" />
+```
+
+### Indeterminate
+
+```tsx
+<Gauge size={48} indeterminate />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Current value, 0–100 |
+| `size` | `number` | `48` | Diameter in pixels |
+| `strokeWidth` | `number` | `~10% of size` | Ring stroke width in pixels |
+| `label` | `boolean \| ReactNode` | — | `true` shows numeric value; pass a `ReactNode` for custom content |
+| `colors` | `GaugeColorStop[]` | default scale | Custom color stops (sorted ascending by `value`) |
+| `secondaryColor` | `string` | muted | CSS color for the background track arc |
+| `arcPriority` | `"value" \| "secondary"` | `"value"` | Which arc renders on top |
+| `indeterminate` | `boolean` | `false` | Show spinning animation (value is ignored) |
+| `className` | `string` | — | Additional CSS classes on the wrapper |
+
+### `GaugeColorStop`
+
+```ts
+interface GaugeColorStop {
+  value: number;  // threshold 0–100
+  color: string;  // any CSS color
+}
+```
+
+The highest stop whose `value` ≤ current gauge value is used.
+
+### Default color scale
+
+| Range | Color |
+|-------|-------|
+| 0–39 | Gray (`hsl(220 9% 46%)`) |
+| 40–74 | Amber (`hsl(38 92% 50%)`) |
+| 75–100 | Emerald (`hsl(142 71% 45%)`) |
+
+## Accessibility
+
+- Root element has `role="meter"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`.
+- Label text is read by screen readers via the SVG `<text>` element.
+- Indeterminate gauges have `aria-label="Loading"`.

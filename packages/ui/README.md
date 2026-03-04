@@ -1,6 +1,22 @@
 # @nebutra/ui
 
-Unified UI package built on [Lobe UI](https://github.com/lobehub/lobe-ui) + [Lobe Icons](https://github.com/lobehub/lobe-icons) + Lucide Icons.
+UI layer for the **AI Chat** product feature (`apps/web /chat` route).
+Built on [Lobe UI](https://github.com/lobehub/lobe-ui) + [Lobe Icons](https://github.com/lobehub/lobe-icons) + Lucide Icons.
+
+## Design Intent
+
+| Dependency       | Purpose                                                                        |
+| ---------------- | ------------------------------------------------------------------------------ |
+| `@lobehub/ui`    | Chat bubbles, streaming text, model selector, chat input, markdown renderer    |
+| `@lobehub/icons` | AI provider icons: OpenAI, Anthropic, Claude, Gemini, Mistral, DeepSeek, etc. |
+| `antd`           | Back-office admin tables / forms if needed in enterprise tier                  |
+
+Usage in `apps/web`:
+
+```tsx
+import { ChatList, ChatInputArea } from "@nebutra/ui/components";
+import { Anthropic, Claude } from "@nebutra/ui/icons";
+```
 
 ## Installation
 

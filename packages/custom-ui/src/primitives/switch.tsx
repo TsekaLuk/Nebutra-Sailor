@@ -2,7 +2,11 @@
 
 import React from "react";
 import {
-  Switch as HeroUISwitch,
+  Switch as HeroUISwitchBase,
+} from "@heroui/switch";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HeroUISwitch = HeroUISwitchBase as any;
+import type {
   SwitchProps as HeroUISwitchProps,
 } from "@heroui/switch";
 

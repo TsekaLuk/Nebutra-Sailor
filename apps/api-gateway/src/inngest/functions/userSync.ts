@@ -1,5 +1,8 @@
 import { prisma } from "@nebutra/db";
+import { UserRepository } from "@nebutra/repositories";
 import { inngest } from "../client.js";
+
+const userRepo = new UserRepository(prisma);
 
 /**
  * Shape of the data payload carried by Clerk user webhook events.
@@ -50,19 +53,11 @@ export const syncUserToDB = inngest.createFunction(
       [firstName, lastName].filter(Boolean).join(" ").trim() || null;
 
     await step.run("upsert-user", async () => {
-      await prisma.user.upsert({
-        where: { clerkId: userId },
-        create: {
-          clerkId: userId,
-          email,
-          name: fullName,
-          avatarUrl: imageUrl ?? null,
-        },
-        update: {
-          email,
-          name: fullName,
-          avatarUrl: imageUrl ?? null,
-        },
+      await userRepo.upsertByClerkId({
+        clerkId: userId,
+        email,
+        name: fullName,
+        avatarUrl: imageUrl ?? null,
       });
     });
   },
@@ -94,9 +89,7 @@ export const deleteUserFromDB = inngest.createFunction(
     const userId = (data as Record<string, unknown>)["userId"] as string;
 
     await step.run("delete-user", async () => {
-      await prisma.user.deleteMany({
-        where: { clerkId: userId },
-      });
+      await userRepo.deleteIfExistsByClerkId(userId);
     });
   },
 );

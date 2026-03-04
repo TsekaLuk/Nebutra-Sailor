@@ -20,6 +20,25 @@ const eslintConfig = defineConfig([
       "jsx-a11y/img-redundant-alt": "warn",
       "jsx-a11y/no-autofocus": "warn",
       "jsx-a11y/interactive-supports-focus": "warn",
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "framer-motion",
+              message:
+                "Use shared motion primitives from @nebutra/custom-ui instead of importing framer-motion in app surfaces.",
+            },
+          ],
+          patterns: [
+            {
+              group: ["@nebutra/*/*/*", "@nebutra/custom-ui/lib/*"],
+              message:
+                "Avoid deep cross-package imports in app surfaces. Use package root or first-level exports only.",
+            },
+          ],
+        },
+      ],
     },
   },
   // Override default ignores of eslint-config-next.

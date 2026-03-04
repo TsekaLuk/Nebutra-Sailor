@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { cn } from "@nebutra/custom-ui";
 
 interface AuthBannerProps {
   className?: string;
@@ -20,7 +20,7 @@ export function AuthBanner({ className }: AuthBannerProps) {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 100% 100%, rgba(99,102,241,0.35) 0%, rgba(124,58,237,0.15) 40%, transparent 70%)",
+            "radial-gradient(ellipse 80% 60% at 100% 100%, rgba(0,51,254,0.35) 0%, rgba(11,241,195,0.18) 40%, transparent 70%)",
         }}
       />
 
@@ -64,7 +64,7 @@ export function AuthBanner({ className }: AuthBannerProps) {
       <div className="relative z-10 flex flex-1 flex-col items-start justify-center px-12 pb-16">
         {/* Nebutra Logo */}
         <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--blue-9)]">
             <span className="text-lg font-black text-white">N</span>
           </div>
           <span className="text-2xl font-bold text-white">Nebutra</span>

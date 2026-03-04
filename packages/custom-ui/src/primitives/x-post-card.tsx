@@ -15,7 +15,7 @@ import {
   type TwitterComponents,
 } from "react-tweet";
 import type { Tweet } from "react-tweet/api";
-import { cn } from "@nebutra/design-system/utils";
+import { cn } from "../utils/cn";
 
 // =============================================================================
 // Types

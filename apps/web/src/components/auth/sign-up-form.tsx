@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -26,6 +26,13 @@ export function SignUpForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
+  const codeInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (phase === "verify") {
+      codeInputRef.current?.focus();
+    }
+  }, [phase]);
 
   async function handleDetailsSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -112,6 +119,7 @@ export function SignUpForm() {
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="otp-code">Verification code</Label>
             <Input
+              ref={codeInputRef}
               id="otp-code"
               type="text"
               inputMode="numeric"
@@ -123,7 +131,6 @@ export function SignUpForm() {
                 setCode(e.target.value.replace(/\D/g, "").slice(0, 6))
               }
               required
-              autoFocus
               autoComplete="one-time-code"
               className="text-center text-lg tracking-[0.5em]"
             />
@@ -146,7 +153,7 @@ export function SignUpForm() {
             type="button"
             onClick={handleResendCode}
             disabled={resending}
-            className="font-medium text-indigo-600 hover:text-indigo-700 disabled:opacity-50"
+            className="font-medium text-[color:var(--blue-11)] hover:text-[color:var(--blue-12)] disabled:opacity-50"
           >
             {resending ? "Resending…" : "Resend code"}
           </button>
@@ -237,7 +244,7 @@ export function SignUpForm() {
         Already have an account?{" "}
         <Link
           href="/sign-in"
-          className="font-medium text-indigo-600 hover:text-indigo-700"
+          className="font-medium text-[color:var(--blue-11)] hover:text-[color:var(--blue-12)]"
         >
           Sign in
         </Link>

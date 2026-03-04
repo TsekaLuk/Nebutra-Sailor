@@ -9,7 +9,7 @@ import {
   Check,
   Users,
 } from "lucide-react";
-import { cn } from "@nebutra/design-system/utils";
+import { cn } from "../utils/cn";
 
 // =============================================================================
 // Types

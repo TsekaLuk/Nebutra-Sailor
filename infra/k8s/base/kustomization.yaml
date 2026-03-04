@@ -4,10 +4,43 @@ kind: Kustomization
 namespace: nebutra
 
 resources:
+  # Namespace must come first so subsequent resources land in the right namespace
   - namespace.yaml
-  # - deployments/
-  # - services/
-  # - configmaps/
+
+  # ConfigMaps — non-secret environment configuration
+  - configmaps/nebutra-config.yaml
+
+  # Deployments — one per service
+  - deployments/web.yaml
+  - deployments/landing-page.yaml
+  - deployments/api-gateway.yaml
+  - deployments/ai-service.yaml
+  - deployments/billing-service.yaml
+  - deployments/content-service.yaml
+  - deployments/ecommerce-service.yaml
+  - deployments/recsys-service.yaml
+  - deployments/event-ingest-service.yaml
+  - deployments/web3-service.yaml
+
+  # Services — ClusterIP, one per deployment
+  - services/web.yaml
+  - services/landing-page.yaml
+  - services/api-gateway.yaml
+  - services/ai-service.yaml
+  - services/billing-service.yaml
+  - services/content-service.yaml
+  - services/ecommerce-service.yaml
+  - services/recsys-service.yaml
+  - services/event-ingest-service.yaml
+  - services/web3-service.yaml
+
+  # Ingress — nginx, with TLS via cert-manager
+  - ingress/nginx-ingress.yaml
+
+  # Secrets — reference template / ExternalSecrets operator config
+  # The actual Secret object (app-secrets) must be created out-of-band.
+  # See secrets/external-secrets.yaml for instructions.
+  - secrets/external-secrets.yaml
 
 commonLabels:
   app.kubernetes.io/part-of: nebutra-sailor

@@ -1,0 +1,102 @@
+---
+title: "Checkbox"
+description: "A control that toggles between checked and unchecked, with optional indeterminate state."
+---
+
+<Note>
+  Live examples and prop controls are available in [Storybook → Primitives/Checkbox](http://localhost:6006/?path=/docs/primitives-checkbox--docs).
+</Note>
+
+## Overview
+
+`Checkbox` wraps HeroUI's `@heroui/checkbox`, providing a fully-accessible toggle control with checked, unchecked, and indeterminate states. Supports colors, sizes, radii, and disabled combinations.
+
+## Usage
+
+```tsx
+import { Checkbox } from "@nebutra/custom-ui/primitives";
+```
+
+## Examples
+
+### Default
+
+```tsx
+const [checked, setChecked] = useState(false);
+
+<Checkbox isSelected={checked} onValueChange={setChecked}>
+  Option 1
+</Checkbox>
+```
+
+### Disabled
+
+```tsx
+<Checkbox isDisabled>Disabled</Checkbox>
+<Checkbox isSelected isDisabled>Disabled Checked</Checkbox>
+<Checkbox isIndeterminate isDisabled>Disabled Indeterminate</Checkbox>
+```
+
+### Indeterminate
+
+```tsx
+<Checkbox isIndeterminate>Option 1</Checkbox>
+```
+
+### Sizes
+
+```tsx
+<Checkbox size="sm">Small</Checkbox>
+<Checkbox size="md">Medium</Checkbox>
+<Checkbox size="lg">Large</Checkbox>
+```
+
+### Colors
+
+```tsx
+<Checkbox isSelected color="default">Default</Checkbox>
+<Checkbox isSelected color="primary">Primary</Checkbox>
+<Checkbox isSelected color="success">Success</Checkbox>
+<Checkbox isSelected color="warning">Warning</Checkbox>
+<Checkbox isSelected color="danger">Danger</Checkbox>
+```
+
+### Radius
+
+```tsx
+<Checkbox isSelected radius="none">None</Checkbox>
+<Checkbox isSelected radius="sm">Small</Checkbox>
+<Checkbox isSelected radius="md">Medium</Checkbox>
+<Checkbox isSelected radius="full">Full</Checkbox>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | Label content |
+| `isSelected` | `boolean` | — | Controlled checked state |
+| `defaultSelected` | `boolean` | `false` | Uncontrolled default checked |
+| `onValueChange` | `(isSelected: boolean) => void` | — | Callback when state changes |
+| `isIndeterminate` | `boolean` | `false` | Show indeterminate (mixed) state |
+| `isDisabled` | `boolean` | `false` | Disable the checkbox |
+| `isReadOnly` | `boolean` | `false` | Read-only mode |
+| `isRequired` | `boolean` | `false` | Mark as required in form context |
+| `isInvalid` | `boolean` | `false` | Show invalid/error styling |
+| `color` | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"primary"` | Accent color |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size variant |
+| `radius` | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"md"` | Border radius |
+| `value` | `string` | — | Value submitted with form |
+| `name` | `string` | — | Form field name |
+
+## Accessibility
+
+- ARIA `role="checkbox"` with `aria-checked` (supports `true`, `false`, `mixed`)
+- Keyboard: `Space` toggles the checkbox
+- Label is automatically associated via `children`
+- Disabled state sets `aria-disabled="true"`
+
+## See Also
+
+- [CheckboxGroup](/design-system/atom-components/checkbox-group) — Multi-select checkbox group
+- [Switch](/design-system/atom-components/switch) — Toggle for binary on/off settings

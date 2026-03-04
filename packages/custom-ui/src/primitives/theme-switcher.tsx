@@ -144,7 +144,9 @@ export function ThemeSwitcher({
         className
       )}
     >
-      {themes.map(({ key, icon: Icon, label }) => {
+      {themes.map(({ key, icon: IconRaw, label }) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const Icon = IconRaw as any;
         const isActive = currentValue === key;
 
         return (

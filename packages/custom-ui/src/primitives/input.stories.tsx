@@ -37,6 +37,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+// ─── Sizes ────────────────────────────────────────────────────────────────────
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3 w-72">
+      <Input size="sm" placeholder="Small" />
+      <Input size="md" placeholder="Default" />
+      <Input size="lg" placeholder="Large" />
+    </div>
+  ),
+};
+
 // ─── Base States ──────────────────────────────────────────────────────────────
 
 export const Default: Story = {
@@ -222,6 +234,23 @@ export const PasswordReveal: Story = {
       </div>
     );
   },
+};
+
+// ─── Shortcut (KK) ────────────────────────────────────────────────────────────
+
+export const Shortcut: Story = {
+  name: "Shortcut / KK",
+  render: () => (
+    <div className="flex flex-col gap-3 w-72">
+      <Input
+        placeholder="Search commands…"
+        shortcut="⌘K"
+      />
+      <p className="text-xs text-muted-foreground">
+        Type to see the shortcut badge transition to a loading spinner.
+      </p>
+    </div>
+  ),
 };
 
 // ─── All Types ────────────────────────────────────────────────────────────────

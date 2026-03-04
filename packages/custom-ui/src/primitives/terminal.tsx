@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 import { motion, MotionProps, useInView } from "motion/react";
-import { cn } from "@nebutra/design-system/utils";
+import { cn } from "../utils/cn";
 
 // =============================================================================
 // Context

@@ -1,0 +1,104 @@
+---
+title: "Skeleton"
+description: "Animated loading placeholder that mimics content layout during data fetching."
+---
+
+## Demo
+
+```tsx
+import { Skeleton } from "@nebutra/custom-ui/primitives"
+
+export function SkeletonDemo() {
+  return (
+    <div className="flex items-center space-x-4 w-80">
+      <Skeleton className="h-12 w-12 rounded-full" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-48" />
+        <Skeleton className="h-4 w-36" />
+      </div>
+    </div>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import { Skeleton } from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | **Required.** Set width, height, and border-radius via Tailwind classes |
+
+<Info>
+  `Skeleton` has no fixed size — always provide `className` with `w-*`, `h-*`,
+  and optionally `rounded-*` utilities to match the shape of the content it replaces.
+</Info>
+
+## Examples
+
+### Card Skeleton
+
+```tsx
+<div className="w-80 space-y-4">
+  <Skeleton className="h-40 w-full rounded-lg" />
+  <div className="space-y-2 px-1">
+    <Skeleton className="h-5 w-3/4" />
+    <Skeleton className="h-4 w-full" />
+    <Skeleton className="h-4 w-5/6" />
+  </div>
+</div>
+```
+
+### List Skeleton
+
+```tsx
+<div className="space-y-3 w-80">
+  {Array.from({ length: 5 }).map((_, i) => (
+    <div key={i} className="flex items-center gap-3">
+      <Skeleton className="h-10 w-10 rounded-full shrink-0" />
+      <div className="space-y-1.5 flex-1">
+        <Skeleton className="h-3.5 w-2/3" />
+        <Skeleton className="h-3 w-1/2" />
+      </div>
+    </div>
+  ))}
+</div>
+```
+
+### Conditional Loading
+
+```tsx
+function UserCard({ userId }: { userId: string }) {
+  const { data: user, isLoading } = useUser(userId)
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center space-x-4">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-48" />
+          <Skeleton className="h-4 w-36" />
+        </div>
+      </div>
+    )
+  }
+
+  return <UserInfo user={user} />
+}
+```
+
+## Accessibility
+
+- Skeleton elements have `aria-hidden="true"` by default — they are decorative loading indicators.
+- Wrap a loading section in `aria-busy="true"` on the container to announce loading state.
+- Provide a visible or screen-reader-only "Loading..." label alongside complex skeleton layouts.
+
+```tsx
+<div aria-busy="true" aria-label="Loading user profile">
+  <Skeleton className="h-12 w-12 rounded-full" />
+</div>
+```

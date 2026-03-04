@@ -1,3 +1,5 @@
+import { unstable_cache } from "next/cache";
+
 type GoldMetricsRow = {
   tenant_id: string;
   day: string;
@@ -25,6 +27,9 @@ export interface GrowthSummary {
 }
 
 const DEFAULT_DASHBOARD_TENANT = "demo_org";
+const DEFAULT_DATABASE = "nebutra";
+const TENANT_ID_RE = /^[A-Za-z0-9_-]{1,64}$/;
+const DATABASE_RE = /^[A-Za-z_][A-Za-z0-9_]{0,62}$/;
 
 function toSafeNumber(value: unknown): number {
   const numberValue = Number(value);
@@ -44,14 +49,18 @@ function emptySummary(tenantId: string): GrowthSummary {
   };
 }
 
-function escapeSqlString(value: string): string {
-  return value.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+function sanitizeTenantId(value: string): string {
+  const trimmed = value.trim();
+  return TENANT_ID_RE.test(trimmed) ? trimmed : DEFAULT_DASHBOARD_TENANT;
+}
+
+function sanitizeDatabaseName(value: string | undefined): string {
+  if (!value) return DEFAULT_DATABASE;
+  return DATABASE_RE.test(value) ? value : DEFAULT_DATABASE;
 }
 
 function buildClickHouseUrl(): URL {
-  const url = new URL(
-    process.env.CLICKHOUSE_HTTP_URL || "http://localhost:8123",
-  );
+  const url = new URL(process.env.CLICKHOUSE_HTTP_URL || "http://localhost:8123");
   if (process.env.CLICKHOUSE_USER) {
     url.username = process.env.CLICKHOUSE_USER;
   }
@@ -74,16 +83,10 @@ function toGrowthSummary(row: GoldMetricsRow): GrowthSummary {
   };
 }
 
-export async function getGrowthSummary(
-  tenantId?: string,
-): Promise<GrowthSummary> {
-  const resolvedTenant =
-    (tenantId && tenantId.trim()) ||
-    process.env.DEFAULT_DASHBOARD_TENANT_ID ||
-    DEFAULT_DASHBOARD_TENANT;
-  const escapedTenant = escapeSqlString(resolvedTenant);
-  const database = process.env.CLICKHOUSE_DATABASE || "nebutra";
+async function fetchGrowthSummary(tenantId: string): Promise<GrowthSummary> {
+  const database = sanitizeDatabaseName(process.env.CLICKHOUSE_DATABASE);
   const clickhouseUrl = buildClickHouseUrl();
+  clickhouseUrl.searchParams.set("param_tenant_id", tenantId);
 
   const sql = `
 SELECT
@@ -96,7 +99,7 @@ SELECT
   active_users,
   total_events
 FROM ${database}.growth_metrics_daily
-WHERE tenant_id = '${escapedTenant}'
+WHERE tenant_id = {tenant_id:String}
 ORDER BY day DESC
 LIMIT 1
 FORMAT JSON
@@ -111,13 +114,32 @@ FORMAT JSON
     });
 
     if (!response.ok) {
-      return emptySummary(resolvedTenant);
+      return emptySummary(tenantId);
     }
 
     const payload = (await response.json()) as ClickHouseJsonResponse;
     const row = payload.data?.[0];
-    return row ? toGrowthSummary(row) : emptySummary(resolvedTenant);
+    return row ? toGrowthSummary(row) : emptySummary(tenantId);
   } catch {
-    return emptySummary(resolvedTenant);
+    return emptySummary(tenantId);
   }
+}
+
+const getCachedGrowthSummary = unstable_cache(
+  async (tenantId: string) => fetchGrowthSummary(tenantId),
+  ["growth-summary-v1"],
+  {
+    revalidate: 60,
+    tags: ["growth-summary"],
+  },
+);
+
+export async function getGrowthSummary(tenantId?: string): Promise<GrowthSummary> {
+  const rawTenant =
+    (tenantId && tenantId.trim()) ||
+    process.env.DEFAULT_DASHBOARD_TENANT_ID ||
+    DEFAULT_DASHBOARD_TENANT;
+
+  const resolvedTenant = sanitizeTenantId(rawTenant);
+  return getCachedGrowthSummary(resolvedTenant);
 }

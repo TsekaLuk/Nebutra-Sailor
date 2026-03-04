@@ -1,12 +1,16 @@
 "use client";
 
 /**
- * StatusBadge - Compact status indicator
+ * StatusBadge — compact status indicator dot
  *
- * Usage:
- * <StatusBadge status="operational" />
- * <StatusBadge status="operational" showLabel />
- * <StatusBadge pageSlug="nebutra" />  // Auto-fetch
+ * @example OpenStatus (existing API, unchanged)
+ *   <StatusBadge pageSlug="nebutra" showLabel />
+ *
+ * @example Atlassian Statuspage
+ *   <StatusBadge provider="statuspage" pageId="kctbh9vrtdwd" showLabel />
+ *
+ * @example Static (no fetch)
+ *   <StatusBadge status="operational" showLabel />
  */
 
 import { useEffect, useState } from "react";
@@ -14,8 +18,14 @@ import type { StatusState, StatusConfig } from "../types";
 import { fetchStatusPage } from "../api";
 
 interface StatusBadgeProps {
+  // Static value — skips fetch
   status?: StatusState;
+  // OpenStatus
   pageSlug?: string;
+  // Atlassian Statuspage
+  provider?: "statuspage";
+  pageId?: string;
+  // Display
   showLabel?: boolean;
   size?: "sm" | "md" | "lg";
   className?: string;
@@ -46,6 +56,11 @@ const STATUS_CONFIG: Record<
     bgColor: "bg-red-500",
     label: "Major Outage",
   },
+  maintenance: {
+    color: "text-blue-600",
+    bgColor: "bg-blue-500",
+    label: "Under Maintenance",
+  },
   unknown: {
     color: "text-gray-500",
     bgColor: "bg-gray-400",
@@ -59,29 +74,41 @@ const SIZE_CONFIG = {
   lg: { dot: "h-3 w-3", text: "text-base" },
 };
 
+function buildConfig(props: StatusBadgeProps): StatusConfig | null {
+  if (props.provider === "statuspage" && props.pageId) {
+    return { provider: "statuspage", pageId: props.pageId };
+  }
+  if (props.pageSlug) {
+    return { pageSlug: props.pageSlug };
+  }
+  return null;
+}
+
 export function StatusBadge({
   status: propStatus,
   pageSlug,
+  provider,
+  pageId,
   showLabel = false,
   size = "md",
   className = "",
   onClick,
 }: StatusBadgeProps) {
-  const [status, setStatus] = useState<StatusState>(propStatus || "unknown");
-  const [loading, setLoading] = useState(!propStatus && !!pageSlug);
+  const [status, setStatus] = useState<StatusState>(propStatus ?? "unknown");
+  const config = buildConfig({ pageSlug, provider, pageId });
+  const [loading, setLoading] = useState(!propStatus && !!config);
 
   useEffect(() => {
     if (propStatus) {
       setStatus(propStatus);
       return;
     }
+    if (!config) return;
 
-    if (!pageSlug) return;
-
-    const fetchStatus = async () => {
+    const load = async () => {
       setLoading(true);
       try {
-        const data = await fetchStatusPage({ pageSlug });
+        const data = await fetchStatusPage(config);
         setStatus(data.status);
       } catch {
         setStatus("unknown");
@@ -90,13 +117,14 @@ export function StatusBadge({
       }
     };
 
-    fetchStatus();
-    const interval = setInterval(fetchStatus, 60000); // Refresh every minute
-
+    load();
+    const interval = setInterval(load, 60_000);
     return () => clearInterval(interval);
-  }, [propStatus, pageSlug]);
+    // config is stable within a render cycle — serialise to string for effect dep
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [propStatus, pageSlug, provider, pageId]);
 
-  const config = STATUS_CONFIG[status];
+  const cfg = STATUS_CONFIG[status];
   const sizeConfig = SIZE_CONFIG[size];
 
   return (
@@ -105,11 +133,11 @@ export function StatusBadge({
       onClick={onClick}
       className={`inline-flex items-center gap-2 rounded-full px-3 py-1 transition-opacity hover:opacity-80 ${className}`}
       disabled={!onClick}
-      aria-label={config.label}
+      aria-label={cfg.label}
     >
       <span className="relative flex">
         <span
-          className={`${sizeConfig.dot} ${config.bgColor} rounded-full ${
+          className={`${sizeConfig.dot} ${cfg.bgColor} rounded-full ${
             status === "operational" ? "animate-pulse" : ""
           }`}
         />
@@ -120,8 +148,8 @@ export function StatusBadge({
         )}
       </span>
       {showLabel && (
-        <span className={`${sizeConfig.text} ${config.color} font-medium`}>
-          {config.label}
+        <span className={`${sizeConfig.text} ${cfg.color} font-medium`}>
+          {cfg.label}
         </span>
       )}
     </button>

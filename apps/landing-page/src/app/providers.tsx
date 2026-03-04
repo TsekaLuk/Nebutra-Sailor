@@ -8,15 +8,15 @@ interface ProvidersProps {
 
 /**
  * Client-side providers wrapper
- * Uses class attribute for dark/light/system theme switching via next-themes.
- * Default theme is "dark" with OS preference detection enabled.
+ * Uses data-theme attribute so [data-theme="neon"] selectors in themes.css activate correctly.
+ * Default is "neon" (brand dark) — matches the default @theme block in themes.css.
  */
 export function Providers({ children }: ProvidersProps) {
   return (
     <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
+      attribute="data-theme"
+      defaultTheme="neon"
+      themes={["neon", "gradient", "dark-dense", "minimal", "vibrant", "ocean"]}
       disableTransitionOnChange
     >
       {children}

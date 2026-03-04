@@ -1,0 +1,99 @@
+{
+  "$schema": "./schemas/ui-governance.schema.json",
+  "policyVersion": "2026.03.v1",
+  "rawTailwindColorBudgets": [
+    {
+      "surface": "landing-marketing",
+      "root": "apps/landing-page/src",
+      "extensions": [".tsx"],
+      "excludeContains": ["/(legal)/"],
+      "max": 26
+    },
+    {
+      "surface": "web-app",
+      "root": "apps/web/src",
+      "extensions": [".tsx"],
+      "excludeContains": [],
+      "max": 27
+    }
+  ],
+  "tokenFormatBudget": {
+    "tokenSurfaces": [
+      {
+        "root": "packages/custom-ui/src/tokens",
+        "extensions": [".ts", ".tsx"]
+      },
+      {
+        "root": "packages/theme/themes.css",
+        "extensions": [".css"]
+      }
+    ],
+    "maxHexLiterals": 9,
+    "maxHslLiterals": 1,
+    "minOklchLiterals": 120,
+    "allowedHexFiles": [
+      "packages/custom-ui/src/tokens/primitive.ts",
+      "packages/custom-ui/src/tokens/semantic.ts"
+    ],
+    "allowedHslFiles": [
+      "packages/custom-ui/src/tokens/semantic.ts"
+    ]
+  },
+  "motionBoundary": {
+    "appSurfaces": [
+      "apps/landing-page/src",
+      "apps/web/src"
+    ],
+    "allowedFramerMotionImports": [
+      "apps/landing-page/src/components/landing/AnimateIn.tsx"
+    ]
+  },
+  "componentTierCoverage": {
+    "primitivesRoot": "packages/custom-ui/src/primitives",
+    "tiers": [
+      {
+        "name": "tier-1",
+        "requiredCoverage": 1,
+        "components": [
+          "button",
+          "input",
+          "checkbox-group",
+          "combobox",
+          "command-menu",
+          "dialog",
+          "popover",
+          "select",
+          "tabs",
+          "tooltip",
+          "skeleton",
+          "switch"
+        ]
+      }
+    ]
+  },
+  "dependencyBoundaries": {
+    "appSurfaces": [
+      "apps/landing-page/src",
+      "apps/web/src"
+    ],
+    "forbiddenImportRegexes": [
+      "^@nebutra\\/[^\\/]+\\/[^\\/]+\\/.+",
+      "^@nebutra\\/custom-ui\\/lib\\/.+"
+    ],
+    "customUiAllowedExports": [
+      ".",
+      "./primitives",
+      "./primitives/*",
+      "./components/*",
+      "./layouts/*",
+      "./widgets/*",
+      "./marketing",
+      "./marketing/*",
+      "./styles/globals.css",
+      "./styles/brand-override.css",
+      "./tailwind.preset",
+      "./lib/utils",
+      "./patterns"
+    ]
+  }
+}

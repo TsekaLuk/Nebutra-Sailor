@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@nebutra/custom-ui": ["../../packages/custom-ui/src/index.ts"],
+      "@nebutra/custom-ui/*": ["../../packages/custom-ui/src/*"]
     }
   },
   "include": [

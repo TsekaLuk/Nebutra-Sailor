@@ -1,0 +1,153 @@
+---
+title: "Accordion"
+description: "Collapsible content sections for progressively disclosing information."
+---
+
+## Demo
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@nebutra/custom-ui/primitives"
+
+export function AccordionDemo() {
+  return (
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It comes with default styles that match the design system.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Is it animated?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It's animated by default, but you can disable it with CSS.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+```
+
+## Usage
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@nebutra/custom-ui/primitives"
+```
+
+## Props
+
+### Accordion
+
+Extends `@radix-ui/react-accordion` `Root` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"single" \| "multiple"` | — | Whether one or multiple items can be open at a time |
+| `collapsible` | `boolean` | `false` | When `type="single"`, allows the open item to be collapsed |
+| `defaultValue` | `string \| string[]` | — | The value of the item(s) open by default |
+| `value` | `string \| string[]` | — | Controlled open value(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | — | Callback when open items change |
+| `className` | `string` | — | Additional CSS classes |
+
+### AccordionItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | **Required.** Unique identifier for this item |
+| `disabled` | `boolean` | `false` | Prevents the item from being opened |
+| `className` | `string` | — | Additional CSS classes |
+
+### AccordionTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | Trigger label content |
+| `size` | `"default" \| "small"` | `"default"` | Size variant — `small` uses compact padding and 14px text |
+| `className` | `string` | — | Additional CSS classes |
+
+### AccordionContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | Content displayed when the item is open |
+| `size` | `"default" \| "small"` | `"default"` | Size variant — matches the trigger's size |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### Multiple Open Items
+
+```tsx
+<Accordion type="multiple">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Section One</AccordionTrigger>
+    <AccordionContent>Content for section one.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Section Two</AccordionTrigger>
+    <AccordionContent>Content for section two.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Controlled Accordion
+
+```tsx
+const [value, setValue] = useState<string>("item-1")
+
+<Accordion type="single" value={value} onValueChange={setValue}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Controlled Item</AccordionTrigger>
+    <AccordionContent>This accordion is controlled.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Disabled Item
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1" disabled>
+    <AccordionTrigger>Disabled Section</AccordionTrigger>
+    <AccordionContent>This will not open.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Small Size
+
+A compact variant with reduced padding and smaller text, matching the Geist Collapse `size="small"` variant.
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger size="small">Compact Question</AccordionTrigger>
+    <AccordionContent size="small">
+      Compact content with reduced padding.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Accessibility
+
+- Uses the WAI-ARIA [Accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/).
+- Each `AccordionTrigger` renders a `<button>` with `aria-expanded` and `aria-controls`.
+- Each `AccordionContent` has `role="region"` and `aria-labelledby` pointing to its trigger.
+- Keyboard navigation: `Enter`/`Space` toggles, `Tab` moves focus between items.

@@ -1,0 +1,106 @@
+---
+title: "Feedback"
+description: "Gather text feedback with an associated emotion. Supports a trigger-button popover and an inline reaction bar."
+---
+
+<Note>
+  Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-feedback--docs).
+</Note>
+
+## Overview
+
+`Feedback` is a self-contained feedback widget. It supports two display modes:
+
+- **default** — A "Feedback" trigger button that opens a floating popover panel with a textarea, optional topic select, and emotion buttons.
+- **inline** — An inline "Was this helpful?" bar with emotion icons. Clicking an emotion expands the form in-place.
+
+Submission is handled via the `onSubmit` callback — you are responsible for sending the payload to your backend. Use `dryRun` during UI development to skip the callback.
+
+## Installation
+
+```tsx
+import { Feedback } from "@nebutra/custom-ui/primitives";
+```
+
+## Usage
+
+### Default
+
+```tsx
+<Feedback
+  label="my-app"
+  onSubmit={async (payload) => {
+    await fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }}
+/>
+```
+
+### Inline
+
+```tsx
+<Feedback label="my-app" type="inline" onSubmit={handleFeedback} />
+```
+
+### With topic select
+
+```tsx
+<Feedback
+  label="my-app"
+  topics={["Bug report", "Feature request", "Documentation", "Other"]}
+  onSubmit={handleFeedback}
+/>
+```
+
+### With metadata
+
+```tsx
+<Feedback
+  label="vercel"
+  metadata={{
+    userId: "user_12345",
+    location: "post-checkout",
+    orderId: "order_123456",
+  }}
+  onSubmit={handleFeedback}
+/>
+```
+
+### Dry run (UI testing)
+
+```tsx
+<Feedback label="my-app" dryRun />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | **Required.** Product/feature label attached to every submission |
+| `type` | `"default" \| "inline"` | `"default"` | Display variant |
+| `topics` | `string[]` | — | Pre-defined topics shown in a select dropdown |
+| `metadata` | `Record<string, string>` | — | Arbitrary key-value pairs attached to the submission |
+| `onSubmit` | `(payload: FeedbackPayload) => void \| Promise<void>` | — | Called when the user submits feedback |
+| `dryRun` | `boolean` | `false` | When `true`, the `onSubmit` callback is not called |
+| `className` | `string` | — | Additional CSS classes on the root element |
+
+## FeedbackPayload
+
+```ts
+interface FeedbackPayload {
+  label: string;
+  emotion?: "happy" | "neutral" | "sad" | "other";
+  message: string;
+  topic?: string;
+  metadata?: Record<string, string>;
+}
+```
+
+## Accessibility
+
+- Emotion buttons use `aria-label` and `aria-pressed`.
+- The popover close button is labelled `aria-label="Close feedback"`.
+- The textarea is focusable and keyboard-navigable.
+- After submission a "Thank you" message replaces the form.

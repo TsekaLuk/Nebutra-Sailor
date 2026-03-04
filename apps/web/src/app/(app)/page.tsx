@@ -1,9 +1,27 @@
+import { Suspense } from "react";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { BarChart3, Activity, UserPlus, Rocket, Coins, Database } from "lucide-react";
+import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { Card, EmptyState, ErrorState, LoadingState, PageHeader } from "@nebutra/design-system/components";
 import { getAuth, getUser } from "@/lib/auth";
+import { getQueryClient } from "@/lib/query-client";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
 
 const hasClerkKey = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
-export default async function DashboardPage() {
+const METRICS = [
+  { key: "totalEvents", label: "Total Events", icon: Database },
+  { key: "activeUsers", label: "Active Users", icon: BarChart3 },
+  { key: "signups", label: "Signups", icon: UserPlus },
+  { key: "activations", label: "Activations", icon: Activity },
+  { key: "conversions", label: "Conversions", icon: Rocket },
+] as const;
+
+function formatValue(value: number) {
+  return value.toLocaleString();
+}
+
+async function DashboardContent() {
   let userName = "User";
   let orgName = "";
   let tenantId = process.env.DEFAULT_DASHBOARD_TENANT_ID || "demo_org";
@@ -15,96 +33,119 @@ export default async function DashboardPage() {
     tenantId = authState.orgId || tenantId;
   }
 
-  const summary = await getGrowthSummary(tenantId);
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["growth-summary", tenantId],
+    queryFn: () => getGrowthSummary(tenantId),
+  });
+
+  const summary = queryClient.getQueryData<Awaited<ReturnType<typeof getGrowthSummary>>>([
+    "growth-summary",
+    tenantId,
+  ]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            Dashboard
-          </h1>
-          {orgName && <p className="mt-1 text-sm text-gray-500">{orgName}</p>}
-          <p className="mt-1 text-sm text-gray-500">
-            Gold snapshot: {summary.day || "No data yet"} · tenant{" "}
-            {summary.tenantId}
-          </p>
-        </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <AnimateIn preset="fadeUp">
+        <PageHeader
+          title="Dashboard"
+          description={
+            orgName
+              ? `${orgName} · Gold snapshot ${summary?.day ?? "N/A"}`
+              : `Gold snapshot ${summary?.day ?? "N/A"}`
+          }
+          actions={
+            <span className="max-w-full truncate rounded-full border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] px-3 py-1 text-xs text-[color:var(--neutral-11)] dark:border-white/10 dark:bg-black/40 dark:text-white/70">
+              Tenant: {summary?.tenantId ?? tenantId}
+            </span>
+          }
+        />
+      </AnimateIn>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {/* Welcome Card */}
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Welcome back, {userName}!
-            </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Your dashboard is ready. Start exploring your workspace.
-            </p>
-          </div>
+      {!summary ? (
+        <AnimateIn preset="fadeUp">
+          <ErrorState title="Unable to load dashboard data" message="Please refresh to retry." />
+        </AnimateIn>
+      ) : !summary.day ? (
+        <AnimateIn preset="fadeUp">
+          <Card className="p-8">
+            <EmptyState
+              title="No growth data yet"
+              description="Events will appear here after your first ingestion cycle."
+            />
+          </Card>
+        </AnimateIn>
+      ) : (
+        <>
+          <AnimateIn preset="fadeUp">
+            <Card className="mb-6 p-4 sm:p-6">
+              <h2 className="text-lg font-semibold text-[color:var(--neutral-12)] dark:text-white">
+                Welcome back, {userName}.
+              </h2>
+              <p className="mt-2 text-sm text-[color:var(--neutral-11)] dark:text-white/70">
+                Your operational summary for {summary.day} is ready.
+              </p>
+            </Card>
+          </AnimateIn>
 
-          {/* Gold Metrics */}
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="text-sm font-medium text-gray-500">Total Events</h3>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
-              {summary.totalEvents.toLocaleString()}
-            </p>
-            <p className="mt-1 text-sm text-gray-500">Latest day</p>
-          </div>
+          <AnimateInGroup stagger="fast" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {METRICS.map(({ key, label, icon: Icon }) => (
+              <AnimateIn key={key} preset="fadeUp">
+                <Card className="p-4 sm:p-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-medium text-[color:var(--neutral-11)] dark:text-white/70">
+                      {label}
+                    </h3>
+                    <Icon className="h-4 w-4 text-[color:var(--blue-10)] dark:text-[color:var(--cyan-9)]" />
+                  </div>
+                  <p className="mt-3 text-3xl font-semibold text-[color:var(--neutral-12)] dark:text-white">
+                    {formatValue(summary[key])}
+                  </p>
+                  <p className="mt-1 text-xs text-[color:var(--neutral-10)] dark:text-white/60">Latest day</p>
+                </Card>
+              </AnimateIn>
+            ))}
 
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="text-sm font-medium text-gray-500">Active Users</h3>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
-              {summary.activeUsers.toLocaleString()}
-            </p>
-            <p className="mt-1 text-sm text-gray-500">Latest day</p>
-          </div>
+            <AnimateIn preset="fadeUp">
+              <Card className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-[color:var(--neutral-11)] dark:text-white/70">
+                    Revenue
+                  </h3>
+                  <Coins className="h-4 w-4 text-[color:var(--blue-10)] dark:text-[color:var(--cyan-9)]" />
+                </div>
+                <p className="mt-3 text-3xl font-semibold text-[color:var(--neutral-12)] dark:text-white">
+                  ${summary.revenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                </p>
+                <p className="mt-1 text-xs text-[color:var(--neutral-10)] dark:text-white/60">
+                  Latest day (USD)
+                </p>
+              </Card>
+            </AnimateIn>
+          </AnimateInGroup>
+        </>
+      )}
 
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="text-sm font-medium text-gray-500">Signups</h3>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
-              {summary.signups.toLocaleString()}
+      {!hasClerkKey && (
+        <AnimateIn preset="fadeUp">
+          <Card className="mt-6 border-[hsl(var(--warning)/0.35)] bg-[hsl(var(--warning)/0.12)] p-4 text-[hsl(var(--warning-foreground))]">
+            <p className="text-sm">
+              Clerk authentication is not configured. Set `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+              and `CLERK_SECRET_KEY` to enable auth.
             </p>
-            <p className="mt-1 text-sm text-gray-500">Latest day</p>
-          </div>
+          </Card>
+        </AnimateIn>
+      )}
+    </HydrationBoundary>
+  );
+}
 
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="text-sm font-medium text-gray-500">Activations</h3>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
-              {summary.activations.toLocaleString()}
-            </p>
-            <p className="mt-1 text-sm text-gray-500">Latest day</p>
-          </div>
-
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="text-sm font-medium text-gray-500">Conversions</h3>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
-              {summary.conversions.toLocaleString()}
-            </p>
-            <p className="mt-1 text-sm text-gray-500">Latest day</p>
-          </div>
-
-          <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="text-sm font-medium text-gray-500">Revenue</h3>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
-              $
-              {summary.revenue.toLocaleString(undefined, {
-                maximumFractionDigits: 2,
-              })}
-            </p>
-            <p className="mt-1 text-sm text-gray-500">Latest day (USD)</p>
-          </div>
-        </div>
-
-        {!hasClerkKey && (
-          <div className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
-            <p className="text-sm text-amber-800">
-              ⚠️ Clerk authentication is not configured. Set
-              NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY to enable
-              auth.
-            </p>
-          </div>
-        )}
-      </main>
-    </div>
+export default function DashboardPage() {
+  return (
+    <section className="mx-auto w-full max-w-7xl">
+      <Suspense fallback={<LoadingState message="Loading dashboard data…" />}>
+        <DashboardContent />
+      </Suspense>
+    </section>
   );
 }

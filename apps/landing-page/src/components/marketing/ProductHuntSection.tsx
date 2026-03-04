@@ -4,13 +4,18 @@ import {
   ProductHuntBadge,
   ProductHuntUpvoteBadge,
   SocialProofBar,
-  type SocialProofStats,
 } from "@nebutra/marketing";
 
 interface ProductHuntSectionProps {
   postSlug: string;
   stats?: SocialProofStats;
   className?: string;
+}
+
+interface SocialProofStats {
+  users?: number;
+  rating?: number;
+  productHuntUpvotes?: number;
 }
 
 /**
@@ -41,11 +46,18 @@ export function ProductHuntSection({
 
         {/* Product Hunt Badges */}
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
-          <ProductHuntBadge postSlug={postSlug} theme="light" size="large" />
+          <ProductHuntBadge
+            postSlug={postSlug}
+            theme="light"
+            size="large"
+            altText="Nebutra on Product Hunt"
+            className=""
+          />
           <ProductHuntUpvoteBadge
             postSlug={postSlug}
             theme="light"
             size="medium"
+            className=""
           />
         </div>
       </div>

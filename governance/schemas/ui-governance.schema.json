@@ -1,0 +1,250 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nebutra.com/schemas/ui-governance.schema.json",
+  "title": "Nebutra UI Governance Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "policyVersion",
+    "rawTailwindColorBudgets",
+    "tokenFormatBudget",
+    "motionBoundary",
+    "componentTierCoverage",
+    "dependencyBoundaries"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "policyVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rawTailwindColorBudgets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/rawTailwindBudget"
+      }
+    },
+    "tokenFormatBudget": {
+      "$ref": "#/definitions/tokenFormatBudget"
+    },
+    "motionBoundary": {
+      "$ref": "#/definitions/motionBoundary"
+    },
+    "componentTierCoverage": {
+      "$ref": "#/definitions/componentTierCoverage"
+    },
+    "dependencyBoundaries": {
+      "$ref": "#/definitions/dependencyBoundaries"
+    }
+  },
+  "definitions": {
+    "fileSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root", "extensions"],
+      "properties": {
+        "root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^\\.[a-z0-9]+$"
+          }
+        },
+        "excludeContains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rawTailwindBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surface", "root", "extensions", "max"],
+      "properties": {
+        "surface": {
+          "type": "string",
+          "minLength": 1
+        },
+        "root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^\\.[a-z0-9]+$"
+          }
+        },
+        "excludeContains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "tokenFormatBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tokenSurfaces",
+        "maxHexLiterals",
+        "maxHslLiterals",
+        "minOklchLiterals",
+        "allowedHexFiles",
+        "allowedHslFiles"
+      ],
+      "properties": {
+        "tokenSurfaces": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/fileSurface"
+          }
+        },
+        "maxHexLiterals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxHslLiterals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minOklchLiterals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allowedHexFiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowedHslFiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "motionBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["appSurfaces", "allowedFramerMotionImports"],
+      "properties": {
+        "appSurfaces": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowedFramerMotionImports": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "componentTierCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primitivesRoot", "tiers"],
+      "properties": {
+        "primitivesRoot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/componentTier"
+          }
+        }
+      }
+    },
+    "componentTier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "requiredCoverage", "components"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requiredCoverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "components": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          }
+        }
+      }
+    },
+    "dependencyBoundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "appSurfaces",
+        "forbiddenImportRegexes",
+        "customUiAllowedExports"
+      ],
+      "properties": {
+        "appSurfaces": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "forbiddenImportRegexes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "customUiAllowedExports": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

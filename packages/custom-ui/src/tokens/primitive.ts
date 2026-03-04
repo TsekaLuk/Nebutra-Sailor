@@ -8,47 +8,49 @@
  * Typography:   VI §Typography — Poppins (EN), vivo Sans (CN)
  */
 
+import { colors } from "@nebutra/brand";
+
 // ─── Color Palette ────────────────────────────────────────────────────────────
 
 export const primitiveColors = {
   // Nebutra Blue (云毓蓝) — technology & trust — VI: #0033FE
-  blue50: "#f0f4ff",
-  blue100: "#dbe4ff",
-  blue200: "#bac8ff",
-  blue300: "#91a7ff",
-  blue400: "#5c7cfa",
-  blue500: "#0033FE", // brand primary
-  blue600: "#002ad4",
-  blue700: "#0021ab",
-  blue800: "#001882",
-  blue900: "#000f59",
-  blue950: "#000830",
+  blue50: colors.primary[50],
+  blue100: colors.primary[100],
+  blue200: colors.primary[200],
+  blue300: colors.primary[300],
+  blue400: colors.primary[400],
+  blue500: colors.primary[500], // brand primary
+  blue600: colors.primary[600],
+  blue700: colors.primary[700],
+  blue800: colors.primary[800],
+  blue900: colors.primary[900],
+  blue950: colors.primary[950],
 
   // Nebutra Cyan (云毓青) — data flow & intelligence — VI: #0BF1C3
-  cyan50: "#e6fff8",
-  cyan100: "#b3ffec",
-  cyan200: "#80ffe0",
-  cyan300: "#4dfcd4",
-  cyan400: "#1af7c8",
-  cyan500: "#0BF1C3", // brand secondary
-  cyan600: "#09c9a3",
-  cyan700: "#07a183",
-  cyan800: "#057963",
-  cyan900: "#035143",
-  cyan950: "#012923",
+  cyan50: colors.accent[50],
+  cyan100: colors.accent[100],
+  cyan200: colors.accent[200],
+  cyan300: colors.accent[300],
+  cyan400: colors.accent[400],
+  cyan500: colors.accent[500], // brand secondary
+  cyan600: colors.accent[600],
+  cyan700: colors.accent[700],
+  cyan800: colors.accent[800],
+  cyan900: colors.accent[900],
+  cyan950: colors.accent[950],
 
   // Neutral (blue-undertone gray scale)
-  neutral50: "#f8fafc",
-  neutral100: "#f1f5f9",
-  neutral200: "#e2e8f0",
-  neutral300: "#cbd5e1",
-  neutral400: "#94a3b8",
-  neutral500: "#64748b",
-  neutral600: "#475569",
-  neutral700: "#334155",
-  neutral800: "#1e293b",
-  neutral900: "#0f172a",
-  neutral950: "#020617", // deepest — used as dark background
+  neutral50: colors.neutral[50],
+  neutral100: colors.neutral[100],
+  neutral200: colors.neutral[200],
+  neutral300: colors.neutral[300],
+  neutral400: colors.neutral[400],
+  neutral500: colors.neutral[500],
+  neutral600: colors.neutral[600],
+  neutral700: colors.neutral[700],
+  neutral800: colors.neutral[800],
+  neutral900: colors.neutral[900],
+  neutral950: colors.neutral[950], // deepest — used as dark background
 
   // Semantic raw colors — VI §Color Specifications
   // NOTE: info = brand blue (#0033FE), not sky/teal
@@ -59,8 +61,8 @@ export const primitiveColors = {
   amber500: "#f59e0b",
   amber600: "#d97706",
 
-  white: "#ffffff",
-  black: "#000000",
+  white: colors.white,
+  black: colors.black,
 } as const;
 
 export type PrimitiveColor = keyof typeof primitiveColors;
@@ -69,13 +71,13 @@ export type PrimitiveColor = keyof typeof primitiveColors;
 
 export const primitiveGradients = {
   /** Hero sections, primary CTA buttons, logo fills — VI signature gradient */
-  primary: "linear-gradient(135deg, #0033FE 0%, #0BF1C3 100%)",
+  primary: colors.gradient.primary,
   /** Hover states, secondary gradient elements */
-  reverse: "linear-gradient(135deg, #0BF1C3 0%, #0033FE 100%)",
+  reverse: colors.gradient.primaryReverse,
   /** Vertical layout dividers, page section separators */
-  vertical: "linear-gradient(180deg, #0033FE 0%, #0BF1C3 100%)",
+  vertical: colors.gradient.primaryVertical,
   /** Background halos, focus glow effects, radial emphasis */
-  radial: "radial-gradient(circle, #0BF1C3 0%, #0033FE 100%)",
+  radial: colors.gradient.primaryRadial,
   /** Dark mode card surfaces — deep brand-blue tinted */
   darkCard: "linear-gradient(135deg, #020617 0%, #0a1628 100%)",
 } as const;

@@ -13,3 +13,5 @@ export {
 export { DwellHint, type DwellHintProps } from "./DwellHint";
 
 export { useMediaQuery } from "./use-media-query";
+
+export { useReducedMotion } from "./use-reduced-motion";

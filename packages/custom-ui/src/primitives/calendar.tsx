@@ -2,10 +2,16 @@
 
 import React from "react";
 import {
-  Calendar as HeroUICalendar,
+  Calendar as HeroUICalendarBase,
+  RangeCalendar as HeroUIRangeCalendarBase,
+} from "@heroui/calendar";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HeroUICalendar = HeroUICalendarBase as any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HeroUIRangeCalendar = HeroUIRangeCalendarBase as any;
+import type {
   CalendarProps as HeroUICalendarProps,
-  RangeCalendar as HeroUIRangeCalendar,
-  type RangeCalendarProps as HeroUIRangeCalendarProps,
+  RangeCalendarProps as HeroUIRangeCalendarProps,
 } from "@heroui/calendar";
 export type { RangeValue } from "@heroui/calendar";
 

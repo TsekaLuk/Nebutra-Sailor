@@ -18,7 +18,19 @@ const preview: Preview = {
       ],
     },
     docs: {
-      theme: undefined, // use storybook default; we style via globals.css
+      theme: undefined,
+    },
+    a11y: {
+      // Axe accessibility rules configuration
+      config: {
+        rules: [
+          {
+            // Allow color-contrast issues to be warnings, not failures
+            id: 'color-contrast',
+            enabled: true,
+          },
+        ],
+      },
     },
   },
 
@@ -38,7 +50,6 @@ const preview: Preview = {
   decorators: [
     (Story: StoryFn, context: StoryContext) => {
       const theme = context.globals["theme"] as string;
-      // Apply dark class to the root html element so CSS variables switch correctly
       if (typeof document !== "undefined") {
         document.documentElement.classList.toggle("dark", theme === "dark");
       }
