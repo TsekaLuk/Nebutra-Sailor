@@ -123,7 +123,7 @@ cleanup() {
     git -C "$ROOT" worktree remove --force "$AFTER_DIR" >/dev/null 2>&1 || true
   fi
 
-  rm -rf "$WORKTREE_ROOT"
+  rm -rf "$WORKTREE_ROOT" >/dev/null 2>&1 || true
 }
 trap cleanup EXIT
 
