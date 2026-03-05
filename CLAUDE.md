@@ -7,21 +7,26 @@ Read it in full before writing any code.
 
 ## Project Structure
 
+> **Note:** `@nebutra/ui` was renamed to `@nebutra/ui`. All references below use the current name.
+> `@nebutra/design-system` is being merged into `@nebutra/ui` — see ARCHITECTURE_CORRECTION.md.
+
 ```
 apps/
-  landing-page/   Next.js 15 + Tailwind v4 — public marketing site
-  web/            Next.js 15 + Tailwind v4 — authenticated dashboard
+  landing-page/   Next.js 16 + Tailwind v4 — public marketing site
+  web/            Next.js 16 + Tailwind v4 — authenticated dashboard
   storybook/      Storybook 8.x — component library documentation
-  docs-hub/       Nextra/MDX — product documentation
+  api-gateway/    Hono + OpenAPI — backend APIs
+  design-docs/    Next.js 16 + Fumadocs — internal docs
+  studio/         Sanity Studio v4 — content management
+  docs/           Mintlify — public product docs
 
 packages/
-  custom-ui/      PRIMARY component library — Radix + HeroUI + framer-motion
-  design-system/  Layout/state wrapper components — NO Primer (removed)
+  ui/             PRIMARY component library — Radix + HeroUI + Lobe UI + framer-motion
+  design-system/  Layout/state wrapper components (MERGING INTO ui — see correction plan)
   brand/          Brand colors, gradients, motion language (VI manual)
-  theme/          CSS-only multi-theme engine (data-theme attribute)
+  theme/          CSS-only multi-theme engine (data-theme attribute, 6 themes)
   icons/          541 Geist icons as tree-shakable TSX components
   preset/         Feature-based SaaS starter config system
-  tokens/         (inside custom-ui/src/tokens/) — 3-layer token system
 ```
 
 ---
@@ -31,16 +36,19 @@ packages/
 ### 1. Always import from the right package
 
 ```tsx
-// New components and pages — use custom-ui
-import { Button, Input, Card } from "@nebutra/custom-ui/primitives";
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+// UI components (Lobe UI re-exports + Radix + HeroUI)
+import { Button, Input, Card } from "@nebutra/ui/components";
 
-// Layout wrapper components — use design-system
+// Layout wrapper components (migrating from design-system → ui/layout)
 import { PageHeader, EmptyState, LoadingState, ErrorState } from "@nebutra/design-system/components";
+// After merge: import { PageHeader, EmptyState } from "@nebutra/ui/layout";
 
 // Icons — Geist icons from @nebutra/icons, Lucide for generic
 import { Search, Settings } from "@nebutra/icons";
 import { ChevronRight } from "lucide-react";
+
+// Theme — always from @nebutra/theme
+import { ThemeProvider, useTheme } from "@nebutra/theme";
 
 // NEVER import from @primer/react — it has been removed
 ```
@@ -107,7 +115,7 @@ import { ChevronRight } from "lucide-react";
 ### 4. Animation — ALWAYS use AnimateIn for entrance animations
 
 ```tsx
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 
 // Single element entrance
 <AnimateIn preset="emerge">
@@ -137,7 +145,7 @@ import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
 
 ```tsx
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { cn } from "@nebutra/ui/utils";
 
 const cardVariants = cva(
   "rounded-lg border bg-white shadow-sm transition-shadow",
@@ -198,10 +206,10 @@ Every interactive component must have:
 
 | Component type | Package | Location |
 |---------------|---------|----------|
-| Generic UI primitive (button, input, badge) | `custom-ui` | `src/primitives/` |
-| Complex pattern (data table, command palette) | `custom-ui` | `src/patterns/` |
-| Marketing section (hero, feature grid) | `custom-ui` | `src/marketing/` |
-| Dashboard layout wrapper | `design-system` | `src/components/` |
+| Generic UI primitive (button, input, badge) | `ui` | `src/components/` |
+| Complex pattern (data table, command palette) | `ui` | `src/components/` |
+| Marketing section (hero, feature grid) | `ui` | `src/components/` |
+| Dashboard layout wrapper | `ui` (after merge) | `src/layout/` |
 
 ### Step 2: File structure
 
@@ -244,8 +252,8 @@ export { MyComponent, type MyComponentProps } from "./my-component";
 
 ## Rebranding (no Figma required)
 
-To change the brand colors, edit `packages/custom-ui/src/styles/brand-override.css`.
-The entire design system cascades from two CSS variable scales.
+To change the brand colors, edit `packages/theme/themes.css`.
+The entire design system cascades from the CSS custom properties defined there.
 
 Or use the palette generator:
 ```bash
@@ -299,7 +307,7 @@ The **Design Tokens** section in Storybook shows:
 ## Package Commands
 
 ```bash
-pnpm --filter @nebutra/custom-ui build        # build component library
+pnpm --filter @nebutra/ui typecheck     # typecheck component library
 pnpm --filter @nebutra/storybook dev          # start Storybook
 pnpm --filter @nebutra/storybook typecheck    # typecheck stories
 pnpm --filter @nebutra/landing-page dev       # start landing page
