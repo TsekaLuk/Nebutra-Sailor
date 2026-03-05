@@ -15,7 +15,7 @@ export function ThemeShell({ children, nonce }: ThemeShellProps) {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark"
+      defaultTheme="system"
       enableSystem
       disableTransitionOnChange
       nonce={nonce}
