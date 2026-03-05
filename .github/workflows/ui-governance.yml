@@ -1,0 +1,38 @@
+name: UI Governance
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  ui-governance:
+    name: UI Governance Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate UI Governance Policy Schema
+        run: tsx scripts/validate-ui-governance-policy.ts
+
+      - name: Verify Brand Token Sync
+        run: tsx scripts/verify-brand-token-sync.ts
+
+      - name: Verify UI Governance Rules
+        run: tsx scripts/verify-ui-governance.ts

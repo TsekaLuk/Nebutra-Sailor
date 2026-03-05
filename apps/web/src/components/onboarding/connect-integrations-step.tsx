@@ -107,7 +107,7 @@ export function ConnectIntegrationsStep({
             <div
               key={integration.id}
               className={cn(
-                "flex flex-col gap-3 rounded-xl border p-4 transition-colors",
+                "flex flex-col gap-3 rounded-[var(--radius-xl)] border p-4 transition-colors",
                 isConnected
                   ? "border-emerald-500/30 bg-emerald-500/5"
                   : "border-border bg-card hover:border-border/80",

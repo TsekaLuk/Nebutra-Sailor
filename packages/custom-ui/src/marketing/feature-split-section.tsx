@@ -86,13 +86,13 @@ export function FeatureSplitSection({
   );
 
   const mediaSection = (
-    <div className="bg-muted rounded-md aspect-square">{media}</div>
+    <div className="bg-muted rounded-[var(--radius-md)] aspect-square">{media}</div>
   );
 
   return (
     <div className={cn("w-full py-20 lg:py-40", className)}>
       <div className={cn("container mx-auto", containerClassName)}>
-        <div className="grid border rounded-lg container p-8 grid-cols-1 gap-8 items-center lg:grid-cols-2">
+        <div className="grid border rounded-[var(--radius-lg)] container p-8 grid-cols-1 gap-8 items-center lg:grid-cols-2">
           {mediaPosition === "left" ? (
             <>
               {mediaSection}

@@ -35,16 +35,16 @@ export interface HeroSkeletonProps {
  * @example Takes child's shape
  * ```tsx
  * <HeroSkeleton>
- *   <div className="h-24 w-24 rounded-lg" />
+ *   <div className="h-24 w-24 rounded-[var(--radius-lg)]" />
  * </HeroSkeleton>
  * ```
  *
  * @example Standalone with dimensions
  * ```tsx
  * <div className="flex flex-col gap-3">
- *   <HeroSkeleton className="h-3 w-3/5 rounded-lg" />
- *   <HeroSkeleton className="h-3 w-4/5 rounded-lg" />
- *   <HeroSkeleton className="h-3 w-2/5 rounded-lg" />
+ *   <HeroSkeleton className="h-3 w-3/5 rounded-[var(--radius-lg)]" />
+ *   <HeroSkeleton className="h-3 w-4/5 rounded-[var(--radius-lg)]" />
+ *   <HeroSkeleton className="h-3 w-2/5 rounded-[var(--radius-lg)]" />
  * </div>
  * ```
  *
@@ -52,7 +52,7 @@ export interface HeroSkeletonProps {
  * ```tsx
  * const [isLoaded, setIsLoaded] = useState(false);
  *
- * <HeroSkeleton isLoaded={isLoaded} className="rounded-lg">
+ * <HeroSkeleton isLoaded={isLoaded} className="rounded-[var(--radius-lg)]">
  *   <div className="h-24 w-24 bg-secondary" />
  * </HeroSkeleton>
  * ```
@@ -60,18 +60,18 @@ export interface HeroSkeletonProps {
  * @example Card skeleton
  * ```tsx
  * <HeroCard className="w-[200px] space-y-5 p-4">
- *   <HeroSkeleton className="rounded-lg">
- *     <div className="h-24 rounded-lg bg-default-300" />
+ *   <HeroSkeleton className="rounded-[var(--radius-lg)]">
+ *     <div className="h-24 rounded-[var(--radius-lg)] bg-default-300" />
  *   </HeroSkeleton>
  *   <div className="space-y-3">
- *     <HeroSkeleton className="w-3/5 rounded-lg">
- *       <div className="h-3 w-3/5 rounded-lg bg-default-200" />
+ *     <HeroSkeleton className="w-3/5 rounded-[var(--radius-lg)]">
+ *       <div className="h-3 w-3/5 rounded-[var(--radius-lg)] bg-default-200" />
  *     </HeroSkeleton>
- *     <HeroSkeleton className="w-4/5 rounded-lg">
- *       <div className="h-3 w-4/5 rounded-lg bg-default-200" />
+ *     <HeroSkeleton className="w-4/5 rounded-[var(--radius-lg)]">
+ *       <div className="h-3 w-4/5 rounded-[var(--radius-lg)] bg-default-200" />
  *     </HeroSkeleton>
- *     <HeroSkeleton className="w-2/5 rounded-lg">
- *       <div className="h-3 w-2/5 rounded-lg bg-default-300" />
+ *     <HeroSkeleton className="w-2/5 rounded-[var(--radius-lg)]">
+ *       <div className="h-3 w-2/5 rounded-[var(--radius-lg)] bg-default-300" />
  *     </HeroSkeleton>
  *   </div>
  * </HeroCard>

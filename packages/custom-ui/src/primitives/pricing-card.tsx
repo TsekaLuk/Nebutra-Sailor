@@ -35,7 +35,7 @@ function PricingCardRoot({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       className={cn(
-        "bg-card relative w-full max-w-xs rounded-xl dark:bg-transparent",
+        "bg-card relative w-full max-w-xs rounded-[var(--radius-xl)] dark:bg-transparent",
         "p-1.5 shadow-xl backdrop-blur-xl",
         "dark:border-border/80 border",
         className,
@@ -57,7 +57,7 @@ function PricingCardHeader({
   return (
     <div
       className={cn(
-        "bg-muted/80 dark:bg-muted/50 relative mb-4 rounded-xl border p-4",
+        "bg-muted/80 dark:bg-muted/50 relative mb-4 rounded-[var(--radius-xl)] border p-4",
         className,
       )}
       {...props}

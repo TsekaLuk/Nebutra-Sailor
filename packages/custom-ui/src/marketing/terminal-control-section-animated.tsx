@@ -116,7 +116,7 @@ export const DEFAULT_TERMINAL_ITEMS: BulletItem[] = [
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium bg-white/70 text-zinc-800 border-zinc-200 dark:bg-zinc-800/70 dark:text-zinc-100 dark:border-zinc-700">
+    <span className="inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium bg-[var(--neutral-1)]/70 text-[var(--neutral-12)] border-[var(--neutral-6)]">
       {children}
     </span>
   );
@@ -145,7 +145,7 @@ export function CodeDiff({ diff, className }: CodeDiffProps) {
       normal: "",
       added: "bg-emerald-500/10",
       removed: "bg-rose-500/10",
-      comment: "text-zinc-500 italic",
+      comment: "text-[var(--neutral-9)] italic",
       gap: "opacity-0 select-none h-3",
     }),
     [],
@@ -154,14 +154,14 @@ export function CodeDiff({ diff, className }: CodeDiffProps) {
   return (
     <div
       className={cn(
-        "rounded-2xl border border-zinc-200 bg-zinc-50/60 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/60",
+        "rounded-[var(--radius-2xl)] border border-[var(--neutral-6)] bg-[var(--neutral-2)] shadow-sm",
         className,
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between gap-3 border-b border-zinc-200 px-4 py-2 text-sm dark:border-zinc-800">
-        <div className="truncate text-zinc-700 dark:text-zinc-200">
-          <span className="mr-2 inline-block rounded bg-zinc-100 px-2 py-0.5 font-mono text-[11px] dark:text-white text-black tracking-tight dark:bg-zinc-800">
+      <div className="flex items-center justify-between gap-3 border-b border-[var(--neutral-6)] px-4 py-2 text-sm">
+        <div className="truncate text-[var(--neutral-11)]">
+          <span className="mr-2 inline-block rounded bg-[var(--neutral-3)] px-2 py-0.5 font-mono text-[11px] dark:text-white text-black tracking-tight">
             {diff.fileTag}
           </span>
         </div>
@@ -173,7 +173,7 @@ export function CodeDiff({ diff, className }: CodeDiffProps) {
 
       {/* Body */}
       <motion.div
-        className="grid grid-cols-[auto_1fr] gap-x-0.5 px-1 py-1 font-mono text-[12px] leading-relaxed text-zinc-800 dark:text-zinc-100"
+        className="grid grid-cols-[auto_1fr] gap-x-0.5 px-1 py-1 font-mono text-[12px] leading-relaxed text-[var(--neutral-12)]"
         role="group"
         aria-label="Code diff"
         variants={containerVariants}
@@ -185,7 +185,7 @@ export function CodeDiff({ diff, className }: CodeDiffProps) {
           <React.Fragment key={i}>
             <motion.div
               variants={lineVariants}
-              className="select-none px-3 text-right text-zinc-400 dark:text-zinc-500"
+              className="select-none px-3 text-right text-[var(--neutral-9)]"
             >
               {l.ln ?? ""}
             </motion.div>
@@ -202,9 +202,9 @@ export function CodeDiff({ diff, className }: CodeDiffProps) {
       </motion.div>
 
       {/* Footer / hint bar */}
-      <div className="flex items-center justify-between border-t border-zinc-200 px-4 py-2 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
+      <div className="flex items-center justify-between border-t border-[var(--neutral-6)] px-4 py-2 text-xs text-[var(--neutral-9)]">
         <div className="flex items-center gap-2">
-          <span className="rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-[10px] dark:bg-zinc-800">
+          <span className="rounded bg-[var(--neutral-3)] px-1.5 py-0.5 font-mono text-[10px]">
             →
           </span>
           <span>Add a follow-up</span>
@@ -284,7 +284,7 @@ export function TerminalControlSectionAnimated({
       </div>
 
       <div className="mb-8 flex items-center justify-between">
-        <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
+        <h2 className="text-3xl font-semibold tracking-tight text-[var(--neutral-12)] sm:text-4xl">
           {title}
         </h2>
       </div>
@@ -313,17 +313,17 @@ export function TerminalControlSectionAnimated({
                     aria-selected={isActive}
                     onClick={() => setActive(i)}
                     className={cn(
-                      "group w-full rounded-xl border px-4 py-3 text-left transition will-change-transform",
+                      "group w-full rounded-[var(--radius-xl)] border px-4 py-3 text-left transition will-change-transform",
                       isActive
-                        ? "border-zinc-900 bg-zinc-900 text-zinc-50 shadow-sm dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
-                        : "border-zinc-200 bg-white hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 hover:dark:bg-zinc-900/70",
+                        ? "border-[var(--neutral-7)] bg-[var(--neutral-2)] text-[var(--neutral-12)] shadow-sm"
+                        : "border-[var(--neutral-6)] bg-[var(--neutral-1)] hover:bg-[var(--neutral-2)]",
                     )}
                   >
                     {/* Animated active background (shared layout) */}
                     {isActive && (
                       <motion.span
                         layoutId="activeTabBg"
-                        className="absolute inset-0 -z-10 rounded-xl ring-1 ring-black/5"
+                        className="absolute inset-0 -z-10 rounded-[var(--radius-xl)] ring-1 ring-black/5"
                         transition={{
                           type: "spring",
                           bounce: 0.22,
@@ -338,7 +338,7 @@ export function TerminalControlSectionAnimated({
                         "text-sm mt-0.5",
                         isActive
                           ? "opacity-90"
-                          : "text-zinc-500 dark:text-zinc-400",
+                          : "text-[var(--neutral-9)]",
                       )}
                     >
                       {it.desc}
@@ -363,7 +363,7 @@ export function TerminalControlSectionAnimated({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.98 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="rounded-3xl border border-zinc-200 bg-zinc-900 text-zinc-50 shadow-xl ring-1 ring-black/5 dark:border-zinc-800"
+            className="rounded-[var(--radius-3xl)] border border-[var(--neutral-6)] bg-[var(--neutral-2)] text-[var(--neutral-12)] shadow-xl ring-1 ring-black/5"
           >
             <div className="p-4 sm:p-6">
               <AnimatePresence mode="wait">

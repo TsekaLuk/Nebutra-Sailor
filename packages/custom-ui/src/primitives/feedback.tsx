@@ -72,7 +72,7 @@ function EmotionButton({ emotion, selected, onClick }: EmotionButtonProps) {
       aria-pressed={selected}
       onClick={onClick}
       className={cn(
-        "flex h-7 w-7 items-center justify-center rounded-md transition-colors",
+        "flex h-7 w-7 items-center justify-center rounded-[var(--radius-md)] transition-colors",
         "hover:bg-accent hover:text-accent-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         selected
@@ -154,7 +154,7 @@ function FeedbackForm({
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
           className={cn(
-            "w-full rounded-md border bg-background px-3 py-2 text-sm",
+            "w-full rounded-[var(--radius-md)] border bg-background px-3 py-2 text-sm",
             "text-foreground outline-none",
             "focus:ring-2 focus:ring-ring",
             !topic && "text-muted-foreground",
@@ -174,7 +174,7 @@ function FeedbackForm({
         placeholder="Your feedback..."
         rows={4}
         className={cn(
-          "w-full resize-none rounded-md border bg-background px-3 py-2 text-sm",
+          "w-full resize-none rounded-[var(--radius-md)] border bg-background px-3 py-2 text-sm",
           "text-foreground placeholder:text-muted-foreground",
           "outline-none focus:ring-2 focus:ring-ring",
         )}
@@ -200,7 +200,7 @@ function FeedbackForm({
             disabled={!canSubmit || submitting}
             onClick={handleSubmit}
             className={cn(
-              "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
+              "rounded-[var(--radius-md)] px-3 py-1.5 text-xs font-medium transition-colors",
               "bg-foreground text-background hover:bg-foreground/90",
               "disabled:pointer-events-none disabled:opacity-40",
             )}
@@ -233,7 +233,7 @@ function FeedbackDefault({
         <button
           type="button"
           className={cn(
-            "rounded-md border bg-background px-3 py-1.5 text-sm font-medium shadow-sm",
+            "rounded-[var(--radius-md)] border bg-background px-3 py-1.5 text-sm font-medium shadow-sm",
             "hover:bg-accent hover:text-accent-foreground",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             className,
@@ -248,7 +248,7 @@ function FeedbackDefault({
           align="end"
           sideOffset={8}
           className={cn(
-            "z-50 w-80 rounded-lg border bg-background p-4 shadow-md",
+            "z-50 w-80 rounded-[var(--radius-lg)] border bg-background p-4 shadow-md",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -259,7 +259,7 @@ function FeedbackDefault({
           <div className="mb-3 flex items-center justify-between">
             <span className="text-sm font-medium text-foreground">Feedback</span>
             <PopoverPrimitive.Close
-              className="rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="rounded-[var(--radius-md)] p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label="Close feedback"
             >
               <X size={14} aria-hidden="true" />
@@ -314,7 +314,7 @@ function FeedbackInline({
 
   if (expanded) {
     return (
-      <div className={cn("w-80 rounded-lg border bg-background p-4 shadow-md", className)}>
+      <div className={cn("w-80 rounded-[var(--radius-lg)] border bg-background p-4 shadow-md", className)}>
         <FeedbackForm
           label={label}
           topics={topics}

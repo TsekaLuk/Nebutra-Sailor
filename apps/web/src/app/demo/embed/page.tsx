@@ -48,7 +48,7 @@ export default async function DemoEmbedPage({
               <Link
                 key={tab.id}
                 href={`/demo/embed?view=${tab.id}`}
-                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`rounded-[var(--radius-lg)] px-3 py-1.5 text-sm font-medium transition-colors ${
                   activeTab === tab.id
                     ? "bg-[color:var(--blue-9)] text-white"
                     : "bg-[color:var(--neutral-1)] text-[color:var(--neutral-11)] hover:text-[color:var(--neutral-12)] dark:bg-white/10 dark:text-white/70 dark:hover:text-white"
@@ -132,7 +132,7 @@ export default async function DemoEmbedPage({
         {activeTab === "tenants" && (
           <Card className="p-0">
             <div className="space-y-3 p-4 md:hidden">
-              <div className="rounded-lg border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-3 dark:border-white/10 dark:bg-white/5">
+              <div className="rounded-[var(--radius-lg)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-3 dark:border-white/10 dark:bg-white/5">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-semibold">{summary.tenantId}</p>
                   <span className="inline-flex rounded-full bg-[color:var(--cyan-3)] px-2.5 py-1 text-xs font-medium text-[color:var(--cyan-11)] dark:bg-[color:var(--cyan-9)]/20 dark:text-[color:var(--cyan-9)]">

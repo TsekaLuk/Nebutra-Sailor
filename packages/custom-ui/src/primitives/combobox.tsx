@@ -93,7 +93,7 @@ export type ComboboxGroupProps = React.ComponentPropsWithoutRef<
 export const comboboxTriggerVariants = cva(
   [
     "flex w-full items-center justify-between gap-2 whitespace-nowrap",
-    "rounded-md border border-input bg-background px-3",
+    "rounded-[var(--radius-md)] border border-input bg-background px-3",
     "text-sm ring-offset-background",
     "transition-colors duration-150 ease-out",
     "placeholder:text-muted-foreground",
@@ -341,8 +341,8 @@ function ComboboxRoot({
               id={triggerId}
               type="button"
               role="combobox"
-              aria-expanded={open}
               aria-haspopup="listbox"
+              aria-expanded={open}
               aria-controls={listboxId}
               aria-labelledby={label ? labelId : undefined}
               aria-label={!label ? placeholder : undefined}

@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 import { Webhook } from "svix";
 import { prisma, type Role } from "@nebutra/db";
 import { logger } from "@nebutra/logger";
@@ -93,10 +93,67 @@ function mapClerkRole(clerkRole: string): Role {
 }
 
 // ============================================
+// OpenAPI route definition
+// ============================================
+
+const clerkWebhookRoute = createRoute({
+  method: "post",
+  path: "/clerk",
+  tags: ["Webhooks"],
+  summary: "Clerk webhook handler",
+  description:
+    "Receives Clerk webhook events for user and organization lifecycle management. Signature verification is handled by the Svix SDK.",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: z.object({}).passthrough(),
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: "Webhook received and queued for processing",
+      content: {
+        "application/json": {
+          schema: z.object({
+            received: z.literal(true),
+            skipped: z.boolean().optional(),
+          }),
+        },
+      },
+    },
+    400: {
+      description: "Invalid signature or missing svix headers",
+      content: {
+        "application/json": {
+          schema: z.object({
+            error: z.string(),
+          }),
+        },
+      },
+    },
+    500: {
+      description: "Webhook not configured",
+      content: {
+        "application/json": {
+          schema: z.object({
+            error: z.string(),
+          }),
+        },
+      },
+    },
+  },
+});
+
+// ============================================
 // Factory function
 // ============================================
 
-export function createClerkWebhookRoutes(repos?: Partial<ClerkRepos>): Hono {
+export function createClerkWebhookRoutes(
+  repos?: Partial<ClerkRepos>,
+): OpenAPIHono {
   const resolvedRepos: ClerkRepos = {
     userRepo: repos?.userRepo ?? new UserRepository(prisma),
     orgRepo: repos?.orgRepo ?? new OrganizationRepository(prisma),
@@ -105,13 +162,13 @@ export function createClerkWebhookRoutes(repos?: Partial<ClerkRepos>): Hono {
       repos?.webhookEventRepo ?? new WebhookEventRepository(prisma),
   };
 
-  const app = new Hono();
+  const app = new OpenAPIHono();
 
   // ============================================
   // Route handler
   // ============================================
 
-  app.post("/clerk", async (c) => {
+  app.openapi(clerkWebhookRoute, async (c) => {
     const rawBody = await c.req.text();
     const svixId = c.req.header("svix-id");
     const svixTimestamp = c.req.header("svix-timestamp");
@@ -152,7 +209,7 @@ export function createClerkWebhookRoutes(repos?: Partial<ClerkRepos>): Hono {
         svixId,
         type: payload.type,
       });
-      return c.json({ received: true, skipped: true });
+      return c.json({ received: true as const, skipped: true }, 200);
     }
 
     await resolvedRepos.webhookEventRepo.upsert({
@@ -163,7 +220,7 @@ export function createClerkWebhookRoutes(repos?: Partial<ClerkRepos>): Hono {
     });
 
     // Respond immediately; process asynchronously
-    const response = c.json({ received: true });
+    const response = c.json({ received: true as const }, 200);
 
     handleClerkEvent(payload, resolvedRepos)
       .then(async () => {

@@ -48,7 +48,7 @@ export function Navbar() {
       className={cn(
         "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
         isScrolled
-          ? "border-b border-[color:var(--neutral-7)] bg-white/85 backdrop-blur-md dark:border-white/10 dark:bg-black/80"
+          ? "border-b border-neutral-7 bg-white/85 backdrop-blur-md dark:border-white/10 dark:bg-black/80"
           : "bg-transparent",
       )}
     >
@@ -67,7 +67,7 @@ export function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="flex items-center gap-2 text-sm text-[color:var(--neutral-11)] transition-colors hover:text-[color:var(--neutral-12)] dark:text-white/70 dark:hover:text-white"
+              className="flex items-center gap-2 text-sm text-neutral-11 transition-colors hover:text-neutral-12 dark:text-white/70 dark:hover:text-white"
             >
               {link.icon && <link.icon className="h-4 w-4" />}
               {link.label}
@@ -79,14 +79,13 @@ export function Navbar() {
 
           <a
             href={`${APP_URL}/sign-in`}
-            className="text-sm text-[color:var(--neutral-11)] transition-colors hover:text-[color:var(--neutral-12)] dark:text-white/70 dark:hover:text-white"
+            className="text-sm text-neutral-11 transition-colors hover:text-neutral-12 dark:text-white/70 dark:hover:text-white"
           >
             {t("signIn")}
           </a>
           <a
             href={`${APP_URL}/sign-up`}
-            className="rounded-lg px-4 py-2 text-sm font-medium text-white"
-            style={{ background: "var(--brand-gradient)" }}
+            className="rounded-lg bg-[image:var(--brand-gradient)] px-4 py-2 text-sm font-medium text-white"
           >
             {t("getStarted")}
           </a>
@@ -98,7 +97,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="rounded-lg p-2 text-[color:var(--neutral-11)] transition-colors hover:text-[color:var(--neutral-12)] dark:text-white/70 dark:hover:text-white"
+            className="rounded-lg p-2 text-neutral-11 transition-colors hover:text-neutral-12 dark:text-white/70 dark:hover:text-white"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -107,33 +106,32 @@ export function Navbar() {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="border-t border-[color:var(--neutral-7)] bg-white/95 backdrop-blur-md md:hidden dark:border-white/10 dark:bg-black/95">
+        <div className="border-t border-neutral-7 bg-white/95 backdrop-blur-md md:hidden dark:border-white/10 dark:bg-black/95">
           <div className="flex flex-col gap-4 px-6 py-4">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center gap-2 text-[color:var(--neutral-11)] transition-colors hover:text-[color:var(--neutral-12)] dark:text-white/70 dark:hover:text-white"
+                className="flex items-center gap-2 text-neutral-11 transition-colors hover:text-neutral-12 dark:text-white/70 dark:hover:text-white"
               >
                 {link.icon && <link.icon className="h-4 w-4" />}
                 {link.label}
               </a>
             ))}
 
-            <div className="mt-2 flex flex-col gap-3 border-t border-[color:var(--neutral-7)] pt-4 dark:border-white/10">
+            <div className="mt-2 flex flex-col gap-3 border-t border-neutral-7 pt-4 dark:border-white/10">
               <a
                 href={`${APP_URL}/sign-in`}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full rounded-lg border border-[color:var(--neutral-7)] px-4 py-3 text-center text-sm font-medium text-[color:var(--neutral-12)] dark:border-white/15 dark:text-white"
+                className="w-full rounded-lg border border-neutral-7 px-4 py-3 text-center text-sm font-medium text-neutral-12 dark:border-white/15 dark:text-white"
               >
                 {t("signIn")}
               </a>
               <a
                 href={`${APP_URL}/sign-up`}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full rounded-lg px-4 py-3 text-center text-sm font-medium text-white"
-                style={{ background: "var(--brand-gradient)" }}
+                className="w-full rounded-lg bg-[image:var(--brand-gradient)] px-4 py-3 text-center text-sm font-medium text-white"
               >
                 {t("getStarted")}
               </a>

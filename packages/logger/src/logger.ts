@@ -73,3 +73,16 @@ function makeLogger(base: pino.Logger): Logger {
 }
 
 export const logger: Logger = makeLogger(pinoInstance);
+
+/**
+ * Returns a child logger that automatically includes `requestId` in every log
+ * line produced by the returned logger.  Use this inside request handlers or
+ * middleware to tie log output to a specific HTTP request.
+ *
+ * @example
+ * const reqLogger = withRequestId(c.get("requestId"));
+ * reqLogger.info("processing payment", { userId });
+ */
+export function withRequestId(requestId: string): Logger {
+  return logger.child({ requestId });
+}

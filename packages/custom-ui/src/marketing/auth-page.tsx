@@ -295,7 +295,7 @@ export function AuthPage({
           {error && (
             <div
               className={cn(
-                "text-sm p-3 rounded-md",
+                "text-sm p-3 rounded-[var(--radius-md)]",
                 error.includes("Check your email")
                   ? "bg-green-500/10 text-green-600 dark:text-green-400"
                   : "bg-destructive/10 text-destructive",

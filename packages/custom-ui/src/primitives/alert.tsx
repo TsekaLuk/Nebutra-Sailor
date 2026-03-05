@@ -36,9 +36,9 @@ const alertVariants = cva(
         stroke: "text-foreground",
       },
       size: {
-        lg: "rounded-lg p-4 gap-3 text-base [&>[data-slot=alert-icon]>svg]:size-6 *:data-slot=alert-icon:mt-0.5 [&_[data-slot=alert-close]]:mt-1",
-        md: "rounded-lg p-3.5 gap-2.5 text-sm [&>[data-slot=alert-icon]>svg]:size-5 *:data-slot=alert-icon:mt-0 [&_[data-slot=alert-close]]:mt-0.5",
-        sm: "rounded-md px-3 py-2.5 gap-2 text-xs [&>[data-slot=alert-icon]>svg]:size-4 *:data-alert-icon:mt-0.5 [&_[data-slot=alert-close]]:mt-0.25 [&_[data-slot=alert-close]_svg]:size-3.5",
+        lg: "rounded-[var(--radius-lg)] p-4 gap-3 text-base [&>[data-slot=alert-icon]>svg]:size-6 *:data-slot=alert-icon:mt-0.5 [&_[data-slot=alert-close]]:mt-1",
+        md: "rounded-[var(--radius-lg)] p-3.5 gap-2.5 text-sm [&>[data-slot=alert-icon]>svg]:size-5 *:data-slot=alert-icon:mt-0 [&_[data-slot=alert-close]]:mt-0.5",
+        sm: "rounded-[var(--radius-md)] px-3 py-2.5 gap-2 text-xs [&>[data-slot=alert-icon]>svg]:size-4 *:data-alert-icon:mt-0.5 [&_[data-slot=alert-close]]:mt-0.25 [&_[data-slot=alert-close]_svg]:size-3.5",
       },
     },
     compoundVariants: [
@@ -80,7 +80,7 @@ const alertVariants = cva(
         variant: "mono",
         appearance: "solid",
         className:
-          "bg-zinc-950 text-white dark:bg-zinc-300 dark:text-black *:data-slot-[alert=close]:text-white",
+          "bg-[var(--neutral-1)] text-white dark:bg-zinc-300 dark:text-black *:data-slot-[alert=close]:text-white",
       },
 
       /* Outline */
@@ -351,7 +351,7 @@ function Alert({
           aria-label="Dismiss"
           data-slot="alert-close"
           className={cn(
-            "group shrink-0 size-4 inline-flex items-center justify-center rounded-sm",
+            "group shrink-0 size-4 inline-flex items-center justify-center rounded-[var(--radius-sm)]",
             "opacity-70 hover:opacity-100 transition-opacity",
             "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
           )}

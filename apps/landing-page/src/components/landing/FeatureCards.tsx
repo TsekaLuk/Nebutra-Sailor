@@ -48,10 +48,10 @@ export function FeatureCards() {
   }));
 
   return (
-    <section id="features" className="w-full bg-[color:var(--neutral-2)] py-24 md:py-32 dark:bg-black">
+    <section id="features" className="w-full bg-neutral-2 py-24 md:py-32 dark:bg-black">
       <div className="feature-cards-cq mx-auto max-w-6xl px-6">
         <AnimateIn preset="emerge" inView>
-          <h2 className="mb-16 text-center text-3xl font-bold tracking-tight text-[color:var(--neutral-12)] md:text-4xl dark:text-white">
+          <h2 className="mb-16 text-center text-3xl font-bold tracking-tight text-neutral-12 md:text-4xl dark:text-white">
             {t("sectionTitle")}
           </h2>
         </AnimateIn>
@@ -65,17 +65,17 @@ export function FeatureCards() {
             const Icon = feature.icon;
             return (
               <AnimateIn key={feature.title} preset="fadeUp" className="h-full">
-                <article className="feature-card-cq group flex h-full flex-col rounded-2xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] p-6 transition-all hover:border-[color:var(--blue-7)] hover:shadow-[var(--elevation-brand)] dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20">
-                  <Icon className="mb-4 h-5 w-5 text-[color:var(--blue-10)] dark:text-[color:var(--cyan-9)]" />
-                  <h3 className="feature-card-title mb-2 font-semibold text-[color:var(--neutral-12)] dark:text-white">
+                <article className="feature-card-cq group flex h-full flex-col rounded-2xl border border-neutral-7 bg-neutral-1 p-6 transition-all hover:border-blue-7 hover:shadow-brand dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20">
+                  <Icon className="mb-4 h-5 w-5 text-blue-10 dark:text-cyan-9" />
+                  <h3 className="feature-card-title mb-2 font-semibold text-neutral-12 dark:text-white">
                     {feature.title}
                   </h3>
-                  <p className="feature-card-description mb-6 text-sm leading-relaxed text-[color:var(--neutral-11)] dark:text-white/70">
+                  <p className="feature-card-description mb-6 text-sm leading-relaxed text-neutral-11 dark:text-white/70">
                     {feature.description}
                   </p>
 
-                  <div className="feature-card-code mt-auto rounded-xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-4 dark:border-white/10 dark:bg-black/40">
-                    <pre className="overflow-x-auto font-mono text-[11px] leading-relaxed text-[color:var(--neutral-11)] dark:text-white/75">
+                  <div className="feature-card-code mt-auto rounded-xl border border-neutral-7 bg-neutral-2 p-4 dark:border-white/10 dark:bg-black/40">
+                    <pre className="overflow-x-auto font-mono text-[11px] leading-relaxed text-neutral-11 dark:text-white/75">
                       {feature.code.map((line, j) => (
                         <span key={j} className="block">
                           {line || "\u00a0"}

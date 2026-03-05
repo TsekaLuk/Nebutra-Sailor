@@ -138,7 +138,7 @@ function PresetList({
           type="button"
           onClick={() => onSelect(key, preset)}
           className={cn(
-            "rounded-md px-3 py-1.5 text-left text-sm font-medium transition-colors",
+            "rounded-[var(--radius-md)] px-3 py-1.5 text-left text-sm font-medium transition-colors",
             "hover:bg-accent hover:text-accent-foreground",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             isSmall && "px-2 py-1 text-xs",

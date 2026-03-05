@@ -418,7 +418,7 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "cb-root relative rounded-lg border bg-card text-card-foreground",
+        "cb-root relative rounded-[var(--radius-lg)] border bg-card text-card-foreground",
         "backdrop-blur-md",
         className,
       )}
@@ -454,7 +454,7 @@ export function CodeBlock({
               type="button"
               onClick={() => setActiveTitle(title)}
               className={cn(
-                "inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                "inline-flex items-center gap-2 rounded-[var(--radius-md)] px-3 py-1.5 text-sm font-medium transition-colors",
                 title === activeTitle
                   ? "bg-secondary text-secondary-foreground"
                   : "hover:bg-accent hover:text-accent-foreground",
@@ -475,7 +475,7 @@ export function CodeBlock({
                   type="button"
                   aria-label={`Switch language, current: ${effectiveLanguage}`}
                   aria-haspopup="menu"
-                  className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  className="inline-flex items-center gap-1 rounded-[var(--radius-md)] px-2 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 >
                   {effectiveLanguage}
                   <ChevronDown className="h-3 w-3" />
@@ -505,7 +505,7 @@ export function CodeBlock({
           <button
             type="button"
             onClick={() => copyToClipboard(code)}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent hover:text-accent-foreground"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] hover:bg-accent hover:text-accent-foreground"
             aria-label="Copy code"
           >
             {copied ? (

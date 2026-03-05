@@ -43,10 +43,10 @@ export default async function FAQPage({
     <div className="space-y-12">
       {/* Header */}
       <section className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h1 className="text-4xl font-bold tracking-tight text-[var(--neutral-12)] dark:text-white">
           {t("faq.heading")}
         </h1>
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+        <p className="mt-4 text-lg text-[var(--neutral-10)]">
           {t("faq.subheading")}
         </p>
       </section>
@@ -54,16 +54,16 @@ export default async function FAQPage({
       {/* FAQ Categories */}
       {faqStructure.map(({ cat, questions }) => (
         <section key={cat}>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-2xl font-bold text-[var(--neutral-12)] dark:text-white mb-6">
             {t(`faq.categories.${cat}.name`)}
           </h2>
           <div className="space-y-4">
             {questions.map((qIdx) => (
               <details
                 key={qIdx}
-                className="group rounded-lg border border-gray-200 dark:border-gray-700"
+                className="group rounded-[var(--radius-lg)] border border-[var(--neutral-6)]"
               >
-                <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-gray-900 dark:text-white">
+                <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-[var(--neutral-12)] dark:text-white">
                   {t(
                     `faq.categories.${cat}.questions.${qIdx}.q` as Parameters<
                       typeof t
@@ -71,7 +71,7 @@ export default async function FAQPage({
                   )}
                   <span className="ml-4 shrink-0 transition group-open:rotate-180">
                     <svg
-                      className="h-5 w-5 text-gray-500"
+                      className="h-5 w-5 text-[var(--neutral-9)]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -85,8 +85,8 @@ export default async function FAQPage({
                     </svg>
                   </span>
                 </summary>
-                <div className="border-t border-gray-200 dark:border-gray-700 p-4">
-                  <p className="text-gray-600 dark:text-gray-400">
+                <div className="border-t border-[var(--neutral-6)] p-4">
+                  <p className="text-[var(--neutral-10)]">
                     {t(
                       `faq.categories.${cat}.questions.${qIdx}.a` as Parameters<
                         typeof t
@@ -101,23 +101,23 @@ export default async function FAQPage({
       ))}
 
       {/* Contact CTA */}
-      <section className="rounded-2xl bg-gray-50 dark:bg-gray-800 p-8 text-center">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+      <section className="rounded-[var(--radius-2xl)] bg-[var(--neutral-2)] p-8 text-center">
+        <h2 className="text-xl font-bold text-[var(--neutral-12)] dark:text-white">
           {t("faq.ctaHeading")}
         </h2>
-        <p className="mt-2 text-gray-600 dark:text-gray-300">
+        <p className="mt-2 text-[var(--neutral-10)]">
           {t("faq.ctaDescription")}
         </p>
         <div className="mt-6 flex justify-center gap-4">
           <Link
             href="/contact"
-            className="rounded-lg bg-[color:var(--blue-9)] px-6 py-3 font-semibold text-white transition hover:bg-[color:var(--blue-10)]"
+            className="rounded-[var(--radius-lg)] bg-[color:var(--blue-9)] px-6 py-3 font-semibold text-white transition hover:bg-[color:var(--blue-10)]"
           >
             {t("faq.ctaButton")}
           </Link>
           <a
             href="mailto:support@nebutra.com"
-            className="rounded-lg border border-gray-300 dark:border-gray-600 px-6 py-3 font-semibold text-gray-700 dark:text-gray-200 transition hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="rounded-[var(--radius-lg)] border border-[var(--neutral-7)] px-6 py-3 font-semibold text-[var(--neutral-11)] transition hover:bg-[var(--neutral-3)]"
           >
             {t("faq.ctaEmail")}
           </a>

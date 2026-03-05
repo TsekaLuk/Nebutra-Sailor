@@ -142,7 +142,7 @@ export const PlusCard: React.FC<PlusCardProps> = ({
   );
 
   const cardClasses = cn(
-    "relative rounded-lg border border-dashed border-border bg-background p-6",
+    "relative rounded-[var(--radius-lg)] border border-dashed border-border bg-background p-6",
     "flex min-h-[200px] flex-col justify-between",
     className
   );

@@ -29,9 +29,9 @@ const TerminalContext = React.createContext<TerminalContextValue | null>(null);
 /* ─────────────────────────────────────────────────────────────────────────── */
 
 const variantStyles: Record<TerminalVariant, string> = {
-  default: "bg-zinc-900 border border-zinc-700",
-  minimal: "bg-zinc-950 border border-zinc-800",
-  glass: "bg-zinc-900/80 backdrop-blur-md border border-zinc-700/50",
+  default: "bg-[var(--neutral-2)] border border-[var(--neutral-7)]",
+  minimal: "bg-[var(--neutral-1)] border border-[var(--neutral-7)]",
+  glass: "bg-[var(--neutral-2)] backdrop-blur-md border border-[var(--neutral-7)]",
 };
 
 /* ─────────────────────────────────────────────────────────────────────────── */
@@ -47,7 +47,7 @@ const TerminalRoot = React.forwardRef<HTMLDivElement, TerminalProps>(
         <div
           ref={ref}
           className={cn(
-            "rounded-xl overflow-hidden font-mono text-sm",
+            "rounded-[var(--radius-xl)] overflow-hidden font-mono text-sm",
             variantStyles[variant],
             className,
           )}
@@ -74,7 +74,7 @@ const TerminalHeader = React.forwardRef<HTMLDivElement, TerminalHeaderProps>(
       <div
         ref={ref}
         className={cn(
-          "flex items-center gap-2 px-4 py-3 border-b border-zinc-700/50 bg-zinc-800/50",
+          "flex items-center gap-2 px-4 py-3 border-b border-[var(--neutral-7)] bg-[var(--neutral-3)]",
           className,
         )}
         {...props}
@@ -92,7 +92,7 @@ const TerminalHeader = React.forwardRef<HTMLDivElement, TerminalHeaderProps>(
             />
           </div>
         )}
-        {title && <span className="ml-2 text-xs text-zinc-500">{title}</span>}
+        {title && <span className="ml-2 text-xs text-[var(--neutral-9)]">{title}</span>}
         {children}
       </div>
     );
@@ -140,7 +140,7 @@ const TerminalLine = React.forwardRef<HTMLDivElement, TerminalLineProps>(
         ref={ref}
         className={cn(
           "flex items-start gap-2",
-          highlight && "bg-zinc-800/50 -mx-2 px-2 py-0.5 rounded",
+          highlight && "bg-[var(--neutral-3)] -mx-2 px-2 py-0.5 rounded",
           className,
         )}
         {...props}
@@ -151,7 +151,7 @@ const TerminalLine = React.forwardRef<HTMLDivElement, TerminalLineProps>(
           </span>
         )}
         <span
-          className={cn("flex-1", output ? "text-zinc-400" : "text-zinc-200")}
+          className={cn("flex-1", output ? "text-[var(--neutral-9)]" : "text-[var(--neutral-11)]")}
         >
           {children}
         </span>

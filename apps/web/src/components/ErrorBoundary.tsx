@@ -42,7 +42,7 @@ export class ErrorBoundary extends Component<Props, State> {
           </p>
           <button
             onClick={() => this.setState({ hasError: false, error: null })}
-            className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90"
+            className="rounded-[var(--radius-md)] bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90"
           >
             Try again
           </button>

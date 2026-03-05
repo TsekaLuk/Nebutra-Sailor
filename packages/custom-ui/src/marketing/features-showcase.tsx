@@ -65,7 +65,7 @@ export function FeaturesShowcase({
 
         {/* Image Showcase */}
         {images && (
-          <div className="relative rounded-3xl p-3 md:-mx-8 lg:col-span-3">
+          <div className="relative rounded-[var(--radius-3xl)] p-3 md:-mx-8 lg:col-span-3">
             <div className="aspect-[88/36] relative">
               <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background to-transparent" />
               {images.foreground && (

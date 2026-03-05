@@ -41,7 +41,7 @@ export function TestimonialsSection() {
         >
           {TESTIMONIALS.map((item) => (
             <AnimateIn key={item.author} preset="fadeUp">
-              <article className="rounded-2xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] p-6 dark:border-white/10 dark:bg-white/5">
+              <article className="rounded-[var(--radius-2xl)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] p-6 dark:border-white/10 dark:bg-white/5">
                 <p className="text-sm leading-relaxed text-[color:var(--neutral-11)] dark:text-white/75">
                   “{item.quote}”
                 </p>

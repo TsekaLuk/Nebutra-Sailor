@@ -30,9 +30,9 @@ const snippetSizes = {
 
 const snippetRadius = {
   none: "rounded-none",
-  sm: "rounded-sm",
-  md: "rounded-md",
-  lg: "rounded-lg",
+  sm: "rounded-[var(--radius-sm)]",
+  md: "rounded-[var(--radius-md)]",
+  lg: "rounded-[var(--radius-lg)]",
   full: "rounded-full",
 } as const;
 

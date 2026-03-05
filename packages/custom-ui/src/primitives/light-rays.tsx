@@ -98,7 +98,7 @@ const Ray = ({
  *
  * @example Basic usage
  * ```tsx
- * <div className="relative h-[400px] w-full overflow-hidden rounded-xl border">
+ * <div className="relative h-[400px] w-full overflow-hidden rounded-[var(--radius-xl)] border">
  *   <LightRays />
  * </div>
  * ```

@@ -60,7 +60,7 @@ export const sectionThemes: Record<string, SectionThemeConfig> = {
 
   // Architecture: "Terminal Matrix" - Monochrome with subtle pattern
   architecture: {
-    backgroundColor: "bg-zinc-950",
+    backgroundColor: "bg-[var(--neutral-1)]",
     pattern: "dots",
     patternColor: "currentColor",
     patternOpacity: 0.03,
@@ -140,7 +140,7 @@ export const sectionThemes: Record<string, SectionThemeConfig> = {
 
   // Terminal: "Developer Immersion" - Code environment feel
   terminal: {
-    backgroundColor: "bg-zinc-950",
+    backgroundColor: "bg-[var(--neutral-1)]",
     pattern: "none",
   },
 };
@@ -174,7 +174,7 @@ export interface ThemedSectionProps extends Omit<
  * @example
  * <ThemedSection
  *   theme={{
- *     backgroundColor: "bg-slate-900",
+ *     backgroundColor: "bg-[var(--neutral-2)]",
  *     pattern: "grid",
  *     patternColor: "hsl(var(--accent))",
  *     patternOpacity: 0.05,

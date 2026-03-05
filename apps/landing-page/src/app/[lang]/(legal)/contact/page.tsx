@@ -68,10 +68,10 @@ export default async function ContactPage({
     <div className="space-y-12">
       {/* Header */}
       <section className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h1 className="text-4xl font-bold tracking-tight text-[var(--neutral-12)] dark:text-white">
           {t("contact.heading")}
         </h1>
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+        <p className="mt-4 text-lg text-[var(--neutral-10)]">
           {t("contact.subheading")}
         </p>
       </section>
@@ -81,12 +81,12 @@ export default async function ContactPage({
         {contacts.map((contact) => (
           <div
             key={contact.email}
-            className="rounded-lg border border-gray-200 p-6 transition-colors hover:border-[color:var(--blue-8)] dark:border-gray-700 dark:hover:border-[color:var(--blue-7)]"
+            className="rounded-[var(--radius-lg)] border border-[var(--neutral-6)] p-6 transition-colors hover:border-[color:var(--blue-8)] dark:hover:border-[color:var(--blue-7)]"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold text-[var(--neutral-12)] dark:text-white">
               {contact.title}
             </h3>
-            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-1 text-sm text-[var(--neutral-10)]">
               {contact.description}
             </p>
             <a
@@ -100,8 +100,8 @@ export default async function ContactPage({
       </section>
 
       {/* Contact Form */}
-      <section className="rounded-2xl border border-gray-200 dark:border-gray-700 p-8">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+      <section className="rounded-[var(--radius-2xl)] border border-[var(--neutral-6)] p-8">
+        <h2 className="text-2xl font-bold text-[var(--neutral-12)] dark:text-white mb-6">
           {t("contact.formTitle")}
         </h2>
         <form className="space-y-6">
@@ -109,7 +109,7 @@ export default async function ContactPage({
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium text-[var(--neutral-11)]"
               >
                 {t("contact.form.name")} *
               </label>
@@ -118,13 +118,13 @@ export default async function ContactPage({
                 id="name"
                 name="name"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
               />
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium text-[var(--neutral-11)]"
               >
                 {t("contact.form.email")} *
               </label>
@@ -133,7 +133,7 @@ export default async function ContactPage({
                 id="email"
                 name="email"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
               />
             </div>
           </div>
@@ -141,7 +141,7 @@ export default async function ContactPage({
             <div>
               <label
                 htmlFor="company"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium text-[var(--neutral-11)]"
               >
                 {t("contact.form.company")}
               </label>
@@ -149,13 +149,13 @@ export default async function ContactPage({
                 type="text"
                 id="company"
                 name="company"
-                className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
               />
             </div>
             <div>
               <label
                 htmlFor="category"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium text-[var(--neutral-11)]"
               >
                 {t("contact.form.category")} *
               </label>
@@ -163,7 +163,7 @@ export default async function ContactPage({
                 id="category"
                 name="category"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
               >
                 <option value="general">
                   {t("contact.form.categories.general")}
@@ -192,7 +192,7 @@ export default async function ContactPage({
           <div>
             <label
               htmlFor="subject"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-[var(--neutral-11)]"
             >
               {t("contact.form.subject")} *
             </label>
@@ -201,13 +201,13 @@ export default async function ContactPage({
               id="subject"
               name="subject"
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
             />
           </div>
           <div>
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-[var(--neutral-11)]"
             >
               {t("contact.form.message")} *
             </label>
@@ -216,18 +216,18 @@ export default async function ContactPage({
               name="message"
               rows={5}
               required
-              className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
             />
           </div>
           <div>
             <button
               type="submit"
-              className="w-full rounded-lg bg-[color:var(--blue-9)] px-6 py-3 font-semibold text-white transition hover:bg-[color:var(--blue-10)] focus:outline-none focus:ring-2 focus:ring-[color:var(--blue-8)] focus:ring-offset-2"
+              className="w-full rounded-[var(--radius-lg)] bg-[color:var(--blue-9)] px-6 py-3 font-semibold text-white transition hover:bg-[color:var(--blue-10)] focus:outline-none focus:ring-2 focus:ring-[color:var(--blue-8)] focus:ring-offset-2"
             >
               {t("contact.form.submit")}
             </button>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-[var(--neutral-9)]">
             {t("contact.form.privacyNotice")}{" "}
             <Link
               href="/privacy"
@@ -241,20 +241,20 @@ export default async function ContactPage({
       </section>
 
       {/* Office Info */}
-      <section className="rounded-2xl bg-gray-50 dark:bg-gray-800 p-8">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="rounded-[var(--radius-2xl)] bg-[var(--neutral-2)] p-8">
+        <h2 className="text-xl font-bold text-[var(--neutral-12)] dark:text-white mb-4">
           {t("contact.companyInfoTitle")}
         </h2>
-        <div className="space-y-4 text-gray-600 dark:text-gray-400">
+        <div className="space-y-4 text-[var(--neutral-10)]">
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold text-[var(--neutral-12)] dark:text-white">
               Nebutra, Inc.
             </h3>
             <p>San Francisco, California</p>
             <p>United States</p>
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold text-[var(--neutral-12)] dark:text-white">
               {t("contact.socialMedia")}
             </h3>
             <div className="flex gap-4 mt-2">
@@ -262,7 +262,7 @@ export default async function ContactPage({
                 href="https://twitter.com/nebutra"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
+                className="text-[var(--neutral-9)] hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
               >
                 Twitter
               </a>
@@ -270,7 +270,7 @@ export default async function ContactPage({
                 href="https://linkedin.com/company/nebutra"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
+                className="text-[var(--neutral-9)] hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
               >
                 LinkedIn
               </a>
@@ -278,7 +278,7 @@ export default async function ContactPage({
                 href="https://github.com/nebutra"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
+                className="text-[var(--neutral-9)] hover:text-[color:var(--blue-11)] dark:hover:text-[color:var(--blue-9)]"
               >
                 GitHub
               </a>

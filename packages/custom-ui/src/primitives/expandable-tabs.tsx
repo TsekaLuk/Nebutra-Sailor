@@ -79,7 +79,7 @@ export function ExpandableTabs({
     <div
       ref={outsideClickRef}
       className={cn(
-        "flex flex-wrap items-center gap-2 rounded-2xl border border-border bg-background p-1 shadow-sm",
+        "flex flex-wrap items-center gap-2 rounded-[var(--radius-2xl)] border border-border bg-background p-1 shadow-sm",
         className,
       )}
       role="tablist"
@@ -93,7 +93,7 @@ export function ExpandableTabs({
         const Icon = tab.icon;
         const isSelected = selected === index;
         const tabClassName = cn(
-          "relative rounded-xl py-2 text-sm font-medium transition-colors duration-300",
+          "relative rounded-[var(--radius-xl)] py-2 text-sm font-medium transition-colors duration-300",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           isSelected
             ? cn("bg-muted", activeColor)

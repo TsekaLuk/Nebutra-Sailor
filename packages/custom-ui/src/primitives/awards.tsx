@@ -181,7 +181,7 @@ export function Awards({
         <div className="z-10 px-8 text-center">
           <div
             className={cn(
-              "mt-6 mb-2 inline-block rounded-md px-4 py-1 tracking-wider text-white",
+              "mt-6 mb-2 inline-block rounded-[var(--radius-md)] px-4 py-1 tracking-wider text-white",
               `bg-gradient-to-r ${levelColors[level]}`,
             )}
           >
@@ -224,12 +224,12 @@ export function Awards({
       <div
         className={cn(
           "relative z-0",
-          "flex flex-col items-center justify-center rounded-xl border-2 border-dotted p-2",
+          "flex flex-col items-center justify-center rounded-[var(--radius-xl)] border-2 border-dotted p-2",
           "overflow-hidden",
           className,
         )}
       >
-        <div className="bg-card z-10 rounded-sm border p-6 px-8 text-center">
+        <div className="bg-card z-10 rounded-[var(--radius-sm)] border p-6 px-8 text-center">
           <Badge />
           <h1
             className={cn(
@@ -280,7 +280,7 @@ export function Awards({
     return (
       <div className={cn("", className)}>
         <div
-          className={cn("rounded-md border-4 p-4", "flex justify-start gap-3")}
+          className={cn("rounded-[var(--radius-md)] border-4 p-4", "flex justify-start gap-3")}
         >
           <Badge />
           <div className={cn("border-l px-3")}>
@@ -508,12 +508,12 @@ export function Awards({
     return (
       <div
         className={cn(
-          "flex bg-card items-center rounded-md border shadow-lg p-1 justify-center",
+          "flex bg-card items-center rounded-[var(--radius-md)] border shadow-lg p-1 justify-center",
           className,
         )}
       >
-        <div className="relative h-100 w-72 rounded-sm overflow-hidden border-4">
-          <span className="absolute top-8 right-8 flex h-4 w-4  items-center  justify-center">
+        <div className="relative h-100 w-72 rounded-[var(--radius-sm)] overflow-hidden border-4">
+          <span className="absolute top-8 right-8 flex h-4 w-4 items-center justify-center">
             <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
             <span className="bg-primary relative inline-flex h-3 w-3 rounded-full"></span>
           </span>
@@ -521,7 +521,7 @@ export function Awards({
           <div className="mt-24 px-6">
             <div
               className={cn(
-                "bg-secondary mb-4 w-fit rounded-md border px-4 py-2 text-xs",
+                "bg-secondary mb-4 w-fit rounded-[var(--radius-md)] border px-4 py-2 text-xs",
               )}
             >
               {date}

@@ -46,8 +46,8 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * @example Card skeleton
  * ```tsx
- * <div className="p-4 border rounded-lg space-y-4">
- *   <Skeleton className="h-32 w-full rounded-lg" />
+ * <div className="p-4 border rounded-[var(--radius-lg)] space-y-4">
+ *   <Skeleton className="h-32 w-full rounded-[var(--radius-lg)]" />
  *   <div className="space-y-2">
  *     <Skeleton className="h-4 w-3/4" />
  *     <Skeleton className="h-4 w-1/2" />
@@ -59,7 +59,7 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
  * ```tsx
  * const [isLoaded, setIsLoaded] = useState(false);
  *
- * <Skeleton isLoaded={isLoaded} className="h-24 w-24 rounded-lg">
+ * <Skeleton isLoaded={isLoaded} className="h-24 w-24 rounded-[var(--radius-lg)]">
  *   <img src="/avatar.jpg" alt="Avatar" />
  * </Skeleton>
  * ```
@@ -86,7 +86,7 @@ export function Skeleton({
     <div
       data-loaded={isLoaded}
       className={cn(
-        "bg-muted rounded-md",
+        "bg-muted rounded-[var(--radius-md)]",
         !disableAnimation && "animate-pulse",
         className,
       )}
@@ -143,7 +143,7 @@ export function SkeletonAvatar({
 export function SkeletonCard({ className, ...props }: SkeletonProps) {
   return (
     <div className={cn("space-y-4 p-4", className)} {...props}>
-      <Skeleton className="h-32 w-full rounded-lg" />
+      <Skeleton className="h-32 w-full rounded-[var(--radius-lg)]" />
       <div className="space-y-2">
         <Skeleton className="h-4 w-3/4" />
         <Skeleton className="h-4 w-1/2" />

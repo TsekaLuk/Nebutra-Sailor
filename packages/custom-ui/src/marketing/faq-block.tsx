@@ -160,7 +160,7 @@ export default function FAQBlock({
   return (
     <div
       className={cn(
-        "w-full max-w-2xl mx-auto rounded-lg border border-border bg-card p-6",
+        "w-full max-w-2xl mx-auto rounded-[var(--radius-lg)] border border-border bg-card p-6",
         className,
       )}
     >
@@ -229,7 +229,7 @@ export default function FAQBlock({
                 </Button>
                 {aiResponse && (
                   <div
-                    className="bg-accent rounded-md p-3 text-sm text-foreground"
+                    className="bg-accent rounded-[var(--radius-md)] p-3 text-sm text-foreground"
                     role="alert"
                   >
                     {aiResponse}

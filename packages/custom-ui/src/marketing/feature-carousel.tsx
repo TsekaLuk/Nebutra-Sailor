@@ -97,12 +97,12 @@ export function FeatureCarousel({
               <CarouselContent>
                 {displaySlides.map((slide, index) => (
                   <CarouselItem key={index}>
-                    <div className="flex aspect-video items-center justify-center rounded-md bg-muted p-6">
+                    <div className="flex aspect-video items-center justify-center rounded-[var(--radius-md)] bg-muted p-6">
                       {slide.image ? (
                         <img
                           src={slide.image}
                           alt={slide.alt || `Slide ${index + 1}`}
-                          className="h-full w-full object-cover rounded-md"
+                          className="h-full w-full object-cover rounded-[var(--radius-md)]"
                           loading="lazy"
                         />
                       ) : (

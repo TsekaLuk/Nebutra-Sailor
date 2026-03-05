@@ -1,3 +1,4 @@
+import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   Dialog,
@@ -67,4 +68,26 @@ export const Default: Story = {
       </DialogContent>
     </Dialog>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Click the trigger button to open the dialog
+    const trigger = canvas.getByRole("button", { name: /open dialog/i });
+    await userEvent.click(trigger);
+
+    // Dialog portal renders in document.body — query from there
+    const body = within(document.body);
+    const dialog = await body.findByRole("dialog");
+    expect(dialog).toBeVisible();
+
+    // Verify the dialog title is visible
+    const title = body.getByText("Delete workspace");
+    expect(title).toBeVisible();
+
+    // Press Escape to close the dialog
+    await userEvent.keyboard("{Escape}");
+
+    // Dialog should no longer be in the DOM
+    expect(body.queryByRole("dialog")).toBeNull();
+  },
 };

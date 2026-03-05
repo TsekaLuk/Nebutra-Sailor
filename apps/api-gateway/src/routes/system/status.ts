@@ -1,38 +1,74 @@
-import { Hono } from "hono";
+import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 
-export const statusRoutes = new Hono();
+const serviceStatusEnum = z.enum(["available", "unavailable", "unknown"]);
+const checkStatusEnum = z.enum(["pass", "fail"]);
 
-interface StatusResponse {
-  status: "healthy" | "degraded" | "unhealthy";
-  timestamp: string;
-  version: string;
-  database: "connected" | "disconnected";
-  redis: "connected" | "disconnected";
-  services: {
-    ai: "available" | "unavailable" | "unknown";
-    content: "available" | "unavailable" | "unknown";
-    recsys: "available" | "unavailable" | "unknown";
-    ecommerce: "available" | "unavailable" | "unknown";
-    web3: "available" | "unavailable" | "unknown";
-    billing: "available" | "unavailable" | "unknown";
-    eventIngest: "available" | "unavailable" | "unknown";
-  };
-  uptime: number;
-  checks: Array<{
-    name: string;
-    status: "pass" | "fail";
-    latency?: number;
-    message?: string;
-  }>;
-}
+const checkSchema = z.object({
+  name: z.string(),
+  status: checkStatusEnum,
+  latency: z.number().optional(),
+  message: z.string().optional(),
+});
+
+const statusResponseSchema = z.object({
+  status: z.enum(["healthy", "degraded", "unhealthy"]),
+  timestamp: z.string(),
+  version: z.string(),
+  database: z.enum(["connected", "disconnected"]),
+  redis: z.enum(["connected", "disconnected"]),
+  services: z.object({
+    ai: serviceStatusEnum,
+    content: serviceStatusEnum,
+    recsys: serviceStatusEnum,
+    ecommerce: serviceStatusEnum,
+    web3: serviceStatusEnum,
+    billing: serviceStatusEnum,
+    eventIngest: serviceStatusEnum,
+  }),
+  uptime: z.number(),
+  checks: z.array(checkSchema),
+});
+
+type StatusResponse = z.infer<typeof statusResponseSchema>;
+
+export const statusRoutes = new OpenAPIHono();
 
 const startTime = Date.now();
 
-/**
- * Comprehensive status endpoint for OpenStatus monitoring
- * GET /api/system/status
- */
-statusRoutes.get("/status", async (c) => {
+// ============================================
+// Status route
+// ============================================
+
+const statusRoute = createRoute({
+  method: "get",
+  path: "/status",
+  tags: ["System"],
+  summary: "Comprehensive system status",
+  description:
+    "Returns detailed status of all system components including database, Redis, and microservices. Used by OpenStatus monitoring.",
+  responses: {
+    200: {
+      description: "System is healthy or degraded",
+      content: {
+        "application/json": {
+          schema: statusResponseSchema,
+        },
+      },
+    },
+    503: {
+      description: "System is unhealthy",
+      content: {
+        "application/json": {
+          schema: statusResponseSchema,
+        },
+      },
+    },
+  },
+});
+
+statusRoutes.openapi(statusRoute, async (c) => {
+  c.header("Cache-Control", "public, max-age=10, stale-while-revalidate=30");
+
   const checks: StatusResponse["checks"] = [];
   let overallStatus: StatusResponse["status"] = "healthy";
 
@@ -127,37 +163,107 @@ statusRoutes.get("/status", async (c) => {
         ? 200
         : 503;
 
-  return c.json(response, statusCode);
+  return c.json(response, statusCode as 200 | 503);
 });
 
-/**
- * Readiness check for Kubernetes
- * GET /api/system/ready
- */
-statusRoutes.get("/ready", async (c) => {
+// ============================================
+// Readiness route
+// ============================================
+
+const readyRoute = createRoute({
+  method: "get",
+  path: "/ready",
+  tags: ["System"],
+  summary: "Kubernetes readiness probe",
+  description: "Returns whether the service is ready to accept traffic",
+  responses: {
+    200: {
+      description: "Service is ready",
+      content: {
+        "application/json": {
+          schema: z.object({
+            ready: z.literal(true),
+          }),
+        },
+      },
+    },
+    503: {
+      description: "Service is not ready",
+      content: {
+        "application/json": {
+          schema: z.object({
+            ready: z.literal(false),
+            reason: z.string(),
+          }),
+        },
+      },
+    },
+  },
+});
+
+statusRoutes.openapi(readyRoute, async (c) => {
   const dbCheck = await checkDatabase();
 
   if (dbCheck.status === "fail") {
-    return c.json({ ready: false, reason: "database unavailable" }, 503);
+    return c.json({ ready: false as const, reason: "database unavailable" }, 503);
   }
 
-  return c.json({ ready: true });
+  return c.json({ ready: true as const }, 200);
 });
 
-/**
- * Liveness check for Kubernetes
- * GET /api/system/live
- */
-statusRoutes.get("/live", (c) => {
-  return c.json({ live: true });
+// ============================================
+// Liveness route
+// ============================================
+
+const liveRoute = createRoute({
+  method: "get",
+  path: "/live",
+  tags: ["System"],
+  summary: "Kubernetes liveness probe",
+  description: "Returns whether the service process is alive",
+  responses: {
+    200: {
+      description: "Service is alive",
+      content: {
+        "application/json": {
+          schema: z.object({
+            live: z.literal(true),
+          }),
+        },
+      },
+    },
+  },
 });
 
-// Simplified status for uptime monitors
-statusRoutes.get("/ping", (c) => {
-  return c.text("pong");
+statusRoutes.openapi(liveRoute, (c) => {
+  return c.json({ live: true as const }, 200);
 });
 
+// ============================================
+// Ping route
+// ============================================
+
+const pingRoute = createRoute({
+  method: "get",
+  path: "/ping",
+  tags: ["System"],
+  summary: "Simple uptime ping",
+  description: "Returns 'pong' for uptime monitoring services",
+  responses: {
+    200: {
+      description: "pong",
+    },
+  },
+});
+
+statusRoutes.openapi(pingRoute, (c) => {
+  return c.text("pong") as never;
+});
+
+// ============================================
 // Helper functions
+// ============================================
+
 async function checkDatabase(): Promise<StatusResponse["checks"][0]> {
   const start = Date.now();
   try {

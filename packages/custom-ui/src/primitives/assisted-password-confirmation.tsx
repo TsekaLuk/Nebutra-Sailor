@@ -109,14 +109,14 @@ export function AssistedPasswordConfirmation({
         </span>
       )}
       <motion.div
-        className="mb-3 mt-1 h-[52px] w-full rounded-xl border-2 border-border bg-background px-2 py-2"
+        className="mb-3 mt-1 h-[52px] w-full rounded-[var(--radius-xl)] border-2 border-border bg-background px-2 py-2"
         animate={{
           ...bounceAnimation,
           ...matchAnimation,
           ...borderAnimation,
         }}
       >
-        <div className="relative h-full w-fit overflow-hidden rounded-lg">
+        <div className="relative h-full w-fit overflow-hidden rounded-[var(--radius-lg)]">
           {/* Password dots display */}
           <div className="z-10 flex h-full items-center justify-center bg-transparent px-0 py-1 tracking-[0.15em]">
             {password.split("").map((_, index) => (
@@ -152,11 +152,11 @@ export function AssistedPasswordConfirmation({
       </motion.div>
 
       <motion.div
-        className="h-[52px] w-full overflow-hidden rounded-xl"
+        className="h-[52px] w-full overflow-hidden rounded-[var(--radius-xl)]"
         animate={matchAnimation}
       >
         <motion.input
-          className="h-full w-full rounded-xl border-2 border-border bg-background px-3.5 py-3 tracking-[0.4em] text-foreground outline-none placeholder:tracking-normal focus:border-ring focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="h-full w-full rounded-[var(--radius-xl)] border-2 border-border bg-background px-3.5 py-3 tracking-[0.4em] text-foreground outline-none placeholder:tracking-normal focus:border-ring focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           type="password"
           placeholder={placeholder}
           value={confirmPassword}

@@ -35,7 +35,8 @@ concurrency:
 
 permissions:
   contents: read
-  packages: write  # Required to push to ghcr.io
+  packages: write        # Required to push to ghcr.io
+  security-events: write # Required to upload Trivy SARIF results to GitHub Security
 
 env:
   # ── Turborepo remote cache ──────────────────────────────────────────────────
@@ -44,6 +45,10 @@ env:
 
   # ── Registry base paths (populated from secrets at run time) ────────────────
   GHCR_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  ALIYUN_ACR_USERNAME: ${{ secrets.ALIYUN_ACR_USERNAME }}
+  TENCENT_TCR_HOST: ${{ secrets.TENCENT_TCR_HOST }}
 
 jobs:
   # ============================================================================
@@ -86,7 +91,7 @@ jobs:
 
       # AWS ECR — requires AWS_ACCOUNT_ID and AWS_REGION secrets
       - name: Configure AWS credentials
-        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_REGION != '' }}
+        if: env.AWS_ACCOUNT_ID != '' && env.AWS_REGION != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -94,12 +99,12 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Log in to AWS ECR
-        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_REGION != '' }}
+        if: env.AWS_ACCOUNT_ID != '' && env.AWS_REGION != ''
         uses: aws-actions/amazon-ecr-login@v2
 
       # Alibaba Cloud ACR — requires ALIYUN_ACR_USERNAME + ALIYUN_ACR_PASSWORD
       - name: Log in to Aliyun Container Registry
-        if: ${{ secrets.ALIYUN_ACR_USERNAME != '' }}
+        if: env.ALIYUN_ACR_USERNAME != ''
         uses: docker/login-action@v3
         with:
           registry: registry.cn-hangzhou.aliyuncs.com
@@ -108,7 +113,7 @@ jobs:
 
       # Tencent TCR — requires TENCENT_TCR_HOST + TENCENT_TCR_USERNAME + TENCENT_TCR_PASSWORD
       - name: Log in to Tencent Container Registry
-        if: ${{ secrets.TENCENT_TCR_HOST != '' }}
+        if: env.TENCENT_TCR_HOST != ''
         uses: docker/login-action@v3
         with:
           registry: ${{ secrets.TENCENT_TCR_HOST }}
@@ -154,6 +159,23 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.app }}:buildcache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.app }}:buildcache,mode=max
 
+      # ── Trivy vulnerability scan ─────────────────────────────────────────────
+      - name: Scan image for vulnerabilities
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ steps.meta.outputs.tags }}
+          format: "sarif"
+          output: "trivy-results.sarif"
+          severity: "CRITICAL,HIGH"
+          exit-code: "1"
+          ignore-unfixed: true
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-results.sarif"
+
   # ============================================================================
   # Job: build-push-python-services
   # Builds multi-platform images for Python FastAPI microservices.
@@ -198,7 +220,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure AWS credentials
-        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_REGION != '' }}
+        if: env.AWS_ACCOUNT_ID != '' && env.AWS_REGION != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -206,11 +228,11 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Log in to AWS ECR
-        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_REGION != '' }}
+        if: env.AWS_ACCOUNT_ID != '' && env.AWS_REGION != ''
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Log in to Aliyun Container Registry
-        if: ${{ secrets.ALIYUN_ACR_USERNAME != '' }}
+        if: env.ALIYUN_ACR_USERNAME != ''
         uses: docker/login-action@v3
         with:
           registry: registry.cn-hangzhou.aliyuncs.com
@@ -218,7 +240,7 @@ jobs:
           password: ${{ secrets.ALIYUN_ACR_PASSWORD }}
 
       - name: Log in to Tencent Container Registry
-        if: ${{ secrets.TENCENT_TCR_HOST != '' }}
+        if: env.TENCENT_TCR_HOST != ''
         uses: docker/login-action@v3
         with:
           registry: ${{ secrets.TENCENT_TCR_HOST }}

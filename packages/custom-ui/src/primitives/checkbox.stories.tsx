@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./checkbox-group";
 
@@ -30,6 +31,28 @@ export const Default: Story = {
         Option 1
       </Checkbox>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // The Checkbox renders a sr-only <input type="checkbox"> — get it by role
+    const checkbox = canvas.getByRole("checkbox");
+
+    // Initially unchecked
+    expect(checkbox).not.toBeChecked();
+
+    // Click the label text to trigger the parent div's onClick handler
+    const label = canvas.getByText("Option 1");
+    await userEvent.click(label);
+
+    // Verify the checkbox is now checked
+    expect(checkbox).toBeChecked();
+
+    // Click again to uncheck
+    await userEvent.click(label);
+
+    // Verify it is unchecked again
+    expect(checkbox).not.toBeChecked();
   },
 };
 

@@ -106,7 +106,7 @@ function InlineThread({
   }, [onClose]);
 
   return (
-    <div className="rounded-md border bg-card dark:border-white/10">
+    <div className="rounded-[var(--radius-md)] border bg-card dark:border-white/10">
       {/* Header with status chip */}
       <div className="flex items-center justify-between gap-2 px-2 py-1">
         <div className="flex items-center gap-2">
@@ -278,7 +278,7 @@ export function GithubInlineDiff({
         role="table"
         aria-label={`Diff of ${fileName}`}
         className={cn(
-          "rounded-md border bg-card dark:border-white/10",
+          "rounded-[var(--radius-md)] border bg-card dark:border-white/10",
           className,
         )}
       >

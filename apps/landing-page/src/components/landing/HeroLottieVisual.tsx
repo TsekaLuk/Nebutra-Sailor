@@ -14,7 +14,7 @@ const DotLottie = dynamic(
 
 export function HeroLottieVisual() {
   return (
-    <div className="relative mx-auto flex w-full max-w-md items-center justify-center rounded-3xl border border-[color:var(--blue-7)]/40 bg-[color:var(--neutral-1)]/70 p-6 shadow-[var(--elevation-brand-lg)] backdrop-blur-sm dark:bg-black/30">
+    <div className="relative mx-auto flex w-full max-w-md items-center justify-center rounded-3xl border border-(--blue-7)/40 bg-(--neutral-1)/70 p-6 shadow-brand-lg backdrop-blur-sm dark:bg-black/30">
       <div
         className="absolute inset-0 rounded-3xl"
         style={{

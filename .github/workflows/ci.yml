@@ -222,7 +222,6 @@ jobs:
 
       - name: Audit dependencies (high severity)
         run: pnpm audit --audit-level=high
-        continue-on-error: true
 
       - name: Check for secrets with Gitleaks
         uses: gitleaks/gitleaks-action@v2
@@ -252,6 +251,49 @@ jobs:
   #     needs: [detect-changes, build]
   #     if: needs.detect-changes.outputs.api-gateway == 'true'
   #     steps: ...
+
+  # ── Lighthouse CI (landing page, PRs only) ───────────────────────────────
+  # Audits the public marketing site for performance, accessibility,
+  # best-practices, and SEO.
+  #
+  # Thresholds (defined in lighthouserc.json at repo root):
+  #   accessibility  ≥ 0.95  → "error"  — BLOCKS the PR on failure
+  #   performance    ≥ 0.80  → "warn"   — reports but does not block
+  #   best-practices ≥ 0.90  → "warn"   — reports but does not block
+  #   seo            ≥ 0.90  → "warn"   — reports but does not block
+  lighthouse:
+    name: Lighthouse CI (landing page)
+    runs-on: ubuntu-latest
+    needs: [detect-changes, build]
+    # Only run on PRs and only when landing-page or shared packages changed
+    if: |
+      github.event_name == 'pull_request' &&
+      (needs.detect-changes.outputs.landing-page == 'true' || needs.detect-changes.outputs.packages == 'true')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build landing page
+        run: pnpm --filter @nebutra/landing-page build
+        env:
+          SKIP_ENV_VALIDATION: true
+
+      - name: Run Lighthouse CI
+        run: npx @lhci/cli@0.14.x autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
   # ── E2E Tests ─────────────────────────────────────────────────────────────
   e2e:

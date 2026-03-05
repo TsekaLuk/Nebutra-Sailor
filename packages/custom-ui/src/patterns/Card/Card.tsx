@@ -75,7 +75,7 @@ const CardRoot = React.forwardRef<HTMLDivElement, CardProps>(
         <div
           ref={ref}
           className={cn(
-            "rounded-xl transition-all duration-200",
+            "rounded-[var(--radius-xl)] transition-all duration-200",
             variantStyles[variant],
             paddingMap[padding],
             className,
@@ -165,7 +165,7 @@ const CardIcon = React.forwardRef<HTMLDivElement, CardIconProps>(
       <div
         ref={ref}
         className={cn(
-          "flex items-center justify-center rounded-lg bg-muted/50 shrink-0",
+          "flex items-center justify-center rounded-[var(--radius-lg)] bg-muted/50 shrink-0",
           sizeMap[size],
           className,
         )}

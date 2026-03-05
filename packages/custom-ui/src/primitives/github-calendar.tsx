@@ -222,7 +222,7 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
   return (
     <div
       className={cn(
-        "rounded-lg border border-border bg-background p-4",
+        "rounded-[var(--radius-lg)] border border-border bg-background p-4",
         className,
       )}
     >

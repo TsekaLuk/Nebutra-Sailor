@@ -30,7 +30,7 @@ const variant = {
   },
   inverted: {
     background: "bg-gray-1000",
-    text: "text-gray-100",
+    text: "text-[var(--neutral-12)]",
     fill: "fill-gray-100",
   },
   success: {
@@ -133,7 +133,7 @@ export function SnippetStatus({
   return (
     <div
       className={cn(
-        "flex px-3 py-2.5 rounded-md border border-gray-alpha-400",
+        "flex px-3 py-2.5 rounded-[var(--radius-md)] border border-gray-alpha-400",
         colors.background,
         className,
       )}

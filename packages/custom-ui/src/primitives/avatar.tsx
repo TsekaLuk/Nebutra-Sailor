@@ -159,7 +159,7 @@ function AvatarGroup({
           >
             <AvatarFallback
               size={size}
-              className="bg-gray-100 dark:bg-gray-800 text-[0.625rem] font-semibold leading-none text-gray-700 dark:text-gray-200"
+              className="bg-[var(--neutral-3)] text-[0.625rem] font-semibold leading-none text-[var(--neutral-11)]"
             >
               +{overflowCount}
             </AvatarFallback>

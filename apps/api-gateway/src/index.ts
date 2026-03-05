@@ -1,9 +1,11 @@
-import { Hono } from "hono";
+import { OpenAPIHono } from "@hono/zod-openapi";
 import { serve } from "@hono/node-server";
 import { bodyLimit } from "hono/body-limit";
 import { cors } from "hono/cors";
 import { logger as honoLogger } from "hono/logger";
 import { requestId } from "hono/request-id";
+import { swaggerUI } from "@hono/swagger-ui";
+import { trace } from "@opentelemetry/api";
 import { logger, initOtel } from "@nebutra/logger";
 import { setAlertErrorHandler, initializeFromEnv } from "@nebutra/alerting";
 import { prisma } from "@nebutra/db";
@@ -32,7 +34,7 @@ if (registeredChannels.length > 0) {
   logger.info("Alerting channels registered", { channels: registeredChannels });
 }
 
-const app = new Hono();
+const app = new OpenAPIHono();
 
 // Build CORS allowlist from constants + env overrides
 const corsOrigins = [
@@ -59,6 +61,42 @@ const corsOrigins = [
 
 // Global middlewares
 app.use("*", requestId());
+
+// Wire requestId and OTel traceId into structured logger context for log
+// correlation, and propagate both IDs to the client as response headers.
+app.use("*", async (c, next) => {
+  const reqId = c.get("requestId");
+  const method = c.req.method;
+  const path = new URL(c.req.url).pathname;
+
+  const activeSpan = trace.getActiveSpan();
+  const traceId = activeSpan?.spanContext().traceId;
+
+  logger.info("incoming request", {
+    requestId: reqId,
+    method,
+    path,
+    ...(traceId ? { traceId } : {}),
+  });
+
+  const start = Date.now();
+  await next();
+
+  logger.info("request completed", {
+    requestId: reqId,
+    method,
+    path,
+    status: c.res.status,
+    durationMs: Date.now() - start,
+    ...(traceId ? { traceId } : {}),
+  });
+
+  c.header("X-Request-ID", reqId);
+  if (traceId) {
+    c.header("X-Trace-ID", traceId);
+  }
+});
+
 app.use("*", honoLogger());
 app.use(
   "*",
@@ -104,6 +142,9 @@ app.route("/misc", healthRoutes);
 app.route("/system", statusRoutes);
 
 // Legal & Consent routes (v1 API)
+// Rate limiting is applied by the /api/* middleware above (paths not in the
+// skip list). /api/v1/legal/* and /api/v1/events/* are intentionally NOT in
+// the skip list so they receive full rate limiting.
 app.route("/api/v1/legal", consentRoutes);
 app.route("/api/v1/events", eventRoutes);
 
@@ -113,6 +154,20 @@ app.route("/api/webhooks", clerkWebhookRoutes);
 
 // Inngest background job handler (GET for SDK handshake, POST/PUT for execution)
 app.on(["GET", "POST", "PUT"], "/api/inngest", (c) => inngestHandler(c));
+
+// OpenAPI spec document (auto-generated from createRoute definitions)
+app.doc("/openapi.json", {
+  openapi: "3.1.0",
+  info: {
+    title: "Nebutra API",
+    version: "1.0.0",
+    description: "Nebutra SaaS Platform API Gateway",
+  },
+  servers: [{ url: "/", description: "Current server" }],
+});
+
+// Swagger UI explorer
+app.get("/docs", swaggerUI({ url: "/openapi.json" }));
 
 // Root route
 app.get("/", (c) => {

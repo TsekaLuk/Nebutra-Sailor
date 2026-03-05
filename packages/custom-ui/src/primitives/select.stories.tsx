@@ -1,3 +1,4 @@
+import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   Select,
@@ -45,4 +46,25 @@ export const Default: Story = {
       </Select>
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Click the select trigger to open the listbox
+    const trigger = canvas.getByRole("combobox");
+    await userEvent.click(trigger);
+
+    // Radix Select portal renders in document.body
+    const body = within(document.body);
+
+    // Verify the listbox options are visible
+    const listbox = await body.findByRole("listbox");
+    expect(listbox).toBeVisible();
+
+    // Click the "Starter" option
+    const starterOption = body.getByRole("option", { name: "Starter" });
+    await userEvent.click(starterOption);
+
+    // Trigger should now show the selected value
+    expect(trigger).toHaveTextContent("Starter");
+  },
 };

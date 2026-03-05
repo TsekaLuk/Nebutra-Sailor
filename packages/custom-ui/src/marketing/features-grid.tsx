@@ -47,7 +47,7 @@ export function FeaturesGrid({
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-muted/50 to-background p-6"
+            className="relative overflow-hidden rounded-[var(--radius-3xl)] bg-gradient-to-b from-muted/50 to-background p-6"
           >
             <DecorativeGrid size={gridSize} />
             <p className="relative z-20 text-base font-bold text-foreground">

@@ -122,3 +122,42 @@ export async function requireOrganization(c: Context, next: Next) {
 
   await next();
 }
+
+/**
+ * Require specific organization roles.
+ * Pass one or more allowed roles — user must have at least one.
+ * Clerk org_role values: "org:owner", "org:admin", "org:member", "org:viewer"
+ */
+export function requireRole(...allowedRoles: string[]) {
+  return async function (c: Context, next: Next) {
+    const tenant = c.get("tenant");
+
+    if (!tenant?.userId) {
+      return c.json(
+        { error: "Unauthorized", message: "Authentication required" },
+        401,
+      );
+    }
+
+    if (!tenant?.organizationId) {
+      return c.json(
+        { error: "Forbidden", message: "Organization membership required" },
+        403,
+      );
+    }
+
+    if (!tenant?.role || !allowedRoles.includes(tenant.role)) {
+      return c.json(
+        {
+          error: "Forbidden",
+          message: `Insufficient permissions. Required: ${allowedRoles.join(" or ")}`,
+          required: allowedRoles,
+          current: tenant.role ?? null,
+        },
+        403,
+      );
+    }
+
+    await next();
+  };
+}

@@ -27,9 +27,22 @@ export interface TierPolicy {
   components: string[];
 }
 
+export interface AggregateBudgetEntry {
+  description: string;
+  max: number;
+  paths: string[];
+  exclude?: string[];
+}
+
+export interface AggregateBudgets {
+  rawTailwindColors: AggregateBudgetEntry;
+  rawTailwindBorderRadius: AggregateBudgetEntry;
+}
+
 export interface GovernancePolicy {
   policyVersion: string;
   rawTailwindColorBudgets: RawTailwindBudget[];
+  budgets?: AggregateBudgets;
   tokenFormatBudget: {
     tokenSurfaces: FileSurface[];
     maxHexLiterals: number;

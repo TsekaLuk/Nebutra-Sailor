@@ -49,16 +49,16 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
     }, [command, onCopy]);
 
     const variantStyles = {
-      default: "bg-zinc-900 border border-zinc-700 rounded-lg",
-      minimal: "bg-zinc-950/50 border border-zinc-800 rounded-md",
-      pill: "bg-zinc-900 border border-zinc-700 rounded-full",
+      default: "bg-[var(--neutral-2)] border border-[var(--neutral-7)] rounded-[var(--radius-lg)]",
+      minimal: "bg-[var(--neutral-1)] border border-[var(--neutral-7)] rounded-[var(--radius-md)]",
+      pill: "bg-[var(--neutral-2)] border border-[var(--neutral-7)] rounded-full",
     };
 
     return (
       <div
         ref={ref}
         className={cn(
-          "group relative flex items-center gap-3 px-4 py-2.5 font-mono text-sm cursor-pointer transition-all hover:bg-zinc-800/50",
+          "group relative flex items-center gap-3 px-4 py-2.5 font-mono text-sm cursor-pointer transition-all hover:bg-[var(--neutral-3)]",
           variantStyles[variant],
           className,
         )}
@@ -78,7 +78,7 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
         <span className="text-emerald-400 shrink-0 select-none">{prefix}</span>
 
         {/* Command text */}
-        <span className="flex-1 text-zinc-200 truncate">{command}</span>
+        <span className="flex-1 text-[var(--neutral-11)] truncate">{command}</span>
 
         {/* Copy indicator */}
         {showCopyButton && (
@@ -87,7 +87,7 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
               "shrink-0 text-xs transition-colors",
               copied
                 ? "text-emerald-400"
-                : "text-zinc-500 group-hover:text-zinc-300",
+                : "text-[var(--neutral-9)] group-hover:text-[var(--neutral-11)]",
             )}
           >
             {copied ? (
@@ -101,7 +101,7 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
         {/* Copy tooltip */}
         <span
           className={cn(
-            "absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-zinc-700 text-zinc-200 opacity-0 transition-opacity pointer-events-none",
+            "absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-zinc-700 text-[var(--neutral-11)] opacity-0 transition-opacity pointer-events-none",
             "group-hover:opacity-100",
             copied && "opacity-100",
           )}

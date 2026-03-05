@@ -89,7 +89,7 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
 
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="workspace-slug">Workspace URL</Label>
-          <div className="flex items-center rounded-md border border-input bg-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+          <div className="flex items-center rounded-[var(--radius-md)] border border-input bg-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
             <span className="select-none border-r border-input px-3 py-2 text-sm text-muted-foreground">
               nebutra.app /
             </span>

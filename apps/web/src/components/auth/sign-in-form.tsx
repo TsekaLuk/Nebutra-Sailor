@@ -47,17 +47,17 @@ export function SignInForm() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
+        <h1 className="text-2xl font-semibold tracking-tight text-[var(--neutral-12)]">
           Log in to Nebutra
         </h1>
-        <p className="mt-1 text-sm text-gray-500">Welcome back</p>
+        <p className="mt-1 text-sm text-[var(--neutral-9)]">Welcome back</p>
       </div>
 
       <OAuthButtons mode="signIn" />
 
       <div className="relative">
         <Separator />
-        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-xs text-gray-400">
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-xs text-[var(--neutral-9)]">
           Or continue with
         </span>
       </div>
@@ -107,7 +107,7 @@ export function SignInForm() {
         </Button>
       </form>
 
-      <p className="text-center text-sm text-gray-500">
+      <p className="text-center text-sm text-[var(--neutral-9)]">
         New to Nebutra?{" "}
         <Link
           href="/sign-up"

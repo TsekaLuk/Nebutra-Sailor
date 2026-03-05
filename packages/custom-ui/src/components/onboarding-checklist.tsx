@@ -114,7 +114,7 @@ export function OnboardingChecklist({
       animate="visible"
       variants={containerVariants}
       className={cn(
-        "w-full max-w-4xl mx-auto bg-card text-card-foreground border rounded-2xl shadow-sm p-8 overflow-hidden",
+        "w-full max-w-4xl mx-auto bg-card text-card-foreground border rounded-[var(--radius-2xl)] shadow-sm p-8 overflow-hidden",
         className,
       )}
     >
@@ -139,7 +139,7 @@ export function OnboardingChecklist({
                     {item.helperText}{" "}
                     <a
                       href={item.helperLink.href}
-                      className="text-primary underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-sm"
+                      className="text-primary underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-[var(--radius-sm)]"
                     >
                       {item.helperLink.text}
                     </a>
@@ -153,13 +153,13 @@ export function OnboardingChecklist({
         {/* Right Side: Video Thumbnail */}
         <motion.div
           variants={itemVariants}
-          className="relative group rounded-lg overflow-hidden cursor-pointer w-full aspect-video"
+          className="relative group rounded-[var(--radius-lg)] overflow-hidden cursor-pointer w-full aspect-video"
         >
           <Dialog>
             <DialogTrigger asChild>
               <button
                 type="button"
-                className="w-full h-full focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-lg"
+                className="w-full h-full focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-[var(--radius-lg)]"
               >
                 <img
                   src={videoThumbnailUrl}
@@ -179,7 +179,7 @@ export function OnboardingChecklist({
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  className="w-full h-full rounded-lg"
+                  className="w-full h-full rounded-[var(--radius-lg)]"
                 />
               </div>
             </DialogContent>

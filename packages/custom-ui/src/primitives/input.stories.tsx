@@ -1,3 +1,4 @@
+import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Search, Mail, DollarSign, AtSign, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
@@ -53,6 +54,26 @@ export const Sizes: Story = {
 
 export const Default: Story = {
   args: { placeholder: "Enter value…", type: "text" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Get the input element and focus it
+    const input = canvas.getByRole("textbox");
+    await userEvent.click(input);
+
+    // Type "hello world" into the input
+    await userEvent.type(input, "hello world");
+
+    // Verify the input value is "hello world"
+    expect(input).toHaveValue("hello world");
+
+    // Clear the input with triple-click to select all, then Delete
+    await userEvent.tripleClick(input);
+    await userEvent.keyboard("{Delete}");
+
+    // Verify the input is now empty
+    expect(input).toHaveValue("");
+  },
 };
 
 export const WithValue: Story = {

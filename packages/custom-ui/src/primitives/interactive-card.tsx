@@ -134,7 +134,7 @@ export const InteractiveCard = React.forwardRef<
     <motion.div
       ref={ref}
       className={cn(
-        "relative w-full max-w-sm overflow-hidden rounded-2xl border bg-card p-8 text-center shadow-sm",
+        "relative w-full max-w-sm overflow-hidden rounded-[var(--radius-2xl)] border bg-card p-8 text-center shadow-sm",
         className,
       )}
       initial="initial"

@@ -1,13 +1,64 @@
-import { Hono } from "hono";
+import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 import Stripe from "stripe";
 import { prisma, Prisma } from "@nebutra/db";
 import { logger } from "@nebutra/logger";
 
 const log = logger.child({ service: "stripe-webhook" });
 
-export const stripeWebhookRoutes = new Hono();
+export const stripeWebhookRoutes = new OpenAPIHono();
 
-stripeWebhookRoutes.post("/stripe", async (c) => {
+const stripeWebhookRoute = createRoute({
+  method: "post",
+  path: "/stripe",
+  tags: ["Webhooks"],
+  summary: "Stripe webhook handler",
+  description:
+    "Receives Stripe webhook events for subscription lifecycle management. Signature verification is handled by the Stripe SDK.",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: z.object({}).passthrough(),
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: "Webhook received and queued for processing",
+      content: {
+        "application/json": {
+          schema: z.object({
+            received: z.literal(true),
+            skipped: z.boolean().optional(),
+          }),
+        },
+      },
+    },
+    400: {
+      description: "Invalid signature or missing headers",
+      content: {
+        "application/json": {
+          schema: z.object({
+            error: z.string(),
+          }),
+        },
+      },
+    },
+    500: {
+      description: "Webhook not configured",
+      content: {
+        "application/json": {
+          schema: z.object({
+            error: z.string(),
+          }),
+        },
+      },
+    },
+  },
+});
+
+stripeWebhookRoutes.openapi(stripeWebhookRoute, async (c) => {
   const rawBody = await c.req.text();
   const sig = c.req.header("stripe-signature");
 
@@ -43,7 +94,7 @@ stripeWebhookRoutes.post("/stripe", async (c) => {
       eventId: event.id,
       type: event.type,
     });
-    return c.json({ received: true, skipped: true });
+    return c.json({ received: true as const, skipped: true }, 200);
   }
 
   // Persist event record (upsert in case of duplicate delivery before processing)
@@ -59,7 +110,7 @@ stripeWebhookRoutes.post("/stripe", async (c) => {
   });
 
   // Respond immediately; process asynchronously
-  const response = c.json({ received: true });
+  const response = c.json({ received: true as const }, 200);
 
   handleStripeEvent(event, stripe, prisma)
     .then(async () => {

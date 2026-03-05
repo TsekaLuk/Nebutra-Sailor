@@ -5,7 +5,7 @@ export function PricingHintSection() {
     <section id="pricing" className="w-full bg-[color:var(--neutral-1)] py-24 md:py-32 dark:bg-black">
       <div className="mx-auto max-w-6xl px-6">
         <AnimateIn inView preset="emerge">
-          <div className="rounded-3xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-8 md:p-12 dark:border-white/10 dark:bg-white/5">
+          <div className="rounded-[var(--radius-3xl)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-8 md:p-12 dark:border-white/10 dark:bg-white/5">
             <div className="grid gap-8 md:grid-cols-2 md:items-end">
               <div>
                 <p className="text-sm font-semibold tracking-[0.14em] text-[color:var(--blue-11)] uppercase">
@@ -24,17 +24,17 @@ export function PricingHintSection() {
                 className="grid gap-3 text-sm text-[color:var(--neutral-12)] dark:text-white/90"
               >
                 <AnimateIn preset="fadeUp">
-                  <p className="rounded-xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] px-4 py-3 dark:border-white/10 dark:bg-black/30">
+                  <p className="rounded-[var(--radius-xl)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] px-4 py-3 dark:border-white/10 dark:bg-black/30">
                     Starter: core multi-tenancy and auth
                   </p>
                 </AnimateIn>
                 <AnimateIn preset="fadeUp">
-                  <p className="rounded-xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] px-4 py-3 dark:border-white/10 dark:bg-black/30">
+                  <p className="rounded-[var(--radius-xl)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] px-4 py-3 dark:border-white/10 dark:bg-black/30">
                     Pro: usage billing and advanced automation
                   </p>
                 </AnimateIn>
                 <AnimateIn preset="fadeUp">
-                  <p className="rounded-xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] px-4 py-3 dark:border-white/10 dark:bg-black/30">
+                  <p className="rounded-[var(--radius-xl)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] px-4 py-3 dark:border-white/10 dark:bg-black/30">
                     Enterprise: SSO, audit controls, dedicated support
                   </p>
                 </AnimateIn>

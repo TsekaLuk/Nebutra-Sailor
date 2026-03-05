@@ -67,13 +67,13 @@ const IconContainer = memo(function IconContainer({
     <motion.div
       variants={ICON_VARIANTS[variant]}
       className={cn(
-        "w-12 h-12 rounded-xl flex items-center justify-center relative shadow-lg transition-all duration-300",
+        "w-12 h-12 rounded-[var(--radius-xl)] flex items-center justify-center relative shadow-lg transition-all duration-300",
         theme === "dark" &&
           "bg-neutral-800 border border-neutral-700 group-hover:shadow-xl group-hover:border-neutral-600",
         theme === "neutral" &&
           "bg-stone-100 border border-stone-200 group-hover:shadow-xl group-hover:border-stone-300",
         (!theme || theme === "light") &&
-          "bg-white border border-gray-200 group-hover:shadow-xl group-hover:border-gray-300",
+          "bg-white border border-[var(--neutral-6)] group-hover:shadow-xl group-hover:border-[var(--neutral-7)]",
         className
       )}
     >
@@ -82,7 +82,7 @@ const IconContainer = memo(function IconContainer({
           "text-sm transition-colors duration-300",
           theme === "dark" && "text-neutral-400 group-hover:text-neutral-200",
           theme === "neutral" && "text-stone-500 group-hover:text-stone-700",
-          (!theme || theme === "light") && "text-gray-500 group-hover:text-gray-700"
+          (!theme || theme === "light") && "text-[var(--neutral-9)] group-hover:text-[var(--neutral-11)]"
         )}
       >
         {children}
@@ -163,7 +163,7 @@ export interface EmptyStateProps {
 }
 
 const baseClasses =
-  "group transition-all duration-300 rounded-xl relative overflow-hidden text-center flex flex-col items-center justify-center";
+  "group transition-all duration-300 rounded-[var(--radius-xl)] relative overflow-hidden text-center flex flex-col items-center justify-center";
 
 const sizeClasses: Record<Size, string> = {
   sm: "p-6",
@@ -175,13 +175,13 @@ const getVariantClasses = (variant: Variant, theme: Theme): string => {
   const variants: Record<Variant, Record<Theme, string>> = {
     default: {
       light:
-        "bg-white border-dashed border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50/50",
+        "bg-white border-dashed border-2 border-[var(--neutral-7)] hover:border-[var(--neutral-8)] hover:bg-[var(--neutral-2)]",
       dark: "bg-neutral-900 border-dashed border-2 border-neutral-700 hover:border-neutral-600 hover:bg-neutral-800/50",
       neutral:
         "bg-stone-50 border-dashed border-2 border-stone-300 hover:border-stone-400 hover:bg-stone-100/50",
     },
     subtle: {
-      light: "bg-white border border-transparent hover:bg-gray-50/30",
+      light: "bg-white border border-transparent hover:bg-[var(--neutral-2)]",
       dark: "bg-neutral-900 border border-transparent hover:bg-neutral-800/30",
       neutral: "bg-stone-50 border border-transparent hover:bg-stone-100/30",
     },
@@ -210,12 +210,12 @@ const getTextClasses = (type: "title" | "description", size: Size, theme: Theme)
 
   const colors: Record<"title" | "description", Record<Theme, string>> = {
     title: {
-      light: "text-gray-900",
+      light: "text-[var(--neutral-12)]",
       dark: "text-neutral-100",
       neutral: "text-stone-900",
     },
     description: {
-      light: "text-gray-600",
+      light: "text-[var(--neutral-10)]",
       dark: "text-neutral-400",
       neutral: "text-stone-600",
     },
@@ -237,13 +237,13 @@ const getButtonClasses = (size: Size, theme: Theme): string => {
   };
 
   const themeCls: Record<Theme, string> = {
-    light: "border-gray-300 bg-white hover:bg-gray-50 text-gray-700",
+    light: "border-[var(--neutral-7)] bg-white hover:bg-[var(--neutral-2)] text-[var(--neutral-11)]",
     dark: "border-neutral-600 bg-neutral-800 hover:bg-neutral-700 text-neutral-200",
     neutral: "border-stone-300 bg-stone-100 hover:bg-stone-200 text-stone-700",
   };
 
   return cn(
-    "inline-flex items-center gap-2 border rounded-md font-medium shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group/button disabled:opacity-50 disabled:cursor-not-allowed",
+    "inline-flex items-center gap-2 border rounded-[var(--radius-md)] font-medium shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group/button disabled:opacity-50 disabled:cursor-not-allowed",
     sizeCls[size],
     themeCls[theme]
   );

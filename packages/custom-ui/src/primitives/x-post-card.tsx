@@ -54,7 +54,7 @@ function MagicXPost({ tweet: t, components, className }: MagicXPostProps) {
   return (
     <TweetContainer
       className={cn(
-        "relative flex size-full max-w-lg flex-col gap-2 overflow-hidden rounded-lg border p-4",
+        "relative flex size-full max-w-lg flex-col gap-2 overflow-hidden rounded-[var(--radius-lg)] border p-4",
         "bg-card text-card-foreground shadow-sm",
         className,
       )}
@@ -163,7 +163,7 @@ export function XPostSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex size-full max-w-lg flex-col gap-2 rounded-lg border p-4",
+        "flex size-full max-w-lg flex-col gap-2 rounded-[var(--radius-lg)] border p-4",
         "bg-card animate-pulse",
         className,
       )}

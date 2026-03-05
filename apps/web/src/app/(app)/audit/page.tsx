@@ -10,15 +10,15 @@ const CONTROLS = [
 
 function statusClassName(status: string) {
   if (status === "Passing") {
-    return "bg-[color:var(--cyan-3)] text-[color:var(--cyan-11)] dark:bg-[color:var(--cyan-9)]/20 dark:text-[color:var(--cyan-9)]";
+    return "bg-cyan-3 text-cyan-11 dark:bg-(--cyan-9)/20 dark:text-cyan-9";
   }
 
-  return "bg-[hsl(var(--warning)/0.14)] text-[hsl(var(--warning-foreground))]";
+  return "bg-[hsl(var(--warning)/0.14)] text-warning-foreground";
 }
 
 export default function AuditPage() {
   return (
-    <section className="mx-auto w-full max-w-7xl">
+    <section className="mx-auto w-full max-w-7xl" aria-label="Audit">
       <AnimateIn preset="fadeUp">
         <PageHeader title="Audit" description="Operational controls and compliance checkpoints." />
       </AnimateIn>
@@ -26,17 +26,17 @@ export default function AuditPage() {
       <AnimateInGroup stagger="fast" className="grid gap-4 lg:grid-cols-2">
         <AnimateIn preset="fadeUp">
           <Card className="p-4 sm:p-6">
-            <h2 className="text-base font-semibold text-[color:var(--neutral-12)] dark:text-white">
+            <h2 className="text-base font-semibold text-neutral-12 dark:text-white">
               Control Checklist
             </h2>
             <div className="mt-4 space-y-3">
               {CONTROLS.map((control) => (
                 <div
                   key={control.name}
-                  className="rounded-lg border border-[color:var(--neutral-7)] p-3 dark:border-white/10"
+                  className="rounded-lg border border-neutral-7 p-3 dark:border-white/10"
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium text-[color:var(--neutral-12)] dark:text-white">
+                    <p className="text-sm font-medium text-neutral-12 dark:text-white">
                       {control.name}
                     </p>
                     <span
@@ -45,7 +45,7 @@ export default function AuditPage() {
                       {control.status}
                     </span>
                   </div>
-                  <p className="mt-1 text-xs text-[color:var(--neutral-10)] dark:text-white/60">
+                  <p className="mt-1 text-xs text-neutral-10 dark:text-white/60">
                     {control.detail}
                   </p>
                 </div>
@@ -56,17 +56,17 @@ export default function AuditPage() {
 
         <AnimateIn preset="fadeUp">
           <Card className="p-4 sm:p-6">
-            <h2 className="text-base font-semibold text-[color:var(--neutral-12)] dark:text-white">
+            <h2 className="text-base font-semibold text-neutral-12 dark:text-white">
               Recent Events
             </h2>
-            <ul className="mt-4 space-y-3 text-sm text-[color:var(--neutral-11)] dark:text-white/70">
-              <li className="rounded-lg border border-[color:var(--neutral-7)] px-3 py-2 dark:border-white/10">
+            <ul className="mt-4 space-y-3 text-sm text-neutral-11 dark:text-white/70">
+              <li className="rounded-lg border border-neutral-7 px-3 py-2 dark:border-white/10">
                 2026-03-03 20:45 UTC · Billing webhook signature validated.
               </li>
-              <li className="rounded-lg border border-[color:var(--neutral-7)] px-3 py-2 dark:border-white/10">
+              <li className="rounded-lg border border-neutral-7 px-3 py-2 dark:border-white/10">
                 2026-03-03 18:10 UTC · New admin invited to workspace.
               </li>
-              <li className="rounded-lg border border-[color:var(--neutral-7)] px-3 py-2 dark:border-white/10">
+              <li className="rounded-lg border border-neutral-7 px-3 py-2 dark:border-white/10">
                 2026-03-03 14:22 UTC · Data export completed.
               </li>
             </ul>

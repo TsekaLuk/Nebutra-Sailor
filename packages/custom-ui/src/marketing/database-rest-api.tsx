@@ -213,9 +213,9 @@ export function DatabaseRestApi({
 
       {/* Main Box */}
       <div className="absolute bottom-10 flex w-full flex-col items-center">
-        <div className="absolute -bottom-4 h-[100px] w-[62%] rounded-lg bg-accent/30" />
+        <div className="absolute -bottom-4 h-[100px] w-[62%] rounded-[var(--radius-lg)] bg-accent/30" />
 
-        <div className="absolute -top-3 z-20 flex items-center justify-center rounded-lg border bg-card px-2 py-1 sm:-top-4 sm:py-1.5">
+        <div className="absolute -top-3 z-20 flex items-center justify-center rounded-[var(--radius-lg)] border bg-card px-2 py-1 sm:-top-4 sm:py-1.5">
           <Sparkles className="size-3" />
           <span className="ml-2 text-[10px]">{title}</span>
         </div>
@@ -224,7 +224,7 @@ export function DatabaseRestApi({
           {circleText}
         </div>
 
-        <div className="relative z-10 flex h-[150px] w-full items-center justify-center overflow-hidden rounded-lg border bg-background shadow-md">
+        <div className="relative z-10 flex h-[150px] w-full items-center justify-center overflow-hidden rounded-[var(--radius-lg)] border bg-background shadow-md">
           <div className="absolute bottom-8 left-12 z-10 flex h-7 items-center gap-2 rounded-full border bg-card px-3 text-xs">
             <FirstIcon className="size-4" />
             <span>{btn1}</span>

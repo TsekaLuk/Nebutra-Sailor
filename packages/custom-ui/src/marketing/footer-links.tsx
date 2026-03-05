@@ -236,7 +236,7 @@ export function SystemStatusButton({
   );
 
   const baseClassName = cn(
-    "inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors",
+    "inline-flex items-center gap-2 rounded-[var(--radius-md)] px-4 py-2 text-sm font-medium transition-colors",
     "hover:bg-accent hover:text-accent-foreground",
     status === "normal" && "text-green-600 hover:text-green-600",
     status === "degraded" && "text-yellow-600 hover:text-yellow-600",

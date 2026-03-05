@@ -35,7 +35,7 @@ export interface GlowingEffectProps {
  *
  * @example
  * ```tsx
- * <div className="relative rounded-xl border p-4">
+ * <div className="relative rounded-[var(--radius-xl)] border p-4">
  *   <GlowingEffect
  *     spread={40}
  *     glow={true}

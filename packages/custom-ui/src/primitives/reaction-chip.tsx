@@ -227,7 +227,7 @@ export function MessageWithReactions({
     <div
       className={cn(
         "group relative inline-block max-w-sm",
-        "rounded-lg border border-border bg-card px-3 py-2",
+        "rounded-[var(--radius-lg)] border border-border bg-card px-3 py-2",
         "text-sm text-foreground shadow-sm",
         className,
       )}

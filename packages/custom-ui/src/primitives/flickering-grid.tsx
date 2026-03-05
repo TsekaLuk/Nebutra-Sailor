@@ -94,7 +94,7 @@ export interface FlickeringGridProps extends React.HTMLAttributes<HTMLDivElement
  * />
  *
  * // Rounded container
- * <div className="relative overflow-hidden rounded-lg">
+ * <div className="relative overflow-hidden rounded-[var(--radius-lg)]">
  *   <FlickeringGrid />
  * </div>
  * ```

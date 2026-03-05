@@ -43,6 +43,16 @@ const nextConfig: NextConfig = {
   // Required for Docker / self-hosted deployments.
   // Produces a minimal standalone server bundle under .next/standalone.
   output: "standalone",
+
+  // Tree-shake large icon/component packages at the import level.
+  optimizePackageImports: ["@nebutra/custom-ui", "@nebutra/icons", "lucide-react"],
+
+  experimental: {
+    // PPR: incremental opt-in per page via `export const experimental_ppr = true`.
+    ppr: "incremental",
+    cacheComponents: true,
+    reactCompiler: true,
+  },
   // Workspace packages: src/-exporting packages need this for SWC to process
   // TypeScript; dist/-exporting packages need it for "use client" detection.
   transpilePackages: [

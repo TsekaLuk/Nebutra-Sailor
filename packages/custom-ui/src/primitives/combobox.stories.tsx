@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Combobox } from "./combobox";
 import { CommandList } from "./command";
@@ -50,6 +51,30 @@ export const Default: Story = {
         />
       </div>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Click the combobox trigger to open the dropdown
+    const trigger = canvas.getByRole("combobox");
+    await userEvent.click(trigger);
+
+    // Popover portal renders in document.body — query from there
+    const body = within(document.body);
+
+    // Type a search query to filter results
+    const searchInput = await body.findByPlaceholderText("Search...");
+    await userEvent.type(searchInput, "next");
+
+    // Verify the filtered option is visible
+    const nextOption = await body.findByText("Next.js");
+    expect(nextOption).toBeVisible();
+
+    // Click the option to select it
+    await userEvent.click(nextOption);
+
+    // Trigger should now show the selected value
+    expect(trigger).toHaveTextContent("Next.js");
   },
 };
 

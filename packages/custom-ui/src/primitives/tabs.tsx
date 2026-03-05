@@ -37,25 +37,25 @@ const tabsListVariants = cva("flex items-center shrink-0", {
       variant: "default",
       shape: "default",
       size: "lg",
-      className: "rounded-lg",
+      className: "rounded-[var(--radius-lg)]",
     },
     {
       variant: "default",
       shape: "default",
       size: "md",
-      className: "rounded-lg",
+      className: "rounded-[var(--radius-lg)]",
     },
     {
       variant: "default",
       shape: "default",
       size: "sm",
-      className: "rounded-md",
+      className: "rounded-[var(--radius-md)]",
     },
     {
       variant: "default",
       shape: "default",
       size: "xs",
-      className: "rounded-md",
+      className: "rounded-[var(--radius-md)]",
     },
 
     { variant: "line", size: "lg", className: "gap-9" },
@@ -88,7 +88,7 @@ const tabsTriggerVariants = cva(
         default:
           "text-muted-foreground data-[state=active]:bg-background hover:text-foreground data-[state=active]:text-foreground data-[state=active]:shadow-sm",
         button:
-          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg text-accent-foreground hover:text-foreground data-[state=active]:bg-accent data-[state=active]:text-foreground",
+          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-[var(--radius-lg)] text-accent-foreground hover:text-foreground data-[state=active]:bg-accent data-[state=active]:text-foreground",
         line: "border-b-2 text-muted-foreground border-transparent data-[state=active]:border-primary hover:text-primary data-[state=active]:text-primary",
       },
       size: {
@@ -99,15 +99,15 @@ const tabsTriggerVariants = cva(
       },
     },
     compoundVariants: [
-      { variant: "default", size: "lg", className: "py-2.5 px-4 rounded-md" },
-      { variant: "default", size: "md", className: "py-1.5 px-3 rounded-md" },
-      { variant: "default", size: "sm", className: "py-1.5 px-2.5 rounded-sm" },
-      { variant: "default", size: "xs", className: "py-1 px-2 rounded-sm" },
+      { variant: "default", size: "lg", className: "py-2.5 px-4 rounded-[var(--radius-md)]" },
+      { variant: "default", size: "md", className: "py-1.5 px-3 rounded-[var(--radius-md)]" },
+      { variant: "default", size: "sm", className: "py-1.5 px-2.5 rounded-[var(--radius-sm)]" },
+      { variant: "default", size: "xs", className: "py-1 px-2 rounded-[var(--radius-sm)]" },
 
-      { variant: "button", size: "lg", className: "py-3 px-4 rounded-lg" },
-      { variant: "button", size: "md", className: "py-2.5 px-3 rounded-lg" },
-      { variant: "button", size: "sm", className: "py-2 px-2.5 rounded-md" },
-      { variant: "button", size: "xs", className: "py-1.5 px-2 rounded-md" },
+      { variant: "button", size: "lg", className: "py-3 px-4 rounded-[var(--radius-lg)]" },
+      { variant: "button", size: "md", className: "py-2.5 px-3 rounded-[var(--radius-lg)]" },
+      { variant: "button", size: "sm", className: "py-2 px-2.5 rounded-[var(--radius-md)]" },
+      { variant: "button", size: "xs", className: "py-1.5 px-2 rounded-[var(--radius-md)]" },
 
       { variant: "line", size: "lg", className: "py-3" },
       { variant: "line", size: "md", className: "py-2.5" },

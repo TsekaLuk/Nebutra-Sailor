@@ -86,7 +86,7 @@ export function Banner({
   return (
     <div
       className={cn(
-        "relative isolate flex flex-col justify-between gap-3 overflow-hidden rounded-lg border border-emerald-600/15 bg-gradient-to-r from-lime-100/80 to-emerald-100/80 py-3 pl-4 pr-12 sm:flex-row sm:items-center sm:py-2 dark:from-emerald-950/50 dark:to-lime-950/50 dark:border-emerald-500/20",
+        "relative isolate flex flex-col justify-between gap-3 overflow-hidden rounded-[var(--radius-lg)] border border-emerald-600/15 bg-gradient-to-r from-lime-100/80 to-emerald-100/80 py-3 pl-4 pr-12 sm:flex-row sm:items-center sm:py-2 dark:from-emerald-950/50 dark:to-lime-950/50 dark:border-emerald-500/20",
         className
       )}
       role="banner"
@@ -117,7 +117,7 @@ export function Banner({
                 href={learnMoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground underline transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+                className="text-muted-foreground underline transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-[var(--radius-sm)]"
               >
                 Learn more
               </a>
@@ -129,7 +129,7 @@ export function Banner({
       <div className="flex items-center sm:-my-1">
         <button
           type="button"
-          className="whitespace-nowrap rounded-md border border-emerald-700/50 px-3 py-1 text-sm text-foreground transition-colors hover:bg-emerald-500/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:border-emerald-500/50 dark:hover:bg-emerald-500/20"
+          className="whitespace-nowrap rounded-[var(--radius-md)] border border-emerald-700/50 px-3 py-1 text-sm text-foreground transition-colors hover:bg-emerald-500/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:border-emerald-500/50 dark:hover:bg-emerald-500/20"
           onClick={action.onClick}
         >
           {action.label}
@@ -138,7 +138,7 @@ export function Banner({
 
       <button
         type="button"
-        className="absolute inset-y-0 right-2.5 p-1 text-sm text-emerald-700 transition-colors hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+        className="absolute inset-y-0 right-2.5 p-1 text-sm text-emerald-700 transition-colors hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-[var(--radius-sm)]"
         onClick={onHide}
         aria-label="Dismiss banner"
       >

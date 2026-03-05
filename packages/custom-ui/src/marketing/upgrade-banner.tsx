@@ -102,9 +102,9 @@ export function UpgradeBanner({
           </motion.div>
 
           {/* Banner container */}
-          <div className="relative flex h-9 items-center gap-1 rounded-md border border-primary/20 bg-primary/5 pl-2.5 pr-1 text-sm">
+          <div className="relative flex h-9 items-center gap-1 rounded-[var(--radius-md)] border border-primary/20 bg-primary/5 pl-2.5 pr-1 text-sm">
             <button
-              className="my-[-1px] cursor-pointer rounded-sm border-none bg-transparent px-0 py-1 text-[13px] font-medium text-foreground underline decoration-primary/30 underline-offset-4 outline-none transition-colors hover:text-primary hover:decoration-primary/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="my-[-1px] cursor-pointer rounded-[var(--radius-sm)] border-none bg-transparent px-0 py-1 text-[13px] font-medium text-foreground underline decoration-primary/30 underline-offset-4 outline-none transition-colors hover:text-primary hover:decoration-primary/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               onClick={onClick}

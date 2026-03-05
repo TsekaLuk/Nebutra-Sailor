@@ -98,7 +98,7 @@ const MicroLandingCardRoot = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card",
+          "group relative flex flex-col overflow-hidden rounded-[var(--radius-xl)] border border-border bg-card",
           // Variant styles
           variant === "primary" && "row-span-2",
           variant === "compact" && "min-h-[280px]",

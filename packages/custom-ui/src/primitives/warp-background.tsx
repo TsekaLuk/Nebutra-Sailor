@@ -189,7 +189,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
 
   return (
     <div
-      className={cn("relative rounded-lg border p-20", className)}
+      className={cn("relative rounded-[var(--radius-lg)] border p-20", className)}
       {...props}
     >
       {/* 3D Grid Container */}

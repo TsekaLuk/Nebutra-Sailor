@@ -35,7 +35,7 @@ const sizeStyles = {
 } as const;
 
 const inputBase = [
-  "flex w-full rounded-md border border-input bg-background",
+  "flex w-full rounded-[var(--radius-md)] border border-input bg-background",
   "ring-offset-background",
   "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground",
   "placeholder:text-muted-foreground",

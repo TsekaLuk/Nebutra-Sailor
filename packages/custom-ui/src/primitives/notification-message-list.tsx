@@ -67,12 +67,12 @@ export function NotificationMessageList({
         {messages.map((msg, i) => (
           <div
             key={i}
-            className="notification-animate-scale-up flex cursor-pointer items-start gap-3 rounded-lg border p-3 transition duration-300 ease-in-out hover:bg-muted/50"
+            className="notification-animate-scale-up flex cursor-pointer items-start gap-3 rounded-[var(--radius-lg)] border p-3 transition duration-300 ease-in-out hover:bg-muted/50"
             style={{ animationDelay: `${i * animationDelay}ms` }}
           >
             <div
               className={cn(
-                "size-8 min-h-[2rem] min-w-[2rem] rounded-lg bg-gradient-to-br",
+                "size-8 min-h-[2rem] min-w-[2rem] rounded-[var(--radius-lg)] bg-gradient-to-br",
                 msg.gradientColor || "from-primary to-primary/60"
               )}
             />

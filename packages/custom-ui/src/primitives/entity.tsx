@@ -112,7 +112,7 @@ function EntityList({ children, className }: EntityListProps) {
   return (
     <ul
       className={cn(
-        "divide-y rounded-lg border bg-background",
+        "divide-y rounded-[var(--radius-lg)] border bg-background",
         className,
       )}
     >

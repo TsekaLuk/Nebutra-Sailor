@@ -77,6 +77,8 @@ jobs:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'staging' }}
       # The image tag to roll out — use the commit SHA that triggered the upstream build
       IMAGE_TAG: sha-${{ github.event.workflow_run.head_sha && github.event.workflow_run.head_sha || github.sha }}
+      # Expose secret via env so it can be checked safely in `if` expressions.
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     steps:
       # ── Checkout ─────────────────────────────────────────────────────────────
@@ -198,7 +200,7 @@ jobs:
       # Only runs when SLACK_WEBHOOK_URL secret is configured.
       # Sends a success or failure notification with deployment details.
       - name: Notify Slack — success
-        if: ${{ success() && secrets.SLACK_WEBHOOK_URL != '' }}
+        if: success() && env.SLACK_WEBHOOK_URL != ''
         uses: slackapi/slack-github-action@v1
         with:
           payload: |
@@ -217,11 +219,11 @@ jobs:
               ]
             }
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ env.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
       - name: Notify Slack — failure
-        if: ${{ failure() && secrets.SLACK_WEBHOOK_URL != '' }}
+        if: failure() && env.SLACK_WEBHOOK_URL != ''
         uses: slackapi/slack-github-action@v1
         with:
           payload: |
@@ -240,7 +242,7 @@ jobs:
               ]
             }
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ env.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
       # ── Cleanup kubeconfig ────────────────────────────────────────────────────

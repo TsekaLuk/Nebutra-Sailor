@@ -64,7 +64,7 @@ export function AuthBanner({ className }: AuthBannerProps) {
       <div className="relative z-10 flex flex-1 flex-col items-start justify-center px-12 pb-16">
         {/* Nebutra Logo */}
         <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--blue-9)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-xl)] bg-[color:var(--blue-9)]">
             <span className="text-lg font-black text-white">N</span>
           </div>
           <span className="text-2xl font-bold text-white">Nebutra</span>

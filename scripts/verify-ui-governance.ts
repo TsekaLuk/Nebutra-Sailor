@@ -16,6 +16,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   loadUiGovernancePolicy,
+  type AggregateBudgetEntry,
   type GovernancePolicy,
 } from "./lib/ui-governance-policy";
 
@@ -25,6 +26,8 @@ const repoRoot = path.resolve(__dirname, "..");
 
 const RAW_TAILWIND_COLOR_RE =
   /\b(?:bg|text|border|from|to|via|ring|stroke|fill)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950)\b/g;
+const RAW_TAILWIND_BORDER_RADIUS_RE =
+  /\brounded-(?:sm|md|lg|xl|2xl|3xl)\b/g;
 const FRAMER_MOTION_IMPORT_RE = /from\s+["']framer-motion["']/;
 const IMPORT_SOURCE_RE = /from\s+["']([^"']+)["']/g;
 const HEX_RE = /#[0-9A-Fa-f]{6}\b/g;
@@ -287,6 +290,63 @@ function verifyDependencyBoundaries(policy: GovernancePolicy) {
   );
 }
 
+function countAggregateBudgetViolations(
+  budget: AggregateBudgetEntry,
+  pattern: RegExp,
+): number {
+  const excludeSet = new Set(budget.exclude ?? []);
+
+  // Derive roots from paths (strip glob suffix, e.g. "packages/custom-ui/src/**" -> "packages/custom-ui/src")
+  const roots = budget.paths.map((p) => p.replace(/\/\*\*$/, "").replace(/\/\*$/, ""));
+
+  const allFiles = roots.flatMap((root) =>
+    collectFiles(root, new Set([".ts", ".tsx", ".css"])),
+  );
+
+  let total = 0;
+  for (const file of allFiles) {
+    const posixFile = toPosixPath(file);
+    const shouldExclude = [...excludeSet].some((ex) => {
+      if (ex.startsWith("**/")) {
+        const suffix = ex.slice(3);
+        return posixFile.includes(suffix);
+      }
+      return posixFile.includes(ex);
+    });
+    if (shouldExclude) continue;
+
+    const content = stripComments(read(file), file);
+    const cloned = new RegExp(pattern.source, pattern.flags);
+    total += countMatches(content, cloned);
+  }
+
+  return total;
+}
+
+function verifyAggregateBudgets(policy: GovernancePolicy) {
+  if (!policy.budgets) return;
+
+  const colorCount = countAggregateBudgetViolations(
+    policy.budgets.rawTailwindColors,
+    RAW_TAILWIND_COLOR_RE,
+  );
+  assert(
+    colorCount <= policy.budgets.rawTailwindColors.max,
+    `[budgets.rawTailwindColors] aggregate raw Tailwind color utility regression: ${colorCount} > ${policy.budgets.rawTailwindColors.max}. Use semantic CSS variable tokens instead of raw palette classes.`,
+  );
+
+  const radiusCount = countAggregateBudgetViolations(
+    policy.budgets.rawTailwindBorderRadius,
+    RAW_TAILWIND_BORDER_RADIUS_RE,
+  );
+  assert(
+    radiusCount <= policy.budgets.rawTailwindBorderRadius.max,
+    `[budgets.rawTailwindBorderRadius] aggregate raw Tailwind border-radius regression: ${radiusCount} > ${policy.budgets.rawTailwindBorderRadius.max}. Use var(--radius-*) tokens instead of raw rounded-* classes.`,
+  );
+
+  return { colorCount, radiusCount };
+}
+
 function main() {
   const policy = loadUiGovernancePolicy();
   const rawColorStats = verifyRawTailwindColorUsage(policy);
@@ -294,6 +354,7 @@ function main() {
   const tokenStats = verifyTokenFormatPolicy(policy);
   const tierStats = verifyComponentTierCoverage(policy);
   verifyDependencyBoundaries(policy);
+  const budgetStats = verifyAggregateBudgets(policy);
 
   console.log("UI governance verification passed");
   console.log(`- policy: ${policy.policyVersion}`);
@@ -312,6 +373,14 @@ function main() {
   for (const tier of tierStats) {
     console.log(
       `- component stories [${tier.tier}]: ${Math.round(tier.coverage * 100)}%/${Math.round(tier.required * 100)}%`,
+    );
+  }
+  if (budgetStats && policy.budgets) {
+    console.log(
+      `- aggregate raw tailwind colors: ${budgetStats.colorCount}/${policy.budgets.rawTailwindColors.max}`,
+    );
+    console.log(
+      `- aggregate raw tailwind border-radius: ${budgetStats.radiusCount}/${policy.budgets.rawTailwindBorderRadius.max}`,
     );
   }
 }

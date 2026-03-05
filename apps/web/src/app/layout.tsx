@@ -5,6 +5,7 @@ import { DesignSystemProvider } from "@nebutra/design-system";
 import { ThemeShell } from "./providers/theme-provider";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { QueryProvider } from "./providers";
+import { getNonce } from "@/lib/nonce";
 import "./globals.css";
 
 const inter = Inter({
@@ -37,11 +38,13 @@ export const metadata: Metadata = {
 
 const hasClerkKey = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const nonce = await getNonce();
+
   const content = (
     <html
       lang="en"
@@ -51,12 +54,12 @@ export default function RootLayout({
       <body className="antialiased">
         <a
           href="#main-content"
-          className="sr-only fixed left-3 top-3 z-[100] rounded-md bg-[color:var(--blue-9)] px-3 py-2 text-sm font-medium text-white focus:not-sr-only"
+          className="sr-only fixed left-3 top-3 z-100 rounded-md bg-blue-9 px-3 py-2 text-sm font-medium text-white focus:not-sr-only"
         >
           Skip to content
         </a>
 
-        <ThemeShell>
+        <ThemeShell nonce={nonce}>
           <DesignSystemProvider>
             <QueryProvider>
               <ErrorBoundary>{children}</ErrorBoundary>
@@ -71,5 +74,5 @@ export default function RootLayout({
     return content;
   }
 
-  return <ClerkProvider>{content}</ClerkProvider>;
+  return <ClerkProvider nonce={nonce}>{content}</ClerkProvider>;
 }

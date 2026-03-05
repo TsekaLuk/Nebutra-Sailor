@@ -16,9 +16,9 @@ export async function LogoStrip() {
   }));
 
   return (
-    <section className="w-full border-y border-gray-200 bg-white py-10 dark:border-white/5 dark:bg-black">
+    <section className="w-full border-y border-[var(--neutral-6)] bg-white py-10 dark:border-white/5 dark:bg-black">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-8 text-center text-xs uppercase tracking-widest text-gray-400 dark:text-white/30">
+        <p className="mb-8 text-center text-xs uppercase tracking-widest text-[var(--neutral-9)] dark:text-white/30">
           {t("tagline")}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">

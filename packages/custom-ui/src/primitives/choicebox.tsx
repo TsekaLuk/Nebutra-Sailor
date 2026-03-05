@@ -88,7 +88,7 @@ function useChoiceboxContext(): ChoiceboxContextType {
 
 export const choiceboxItemVariants = cva(
   [
-    "relative flex flex-1 flex-col gap-1 rounded-lg border p-4",
+    "relative flex flex-1 flex-col gap-1 rounded-[var(--radius-lg)] border p-4",
     "cursor-pointer select-none",
     "transition-colors duration-150 ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
@@ -218,7 +218,7 @@ function ChoiceboxItem({
           aria-hidden="true"
           className={cn(
             "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center border-2 transition-colors",
-            isRadio ? "rounded-full" : "rounded-sm",
+            isRadio ? "rounded-full" : "rounded-[var(--radius-sm)]",
             isSelected
               ? "border-primary bg-primary text-primary-foreground"
               : "border-muted-foreground/30",

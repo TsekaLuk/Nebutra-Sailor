@@ -106,12 +106,12 @@ export function SignUpForm() {
     return (
       <div className="flex flex-col gap-6">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
+          <h1 className="text-2xl font-semibold tracking-tight text-[var(--neutral-12)]">
             Check your email
           </h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-[var(--neutral-9)]">
             We sent a 6-digit code to{" "}
-            <span className="font-medium text-gray-700">{email}</span>
+            <span className="font-medium text-[var(--neutral-11)]">{email}</span>
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export function SignUpForm() {
           </Button>
         </form>
 
-        <p className="text-center text-sm text-gray-500">
+        <p className="text-center text-sm text-[var(--neutral-9)]">
           Didn&apos;t receive it?{" "}
           <button
             type="button"
@@ -165,17 +165,17 @@ export function SignUpForm() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
+        <h1 className="text-2xl font-semibold tracking-tight text-[var(--neutral-12)]">
           Create your account
         </h1>
-        <p className="mt-1 text-sm text-gray-500">Start building today</p>
+        <p className="mt-1 text-sm text-[var(--neutral-9)]">Start building today</p>
       </div>
 
       <OAuthButtons mode="signUp" />
 
       <div className="relative">
         <Separator />
-        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-xs text-gray-400">
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-xs text-[var(--neutral-9)]">
           Or continue with
         </span>
       </div>
@@ -240,7 +240,7 @@ export function SignUpForm() {
         </Button>
       </form>
 
-      <p className="text-center text-sm text-gray-500">
+      <p className="text-center text-sm text-[var(--neutral-9)]">
         Already have an account?{" "}
         <Link
           href="/sign-in"

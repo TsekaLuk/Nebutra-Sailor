@@ -62,7 +62,7 @@ export function Enable2FACard({
       description:
         "Scan this QR code using a mobile authentication app. This will generate a verification code.",
       content: (
-        <div className="inline-block rounded-lg border p-1">
+        <div className="inline-block rounded-[var(--radius-lg)] border p-1">
           <img src={qrCodeUrl} alt="QR Code" className="size-32 dark:invert" />
         </div>
       ),
@@ -78,7 +78,7 @@ export function Enable2FACard({
           render={({ slots }) => (
             <InputOTPGroup className="gap-2.5">
               {slots.map((_, i) => (
-                <InputOTPSlot key={i} index={i} className="rounded-lg border" />
+                <InputOTPSlot key={i} index={i} className="rounded-[var(--radius-lg)] border" />
               ))}
             </InputOTPGroup>
           )}

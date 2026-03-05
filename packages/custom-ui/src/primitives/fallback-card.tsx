@@ -247,7 +247,7 @@ export function FallbackCard({
   return (
     <div
       className={cn(
-        "relative flex w-full flex-col items-center justify-center overflow-hidden rounded-2xl border shadow-md",
+        "relative flex w-full flex-col items-center justify-center overflow-hidden rounded-[var(--radius-2xl)] border shadow-md",
         baseBg,
         className,
       )}

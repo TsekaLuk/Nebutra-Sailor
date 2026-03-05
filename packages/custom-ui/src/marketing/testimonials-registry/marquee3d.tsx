@@ -69,7 +69,7 @@ export function Marquee3DTestimonials({
   return (
     <div
       className={cn(
-        "border border-border rounded-lg relative flex h-96 w-full max-w-[800px] flex-row items-center justify-center overflow-hidden gap-1.5 [perspective:300px]",
+        "border border-border rounded-[var(--radius-lg)] relative flex h-96 w-full max-w-[800px] flex-row items-center justify-center overflow-hidden gap-1.5 [perspective:300px]",
         className,
       )}
       style={height ? { height } : undefined}

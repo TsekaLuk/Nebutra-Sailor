@@ -262,7 +262,7 @@ export interface CircularUIProps {
 export function CircularUI({ label, circles, className }: CircularUIProps) {
   return (
     <div className={className}>
-      <div className="size-fit rounded-2xl bg-gradient-to-b from-border to-transparent p-px">
+      <div className="size-fit rounded-[var(--radius-2xl)] bg-gradient-to-b from-border to-transparent p-px">
         <div className="relative flex aspect-square w-fit items-center -space-x-4 rounded-[15px] bg-gradient-to-b from-background to-muted/25 p-4">
           {circles.map((circle, i) => (
             <div

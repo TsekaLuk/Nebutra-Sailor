@@ -38,6 +38,9 @@
     },
     "dependencyBoundaries": {
       "$ref": "#/definitions/dependencyBoundaries"
+    },
+    "budgets": {
+      "$ref": "#/definitions/aggregateBudgets"
     }
   },
   "definitions": {
@@ -208,6 +211,49 @@
             "type": "string",
             "pattern": "^[a-z0-9-]+$"
           }
+        }
+      }
+    },
+    "aggregateBudgetEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "max", "paths"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "aggregateBudgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rawTailwindColors", "rawTailwindBorderRadius"],
+      "properties": {
+        "rawTailwindColors": {
+          "$ref": "#/definitions/aggregateBudgetEntry"
+        },
+        "rawTailwindBorderRadius": {
+          "$ref": "#/definitions/aggregateBudgetEntry"
         }
       }
     },

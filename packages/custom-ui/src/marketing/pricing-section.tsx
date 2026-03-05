@@ -138,7 +138,7 @@ export function PricingCard({
     <div
       key={plan.name}
       className={cn(
-        "relative flex w-full flex-col rounded-lg border border-border",
+        "relative flex w-full flex-col rounded-[var(--radius-lg)] border border-border",
         className,
       )}
       {...props}
@@ -160,13 +160,13 @@ export function PricingCard({
       >
         <div className="absolute top-2 right-2 z-10 flex items-center gap-2">
           {plan.highlighted && (
-            <p className="bg-background flex items-center gap-1 rounded-md border border-border px-2 py-0.5 text-xs">
+            <p className="bg-background flex items-center gap-1 rounded-[var(--radius-md)] border border-border px-2 py-0.5 text-xs">
               <StarIcon className="h-3 w-3 fill-current" />
               Popular
             </p>
           )}
           {frequency === "yearly" && (
-            <p className="bg-primary text-primary-foreground flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs">
+            <p className="bg-primary text-primary-foreground flex items-center gap-1 rounded-[var(--radius-md)] border px-2 py-0.5 text-xs">
               {Math.round(
                 ((plan.price.monthly * 12 - plan.price.yearly) /
                   plan.price.monthly /
@@ -265,7 +265,7 @@ export function BorderTrail({
   return (
     <div className="pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent [mask-clip:padding-box,border-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)]">
       <motion.div
-        className={cn("absolute aspect-square bg-zinc-500", className)}
+        className={cn("absolute aspect-square bg-[var(--neutral-8)]", className)}
         style={{
           width: size,
           offsetPath: `rect(0 auto auto 0 round ${size}px)`,

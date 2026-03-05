@@ -39,23 +39,23 @@ export function ProductDemoSection() {
   const liveSrc = useMemo(() => `${env.NEXT_PUBLIC_APP_URL}${activeDemo.path}`, [activeDemo.path]);
 
   return (
-    <section id="product" className="w-full bg-[color:var(--neutral-1)] py-24 md:py-32 dark:bg-black">
+    <section id="product" className="w-full bg-neutral-1 py-24 md:py-32 dark:bg-black">
       <div className="product-demo-cq mx-auto max-w-7xl px-6">
         <AnimateIn inView preset="emerge" className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold tracking-[0.14em] text-[color:var(--blue-11)] uppercase">
+          <p className="text-sm font-semibold tracking-[0.14em] text-blue-11 uppercase">
             Product in action
           </p>
-          <h2 className="product-demo-title mt-4 text-3xl font-bold tracking-tight text-[color:var(--neutral-12)] md:text-5xl dark:text-white">
+          <h2 className="product-demo-title mt-4 text-3xl font-bold tracking-tight text-neutral-12 md:text-5xl dark:text-white">
             See the operator-grade UI your team ships on day one.
           </h2>
-          <p className="product-demo-subtitle mt-4 text-lg text-[color:var(--neutral-11)] dark:text-white/70">
+          <p className="product-demo-subtitle mt-4 text-lg text-neutral-11 dark:text-white/70">
             Tenant analytics, usage billing, and AI workflows are included in a single cohesive dashboard shell.
           </p>
         </AnimateIn>
 
         <AnimateIn inView preset="fadeUp" className="mt-12">
-          <div className="overflow-hidden rounded-2xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-3 shadow-sm dark:border-white/10 dark:bg-white/5">
-            <div className="flex flex-wrap gap-2 border-b border-[color:var(--neutral-7)] px-1 pb-3 dark:border-white/10">
+          <div className="overflow-hidden rounded-2xl border border-neutral-7 bg-neutral-2 p-3 shadow-sm dark:border-white/10 dark:bg-white/5">
+            <div className="flex flex-wrap gap-2 border-b border-neutral-7 px-1 pb-3 dark:border-white/10">
               {LIVE_DEMOS.map((demo) => (
                 <button
                   key={demo.id}
@@ -67,8 +67,8 @@ export function ProductDemoSection() {
                   }}
                   className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                     activeDemoId === demo.id
-                      ? "bg-[color:var(--blue-9)] text-white"
-                      : "bg-[color:var(--neutral-1)] text-[color:var(--neutral-11)] hover:text-[color:var(--neutral-12)] dark:bg-black/40 dark:text-white/70 dark:hover:text-white"
+                      ? "bg-blue-9 text-white"
+                      : "bg-neutral-1 text-neutral-11 hover:text-neutral-12 dark:bg-black/40 dark:text-white/70 dark:hover:text-white"
                   }`}
                 >
                   {demo.label}
@@ -76,9 +76,9 @@ export function ProductDemoSection() {
               ))}
             </div>
 
-            <div className="relative mt-3 aspect-[16/10] overflow-hidden rounded-xl border border-[color:var(--neutral-6)] bg-[color:var(--neutral-1)] dark:border-white/10 dark:bg-black">
+            <div className="relative mt-3 aspect-16/10 overflow-hidden rounded-xl border border-neutral-6 bg-neutral-1 dark:border-white/10 dark:bg-black">
               {isFrameLoading && (
-                <div className="absolute inset-0 z-10 flex items-center justify-center bg-[color:var(--neutral-1)]/85 text-sm text-[color:var(--neutral-11)] dark:bg-black/80 dark:text-white/70">
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-(--neutral-1)/85 text-sm text-neutral-11 dark:bg-black/80 dark:text-white/70">
                   Loading live demo...
                 </div>
               )}
@@ -93,14 +93,14 @@ export function ProductDemoSection() {
             </div>
 
             <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1">
-              <p className="text-xs text-[color:var(--neutral-10)] dark:text-white/60">
+              <p className="text-xs text-neutral-10 dark:text-white/60">
                 Interactive embed from {env.NEXT_PUBLIC_APP_URL}
               </p>
               <a
                 href={liveSrc}
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs font-medium text-[color:var(--blue-10)] hover:text-[color:var(--blue-11)] dark:text-[color:var(--cyan-9)] dark:hover:text-[color:var(--cyan-10)]"
+                className="text-xs font-medium text-blue-10 hover:text-blue-11 dark:text-cyan-9 dark:hover:text-cyan-10"
               >
                 Open full app
               </a>
@@ -124,11 +124,11 @@ export function ProductDemoSection() {
                 }}
                 className={`product-demo-card w-full overflow-hidden rounded-2xl border p-2 text-left transition-colors ${
                   activeDemoId === demo.id
-                    ? "border-[color:var(--blue-7)] bg-[color:var(--blue-2)] dark:border-[color:var(--cyan-7)] dark:bg-[color:var(--cyan-1)]/30"
-                    : "border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] dark:border-white/10 dark:bg-white/5"
+                    ? "border-blue-7 bg-blue-2 dark:border-cyan-7 dark:bg-(--cyan-1)/30"
+                    : "border-neutral-7 bg-neutral-2 dark:border-white/10 dark:bg-white/5"
                 }`}
               >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-[color:var(--neutral-6)] dark:border-white/10">
+                <div className="relative aspect-4/3 overflow-hidden rounded-xl border border-neutral-6 dark:border-white/10">
                   <Image
                     src={demo.image}
                     alt={demo.alt}
@@ -137,7 +137,7 @@ export function ProductDemoSection() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
-                <p className="px-1 pt-2 text-xs font-medium text-[color:var(--neutral-11)] dark:text-white/70">
+                <p className="px-1 pt-2 text-xs font-medium text-neutral-11 dark:text-white/70">
                   {demo.label}
                 </p>
               </button>

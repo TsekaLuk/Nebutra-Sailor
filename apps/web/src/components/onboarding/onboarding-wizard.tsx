@@ -72,7 +72,7 @@ export function OnboardingWizard() {
         </div>
 
         {/* Step content */}
-        <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
+        <div className="rounded-[var(--radius-2xl)] border border-border bg-card p-8 shadow-sm">
           {currentStep === 0 && (
             <CreateWorkspaceStep onComplete={() => setCurrentStep(1)} />
           )}

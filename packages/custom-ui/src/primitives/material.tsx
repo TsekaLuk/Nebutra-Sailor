@@ -21,7 +21,7 @@ import { cn } from "../utils/cn";
  * | modal       | shadow-lg  | bg-popover  | Dialogs / drawers     |
  * | fullscreen  | shadow-none| bg-background| Full-screen overlays |
  */
-const materialVariants = cva("rounded-lg overflow-hidden", {
+const materialVariants = cva("rounded-[var(--radius-lg)] overflow-hidden", {
   variants: {
     type: {
       card: "bg-card shadow-sm",

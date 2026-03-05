@@ -7,14 +7,14 @@
       "root": "apps/landing-page/src",
       "extensions": [".tsx"],
       "excludeContains": ["/(legal)/"],
-      "max": 26
+      "max": 0
     },
     {
       "surface": "web-app",
       "root": "apps/web/src",
       "extensions": [".tsx"],
       "excludeContains": [],
-      "max": 27
+      "max": 0
     }
   ],
   "tokenFormatBudget": {
@@ -95,5 +95,19 @@
       "./lib/utils",
       "./patterns"
     ]
+  },
+  "budgets": {
+    "rawTailwindColors": {
+      "description": "Raw Tailwind color utilities (bg-slate-*, text-gray-*, etc.) — use semantic tokens instead",
+      "max": 4,
+      "paths": ["packages/custom-ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
+      "exclude": ["**/*.stories.*", "**/globals.css"]
+    },
+    "rawTailwindBorderRadius": {
+      "description": "Raw Tailwind border-radius utilities — use var(--radius-*) tokens instead",
+      "max": 0,
+      "paths": ["packages/custom-ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
+      "exclude": ["**/*.stories.*"]
+    }
   }
 }

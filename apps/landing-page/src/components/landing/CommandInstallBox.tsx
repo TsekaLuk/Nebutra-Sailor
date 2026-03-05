@@ -28,7 +28,7 @@ export function CommandInstallBox({
   return (
     <div
       className={cn(
-        "group relative flex items-center rounded-xl border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-1.5 transition-all hover:border-[color:var(--blue-7)] dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20",
+        "group relative flex items-center rounded-[var(--radius-xl)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-1.5 transition-all hover:border-[color:var(--blue-7)] dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20",
         className,
       )}
     >
@@ -39,7 +39,7 @@ export function CommandInstallBox({
       <button
         type="button"
         onClick={handleCopy}
-        className="flex cursor-pointer items-center gap-2 rounded-lg bg-[color:var(--blue-9)] px-5 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90"
+        className="flex cursor-pointer items-center gap-2 rounded-[var(--radius-lg)] bg-[color:var(--blue-9)] px-5 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90"
       >
         {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
         {copied ? copiedLabel : copyLabel}

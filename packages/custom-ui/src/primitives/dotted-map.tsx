@@ -106,7 +106,7 @@ export function DottedMap({
   return (
     <svg
       viewBox={`0 0 ${width} ${height}`}
-      className={cn("text-gray-500 dark:text-gray-500", className)}
+      className={cn("text-[var(--neutral-9)]", className)}
       style={{ width: "100%", height: "100%", ...style }}
     >
       {points.map((point, index) => {

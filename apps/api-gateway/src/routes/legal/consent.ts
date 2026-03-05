@@ -1,17 +1,45 @@
-import { Hono } from "hono";
+import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
-import { zValidator } from "@hono/zod-validator";
-import { z } from "zod";
 import { prisma, Prisma } from "@nebutra/db";
 import { logger } from "@nebutra/logger";
 import { DatabaseError, NotFoundError, toApiError } from "@nebutra/errors";
+import {
+  requireAuth,
+  requireOrganization,
+} from "@/middlewares/tenantContext.js";
 
 const log = logger.child({ service: "consent" });
 
 type ConsentEnv = {
   Variables: { userId?: string; organizationId?: string };
 };
-export const consentRoutes = new Hono<ConsentEnv>();
+export const consentRoutes = new OpenAPIHono<ConsentEnv>();
+
+// ============================================
+// Route-level auth middleware
+// ============================================
+
+// POST /consent and DELETE /consent require authentication — any member can
+// record or withdraw their own consent.
+consentRoutes.use("/consent", requireAuth, requireOrganization);
+
+// ============================================
+// Shared error helper
+// ============================================
+
+/**
+ * Return an API error response with a dynamic status code.
+ * OpenAPIHono's strict typing requires declared response codes;
+ * we cast via `never` because error shapes are validated at the
+ * OpenAPI-spec level rather than at compile time.
+ */
+function jsonError(
+  c: Parameters<Parameters<typeof consentRoutes.openapi>[1]>[0],
+  error: unknown,
+  statusCode: ContentfulStatusCode,
+) {
+  return c.json(toApiError(error), statusCode) as never;
+}
 
 // ============================================
 // Validation Schemas
@@ -38,122 +66,205 @@ const cookieConsentSchema = z.object({
   }),
 });
 
+const contactFormSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+  company: z.string().optional(),
+  phone: z.string().optional(),
+  subject: z.string().min(1).max(200),
+  message: z.string().min(1),
+  category: z
+    .enum([
+      "general",
+      "sales",
+      "support",
+      "legal",
+      "privacy",
+      "partnership",
+      "press",
+    ])
+    .default("general"),
+});
+
+const apiErrorSchema = z.object({
+  error: z.object({
+    code: z.string(),
+    message: z.string(),
+    details: z.record(z.unknown()).optional(),
+  }),
+  requestId: z.string().optional(),
+});
+
 // ============================================
-// Document Consent Endpoints
+// Document Consent Routes
 // ============================================
 
-/**
- * POST /api/v1/legal/consent
- * Record user consent for a legal document
- */
-consentRoutes.post(
-  "/consent",
-  zValidator("json", recordConsentSchema),
-  async (c) => {
-    const data = c.req.valid("json");
-    const userId = c.get("userId") as string | undefined;
-    const organizationId = c.get("organizationId") as string | undefined;
-
-    try {
-      // Get the latest active document version
-      const document = await prisma.legalDocument.findFirst({
-        where: {
-          slug: data.documentSlug,
-          isActive: true,
-          ...(data.documentVersion && { version: data.documentVersion }),
+const recordConsentRoute = createRoute({
+  method: "post",
+  path: "/consent",
+  tags: ["Legal"],
+  summary: "Record document consent",
+  description:
+    "Record user consent for a legal document (e.g. terms of service, privacy policy)",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: recordConsentSchema,
         },
-        orderBy: { effectiveAt: "desc" },
-      });
+      },
+      required: true,
+    },
+  },
+  responses: {
+    200: {
+      description: "Consent recorded successfully",
+      content: {
+        "application/json": {
+          schema: z.object({
+            success: z.literal(true),
+            consentId: z.string(),
+            documentSlug: z.string(),
+            documentVersion: z.string(),
+            consentedAt: z.string().or(z.date()),
+          }),
+        },
+      },
+    },
+    404: {
+      description: "Legal document not found",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+    500: {
+      description: "Database error",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+  },
+});
 
-      if (!document) {
-        const notFound = new NotFoundError("LegalDocument", data.documentSlug);
-        return c.json(
-          toApiError(notFound),
-          notFound.statusCode as ContentfulStatusCode,
-        );
-      }
+consentRoutes.openapi(recordConsentRoute, async (c) => {
+  const data = c.req.valid("json");
+  const userId = c.get("userId") as string | undefined;
+  const organizationId = c.get("organizationId") as string | undefined;
 
-      // Create consent record
-      const consentData: Parameters<
-        typeof prisma.userConsent.create
-      >[0]["data"] = {
-        visitorId: data.visitorId,
-        documentId: document.id,
-        documentSlug: document.slug,
-        documentVersion: document.version,
-        consentType: data.consentType,
-        consentGiven: true,
-        consentContext: data.context ?? null,
-        metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
-      };
+  try {
+    const document = await prisma.legalDocument.findFirst({
+      where: {
+        slug: data.documentSlug,
+        isActive: true,
+        ...(data.documentVersion && { version: data.documentVersion }),
+      },
+      orderBy: { effectiveAt: "desc" },
+    });
 
-      if (userId) consentData.userId = userId;
-      if (organizationId) consentData.organizationId = organizationId;
+    if (!document) {
+      const notFound = new NotFoundError("LegalDocument", data.documentSlug);
+      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
+    }
 
-      const ipAddress =
-        c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
-      if (ipAddress) consentData.ipAddress = ipAddress;
+    const consentData: Parameters<
+      typeof prisma.userConsent.create
+    >[0]["data"] = {
+      visitorId: data.visitorId,
+      documentId: document.id,
+      documentSlug: document.slug,
+      documentVersion: document.version,
+      consentType: data.consentType,
+      consentGiven: true,
+      consentContext: data.context ?? null,
+      metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
+    };
 
-      const userAgent = c.req.header("user-agent");
-      if (userAgent) consentData.userAgent = userAgent;
+    if (userId) consentData.userId = userId;
+    if (organizationId) consentData.organizationId = organizationId;
 
-      const consent = await prisma.userConsent.create({
-        data: consentData,
-      });
+    const ipAddress =
+      c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
+    if (ipAddress) consentData.ipAddress = ipAddress;
 
-      return c.json({
-        success: true,
+    const userAgent = c.req.header("user-agent");
+    if (userAgent) consentData.userAgent = userAgent;
+
+    const consent = await prisma.userConsent.create({ data: consentData });
+
+    return c.json(
+      {
+        success: true as const,
         consentId: consent.id,
         documentSlug: consent.documentSlug,
         documentVersion: consent.documentVersion,
         consentedAt: consent.consentedAt,
-      });
-    } catch (error) {
-      const dbError = new DatabaseError(
-        "record consent",
-        error instanceof Error ? error : undefined,
-      );
-      log.error("Failed to record consent", { error, userId, organizationId });
-      return c.json(
-        toApiError(dbError),
-        dbError.statusCode as ContentfulStatusCode,
-      );
-    }
-  },
-);
+      },
+      200,
+    );
+  } catch (error) {
+    const dbError = new DatabaseError(
+      "record consent",
+      error instanceof Error ? error : undefined,
+    );
+    log.error("Failed to record consent", { error, userId, organizationId });
+    return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
+  }
+});
 
-/**
- * GET /api/v1/legal/consent/status
- * Get consent status for a document
- */
-consentRoutes.get("/consent/status", async (c) => {
-  const documentSlug = c.req.query("documentSlug");
-  const visitorId = c.req.query("visitorId");
+// ============================================
+// Get Consent Status
+// ============================================
+
+const consentStatusRoute = createRoute({
+  method: "get",
+  path: "/consent/status",
+  tags: ["Legal"],
+  summary: "Get consent status",
+  description:
+    "Check whether a user has consented to a specific legal document and whether re-consent is needed",
+  request: {
+    query: z.object({
+      documentSlug: z.string().min(1),
+      visitorId: z.string().optional(),
+    }),
+  },
+  responses: {
+    200: {
+      description: "Consent status retrieved",
+      content: {
+        "application/json": {
+          schema: z.object({
+            hasConsented: z.boolean(),
+            consentedVersion: z.string().nullable(),
+            currentVersion: z.string(),
+            needsReconsent: z.boolean(),
+            lastConsentedAt: z.string().or(z.date()).nullable(),
+          }),
+        },
+      },
+    },
+    404: {
+      description: "Legal document not found",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+    500: {
+      description: "Database error",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+  },
+});
+
+consentRoutes.openapi(consentStatusRoute, async (c) => {
+  const { documentSlug, visitorId } = c.req.valid("query");
   const userId = c.get("userId") as string | undefined;
 
-  if (!documentSlug) {
-    return c.json({ error: "documentSlug is required" }, 400);
-  }
-
   try {
-    // Get the current active document version
     const currentDocument = await prisma.legalDocument.findFirst({
-      where: {
-        slug: documentSlug,
-        isActive: true,
-      },
+      where: { slug: documentSlug, isActive: true },
       orderBy: { effectiveAt: "desc" },
     });
 
     if (!currentDocument) {
       const notFound = new NotFoundError("LegalDocument", documentSlug);
-      return c.json(
-        toApiError(notFound),
-        notFound.statusCode as ContentfulStatusCode,
-      );
+      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
     }
 
-    // Find user's latest consent for this document
     const consent = await prisma.userConsent.findFirst({
       where: {
         documentSlug,
@@ -171,13 +282,16 @@ consentRoutes.get("/consent/status", async (c) => {
     const needsReconsent =
       hasConsented && consent.documentVersion !== currentDocument.version;
 
-    return c.json({
-      hasConsented,
-      consentedVersion: consent?.documentVersion,
-      currentVersion: currentDocument.version,
-      needsReconsent,
-      lastConsentedAt: consent?.consentedAt,
-    });
+    return c.json(
+      {
+        hasConsented,
+        consentedVersion: consent?.documentVersion ?? null,
+        currentVersion: currentDocument.version,
+        needsReconsent,
+        lastConsentedAt: consent?.consentedAt ?? null,
+      },
+      200,
+    );
   } catch (error) {
     const dbError = new DatabaseError(
       "get consent status",
@@ -189,28 +303,50 @@ consentRoutes.get("/consent/status", async (c) => {
       userId,
       visitorId,
     });
-    return c.json(
-      toApiError(dbError),
-      dbError.statusCode as ContentfulStatusCode,
-    );
+    return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
   }
 });
 
-/**
- * DELETE /api/v1/legal/consent
- * Withdraw consent for a document
- */
-consentRoutes.delete("/consent", async (c) => {
-  const documentSlug = c.req.query("documentSlug");
-  const visitorId = c.req.query("visitorId");
+// ============================================
+// Withdraw Consent
+// ============================================
+
+const withdrawConsentRoute = createRoute({
+  method: "delete",
+  path: "/consent",
+  tags: ["Legal"],
+  summary: "Withdraw consent",
+  description: "Withdraw previously given consent for a legal document",
+  request: {
+    query: z.object({
+      documentSlug: z.string().min(1),
+      visitorId: z.string().optional(),
+    }),
+  },
+  responses: {
+    200: {
+      description: "Consent withdrawn",
+      content: {
+        "application/json": {
+          schema: z.object({
+            success: z.literal(true),
+            withdrawnCount: z.number(),
+          }),
+        },
+      },
+    },
+    500: {
+      description: "Database error",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+  },
+});
+
+consentRoutes.openapi(withdrawConsentRoute, async (c) => {
+  const { documentSlug, visitorId } = c.req.valid("query");
   const userId = c.get("userId") as string | undefined;
 
-  if (!documentSlug) {
-    return c.json({ error: "documentSlug is required" }, 400);
-  }
-
   try {
-    // Update all matching consent records
     const result = await prisma.userConsent.updateMany({
       where: {
         documentSlug,
@@ -226,10 +362,13 @@ consentRoutes.delete("/consent", async (c) => {
       },
     });
 
-    return c.json({
-      success: true,
-      withdrawnCount: result.count,
-    });
+    return c.json(
+      {
+        success: true as const,
+        withdrawnCount: result.count,
+      },
+      200,
+    );
   } catch (error) {
     const dbError = new DatabaseError(
       "withdraw consent",
@@ -241,10 +380,7 @@ consentRoutes.delete("/consent", async (c) => {
       userId,
       visitorId,
     });
-    return c.json(
-      toApiError(dbError),
-      dbError.statusCode as ContentfulStatusCode,
-    );
+    return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
   }
 });
 
@@ -252,64 +388,100 @@ consentRoutes.delete("/consent", async (c) => {
 // Cookie Consent Endpoints
 // ============================================
 
-/**
- * POST /api/v1/legal/cookie-consent
- * Record cookie consent preferences
- */
-consentRoutes.post(
-  "/cookie-consent",
-  zValidator("json", cookieConsentSchema),
-  async (c) => {
-    const data = c.req.valid("json");
-    const userId = c.get("userId") as string | undefined;
+const recordCookieConsentRoute = createRoute({
+  method: "post",
+  path: "/cookie-consent",
+  tags: ["Legal"],
+  summary: "Record cookie consent",
+  description: "Record or update cookie consent preferences for a visitor",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: cookieConsentSchema,
+        },
+      },
+      required: true,
+    },
+  },
+  responses: {
+    200: {
+      description: "Cookie consent recorded",
+      content: {
+        "application/json": {
+          schema: z.object({
+            success: z.literal(true),
+            consentId: z.string(),
+            preferences: z.object({
+              necessary: z.boolean(),
+              functional: z.boolean(),
+              analytics: z.boolean(),
+              marketing: z.boolean(),
+              thirdParty: z.boolean(),
+            }),
+            consentedAt: z.string().or(z.date()),
+            expiresAt: z.string().or(z.date()),
+          }),
+        },
+      },
+    },
+    500: {
+      description: "Database error",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+  },
+});
 
-    // Calculate expiry (1 year from now)
-    const expiresAt = new Date();
-    expiresAt.setFullYear(expiresAt.getFullYear() + 1);
+consentRoutes.openapi(recordCookieConsentRoute, async (c) => {
+  const data = c.req.valid("json");
+  const userId = c.get("userId") as string | undefined;
 
-    try {
-      // Upsert cookie consent (create or update by visitorId)
-      const createData: Parameters<
-        typeof prisma.cookieConsent.upsert
-      >[0]["create"] = {
-        visitorId: data.visitorId,
-        necessary: true, // Always true
-        functional: data.preferences.functional,
-        analytics: data.preferences.analytics,
-        marketing: data.preferences.marketing,
-        thirdParty: data.preferences.thirdParty,
-        expiresAt,
-      };
-      if (userId) createData.userId = userId;
+  const expiresAt = new Date();
+  expiresAt.setFullYear(expiresAt.getFullYear() + 1);
 
-      const ipAddress =
-        c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
-      if (ipAddress) createData.ipAddress = ipAddress;
+  try {
+    const createData: Parameters<
+      typeof prisma.cookieConsent.upsert
+    >[0]["create"] = {
+      visitorId: data.visitorId,
+      necessary: true,
+      functional: data.preferences.functional,
+      analytics: data.preferences.analytics,
+      marketing: data.preferences.marketing,
+      thirdParty: data.preferences.thirdParty,
+      expiresAt,
+    };
+    if (userId) createData.userId = userId;
 
-      const userAgent = c.req.header("user-agent");
-      if (userAgent) createData.userAgent = userAgent;
+    const ipAddress =
+      c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
+    if (ipAddress) createData.ipAddress = ipAddress;
 
-      const updateData: Parameters<
-        typeof prisma.cookieConsent.upsert
-      >[0]["update"] = {
-        functional: data.preferences.functional,
-        analytics: data.preferences.analytics,
-        marketing: data.preferences.marketing,
-        thirdParty: data.preferences.thirdParty,
-        expiresAt,
-      };
-      if (userId) updateData.userId = userId;
-      if (ipAddress) updateData.ipAddress = ipAddress;
-      if (userAgent) updateData.userAgent = userAgent;
+    const userAgent = c.req.header("user-agent");
+    if (userAgent) createData.userAgent = userAgent;
 
-      const consent = await prisma.cookieConsent.upsert({
-        where: { visitorId: data.visitorId },
-        create: createData,
-        update: updateData,
-      });
+    const updateData: Parameters<
+      typeof prisma.cookieConsent.upsert
+    >[0]["update"] = {
+      functional: data.preferences.functional,
+      analytics: data.preferences.analytics,
+      marketing: data.preferences.marketing,
+      thirdParty: data.preferences.thirdParty,
+      expiresAt,
+    };
+    if (userId) updateData.userId = userId;
+    if (ipAddress) updateData.ipAddress = ipAddress;
+    if (userAgent) updateData.userAgent = userAgent;
 
-      return c.json({
-        success: true,
+    const consent = await prisma.cookieConsent.upsert({
+      where: { visitorId: data.visitorId },
+      create: createData,
+      update: updateData,
+    });
+
+    return c.json(
+      {
+        success: true as const,
         consentId: consent.id,
         preferences: {
           necessary: consent.necessary,
@@ -320,31 +492,79 @@ consentRoutes.post(
         },
         consentedAt: consent.consentedAt,
         expiresAt: consent.expiresAt,
-      });
-    } catch (error) {
-      const dbError = new DatabaseError(
-        "record cookie consent",
-        error instanceof Error ? error : undefined,
-      );
-      log.error("Failed to record cookie consent", {
-        error,
-        userId,
-        visitorId: data.visitorId,
-      });
-      return c.json(
-        toApiError(dbError),
-        dbError.statusCode as ContentfulStatusCode,
-      );
-    }
-  },
-);
+      },
+      200,
+    );
+  } catch (error) {
+    const dbError = new DatabaseError(
+      "record cookie consent",
+      error instanceof Error ? error : undefined,
+    );
+    log.error("Failed to record cookie consent", {
+      error,
+      userId,
+      visitorId: data.visitorId,
+    });
+    return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
+  }
+});
 
-/**
- * GET /api/v1/legal/cookie-consent
- * Get cookie consent preferences
- */
-consentRoutes.get("/cookie-consent", async (c) => {
-  const visitorId = c.req.query("visitorId");
+// ============================================
+// Get Cookie Consent
+// ============================================
+
+const getCookieConsentRoute = createRoute({
+  method: "get",
+  path: "/cookie-consent",
+  tags: ["Legal"],
+  summary: "Get cookie consent preferences",
+  description:
+    "Retrieve current cookie consent preferences for a visitor or user",
+  request: {
+    query: z.object({
+      visitorId: z.string().optional(),
+    }),
+  },
+  responses: {
+    200: {
+      description: "Cookie consent preferences",
+      content: {
+        "application/json": {
+          schema: z.object({
+            hasConsent: z.boolean(),
+            preferences: z
+              .object({
+                necessary: z.boolean(),
+                functional: z.boolean(),
+                analytics: z.boolean(),
+                marketing: z.boolean(),
+                thirdParty: z.boolean(),
+              })
+              .nullable(),
+            consentedAt: z.string().or(z.date()).optional(),
+            updatedAt: z.string().or(z.date()).optional(),
+            expiresAt: z.string().or(z.date()).optional(),
+          }),
+        },
+      },
+    },
+    400: {
+      description: "Missing required parameter",
+      content: {
+        "application/json": {
+          schema: z.object({ error: z.string() }),
+        },
+      },
+    },
+    500: {
+      description: "Database error",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+  },
+});
+
+consentRoutes.openapi(getCookieConsentRoute, async (c) => {
+  const { visitorId } = c.req.valid("query");
   const userId = c.get("userId") as string | undefined;
 
   if (!visitorId && !userId) {
@@ -364,35 +584,38 @@ consentRoutes.get("/cookie-consent", async (c) => {
     });
 
     if (!consent) {
-      return c.json({
-        hasConsent: false,
-        preferences: null,
-      });
+      return c.json(
+        {
+          hasConsent: false,
+          preferences: null,
+        },
+        200,
+      );
     }
 
-    return c.json({
-      hasConsent: true,
-      preferences: {
-        necessary: consent.necessary,
-        functional: consent.functional,
-        analytics: consent.analytics,
-        marketing: consent.marketing,
-        thirdParty: consent.thirdParty,
+    return c.json(
+      {
+        hasConsent: true,
+        preferences: {
+          necessary: consent.necessary,
+          functional: consent.functional,
+          analytics: consent.analytics,
+          marketing: consent.marketing,
+          thirdParty: consent.thirdParty,
+        },
+        consentedAt: consent.consentedAt,
+        updatedAt: consent.updatedAt,
+        expiresAt: consent.expiresAt,
       },
-      consentedAt: consent.consentedAt,
-      updatedAt: consent.updatedAt,
-      expiresAt: consent.expiresAt,
-    });
+      200,
+    );
   } catch (error) {
     const dbError = new DatabaseError(
       "get cookie consent",
       error instanceof Error ? error : undefined,
     );
     log.error("Failed to get cookie consent", { error, visitorId, userId });
-    return c.json(
-      toApiError(dbError),
-      dbError.statusCode as ContentfulStatusCode,
-    );
+    return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
   }
 });
 
@@ -400,13 +623,54 @@ consentRoutes.get("/cookie-consent", async (c) => {
 // Legal Documents Endpoints
 // ============================================
 
-/**
- * GET /api/v1/legal/documents
- * List available legal documents
- */
-consentRoutes.get("/documents", async (c) => {
-  const locale = c.req.query("locale") || "en";
-  const type = c.req.query("type");
+const listDocumentsRoute = createRoute({
+  method: "get",
+  path: "/documents",
+  tags: ["Legal"],
+  summary: "List legal documents",
+  description:
+    "List all active legal documents, optionally filtered by locale and type",
+  request: {
+    query: z.object({
+      locale: z.string().default("en").optional(),
+      type: z.string().optional(),
+    }),
+  },
+  responses: {
+    200: {
+      description: "List of legal documents",
+      content: {
+        "application/json": {
+          schema: z.object({
+            documents: z.array(
+              z.object({
+                id: z.string(),
+                slug: z.string(),
+                type: z.string(),
+                locale: z.string(),
+                version: z.string(),
+                title: z.string(),
+                summary: z.string().nullable(),
+                effectiveAt: z.string().or(z.date()),
+                isRequired: z.boolean(),
+              }),
+            ),
+          }),
+        },
+      },
+    },
+    500: {
+      description: "Database error",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+  },
+});
+
+consentRoutes.openapi(listDocumentsRoute, async (c) => {
+  c.header("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+
+  const { locale: rawLocale, type } = c.req.valid("query");
+  const locale = rawLocale || "en";
 
   try {
     const documents = await prisma.legalDocument.findMany({
@@ -440,30 +704,64 @@ consentRoutes.get("/documents", async (c) => {
       {} as Record<string, (typeof documents)[0]>,
     );
 
-    return c.json({
-      documents: Object.values(uniqueDocs),
-    });
+    return c.json({ documents: Object.values(uniqueDocs) }, 200);
   } catch (error) {
     const dbError = new DatabaseError(
       "list legal documents",
       error instanceof Error ? error : undefined,
     );
     log.error("Failed to list documents", { error, locale, type });
-    return c.json(
-      toApiError(dbError),
-      dbError.statusCode as ContentfulStatusCode,
-    );
+    return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
   }
 });
 
-/**
- * GET /api/v1/legal/documents/:slug
- * Get a specific legal document
- */
-consentRoutes.get("/documents/:slug", async (c) => {
-  const slug = c.req.param("slug");
-  const locale = c.req.query("locale") || "en";
-  const version = c.req.query("version");
+// ============================================
+// Get Single Document
+// ============================================
+
+const getDocumentRoute = createRoute({
+  method: "get",
+  path: "/documents/{slug}",
+  tags: ["Legal"],
+  summary: "Get legal document",
+  description: "Retrieve a specific legal document by its slug",
+  request: {
+    params: z.object({
+      slug: z.string().min(1),
+    }),
+    query: z.object({
+      locale: z.string().default("en").optional(),
+      version: z.string().optional(),
+    }),
+  },
+  responses: {
+    200: {
+      description: "Legal document found",
+      content: {
+        "application/json": {
+          schema: z.object({
+            document: z.object({}).passthrough(),
+          }),
+        },
+      },
+    },
+    404: {
+      description: "Legal document not found",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+    500: {
+      description: "Database error",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+  },
+});
+
+consentRoutes.openapi(getDocumentRoute, async (c) => {
+  c.header("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+
+  const { slug } = c.req.valid("param");
+  const { locale: rawLocale, version } = c.req.valid("query");
+  const locale = rawLocale || "en";
 
   try {
     const document = await prisma.legalDocument.findFirst({
@@ -478,23 +776,17 @@ consentRoutes.get("/documents/:slug", async (c) => {
 
     if (!document) {
       const notFound = new NotFoundError("LegalDocument", slug);
-      return c.json(
-        toApiError(notFound),
-        notFound.statusCode as ContentfulStatusCode,
-      );
+      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
     }
 
-    return c.json({ document });
+    return c.json({ document }, 200);
   } catch (error) {
     const dbError = new DatabaseError(
       "get legal document",
       error instanceof Error ? error : undefined,
     );
     log.error("Failed to get document", { error, slug, locale, version });
-    return c.json(
-      toApiError(dbError),
-      dbError.statusCode as ContentfulStatusCode,
-    );
+    return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
   }
 });
 
@@ -502,79 +794,88 @@ consentRoutes.get("/documents/:slug", async (c) => {
 // Contact Form Endpoint
 // ============================================
 
-const contactFormSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  company: z.string().optional(),
-  phone: z.string().optional(),
-  subject: z.string().min(1).max(200),
-  message: z.string().min(1),
-  category: z
-    .enum([
-      "general",
-      "sales",
-      "support",
-      "legal",
-      "privacy",
-      "partnership",
-      "press",
-    ])
-    .default("general"),
+const contactFormRoute = createRoute({
+  method: "post",
+  path: "/contact",
+  tags: ["Legal"],
+  summary: "Submit contact form",
+  description:
+    "Submit a contact form inquiry. Responses are typically provided within 1-2 business days.",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: contactFormSchema,
+        },
+      },
+      required: true,
+    },
+  },
+  responses: {
+    200: {
+      description: "Contact form submitted successfully",
+      content: {
+        "application/json": {
+          schema: z.object({
+            success: z.literal(true),
+            submissionId: z.string(),
+            message: z.string(),
+          }),
+        },
+      },
+    },
+    500: {
+      description: "Database error",
+      content: { "application/json": { schema: apiErrorSchema } },
+    },
+  },
 });
 
-/**
- * POST /api/v1/legal/contact
- * Submit a contact form
- */
-consentRoutes.post(
-  "/contact",
-  zValidator("json", contactFormSchema),
-  async (c) => {
-    const data = c.req.valid("json");
+consentRoutes.openapi(contactFormRoute, async (c) => {
+  const data = c.req.valid("json");
 
-    try {
-      const submission = await prisma.contactSubmission.create({
-        data: {
-          name: data.name,
-          email: data.email,
-          company: data.company ?? null,
-          phone: data.phone ?? null,
-          subject: data.subject,
-          message: data.message,
-          category: data.category,
-          status: "new",
-          ipAddress:
-            c.req.header("x-forwarded-for") ??
-            c.req.header("x-real-ip") ??
-            null,
-          userAgent: c.req.header("user-agent") ?? null,
-        },
-      });
+  try {
+    const submission = await prisma.contactSubmission.create({
+      data: {
+        name: data.name,
+        email: data.email,
+        company: data.company ?? null,
+        phone: data.phone ?? null,
+        subject: data.subject,
+        message: data.message,
+        category: data.category,
+        status: "new",
+        ipAddress:
+          c.req.header("x-forwarded-for") ??
+          c.req.header("x-real-ip") ??
+          null,
+        userAgent: c.req.header("user-agent") ?? null,
+      },
+    });
 
-      // TODO: Send notification email via Resend
+    // TODO: Send notification email via Resend
 
-      return c.json({
-        success: true,
+    return c.json(
+      {
+        success: true as const,
         submissionId: submission.id,
         message:
           "Your message has been received. We will respond within 1-2 business days.",
-      });
-    } catch (error) {
-      const dbError = new DatabaseError(
-        "submit contact form",
-        error instanceof Error ? error : undefined,
-      );
-      log.error("Failed to submit contact form", {
-        error,
-        email: data.email,
-        category: data.category,
-      });
-      return c.json(
-        toApiError(dbError),
-        dbError.statusCode as ContentfulStatusCode,
-      );
-    }
-  },
-);
+      },
+      200,
+    );
+  } catch (error) {
+    const dbError = new DatabaseError(
+      "submit contact form",
+      error instanceof Error ? error : undefined,
+    );
+    log.error("Failed to submit contact form", {
+      error,
+      email: data.email,
+      category: data.category,
+    });
+    return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
+  }
+});
 
 export default consentRoutes;

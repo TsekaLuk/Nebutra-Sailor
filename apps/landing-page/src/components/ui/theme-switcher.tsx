@@ -24,8 +24,8 @@ function ThemeOption({
       className={cn(
         "relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-all [&_svg]:size-4",
         isActive
-          ? "text-zinc-950 dark:text-zinc-50"
-          : "text-zinc-400 hover:text-zinc-950 dark:text-zinc-500 dark:hover:text-zinc-50",
+          ? "text-[var(--neutral-12)]"
+          : "text-[var(--neutral-9)] hover:text-[var(--neutral-12)]",
       )}
       role="radio"
       aria-checked={isActive}
@@ -35,7 +35,7 @@ function ThemeOption({
       {icon}
 
       {isActive && (
-        <span className="absolute inset-0 rounded-full border border-zinc-200 dark:border-zinc-700" />
+        <span className="absolute inset-0 rounded-full border border-[var(--neutral-6)]" />
       )}
     </button>
   );
@@ -57,7 +57,7 @@ function ThemeSwitcher() {
 
   return (
     <div
-      className="inline-flex items-center overflow-hidden rounded-full bg-white ring-1 ring-zinc-200 ring-inset dark:bg-zinc-950 dark:ring-zinc-700"
+      className="inline-flex items-center overflow-hidden rounded-full bg-[var(--neutral-1)] ring-1 ring-zinc-200 ring-inset dark:ring-zinc-700"
       role="radiogroup"
       aria-label="Select color theme"
     >

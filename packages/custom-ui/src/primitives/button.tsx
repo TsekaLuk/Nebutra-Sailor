@@ -12,7 +12,7 @@ import { cn } from "../utils/cn";
 const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
-    "rounded-md text-sm font-medium",
+    "rounded-[var(--radius-md)] text-sm font-medium",
     "transition-colors duration-150 ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:opacity-50",
@@ -35,10 +35,10 @@ const buttonVariants = cva(
         warning: "bg-warning text-warning-foreground hover:bg-warning/90",
       },
       size: {
-        tiny: "h-6 rounded-sm px-2 text-[11px]", // 24px
-        sm: "h-8 rounded-sm px-3 text-xs", // 32px
+        tiny: "h-6 rounded-[var(--radius-sm)] px-2 text-[11px]", // 24px
+        sm: "h-8 rounded-[var(--radius-sm)] px-3 text-xs", // 32px
         default: "h-10 px-4 py-2", // 40px
-        lg: "h-12 rounded-lg px-5 text-base", // 48px
+        lg: "h-12 rounded-[var(--radius-lg)] px-5 text-base", // 48px
         icon: "h-10 w-10", // 40×40px (kept for backward compat)
       },
       shape: {

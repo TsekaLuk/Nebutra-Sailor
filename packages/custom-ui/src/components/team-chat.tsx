@@ -95,7 +95,7 @@ function Avatar({ src, alt, isOnline, size = "md" }: AvatarProps) {
         <span
           className={cn(
             "absolute bottom-0 right-0 w-3 h-3 rounded-full ring-2 ring-white dark:ring-black",
-            isOnline ? "bg-green-500" : "bg-gray-400",
+            isOnline ? "bg-green-500" : "bg-[var(--neutral-8)]",
           )}
         />
       )}
@@ -172,12 +172,12 @@ export function TeamChat({
   return (
     <div
       className={cn(
-        "w-full max-w-5xl mx-auto p-6 bg-white dark:bg-black rounded-3xl shadow-lg flex flex-col h-[550px] border border-gray-300 dark:border-gray-700",
+        "w-full max-w-5xl mx-auto p-6 bg-white dark:bg-black rounded-[var(--radius-3xl)] shadow-lg flex flex-col h-[550px] border border-[var(--neutral-7)]",
         className,
       )}
     >
       {/* Header */}
-      <header className="flex justify-between items-center border-b border-gray-300 dark:border-gray-700 pb-3 mb-6">
+      <header className="flex justify-between items-center border-b border-[var(--neutral-7)] pb-3 mb-6">
         <div className="flex items-center gap-3">
           <Users className="w-8 h-8 text-black dark:text-white" />
           <div>
@@ -185,7 +185,7 @@ export function TeamChat({
               {chatName}
             </h2>
             {tagline && (
-              <p className="italic text-sm text-gray-600 dark:text-gray-400">
+              <p className="italic text-sm text-[var(--neutral-10)]">
                 {tagline}
               </p>
             )}
@@ -194,16 +194,16 @@ export function TeamChat({
         <button
           aria-label="More options"
           onClick={onMoreOptions}
-          className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition"
+          className="p-2 rounded-[var(--radius-lg)] hover:bg-[var(--neutral-3)] transition"
         >
-          <MoreHorizontal className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+          <MoreHorizontal className="w-6 h-6 text-[var(--neutral-10)]" />
         </button>
       </header>
 
       {/* Body */}
-      <main className="flex flex-1 overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
+      <main className="flex flex-1 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--neutral-7)]">
         {/* Participants List */}
-        <aside className="w-56 bg-gray-50 dark:bg-gray-900 border-r border-gray-300 dark:border-gray-700 p-4 overflow-y-auto">
+        <aside className="w-56 bg-[var(--neutral-2)] border-r border-[var(--neutral-7)] p-4 overflow-y-auto">
           {uniqueSenders.map((sender) => {
             const isSelected = selectedSender === sender.name;
             return (
@@ -213,10 +213,10 @@ export function TeamChat({
                   setSelectedSender(isSelected ? null : sender.name)
                 }
                 className={cn(
-                  "flex items-center gap-3 w-full p-3 mb-3 rounded-lg transition-colors",
+                  "flex items-center gap-3 w-full p-3 mb-3 rounded-[var(--radius-lg)] transition-colors",
                   isSelected
                     ? "bg-black dark:bg-white text-white dark:text-black"
-                    : "hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-900 dark:text-gray-300",
+                    : "hover:bg-[var(--neutral-4)] text-[var(--neutral-12)]",
                 )}
               >
                 <Avatar
@@ -235,14 +235,14 @@ export function TeamChat({
         {/* Messages */}
         <section className="flex-1 p-6 overflow-y-auto bg-white dark:bg-black">
           {filteredMessages.length === 0 ? (
-            <p className="text-center text-gray-500 dark:text-gray-400">
+            <p className="text-center text-[var(--neutral-9)]">
               No messages to display.
             </p>
           ) : (
             filteredMessages.map((message) => (
               <div
                 key={message.id}
-                className="mb-6 last:mb-0 group border-b border-gray-200 dark:border-gray-800 pb-4"
+                className="mb-6 last:mb-0 group border-b border-[var(--neutral-6)] pb-4"
               >
                 <div className="flex items-center gap-4 mb-2">
                   <Avatar
@@ -253,15 +253,15 @@ export function TeamChat({
                     <p className="font-semibold text-black dark:text-white">
                       {message.sender.name}
                     </p>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                    <span className="text-xs text-[var(--neutral-9)]">
                       {message.timestamp}
                     </span>
                   </div>
                 </div>
-                <p className="text-gray-800 dark:text-gray-200 text-lg mb-1">
+                <p className="text-[var(--neutral-12)] text-lg mb-1">
                   {message.content}
                 </p>
-                <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+                <div className="flex items-center justify-between text-sm text-[var(--neutral-10)]">
                   <div className="flex items-center gap-1">
                     {message.status === "read" && (
                       <CheckCheck className="w-5 h-5 text-green-500" />
@@ -279,11 +279,11 @@ export function TeamChat({
                           onReactionClick?.(message.id, reaction.emoji)
                         }
                         className={cn(
-                          "px-2 py-1 rounded-md text-sm transition-colors",
+                          "px-2 py-1 rounded-[var(--radius-md)] text-sm transition-colors",
                           reaction.reacted
-                            ? "bg-gray-300 dark:bg-gray-700 text-black dark:text-white"
-                            : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400",
-                          "hover:bg-gray-200 dark:hover:bg-gray-600",
+                            ? "bg-[var(--neutral-5)] text-black dark:text-white"
+                            : "bg-[var(--neutral-3)] text-[var(--neutral-11)]",
+                          "hover:bg-[var(--neutral-4)]",
                         )}
                       >
                         {reaction.emoji} {reaction.count}
@@ -298,12 +298,12 @@ export function TeamChat({
       </main>
 
       {/* Footer */}
-      <footer className="mt-6 flex items-center gap-4 border-t border-gray-300 dark:border-gray-700 pt-4">
+      <footer className="mt-6 flex items-center gap-4 border-t border-[var(--neutral-7)] pt-4">
         <button
           aria-label="Add emoji"
-          className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+          className="p-3 rounded-full bg-[var(--neutral-3)] hover:bg-[var(--neutral-4)] transition"
         >
-          <SmilePlus className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+          <SmilePlus className="w-6 h-6 text-[var(--neutral-10)]" />
         </button>
         <input
           type="text"
@@ -312,7 +312,7 @@ export function TeamChat({
           onKeyDown={handleKeyDown}
           placeholder={inputPlaceholder}
           className={cn(
-            "flex-1 px-5 py-3 rounded-full border border-gray-300 dark:border-gray-700",
+            "flex-1 px-5 py-3 rounded-full border border-[var(--neutral-7)]",
             "bg-white dark:bg-black text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400",
             "focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition",
           )}

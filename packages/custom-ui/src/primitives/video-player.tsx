@@ -222,7 +222,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   return (
     <motion.div
       className={cn(
-        "relative mx-auto w-full max-w-4xl overflow-hidden rounded-xl bg-black/60 shadow-lg backdrop-blur-sm",
+        "relative mx-auto w-full max-w-4xl overflow-hidden rounded-[var(--radius-xl)] bg-black/60 shadow-lg backdrop-blur-sm",
         className,
       )}
       initial={{ opacity: 0, y: 20 }}
@@ -247,7 +247,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       <AnimatePresence>
         {showControls && (
           <motion.div
-            className="absolute bottom-0 left-0 right-0 m-2 mx-auto max-w-xl rounded-2xl bg-black/60 p-4 backdrop-blur-md"
+            className="absolute bottom-0 left-0 right-0 m-2 mx-auto max-w-xl rounded-[var(--radius-2xl)] bg-black/60 p-4 backdrop-blur-md"
             initial={{ y: 20, opacity: 0, filter: "blur(10px)" }}
             animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
             exit={{ y: 20, opacity: 0, filter: "blur(10px)" }}

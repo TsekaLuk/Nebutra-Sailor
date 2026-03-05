@@ -93,7 +93,7 @@ export function FeatureCardsSection({
   return (
     <section
       className={cn(
-        "bg-zinc-50 py-16 dark:bg-transparent md:py-32",
+        "bg-[var(--neutral-2)] py-16 dark:bg-transparent md:py-32",
         className
       )}
     >

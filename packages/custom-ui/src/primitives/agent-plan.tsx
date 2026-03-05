@@ -334,7 +334,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
       )}
     >
       <motion.div
-        className="overflow-hidden rounded-lg border border-border bg-card shadow"
+        className="overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0, transition: { duration: 0.3 } }}
       >
@@ -355,7 +355,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                   >
                     {/* Task row */}
                     <motion.div
-                      className="group flex items-center rounded-md px-3 py-1.5"
+                      className="group flex items-center rounded-[var(--radius-md)] px-3 py-1.5"
                       whileHover={{ backgroundColor: "rgba(0,0,0,0.03)" }}
                     >
                       <motion.div
@@ -438,7 +438,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                                   }
                                 >
                                   <motion.div
-                                    className="flex flex-1 items-center rounded-md p-1"
+                                    className="flex flex-1 items-center rounded-[var(--radius-md)] p-1"
                                     whileHover={{
                                       backgroundColor: "rgba(0,0,0,0.03)",
                                     }}
