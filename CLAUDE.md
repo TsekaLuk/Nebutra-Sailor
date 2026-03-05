@@ -22,8 +22,9 @@ apps/
 
 packages/
   ui/             PRIMARY component library — Radix + HeroUI + Lobe UI + layout + framer-motion
+  tokens/         Runtime design tokens (CSS variables) + next-themes ThemeProvider  ★ SOURCE OF TRUTH
   brand/          Brand colors, gradients, motion language (VI manual)
-  theme/          CSS-only multi-theme engine (data-theme attribute, 6 themes)
+  theme/          CSS-only multi-theme engine (data-theme attribute, 6 oklch themes)
   icons/          541 Geist icons as tree-shakable TSX components
   preset/         Feature-based SaaS starter config system
 ```
@@ -45,8 +46,11 @@ import { PageHeader, EmptyState, LoadingState, ErrorState } from "@nebutra/ui/la
 import { Search, Settings } from "@nebutra/icons";
 import { ChevronRight } from "lucide-react";
 
-// Theme — always from @nebutra/theme
-import { ThemeProvider, useTheme } from "@nebutra/theme";
+// Theme switching (light/dark) — from @nebutra/tokens
+import { ThemeProvider, useTheme } from "@nebutra/tokens";
+
+// Lobe UI theme wrapper — from @nebutra/ui
+import { NebutraThemeProvider } from "@nebutra/ui";
 
 // NEVER import from @primer/react — it has been removed
 ```
@@ -212,7 +216,7 @@ Every interactive component must have:
 ### Step 2: File structure
 
 ```
-src/primitives/
+src/components/
   my-component.tsx          ← component implementation
   my-component.stories.tsx  ← Storybook stories (REQUIRED)
   index.ts                  ← re-export (update existing file)
@@ -241,7 +245,7 @@ export const AllVariants: Story = { render: () => ( /* showcase */ ) };
 
 ### Step 4: Export from index.ts
 
-After creating the component, add to `packages/custom-ui/src/primitives/index.ts`:
+After creating the component, add to `packages/ui/src/components/index.ts`:
 ```ts
 export { MyComponent, type MyComponentProps } from "./my-component";
 ```
@@ -250,15 +254,15 @@ export { MyComponent, type MyComponentProps } from "./my-component";
 
 ## Rebranding (no Figma required)
 
-To change the brand colors, edit `packages/theme/themes.css`.
-The entire design system cascades from the CSS custom properties defined there.
+To change the brand colors:
+1. Edit `packages/tokens/styles.css` — the runtime token source of truth
+2. Edit `packages/brand/src/` — the brand primitive definitions
+3. Optionally edit `packages/theme/themes.css` — for multi-theme presets
 
 Or use the palette generator:
 ```bash
 node scripts/generate-palette.mjs --primary=#7C3AED --secondary=#F59E0B
 ```
-
-This generates a complete `brand-override.css` from any two hex colors.
 
 ---
 
@@ -280,6 +284,40 @@ import { HeroNewComponent } from "@heroui/new-component";
 // ❌ Never create a component without a Storybook story
 // ❌ Never use console.log in production code (use @nebutra/logger)
 // ❌ Never hardcode secrets or API keys
+```
+
+---
+
+## Token Architecture
+
+```
+@nebutra/brand    → Brand primitives (color definitions, motion language)
+                     Source data — not imported at runtime by apps
+                     ↓
+@nebutra/tokens   → Runtime CSS variables (★ SINGLE SOURCE OF TRUTH)
+                     @import "@nebutra/tokens/styles.css" in each app's globals.css
+                     Light/dark mode, 12-step color scales, brand gradients
+                     ThemeProvider + useTheme re-exported from next-themes
+                     ↓
+@nebutra/theme    → Multi-theme presets (oklch, 6 variants)
+                     Product feature: neon, gradient, dark-dense, minimal, vibrant, ocean
+                     Used by the SaaS preset system
+                     ↓
+@nebutra/ui       → Component library
+                     Components use CSS variables (var(--color-primary), etc.)
+                     NebutraThemeProvider wraps Lobe UI with brand tokens (internal bridge)
+```
+
+**In app code, always use CSS variables from `@nebutra/tokens`:**
+```tsx
+// ✅ Tailwind classes from tokens
+<div className="bg-primary text-foreground border-border" />
+
+// ✅ CSS variables
+<div style={{ color: "var(--color-primary)" }} />
+
+// ❌ Never import JS hex tokens from @nebutra/ui/theme
+import { colors } from "@nebutra/ui/theme"; // deprecated — internal only
 ```
 
 ---
