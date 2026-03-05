@@ -1,10 +1,22 @@
 import { Suspense } from "react";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-export const experimental_ppr = true;
-import { BarChart3, Activity, UserPlus, Rocket, Coins, Database } from "lucide-react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
-import { Card, EmptyState, ErrorState, LoadingState, PageHeader } from "@nebutra/design-system/components";
+import {
+  BarChart3,
+  Activity,
+  UserPlus,
+  Rocket,
+  Coins,
+  Database,
+} from "lucide-react";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import {
+  Card,
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  PageHeader,
+} from "@nebutra/design-system/components";
 import { getAuth, getUser } from "@/lib/auth";
 import { getQueryClient } from "@/lib/query-client";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
@@ -41,10 +53,9 @@ async function DashboardContent() {
     queryFn: () => getGrowthSummary(tenantId),
   });
 
-  const summary = queryClient.getQueryData<Awaited<ReturnType<typeof getGrowthSummary>>>([
-    "growth-summary",
-    tenantId,
-  ]);
+  const summary = queryClient.getQueryData<
+    Awaited<ReturnType<typeof getGrowthSummary>>
+  >(["growth-summary", tenantId]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -66,7 +77,10 @@ async function DashboardContent() {
 
       {!summary ? (
         <AnimateIn preset="fadeUp">
-          <ErrorState title="Unable to load dashboard data" message="Please refresh to retry." />
+          <ErrorState
+            title="Unable to load dashboard data"
+            message="Please refresh to retry."
+          />
         </AnimateIn>
       ) : !summary.day ? (
         <AnimateIn preset="fadeUp">
@@ -90,7 +104,10 @@ async function DashboardContent() {
             </Card>
           </AnimateIn>
 
-          <AnimateInGroup stagger="fast" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <AnimateInGroup
+            stagger="fast"
+            className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+          >
             {METRICS.map(({ key, label, icon: Icon }) => (
               <AnimateIn key={key} preset="fadeUp">
                 <Card className="p-4 sm:p-6">
@@ -103,7 +120,9 @@ async function DashboardContent() {
                   <p className="mt-3 text-3xl font-semibold text-neutral-12 dark:text-white">
                     {formatValue(summary[key])}
                   </p>
-                  <p className="mt-1 text-xs text-neutral-10 dark:text-white/60">Latest day</p>
+                  <p className="mt-1 text-xs text-neutral-10 dark:text-white/60">
+                    Latest day
+                  </p>
                 </Card>
               </AnimateIn>
             ))}
@@ -117,7 +136,10 @@ async function DashboardContent() {
                   <Coins className="h-4 w-4 text-blue-10 dark:text-cyan-9" />
                 </div>
                 <p className="mt-3 text-3xl font-semibold text-neutral-12 dark:text-white">
-                  ${summary.revenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                  $
+                  {summary.revenue.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })}
                 </p>
                 <p className="mt-1 text-xs text-neutral-10 dark:text-white/60">
                   Latest day (USD)
@@ -132,8 +154,9 @@ async function DashboardContent() {
         <AnimateIn preset="fadeUp">
           <Card className="mt-6 border-[hsl(var(--warning)/0.35)] bg-[hsl(var(--warning)/0.12)] p-4 text-warning-foreground">
             <p className="text-sm">
-              Clerk authentication is not configured. Set `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
-              and `CLERK_SECRET_KEY` to enable auth.
+              Clerk authentication is not configured. Set
+              `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` to
+              enable auth.
             </p>
           </Card>
         </AnimateIn>
@@ -142,7 +165,7 @@ async function DashboardContent() {
   );
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
   return (
     <section className="mx-auto w-full max-w-7xl">
       <Suspense fallback={<LoadingState message="Loading dashboard data…" />}>

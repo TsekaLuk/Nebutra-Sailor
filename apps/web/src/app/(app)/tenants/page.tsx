@@ -1,9 +1,11 @@
 import { Suspense } from "react";
-import { AnimateIn } from "@nebutra/custom-ui/primitives";
-import { Card, LoadingState, PageHeader } from "@nebutra/design-system/components";
+import { AnimateIn } from "@nebutra/ui/primitives";
+import {
+  Card,
+  LoadingState,
+  PageHeader,
+} from "@nebutra/design-system/components";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
-
-export const experimental_ppr = true;
 
 async function TenantsContent() {
   const tenantId = process.env.DEFAULT_DASHBOARD_TENANT_ID || "demo_org";
@@ -12,7 +14,10 @@ async function TenantsContent() {
   return (
     <>
       <AnimateIn preset="fadeUp">
-        <PageHeader title="Tenants" description="Workspace health and tenant-level metrics." />
+        <PageHeader
+          title="Tenants"
+          description="Workspace health and tenant-level metrics."
+        />
       </AnimateIn>
 
       <AnimateIn preset="fadeUp">
@@ -40,15 +45,22 @@ async function TenantsContent() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-neutral-10 dark:text-white/60">Active Users</dt>
+                  <dt className="text-neutral-10 dark:text-white/60">
+                    Active Users
+                  </dt>
                   <dd className="font-medium text-neutral-12 dark:text-white">
                     {summary.activeUsers.toLocaleString()}
                   </dd>
                 </div>
                 <div className="min-[420px]:col-span-2">
-                  <dt className="text-neutral-10 dark:text-white/60">Revenue</dt>
+                  <dt className="text-neutral-10 dark:text-white/60">
+                    Revenue
+                  </dt>
                   <dd className="font-medium text-neutral-12 dark:text-white">
-                    ${summary.revenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    $
+                    {summary.revenue.toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })}
                   </dd>
                 </div>
               </dl>
@@ -65,7 +77,9 @@ async function TenantsContent() {
             </div>
             <div className="grid grid-cols-12 items-center px-4 py-4 text-sm">
               <div className="col-span-4">
-                <p className="font-medium text-neutral-12 dark:text-white">{summary.tenantId}</p>
+                <p className="font-medium text-neutral-12 dark:text-white">
+                  {summary.tenantId}
+                </p>
                 <p className="text-xs text-neutral-10 dark:text-white/60">
                   Snapshot: {summary.day ?? "N/A"}
                 </p>
@@ -82,7 +96,10 @@ async function TenantsContent() {
                 {summary.activeUsers.toLocaleString()}
               </div>
               <div className="col-span-2 text-neutral-12 dark:text-white">
-                ${summary.revenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                $
+                {summary.revenue.toLocaleString(undefined, {
+                  maximumFractionDigits: 2,
+                })}
               </div>
             </div>
           </div>
@@ -92,7 +109,7 @@ async function TenantsContent() {
   );
 }
 
-export default function TenantsPage() {
+export default async function TenantsPage() {
   return (
     <section className="mx-auto w-full max-w-7xl" aria-label="Tenants">
       <Suspense fallback={<LoadingState message="Loading tenant health..." />}>

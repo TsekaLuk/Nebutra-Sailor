@@ -1,9 +1,12 @@
 import { Suspense } from "react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
-import { Card, EmptyState, LoadingState, PageHeader } from "@nebutra/design-system/components";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import {
+  Card,
+  EmptyState,
+  LoadingState,
+  PageHeader,
+} from "@nebutra/design-system/components";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
-
-export const experimental_ppr = true;
 
 function toPercent(numerator: number, denominator: number) {
   if (!denominator) return "0.0%";
@@ -24,7 +27,8 @@ async function AnalyticsContent() {
 
   const activationRate = toPercent(summary.activations, summary.signups);
   const conversionRate = toPercent(summary.conversions, summary.activations);
-  const arpu = summary.activeUsers > 0 ? summary.revenue / summary.activeUsers : 0;
+  const arpu =
+    summary.activeUsers > 0 ? summary.revenue / summary.activeUsers : 0;
 
   return (
     <>
@@ -45,10 +49,15 @@ async function AnalyticsContent() {
           </Card>
         </AnimateIn>
       ) : (
-        <AnimateInGroup stagger="fast" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <AnimateInGroup
+          stagger="fast"
+          className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        >
           <AnimateIn preset="fadeUp">
             <Card className="p-4 sm:p-6">
-              <p className="text-sm text-neutral-11 dark:text-white/70">Activation Rate</p>
+              <p className="text-sm text-neutral-11 dark:text-white/70">
+                Activation Rate
+              </p>
               <p className="mt-2 text-3xl font-semibold text-neutral-12 dark:text-white">
                 {activationRate}
               </p>
@@ -60,7 +69,9 @@ async function AnalyticsContent() {
 
           <AnimateIn preset="fadeUp">
             <Card className="p-4 sm:p-6">
-              <p className="text-sm text-neutral-11 dark:text-white/70">Conversion Rate</p>
+              <p className="text-sm text-neutral-11 dark:text-white/70">
+                Conversion Rate
+              </p>
               <p className="mt-2 text-3xl font-semibold text-neutral-12 dark:text-white">
                 {conversionRate}
               </p>
@@ -84,7 +95,9 @@ async function AnalyticsContent() {
 
           <AnimateIn preset="fadeUp">
             <Card className="p-4 sm:p-6">
-              <p className="text-sm text-neutral-11 dark:text-white/70">Total Events</p>
+              <p className="text-sm text-neutral-11 dark:text-white/70">
+                Total Events
+              </p>
               <p className="mt-2 text-3xl font-semibold text-neutral-12 dark:text-white">
                 {summary.totalEvents.toLocaleString()}
               </p>
@@ -99,7 +112,7 @@ async function AnalyticsContent() {
   );
 }
 
-export default function AnalyticsPage() {
+export default async function AnalyticsPage() {
   return (
     <section className="mx-auto w-full max-w-7xl" aria-label="Analytics">
       <Suspense fallback={<LoadingState message="Loading analytics..." />}>

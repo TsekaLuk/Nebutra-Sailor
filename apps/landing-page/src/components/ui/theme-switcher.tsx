@@ -1,6 +1,6 @@
 "use client";
 
-import { MonitorIcon, MoonStarIcon, SunIcon } from "lucide-react";
+import { MoonStarIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import type { JSX } from "react";
 import React from "react";
@@ -15,9 +15,9 @@ function ThemeOption({
   onClick,
 }: {
   icon: JSX.Element;
-  value: string;
+  value: "light" | "dark";
   isActive?: boolean;
-  onClick: (value: string) => void;
+  onClick: (value: "light" | "dark") => void;
 }) {
   return (
     <button
@@ -42,9 +42,8 @@ function ThemeOption({
 }
 
 const THEME_OPTIONS = [
-  { icon: <MonitorIcon />, value: "system" },
-  { icon: <SunIcon />, value: "light" },
-  { icon: <MoonStarIcon />, value: "dark" },
+  { icon: <SunIcon />, value: "light" as const },
+  { icon: <MoonStarIcon />, value: "dark" as const },
 ];
 
 function ThemeSwitcher() {
@@ -52,7 +51,7 @@ function ThemeSwitcher() {
   const isMounted = useMount();
 
   if (!isMounted) {
-    return <div className="flex h-8 w-24" />;
+    return <div className="flex h-8 w-16" />;
   }
 
   return (

@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { Menu, X, Github } from "lucide-react";
 import { Logo, Logomark } from "@nebutra/brand";
 import { cn } from "@/lib/utils";
+import { useMount } from "@/hooks/useMount";
 import { useTranslations } from "next-intl";
 import { env } from "@/lib/env";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
@@ -19,10 +20,11 @@ const APP_URL = env.NEXT_PUBLIC_APP_URL;
 export function Navbar() {
   const t = useTranslations("nav");
   const { resolvedTheme } = useTheme();
+  const isMounted = useMount();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = !isMounted || resolvedTheme !== "light";
 
   const navLinks = [
     { label: t("features"), href: "#features" },
@@ -59,7 +61,12 @@ export function Navbar() {
             variant={isDark ? "inverse" : "color"}
             className="md:hidden"
           />
-          <Logo variant="en" size={150} inverted={isDark} className="hidden md:block" />
+          <Logo
+            variant="en"
+            size={150}
+            inverted={isDark}
+            className="hidden md:block"
+          />
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -100,7 +107,11 @@ export function Navbar() {
             className="rounded-lg p-2 text-neutral-11 transition-colors hover:text-neutral-12 dark:text-white/70 dark:hover:text-white"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
       </div>

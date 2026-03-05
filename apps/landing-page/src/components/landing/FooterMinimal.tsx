@@ -5,6 +5,7 @@ import { Logo } from "@nebutra/brand";
 import { footerContent } from "@/lib/landing-content";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
+import { useMount } from "@/hooks/useMount";
 
 const SOCIAL_ICONS = {
   x: Twitter,
@@ -18,8 +19,9 @@ const SOCIAL_ICONS = {
 export function FooterMinimal() {
   const t = useTranslations("footer");
   const { resolvedTheme } = useTheme();
+  const isMounted = useMount();
   const { social, status } = footerContent;
-  const isDark = resolvedTheme === "dark";
+  const isDark = !isMounted || resolvedTheme !== "light";
 
   const links = [
     { label: t("links.product"), href: "/features" },
@@ -33,7 +35,10 @@ export function FooterMinimal() {
 
   return (
     <footer className="relative w-full overflow-hidden border-t border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] py-12 dark:border-white/10 dark:bg-black">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px" style={{ background: "var(--brand-gradient)" }} />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{ background: "var(--brand-gradient)" }}
+      />
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           {/* Brand */}

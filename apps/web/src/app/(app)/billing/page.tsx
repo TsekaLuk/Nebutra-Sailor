@@ -1,9 +1,12 @@
 import { Suspense } from "react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
-import { Card, EmptyState, LoadingState, PageHeader } from "@nebutra/design-system/components";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import {
+  Card,
+  EmptyState,
+  LoadingState,
+  PageHeader,
+} from "@nebutra/design-system/components";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
-
-export const experimental_ppr = true;
 
 function toCurrency(value: number) {
   return value.toLocaleString(undefined, {
@@ -21,7 +24,10 @@ async function BillingContent() {
   return (
     <>
       <AnimateIn preset="fadeUp">
-        <PageHeader title="Billing" description="Revenue health, invoicing, and plan status." />
+        <PageHeader
+          title="Billing"
+          description="Revenue health, invoicing, and plan status."
+        />
       </AnimateIn>
 
       {!summary.day ? (
@@ -42,7 +48,9 @@ async function BillingContent() {
               </h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <div>
-                  <p className="text-sm text-neutral-11 dark:text-white/70">Today</p>
+                  <p className="text-sm text-neutral-11 dark:text-white/70">
+                    Today
+                  </p>
                   <p className="mt-1 text-2xl font-semibold text-neutral-12 dark:text-white">
                     {toCurrency(summary.revenue)}
                   </p>
@@ -67,7 +75,9 @@ async function BillingContent() {
               <h2 className="text-base font-semibold text-neutral-12 dark:text-white">
                 Plan
               </h2>
-              <p className="mt-2 text-sm text-neutral-11 dark:text-white/70">Starter</p>
+              <p className="mt-2 text-sm text-neutral-11 dark:text-white/70">
+                Starter
+              </p>
               <div className="mt-4 space-y-2 text-sm text-neutral-11 dark:text-white/70">
                 <p>Seats: 5 included</p>
                 <p>Usage-based overage enabled</p>
@@ -87,10 +97,12 @@ async function BillingContent() {
   );
 }
 
-export default function BillingPage() {
+export default async function BillingPage() {
   return (
     <section className="mx-auto w-full max-w-7xl" aria-label="Billing">
-      <Suspense fallback={<LoadingState message="Loading billing overview..." />}>
+      <Suspense
+        fallback={<LoadingState message="Loading billing overview..." />}
+      >
         <BillingContent />
       </Suspense>
     </section>

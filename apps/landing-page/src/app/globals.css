@@ -1,14 +1,9 @@
 /**
  * Nebutra Landing Page - Global Styles
  *
- * 1. Google Fonts URLs (must be absolute first — CSS spec)
- * 2. Tailwind CSS v4
- * 3. Tokens from @nebutra/tokens (single source of truth)
+ * 1. Tailwind CSS v4
+ * 2. Tokens from @nebutra/tokens (single source of truth)
  */
-
-/* Google Fonts — must precede ALL other rules (CSS spec §6.3) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 /* Tailwind CSS v4 */
 @import "tailwindcss";
