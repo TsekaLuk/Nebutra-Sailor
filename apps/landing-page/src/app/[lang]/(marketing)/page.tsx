@@ -74,13 +74,14 @@ export default async function LocalizedHomePage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  setRequestLocale(lang as Locale);
+  const locale = lang as Locale;
+  setRequestLocale(locale);
 
   return (
     <main id="main-content" className="min-h-screen bg-white dark:bg-black">
       <Navbar />
       <HeroSection />
-      <LogoStrip />
+      <LogoStrip locale={locale} />
       <ProductDemoSection />
       <FeatureCards />
       <WorkflowSection />

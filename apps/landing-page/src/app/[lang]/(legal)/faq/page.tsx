@@ -28,8 +28,9 @@ export default async function FAQPage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  setRequestLocale(lang as Locale);
-  const t = await getTranslations("legalPages");
+  const locale = lang as Locale;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "legalPages" });
 
   const faqStructure = [
     { cat: 0 as const, questions: [0, 1, 2] as const },

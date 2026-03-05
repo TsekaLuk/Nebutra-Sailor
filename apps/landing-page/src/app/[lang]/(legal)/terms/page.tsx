@@ -29,8 +29,9 @@ export default async function TermsOfServicePage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  setRequestLocale(lang as Locale);
-  const t = await getTranslations("legalPages");
+  const locale = lang as Locale;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "legalPages" });
 
   return (
     <article className="prose prose-gray dark:prose-invert max-w-none">

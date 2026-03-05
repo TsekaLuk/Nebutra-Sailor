@@ -1,9 +1,9 @@
 import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 
 interface LangLayoutProps {
   children: React.ReactNode;
@@ -54,10 +54,12 @@ export default async function LangLayout({
     notFound();
   }
 
-  const messages = await getMessages();
+  const locale = lang as Locale;
+  setRequestLocale(locale);
+  const messages = await getMessages({ locale });
 
   return (
-    <NextIntlClientProvider locale={lang} messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
       {children}
     </NextIntlClientProvider>
   );

@@ -13,8 +13,9 @@ export default async function LegalLayout({
   params,
 }: LegalLayoutProps) {
   const { lang } = await params;
-  setRequestLocale(lang as Locale);
-  const t = await getTranslations("legal");
+  const locale = lang as Locale;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "legal" });
 
   return (
     <div className="min-h-screen bg-neutral-1">

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import type { Locale } from "@/i18n/routing";
 import { techStackLogos, getLogoUrl } from "@/lib/landing-content";
 
 /**
@@ -7,8 +8,8 @@ import { techStackLogos, getLogoUrl } from "@/lib/landing-content";
  *
  * No marquee animation — static grid gives a more premium feel (à la Neon, Linear)
  */
-export async function LogoStrip() {
-  const t = await getTranslations("logoStrip");
+export async function LogoStrip({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "logoStrip" });
 
   const logos = techStackLogos.slice(0, 8).map((logo) => ({
     name: logo.name,

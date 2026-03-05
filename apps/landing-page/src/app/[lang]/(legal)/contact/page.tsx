@@ -28,8 +28,9 @@ export default async function ContactPage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  setRequestLocale(lang as Locale);
-  const t = await getTranslations("legalPages");
+  const locale = lang as Locale;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "legalPages" });
 
   const contacts = [
     {
