@@ -1,6 +1,18 @@
 /**
- * Nebutra Design Tokens
- * Unified tokens for Lobe UI + Tailwind + Custom components
+ * @internal — Lobe UI Ant Design Token Bridge
+ *
+ * These hex color values exist ONLY to configure Lobe UI's `customTheme` prop,
+ * which requires JS-level token values (not CSS variables).
+ *
+ * ⚠️  DO NOT import these tokens in app code.
+ *     App code should use CSS variables from `@nebutra/tokens/styles.css`
+ *     (e.g., `var(--color-primary)`, `bg-primary`, `text-neutral-12`)
+ *
+ * Token hierarchy:
+ *   @nebutra/brand          → brand primitives (source data)
+ *   @nebutra/tokens         → runtime CSS variables (light/dark, 12-step scales)
+ *   @nebutra/theme          → multi-theme presets (oklch, 6 variants)
+ *   @nebutra/ui/theme       → THIS FILE: Lobe UI bridge (internal only)
  */
 
 export const colors = {

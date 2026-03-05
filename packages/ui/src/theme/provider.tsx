@@ -1,8 +1,16 @@
 "use client";
 
 /**
- * Nebutra Theme Provider
- * Wraps Lobe UI ThemeProvider with Nebutra design tokens
+ * Nebutra Theme Provider — Lobe UI integration bridge
+ *
+ * Wraps Lobe UI's ThemeProvider with Nebutra brand tokens.
+ * This provider handles Lobe UI / Ant Design theming only.
+ *
+ * For app-level light/dark mode switching, use:
+ *   import { ThemeProvider } from "@nebutra/tokens";
+ *
+ * For CSS-variable-based tokens (Tailwind, custom components), use:
+ *   @import "@nebutra/tokens/styles.css";
  */
 
 import { ThemeProvider as LobeThemeProvider } from "@lobehub/ui";

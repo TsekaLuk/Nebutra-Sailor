@@ -78,21 +78,32 @@ import { Settings, Search, Menu, Plus, Check } from "@nebutra/ui/icons";
 
 ### Design Tokens
 
-```tsx
-import { tokens, colors } from "@nebutra/ui/theme";
+Runtime design tokens live in `@nebutra/tokens/styles.css` (CSS variables).
+Use Tailwind classes or `var()` in your components:
 
-// Use in styled-components, CSS-in-JS, etc.
-const primaryColor = colors.primary[600]; // #2563EB
+```tsx
+// Tailwind classes (preferred)
+<div className="bg-primary text-foreground border-border" />
+
+// CSS variables (when Tailwind isn't available)
+<div style={{ color: "var(--color-primary)" }} />
 ```
+
+> **Note:** `@nebutra/ui/theme` also exports JS token objects (`tokens`, `colors`, etc.)
+> but these are an internal Lobe UI bridge and are deprecated for app use.
 
 ## Exports
 
 | Path | Description |
 |------|-------------|
-| `@nebutra/ui` | Main exports (theme + common components/icons) |
-| `@nebutra/ui/components` | All Lobe UI components |
+| `@nebutra/ui` | Main exports (theme provider + common components/icons) |
+| `@nebutra/ui/components` | All Lobe UI components + AnimateIn |
+| `@nebutra/ui/layout` | Layout components (PageHeader, EmptyState, etc.) |
 | `@nebutra/ui/icons` | All icons (Lobe + Lucide) |
-| `@nebutra/ui/theme` | Design tokens and theme provider |
+| `@nebutra/ui/theme` | Lobe UI theme provider (NebutraThemeProvider) |
+| `@nebutra/ui/primitives` | Design primitive tokens (spacing, typography, etc.) |
+| `@nebutra/ui/typography` | Typography system (font families, type styles) |
+| `@nebutra/ui/utils` | Utilities (cn, etc.) |
 
 ## Available AI Icons
 
@@ -113,20 +124,13 @@ const primaryColor = colors.primary[600]; // #2563EB
 - **Yi**: `Yi`
 - And many more from `@lobehub/icons`
 
-## Design Tokens
+## Token Architecture
 
-```ts
-colors: {
-  primary: { 50-950 },    // Blue
-  secondary: { 50-950 },  // Purple
-  neutral: { 50-950 },    // Slate
-  success, warning, error, info
-}
-
-spacing: { xs, sm, md, lg, xl, 2xl, 3xl }
-borderRadius: { none, sm, md, lg, xl, 2xl, full }
-shadows: { sm, md, lg, xl }
-typography: { fontFamily, fontSize }
+```
+@nebutra/brand    → Brand primitives (color definitions, motion language)
+@nebutra/tokens   → Runtime CSS variables (light/dark, 12-step scales)  ★ SOURCE OF TRUTH
+@nebutra/theme    → Multi-theme presets (6 oklch variants for SaaS)
+@nebutra/ui       → Component library (consumes tokens via CSS variables)
 ```
 
 ## License

@@ -1,11 +1,17 @@
 /**
  * @nebutra/ui
  *
- * Unified UI package built on Lobe UI + Lucide Icons + Nebutra design tokens
+ * Unified UI package built on Lobe UI + Lucide Icons + Nebutra design tokens.
+ *
+ * Token architecture:
+ *   @nebutra/brand    → brand primitives (source data)
+ *   @nebutra/tokens   → runtime CSS variables (@import styles.css)
+ *   @nebutra/theme    → multi-theme presets (oklch, 6 variants)
+ *   @nebutra/ui/theme → Lobe UI Ant Design bridge (internal)
  *
  * @example
  * ```tsx
- * import { NebutraThemeProvider, tokens } from "@nebutra/ui";
+ * import { NebutraThemeProvider } from "@nebutra/ui";
  * import { Button, ChatList } from "@nebutra/ui/components";
  * import { OpenAI, Settings } from "@nebutra/ui/icons";
  *
@@ -20,9 +26,15 @@
  * ```
  */
 
-// Theme exports
+// Theme — Lobe UI integration
+export { NebutraThemeProvider } from "./theme/index.js";
+export type { NebutraThemeProviderProps, ThemeMode } from "./theme/index.js";
+
+/**
+ * @deprecated — Use CSS variables from `@nebutra/tokens/styles.css` instead.
+ * These JS token objects are an internal Lobe UI bridge and will be removed in v1.0.
+ */
 export {
-  NebutraThemeProvider,
   tokens,
   colors,
   spacing,
@@ -30,8 +42,7 @@ export {
   shadows,
   typography,
 } from "./theme/index.js";
-
-export type { NebutraThemeProviderProps, NebutraTokens } from "./theme/index.js";
+export type { NebutraTokens } from "./theme/index.js";
 
 // Re-export everything from subpaths for convenience
 // (Users can also import directly from subpaths for smaller bundles)
