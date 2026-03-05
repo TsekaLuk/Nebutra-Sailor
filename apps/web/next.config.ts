@@ -36,9 +36,8 @@ const nextConfig: NextConfig = {
   // Keep Prisma and bcryptjs out of the client bundle — they are Node-only.
   serverExternalPackages: ["@prisma/client", "bcryptjs"],
 
-  // Tree-shake large icon/component packages at the import level.
-  // Next.js rewrites barrel imports to per-file imports automatically.
-  optimizePackageImports: ["@nebutra/ui", "@nebutra/icons", "lucide-react"],
+  // Enable Partial Prerendering — Next.js 16 merged experimental.ppr into cacheComponents.
+  cacheComponents: true,
 
   // Workspace packages: src/-exporting packages need this for SWC to process
   // TypeScript; dist/-exporting packages need it for "use client" detection.
@@ -47,12 +46,6 @@ const nextConfig: NextConfig = {
     "@nebutra/design-system",
     "@nebutra/theme",
   ],
-
-  experimental: {
-    ppr: "incremental",
-    cacheComponents: true,
-    reactCompiler: true,
-  },
 
   // Attach security headers to every route.
   async headers() {

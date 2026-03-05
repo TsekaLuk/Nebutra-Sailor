@@ -44,14 +44,8 @@ const nextConfig: NextConfig = {
   // Produces a minimal standalone server bundle under .next/standalone.
   output: "standalone",
 
-  // Tree-shake large icon/component packages at the import level.
-  optimizePackageImports: ["@nebutra/ui", "@nebutra/icons", "lucide-react"],
-
-  experimental: {
-    ppr: "incremental",
-    cacheComponents: true,
-    reactCompiler: true,
-  },
+  // Enable Partial Prerendering — Next.js 16 merged experimental.ppr into cacheComponents.
+  cacheComponents: true,
 
   // Workspace packages: src/-exporting packages need this for SWC to process
   // TypeScript; dist/-exporting packages need it for "use client" detection.
