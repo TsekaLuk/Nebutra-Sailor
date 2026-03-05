@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { AnimateIn } from "@nebutra/ui/primitives";
+import { AnimateIn } from "./AnimateIn";
 import { useTranslations } from "next-intl";
 import { heroContent } from "@/lib/landing-content";
 import { CommandInstallBox } from "./CommandInstallBox";

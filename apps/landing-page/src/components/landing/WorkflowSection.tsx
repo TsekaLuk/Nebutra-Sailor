@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import { AnimateIn, AnimateInGroup } from "./AnimateIn";
 
 const STEPS = [
   {

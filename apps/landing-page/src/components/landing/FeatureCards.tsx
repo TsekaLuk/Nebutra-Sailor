@@ -1,7 +1,7 @@
 "use client";
 
 import { Server, Zap, CreditCard } from "lucide-react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import { AnimateIn, AnimateInGroup } from "./AnimateIn";
 import { useTranslations } from "next-intl";
 
 const featureCodes = [

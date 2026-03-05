@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import { AnimateIn, AnimateInGroup } from "./AnimateIn";
 import { env } from "@/lib/env";
 
 const LIVE_DEMOS = [
