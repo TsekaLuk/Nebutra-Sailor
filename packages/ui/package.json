@@ -7,18 +7,9 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./primitives": "./src/primitives/index.ts",
-    "./primitives/*": "./src/primitives/*.tsx",
-    "./components/*": "./src/components/*.tsx",
-    "./layouts/*": "./src/layouts/*.tsx",
-    "./widgets/*": "./src/widgets/*.tsx",
-    "./patterns": "./src/patterns/index.ts",
-    "./marketing": "./src/marketing/index.ts",
-    "./marketing/*": "./src/marketing/*.tsx",
-    "./styles/globals.css": "./src/styles/globals.css",
-    "./styles/brand-override.css": "./src/styles/brand-override.css",
-    "./tailwind.preset": "./src/tailwind.preset.ts",
-    "./lib/utils": "./src/utils/cn.ts"
+    "./components": "./src/components/index.ts",
+    "./icons": "./src/icons/index.ts",
+    "./theme": "./src/theme/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

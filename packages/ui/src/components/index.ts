@@ -93,3 +93,11 @@ export type {
   ChatListProps,
   ChatMessage,
 } from "@lobehub/ui";
+
+// Animation
+export {
+  AnimateIn,
+  AnimateInGroup,
+  type AnimateInProps,
+  type AnimateInGroupProps,
+} from "./animate-in";

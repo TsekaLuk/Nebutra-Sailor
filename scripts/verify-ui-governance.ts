@@ -275,18 +275,18 @@ function verifyDependencyBoundaries(policy: GovernancePolicy) {
     `Dependency boundary violation (deep cross-package import):\n${importViolations.map((item) => `- ${item}`).join("\n")}`,
   );
 
-  const customUiPackage = JSON.parse(
-    read("packages/custom-ui/package.json"),
+  const uiPackage = JSON.parse(
+    read("packages/ui/package.json"),
   ) as { exports?: Record<string, unknown> };
-  const exportKeys = Object.keys(customUiPackage.exports || {});
-  const allowed = new Set(policy.dependencyBoundaries.customUiAllowedExports);
+  const exportKeys = Object.keys(uiPackage.exports || {});
+  const allowed = new Set(policy.dependencyBoundaries.uiAllowedExports ?? policy.dependencyBoundaries.customUiAllowedExports);
 
   const unexpected = exportKeys.filter((key) => !allowed.has(key));
   const missing = [...allowed].filter((key) => !exportKeys.includes(key));
 
   assert(
     unexpected.length === 0 && missing.length === 0,
-    `custom-ui exports do not match layered allowlist.\nUnexpected:\n${unexpected.map((item) => `- ${item}`).join("\n") || "- (none)"}\nMissing:\n${missing.map((item) => `- ${item}`).join("\n") || "- (none)"}`,
+    `ui exports do not match layered allowlist.\nUnexpected:\n${unexpected.map((item) => `- ${item}`).join("\n") || "- (none)"}\nMissing:\n${missing.map((item) => `- ${item}`).join("\n") || "- (none)"}`,
   );
 }
 

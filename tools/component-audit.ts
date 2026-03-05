@@ -21,13 +21,12 @@ import * as path from "path";
 // Configuration
 const CONFIG = {
   // Directories to scan
-  scanDirs: ["apps", "packages/custom-ui"],
+  scanDirs: ["apps", "packages/ui"],
 
   // Approved internal packages
   approvedPackages: [
     "@nebutra/design-system",
-    "@nebutra/custom-ui",
-    "@nebutra/custom-ui",
+    "@nebutra/ui",
   ],
 
   // Pre-approved external libraries

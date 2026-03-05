@@ -20,7 +20,7 @@
   "tokenFormatBudget": {
     "tokenSurfaces": [
       {
-        "root": "packages/custom-ui/src/tokens",
+        "root": "packages/ui/src/theme",
         "extensions": [".ts", ".tsx"]
       },
       {
@@ -32,12 +32,9 @@
     "maxHslLiterals": 1,
     "minOklchLiterals": 120,
     "allowedHexFiles": [
-      "packages/custom-ui/src/tokens/primitive.ts",
-      "packages/custom-ui/src/tokens/semantic.ts"
+      "packages/ui/src/theme/tokens.ts"
     ],
-    "allowedHslFiles": [
-      "packages/custom-ui/src/tokens/semantic.ts"
-    ]
+    "allowedHslFiles": []
   },
   "motionBoundary": {
     "appSurfaces": [
@@ -45,11 +42,12 @@
       "apps/web/src"
     ],
     "allowedFramerMotionImports": [
-      "apps/landing-page/src/components/landing/AnimateIn.tsx"
+      "apps/landing-page/src/components/landing/AnimateIn.tsx",
+      "packages/ui/src/components/animate-in.tsx"
     ]
   },
   "componentTierCoverage": {
-    "primitivesRoot": "packages/custom-ui/src/primitives",
+    "primitivesRoot": "packages/ui/src/components",
     "tiers": [
       {
         "name": "tier-1",
@@ -77,36 +75,26 @@
       "apps/web/src"
     ],
     "forbiddenImportRegexes": [
-      "^@nebutra\\/[^\\/]+\\/[^\\/]+\\/.+",
-      "^@nebutra\\/custom-ui\\/lib\\/.+"
+      "^@nebutra\\/[^\\/]+\\/[^\\/]+\\/.+"
     ],
-    "customUiAllowedExports": [
+    "uiAllowedExports": [
       ".",
-      "./primitives",
-      "./primitives/*",
-      "./components/*",
-      "./layouts/*",
-      "./widgets/*",
-      "./marketing",
-      "./marketing/*",
-      "./styles/globals.css",
-      "./styles/brand-override.css",
-      "./tailwind.preset",
-      "./lib/utils",
-      "./patterns"
+      "./components",
+      "./icons",
+      "./theme"
     ]
   },
   "budgets": {
     "rawTailwindColors": {
       "description": "Raw Tailwind color utilities (bg-slate-*, text-gray-*, etc.) — use semantic tokens instead",
       "max": 4,
-      "paths": ["packages/custom-ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
+      "paths": ["packages/ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
       "exclude": ["**/*.stories.*", "**/globals.css"]
     },
     "rawTailwindBorderRadius": {
       "description": "Raw Tailwind border-radius utilities — use var(--radius-*) tokens instead",
       "max": 0,
-      "paths": ["packages/custom-ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
+      "paths": ["packages/ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
       "exclude": ["**/*.stories.*"]
     }
   }

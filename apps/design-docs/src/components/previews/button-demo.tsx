@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/components";
 import { Mail, ArrowRight } from "lucide-react";
 
 export function ButtonDemo() {

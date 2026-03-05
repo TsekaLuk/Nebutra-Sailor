@@ -59,7 +59,7 @@ export default tseslint.config(
   // ───────────────────────────────────────────────────────────────────────
   {
     files: [
-      "packages/custom-ui/src/**/*.{ts,tsx}",
+      "packages/ui/src/**/*.{ts,tsx}",
       "apps/web/src/**/*.{ts,tsx}",
       "apps/landing-page/src/**/*.{ts,tsx}",
     ],

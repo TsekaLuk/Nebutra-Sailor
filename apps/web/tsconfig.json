@@ -20,8 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@nebutra/custom-ui": ["../../packages/custom-ui/src/index.ts"],
-      "@nebutra/custom-ui/*": ["../../packages/custom-ui/src/*"]
+      "@nebutra/ui": ["../../packages/ui/src/index.ts"],
+      "@nebutra/ui/*": ["../../packages/ui/src/*"]
     }
   },
   "include": [
