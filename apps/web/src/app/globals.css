@@ -5,14 +5,14 @@
  * 1. Tailwind CSS v4 (must be first)
  * 2. Theme engine from @nebutra/theme (multi-theme tokens)
  * 3. Typography CSS variables from design-system (SSOT for fonts)
- * 4. Theme system from @nebutra/custom-ui (colors, Tailwind config)
+ * 4. Theme system from @nebutra/ui (colors, Tailwind config)
  */
 
 /* Tailwind CSS v4 - must be imported first */
 @import "tailwindcss";
 
-/* Scan @nebutra/custom-ui source for Tailwind classes (dist/ is gitignored, scanner won't see it otherwise) */
-@source "../../node_modules/@nebutra/custom-ui/src";
+/* Scan @nebutra/ui source for Tailwind classes (dist/ is gitignored, scanner won't see it otherwise) */
+@source "../../../../packages/ui/src";
 
 /* Theme engine — multi-theme tokens via data-theme selectors */
 @import "@nebutra/theme/themes.css";
@@ -20,8 +20,8 @@
 /* Typography SSOT - must be imported first to define --font-* variables */
 @import "@nebutra/design-system/typography/fonts.css";
 
-/* Import 21st.dev compatible theme from @nebutra/custom-ui */
-@import "@nebutra/custom-ui/styles/globals.css";
+/* Import 21st.dev compatible theme from @nebutra/ui */
+@import "@nebutra/ui/styles/globals.css";
 
 /* Custom overrides for web app (dashboard) */
 @layer base {

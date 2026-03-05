@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
-@import "@nebutra/custom-ui/styles/globals.css";
+@import "@nebutra/ui/styles/globals.css";
 
-/* Scan custom-ui primitives through node_modules symlink (Tailwind v4 @source for gitignored/external packages) */
-@source "../../node_modules/@nebutra/custom-ui/src";
+/* Scan @nebutra/ui source directly via workspace path (avoids node_modules symlink fragility) */
+@source "../../../../packages/ui/src";

@@ -3,7 +3,11 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
-    "noEmit": true
+    "noEmit": true,
+    "paths": {
+      "@nebutra/ui/src": ["../../packages/ui/src"],
+      "@nebutra/ui/src/*": ["../../packages/ui/src/*"]
+    }
   },
   "include": [".storybook/**/*", "src/**/*"],
   "exclude": ["node_modules", "dist"]

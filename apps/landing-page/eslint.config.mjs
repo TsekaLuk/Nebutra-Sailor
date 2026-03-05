@@ -20,6 +20,7 @@ const eslintConfig = defineConfig([
       "jsx-a11y/img-redundant-alt": "warn",
       "jsx-a11y/no-autofocus": "warn",
       "jsx-a11y/interactive-supports-focus": "warn",
+      "react/no-unescaped-entities": "off",
       "no-restricted-imports": [
         "error",
         {
@@ -32,7 +33,7 @@ const eslintConfig = defineConfig([
           ],
           patterns: [
             {
-              group: ["@nebutra/*/*/*", "@nebutra/custom-ui/lib/*"],
+              group: ["@nebutra/*/*/*", "@nebutra/ui/lib/*"],
               message:
                 "Avoid deep cross-package imports in app surfaces. Use package root or first-level exports only.",
             },

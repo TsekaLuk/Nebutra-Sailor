@@ -48,8 +48,11 @@ const nextConfig: NextConfig = {
     "@nebutra/theme",
   ],
 
-  cacheComponents: true,
-  reactCompiler: true,
+  experimental: {
+    ppr: "incremental",
+    cacheComponents: true,
+    reactCompiler: true,
+  },
 
   // Attach security headers to every route.
   async headers() {
