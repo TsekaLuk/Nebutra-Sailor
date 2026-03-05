@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider } from "@nebutra/theme";
+import { ThemeProvider } from "@nebutra/tokens";
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -8,15 +8,14 @@ interface ProvidersProps {
 
 /**
  * Client-side providers wrapper
- * Uses data-theme attribute so [data-theme="neon"] selectors in themes.css activate correctly.
- * Default is "neon" (brand dark) — matches the default @theme block in themes.css.
+ * Single theme mechanism: class-based dark mode (.dark).
  */
 export function Providers({ children }: ProvidersProps) {
   return (
     <ThemeProvider
-      attribute="data-theme"
-      defaultTheme="neon"
-      themes={["neon", "gradient", "dark-dense", "minimal", "vibrant", "ocean"]}
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
       disableTransitionOnChange
     >
       {children}

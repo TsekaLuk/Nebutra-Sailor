@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider } from "@nebutra/theme";
+import { ThemeProvider } from "@nebutra/tokens";
 
 interface ThemeShellProps {
   children: React.ReactNode;
@@ -9,15 +9,14 @@ interface ThemeShellProps {
 
 /**
  * Client-side theme provider for the web app.
- * Uses data-theme attribute for CSS-only multi-theme system.
- * Default theme is "neon" (dark AI SaaS aesthetic).
+ * Single theme mechanism: class-based dark mode (.dark).
  */
 export function ThemeShell({ children, nonce }: ThemeShellProps) {
   return (
     <ThemeProvider
-      attribute="data-theme"
-      defaultTheme="neon"
-      themes={["neon", "gradient", "dark-dense", "minimal", "vibrant", "ocean"]}
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
       disableTransitionOnChange
       nonce={nonce}
     >

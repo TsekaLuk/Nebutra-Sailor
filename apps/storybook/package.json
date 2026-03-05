@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@nebutra/ui": "workspace:*",
+    "@nebutra/tokens": "workspace:*",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
   },

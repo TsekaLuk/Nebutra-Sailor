@@ -14,7 +14,7 @@ COPY apps/web/package.json ./apps/web/
 
 # Internal workspace packages that @nebutra/web depends on.
 # Derived from the "dependencies" field in apps/web/package.json:
-#   @nebutra/custom-ui, @nebutra/design-system (via custom-ui), @nebutra/theme
+#   @nebutra/custom-ui, @nebutra/design-system (via custom-ui), @nebutra/tokens
 COPY packages/custom-ui/package.json   ./packages/custom-ui/
 COPY packages/theme/package.json       ./packages/theme/
 

@@ -1,7 +1,9 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
-@import "@nebutra/ui/styles/globals.css";
+@import "@nebutra/tokens/styles.css";
 
 /* Scan @nebutra/ui source directly via workspace path (avoids node_modules symlink fragility) */
 @source "../../../../packages/ui/src";
+
+@custom-variant dark (&:is(.dark *));

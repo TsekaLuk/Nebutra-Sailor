@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nebutra/ui": "workspace:*",
+    "@nebutra/tokens": "workspace:*",
     "framer-motion": "^11.0.0",
     "fumadocs-core": "^16.6.9",
     "fumadocs-mdx": "^14.2.9",

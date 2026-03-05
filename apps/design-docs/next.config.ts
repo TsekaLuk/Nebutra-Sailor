@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   transpilePackages: [
     "@nebutra/ui",
     "@nebutra/design-system",
-    "@nebutra/theme",
+    "@nebutra/tokens",
   ],
   reactStrictMode: true,
 };

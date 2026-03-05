@@ -1,5 +1,5 @@
 import type { Preview, StoryFn, StoryContext } from "@storybook/react";
-import "@nebutra/custom-ui/styles/globals.css";
+import "@nebutra/tokens/styles.css";
 
 const preview: Preview = {
   parameters: {

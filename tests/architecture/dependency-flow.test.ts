@@ -22,7 +22,6 @@ const EXCLUDED_PACKAGES = new Set([
   "@nebutra/event-bus",
   "@nebutra/marketing",
   "@nebutra/sanity",
-  "@nebutra/theme",
   "@nebutra/preset",
 ]);
 
@@ -38,9 +37,9 @@ interface DependencyRule {
  * Actual workspace:* deps found in each package (excluding tooling packages):
  *   @nebutra/design-system  (apps/docs-hub/design-system): none
  *   @nebutra/ui             (packages/ui):                  none
- *   @nebutra/custom-ui      (packages/custom-ui):           @nebutra/design-system
- *   @nebutra/web            (apps/web):                     @nebutra/custom-ui, @nebutra/design-system
- *   @nebutra/landing-page   (apps/landing-page):            @nebutra/custom-ui, @nebutra/design-system (+ excluded: brand, marketing, sanity, theme, preset)
+ *   @nebutra/ui      (packages/ui):           @nebutra/design-system
+ *   @nebutra/web            (apps/web):                     @nebutra/ui, @nebutra/design-system, @nebutra/tokens
+ *   @nebutra/landing-page   (apps/landing-page):            @nebutra/ui, @nebutra/design-system, @nebutra/tokens (+ excluded: brand, marketing, sanity, preset)
  *   @nebutra/docs-hub       (apps/docs-hub):                none
  */
 const DEPENDENCY_RULES: DependencyRule[] = [
@@ -55,8 +54,8 @@ const DEPENDENCY_RULES: DependencyRule[] = [
     allowedDeps: ["@nebutra/design-system"],
   },
   {
-    name: "@nebutra/custom-ui",
-    packageJsonPath: "packages/custom-ui/package.json",
+    name: "@nebutra/ui",
+    packageJsonPath: "packages/ui/package.json",
     allowedDeps: ["@nebutra/design-system", "@nebutra/ui"],
   },
   {
@@ -65,7 +64,8 @@ const DEPENDENCY_RULES: DependencyRule[] = [
     allowedDeps: [
       "@nebutra/design-system",
       "@nebutra/ui",
-      "@nebutra/custom-ui",
+      "@nebutra/ui",
+      "@nebutra/tokens",
     ],
   },
   {
@@ -74,7 +74,8 @@ const DEPENDENCY_RULES: DependencyRule[] = [
     allowedDeps: [
       "@nebutra/design-system",
       "@nebutra/ui",
-      "@nebutra/custom-ui",
+      "@nebutra/ui",
+      "@nebutra/tokens",
     ],
   },
   {

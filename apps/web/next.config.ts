@@ -44,7 +44,7 @@ const nextConfig: NextConfig = {
   transpilePackages: [
     "@nebutra/ui",
     "@nebutra/design-system",
-    "@nebutra/theme",
+    "@nebutra/tokens",
   ],
 
   // Attach security headers to every route.
