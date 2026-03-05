@@ -95,8 +95,7 @@
 /* ========================
  * Dark Mode
  * ======================== */
-.dark,
-[data-theme="dark"] {
+.dark {
   --marketing-canvas-default: #0d1117;
   --marketing-canvas-subtle: #161b22;
   --marketing-canvas-inset: #010409;
