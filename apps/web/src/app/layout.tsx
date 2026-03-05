@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { DesignSystemProvider } from "@nebutra/design-system";
+import { DesignSystemProvider } from "@nebutra/ui/layout";
 import { ThemeShell } from "./providers/theme-provider";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { QueryProvider } from "./providers";

@@ -39,6 +39,9 @@ export type { NebutraThemeProviderProps, NebutraTokens } from "./theme/index.js"
 // Components
 export * from "./components/index.js";
 
+// Layout (migrated from @nebutra/design-system)
+export * from "./layout/index.js";
+
 // Icons (selective re-export to avoid bundle bloat)
 export {
   // Most common AI icons

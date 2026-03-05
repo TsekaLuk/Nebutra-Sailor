@@ -7,8 +7,8 @@ Read it in full before writing any code.
 
 ## Project Structure
 
-> **Note:** `@nebutra/ui` was renamed to `@nebutra/ui`. All references below use the current name.
-> `@nebutra/design-system` is being merged into `@nebutra/ui` — see ARCHITECTURE_CORRECTION.md.
+> **Note:** `@nebutra/custom-ui` was the old name for `@nebutra/ui`. All references use the current name.
+> `@nebutra/design-system` has been merged into `@nebutra/ui` (layout components now at `@nebutra/ui/layout`).
 
 ```
 apps/
@@ -21,8 +21,7 @@ apps/
   docs/           Mintlify — public product docs
 
 packages/
-  ui/             PRIMARY component library — Radix + HeroUI + Lobe UI + framer-motion
-  design-system/  Layout/state wrapper components (MERGING INTO ui — see correction plan)
+  ui/             PRIMARY component library — Radix + HeroUI + Lobe UI + layout + framer-motion
   brand/          Brand colors, gradients, motion language (VI manual)
   theme/          CSS-only multi-theme engine (data-theme attribute, 6 themes)
   icons/          541 Geist icons as tree-shakable TSX components
@@ -39,9 +38,8 @@ packages/
 // UI components (Lobe UI re-exports + Radix + HeroUI)
 import { Button, Input, Card } from "@nebutra/ui/components";
 
-// Layout wrapper components (migrating from design-system → ui/layout)
-import { PageHeader, EmptyState, LoadingState, ErrorState } from "@nebutra/design-system/components";
-// After merge: import { PageHeader, EmptyState } from "@nebutra/ui/layout";
+// Layout wrapper components (merged from design-system)
+import { PageHeader, EmptyState, LoadingState, ErrorState } from "@nebutra/ui/layout";
 
 // Icons — Geist icons from @nebutra/icons, Lucide for generic
 import { Search, Settings } from "@nebutra/icons";
@@ -209,7 +207,7 @@ Every interactive component must have:
 | Generic UI primitive (button, input, badge) | `ui` | `src/components/` |
 | Complex pattern (data table, command palette) | `ui` | `src/components/` |
 | Marketing section (hero, feature grid) | `ui` | `src/components/` |
-| Dashboard layout wrapper | `ui` (after merge) | `src/layout/` |
+| Dashboard layout wrapper | `ui` | `src/layout/` |
 
 ### Step 2: File structure
 

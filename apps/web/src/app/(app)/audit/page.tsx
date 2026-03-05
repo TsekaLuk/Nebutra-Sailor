@@ -1,5 +1,5 @@
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
-import { Card, PageHeader } from "@nebutra/design-system/components";
+import { Card, PageHeader } from "@nebutra/ui/layout";
 
 const CONTROLS = [
   { name: "Access logging", status: "Passing", detail: "Events retained for 90 days." },

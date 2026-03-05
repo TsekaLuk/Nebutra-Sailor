@@ -14,8 +14,7 @@ COPY apps/landing-page/package.json ./apps/landing-page/
 
 # Internal workspace packages that @nebutra/landing-page depends on.
 # Derived from the "dependencies" field in apps/landing-page/package.json:
-#   @nebutra/brand, @nebutra/ui, @nebutra/design-system,
-#   @nebutra/marketing, @nebutra/sanity, @nebutra/tokens
+#   @nebutra/brand, @nebutra/ui, @nebutra/marketing, @nebutra/sanity, @nebutra/tokens
 COPY packages/brand/package.json      ./packages/brand/
 COPY packages/ui/package.json         ./packages/ui/
 COPY packages/marketing/package.json  ./packages/marketing/
