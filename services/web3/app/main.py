@@ -1,6 +1,11 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+import sys
+import os
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+
+from fastapi import FastAPI
+
+from _shared.otel import instrument_app
 from app.api.v1 import routes_web3
 
 app = FastAPI(
@@ -9,13 +14,10 @@ app = FastAPI(
     version="0.1.0",
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+instrument_app(app, service_name="web3-service")
+
+# CORS is handled at the Hono API Gateway layer — do not add CORSMiddleware here.
+# This service is internal and should not be exposed directly to browsers.
 
 app.include_router(routes_web3.router, prefix="/api/v1", tags=["web3"])
 

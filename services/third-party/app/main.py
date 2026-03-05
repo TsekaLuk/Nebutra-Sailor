@@ -6,14 +6,18 @@ with caching, rate limiting, and data transformation.
 """
 
 import logging
+import os
+import sys
 from contextlib import asynccontextmanager
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
+from _shared.otel import instrument_app
 from app.api.v1 import routes_producthunt
 from utils.config import get_settings
 
@@ -83,19 +87,15 @@ Configure via `PRODUCT_HUNT_DEV_TOKEN` environment variable.
     lifespan=lifespan,
 )
 
+instrument_app(app, service_name="third-party-service")
+
 # Rate limiting
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Configure properly in production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# CORS is handled at the Hono API Gateway layer — do not add CORSMiddleware here.
+# This service is internal and should not be exposed directly to browsers.
 
 # Include routers
 app.include_router(

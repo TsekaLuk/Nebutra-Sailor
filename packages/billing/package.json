@@ -41,7 +41,7 @@
     "@nebutra/contracts": "workspace:*",
     "@prisma/client": "^7.0.0",
     "stripe": "^17.4.0",
-    "zod": "^3.23.0"
+    "zod": "^4.0.0"
   },
   "devDependencies": {
     "@nebutra/db": "workspace:*",

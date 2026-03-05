@@ -47,6 +47,10 @@ const nextConfig: NextConfig = {
     "@nebutra/tokens",
   ],
 
+  experimental: {
+    reactCompiler: true,
+  },
+
   // Attach security headers to every route.
   async headers() {
     return [

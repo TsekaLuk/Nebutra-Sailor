@@ -4,11 +4,16 @@ Billing Microservice
 FastAPI service for billing, subscriptions, usage tracking, and credits management.
 """
 
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
+from _shared.otel import instrument_app
 from app.api.v1 import routes_billing, routes_subscriptions, routes_usage, routes_credits, routes_webhooks
 from app.config import settings
 
@@ -30,14 +35,10 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Configure for production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+instrument_app(app, service_name="billing-service")
+
+# CORS is handled at the Hono API Gateway layer — do not add CORSMiddleware here.
+# This service is internal and should not be exposed directly to browsers.
 
 # Routes
 app.include_router(routes_billing.router, prefix="/api/v1/billing", tags=["billing"])
