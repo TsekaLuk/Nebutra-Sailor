@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
 import { useTranslations } from "next-intl";
 import { heroContent } from "@/lib/landing-content";
 import { CommandInstallBox } from "./CommandInstallBox";
@@ -17,9 +17,7 @@ export function HeroSection() {
     <section className="relative min-h-screen w-full overflow-hidden bg-white dark:bg-black">
       <div className="pointer-events-none absolute inset-0 bg-grid-overlay" />
       <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute left-1/2 top-1/3 h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[image:var(--brand-gradient-radial)] opacity-[0.22] blur-[140px]"
-        />
+        <div className="absolute left-1/2 top-1/3 h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[image:var(--brand-gradient-radial)] opacity-[0.22] blur-[140px]" />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6 pt-24 pb-16">

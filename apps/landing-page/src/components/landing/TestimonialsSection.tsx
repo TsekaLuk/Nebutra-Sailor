@@ -1,4 +1,4 @@
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
 
 const TESTIMONIALS = [
   {
@@ -25,7 +25,11 @@ export function TestimonialsSection() {
   return (
     <section className="w-full bg-[color:var(--neutral-2)] py-24 md:py-32 dark:bg-black">
       <div className="mx-auto max-w-7xl px-6">
-        <AnimateIn inView preset="emerge" className="mx-auto max-w-3xl text-center">
+        <AnimateIn
+          inView
+          preset="emerge"
+          className="mx-auto max-w-3xl text-center"
+        >
           <p className="text-sm font-semibold tracking-[0.14em] text-[color:var(--blue-11)] uppercase">
             Trusted by operators
           </p>
@@ -48,7 +52,9 @@ export function TestimonialsSection() {
                 <p className="mt-6 text-sm font-semibold text-[color:var(--neutral-12)] dark:text-white">
                   {item.author}
                 </p>
-                <p className="text-xs text-[color:var(--neutral-10)] dark:text-white/60">{item.role}</p>
+                <p className="text-xs text-[color:var(--neutral-10)] dark:text-white/60">
+                  {item.role}
+                </p>
               </article>
             </AnimateIn>
           ))}

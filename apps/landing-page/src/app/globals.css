@@ -3,7 +3,7 @@
  *
  * 1. Google Fonts URLs (must be absolute first — CSS spec)
  * 2. Tailwind CSS v4
- * 3. Theme system from @nebutra/custom-ui (colors, Tailwind config)
+ * 3. Theme system from @nebutra/theme (colors, Tailwind config)
  */
 
 /* Google Fonts — must precede ALL other rules (CSS spec §6.3) */
@@ -16,8 +16,6 @@
 /* Theme engine — multi-theme tokens via data-theme selectors */
 @import "@nebutra/theme/themes.css";
 
-/* Import theme variables from @nebutra/custom-ui */
-@import "@nebutra/custom-ui/styles/globals.css";
 @import "tw-animate-css";
 /*---break---
  */
@@ -25,7 +23,7 @@
 
 /* ==============================================
  * Nebutra Brand Color Aliases
- * Maps new @nebutra/custom-ui variables to legacy names
+ * Maps @nebutra/theme variables to legacy names
  * ============================================== */
 :root {
   /* Legacy aliases for backward compatibility */

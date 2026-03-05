@@ -5,4 +5,4 @@ export {
   AnimateInGroup,
   type AnimateInProps,
   type AnimateInGroupProps,
-} from "@nebutra/custom-ui/primitives";
+} from "@nebutra/ui/primitives";

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
 import { env } from "@/lib/env";
 
 const LIVE_DEMOS = [
@@ -30,18 +30,29 @@ const LIVE_DEMOS = [
 ] as const;
 
 export function ProductDemoSection() {
-  const [activeDemoId, setActiveDemoId] = useState<(typeof LIVE_DEMOS)[number]["id"]>("analytics");
+  const [activeDemoId, setActiveDemoId] =
+    useState<(typeof LIVE_DEMOS)[number]["id"]>("analytics");
   const [isFrameLoading, setIsFrameLoading] = useState(true);
 
   const activeDemo =
     LIVE_DEMOS.find((demo) => demo.id === activeDemoId) ?? LIVE_DEMOS[0];
 
-  const liveSrc = useMemo(() => `${env.NEXT_PUBLIC_APP_URL}${activeDemo.path}`, [activeDemo.path]);
+  const liveSrc = useMemo(
+    () => `${env.NEXT_PUBLIC_APP_URL}${activeDemo.path}`,
+    [activeDemo.path],
+  );
 
   return (
-    <section id="product" className="w-full bg-neutral-1 py-24 md:py-32 dark:bg-black">
+    <section
+      id="product"
+      className="w-full bg-neutral-1 py-24 md:py-32 dark:bg-black"
+    >
       <div className="product-demo-cq mx-auto max-w-7xl px-6">
-        <AnimateIn inView preset="emerge" className="mx-auto max-w-3xl text-center">
+        <AnimateIn
+          inView
+          preset="emerge"
+          className="mx-auto max-w-3xl text-center"
+        >
           <p className="text-sm font-semibold tracking-[0.14em] text-blue-11 uppercase">
             Product in action
           </p>
@@ -49,7 +60,8 @@ export function ProductDemoSection() {
             See the operator-grade UI your team ships on day one.
           </h2>
           <p className="product-demo-subtitle mt-4 text-lg text-neutral-11 dark:text-white/70">
-            Tenant analytics, usage billing, and AI workflows are included in a single cohesive dashboard shell.
+            Tenant analytics, usage billing, and AI workflows are included in a
+            single cohesive dashboard shell.
           </p>
         </AnimateIn>
 

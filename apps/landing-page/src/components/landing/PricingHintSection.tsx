@@ -1,8 +1,11 @@
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
 
 export function PricingHintSection() {
   return (
-    <section id="pricing" className="w-full bg-[color:var(--neutral-1)] py-24 md:py-32 dark:bg-black">
+    <section
+      id="pricing"
+      className="w-full bg-[color:var(--neutral-1)] py-24 md:py-32 dark:bg-black"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <AnimateIn inView preset="emerge">
           <div className="rounded-[var(--radius-3xl)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-2)] p-8 md:p-12 dark:border-white/10 dark:bg-white/5">
@@ -15,7 +18,8 @@ export function PricingHintSection() {
                   Start free. Upgrade when your usage demands it.
                 </h2>
                 <p className="mt-4 text-base text-[color:var(--neutral-11)] dark:text-white/70">
-                  The same codebase powers starter projects and enterprise rollouts.
+                  The same codebase powers starter projects and enterprise
+                  rollouts.
                 </p>
               </div>
               <AnimateInGroup

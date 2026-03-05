@@ -48,11 +48,8 @@ const nextConfig: NextConfig = {
     "@nebutra/theme",
   ],
 
-  // Next.js 16: cacheComponents replaces experimental.ppr.
-  experimental: {
-    cacheComponents: true,
-    reactCompiler: true,
-  },
+  cacheComponents: true,
+  reactCompiler: true,
 
   // Attach security headers to every route.
   async headers() {

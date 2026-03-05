@@ -44,13 +44,8 @@ const nextConfig: NextConfig = {
   // Produces a minimal standalone server bundle under .next/standalone.
   output: "standalone",
 
-  // Tree-shake large icon/component packages at the import level.
-  optimizePackageImports: ["@nebutra/ui", "@nebutra/icons", "lucide-react"],
-
-  experimental: {
-    cacheComponents: true,
-    reactCompiler: true,
-  },
+  cacheComponents: true,
+  reactCompiler: true,
   // Workspace packages: src/-exporting packages need this for SWC to process
   // TypeScript; dist/-exporting packages need it for "use client" detection.
   transpilePackages: [

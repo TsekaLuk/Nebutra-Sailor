@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { AnimateIn } from "@nebutra/custom-ui/primitives";
+import { AnimateIn } from "@nebutra/ui/primitives";
 import { useTranslations } from "next-intl";
 import { heroContent } from "@/lib/landing-content";
 import { CommandInstallBox } from "./CommandInstallBox";
@@ -14,9 +14,7 @@ export function FinalCTA() {
 
   return (
     <section className="relative w-full overflow-hidden bg-white py-28 md:py-36 dark:bg-black">
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[image:var(--brand-gradient-radial)] opacity-20 blur-[110px]"
-      />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[image:var(--brand-gradient-radial)] opacity-20 blur-[110px]" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
         <AnimateIn preset="emerge" inView>
