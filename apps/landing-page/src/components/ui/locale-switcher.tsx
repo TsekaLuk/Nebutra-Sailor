@@ -69,7 +69,7 @@ export function LocaleSwitcher() {
               className={cn(
                 "w-full px-3 py-2 text-left text-sm transition-colors",
                 l === locale
-                  ? "font-medium text-indigo-600 dark:text-indigo-400"
+                  ? "font-medium text-[var(--blue-10)]"
                   : "text-[var(--neutral-10)] hover:bg-[var(--neutral-2)] hover:text-[var(--neutral-12)] dark:text-white/60 dark:hover:bg-white/5 dark:hover:text-white",
               )}
             >

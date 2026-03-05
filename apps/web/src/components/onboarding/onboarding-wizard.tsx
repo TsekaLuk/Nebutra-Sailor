@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CreateWorkspaceStep } from "./create-workspace-step";
 import { ConnectIntegrationsStep } from "./connect-integrations-step";
-import { cn } from "@nebutra/custom-ui";
+import { cn } from "@nebutra/ui";
 
 const STEPS = [{ label: "Workspace" }, { label: "Integrations" }] as const;
 

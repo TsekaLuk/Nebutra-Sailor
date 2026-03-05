@@ -2,30 +2,109 @@
   "name": "@nebutra/ui",
   "version": "0.1.0",
   "private": true,
+  "description": "Brand-specific UI components built on top of @nebutra/design-system - domain-specific, complex, and high-density UI",
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./icons": "./src/icons/index.ts",
-    "./theme": "./src/theme/index.ts",
-    "./components": "./src/components/index.ts"
+    "./primitives": "./src/primitives/index.ts",
+    "./primitives/*": "./src/primitives/*.tsx",
+    "./components/*": "./src/components/*.tsx",
+    "./layouts/*": "./src/layouts/*.tsx",
+    "./widgets/*": "./src/widgets/*.tsx",
+    "./patterns": "./src/patterns/index.ts",
+    "./marketing": "./src/marketing/index.ts",
+    "./marketing/*": "./src/marketing/*.tsx",
+    "./styles/globals.css": "./src/styles/globals.css",
+    "./styles/brand-override.css": "./src/styles/brand-override.css",
+    "./tailwind.preset": "./src/tailwind.preset.ts",
+    "./lib/utils": "./src/utils/cn.ts"
   },
-  "scripts": {},
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
-    "@lobehub/icons": "^2.43.1",
-    "@lobehub/ui": "^2.18.3",
-    "antd": "^5.22.0",
-    "antd-style": "^3.7.0",
+    "@heroui/calendar": "^2.2.27",
+    "@heroui/card": "^2.2.25",
+    "@heroui/checkbox": "^2.3.27",
+    "@heroui/date-input": "^2.3.27",
+    "@heroui/date-picker": "^2.3.32",
+    "@heroui/popover": "^2.3.18",
+    "@heroui/progress": "^2.2.22",
+    "@heroui/select": "^2.4.16",
+    "@heroui/skeleton": "^2.2.10",
+    "@heroui/slider": "^2.4.28",
+    "@heroui/switch": "^2.2.24",
+    "@heroui/theme": "^2.4.26",
+    "@internationalized/date": "3.11.0",
+    "@nebutra/brand": "workspace:*",
+    "@nebutra/design-system": "workspace:*",
+    "@paper-design/shaders-react": "^0.0.67",
+    "@radix-ui/react-accordion": "^1.2.0",
+    "@radix-ui/react-avatar": "^1.1.0",
+    "@radix-ui/react-checkbox": "^1.3.3",
+    "@radix-ui/react-context-menu": "^2.2.16",
+    "@radix-ui/react-dialog": "^1.1.0",
+    "@radix-ui/react-dropdown-menu": "^2.1.0",
+    "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.2.0",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@radix-ui/react-tooltip": "^1.1.0",
+    "@react-types/shared": "^3.33.0",
+    "canvas-confetti": "^1.9.4",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "cobe": "^0.6.3",
+    "date-fns": "^4.1.0",
+    "dotted-map": "^2.2.2",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^11.0.0",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.460.0",
+    "motion": "^11.0.0",
     "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "react-dom": "^19.2.1",
+    "react-syntax-highlighter": "^15.6.1",
+    "react-tweet": "^3.2.0",
+    "react-use-measure": "^2.1.7",
+    "recharts": "^2.15.0",
+    "rough-notation": "^0.5.1",
+    "svg-dotted-map": "^2.0.1",
+    "tailwind-merge": "^2.5.0",
+    "usehooks-ts": "^3.1.0",
+    "vaul": "^1.1.2"
+  },
+  "optionalDependencies": {
+    "@react-three/fiber": "^9.0.0",
+    "three": "^0.170.0"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20.14.0",
     "@types/react": "^19.0.0",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "@types/recharts": "^2.0.1",
+    "@types/three": "^0.170.0",
+    "next": "^16.0.7",
     "typescript": "^5.6.0"
   },
   "peerDependencies": {
+    "@clerk/nextjs": ">=5.0.0",
+    "next": ">=14.0.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@clerk/nextjs": {
+      "optional": true
+    },
+    "next": {
+      "optional": true
+    }
   }
 }

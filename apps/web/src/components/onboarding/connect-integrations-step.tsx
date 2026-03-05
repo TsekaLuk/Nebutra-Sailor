@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { cn } from "@nebutra/custom-ui";
+import { Button } from "@nebutra/ui/primitives";
+import { cn } from "@nebutra/ui";
 
 interface Integration {
   id: string;
@@ -109,7 +109,7 @@ export function ConnectIntegrationsStep({
               className={cn(
                 "flex flex-col gap-3 rounded-[var(--radius-xl)] border p-4 transition-colors",
                 isConnected
-                  ? "border-emerald-500/30 bg-emerald-500/5"
+                  ? "border-[hsl(var(--success)/0.35)] bg-[hsl(var(--success)/0.12)]"
                   : "border-border bg-card hover:border-border/80",
               )}
             >

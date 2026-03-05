@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { Separator } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
 import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 
@@ -111,7 +111,9 @@ export function SignUpForm() {
           </h1>
           <p className="mt-1 text-sm text-[var(--neutral-9)]">
             We sent a 6-digit code to{" "}
-            <span className="font-medium text-[var(--neutral-11)]">{email}</span>
+            <span className="font-medium text-[var(--neutral-11)]">
+              {email}
+            </span>
           </p>
         </div>
 
@@ -136,7 +138,9 @@ export function SignUpForm() {
             />
           </div>
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && (
+            <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>
+          )}
 
           <Button
             type="submit"
@@ -168,7 +172,9 @@ export function SignUpForm() {
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--neutral-12)]">
           Create your account
         </h1>
-        <p className="mt-1 text-sm text-[var(--neutral-9)]">Start building today</p>
+        <p className="mt-1 text-sm text-[var(--neutral-9)]">
+          Start building today
+        </p>
       </div>
 
       <OAuthButtons mode="signUp" />
@@ -229,7 +235,9 @@ export function SignUpForm() {
           />
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && (
+          <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>
+        )}
 
         <Button
           type="submit"

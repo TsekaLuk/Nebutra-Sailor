@@ -56,7 +56,7 @@ function ThemeSwitcher() {
 
   return (
     <div
-      className="inline-flex items-center overflow-hidden rounded-full bg-[var(--neutral-1)] ring-1 ring-zinc-200 ring-inset dark:ring-zinc-700"
+      className="inline-flex items-center overflow-hidden rounded-full bg-[var(--neutral-1)] ring-1 ring-[var(--neutral-6)] ring-inset"
       role="radiogroup"
       aria-label="Select color theme"
     >

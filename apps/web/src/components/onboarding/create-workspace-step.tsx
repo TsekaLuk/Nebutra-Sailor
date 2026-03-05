@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useOrganizationList } from "@clerk/nextjs";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { cn } from "@nebutra/custom-ui";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { cn } from "@nebutra/ui";
 
 interface CreateWorkspaceStepProps {
   onComplete: () => void;

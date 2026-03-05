@@ -39,7 +39,7 @@ ChartContainer (owns ChartConfig, sets aspect ratio)
 Define one entry per data series. Map each key to a label and a color token or theme object.
 
 ```tsx
-import { ChartConfig } from "@nebutra/custom-ui/primitives/chart";
+import { ChartConfig } from "@nebutra/ui/primitives";
 
 const chartConfig: ChartConfig = {
   apiCalls: {
@@ -74,7 +74,7 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@nebutra/custom-ui/primitives/chart";
+} from "@nebutra/ui/primitives";
 import { BarChart, Bar, CartesianGrid, XAxis } from "recharts";
 
 <ChartContainer config={chartConfig} className="h-[300px]">

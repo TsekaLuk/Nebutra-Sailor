@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { Separator } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
 import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 
@@ -96,7 +96,9 @@ export function SignInForm() {
           />
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && (
+          <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>
+        )}
 
         <Button
           type="submit"
