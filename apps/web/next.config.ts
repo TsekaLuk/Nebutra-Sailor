@@ -38,20 +38,18 @@ const nextConfig: NextConfig = {
 
   // Tree-shake large icon/component packages at the import level.
   // Next.js rewrites barrel imports to per-file imports automatically.
-  optimizePackageImports: ["@nebutra/custom-ui", "@nebutra/icons", "lucide-react"],
+  optimizePackageImports: ["@nebutra/ui", "@nebutra/icons", "lucide-react"],
 
   // Workspace packages: src/-exporting packages need this for SWC to process
   // TypeScript; dist/-exporting packages need it for "use client" detection.
   transpilePackages: [
-    "@nebutra/custom-ui",
+    "@nebutra/ui",
     "@nebutra/design-system",
     "@nebutra/theme",
   ],
 
-  // Next.js 15+: cache RSC output + React Compiler auto-memoization.
-  // PPR: incremental opt-in — pages export `experimental_ppr = true` to enable.
+  // Next.js 16: cacheComponents replaces experimental.ppr.
   experimental: {
-    ppr: "incremental",
     cacheComponents: true,
     reactCompiler: true,
   },

@@ -45,11 +45,9 @@ const nextConfig: NextConfig = {
   output: "standalone",
 
   // Tree-shake large icon/component packages at the import level.
-  optimizePackageImports: ["@nebutra/custom-ui", "@nebutra/icons", "lucide-react"],
+  optimizePackageImports: ["@nebutra/ui", "@nebutra/icons", "lucide-react"],
 
   experimental: {
-    // PPR: incremental opt-in per page via `export const experimental_ppr = true`.
-    ppr: "incremental",
     cacheComponents: true,
     reactCompiler: true,
   },
@@ -57,7 +55,7 @@ const nextConfig: NextConfig = {
   // TypeScript; dist/-exporting packages need it for "use client" detection.
   transpilePackages: [
     "@nebutra/brand",
-    "@nebutra/custom-ui",
+    "@nebutra/ui",
     "@nebutra/design-system",
     "@nebutra/marketing",
     "@nebutra/sanity",
