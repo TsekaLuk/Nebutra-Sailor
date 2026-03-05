@@ -47,7 +47,7 @@
     "dev:blog": "turbo run dev --filter=@nebutra/landing-page --filter=@nebutra/blog",
     "dev:community": "turbo run dev --filter=@nebutra/web --filter=@nebutra/api-gateway --filter=@nebutra/blog",
     "dev:solo": "turbo run dev --filter=@nebutra/web --filter=@nebutra/landing-page --filter=@nebutra/admin --filter=@nebutra/blog",
-    "dev:design": "turbo run dev --filter=@nebutra/design-docs --filter=@nebutra/custom-ui",
+    "dev:design": "turbo run dev --filter=@nebutra/design-docs --filter=@nebutra/ui",
     "build:ai-saas": "turbo run build --filter=@nebutra/web --filter=@nebutra/landing-page --filter=@nebutra/api-gateway --filter=@nebutra/studio --filter=@nebutra/admin --filter=@nebutra/design-docs",
     "build:marketing": "turbo run build --filter=@nebutra/landing-page --filter=@nebutra/blog --filter=@nebutra/studio",
     "build:dashboard": "turbo run build --filter=@nebutra/web --filter=@nebutra/admin --filter=@nebutra/api-gateway",

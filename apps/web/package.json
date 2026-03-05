@@ -16,7 +16,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.35.5",
     "openapi-fetch": "^0.13.0",
-    "@nebutra/custom-ui": "workspace:*",
+    "@nebutra/ui": "workspace:*",
     "@nebutra/design-system": "workspace:*",
     "@nebutra/theme": "workspace:*",
     "@t3-oss/env-nextjs": "^0.13.10",
