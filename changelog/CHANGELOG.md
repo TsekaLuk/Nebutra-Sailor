@@ -5,6 +5,12 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.5](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.5.4...v1.5.5) (2026-03-06)
+
+### 🐛 Bug Fixes
+
+- **web:** prerender build fixes for next js 16 plus clerk esm patch ([963841d](https://github.com/TsekaLuk/Nebutra-Sailor/commit/963841df776c1b09395bc116d620e177ffb07b5a))
+
 ## [1.5.4](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.5.3...v1.5.4) (2026-03-06)
 
 ### 🐛 Bug Fixes
