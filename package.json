@@ -62,7 +62,7 @@
     "multi-tenant"
   ],
   "author": "Nebutra",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "packageManager": "pnpm@10.14.0",
   "engines": {
     "node": ">=22.0.0",

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import {
@@ -36,6 +37,8 @@ function formatValue(value: number) {
 }
 
 async function DashboardContent() {
+  await connection();
+
   let userName = "User";
   let orgName = "";
   let tenantId = process.env.DEFAULT_DASHBOARD_TENANT_ID || "demo_org";

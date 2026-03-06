@@ -1,13 +1,21 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { AuthSplitLayout } from "@/components/auth/auth-split-layout";
 import { SignUpForm } from "@/components/auth/sign-up-form";
 
-export default function SignUpPage() {
+async function SignUpPageContent() {
+  await connection();
   return (
     <AuthSplitLayout>
-      <Suspense>
-        <SignUpForm />
-      </Suspense>
+      <SignUpForm />
     </AuthSplitLayout>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense>
+      <SignUpPageContent />
+    </Suspense>
   );
 }
