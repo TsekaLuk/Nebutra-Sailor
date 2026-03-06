@@ -43,6 +43,9 @@ COPY . .
 # but the brand package also needs its TypeScript compiled first.
 RUN pnpm --filter @nebutra/brand build
 
+# Build @nebutra/marketing (tsup) — exports from dist/, must be compiled before the app.
+RUN pnpm --filter @nebutra/marketing build
+
 # Build @nebutra/landing-page; next.config.ts must have output: 'standalone'
 RUN pnpm --filter @nebutra/landing-page build
 

@@ -3,6 +3,41 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs";
+
+function HeaderAuthControls() {
+  const { isSignedIn } = useAuth();
+
+  return (
+    <div className="hidden items-center gap-2 sm:flex">
+      {isSignedIn ? (
+        <UserButton
+          appearance={{
+            elements: { avatarBox: "h-9 w-9" },
+          }}
+        />
+      ) : (
+        <div className="flex gap-2">
+          <SignInButton mode="modal">
+            <button
+              type="button"
+              className="rounded-md px-3 py-1.5 text-sm font-medium text-neutral-11 transition-colors hover:bg-neutral-2 dark:text-white/70 dark:hover:bg-white/10"
+            >
+              Sign In
+            </button>
+          </SignInButton>
+          <SignUpButton mode="modal">
+            <button
+              type="button"
+              className="rounded-md bg-[image:var(--brand-gradient)] px-3 py-1.5 text-sm font-medium text-white"
+            >
+              Sign Up
+            </button>
+          </SignUpButton>
+        </div>
+      )}
+    </div>
+  );
+}
 import { ChevronRight, Menu, X } from "lucide-react";
 import {
   buildBreadcrumbs,
@@ -66,7 +101,6 @@ function SidebarNav({
 
 export function DesignSystemShell({ children, hasClerkKey }: Props) {
   const pathname = usePathname();
-  const { isSignedIn } = useAuth();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [workspace, setWorkspace] = useState<WorkspaceId>(WORKSPACES[0].id);
   const breadcrumbs = buildBreadcrumbs(pathname);
@@ -241,36 +275,7 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
                 ))}
               </div>
 
-              {hasClerkKey && (
-                <div className="hidden items-center gap-2 sm:flex">
-                  {isSignedIn ? (
-                    <UserButton
-                      appearance={{
-                        elements: { avatarBox: "h-9 w-9" },
-                      }}
-                    />
-                  ) : (
-                    <div className="flex gap-2">
-                      <SignInButton mode="modal">
-                        <button
-                          type="button"
-                          className="rounded-md px-3 py-1.5 text-sm font-medium text-neutral-11 transition-colors hover:bg-neutral-2 dark:text-white/70 dark:hover:bg-white/10"
-                        >
-                          Sign In
-                        </button>
-                      </SignInButton>
-                      <SignUpButton mode="modal">
-                        <button
-                          type="button"
-                          className="rounded-md bg-[image:var(--brand-gradient)] px-3 py-1.5 text-sm font-medium text-white"
-                        >
-                          Sign Up
-                        </button>
-                      </SignUpButton>
-                    </div>
-                  )}
-                </div>
-              )}
+              {hasClerkKey && <HeaderAuthControls />}
             </div>
           </header>
 
