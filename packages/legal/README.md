@@ -1,5 +1,7 @@
 # @nebutra/legal
 
+> **Status: WIP** — Not yet integrated into any production app. Do not import until this notice is removed.
+
 GDPR/CCPA-compliant consent management, legal document versioning, and React UI components for Nebutra.
 
 ## Design Intent

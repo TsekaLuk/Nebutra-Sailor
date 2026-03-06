@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { AnimateIn } from "@nebutra/ui/primitives";
-import { ErrorState } from "@nebutra/design-system/components";
+import { AnimateIn } from "@nebutra/ui/components";
+import { ErrorState } from "@nebutra/ui/layout";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -24,10 +24,10 @@ export default function BillingError({ error, reset }: ErrorProps) {
       <AnimateIn preset="fadeUp">
         <ErrorState
           title="Failed to load billing"
-          message={
+          description={
             error.message || "An unexpected error occurred. Please try again."
           }
-          onRetry={reset}
+          action={{ label: "Try again", onClick: reset }}
         />
       </AnimateIn>
     </section>

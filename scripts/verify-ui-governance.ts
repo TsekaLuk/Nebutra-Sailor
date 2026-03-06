@@ -275,11 +275,11 @@ function verifyDependencyBoundaries(policy: GovernancePolicy) {
     `Dependency boundary violation (deep cross-package import):\n${importViolations.map((item) => `- ${item}`).join("\n")}`,
   );
 
-  const customUiPackage = JSON.parse(
+  const uiPackage = JSON.parse(
     read("packages/ui/package.json"),
   ) as { exports?: Record<string, unknown> };
-  const exportKeys = Object.keys(customUiPackage.exports || {});
-  const allowed = new Set(policy.dependencyBoundaries.customUiAllowedExports);
+  const exportKeys = Object.keys(uiPackage.exports || {});
+  const allowed = new Set(policy.dependencyBoundaries.uiAllowedExports ?? policy.dependencyBoundaries.customUiAllowedExports);
 
   const unexpected = exportKeys.filter((key) => !allowed.has(key));
   const missing = [...allowed].filter((key) => !exportKeys.includes(key));
@@ -296,7 +296,7 @@ function countAggregateBudgetViolations(
 ): number {
   const excludeSet = new Set(budget.exclude ?? []);
 
-  // Derive roots from paths (strip glob suffix, e.g. "packages/ui/src/**" -> "packages/ui/src")
+  // Derive roots from paths (strip glob suffix, e.g. "packages/custom-ui/src/**" -> "packages/custom-ui/src")
   const roots = budget.paths.map((p) => p.replace(/\/\*\*$/, "").replace(/\/\*$/, ""));
 
   const allFiles = roots.flatMap((root) =>

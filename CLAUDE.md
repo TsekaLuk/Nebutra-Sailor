@@ -7,21 +7,26 @@ Read it in full before writing any code.
 
 ## Project Structure
 
+> **Note:** `@nebutra/custom-ui` was the old name for `@nebutra/ui`. All references use the current name.
+> `@nebutra/design-system` has been merged into `@nebutra/ui` (layout components now at `@nebutra/ui/layout`).
+
 ```
 apps/
-  landing-page/   Next.js 15 + Tailwind v4 — public marketing site
-  web/            Next.js 15 + Tailwind v4 — authenticated dashboard
+  landing-page/   Next.js 16 + Tailwind v4 — public marketing site
+  web/            Next.js 16 + Tailwind v4 — authenticated dashboard
   storybook/      Storybook 8.x — component library documentation
-  docs-hub/       Nextra/MDX — product documentation
+  api-gateway/    Hono + OpenAPI — backend APIs
+  design-docs/    Next.js 16 + Fumadocs — internal docs
+  studio/         Sanity Studio v4 — content management
+  docs/           Mintlify — public product docs
 
 packages/
-  custom-ui/      PRIMARY component library — Radix + HeroUI + framer-motion
-  design-system/  Layout/state wrapper components — NO Primer (removed)
+  ui/             PRIMARY component library — Radix + HeroUI + Lobe UI + layout + framer-motion
+  tokens/         Runtime design tokens (CSS variables) + next-themes ThemeProvider  ★ SOURCE OF TRUTH
   brand/          Brand colors, gradients, motion language (VI manual)
-  theme/          CSS-only multi-theme engine (data-theme attribute)
+  theme/          CSS-only multi-theme engine (data-theme attribute, 6 oklch themes)
   icons/          541 Geist icons as tree-shakable TSX components
   preset/         Feature-based SaaS starter config system
-  tokens/         (inside custom-ui/src/tokens/) — 3-layer token system
 ```
 
 ---
@@ -31,16 +36,21 @@ packages/
 ### 1. Always import from the right package
 
 ```tsx
-// New components and pages — use custom-ui
-import { Button, Input, Card } from "@nebutra/ui/primitives";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+// UI components (Lobe UI re-exports + Radix + HeroUI)
+import { Button, Input, Card } from "@nebutra/ui/components";
 
-// Layout wrapper components — use design-system
-import { PageHeader, EmptyState, LoadingState, ErrorState } from "@nebutra/design-system/components";
+// Layout wrapper components (merged from design-system)
+import { PageHeader, EmptyState, LoadingState, ErrorState } from "@nebutra/ui/layout";
 
 // Icons — Geist icons from @nebutra/icons, Lucide for generic
 import { Search, Settings } from "@nebutra/icons";
 import { ChevronRight } from "lucide-react";
+
+// Theme switching (light/dark) — from @nebutra/tokens
+import { ThemeProvider, useTheme } from "@nebutra/tokens";
+
+// Lobe UI theme wrapper — from @nebutra/ui
+import { NebutraThemeProvider } from "@nebutra/ui";
 
 // NEVER import from @primer/react — it has been removed
 ```
@@ -107,7 +117,7 @@ import { ChevronRight } from "lucide-react";
 ### 4. Animation — ALWAYS use AnimateIn for entrance animations
 
 ```tsx
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 
 // Single element entrance
 <AnimateIn preset="emerge">
@@ -137,7 +147,7 @@ import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
 
 ```tsx
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@nebutra/ui/lib/utils";
+import { cn } from "@nebutra/ui/utils";
 
 const cardVariants = cva(
   "rounded-lg border bg-white shadow-sm transition-shadow",
@@ -198,15 +208,15 @@ Every interactive component must have:
 
 | Component type | Package | Location |
 |---------------|---------|----------|
-| Generic UI primitive (button, input, badge) | `custom-ui` | `src/primitives/` |
-| Complex pattern (data table, command palette) | `custom-ui` | `src/patterns/` |
-| Marketing section (hero, feature grid) | `custom-ui` | `src/marketing/` |
-| Dashboard layout wrapper | `design-system` | `src/components/` |
+| Generic UI primitive (button, input, badge) | `ui` | `src/components/` |
+| Complex pattern (data table, command palette) | `ui` | `src/components/` |
+| Marketing section (hero, feature grid) | `ui` | `src/components/` |
+| Dashboard layout wrapper | `ui` | `src/layout/` |
 
 ### Step 2: File structure
 
 ```
-src/primitives/
+src/components/
   my-component.tsx          ← component implementation
   my-component.stories.tsx  ← Storybook stories (REQUIRED)
   index.ts                  ← re-export (update existing file)
@@ -235,7 +245,7 @@ export const AllVariants: Story = { render: () => ( /* showcase */ ) };
 
 ### Step 4: Export from index.ts
 
-After creating the component, add to `packages/custom-ui/src/primitives/index.ts`:
+After creating the component, add to `packages/ui/src/components/index.ts`:
 ```ts
 export { MyComponent, type MyComponentProps } from "./my-component";
 ```
@@ -244,15 +254,15 @@ export { MyComponent, type MyComponentProps } from "./my-component";
 
 ## Rebranding (no Figma required)
 
-To change the brand colors, edit `packages/custom-ui/src/styles/brand-override.css`.
-The entire design system cascades from two CSS variable scales.
+To change the brand colors:
+1. Edit `packages/tokens/styles.css` — the runtime token source of truth
+2. Edit `packages/brand/src/` — the brand primitive definitions
+3. Optionally edit `packages/theme/themes.css` — for multi-theme presets
 
 Or use the palette generator:
 ```bash
 node scripts/generate-palette.mjs --primary=#7C3AED --secondary=#F59E0B
 ```
-
-This generates a complete `brand-override.css` from any two hex colors.
 
 ---
 
@@ -278,6 +288,40 @@ import { HeroNewComponent } from "@heroui/new-component";
 
 ---
 
+## Token Architecture
+
+```
+@nebutra/brand    → Brand primitives (color definitions, motion language)
+                     Source data — not imported at runtime by apps
+                     ↓
+@nebutra/tokens   → Runtime CSS variables (★ SINGLE SOURCE OF TRUTH)
+                     @import "@nebutra/tokens/styles.css" in each app's globals.css
+                     Light/dark mode, 12-step color scales, brand gradients
+                     ThemeProvider + useTheme re-exported from next-themes
+                     ↓
+@nebutra/theme    → Multi-theme presets (oklch, 6 variants)
+                     Product feature: neon, gradient, dark-dense, minimal, vibrant, ocean
+                     Used by the SaaS preset system
+                     ↓
+@nebutra/ui       → Component library
+                     Components use CSS variables (var(--color-primary), etc.)
+                     NebutraThemeProvider wraps Lobe UI with brand tokens (internal bridge)
+```
+
+**In app code, always use CSS variables from `@nebutra/tokens`:**
+```tsx
+// ✅ Tailwind classes from tokens
+<div className="bg-primary text-foreground border-border" />
+
+// ✅ CSS variables
+<div style={{ color: "var(--color-primary)" }} />
+
+// ❌ Never import JS hex tokens from @nebutra/ui/theme
+import { colors } from "@nebutra/ui/theme"; // deprecated — internal only
+```
+
+---
+
 ## Design Token Reference
 
 View ALL tokens visually in Storybook:
@@ -299,7 +343,7 @@ The **Design Tokens** section in Storybook shows:
 ## Package Commands
 
 ```bash
-pnpm --filter @nebutra/ui build        # build component library
+pnpm --filter @nebutra/ui typecheck     # typecheck component library
 pnpm --filter @nebutra/storybook dev          # start Storybook
 pnpm --filter @nebutra/storybook typecheck    # typecheck stories
 pnpm --filter @nebutra/landing-page dev       # start landing page

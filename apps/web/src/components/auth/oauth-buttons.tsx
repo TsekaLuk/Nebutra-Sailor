@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
-import { Button } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/components";
 
 interface OAuthButtonsProps {
   mode: "signIn" | "signUp";

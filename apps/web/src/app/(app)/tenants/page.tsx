@@ -4,7 +4,7 @@ import {
   Card,
   LoadingState,
   PageHeader,
-} from "@nebutra/design-system/components";
+} from "@nebutra/ui/layout";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
 
 async function TenantsContent() {

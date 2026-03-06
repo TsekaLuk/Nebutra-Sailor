@@ -16,7 +16,7 @@ import {
   ErrorState,
   LoadingState,
   PageHeader,
-} from "@nebutra/design-system/components";
+} from "@nebutra/ui/layout";
 import { getAuth, getUser } from "@/lib/auth";
 import { getQueryClient } from "@/lib/query-client";
 import { getGrowthSummary } from "@/lib/warehouse/gold";

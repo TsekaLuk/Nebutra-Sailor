@@ -21,6 +21,7 @@ import {
 import { inngestHandler } from "./inngest/index.js";
 import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
 import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
+import { apiVersionMiddleware } from "./middlewares/apiVersion.js";
 import { env, DOMAINS } from "./config/env.js";
 
 initOtel({ serviceName: "api-gateway" });
@@ -117,6 +118,11 @@ app.use(
 
 // Tenant context extraction (before rate limiting)
 app.use("*", tenantContextMiddleware);
+
+// API versioning — sets API-Version header, supports Sunset for deprecated versions
+app.use("/api/*", apiVersionMiddleware({
+  // deprecated: { "v1": "2027-06-30" }, // Uncomment when v2 is ready
+}));
 
 // Rate limiting (skip for health/status/webhook/inngest endpoints)
 app.use("/api/*", async (c, next) => {

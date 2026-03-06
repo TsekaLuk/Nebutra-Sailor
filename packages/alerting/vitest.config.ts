@@ -8,13 +8,11 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
-      exclude: ["node_modules/", "src/**/*.{test,spec}.ts"],
-      include: ["src/**/*.ts"],
       thresholds: {
-        lines: 40,
-        functions: 50,
-        branches: 80,
-        statements: 40,
+        lines: 70,
+        functions: 70,
+        branches: 60,
+        statements: 70,
       },
     },
   },

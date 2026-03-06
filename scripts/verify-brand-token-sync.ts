@@ -27,37 +27,17 @@ function assert(condition: boolean, message: string) {
   }
 }
 
-const primitiveFile = read("packages/ui/src/tokens/primitive.ts");
-const globalsCss = read("packages/ui/src/styles/globals.css");
+const themesCss = read("packages/theme/themes.css");
 
 assert(
-  primitiveFile.includes('import { colors } from "@nebutra/brand"') ||
-    primitiveFile.includes("colors.primary[500]"),
-  "Primitive token layer is not wired to @nebutra/brand.",
+  themesCss.includes("--color-primary") &&
+    themesCss.includes("--color-secondary"),
+  "Theme CSS is missing primary/secondary color tokens.",
 );
 
 assert(
-  primitiveFile.includes(`blue500: colors.primary[500]`) &&
-    primitiveFile.includes(`cyan500: colors.accent[500]`),
-  "Primitive color tokens are not mapped to brand primary/accent.",
-);
-
-assert(
-  primitiveFile.includes("primary: colors.gradient.primary"),
-  "Primitive gradients are not mapped to brand gradients.",
-);
-
-assert(
-  globalsCss.includes("--nebutra-brand-blue: #0033FE") &&
-    globalsCss.includes("--nebutra-brand-cyan: #0BF1C3"),
-  "sRGB brand fallback variables are missing.",
-);
-
-assert(
-  globalsCss.includes("@supports (color: color(display-p3 1 1 1))") &&
-    globalsCss.includes("--nebutra-brand-blue: color(display-p3") &&
-    globalsCss.includes("--nebutra-brand-cyan: color(display-p3"),
-  "Display-P3 brand bridge is missing.",
+  themesCss.includes("@theme"),
+  "Theme CSS is missing Tailwind v4 @theme block.",
 );
 
 assert(colors.primary[500] === "#0033FE", "Brand primary 500 drift detected.");

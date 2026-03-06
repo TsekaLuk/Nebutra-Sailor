@@ -8,15 +8,20 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
+import sys
 from datetime import UTC, datetime, timedelta
 from typing import Any
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 from clickhouse_connect import get_client
 from clickhouse_connect.driver.client import Client
 from fastapi import FastAPI, Header, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
+
+from _shared.otel import instrument_app
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("event-ingest")
@@ -75,13 +80,10 @@ app = FastAPI(
     version="0.1.0",
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+instrument_app(app, service_name="event-ingest-service")
+
+# CORS is handled at the Hono API Gateway layer — do not add CORSMiddleware here.
+# This service is internal and should not be exposed directly to browsers.
 
 _clickhouse_client: Client | None = None
 _idempotency_cache: dict[str, datetime] = {}

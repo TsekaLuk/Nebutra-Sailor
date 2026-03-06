@@ -51,8 +51,8 @@ All landing page copy is centralized in [`src/lib/landing-content.ts`](./src/lib
 
 Landing page sections compose primitives from:
 
-- `@nebutra/ui/marketing` — Marketing UI components
-- `@nebutra/design-system` — Design tokens
+- `@nebutra/ui/components` — UI components
+- `@nebutra/theme` — Design tokens and theming
 - `@nebutra/brand` — Brand assets
 
 See [`src/components/landing/index.ts`](./src/components/landing/index.ts) for the component dependency map.

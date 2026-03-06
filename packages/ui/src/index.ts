@@ -1,164 +1,76 @@
 /**
  * @nebutra/ui
  *
- * Brand-specific UI components built on @nebutra/design-system.
+ * Unified UI package built on Lobe UI + Lucide Icons + Nebutra design tokens.
  *
- * This package contains:
- * - Domain-specific components (dashboard widgets, data grids, commerce UI, Web3 UI)
- * - High-density / complex UI patterns
- * - Brand-customized wrappers around external components (promoted from experimental)
- * - Layout patterns specific to Nebutra products
+ * Token architecture:
+ *   @nebutra/brand    → brand primitives (source data)
+ *   @nebutra/tokens   → runtime CSS variables (@import styles.css)
+ *   @nebutra/theme    → multi-theme presets (oklch, 6 variants)
+ *   @nebutra/ui/theme → Lobe UI Ant Design bridge (internal)
  *
- * @see docs/UI-GUIDELINES.md for usage
- * @see docs/COMPONENT-LIBRARY-POLICY.md for governance
+ * @example
+ * ```tsx
+ * import { NebutraThemeProvider } from "@nebutra/ui";
+ * import { Button, ChatList } from "@nebutra/ui/components";
+ * import { OpenAI, Settings } from "@nebutra/ui/icons";
+ *
+ * function App() {
+ *   return (
+ *     <NebutraThemeProvider>
+ *       <Button>Click me</Button>
+ *       <OpenAI size={24} />
+ *     </NebutraThemeProvider>
+ *   );
+ * }
+ * ```
  */
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Utils
-// ─────────────────────────────────────────────────────────────────────────────
-export { cn } from "./utils/cn";
+// Theme — Lobe UI integration
+export { NebutraThemeProvider } from "./theme/index.js";
+export type { NebutraThemeProviderProps, ThemeMode } from "./theme/index.js";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Design Tokens
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./tokens";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Primitives - Atomic building blocks
-// ─────────────────────────────────────────────────────────────────────────────
-export { Box } from "./primitives/box";
-export type { BoxProps } from "./primitives/box";
-export { Stack } from "./primitives/stack";
-export type { StackProps } from "./primitives/stack";
-export { Flex } from "./primitives/flex";
-export type { FlexProps } from "./primitives/flex";
-export { Text } from "./primitives/text";
-export type { TextProps } from "./primitives/text";
-export { Heading } from "./primitives/heading";
-export type { HeadingProps } from "./primitives/heading";
-export { BorderTrail } from "./primitives/border-trail";
-export type { BorderTrailProps } from "./primitives/border-trail";
-export { MagicCard } from "./primitives/magic-card";
-export type { MagicCardProps } from "./primitives/magic-card";
+/**
+ * @deprecated — Use CSS variables from `@nebutra/tokens/styles.css` instead.
+ * These JS token objects are an internal Lobe UI bridge and will be removed in v1.0.
+ */
 export {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-  AvatarGroup,
-} from "./primitives/avatar";
-export type {
-  AvatarProps,
-  AvatarFallbackProps,
-  AvatarGroupProps,
-  AvatarGroupItem,
-} from "./primitives/avatar";
-export { AvatarCircles } from "./primitives/avatar-circles";
-export type {
-  AvatarCirclesProps,
-  AvatarCircleItem,
-} from "./primitives/avatar-circles";
+  tokens,
+  colors,
+  spacing,
+  borderRadius,
+  shadows,
+  typography,
+} from "./theme/index.js";
+export type { NebutraTokens } from "./theme/index.js";
+
+// Re-export everything from subpaths for convenience
+// (Users can also import directly from subpaths for smaller bundles)
+
+// Components
+export * from "./components/index.js";
+
+// Layout (migrated from @nebutra/design-system)
+export * from "./layout/index.js";
+
+// Icons (selective re-export to avoid bundle bloat)
 export {
-  GitHubAvatar,
-  GitLabAvatar,
-  BitbucketAvatar,
-  AvatarWithIcon,
-  DiceBearAvatar,
-} from "./primitives/avatar-extended";
-export type {
-  GitHubAvatarProps,
-  GitLabAvatarProps,
-  BitbucketAvatarProps,
-  AvatarWithIconProps,
-  DiceBearAvatarProps,
-  DiceBearStyle,
-} from "./primitives/avatar-extended";
-export { AnimatedBeam } from "./primitives/animated-beam";
-export type { AnimatedBeamProps } from "./primitives/animated-beam";
-export { BentoGrid, BentoCard } from "./primitives/bento-grid";
-export type { BentoGridProps, BentoCardProps } from "./primitives/bento-grid";
-export { Badge, badgeVariants } from "./primitives/badge";
-export type { BadgeProps } from "./primitives/badge";
-export { Book } from "./primitives/book";
-export type { BookProps, BookWidth } from "./primitives/book";
-export { HexGrid } from "./primitives/hex-grid";
-export type { HexGridProps } from "./primitives/hex-grid";
-export { MeshGradientBg } from "./primitives/mesh-gradient-bg";
-export type { MeshGradientBgProps } from "./primitives/mesh-gradient-bg";
-export { NeuroNoiseBg } from "./primitives/neuro-noise-bg";
-export type { NeuroNoiseBgProps } from "./primitives/neuro-noise-bg";
-export { WavesBg } from "./primitives/waves-bg";
-export type { WavesBgProps } from "./primitives/waves-bg";
-export { Snippet } from "./primitives/snippet";
-export type { SnippetProps } from "./primitives/snippet";
-export { FlickeringGrid } from "./primitives/flickering-grid";
-export type { FlickeringGridProps } from "./primitives/flickering-grid";
-export { DotPattern } from "./primitives/dot-pattern";
-export type { DotPatternProps } from "./primitives/dot-pattern";
-export { DottedMap } from "./primitives/dotted-map";
-export type { DottedMapProps, DottedMapMarker } from "./primitives/dotted-map";
-export { ShineBorder } from "./primitives/shine-border";
-export type { ShineBorderProps } from "./primitives/shine-border";
-export { Globe } from "./primitives/globe";
-export type { GlobeProps, GlobeConfig, GlobeMarker } from "./primitives/globe";
-export { AnimatedList, AnimatedListItem } from "./primitives/animated-list";
-export type {
-  AnimatedListProps,
-  AnimatedListItemProps,
-} from "./primitives/animated-list";
-// Note: Terminal compound component is exported from ./patterns
-// These are the simple animation primitives for Terminal content
-export {
-  Terminal as SimpleTerminal,
-  TypingAnimation,
-  AnimatedSpan,
-} from "./primitives/terminal";
-export type {
-  TerminalProps as SimpleTerminalProps,
-  TypingAnimationProps,
-  AnimatedSpanProps,
-} from "./primitives/terminal";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Patterns - Compound components
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./patterns";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Decorations - Background effects and visual embellishments
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./decorations";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Layouts - Product-specific layout patterns
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./layouts";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Components - Brand-specific UI components
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./components";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Widgets - Dashboard and data-heavy UI widgets
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./widgets";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Types - Shared type definitions
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./types";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Hooks - Custom React hooks for UI behavior
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./hooks";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Navigation - Scroll spy and narrative navigation
-// ─────────────────────────────────────────────────────────────────────────────
-export * from "./navigation";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Marketing - Landing page and marketing site components
-// ─────────────────────────────────────────────────────────────────────────────
-export * as marketing from "./marketing";
+  // Most common AI icons
+  OpenAI,
+  Anthropic,
+  Google,
+  Claude,
+  Gemini,
+  // Most common UI icons
+  Menu,
+  X,
+  Settings,
+  Search,
+  Plus,
+  Check,
+  Loader2,
+  Sun,
+  Moon,
+  Bot,
+  Sparkles,
+} from "./icons/index.js";

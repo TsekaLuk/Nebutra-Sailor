@@ -21,12 +21,14 @@ terraform {
     # }
   }
 
-  # Remote state (uncomment for production)
-  # backend "s3" {
-  #   bucket = "nebutra-terraform-state"
-  #   key    = "sailor/terraform.tfstate"
-  #   region = "us-east-1"
-  # }
+  # Remote state
+  backend "s3" {
+    bucket         = "nebutra-terraform-state"
+    key            = "sailor/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "nebutra-terraform-locks"
+  }
 }
 
 # ============================================

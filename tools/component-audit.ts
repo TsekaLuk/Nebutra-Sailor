@@ -27,7 +27,6 @@ const CONFIG = {
   approvedPackages: [
     "@nebutra/design-system",
     "@nebutra/ui",
-    "@nebutra/ui",
   ],
 
   // Pre-approved external libraries

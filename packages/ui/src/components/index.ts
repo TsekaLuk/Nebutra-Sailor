@@ -1,39 +1,103 @@
 /**
- * Custom Components
+ * @nebutra/ui/components
  *
- * Brand-specific components that extend or wrap design-system primitives.
- * Components here are either:
- * - Promoted from external libraries (HeroUI/MagicUI, HeroUI, etc.) after review
- * - Domain-specific implementations (commerce, Web3, multi-tenant)
- * - Complex/composite components built from design-system primitives
+ * Re-exported components from @lobehub/ui
+ * Use these for AI-focused features and chat interfaces
  */
 
-// Re-export promoted components
-// export { PromotedButton } from "./PromotedButton";
-
-// Domain-specific components
-// export { TenantSwitcher } from "./TenantSwitcher";
-// export { PricingCard } from "./PricingCard";
-
-// Empty State
+// Chat components
 export {
-  EmptyState,
-  type EmptyStateProps,
-  type EmptyStateAction,
-} from "./empty-state";
+  ChatInputArea,
+  ChatItem,
+  ChatList,
+  Markdown,
+  MessageInput,
+  MessageModal,
+} from "@lobehub/ui";
 
-// Onboarding Checklist
+// AI components
 export {
-  OnboardingChecklist,
-  type OnboardingChecklistProps,
-  type ChecklistItem,
-} from "./onboarding-checklist";
+  Avatar,
+  ModelIcon,
+  ModelTag,
+  PluginTag,
+} from "@lobehub/ui";
 
-// Team Chat
+// Layout
 export {
-  TeamChat,
-  type TeamChatProps,
-  type ChatMessage,
-  type ChatSender,
-  type ChatReaction,
-} from "./team-chat";
+  DraggablePanel,
+  DraggablePanelBody,
+  DraggablePanelContainer,
+  DraggablePanelFooter,
+  DraggablePanelHeader,
+  Flexbox,
+  FlexboxProps,
+} from "@lobehub/ui";
+
+// Data Display
+export {
+  Highlighter,
+  Image,
+  List,
+  Tag,
+  Tooltip,
+} from "@lobehub/ui";
+
+// Feedback
+export {
+  Alert,
+  Modal,
+  Spotlight,
+} from "@lobehub/ui";
+
+// Input
+export {
+  ActionIcon,
+  ActionIconGroup,
+  Button,
+  Checkbox,
+  Input,
+  SearchBar,
+  Select,
+  Segmented,
+  Slider,
+  Switch,
+  TextArea,
+} from "@lobehub/ui";
+
+// Navigation
+export {
+  Breadcrumb,
+  Menu,
+  SideNav,
+  TabsNav,
+} from "@lobehub/ui";
+
+// Form
+export {
+  Form,
+  FormGroup,
+  FormItem,
+} from "@lobehub/ui";
+
+// Theme
+export {
+  ThemeProvider,
+  useTheme,
+  useThemeMode,
+} from "@lobehub/ui";
+
+// Types
+export type {
+  ChatItemProps,
+  ChatListProps,
+  ChatMessage,
+} from "@lobehub/ui";
+
+// Animation
+export {
+  AnimateIn,
+  AnimateInGroup,
+  type AnimateInProps,
+  type AnimateInGroupProps,
+} from "./animate-in";

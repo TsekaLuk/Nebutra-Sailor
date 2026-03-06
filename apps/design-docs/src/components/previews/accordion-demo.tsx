@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@nebutra/ui/primitives";
+} from "@nebutra/ui/components";
 
 export function AccordionDemo() {
   return (

@@ -1,4 +1,4 @@
-import { LoadingState } from "@nebutra/design-system/components";
+import { LoadingState } from "@nebutra/ui/layout";
 
 export default function Loading() {
   return <LoadingState message="Loading dashboard data…" />;

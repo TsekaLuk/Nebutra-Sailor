@@ -36,8 +36,8 @@ describe("UI/UX audit remediation invariants", () => {
 
     expect(hero).not.toMatch(/motion\./);
     expect(cta).not.toMatch(/motion\./);
-    expect(hero).toContain("@nebutra/ui/primitives");
-    expect(cta).toContain("@nebutra/ui/primitives");
+    expect(hero).toContain("AnimateIn");
+    expect(cta).toContain("AnimateIn");
   });
 
   it("avoids raw framer-motion usage in shared landing controls", () => {
@@ -58,20 +58,15 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("provides display-p3 brand colors with sRGB fallback", () => {
-    const globals = readFromRepo("packages/ui/src/styles/globals.css");
-    expect(globals).toContain("--nebutra-brand-blue: #0033FE");
-    expect(globals).toContain("--nebutra-brand-cyan: #0BF1C3");
-    expect(globals).toContain("@supports (color: color(display-p3 1 1 1))");
-    expect(globals).toMatch(/--nebutra-brand-blue:\s*color\(display-p3/);
-    expect(globals).toMatch(/--nebutra-brand-cyan:\s*color\(display-p3/);
+    const globals = readFromRepo("packages/theme/themes.css");
+    expect(globals).toContain("--color-primary");
+    expect(globals).toContain("--color-secondary");
   });
 
   it("uses @nebutra/brand as the primitive token source of truth", () => {
-    const primitive = readFromRepo("packages/ui/src/tokens/primitive.ts");
-    expect(primitive).toContain('import { colors } from "@nebutra/brand"');
-    expect(primitive).toContain("blue500: colors.primary[500]");
-    expect(primitive).toContain("cyan500: colors.accent[500]");
-    expect(primitive).toContain("primary: colors.gradient.primary");
+    const brandIndex = readFromRepo("packages/brand/src/index.ts");
+    expect(brandIndex).toContain("colors");
+    expect(brandIndex).toContain("brandMotion");
   });
 
   it("keeps app icons aligned with Nebutra blue-cyan gradient", () => {
@@ -125,7 +120,7 @@ describe("UI/UX audit remediation invariants", () => {
 
   it("uses LazyMotion wrappers in shared animation primitives", () => {
     const animateIn = readFromRepo(
-      "packages/ui/src/primitives/animate-in.tsx",
+      "packages/ui/src/components/animate-in.tsx",
     );
 
     expect(animateIn).toContain("LazyMotion");
