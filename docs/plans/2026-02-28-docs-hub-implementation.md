@@ -4,7 +4,7 @@
 
 **Goal:** Create `apps/docs-hub` as a Mintlify documentation site, migrate `packages/design-system` into it as a co-located sub-package, and scaffold all MDX pages for the full Design System — Foundations, UI Patterns, Fragment Components, and Atom Components.
 
-**Architecture:** `apps/docs-hub/` is the Mintlify app root (mint.json + MDX pages). `apps/docs-hub/design-system/` is the migrated `@nebutra/design-system` package. `pnpm-workspace.yaml` gains `"apps/docs-hub/*"` so the nested package is still discoverable as a workspace package — consumers (`apps/web`, `apps/landing-page`, `packages/custom-ui`) require zero changes.
+**Architecture:** `apps/docs-hub/` is the Mintlify app root (mint.json + MDX pages). `apps/docs-hub/design-system/` is the migrated `@nebutra/ui` package. `pnpm-workspace.yaml` gains `"apps/docs-hub/*"` so the nested package is still discoverable as a workspace package — consumers (`apps/web`, `apps/landing-page`, `packages/custom-ui`) require zero changes.
 
 **Tech Stack:** Mintlify (docs platform), pnpm workspaces, TypeScript, MDX
 
@@ -231,7 +231,7 @@ mv packages/design-system apps/docs-hub/design-system
 
 ```bash
 cat apps/docs-hub/design-system/package.json | grep '"name"'
-# Expected: "name": "@nebutra/design-system"
+# Expected: "name": "@nebutra/ui"
 ```
 
 **Step 3: Commit**
@@ -276,7 +276,7 @@ packages:
 pnpm install
 ```
 
-Expected: pnpm resolves `@nebutra/design-system` from `apps/docs-hub/design-system`. No errors.
+Expected: pnpm resolves `@nebutra/ui` from `apps/docs-hub/design-system`. No errors.
 
 **Step 3: Verify consumers still typecheck**
 
@@ -370,7 +370,7 @@ The design system is a workspace package. Add it to your app:
 ```json
 {
   "dependencies": {
-    "@nebutra/design-system": "workspace:*"
+    "@nebutra/ui": "workspace:*"
   }
 }
 ```
@@ -381,7 +381,7 @@ The design system is a workspace package. Add it to your app:
 Wrap your app with `DesignSystemProvider`:
 
 ```tsx
-import { DesignSystemProvider } from "@nebutra/design-system";
+import { DesignSystemProvider } from "@nebutra/ui";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <DesignSystemProvider>{children}</DesignSystemProvider>;
@@ -391,15 +391,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 ## Importing components
 
 ```tsx
-import { Button, Card, PageHeader } from "@nebutra/design-system";
-import { fontFamilies, typeStyles } from "@nebutra/design-system/typography";
-import { marketingGradients } from "@nebutra/design-system/theme";
+import { Button, Card, PageHeader } from "@nebutra/ui";
+import { fontFamilies, typeStyles } from "@nebutra/ui/typography";
+import { marketingGradients } from "@nebutra/ui/theme";
 ```
 
 ## Theme mode
 
 ```tsx
-import { useDesignSystem } from "@nebutra/design-system";
+import { useDesignSystem } from "@nebutra/ui";
 
 function ThemeToggle() {
   const { toggleMode, resolvedMode } = useDesignSystem();
@@ -433,7 +433,7 @@ description: "How to add or update components in the design system."
 1. Identify it in `packages/custom-ui/src/primitives/` or an app
 2. Ensure it has no semantic overlap with existing components
 3. Add `atom-components/<name>.mdx` with Demo / Usage / Props / Examples / Accessibility sections
-4. Export it from `@nebutra/design-system` if it belongs at that layer
+4. Export it from `@nebutra/ui` if it belongs at that layer
 
 ## Adding a new fragment component
 
@@ -445,7 +445,7 @@ description: "How to add or update components in the design system."
 
 1. Update the MDX page
 2. Update the component source in `apps/docs-hub/design-system/src/`
-3. Run `pnpm --filter @nebutra/design-system build` to verify
+3. Run `pnpm --filter @nebutra/ui build` to verify
 ````
 
 **Step 4: Commit**
@@ -505,7 +505,7 @@ The color system is layered:
 <Box sx={{ color: "fg.default", bg: "canvas.default" }} />
 
 // ✅ Use brand colors
-import { brandColors } from "@nebutra/design-system/theme"
+import { brandColors } from "@nebutra/ui/theme"
 <Box sx={{ color: brandColors.primary[600] }} />
 
 // ❌ Never hardcode hex values
@@ -552,7 +552,7 @@ description: "Font system built on Inter, JetBrains Mono, and CJK fallbacks."
 
 ## Overview
 
-Typography is managed exclusively in `@nebutra/design-system/typography`. Do not set font families or sizes outside this system.
+Typography is managed exclusively in `@nebutra/ui/typography`. Do not set font families or sizes outside this system.
 
 ## Design Rationale
 
@@ -565,7 +565,7 @@ Three font stacks cover all use cases:
 ## Font Families
 
 ```tsx
-import { fontFamilies } from "@nebutra/design-system/typography";
+import { fontFamilies } from "@nebutra/ui/typography";
 
 fontFamilies.primary; // Inter, system-ui, sans-serif
 fontFamilies.mono; // JetBrains Mono, Fira Code, monospace
@@ -576,7 +576,7 @@ fontFamilies.cjk; // Noto Sans CJK, PingFang SC, ...
 ## Type Scale
 
 ```tsx
-import { fontSizes } from "@nebutra/design-system/typography";
+import { fontSizes } from "@nebutra/ui/typography";
 
 // xs → 8xl (rem values)
 fontSizes.xs; // 0.75rem
@@ -590,7 +590,7 @@ fontSizes.h1; // 2.25rem
 ## Type Presets
 
 ```tsx
-import { typeStyles } from "@nebutra/design-system/typography"
+import { typeStyles } from "@nebutra/ui/typography"
 
 <Heading sx={typeStyles.h1}>Page Title</Heading>
 <Text sx={typeStyles.body}>Body content</Text>
@@ -621,7 +621,7 @@ Modes: `light`, `dark`, `auto` (follows system preference).
 ## Usage
 
 ```tsx
-import { DesignSystemProvider, useDesignSystem } from "@nebutra/design-system"
+import { DesignSystemProvider, useDesignSystem } from "@nebutra/ui"
 
 // Wrap at root
 <DesignSystemProvider defaultMode="auto">
@@ -635,7 +635,7 @@ const { mode, resolvedMode, toggleMode, setMode } = useDesignSystem()
 ## Brand Customisation
 
 ```tsx
-import { createTheme, brandColors } from "@nebutra/design-system/theme";
+import { createTheme, brandColors } from "@nebutra/ui/theme";
 
 const customTheme = createTheme("light", {
   colors: {
@@ -657,7 +657,7 @@ import {
   marketingEffects,
   marketingTypography,
   marketingTokens,
-} from "@nebutra/design-system/theme"
+} from "@nebutra/ui/theme"
 
 <Box sx={{ background: marketingGradients.mesh }} />
 <Card sx={marketingEffects.glass} />
@@ -862,9 +862,7 @@ Fragment components are pre-assembled combinations of atom components for specif
 Unlike UI Patterns (structural guidelines), Fragments are **concrete, importable components**.
 
 <Info>
-  Fragment components are implemented in `@nebutra/ui`. They are
-  documented here but may reference atoms from `@nebutra/design-system` or
-  `@nebutra/ui`.
+  Fragment components are implemented in `@nebutra/ui`.
 </Info>
 ```
 
@@ -1081,7 +1079,7 @@ After all tasks complete:
 - [ ] `pnpm --filter @nebutra/ui typecheck` passes
 - [ ] `cd apps/docs-hub && pnpm dev` starts without errors
 - [ ] All mint.json pages resolve in the browser (no 404s)
-- [ ] `apps/docs-hub/design-system/` contains `package.json` with `"name": "@nebutra/design-system"`
+- [ ] `apps/docs-hub/design-system/` contains `package.json` with `"name": "@nebutra/ui"`
 - [ ] `packages/design-system/` no longer exists
 
 ---
@@ -1720,7 +1718,7 @@ the design system's token format. Ambiguous mappings are flagged for Claude-assi
 import {
   parseFigmaTokens,
   transformTokens,
-} from "@nebutra/design-system/tokens";
+} from "@nebutra/ui/tokens";
 
 const tokens = parseFigmaTokens(figmaExportJson);
 const { brandOverrides, marketingTokens, unknownTokens } =

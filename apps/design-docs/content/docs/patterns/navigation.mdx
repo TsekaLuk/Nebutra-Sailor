@@ -71,7 +71,7 @@ PageHeader
 The application shell at `apps/web/src/app/providers/design-system-shell.tsx` demonstrates the canonical `Header` pattern. `Header.Item full` takes all available space (flex-grow); subsequent `Header.Item` elements stack to the right.
 
 ```tsx
-import { Header, Button } from "@nebutra/design-system";
+import { Header, Button } from "@nebutra/ui";
 
 <Header>
   <Header.Item full>
@@ -88,7 +88,7 @@ The `Header` sits outside `<main>`. The remaining viewport height is available t
 ### NavList (settings sidebar)
 
 ```tsx
-import { NavList } from "@nebutra/design-system";
+import { NavList } from "@nebutra/ui";
 
 <NavList aria-label="Settings navigation">
   <NavList.Group title="Account">
@@ -113,7 +113,7 @@ Apply `aria-current="page"` to the active item. `NavList` renders an `<nav>` —
 Use `UnderlineNav` for switching between peer views of the same entity. The component renders as a `<nav>` with an underline indicator on the active item.
 
 ```tsx
-import { UnderlineNav } from "@nebutra/design-system";
+import { UnderlineNav } from "@nebutra/ui";
 
 <UnderlineNav aria-label="Key details">
   <UnderlineNav.Item href={`/keys/${id}`} aria-current={tab === "overview" ? "page" : undefined}>
@@ -149,7 +149,7 @@ Breadcrumbs are appropriate for resources nested 2 or more levels deep. Do not a
 Use `Pagination` at the bottom of tables or lists when the total item count exceeds the page size. Pair it with the table pattern — render it below the `DataTable`.
 
 ```tsx
-import { Pagination } from "@nebutra/design-system";
+import { Pagination } from "@nebutra/ui";
 
 <Pagination
   pageCount={totalPages}

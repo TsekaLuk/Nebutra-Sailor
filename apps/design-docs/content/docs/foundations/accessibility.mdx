@@ -32,7 +32,7 @@ These primitives establish the baseline. They do not replace semantic HTML. Use 
 Removes an element from the visual layout while keeping it in the accessibility tree.
 
 ```ts
-import { visuallyHidden } from "@nebutra/design-system/primitives/accessibility";
+import { visuallyHidden } from "@nebutra/ui/primitives/accessibility";
 
 // Style object — spread into inline styles or CSS-in-JS
 const style = visuallyHidden;
@@ -58,7 +58,7 @@ Do not use `display: none` or `visibility: hidden` to hide content that screen r
 Standard keyboard focus ring that meets WCAG 2.4.7 (Focus Visible).
 
 ```ts
-import { focusRing } from "@nebutra/design-system/primitives/accessibility";
+import { focusRing } from "@nebutra/ui/primitives/accessibility";
 
 // focusRing resolves to:
 // {
@@ -79,7 +79,7 @@ Use `:focus-visible` (not `:focus`) to show the ring only for keyboard users. Mo
 A skip navigation link visible only on keyboard focus. Required for WCAG 2.4.1 (Bypass Blocks).
 
 ```tsx
-import { skipLinkStyle } from "@nebutra/design-system/primitives/accessibility";
+import { skipLinkStyle } from "@nebutra/ui/primitives/accessibility";
 
 // In your root layout
 <a href="#main-content" style={skipLinkStyle}>
@@ -96,7 +96,7 @@ Pre-composed ARIA attribute objects for common UI states.
 ### `ariaPatterns.loading`
 
 ```tsx
-import { ariaPatterns } from "@nebutra/design-system/primitives/accessibility";
+import { ariaPatterns } from "@nebutra/ui/primitives/accessibility";
 
 <div {...ariaPatterns.loading}>
   Loading content...
@@ -144,7 +144,7 @@ import { ariaPatterns } from "@nebutra/design-system/primitives/accessibility";
 WCAG 2.5.5 (Target Size) requires a minimum 44×44px interactive area.
 
 ```ts
-import { minTouchTarget } from "@nebutra/design-system/primitives/accessibility";
+import { minTouchTarget } from "@nebutra/ui/primitives/accessibility";
 
 // minTouchTarget = { minWidth: 44, minHeight: 44 }
 
@@ -160,7 +160,7 @@ Apply to any interactive element whose visible area is smaller than 44×44px —
 Runtime check for the OS-level reduce-motion preference.
 
 ```ts
-import { prefersReducedMotion } from "@nebutra/design-system/primitives/accessibility";
+import { prefersReducedMotion } from "@nebutra/ui/primitives/accessibility";
 
 const duration = prefersReducedMotion() ? 0 : 300;
 
@@ -184,7 +184,7 @@ WCAG contrast ratio thresholds for programmatic contrast checking.
 | `contrastRequirements.largeTextAAA` | 4.5 | AAA | Enhanced large text |
 
 ```ts
-import { contrastRequirements } from "@nebutra/design-system/primitives/accessibility";
+import { contrastRequirements } from "@nebutra/ui/primitives/accessibility";
 
 function isAccessible(contrastRatio: number, isLargeText: boolean): boolean {
   const required = isLargeText

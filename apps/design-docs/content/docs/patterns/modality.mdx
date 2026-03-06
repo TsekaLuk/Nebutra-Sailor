@@ -93,7 +93,7 @@ const [isOpen, setIsOpen] = useState(false);
 For irreversible actions (delete, revoke, transfer), use the Text Confirm Dialog fragment which requires the user to type the resource name before the destructive button enables.
 
 ```tsx
-import { TextConfirmDialog } from "@nebutra/design-system";
+import { TextConfirmDialog } from "@nebutra/ui";
 
 <TextConfirmDialog
   isOpen={isOpen}
@@ -115,7 +115,7 @@ For simpler confirms (no typed verification), use the `ConfirmationModal` fragme
 `AnchoredOverlay` and `ActionMenu` position themselves relative to a trigger element and close on outside click or Escape. Use them for contextual row actions, inline option menus, and filter dropdowns — not for forms.
 
 ```tsx
-import { ActionMenu, ActionList } from "@nebutra/design-system";
+import { ActionMenu, ActionList } from "@nebutra/ui";
 
 <ActionMenu>
   <ActionMenu.Button>Actions</ActionMenu.Button>
@@ -159,7 +159,7 @@ function DeleteKeyDialog({ keyName, onConfirm, onCancel, isOpen }: Props) {
 Use a `Sheet` when the form is long enough to scroll, or when preserving visibility of the underlying page aids context.
 
 ```tsx
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@nebutra/design-system";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@nebutra/ui";
 
 <Sheet open={isOpen} onOpenChange={setIsOpen}>
   <SheetContent side="right" className="w-[480px]">

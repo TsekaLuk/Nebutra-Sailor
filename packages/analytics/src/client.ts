@@ -358,7 +358,7 @@ export class AnalyticsClient {
       // 2. Calculate the reward
       // 3. Credit the referrer's account
       // 4. Record the transaction
-      console.log("Processing referral reward:", input);
+      // TODO: Implement referral reward processing
     },
   };
 
@@ -417,24 +417,21 @@ export class AnalyticsClient {
    * Anonymize user data
    */
   async anonymizeUser(request: GDPRRequest): Promise<void> {
-    // Anonymize all links and analytics data for this user
-    console.log("Anonymizing user data:", request);
+    // TODO: Anonymize all links and analytics data for this user
   }
 
   /**
    * Delete user data (GDPR right to erasure)
    */
   async deleteUserData(request: GDPRRequest): Promise<void> {
-    // Delete all user's links and associated data
-    console.log("Deleting user data:", request);
+    // TODO: Delete all user's links and associated data
   }
 
   /**
    * Export user data (GDPR right to portability)
    */
   async exportUserData(request: GDPRRequest): Promise<unknown> {
-    // Export all user's links, clicks, and conversions
-    console.log("Exporting user data:", request);
+    // TODO: Export all user's links, clicks, and conversions
     return {};
   }
 

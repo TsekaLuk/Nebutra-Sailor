@@ -43,7 +43,7 @@ import {
 import { cn } from "@nebutra/ui/lib/utils";
 
 // Design system
-import { DesignSystemProvider } from "@nebutra/design-system";
+import { DesignSystemProvider } from "@nebutra/ui";
 ```
 
 ---
@@ -68,7 +68,7 @@ Replace entire `apps/web/src/app/layout.tsx` with:
 ```tsx
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { DesignSystemProvider } from "@nebutra/design-system";
+import { DesignSystemProvider } from "@nebutra/ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -133,7 +133,7 @@ Replace entire `apps/web/src/app/providers/design-system-shell.tsx` with:
 "use client";
 
 import React from "react";
-import { Button, Header } from "@nebutra/design-system";
+import { Button, Header } from "@nebutra/ui";
 import {
   SignInButton,
   SignUpButton,

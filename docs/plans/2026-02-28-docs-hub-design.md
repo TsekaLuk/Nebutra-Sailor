@@ -135,7 +135,7 @@ apps/docs-hub/
 │   └── tree-view.mdx
 │
 └── design-system/                     # Migrated from packages/design-system
-    ├── package.json                   # name: @nebutra/design-system (unchanged)
+    ├── package.json                   # name: @nebutra/ui (unchanged)
     ├── tsconfig.json
     ├── tsup.config.ts
     └── src/
@@ -172,7 +172,7 @@ Zero changes required in:
 - `apps/landing-page/package.json`
 - `packages/custom-ui/package.json`
 
-All use `"@nebutra/design-system": "workspace:*"` — pnpm resolves by package name, not physical path.
+All use `"@nebutra/ui": "workspace:*"` — pnpm resolves by package name, not physical path.
 
 ---
 
@@ -346,7 +346,7 @@ description: "Triggers an action or event."
 ## Usage
 
 ```tsx
-import { Button } from "@nebutra/design-system";
+import { Button } from "@nebutra/ui";
 ```
 ````
 

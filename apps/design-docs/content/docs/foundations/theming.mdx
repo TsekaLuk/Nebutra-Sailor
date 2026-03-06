@@ -19,7 +19,7 @@ Tokens originate in `default.ts` (Primer baseline), are optionally overridden in
 Located in `apps/docs-hub/design-system/src/theme/brand.ts`.
 
 ```ts
-import { createTheme } from "@nebutra/design-system/theme/brand";
+import { createTheme } from "@nebutra/ui/theme/brand";
 
 // Light theme with no overrides (Primer defaults)
 const theme = createTheme("light");
@@ -78,7 +78,7 @@ function createTheme(
 Two pre-built themes are exported directly:
 
 ```ts
-import { lightTheme, darkTheme } from "@nebutra/design-system/theme/brand";
+import { lightTheme, darkTheme } from "@nebutra/ui/theme/brand";
 ```
 
 Both are `DefaultTheme` objects — Primer semantic tokens with no brand overrides applied.
@@ -90,7 +90,7 @@ The `DesignSystemProvider` component is the integration point between the design
 </Info>
 
 ```tsx
-import { DesignSystemProvider } from "@nebutra/design-system";
+import { DesignSystemProvider } from "@nebutra/ui";
 
 // Default mode: system preference
 <DesignSystemProvider>
@@ -121,7 +121,7 @@ import { DesignSystemProvider } from "@nebutra/design-system";
 Access the current theme and mode toggle from any component inside `DesignSystemProvider`.
 
 ```tsx
-import { useDesignSystem } from "@nebutra/design-system";
+import { useDesignSystem } from "@nebutra/ui";
 
 function ThemeToggle() {
   const { mode, setMode, theme } = useDesignSystem();
@@ -151,7 +151,7 @@ Marketing tokens are not part of the theme context. They are CSS custom properti
 Located in `apps/docs-hub/design-system/src/theme/marketing.ts`.
 
 ```ts
-import { generateMarketingCSSVars } from "@nebutra/design-system/theme/marketing";
+import { generateMarketingCSSVars } from "@nebutra/ui/theme/marketing";
 
 // Returns a string of CSS custom property declarations
 const cssVars = generateMarketingCSSVars();
@@ -187,7 +187,7 @@ Inject this into the page layout of any marketing surface:
 
 ```tsx
 // apps/landing-page/src/app/layout.tsx
-import { generateMarketingCSSVars } from "@nebutra/design-system/theme/marketing";
+import { generateMarketingCSSVars } from "@nebutra/ui/theme/marketing";
 
 export default function Layout({ children }) {
   return (
@@ -204,7 +204,7 @@ export default function Layout({ children }) {
 ### Full Marketing Token Map
 
 ```ts
-import { marketingTokens } from "@nebutra/design-system/theme/marketing";
+import { marketingTokens } from "@nebutra/ui/theme/marketing";
 // marketingTokens.spacing
 // marketingTokens.typography
 // marketingTokens.gradients

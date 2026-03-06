@@ -87,7 +87,7 @@ This is the single biggest architectural problem in the codebase. Three packages
 |---------|------------|--------|-------|
 | `@nebutra/tokens` | hex | light, dark | `--nebutra-blue-500` etc. |
 | `@nebutra/theme` | oklch() | 6 themes (neon, gradient, dark-dense, minimal, vibrant, ocean) | Tailwind v4 @theme |
-| `@nebutra/design-system` | Primer scales | light, dark | 12-step semantic (fg.default, etc.) |
+| `@nebutra/ui` | Primer scales | light, dark | 12-step semantic (fg.default, etc.) |
 
 **Problems:**
 - Apps cannot use `@nebutra/theme` and `@nebutra/tokens` simultaneously (different color spaces, different theme IDs)
@@ -97,8 +97,8 @@ This is the single biggest architectural problem in the codebase. Three packages
 **Recommendation:** Unify into a single token pipeline:
 1. `@nebutra/tokens` as the **single source of truth** (define all scales)
 2. `@nebutra/theme` consumes tokens and applies them to Tailwind v4 themes
-3. `@nebutra/ui` and `@nebutra/design-system` import from tokens, never define their own
-4. Remove duplicate token definitions from `@nebutra/ui/src/theme/tokens.ts` and `@nebutra/design-system/src/theme/`
+3. `@nebutra/ui` and `@nebutra/ui` import from tokens, never define their own
+4. Remove duplicate token definitions from `@nebutra/ui/src/theme/tokens.ts` and `@nebutra/ui/src/theme/`
 
 ### 3.2 Non-Existent Exports in @nebutra/ui
 
@@ -124,7 +124,7 @@ This is the single biggest architectural problem in the codebase. Three packages
 | Domain | Package | Foundation |
 |--------|---------|-----------|
 | Chat/AI UI | `@nebutra/ui` | Lobe UI |
-| Dashboard/Admin | `@nebutra/design-system` | Primer |
+| Dashboard/Admin | `@nebutra/ui` | Primer |
 | Landing/Marketing | ??? | Neither explicitly owns this |
 
 No clear decision matrix exists for which package owns hybrid features (e.g., a settings page that includes both chat and admin UI).
@@ -132,7 +132,7 @@ No clear decision matrix exists for which package owns hybrid features (e.g., a 
 
 ### 3.4 Unused Token Ingestion Infrastructure
 
-`@nebutra/design-system` contains a sophisticated token ingestion system (Figma, Framer, Lottie integrations) with zero active consumers.
+`@nebutra/ui` contains a sophisticated token ingestion system (Figma, Framer, Lottie integrations) with zero active consumers.
 - **Recommendation:** Archive until needed
 
 ---

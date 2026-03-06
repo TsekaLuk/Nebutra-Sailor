@@ -518,7 +518,7 @@ Motion: Status dot pulse
 | CTA          | `CTASection`, `GridPattern`                              | mesh gradient bg        |
 | Footer       | `Footer`, `SystemStatusButton`                           | minimal variant         |
 
-### From `@nebutra/design-system`
+### From `@nebutra/ui`
 
 | Usage              | Token                                 |
 | ------------------ | ------------------------------------- |

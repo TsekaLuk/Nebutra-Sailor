@@ -52,9 +52,9 @@ ErrorState
 Use when a list, table, or data region has no records. Always include an action when the user can resolve the emptiness directly.
 
 ```tsx
-import { EmptyState } from "@nebutra/design-system";
+import { EmptyState } from "@nebutra/ui";
 import { PlusIcon } from "@primer/octicons-react";
-import { Button } from "@nebutra/design-system";
+import { Button } from "@nebutra/ui";
 
 <EmptyState
   icon={<PlusIcon />}
@@ -83,7 +83,7 @@ Props:
 Replace data regions while a request is in-flight. Use `size="large"` for full-page loading; `size="small"` inside compact cards.
 
 ```tsx
-import { LoadingState } from "@nebutra/design-system";
+import { LoadingState } from "@nebutra/ui";
 
 // Inside a section
 <LoadingState size="medium" message="Fetching usage data…" />
@@ -101,7 +101,7 @@ For complex pages with multiple regions, prefer per-region `LoadingState` over a
 Provide `onRetry` whenever the operation is idempotent and can be retried without user input.
 
 ```tsx
-import { ErrorState } from "@nebutra/design-system";
+import { ErrorState } from "@nebutra/ui";
 
 <ErrorState
   title="Failed to load usage"
@@ -118,7 +118,7 @@ For unrecoverable errors (auth, permissions), omit `onRetry` and render a `Butto
 For content-heavy pages where layout stability matters, use `Skeleton` atoms in place of `LoadingState`. Skeletons match the shape of real content and reduce layout shift.
 
 ```tsx
-import { Skeleton } from "@nebutra/design-system";
+import { Skeleton } from "@nebutra/ui";
 
 // Placeholder for a metric card
 <div className="space-y-2">
