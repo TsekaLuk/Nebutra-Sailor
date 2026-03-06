@@ -5,6 +5,12 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.5.0...v1.5.1) (2026-03-06)
+
+### 🐛 Bug Fixes
+
+- ci infra - pnpm version, coverage threshold, docker node_modules ([66048c6](https://github.com/TsekaLuk/Nebutra-Sailor/commit/66048c63db30bc59aea6e70c69c5b0c739cd8b55))
+
 ## [1.5.0](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.4.1...v1.5.0) (2026-03-06)
 
 ### 🆕 Features
