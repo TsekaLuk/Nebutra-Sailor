@@ -72,6 +72,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Docker registry names must be all-lowercase; bash ,, expansion lowercases.
+      - name: Set lowercase owner
+        id: lowercase
+        run: echo "owner=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_OUTPUT
+
       # ── Docker Buildx (multi-platform builder) ───────────────────────────────
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -129,7 +134,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.app }}
+            ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.app }}
             ${{ secrets.AWS_ACCOUNT_ID != '' && format('{0}.dkr.ecr.{1}.amazonaws.com/nebutra-{2}', secrets.AWS_ACCOUNT_ID, secrets.AWS_REGION, matrix.app) || '' }}
             ${{ secrets.ALIYUN_ACR_USERNAME != '' && format('registry.cn-hangzhou.aliyuncs.com/nebutra/{0}', matrix.app) || '' }}
             ${{ secrets.TENCENT_TCR_HOST != '' && format('{0}/nebutra/{1}', secrets.TENCENT_TCR_HOST, matrix.app) || '' }}
@@ -156,8 +161,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use GHCR as the layer cache backend — avoids cold-cache on every run
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.app }}:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.app }}:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.app }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.app }}:buildcache,mode=max
 
       # ── Trivy vulnerability scan ─────────────────────────────────────────────
       - name: Scan image for vulnerabilities
@@ -202,6 +207,10 @@ jobs:
       # ── Checkout ─────────────────────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set lowercase owner
+        id: lowercase
+        run: echo "owner=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_OUTPUT
 
       # ── Docker Buildx (multi-platform builder) ───────────────────────────────
       - name: Set up Docker Buildx
@@ -253,7 +262,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.service }}
+            ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.service }}
             ${{ secrets.AWS_ACCOUNT_ID != '' && format('{0}.dkr.ecr.{1}.amazonaws.com/nebutra-{2}', secrets.AWS_ACCOUNT_ID, secrets.AWS_REGION, matrix.service) || '' }}
             ${{ secrets.ALIYUN_ACR_USERNAME != '' && format('registry.cn-hangzhou.aliyuncs.com/nebutra/{0}', matrix.service) || '' }}
             ${{ secrets.TENCENT_TCR_HOST != '' && format('{0}/nebutra/{1}', secrets.TENCENT_TCR_HOST, matrix.service) || '' }}
@@ -281,5 +290,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Registry-backed layer cache using GHCR — shared across branches
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.service }}:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/nebutra-${{ matrix.service }}:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.service }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.service }}:buildcache,mode=max

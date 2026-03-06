@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'packages/custom-ui/src/**'
+      - 'packages/ui/src/**'
       - 'apps/storybook/**'
   pull_request:
     paths:
-      - 'packages/custom-ui/src/**'
+      - 'packages/ui/src/**'
       - 'apps/storybook/**'
 
 jobs:
@@ -24,8 +24,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
