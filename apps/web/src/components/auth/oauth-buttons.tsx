@@ -69,8 +69,8 @@ export function OAuthButtons({ mode }: OAuthButtonsProps) {
   return (
     <div className="flex flex-col gap-3">
       <Button
-        type="button"
-        variant="outline"
+        htmlType="button"
+        variant="outlined"
         className="w-full justify-center gap-2"
         disabled={loadingProvider !== null}
         onClick={() => handleOAuth("oauth_google")}
@@ -81,8 +81,8 @@ export function OAuthButtons({ mode }: OAuthButtonsProps) {
           : "Continue with Google"}
       </Button>
       <Button
-        type="button"
-        variant="outline"
+        htmlType="button"
+        variant="outlined"
         className="w-full justify-center gap-2"
         disabled={loadingProvider !== null}
         onClick={() => handleOAuth("oauth_github")}

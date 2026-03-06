@@ -56,9 +56,7 @@ const nextConfig: NextConfig = {
     "@nebutra/marketing",
     "@nebutra/sanity",
   ],
-  experimental: {
-    reactCompiler: true,
-  },
+  reactCompiler: true,
 
   async headers() {
     return [

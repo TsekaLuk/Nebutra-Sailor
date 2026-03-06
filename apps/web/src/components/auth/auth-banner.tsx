@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cn } from "@nebutra/ui";
+import { cn } from "@nebutra/ui/utils";
 
 interface AuthBannerProps {
   className?: string;

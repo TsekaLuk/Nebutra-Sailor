@@ -1,5 +1,5 @@
 import { AuthBanner } from "./auth-banner";
-import { cn } from "@nebutra/ui";
+import { cn } from "@nebutra/ui/utils";
 
 interface AuthSplitLayoutProps {
   children: React.ReactNode;

@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { useOrganizationList } from "@clerk/nextjs";
 import { Button } from "@nebutra/ui/components";
 import { Input } from "@nebutra/ui/components";
-import { Label } from "@nebutra/ui/components";
-import { cn } from "@nebutra/ui";
+import { Label } from "@nebutra/ui/primitives";
+import { cn } from "@nebutra/ui/utils";
 
 interface CreateWorkspaceStepProps {
   onComplete: () => void;
@@ -27,7 +27,8 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
   const [slugEdited, setSlugEdited] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const workspaceNameRef = useRef<HTMLInputElement | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Lobehub v5 Input uses antd's InputRef, not HTMLInputElement
+  const workspaceNameRef = useRef<any>(null);
 
   useEffect(() => {
     if (!slugEdited) {
@@ -36,7 +37,7 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
   }, [name, slugEdited]);
 
   useEffect(() => {
-    workspaceNameRef.current?.focus();
+    workspaceNameRef.current?.focus?.();
   }, []);
 
   const slugValid =
@@ -120,7 +121,11 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
 
         {error && <p className="text-sm text-destructive">{error}</p>}
 
-        <Button type="submit" className="w-full" disabled={loading || !name}>
+        <Button
+          htmlType="submit"
+          className="w-full"
+          disabled={loading || !name}
+        >
           {loading ? "Creating…" : "Create Workspace →"}
         </Button>
       </form>

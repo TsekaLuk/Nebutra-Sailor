@@ -24,10 +24,10 @@ export default function TenantsError({ error, reset }: ErrorProps) {
       <AnimateIn preset="fadeUp">
         <ErrorState
           title="Failed to load tenants"
-          description={
+          message={
             error.message || "An unexpected error occurred. Please try again."
           }
-          action={{ label: "Try again", onClick: reset }}
+          onRetry={reset}
         />
       </AnimateIn>
     </section>

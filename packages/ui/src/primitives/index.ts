@@ -114,6 +114,8 @@ export {
   type TabsContentProps,
 } from "./tabs";
 
+export { Separator } from "./separator";
+
 export {
   Tooltip,
   TooltipTrigger,

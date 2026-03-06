@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@nebutra/ui/components";
-import { cn } from "@nebutra/ui";
+import { cn } from "@nebutra/ui/utils";
 
 interface Integration {
   id: string;
@@ -125,9 +125,9 @@ export function ConnectIntegrationsStep({
                 </p>
               </div>
               <Button
-                type="button"
-                variant={isConnected ? "secondary" : "outline"}
-                size="sm"
+                htmlType="button"
+                variant={isConnected ? "outlined" : "outlined"}
+                size="small"
                 className="w-full text-xs"
                 onClick={() => !isConnected && handleConnect(integration.id)}
                 disabled={isConnected}
@@ -161,8 +161,8 @@ export function ConnectIntegrationsStep({
       </div>
 
       <Button
-        type="button"
-        variant="ghost"
+        htmlType="button"
+        variant="text"
         className="w-full text-muted-foreground"
         onClick={onComplete}
       >

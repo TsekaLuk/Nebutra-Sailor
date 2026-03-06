@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@nebutra/ui/components";
 import { Input } from "@nebutra/ui/components";
-import { Label } from "@nebutra/ui/components";
-import { Separator } from "@nebutra/ui/components";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
 import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 
@@ -101,7 +101,7 @@ export function SignInForm() {
         )}
 
         <Button
-          type="submit"
+          htmlType="submit"
           className="w-full"
           disabled={loading || !isLoaded}
         >

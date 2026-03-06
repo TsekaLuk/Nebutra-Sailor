@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@nebutra/ui/components";
 import { Input } from "@nebutra/ui/components";
-import { Label } from "@nebutra/ui/components";
-import { Separator } from "@nebutra/ui/components";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
 import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 
@@ -26,11 +26,12 @@ export function SignUpForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
-  const codeInputRef = useRef<HTMLInputElement | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Lobehub v5 Input uses antd's InputRef, not HTMLInputElement
+  const codeInputRef = useRef<any>(null);
 
   useEffect(() => {
     if (phase === "verify") {
-      codeInputRef.current?.focus();
+      codeInputRef.current?.focus?.();
     }
   }, [phase]);
 
@@ -143,7 +144,7 @@ export function SignUpForm() {
           )}
 
           <Button
-            type="submit"
+            htmlType="submit"
             className="w-full"
             disabled={loading || code.length !== 6}
           >
@@ -240,7 +241,7 @@ export function SignUpForm() {
         )}
 
         <Button
-          type="submit"
+          htmlType="submit"
           className="w-full"
           disabled={loading || !isLoaded}
         >

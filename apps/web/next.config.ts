@@ -41,14 +41,9 @@ const nextConfig: NextConfig = {
 
   // Workspace packages: src/-exporting packages need this for SWC to process
   // TypeScript; dist/-exporting packages need it for "use client" detection.
-  transpilePackages: [
-    "@nebutra/ui",
-    "@nebutra/tokens",
-  ],
+  transpilePackages: ["@nebutra/ui", "@nebutra/tokens"],
 
-  experimental: {
-    reactCompiler: true,
-  },
+  reactCompiler: true,
 
   // Attach security headers to every route.
   async headers() {
