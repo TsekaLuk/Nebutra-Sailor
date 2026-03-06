@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { AnimateIn } from "@nebutra/ui/primitives";
+import { AnimateIn } from "@nebutra/ui/components";
 import {
   Card,
   LoadingState,

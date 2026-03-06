@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@nebutra/ui/primitives";
-import { Input } from "@nebutra/ui/primitives";
-import { Label } from "@nebutra/ui/primitives";
-import { Separator } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/components";
+import { Input } from "@nebutra/ui/components";
+import { Label } from "@nebutra/ui/components";
+import { Separator } from "@nebutra/ui/components";
 import { OAuthButtons } from "./oauth-buttons";
 import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 

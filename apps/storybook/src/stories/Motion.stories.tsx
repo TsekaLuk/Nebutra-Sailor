@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 
 const meta: Meta = {
   title: "Design Tokens/Motion",

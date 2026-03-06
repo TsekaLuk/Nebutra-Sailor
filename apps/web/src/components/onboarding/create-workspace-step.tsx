@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useOrganizationList } from "@clerk/nextjs";
-import { Button } from "@nebutra/ui/primitives";
-import { Input } from "@nebutra/ui/primitives";
-import { Label } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/components";
+import { Input } from "@nebutra/ui/components";
+import { Label } from "@nebutra/ui/components";
 import { cn } from "@nebutra/ui";
 
 interface CreateWorkspaceStepProps {

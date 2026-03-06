@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/components";
 import { cn } from "@nebutra/ui";
 
 interface Integration {
