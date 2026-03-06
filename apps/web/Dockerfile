@@ -7,7 +7,7 @@ WORKDIR /app
 RUN corepack enable pnpm
 
 # Root workspace manifests
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
 # App manifest
 COPY apps/web/package.json ./apps/web/
@@ -29,10 +29,9 @@ WORKDIR /app
 RUN corepack enable pnpm
 
 # Restore node_modules from the deps stage
-# Note: @prisma packages are hoisted to root node_modules via .npmrc
+# All deps are hoisted to root node_modules via public-hoist-pattern[]=* in .npmrc
 COPY --from=deps /app/node_modules            ./node_modules
 COPY --from=deps /app/apps/web/node_modules   ./apps/web/node_modules
-COPY --from=deps /app/packages/db/node_modules ./packages/db/node_modules
 
 # Copy full source tree (respects .dockerignore at the repo root)
 COPY . .

@@ -5,7 +5,7 @@ WORKDIR /app
 RUN corepack enable pnpm
 
 # Copy manifests for workspace packages api-gateway depends on
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 COPY apps/api-gateway/package.json ./apps/api-gateway/
 COPY packages/alerting/package.json ./packages/alerting/
 COPY packages/cache/package.json ./packages/cache/
@@ -22,9 +22,9 @@ WORKDIR /app
 
 RUN corepack enable pnpm
 
+# All deps are hoisted to root node_modules via public-hoist-pattern[]=* in .npmrc
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps/api-gateway/node_modules ./apps/api-gateway/node_modules
-COPY --from=deps /app/packages/db/node_modules ./packages/db/node_modules
 COPY . .
 
 RUN pnpm --filter @nebutra/db db:generate
