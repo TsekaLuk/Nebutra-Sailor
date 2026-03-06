@@ -5,6 +5,14 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.4](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.5.3...v1.5.4) (2026-03-06)
+
+### 🐛 Bug Fixes
+
+- always render clerkprovider so clerk hooks have context on ci ([d5233cf](https://github.com/TsekaLuk/Nebutra-Sailor/commit/d5233cf8831380361bcd951949a8dd617b55ecfe))
+- copy patches/ directory in all dockerfiles for pnpm install ([7afe6ee](https://github.com/TsekaLuk/Nebutra-Sailor/commit/7afe6ee19f89350713c02f7bc4f5c0cb873f9b85))
+- resolve clerk v7 esm imports and web/landing-page build failures ([f7a6430](https://github.com/TsekaLuk/Nebutra-Sailor/commit/f7a6430339705a6483687fb0ed1e47682aadb295))
+
 ## [1.5.3](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.5.2...v1.5.3) (2026-03-06)
 
 ### 🐛 Bug Fixes
