@@ -81,17 +81,20 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("keeps Twitter OG dimensions and branding consistent with OpenGraph", () => {
-    const twitterImage = readFromRepo("apps/landing-page/src/app/twitter-image.tsx");
+    const twitterImage = readFromRepo(
+      "apps/landing-page/src/app/twitter-image.tsx",
+    );
     expect(twitterImage).toContain("width: 1200");
     expect(twitterImage).toContain("height: 630");
     expect(twitterImage).toMatch(/Nebutra Sailor|Sailor/);
   });
 
-  it("enables ISR and lazy-loaded sections on the localized marketing page", () => {
+  it("enables caching and lazy-loaded sections on the localized marketing page", () => {
     const marketingPage = readFromRepo(
       "apps/landing-page/src/app/[lang]/(marketing)/page.tsx",
     );
-    expect(marketingPage).toContain("export const revalidate = 3600");
+    expect(marketingPage).toContain('"use cache"');
+    expect(marketingPage).toContain("cacheLife");
     expect(marketingPage).toMatch(/dynamic\(/);
   });
 
@@ -101,7 +104,7 @@ describe("UI/UX audit remediation invariants", () => {
     );
 
     expect(marketingPage).toContain("export async function generateMetadata");
-    expect(marketingPage).toContain("namespace: \"metadata\"");
+    expect(marketingPage).toContain('namespace: "metadata"');
     expect(marketingPage).toContain("alternates");
   });
 
@@ -119,9 +122,7 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("uses LazyMotion wrappers in shared animation primitives", () => {
-    const animateIn = readFromRepo(
-      "packages/ui/src/components/animate-in.tsx",
-    );
+    const animateIn = readFromRepo("packages/ui/src/components/animate-in.tsx");
 
     expect(animateIn).toContain("LazyMotion");
     expect(animateIn).toContain("domAnimation");
@@ -132,7 +133,7 @@ describe("UI/UX audit remediation invariants", () => {
     const shell = readFromRepo(
       "apps/web/src/app/providers/design-system-shell.tsx",
     );
-    expect(shell).toMatch(/<aside|role=\"navigation\"|aria-label=\"Sidebar\"/);
+    expect(shell).toMatch(/<aside|role="navigation"|aria-label="Sidebar"/);
   });
 
   it("uses real dashboard IA routes with breadcrumb navigation", () => {
@@ -147,7 +148,7 @@ describe("UI/UX audit remediation invariants", () => {
     expect(navModel).toContain('href: "/billing"');
     expect(navModel).toContain('href: "/tenants"');
     expect(navModel).toContain('href: "/audit"');
-    expect(shell).toMatch(/aria-label=\"Breadcrumb\"/);
+    expect(shell).toMatch(/aria-label="Breadcrumb"/);
     expect(shell).toMatch(/aria-current=/);
   });
 
@@ -159,7 +160,7 @@ describe("UI/UX audit remediation invariants", () => {
       "apps/web/src/app/providers/dashboard-nav.ts",
     );
 
-    expect(shell).toMatch(/aria-label=\"Workspace switcher\"/);
+    expect(shell).toMatch(/aria-label="Workspace switcher"/);
     expect(shell).toContain("./dashboard-nav");
     expect(navModel).toContain("Product");
     expect(navModel).toContain("Operations");
@@ -233,13 +234,13 @@ describe("UI/UX audit remediation invariants", () => {
     expect(script).toContain("UI governance verification passed");
     expect(script).toContain("loadUiGovernancePolicy");
     expect(pointer).toContain("policyFile");
-    expect(policy).toContain("\"$schema\"");
-    expect(policy).toContain("\"policyVersion\"");
-    expect(policy).toContain("\"rawTailwindColorBudgets\"");
-    expect(policy).toContain("\"componentTierCoverage\"");
-    expect(policy).toContain("\"dependencyBoundaries\"");
-    expect(schema).toContain("\"Nebutra UI Governance Policy\"");
-    expect(schema).toContain("\"rawTailwindColorBudgets\"");
+    expect(policy).toContain('"$schema"');
+    expect(policy).toContain('"policyVersion"');
+    expect(policy).toContain('"rawTailwindColorBudgets"');
+    expect(policy).toContain('"componentTierCoverage"');
+    expect(policy).toContain('"dependencyBoundaries"');
+    expect(schema).toContain('"Nebutra UI Governance Policy"');
+    expect(schema).toContain('"rawTailwindColorBudgets"');
   });
 
   it("uses source-level ui path mapping and explicit runtime env mapping", () => {
@@ -248,7 +249,9 @@ describe("UI/UX audit remediation invariants", () => {
 
     expect(webTsConfig).toContain('"@nebutra/ui/*"');
     expect(webEnv).toContain("experimental__runtimeEnv: {");
-    expect(webEnv).toContain("NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL");
+    expect(webEnv).toContain(
+      "NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL",
+    );
   });
 
   it("uses parameterized tenant binding for ClickHouse dashboard queries", () => {
@@ -298,9 +301,15 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("removes indigo accents and autofocus props from auth/onboarding surfaces", () => {
-    const signIn = readFromRepo("apps/web/src/components/auth/sign-in-form.tsx");
-    const signUp = readFromRepo("apps/web/src/components/auth/sign-up-form.tsx");
-    const authBanner = readFromRepo("apps/web/src/components/auth/auth-banner.tsx");
+    const signIn = readFromRepo(
+      "apps/web/src/components/auth/sign-in-form.tsx",
+    );
+    const signUp = readFromRepo(
+      "apps/web/src/components/auth/sign-up-form.tsx",
+    );
+    const authBanner = readFromRepo(
+      "apps/web/src/components/auth/auth-banner.tsx",
+    );
     const workspace = readFromRepo(
       "apps/web/src/components/onboarding/create-workspace-step.tsx",
     );

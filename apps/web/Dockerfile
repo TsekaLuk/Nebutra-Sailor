@@ -13,10 +13,12 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 COPY apps/web/package.json ./apps/web/
 
 # Internal workspace packages that @nebutra/web depends on.
-# Derived from the "dependencies" field in apps/web/package.json:
-#   @nebutra/ui, @nebutra/tokens, @nebutra/db (Prisma client)
+# Derived from the "dependencies" field in apps/web/package.json
+# and transitive workspace deps (@nebutra/ui → @nebutra/brand).
 COPY packages/ui/package.json          ./packages/ui/
+COPY packages/tokens/package.json      ./packages/tokens/
 COPY packages/theme/package.json       ./packages/theme/
+COPY packages/brand/package.json       ./packages/brand/
 COPY packages/db/package.json          ./packages/db/
 
 # Install only the closure needed for @nebutra/web (and its workspace deps)
@@ -40,6 +42,9 @@ COPY . .
 
 # Generate Prisma client (db package is a transitive dep used at runtime)
 RUN pnpm --filter @nebutra/db db:generate
+
+# Build @nebutra/brand (used by @nebutra/ui at runtime)
+RUN pnpm --filter @nebutra/brand build
 
 # Build @nebutra/web; next.config.ts must have output: 'standalone'
 RUN pnpm --filter @nebutra/web build

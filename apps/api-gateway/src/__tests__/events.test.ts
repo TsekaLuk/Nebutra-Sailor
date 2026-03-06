@@ -230,7 +230,7 @@ describe("POST /ingest — upstream proxy", () => {
     await authedJsonRequest("/ingest", { events: [validEvent] });
 
     expect(fetchSpy).toHaveBeenCalledOnce();
-    const calledUrl = fetchSpy.mock.calls[0][0] as string;
+    const calledUrl = fetchSpy.mock.calls[0]![0] as string;
     expect(calledUrl).toContain("http://event-ingest.test");
   });
 
@@ -247,7 +247,7 @@ describe("POST /ingest — upstream proxy", () => {
 
     expect(fetchSpy).toHaveBeenCalledOnce();
     // fetch(url, init) — init.headers contains the forwarded org header
-    const calledInit = fetchSpy.mock.calls[0][1] as RequestInit;
+    const calledInit = fetchSpy.mock.calls[0]![1] as RequestInit;
     const forwardedHeaders = calledInit.headers as Record<string, string>;
     expect(forwardedHeaders["x-organization-id"]).toBe("org-789");
   });

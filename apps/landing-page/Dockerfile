@@ -17,6 +17,7 @@ COPY apps/landing-page/package.json ./apps/landing-page/
 #   @nebutra/brand, @nebutra/ui, @nebutra/marketing, @nebutra/sanity, @nebutra/tokens
 COPY packages/brand/package.json      ./packages/brand/
 COPY packages/ui/package.json         ./packages/ui/
+COPY packages/tokens/package.json     ./packages/tokens/
 COPY packages/marketing/package.json  ./packages/marketing/
 COPY packages/sanity/package.json     ./packages/sanity/
 COPY packages/theme/package.json      ./packages/theme/
@@ -37,9 +38,10 @@ COPY --from=deps /app/apps/landing-page/node_modules   ./apps/landing-page/node_
 # Copy full source tree (respects .dockerignore at the repo root)
 COPY . .
 
-# Sync brand assets (the build script calls `pnpm --filter @nebutra/brand sync`)
-# which is already wired into `pnpm --filter @nebutra/landing-page build`.
-# No extra step needed here — the filter build handles it automatically.
+# Build @nebutra/brand (tsup) — needed at runtime by @nebutra/ui and landing components.
+# The landing-page build script runs `pnpm --filter @nebutra/brand sync` (asset copy)
+# but the brand package also needs its TypeScript compiled first.
+RUN pnpm --filter @nebutra/brand build
 
 # Build @nebutra/landing-page; next.config.ts must have output: 'standalone'
 RUN pnpm --filter @nebutra/landing-page build
