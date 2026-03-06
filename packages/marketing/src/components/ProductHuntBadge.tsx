@@ -78,7 +78,7 @@ function ProductHuntIcon({ size = 24 }: { size?: number }) {
 export function ProductHuntEmbedBadge({
   postSlug,
   postId,
-  theme: _theme = "light",
+  theme = "light",
   altText,
   className,
   openInNewTab = true,

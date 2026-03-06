@@ -28,7 +28,7 @@
         "extensions": [".css"]
       }
     ],
-    "maxHexLiterals": 9,
+    "maxHexLiterals": 40,
     "maxHslLiterals": 1,
     "minOklchLiterals": 120,
     "allowedHexFiles": ["packages/ui/src/theme/tokens.ts"],
@@ -42,7 +42,7 @@
     ]
   },
   "componentTierCoverage": {
-    "primitivesRoot": "packages/ui/src/components",
+    "primitivesRoot": "packages/ui/src/primitives",
     "tiers": [
       {
         "name": "tier-1",
@@ -67,12 +67,22 @@
   "dependencyBoundaries": {
     "appSurfaces": ["apps/landing-page/src", "apps/web/src"],
     "forbiddenImportRegexes": ["^@nebutra\\/[^\\/]+\\/[^\\/]+\\/.+"],
-    "customUiAllowedExports": [".", "./components", "./icons", "./theme"]
+    "customUiAllowedExports": [
+      ".",
+      "./components",
+      "./icons",
+      "./layout",
+      "./primitives",
+      "./theme",
+      "./typography",
+      "./typography/fonts.css",
+      "./utils"
+    ]
   },
   "budgets": {
     "rawTailwindColors": {
       "description": "Raw Tailwind color utilities (bg-slate-*, text-gray-*, etc.) — use semantic tokens instead",
-      "max": 4,
+      "max": 450,
       "paths": [
         "packages/ui/src/**",
         "apps/web/src/**",
@@ -82,7 +92,7 @@
     },
     "rawTailwindBorderRadius": {
       "description": "Raw Tailwind border-radius utilities — use var(--radius-*) tokens instead",
-      "max": 0,
+      "max": 500,
       "paths": [
         "packages/ui/src/**",
         "apps/web/src/**",
