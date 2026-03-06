@@ -24,7 +24,6 @@ RUN corepack enable pnpm
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps/api-gateway/node_modules ./apps/api-gateway/node_modules
-COPY --from=deps /app/packages/db/node_modules ./packages/db/node_modules
 COPY . .
 
 RUN pnpm --filter @nebutra/db db:generate

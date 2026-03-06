@@ -29,9 +29,9 @@ WORKDIR /app
 RUN corepack enable pnpm
 
 # Restore node_modules from the deps stage
+# Note: @prisma packages are hoisted to root node_modules via .npmrc
 COPY --from=deps /app/node_modules            ./node_modules
 COPY --from=deps /app/apps/web/node_modules   ./apps/web/node_modules
-COPY --from=deps /app/packages/db/node_modules ./packages/db/node_modules
 
 # Copy full source tree (respects .dockerignore at the repo root)
 COPY . .
