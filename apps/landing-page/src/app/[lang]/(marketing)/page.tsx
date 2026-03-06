@@ -11,6 +11,8 @@ import {
   FooterMinimal,
 } from "@/components/landing";
 
+export const revalidate = 3600;
+
 const ProductDemoSection = dynamic(
   () => import("@/components/landing").then((mod) => mod.ProductDemoSection),
   {

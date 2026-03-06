@@ -2,10 +2,11 @@
  * Consent Route Integration Tests
  *
  * Tests all routes in apps/api-gateway/src/routes/legal/consent.ts
- * using Hono's app.request() pattern with mocked Prisma.
+ * using a wrapper app that mirrors the production middleware mount order.
  */
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { OpenAPIHono } from "@hono/zod-openapi";
 
 // Mock MUST be declared before the route module is imported.
 vi.mock("@nebutra/db", () => ({
@@ -30,12 +31,26 @@ vi.mock("@nebutra/db", () => ({
   Prisma: {},
 }));
 
+vi.mock("@clerk/backend", () => ({
+  verifyToken: vi.fn().mockRejectedValue(new Error("No JWT in tests")),
+}));
+
 import { prisma } from "@nebutra/db";
+import { tenantContextMiddleware } from "@/middlewares/tenantContext.js";
 import { consentRoutes } from "../routes/legal/consent.js";
+
+const app = new OpenAPIHono();
+app.use("*", tenantContextMiddleware);
+app.route("/", consentRoutes);
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+const AUTH_HEADERS = {
+  "x-user-id": "user-123",
+  "x-organization-id": "org-456",
+};
 
 function jsonRequest(
   method: string,
@@ -50,15 +65,23 @@ function jsonRequest(
   } else if (headers) {
     opts.headers = headers;
   }
-  return consentRoutes.request(path, opts);
+  return app.request(path, opts);
 }
 
-function getRequest(path: string) {
-  return consentRoutes.request(path, { method: "GET" });
+function authedJsonRequest(method: string, path: string, body?: unknown) {
+  return jsonRequest(method, path, body, AUTH_HEADERS);
 }
 
-function deleteRequest(path: string) {
-  return consentRoutes.request(path, { method: "DELETE" });
+function getRequest(path: string, headers?: Record<string, string>) {
+  return app.request(path, { method: "GET", headers });
+}
+
+function deleteRequest(path: string, headers?: Record<string, string>) {
+  return app.request(path, { method: "DELETE", headers });
+}
+
+function authedDeleteRequest(path: string) {
+  return deleteRequest(path, AUTH_HEADERS);
 }
 
 // ---------------------------------------------------------------------------
@@ -139,7 +162,7 @@ describe("POST /consent", () => {
       mockConsent,
     );
 
-    const res = await jsonRequest("POST", "/consent", validBody);
+    const res = await authedJsonRequest("POST", "/consent", validBody);
     const body = await res.json();
 
     expect(res.status).toBe(200);
@@ -147,6 +170,10 @@ describe("POST /consent", () => {
     expect(body.consentId).toBe("consent-1");
     expect(body.documentSlug).toBe("terms-of-service");
     expect(body.documentVersion).toBe("2024-01");
+    const createCall = (prisma.userConsent.create as ReturnType<typeof vi.fn>)
+      .mock.calls[0][0];
+    expect(createCall.data.userId).toBe("user-123");
+    expect(createCall.data.organizationId).toBe("org-456");
   });
 
   it("returns 404 when the document is not found", async () => {
@@ -154,7 +181,7 @@ describe("POST /consent", () => {
       prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
     ).mockResolvedValue(null);
 
-    const res = await jsonRequest("POST", "/consent", validBody);
+    const res = await authedJsonRequest("POST", "/consent", validBody);
     const body = await res.json();
 
     expect(res.status).toBe(404);
@@ -165,7 +192,7 @@ describe("POST /consent", () => {
   });
 
   it("returns 400/422 when required field documentSlug is missing", async () => {
-    const res = await jsonRequest("POST", "/consent", {
+    const res = await authedJsonRequest("POST", "/consent", {
       visitorId: "visitor-abc",
     });
 
@@ -173,7 +200,7 @@ describe("POST /consent", () => {
   });
 
   it("returns 400/422 when required field visitorId is missing", async () => {
-    const res = await jsonRequest("POST", "/consent", {
+    const res = await authedJsonRequest("POST", "/consent", {
       documentSlug: "terms-of-service",
     });
 
@@ -188,7 +215,7 @@ describe("POST /consent", () => {
       new Error("DB error"),
     );
 
-    const res = await jsonRequest("POST", "/consent", validBody);
+    const res = await authedJsonRequest("POST", "/consent", validBody);
     const body = await res.json();
 
     expect(res.status).toBe(500);
@@ -207,7 +234,7 @@ describe("POST /consent", () => {
     );
 
     // No consentType provided — Zod default is EXPLICIT
-    const res = await jsonRequest("POST", "/consent", {
+    const res = await authedJsonRequest("POST", "/consent", {
       documentSlug: "terms-of-service",
       visitorId: "visitor-abc",
     });
@@ -229,7 +256,9 @@ describe("GET /consent/status", () => {
     const body = await res.json();
 
     expect(res.status).toBe(400);
-    expect(body.error).toBe("documentSlug is required");
+    expect(body.error?.issues?.[0]).toMatchObject({
+      path: ["documentSlug"],
+    });
   });
 
   it("returns 404 when document is not found", async () => {
@@ -332,11 +361,13 @@ describe("GET /consent/status", () => {
 
 describe("DELETE /consent", () => {
   it("returns 400 when documentSlug query param is missing", async () => {
-    const res = await deleteRequest("/consent");
+    const res = await authedDeleteRequest("/consent");
     const body = await res.json();
 
     expect(res.status).toBe(400);
-    expect(body.error).toBe("documentSlug is required");
+    expect(body.error?.issues?.[0]).toMatchObject({
+      path: ["documentSlug"],
+    });
   });
 
   it("returns 200 with success and withdrawnCount", async () => {
@@ -344,7 +375,7 @@ describe("DELETE /consent", () => {
       prisma.userConsent.updateMany as ReturnType<typeof vi.fn>
     ).mockResolvedValue({ count: 2 });
 
-    const res = await deleteRequest(
+    const res = await authedDeleteRequest(
       "/consent?documentSlug=terms-of-service&visitorId=visitor-abc",
     );
     const body = await res.json();
@@ -359,7 +390,7 @@ describe("DELETE /consent", () => {
       prisma.userConsent.updateMany as ReturnType<typeof vi.fn>
     ).mockResolvedValue({ count: 0 });
 
-    const res = await deleteRequest(
+    const res = await authedDeleteRequest(
       "/consent?documentSlug=terms-of-service&visitorId=unknown-visitor",
     );
     const body = await res.json();
@@ -374,7 +405,7 @@ describe("DELETE /consent", () => {
       prisma.userConsent.updateMany as ReturnType<typeof vi.fn>
     ).mockRejectedValue(new Error("DB error"));
 
-    const res = await deleteRequest(
+    const res = await authedDeleteRequest(
       "/consent?documentSlug=terms-of-service&visitorId=visitor-abc",
     );
     const body = await res.json();

@@ -144,8 +144,9 @@ const recordConsentRoute = createRoute({
 
 consentRoutes.openapi(recordConsentRoute, async (c) => {
   const data = c.req.valid("json");
-  const userId = c.get("userId") as string | undefined;
-  const organizationId = c.get("organizationId") as string | undefined;
+  const tenant = c.get("tenant");
+  const userId = tenant?.userId;
+  const organizationId = tenant?.organizationId;
 
   try {
     const document = await prisma.legalDocument.findFirst({
@@ -252,7 +253,8 @@ const consentStatusRoute = createRoute({
 
 consentRoutes.openapi(consentStatusRoute, async (c) => {
   const { documentSlug, visitorId } = c.req.valid("query");
-  const userId = c.get("userId") as string | undefined;
+  const tenant = c.get("tenant");
+  const userId = tenant?.userId;
 
   try {
     const currentDocument = await prisma.legalDocument.findFirst({
@@ -344,7 +346,8 @@ const withdrawConsentRoute = createRoute({
 
 consentRoutes.openapi(withdrawConsentRoute, async (c) => {
   const { documentSlug, visitorId } = c.req.valid("query");
-  const userId = c.get("userId") as string | undefined;
+  const tenant = c.get("tenant");
+  const userId = tenant?.userId;
 
   try {
     const result = await prisma.userConsent.updateMany({
@@ -434,7 +437,8 @@ const recordCookieConsentRoute = createRoute({
 
 consentRoutes.openapi(recordCookieConsentRoute, async (c) => {
   const data = c.req.valid("json");
-  const userId = c.get("userId") as string | undefined;
+  const tenant = c.get("tenant");
+  const userId = tenant?.userId;
 
   const expiresAt = new Date();
   expiresAt.setFullYear(expiresAt.getFullYear() + 1);
@@ -565,7 +569,8 @@ const getCookieConsentRoute = createRoute({
 
 consentRoutes.openapi(getCookieConsentRoute, async (c) => {
   const { visitorId } = c.req.valid("query");
-  const userId = c.get("userId") as string | undefined;
+  const tenant = c.get("tenant");
+  const userId = tenant?.userId;
 
   if (!visitorId && !userId) {
     return c.json({ error: "visitorId or userId is required" }, 400);
