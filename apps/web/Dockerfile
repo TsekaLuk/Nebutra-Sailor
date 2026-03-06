@@ -20,7 +20,9 @@ COPY packages/theme/package.json       ./packages/theme/
 COPY packages/db/package.json          ./packages/db/
 
 # Install only the closure needed for @nebutra/web (and its workspace deps)
-RUN pnpm install --frozen-lockfile --filter @nebutra/web...
+# @nebutra/db is added as an explicit filter target so its devDependencies
+# (prisma CLI) are installed — transitive workspace deps only get prod deps.
+RUN pnpm install --frozen-lockfile --filter @nebutra/web... --filter @nebutra/db...
 
 # ── Stage 2: Build ────────────────────────────────────────────────────────────
 FROM node:22-alpine AS builder

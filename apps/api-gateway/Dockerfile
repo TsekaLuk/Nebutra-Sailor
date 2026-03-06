@@ -14,7 +14,9 @@ COPY packages/health/package.json ./packages/health/
 COPY packages/logger/package.json ./packages/logger/
 COPY packages/rate-limit/package.json ./packages/rate-limit/
 
-RUN pnpm install --frozen-lockfile --filter @nebutra/api-gateway...
+# @nebutra/db is added as an explicit filter target so its devDependencies
+# (prisma CLI) are installed — transitive workspace deps only get prod deps.
+RUN pnpm install --frozen-lockfile --filter @nebutra/api-gateway... --filter @nebutra/db...
 
 # ── Stage 2: Build ──────────────────────────────────────────────────────────
 FROM node:22-alpine AS builder

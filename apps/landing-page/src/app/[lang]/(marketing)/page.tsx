@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
@@ -10,8 +11,6 @@ import {
   FeatureCards,
   FooterMinimal,
 } from "@/components/landing";
-
-export const revalidate = 3600;
 
 const ProductDemoSection = dynamic(
   () => import("@/components/landing").then((mod) => mod.ProductDemoSection),
@@ -75,6 +74,9 @@ export default async function LocalizedHomePage({
 }: {
   params: Promise<{ lang: string }>;
 }) {
+  "use cache";
+  cacheLife("hours");
+
   const { lang } = await params;
   const locale = lang as Locale;
   setRequestLocale(locale);
