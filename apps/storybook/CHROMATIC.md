@@ -1,6 +1,6 @@
 # Chromatic Visual Regression CI
 
-Chromatic runs on every PR that touches `packages/custom-ui/src/` or `apps/storybook/`.
+Chromatic runs on every PR that touches `packages/ui/src/` or `apps/storybook/`.
 
 ## Setup
 

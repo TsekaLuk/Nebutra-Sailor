@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { AnimateIn } from "@nebutra/custom-ui/primitives";
-import { ErrorState } from "@nebutra/design-system/components";
+import { AnimateIn } from "@nebutra/ui/components";
+import { ErrorState } from "@nebutra/ui/layout";
 
 interface ErrorProps {
   error: Error & { digest?: string };

@@ -1,5 +1,7 @@
 # @nebutra/captcha
 
+> **Status: WIP** — Not yet integrated into any production app. Do not import until this notice is removed.
+
 CAPTCHA integration using Cloudflare Turnstile.
 
 ## Setup

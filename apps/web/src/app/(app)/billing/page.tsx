@@ -5,7 +5,7 @@ import {
   EmptyState,
   LoadingState,
   PageHeader,
-} from "@nebutra/design-system/components";
+} from "@nebutra/ui/layout";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
 
 function toCurrency(value: number) {

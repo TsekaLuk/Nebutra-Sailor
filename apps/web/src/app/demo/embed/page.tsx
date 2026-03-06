@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BarChart3, Coins, Database, Users } from "lucide-react";
-import { Card } from "@nebutra/design-system/components";
+import { Card } from "@nebutra/ui/layout";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
 
 const DEMO_TABS = [

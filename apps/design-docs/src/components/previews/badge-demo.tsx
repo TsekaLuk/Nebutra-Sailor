@@ -1,5 +1,5 @@
 "use client";
-import { Badge } from "@nebutra/custom-ui/primitives";
+import { Badge } from "@nebutra/ui/components";
 export function BadgeDemo() {
   return (
     <div className="flex flex-wrap gap-2">

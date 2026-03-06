@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
@@ -26,6 +27,26 @@ export default tseslint.config(
     },
   },
   // ───────────────────────────────────────────────────────────────────────
+  // JSX Accessibility rules (eslint-plugin-jsx-a11y)
+  //
+  // Applied to all TSX files across packages and apps so that
+  // accessibility violations are caught at the root level, even for
+  // packages that do not use eslint-config-next.
+  // ───────────────────────────────────────────────────────────────────────
+  {
+    files: ["**/*.tsx"],
+    ...jsxA11y.flatConfigs.recommended,
+    rules: {
+      ...jsxA11y.flatConfigs.recommended.rules,
+      "jsx-a11y/alt-text": "error",
+      "jsx-a11y/anchor-has-content": "error",
+      "jsx-a11y/aria-role": "error",
+      "jsx-a11y/img-redundant-alt": "warn",
+      "jsx-a11y/no-autofocus": "warn",
+      "jsx-a11y/interactive-supports-focus": "warn",
+    },
+  },
+  // ───────────────────────────────────────────────────────────────────────
   // Semantic token enforcement: ban raw Tailwind gray-scale colors in
   // production code. Use var(--neutral-*) semantic tokens instead.
   //
@@ -38,7 +59,7 @@ export default tseslint.config(
   // ───────────────────────────────────────────────────────────────────────
   {
     files: [
-      "packages/custom-ui/src/**/*.{ts,tsx}",
+      "packages/ui/src/**/*.{ts,tsx}",
       "apps/web/src/**/*.{ts,tsx}",
       "apps/landing-page/src/**/*.{ts,tsx}",
     ],

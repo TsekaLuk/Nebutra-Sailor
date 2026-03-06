@@ -94,7 +94,7 @@ const output = `/**
  * Generated: ${new Date().toISOString().split("T")[0]}
  *
  * Import in your globals.css:
- *   @import "@nebutra/custom-ui/styles/brand-override.css";
+ *   @import "@nebutra/theme/themes.css";
  */
 
 :root {

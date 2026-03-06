@@ -15,7 +15,6 @@
     "@nebutra/brand": "workspace:*",
     "@nebutra/ui": "workspace:*",
     "@nebutra/tokens": "workspace:*",
-    "@nebutra/design-system": "workspace:*",
     "@nebutra/marketing": "workspace:*",
     "@nebutra/sanity": "workspace:*",
     "@radix-ui/react-slot": "^1.2.4",
