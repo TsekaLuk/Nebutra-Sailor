@@ -256,9 +256,9 @@ describe("GET /consent/status", () => {
     const body = await res.json();
 
     expect(res.status).toBe(400);
-    expect(body.error?.issues?.[0]).toMatchObject({
-      path: ["documentSlug"],
-    });
+    expect(body.success).toBe(false);
+    expect(body.error.name).toBe("ZodError");
+    expect(body.error.message).toContain("documentSlug");
   });
 
   it("returns 404 when document is not found", async () => {
@@ -365,9 +365,9 @@ describe("DELETE /consent", () => {
     const body = await res.json();
 
     expect(res.status).toBe(400);
-    expect(body.error?.issues?.[0]).toMatchObject({
-      path: ["documentSlug"],
-    });
+    expect(body.success).toBe(false);
+    expect(body.error.name).toBe("ZodError");
+    expect(body.error.message).toContain("documentSlug");
   });
 
   it("returns 200 with success and withdrawnCount", async () => {
