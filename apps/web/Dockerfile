@@ -14,9 +14,10 @@ COPY apps/web/package.json ./apps/web/
 
 # Internal workspace packages that @nebutra/web depends on.
 # Derived from the "dependencies" field in apps/web/package.json:
-#   @nebutra/ui, @nebutra/tokens
+#   @nebutra/ui, @nebutra/tokens, @nebutra/db (Prisma client)
 COPY packages/ui/package.json          ./packages/ui/
 COPY packages/theme/package.json       ./packages/theme/
+COPY packages/db/package.json          ./packages/db/
 
 # Install only the closure needed for @nebutra/web (and its workspace deps)
 RUN pnpm install --frozen-lockfile --filter @nebutra/web...
@@ -30,6 +31,7 @@ RUN corepack enable pnpm
 # Restore node_modules from the deps stage
 COPY --from=deps /app/node_modules            ./node_modules
 COPY --from=deps /app/apps/web/node_modules   ./apps/web/node_modules
+COPY --from=deps /app/packages/db/node_modules ./packages/db/node_modules
 
 # Copy full source tree (respects .dockerignore at the repo root)
 COPY . .

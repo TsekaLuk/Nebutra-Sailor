@@ -58,8 +58,8 @@ export const ThemeId = z.enum([
 
 export const NebutraConfigSchema = z.object({
   preset: PresetId.default("full"),
-  apps: z.record(AppId, z.boolean()).optional(),
-  features: z.record(FeatureId, z.boolean()).optional(),
+  apps: z.record(z.string(), z.boolean()).optional(),
+  features: z.record(z.string(), z.boolean()).optional(),
   theme: ThemeId.default("neon"),
   locales: z.array(z.string()).default(["en"]),
   defaultLocale: z.string().default("en"),

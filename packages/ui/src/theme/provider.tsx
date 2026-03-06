@@ -15,7 +15,6 @@
 
 import { ThemeProvider as LobeThemeProvider } from "@lobehub/ui";
 import { type ReactNode } from "react";
-import { colors } from "./tokens";
 
 export interface NebutraThemeProviderProps {
   children: ReactNode;
@@ -24,43 +23,6 @@ export interface NebutraThemeProviderProps {
   /** Default theme mode when appearance is "auto" */
   defaultAppearance?: "dark" | "light";
 }
-
-// Lobe UI theme customization to match Nebutra design
-const nebutraTheme = {
-  token: {
-    // Primary colors
-    colorPrimary: colors.primary[600],
-    colorPrimaryHover: colors.primary[500],
-    colorPrimaryActive: colors.primary[700],
-    colorPrimaryBg: colors.primary[50],
-    colorPrimaryBgHover: colors.primary[100],
-
-    // Info/Link colors
-    colorInfo: colors.info,
-    colorLink: colors.primary[600],
-    colorLinkHover: colors.primary[500],
-
-    // Success
-    colorSuccess: colors.success,
-
-    // Warning
-    colorWarning: colors.warning,
-
-    // Error
-    colorError: colors.error,
-
-    // Border radius
-    borderRadius: 8,
-    borderRadiusLG: 12,
-    borderRadiusSM: 6,
-
-    // Font
-    fontFamily:
-      'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    fontFamilyCode:
-      '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace',
-  },
-};
 
 /**
  * Theme provider that wraps Lobe UI with Nebutra design tokens
@@ -77,11 +39,16 @@ export function NebutraThemeProvider({
   appearance = "auto",
   defaultAppearance = "light",
 }: NebutraThemeProviderProps) {
+  const resolvedAppearance = appearance === "auto" ? undefined : appearance;
+
   return (
     <LobeThemeProvider
-      appearance={appearance === "auto" ? undefined : appearance}
+      {...(resolvedAppearance != null && { appearance: resolvedAppearance })}
       defaultAppearance={defaultAppearance}
-      customTheme={nebutraTheme}
+      customTheme={{
+        primaryColor: "blue",
+        neutralColor: "slate",
+      }}
     >
       {children}
     </LobeThemeProvider>

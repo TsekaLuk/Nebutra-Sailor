@@ -1,27 +1,33 @@
 /**
  * @nebutra/ui/components
  *
- * Re-exported components from @lobehub/ui
- * Use these for AI-focused features and chat interfaces
+ * Re-exported components from @lobehub/ui (v5)
+ * Use these for AI-focused features and chat interfaces.
+ *
+ * Components removed in v5 that we previously re-exported:
+ *   - ModelIcon, ModelTag, PluginTag — removed upstream (lobe-chat specific)
+ *   - Breadcrumb, TabsNav, Slider, Switch — use Radix/HeroUI primitives instead
+ *   - useTheme, useThemeMode — use @nebutra/tokens ThemeProvider instead
  */
 
-// Chat components
+// Chat components (moved to @lobehub/ui/chat in v5)
 export {
   ChatInputArea,
   ChatItem,
   ChatList,
-  Markdown,
   MessageInput,
   MessageModal,
-} from "@lobehub/ui";
+} from "@lobehub/ui/chat";
+
+// Chat types (moved to @lobehub/ui/chat in v5)
+export type {
+  ChatItemProps,
+  ChatListProps,
+  ChatMessage,
+} from "@lobehub/ui/chat";
 
 // AI components
-export {
-  Avatar,
-  ModelIcon,
-  ModelTag,
-  PluginTag,
-} from "@lobehub/ui";
+export { Avatar } from "@lobehub/ui";
 
 // Layout
 export {
@@ -31,24 +37,18 @@ export {
   DraggablePanelFooter,
   DraggablePanelHeader,
   Flexbox,
-  FlexboxProps,
 } from "@lobehub/ui";
+
+export type { FlexboxProps } from "@lobehub/ui";
 
 // Data Display
-export {
-  Highlighter,
-  Image,
-  List,
-  Tag,
-  Tooltip,
-} from "@lobehub/ui";
+export { Highlighter, Image, List, Markdown, Tag, Tooltip } from "@lobehub/ui";
 
 // Feedback
-export {
-  Alert,
-  Modal,
-  Spotlight,
-} from "@lobehub/ui";
+export { Alert, Modal } from "@lobehub/ui";
+
+// Spotlight (moved to @lobehub/ui/awesome in v5)
+export { Spotlight } from "@lobehub/ui/awesome";
 
 // Input
 export {
@@ -60,39 +60,17 @@ export {
   SearchBar,
   Select,
   Segmented,
-  Slider,
-  Switch,
   TextArea,
 } from "@lobehub/ui";
 
 // Navigation
-export {
-  Breadcrumb,
-  Menu,
-  SideNav,
-  TabsNav,
-} from "@lobehub/ui";
+export { Menu, SideNav } from "@lobehub/ui";
 
 // Form
-export {
-  Form,
-  FormGroup,
-  FormItem,
-} from "@lobehub/ui";
+export { Form, FormGroup, FormItem } from "@lobehub/ui";
 
 // Theme
-export {
-  ThemeProvider,
-  useTheme,
-  useThemeMode,
-} from "@lobehub/ui";
-
-// Types
-export type {
-  ChatItemProps,
-  ChatListProps,
-  ChatMessage,
-} from "@lobehub/ui";
+export { ThemeProvider } from "@lobehub/ui";
 
 // Animation
 export {
