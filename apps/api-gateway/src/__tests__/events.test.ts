@@ -60,14 +60,17 @@ function jsonRequest(
   body?: unknown,
   extraHeaders?: Record<string, string>,
 ) {
-  return app.request(path, {
+  const opts: RequestInit = {
     method: "POST",
-    body: body !== undefined ? JSON.stringify(body) : undefined,
     headers: {
       "Content-Type": "application/json",
       ...extraHeaders,
     },
-  });
+  };
+  if (body !== undefined) {
+    opts.body = JSON.stringify(body);
+  }
+  return app.request(path, opts);
 }
 
 function authedJsonRequest(path: string, body?: unknown) {
@@ -220,9 +223,9 @@ describe("POST /ingest — upstream proxy", () => {
   });
 
   it("calls the upstream URL from the env config", async () => {
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
-      new Response(JSON.stringify({}), { status: 200 }),
-    );
+    const fetchSpy = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(new Response(JSON.stringify({}), { status: 200 }));
 
     await authedJsonRequest("/ingest", { events: [validEvent] });
 
@@ -232,9 +235,9 @@ describe("POST /ingest — upstream proxy", () => {
   });
 
   it("forwards x-organization-id header to upstream when provided", async () => {
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
-      new Response(JSON.stringify({}), { status: 200 }),
-    );
+    const fetchSpy = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(new Response(JSON.stringify({}), { status: 200 }));
 
     await jsonRequest(
       "/ingest",

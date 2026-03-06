@@ -1,5 +1,8 @@
-import type { PrismaClient, WebhookEvent } from "@nebutra/db";
-import type { CursorPaginationParams, CursorPaginationResult } from "./pagination.js";
+import type { PrismaClient, Prisma, WebhookEvent } from "@nebutra/db";
+import type {
+  CursorPaginationParams,
+  CursorPaginationResult,
+} from "./pagination.js";
 import { normalizePaginationParams } from "./pagination.js";
 
 /**
@@ -29,16 +32,20 @@ export class WebhookEventRepository {
   }
 
   async findPaginated(
-    params: CursorPaginationParams & { organizationId?: string } = {},
+    params: CursorPaginationParams = {},
   ): Promise<CursorPaginationResult<WebhookEvent>> {
     const { cursor, take } = normalizePaginationParams(params);
 
-    const items = await this.prisma.webhookEvent.findMany({
+    type FindArgs = Parameters<typeof this.prisma.webhookEvent.findMany>[0];
+    const query: FindArgs = {
       take: take + 1,
-      ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
-      ...(params.organizationId ? { where: { organizationId: params.organizationId } } : {}),
       orderBy: { createdAt: "desc" },
-    });
+    };
+    if (cursor != null) {
+      query.cursor = { id: cursor };
+      query.skip = 1;
+    }
+    const items = await this.prisma.webhookEvent.findMany(query);
 
     const hasNextPage = items.length > take;
     if (hasNextPage) items.pop();
@@ -83,11 +90,11 @@ export class WebhookEventRepository {
         provider,
         eventId,
         eventType,
-        payload: payload as unknown as Record<string, unknown>,
+        payload: payload as Prisma.InputJsonValue,
       },
       update: {
         eventType,
-        payload: payload as unknown as Record<string, unknown>,
+        payload: payload as Prisma.InputJsonValue,
       },
     });
   }
@@ -95,7 +102,10 @@ export class WebhookEventRepository {
   /**
    * Mark an event as successfully processed by setting `processedAt` to now.
    */
-  async markProcessed(provider: string, eventId: string): Promise<WebhookEvent> {
+  async markProcessed(
+    provider: string,
+    eventId: string,
+  ): Promise<WebhookEvent> {
     return this.prisma.webhookEvent.update({
       where: {
         provider_eventId: { provider, eventId },

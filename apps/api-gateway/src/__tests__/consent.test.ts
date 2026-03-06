@@ -73,11 +73,11 @@ function authedJsonRequest(method: string, path: string, body?: unknown) {
 }
 
 function getRequest(path: string, headers?: Record<string, string>) {
-  return app.request(path, { method: "GET", headers });
+  return app.request(path, { method: "GET", ...(headers && { headers }) });
 }
 
 function deleteRequest(path: string, headers?: Record<string, string>) {
-  return app.request(path, { method: "DELETE", headers });
+  return app.request(path, { method: "DELETE", ...(headers && { headers }) });
 }
 
 function authedDeleteRequest(path: string) {
