@@ -26,7 +26,7 @@ const preview: Preview = {
         rules: [
           {
             // Allow color-contrast issues to be warnings, not failures
-            id: 'color-contrast',
+            id: "color-contrast",
             enabled: true,
           },
         ],
@@ -53,7 +53,7 @@ const preview: Preview = {
       if (typeof document !== "undefined") {
         document.documentElement.classList.toggle("dark", theme === "dark");
       }
-      return Story();
+      return Story(context.args, context);
     },
   ],
 };
