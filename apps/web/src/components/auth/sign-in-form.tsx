@@ -12,7 +12,7 @@ import { OAuthButtons } from "./oauth-buttons";
 import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 
 export function SignInForm() {
-  const { isLoaded, signIn, setActive } = useSignIn();
+  const { signIn, fetchStatus } = useSignIn();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -20,21 +20,29 @@ export function SignInForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const isReady = fetchStatus === "idle";
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!isLoaded || !signIn || !setActive) return;
+    if (!isReady || !signIn) return;
 
     setLoading(true);
     setError("");
 
     try {
-      const result = await signIn.create({
-        identifier: email,
-        password,
-      });
+      await signIn.create({ identifier: email });
 
-      if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId });
+      const { error: pwError } = await signIn.password({
+        password,
+        identifier: email,
+      });
+      if (pwError) {
+        setError(pwError.message ?? "Sign in failed");
+        return;
+      }
+
+      if (signIn.status === "complete") {
+        await signIn.finalize();
         router.push("/");
       }
     } catch (err: unknown) {
@@ -103,7 +111,7 @@ export function SignInForm() {
         <Button
           htmlType="submit"
           className="w-full"
-          disabled={loading || !isLoaded}
+          disabled={loading || !isReady}
         >
           {loading ? "Signing in…" : "Log in"}
         </Button>

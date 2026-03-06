@@ -14,7 +14,7 @@ import { extractClerkErrorMessage } from "@/lib/clerk-errors";
 type Phase = "details" | "verify";
 
 export function SignUpForm() {
-  const { isLoaded, signUp, setActive } = useSignUp();
+  const { signUp, fetchStatus } = useSignUp();
   const router = useRouter();
 
   const [phase, setPhase] = useState<Phase>("details");
@@ -29,6 +29,8 @@ export function SignUpForm() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Lobehub v5 Input uses antd's InputRef, not HTMLInputElement
   const codeInputRef = useRef<any>(null);
 
+  const isReady = fetchStatus === "idle";
+
   useEffect(() => {
     if (phase === "verify") {
       codeInputRef.current?.focus?.();
@@ -37,7 +39,7 @@ export function SignUpForm() {
 
   async function handleDetailsSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!isLoaded || !signUp) return;
+    if (!isReady || !signUp) return;
 
     setLoading(true);
     setError("");
@@ -47,12 +49,18 @@ export function SignUpForm() {
         firstName,
         lastName,
         emailAddress: email,
-        password,
       });
 
-      await signUp.prepareEmailAddressVerification({
-        strategy: "email_code",
+      const { error: pwError } = await signUp.password({
+        password,
+        emailAddress: email,
       });
+      if (pwError) {
+        setError(pwError.message ?? "Sign up failed");
+        return;
+      }
+
+      await signUp.verifications.sendEmailCode();
 
       setPhase("verify");
     } catch (err: unknown) {
@@ -64,18 +72,25 @@ export function SignUpForm() {
 
   async function handleVerify(e: React.FormEvent) {
     e.preventDefault();
-    if (!isLoaded || !signUp || !setActive) return;
+    if (!isReady || !signUp) return;
 
     setLoading(true);
     setError("");
 
     try {
-      const result = await signUp.attemptEmailAddressVerification({
-        code,
-      });
+      const { error: verifyError } = await signUp.verifications.verifyEmailCode(
+        {
+          code,
+        },
+      );
 
-      if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId });
+      if (verifyError) {
+        setError(verifyError.message ?? "Invalid code. Please try again.");
+        return;
+      }
+
+      if (signUp.status === "complete") {
+        await signUp.finalize();
         router.push("/onboarding");
       }
     } catch (err: unknown) {
@@ -88,14 +103,12 @@ export function SignUpForm() {
   }
 
   async function handleResendCode() {
-    if (!isLoaded || !signUp || resending) return;
+    if (!isReady || !signUp || resending) return;
 
     setError("");
     setResending(true);
     try {
-      await signUp.prepareEmailAddressVerification({
-        strategy: "email_code",
-      });
+      await signUp.verifications.sendEmailCode();
     } catch {
       setError("Failed to resend code. Please try again.");
     } finally {
@@ -243,7 +256,7 @@ export function SignUpForm() {
         <Button
           htmlType="submit"
           className="w-full"
-          disabled={loading || !isLoaded}
+          disabled={loading || !isReady}
         >
           {loading ? "Creating account…" : "Create account"}
         </Button>
