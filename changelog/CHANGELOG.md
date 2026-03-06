@@ -5,6 +5,16 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.3](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.5.2...v1.5.3) (2026-03-06)
+
+### 🐛 Bug Fixes
+
+- docker module resolution, test assertions for cache migration ([11a01db](https://github.com/TsekaLuk/Nebutra-Sailor/commit/11a01db10488780e309236d4d02e50db93d240f6))
+- docker prisma filter, landing-page cache components migration ([7fd74e8](https://github.com/TsekaLuk/Nebutra-Sailor/commit/7fd74e84d9f5b132d3ef28e365eaa115c0407521))
+- migrate auth components to clerk v7 future api ([0dc88e2](https://github.com/TsekaLuk/Nebutra-Sailor/commit/0dc88e21d3c2289a4c0ebabe412a65959e889df5))
+- pass required args to storybook decorator story call ([05387d2](https://github.com/TsekaLuk/Nebutra-Sailor/commit/05387d2580175e342af6b8a70c2850804f96a4d3))
+- upgrade clerk to v7 and hoist all deps for docker compat ([7ca9920](https://github.com/TsekaLuk/Nebutra-Sailor/commit/7ca99201adb2a00d82791dddff8fa00e8c94ee70))
+
 ## [1.5.2](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.5.1...v1.5.2) (2026-03-06)
 
 ### 🐛 Bug Fixes
