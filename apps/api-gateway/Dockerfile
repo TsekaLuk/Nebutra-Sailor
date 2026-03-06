@@ -6,6 +6,7 @@ RUN corepack enable pnpm
 
 # Copy manifests for workspace packages api-gateway depends on
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+COPY patches/ ./patches/
 COPY apps/api-gateway/package.json ./apps/api-gateway/
 COPY packages/alerting/package.json ./packages/alerting/
 COPY packages/cache/package.json ./packages/cache/

@@ -8,6 +8,7 @@ RUN corepack enable pnpm
 
 # Root workspace manifests
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+COPY patches/ ./patches/
 
 # App manifest
 COPY apps/landing-page/package.json ./apps/landing-page/
