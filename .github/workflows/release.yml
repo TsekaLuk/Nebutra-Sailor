@@ -42,7 +42,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 22
           cache: "pnpm"
 
       - name: Install dependencies
@@ -72,7 +72,7 @@ jobs:
           else
             COMMITS=$(git log --oneline --format="%s" ${LAST_TAG}..HEAD)
           fi
-          
+
           # Check for conventional commit types that trigger release
           if echo "$COMMITS" | grep -qE "^(feat|fix|perf|refactor|revert)(\(.+\))?:"; then
             echo "has_releasable_commits=true" >> $GITHUB_OUTPUT
@@ -85,17 +85,17 @@ jobs:
         if: steps.check_commits.outputs.has_releasable_commits == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           RELEASE_ARGS=""
-          
+
           # Add release type if specified
           if [ -n "${{ github.event.inputs.release_type }}" ]; then
             RELEASE_ARGS="--release-as ${{ github.event.inputs.release_type }}"
           fi
-          
+
           # Add dry-run flag if specified
           if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
             RELEASE_ARGS="$RELEASE_ARGS --dry-run"
           fi
-          
+
           pnpm release $RELEASE_ARGS
 
       - name: Push changes and tags

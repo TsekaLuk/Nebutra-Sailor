@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
-const DESIGN_SYSTEM_SRC = resolve(ROOT, "apps/docs-hub/design-system/src");
+const DESIGN_SYSTEM_SRC = resolve(ROOT, "packages/ui/src");
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -58,21 +58,18 @@ type _RequiredSubdir = (typeof REQUIRED_SUBDIRS)[number];
  */
 const HARDCODED_HEX_EXEMPTIONS = new Set([
   // Syntax highlighting palette — language token colors cannot map to semantic UI tokens
-  resolve(ROOT, "packages/ui/src/components/code-block.tsx"),
+  resolve(ROOT, "packages/ui/src/primitives/code-block.tsx"),
+  // Gauge — data viz component with color threshold API; hex values in JSDoc + stories
+  resolve(ROOT, "packages/ui/src/primitives/gauge.tsx"),
+  resolve(ROOT, "packages/ui/src/primitives/gauge.stories.tsx"),
 ]);
 
-/** All TS/TSX files under design-system/src/ (excluding tokens — those import primitives by design) */
-const DS_COMPONENT_FILES = collectTsFiles(DESIGN_SYSTEM_SRC).filter(
+/** All TS/TSX files under packages/ui/src/ (excluding theme/tokens — those define primitives by design) */
+const ALL_COMPONENT_FILES = collectTsFiles(DESIGN_SYSTEM_SRC).filter(
   (f) =>
     !f.includes(`${DESIGN_SYSTEM_SRC}/theme/`) &&
     !f.includes(`${DESIGN_SYSTEM_SRC}/tokens/`),
 );
-
-/** All TS/TSX files under packages/ui/src/ */
-const UI_FILES = collectTsFiles(resolve(ROOT, "packages/ui/src"));
-
-/** Combined consumer component files */
-const ALL_COMPONENT_FILES = [...DS_COMPONENT_FILES, ...UI_FILES];
 
 // ---------------------------------------------------------------------------
 // Property 3a: Structural completeness
@@ -88,7 +85,7 @@ describe("Property 3a: Token Structure Completeness", () => {
           stat = statSync(full);
         } catch {
           throw new Error(
-            `Required directory "apps/docs-hub/design-system/src/${subdir}" is missing.`,
+            `Required directory "packages/ui/src/${subdir}" is missing.`,
           );
         }
         expect(stat.isDirectory()).toBe(true);
@@ -103,7 +100,7 @@ describe("Property 3a: Token Structure Completeness", () => {
         const files = collectTsFiles(resolve(DESIGN_SYSTEM_SRC, subdir));
         expect(
           files.length,
-          `apps/docs-hub/design-system/src/${subdir}/ has no .ts/.tsx files`,
+          `packages/ui/src/${subdir}/ has no .ts/.tsx files`,
         ).toBeGreaterThan(0);
       }),
       { numRuns: REQUIRED_SUBDIRS.length },
