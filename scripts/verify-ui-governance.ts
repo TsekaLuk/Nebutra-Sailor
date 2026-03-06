@@ -276,7 +276,7 @@ function verifyDependencyBoundaries(policy: GovernancePolicy) {
   );
 
   const customUiPackage = JSON.parse(
-    read("packages/custom-ui/package.json"),
+    read("packages/ui/package.json"),
   ) as { exports?: Record<string, unknown> };
   const exportKeys = Object.keys(customUiPackage.exports || {});
   const allowed = new Set(policy.dependencyBoundaries.customUiAllowedExports);
@@ -286,7 +286,7 @@ function verifyDependencyBoundaries(policy: GovernancePolicy) {
 
   assert(
     unexpected.length === 0 && missing.length === 0,
-    `custom-ui exports do not match layered allowlist.\nUnexpected:\n${unexpected.map((item) => `- ${item}`).join("\n") || "- (none)"}\nMissing:\n${missing.map((item) => `- ${item}`).join("\n") || "- (none)"}`,
+    `ui exports do not match layered allowlist.\nUnexpected:\n${unexpected.map((item) => `- ${item}`).join("\n") || "- (none)"}\nMissing:\n${missing.map((item) => `- ${item}`).join("\n") || "- (none)"}`,
   );
 }
 
@@ -296,7 +296,7 @@ function countAggregateBudgetViolations(
 ): number {
   const excludeSet = new Set(budget.exclude ?? []);
 
-  // Derive roots from paths (strip glob suffix, e.g. "packages/custom-ui/src/**" -> "packages/custom-ui/src")
+  // Derive roots from paths (strip glob suffix, e.g. "packages/ui/src/**" -> "packages/ui/src")
   const roots = budget.paths.map((p) => p.replace(/\/\*\*$/, "").replace(/\/\*$/, ""));
 
   const allFiles = roots.flatMap((root) =>

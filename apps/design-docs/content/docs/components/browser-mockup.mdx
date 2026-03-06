@@ -15,7 +15,7 @@ description: Geist-style browser window frame with navigation buttons, address b
 ## Usage
 
 ```tsx
-import { Browser } from "@nebutra/custom-ui/primitives";
+import { Browser } from "@nebutra/ui/primitives";
 
 // Children mode — arbitrary JSX
 <Browser address="vercel.com">
@@ -48,8 +48,8 @@ All other `<div>` props are forwarded to the container element.
 `BrowserMockup` is still exported as a deprecated alias. To migrate:
 
 ```diff
-- import { BrowserMockup } from "@nebutra/custom-ui/primitives";
-+ import { Browser } from "@nebutra/custom-ui/primitives";
+- import { BrowserMockup } from "@nebutra/ui/primitives";
++ import { Browser } from "@nebutra/ui/primitives";
 
 - <BrowserMockup url="example.com" image="/screenshot.png" />
 + <Browser address="example.com" imageSrc="/screenshot.png" />

@@ -32,8 +32,8 @@ packages/
 
 ```tsx
 // New components and pages — use custom-ui
-import { Button, Input, Card } from "@nebutra/custom-ui/primitives";
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { Button, Input, Card } from "@nebutra/ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
 
 // Layout wrapper components — use design-system
 import { PageHeader, EmptyState, LoadingState, ErrorState } from "@nebutra/design-system/components";
@@ -107,7 +107,7 @@ import { ChevronRight } from "lucide-react";
 ### 4. Animation — ALWAYS use AnimateIn for entrance animations
 
 ```tsx
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
 
 // Single element entrance
 <AnimateIn preset="emerge">
@@ -137,7 +137,7 @@ import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
 
 ```tsx
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { cn } from "@nebutra/ui/lib/utils";
 
 const cardVariants = cva(
   "rounded-lg border bg-white shadow-sm transition-shadow",
@@ -299,7 +299,7 @@ The **Design Tokens** section in Storybook shows:
 ## Package Commands
 
 ```bash
-pnpm --filter @nebutra/custom-ui build        # build component library
+pnpm --filter @nebutra/ui build        # build component library
 pnpm --filter @nebutra/storybook dev          # start Storybook
 pnpm --filter @nebutra/storybook typecheck    # typecheck stories
 pnpm --filter @nebutra/landing-page dev       # start landing page

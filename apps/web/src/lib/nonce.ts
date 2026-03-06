@@ -12,6 +12,12 @@ import { headers } from "next/headers";
  * generation or in tests).
  */
 export async function getNonce(): Promise<string> {
+  // During production builds there is no request context; skip header access
+  // to keep Cache Components prerendering non-blocking.
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return "";
+  }
+
   const headersList = await headers();
   return headersList.get("x-nonce") ?? "";
 }

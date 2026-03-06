@@ -20,7 +20,7 @@
   "tokenFormatBudget": {
     "tokenSurfaces": [
       {
-        "root": "packages/custom-ui/src/tokens",
+        "root": "packages/ui/src/tokens",
         "extensions": [".ts", ".tsx"]
       },
       {
@@ -32,11 +32,11 @@
     "maxHslLiterals": 1,
     "minOklchLiterals": 120,
     "allowedHexFiles": [
-      "packages/custom-ui/src/tokens/primitive.ts",
-      "packages/custom-ui/src/tokens/semantic.ts"
+      "packages/ui/src/tokens/primitive.ts",
+      "packages/ui/src/tokens/semantic.ts"
     ],
     "allowedHslFiles": [
-      "packages/custom-ui/src/tokens/semantic.ts"
+      "packages/ui/src/tokens/semantic.ts"
     ]
   },
   "motionBoundary": {
@@ -49,7 +49,7 @@
     ]
   },
   "componentTierCoverage": {
-    "primitivesRoot": "packages/custom-ui/src/primitives",
+    "primitivesRoot": "packages/ui/src/primitives",
     "tiers": [
       {
         "name": "tier-1",
@@ -78,7 +78,7 @@
     ],
     "forbiddenImportRegexes": [
       "^@nebutra\\/[^\\/]+\\/[^\\/]+\\/.+",
-      "^@nebutra\\/custom-ui\\/lib\\/.+"
+      "^@nebutra\\/ui\\/lib\\/.+"
     ],
     "customUiAllowedExports": [
       ".",
@@ -100,13 +100,13 @@
     "rawTailwindColors": {
       "description": "Raw Tailwind color utilities (bg-slate-*, text-gray-*, etc.) — use semantic tokens instead",
       "max": 4,
-      "paths": ["packages/custom-ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
+      "paths": ["packages/ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
       "exclude": ["**/*.stories.*", "**/globals.css"]
     },
     "rawTailwindBorderRadius": {
       "description": "Raw Tailwind border-radius utilities — use var(--radius-*) tokens instead",
       "max": 0,
-      "paths": ["packages/custom-ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
+      "paths": ["packages/ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
       "exclude": ["**/*.stories.*"]
     }
   }

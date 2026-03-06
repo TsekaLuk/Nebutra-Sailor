@@ -12,12 +12,14 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest"
   },
   "dependencies": {
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.18",
     "@types/node": "^24.10.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"

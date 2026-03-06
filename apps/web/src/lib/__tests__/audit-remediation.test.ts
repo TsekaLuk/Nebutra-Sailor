@@ -36,8 +36,8 @@ describe("UI/UX audit remediation invariants", () => {
 
     expect(hero).not.toMatch(/motion\./);
     expect(cta).not.toMatch(/motion\./);
-    expect(hero).toContain("@nebutra/custom-ui/primitives");
-    expect(cta).toContain("@nebutra/custom-ui/primitives");
+    expect(hero).toContain("@nebutra/ui/primitives");
+    expect(cta).toContain("@nebutra/ui/primitives");
   });
 
   it("avoids raw framer-motion usage in shared landing controls", () => {
@@ -58,7 +58,7 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("provides display-p3 brand colors with sRGB fallback", () => {
-    const globals = readFromRepo("packages/custom-ui/src/styles/globals.css");
+    const globals = readFromRepo("packages/ui/src/styles/globals.css");
     expect(globals).toContain("--nebutra-brand-blue: #0033FE");
     expect(globals).toContain("--nebutra-brand-cyan: #0BF1C3");
     expect(globals).toContain("@supports (color: color(display-p3 1 1 1))");
@@ -67,7 +67,7 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("uses @nebutra/brand as the primitive token source of truth", () => {
-    const primitive = readFromRepo("packages/custom-ui/src/tokens/primitive.ts");
+    const primitive = readFromRepo("packages/ui/src/tokens/primitive.ts");
     expect(primitive).toContain('import { colors } from "@nebutra/brand"');
     expect(primitive).toContain("blue500: colors.primary[500]");
     expect(primitive).toContain("cyan500: colors.accent[500]");
@@ -125,7 +125,7 @@ describe("UI/UX audit remediation invariants", () => {
 
   it("uses LazyMotion wrappers in shared animation primitives", () => {
     const animateIn = readFromRepo(
-      "packages/custom-ui/src/primitives/animate-in.tsx",
+      "packages/ui/src/primitives/animate-in.tsx",
     );
 
     expect(animateIn).toContain("LazyMotion");
@@ -247,11 +247,11 @@ describe("UI/UX audit remediation invariants", () => {
     expect(schema).toContain("\"rawTailwindColorBudgets\"");
   });
 
-  it("uses source-level custom-ui path mapping and explicit runtime env mapping", () => {
+  it("uses source-level ui path mapping and explicit runtime env mapping", () => {
     const webTsConfig = readFromRepo("apps/web/tsconfig.json");
     const webEnv = readFromRepo("apps/web/src/lib/env.ts");
 
-    expect(webTsConfig).toContain('"@nebutra/custom-ui/*"');
+    expect(webTsConfig).toContain('"@nebutra/ui/*"');
     expect(webEnv).toContain("experimental__runtimeEnv: {");
     expect(webEnv).toContain("NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL");
   });

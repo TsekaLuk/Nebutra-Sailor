@@ -17,7 +17,7 @@ description: "Searchable select input combining a trigger button with a filtered
 ## Installation
 
 ```tsx
-import { Combobox } from "@nebutra/custom-ui/primitives";
+import { Combobox } from "@nebutra/ui/primitives";
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ import { Combobox } from "@nebutra/custom-ui/primitives";
 
 ```tsx
 import { useState } from "react"
-import { Combobox } from "@nebutra/custom-ui/primitives"
+import { Combobox } from "@nebutra/ui/primitives"
 
 const frameworks = [
   { value: "next", label: "Next.js" },
@@ -138,8 +138,8 @@ const grouped = [
 For advanced scenarios (async search, custom rendering, separators), use sub-components as children.
 
 ```tsx
-import { Combobox } from "@nebutra/custom-ui/primitives"
-import { CommandList } from "@nebutra/custom-ui/primitives"
+import { Combobox } from "@nebutra/ui/primitives"
+import { CommandList } from "@nebutra/ui/primitives"
 
 <Combobox value={value} onChange={setValue} placeholder="Select framework...">
   <Combobox.Input placeholder="Search frameworks..." />

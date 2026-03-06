@@ -14,7 +14,7 @@ import {
   XPostCard,
   ClientXPostCard,
   XPostSkeleton,
-} from "@nebutra/custom-ui/primitives";
+} from "@nebutra/ui/primitives";
 ```
 
 `react-tweet` is a peer dependency — install if not already present:
@@ -47,7 +47,7 @@ Use `ClientXPostCard` when you need to embed in a client component that already 
 ```tsx
 "use client";
 
-import { ClientXPostCard } from "@nebutra/custom-ui/primitives";
+import { ClientXPostCard } from "@nebutra/ui/primitives";
 
 export default function TweetSection() {
   return <ClientXPostCard id="1441032681968212480" />;

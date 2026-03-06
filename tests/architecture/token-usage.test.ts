@@ -58,7 +58,7 @@ type _RequiredSubdir = (typeof REQUIRED_SUBDIRS)[number];
  */
 const HARDCODED_HEX_EXEMPTIONS = new Set([
   // Syntax highlighting palette — language token colors cannot map to semantic UI tokens
-  resolve(ROOT, "packages/custom-ui/src/primitives/code-block.tsx"),
+  resolve(ROOT, "packages/ui/src/primitives/code-block.tsx"),
 ]);
 
 /** All TS/TSX files under design-system/src/ (excluding tokens — those import primitives by design) */
@@ -68,8 +68,8 @@ const DS_COMPONENT_FILES = collectTsFiles(DESIGN_SYSTEM_SRC).filter(
     !f.includes(`${DESIGN_SYSTEM_SRC}/tokens/`),
 );
 
-/** All TS/TSX files under packages/custom-ui/src/ */
-const CUSTOM_UI_FILES = collectTsFiles(resolve(ROOT, "packages/custom-ui/src"));
+/** All TS/TSX files under packages/ui/src/ */
+const CUSTOM_UI_FILES = collectTsFiles(resolve(ROOT, "packages/ui/src"));
 
 /** Combined consumer component files */
 const ALL_COMPONENT_FILES = [...DS_COMPONENT_FILES, ...CUSTOM_UI_FILES];

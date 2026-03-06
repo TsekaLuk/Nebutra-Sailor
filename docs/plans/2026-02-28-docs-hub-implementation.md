@@ -283,7 +283,7 @@ Expected: pnpm resolves `@nebutra/design-system` from `apps/docs-hub/design-syst
 ```bash
 pnpm --filter @nebutra/landing-page typecheck
 pnpm --filter @nebutra/web typecheck
-pnpm --filter @nebutra/custom-ui typecheck
+pnpm --filter @nebutra/ui typecheck
 ```
 
 Expected: All pass with zero errors.
@@ -862,7 +862,7 @@ Fragment components are pre-assembled combinations of atom components for specif
 Unlike UI Patterns (structural guidelines), Fragments are **concrete, importable components**.
 
 <Info>
-  Fragment components are implemented in `@nebutra/custom-ui`. They are
+  Fragment components are implemented in `@nebutra/ui`. They are
   documented here but may reference atoms from `@nebutra/design-system` or
   `@nebutra/ui`.
 </Info>
@@ -885,7 +885,7 @@ description: "[One line description]"
 ## Usage
 
 ```tsx
-import {} from "@nebutra/custom-ui";
+import {} from "@nebutra/ui";
 ```
 ````
 
@@ -947,7 +947,7 @@ Atom components are the foundation of the design system. They are:
 
 <Info>
   Atoms are implemented in `packages/custom-ui/src/primitives/`. Import them via
-  `@nebutra/custom-ui/primitives`.
+  `@nebutra/ui/primitives`.
 </Info>
 ```
 
@@ -971,7 +971,7 @@ description: "[One line description]"
 ## Usage
 
 ```tsx
-import { [ComponentName] } from "@nebutra/custom-ui/primitives"
+import { [ComponentName] } from "@nebutra/ui/primitives"
 ```
 
 ## Props
@@ -1078,7 +1078,7 @@ After all tasks complete:
 - [ ] `pnpm install` runs clean from repo root
 - [ ] `pnpm --filter @nebutra/landing-page typecheck` passes
 - [ ] `pnpm --filter @nebutra/web typecheck` passes
-- [ ] `pnpm --filter @nebutra/custom-ui typecheck` passes
+- [ ] `pnpm --filter @nebutra/ui typecheck` passes
 - [ ] `cd apps/docs-hub && pnpm dev` starts without errors
 - [ ] All mint.json pages resolve in the browser (no 404s)
 - [ ] `apps/docs-hub/design-system/` contains `package.json` with `"name": "@nebutra/design-system"`

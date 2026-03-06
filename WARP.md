@@ -450,7 +450,7 @@ The following may be exempted from strict compliance:
 
 ### Component Integration Principles
 
-When integrating components into `@nebutra/custom-ui`, follow these principles:
+When integrating components into `@nebutra/ui`, follow these principles:
 
 1. **Atomic Decomposition** - Break down complex components into composable atomic units
    - Separate container/content patterns (e.g., `NoisePatternCard` + `NoisePatternCardBody`)

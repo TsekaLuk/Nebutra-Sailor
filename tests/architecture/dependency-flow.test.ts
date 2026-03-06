@@ -36,10 +36,9 @@ interface DependencyRule {
  *
  * Actual workspace:* deps found in each package (excluding tooling packages):
  *   @nebutra/design-system  (apps/docs-hub/design-system): none
- *   @nebutra/ui             (packages/ui):                  none
- *   @nebutra/ui      (packages/ui):           @nebutra/design-system
+ *   @nebutra/ui             (packages/ui):                  @nebutra/design-system
  *   @nebutra/web            (apps/web):                     @nebutra/ui, @nebutra/design-system, @nebutra/tokens
- *   @nebutra/landing-page   (apps/landing-page):            @nebutra/ui, @nebutra/design-system, @nebutra/tokens (+ excluded: brand, marketing, sanity, preset)
+ *   @nebutra/landing-page   (apps/landing-page):            @nebutra/brand, @nebutra/ui, @nebutra/design-system, @nebutra/tokens (+ excluded: marketing, sanity, preset)
  *   @nebutra/docs-hub       (apps/docs-hub):                none
  */
 const DEPENDENCY_RULES: DependencyRule[] = [
@@ -51,19 +50,13 @@ const DEPENDENCY_RULES: DependencyRule[] = [
   {
     name: "@nebutra/ui",
     packageJsonPath: "packages/ui/package.json",
-    allowedDeps: ["@nebutra/design-system"],
-  },
-  {
-    name: "@nebutra/ui",
-    packageJsonPath: "packages/ui/package.json",
-    allowedDeps: ["@nebutra/design-system", "@nebutra/ui"],
+    allowedDeps: ["@nebutra/design-system", "@nebutra/brand"],
   },
   {
     name: "@nebutra/web",
     packageJsonPath: "apps/web/package.json",
     allowedDeps: [
       "@nebutra/design-system",
-      "@nebutra/ui",
       "@nebutra/ui",
       "@nebutra/tokens",
     ],
@@ -72,8 +65,8 @@ const DEPENDENCY_RULES: DependencyRule[] = [
     name: "@nebutra/landing-page",
     packageJsonPath: "apps/landing-page/package.json",
     allowedDeps: [
+      "@nebutra/brand",
       "@nebutra/design-system",
-      "@nebutra/ui",
       "@nebutra/ui",
       "@nebutra/tokens",
     ],

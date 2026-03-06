@@ -10,7 +10,7 @@ description: "Popover-based date selection combining DateInput + Calendar. Suppo
 ## Usage
 
 ```tsx
-import { DatePicker, DateRangePicker } from "@nebutra/custom-ui/primitives";
+import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 ```
 
 ## Examples
@@ -30,7 +30,7 @@ import { DatePicker, DateRangePicker } from "@nebutra/custom-ui/primitives";
 ### Controlled
 
 ```tsx
-import { parseDate } from "@nebutra/custom-ui/primitives";
+import { parseDate } from "@nebutra/ui/primitives";
 import { useState } from "react";
 
 const [date, setDate] = useState(parseDate("2024-04-04"));
@@ -41,7 +41,7 @@ const [date, setDate] = useState(parseDate("2024-04-04"));
 ### With Min/Max
 
 ```tsx
-import { today, getLocalTimeZone } from "@nebutra/custom-ui/primitives";
+import { today, getLocalTimeZone } from "@nebutra/ui/primitives";
 
 <DateRangePicker
   label="Period"

@@ -6,7 +6,7 @@
 
 **Architecture:** Custom React forms using Clerk hooks for full design control. OAuth via `authenticateWithRedirect`. JWT auto-injection via server-side `getAuthenticatedApi()` and client-side `useApi()` hook wrapping existing `api` client.
 
-**Tech Stack:** @clerk/nextjs v6, React 19, Next.js App Router, @nebutra/custom-ui primitives (Button, Input, Label, Separator)
+**Tech Stack:** @clerk/nextjs v6, React 19, Next.js App Router, @nebutra/ui primitives (Button, Input, Label, Separator)
 
 ---
 
@@ -23,7 +23,7 @@
 
 import { useState } from "react";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
-import { Button } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
 
 interface OAuthButtonsProps {
   mode: "signIn" | "signUp";
@@ -148,10 +148,10 @@ import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { Separator } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
 
 export function SignInForm() {
@@ -297,10 +297,10 @@ import { useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { Separator } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
 
 type Phase = "details" | "verify";
@@ -805,7 +805,7 @@ Expected: build succeeds. If there are Clerk-related warnings about SSR, they're
 
 If errors occur, fix them. Common issues:
 
-- `Separator` import path wrong → check `@nebutra/custom-ui/primitives` exports
+- `Separator` import path wrong → check `@nebutra/ui/primitives` exports
 - `useSignIn`/`useSignUp` type mismatches → check Clerk v6 API
 
 **Step 3: Final commit (if fixes needed)**

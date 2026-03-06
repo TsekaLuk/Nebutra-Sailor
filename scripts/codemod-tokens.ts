@@ -57,7 +57,7 @@ function walkDir(dir: string, extensions: string[]): string[] {
 
 function discoverFiles(): string[] {
   const dirs = [
-    join(ROOT, "packages/custom-ui/src"),
+    join(ROOT, "packages/ui/src"),
     join(ROOT, "apps/web/src"),
     join(ROOT, "apps/landing-page/src"),
   ];

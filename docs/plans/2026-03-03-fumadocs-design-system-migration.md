@@ -2,11 +2,11 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Migrate design system component documentation from Mintlify (static code blocks, no live preview) to a new Fumadocs app (`apps/design-docs`) that renders `@nebutra/custom-ui` components inline.
+**Goal:** Migrate design system component documentation from Mintlify (static code blocks, no live preview) to a new Fumadocs app (`apps/design-docs`) that renders `@nebutra/ui` components inline.
 
-**Architecture:** New `apps/design-docs` is a standalone Next.js 16 App Router app using `fumadocs-ui` + `fumadocs-mdx`. It imports `@nebutra/custom-ui` as a workspace dependency via `transpilePackages`, so components render live without a separate build step. A `ComponentPreview` wrapper renders each demo in a Preview tab alongside a Code tab. `apps/docs-hub` (Mintlify) is retained but stripped of all design-system pages — it becomes the product docs hub (user manuals, API specs, Q&A only).
+**Architecture:** New `apps/design-docs` is a standalone Next.js 16 App Router app using `fumadocs-ui` + `fumadocs-mdx`. It imports `@nebutra/ui` as a workspace dependency via `transpilePackages`, so components render live without a separate build step. A `ComponentPreview` wrapper renders each demo in a Preview tab alongside a Code tab. `apps/docs-hub` (Mintlify) is retained but stripped of all design-system pages — it becomes the product docs hub (user manuals, API specs, Q&A only).
 
-**Tech Stack:** Next.js 16, React 19, Tailwind CSS v4, `fumadocs-ui@14`, `fumadocs-core`, `fumadocs-mdx`, `@nebutra/custom-ui` (workspace:*), pnpm, Turborepo
+**Tech Stack:** Next.js 16, React 19, Tailwind CSS v4, `fumadocs-ui@14`, `fumadocs-core`, `fumadocs-mdx`, `@nebutra/ui` (workspace:*), pnpm, Turborepo
 
 ---
 
@@ -17,7 +17,7 @@
 - Workspace packages: `apps/*`, `packages/*`, `services/*`
 - Package manager: pnpm 10 + Turborepo 2
 - `apps/docs-hub/` — current Mintlify docs (to be trimmed, not deleted)
-- `packages/custom-ui/` → `@nebutra/custom-ui` — component library (tsup-built, dist/)
+- `packages/custom-ui/` → `@nebutra/ui` — component library (tsup-built, dist/)
 - `apps/storybook/` — Storybook 8 (unchanged)
 
 ### Content to migrate (from `apps/docs-hub/design-system/`)
@@ -61,7 +61,7 @@ mkdir -p /path/to/repo/apps/design-docs
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@nebutra/custom-ui": "workspace:*",
+    "@nebutra/ui": "workspace:*",
     "fumadocs-core": "^14.0.0",
     "fumadocs-mdx": "^11.0.0",
     "fumadocs-ui": "^14.0.0",
@@ -180,7 +180,7 @@ git commit -m "feat(design-docs): add fumadocs-mdx source config"
 **Files:**
 - Create: `apps/design-docs/next.config.ts`
 
-`transpilePackages` is required so Next.js compiles `@nebutra/custom-ui` source directly, avoiding stale `dist/` in dev.
+`transpilePackages` is required so Next.js compiles `@nebutra/ui` source directly, avoiding stale `dist/` in dev.
 
 **Step 1: Write next.config.ts**
 
@@ -191,7 +191,7 @@ import type { NextConfig } from "next";
 const withMDX = createMDX();
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@nebutra/custom-ui"],
+  transpilePackages: ["@nebutra/ui"],
   reactStrictMode: true,
 };
 
@@ -218,7 +218,7 @@ The project uses Tailwind v4 which is CSS-first (no `tailwind.config.ts` needed)
 
 ```css
 @import "tailwindcss";
-@import "@nebutra/custom-ui/styles/globals.css";
+@import "@nebutra/ui/styles/globals.css";
 @import "fumadocs-ui/style.css";
 ```
 
@@ -227,10 +227,10 @@ Note: Tailwind v4 uses `@import "tailwindcss"` — not `@tailwind base/component
 **Step 2: Verify the import path exists**
 
 ```bash
-ls node_modules/@nebutra/custom-ui/src/styles/globals.css
+ls node_modules/@nebutra/ui/src/styles/globals.css
 ```
 
-If using the built dist, the path is `@nebutra/custom-ui/styles/globals.css` (as exported in package.json). With `transpilePackages`, Next.js will resolve to source.
+If using the built dist, the path is `@nebutra/ui/styles/globals.css` (as exported in package.json). With `transpilePackages`, Next.js will resolve to source.
 
 **Step 3: Commit**
 
@@ -560,7 +560,7 @@ Goal: validate the full chain with 3 representative components before mass migra
 ```tsx
 "use client";
 
-import { Button } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
 import { Mail, ArrowRight } from "lucide-react";
 
 export function ButtonDemo() {
@@ -597,7 +597,7 @@ import { ComponentPreview } from "@/components/component-preview";
 ## Installation
 
 ```tsx
-import { Button, ButtonLink } from "@nebutra/custom-ui/primitives"
+import { Button, ButtonLink } from "@nebutra/ui/primitives"
 \```
 
 ## Variants
@@ -676,7 +676,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@nebutra/custom-ui/primitives";
+} from "@nebutra/ui/primitives";
 
 export function AccordionDemo() {
   return (
@@ -739,7 +739,7 @@ git commit -m "feat(design-docs): add Accordion pilot page with live preview"
 "use client";
 
 import { useState } from "react";
-import { Combobox } from "@nebutra/custom-ui/primitives";
+import { Combobox } from "@nebutra/ui/primitives";
 
 const frameworks = [
   { value: "next", label: "Next.js" },
@@ -943,7 +943,7 @@ Example for Badge:
 ```tsx
 // src/components/previews/badge-demo.tsx
 "use client";
-import { Badge } from "@nebutra/custom-ui/primitives";
+import { Badge } from "@nebutra/ui/primitives";
 export function BadgeDemo() {
   return (
     <div className="flex flex-wrap gap-2">
@@ -1031,12 +1031,12 @@ git commit -m "chore(docs-hub): remove design-system navigation groups (moved to
 ```json
 {
   "scripts": {
-    "dev:design": "turbo run dev --filter=@nebutra/design-docs --filter=@nebutra/custom-ui"
+    "dev:design": "turbo run dev --filter=@nebutra/design-docs --filter=@nebutra/ui"
   }
 }
 ```
 
-`--filter=@nebutra/custom-ui` ensures the tsup watch runs alongside Next.js dev.
+`--filter=@nebutra/ui` ensures the tsup watch runs alongside Next.js dev.
 
 **Step 2: Commit**
 
@@ -1089,7 +1089,7 @@ Before marking migration complete:
 
 | Risk | Mitigation |
 |------|-----------|
-| `@nebutra/custom-ui` CSS variables don't apply in Fumadocs | Verify `@import "@nebutra/custom-ui/styles/globals.css"` is before `fumadocs-ui/style.css` in globals.css |
+| `@nebutra/ui` CSS variables don't apply in Fumadocs | Verify `@import "@nebutra/ui/styles/globals.css"` is before `fumadocs-ui/style.css` in globals.css |
 | Some components use `window`/`document` — SSR errors | Wrap with `dynamic(() => import(...), { ssr: false })` in demo files |
 | Three.js / WebGL components (Stars Canvas, Globe) are heavy | Use `dynamic` + `ssr: false` in demo, show static screenshot as fallback |
 | Fumadocs `@/.source` type doesn't resolve | Run `next dev` once to let fumadocs-mdx generate `.source/` |

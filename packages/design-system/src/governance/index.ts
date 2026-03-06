@@ -14,9 +14,9 @@
  */
 export type ComponentSource =
   | "design-system" // From @nebutra/design-system (SSOT)
-  | "custom" // Built in-house for @nebutra/custom-ui
+  | "custom" // Built in-house for @nebutra/ui
   | "promoted" // Promoted from external library
-  | "experimental"; // Still experimental, from @nebutra/custom-ui or external
+  | "experimental"; // Still experimental, from @nebutra/ui or external
 
 /**
  * Component lifecycle status

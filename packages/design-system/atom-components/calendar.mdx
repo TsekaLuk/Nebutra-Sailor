@@ -14,7 +14,7 @@ description: "International date selection component with full keyboard navigati
 ## Usage
 
 ```tsx
-import { Calendar, RangeCalendar, today, getLocalTimeZone } from "@nebutra/custom-ui/primitives";
+import { Calendar, RangeCalendar, today, getLocalTimeZone } from "@nebutra/ui/primitives";
 ```
 
 ## Examples
@@ -28,7 +28,7 @@ import { Calendar, RangeCalendar, today, getLocalTimeZone } from "@nebutra/custo
 ### Controlled
 
 ```tsx
-import { today, getLocalTimeZone } from "@nebutra/custom-ui/primitives";
+import { today, getLocalTimeZone } from "@nebutra/ui/primitives";
 
 const [date, setDate] = useState(today(getLocalTimeZone()));
 
@@ -61,7 +61,7 @@ const tz = getLocalTimeZone();
 ### Weekends Unavailable
 
 ```tsx
-import { isWeekend } from "@nebutra/custom-ui/primitives";
+import { isWeekend } from "@nebutra/ui/primitives";
 
 <Calendar isDateUnavailable={(date) => isWeekend(date, "en-US")} />
 ```
@@ -71,7 +71,7 @@ import { isWeekend } from "@nebutra/custom-ui/primitives";
 For selecting a date range on an inline calendar grid.
 
 ```tsx
-import type { RangeValue, DateValue } from "@nebutra/custom-ui/primitives";
+import type { RangeValue, DateValue } from "@nebutra/ui/primitives";
 
 const [range, setRange] = useState<RangeValue<DateValue>>();
 
@@ -122,7 +122,7 @@ import {
   isWeekend, isToday, isSameDay, isSameMonth, isSameYear,
   startOfWeek, startOfMonth, startOfYear,
   endOfWeek, endOfMonth, endOfYear,
-} from "@nebutra/custom-ui/primitives";
+} from "@nebutra/ui/primitives";
 ```
 
 ## Accessibility

@@ -27,12 +27,12 @@ const eslintConfig = defineConfig([
             {
               name: "framer-motion",
               message:
-                "Use shared motion primitives from @nebutra/custom-ui instead of importing framer-motion in app surfaces.",
+                "Use shared motion primitives from @nebutra/ui instead of importing framer-motion in app surfaces.",
             },
           ],
           patterns: [
             {
-              group: ["@nebutra/*/*/*", "@nebutra/custom-ui/lib/*"],
+              group: ["@nebutra/*/*/*", "@nebutra/ui/lib/*"],
               message:
                 "Avoid deep cross-package imports in app surfaces. Use package root or first-level exports only.",
             },

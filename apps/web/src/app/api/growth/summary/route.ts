@@ -2,9 +2,6 @@ import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 const hasClerkKeys =
   !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
   !!process.env.CLERK_SECRET_KEY;

@@ -6,7 +6,7 @@
 
 **Architecture:** Custom Clerk hooks (`useSignIn`/`useSignUp`) power the auth forms; root layout is refactored so auth routes get no Header while app routes do; onboarding uses Clerk's `createOrganization` API.
 
-**Tech Stack:** Next.js 16 App Router, `@clerk/nextjs` v6, `@nebutra/custom-ui/primitives` (Button, Input, Label, Separator, Card, InputOTP), Tailwind CSS v4.
+**Tech Stack:** Next.js 16 App Router, `@clerk/nextjs` v6, `@nebutra/ui/primitives` (Button, Input, Label, Separator, Card, InputOTP), Tailwind CSS v4.
 
 ---
 
@@ -24,23 +24,23 @@
 
 ```ts
 // Primitives (shadcn-based)
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { Separator } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@nebutra/custom-ui/primitives";
+} from "@nebutra/ui/primitives";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@nebutra/custom-ui/primitives";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+} from "@nebutra/ui/primitives";
+import { cn } from "@nebutra/ui/lib/utils";
 
 // Design system
 import { DesignSystemProvider } from "@nebutra/design-system";
@@ -339,7 +339,7 @@ Create `apps/web/src/components/auth/auth-banner.tsx`:
 
 ```tsx
 import Link from "next/link";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { cn } from "@nebutra/ui/lib/utils";
 
 interface AuthBannerProps {
   className?: string;
@@ -446,7 +446,7 @@ Create `apps/web/src/components/auth/auth-split-layout.tsx`:
 
 ```tsx
 import { AuthBanner } from "./auth-banner";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { cn } from "@nebutra/ui/lib/utils";
 
 interface AuthSplitLayoutProps {
   children: React.ReactNode;
@@ -490,7 +490,7 @@ Create `apps/web/src/components/auth/oauth-buttons.tsx`:
 "use client";
 
 import { useSignIn } from "@clerk/nextjs";
-import { Button } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
 
 interface OAuthButtonsProps {
   mode: "sign_in" | "sign_up";
@@ -595,10 +595,10 @@ import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { Separator } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
 
 type FormState = "idle" | "loading" | "error";
@@ -779,15 +779,15 @@ import { useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { Separator } from "@nebutra/custom-ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { Separator } from "@nebutra/ui/primitives";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@nebutra/custom-ui/primitives";
+} from "@nebutra/ui/primitives";
 import { OAuthButtons } from "./oauth-buttons";
 
 type Step = "details" | "verify";
@@ -1156,10 +1156,10 @@ Create `apps/web/src/components/onboarding/create-workspace-step.tsx`:
 
 import { useState, useEffect } from "react";
 import { useOrganizationList } from "@clerk/nextjs";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { Input } from "@nebutra/custom-ui/primitives";
-import { Label } from "@nebutra/custom-ui/primitives";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { Button } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
+import { Label } from "@nebutra/ui/primitives";
+import { cn } from "@nebutra/ui/lib/utils";
 
 interface CreateWorkspaceStepProps {
   onComplete: () => void;
@@ -1305,8 +1305,8 @@ Create `apps/web/src/components/onboarding/connect-integrations-step.tsx`:
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@nebutra/custom-ui/primitives";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { Button } from "@nebutra/ui/primitives";
+import { cn } from "@nebutra/ui/lib/utils";
 
 interface Integration {
   id: string;
@@ -1508,7 +1508,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CreateWorkspaceStep } from "./create-workspace-step";
 import { ConnectIntegrationsStep } from "./connect-integrations-step";
-import { cn } from "@nebutra/custom-ui/lib/utils";
+import { cn } from "@nebutra/ui/lib/utils";
 
 const STEPS = [{ label: "Workspace" }, { label: "Integrations" }] as const;
 

@@ -10,7 +10,7 @@ import {
   BitbucketAvatar,
   AvatarWithIcon,
   DiceBearAvatar,
-} from "@nebutra/custom-ui/primitives";
+} from "@nebutra/ui/primitives";
 
 const va = (seed: string) => `https://avatar.vercel.sh/${seed}`;
 

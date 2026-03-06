@@ -6,7 +6,7 @@ Good -- no existing stories in the project source (only in node_modules), and no
 
 ## Overview
 
-This plan upgrades the `@nebutra/custom-ui` design system to Geist-level quality by establishing a 3-layer design token architecture, setting up Storybook for isolated development, adding interactive documentation components to `docs-hub`, and refining 5 core components (Button, Avatar, Input, Card, Badge) with strict sizing, new variants, and unified focus/transition behavior. The work spans 10 sequential phases across 3 packages.
+This plan upgrades the `@nebutra/ui` design system to Geist-level quality by establishing a 3-layer design token architecture, setting up Storybook for isolated development, adding interactive documentation components to `docs-hub`, and refining 5 core components (Button, Avatar, Input, Card, Badge) with strict sizing, new variants, and unified focus/transition behavior. The work spans 10 sequential phases across 3 packages.
 
 ## Requirements
 
@@ -741,7 +741,7 @@ This makes `tailwind.preset.ts` a consumer of Layer 1 rather than a parallel sou
   "dependencies": {
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "@nebutra/custom-ui": "workspace:*"
+    "@nebutra/ui": "workspace:*"
   },
   "devDependencies": {
     "@storybook/react": "^8.6.0",
@@ -787,7 +787,7 @@ export default config;
 ```tsx
 import type { Preview } from "@storybook/react";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import "@nebutra/custom-ui/styles/globals.css";
+import "@nebutra/ui/styles/globals.css";
 
 const preview: Preview = {
   decorators: [

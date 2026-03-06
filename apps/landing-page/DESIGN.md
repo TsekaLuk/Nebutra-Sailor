@@ -500,7 +500,7 @@ Motion: Status dot pulse
 
 ## 4. Component Mapping
 
-### From `@nebutra/custom-ui/marketing`
+### From `@nebutra/ui/marketing`
 
 | Section      | Component(s)                                             | Variant/Props           |
 | ------------ | -------------------------------------------------------- | ----------------------- |
@@ -2347,7 +2347,7 @@ interface CardDecoProps {
 
 1. Create `MicroLandingCard` compound component
 2. Implement 5 sub-components (Hero / Context / Proof / CTA / Deco)
-3. Export to `@nebutra/custom-ui`
+3. Export to `@nebutra/ui`
 
 #### Phase 2: Deco Implementation
 

@@ -1,95 +1,39 @@
 /**
- * @nebutra/ui/components
+ * Custom Components
  *
- * Re-exported components from @lobehub/ui
- * Use these for AI-focused features and chat interfaces
+ * Brand-specific components that extend or wrap design-system primitives.
+ * Components here are either:
+ * - Promoted from external libraries (HeroUI/MagicUI, HeroUI, etc.) after review
+ * - Domain-specific implementations (commerce, Web3, multi-tenant)
+ * - Complex/composite components built from design-system primitives
  */
 
-// Chat components
-export {
-  ChatInputArea,
-  ChatItem,
-  ChatList,
-  Markdown,
-  MessageInput,
-  MessageModal,
-} from "@lobehub/ui";
+// Re-export promoted components
+// export { PromotedButton } from "./PromotedButton";
 
-// AI components
-export {
-  Avatar,
-  ModelIcon,
-  ModelTag,
-  PluginTag,
-} from "@lobehub/ui";
+// Domain-specific components
+// export { TenantSwitcher } from "./TenantSwitcher";
+// export { PricingCard } from "./PricingCard";
 
-// Layout
+// Empty State
 export {
-  DraggablePanel,
-  DraggablePanelBody,
-  DraggablePanelContainer,
-  DraggablePanelFooter,
-  DraggablePanelHeader,
-  Flexbox,
-  FlexboxProps,
-} from "@lobehub/ui";
+  EmptyState,
+  type EmptyStateProps,
+  type EmptyStateAction,
+} from "./empty-state";
 
-// Data Display
+// Onboarding Checklist
 export {
-  Highlighter,
-  Image,
-  List,
-  Tag,
-  Tooltip,
-} from "@lobehub/ui";
+  OnboardingChecklist,
+  type OnboardingChecklistProps,
+  type ChecklistItem,
+} from "./onboarding-checklist";
 
-// Feedback
+// Team Chat
 export {
-  Alert,
-  Modal,
-  Spotlight,
-} from "@lobehub/ui";
-
-// Input
-export {
-  ActionIcon,
-  ActionIconGroup,
-  Button,
-  Checkbox,
-  Input,
-  SearchBar,
-  Select,
-  Segmented,
-  Slider,
-  Switch,
-  TextArea,
-} from "@lobehub/ui";
-
-// Navigation
-export {
-  Breadcrumb,
-  Menu,
-  SideNav,
-  TabsNav,
-} from "@lobehub/ui";
-
-// Form
-export {
-  Form,
-  FormGroup,
-  FormItem,
-} from "@lobehub/ui";
-
-// Theme
-export {
-  ThemeProvider,
-  useTheme,
-  useThemeMode,
-} from "@lobehub/ui";
-
-// Types
-export type {
-  ChatItemProps,
-  ChatListProps,
-  ChatMessage,
-} from "@lobehub/ui";
+  TeamChat,
+  type TeamChatProps,
+  type ChatMessage,
+  type ChatSender,
+  type ChatReaction,
+} from "./team-chat";

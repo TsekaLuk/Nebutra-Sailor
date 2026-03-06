@@ -1,4 +1,4 @@
-import { AnimateIn, AnimateInGroup } from "@nebutra/custom-ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
 import { Card, PageHeader } from "@nebutra/design-system/components";
 
 const CONTROLS = [

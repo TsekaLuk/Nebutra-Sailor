@@ -5,12 +5,12 @@ description: Nebutra's Tailwind CSS 4 preset maps design tokens to utility class
 
 ## Overview
 
-The `@nebutra/custom-ui` package ships a Tailwind preset that makes design tokens available as Tailwind utility classes. All color, spacing, border-radius, shadow, font, and animation values in the preset are derived from the same token source as the React components — keeping the two systems in sync.
+The `@nebutra/ui` package ships a Tailwind preset that makes design tokens available as Tailwind utility classes. All color, spacing, border-radius, shadow, font, and animation values in the preset are derived from the same token source as the React components — keeping the two systems in sync.
 
-Source: `packages/custom-ui/src/tailwind.preset.ts`
+Source: `packages/ui/src/tailwind.preset.ts`
 
 ```ts
-import nebutraPreset from "@nebutra/custom-ui/tailwind.preset";
+import nebutraPreset from "@nebutra/ui/tailwind.preset";
 ```
 
 The preset exports:
@@ -157,7 +157,7 @@ Full 50–950 scale available. See `nebutraColors.secondary` in the preset.
 | `pulse` | `pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite` |
 | `bounce` | `bounce 1s infinite` |
 
-Keyframe definitions live in `packages/custom-ui/styles/globals.css`.
+Keyframe definitions live in `packages/ui/styles/globals.css`.
 
 ## Usage Guidelines
 
@@ -166,14 +166,14 @@ Keyframe definitions live in `packages/custom-ui/styles/globals.css`.
 ```css
 /* app/globals.css */
 @import "tailwindcss";
-@source "@nebutra/custom-ui/styles/globals.css";
+@source "@nebutra/ui/styles/globals.css";
 ```
 
 ### Tailwind CSS 3 (Config-based)
 
 ```ts
 // tailwind.config.ts
-import { nebutraPreset } from "@nebutra/custom-ui/tailwind.preset";
+import { nebutraPreset } from "@nebutra/ui/tailwind.preset";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -187,7 +187,7 @@ export default {
 When you need token values in TypeScript (not as Tailwind classes):
 
 ```ts
-import { nebutraColors, nebutraSpacing } from "@nebutra/custom-ui/tailwind.preset";
+import { nebutraColors, nebutraSpacing } from "@nebutra/ui/tailwind.preset";
 
 const brandBlue = nebutraColors.primary[500]; // "#3B82F6"
 const sectionPadding = nebutraSpacing["2xl"];  // "3rem"

@@ -88,7 +88,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -110,11 +110,26 @@ jobs:
       - name: Generate Prisma Client
         run: pnpm db:generate
 
+      - name: Resolve Turbo base ref
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+          fi
+
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA="$(git rev-parse HEAD~1)"
+          fi
+
+          echo "TURBO_BASE_REF=$BASE_SHA" >> "$GITHUB_ENV"
+          echo "Using TURBO_BASE_REF=$BASE_SHA"
+
       - name: Lint (affected)
-        run: pnpm turbo lint --filter=...[HEAD^1]...
+        run: pnpm turbo lint --filter="...[${TURBO_BASE_REF}]..."
 
       - name: Typecheck (affected)
-        run: pnpm turbo typecheck --filter=...[HEAD^1]...
+        run: pnpm turbo typecheck --filter="...[${TURBO_BASE_REF}]..."
 
   # ── Build (affected packages only) ──────────────────────────────────────
   build:
@@ -125,7 +140,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -142,8 +157,23 @@ jobs:
       - name: Generate Prisma Client
         run: pnpm db:generate
 
+      - name: Resolve Turbo base ref
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+          fi
+
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA="$(git rev-parse HEAD~1)"
+          fi
+
+          echo "TURBO_BASE_REF=$BASE_SHA" >> "$GITHUB_ENV"
+          echo "Using TURBO_BASE_REF=$BASE_SHA"
+
       - name: Build (affected)
-        run: pnpm turbo build --filter=...[HEAD^1]...
+        run: pnpm turbo build --filter="...[${TURBO_BASE_REF}]..."
         env:
           SKIP_ENV_VALIDATION: true
 
@@ -156,7 +186,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -170,8 +200,54 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Resolve Turbo base ref
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+          fi
+
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA="$(git rev-parse HEAD~1)"
+          fi
+
+          echo "TURBO_BASE_REF=$BASE_SHA" >> "$GITHUB_ENV"
+          echo "Using TURBO_BASE_REF=$BASE_SHA"
+
       - name: Run tests (affected)
-        run: pnpm turbo test --filter=...[HEAD^1]...
+        run: pnpm turbo test --filter="...[${TURBO_BASE_REF}]..."
+        env:
+          CI: true
+
+  coverage:
+    name: Coverage Gate
+    runs-on: ubuntu-latest
+    needs: [detect-changes, test]
+    if: needs.detect-changes.outputs.packages == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run coverage for core utility packages
+        run: |
+          pnpm --filter @nebutra/preset test:coverage
+          pnpm --filter @nebutra/alerting test:coverage
+          pnpm --filter @nebutra/rate-limit test:coverage
         env:
           CI: true
 

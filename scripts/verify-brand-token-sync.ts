@@ -27,8 +27,8 @@ function assert(condition: boolean, message: string) {
   }
 }
 
-const primitiveFile = read("packages/custom-ui/src/tokens/primitive.ts");
-const globalsCss = read("packages/custom-ui/src/styles/globals.css");
+const primitiveFile = read("packages/ui/src/tokens/primitive.ts");
+const globalsCss = read("packages/ui/src/styles/globals.css");
 
 assert(
   primitiveFile.includes('import { colors } from "@nebutra/brand"') ||
