@@ -15,7 +15,7 @@
 
 import { ThemeProvider as LobeThemeProvider } from "@lobehub/ui";
 import { type ReactNode } from "react";
-import { colors } from "./tokens.js";
+import { colors } from "./tokens";
 
 export interface NebutraThemeProviderProps {
   children: ReactNode;
