@@ -42,7 +42,7 @@ recordUsage({
   organizationId: "org_xxx",
   type: "AI_TOKEN",
   quantity: 1000,
-  resource: "gpt-4o",
+  resource: "gpt-5.2",
 });
 
 // Check feature entitlement
@@ -149,13 +149,15 @@ recordUsage({
   organizationId: "org_xxx",
   type: "AI_TOKEN",
   quantity: 1000,
-  resource: "gpt-4o",
+  resource: "gpt-5.2",
 });
 
 // Check limits before operation
 const limit = checkUsageLimit("org_xxx", "AI_TOKEN", 500);
 if (limit.exceeded) {
-  throw new Error(`Usage limit exceeded. Used: ${limit.current}/${limit.limit}`);
+  throw new Error(
+    `Usage limit exceeded. Used: ${limit.current}/${limit.limit}`,
+  );
 }
 
 // Calculate overage cost
@@ -226,11 +228,11 @@ await initializePlanEntitlements("org_xxx", "PRO");
 
 ## Plans
 
-| Plan | Monthly | Yearly | AI Tokens | API Calls | Features |
-|------|---------|--------|-----------|-----------|----------|
-| FREE | $0 | $0 | 1,000 | 100/day | Basic |
-| PRO | $29 | $279 | 100,000 | 10,000/day | Full access |
-| ENTERPRISE | Custom | Custom | Unlimited | Unlimited | Custom SLA |
+| Plan       | Monthly | Yearly | AI Tokens | API Calls  | Features    |
+| ---------- | ------- | ------ | --------- | ---------- | ----------- |
+| FREE       | $0      | $0     | 1,000     | 100/day    | Basic       |
+| PRO        | $29     | $279   | 100,000   | 10,000/day | Full access |
+| ENTERPRISE | Custom  | Custom | Unlimited | Unlimited  | Custom SLA  |
 
 ## Feature Flags
 
@@ -242,19 +244,28 @@ const FEATURES = {
   "ai.chat": { name: "AI Chat", plans: ["FREE", "PRO", "ENTERPRISE"] },
   "ai.embeddings": { name: "Embeddings", plans: ["PRO", "ENTERPRISE"] },
   "ai.image": { name: "Image Generation", plans: ["PRO", "ENTERPRISE"] },
-  
+
   // Content Features
   "content.posts": { name: "Posts", plans: ["FREE", "PRO", "ENTERPRISE"] },
-  "content.comments": { name: "Comments", plans: ["FREE", "PRO", "ENTERPRISE"] },
-  
+  "content.comments": {
+    name: "Comments",
+    plans: ["FREE", "PRO", "ENTERPRISE"],
+  },
+
   // Recommendations
-  "recsys.basic": { name: "Basic Recommendations", plans: ["PRO", "ENTERPRISE"] },
-  "recsys.advanced": { name: "Advanced Recommendations", plans: ["ENTERPRISE"] },
-  
+  "recsys.basic": {
+    name: "Basic Recommendations",
+    plans: ["PRO", "ENTERPRISE"],
+  },
+  "recsys.advanced": {
+    name: "Advanced Recommendations",
+    plans: ["ENTERPRISE"],
+  },
+
   // E-commerce
   "ecommerce.basic": { name: "Basic E-commerce", plans: ["PRO", "ENTERPRISE"] },
   "ecommerce.advanced": { name: "Advanced E-commerce", plans: ["ENTERPRISE"] },
-  
+
   // Web3
   "web3.contracts": { name: "Smart Contracts", plans: ["ENTERPRISE"] },
   "web3.indexing": { name: "Blockchain Indexing", plans: ["ENTERPRISE"] },

@@ -8,7 +8,7 @@
     "getStarted": "Commencer"
   },
   "hero": {
-    "badge": "Licence MIT · Prêt pour la production",
+    "badge": "Licence AGPLv3 · Prêt pour la production",
     "headline1": "Lancez votre SaaS",
     "headline2": "en semaines, pas en mois.",
     "subheadline": "Monorepo prêt pour la production avec multi-location, infrastructure IA, facturation et tout ce dont vous avez besoin pour lancer.",
@@ -78,7 +78,7 @@
       "values": {
         "0": {
           "title": "Premier à l'ouvert",
-          "description": "Nous construisons en ouvert. Notre framework principal est licencié MIT et restera toujours ainsi."
+          "description": "Nous construisons en ouvert. Notre framework principal est licencié AGPLv3 et restera toujours ainsi."
         },
         "1": {
           "title": "Prête à la production",
@@ -189,7 +189,7 @@
             },
             "1": {
               "q": "Est-ce que Nebutra est libre d'utilisation?",
-              "a": "Oui, Nebutra Sailor est licencié MIT et libre d'utilisation. Nous proposons également des plans cloud gérés pour les équipes souhaitant un infrastructure hébergée et une support premium."
+              "a": "Oui, Nebutra Sailor est licencié AGPLv3 et libre d'utilisation. Nous proposons également des plans cloud gérés pour les équipes souhaitant un infrastructure hébergée et une support premium."
             },
             "2": {
               "q": "Comment puis-je commencer?",
@@ -311,6 +311,6 @@
   },
   "metadata": {
     "title": "Nebutra Sailor — Le framework SaaS d'entreprise open-source",
-    "description": "Lancez votre SaaS en semaines, pas en mois. Multi-location, facturation, authentification et IA intégrées. Prêt pour la production, sous licence MIT."
+    "description": "Lancez votre SaaS en semaines, pas en mois. Multi-location, facturation, authentification et IA intégrées. Prêt pour la production, sous licence AGPLv3."
   }
 }

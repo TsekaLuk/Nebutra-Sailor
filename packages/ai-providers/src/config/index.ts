@@ -14,25 +14,28 @@ import type { ProviderModel } from "../providers/base.js";
 // Default Models by Provider
 // ============================================
 
-export const DEFAULT_MODELS: Record<ProviderName, { chat: string; embedding: string }> = {
+export const DEFAULT_MODELS: Record<
+  ProviderName,
+  { chat: string; embedding: string }
+> = {
   siliconflow: {
     chat: "deepseek-ai/DeepSeek-V3",
     embedding: "BAAI/bge-m3",
   },
   openai: {
-    chat: "gpt-4o-mini",
+    chat: "gpt-5.2",
     embedding: "text-embedding-3-small",
   },
   anthropic: {
-    chat: "claude-3-5-sonnet-20241022",
+    chat: "claude-4.6-sonnet-20260217",
     embedding: "text-embedding-3-small", // Anthropic doesn't have embeddings, fallback
   },
   google: {
-    chat: "gemini-1.5-flash",
+    chat: "gemini-3.1-flash",
     embedding: "text-embedding-004",
   },
   openrouter: {
-    chat: "openai/gpt-4o-mini",
+    chat: "openai/gpt-5.2",
     embedding: "openai/text-embedding-3-small",
   },
 };
@@ -59,16 +62,21 @@ export function getModelsForProvider(provider: ProviderName): ProviderModel[] {
 /**
  * Get a specific model by ID
  */
-export function getModel(provider: ProviderName, modelId: string): ProviderModel | undefined {
+export function getModel(
+  provider: ProviderName,
+  modelId: string,
+): ProviderModel | undefined {
   return MODEL_REGISTRY[provider]?.find((m) => m.id === modelId);
 }
 
 /**
  * Get all models across all providers
  */
-export function getAllModels(): Array<ProviderModel & { provider: ProviderName }> {
+export function getAllModels(): Array<
+  ProviderModel & { provider: ProviderName }
+> {
   return Object.entries(MODEL_REGISTRY).flatMap(([provider, models]) =>
-    models.map((m) => ({ ...m, provider: provider as ProviderName }))
+    models.map((m) => ({ ...m, provider: provider as ProviderName })),
   );
 }
 
@@ -91,7 +99,7 @@ export interface ProviderSelectionCriteria {
  * Find the best model matching criteria
  */
 export function findBestModel(
-  criteria: ProviderSelectionCriteria
+  criteria: ProviderSelectionCriteria,
 ): (ProviderModel & { provider: ProviderName }) | undefined {
   const allModels = getAllModels();
 
@@ -100,14 +108,16 @@ export function findBestModel(
   // Filter by capabilities
   if (criteria.capabilities?.length) {
     candidates = candidates.filter((m) =>
-      criteria.capabilities!.every((cap) => m.capabilities.includes(cap as ProviderModel["capabilities"][number]))
+      criteria.capabilities!.every((cap) =>
+        m.capabilities.includes(cap as ProviderModel["capabilities"][number]),
+      ),
     );
   }
 
   // Filter by context window
   if (criteria.minContextWindow) {
     candidates = candidates.filter(
-      (m) => m.contextWindow && m.contextWindow >= criteria.minContextWindow!
+      (m) => m.contextWindow && m.contextWindow >= criteria.minContextWindow!,
     );
   }
 
@@ -116,8 +126,10 @@ export function findBestModel(
   // Sort by preference
   if (criteria.preferCheap) {
     candidates.sort((a, b) => {
-      const priceA = (a.inputPricePerMillion || 0) + (a.outputPricePerMillion || 0);
-      const priceB = (b.inputPricePerMillion || 0) + (b.outputPricePerMillion || 0);
+      const priceA =
+        (a.inputPricePerMillion || 0) + (a.outputPricePerMillion || 0);
+      const priceB =
+        (b.inputPricePerMillion || 0) + (b.outputPricePerMillion || 0);
       return priceA - priceB;
     });
   }
@@ -164,6 +176,7 @@ export function loadConfigFromEnv(): EnvironmentConfig {
       httpReferer: process.env.OPENROUTER_HTTP_REFERER,
       appTitle: process.env.OPENROUTER_APP_TITLE,
     },
-    defaultProvider: (process.env.DEFAULT_AI_PROVIDER as ProviderName) || "siliconflow",
+    defaultProvider:
+      (process.env.DEFAULT_AI_PROVIDER as ProviderName) || "siliconflow",
   };
 }

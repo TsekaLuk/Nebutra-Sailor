@@ -10,7 +10,7 @@ class GenerateRequest(BaseModel):
     prompt: str
     max_tokens: int = 1000
     temperature: float = 0.7
-    model: str = "gpt-4o-mini"
+    model: str = "gpt-5.2"
 
 
 class GenerateResponse(BaseModel):

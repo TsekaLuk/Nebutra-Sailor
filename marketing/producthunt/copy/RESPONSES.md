@@ -62,7 +62,7 @@ Happy to help you evaluate which fits your needs!
 ### Pricing / Licensing
 
 ```
-We're MIT + Commons Clause license:
+We're AGPLv3 license:
 - ✅ Free for personal projects and learning
 - ✅ Free for internal tools
 - ✅ Free if you keep it open source

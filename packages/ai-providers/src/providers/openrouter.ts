@@ -126,7 +126,7 @@ export interface OpenRouterChatRequest extends ChatCompletionRequest {
   /**
    * OpenRouter-specific transforms
    */
-  transforms?: ("middle-out")[];
+  transforms?: "middle-out"[];
 }
 
 // ============================================
@@ -136,109 +136,132 @@ export interface OpenRouterChatRequest extends ChatCompletionRequest {
 export const OPENROUTER_MODELS: ProviderModel[] = [
   // OpenAI Models
   {
-    id: "openai/gpt-4o",
-    name: "GPT-4o",
-    description: "OpenAI's most capable multimodal model",
-    capabilities: ["chat", "chat-stream", "function-calling", "vision"],
-    contextWindow: 128000,
+    id: "openai/gpt-5.4",
+    name: "GPT-5.4",
+    description: "OpenAI's most capable model",
+    capabilities: [
+      "chat",
+      "chat-stream",
+      "function-calling",
+      "vision",
+      "reasoning",
+    ],
+    contextWindow: 1000000,
     inputPricePerMillion: 2.5,
-    outputPricePerMillion: 10,
+    outputPricePerMillion: 15.0,
   },
   {
-    id: "openai/gpt-4o-mini",
-    name: "GPT-4o Mini",
-    description: "Fast and affordable multimodal model",
+    id: "openai/gpt-5.2",
+    name: "GPT-5.2",
+    description: "Standard model for general use",
     capabilities: ["chat", "chat-stream", "function-calling", "vision"],
     contextWindow: 128000,
-    inputPricePerMillion: 0.15,
-    outputPricePerMillion: 0.6,
+    inputPricePerMillion: 1.75,
+    outputPricePerMillion: 14.0,
   },
   {
-    id: "openai/o1",
-    name: "OpenAI o1",
-    description: "Reasoning model with chain-of-thought",
+    id: "openai/o3",
+    name: "OpenAI o3",
+    description: "Powerful reasoning model",
     capabilities: ["chat", "chat-stream", "reasoning"],
     contextWindow: 200000,
-    inputPricePerMillion: 15,
-    outputPricePerMillion: 60,
+    inputPricePerMillion: 2.0,
+    outputPricePerMillion: 8.0,
   },
   {
-    id: "openai/o1-mini",
-    name: "OpenAI o1-mini",
-    description: "Smaller reasoning model",
+    id: "openai/o3-mini",
+    name: "OpenAI o3-mini",
+    description: "Fast reasoning model",
     capabilities: ["chat", "chat-stream", "reasoning"],
-    contextWindow: 128000,
-    inputPricePerMillion: 3,
-    outputPricePerMillion: 12,
+    contextWindow: 200000,
+    inputPricePerMillion: 1.1,
+    outputPricePerMillion: 4.4,
   },
 
   // Anthropic Models
   {
-    id: "anthropic/claude-sonnet-4",
-    name: "Claude Sonnet 4",
-    description: "Latest Claude model with excellent reasoning",
-    capabilities: ["chat", "chat-stream", "function-calling", "vision"],
-    contextWindow: 200000,
+    id: "anthropic/claude-4.6-sonnet",
+    name: "Claude 4.6 Sonnet",
+    description: "Latest Claude 4.6 model with 1M context",
+    capabilities: [
+      "chat",
+      "chat-stream",
+      "function-calling",
+      "vision",
+      "reasoning",
+    ],
+    contextWindow: 1000000,
     inputPricePerMillion: 3,
     outputPricePerMillion: 15,
   },
   {
-    id: "anthropic/claude-3.5-sonnet",
-    name: "Claude 3.5 Sonnet",
-    description: "Balanced performance Claude model",
-    capabilities: ["chat", "chat-stream", "function-calling", "vision"],
-    contextWindow: 200000,
-    inputPricePerMillion: 3,
-    outputPricePerMillion: 15,
-  },
-  {
-    id: "anthropic/claude-3.5-haiku",
-    name: "Claude 3.5 Haiku",
-    description: "Fast and efficient Claude model",
+    id: "anthropic/claude-4.5-haiku",
+    name: "Claude 4.5 Haiku",
+    description: "Fast and efficient Claude 4.5 model",
     capabilities: ["chat", "chat-stream", "function-calling"],
     contextWindow: 200000,
     inputPricePerMillion: 0.8,
     outputPricePerMillion: 4,
   },
 
-  // Google Models
+  // xAI Models
   {
-    id: "google/gemini-2.0-flash-exp:free",
-    name: "Gemini 2.0 Flash (Free)",
-    description: "Google's latest fast model (free tier)",
-    capabilities: ["chat", "chat-stream", "vision"],
-    contextWindow: 1000000,
-    inputPricePerMillion: 0,
-    outputPricePerMillion: 0,
+    id: "x-ai/grok-4.1-fast",
+    name: "Grok 4.1 Fast",
+    description: "xAI's flagship fast reasoning model",
+    capabilities: ["chat", "chat-stream", "function-calling", "reasoning"],
+    contextWindow: 2000000,
+    inputPricePerMillion: 2.0,
+    outputPricePerMillion: 10.0,
   },
   {
-    id: "google/gemini-pro-1.5",
-    name: "Gemini Pro 1.5",
-    description: "Google's flagship model with long context",
+    id: "x-ai/grok-3",
+    name: "Grok 3",
+    description: "xAI's versatile enterprise model",
+    capabilities: ["chat", "chat-stream", "function-calling"],
+    contextWindow: 128000,
+    inputPricePerMillion: 2.5,
+    outputPricePerMillion: 10.0,
+  },
+
+  // Google Models
+  {
+    id: "google/gemini-3.1-flash",
+    name: "Gemini 3.1 Flash",
+    description: "Google's fast, efficient multimodal model",
+    capabilities: ["chat", "chat-stream", "vision"],
+    contextWindow: 1000000,
+    inputPricePerMillion: 0.25,
+    outputPricePerMillion: 1.5,
+  },
+  {
+    id: "google/gemini-3.1-pro",
+    name: "Gemini 3.1 Pro",
+    description: "Google's flagship model with advanced analysis",
     capabilities: ["chat", "chat-stream", "function-calling", "vision"],
     contextWindow: 2000000,
-    inputPricePerMillion: 1.25,
-    outputPricePerMillion: 5,
+    inputPricePerMillion: 2.0,
+    outputPricePerMillion: 12.0,
   },
 
   // Meta Models
   {
-    id: "meta-llama/llama-3.3-70b-instruct",
-    name: "Llama 3.3 70B",
-    description: "Meta's latest open model",
-    capabilities: ["chat", "chat-stream", "function-calling"],
+    id: "meta-llama/llama-4-scout",
+    name: "Llama 4 Scout (109B)",
+    description: "Meta's efficient MoE model",
+    capabilities: ["chat", "chat-stream", "function-calling", "vision"],
     contextWindow: 128000,
     inputPricePerMillion: 0.4,
     outputPricePerMillion: 0.4,
   },
   {
-    id: "meta-llama/llama-3.1-405b-instruct",
-    name: "Llama 3.1 405B",
-    description: "Meta's largest model",
-    capabilities: ["chat", "chat-stream", "function-calling"],
+    id: "meta-llama/llama-4-maverick",
+    name: "Llama 4 Maverick (400B)",
+    description: "Meta's largest cutting-edge model",
+    capabilities: ["chat", "chat-stream", "function-calling", "vision"],
     contextWindow: 128000,
-    inputPricePerMillion: 2,
-    outputPricePerMillion: 2,
+    inputPricePerMillion: 2.0,
+    outputPricePerMillion: 2.0,
   },
 
   // DeepSeek Models
@@ -431,14 +454,14 @@ export class OpenRouterProvider extends BaseAIProvider {
     }
 
     const response = await this.client.chat.completions.create(
-      body as unknown as OpenAI.Chat.ChatCompletionCreateParamsNonStreaming
+      body as unknown as OpenAI.Chat.ChatCompletionCreateParamsNonStreaming,
     );
 
     return this.transformChatResponse(response);
   }
 
   async *chatStream(
-    request: ChatCompletionRequest
+    request: ChatCompletionRequest,
   ): AsyncGenerator<ChatCompletionChunk, void, unknown> {
     const openRouterRequest = request as OpenRouterChatRequest;
 
@@ -482,7 +505,7 @@ export class OpenRouterProvider extends BaseAIProvider {
     }
 
     const stream = await this.client.chat.completions.create(
-      body as unknown as OpenAI.Chat.ChatCompletionCreateParamsStreaming
+      body as unknown as OpenAI.Chat.ChatCompletionCreateParamsStreaming,
     );
 
     for await (const chunk of stream) {
@@ -498,7 +521,7 @@ export class OpenRouterProvider extends BaseAIProvider {
    */
   async chatWithFallback(
     request: ChatCompletionRequest,
-    fallbackModels: string[]
+    fallbackModels: string[],
   ): Promise<ChatCompletionResponse> {
     const openRouterRequest: OpenRouterChatRequest = {
       ...request,
@@ -532,11 +555,11 @@ export class OpenRouterProvider extends BaseAIProvider {
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
       throw new Error(
-        `OpenRouter embeddings error: ${response.status} ${(error as { message?: string }).message || response.statusText}`
+        `OpenRouter embeddings error: ${response.status} ${(error as { message?: string }).message || response.statusText}`,
       );
     }
 
-    const data = await response.json() as {
+    const data = (await response.json()) as {
       data: Array<{ embedding: number[] }>;
       model: string;
       usage: { prompt_tokens: number; total_tokens: number };
@@ -575,7 +598,7 @@ export class OpenRouterProvider extends BaseAIProvider {
       throw new Error(`Failed to list models: ${response.status}`);
     }
 
-    const data = await response.json() as { data: OpenRouterModelInfo[] };
+    const data = (await response.json()) as { data: OpenRouterModelInfo[] };
     return data.data;
   }
 
@@ -590,7 +613,7 @@ export class OpenRouterProvider extends BaseAIProvider {
         headers: {
           Authorization: `Bearer ${this.config.apiKey}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {
@@ -604,20 +627,17 @@ export class OpenRouterProvider extends BaseAIProvider {
    * Get current account credits
    */
   async getCredits(): Promise<{ credits: number; usage: number }> {
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/auth/key",
-      {
-        headers: {
-          Authorization: `Bearer ${this.config.apiKey}`,
-        },
-      }
-    );
+    const response = await fetch("https://openrouter.ai/api/v1/auth/key", {
+      headers: {
+        Authorization: `Bearer ${this.config.apiKey}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to get credits: ${response.status}`);
     }
 
-    const data = await response.json() as {
+    const data = (await response.json()) as {
       data: { limit: number | null; usage: number };
     };
     return {
@@ -630,20 +650,17 @@ export class OpenRouterProvider extends BaseAIProvider {
    * Get rate limit status
    */
   async getRateLimits(): Promise<OpenRouterRateLimit> {
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/auth/key",
-      {
-        headers: {
-          Authorization: `Bearer ${this.config.apiKey}`,
-        },
-      }
-    );
+    const response = await fetch("https://openrouter.ai/api/v1/auth/key", {
+      headers: {
+        Authorization: `Bearer ${this.config.apiKey}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to get rate limits: ${response.status}`);
     }
 
-    const data = await response.json() as { data: OpenRouterRateLimit };
+    const data = (await response.json()) as { data: OpenRouterRateLimit };
     return data.data;
   }
 
@@ -664,7 +681,7 @@ export class OpenRouterProvider extends BaseAIProvider {
    */
   getModelVariant(
     modelId: string,
-    variant: keyof typeof OPENROUTER_VARIANTS
+    variant: keyof typeof OPENROUTER_VARIANTS,
   ): string {
     return `${modelId}${OPENROUTER_VARIANTS[variant]}`;
   }
@@ -688,7 +705,7 @@ export class OpenRouterProvider extends BaseAIProvider {
   }
 
   private transformChatResponse(
-    response: OpenAI.Chat.Completions.ChatCompletion
+    response: OpenAI.Chat.Completions.ChatCompletion,
   ): ChatCompletionResponse {
     return {
       id: response.id,
@@ -700,7 +717,8 @@ export class OpenRouterProvider extends BaseAIProvider {
         message: {
           role: "assistant" as const,
           content: c.message.content,
-          toolCalls: c.message.tool_calls?.map((tc) => ({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          toolCalls: c.message.tool_calls?.map((tc: any) => ({
             id: tc.id,
             type: "function" as const,
             function: {
@@ -724,7 +742,7 @@ export class OpenRouterProvider extends BaseAIProvider {
   }
 
   private transformStreamChunk(
-    chunk: OpenAI.Chat.Completions.ChatCompletionChunk
+    chunk: OpenAI.Chat.Completions.ChatCompletionChunk,
   ): ChatCompletionChunk {
     return {
       id: chunk.id,
@@ -736,7 +754,8 @@ export class OpenRouterProvider extends BaseAIProvider {
         delta: {
           role: c.delta.role as "assistant" | undefined,
           content: c.delta.content ?? undefined,
-          toolCalls: c.delta.tool_calls?.map((tc) => ({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          toolCalls: c.delta.tool_calls?.map((tc: any) => ({
             id: tc.id || "",
             type: "function" as const,
             function: {
@@ -751,7 +770,7 @@ export class OpenRouterProvider extends BaseAIProvider {
   }
 
   private normalizeFinishReason(
-    reason: string | null
+    reason: string | null,
   ): "stop" | "length" | "tool_calls" | "content_filter" | null {
     if (!reason) return null;
 
@@ -828,6 +847,9 @@ export interface OpenRouterRateLimit {
 }
 
 // Register the provider
-registerProvider("openrouter", (config) => new OpenRouterProvider(config as OpenRouterConfig));
+registerProvider(
+  "openrouter",
+  (config) => new OpenRouterProvider(config as OpenRouterConfig),
+);
 
 export default OpenRouterProvider;

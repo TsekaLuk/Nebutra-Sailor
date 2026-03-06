@@ -12,7 +12,7 @@
 // =============================================================================
 
 export const heroContent = {
-  badge: "MIT Licensed · Production-Ready",
+  badge: "AGPLv3 Licensed · Production-Ready",
   preHeadline: "The SaaS framework for",
   headlineWords: ["builders who ship", "teams who scale", "founders who win"],
   command: "npx create-sailor@latest",
@@ -29,7 +29,7 @@ export const heroContent = {
  * Tech stack logos for the logo strip.
  *
  * Primary source: SVGL (https://svgl.app)
- * - MIT licensed, open source
+ * - AGPLv3 licensed, open source
  * - 300+ tech logos with light/dark variants
  * - CDN: https://svgl.app/library/{filename}.svg
  *
@@ -206,7 +206,7 @@ export const footerContent = {
 export const seoContent = {
   title: "Nebutra Sailor — The Open-Source Enterprise SaaS Framework",
   description:
-    "Ship your SaaS in weeks, not months. Multi-tenancy, billing, auth, and AI built in. Production-ready, MIT licensed.",
+    "Ship your SaaS in weeks, not months. Multi-tenancy, billing, auth, and AI built in. Production-ready, AGPLv3 licensed.",
   keywords: [
     "saas framework",
     "multi-tenant",

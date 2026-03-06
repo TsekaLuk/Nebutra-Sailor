@@ -281,8 +281,12 @@ async function handleSubscriptionCreated(
     where: { stripeId: sub.id },
     data: {
       status: mapStripeStatus(sub.status),
-      currentPeriodStart: new Date(sub.current_period_start * 1000),
-      currentPeriodEnd: new Date(sub.current_period_end * 1000),
+      currentPeriodStart: new Date(
+        (sub.items.data[0]?.current_period_start ?? sub.created) * 1000,
+      ),
+      currentPeriodEnd: new Date(
+        (sub.items.data[0]?.current_period_end ?? sub.created) * 1000,
+      ),
       cancelAtPeriodEnd: sub.cancel_at_period_end,
     },
   });
@@ -305,8 +309,12 @@ async function handleSubscriptionUpdated(
     data: {
       status,
       cancelAtPeriodEnd: sub.cancel_at_period_end,
-      currentPeriodStart: new Date(sub.current_period_start * 1000),
-      currentPeriodEnd: new Date(sub.current_period_end * 1000),
+      currentPeriodStart: new Date(
+        (sub.items.data[0]?.current_period_start ?? sub.created) * 1000,
+      ),
+      currentPeriodEnd: new Date(
+        (sub.items.data[0]?.current_period_end ?? sub.created) * 1000,
+      ),
       ...(sub.trial_start && {
         trialStart: new Date(sub.trial_start * 1000),
       }),
@@ -376,16 +384,17 @@ async function handleInvoicePaymentFailed(
   });
 
   // Mark associated subscription as past_due
-  if (invoice.subscription) {
+  const subscriptionId = invoice.lines.data[0]?.subscription;
+  if (subscriptionId) {
     await db.subscription.updateMany({
-      where: { stripeId: invoice.subscription as string },
+      where: { stripeId: subscriptionId as string },
       data: { status: "PAST_DUE" },
     });
   }
 
   log.error("Invoice payment failed", null, {
     invoiceId: invoice.id,
-    subscriptionId: invoice.subscription,
+    subscriptionId: invoice.lines.data[0]?.subscription,
     currency: invoice.currency,
     amountDue: invoice.amount_due,
   });

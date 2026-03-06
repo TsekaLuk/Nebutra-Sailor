@@ -123,7 +123,7 @@ SECTION                  VISUAL WEIGHT    PURPOSE
 │  ░                    │  cursor)             │                   ░ │
 │  ░                    ╰──────────────────────╯                   ░ │
 │  ░                                                                ░ │
-│  ░           MIT Licensed · Production-Ready                     ░ │
+│  ░           AGPLv3 Licensed · Production-Ready                     ░ │
 │  ░                                                                ░ │
 │  ░                 The SaaS framework for                        ░ │
 │  ░               ┌─────────────────────────┐                     ░ │
@@ -259,7 +259,7 @@ Motion: Staggered fadeInUp, internal card animations
                         · · ·
 
     ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐
-    │    2-4     │  │    60%     │  │    847     │  │    MIT     │
+    │    2-4     │  │    60%     │  │    847     │  │    AGPLv3     │
     │   weeks    │  │   faster   │  │   files    │  │  license   │
     │  to MVP    │  │  delivery  │  │  included  │  │  forever   │
     └────────────┘  └────────────┘  └────────────┘  └────────────┘
@@ -405,7 +405,7 @@ Motion: Logo float, philosophy cards stagger fadeIn, vision typewriter
     │                                 │                                 │
     │        ✓ Full source            │        ─────────────            │
     │        ✓ All features           │                                 │
-    │        ✓ MIT license            │        ✓ Managed infra          │
+    │        ✓ AGPLv3 license            │        ✓ Managed infra          │
     │        ✓ Community              │        ✓ Auto-scaling           │
     │                                 │        ✓ 99.9% SLA              │
     │                                 │        ✓ Priority support       │
@@ -428,7 +428,7 @@ Motion: BorderTrail on Cloud card
 
     ┌─────────────────────────────────────────────────────────────────┐
     │  ▼  Is it really free?                                          │
-    │     Yes, MIT licensed with Commons Clause.                      │
+    │     Yes, AGPLv3 licensed.                      │
     ├─────────────────────────────────────────────────────────────────┤
     │  ▶  What's the tech stack?                                      │
     ├─────────────────────────────────────────────────────────────────┤

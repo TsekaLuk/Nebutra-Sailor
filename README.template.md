@@ -29,7 +29,7 @@
       <img src="https://img.shields.io/github/forks/{{repo.full}}?style=for-the-badge&logo=github&color=14b8a6&logoColor=fff" alt="GitHub Forks" />
     </a>
     <a href="https://github.com/{{repo.full}}/blob/main/LICENSE">
-      <img src="https://img.shields.io/badge/license-MIT%20%2B%20Commons%20Clause-6366f1?style=for-the-badge" alt="License" />
+      <img src="https://img.shields.io/badge/license-AGPLv3-6366f1?style=for-the-badge" alt="License" />
     </a>
   </p>
 </div>
@@ -368,7 +368,7 @@ We welcome contributions of all kinds.
 
 ## License
 
-**MIT License with Commons Clause**
+**AGPLv3**
 
 |                        |                                             |
 | ---------------------- | ------------------------------------------- |

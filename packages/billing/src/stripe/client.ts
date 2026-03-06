@@ -3,7 +3,7 @@ import Stripe from "stripe";
 let stripeClient: Stripe | null = null;
 
 // Use the latest Stripe API version
-const STRIPE_API_VERSION = "2025-02-24.acacia" as const;
+const STRIPE_API_VERSION = "2026-02-25.clover" as const;
 
 export interface StripeConfig {
   secretKey: string;
@@ -29,7 +29,7 @@ export function getStripe(): Stripe {
     const secretKey = process.env.STRIPE_SECRET_KEY;
     if (!secretKey) {
       throw new Error(
-        "Stripe not initialized. Call initStripe() or set STRIPE_SECRET_KEY"
+        "Stripe not initialized. Call initStripe() or set STRIPE_SECRET_KEY",
       );
     }
     stripeClient = new Stripe(secretKey, {

@@ -5,11 +5,11 @@ Built on [Lobe UI](https://github.com/lobehub/lobe-ui) + [Lobe Icons](https://gi
 
 ## Design Intent
 
-| Dependency       | Purpose                                                                        |
-| ---------------- | ------------------------------------------------------------------------------ |
-| `@lobehub/ui`    | Chat bubbles, streaming text, model selector, chat input, markdown renderer    |
+| Dependency       | Purpose                                                                       |
+| ---------------- | ----------------------------------------------------------------------------- |
+| `@lobehub/ui`    | Chat bubbles, streaming text, model selector, chat input, markdown renderer   |
 | `@lobehub/icons` | AI provider icons: OpenAI, Anthropic, Claude, Gemini, Mistral, DeepSeek, etc. |
-| `antd`           | Back-office admin tables / forms if needed in enterprise tier                  |
+| `antd`           | Back-office admin tables / forms if needed in enterprise tier                 |
 
 Usage in `apps/web`:
 
@@ -73,7 +73,7 @@ import { HuggingFace, Mistral, DeepSeek, Qwen } from "@nebutra/ui/icons";
 ```tsx
 import { Settings, Search, Menu, Plus, Check } from "@nebutra/ui/icons";
 
-<Settings size={20} />
+<Settings size={20} />;
 ```
 
 ### Design Tokens
@@ -94,16 +94,16 @@ Use Tailwind classes or `var()` in your components:
 
 ## Exports
 
-| Path | Description |
-|------|-------------|
-| `@nebutra/ui` | Main exports (theme provider + common components/icons) |
-| `@nebutra/ui/components` | All Lobe UI components + AnimateIn |
-| `@nebutra/ui/layout` | Layout components (PageHeader, EmptyState, etc.) |
-| `@nebutra/ui/icons` | All icons (Lobe + Lucide) |
-| `@nebutra/ui/theme` | Lobe UI theme provider (NebutraThemeProvider) |
-| `@nebutra/ui/primitives` | Design primitive tokens (spacing, typography, etc.) |
-| `@nebutra/ui/typography` | Typography system (font families, type styles) |
-| `@nebutra/ui/utils` | Utilities (cn, etc.) |
+| Path                     | Description                                             |
+| ------------------------ | ------------------------------------------------------- |
+| `@nebutra/ui`            | Main exports (theme provider + common components/icons) |
+| `@nebutra/ui/components` | All Lobe UI components + AnimateIn                      |
+| `@nebutra/ui/layout`     | Layout components (PageHeader, EmptyState, etc.)        |
+| `@nebutra/ui/icons`      | All icons (Lobe + Lucide)                               |
+| `@nebutra/ui/theme`      | Lobe UI theme provider (NebutraThemeProvider)           |
+| `@nebutra/ui/primitives` | Design primitive tokens (spacing, typography, etc.)     |
+| `@nebutra/ui/typography` | Typography system (font families, type styles)          |
+| `@nebutra/ui/utils`      | Utilities (cn, etc.)                                    |
 
 ## Available AI Icons
 
@@ -135,6 +135,6 @@ Use Tailwind classes or `var()` in your components:
 
 ## License
 
-MIT (inherits from Lobe UI)
+AGPL-3.0 (inherits from Lobe UI)
 
 > ⚠️ AI provider icons may be subject to their respective trademark guidelines.

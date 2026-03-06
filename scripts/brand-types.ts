@@ -141,10 +141,23 @@ export const DEFAULT_BRAND: BrandConfig = {
     description: "AI-native enterprise platform for multi-tenant systems",
     vision: {
       pillars: [
-        { word: "Nebula", meaning: "Aggregate data, tools, and intelligence into usable products" },
-        { word: "Nurture", meaning: "Incubate AI-native apps via automated toolchains" },
-        { word: "Ultra", meaning: "Ship reliable engineering and value-first outcomes" },
-        { word: "Future", meaning: "Make AI productivity accessible to everyone" },
+        {
+          word: "Nebula",
+          meaning:
+            "Aggregate data, tools, and intelligence into usable products",
+        },
+        {
+          word: "Nurture",
+          meaning: "Incubate AI-native apps via automated toolchains",
+        },
+        {
+          word: "Ultra",
+          meaning: "Ship reliable engineering and value-first outcomes",
+        },
+        {
+          word: "Future",
+          meaning: "Make AI productivity accessible to everyone",
+        },
       ],
     },
   },
@@ -227,7 +240,7 @@ export const DEFAULT_BRAND: BrandConfig = {
   },
   packageScope: "@nebutra",
   license: {
-    type: "MIT + Commons Clause",
+    type: "AGPLv3",
     commercialExempt: [
       "Wuxi Yunyu Intelligent Technology Co., Ltd.",
       "Nebutra Intelligence",

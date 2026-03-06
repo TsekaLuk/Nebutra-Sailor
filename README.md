@@ -30,7 +30,7 @@
       <img src="https://img.shields.io/github/forks/TsekaLuk/Nebutra-Sailor?style=for-the-badge&logo=github&color=14b8a6&logoColor=fff" alt="GitHub Forks" />
     </a>
     <a href="https://github.com/TsekaLuk/Nebutra-Sailor/blob/main/LICENSE">
-      <img src="https://img.shields.io/badge/license-MIT%20%2B%20Commons%20Clause-6366f1?style=for-the-badge" alt="License" />
+      <img src="https://img.shields.io/badge/license-AGPLv3-6366f1?style=for-the-badge" alt="License" />
     </a>
   </p>
   <p>
@@ -513,7 +513,7 @@ We love our contributors! Here's how you can help:
 
 ## License
 
-This project is licensed under the **MIT License with Commons Clause**.
+This project is licensed under the **AGPLv3**.
 
 ### What this means:
 

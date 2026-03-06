@@ -10,25 +10,25 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@nebutra/ui": "workspace:*",
     "@nebutra/tokens": "workspace:*",
-    "framer-motion": "^11.0.0",
+    "@nebutra/ui": "workspace:*",
+    "framer-motion": "^12.35.0",
     "fumadocs-core": "^16.6.9",
     "fumadocs-mdx": "^14.2.9",
     "fumadocs-ui": "^16.6.9",
-    "lucide-react": "^0.460.0",
-    "motion": "^11.0.0",
-    "next": "^16.0.7",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "lucide-react": "^0.577.0",
+    "motion": "^12.35.0",
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/mdx": "^2.0.0",
-    "@types/node": "^24.0.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "tailwindcss": "^4",
+    "@tailwindcss/postcss": "^4.2.1",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^22.19.15",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
   }
 }

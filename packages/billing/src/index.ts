@@ -35,7 +35,7 @@
  *   organizationId: "org_xxx",
  *   type: "AI_TOKEN",
  *   quantity: 1000,
- *   resource: "gpt-4o",
+ *   resource: "gpt-5.2",
  * });
  *
  * // Check feature entitlement

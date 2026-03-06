@@ -3,7 +3,7 @@ AI Providers for Nebutra
 
 Supports multiple AI providers with a unified interface:
 - SiliconFlow (DeepSeek, Qwen, BGE embeddings, reranking)
-- OpenAI (GPT-4, embeddings, DALL-E)
+- OpenAI (GPT-5, embeddings, DALL-E)
 """
 
 from .base import BaseProvider, ProviderConfig

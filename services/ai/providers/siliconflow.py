@@ -51,16 +51,6 @@ SILICONFLOW_MODELS: List[ModelInfo] = [
         input_price_per_million=0.55,
         output_price_per_million=2.19,
     ),
-    ModelInfo(
-        id="deepseek-ai/DeepSeek-V2.5",
-        name="DeepSeek V2.5",
-        description="Balanced performance and cost",
-        capabilities=["chat", "chat-stream", "function-calling"],
-        context_window=128000,
-        input_price_per_million=0.14,
-        output_price_per_million=0.28,
-    ),
-    
     # Chat Models - Qwen
     ModelInfo(
         id="Qwen/QwQ-32B",

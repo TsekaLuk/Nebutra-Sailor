@@ -148,7 +148,7 @@ const config: BrandConfig = {
    * License
    */
   license: {
-    type: "MIT + Commons Clause",
+    type: "AGPLv3",
     commercialExempt: ["My Company Inc."], // Companies exempt from commons clause
   },
 };

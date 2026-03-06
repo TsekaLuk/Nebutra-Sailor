@@ -1,7 +1,6 @@
 import { Dub } from "dub";
-import type { CountryCode } from "dub/models/components";
+
 import type {
-  AnalyticsConfig,
   MultiTenantConfig,
   CreateLinkInput,
   Link,
@@ -63,7 +62,7 @@ export class AnalyticsClient {
      */
     createMany: async (inputs: CreateLinkInput[]): Promise<Link[]> => {
       const links = await Promise.all(
-        inputs.map((input) => this.links.create(input))
+        inputs.map((input) => this.links.create(input)),
       );
       return links;
     },
@@ -97,7 +96,7 @@ export class AnalyticsClient {
      */
     update: async (
       linkId: string,
-      input: Partial<CreateLinkInput>
+      input: Partial<CreateLinkInput>,
     ): Promise<Link> => {
       const response = await this.dub.links.update(linkId, {
         url: input.url,
@@ -151,7 +150,7 @@ export class AnalyticsClient {
      * Get analytics for a specific link
      */
     getAnalytics: async (
-      query: AnalyticsQuery & { linkId: string }
+      query: AnalyticsQuery & { linkId: string },
     ): Promise<AnalyticsResult> => {
       return this.getAnalytics(query);
     },
@@ -167,7 +166,7 @@ export class AnalyticsClient {
   async getAnalytics(query: AnalyticsQuery): Promise<AnalyticsResult> {
     // Map interval types (dub SDK v0.40+ uses different interval names)
     const mapInterval = (
-      interval?: AnalyticsQuery["interval"]
+      interval?: AnalyticsQuery["interval"],
     ): "24h" | "7d" | "30d" | "90d" | "1y" | "all" | undefined => {
       if (!interval) return undefined;
       // "ytd" and "all_unfiltered" are also valid but not exposed in our types
@@ -182,8 +181,7 @@ export class AnalyticsClient {
       interval: mapInterval(query.interval),
       start: query.start?.toString(),
       end: query.end?.toString(),
-      // Cast country to CountryCode (ISO 3166-1 alpha-2)
-      country: query.country as CountryCode | undefined,
+      country: query.country as string | undefined,
       device: query.device,
       browser: query.browser,
       os: query.os,
@@ -270,7 +268,7 @@ export class AnalyticsClient {
       await this.dub.track.lead({
         clickId: input.clickId || "",
         eventName: input.eventName,
-        customerId: input.customerId || "",
+        customerExternalId: input.customerId || "",
         customerEmail: input.metadata?.email as string,
         customerName: input.metadata?.name as string,
       });
@@ -285,7 +283,7 @@ export class AnalyticsClient {
       if (input.value) {
         await this.dub.track.sale({
           eventName: input.eventName,
-          customerId: input.customerId || "",
+          customerExternalId: input.customerId || "",
           amount: Math.round(input.value * 100), // Convert to cents
           currency: input.currency || "USD",
           // Use stripe as default processor (dub SDK v0.40+ requires stripe|shopify|paddle)
@@ -295,9 +293,9 @@ export class AnalyticsClient {
         });
       } else {
         await this.dub.track.lead({
-          clickId: input.clickId,
+          clickId: input.clickId || "",
           eventName: input.eventName,
-          customerId: input.customerId || "",
+          customerExternalId: input.customerId || "",
         });
       }
     },
@@ -352,7 +350,7 @@ export class AnalyticsClient {
     /**
      * Process a referral reward
      */
-    processReward: async (input: ProcessRewardInput): Promise<void> => {
+    processReward: async (_input: ProcessRewardInput): Promise<void> => {
       // This would typically:
       // 1. Verify the referral is valid
       // 2. Calculate the reward
@@ -371,7 +369,7 @@ export class AnalyticsClient {
    */
   async handleWebhook(
     request: Request,
-    config: WebhookConfig
+    config: WebhookConfig,
   ): Promise<WebhookEvent> {
     const body = await request.text();
     const signature = request.headers.get("x-dub-signature");
@@ -394,12 +392,13 @@ export class AnalyticsClient {
   private verifyWebhookSignature(
     body: string,
     signature: string | null,
-    secret: string
+    secret: string,
   ): boolean {
     if (!signature) return false;
 
     // Implement HMAC verification
     // This is a simplified version - use proper crypto in production
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const crypto = require("crypto");
     const expectedSignature = crypto
       .createHmac("sha256", secret)
@@ -416,21 +415,21 @@ export class AnalyticsClient {
   /**
    * Anonymize user data
    */
-  async anonymizeUser(request: GDPRRequest): Promise<void> {
+  async anonymizeUser(_request: GDPRRequest): Promise<void> {
     // TODO: Anonymize all links and analytics data for this user
   }
 
   /**
    * Delete user data (GDPR right to erasure)
    */
-  async deleteUserData(request: GDPRRequest): Promise<void> {
+  async deleteUserData(_request: GDPRRequest): Promise<void> {
     // TODO: Delete all user's links and associated data
   }
 
   /**
    * Export user data (GDPR right to portability)
    */
-  async exportUserData(request: GDPRRequest): Promise<unknown> {
+  async exportUserData(_request: GDPRRequest): Promise<unknown> {
     // TODO: Export all user's links, clicks, and conversions
     return {};
   }
@@ -464,7 +463,7 @@ export class AnalyticsClient {
  * Create an analytics client instance
  */
 export function createAnalyticsClient(
-  config: MultiTenantConfig
+  config: MultiTenantConfig,
 ): AnalyticsClient {
   return new AnalyticsClient(config);
 }

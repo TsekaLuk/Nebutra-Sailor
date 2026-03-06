@@ -10,10 +10,10 @@
   },
   "scripts": {},
   "dependencies": {
-    "zod": "^4.0.0"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@types/node": "^24.10.1",
+    "@types/node": "^22.19.15",
     "typescript": "^5.9.3"
   }
 }

@@ -102,34 +102,34 @@ console.log(reranked.results);
 
 ### SiliconFlow
 
-| Model | Type | Context | Price ($/M tokens) |
-|-------|------|---------|-------------------|
-| `deepseek-ai/DeepSeek-V3` | Chat | 164K | $0.27 / $0.41 |
-| `deepseek-ai/DeepSeek-R1` | Chat + Reasoning | 164K | $0.55 / $2.19 |
-| `Qwen/QwQ-32B` | Chat + Reasoning | 32K | $1.26 / $1.26 |
-| `Qwen/Qwen2.5-Coder-32B-Instruct` | Chat + Code | 32K | $1.26 / $1.26 |
-| `BAAI/bge-m3` | Embedding | 8K | $0.01 |
-| `BAAI/bge-reranker-v2-m3` | Rerank | - | $0.10 |
+| Model                             | Type             | Context | Price ($/M tokens) |
+| --------------------------------- | ---------------- | ------- | ------------------ |
+| `deepseek-ai/DeepSeek-V3`         | Chat             | 164K    | $0.27 / $0.41      |
+| `deepseek-ai/DeepSeek-R1`         | Chat + Reasoning | 164K    | $0.55 / $2.19      |
+| `Qwen/QwQ-32B`                    | Chat + Reasoning | 32K     | $1.26 / $1.26      |
+| `Qwen/Qwen2.5-Coder-32B-Instruct` | Chat + Code      | 32K     | $1.26 / $1.26      |
+| `BAAI/bge-m3`                     | Embedding        | 8K      | $0.01              |
+| `BAAI/bge-reranker-v2-m3`         | Rerank           | -       | $0.10              |
 
 ### OpenAI
 
-| Model | Type | Context | Price ($/M tokens) |
-|-------|------|---------|-------------------|
-| `gpt-4o` | Chat + Vision | 128K | $2.50 / $10.00 |
-| `gpt-4o-mini` | Chat + Vision | 128K | $0.15 / $0.60 |
-| `o1-preview` | Reasoning | 128K | $15.00 / $60.00 |
-| `text-embedding-3-small` | Embedding | - | $0.02 |
+| Model                    | Type                      | Context | Price ($/M tokens) |
+| ------------------------ | ------------------------- | ------- | ------------------ |
+| `gpt-5.4`                | Chat + Vision + Reasoning | 1M      | $2.50 / $15.00     |
+| `gpt-5.2`                | Chat + Vision             | 128K    | $1.75 / $14.00     |
+| `o3`                     | Reasoning                 | 200K    | $2.00 / $8.00      |
+| `text-embedding-3-small` | Embedding                 | -       | $0.02              |
 
 ### OpenRouter (400+ models)
 
-| Model | Type | Context | Price ($/M tokens) |
-|-------|------|---------|-------------------|
-| `openai/gpt-4o` | Chat + Vision | 128K | $2.50 / $10.00 |
-| `anthropic/claude-sonnet-4` | Chat + Vision | 200K | $3.00 / $15.00 |
-| `google/gemini-pro-1.5` | Chat + Vision | 2M | $1.25 / $5.00 |
-| `deepseek/deepseek-r1` | Reasoning | 164K | $0.55 / $2.19 |
-| `meta-llama/llama-3.3-70b-instruct` | Chat | 128K | $0.40 / $0.40 |
-| `openrouter/auto` | Auto-select | - | Varies |
+| Model                         | Type          | Context | Price ($/M tokens) |
+| ----------------------------- | ------------- | ------- | ------------------ |
+| `openai/gpt-5.4`              | Chat + Vision | 1M      | $2.50 / $15.00     |
+| `anthropic/claude-4.6-sonnet` | Chat + Vision | 1M      | $3.00 / $15.00     |
+| `google/gemini-3.1-pro`       | Chat + Vision | 2M      | $2.00 / $12.00     |
+| `deepseek/deepseek-r1`        | Reasoning     | 164K    | $0.55 / $2.19      |
+| `meta-llama/llama-4-scout`    | Chat          | 128K    | $0.40 / $0.40      |
+| `openrouter/auto`             | Auto-select   | -       | Varies             |
 
 ## Configuration
 
@@ -158,8 +158,8 @@ OPENROUTER_APP_TITLE=Your App Name            # App attribution (optional)
 ```typescript
 const provider = createProvider("siliconflow", {
   apiKey: "sk-xxx",
-  baseUrl: "https://api.siliconflow.cn/v1",  // Optional
-  timeout: 60000,  // 60 seconds
+  baseUrl: "https://api.siliconflow.cn/v1", // Optional
+  timeout: 60000, // 60 seconds
   maxRetries: 3,
 });
 ```
@@ -175,13 +175,13 @@ import { createProvider, OpenRouterProvider } from "@nebutra/ai-providers";
 
 const provider = createProvider("openrouter", {
   apiKey: process.env.OPENROUTER_API_KEY!,
-  httpReferer: "https://your-app.com",  // For attribution
+  httpReferer: "https://your-app.com", // For attribution
   appTitle: "Your App Name",
 });
 
 // Use any model from any provider
 const response = await provider.chat({
-  model: "anthropic/claude-sonnet-4",
+  model: "anthropic/claude-4.6-sonnet",
   messages: [{ role: "user", content: "Hello!" }],
 });
 ```
@@ -198,10 +198,10 @@ const openrouter = new OpenRouterProvider({
 // Tries models in order until one succeeds
 const response = await openrouter.chatWithFallback(
   {
-    model: "anthropic/claude-sonnet-4",
+    model: "anthropic/claude-4.6-sonnet",
     messages: [{ role: "user", content: "Hello!" }],
   },
-  ["openai/gpt-4o", "google/gemini-pro-1.5"]  // Fallback models
+  ["openai/gpt-5.2", "google/gemini-3.1-pro"], // Fallback models
 );
 ```
 
@@ -213,13 +213,13 @@ Control which providers handle your requests:
 import { OpenRouterChatRequest } from "@nebutra/ai-providers";
 
 const request: OpenRouterChatRequest = {
-  model: "openai/gpt-4o",
+  model: "openai/gpt-5.2",
   messages: [{ role: "user", content: "Hello!" }],
   provider: {
-    sort: "throughput",        // Prefer fastest provider
-    allowFallbacks: true,      // Allow backup providers
-    dataCollection: "deny",    // Privacy preference
-    ignore: ["azure"],         // Skip specific providers
+    sort: "throughput", // Prefer fastest provider
+    allowFallbacks: true, // Allow backup providers
+    dataCollection: "deny", // Privacy preference
+    ignore: ["azure"], // Skip specific providers
   },
 };
 
@@ -236,16 +236,16 @@ import { OpenRouterProvider, OPENROUTER_VARIANTS } from "@nebutra/ai-providers";
 const provider = new OpenRouterProvider({ apiKey: "..." });
 
 // Get fastest provider for a model
-const nitroModel = provider.getModelVariant("openai/gpt-4o", "NITRO");
-// Returns: "openai/gpt-4o:nitro"
+const nitroModel = provider.getModelVariant("openai/gpt-5.2", "NITRO");
+// Returns: "openai/gpt-5.2:nitro"
 
 // Get cheapest provider
-const floorModel = provider.getModelVariant("openai/gpt-4o", "FLOOR");
-// Returns: "openai/gpt-4o:floor"
+const floorModel = provider.getModelVariant("openai/gpt-5.2", "FLOOR");
+// Returns: "openai/gpt-5.2:floor"
 
 // Better tool-calling accuracy
-const exactoModel = provider.getModelVariant("openai/gpt-4o", "EXACTO");
-// Returns: "openai/gpt-4o:exacto"
+const exactoModel = provider.getModelVariant("openai/gpt-5.2", "EXACTO");
+// Returns: "openai/gpt-5.2:exacto"
 ```
 
 ### OpenRouter-specific APIs
@@ -329,4 +329,4 @@ print(response.content)
 
 ## License
 
-MIT
+AGPL-3.0

@@ -8,7 +8,7 @@
     "getStarted": "立即开始"
   },
   "hero": {
-    "badge": "MIT 许可 · 生产就绪",
+    "badge": "AGPLv3 许可 · 生产就绪",
     "headline1": "快速交付您的 SaaS",
     "headline2": "以周计，而非月计。",
     "subheadline": "生产就绪的 Monorepo，内置多租户、AI 基础设施、计费及一切所需。",
@@ -78,7 +78,7 @@
       "values": {
         "0": {
           "title": "开源优先",
-          "description": "我们以开放的方式构建。我们的核心框架采用MIT许可证，始终如此。"
+          "description": "我们以开放的方式构建。我们的核心框架采用AGPLv3许可证，始终如此。"
         },
         "1": {
           "title": "生产就绪",
@@ -189,7 +189,7 @@
             },
             "1": {
               "q": "Nebutra是否免费使用？",
-              "a": "是的，Nebutra Sailor是MIT许可证，免费使用。我们还为希望托管基础设施和高级支持的团队提供托管云计划。"
+              "a": "是的，Nebutra Sailor是AGPLv3许可证，免费使用。我们还为希望托管基础设施和高级支持的团队提供托管云计划。"
             },
             "2": {
               "q": "我该如何开始？",
@@ -311,6 +311,6 @@
   },
   "metadata": {
     "title": "Nebutra Sailor — 开源企业级 SaaS 框架",
-    "description": "以周计交付 SaaS，内置多租户、计费、认证和 AI。生产就绪，MIT 许可。"
+    "description": "以周计交付 SaaS，内置多租户、计费、认证和 AI。生产就绪，AGPLv3 许可。"
   }
 }

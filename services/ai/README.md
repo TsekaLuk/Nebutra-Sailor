@@ -90,6 +90,6 @@ Called by the BFF layer (`apps/api-gateway`) via internal HTTP:
 // In api-gateway
 const response = await fetch("http://ai-service:8001/api/v1/generate", {
   method: "POST",
-  body: JSON.stringify({ prompt, model: "gpt-4" }),
+  body: JSON.stringify({ prompt, model: "gpt-5.2" }),
 });
 ```

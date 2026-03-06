@@ -16,9 +16,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.0"
+    "@supabase/supabase-js": "^2.98.0"
   },
   "devDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }

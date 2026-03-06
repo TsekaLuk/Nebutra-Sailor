@@ -204,7 +204,7 @@ Hey everyone!
 
 We're launching Nebutra Sailor on Product Hunt [DATE]. It's a complete enterprise SaaS foundation with multi-tenant architecture, AI integration, billing, and compliance built-in.
 
-Open source (MIT + Commons Clause) so you can inspect every line.
+Open source (AGPLv3) so you can inspect every line.
 
 Looking for early feedback: [link]
 

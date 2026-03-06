@@ -5,7 +5,7 @@
  *
  * Supports:
  * - SiliconFlow (DeepSeek, Qwen, BGE embeddings, reranking)
- * - OpenAI (GPT-4, embeddings, DALL-E, Whisper)
+ * - OpenAI (GPT-5, GPT-4, embeddings, DALL-E, Whisper)
  *
  * @example
  * ```typescript
@@ -100,10 +100,7 @@ export {
   type SiliconFlowConfig,
 } from "./providers/siliconflow.js";
 
-export {
-  OpenAIProvider,
-  OPENAI_MODELS,
-} from "./providers/openai.js";
+export { OpenAIProvider, OPENAI_MODELS } from "./providers/openai.js";
 
 export {
   OpenRouterProvider,

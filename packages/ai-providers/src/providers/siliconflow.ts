@@ -10,7 +10,6 @@ import type {
   RerankResponse,
   ImageGenerationRequest,
   ImageGenerationResponse,
-  AIProviderError,
 } from "../types.js";
 import {
   BaseAIProvider,
@@ -159,8 +158,11 @@ export class SiliconFlowProvider extends BaseAIProvider {
   private capabilities: Set<ProviderCapability>;
 
   constructor(config: SiliconFlowConfig) {
-    const baseUrl = config.baseUrl ||
-      (config.useInternational ? SILICONFLOW_BASE_URL_INTL : SILICONFLOW_BASE_URL_CN);
+    const baseUrl =
+      config.baseUrl ||
+      (config.useInternational
+        ? SILICONFLOW_BASE_URL_INTL
+        : SILICONFLOW_BASE_URL_CN);
 
     super({
       ...config,
@@ -219,7 +221,7 @@ export class SiliconFlowProvider extends BaseAIProvider {
   }
 
   async *chatStream(
-    request: ChatCompletionRequest
+    request: ChatCompletionRequest,
   ): AsyncGenerator<ChatCompletionChunk, void, unknown> {
     const stream = await this.client.chat.completions.create({
       model: request.model,
@@ -289,14 +291,20 @@ export class SiliconFlowProvider extends BaseAIProvider {
     });
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({})) as { message?: string };
+      const error = (await response.json().catch(() => ({}))) as {
+        message?: string;
+      };
       throw new Error(
-        `SiliconFlow rerank error: ${response.status} ${error.message || response.statusText}`
+        `SiliconFlow rerank error: ${response.status} ${error.message || response.statusText}`,
       );
     }
 
-    const data = await response.json() as {
-      results: Array<{ index: number; document?: { text: string }; relevance_score: number }>;
+    const data = (await response.json()) as {
+      results: Array<{
+        index: number;
+        document?: { text: string };
+        relevance_score: number;
+      }>;
       model: string;
       usage?: { total_tokens: number };
     };
@@ -317,12 +325,19 @@ export class SiliconFlowProvider extends BaseAIProvider {
   // Image Generation
   // ============================================
 
-  async generateImage(request: ImageGenerationRequest): Promise<ImageGenerationResponse> {
+  async generateImage(
+    request: ImageGenerationRequest,
+  ): Promise<ImageGenerationResponse> {
     const response = await this.client.images.generate({
       model: request.model,
       prompt: request.prompt,
       n: request.n,
-      size: request.size as "256x256" | "512x512" | "1024x1024" | "1792x1024" | "1024x1792",
+      size: request.size as
+        | "256x256"
+        | "512x512"
+        | "1024x1024"
+        | "1792x1024"
+        | "1024x1792",
       quality: request.quality,
       style: request.style,
       response_format: request.responseFormat,
@@ -364,7 +379,9 @@ export class SiliconFlowProvider extends BaseAIProvider {
       throw new Error(`Failed to get user info: ${response.status}`);
     }
 
-    const data = await response.json() as { data?: { balance?: number; status?: string } };
+    const data = (await response.json()) as {
+      data?: { balance?: number; status?: string };
+    };
     return {
       balance: data.data?.balance || 0,
       status: data.data?.status || "unknown",
@@ -376,7 +393,7 @@ export class SiliconFlowProvider extends BaseAIProvider {
   // ============================================
 
   private transformChatResponse(
-    response: OpenAI.Chat.Completions.ChatCompletion
+    response: OpenAI.Chat.Completions.ChatCompletion,
   ): ChatCompletionResponse {
     return {
       id: response.id,
@@ -388,7 +405,8 @@ export class SiliconFlowProvider extends BaseAIProvider {
         message: {
           role: "assistant" as const,
           content: c.message.content,
-          toolCalls: c.message.tool_calls?.map((tc) => ({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          toolCalls: c.message.tool_calls?.map((tc: any) => ({
             id: tc.id,
             type: "function" as const,
             function: {
@@ -397,9 +415,15 @@ export class SiliconFlowProvider extends BaseAIProvider {
             },
           })),
           // SiliconFlow returns reasoning_content for DeepSeek-R1 models
-          reasoningContent: (c.message as { reasoning_content?: string }).reasoning_content,
+          reasoningContent: (c.message as { reasoning_content?: string })
+            .reasoning_content,
         },
-        finishReason: c.finish_reason as "stop" | "length" | "tool_calls" | "content_filter" | null,
+        finishReason: c.finish_reason as
+          | "stop"
+          | "length"
+          | "tool_calls"
+          | "content_filter"
+          | null,
       })),
       usage: response.usage
         ? {
@@ -412,7 +436,7 @@ export class SiliconFlowProvider extends BaseAIProvider {
   }
 
   private transformStreamChunk(
-    chunk: OpenAI.Chat.Completions.ChatCompletionChunk
+    chunk: OpenAI.Chat.Completions.ChatCompletionChunk,
   ): ChatCompletionChunk {
     return {
       id: chunk.id,
@@ -424,7 +448,8 @@ export class SiliconFlowProvider extends BaseAIProvider {
         delta: {
           role: c.delta.role as "assistant" | undefined,
           content: c.delta.content ?? undefined,
-          toolCalls: c.delta.tool_calls?.map((tc) => ({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          toolCalls: c.delta.tool_calls?.map((tc: any) => ({
             id: tc.id || "",
             type: "function" as const,
             function: {
@@ -433,13 +458,21 @@ export class SiliconFlowProvider extends BaseAIProvider {
             },
           })),
         },
-        finishReason: c.finish_reason as "stop" | "length" | "tool_calls" | "content_filter" | null,
+        finishReason: c.finish_reason as
+          | "stop"
+          | "length"
+          | "tool_calls"
+          | "content_filter"
+          | null,
       })),
     };
   }
 }
 
 // Register the provider
-registerProvider("siliconflow", (config) => new SiliconFlowProvider(config as SiliconFlowConfig));
+registerProvider(
+  "siliconflow",
+  (config) => new SiliconFlowProvider(config as SiliconFlowConfig),
+);
 
 export default SiliconFlowProvider;

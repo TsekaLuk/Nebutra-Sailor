@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "mintlify dev",
-    "build": "mintlify build"
+    "dev": "mintlify dev"
   },
   "devDependencies": {
-    "mintlify": "^4.0.0"
+    "mintlify": "^4.2.408"
   }
 }

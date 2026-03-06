@@ -29,7 +29,7 @@
       <img src="https://img.shields.io/github/forks/{{repo.full}}?style=for-the-badge&logo=github&color=14b8a6&logoColor=fff" alt="GitHub Forks" />
     </a>
     <a href="https://github.com/{{repo.full}}/blob/main/LICENSE">
-      <img src="https://img.shields.io/badge/许可证-MIT%20%2B%20公共条款-6366f1?style=for-the-badge" alt="License" />
+      <img src="https://img.shields.io/badge/许可证-AGPLv3-6366f1?style=for-the-badge" alt="License" />
     </a>
   </p>
 </div>
@@ -224,7 +224,7 @@ pnpm db:generate && pnpm dev
 
 ## 许可证
 
-**MIT 许可证 + 公共条款**
+**AGPLv3**
 
 |                |                              |
 | -------------- | ---------------------------- |

@@ -79,7 +79,7 @@ So I built Nebutra Sailor — an open-source SaaS platform that handles all that
 **Tech stack:**
 Next.js 17 · React 19 · TypeScript · Prisma 7 · Supabase · Vercel AI SDK
 
-We're fully open source (MIT + Commons Clause), so you can inspect every line of code.
+We're fully open source (AGPLv3), so you can inspect every line of code.
 
 I'd love to hear:
 - What features would make this more useful for your next project?
@@ -140,7 +140,7 @@ Great question! [Answer]. We also have detailed docs at docs.nebutra.com/[topic]
 **Pricing/licensing:**
 
 ```
-We're MIT + Commons Clause — free for personal/internal use, open source required for commercial. Happy to discuss specific use cases!
+We're AGPLv3 — free for personal/internal use, open source required for commercial. Happy to discuss specific use cases!
 ```
 
 ### For Feature Requests
@@ -223,7 +223,7 @@ All production-tested and documented.
 **Tweet 5**
 
 ```
-Fully open source (MIT + Commons Clause)
+Fully open source (AGPLv3)
 
 → Inspect every line of code
 → Fork for your project
@@ -314,7 +314,7 @@ Thank you! 🙏
 **Q: Is this really free?**
 
 ```
-Yes! MIT + Commons Clause license. Free for personal projects, learning, and internal tools. Commercial use requires keeping it open source. Enterprise licensing available for closed-source commercial use.
+Yes! AGPLv3 license. Free for personal projects, learning, and internal tools. Commercial use requires keeping it open source. Enterprise licensing available for closed-source commercial use.
 ```
 
 **Q: How is this different from [Next.js SaaS Starter / Shipfast / etc]?**

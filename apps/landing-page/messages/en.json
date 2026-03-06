@@ -8,7 +8,7 @@
     "getStarted": "Get Started"
   },
   "hero": {
-    "badge": "MIT Licensed · Production-Ready",
+    "badge": "AGPLv3 Licensed · Production-Ready",
     "headline1": "Ship your SaaS",
     "headline2": "in weeks, not months.",
     "subheadline": "Production-ready monorepo with multi-tenancy, AI infrastructure, billing, and everything you need to launch.",
@@ -75,7 +75,7 @@
       "values": {
         "0": {
           "title": "Open Source First",
-          "description": "We build in the open. Our core framework is MIT-licensed and always will be."
+          "description": "We build in the open. Our core framework is AGPLv3-licensed and always will be."
         },
         "1": {
           "title": "Production-Ready",
@@ -186,7 +186,7 @@
             },
             "1": {
               "q": "Is Nebutra free to use?",
-              "a": "Yes, Nebutra Sailor is MIT-licensed and free to use. We also offer managed cloud plans for teams that want hosted infrastructure and premium support."
+              "a": "Yes, Nebutra Sailor is AGPLv3-licensed and free to use. We also offer managed cloud plans for teams that want hosted infrastructure and premium support."
             },
             "2": {
               "q": "How do I get started?",
@@ -308,6 +308,6 @@
   },
   "metadata": {
     "title": "Nebutra Sailor — The Open-Source Enterprise SaaS Framework",
-    "description": "Ship your SaaS in weeks, not months. Multi-tenancy, billing, auth, and AI built in. Production-ready, MIT licensed."
+    "description": "Ship your SaaS in weeks, not months. Multi-tenancy, billing, auth, and AI built in. Production-ready, AGPLv3 licensed."
   }
 }

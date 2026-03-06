@@ -8,7 +8,7 @@
     "getStarted": "시작하기"
   },
   "hero": {
-    "badge": "MIT 라이선스 · 프로덕션 준비 완료",
+    "badge": "AGPLv3 라이선스 · 프로덕션 준비 완료",
     "headline1": "SaaS를 빠르게",
     "headline2": "몇 달이 아닌 몇 주 만에 출시하세요.",
     "subheadline": "멀티테넌시, AI 인프라, 결제 시스템 등 출시에 필요한 모든 것이 갖춰진 프로덕션 준비 모노레포입니다.",
@@ -78,7 +78,7 @@
       "values": {
         "0": {
           "title": "Open Source First",
-          "description": "We build in the open. Our core framework is MIT-licensed and always will be."
+          "description": "We build in the open. Our core framework is AGPLv3-licensed and always will be."
         },
         "1": {
           "title": "Production-Ready",
@@ -189,7 +189,7 @@
             },
             "1": {
               "q": "Is Nebutra free to use?",
-              "a": "Yes, Nebutra Sailor is MIT-licensed and free to use. We also offer managed cloud plans for teams that want hosted infrastructure and premium support."
+              "a": "Yes, Nebutra Sailor is AGPLv3-licensed and free to use. We also offer managed cloud plans for teams that want hosted infrastructure and premium support."
             },
             "2": {
               "q": "How do I get started?",
@@ -311,6 +311,6 @@
   },
   "metadata": {
     "title": "Nebutra Sailor — 오픈소스 엔터프라이즈 SaaS 프레임워크",
-    "description": "몇 달이 아닌 몇 주 만에 SaaS를 출시하세요. 멀티테넌시, 결제, 인증, AI가 내장되어 있습니다. 프로덕션 준비 완료, MIT 라이선스."
+    "description": "몇 달이 아닌 몇 주 만에 SaaS를 출시하세요. 멀티테넌시, 결제, 인증, AI가 내장되어 있습니다. 프로덕션 준비 완료, AGPLv3 라이선스."
   }
 }

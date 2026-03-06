@@ -1,10 +1,6 @@
 import type Stripe from "stripe";
 import { getStripe } from "../stripe/client.js";
-import type {
-  SubscriptionStatus,
-  CreateSubscriptionInput,
-  UpdateSubscriptionInput,
-} from "../types.js";
+import type { SubscriptionStatus } from "../types.js";
 import { SubscriptionError } from "../types.js";
 
 // ============================================
@@ -40,7 +36,7 @@ export interface CreateStripeSubscriptionInput {
  * Create a subscription in Stripe
  */
 export async function createStripeSubscription(
-  input: CreateStripeSubscriptionInput
+  input: CreateStripeSubscriptionInput,
 ): Promise<Stripe.Subscription> {
   const stripe = getStripe();
 
@@ -65,7 +61,7 @@ export async function createStripeSubscription(
  * Get a subscription from Stripe
  */
 export async function getStripeSubscription(
-  subscriptionId: string
+  subscriptionId: string,
 ): Promise<Stripe.Subscription | null> {
   const stripe = getStripe();
 
@@ -87,7 +83,7 @@ export async function updateStripeSubscription(
     priceId?: string;
     cancelAtPeriodEnd?: boolean;
     metadata?: Record<string, string>;
-  }
+  },
 ): Promise<Stripe.Subscription> {
   const stripe = getStripe();
 
@@ -101,7 +97,7 @@ export async function updateStripeSubscription(
     if (!itemId) {
       throw new SubscriptionError(
         "No subscription items found",
-        "NO_SUBSCRIPTION_ITEMS"
+        "NO_SUBSCRIPTION_ITEMS",
       );
     }
 
@@ -130,7 +126,7 @@ export async function updateStripeSubscription(
  */
 export async function cancelStripeSubscription(
   subscriptionId: string,
-  immediately: boolean = false
+  immediately: boolean = false,
 ): Promise<Stripe.Subscription> {
   const stripe = getStripe();
 
@@ -147,7 +143,7 @@ export async function cancelStripeSubscription(
  * Resume a canceled subscription
  */
 export async function resumeStripeSubscription(
-  subscriptionId: string
+  subscriptionId: string,
 ): Promise<Stripe.Subscription> {
   const stripe = getStripe();
 
@@ -160,7 +156,7 @@ export async function resumeStripeSubscription(
  * Pause a subscription
  */
 export async function pauseStripeSubscription(
-  subscriptionId: string
+  subscriptionId: string,
 ): Promise<Stripe.Subscription> {
   const stripe = getStripe();
 
@@ -175,7 +171,7 @@ export async function pauseStripeSubscription(
  * Resume a paused subscription
  */
 export async function unpauseStripeSubscription(
-  subscriptionId: string
+  subscriptionId: string,
 ): Promise<Stripe.Subscription> {
   const stripe = getStripe();
 
@@ -188,7 +184,7 @@ export async function unpauseStripeSubscription(
  * Get all subscriptions for a customer
  */
 export async function getCustomerSubscriptions(
-  customerId: string
+  customerId: string,
 ): Promise<Stripe.Subscription[]> {
   const stripe = getStripe();
 
@@ -206,7 +202,7 @@ export async function getCustomerSubscriptions(
 // ============================================
 
 export function mapStripeStatusToLocal(
-  stripeStatus: Stripe.Subscription.Status
+  stripeStatus: Stripe.Subscription.Status,
 ): SubscriptionStatus {
   const statusMap: Record<Stripe.Subscription.Status, SubscriptionStatus> = {
     active: "ACTIVE",
@@ -227,7 +223,7 @@ export function mapStripeStatusToLocal(
  */
 export async function previewSubscriptionChange(
   subscriptionId: string,
-  newPriceId: string
+  newPriceId: string,
 ): Promise<Stripe.UpcomingInvoice> {
   const stripe = getStripe();
 
@@ -237,17 +233,19 @@ export async function previewSubscriptionChange(
   if (!itemId) {
     throw new SubscriptionError(
       "No subscription items found",
-      "NO_SUBSCRIPTION_ITEMS"
+      "NO_SUBSCRIPTION_ITEMS",
     );
   }
 
-  return stripe.invoices.retrieveUpcoming({
+  return stripe.invoices.createPreview({
     subscription: subscriptionId,
-    subscription_items: [
-      {
-        id: itemId,
-        price: newPriceId,
-      },
-    ],
+    subscription_details: {
+      items: [
+        {
+          id: itemId,
+          price: newPriceId,
+        },
+      ],
+    },
   });
 }
