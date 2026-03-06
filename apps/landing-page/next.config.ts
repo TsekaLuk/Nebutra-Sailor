@@ -53,7 +53,6 @@ const nextConfig: NextConfig = {
     "@nebutra/brand",
     "@nebutra/ui",
     "@nebutra/tokens",
-    "@nebutra/design-system",
     "@nebutra/marketing",
     "@nebutra/sanity",
   ],

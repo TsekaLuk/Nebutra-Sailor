@@ -43,7 +43,6 @@ const nextConfig: NextConfig = {
   // TypeScript; dist/-exporting packages need it for "use client" detection.
   transpilePackages: [
     "@nebutra/ui",
-    "@nebutra/design-system",
     "@nebutra/tokens",
   ],
 

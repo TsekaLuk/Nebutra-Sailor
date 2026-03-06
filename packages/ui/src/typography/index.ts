@@ -10,7 +10,7 @@
  *   fontSizes,
  *   typeStyles,
  *   getGoogleFontsUrl,
- * } from "@nebutra/design-system/typography";
+ * } from "@nebutra/ui/typography";
  *
  * // Use font family
  * const style = { fontFamily: fontFamilies.primary };

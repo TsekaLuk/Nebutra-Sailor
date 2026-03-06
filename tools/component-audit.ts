@@ -25,7 +25,6 @@ const CONFIG = {
 
   // Approved internal packages
   approvedPackages: [
-    "@nebutra/design-system",
     "@nebutra/ui",
   ],
 

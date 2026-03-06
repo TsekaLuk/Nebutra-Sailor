@@ -10,7 +10,7 @@ const ROOT = resolve(__dirname, "../..");
 /**
  * Excluded packages: tooling and non-design-system workspace packages.
  * These appear as workspace deps in app packages but are not part of
- * the design system dependency hierarchy under test.
+ * the UI dependency hierarchy under test.
  */
 const EXCLUDED_PACKAGES = new Set([
   "@nebutra/tsconfig",
@@ -34,29 +34,22 @@ interface DependencyRule {
 /**
  * Dependency rules based on actual package.json workspace deps.
  *
- * Actual workspace:* deps found in each package (excluding tooling packages):
- *   @nebutra/design-system  (apps/docs-hub/design-system): none
- *   @nebutra/ui             (packages/ui):                  @nebutra/design-system
- *   @nebutra/web            (apps/web):                     @nebutra/ui, @nebutra/design-system, @nebutra/tokens
- *   @nebutra/landing-page   (apps/landing-page):            @nebutra/brand, @nebutra/ui, @nebutra/design-system, @nebutra/tokens (+ excluded: marketing, sanity, preset)
- *   @nebutra/docs-hub       (apps/docs-hub):                none
+ * After architecture correction (Phase 1–2):
+ *   @nebutra/ui             (packages/ui):              none (design-system merged in)
+ *   @nebutra/web            (apps/web):                 @nebutra/ui, @nebutra/tokens
+ *   @nebutra/landing-page   (apps/landing-page):        @nebutra/ui, @nebutra/tokens
+ *   @nebutra/design-docs    (apps/design-docs):         @nebutra/ui, @nebutra/tokens
  */
 const DEPENDENCY_RULES: DependencyRule[] = [
   {
-    name: "@nebutra/design-system",
-    packageJsonPath: "apps/docs-hub/design-system/package.json",
-    allowedDeps: [],
-  },
-  {
     name: "@nebutra/ui",
     packageJsonPath: "packages/ui/package.json",
-    allowedDeps: ["@nebutra/design-system", "@nebutra/brand"],
+    allowedDeps: [],
   },
   {
     name: "@nebutra/web",
     packageJsonPath: "apps/web/package.json",
     allowedDeps: [
-      "@nebutra/design-system",
       "@nebutra/ui",
       "@nebutra/tokens",
     ],
@@ -65,16 +58,17 @@ const DEPENDENCY_RULES: DependencyRule[] = [
     name: "@nebutra/landing-page",
     packageJsonPath: "apps/landing-page/package.json",
     allowedDeps: [
-      "@nebutra/brand",
-      "@nebutra/design-system",
       "@nebutra/ui",
       "@nebutra/tokens",
     ],
   },
   {
-    name: "@nebutra/docs-hub",
-    packageJsonPath: "apps/docs-hub/package.json",
-    allowedDeps: [],
+    name: "@nebutra/design-docs",
+    packageJsonPath: "apps/design-docs/package.json",
+    allowedDeps: [
+      "@nebutra/ui",
+      "@nebutra/tokens",
+    ],
   },
 ];
 
@@ -87,9 +81,9 @@ interface PackageJson {
 /**
  * Extract @nebutra/* workspace dependencies from a package.json,
  * excluding tooling/infrastructure packages that are not part of the
- * design system dependency flow.
+ * UI dependency flow.
  */
-function getDesignSystemWorkspaceDeps(
+function getUIWorkspaceDeps(
   packageJsonRelativePath: string,
 ): string[] {
   const fullPath = resolve(ROOT, packageJsonRelativePath);
@@ -113,21 +107,21 @@ function getDesignSystemWorkspaceDeps(
 }
 
 describe("Property 4: Dependency Flow Conformance", () => {
-  it("DEPENDENCY_RULES covers all expected design-system packages", () => {
-    expect(DEPENDENCY_RULES.length).toBe(6);
+  it("DEPENDENCY_RULES covers all expected UI packages", () => {
+    expect(DEPENDENCY_RULES.length).toBe(4);
   });
 
-  it("every design-system package workspace deps are a subset of allowed deps", () => {
+  it("every UI package workspace deps are a subset of allowed deps", () => {
     fc.assert(
       fc.property(fc.constantFrom(...DEPENDENCY_RULES), (rule) => {
-        const actualDeps = getDesignSystemWorkspaceDeps(rule.packageJsonPath);
+        const actualDeps = getUIWorkspaceDeps(rule.packageJsonPath);
         const allowedSet = new Set(rule.allowedDeps);
 
         for (const dep of actualDeps) {
           if (!allowedSet.has(dep)) {
             throw new Error(
               `Package "${rule.name}" has an unauthorized dependency on "${dep}". ` +
-                `Allowed design-system deps: [${rule.allowedDeps.join(", ") || "none"}]. ` +
+                `Allowed UI deps: [${rule.allowedDeps.join(", ") || "none"}]. ` +
                 `This violates the unidirectional dependency flow invariant.`,
             );
           }
@@ -138,25 +132,14 @@ describe("Property 4: Dependency Flow Conformance", () => {
     );
   });
 
-  it("design-system has no @nebutra/* workspace dependencies (it is the root)", () => {
-    const dsRule = DEPENDENCY_RULES.find(
-      (r) => r.name === "@nebutra/design-system",
+  it("@nebutra/ui has no @nebutra/* workspace dependencies (it is the leaf package)", () => {
+    const uiRule = DEPENDENCY_RULES.find(
+      (r) => r.name === "@nebutra/ui",
     );
-    expect(dsRule).toBeDefined();
-    if (!dsRule) return;
+    expect(uiRule).toBeDefined();
+    if (!uiRule) return;
 
-    const actualDeps = getDesignSystemWorkspaceDeps(dsRule.packageJsonPath);
-    expect(actualDeps).toHaveLength(0);
-  });
-
-  it("@nebutra/docs-hub has no @nebutra/* workspace dependencies (it contains design-system)", () => {
-    const docsRule = DEPENDENCY_RULES.find(
-      (r) => r.name === "@nebutra/docs-hub",
-    );
-    expect(docsRule).toBeDefined();
-    if (!docsRule) return;
-
-    const actualDeps = getDesignSystemWorkspaceDeps(docsRule.packageJsonPath);
+    const actualDeps = getUIWorkspaceDeps(uiRule.packageJsonPath);
     expect(actualDeps).toHaveLength(0);
   });
 });

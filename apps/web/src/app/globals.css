@@ -4,7 +4,7 @@
  * This file imports:
  * 1. Tailwind CSS v4 (must be first)
  * 2. Tokens from @nebutra/tokens (single source of truth)
- * 3. Typography CSS variables from design-system (SSOT for fonts)
+ * 3. Typography CSS variables from @nebutra/ui (fonts.css)
  */
 
 /* Tailwind CSS v4 - must be imported first */
@@ -17,7 +17,7 @@
 @import "@nebutra/tokens/styles.css";
 
 /* Typography SSOT - must be imported first to define --font-* variables */
-@import "@nebutra/design-system/typography/fonts.css";
+@import "@nebutra/ui/typography/fonts.css";
 
 @custom-variant dark (&:is(.dark *));
 
