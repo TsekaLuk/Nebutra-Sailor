@@ -6,8 +6,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@nebutra/ui/components";
-import { Button } from "@nebutra/ui/components";
+  Button,
+} from "@nebutra/ui/primitives";
 export function DialogDemo() {
   return (
     <Dialog>

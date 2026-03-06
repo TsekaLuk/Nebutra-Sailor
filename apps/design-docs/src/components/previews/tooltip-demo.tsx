@@ -4,8 +4,8 @@ import {
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "@nebutra/ui/components";
-import { Button } from "@nebutra/ui/components";
+  Button,
+} from "@nebutra/ui/primitives";
 export function TooltipDemo() {
   return (
     <TooltipProvider>

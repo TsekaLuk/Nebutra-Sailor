@@ -4,7 +4,7 @@ import {
   TabsList,
   TabsTrigger,
   TabsContent,
-} from "@nebutra/ui/components";
+} from "@nebutra/ui/primitives";
 export function TabsDemo() {
   return (
     <Tabs defaultValue="overview" className="w-full max-w-md">

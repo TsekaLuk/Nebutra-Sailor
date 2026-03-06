@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Checkbox } from "@nebutra/ui/components";
+import { Checkbox } from "@nebutra/ui/primitives";
 
 export function CheckboxDemo() {
   const [checked, setChecked] = useState(false);

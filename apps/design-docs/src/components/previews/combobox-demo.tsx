@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Combobox } from "@nebutra/ui/components";
+import { Combobox } from "@nebutra/ui/primitives";
 
 const frameworks = [
   { value: "next", label: "Next.js" },

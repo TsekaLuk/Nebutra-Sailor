@@ -8,7 +8,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@nebutra/ui/components";
+} from "@nebutra/ui/primitives";
 
 export function SelectDemo() {
   return (

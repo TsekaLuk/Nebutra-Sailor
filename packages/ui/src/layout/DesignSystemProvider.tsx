@@ -53,7 +53,7 @@ export interface DesignSystemProviderProps {
 
 export function DesignSystemProvider({
   children,
-  defaultMode = "auto",
+  defaultMode = "system",
   storageKey = "nebutra-theme-mode",
   enableSystemPreference = true,
 }: DesignSystemProviderProps) {
@@ -82,14 +82,14 @@ export function DesignSystemProvider({
     if (typeof window === "undefined") return;
 
     const stored = localStorage.getItem(storageKey);
-    if (stored && ["light", "dark", "auto"].includes(stored)) {
+    if (stored && ["light", "dark", "system"].includes(stored)) {
       setModeState(stored as ThemeMode);
     }
   }, [storageKey]);
 
   // Resolve actual mode
-  const resolvedMode = useMemo(() => {
-    if (mode === "auto") {
+  const resolvedMode = useMemo((): "light" | "dark" => {
+    if (mode === "system") {
       return systemPreference;
     }
     return mode;

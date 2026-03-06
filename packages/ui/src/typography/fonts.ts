@@ -222,7 +222,7 @@ export const fontFeatureSettings = {
 export function getFontLicenses(): Array<{
   family: string;
   license: string;
-  url?: string;
+  url?: string | undefined;
 }> {
   return Object.values(fonts).map((font) => ({
     family: font.family,

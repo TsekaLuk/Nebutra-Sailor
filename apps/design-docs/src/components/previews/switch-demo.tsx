@@ -1,5 +1,5 @@
 "use client";
-import { Switch } from "@nebutra/ui/components";
+import { Switch } from "@nebutra/ui/primitives";
 export function SwitchDemo() {
   return (
     <div className="flex flex-col gap-4">

@@ -130,10 +130,10 @@ function resolveShadowClass(
 
 interface ButtonContentProps {
   loading: boolean;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
-  size?: string | null;
-  children?: React.ReactNode;
+  prefix?: React.ReactNode | undefined;
+  suffix?: React.ReactNode | undefined;
+  size?: string | null | undefined;
+  children?: React.ReactNode | undefined;
 }
 
 function ButtonContent({

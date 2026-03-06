@@ -4,6 +4,13 @@ import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils";
+import { withHtmlProps } from "../utils/primitive-props";
+
+// Radix types don't resolve HTML props with React 19 + exactOptionalPropertyTypes.
+const RadixRoot = withHtmlProps<"div">(TabsPrimitive.Root);
+const RadixList = withHtmlProps<"div">(TabsPrimitive.List);
+const RadixTrigger = withHtmlProps<"button">(TabsPrimitive.Trigger);
+const RadixContent = withHtmlProps<"div">(TabsPrimitive.Content);
 
 // =============================================================================
 // Variants
@@ -99,15 +106,47 @@ const tabsTriggerVariants = cva(
       },
     },
     compoundVariants: [
-      { variant: "default", size: "lg", className: "py-2.5 px-4 rounded-[var(--radius-md)]" },
-      { variant: "default", size: "md", className: "py-1.5 px-3 rounded-[var(--radius-md)]" },
-      { variant: "default", size: "sm", className: "py-1.5 px-2.5 rounded-[var(--radius-sm)]" },
-      { variant: "default", size: "xs", className: "py-1 px-2 rounded-[var(--radius-sm)]" },
+      {
+        variant: "default",
+        size: "lg",
+        className: "py-2.5 px-4 rounded-[var(--radius-md)]",
+      },
+      {
+        variant: "default",
+        size: "md",
+        className: "py-1.5 px-3 rounded-[var(--radius-md)]",
+      },
+      {
+        variant: "default",
+        size: "sm",
+        className: "py-1.5 px-2.5 rounded-[var(--radius-sm)]",
+      },
+      {
+        variant: "default",
+        size: "xs",
+        className: "py-1 px-2 rounded-[var(--radius-sm)]",
+      },
 
-      { variant: "button", size: "lg", className: "py-3 px-4 rounded-[var(--radius-lg)]" },
-      { variant: "button", size: "md", className: "py-2.5 px-3 rounded-[var(--radius-lg)]" },
-      { variant: "button", size: "sm", className: "py-2 px-2.5 rounded-[var(--radius-md)]" },
-      { variant: "button", size: "xs", className: "py-1.5 px-2 rounded-[var(--radius-md)]" },
+      {
+        variant: "button",
+        size: "lg",
+        className: "py-3 px-4 rounded-[var(--radius-lg)]",
+      },
+      {
+        variant: "button",
+        size: "md",
+        className: "py-2.5 px-3 rounded-[var(--radius-lg)]",
+      },
+      {
+        variant: "button",
+        size: "sm",
+        className: "py-2 px-2.5 rounded-[var(--radius-md)]",
+      },
+      {
+        variant: "button",
+        size: "xs",
+        className: "py-1.5 px-2 rounded-[var(--radius-md)]",
+      },
 
       { variant: "line", size: "lg", className: "py-3" },
       { variant: "line", size: "md", className: "py-2.5" },
@@ -184,23 +223,37 @@ const TabsContext = React.createContext<TabsContextType>({
  * - Keyboard navigation (arrows, Home, End)
  * - Focus management
  */
-export type TabsProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Root
->;
+export type TabsProps = React.ComponentPropsWithoutRef<"div"> & {
+  /** The value for the selected tab, if controlled */
+  value?: string;
+  /** The value of the tab to select by default, if uncontrolled */
+  defaultValue?: string;
+  /** A function called when a new tab is selected */
+  onValueChange?: (value: string) => void;
+  /** The orientation the tabs are laid out */
+  orientation?: "horizontal" | "vertical";
+  /** The direction of navigation */
+  dir?: "ltr" | "rtl";
+  /** Whether a tab is activated automatically or manually */
+  activationMode?: "automatic" | "manual";
+};
 
-export type TabsListProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.List
-> &
-  VariantProps<typeof tabsListVariants>;
+export type TabsListProps = React.ComponentPropsWithoutRef<"div"> &
+  VariantProps<typeof tabsListVariants> & {
+    loop?: boolean;
+  };
 
-export type TabsTriggerProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Trigger
->;
+export type TabsTriggerProps = React.ComponentPropsWithoutRef<"button"> & {
+  value: string;
+};
 
 export interface TabsContentProps
   extends
-    React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>,
-    VariantProps<typeof tabsContentVariants> {}
+    React.ComponentPropsWithoutRef<"div">,
+    VariantProps<typeof tabsContentVariants> {
+  value: string;
+  forceMount?: true;
+}
 
 // =============================================================================
 // Components
@@ -254,11 +307,7 @@ export interface TabsContentProps
  */
 function Tabs({ className, ...props }: TabsProps) {
   return (
-    <TabsPrimitive.Root
-      data-slot="tabs"
-      className={cn("", className)}
-      {...props}
-    />
+    <RadixRoot data-slot="tabs" className={cn("", className)} {...props} />
   );
 }
 
@@ -276,7 +325,7 @@ function TabsList({
     <TabsContext.Provider
       value={{ variant: variant || "default", size: size || "md" }}
     >
-      <TabsPrimitive.List
+      <RadixList
         data-slot="tabs-list"
         className={cn(tabsListVariants({ variant, shape, size }), className)}
         {...props}
@@ -292,7 +341,7 @@ function TabsTrigger({ className, ...props }: TabsTriggerProps) {
   const { variant, size } = React.useContext(TabsContext);
 
   return (
-    <TabsPrimitive.Trigger
+    <RadixTrigger
       data-slot="tabs-trigger"
       className={cn(tabsTriggerVariants({ variant, size }), className)}
       {...props}
@@ -305,7 +354,7 @@ function TabsTrigger({ className, ...props }: TabsTriggerProps) {
  */
 function TabsContent({ className, variant, ...props }: TabsContentProps) {
   return (
-    <TabsPrimitive.Content
+    <RadixContent
       data-slot="tabs-content"
       className={cn(tabsContentVariants({ variant }), className)}
       {...props}

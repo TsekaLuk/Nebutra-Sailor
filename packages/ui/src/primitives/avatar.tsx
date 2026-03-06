@@ -3,6 +3,7 @@
 import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { cn } from "../utils/cn";
+import { withHtmlProps } from "../utils/primitive-props";
 
 // ─── Size Map ─────────────────────────────────────────────────────────────────
 // Matches avatarTokens: xs=20 sm=32 md=40 lg=56 xl=80
@@ -17,38 +18,40 @@ const sizeClasses = {
 
 type AvatarSize = keyof typeof sizeClasses;
 
+// Radix types don't resolve HTML props with React 19 + exactOptionalPropertyTypes.
+const RadixRoot = withHtmlProps<"span">(AvatarPrimitive.Root);
+const RadixImage = withHtmlProps<"img">(AvatarPrimitive.Image);
+const RadixFallback = withHtmlProps<"span">(AvatarPrimitive.Fallback);
+
 // ─── Avatar ───────────────────────────────────────────────────────────────────
 
-export interface AvatarProps extends React.ComponentPropsWithoutRef<
-  typeof AvatarPrimitive.Root
-> {
+export interface AvatarProps extends React.ComponentPropsWithoutRef<"span"> {
   /** Size preset — xs=20px sm=32px md=40px lg=56px xl=80px */
   size?: AvatarSize;
 }
 
-const Avatar = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Root>,
-  AvatarProps
->(({ className, size = "md", ...props }, ref) => (
-  <AvatarPrimitive.Root
-    ref={ref}
-    className={cn(
-      "relative flex shrink-0 overflow-hidden rounded-full",
-      sizeClasses[size].root,
-      className,
-    )}
-    {...props}
-  />
-));
+const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
+  ({ className, size = "md", ...props }, ref) => (
+    <RadixRoot
+      ref={ref}
+      className={cn(
+        "relative flex shrink-0 overflow-hidden rounded-full",
+        sizeClasses[size].root,
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 Avatar.displayName = AvatarPrimitive.Root.displayName;
 
 // ─── AvatarImage ──────────────────────────────────────────────────────────────
 
 const AvatarImage = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+  HTMLImageElement,
+  React.ComponentPropsWithoutRef<"img">
 >(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image
+  <RadixImage
     ref={ref}
     className={cn("aspect-square h-full w-full", className)}
     {...props}
@@ -58,27 +61,24 @@ AvatarImage.displayName = AvatarPrimitive.Image.displayName;
 
 // ─── AvatarFallback ───────────────────────────────────────────────────────────
 
-export interface AvatarFallbackProps extends React.ComponentPropsWithoutRef<
-  typeof AvatarPrimitive.Fallback
-> {
+export interface AvatarFallbackProps extends React.ComponentPropsWithoutRef<"span"> {
   /** Pass the same size as the parent Avatar for correct font size */
   size?: AvatarSize;
 }
 
-const AvatarFallback = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Fallback>,
-  AvatarFallbackProps
->(({ className, size = "md", ...props }, ref) => (
-  <AvatarPrimitive.Fallback
-    ref={ref}
-    className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted font-medium text-muted-foreground",
-      sizeClasses[size].fallback,
-      className,
-    )}
-    {...props}
-  />
-));
+const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
+  ({ className, size = "md", ...props }, ref) => (
+    <RadixFallback
+      ref={ref}
+      className={cn(
+        "flex h-full w-full items-center justify-center rounded-full bg-muted font-medium text-muted-foreground",
+        sizeClasses[size].fallback,
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 // ─── AvatarGroup ──────────────────────────────────────────────────────────────
@@ -108,7 +108,7 @@ function AvatarGroup({
   // if items.length > max show +N badge instead of last slot.
   // Use built-in Tailwind z-index utilities (z-10..z-60) so they are
   // guaranteed to exist without arbitrary-value scanning.
-  const Z = ["z-10","z-20","z-30","z-40","z-50","z-60"] as const;
+  const Z = ["z-10", "z-20", "z-30", "z-40", "z-50", "z-60"] as const;
   const visibleCount = items.length >= max ? max - 1 : items.length;
   const visible = items.slice(0, visibleCount);
   const lastItem = items.length === max ? items[max - 1] : null;
@@ -144,7 +144,9 @@ function AvatarGroup({
             size={size}
             className="border border-black/[0.08] dark:border-white/[0.14] bg-background"
           >
-            {lastItem.src && <AvatarImage src={lastItem.src} alt={lastItem.alt} />}
+            {lastItem.src && (
+              <AvatarImage src={lastItem.src} alt={lastItem.alt} />
+            )}
             <AvatarFallback size={size}>{lastItem.fallback}</AvatarFallback>
           </Avatar>
         </span>

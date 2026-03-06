@@ -161,8 +161,8 @@ const ComboboxOptionItem = React.forwardRef<
     <CommandItem
       ref={ref}
       value={value}
-      keywords={keywords}
-      disabled={disabled}
+      {...(keywords ? { keywords } : {})}
+      disabled={disabled ?? false}
       onSelect={onSelect}
       className={cn("gap-2", className)}
     >
@@ -304,7 +304,7 @@ function ComboboxRoot({
                   <ComboboxOptionItem
                     key={opt.value}
                     value={opt.value}
-                    disabled={opt.disabled}
+                    disabled={opt.disabled ?? false}
                   >
                     {opt.label}
                   </ComboboxOptionItem>
@@ -349,9 +349,7 @@ function ComboboxRoot({
               disabled={disabled}
               className={cn(comboboxTriggerVariants({ size, error }))}
             >
-              <span
-                className={cn(!selectedValue && "text-muted-foreground")}
-              >
+              <span className={cn(!selectedValue && "text-muted-foreground")}>
                 {selectedValue ? selectedLabel : placeholder}
               </span>
               <ChevronsUpDown

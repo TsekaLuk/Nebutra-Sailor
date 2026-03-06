@@ -10,7 +10,7 @@ import {
   BitbucketAvatar,
   AvatarWithIcon,
   DiceBearAvatar,
-} from "@nebutra/ui/components";
+} from "@nebutra/ui/primitives";
 
 const va = (seed: string) => `https://avatar.vercel.sh/${seed}`;
 
@@ -54,16 +54,16 @@ const gh = (u: string) => `https://avatars.githubusercontent.com/${u}?s=64`;
 
 const GROUP_SM = [
   { src: gh("evilrabbit"), alt: "evilrabbit", fallback: "ER" },
-  { src: gh("leerob"),     alt: "leerob",     fallback: "LR" },
-  { src: gh("rauchg"),     alt: "rauchg",     fallback: "RG" },
+  { src: gh("leerob"), alt: "leerob", fallback: "LR" },
+  { src: gh("rauchg"), alt: "rauchg", fallback: "RG" },
 ];
 
 const GROUP_LG = [
   { src: gh("sambecker"), alt: "sambecker", fallback: "SB" },
-  { src: gh("rauno"),     alt: "rauno",     fallback: "RA" },
-  { src: gh("shuding"),   alt: "shuding",   fallback: "SH" },
-  { src: gh("skllcrn"),   alt: "skllcrn",   fallback: "SK" },
-  { src: gh("almonk"),    alt: "almonk",    fallback: "AL" },
+  { src: gh("rauno"), alt: "rauno", fallback: "RA" },
+  { src: gh("shuding"), alt: "shuding", fallback: "SH" },
+  { src: gh("skllcrn"), alt: "skllcrn", fallback: "SK" },
+  { src: gh("almonk"), alt: "almonk", fallback: "AL" },
 ];
 
 /** Two rows: default limit and with overflow +N */
@@ -111,9 +111,7 @@ export function AvatarWithIconDemo() {
         <AvatarWithIcon
           src={gh("rauchg")}
           alt="rauchg"
-          icon={
-            <span className="block h-2 w-2 rounded-full bg-green-500" />
-          }
+          icon={<span className="block h-2 w-2 rounded-full bg-green-500" />}
           iconBackground="bg-background"
           size="md"
         />
@@ -124,9 +122,7 @@ export function AvatarWithIconDemo() {
         <AvatarWithIcon
           src={gh("shuding")}
           alt="shuding"
-          icon={
-            <span className="block h-2 w-2 rounded-full bg-yellow-500" />
-          }
+          icon={<span className="block h-2 w-2 rounded-full bg-yellow-500" />}
           iconBackground="bg-background"
           size="md"
         />
@@ -157,10 +153,17 @@ export function DiceBearAvatarDemo() {
     <div className="flex flex-wrap gap-6">
       <div className="flex flex-col items-center gap-2">
         <DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
-        <span className="text-[11px] text-muted-foreground">bottts-neutral</span>
+        <span className="text-[11px] text-muted-foreground">
+          bottts-neutral
+        </span>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <DiceBearAvatar seed="leerob" avatarStyle="pixel-art" options={{ radius: 50 }} size="md" />
+        <DiceBearAvatar
+          seed="leerob"
+          avatarStyle="pixel-art"
+          options={{ radius: 50 }}
+          size="md"
+        />
         <span className="text-[11px] text-muted-foreground">pixel-art</span>
       </div>
       <div className="flex flex-col items-center gap-2">

@@ -6,6 +6,30 @@
     "rootDir": "./src",
     "composite": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts", "**/*.test.tsx", "**/*.spec.tsx"]
+  "include": [
+    "src/index.ts",
+    "src/components/**/*.ts",
+    "src/components/**/*.tsx",
+    "src/layout/**/*.ts",
+    "src/layout/**/*.tsx",
+    "src/icons/**/*.ts",
+    "src/icons/**/*.tsx",
+    "src/theme/**/*.ts",
+    "src/theme/**/*.tsx",
+    "src/primitives/index.ts",
+    "src/typography/**/*.ts",
+    "src/typography/**/*.tsx",
+    "src/utils/**/*.ts",
+    "src/utils/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.test.tsx",
+    "**/*.spec.tsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx"
+  ]
 }
