@@ -14,7 +14,7 @@ const eventEnvelopeSchema = z
   .object({
     eventName: z.string().min(1),
     context: eventContextSchema,
-    payload: z.record(z.unknown()).default({}),
+    payload: z.record(z.string(), z.unknown()).default({}),
     eventId: z.string().min(1).optional(),
     source: z.string().min(1).default("web"),
   })
