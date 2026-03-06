@@ -20,6 +20,7 @@
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/react": "^8.6.12",
+    "@storybook/test": "^8.6.12",
     "@storybook/react-vite": "^8.6.12",
     "@types/node": "^20.14.0",
     "@types/react": "^19.0.0",

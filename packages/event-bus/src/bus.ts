@@ -8,12 +8,14 @@ export const BaseEventSchema = z.object({
   source: z.string(),
   tenantId: z.string().optional(),
   correlationId: z.string().optional(),
-  data: z.record(z.unknown()),
+  data: z.record(z.string(), z.unknown()),
 });
 
 export type BaseEvent = z.infer<typeof BaseEventSchema>;
 
-type EventHandler<T extends BaseEvent = BaseEvent> = (event: T) => Promise<void>;
+type EventHandler<T extends BaseEvent = BaseEvent> = (
+  event: T,
+) => Promise<void>;
 
 /**
  * In-memory event bus for local development
@@ -28,7 +30,7 @@ export class EventBus {
    */
   subscribe<T extends BaseEvent>(
     eventType: string,
-    handler: EventHandler<T>
+    handler: EventHandler<T>,
   ): () => void {
     if (!this.handlers.has(eventType)) {
       this.handlers.set(eventType, new Set());
@@ -49,10 +51,10 @@ export class EventBus {
   async publish(event: BaseEvent): Promise<void> {
     // Validate event
     const validated = BaseEventSchema.parse(event);
-    
+
     // Log event
     this.eventLog.push(validated);
-    
+
     // Notify handlers
     const handlers = this.handlers.get(event.type) || new Set();
     const wildcardHandlers = this.handlers.get("*") || new Set();
@@ -66,7 +68,7 @@ export class EventBus {
         } catch (error) {
           console.error(`Event handler error for ${event.type}:`, error);
         }
-      })
+      }),
     );
   }
 
@@ -80,7 +82,7 @@ export class EventBus {
       source?: string;
       tenantId?: string;
       correlationId?: string;
-    }
+    },
   ): BaseEvent {
     return {
       id: crypto.randomUUID(),

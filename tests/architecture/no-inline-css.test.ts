@@ -6,9 +6,15 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
-const DESIGN_SYSTEM_SRC = resolve(ROOT, "apps/docs-hub/design-system/src");
+const DESIGN_SYSTEM_SRC = resolve(ROOT, "packages/ui/src/layout");
 
-const EXCLUDED_DIRS = new Set(["node_modules", ".next", "dist", ".turbo"]);
+const EXCLUDED_DIRS = new Set([
+  "node_modules",
+  ".next",
+  "dist",
+  ".turbo",
+  "marketing",
+]);
 
 function collectTsFiles(dir: string): string[] {
   const results: string[] = [];

@@ -27,8 +27,8 @@
  */
 
 // Theme — Lobe UI integration
-export { NebutraThemeProvider } from "./theme/index.js";
-export type { NebutraThemeProviderProps, ThemeMode } from "./theme/index.js";
+export { NebutraThemeProvider } from "./theme";
+export type { NebutraThemeProviderProps, ThemeMode } from "./theme";
 
 /**
  * @deprecated — Use CSS variables from `@nebutra/tokens/styles.css` instead.
@@ -41,17 +41,17 @@ export {
   borderRadius,
   shadows,
   typography,
-} from "./theme/index.js";
-export type { NebutraTokens } from "./theme/index.js";
+} from "./theme";
+export type { NebutraTokens } from "./theme";
 
 // Re-export everything from subpaths for convenience
 // (Users can also import directly from subpaths for smaller bundles)
 
 // Components
-export * from "./components/index.js";
+export * from "./components";
 
 // Layout (migrated from @nebutra/design-system)
-export * from "./layout/index.js";
+export * from "./layout";
 
 // Icons (selective re-export to avoid bundle bloat)
 export {
@@ -73,4 +73,4 @@ export {
   Moon,
   Bot,
   Sparkles,
-} from "./icons/index.js";
+} from "./icons";

@@ -61,7 +61,7 @@ Use this pattern for:
 `Container` constrains maximum width and applies responsive horizontal padding (`px-4 sm:px-6 lg:px-8`). Use it as the outermost wrapper inside `<main>`.
 
 ```tsx
-import { Container } from "@nebutra/design-system";
+import { Container } from "@nebutra/ui";
 
 // xl = max-w-7xl (1280px) — standard dashboard width
 <Container size="xl">…</Container>
@@ -88,8 +88,8 @@ Size reference:
 Place `PageHeader` immediately inside `Container`, before the first `Section`. It owns the page-level title, description, breadcrumb trail, and primary page actions.
 
 ```tsx
-import { PageHeader } from "@nebutra/design-system";
-import { Button } from "@nebutra/design-system";
+import { PageHeader } from "@nebutra/ui";
+import { Button } from "@nebutra/ui";
 
 <PageHeader
   title="API Keys"
@@ -111,7 +111,7 @@ import { Button } from "@nebutra/design-system";
 `Section` groups related content under an `h2` heading. It adds `mb-6` spacing below itself and a flex row for the heading and optional actions.
 
 ```tsx
-import { Section } from "@nebutra/design-system";
+import { Section } from "@nebutra/ui";
 
 <Section title="Usage this month" description="Resets on the 1st.">
   {/* charts, cards, table */}

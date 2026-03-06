@@ -8,7 +8,7 @@
 
 ## Goal
 
-Replace Clerk's default sign-in/sign-up components with a fully branded, Neon-style split-layout auth experience, plus a 2-step post-signup onboarding wizard. All UI uses the `@nebutra/design-system` component library and Nebutra brand tokens.
+Replace Clerk's default sign-in/sign-up components with a fully branded, Neon-style split-layout auth experience, plus a 2-step post-signup onboarding wizard. All UI uses the `@nebutra/ui` component library and Nebutra brand tokens.
 
 ---
 
@@ -134,7 +134,7 @@ Password       [______________] [👁 toggle]
 New to Nebutra? Sign up →      ← Link to /sign-up
 ```
 
-All `Input`, `Button`, `Label`, `Separator` from `@nebutra/design-system`.
+All `Input`, `Button`, `Label`, `Separator` from `@nebutra/ui`.
 Error messages: inline below field using `FormMessage` (red, `text-sm`).
 
 ### `sign-up-form.tsx`

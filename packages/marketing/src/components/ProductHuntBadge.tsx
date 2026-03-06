@@ -122,7 +122,7 @@ export function ProductHuntEmbedBadge({
  */
 export function ProductHuntBadge({
   postSlug,
-  theme = "light",
+  theme: _theme = "light",
   size = "medium",
   altText,
   className,
@@ -176,7 +176,7 @@ export function ProductHuntBadge({
  */
 export function ProductHuntUpvoteBadge({
   postSlug,
-  theme = "light",
+  theme: _theme = "light",
   size = "medium",
   className,
   openInNewTab = true,
@@ -237,7 +237,7 @@ export function ProductHuntUpvoteBadge({
  */
 export function ProductHuntTextBadge({
   postSlug,
-  theme = "light",
+  theme: _theme = "light",
   className,
   openInNewTab = true,
 }: ProductHuntBadgeProps) {

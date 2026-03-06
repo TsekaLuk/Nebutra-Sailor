@@ -280,7 +280,7 @@ See [Typography Documentation](docs/TYPOGRAPHY.md) for full details.
 
 ## Design System Customization
 
-The design system (`@nebutra/design-system`) is the single source of truth for all UI styling.
+The design system (`@nebutra/ui`) is the single source of truth for all UI styling.
 
 ### Architecture
 

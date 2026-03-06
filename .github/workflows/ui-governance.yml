@@ -22,17 +22,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Validate UI Governance Policy Schema
-        run: tsx scripts/validate-ui-governance-policy.ts
+        run: pnpm exec tsx scripts/validate-ui-governance-policy.ts
 
       - name: Verify Brand Token Sync
-        run: tsx scripts/verify-brand-token-sync.ts
+        run: pnpm exec tsx scripts/verify-brand-token-sync.ts
 
       - name: Verify UI Governance Rules
-        run: tsx scripts/verify-ui-governance.ts
+        run: pnpm exec tsx scripts/verify-ui-governance.ts

@@ -14,7 +14,7 @@ export const ToolParameterSchema = z.object({
 export const ToolDefinitionSchema = z.object({
   name: z.string(),
   description: z.string(),
-  parameters: z.record(ToolParameterSchema).optional(),
+  parameters: z.record(z.string(), ToolParameterSchema).optional(),
   returns: z.string().optional(),
 });
 

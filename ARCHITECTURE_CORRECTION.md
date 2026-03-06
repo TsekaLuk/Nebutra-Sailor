@@ -10,7 +10,7 @@
 
 | Question | Decision |
 |----------|----------|
-| `@nebutra/ui` vs `@nebutra/design-system` | **Merge into one package** |
+| `@nebutra/ui` vs `@nebutra/ui` | **Merge into one package** |
 | `@nebutra/custom-ui` in CLAUDE.md | **Old name for `@nebutra/ui`** — update all references |
 | Multi-theme capability | **Keep** — 6 themes are product capability |
 | 8 unused backend packages | **Keep but mark WIP** |
@@ -71,7 +71,7 @@
 
 ### 2.1 Target State
 
-Merge `@nebutra/design-system` INTO `@nebutra/ui`. After merge:
+Merge `@nebutra/ui` INTO `@nebutra/ui`. After merge:
 
 ```
 packages/ui/
@@ -130,8 +130,8 @@ After merge, `@nebutra/ui` exports:
 3. Copy `design-system/src/typography/` → `ui/src/typography/`
 4. Copy `design-system/src/utils/` → `ui/src/utils/`
 5. Merge dependencies: Move `@primer/octicons-react` and `@primer/primitives` to `ui` deps (if still needed for icons)
-6. Update all app imports: `@nebutra/design-system/components` → `@nebutra/ui/layout`
-7. Update all app imports: `@nebutra/design-system/typography` → `@nebutra/ui/typography`
+6. Update all app imports: `@nebutra/ui/layout` → `@nebutra/ui/layout`
+7. Update all app imports: `@nebutra/ui/typography` → `@nebutra/ui/typography`
 8. Move `design-system/src/tokens/` ingestion system → `_archive/token-ingestion/` (no active consumers)
 9. Move `design-system/src/governance/` → `_archive/governance/` (premature)
 10. Delete `packages/design-system/` after all imports updated
@@ -159,7 +159,7 @@ Three independent token systems exist with incompatible color spaces:
 |--------|------------|-----------|
 | `@nebutra/theme/themes.css` | oklch() | Apps (via Tailwind v4 @theme) |
 | `@nebutra/ui/src/theme/tokens.ts` | hex | `@nebutra/ui` internal |
-| `@nebutra/design-system/src/theme/` | Primer scales | `@nebutra/design-system` |
+| `@nebutra/ui/src/theme/` | Primer scales | `@nebutra/ui` |
 
 ### 3.2 Target Architecture
 
@@ -191,7 +191,7 @@ Three independent token systems exist with incompatible color spaces:
 
 1. **Delete `packages/ui/src/theme/tokens.ts`** — Replace all internal hex references with CSS variable references (`var(--color-primary)`, etc.)
 2. **Simplify `packages/ui/src/theme/provider.tsx`** — Should delegate to `@nebutra/theme`'s ThemeProvider, not define its own token system
-3. **Delete `@nebutra/design-system/src/theme/`** entirely — After merge, theme comes from `@nebutra/theme`
+3. **Delete `@nebutra/ui/src/theme/`** entirely — After merge, theme comes from `@nebutra/theme`
 4. **Add `--brand-gradient` to `themes.css`** — Currently defined in CLAUDE.md but not in the actual theme CSS. Each theme variant should define its own gradient.
 5. **Add semantic aliases** to `themes.css` to support CLAUDE.md's `--neutral-1` through `--neutral-12` scale:
 
@@ -316,13 +316,13 @@ After merging design-system into ui, check if `@primer/octicons-react` and `@pri
 ### Changes Required
 
 1. **Replace all `@nebutra/custom-ui` → `@nebutra/ui`**
-2. **Remove `@nebutra/design-system` references** — all layout components now live in `@nebutra/ui/layout`
+2. **Remove `@nebutra/ui` references** — all layout components now live in `@nebutra/ui/layout`
 3. **Update import examples:**
 
 ```tsx
 // BEFORE (CLAUDE.md current)
 import { Button, Input, Card } from "@nebutra/custom-ui/primitives";
-import { PageHeader, EmptyState } from "@nebutra/design-system/components";
+import { PageHeader, EmptyState } from "@nebutra/ui/layout";
 
 // AFTER
 import { Button, Input, Card } from "@nebutra/ui/components";
@@ -371,7 +371,7 @@ Each phase is independently deployable. No phase depends on a later phase.
 - [ ] `pnpm typecheck` passes across all apps
 - [ ] Zero phantom exports in any `package.json`
 - [ ] Single import path for all UI components: `@nebutra/ui/*`
-- [ ] `@nebutra/design-system` no longer exists as a package
+- [ ] `@nebutra/ui` no longer exists as a package
 - [ ] All tokens flow from `@nebutra/theme/themes.css` — no competing definitions
 - [ ] CLAUDE.md accurately reflects the actual codebase structure
 - [ ] 8 WIP packages clearly documented with status and milestone

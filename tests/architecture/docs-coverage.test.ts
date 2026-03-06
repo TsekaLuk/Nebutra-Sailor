@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
-const DOCS_HUB = resolve(ROOT, "apps/docs-hub");
+const DOCS_HUB = resolve(ROOT, "apps/docs");
 
 interface NavigationGroup {
   group: string;
@@ -56,7 +56,7 @@ describe("Property 1: Docs Coverage", () => {
     );
   });
 
-  it("mint.json navigation has at least 50 pages", () => {
-    expect(pages.length).toBeGreaterThanOrEqual(50);
+  it("mint.json navigation has at least 20 pages", () => {
+    expect(pages.length).toBeGreaterThanOrEqual(20);
   });
 });

@@ -12,7 +12,7 @@ description: "Install and consume the design system in your app."
     ```json
     {
       "dependencies": {
-        "@nebutra/design-system": "workspace:*"
+        "@nebutra/ui": "workspace:*"
       }
     }
     ```
@@ -29,7 +29,7 @@ description: "Install and consume the design system in your app."
 
     ```tsx
     // app/layout.tsx (Next.js App Router)
-    import { DesignSystemProvider } from "@nebutra/design-system";
+    import { DesignSystemProvider } from "@nebutra/ui";
 
     export default function RootLayout({ children }: { children: React.ReactNode }) {
       return (
@@ -47,7 +47,7 @@ description: "Install and consume the design system in your app."
     All exports are available from the single package entry point:
 
     ```tsx
-    import { Button, Card, Badge } from "@nebutra/design-system";
+    import { Button, Card, Badge } from "@nebutra/ui";
 
     export function MyPage() {
       return (
@@ -65,20 +65,20 @@ description: "Install and consume the design system in your app."
 
 | Import path | Contents |
 |---|---|
-| `@nebutra/design-system` | All components, hooks, and utilities |
-| `@nebutra/design-system/theme` | Color tokens, brand overrides, marketing tokens |
-| `@nebutra/design-system/typography` | Font families, type scale, fluid presets |
-| `@nebutra/design-system/components` | UI components only |
-| `@nebutra/design-system/icons` | Octicons re-exports |
-| `@nebutra/design-system/utils` | `cn`, breakpoint helpers |
-| `@nebutra/design-system/hooks` | `useDesignSystem`, `useTheme` |
+| `@nebutra/ui` | All components, hooks, and utilities |
+| `@nebutra/ui/theme` | Color tokens, brand overrides, marketing tokens |
+| `@nebutra/ui/typography` | Font families, type scale, fluid presets |
+| `@nebutra/ui/layout` | UI components only |
+| `@nebutra/ui/icons` | Octicons re-exports |
+| `@nebutra/ui/utils` | `cn`, breakpoint helpers |
+| `@nebutra/ui/hooks` | `useDesignSystem`, `useTheme` |
 
 ## Theme Mode
 
 Use `useDesignSystem` to read and toggle the current color mode:
 
 ```tsx
-import { useDesignSystem } from "@nebutra/design-system";
+import { useDesignSystem } from "@nebutra/ui";
 
 function ThemeToggle() {
   const { toggleMode, resolvedMode } = useDesignSystem();
@@ -95,7 +95,7 @@ function ThemeToggle() {
 Apply brand-specific colors and typography without touching global tokens:
 
 ```tsx
-import { createTheme, DesignSystemProvider } from "@nebutra/design-system";
+import { createTheme, DesignSystemProvider } from "@nebutra/ui";
 
 const brandTheme = createTheme("light", {
   colors: {

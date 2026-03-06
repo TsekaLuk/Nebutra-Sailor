@@ -1,7 +1,7 @@
 /**
  * Typography Primitives (Legacy)
  *
- * @deprecated Use `@nebutra/design-system/typography` instead.
+ * @deprecated Use `@nebutra/ui/typography` instead.
  * This module is kept for Primer compatibility and will be removed in v2.
  *
  * Migration:

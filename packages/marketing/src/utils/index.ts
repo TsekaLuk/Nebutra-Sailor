@@ -336,7 +336,7 @@ export function trackMarketingEvent(event: MarketingEvent): void {
 
   // Log event for debugging (can be replaced with actual analytics)
   if (process.env.NODE_ENV === "development") {
-    console.log("[Marketing Event]", eventWithAttribution);
+    console.warn("[Marketing Event]", eventWithAttribution);
   }
 }
 

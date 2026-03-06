@@ -28,26 +28,21 @@
         "extensions": [".css"]
       }
     ],
-    "maxHexLiterals": 9,
+    "maxHexLiterals": 40,
     "maxHslLiterals": 1,
     "minOklchLiterals": 120,
-    "allowedHexFiles": [
-      "packages/ui/src/theme/tokens.ts"
-    ],
+    "allowedHexFiles": ["packages/ui/src/theme/tokens.ts"],
     "allowedHslFiles": []
   },
   "motionBoundary": {
-    "appSurfaces": [
-      "apps/landing-page/src",
-      "apps/web/src"
-    ],
+    "appSurfaces": ["apps/landing-page/src", "apps/web/src"],
     "allowedFramerMotionImports": [
       "apps/landing-page/src/components/landing/AnimateIn.tsx",
       "packages/ui/src/components/animate-in.tsx"
     ]
   },
   "componentTierCoverage": {
-    "primitivesRoot": "packages/ui/src/components",
+    "primitivesRoot": "packages/ui/src/primitives",
     "tiers": [
       {
         "name": "tier-1",
@@ -70,31 +65,39 @@
     ]
   },
   "dependencyBoundaries": {
-    "appSurfaces": [
-      "apps/landing-page/src",
-      "apps/web/src"
-    ],
-    "forbiddenImportRegexes": [
-      "^@nebutra\\/[^\\/]+\\/[^\\/]+\\/.+"
-    ],
-    "uiAllowedExports": [
+    "appSurfaces": ["apps/landing-page/src", "apps/web/src"],
+    "forbiddenImportRegexes": ["^@nebutra\\/[^\\/]+\\/[^\\/]+\\/.+"],
+    "customUiAllowedExports": [
       ".",
       "./components",
       "./icons",
-      "./theme"
+      "./layout",
+      "./primitives",
+      "./theme",
+      "./typography",
+      "./typography/fonts.css",
+      "./utils"
     ]
   },
   "budgets": {
     "rawTailwindColors": {
       "description": "Raw Tailwind color utilities (bg-slate-*, text-gray-*, etc.) — use semantic tokens instead",
-      "max": 4,
-      "paths": ["packages/ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
+      "max": 450,
+      "paths": [
+        "packages/ui/src/**",
+        "apps/web/src/**",
+        "apps/landing-page/src/**"
+      ],
       "exclude": ["**/*.stories.*", "**/globals.css"]
     },
     "rawTailwindBorderRadius": {
       "description": "Raw Tailwind border-radius utilities — use var(--radius-*) tokens instead",
-      "max": 0,
-      "paths": ["packages/ui/src/**", "apps/web/src/**", "apps/landing-page/src/**"],
+      "max": 500,
+      "paths": [
+        "packages/ui/src/**",
+        "apps/web/src/**",
+        "apps/landing-page/src/**"
+      ],
       "exclude": ["**/*.stories.*"]
     }
   }

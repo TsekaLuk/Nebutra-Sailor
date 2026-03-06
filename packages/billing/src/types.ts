@@ -17,7 +17,12 @@ export type SubscriptionStatus =
 
 export type BillingInterval = "MONTHLY" | "YEARLY" | "WEEKLY" | "ONE_TIME";
 
-export type InvoiceStatus = "DRAFT" | "OPEN" | "PAID" | "VOID" | "UNCOLLECTIBLE";
+export type InvoiceStatus =
+  | "DRAFT"
+  | "OPEN"
+  | "PAID"
+  | "VOID"
+  | "UNCOLLECTIBLE";
 
 export type PaymentMethodType =
   | "CARD"
@@ -256,10 +261,17 @@ export const UpdateSubscriptionSchema = z.object({
 export const RecordUsageSchema = z.object({
   organizationId: z.string(),
   userId: z.string().optional(),
-  type: z.enum(["API_CALL", "AI_TOKEN", "STORAGE", "COMPUTE", "BANDWIDTH", "CUSTOM"]),
+  type: z.enum([
+    "API_CALL",
+    "AI_TOKEN",
+    "STORAGE",
+    "COMPUTE",
+    "BANDWIDTH",
+    "CUSTOM",
+  ]),
   quantity: z.number().int().positive(),
   resource: z.string().optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const PurchaseCreditsSchema = z.object({
@@ -290,7 +302,7 @@ export class BillingError extends Error {
     message: string,
     public readonly code: string,
     public readonly statusCode: number = 400,
-    public readonly cause?: unknown
+    public readonly cause?: unknown,
   ) {
     super(message);
     this.name = "BillingError";

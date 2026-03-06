@@ -41,7 +41,7 @@ Section (title + description + table-level actions)
 `DataTable` from `@primer/react/experimental` is the primary table component. It handles column definition, sorting, and accessibility out of the box.
 
 ```tsx
-import { DataTable, Table } from "@nebutra/design-system";
+import { DataTable, Table } from "@nebutra/ui";
 
 const columns = [
   {
@@ -120,7 +120,7 @@ function RowActionMenu({ row }: { row: ApiKey }) {
 Place a `FilterBar` fragment above the table when users need to filter or search the data set. The filter bar connects to table data via shared state.
 
 ```tsx
-import { FilterBar } from "@nebutra/design-system";
+import { FilterBar } from "@nebutra/ui";
 
 const [search, setSearch] = useState("");
 const [statusFilter, setStatusFilter] = useState<string[]>([]);

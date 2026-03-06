@@ -9,7 +9,7 @@ import {
   Coins,
   Database,
 } from "lucide-react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/primitives";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 import {
   Card,
   EmptyState,

@@ -6,7 +6,6 @@ const withMDX = createMDX();
 const nextConfig: NextConfig = {
   transpilePackages: [
     "@nebutra/ui",
-    "@nebutra/design-system",
     "@nebutra/tokens",
   ],
   reactStrictMode: true,

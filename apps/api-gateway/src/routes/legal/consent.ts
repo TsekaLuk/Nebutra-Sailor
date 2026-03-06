@@ -53,7 +53,7 @@ const recordConsentSchema = z.object({
     .default("EXPLICIT"),
   context: z.string().optional(),
   visitorId: z.string().min(1),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 const cookieConsentSchema = z.object({
@@ -90,7 +90,7 @@ const apiErrorSchema = z.object({
   error: z.object({
     code: z.string(),
     message: z.string(),
-    details: z.record(z.unknown()).optional(),
+    details: z.record(z.string(), z.unknown()).optional(),
   }),
   requestId: z.string().optional(),
 });
@@ -160,21 +160,24 @@ consentRoutes.openapi(recordConsentRoute, async (c) => {
 
     if (!document) {
       const notFound = new NotFoundError("LegalDocument", data.documentSlug);
-      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
+      return jsonError(
+        c,
+        notFound,
+        notFound.statusCode as ContentfulStatusCode,
+      );
     }
 
-    const consentData: Parameters<
-      typeof prisma.userConsent.create
-    >[0]["data"] = {
-      visitorId: data.visitorId,
-      documentId: document.id,
-      documentSlug: document.slug,
-      documentVersion: document.version,
-      consentType: data.consentType,
-      consentGiven: true,
-      consentContext: data.context ?? null,
-      metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
-    };
+    const consentData: Parameters<typeof prisma.userConsent.create>[0]["data"] =
+      {
+        visitorId: data.visitorId,
+        documentId: document.id,
+        documentSlug: document.slug,
+        documentVersion: document.version,
+        consentType: data.consentType,
+        consentGiven: true,
+        consentContext: data.context ?? null,
+        metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
+      };
 
     if (userId) consentData.userId = userId;
     if (organizationId) consentData.organizationId = organizationId;
@@ -264,7 +267,11 @@ consentRoutes.openapi(consentStatusRoute, async (c) => {
 
     if (!currentDocument) {
       const notFound = new NotFoundError("LegalDocument", documentSlug);
-      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
+      return jsonError(
+        c,
+        notFound,
+        notFound.statusCode as ContentfulStatusCode,
+      );
     }
 
     const consent = await prisma.userConsent.findFirst({
@@ -672,7 +679,10 @@ const listDocumentsRoute = createRoute({
 });
 
 consentRoutes.openapi(listDocumentsRoute, async (c) => {
-  c.header("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+  c.header(
+    "Cache-Control",
+    "public, max-age=3600, stale-while-revalidate=86400",
+  );
 
   const { locale: rawLocale, type } = c.req.valid("query");
   const locale = rawLocale || "en";
@@ -762,7 +772,10 @@ const getDocumentRoute = createRoute({
 });
 
 consentRoutes.openapi(getDocumentRoute, async (c) => {
-  c.header("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+  c.header(
+    "Cache-Control",
+    "public, max-age=3600, stale-while-revalidate=86400",
+  );
 
   const { slug } = c.req.valid("param");
   const { locale: rawLocale, version } = c.req.valid("query");
@@ -781,7 +794,11 @@ consentRoutes.openapi(getDocumentRoute, async (c) => {
 
     if (!document) {
       const notFound = new NotFoundError("LegalDocument", slug);
-      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
+      return jsonError(
+        c,
+        notFound,
+        notFound.statusCode as ContentfulStatusCode,
+      );
     }
 
     return c.json({ document }, 200);
@@ -851,9 +868,7 @@ consentRoutes.openapi(contactFormRoute, async (c) => {
         category: data.category,
         status: "new",
         ipAddress:
-          c.req.header("x-forwarded-for") ??
-          c.req.header("x-real-ip") ??
-          null,
+          c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? null,
         userAgent: c.req.header("user-agent") ?? null,
       },
     });
