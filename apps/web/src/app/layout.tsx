@@ -36,8 +36,6 @@ export const metadata: Metadata = {
   },
 };
 
-const hasClerkKey = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
 export default async function RootLayout({
   children,
 }: {
@@ -45,34 +43,30 @@ export default async function RootLayout({
 }) {
   const nonce = await getNonce();
 
-  const content = (
-    <html
-      lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="antialiased">
-        <a
-          href="#main-content"
-          className="sr-only fixed left-3 top-3 z-100 rounded-md bg-blue-9 px-3 py-2 text-sm font-medium text-white focus:not-sr-only"
-        >
-          Skip to content
-        </a>
+  return (
+    <ClerkProvider nonce={nonce}>
+      <html
+        lang="en"
+        className={`${inter.variable} ${jetbrainsMono.variable}`}
+        suppressHydrationWarning
+      >
+        <body className="antialiased">
+          <a
+            href="#main-content"
+            className="sr-only fixed left-3 top-3 z-100 rounded-md bg-blue-9 px-3 py-2 text-sm font-medium text-white focus:not-sr-only"
+          >
+            Skip to content
+          </a>
 
-        <ThemeShell nonce={nonce}>
-          <DesignSystemProvider>
-            <QueryProvider>
-              <ErrorBoundary>{children}</ErrorBoundary>
-            </QueryProvider>
-          </DesignSystemProvider>
-        </ThemeShell>
-      </body>
-    </html>
+          <ThemeShell nonce={nonce}>
+            <DesignSystemProvider>
+              <QueryProvider>
+                <ErrorBoundary>{children}</ErrorBoundary>
+              </QueryProvider>
+            </DesignSystemProvider>
+          </ThemeShell>
+        </body>
+      </html>
+    </ClerkProvider>
   );
-
-  if (!hasClerkKey) {
-    return content;
-  }
-
-  return <ClerkProvider nonce={nonce}>{content}</ClerkProvider>;
 }
