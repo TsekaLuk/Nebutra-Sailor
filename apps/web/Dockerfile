@@ -1,7 +1,7 @@
 # ── Stage 1: Install dependencies ────────────────────────────────────────────
 # Only package manifests are copied here so Docker can cache the layer
 # and skip re-installing when only source code changes.
-FROM node:20-alpine AS deps
+FROM node:22-alpine AS deps
 WORKDIR /app
 
 RUN corepack enable pnpm
@@ -23,7 +23,7 @@ COPY packages/db/package.json          ./packages/db/
 RUN pnpm install --frozen-lockfile --filter @nebutra/web...
 
 # ── Stage 2: Build ────────────────────────────────────────────────────────────
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 
 RUN corepack enable pnpm
@@ -32,6 +32,7 @@ RUN corepack enable pnpm
 # Note: @prisma packages are hoisted to root node_modules via .npmrc
 COPY --from=deps /app/node_modules            ./node_modules
 COPY --from=deps /app/apps/web/node_modules   ./apps/web/node_modules
+COPY --from=deps /app/packages/db/node_modules ./packages/db/node_modules
 
 # Copy full source tree (respects .dockerignore at the repo root)
 COPY . .
@@ -43,7 +44,7 @@ RUN pnpm --filter @nebutra/db db:generate
 RUN pnpm --filter @nebutra/web build
 
 # ── Stage 3: Runtime ──────────────────────────────────────────────────────────
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production

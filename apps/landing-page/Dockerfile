@@ -1,7 +1,7 @@
 # ── Stage 1: Install dependencies ────────────────────────────────────────────
 # Only package manifests are copied here so Docker can cache the layer
 # and skip re-installing when only source code changes.
-FROM node:20-alpine AS deps
+FROM node:22-alpine AS deps
 WORKDIR /app
 
 RUN corepack enable pnpm
@@ -25,7 +25,7 @@ COPY packages/theme/package.json      ./packages/theme/
 RUN pnpm install --frozen-lockfile --filter @nebutra/landing-page...
 
 # ── Stage 2: Build ────────────────────────────────────────────────────────────
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 
 RUN corepack enable pnpm
@@ -45,7 +45,7 @@ COPY . .
 RUN pnpm --filter @nebutra/landing-page build
 
 # ── Stage 3: Runtime ──────────────────────────────────────────────────────────
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production

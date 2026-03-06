@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
 
   // Keep Prisma and bcryptjs out of the client bundle — they are Node-only.
-  serverExternalPackages: ["@prisma/client", "bcryptjs"],
+  serverExternalPackages: ["@prisma/client", "bcryptjs", "@clerk/nextjs"],
 
   // Enable Partial Prerendering — Next.js 16 merged experimental.ppr into cacheComponents.
   cacheComponents: true,
