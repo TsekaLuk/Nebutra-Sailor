@@ -245,3 +245,206 @@ describe("trackError", () => {
     expect(ch.send).toHaveBeenCalledTimes(2);
   });
 });
+
+// ─── Convenience Functions ───────────────────────────────────────────────────
+
+describe("Convenience Functions", () => {
+  beforeEach(() => clearChannels());
+
+  it("alertInfo sends info severity", async () => {
+    const ch = makeMockChannel("slack");
+    registerChannel(ch);
+    await import("../index.js").then((m) =>
+      m.alertInfo("Info", "msg", "svc-info"),
+    );
+    expect(ch.calls[0].severity).toBe("info");
+    expect(ch.calls[0].service).toBe("svc-info");
+  });
+
+  it("alertWarning sends warning severity", async () => {
+    const ch = makeMockChannel("slack");
+    registerChannel(ch);
+    await import("../index.js").then((m) =>
+      m.alertWarning("Warn", "msg", "svc-warn"),
+    );
+    expect(ch.calls[0].severity).toBe("warning");
+  });
+
+  it("alertError sends error severity", async () => {
+    const ch = makeMockChannel("slack");
+    registerChannel(ch);
+    await import("../index.js").then((m) =>
+      m.alertError("Err", "msg", "svc-err"),
+    );
+    expect(ch.calls[0].severity).toBe("error");
+  });
+
+  it("alertCritical sends critical severity", async () => {
+    const ch = makeMockChannel("slack");
+    registerChannel(ch);
+    await import("../index.js").then((m) =>
+      m.alertCritical("Crit", "msg", "svc-crit"),
+    );
+    expect(ch.calls[0].severity).toBe("critical");
+  });
+});
+
+// ─── Channels & Utilities ────────────────────────────────────────────────────
+
+describe("Channels and Utilities", () => {
+  beforeEach(() => {
+    clearChannels();
+    global.fetch = vi.fn();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("createSlackChannel logic and utility mapping", async () => {
+    const fetchMock = vi.mocked(global.fetch).mockResolvedValue({
+      ok: true,
+    } as Response);
+
+    // Use dynamic import to get unexported coverage logic via channel
+    const slack = await import("../index.js").then((m) =>
+      m.createSlackChannel("http://slack.test"),
+    );
+
+    // Testing specific severities to hit getSeverityColor and getSeverityEmoji branches
+    await slack.send({ ...basePayload, severity: "info" });
+    await slack.send({ ...basePayload, severity: "warning" });
+    await slack.send({ ...basePayload, severity: "error" });
+    await slack.send({ ...basePayload, severity: "critical" });
+    await slack.send({ ...basePayload, severity: "unknown" as any }); // branch default
+
+    expect(fetchMock).toHaveBeenCalledTimes(5);
+  });
+
+  it("createSlackChannel handles fetch error", async () => {
+    vi.mocked(global.fetch).mockRejectedValue(new Error("Net Err"));
+    const slack = await import("../index.js").then((m) =>
+      m.createSlackChannel("http://slack.test"),
+    );
+    const res = await slack.send(basePayload);
+    expect(res).toBe(false);
+  });
+
+  it("createDiscordChannel logic and utility mapping", async () => {
+    const fetchMock = vi.mocked(global.fetch).mockResolvedValue({
+      ok: true,
+    } as Response);
+
+    const discord = await import("../index.js").then((m) =>
+      m.createDiscordChannel("http://discord.test"),
+    );
+
+    await discord.send({ ...basePayload, severity: "info" });
+    await discord.send({ ...basePayload, severity: "warning" });
+    await discord.send({ ...basePayload, severity: "error" });
+    await discord.send({ ...basePayload, severity: "critical" });
+    await discord.send({ ...basePayload, severity: "unknown" as any });
+
+    expect(fetchMock).toHaveBeenCalledTimes(5);
+  });
+
+  it("createDiscordChannel handles fetch error", async () => {
+    vi.mocked(global.fetch).mockRejectedValue(new Error("Net Err"));
+    const discord = await import("../index.js").then((m) =>
+      m.createDiscordChannel("http://discord.test"),
+    );
+    const res = await discord.send(basePayload);
+    expect(res).toBe(false);
+  });
+
+  it("createWebhookChannel logic", async () => {
+    const fetchMock = vi.mocked(global.fetch).mockResolvedValue({
+      ok: true,
+    } as Response);
+
+    const webhook = await import("../index.js").then((m) =>
+      m.createWebhookChannel("hook", "http://hook.test", {
+        headers: { "X-Test": "1" },
+        transformPayload: (p) => ({ custom: p.title }),
+      }),
+    );
+
+    await webhook.send(basePayload);
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://hook.test",
+      expect.objectContaining({
+        headers: expect.objectContaining({ "X-Test": "1" }),
+        body: JSON.stringify({ custom: "Test Alert" }),
+      }),
+    );
+  });
+
+  it("createWebhookChannel no transform logic", async () => {
+    const fetchMock = vi.mocked(global.fetch).mockResolvedValue({
+      ok: true,
+    } as Response);
+
+    const webhook = await import("../index.js").then((m) =>
+      m.createWebhookChannel("hook", "http://hook.test"),
+    );
+    await webhook.send(basePayload);
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://hook.test",
+      expect.objectContaining({
+        body: JSON.stringify(basePayload),
+      }),
+    );
+  });
+
+  it("createWebhookChannel handles fetch error", async () => {
+    vi.mocked(global.fetch).mockRejectedValue(new Error("Net Err"));
+    const webhook = await import("../index.js").then((m) =>
+      m.createWebhookChannel("hook", "http://hook.test"),
+    );
+    const res = await webhook.send(basePayload);
+    expect(res).toBe(false);
+  });
+});
+
+// ─── initializeFromEnv ───────────────────────────────────────────────────────
+
+describe("initializeFromEnv", () => {
+  const originalEnv = process.env;
+
+  beforeEach(() => {
+    vi.resetModules();
+    process.env = { ...originalEnv };
+    clearChannels();
+  });
+
+  afterEach(() => {
+    process.env = originalEnv;
+  });
+
+  it("registers channels when env vars are present", async () => {
+    process.env.SLACK_WEBHOOK_URL = "http://slack";
+    process.env.DISCORD_WEBHOOK_URL = "http://discord";
+
+    const { initializeFromEnv, getRegisteredChannelNames } =
+      await import("../index.js");
+    const registered = initializeFromEnv();
+
+    expect(registered).toContain("slack");
+    expect(registered).toContain("discord");
+    expect(getRegisteredChannelNames()).toEqual(["slack", "discord"]);
+  });
+
+  it("does nothing when env vars are missing", async () => {
+    delete process.env.SLACK_WEBHOOK_URL;
+    delete process.env.DISCORD_WEBHOOK_URL;
+
+    const { initializeFromEnv, getRegisteredChannelNames } =
+      await import("../index.js");
+    const registered = initializeFromEnv();
+
+    expect(registered).toHaveLength(0);
+    expect(getRegisteredChannelNames()).toHaveLength(0);
+  });
+});
