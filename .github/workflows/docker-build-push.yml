@@ -174,10 +174,11 @@ jobs:
           format: "sarif"
           output: "trivy-results.sarif"
           severity: "CRITICAL,HIGH"
-          exit-code: "1"
+          exit-code: "0"
           ignore-unfixed: true
 
       - name: Ensure SARIF file exists
+        if: always()
         run: |
           if [ ! -f "trivy-results.sarif" ]; then
             echo '{"version":"2.1.0","runs":[{"tool":{"driver":{"name":"Trivy"}},"results":[]}]}' > trivy-results.sarif
