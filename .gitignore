@@ -57,3 +57,4 @@ brand.config/
 
 # Misc
 *.tsbuildinfo
+artifacts/

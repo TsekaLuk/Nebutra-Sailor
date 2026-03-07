@@ -316,7 +316,8 @@ describe("Channels and Utilities", () => {
     await slack.send({ ...basePayload, severity: "warning" });
     await slack.send({ ...basePayload, severity: "error" });
     await slack.send({ ...basePayload, severity: "critical" });
-    await slack.send({ ...basePayload, severity: "unknown" as any }); // branch default
+    // @ts-expect-error - Testing fallback for unknown severity
+    await slack.send({ ...basePayload, severity: "unknown" }); // branch default
 
     expect(fetchMock).toHaveBeenCalledTimes(5);
   });
@@ -343,7 +344,8 @@ describe("Channels and Utilities", () => {
     await discord.send({ ...basePayload, severity: "warning" });
     await discord.send({ ...basePayload, severity: "error" });
     await discord.send({ ...basePayload, severity: "critical" });
-    await discord.send({ ...basePayload, severity: "unknown" as any });
+    // @ts-expect-error - Testing fallback for unknown severity
+    await discord.send({ ...basePayload, severity: "unknown" });
 
     expect(fetchMock).toHaveBeenCalledTimes(5);
   });
