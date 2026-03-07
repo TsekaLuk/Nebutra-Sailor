@@ -5,6 +5,13 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.6](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.5.5...v1.5.6) (2026-03-07)
+
+### 🐛 Bug Fixes
+
+- resolve exact optional property types errors ([eabcda1](https://github.com/Nebutra/Nebutra-Sailor/commit/eabcda1502c213087f51c2a3d4cab1c7ac6ccebe))
+- resolve framer-motion variants type error in onboarding-checklist ([5cdf1e2](https://github.com/Nebutra/Nebutra-Sailor/commit/5cdf1e21748d4b26258bb543281bfc280c420d40))
+
 ## [1.5.5](https://github.com/TsekaLuk/Nebutra-Sailor/compare/v1.5.4...v1.5.5) (2026-03-06)
 
 ### 🐛 Bug Fixes
