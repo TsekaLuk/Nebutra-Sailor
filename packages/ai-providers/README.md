@@ -9,7 +9,7 @@
 This package provides a unified interface for multiple AI providers:
 
 - **SiliconFlow** - DeepSeek, Qwen, BGE embeddings, reranking, image generation
-- **OpenAI** - GPT-4, embeddings, DALL-E, Whisper
+- **OpenAI** - GPT-5, embeddings, DALL-E, Whisper
 - **OpenRouter** - Unified API for 400+ models (GPT, Claude, Gemini, Llama, etc.) with automatic fallbacks
 
 ## Installation

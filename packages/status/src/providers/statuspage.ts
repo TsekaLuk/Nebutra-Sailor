@@ -79,9 +79,10 @@ export class AtlassianStatuspageProvider implements StatusProvider {
       ? data.scheduled_maintenances
       : [];
 
-    const page = typeof data.page === "object" && data.page !== null
-      ? (data.page as Record<string, unknown>)
-      : {};
+    const page =
+      typeof data.page === "object" && data.page !== null
+        ? (data.page as Record<string, unknown>)
+        : {};
 
     // Components → monitors (skip group containers)
     const monitors: MonitorStatus[] = rawComponents
@@ -90,15 +91,19 @@ export class AtlassianStatuspageProvider implements StatusProvider {
         id: String(c.id),
         name: String(c.name),
         status: mapComponentStatus(String(c.status ?? "")),
-        description: typeof c.description === "string" ? c.description : undefined,
-        lastChecked: typeof c.updated_at === "string" ? c.updated_at : undefined,
+        ...(typeof c.description === "string"
+          ? { description: c.description }
+          : {}),
+        ...(typeof c.updated_at === "string"
+          ? { lastChecked: c.updated_at }
+          : {}),
       }));
 
     // Active incidents (not resolved / not postmortem)
     const activeIncidents: IncidentStatus[] = rawIncidents
       .filter(
         (i: Record<string, unknown>) =>
-          i.status !== "resolved" && i.status !== "postmortem"
+          i.status !== "resolved" && i.status !== "postmortem",
       )
       .map((i: Record<string, unknown>) => ({
         id: String(i.id),
@@ -107,9 +112,10 @@ export class AtlassianStatuspageProvider implements StatusProvider {
         impact: mapImpact(String(i.impact ?? "none")),
         createdAt: String(i.created_at ?? ""),
         updatedAt: String(i.updated_at ?? ""),
-        resolvedAt:
-          typeof i.resolved_at === "string" ? i.resolved_at : undefined,
-        shortlink: typeof i.shortlink === "string" ? i.shortlink : undefined,
+        ...(typeof i.resolved_at === "string"
+          ? { resolvedAt: i.resolved_at }
+          : {}),
+        ...(typeof i.shortlink === "string" ? { shortlink: i.shortlink } : {}),
       }));
 
     // Scheduled maintenances
@@ -120,16 +126,14 @@ export class AtlassianStatuspageProvider implements StatusProvider {
         status: mapMaintenanceStatus(String(m.status ?? "")),
         scheduledFor: String(m.scheduled_for ?? ""),
         scheduledUntil: String(m.scheduled_until ?? ""),
-        description: typeof m.incident_updates === "object"
-          ? undefined
-          : undefined,
-      })
+      }),
     );
 
     // Overall status: prefer the top-level indicator over deriving from components
-    const rawStatus = typeof data.status === "object" && data.status !== null
-      ? (data.status as Record<string, unknown>)
-      : {};
+    const rawStatus =
+      typeof data.status === "object" && data.status !== null
+        ? (data.status as Record<string, unknown>)
+        : {};
     const overallStatus =
       mapIndicatorStatus(String(rawStatus.indicator ?? "")) ??
       calculateOverallStatus(monitors, activeIncidents);
@@ -150,7 +154,7 @@ export class AtlassianStatuspageProvider implements StatusProvider {
         typeof page.updated_at === "string"
           ? page.updated_at
           : new Date().toISOString(),
-      pageUrl: typeof page.url === "string" ? page.url : undefined,
+      ...(typeof page.url === "string" ? { pageUrl: page.url } : {}),
     };
   }
 }
@@ -193,9 +197,7 @@ function mapComponentStatus(status: string): StatusState {
   }
 }
 
-function mapIncidentStatus(
-  status: string
-): IncidentStatus["status"] {
+function mapIncidentStatus(status: string): IncidentStatus["status"] {
   switch (status.toLowerCase()) {
     case "investigating":
       return "investigating";
@@ -223,9 +225,7 @@ function mapImpact(impact: string): IncidentStatus["impact"] {
   }
 }
 
-function mapMaintenanceStatus(
-  status: string
-): ScheduledMaintenance["status"] {
+function mapMaintenanceStatus(status: string): ScheduledMaintenance["status"] {
   switch (status.toLowerCase()) {
     case "in_progress":
       return "in_progress";

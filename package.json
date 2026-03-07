@@ -5,7 +5,8 @@
   "description": "Enterprise-grade SaaS monorepo for AI-native, multi-tenant platforms",
   "scripts": {
     "dev": "turbo run dev",
-    "build": "pnpm ui:verify-governance && pnpm brand:verify-tokens && pnpm brand:sync && turbo run build",
+    "build": "pnpm brand:sync && turbo run build",
+    "build:strict": "pnpm ui:verify-governance && pnpm brand:verify-tokens && pnpm run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",

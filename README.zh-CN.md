@@ -53,7 +53,7 @@
 
 Nebutra Sailor 是一个企业级、AI 原生的 SaaS 单体仓库架构，专为构建现代多租户平台而设计。它为内容社区、推荐系统、电商集成和 Web3 应用提供了经过实战检验的基础设施。
 
-采用最新技术栈构建，包括 Next.js 17、React 19 和 Prisma 7，Sailor 秉承「AI 优先」的理念，原生支持大语言模型、向量搜索和智能工作流。
+采用最新技术栈构建，包括 Next.js 16、React 19 和 Prisma 7，Sailor 秉承「AI 优先」的理念，原生支持大语言模型、向量搜索和智能工作流。
 
 ### 品牌愿景
 
@@ -130,7 +130,7 @@ Nebula • Nurture • Ultra • Future
 | 🚀  | **生产就绪**   | 企业部署验证的架构模式          |
 | 🤖  | **AI 原生**    | LLM・Embeddings・RAG・MCP Agent |
 | 🏢  | **多租户**     | RLS・租户隔离・租户定制         |
-| ⚡  | **现代技术栈** | Next.js 17・React 19・TS 5.6+   |
+| ⚡  | **现代技术栈** | Next.js 16・React 19・TS 5.6+   |
 | 💳  | **计费内置**   | Stripe・用量计量・功能权限      |
 
 </td>
@@ -155,7 +155,7 @@ Nebula • Nurture • Ultra • Future
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/ai.svg" width="28" alt="AI" /><br />
       <strong>AI 原生</strong>
-      <br />内置 LLM、向量检索、MCP Agents，现代 AI 应用的一等公民。
+      <br />内置 LLM、向量检索、MCP Agents，以及高级的 Lobe UI 聊天体验。
     </td>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/tenants.svg" width="28" alt="Tenants" /><br />
@@ -185,7 +185,52 @@ Nebula • Nurture • Ultra • Future
       <br />Hero、Features、Pricing、Testimonials 等转化优化组件。
     </td>
   </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/enterprise.svg" width="28" alt="Architecture" /><br />
+      <strong>自动化架构治理</strong>
+      <br />内置 <code>vitest.arch</code> 边界测试与严格的语义化 Token 校验。
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/toolkit.svg" width="28" alt="CSS" /><br />
+      <strong>零运行时 CSS</strong>
+      <br />纯 CSS 变量作为 SSOT，彻底抛弃 CSS-in-JS 性能损耗。
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Docker" /><br />
+      <strong>按需模块化 DX</strong>
+      <br />配置文件隔离，本地开发仅需按需启动核心微服务。
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/ai.svg" width="28" alt="AI Agent" /><br />
+      <strong>自带商业化 MCP 网关</strong>
+      <br />基于订阅计划的 Model Context Protocol 访问控制与审计额度。
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/security.svg" width="28" alt="Saga" /><br />
+      <strong>分布式 Saga 编排器</strong>
+      <br />纯 TypeScript 编排机制，自带事务失败自动回滚与补偿。
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/tenants.svg" width="28" alt="Event Bus" /><br />
+      <strong>多租户事件总线隔离</strong>
+      <br />强制 <code>tenantId</code> 隔离，原生支持异步广播与同步等待流。
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Monitoring" /><br />
+      <strong>多端监控集成网关</strong>
+      <br />单节点并发检测 9 个微服务及组件，提供 OpenStatus 与 Atlassian Statuspage 的标准化遥测。
+    </td>
+    <td width="33%" valign="top"></td>
+    <td width="33%" valign="top"></td>
+  </tr>
 </table>
+
+<br />
 
 ## 技术栈
 
@@ -204,6 +249,8 @@ Nebula • Nurture • Ultra • Future
 <td>
   <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
   <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
+  <img src="https://img.shields.io/badge/Lobe_UI-000?style=flat-square&logo=react&logoColor=white" alt="Lobe UI" />
+  <img src="https://img.shields.io/badge/Lobe_Icons-000?style=flat-square" alt="Lobe Icons" />
   <img src="https://img.shields.io/badge/Inter-000?style=flat-square" alt="Inter" />
   <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square" alt="JetBrains Mono" />
   <img src="https://img.shields.io/badge/设计令牌-gray?style=flat-square" alt="Design Tokens" />

@@ -84,6 +84,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    profiles: ["ai", "core"]
 
   content-service:
     build:
@@ -102,6 +103,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    profiles: ["content", "core"]
 
   recsys-service:
     build:
@@ -120,6 +122,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    profiles: ["recsys", "core"]
 
   ecommerce-service:
     build:
@@ -140,6 +143,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    profiles: ["ecommerce", "core"]
 
   web3-service:
     build:
@@ -159,6 +163,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    profiles: ["web3"]
 
   billing-service:
     build:
@@ -183,6 +188,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    profiles: ["billing", "core"]
 
   event-ingest-service:
     build:
@@ -203,6 +209,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
+    profiles: ["analytics"]
 
   # ============================================
   # Observability (optional)

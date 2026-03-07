@@ -52,7 +52,7 @@
 
 Nebutra Sailor is an enterprise-grade, AI-native SaaS monorepo architecture designed for building modern multi-tenant platforms. It provides a battle-tested foundation for content communities, recommendation systems, e-commerce integrations, and Web3 applications.
 
-Built with the latest technologies including Next.js 17, React 19, and Prisma 7, Sailor embraces an "AI-first" philosophy with native support for LLMs, vector search, and intelligent workflows.
+Built with the latest technologies including Next.js 16, React 19, and Prisma 7, Sailor embraces an "AI-first" philosophy with native support for LLMs, vector search, and intelligent workflows.
 
 ### Brand Vision
 
@@ -129,7 +129,7 @@ Nebula • Nurture • Ultra • Future
 | 🚀  | **Production-Ready** | Battle-tested enterprise patterns      |
 | 🤖  | **AI-Native**        | LLM · Embeddings · RAG · MCP Agent     |
 | 🏢  | **Multi-Tenant**     | RLS · Isolation · Customization        |
-| ⚡  | **Modern Stack**     | Next.js 17 · React 19 · TS 5.6+        |
+| ⚡  | **Modern Stack**     | Next.js 16 · React 19 · TS 5.6+        |
 | 💳  | **Billing Built-in** | Stripe · Usage metering · Entitlements |
 
 </td>
@@ -154,7 +154,7 @@ Nebula • Nurture • Ultra • Future
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/ai.svg" width="28" alt="AI" /><br />
       <strong>AI‑native</strong>
-      <br />LLMs, vector search, MCP agents. First‑class patterns for modern AI apps.
+      <br />LLMs, vector search, MCP agents, and premium Lobe UI Chat interfaces.
     </td>
     <td width="33%" valign="top">
       <img src="packages/brand/assets/icons/tenants.svg" width="28" alt="Tenants" /><br />
@@ -184,7 +184,52 @@ Nebula • Nurture • Ultra • Future
       <br />Hero, Features, Pricing, Testimonials — conversion-optimized components.
     </td>
   </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/enterprise.svg" width="28" alt="Architecture" /><br />
+      <strong>Automated Governance</strong>
+      <br />Strict <code>vitest.arch</code> boundaries and semantic token linting.
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/toolkit.svg" width="28" alt="CSS" /><br />
+      <strong>Zero-Runtime CSS</strong>
+      <br />Pure CSS variables as SSOT. No CSS-in-JS runtime overhead.
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Docker" /><br />
+      <strong>Modular Local DX</strong>
+      <br />Docker Compose profiles (<code>ai</code>, <code>recsys</code>) to boot only what's needed.
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/ai.svg" width="28" alt="AI Agent" /><br />
+      <strong>Monetized MCP Registry</strong>
+      <br />Native Model Context Protocol with plan-based rate-limits & billing.
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/security.svg" width="28" alt="Saga" /><br />
+      <strong>Distributed Saga</strong>
+      <br />Native TypeScript orchestrator with automatic transaction rollback.
+    </td>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/tenants.svg" width="28" alt="Event Bus" /><br />
+      <strong>Multi-Tenant Event Bus</strong>
+      <br />Tenant-isolated Pub/Sub supporting Fan-out & Request-Reply.
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <img src="packages/brand/assets/icons/workflows.svg" width="28" alt="Monitoring" /><br />
+      <strong>Unified Status Aggregation</strong>
+      <br />Concurrent checks across 9 services returning a standardized schema for OpenStatus & Atlassian.
+    </td>
+    <td width="33%" valign="top"></td>
+    <td width="33%" valign="top"></td>
+  </tr>
 </table>
+
+<br />
 
 ## Tech Stack
 
@@ -203,6 +248,8 @@ Nebula • Nurture • Ultra • Future
 <td>
   <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
   <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
+  <img src="https://img.shields.io/badge/Lobe_UI-000?style=flat-square&logo=react&logoColor=white" alt="Lobe UI" />
+  <img src="https://img.shields.io/badge/Lobe_Icons-000?style=flat-square" alt="Lobe Icons" />
   <img src="https://img.shields.io/badge/Inter-000?style=flat-square" alt="Inter" />
   <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square" alt="JetBrains Mono" />
   <img src="https://img.shields.io/badge/Design_Tokens-gray?style=flat-square" alt="Design Tokens" />
