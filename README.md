@@ -607,6 +607,6 @@ For commercial licensing inquiries, please contact us.
     <a href="https://discord.gg/nebutra">Discord</a>
   </p>
   <p>
-    <a href="mailto:hello@nebutra.com">Contact</a>
+    <a href="mailto:contact@nebutra.com">Contact</a>
   </p>
 </div>

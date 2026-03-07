@@ -603,6 +603,6 @@ pnpm brand:apply
     <a href="https://discord.gg/nebutra">Discord</a>
   </p>
   <p>
-    <a href="mailto:hello@nebutra.com">联系我们</a>
+    <a href="mailto:contact@nebutra.com">联系我们</a>
   </p>
 </div>

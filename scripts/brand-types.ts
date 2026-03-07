@@ -164,7 +164,7 @@ export const DEFAULT_BRAND: BrandConfig = {
   company: {
     name: "Wuxi Yunyu Intelligent Technology Co., Ltd.",
     nameCN: "无锡云毓智能科技有限公司",
-    email: "hello@nebutra.com",
+    email: "contact@nebutra.com",
     year: 2024,
   },
   domains: {

@@ -35,7 +35,7 @@ export default async function ContactPage({
   const contacts = [
     {
       title: t("contact.contacts.general.title"),
-      email: "hello@nebutra.com",
+      email: "contact@nebutra.com",
       description: t("contact.contacts.general.description"),
     },
     {

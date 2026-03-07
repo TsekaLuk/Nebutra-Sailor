@@ -124,10 +124,10 @@ export default async function AboutPage({
             {t("about.ctaButton")}
           </Link>
           <a
-            href="mailto:hello@nebutra.com"
+            href="mailto:contact@nebutra.com"
             className="rounded-[var(--radius-lg)] border border-[var(--neutral-7)] px-6 py-3 font-semibold text-[var(--neutral-11)] transition hover:bg-[var(--neutral-3)]"
           >
-            hello@nebutra.com
+            contact@nebutra.com
           </a>
         </div>
       </section>

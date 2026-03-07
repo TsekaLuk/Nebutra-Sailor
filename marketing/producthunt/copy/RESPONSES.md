@@ -206,7 +206,7 @@ What's your current setup? I can point you to the best approach.
 ```
 Absolutely! Feel free to:
 
-📧 Email: hello@nebutra.com
+📧 Email: contact@nebutra.com
 💬 Discord: discord.gg/nebutra
 🐦 Twitter: @nebutra
 

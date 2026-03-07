@@ -219,8 +219,7 @@ export const documentConfigs: Record<string, DocumentConfig> = {
       locale: "en",
       version: "1.0.0",
       title: "Privacy Policy",
-      summary:
-        "How we collect, use, and protect your personal information",
+      summary: "How we collect, use, and protect your personal information",
       effectiveAt: baseDocumentDate,
       isRequired: true,
       changelog: [
@@ -385,7 +384,7 @@ export const cookieConfig: CookieConfig = {
 // ============================================
 
 export const contactConfig: ContactConfig = {
-  generalEmail: "hello@nebutra.com",
+  generalEmail: "contact@nebutra.com",
   salesEmail: "sales@nebutra.com",
   supportEmail: "support@nebutra.com",
   legalEmail: "legal@nebutra.com",
@@ -423,17 +422,19 @@ export function getDocumentConfig(slug: string): DocumentConfig | undefined {
  * Get all required documents
  */
 export function getRequiredDocuments(): DocumentConfig[] {
-  return Object.values(documentConfigs).filter((doc) => doc.metadata.isRequired);
+  return Object.values(documentConfigs).filter(
+    (doc) => doc.metadata.isRequired,
+  );
 }
 
 /**
  * Get documents by type
  */
 export function getDocumentsByType(
-  type: DocumentConfig["metadata"]["type"]
+  type: DocumentConfig["metadata"]["type"],
 ): DocumentConfig[] {
   return Object.values(documentConfigs).filter(
-    (doc) => doc.metadata.type === type
+    (doc) => doc.metadata.type === type,
   );
 }
 

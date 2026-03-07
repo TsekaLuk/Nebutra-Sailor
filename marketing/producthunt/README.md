@@ -110,4 +110,4 @@ marketing/producthunt/
 ## Contact
 
 - **Questions:** @TsekaLuk
-- **Emergency:** hello@nebutra.com
+- **Emergency:** contact@nebutra.com

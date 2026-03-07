@@ -77,7 +77,7 @@ export const Default: Story = {
 };
 
 export const WithValue: Story = {
-  args: { defaultValue: "hello@nebutra.com", type: "email" },
+  args: { defaultValue: "contact@nebutra.com", type: "email" },
 };
 
 export const Password: Story = {
@@ -99,7 +99,7 @@ export const WithLabel: Story = {
       >
         Email address
       </label>
-      <Input id="email-field" type="email" placeholder="hello@nebutra.com" />
+      <Input id="email-field" type="email" placeholder="contact@nebutra.com" />
     </div>
   ),
 };
@@ -146,7 +146,7 @@ export const WithEmailPrefix: Story = {
     <Input
       prefix={<Mail className="h-4 w-4" />}
       type="email"
-      placeholder="hello@nebutra.com"
+      placeholder="contact@nebutra.com"
     />
   ),
 };
@@ -177,7 +177,7 @@ export const Clearable: Story = {
   render: () => (
     <Input
       clearable
-      defaultValue="hello@nebutra.com"
+      defaultValue="contact@nebutra.com"
       placeholder="Type to see the × button…"
     />
   ),
@@ -186,7 +186,7 @@ export const Clearable: Story = {
 export const ClearableControlled: Story = {
   name: "Clearable (controlled)",
   render: () => {
-    const [value, setValue] = useState("hello@nebutra.com");
+    const [value, setValue] = useState("contact@nebutra.com");
     return (
       <div className="flex flex-col gap-1.5">
         <Input
@@ -263,10 +263,7 @@ export const Shortcut: Story = {
   name: "Shortcut / KK",
   render: () => (
     <div className="flex flex-col gap-3 w-72">
-      <Input
-        placeholder="Search commands…"
-        shortcut="⌘K"
-      />
+      <Input placeholder="Search commands…" shortcut="⌘K" />
       <p className="text-xs text-muted-foreground">
         Type to see the shortcut badge transition to a loading spinner.
       </p>
