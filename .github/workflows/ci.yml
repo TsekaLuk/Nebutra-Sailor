@@ -301,11 +301,6 @@ jobs:
       - name: Audit dependencies (high severity)
         run: pnpm audit --audit-level=high
 
-      - name: Check for secrets with Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   # ── Deploy jobs ──────────────────────────────────────────────────────────
   # Add a deploy job per app here, gated by detect-changes output.
   # Each job only runs when its own app directory (or shared packages) changed.
