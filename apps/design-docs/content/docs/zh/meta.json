@@ -1,0 +1,18 @@
+{
+  "title": "Design System",
+  "pages": [
+    "index",
+    "--- 概览 ---",
+    "introduction",
+    "how-to-use",
+    "contributing",
+    "--- 基础 ---",
+    "...foundations",
+    "--- 基元 ---",
+    "...components",
+    "--- 组合 ---",
+    "...fragment-components",
+    "--- 模式 ---",
+    "...patterns"
+  ]
+}

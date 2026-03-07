@@ -1,0 +1,84 @@
+---
+title: "Textarea"
+description: "Multi-line text input field with consistent styling."
+---
+
+## Demo
+
+<ComponentPreview className="max-w-[400px]">
+  <div className="flex flex-col gap-1.5 w-full">
+    <Label htmlFor="message">Message</Label>
+    <Textarea
+      id="message"
+      placeholder="Write your message here..."
+      rows={4}
+    />
+  </div>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+import { Textarea } from "@nebutra/ui";
+```
+
+## Props
+
+All props from native `<textarea>` are supported, plus:
+
+| Prop          | Type      | Default | Description                                      |
+| ------------- | --------- | ------- | ------------------------------------------------ |
+| `className`   | `string`  | —       | Additional CSS classes.                          |
+| `rows`        | `number`  | `3`     | Visible row count.                               |
+| `disabled`    | `boolean` | `false` | Disables the textarea.                           |
+| `placeholder` | `string`  | —       | Placeholder text.                                |
+| `readOnly`    | `boolean` | `false` | Makes the textarea read-only.                    |
+
+## Examples
+
+### With Character Count
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <div className="flex flex-col gap-1 w-full">
+    <Textarea
+      defaultValue=""
+      placeholder="Type here..."
+      maxLength={500}
+    />
+    <span className="text-xs text-muted-foreground text-right w-full">
+      0/500
+    </span>
+  </div>
+</ComponentPreview>
+```
+
+### Disabled
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <div className="w-full">
+    <Textarea disabled value="This field is read-only" />
+  </div>
+</ComponentPreview>
+```
+
+### In a Form
+
+```tsx
+<FormField name="bio">
+  <FormItem>
+    <FormLabel>Bio</FormLabel>
+    <FormControl>
+      <Textarea placeholder="Tell us about yourself" />
+    </FormControl>
+    <FormMessage />
+  </FormItem>
+</FormField>
+```
+
+## Accessibility
+
+Associates with `<Label>` via `htmlFor`/`id`. Supports `aria-describedby` for form error messages. Announces character limits when `maxLength` is set.
+
+For auto-growing behavior, use the `ExpandingTextarea` atom instead.

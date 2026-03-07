@@ -1,0 +1,101 @@
+---
+title: Button
+description: Interactive click target with eight visual variants, five size options, and icon slots.
+---
+
+
+<ComponentPreview>
+  <ButtonDemo />
+</ComponentPreview>
+
+## Installation
+
+```tsx
+import { Button, ButtonLink } from "@nebutra/ui/primitives"
+```
+
+## Variants
+
+```tsx
+<ComponentPreview className="gap-3">
+  <Button variant="default">Default</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="destructive">Delete</Button>
+  <Button variant="warning">Warning</Button>
+  <Button variant="link">Learn more</Button>
+</ComponentPreview>
+```
+
+## Sizes
+
+```tsx
+<ComponentPreview className="gap-3 items-center">
+  <Button size="tiny">Tiny</Button>
+  <Button size="sm">Small</Button>
+  <Button size="default">Default</Button>
+  <Button size="lg">Large</Button>
+</ComponentPreview>
+```
+
+## With Icons
+
+```tsx
+import { Mail, ArrowRight } from "lucide-react"
+
+<ComponentPreview className="gap-3">
+  {/* Note: In MDX, you cannot import Lucide icons inline. 
+      For exact icon usage, see the actual React code. */}
+  <Button prefix={<span>✉️</span>}>Login with Email</Button>
+  <Button suffix={<span>➔</span>}>Continue</Button>
+</ComponentPreview>
+```
+
+## Loading State
+
+```tsx
+<ComponentPreview>
+  <Button loading>Saving…</Button>
+</ComponentPreview>
+```
+
+## Props
+
+<TypeTable
+  type={{
+    variant: {
+      description: 'Visual style variant',
+      type: '"default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "tertiary" | "warning"',
+      default: '"default"',
+    },
+    size: {
+      description: 'Size preset',
+      type: '"tiny" | "sm" | "default" | "lg" | "icon"',
+      default: '"default"',
+    },
+    prefix: {
+      description: 'Icon before children',
+      type: 'ReactNode',
+    },
+    suffix: {
+      description: 'Icon after children',
+      type: 'ReactNode',
+    },
+    loading: {
+      description: 'Show spinner',
+      type: 'boolean',
+      default: 'false',
+    },
+    asChild: {
+      description: 'Merge props onto immediate child',
+      type: 'boolean',
+      default: 'false',
+    },
+    disabled: {
+      description: 'Disables the button',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>

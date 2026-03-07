@@ -1,0 +1,151 @@
+---
+title: "命令菜单 (Command Menu)"
+description: "全屏命令面板覆盖层。以可搜索覆盖面板的形式启动一组操作。"
+---
+
+## 概览 (Overview)
+
+`CommandMenu` 是一个基于 `cmdk` 的全屏对话框式命令面板。它以居中覆盖层的形式打开，包含搜索输入框和分组的操作项。按下 `Escape` 键可将其关闭。
+
+## 安装 (Installation)
+
+```tsx
+import { CommandMenu } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 默认 (Default)
+
+```tsx
+import { useState } from "react"
+import { Button, CommandMenu } from "@nebutra/ui/primitives"
+
+export function CommandMenuDemo() {
+  const [open, setOpen] = useState(false)
+
+  function handleAction(): void {
+    setOpen(false)
+  }
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>打开命令菜单 (Open Command Menu)</Button>
+      <CommandMenu.Root open={open} setOpen={setOpen}>
+        <CommandMenu.Input placeholder="您需要什么？ (What do you need?)" />
+        <CommandMenu.List>
+          <CommandMenu.Group heading="建议 (Suggestions)">
+            <CommandMenu.Item callback={handleAction}>
+              Figma 导入 (Figma Import)
+            </CommandMenu.Item>
+          </CommandMenu.Group>
+          <CommandMenu.Group heading="命令 (Commands)">
+            <CommandMenu.Item callback={handleAction}>
+              导入扩展 (Import Extension)
+            </CommandMenu.Item>
+            <CommandMenu.Item callback={handleAction}>
+              管理扩展 (Manage Extensions)
+            </CommandMenu.Item>
+          </CommandMenu.Group>
+          <CommandMenu.Group heading="协作 (Collaboration)">
+            <CommandMenu.Item callback={handleAction}>
+              特性标志浏览 (Flags Explorer)
+            </CommandMenu.Item>
+          </CommandMenu.Group>
+        </CommandMenu.List>
+      </CommandMenu.Root>
+    </>
+  )
+}
+```
+
+### 使用键盘快捷键 (⌘K) (With keyboard shortcut (⌘K))
+
+在您的应用根目录或布局中挂载一个 `useEffect`，以通过 `Cmd+K` 切换状态：
+
+```tsx
+useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault()
+      setOpen((prev) => !prev)
+    }
+  }
+  document.addEventListener("keydown", handler)
+  return () => document.removeEventListener("keydown", handler)
+}, [])
+```
+
+### 使用分隔符 (With separators)
+
+```tsx
+<CommandMenu.Root open={open} setOpen={setOpen}>
+  <CommandMenu.Input placeholder="搜索命令... (Search commands...)" />
+  <CommandMenu.List>
+    <CommandMenu.Group heading="文件 (Files)">
+      <CommandMenu.Item callback={handleAction}>新建文件 (New File)</CommandMenu.Item>
+    </CommandMenu.Group>
+    <CommandMenu.Separator />
+    <CommandMenu.Group heading="编辑 (Edit)">
+      <CommandMenu.Item callback={handleAction}>复制 (Copy)</CommandMenu.Item>
+    </CommandMenu.Group>
+  </CommandMenu.List>
+</CommandMenu.Root>
+```
+
+### 使用快捷键提示 (With shortcuts)
+
+```tsx
+<CommandMenu.Item callback={handleAction}>
+  新建文件 (New File)
+  <CommandMenu.Shortcut>⌘N</CommandMenu.Shortcut>
+</CommandMenu.Item>
+```
+
+### 使用禁用项 (With disabled items)
+
+```tsx
+<CommandMenu.Item disabled callback={handleAction}>
+  不可用操作 (Unavailable Action)
+</CommandMenu.Item>
+```
+
+## 属性 (Props)
+
+### CommandMenu.Root
+
+| 属性 | 类型 | 描述 |
+|------|------|-------------|
+| `open` | `boolean` | 命令菜单是否可见 |
+| `setOpen` | `(open: boolean) => void` | 用于控制打开状态的 setter 函数 |
+| `children` | `ReactNode` | `CommandMenu.Input` + `CommandMenu.List` |
+
+### CommandMenu.Item
+
+| 属性 | 类型 | 描述 |
+|------|------|-------------|
+| `callback` | `() => void` | 点击或按回车键时调用 |
+| `disabled` | `boolean` | 禁用此项 |
+| `className` | `string` | 额外的 CSS 类名 |
+| `children` | `ReactNode` | 条目标签（+ 可选的 `CommandMenu.Shortcut`） |
+
+### 子组件 (Sub-Components)
+
+| 组件 | 描述 |
+|-----------|-------------|
+| `CommandMenu.Input` | 带有搜索图标的搜索输入框 |
+| `CommandMenu.List` | 可滚动的搜索结果容器 |
+| `CommandMenu.Group` | 带有可选 `heading` 标签的分组 |
+| `CommandMenu.Item` | 带有 `callback` 的可选操作条目 |
+| `CommandMenu.Empty` | 当搜索无结果匹配时显示 |
+| `CommandMenu.Shortcut` | 右侧对齐的键盘快捷键提示 |
+| `CommandMenu.Separator` | 组与组之间的视觉分隔线 |
+
+## 可访问性 (Accessibility)
+
+- 对话框覆盖层会锁定焦点，并在关闭时恢复焦点。
+- 按下 `Escape` 键可关闭覆盖层。
+- 使用 `ArrowUp` / `ArrowDown` 在各条目间导航。
+- 按下 `Enter` 键触发当前选中项的 `callback`。
+- 搜索通过 cmdk 实现实时过滤。
+- 没有关闭按钮 — 命令面板通常依赖 `Escape` 和选择具体操作条目作为退出路径。

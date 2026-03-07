@@ -1,0 +1,162 @@
+---
+title: "选择器 (Select)"
+description: "基于 Radix UI 构建的下拉选择控件，具有完善的键盘支持。"
+---
+
+
+<ComponentPreview className="min-h-[300px] flex items-start justify-center pt-8">
+  <Select>
+    <SelectTrigger className="w-[200px]">
+      <SelectValue placeholder="选择一种水果 (Select a fruit)" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>水果 (Fruits)</SelectLabel>
+        <SelectItem value="apple">苹果 (Apple)</SelectItem>
+        <SelectItem value="banana">香蕉 (Banana)</SelectItem>
+        <SelectItem value="orange">橙子 (Orange)</SelectItem>
+        <SelectItem value="grape">葡萄 (Grape)</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectGroup,
+  SelectLabel,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### Select (根组件)
+
+继承自 `@radix-ui/react-select` 的 `Root` 属性.
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `string` | — | 受控的选中值 |
+| `defaultValue` | `string` | — | 非受控的默认值 |
+| `onValueChange` | `(value: string) => void` | — | 选中改变时的回调函数 |
+| `open` | `boolean` | — | 受控的打开状态 |
+| `onOpenChange` | `(open: boolean) => void` | — | 打开状态改变时的回调函数 |
+| `disabled` | `boolean` | `false` | 禁用选择器 |
+
+### SelectTrigger (触发器)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 触发器内容 (通常为 `SelectValue`) |
+
+### SelectValue (显示值)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `placeholder` | `string" | — | 未选中任何值时显示的占位文本 |
+
+### SelectContent (内容区)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string" | — | 额外的 CSS 类名 |
+| `position` | `"item-aligned" \| "popper"` | `"popper"` | 定位策略 |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | 首选打开侧 |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | 沿触发器的对齐方式 |
+
+### SelectItem (选择条目)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `string" | — | **必填。** 该选项的值 |
+| `disabled` | `boolean" | `false` | 防止该条目被选中 |
+| `className` | `string" | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 条目标签文本 |
+
+### SelectGroup / SelectLabel / SelectSeparator (分组/标签/分隔线)
+
+| 组件 | 描述 |
+|-----------|-------------|
+| `SelectGroup` | 将相关的条目分在一起 |
+| `SelectLabel` | 组的非可选标签 |
+| `SelectSeparator` | 组之间的视觉分隔线 |
+
+## 示例 (Examples)
+
+### 受控选择器 (Controlled Select)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex items-start justify-center pt-8">
+  <Select defaultValue="banana">
+    <SelectTrigger className="w-48">
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="apple">苹果 (Apple)</SelectItem>
+      <SelectItem value="banana">香蕉 (Banana)</SelectItem>
+      <SelectItem value="orange">橙子 (Orange)</SelectItem>
+    </SelectContent>
+  </Select>
+</ComponentPreview>
+```
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex items-start justify-center pt-8">
+  <Select>
+    <SelectTrigger className="w-56">
+      <SelectValue placeholder="选择时区 (Select timezone)" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>北美 (North America)</SelectLabel>
+        <SelectItem value="est">东部标准时间 (EST)</SelectItem>
+        <SelectItem value="cst">中部标准时间 (CST)</SelectItem>
+        <SelectItem value="pst">太平洋标准时间 (PST)</SelectItem>
+      </SelectGroup>
+      <SelectSeparator />
+      <SelectGroup>
+        <SelectLabel>欧洲 (Europe)</SelectLabel>
+        <SelectItem value="gmt">格林威治标准时间 (GMT)</SelectItem>
+        <SelectItem value="cet">中央欧洲时间 (CET)</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</ComponentPreview>
+```
+
+### 禁用条目 (Disabled Items)
+
+```tsx
+<ComponentPreview className="min-h-[250px] flex items-start justify-center pt-8">
+  <Select>
+    <SelectTrigger className="w-48">
+      <SelectValue placeholder="选择计划 (Select plan)" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="free">免费版 (Free)</SelectItem>
+      <SelectItem value="pro">专业版 (Pro)</SelectItem>
+      <SelectItem value="enterprise" disabled>企业版 (Enterprise) - 联系销售</SelectItem>
+    </SelectContent>
+  </Select>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Select 构建 —— 遵循 WAI-ARIA [列表框模式 (Listbox pattern)](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/)。
+- `SelectTrigger` 具有 `role="combobox"` 属性，并带有 `aria-expanded` 和 `aria-haspopup="listbox"`。
+- `SelectContent` 具有 `role="listbox"` 属性。
+- 每个 `SelectItem` 具有 `role="option"` 属性和 `aria-selected`。
+- 完善的键盘导航：使用 `ArrowUp`/`ArrowDown` 导航，使用 `Enter`/`Space` 选择，使用 `Escape` 关闭。
+走

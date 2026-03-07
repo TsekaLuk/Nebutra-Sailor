@@ -1,0 +1,159 @@
+---
+title: "选项卡 (Tabs)"
+description: "具有三种视觉变体、四种尺寸并支持胶囊形状的选项卡内客面板。"
+---
+
+
+<ComponentPreview className="mt-4">
+  <Tabs defaultValue="profile" className="w-[400px]">
+    <TabsList className="grid w-full grid-cols-3">
+      <TabsTrigger value="profile">个人资料 (Profile)</TabsTrigger>
+      <TabsTrigger value="security">安全 (Security)</TabsTrigger>
+      <TabsTrigger value="settings">设置 (Settings)</TabsTrigger>
+    </TabsList>
+    <TabsContent value="profile" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">管理您的个人资料信息。 (Manage your profile information.)</p>
+    </TabsContent>
+    <TabsContent value="security" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">更新您的密码和双因素认证 (2FA)。 (Update your password and 2FA.)</p>
+    </TabsContent>
+    <TabsContent value="settings" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">调整您的电子邮件偏好。 (Adjust your email preferences.)</p>
+    </TabsContent>
+  </Tabs>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### Tabs (根组件)
+
+继承自 `@radix-ui/react-tabs` 的 `Root` 属性。
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | — | 非受控的默认激活选项卡 |
+| `value` | `string` | — | 受控的激活选项卡值 |
+| `onValueChange` | `(value: string) => void` | — | 激活选项卡改变时的回调函数 |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 选项卡列表的方向 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### TabsList (选项卡列表)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "button" \| "line"` | `"default"` | 选项卡列表的视觉样式 |
+| `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | 选项卡的大小 |
+| `shape` | `"default" \| "pill"` | `"default"` | 选项卡触发器的形状 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | `TabsTrigger` 元素 |
+
+### TabsTrigger (选项卡触发器)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `string` | — | **必填。** 匹配 `TabsContent` 的唯一标识符 |
+| `disabled` | `boolean` | `false` | 防止选中此选项卡 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 选项卡标签（文本 + 可选图标） |
+
+### TabsContent (选项卡内容)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `string` | — | **必填。** 匹配 `TabsTrigger` 的值 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 该选项卡激活时显示的内容 |
+
+## 示例 (Examples)
+
+### 按钮变体 (Button Variant)
+
+```tsx
+<ComponentPreview className="mt-4">
+  <Tabs defaultValue="tab1" className="w-[400px]">
+    <TabsList variant="button" className="grid grid-cols-3">
+      <TabsTrigger value="tab1">概览 (Overview)</TabsTrigger>
+      <TabsTrigger value="tab2">分析 (Analytics)</TabsTrigger>
+      <TabsTrigger value="tab3">报告 (Reports)</TabsTrigger>
+    </TabsList>
+    <TabsContent value="tab1" className="p-4 mt-2">概览内容 (Overview content)</TabsContent>
+    <TabsContent value="tab2" className="p-4 mt-2">分析内容 (Analytics content)</TabsContent>
+    <TabsContent value="tab3" className="p-4 mt-2">报告内容 (Reports content)</TabsContent>
+  </Tabs>
+</ComponentPreview>
+```
+
+### 线条变体 - 下划线 (Line Variant)
+
+```tsx
+<ComponentPreview className="mt-4">
+  <Tabs defaultValue="tab1" className="w-[400px]">
+    <TabsList variant="line" className="w-full">
+      <TabsTrigger value="tab1">全部 (All)</TabsTrigger>
+      <TabsTrigger value="tab2">进行中 (Active)</TabsTrigger>
+      <TabsTrigger value="tab3">已归档 (Archived)</TabsTrigger>
+    </TabsList>
+    <TabsContent value="tab1" className="p-4 mt-2">全部内容 (All content)</TabsContent>
+    <TabsContent value="tab2" className="p-4 mt-2">进行中内容 (Active content)</TabsContent>
+    <TabsContent value="tab3" className="p-4 mt-2">已归档内容 (Archived content)</TabsContent>
+  </Tabs>
+</ComponentPreview>
+```
+
+### 胶囊形状 (Pill Shape)
+
+```tsx
+<ComponentPreview className="mt-4">
+  <Tabs defaultValue="tab1" className="w-[400px]">
+    <TabsList shape="pill" className="w-full grid-cols-2 grid">
+      <TabsTrigger value="tab1">选项卡 1 (Tab 1)</TabsTrigger>
+      <TabsTrigger value="tab2">选项卡 2 (Tab 2)</TabsTrigger>
+    </TabsList>
+    <TabsContent value="tab1" className="p-4 mt-2">选项卡 1 内容 (Tab 1 Content)</TabsContent>
+    <TabsContent value="tab2" className="p-4 mt-2">选项卡 2 内容 (Tab 2 Content)</TabsContent>
+  </Tabs>
+</ComponentPreview>
+```
+
+### 尺寸变体 (Size Variants)
+
+```tsx
+<TabsList size="xs">...</TabsList>
+<TabsList size="sm">...</TabsList>
+<TabsList size="md">...</TabsList>
+<TabsList size="lg">...</TabsList>
+```
+
+### 受控选项卡 (Controlled Tabs)
+
+```tsx
+const [activeTab, setActiveTab] = useState("overview")
+
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <TabsList>
+    <TabsTrigger value="overview">概览 (Overview)</TabsTrigger>
+    <TabsTrigger value="details">详情 (Details)</TabsTrigger>
+  </TabsList>
+</Tabs>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Tabs 构建 —— 遵循 WAI-ARIA [选项卡模式](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)。
+- `TabsList` 具有 `role="tablist"` 属性。
+- 每个 `TabsTrigger` 具有 `role="tab"`、`aria-selected` 和 `aria-controls` 属性。
+- 每个 `TabsContent` 具有 `role="tabpanel"` 和 `aria-labelledby` 属性。
+- 键盘导航：使用 `ArrowLeft`/`ArrowRight` 在选项卡间切换，使用 `Home`/`End` 跳转至首个/最后一个。
+- 焦点管理由系统自动处理。
+走

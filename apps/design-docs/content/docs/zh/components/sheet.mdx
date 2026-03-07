@@ -1,0 +1,123 @@
+---
+title: "抽屉面板 (Sheet)"
+description: "锚定在屏幕边缘的滑出式覆盖面板，基于 Radix UI Dialog 构建。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-center">
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button variant="outline">打开抽屉 (Open Sheet)</Button>
+    </SheetTrigger>
+    <SheetContent>
+      <SheetHeader>
+        <SheetTitle>编辑个人资料 (Edit profile)</SheetTitle>
+        <SheetDescription>
+          在此处修改您的个人资料。完成后点击保存。 (Make changes to your profile here. Click save when done.)
+        </SheetDescription>
+      </SheetHeader>
+      <div className="py-6">
+        <p className="text-sm text-muted-foreground">抽屉主体内容。 (Sheet body content.)</p>
+      </div>
+      <SheetFooter>
+        <SheetClose asChild>
+          <Button variant="outline">取消 (Cancel)</Button>
+        </SheetClose>
+        <Button type="submit">保存更改 (Save changes)</Button>
+      </SheetFooter>
+    </SheetContent>
+  </Sheet>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+  SheetClose,
+  SheetPortal,
+  SheetOverlay,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### Sheet (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | 受控的打开状态 |
+| `defaultOpen` | `boolean` | `false` | 非受控的默认打开状态 |
+| `onOpenChange` | `(open: boolean) => void` | — | 打开状态改变时的回调函数 |
+
+### SheetContent (内容区)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"right"` | 抽屉滑出的边缘 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 抽屉内容 |
+
+## 示例 (Examples)
+
+### 左侧导航抽屉 (Left-Side Navigation Sheet)
+
+```tsx
+import { Menu } from "lucide-react"
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <Menu className="h-5 w-5" />
+      </Button>
+    </SheetTrigger>
+    <SheetContent side="left" className="w-64">
+      <SheetHeader>
+        <SheetTitle>导航 (Navigation)</SheetTitle>
+      </SheetHeader>
+      <nav className="flex flex-col gap-2 mt-4">
+        <SheetClose asChild>
+          <Link href="/docs/components/sheet">仪表盘 (Dashboard)</Link>
+        </SheetClose>
+        <SheetClose asChild>
+          <Link href="/docs/components/sheet">设置 (Settings)</Link>
+        </SheetClose>
+      </nav>
+    </SheetContent>
+  </Sheet>
+</ComponentPreview>
+```
+
+### 底部抽屉 - 移动端 (Bottom Sheet - Mobile)
+
+```tsx
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button>分享 (Share)</Button>
+    </SheetTrigger>
+    <SheetContent side="bottom" className="rounded-t-2xl">
+      <SheetHeader>
+        <SheetTitle>分享此页面 (Share this page)</SheetTitle>
+      </SheetHeader>
+      <div className="py-4">此处为分享选项 (Share options here)</div>
+    </SheetContent>
+  </Sheet>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Dialog 构建 —— `SheetContent` 具有 `role="dialog"` 和 `aria-modal="true"` 属性。
+- `SheetTitle` 通过 `aria-labelledby` 进行关联。
+- 打开时焦点会被锁定在抽屉内部。
+- 按下 `Escape` 键会关闭抽屉并将焦点返回触发器。
+走

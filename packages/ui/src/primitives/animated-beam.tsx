@@ -107,7 +107,7 @@ export function AnimatedBeam({
   endXOffset = 0,
   endYOffset = 0,
 }: AnimatedBeamProps) {
-  const id = React.useId();
+  const id = React.useId().replace(/:/g, "");
   const [pathD, setPathD] = React.useState("");
   const [svgDimensions, setSvgDimensions] = React.useState({
     width: 0,
@@ -205,16 +205,16 @@ export function AnimatedBeam({
           id={id}
           gradientUnits="userSpaceOnUse"
           initial={{
-            x1: reverse ? "0%" : "100%",
-            x2: reverse ? "0%" : "100%",
+            x1: "0%",
+            x2: "0%",
             y1: "0%",
             y2: "0%",
           }}
           animate={{
-            x1: reverse ? "100%" : "0%",
-            x2: reverse ? "100%" : "0%",
-            y1: "0%",
-            y2: "0%",
+            x1: reverse ? ["90%", "-10%"] : ["10%", "110%"],
+            x2: reverse ? ["100%", "0%"] : ["0%", "100%"],
+            y1: ["0%", "0%"],
+            y2: ["0%", "0%"],
           }}
           transition={{
             delay,

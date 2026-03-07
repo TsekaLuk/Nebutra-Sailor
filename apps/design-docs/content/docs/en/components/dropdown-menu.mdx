@@ -1,0 +1,153 @@
+---
+title: "Dropdown Menu"
+description: "Contextual action list triggered by a button click, built on Radix UI."
+---
+
+## Demo
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Open Menu</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-48">
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>
+        Profile
+        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Billing
+        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>Settings</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem className="text-destructive">
+        Log out
+        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+} from "@nebutra/ui/primitives"
+```
+
+## Props
+
+### DropdownMenuContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment relative to trigger |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | Preferred side |
+| `sideOffset` | `number` | `4` | Distance from trigger |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Menu items |
+
+### DropdownMenuItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `inset` | `boolean` | `false` | Adds left padding for alignment |
+| `disabled` | `boolean` | `false` | Prevents selection |
+| `onSelect` | `() => void` | — | Callback when item is selected |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Item label content |
+
+## Examples
+
+### With Checkbox Items
+
+```tsx
+<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Appearance</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuCheckboxItem checked={true}>
+        Toolbar
+      </DropdownMenuCheckboxItem>
+      <DropdownMenuCheckboxItem checked={false}>
+        Sidebar
+      </DropdownMenuCheckboxItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+```
+
+### With Radio Group
+
+```tsx
+<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Sort by</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>Sort order</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuRadioGroup value="asc">
+        <DropdownMenuRadioItem value="asc">Ascending</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="desc">Descending</DropdownMenuRadioItem>
+      </DropdownMenuRadioGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+```
+
+### With Submenus
+
+You can nest `DropdownMenuSub` within `DropdownMenuContent` to create cascading menus.
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Share Design</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-48">
+      <DropdownMenuItem>Email Link</DropdownMenuItem>
+      <DropdownMenuItem>Copy Link</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger>Invite Users</DropdownMenuSubTrigger>
+        <DropdownMenuSubContent className="w-40">
+          <DropdownMenuItem>Via Email</DropdownMenuItem>
+          <DropdownMenuItem>From Workspace</DropdownMenuItem>
+        </DropdownMenuSubContent>
+      </DropdownMenuSub>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem className="text-destructive focus:bg-destructive focus:text-destructive-foreground">Delete</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+```
+
+## Accessibility
+
+- Built on Radix UI DropdownMenu — follows the WAI-ARIA [Menu Button pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/).
+- `DropdownMenuContent` has `role="menu"` with `aria-labelledby` pointing to the trigger.
+- Each item has `role="menuitem"`, `role="menuitemcheckbox"`, or `role="menuitemradio"`.
+- Keyboard: `ArrowUp`/`ArrowDown` to navigate, `Enter`/`Space` to select, `Escape` to close.

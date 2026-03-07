@@ -1,0 +1,113 @@
+---
+title: "Breadcrumb"
+description: "Hierarchical navigation trail showing the user's current location."
+---
+
+## Demo
+
+```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#docs">Documentation</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</ComponentPreview>
+```
+
+## Usage
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+  BreadcrumbEllipsis,
+} from "@nebutra/ui/primitives"
+```
+
+## Props
+
+### Breadcrumb
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | `BreadcrumbList` |
+
+### BreadcrumbLink
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | — | Navigation target URL |
+| `asChild` | `boolean` | `false` | Merge props onto immediate child (for router links) |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Link text |
+
+### BreadcrumbPage
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Current page name |
+
+### BreadcrumbSeparator
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | `ChevronRight` | Custom separator icon |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### With Collapsed Middle Items
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#home">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbEllipsis />
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Current Page</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</ComponentPreview>
+```
+
+### With Next.js Link
+
+```tsx
+import Link from "next/link"
+
+<BreadcrumbLink asChild>
+  <Link href="/products">Products</Link>
+</BreadcrumbLink>
+```
+
+## Accessibility
+
+- Root `<nav>` element has `aria-label="breadcrumb"`.
+- `BreadcrumbPage` (current page item) has `aria-current="page"`.
+- `BreadcrumbSeparator` has `aria-hidden="true"` to avoid redundant screen reader output.
+- `BreadcrumbEllipsis` has `aria-hidden="true"`.

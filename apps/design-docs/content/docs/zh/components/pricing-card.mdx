@@ -1,0 +1,132 @@
+---
+title: 价格卡片 (PricingCard)
+description: 可组合的价格卡片组件，具有毛玻璃质感的页头、徽章、价格展示和功能列表插槽。
+---
+
+## 概览 (Overview)
+
+`PricingCard` 提供了一个带有可组合子组件的命名空间，用于构建价格卡片。它包含毛玻璃效果的页头、方案名称、可选徽章、支持划线价的价格展示，以及带有关联分隔符的功能列表。
+
+## 安装 (Installation)
+
+```tsx
+import { PricingCard } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 基础价格卡片 (Basic pricing card)
+
+```tsx
+import { Check } from "lucide-react";
+import { PricingCard } from "@nebutra/ui/primitives";
+
+<PricingCard.Card>
+  <PricingCard.Header>
+    <PricingCard.Plan>
+      <PricingCard.PlanName>专业版 (Pro)</PricingCard.PlanName>
+      <PricingCard.Badge>最热门 (Popular)</PricingCard.Badge>
+    </PricingCard.Plan>
+    <PricingCard.Price>
+      <PricingCard.MainPrice>$29</PricingCard.MainPrice>
+      <PricingCard.Period>/月</PricingCard.Period>
+    </PricingCard.Price>
+    <PricingCard.Description>按工作区计费，按年结算</PricingCard.Description>
+  </PricingCard.Header>
+  <PricingCard.Body>
+    <PricingCard.List>
+      <PricingCard.ListItem>
+        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+        无限项目
+      </PricingCard.ListItem>
+      <PricingCard.ListItem>
+        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+        优先技术支持
+      </PricingCard.ListItem>
+    </PricingCard.List>
+  </PricingCard.Body>
+</PricingCard.Card>
+```
+
+### 带有原始价格（划线价） (With original price)
+
+```tsx
+<PricingCard.Price>
+  <PricingCard.OriginalPrice>$49</PricingCard.OriginalPrice>
+  <PricingCard.MainPrice>$29</PricingCard.MainPrice>
+  <PricingCard.Period>/月</PricingCard.Period>
+</PricingCard.Price>
+```
+
+### 带有分隔符（锁定功能） (With separator)
+
+```tsx
+<PricingCard.Body>
+  <PricingCard.List>
+    <PricingCard.ListItem>
+      <Check className="h-4 w-4 text-primary" />
+      5 个项目
+    </PricingCard.ListItem>
+  </PricingCard.List>
+  <PricingCard.Separator>升级以解锁 (Upgrade to unlock)</PricingCard.Separator>
+  <PricingCard.List>
+    <PricingCard.ListItem className="opacity-50">
+      <Lock className="h-4 w-4" />
+      无限项目
+    </PricingCard.ListItem>
+  </PricingCard.List>
+</PricingCard.Body>
+```
+
+### 计划名称中带有图标 (With icon in plan name)
+
+```tsx
+import { Zap } from "lucide-react";
+
+<PricingCard.PlanName>
+  <Zap />
+  专业版 (Pro)
+</PricingCard.PlanName>
+```
+
+## 组件列表 (Components)
+
+| 子组件 | 对应 HTML 元素 | 描述 |
+|--------------|-------------|-------------|
+| `PricingCard.Card` | `<div>` | 卡片外部容器 |
+| `PricingCard.Header` | `<div>` | 毛玻璃效果的页头区域 |
+| `PricingCard.Plan` | `<div>` | 包含方案名称和徽章的行 |
+| `PricingCard.PlanName` | `<div>` | 方案名称（支持图标 + 标签） |
+| `PricingCard.Badge` | `<span>` | 圆角胶囊样式的徽章 |
+| `PricingCard.Description` | `<p>` | 副标题/描述文本 |
+| `PricingCard.Price` | `<div>` | 价格所在的行容器 |
+| `PricingCard.MainPrice` | `<span>` | 粗体显示的主要价格数值 |
+| `PricingCard.Period` | `<span>` | 计费周期文字（如 `/月`） |
+| `PricingCard.OriginalPrice` | `<span>` | 带有删除线的原始价格 |
+| `PricingCard.Body` | `<div>` | 功能列表区域 |
+| `PricingCard.List` | `<ul>` | 功能列表容器 |
+| `PricingCard.ListItem` | `<li>` | 单个功能项（图标 + 文字） |
+| `PricingCard.Separator` | `<div>` | 带有居中标签文字的分隔线 |
+
+## 属性 (Props)
+
+所有子组件均继承其底层 HTML 元素的属性。
+
+### PricingCard.Header 特有属性
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `glassEffect` | `boolean` | `true` | 是否应用渐变毛玻璃遮盖效果 |
+
+### PricingCard.Separator 特有属性
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `children` | `string` | `"Upgrade to access"` | 分隔线上的标签文字 |
+
+## 注意事项 (Notes)
+
+- 为了提供更大的灵活性，各组件也支持不带命名空间模式的导出（如 `PricingCardRoot`, `PricingCardHeader` 等）。
+- `PlanName` 组件会自动将图标大小设为 `size-4`，除非图标自带显式的尺寸类名。
+- 页头的毛玻璃效果采用 `linear-gradient` 叠加层 —— 在略微深色或柔和的背景上效果最佳。
+走

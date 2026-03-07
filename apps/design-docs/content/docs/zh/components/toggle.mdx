@@ -1,0 +1,67 @@
+---
+title: "开关按钮 (Toggle)"
+description: "一个可以切换开启或关闭状态的双态按钮。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <Toggle aria-label="切换加粗 (Toggle bold)" size="lg">
+    <Bold className="size-4" />
+  </Toggle>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import { Toggle } from "@nebutra/ui";
+```
+
+## 属性 (Props)
+
+| 属性 | 类型 | 默认值 | 描述 |
+| ---------------- | ----------------------------- | ----------- | ------------------------------------------------ |
+| `pressed`        | `boolean`                     | —           | 受控的按钮按下状态。 |
+| `defaultPressed` | `boolean`                     | `false`     | 初始按钮按下状态（非受控）。 |
+| `onPressedChange`| `(pressed: boolean) => void`  | —           | 状态改变时的回调函数。 |
+| `variant`        | `"default" \| "outline"`      | `"default"` | 视觉变体。 |
+| `size`           | `"default" \| "sm" \| "lg"`   | `"default"` | 尺寸变体。 |
+| `disabled`       | `boolean`                     | `false`     | 禁用开关按钮。 |
+| `asChild`        | `boolean`                     | `false`     | 作为子元素渲染。 |
+
+## 示例 (Examples)
+
+### 轮廓变体 (Outline Variant)
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <Toggle variant="outline" aria-label="切换斜体 (Toggle italic)" size="lg">
+    <Italic className="size-4" />
+  </Toggle>
+</ComponentPreview>
+```
+
+### 受控模式 (Controlled)
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <Toggle aria-pressed="true" defaultPressed size="lg" className="w-[80px]">
+    开启 (On)
+  </Toggle>
+</ComponentPreview>
+```
+
+### 文本开关 (Text Toggle)
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <Toggle aria-label="切换下划线 (Toggle underline)" size="sm">
+    下划线 (Underline)
+  </Toggle>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+Toggle 渲染一个带有 `aria-pressed` 属性的 `<button>`。当开关按钮仅包含图标时，请提供 `aria-label`。键盘操作：使用 `Space` 或 `Enter` 键激活。
+走

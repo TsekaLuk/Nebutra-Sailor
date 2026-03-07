@@ -1,0 +1,102 @@
+---
+title: "动画光束 (Animated Beam)"
+description: "在两个 DOM 元素之间绘制动画发光光束。非常适合用于集成图表、数据流可视化和连接展示。"
+---
+
+## 使用方法 (Usage)
+
+```tsx
+import { AnimatedBeam } from "@nebutra/ui/primitives";
+```
+
+## 示例 (Examples)
+
+### 基础连接 (Basic Connection)
+
+```tsx
+function BeamDemo() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const fromRef = useRef<HTMLDivElement>(null);
+  const toRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div ref={containerRef} className="relative flex justify-between p-16">
+      <div ref={fromRef} className="rounded-full bg-blue-500 p-4">
+        A
+      </div>
+      <div ref={toRef} className="rounded-full bg-purple-500 p-4">
+        B
+      </div>
+      <AnimatedBeam
+        containerRef={containerRef}
+        fromRef={fromRef}
+        toRef={toRef}
+      />
+    </div>
+  );
+}
+```
+
+### 弯曲光束 (Curved Beam)
+
+```tsx
+<AnimatedBeam
+  containerRef={containerRef}
+  fromRef={fromRef}
+  toRef={toRef}
+  curvature={50}
+/>
+```
+
+### 自定义颜色 (Custom Colors)
+
+```tsx
+<AnimatedBeam
+  containerRef={containerRef}
+  fromRef={fromRef}
+  toRef={toRef}
+  gradientStartColor="#00ff88"
+  gradientStopColor="#0066ff"
+  pathColor="rgba(0,100,255,0.2)"
+/>
+```
+
+### 反向运行 (Reversed Direction)
+
+```tsx
+<AnimatedBeam
+  containerRef={containerRef}
+  fromRef={fromRef}
+  toRef={toRef}
+  reverse
+/>
+```
+
+## 属性 (Props)
+
+| 属性 | 类型 | 默认值 | 描述 |
+| -------------------- | ------------------------ | ----------- | -------------------------------------------------- |
+| `containerRef`       | `RefObject<HTMLElement>` | —           | 包围容器的 Ref |
+| `fromRef`            | `RefObject<HTMLElement>` | —           | 起始元素的 Ref |
+| `toRef`              | `RefObject<HTMLElement>` | —           | 结束元素的 Ref |
+| `curvature`          | `number`                 | `0`         | 贝塞尔曲线高度（像素），正数表示向下弯曲 |
+| `reverse`            | `boolean`                | `false`     | 反转光束的移动方向 |
+| `duration`           | `number`                 | 随机 4–7    | 动画持续时间（秒） |
+| `delay`              | `number`                 | `0`         | 启动延迟（秒） |
+| `pathColor`          | `string`                 | `"gray"`    | 静态路径线的颜色 |
+| `pathWidth`          | `number`                 | `2`         | 路径线的宽度 |
+| `pathOpacity`        | `number`                 | `0.2`       | 静态路径的透明度 |
+| `gradientStartColor` | `string`                 | `"#ffaa40"` | 光束渐变的起始颜色 |
+| `gradientStopColor`  | `string`                 | `"#9c40ff"` | 光束渐变的结束颜色 |
+| `startXOffset`       | `number`                 | `0`         | 相对于起始元素中心的 X 偏移 |
+| `startYOffset`       | `number`                 | `0`         | 相对于起始元素中心的 Y 偏移 |
+| `endXOffset`         | `number`                 | `0`         | 相对于结束元素中心的 X 偏移 |
+| `endYOffset`         | `number`                 | `0`         | 相对于结束元素中心的 Y 偏移 |
+| `className`          | `string`                 | —           | SVG 上的额外 CSS 类名 |
+
+## 注意事项 (Notes)
+
+- 该组件渲染一个绝对定位的 SVG，填充整个容器。
+- 使用 `ResizeObserver` 在容器尺寸变化时更新路径。
+- 同一个容器上可以堆叠多个光束。
+走

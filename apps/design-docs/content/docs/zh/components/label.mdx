@@ -1,0 +1,87 @@
+---
+title: "标签 (Label)"
+description: "基于 Radix UI Label 原语构建的可访问表单标签组件。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+  <div className="space-y-6 max-w-sm w-full p-4 border rounded-xl shadow-sm">
+    <div className="space-y-2">
+      <Label htmlFor="email">电子邮箱地址 (Email address)</Label>
+      <Input id="email" type="email" placeholder="you@example.com" />
+    </div>
+
+    <div className="flex items-center space-x-2">
+      <Checkbox id="terms" />
+      <Label htmlFor="terms">接受条款和条件 (Accept terms and conditions)</Label>
+    </div>
+  </div>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import { Label } from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+继承自 `@radix-ui/react-label` 的 `Root` 属性 (即继承自 `React.LabelHTMLAttributes<HTMLLabelElement>`)。
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `htmlFor` | `string` | — | 通过控件的 `id` 将标签链接到其对应的控件 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 标签文本 |
+
+## 示例 (Examples)
+
+### 必填字段标签 (Required Field Label)
+
+```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <div className="space-y-2 w-full max-w-sm">
+    <Label htmlFor="name">
+      全名 (Full name)
+      <span className="ml-1 text-destructive" aria-hidden="true">*</span>
+    </Label>
+    <Input id="name" required aria-required="true" />
+  </div>
+</ComponentPreview>
+```
+
+### 带有描述的标签 (Label with Description)
+
+```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+  <div className="space-y-1 w-full max-w-sm">
+    <Label htmlFor="bio">个人简介 (Bio)</Label>
+    <p id="bio-hint" className="text-xs text-muted-foreground mb-2">
+      请简要介绍一下您自己。最多 200 个字符。 (Tell us a bit about yourself. Max 200 characters.)
+    </p>
+    <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
+  </div>
+</ComponentPreview>
+```
+
+### 禁用的标签 (Disabled Label)
+
+```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <div className="space-y-2 w-full max-w-sm">
+    <Label htmlFor="disabled-input" className="opacity-50 cursor-not-allowed">
+      禁用的字段 (Disabled field)
+    </Label>
+    <Input id="disabled-input" disabled />
+  </div>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Label 构建 —— 渲染为原生 `<label>` 元素。
+- 点击标签会通过 `htmlFor` 将焦点转移到关联的控件上。
+- 当关联控件被禁用时，标签会自动反映禁用的光标状态。
+- 不要使用 `<span>` 或 `<div>` 作为标签 —— 始终使用此 `Label` 组件。
+走

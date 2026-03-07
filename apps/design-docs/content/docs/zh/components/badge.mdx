@@ -1,0 +1,213 @@
+---
+title: "徽标 (Badge)"
+description: "用于状态、分类或计数的紧凑标签。支持 22 种颜色变体、3 种尺寸、图标插槽、状态圆点以及链接 (asChild) 模式。"
+---
+
+<ComponentPreview className="gap-3">
+  <Badge variant="default">进行中</Badge>
+  <Badge variant="outline">预览</Badge>
+  <Badge variant="destructive">已废弃</Badge>
+</ComponentPreview>
+
+## 引入 (Import)
+
+```tsx
+import { Badge } from "@nebutra/ui/primitives";
+```
+
+---
+
+## 尺寸 (Sizes)
+
+通过 `size` 属性控制三种尺寸：
+
+| `size` | 字体大小 | 内边距         | 使用场景                        |
+| ------ | ---- | --------------- | ------------------------------- |
+| `sm`   | 10px | `px-1.5 py-px`  | 紧凑的 UI, 表格单元格           |
+| `md`   | 12px | `px-2.5 py-0.5` | 默认 — 大多数环境               |
+| `lg`   | 14px | `px-3 py-1`     | 突出的标签, 头图区域            |
+
+```tsx
+<ComponentPreview className="gap-3 items-center">
+  <Badge size="sm">小 (Small)</Badge>
+  <Badge size="md">中 (Medium)</Badge>
+  <Badge size="lg">大 (Large)</Badge>
+</ComponentPreview>
+```
+
+---
+
+## 语义变体 (Semantic Variants)
+
+使用品牌语义标记的状态驱动变体。
+
+```tsx
+<ComponentPreview className="gap-2 flex-wrap">
+  <Badge variant="default">激活 (Active)</Badge>
+  <Badge variant="secondary">草稿 (Draft)</Badge>
+  <Badge variant="outline">测试 (Beta)</Badge>
+  <Badge variant="success">已部署 (Deployed)</Badge>
+  <Badge variant="warning">降级 (Degraded)</Badge>
+  <Badge variant="info">信息 (Info)</Badge>
+  <Badge variant="error">失败 (Failed)</Badge>
+  <Badge variant="destructive">危险 (Danger)</Badge>
+</ComponentPreview>
+```
+
+---
+
+## 颜色变体 (Color Variants)
+
+Geist 风格色板变体 — 每种色调都有实色和柔和 (边框) 版本。
+
+### 实色 (Solid)
+
+```tsx
+<Badge variant="gray">灰色</Badge>
+<Badge variant="blue">蓝色</Badge>
+<Badge variant="purple">紫色</Badge>
+<Badge variant="amber">琥珀色</Badge>
+<Badge variant="red">红色</Badge>
+<Badge variant="pink">粉色</Badge>
+<Badge variant="green">绿色</Badge>
+<Badge variant="teal">青色</Badge>
+<Badge variant="inverted">反色</Badge>
+```
+
+### 柔和 (Subtle/outline)
+
+带彩色边框的透明背景 — 适用于彩色表面上方。
+
+```tsx
+<Badge variant="gray-subtle">灰色</Badge>
+<Badge variant="blue-subtle">蓝色</Badge>
+<Badge variant="purple-subtle">紫色</Badge>
+<Badge variant="amber-subtle">琥珀色</Badge>
+<Badge variant="red-subtle">红色</Badge>
+<Badge variant="pink-subtle">粉色</Badge>
+<Badge variant="green-subtle">绿色</Badge>
+<Badge variant="teal-subtle">青色</Badge>
+```
+
+---
+
+## 带图标 (With Icon)
+
+将任何 ReactNode 传递给 `icon` 属性。 图标会自动调整为 12×12px。
+
+```tsx
+import { CheckCircle, AlertTriangle, Zap, Globe } from "lucide-react"
+
+<Badge variant="success" icon={<CheckCircle />}>已验证</Badge>
+<Badge variant="warning" icon={<AlertTriangle />}>审核中</Badge>
+<Badge variant="blue" icon={<Zap />}>专业版</Badge>
+<Badge variant="gray" icon={<Globe />}>公开</Badge>
+```
+
+---
+
+## 带状态圆点 (With Status Dot)
+
+`dot` 属性在标签前渲染一个 6×6px 的彩色圆点。 可与语义变体协同工作。
+
+```tsx
+<Badge variant="success" dot>在线</Badge>
+<Badge variant="warning" dot>降级</Badge>
+<Badge variant="error" dot>停机</Badge>
+<Badge variant="outline" dot>待处理</Badge>
+```
+
+---
+
+## 链接徽标 (Link Badge - asChild)
+
+使用 `asChild` 将徽标渲染为锚点元素，以实现可点击的徽标。
+
+```tsx
+import Link from "next/link"
+
+<Badge asChild variant="blue-subtle">
+  <Link href="/changelog">v2.4.0</Link>
+</Badge>
+
+<Badge asChild variant="purple" size="sm">
+  <a href="https://docs.nebutra.com" target="_blank" rel="noopener noreferrer">
+    文档 ↗
+  </a>
+</Badge>
+```
+
+---
+
+## 上下文应用 (In Context)
+
+### 表格状态列 (Table status column)
+
+```tsx
+<TableRow>
+  <TableCell>部署 #1024</TableCell>
+  <TableCell>
+    <Badge variant="success" dot>
+      成功
+    </Badge>
+  </TableCell>
+</TableRow>
+```
+
+### 通知计数 (Notification count)
+
+```tsx
+<div className="relative inline-flex">
+  <Bell className="h-5 w-5" />
+  <Badge
+    variant="red"
+    size="sm"
+    className="absolute -top-2 -right-2 h-4 w-4 justify-center p-0 text-[10px]"
+  >
+    3
+  </Badge>
+</div>
+```
+
+### 功能标签 (Feature tag)
+
+```tsx
+<h2 className="flex items-center gap-2">
+  AI 助手
+  <Badge variant="purple" size="sm">
+    Beta版
+  </Badge>
+</h2>
+```
+
+---
+
+## 属性 (Props)
+
+| 属性        | 类型                   | 默认值     | 描述                                       |
+| ----------- | ---------------------- | ----------- | ------------------------------------------------- |
+| `variant`   | 见下方              | `"default"` | 颜色 / 语义变体                          |
+| `size`      | `"sm" \| "md" \| "lg"` | `"md"`      | 尺寸预设                                       |
+| `icon`      | `ReactNode`            | —           | 渲染在标签前的图标，自动调整大小至 12×12px |
+| `dot`       | `boolean`              | `false`     | 在标签前渲染一个 6px 的状态圆点             |
+| `asChild`   | `boolean`              | `false`     | 通过 Radix Slot 渲染为子元素           |
+| `className` | `string`               | —           | 额外的 CSS 类名                            |
+| `children`  | `ReactNode`            | —           | 徽标标签文本                                       |
+
+### 变体值 (Variant values)
+
+**语义 (Semantic):** `default` `secondary` `destructive` `outline` `success` `warning` `info` `error`
+
+**实色 (Color solid):** `gray` `blue` `purple` `amber` `red` `pink` `green` `teal` `inverted`
+
+**柔和 (Color subtle):** `gray-subtle` `blue-subtle` `purple-subtle` `amber-subtle` `red-subtle` `pink-subtle` `green-subtle` `teal-subtle`
+
+---
+
+## 可访问性 (Accessibility)
+
+- 默认情况下渲染为 `<div>` — 不可交互。
+- 针对可点击的徽标，可以将 `asChild` 结合原生 `<a>` 或 Next.js 的 `<Link>` 一起使用。
+- 针对动态状态更新，请在父容器添加 `aria-live="polite"` 属性。
+- 当用作通知计数时，请在触发元素上配对使用 `aria-label`。
+- `dot` 和 `icon` 插槽默认带有 `aria-hidden="true"` — 因为标签文本已提供了可访问的无障碍名称。

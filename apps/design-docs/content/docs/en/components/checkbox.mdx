@@ -1,0 +1,78 @@
+---
+title: "Checkbox"
+description: "A control that toggles between checked and unchecked, with optional indeterminate state."
+---
+
+<ComponentPreview className="gap-3">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">Accept terms and conditions</Label>
+</ComponentPreview>
+
+## Overview
+
+`Checkbox` is a Geist Design System implementation via [21st.dev](https://21st.dev), providing a fully-accessible toggle control with checked, unchecked, and indeterminate states. Supports dark mode via `--ds-gray-*` CSS variables.
+
+## Usage
+
+```tsx
+import { Checkbox } from "@nebutra/ui/primitives";
+```
+
+## Examples
+
+### Default
+
+```tsx
+const [checked, setChecked] = useState(false);
+
+<Checkbox checked={checked} onChange={(v) => setChecked(v)}>
+  Option 1
+</Checkbox>
+```
+
+### Disabled
+
+```tsx
+<ComponentPreview className="gap-6">
+  <div className="flex items-center gap-2">
+    <Checkbox disabled id="d1" />
+    <Label htmlFor="d1">Disabled</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <Checkbox checked disabled id="d2" />
+    <Label htmlFor="d2">Disabled Checked</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <Checkbox disabled indeterminate id="d3" />
+    <Label htmlFor="d3">Disabled Indeterminate</Label>
+  </div>
+</ComponentPreview>
+```
+
+### Indeterminate
+
+```tsx
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <Checkbox indeterminate id="i1" />
+    <Label htmlFor="i1">Option 1</Label>
+  </div>
+</ComponentPreview>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | `false` | Checked state |
+| `onChange` | `(checked: boolean) => void` | — | Callback when toggled |
+| `disabled` | `boolean` | `false` | Disable the checkbox |
+| `indeterminate` | `boolean` | `false` | Show indeterminate (dash) state |
+| `children` | `ReactNode` | — | Label text |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Hidden native `<input type="checkbox">` with `aria-label`
+- Keyboard: parent `<div>` is clickable (toggle on click)
+- Disabled state prevents interaction and grays out the control

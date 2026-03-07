@@ -1,0 +1,78 @@
+---
+title: "Introduction"
+description: "Nebutra Design System — a unified UI foundation extracted from production Nebutra applications."
+---
+
+<IntroductionHero />
+
+---
+
+## Foundations
+
+The core visual identity, design tokens, and foundational rules that govern our product ecosystem.
+
+<CardGroup cols={3}>
+  <Card title="Brand Assets" icon="fingerprint" href="/design-system/foundations/brand">Logo usage, #0033FE / #0BF1C3 color specs, brand gradients, and official typography. Sourced from the 云毓智能 VI manual.</Card>
+  <Card title="Color" icon="palette" href="/design-system/foundations/color">Semantic color tokens, dark-mode mappings, and Tailwind CSS 4 `@theme` variables.</Card>
+  <Card title="Typography" icon="type" href="/design-system/foundations/typography">Poppins (EN) and vivo Sans (CN) type scales, weights, and line-height rules.</Card>
+  <Card title="Grid & Layout" icon="layout-grid" href="/design-system/foundations/grid">12-column fluid grid, container widths, spacing scale, and common layout patterns.</Card>
+  <Card title="Theming" icon="sun-moon" href="/design-system/foundations/theming">Light / dark mode architecture using CSS variables and `next-themes`.</Card>
+  <Card title="Icons" icon="sparkles" href="/design-system/foundations/icons">Lucide icon library integration, sizing conventions, and stroke-width rules.</Card>
+</CardGroup>
+
+---
+
+## Primitives
+
+The foundational React components that serve as the building blocks for all Nebutra applications.
+
+<CardGroup cols={2}>
+  <Card title="Atom Primitives" icon="circle" href="/design-system/components/introduction">**57 foundational elements** — Button, Input, Badge, Avatar, and Card. Precision-engineered components that map directly to `@nebutra/ui` exports.</Card>
+  <Card title="Compositions" icon="puzzle" href="/design-system/fragment-components/introduction">**18 assembled blocks** — MetricCard, PageHeader, FilterBar, and EmptyState. Production-ready, composite sections built entirely from primitive elements.</Card>
+</CardGroup>
+
+---
+
+## Patterns
+
+High-level layout and interaction conventions used across all Nebutra apps.
+
+<CardGroup cols={2}>
+  <Card title="UI Patterns" icon="layers" href="/design-system/ui-patterns/introduction">Forms, tables, navigation, modality, charts, and empty-state patterns.</Card>
+  <Card title="Accessibility" icon="accessibility" href="/design-system/foundations/accessibility">WCAG 2.1 AA compliance checklist, focus management, and ARIA conventions.</Card>
+</CardGroup>
+
+---
+
+## Principles
+
+<AccordionGroup>
+  <Accordion title="Production-obsessed source of truth">
+    Every token, component, and pattern documented here is extracted from live, shipped code. We do not design in a vacuum. If a pattern isn't serving users in production, it doesn't exist here.
+  </Accordion>
+  <Accordion title="Systemic reuse over rogue creation">
+    Before engineering a new component, rigorously search the primitives catalogue. If a close match exists, extend it through the variant API. Systemic fragmentation is the enemy of enterprise scale.
+  </Accordion>
+  <Accordion title="Abstract, don't refactor">
+    New code follows the system immediately. Existing code migrates gradually.
+    We do not hold up shipping to achieve perfect consistency everywhere at once.
+  </Accordion>
+  <Accordion title="No inline CSS">
+    All styling uses design tokens (CSS variables), Tailwind utility classes, or component `variant` props.
+    Inline `style=` is forbidden except for truly dynamic values (e.g. chart colours at runtime).
+  </Accordion>
+  <Accordion title="Minimal scope — only high-frequency UI is formalised">
+    We document components and patterns that appear on 3 or more distinct pages.
+    One-off UI stays local to the feature — it does not belong in the system.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Package Reference
+
+| Package | Contents | Import |
+|---------|----------|--------|
+| `@nebutra/ui` | All atom + pattern components | `import { Button } from "@nebutra/ui"` |
+| `@nebutra/tokens` | Raw design tokens (JS/CSS) | `import tokens from "@nebutra/tokens"` |
+| `@nebutra/tailwind-preset` | Shared Tailwind config | `tailwind.config.ts → presets` |

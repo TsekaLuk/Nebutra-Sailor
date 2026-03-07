@@ -15,10 +15,9 @@ export interface MenuTriggerProps
   chevron?: boolean;
 }
 
-export interface MenuContentProps
-  extends React.ComponentPropsWithoutRef<
-    typeof DropdownMenuPrimitive.Content
-  > {}
+export type MenuContentProps = React.ComponentPropsWithoutRef<
+  typeof DropdownMenuPrimitive.Content
+>;
 
 export interface MenuItemProps {
   /** Icon or element rendered to the left of the label */
@@ -176,7 +175,7 @@ function MenuItem({
       <DropdownMenuPrimitive.Item
         asChild
         disabled={isUnavailable}
-        onSelect={onSelect}
+        {...(onSelect !== undefined && { onSelect })}
         className={cn(itemBaseClass, className)}
       >
         <a href={href}>{inner}</a>
@@ -187,7 +186,7 @@ function MenuItem({
   return (
     <DropdownMenuPrimitive.Item
       disabled={isUnavailable}
-      onSelect={onSelect}
+      {...(onSelect !== undefined && { onSelect })}
       className={cn(itemBaseClass, className)}
     >
       {inner}

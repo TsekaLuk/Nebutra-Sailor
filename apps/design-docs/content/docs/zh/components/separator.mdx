@@ -1,0 +1,98 @@
+---
+title: "分隔线 (Separator)"
+description: "内容区块之间的视觉或语义分隔线，基于 Radix UI 构建。"
+---
+
+## 演示 (Demo)
+
+```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <div className="space-y-4 w-80">
+    <div>
+      <h4 className="text-sm font-medium">Nebutra 设计系统 (Nebutra Design System)</h4>
+      <p className="text-sm text-muted-foreground">为现代应用打造的可组合 UI。 (Composable UI for modern apps.)</p>
+    </div>
+    <Separator />
+    <div className="flex gap-4 text-sm h-5 items-center">
+      <span>博客 (Blog)</span>
+      <Separator orientation="vertical" />
+      <span>文档 (Docs)</span>
+      <Separator orientation="vertical" />
+      <span>源码 (Source)</span>
+    </div>
+  </div>
+</ComponentPreview>
+```
+
+## 使用方法 (Usage)
+
+```tsx
+import { Separator } from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+继承自 `@radix-ui/react-separator` 的 `Root` 属性。
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 分隔线的方向 |
+| `decorative` | `boolean` | `true` | 为 `true` 时，分隔线具有 `aria-hidden` 属性（仅用于装饰） |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 示例 (Examples)
+
+### 水平分隔线 (Horizontal Separator)
+
+```tsx
+<ComponentPreview className="min-h-[150px] flex flex-col items-center justify-center p-8 w-full max-w-md mx-auto">
+  <div className="w-full text-center">
+    <p>第一部分内容 (Section one content)</p>
+  </div>
+  <Separator className="my-4" />
+  <div className="w-full text-center">
+    <p>第二部分内容 (Section two content)</p>
+  </div>
+</ComponentPreview>
+```
+
+### Flex 行中的垂直分隔线 (Vertical Separator in Flex Row)
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <div className="flex items-center gap-3 h-5 text-sm">
+    <span>首页 (Home)</span>
+    <Separator orientation="vertical" />
+    <span>关于 (About)</span>
+    <Separator orientation="vertical" />
+    <span>联系我们 (Contact)</span>
+  </div>
+</ComponentPreview>
+```
+
+### 语义化的分隔线 (Semantic Separator)
+
+```tsx
+{/* decorative={false} 会向屏幕阅读器公开 role="separator" 属性 */}
+<Separator decorative={false} />
+```
+
+### 带有标签 (With Label)
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center w-full max-w-sm">
+  <div className="relative w-full">
+    <Separator />
+    <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-fd-background px-2 text-xs text-muted-foreground">
+      或 (OR)
+    </span>
+  </div>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 默认情况下 `decorative={true}` 会设置 `aria-hidden="true"` 和 `role="none"` —— 屏幕阅读器不可见。
+- `decorative={false}` 会设置 `role="separator"` 并带有 `aria-orientation`，用于标识语义上的内容边界。
+- 仅当分隔线传达有意义的结构信息时，才使用 `decorative={false}`。
+走

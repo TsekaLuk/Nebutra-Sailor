@@ -1,0 +1,112 @@
+---
+title: 主题切换器 (ThemeSwitcher)
+description: 精简的胶囊型切换按钮，用于在浅色、深色及系统主题间切换。可集成 next-themes 或任何受控状态。
+---
+
+## 使用方法 (Usage)
+
+```tsx
+import { ThemeSwitcher } from "@nebutra/ui";
+
+// 非受控模式 (Uncontrolled)
+<ThemeSwitcher defaultValue="system" onChange={(theme) => console.log(theme)} />
+
+// 受控模式 (Controlled)
+const [theme, setTheme] = useState("system");
+<ThemeSwitcher value={theme} onChange={setTheme} />
+```
+
+## 示例 (Examples)
+
+### 配合 next-themes 使用 (With next-themes)
+
+这是最常见的集成模式 —— 直接连接到 `next-themes`：
+
+```tsx
+import { useTheme } from "next-themes";
+import { ThemeSwitcher } from "@nebutra/ui";
+
+function AppThemeSwitcher() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <ThemeSwitcher
+      value={theme as "light" | "dark" | "system"}
+      onChange={setTheme}
+    />
+  );
+}
+```
+
+### 独立受控模式 (Standalone Controlled)
+
+```tsx
+const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
+
+<ThemeSwitcher value={theme} onChange={setTheme} />
+```
+
+### 带有默认值的非受控模式 (Uncontrolled with Default)
+
+```tsx
+<ThemeSwitcher defaultValue="dark" />
+```
+
+### 自定义图标 (Custom Icons)
+
+你可以用自定义图标替换默认图标（显示器、太阳、月亮）：
+
+```tsx
+import { Laptop, Sparkles, CloudMoon } from "lucide-react";
+
+<ThemeSwitcher
+  icons={{
+    system: Laptop,
+    light: Sparkles,
+    dark: CloudMoon,
+  }}
+/>
+```
+
+### 自定义无障碍标签 (Custom Accessibility Labels)
+
+```tsx
+<ThemeSwitcher
+  labels={{
+    system: "遵循设备偏好",
+    light: "切换至浅色模式",
+    dark: "切换至深色模式",
+  }}
+/>
+```
+
+### 在导航栏中使用 (In a Navbar)
+
+```tsx
+<nav className="flex items-center justify-between px-6 py-3">
+  <Logo />
+  <div className="flex items-center gap-4">
+    <Links />
+    <ThemeSwitcher value={theme} onChange={setTheme} />
+  </div>
+</nav>
+```
+
+## 属性 (Props)
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `"light" \| "dark" \| "system"` | — | 受控的主题数值 |
+| `defaultValue` | `"light" \| "dark" \| "system"` | `"system"` | 非受控模式下的初始值 |
+| `onChange` | `(theme: ThemeSwitcherValue) => void` | — | 用户选择主题时触发的回调 |
+| `icons` | `{ system?: ElementType; light?: ElementType; dark?: ElementType }` | Monitor, Sun, Moon | 各模式对应的自定义图标组件 |
+| `labels` | `{ system?: string; light?: string; dark?: string }` | — | 各按钮的无障碍标签 |
+| `className` | `string` | — | 容器的额外 Tailwind 类名 |
+
+## 注意事项 (Notes)
+
+- **注水安全 (Hydration-safe)**：该组件在服务器端及首次渲染时会渲染一个骨架占位符，以防止 SSR 注水不匹配。实际的主题按钮仅在挂载后显示。
+- 受控模式下（集成 next-themes 或个人状态）请配合使用 `value` + `onChange`。
+- 非受控模式下单独使用 `defaultValue`，此时 ThemeSwitcher 会自行管理状态。
+- 图标会接收用于控制颜色和尺寸 (`h-3.5 w-3.5`) 的 `className` —— 自定义图标组件必须能够接收并处理这些属性。
+走

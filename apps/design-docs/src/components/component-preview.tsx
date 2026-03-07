@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
+import { cn } from "@nebutra/ui/utils";
 
 interface ComponentPreviewProps {
   children: ReactNode;
@@ -17,10 +18,14 @@ export function ComponentPreview({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="my-6 rounded-xl border bg-card">
-      {/* Preview area — not-prose prevents Tailwind Typography from adding margins to inner <img> elements */}
+    <div className="my-8 overflow-hidden rounded-xl border border-[var(--neutral-6)] bg-card shadow-sm">
+      {/* Preview area with subtle dot grid background */}
       <div
-        className={`not-prose flex flex-wrap items-center justify-center p-8 ${className ?? ""}`}
+        className={cn(
+          "not-prose relative flex min-h-[350px] w-full flex-wrap items-center justify-center p-10",
+          "bg-[radial-gradient(var(--neutral-6)_1px,transparent_1px)] [background-size:16px_16px]",
+          className
+        )}
       >
         {children}
       </div>

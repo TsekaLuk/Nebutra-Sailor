@@ -1,0 +1,116 @@
+---
+title: "弹出框 (Popover)"
+description: "锚定在触发元素上的浮动内容容器，基于 Radix UI 构建。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="outline">打开弹出框 (Open Popover)</Button>
+    </PopoverTrigger>
+    <PopoverContent className="w-72">
+      <div className="space-y-2">
+        <h4 className="font-medium leading-none">尺寸 (Dimensions)</h4>
+        <p className="text-sm text-muted-foreground">
+          设置图层的尺寸。 (Set the dimensions for the layer.)
+        </p>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverAnchor,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### Popover (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | 受控的打开状态 |
+| `defaultOpen` | `boolean` | `false` | 非受控的默认打开状态 |
+| `onOpenChange` | `(open: boolean) => void` | — | 打开状态改变时的回调函数 |
+| `modal` | `boolean` | `false` | 是否使用模态行为 |
+
+### PopoverTrigger (触发器)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | 将属性合并到直接子元素上 |
+| `children` | `ReactNode` | — | 触发元素 |
+
+### PopoverContent (内容区)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | 首选打开侧 |
+| `sideOffset` | `number` | `4` | 距离触发器的距离 |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | 沿触发器的对齐方式 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 弹出框主体内容 |
+
+## 示例 (Examples)
+
+### 设置弹出框 (Settings Popover)
+
+```tsx
+import { Settings } from "lucide-react"
+import { Switch, Label } from "@nebutra/ui/primitives"
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <Settings className="h-4 w-4" />
+      </Button>
+    </PopoverTrigger>
+    <PopoverContent side="right" align="start" className="w-64">
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <Label htmlFor="notifications">通知 (Notifications)</Label>
+          <Switch id="notifications" />
+        </div>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="marketing">营销邮件 (Marketing emails)</Label>
+          <Switch id="marketing" />
+        </div>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+```
+
+### 受控弹出框 (Controlled Popover)
+
+```tsx
+<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+  <Popover defaultOpen={true}>
+    <PopoverTrigger asChild>
+      <Button>切换弹出框 (Toggle Popover)</Button>
+    </PopoverTrigger>
+    <PopoverContent>
+      <p className="mb-4 text-sm">受控弹出框内容。 (Controlled popover content.)</p>
+      <Button variant="outline" size="sm">关闭 (Close)</Button>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Popover 构建 —— `PopoverContent` 具有 `role="dialog"` 属性。
+- 触发器具有 `aria-expanded` 和 `aria-haspopup="dialog"` 属性。
+- 打开时焦点移入弹出框；关闭时焦点返回触发器。
+- 按下 `Escape` 键关闭弹出框。
+- 默认情况下，点击弹出框外部会将其关闭。

@@ -1,0 +1,125 @@
+---
+title: Bento 网格 (BentoGrid)
+description: 响应式 Bento 风格网格容器，带有具有背景插槽、图标和悬停显示 CTA 的 BentoCard 条目。
+---
+
+## 使用方法 (Usage)
+
+```tsx
+import { BentoGrid, BentoCard } from "@nebutra/ui";
+import { Sparkles } from "lucide-react";
+
+<BentoGrid>
+  <BentoCard
+    name="AI 集成"
+    description="将 AI 无缝集成到您的工作流中"
+    Icon={Sparkles}
+    href="/features/ai"
+    cta="了解更多"
+  />
+</BentoGrid>;
+```
+
+## 示例 (Examples)
+
+### 基础网格 (Basic Grid)
+
+```tsx
+import { Sparkles, Zap, Lock } from "lucide-react";
+
+<BentoGrid>
+  <BentoCard
+    name="AI 驱动"
+    description="内置智能，从您的工作流中不断学习。"
+    Icon={Sparkles}
+    className="lg:col-span-2"
+    href="/features/ai"
+    cta="探索 AI 功能"
+  />
+  <BentoCard
+    name="闪电般飞速"
+    description="秒级响应，全球分布式分发。"
+    Icon={Zap}
+    href="/features/performance"
+    cta="查看测试数据"
+  />
+  <BentoCard
+    name="企业级安全"
+    description="通过 SOC 2 Type II 认证。符合 GDPR 标准。"
+    Icon={Lock}
+    href="/features/security"
+    cta="查看合规性"
+  />
+</BentoGrid>;
+```
+
+### 带有背景插槽 (With Background Slot)
+
+`background` 属性接受任何 ReactNode —— 可以使用渐变、图像或动画组件：
+
+```tsx
+<BentoCard
+  name="波动可视化"
+  description="为您的数据流提供实时音频可视化。"
+  Icon={Radio}
+  background={
+    <div className="absolute inset-0 opacity-60">
+      <WaveAnimation position="absolute" />
+    </div>
+  }
+  href="/features/streams"
+/>
+```
+
+### 自定义行/列跨度 (Custom Row/Column Span)
+
+使用 `className` 控制网格布局：
+
+```tsx
+<BentoGrid className="lg:grid-cols-3">
+  <BentoCard
+    name="宽屏 (Wide)"
+    description="..."
+    Icon={Maximize}
+    className="lg:col-span-2 lg:row-span-2"
+  />
+  <BentoCard
+    name="纵向 (Tall)"
+    description="..."
+    Icon={ArrowUp}
+    className="lg:row-span-2"
+  />
+  <BentoCard name="常规 (Normal)" description="..." Icon={Square} />
+  <BentoCard name="常规 (Normal)" description="..." Icon={Circle} />
+</BentoGrid>
+```
+
+## 属性 (Props)
+
+### BentoGrid (网格容器)
+
+| 属性 | 类型 | 默认值 | 描述 |
+| ----------- | ----------- | ------- | -------------------------- |
+| `children`  | `ReactNode` | — | BentoCard 条目 |
+| `className` | `string`    | — | 覆盖网格列/行 |
+
+默认网格：`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`，`auto-rows-[22rem]`，`gap-4`。
+
+### BentoCard (网格条目)
+
+| 属性 | 类型 | 默认值 | 描述 |
+| ------------- | ------------------- | -------------- | ------------------------------------------------------ |
+| `name`        | `string`            | — | 卡片标题 |
+| `description` | `string`            | — | 卡片描述文本 |
+| `Icon`        | `React.ElementType` | — | 图标组件（显示在标题上方） |
+| `background`  | `ReactNode`         | — | 背景插槽 —— 绝对定位在内容后方 |
+| `href`        | `string`            | — | CTA 链接 URL |
+| `cta`         | `string`            | `"了解更多"` | CTA 按钮文本 |
+| `className`   | `string`            | — | 网格跨度类名 (`lg:col-span-2` 等) |
+
+## 注意事项 (Notes)
+
+- 在**桌面端** (lg)，CTA 按钮初始状态下是隐藏的，通过向上滑动悬停显示。
+- 在**移动端**，CTA 始终显示在描述下方。
+- 背景插槽渲染在卡片顶部的 `div` 容器中 —— 在背景内部使用 `absolute inset-0` 定位以实现全覆盖。
+- 悬停时图标会缩小至 75% (`group-hover:scale-75`)，且内容会向上滑动 (`group-hover:-translate-y-10`)。

@@ -1,0 +1,110 @@
+---
+title: "条目 (Entity)"
+description: "显示最多两列内容。左列可以包含任意内容，右列通常包含控件或操作项。"
+---
+
+<Note>
+  交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-entity--docs) 中查看。
+</Note>
+
+## 概览 (Overview)
+
+`Entity` 是一个具有三个区域的横向行布局：`left`（头像、图标等）、内容区域 (`Entity.Content`) 和 `right`（操作项、元数据）。`Entity.List` 将多个行包裹在一个带边框的 `<ul>` 中。
+
+## 安装 (Installation)
+
+```tsx
+import { Entity } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 默认用法 (Default)
+
+```tsx
+import { Entity } from "@nebutra/ui/primitives";
+import { Avatar } from "@nebutra/ui/primitives";
+
+<Entity
+  left={<Avatar size={32} username="evilrabbit" />}
+  right={<p className="text-sm text-muted-foreground">1小时前已连接 (Connected 1h ago)</p>}
+>
+  <Entity.Content
+    title="Evil Rabbit"
+    description="@Glenn Hitchcock (@gin)"
+    fill
+  />
+</Entity>
+```
+
+### 实体列表 (Entity.List)
+
+使用 `Entity.List` 作为容器，并在每个 `Entity` 行上通过 `as="li"` 属性。
+
+```tsx
+<Entity.List>
+  <Entity
+    as="li"
+    right={<Button size="small" variant="outline">拒绝 (Decline)</Button>}
+  >
+    <Entity.Content
+      title="MacBook Pro 上的 GitHub Desktop"
+      description="刚刚使用过"
+      fill
+    />
+  </Entity>
+  <Entity
+    as="li"
+    right={<Button size="small" variant="outline">拒绝 (Decline)</Button>}
+  >
+    <Entity.Content
+      title="Windows 11 上的 VS Code"
+      description="10分钟前使用过"
+      fill
+    />
+  </Entity>
+</Entity.List>
+```
+
+### 结合 Skeleton（加载状态） (With Skeleton)
+
+```tsx
+<Entity>
+  <div className="flex flex-1 flex-col gap-2">
+    <Skeleton className="h-4 w-full" />
+    <div className="flex gap-2">
+      <Skeleton className="h-4 w-16" />
+      <Skeleton className="h-4 w-14" />
+    </div>
+  </div>
+</Entity>
+```
+
+## 属性 (Props)
+
+### `Entity`
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `as` | `React.ElementType` | `"div"` | 覆盖根元素（例如在 `Entity.List` 内部时设为 `"li"`） |
+| `left` | `ReactNode` | — | 左侧插槽 —— 头像、图标或其他前置内容 |
+| `right` | `ReactNode` | — | 右侧插槽 —— 操作项、元数据或其他后置内容 |
+| `children` | `ReactNode` | — | 通常为一个或多个 `Entity.Content` 区块 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### `Entity.Content`
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `title` | `string` | — | **必填。** 主要标签 |
+| `description` | `ReactNode` | — | 显示在标题下方的辅助文本 |
+| `fill` | `boolean` | `false` | 为 `true` 时，该区块将展开以填满可用的水平空间 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### `Entity.List`
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | 带有 `as="li"` 的 `Entity` 行 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+走

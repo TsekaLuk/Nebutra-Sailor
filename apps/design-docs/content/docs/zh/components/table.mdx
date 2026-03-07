@@ -1,0 +1,126 @@
+---
+title: "表格 (Table)"
+description: "用于显示结构化表格数据的语义化 HTML 表格组件。"
+---
+
+## 演示 (Demo)
+
+```tsx
+<ComponentPreview className="min-h-[400px] flex justify-center items-center w-full max-w-3xl">
+  <Table>
+    <TableCaption>您最近的发票列表。 (A list of your recent invoices.)</TableCaption>
+    <TableHeader>
+      <TableRow>
+        <TableHead>发票 (Invoice)</TableHead>
+        <TableHead>状态 (Status)</TableHead>
+        <TableHead>支付方式 (Method)</TableHead>
+        <TableHead className="text-right">金额 (Amount)</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell className="font-medium">INV-001</TableCell>
+        <TableCell>已支付 (Paid)</TableCell>
+        <TableCell>信用卡 (Credit Card)</TableCell>
+        <TableCell className="text-right">$250.00</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell className="font-medium">INV-002</TableCell>
+        <TableCell>等待中 (Pending)</TableCell>
+        <TableCell>银行转账 (Bank Transfer)</TableCell>
+        <TableCell className="text-right">$150.00</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell className="font-medium">INV-003</TableCell>
+        <TableCell>未支付 (Unpaid)</TableCell>
+        <TableCell>PayPal</TableCell>
+        <TableCell className="text-right">$350.00</TableCell>
+      </TableRow>
+    </TableBody>
+    <TableFooter>
+      <TableRow>
+        <TableCell colSpan={3}>总计 (Total)</TableCell>
+        <TableCell className="text-right">$750.00</TableCell>
+      </TableRow>
+    </TableFooter>
+  </Table>
+</ComponentPreview>
+```
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+所有表格组件均继承其原生 HTML 元素属性。
+
+| 组件 | 对应元素 | 核心属性 |
+|-----------|---------|-----------|
+| `Table` | `<table>` | `className` |
+| `TableHeader` | `<thead>` | `className` |
+| `TableBody` | `<tbody>` | `className` |
+| `TableFooter` | `<tfoot>` | `className` |
+| `TableHead` | `<th>` | `className`, `scope` |
+| `TableRow` | `<tr>` | `className` |
+| `TableCell` | `<td>` | `className`, `colSpan`, `rowSpan` |
+| `TableCaption` | `<caption>` | `className` |
+
+## 示例 (Examples)
+
+### 可排序的表头 (Sortable Table Header)
+
+```tsx
+<TableHead
+  className="cursor-pointer select-none"
+  onClick={() => toggleSort("amount")}
+>
+  <div className="flex items-center gap-1">
+    金额 (Amount)
+    {sortColumn === "amount" && (
+      sortDirection === "asc" ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
+    )}
+  </div>
+</TableHead>
+```
+
+### 带有状态徽标的表格 (Table with Status Badges)
+
+```tsx
+<TableCell>
+  <Badge variant={invoice.status === "Paid" ? "default" : "destructive"}>
+    {invoice.status === "Paid" ? "已支付" : "未支付"}
+  </Badge>
+</TableCell>
+```
+
+### 可滚动的表格 (Scrollable Table)
+
+```tsx
+<div className="rounded-md border">
+  <ScrollArea className="h-72">
+    <Table>
+      {/* 表格内容 (Table content) */}
+    </Table>
+  </ScrollArea>
+</div>
+```
+
+## 可访问性 (Accessibility)
+
+- 使用语义化的 HTML 表格元素 —— 屏幕阅读器完全支持 `<table>`、`<thead>`、`<th>`、`<td>`。
+- `TableCaption` 通过 `<caption>` 元素提供表格的描述信息。
+- 对于复杂的表格，`TableHead` (`<th>`) 单元格应设置 `scope="col"` 或 `scope="row"`。
+- 对于可排序的列，请在活动的表头上添加 `aria-sort="ascending"` 或 `aria-sort="descending"` 属性。
+走

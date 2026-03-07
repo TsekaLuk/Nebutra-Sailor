@@ -1,0 +1,160 @@
+---
+title: "Context Menu"
+description: "Right-click context menu with support for icons, shortcuts, disabled items, and link mode."
+---
+
+## Overview
+
+`ContextMenu` is a right-click context menu built on Radix ContextMenu. It supports prefix icons, suffix hints (shortcuts/badges), disabled items, link mode, and labeled groups.
+
+## Installation
+
+```tsx
+import { ContextMenu } from "@nebutra/ui/primitives";
+```
+
+## Usage
+
+### Default
+
+```tsx
+import { ContextMenu } from "@nebutra/ui/primitives"
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+  <ContextMenu.Root>
+    <ContextMenu.Trigger asChild>
+      <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">Right-click here</div>
+    </ContextMenu.Trigger>
+    <ContextMenu.Content>
+      <ContextMenu.Item onSelect={() => {}}>Edit</ContextMenu.Item>
+      <ContextMenu.Item onSelect={() => {}}>Duplicate</ContextMenu.Item>
+      <ContextMenu.Item onSelect={() => {}}>Delete</ContextMenu.Item>
+    </ContextMenu.Content>
+  </ContextMenu.Root>
+</ComponentPreview>
+```
+
+### With prefix icons
+
+```tsx
+import { Edit2, Trash2, Copy } from "lucide-react"
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+  <ContextMenu.Root>
+    <ContextMenu.Trigger asChild>
+      <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">Right-click here</div>
+    </ContextMenu.Trigger>
+    <ContextMenu.Content>
+      <ContextMenu.Item prefix={<Edit2 className="h-4 w-4" />} onSelect={() => {}}>
+        Edit
+      </ContextMenu.Item>
+      <ContextMenu.Item prefix={<Copy className="h-4 w-4" />} onSelect={() => {}}>
+        Copy
+      </ContextMenu.Item>
+      <ContextMenu.Separator />
+      <ContextMenu.Item prefix={<Trash2 className="h-4 w-4" />} onSelect={() => {}}>
+        Delete
+      </ContextMenu.Item>
+    </ContextMenu.Content>
+  </ContextMenu.Root>
+</ComponentPreview>
+```
+
+### With suffix hints (shortcuts)
+
+```tsx
+<ContextMenu.Item
+  prefix={<Edit2 className="h-4 w-4" />}
+  suffix={<span className="text-xs text-muted-foreground">⌘E</span>}
+  onSelect={() => {}}
+>
+  Edit
+</ContextMenu.Item>
+```
+
+### With labels and sections
+
+```tsx
+<ContextMenu.Content>
+  <ContextMenu.Label>Actions</ContextMenu.Label>
+  <ContextMenu.Item onSelect={() => {}}>Edit</ContextMenu.Item>
+  <ContextMenu.Item onSelect={() => {}}>Copy</ContextMenu.Item>
+  <ContextMenu.Separator />
+  <ContextMenu.Label>Danger</ContextMenu.Label>
+  <ContextMenu.Item
+    onSelect={() => {}}
+    className="text-destructive focus:text-destructive"
+  >
+    Delete
+  </ContextMenu.Item>
+</ContextMenu.Content>
+```
+
+### Link mode
+
+Items with `href` render as `<a>` tags:
+
+```tsx
+<ContextMenu.Item value="docs" href="/docs" prefix={<Link className="h-4 w-4" />}>
+  Documentation
+</ContextMenu.Item>
+```
+
+### Disabled items
+
+```tsx
+<ContextMenu.Item disabled onSelect={() => {}}>
+  Paste
+</ContextMenu.Item>
+```
+
+## Props
+
+### ContextMenu.Root
+
+Accepts all Radix `ContextMenu.Root` props.
+
+### ContextMenu.Trigger
+
+Accepts all Radix `ContextMenu.Trigger` props. Use `asChild` to make any element the trigger.
+
+### ContextMenu.Content
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+Accepts all Radix `ContextMenu.Content` props.
+
+### ContextMenu.Item
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | Item label |
+| `onSelect` | `() => void` | — | Called on click or keyboard selection (maps to Radix `onSelect`). Not fired when `href` is set. |
+| `disabled` | `boolean` | `false` | Disables interaction |
+| `href` | `string` | — | Renders item as `<a>` link; navigation is the selection action |
+| `prefix` | `ReactNode` | — | Element before the label (icon) |
+| `suffix` | `ReactNode` | — | Element after the label (shortcut/badge) |
+| `className` | `string` | — | Additional CSS classes |
+
+### ContextMenu.Label
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | Label text |
+| `className` | `string` | — | Additional CSS classes |
+
+### ContextMenu.Separator
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Built on Radix ContextMenu — fully keyboard navigable.
+- Arrow keys move between items; `Enter` or `Space` selects.
+- `Escape` closes the menu.
+- Disabled items are skipped by keyboard navigation.
+- Screen readers announce the menu via `role="menu"` and items via `role="menuitem"`.

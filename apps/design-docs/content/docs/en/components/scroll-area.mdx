@@ -1,0 +1,84 @@
+---
+title: "Scroll Area"
+description: "Custom scrollable container with styled scrollbars, built on Radix UI."
+---
+
+## Demo
+
+<ComponentPreview className="min-h-[350px] flex items-center justify-center">
+  <ScrollArea className="h-72 w-48 rounded-md border text-left">
+    <div className="p-4">
+      <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
+      {Array.from({ length: 50 }, (_, i) => `Tag ${i + 1}`).map((tag, i, tags) => (
+        <React.Fragment key={tag}>
+          <div className="text-sm">{tag}</div>
+          {i < tags.length - 1 && <Separator className="my-2" />}
+        </React.Fragment>
+      ))}
+    </div>
+  </ScrollArea>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+import { ScrollArea, ScrollBar } from "@nebutra/ui/primitives"
+```
+
+## Props
+
+### ScrollArea
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"auto" \| "always" \| "scroll" \| "hover"` | `"hover"` | When to show the scrollbar |
+| `scrollHideDelay` | `number` | `600` | Delay in ms before hiding scroll bar |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Scrollable content |
+
+### ScrollBar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Scrollbar orientation |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### Horizontal Scroll Area
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex items-center justify-center w-full">
+  <ScrollArea className="w-full max-w-[400px] whitespace-nowrap rounded-md border text-left mb-6">
+    <div className="flex w-max space-x-4 p-4">
+      {Array.from({ length: 10 }, (_, i) => (
+        <figure key={i} className="shrink-0">
+          <div className="h-40 w-40 rounded-md bg-muted flex items-center justify-center text-muted-foreground">Image {i+1}</div>
+        </figure>
+      ))}
+    </div>
+    <ScrollBar orientation="horizontal" />
+  </ScrollArea>
+</ComponentPreview>
+```
+
+### Fixed Height Content List
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex items-center justify-center pt-2">
+  <ScrollArea className="h-[250px] w-[350px] rounded-md border text-left">
+    {Array.from({ length: 15 }, (_, i) => (
+      <div key={i} className="p-4 border-b last:border-0 border-border/50 hover:bg-muted/50 transition-colors">
+        <p className="text-sm font-medium mb-1">Notification {i+1}</p>
+        <p className="text-xs text-muted-foreground">{10 * (i+1)} minutes ago</p>
+      </div>
+    ))}
+  </ScrollArea>
+</ComponentPreview>
+```
+
+## Accessibility
+
+- Scroll area content is accessible to keyboard and screen reader users — native scrolling semantics are preserved.
+- The custom scrollbar is `aria-hidden="true"` — it is purely visual.
+- Focus remains on content elements within the scroll area, not the scrollbar itself.

@@ -1,0 +1,113 @@
+---
+title: 加载动画 (Spinner)
+description: 多变体加载动画，使用 Lucide 图标和自定义 SVG 动画实现。支持全部 LucideProps 属性以控制尺寸和颜色。
+---
+
+## 使用方法 (Usage)
+
+```tsx
+import { Spinner } from "@nebutra/ui";
+
+<Spinner />
+<Spinner variant="ring" size={32} />
+<Spinner variant="infinite" className="text-primary" />
+```
+
+## 变体 (Variants)
+
+### 默认 (Default)
+
+Lucide `Loader` 图标配合旋转动画 —— 经典的虚线圆圈。
+
+```tsx
+<Spinner variant="default" />
+```
+
+### 圆环 (Circle)
+
+Lucide `LoaderCircle` 图标 —— 实线弧形旋转动画。
+
+```tsx
+<Spinner variant="circle" />
+```
+
+### 风车 (Pinwheel)
+
+Lucide `LoaderPinwheel` 图标 —— 风车式旋转。
+
+```tsx
+<Spinner variant="pinwheel" />
+```
+
+### 实心圆环 (Circle Filled)
+
+由两个重叠的 `LoaderCircle` 图标组成，带有不透明度偏移 —— 营造出深度感。
+
+```tsx
+<Spinner variant="circle-filled" />
+```
+
+### 省略点 (Ellipsis)
+
+三个依次弹跳的圆点，使用原生 SVG `<animate>` 实现。
+
+```tsx
+<Spinner variant="ellipsis" />
+```
+
+### 光圈 (Ring)
+
+向外扩散的脉冲光轮 —— 类似声纳探测波。
+
+```tsx
+<Spinner variant="ring" />
+```
+
+### 柱状图 (Bars)
+
+三个依次缩放的垂直条柱 —— 音频可视化器风格。
+
+```tsx
+<Spinner variant="bars" />
+```
+
+### 无限 (Infinite)
+
+带有虚线描边的动态无限符号。
+
+```tsx
+<Spinner variant="infinite" />
+```
+
+## 尺寸与颜色 (Size and Color)
+
+`Spinner` 继承自 `LucideProps`，因此可以通过 `size` 和 `className` 控制维度和颜色：
+
+```tsx
+<Spinner size={16} className="mr-2 text-white" />
+<Spinner variant="ring" size={48} className="text-blue-500" />
+```
+
+### 在按钮中使用 (In a Button)
+
+```tsx
+<button disabled className="flex items-center gap-2 px-4 py-2">
+  <Spinner size={16} />
+  正在保存... (Saving...)
+</button>
+```
+
+## 属性 (Props)
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "circle" \| "pinwheel" \| "circle-filled" \| "ellipsis" \| "ring" \| "bars" \| "infinite"` | `"default"` | 加载动画风格 |
+| `size` | `number \| string` | `24` | 宽度和高度（像素值，源自 `LucideProps`） |
+| `className` | `string` | — | Tailwind 类名 —— 使用 `text-*` 来控制颜色 |
+
+## 注意事项 (Notes)
+
+- `Spinner` 的所有自定义 SVG 变体均使用 `currentColor` —— 颜色由 Tailwind 的 `text-*` 类名控制。
+- `ellipsis`、`ring`、`bars` 以及 `infinite` 变体使用了原生的 SVG `<animate>` 元素，在支持该属性的浏览器中会遵循系统的“减弱动画”偏好设置。
+- 对于纯文本形式的加载指示器（例如“思考中...”），请改用 `Loader` 组件的 `text-shimmer` 或 `loading-dots` 变体。
+走

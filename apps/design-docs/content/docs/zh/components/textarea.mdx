@@ -1,0 +1,85 @@
+---
+title: "多行文本框 (Textarea)"
+description: "具有一致样式的多行文本输入字段。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="max-w-[400px]">
+  <div className="flex flex-col gap-1.5 w-full">
+    <Label htmlFor="message">消息 (Message)</Label>
+    <Textarea
+      id="message"
+      placeholder="在此输入您的消息... (Write your message here...)"
+      rows={4}
+    />
+  </div>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import { Textarea } from "@nebutra/ui";
+```
+
+## 属性 (Props)
+
+支持原生 `<textarea>` 的所有属性，此外还包括：
+
+| 属性 | 类型 | 默认值 | 描述 |
+| ------------- | --------- | ------- | ------------------------------------------------ |
+| `className`   | `string`  | —       | 额外的 CSS 类名。 |
+| `rows`        | `number`  | `3`     | 可见的行数。 |
+| `disabled`    | `boolean` | `false` | 禁用文本框。 |
+| `placeholder` | `string`  | —       | 占位文本。 |
+| `readOnly`    | `boolean` | `false` | 将文本框设置为只读。 |
+
+## 示例 (Examples)
+
+### 带有字符计数 (With Character Count)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <div className="flex flex-col gap-1 w-full">
+    <Textarea
+      defaultValue=""
+      placeholder="在此输入... (Type here...)"
+      maxLength={500}
+    />
+    <span className="text-xs text-muted-foreground text-right w-full">
+      0/500
+    </span>
+  </div>
+</ComponentPreview>
+```
+
+### 禁用状态 (Disabled)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <div className="w-full">
+    <Textarea disabled value="该字段为只读状态 (This field is read-only)" />
+  </div>
+</ComponentPreview>
+```
+
+### 在表单中使用 (In a Form)
+
+```tsx
+<FormField name="bio">
+  <FormItem>
+    <FormLabel>简介 (Bio)</FormLabel>
+    <FormControl>
+      <Textarea placeholder="向大家介绍一下你自己 (Tell us about yourself)" />
+    </FormControl>
+    <FormMessage />
+  </FormItem>
+</FormField>
+```
+
+## 可访问性 (Accessibility)
+
+通过 `htmlFor`/`id` 与 `<Label>` 关联。支持 `aria-describedby` 以显示表单错误消息。当设置了 `maxLength` 时，会播报字符限制。
+
+如需自动增长行为，请改用 `ExpandingTextarea` 原子组件。
+走

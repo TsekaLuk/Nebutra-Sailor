@@ -1,0 +1,112 @@
+---
+title: "仪表盘 (Gauge)"
+description: "用于传达百分比的圆形视觉组件。"
+---
+
+<Note>
+  交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-gauge--docs) 中查看。
+</Note>
+
+## 概览 (Overview)
+
+`Gauge` 渲染一个 SVG 圆环图，其填充范围为 0–100%。它支持：
+- **自动颜色刻度** —— 根据数值自动从 灰色 → 琥珀色 → 翡翠色 切换
+- **自定义颜色停靠点** —— 可设置任意阈值和 CSS 颜色
+- **中心标签** —— 可显示数字或自定义 `ReactNode`
+- **未定状态 (Indeterminate)** —— 用于未知或加载状态的旋转动画
+
+## 安装 (Installation)
+
+```tsx
+import { Gauge } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 默认用法 (Default)
+
+```tsx
+<Gauge value={72} size={48} />
+```
+
+### 带有标签 (With label)
+
+```tsx
+<Gauge value={72} size={64} label />
+```
+
+### 自定义颜色范围 (Custom color range)
+
+```tsx
+<Gauge
+  value={60}
+  size={64}
+  label
+  colors={[
+    { value: 0,  color: "#ef4444" },
+    { value: 50, color: "#f59e0b" },
+    { value: 80, color: "#22c55e" },
+  ]}
+/>
+```
+
+### 自定义背景环颜色 (Custom secondary color)
+
+```tsx
+<Gauge value={60} size={64} secondaryColor="#dbeafe" label />
+```
+
+### 圆弧优先级 (Arc priority)
+
+控制当两个圆弧重叠时，哪个渲染在上方：
+
+```tsx
+<Gauge value={60} arcPriority="value" />     {/* 默认 */}
+<Gauge value={60} arcPriority="secondary" />
+```
+
+### 未定状态 (Indeterminate)
+
+```tsx
+<Gauge size={48} indeterminate />
+```
+
+## 属性 (Props)
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | 当前值，范围 0–100 |
+| `size` | `number` | `48` | 直径（像素） |
+| `strokeWidth` | `number` | 约尺寸的 10% | 环形的描边宽度（像素） |
+| `label` | `boolean \| ReactNode` | — | 为 `true` 时显示数值；也可以传入 `ReactNode` 作为自定义内容 |
+| `colors` | `GaugeColorStop[]` | 默认刻度 | 自定义颜色停靠点（按 `value` 升序排列） |
+| `secondaryColor` | `string` | muted | 背景轨道圆弧的 CSS 颜色 |
+| `arcPriority` | `"value" \| "secondary"` | `"value"` | 哪个圆弧渲染在顶层 |
+| `indeterminate` | `boolean` | `false` | 显示旋转动画（此时会忽略 `value`） |
+| `className` | `string` | — | 外层容器的额外 CSS 类名 |
+
+### `GaugeColorStop`
+
+```ts
+interface GaugeColorStop {
+  value: number;  // 阈值 0–100
+  color: string;  // 任意 CSS 颜色
+}
+```
+
+将使用 `value` ≤ 当前数值的最高值对应的颜色。
+
+### 默认颜色刻度 (Default color scale)
+
+| 范围 | 颜色 |
+|-------|-------|
+| 0–39 | 灰色 (`hsl(220 9% 46%)`) |
+| 40–74 | 琥珀色 (`hsl(38 92% 50%)`) |
+| 75–100 | 翡翠色 (`hsl(142 71% 45%)`) |
+
+## 可访问性 (Accessibility)
+
+- 根元素具有 `role="meter"`，并带有 `aria-valuenow`, `aria-valuemin`, `aria-valuemax`。
+- 标签文本通过 SVG 的 `<text>` 元素可被屏幕阅读器读取。
+- 未定状态的 Gauge 带有 `aria-label="正在加载 (Loading)"`。
+走

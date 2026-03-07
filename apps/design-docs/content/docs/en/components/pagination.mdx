@@ -1,0 +1,115 @@
+---
+title: "Pagination"
+description: "Page navigation controls for navigating between pages of content."
+---
+
+## Demo
+
+```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem>
+        <PaginationPrevious href="#prev" />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#1">1</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#2" isActive>2</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#3">3</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationEllipsis />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#10">10</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationNext href="#next" />
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>
+</ComponentPreview>
+```
+
+## Usage
+
+```tsx
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+} from "@nebutra/ui/primitives"
+```
+
+## Props
+
+### PaginationLink
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | — | Page navigation URL |
+| `isActive` | `boolean` | `false` | Marks as current page |
+| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"icon"` | Button size |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Page number or label |
+
+### PaginationPrevious / PaginationNext
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | — | Navigation URL |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### Controlled Pagination
+
+```tsx
+function PaginatedList({ totalPages }: { totalPages: number }) {
+  const [page, setPage] = useState(1)
+
+  return (
+    <>
+      <DataList page={page} />
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              aria-disabled={page === 1}
+            />
+          </PaginationItem>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+            <PaginationItem key={p}>
+              <PaginationLink isActive={p === page} onClick={() => setPage(p)}>
+                {p}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              aria-disabled={page === totalPages}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </>
+  )
+}
+```
+
+## Accessibility
+
+- Root `<nav>` has `aria-label="Pagination"`.
+- Active page link has `aria-current="page"`.
+- `PaginationEllipsis` has `aria-hidden="true"`.
+- Previous/Next buttons have descriptive `aria-label` attributes.

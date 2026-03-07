@@ -1,0 +1,77 @@
+---
+title: "描述 (Description)"
+description: "显示简短的标题和副标题，用以传达用户继续操作所需的额外信息或背景。"
+---
+
+<Note>
+  交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-description--docs) 中查看。
+</Note>
+
+## 概览 (Overview)
+
+`Description` 是一个紧凑的“标题 + 副标题”组合块。通过可选的 `tooltip` 属性，可以在标题旁边渲染一个信息图标 —— 悬停或聚焦该图标时，会显示一个包含额外背景信息的 `ContextCard`。
+
+## 安装 (Installation)
+
+```tsx
+import { Description } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 默认用法 (Default)
+
+```tsx
+import { Description } from "@nebutra/ui/primitives"
+
+<Description
+  title="部分标题"
+  content="关于此部分的数据。"
+/>
+```
+
+### 带有工具提示 (With tooltip)
+
+```tsx
+<Description
+  title="部分标题"
+  content="关于此部分的数据。"
+  tooltip="关于此部分所指内容的额外背景信息。"
+/>
+```
+
+### 富文本工具提示内容 (Rich tooltip content)
+
+`tooltip` 属性接受任何 `ReactNode`：
+
+```tsx
+<Description
+  title="部署区域"
+  content="您的工作负载运行在何处。"
+  tooltip={
+    <div className="flex flex-col gap-1">
+      <p className="font-medium">区域选择</p>
+      <p className="text-muted-foreground text-xs">
+        选择离您的用户最近的区域以降低延迟。
+      </p>
+    </div>
+  }
+/>
+```
+
+## 属性 (Props)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `title` | `string` | — | **必填。** 主要标签 / 标题 |
+| `content` | `string` | — | **必填。** 标题下方的辅助文本 |
+| `tooltip` | `ReactNode` | — | 如果提供，则显示一个信息图标，悬停时揭示此内容 |
+| `className` | `string` | — | 包装器的额外 CSS 类名 |
+
+## 可访问性 (Accessibility)
+
+- 工具提示基于 `ContextCard` (Radix Tooltip) 构建，具有 200ms 的悬停延迟。
+- 键盘可达：通过聚焦信息图标来显示工具提示。
+- 屏幕阅读器通过 `role="tooltip"` 播报工具提示内容。
+- 使用 `Escape` 键可关闭工具提示。
+走

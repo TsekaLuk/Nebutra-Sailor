@@ -1,0 +1,172 @@
+---
+title: "How to Use"
+description: "Install and consume the design system in your app."
+---
+
+## Installation
+
+<Steps>
+  <Step title="Add the dependency">
+    The design system is a workspace package. Add it to your app's `package.json`:
+
+    ```json
+    {
+      "dependencies": {
+        "@nebutra/ui": "workspace:*"
+      }
+    }
+    ```
+
+    Then install from the repo root:
+
+    ```bash
+    pnpm install
+    ```
+  </Step>
+
+  <Step title="Wrap your app with DesignSystemProvider">
+    Add the provider to your root layout. This sets up theme context and CSS variables.
+
+    ```tsx
+    // app/layout.tsx (Next.js App Router)
+    import { DesignSystemProvider } from "@nebutra/ui";
+
+    export default function RootLayout({ children }: { children: React.ReactNode }) {
+      return (
+        <html>
+          <body>
+            <DesignSystemProvider>{children}</DesignSystemProvider>
+          </body>
+        </html>
+      );
+    }
+    ```
+  </Step>
+
+  <Step title="Import and use components">
+    All exports are available from the single package entry point:
+
+    ```tsx
+    import { Button, Card, Badge } from "@nebutra/ui";
+
+    export function MyPage() {
+      return (
+        <Card>
+          <Badge variant="secondary">New</Badge>
+          <Button>Get started</Button>
+        </Card>
+      );
+    }
+    ```
+  </Step>
+</Steps>
+
+## Package Structure
+
+The Nebutra design system is organized into a monorepo workspace. Here is a high-level overview of the structure:
+
+<Files>
+  <Folder name="packages" defaultOpen>
+    <Folder name="ui" defaultOpen>
+      <Folder name="src">
+        <Folder name="primitives">
+          <File name="button.tsx" />
+          <File name="card.tsx" />
+          <File name="index.ts" />
+        </Folder>
+        <Folder name="patterns">
+          <File name="page-header.tsx" />
+          <File name="index.ts" />
+        </Folder>
+      </Folder>
+      <File name="package.json" />
+    </Folder>
+    <Folder name="tokens">
+      <File name="package.json" />
+      <File name="colors.ts" />
+    </Folder>
+  </Folder>
+  <Folder name="apps">
+    <Folder name="design-docs">
+      <File name="package.json" />
+    </Folder>
+  </Folder>
+</Files>
+
+## Available Export Paths
+
+<TypeTable
+  type={{
+    '@nebutra/ui': {
+      description: 'All components, hooks, and utilities',
+      type: 'Module',
+    },
+    '@nebutra/ui/theme': {
+      description: 'Color tokens, brand overrides, marketing tokens',
+      type: 'Module',
+    },
+    '@nebutra/ui/typography': {
+      description: 'Font families, type scale, fluid presets',
+      type: 'Module',
+    },
+    '@nebutra/ui/layout': {
+      description: 'UI components only',
+      type: 'Module',
+    },
+    '@nebutra/ui/icons': {
+      description: 'Octicons re-exports',
+      type: 'Module',
+    },
+    '@nebutra/ui/utils': {
+      description: '`cn`, breakpoint helpers',
+      type: 'Module',
+    },
+    '@nebutra/ui/hooks': {
+      description: '`useDesignSystem`, `useTheme`',
+      type: 'Module',
+    },
+  }}
+/>
+
+## Theme Mode
+
+Use `useDesignSystem` to read and toggle the current color mode:
+
+```tsx
+import { useDesignSystem } from "@nebutra/ui";
+
+function ThemeToggle() {
+  const { toggleMode, resolvedMode } = useDesignSystem();
+  return (
+    <button onClick={toggleMode}>
+      {resolvedMode === "dark" ? "Light mode" : "Dark mode"}
+    </button>
+  );
+}
+```
+
+## Brand Overrides
+
+Apply brand-specific colors and typography without touching global tokens:
+
+```tsx
+import { createTheme, DesignSystemProvider } from "@nebutra/ui";
+
+const brandTheme = createTheme("light", {
+  colors: {
+    accent: {
+      fg: "#your-brand-color",
+      emphasis: "#your-brand-emphasis",
+    },
+  },
+  typography: {
+    fontFamily: {
+      normal: '"YourBrandFont", Inter, sans-serif',
+    },
+  },
+});
+
+<DesignSystemProvider theme={brandTheme}>{children}</DesignSystemProvider>
+```
+
+See [Theming](/design-system/foundations/theming) for the full `BrandOverrides` interface.

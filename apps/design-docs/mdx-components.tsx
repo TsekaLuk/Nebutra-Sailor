@@ -1,9 +1,13 @@
 import defaultComponents from "fumadocs-ui/mdx";
 import { Callout } from "fumadocs-ui/components/callout";
+import { Files, Folder, File } from "fumadocs-ui/components/files";
+import { TypeTable } from "fumadocs-ui/components/type-table";
+import { ImageZoom } from "fumadocs-ui/components/image-zoom";
+import { InlineTOC } from "fumadocs-ui/components/inline-toc";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { ComponentPreview } from "@/components/component-preview";
-import { Tab, Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/mdx-tabs";
+import { Tab, Tabs as FumadocsTabs, TabsList as FumadocsTabsList, TabsTrigger as FumadocsTabsTrigger, TabsContent as FumadocsTabsContent } from "@/components/mdx-tabs";
 import {
   Tip,
   Warning,
@@ -12,11 +16,11 @@ import {
   Check,
   Step,
   Steps,
-  Accordion,
-  Accordions,
+  Accordion as FumadocsAccordion,
+  Accordions as FumadocsAccordions,
   AccordionGroup,
-  Card,
-  CardGroup,
+  Card as FumadocsCard,
+  CardGroup as FumadocsCardGroup,
 } from "@/components/mdx-compat";
 import {
   AccordionDemo,
@@ -37,24 +41,142 @@ import {
   TabsDemo,
   TooltipDemo,
 } from "@/components/previews/dynamic-demos";
+import { IconGallery } from "@/components/icon-gallery";
+import { ColorPalette } from "@/components/color-palette";
+import { ColorUsageDemos } from "@/components/color-usage";
+import { TypographyHierarchyDemos, TypeScaleDemo } from "@/components/typography-demos";
+import { BrandGradientsDemo } from "@/components/gradient-demos";
+import { MotionDemos } from "@/components/motion-demos";
+import { IntroductionHero } from "@/components/introduction-hero";
+import { LogoShowcase, BrandPhilosophyVisual } from "@/components/brand-overview-visuals";
+import {
+  HexGridDemo,
+  DotPatternDemo,
+  FlickeringGridDemo,
+  WarpBackgroundDemo,
+  StarsCanvasDemo,
+  GlassmorphismDemo
+} from "@/components/pattern-demos";
+
+// Nebutra UI components (Globally injected into MDX)
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  AvatarGroup,
+  GitHubAvatar,
+  GitLabAvatar,
+  BitbucketAvatar,
+  AvatarWithIcon,
+  DiceBearAvatar,
+  Badge,
+  Button,
+  ButtonLink,
+  Checkbox,
+  CheckboxGroup,
+  Combobox,
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+  DialogOverlay,
+  DialogPortal,
+  Input,
+  Label,
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  Switch,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Separator,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+  ContextMenu,
+  Progress,
+  Skeleton,
+  Slider,
+  Textarea,
+  Sheet, SheetPortal, SheetOverlay, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription,
+  Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription,
+  Popover, PopoverTrigger, PopoverContent, PopoverAnchor,
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuRadioItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuGroup, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuRadioGroup,
+  Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
+  Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator,
+  DatePicker, DateRangePicker,
+  Collapsible, CollapsibleTrigger, CollapsibleContent,
+  HoverCard, HoverCardTrigger, HoverCardContent,
+  CardContent,
+  NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuContent, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, navigationMenuTriggerStyle,
+  Menu,
+} from "@nebutra/ui/primitives";
+
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  CardIcon,
+  CardTitle,
+  CardDescription,
+  Terminal,
+  TerminalHeader,
+  TerminalBody,
+  TerminalLine,
+  CommandBox,
+} from "@nebutra/ui/patterns";
+
+// Common Lucide Icons used in documentation examples
+import {
+  User, UserCircle, CheckCircle2, Search, ChevronsUpDown,
+  ChevronDown, ChevronUp, ChevronRight, ChevronLeft,
+  Edit2, Copy, Trash2, Link as LinkIcon, Check as CheckIcon, Lock, Bell,
+  Clock, Mountain, Timer, Map as MapIcon, TrendingUp, Layers,
+  FileCode, BookOpen, LayoutDashboard, Users, BarChart,
+  Settings, Volume2, ShieldCheck, XCircle, AlertCircle,
+  Zap, Laptop, Sparkles, CloudMoon, X, Plus, Minus
+} from "lucide-react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...defaultComponents,
     // fumadocs built-in
     Callout,
-    // Tabs
+    Files,
+    Folder,
+    File,
+    TypeTable,
+    ImageZoom,
+    InlineTOC,
+    // Tabs (Fumadocs specific)
     Tab,
-    Tabs,
-    TabsList,
-    TabsTrigger,
-    TabsContent,
+    Tabs: FumadocsTabs,
+    TabsList: FumadocsTabsList,
+    TabsTrigger: FumadocsTabsTrigger,
+    TabsContent: FumadocsTabsContent,
     // Steps
     Step,
     Steps,
-    // Accordion
-    Accordion,
-    Accordions,
+    // Accordion (Fumadocs specific)
+    Accordion: FumadocsAccordion,
+    Accordions: FumadocsAccordions,
     // Mintlify compat
     Tip,
     Warning,
@@ -62,8 +184,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Note,
     Check,
     AccordionGroup,
-    Card,
-    CardGroup,
+    Card: FumadocsCard,
+    CardGroup: FumadocsCardGroup,
     // Standard
     Link,
     // Live preview demos
@@ -86,6 +208,115 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TooltipDemo,
     // Custom preview wrapper
     ComponentPreview,
+    IconGallery,
+    ColorPalette,
+    ColorUsageDemos,
+    TypographyHierarchyDemos,
+    TypeScaleDemo,
+    BrandGradientsDemo,
+    MotionDemos,
+    IntroductionHero,
+    LogoShowcase,
+    BrandPhilosophyVisual,
+    HexGridDemo,
+    DotPatternDemo,
+    FlickeringGridDemo,
+    WarpBackgroundDemo,
+    StarsCanvasDemo,
+    GlassmorphismDemo,
+
+    // --- Globally injected Nebutra UI materials ---
+    // These allow direct rendering inside MDX without wrapper files
+    NebutraAccordion: Accordion,
+    AccordionItem,
+    AccordionTrigger,
+    AccordionContent,
+    Avatar,
+    AvatarImage,
+    AvatarFallback,
+    AvatarGroup,
+    GitHubAvatar,
+    GitLabAvatar,
+    BitbucketAvatar,
+    AvatarWithIcon,
+    DiceBearAvatar,
+    Badge,
+    Button,
+    ButtonLink,
+    Checkbox,
+    CheckboxGroup,
+    Combobox,
+    Dialog,
+    DialogTrigger,
+    DialogContent,
+    DialogHeader,
+    DialogFooter,
+    DialogTitle,
+    DialogDescription,
+    DialogClose,
+    DialogOverlay,
+    DialogPortal,
+    Input,
+    Label,
+    Select,
+    SelectGroup,
+    SelectValue,
+    SelectTrigger,
+    SelectContent,
+    SelectLabel,
+    SelectItem,
+    SelectSeparator,
+    Switch,
+    NebutraTabs: Tabs,
+    NebutraTabsList: TabsList,
+    NebutraTabsTrigger: TabsTrigger,
+    NebutraTabsContent: TabsContent,
+    Separator,
+    Tooltip,
+    TooltipTrigger,
+    TooltipContent,
+    TooltipProvider,
+    ContextMenu: ContextMenu as unknown as React.ComponentType<Record<string, unknown>>,
+    Progress,
+    Skeleton,
+    Slider,
+    Textarea,
+    Sheet, SheetPortal, SheetOverlay, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription,
+    Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription,
+    Popover, PopoverTrigger, PopoverContent, PopoverAnchor,
+    DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuRadioItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuGroup, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuRadioGroup,
+    Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
+    Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator,
+    DatePicker, DateRangePicker,
+    Collapsible, CollapsibleTrigger, CollapsibleContent,
+    HoverCard, HoverCardTrigger, HoverCardContent,
+    CardContent,
+    NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuContent, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport,
+    navigationMenuTriggerStyle: () => navigationMenuTriggerStyle(),
+    Menu: Menu as unknown as React.ComponentType<Record<string, unknown>>,
+    NebutraCard: Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    CardIcon,
+    CardTitle,
+    CardDescription,
+    Terminal,
+    TerminalHeader,
+    TerminalBody,
+    TerminalLine,
+    CommandBox,
+
+    // --- Globally injected Lucide Icons ---
+    User, UserCircle, CheckCircle2, Search, ChevronsUpDown,
+    ChevronDown, ChevronUp, ChevronRight, ChevronLeft,
+    Edit2, Copy, Trash2, LinkIcon, CheckIcon, Lock, Bell,
+    Clock, Mountain, Timer, MapIcon, TrendingUp, Layers,
+    FileCode, BookOpen, LayoutDashboard, Users, BarChart,
+    Settings, Volume2, ShieldCheck, XCircle, AlertCircle,
+    Zap, Laptop, Sparkles, CloudMoon, X, Plus, Minus,
+    // ----------------------------------------------
+
     ...components,
   };
 }

@@ -1,0 +1,111 @@
+---
+title: "网格系统 (Grid)"
+description: "在网格布局中展示元素，并可选显示列和行的引导线。"
+---
+
+<Note>
+  交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-grid--docs) 中查看。
+</Note>
+
+## 概览 (Overview)
+
+`Grid.System` 是一个 CSS 网格容器，它通过使用容器的 `border` 颜色作为背景并配合 `gap-px` 来渲染 1px 厚度的引导线。`Grid.Cell` 是网格中的每一项 —— 它的 `bg-background` 填充色会遮盖其下方的引导线背景，从而产生出独特的列/行指示效果。
+
+设置 `showGuides={false}` 可以使用不带引导线的普通 CSS 网格。
+
+## 安装 (Installation)
+
+```tsx
+import { Grid } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 基础网格 (Basic grid)
+
+```tsx
+<Grid.System columns={3}>
+  <Grid.Cell><p>1</p></Grid.Cell>
+  <Grid.Cell><p>2</p></Grid.Cell>
+  <Grid.Cell><p>3</p></Grid.Cell>
+</Grid.System>
+```
+
+### 跨度设置 (Spanning cells)
+
+```tsx
+<Grid.System columns={12}>
+  <Grid.Cell span={8}><p>主要内容 (main)</p></Grid.Cell>
+  <Grid.Cell span={4}><p>侧边栏 (sidebar)</p></Grid.Cell>
+</Grid.System>
+```
+
+### 实色单元格 (Solid cells)
+
+实色单元格使用 `bg-muted` 填充并从视觉上“填满”整个空间，覆盖所有交叉的引导线：
+
+```tsx
+<Grid.System columns={3}>
+  <Grid.Cell solid><p>1</p></Grid.Cell>
+  <Grid.Cell solid><p>2</p></Grid.Cell>
+  <Grid.Cell solid><p>3</p></Grid.Cell>
+</Grid.System>
+```
+
+### 隐藏行引导线 (Hide row guides)
+
+```tsx
+<Grid.System columns={3}>
+  <Grid.Cell hideRowGuides="top"><p>无顶部引导线</p></Grid.Cell>
+  <Grid.Cell hideRowGuides="bottom"><p>无底部引导线</p></Grid.Cell>
+  <Grid.Cell hideRowGuides><p>无行引导线</p></Grid.Cell>
+</Grid.System>
+```
+
+### 隐藏列引导线 (Hide column guides)
+
+```tsx
+<Grid.System columns={3}>
+  <Grid.Cell hideColumnGuides="left"><p>无左侧引导线</p></Grid.Cell>
+  <Grid.Cell hideColumnGuides="right"><p>无右侧引导线</p></Grid.Cell>
+  <Grid.Cell hideColumnGuides><p>无列引导线</p></Grid.Cell>
+</Grid.System>
+```
+
+### 无引导线（普通 CSS 网格） (No guides)
+
+```tsx
+<Grid.System columns={3} showGuides={false} className="gap-4">
+  <Grid.Cell><p>1</p></Grid.Cell>
+  <Grid.Cell><p>2</p></Grid.Cell>
+  <Grid.Cell><p>3</p></Grid.Cell>
+</Grid.System>
+```
+
+## 属性 (Props)
+
+### `Grid.System`
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `columns` | `number` | `12` | 等宽列的数量 |
+| `rowHeight` | `string \| number` | — | `grid-auto-rows` 的 CSS 值 |
+| `showGuides` | `boolean` | `true` | 是否渲染 1px 的引导线 |
+| `children` | `ReactNode` | — | `Grid.Cell` 元素 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### `Grid.Cell`
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `span` | `number` | — | 该单元格跨越的列数 |
+| `solid` | `boolean` | `false` | 使用 `bg-muted` 填充（视觉上覆盖引导线） |
+| `hideRowGuides` | `boolean \| "top" \| "bottom"` | — | 移除该单元格的顶部/底部引导线 |
+| `hideColumnGuides` | `boolean \| "left" \| "right"` | — | 移除该单元格的左侧/右侧引导线 |
+| `children` | `ReactNode` | — | 单元格内容 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 实现说明 (Implementation notes)
+
+引导线通过在容器上设置 `gap-px` 并使用 `bg-border` 作为背景来实现。每个 `Grid.Cell` 则使用 `bg-background`（或实色时的 `bg-muted`）进行填充，从而使 1px 的间隙显现为列/行引导线。这种方案避免了复杂的绝对定位叠加或 SVG 技巧。
+走

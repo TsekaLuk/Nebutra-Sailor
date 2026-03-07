@@ -659,3 +659,18 @@ specific requirements.
 if any, to sign a "copyright disclaimer" for the program, if necessary.
 For more information on this, and how to apply and follow the GNU AGPL, see
 <https://www.gnu.org/licenses/>.
+
+
+------------------------------------------------------------------------
+TRADEMARK POLICY
+
+This license does NOT grant any rights in the trademarks, service marks, logos, 
+or brand assets of Wuxi Yunyu Intelligent Technology Co., Ltd. or Nebutra. 
+
+While the software source code is open-source under the AGPLv3 license, the 
+Nebutra and Nebutra Sailor names, logos, and visual brand identities are 
+protected. They may not be used to endorse or promote products derived from 
+this software without specific prior written permission.
+
+For more details on brand usage, please refer to the BRAND_GUIDELINES.md and 
+TRADEMARK.md files in this repository.

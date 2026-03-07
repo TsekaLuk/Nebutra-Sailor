@@ -1,0 +1,107 @@
+---
+title: "反馈 (Feedback)"
+description: "收集带有情感倾向的文本反馈。支持触发按钮打开的气泡面板以及行内的评价栏。"
+---
+
+<Note>
+  交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-feedback--docs) 中查看。
+</Note>
+
+## 概览 (Overview)
+
+`Feedback` 是一个自包含的反馈小组件。它支持两种显示模式：
+
+- **default (默认)** —— 点击 “Feedback” 触发按钮会打开一个悬浮的气泡面板，面板中包含文本域、可选的话题选择器以及情感按钮。
+- **inline (行内)** —— 一个行内的 “这对您有帮助吗？” 评价栏，带有情感图标。点击某个情感会就地展开表单。
+
+提交逻辑通过 `onSubmit` 回调函数处理 —— 您负责将数据发送到后端。在 UI 开发期间可以使用 `dryRun` 来跳过回调执行。
+
+## 安装 (Installation)
+
+```tsx
+import { Feedback } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 默认用法 (Default)
+
+```tsx
+<Feedback
+  label="my-app"
+  onSubmit={async (payload) => {
+    await fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }}
+/>
+```
+
+### 行内用法 (Inline)
+
+```tsx
+<Feedback label="my-app" type="inline" onSubmit={handleFeedback} />
+```
+
+### 带有话题选择 (With topic select)
+
+```tsx
+<Feedback
+  label="my-app"
+  topics={["缺陷报告 (Bug report)", "功能请求 (Feature request)", "文档问题 (Documentation)", "其他 (Other)"]}
+  onSubmit={handleFeedback}
+/>
+```
+
+### 带有元数据 (With metadata)
+
+```tsx
+<Feedback
+  label="vercel"
+  metadata={{
+    userId: "user_12345",
+    location: "结账后页面 (post-checkout)",
+    orderId: "order_123456",
+  }}
+  onSubmit={handleFeedback}
+/>
+```
+
+### 演练模式（UI 测试） (Dry run)
+
+```tsx
+<Feedback label="my-app" dryRun />
+```
+
+## 属性 (Props)
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `label` | `string` | — | **必填。** 附加到每次提交的 产品/功能 标签 |
+| `type` | `"default" \| "inline"` | `"default"` | 显示变体 |
+| `topics` | `string[]` | — | 下拉选择器中显示的预定义话题 |
+| `metadata` | `Record<string, string>` | — | 附加到提交内容的任意键值对 |
+| `onSubmit` | `(payload: FeedbackPayload) => void \| Promise<void>` | — | 用户提交反馈时的回调 |
+| `dryRun` | `boolean` | `false` | 为 `true` 时，不调用 `onSubmit` 回调 |
+| `className` | `string` | — | 根元素上的额外 CSS 类名 |
+
+## FeedbackPayload (提交负荷接口)
+
+```ts
+interface FeedbackPayload {
+  label: string;
+  emotion?: "happy" | "neutral" | "sad" | "other";
+  message: string;
+  topic?: string;
+  metadata?: Record<string, string>;
+}
+```
+
+## 可访问性 (Accessibility)
+
+- 情感按钮使用了 `aria-label` 和 `aria-pressed`。
+- 气泡面板的关闭按钮标记为 `aria-label="Close feedback"`。
+- 文本域支持获取焦点并可以通过键盘导航。
+- 提交成功后，“谢谢您”的消息会替换掉原表单。
+走

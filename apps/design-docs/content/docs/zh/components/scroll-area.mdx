@@ -1,0 +1,85 @@
+---
+title: "滚动区域 (Scroll Area)"
+description: "带有自定义样式的自定义可滚动容器，基于 Radix UI 构建。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[350px] flex items-center justify-center">
+  <ScrollArea className="h-72 w-48 rounded-md border text-left">
+    <div className="p-4">
+      <h4 className="mb-4 text-sm font-medium leading-none">标签 (Tags)</h4>
+      {Array.from({ length: 50 }, (_, i) => `标签 ${i + 1}`).map((tag, i, tags) => (
+        <React.Fragment key={tag}>
+          <div className="text-sm">{tag}</div>
+          {i < tags.length - 1 && <Separator className="my-2" />}
+        </React.Fragment>
+      ))}
+    </div>
+  </ScrollArea>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import { ScrollArea, ScrollBar } from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### ScrollArea (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `type` | `"auto" \| "always" \| "scroll" \| "hover"` | `"hover"` | 何时显示滚动条 |
+| `scrollHideDelay` | `number` | `600` | 隐藏滚动条前的延迟（毫秒） |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 可滚动内容 |
+
+### ScrollBar (滚动条)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | 滚动条方向 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 示例 (Examples)
+
+### 水平滚动区域 (Horizontal Scroll Area)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex items-center justify-center w-full">
+  <ScrollArea className="w-full max-w-[400px] whitespace-nowrap rounded-md border text-left mb-6">
+    <div className="flex w-max space-x-4 p-4">
+      {Array.from({ length: 10 }, (_, i) => (
+        <figure key={i} className="shrink-0">
+          <div className="h-40 w-40 rounded-md bg-muted flex items-center justify-center text-muted-foreground">图片 (Image) {i+1}</div>
+        </figure>
+      ))}
+    </div>
+    <ScrollBar orientation="horizontal" />
+  </ScrollArea>
+</ComponentPreview>
+```
+
+### 固定高度内容列表 (Fixed Height Content List)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex items-center justify-center pt-2">
+  <ScrollArea className="h-[250px] w-[350px] rounded-md border text-left">
+    {Array.from({ length: 15 }, (_, i) => (
+      <div key={i} className="p-4 border-b last:border-0 border-border/50 hover:bg-muted/50 transition-colors">
+        <p className="text-sm font-medium mb-1">通知 (Notification) {i+1}</p>
+        <p className="text-xs text-muted-foreground">{10 * (i+1)} 分钟前</p>
+      </div>
+    ))}
+  </ScrollArea>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 滚动区域的内容对键盘和屏幕阅读器用户均可访问 —— 保留了原生的滚动语义。
+- 自定义滚动条带有 `aria-hidden="true"` 属性 —— 仅作为视觉参考。
+- 焦点保留在滚动区域内的内容元素上，而不是滚动条本身。
+走

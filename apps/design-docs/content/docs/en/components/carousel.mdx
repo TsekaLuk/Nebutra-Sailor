@@ -1,0 +1,115 @@
+---
+title: "Carousel"
+description: "Horizontal or vertical scrollable content slider with navigation controls."
+---
+
+## Demo
+
+<ComponentPreview className="min-h-[400px] flex items-center justify-center w-full">
+  <Carousel className="w-full max-w-xs">
+    <CarouselContent>
+      {Array.from({ length: 5 }).map((_, index) => (
+        <CarouselItem key={index}>
+          <div className="p-1">
+            <NebutraCard>
+              <CardContent className="flex aspect-square items-center justify-center p-6">
+                <span className="text-4xl font-semibold">{index + 1}</span>
+              </CardContent>
+            </NebutraCard>
+          </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+    <CarouselPrevious />
+    <CarouselNext />
+  </Carousel>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@nebutra/ui/primitives"
+```
+
+## Props
+
+### Carousel (Root)
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Scroll direction |
+| `opts` | `EmblaOptionsType` | — | Embla Carousel options |
+| `plugins` | `EmblaPluginType[]` | — | Embla Carousel plugins |
+| `setApi` | `(api: CarouselApi) => void` | — | Access the Embla carousel API |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Carousel content |
+
+### CarouselItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes. Use `basis-*` to control item width |
+| `children` | `ReactNode` | — | Slide content |
+
+## Examples
+
+### Multiple Items Per View
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex items-center justify-center w-full">
+  <Carousel opts={{ align: "start" }} className="w-full max-w-sm">
+    <CarouselContent>
+      {Array.from({ length: 5 }).map((_, index) => (
+        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+          <div className="p-1">
+            <NebutraCard>
+              <CardContent className="flex aspect-square items-center justify-center p-6">
+                <span className="text-3xl font-semibold">{index + 1}</span>
+              </CardContent>
+            </NebutraCard>
+          </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+    <CarouselPrevious />
+    <CarouselNext />
+  </Carousel>
+</ComponentPreview>
+```
+
+### Vertical Carousel
+
+```tsx
+<ComponentPreview className="min-h-[400px] flex items-center justify-center w-full">
+  <Carousel orientation="vertical" opts={{ align: "start" }} className="w-full max-w-xs">
+    <CarouselContent className="-mt-1 h-[200px]">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <CarouselItem key={index} className="pt-1 md:basis-1/2">
+          <div className="p-1">
+            <NebutraCard>
+              <CardContent className="flex items-center justify-center p-6">
+                <span className="text-3xl font-semibold">{index + 1}</span>
+              </CardContent>
+            </NebutraCard>
+          </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+    <CarouselPrevious />
+    <CarouselNext />
+  </Carousel>
+</ComponentPreview>
+```
+
+## Accessibility
+
+- Navigation buttons (`CarouselPrevious`, `CarouselNext`) have descriptive `aria-label` attributes.
+- The carousel region should have `aria-label` or `aria-labelledby` when used in context.
+- Provide keyboard-accessible alternatives for autoplay carousels.
+- Ensure sufficient color contrast on navigation controls.

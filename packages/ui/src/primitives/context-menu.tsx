@@ -16,7 +16,7 @@ export interface ContextMenuItemProps {
    * Maps to Radix's onSelect — fires for both pointer and keyboard interactions.
    * When `href` is set, navigation itself is the selection action and onSelect is not wired.
    */
-  onSelect?: () => void;
+  onSelect?: (event: Event) => void;
   /** Disable the item */
   disabled?: boolean;
   /** Navigate to this URL when selected (renders as <a>) */
@@ -152,9 +152,8 @@ const ContextMenuItem = React.forwardRef<
   return (
     <ContextMenuPrimitive.Item
       ref={ref}
-      disabled={disabled}
-      // When href is set, navigation is the selection action — don't wire onSelect
-      onSelect={href ? undefined : onSelect}
+      {...(disabled !== undefined && { disabled })}
+      {...(onSelect && !href ? { onSelect } : {})}
       className={cn(
         "relative flex cursor-default select-none items-center rounded-[var(--radius-md)] px-2 py-1.5",
         "text-sm outline-none transition-colors",

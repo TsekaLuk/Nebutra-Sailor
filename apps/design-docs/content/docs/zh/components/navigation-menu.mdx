@@ -1,0 +1,99 @@
+---
+title: "导航菜单 (Navigation Menu)"
+description: "带有浮出式内容面板的水平导航，基于 Radix UI 构建。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start">
+  <NavigationMenu>
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger>立即开始 (Getting Started)</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <ul className="grid gap-3 p-4 w-[400px] md:w-[500px] lg:w-[600px] lg:grid-cols-[.75fr_1fr]">
+            <li className="row-span-3">
+              <NavigationMenuLink className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md" href="/">
+                  <div className="mb-2 mt-4 text-lg font-medium">Nebutra UI</div>
+                  <p className="text-sm leading-tight text-muted-foreground">基于 Radix UI 和 Tailwind CSS 构建的精美组件。 (Beautifully designed components built with Radix UI and Tailwind CSS.)</p>
+              </NavigationMenuLink>
+            </li>
+            <li>
+              <NavigationMenuLink href="/docs/introduction" className="block p-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground outline-none transition-colors">
+                  <div className="font-medium mb-1">简介 (Introduction)</div>
+                  <p className="text-sm text-muted-foreground line-clamp-2">设计系统概述。 (Overview of the design system.)</p>
+              </NavigationMenuLink>
+            </li>
+            <li>
+              <NavigationMenuLink href="/docs/installation" className="block p-3 rounded-md hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground outline-none transition-colors">
+                  <div className="font-medium mb-1">安装 (Installation)</div>
+                  <p className="text-sm text-muted-foreground line-clamp-2">如何安装和配置。 (How to install and configure.)</p>
+              </NavigationMenuLink>
+            </li>
+          </ul>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuLink href="/docs" className="group inline-flex h-10 w-max items-center justify-center rounded-[var(--radius-md)] bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">文档 (Documentation)</NavigationMenuLink>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  NavigationMenuIndicator,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### NavigationMenu (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 菜单方向 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 菜单内容 |
+
+### NavigationMenuTrigger (触发器)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 触发器标签 |
+
+### NavigationMenuContent (内容区)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 浮出面板内容 |
+
+### NavigationMenuLink (链接)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `active` | `boolean` | `false` | 标记为当前页面 |
+| `asChild` | `boolean` | `false` | 将属性合并到子元素上 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 链接内容 |
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Navigation Menu 构建 —— 遵循 WAI-ARIA [揭开式导航模式 (Disclosure Navigation pattern)](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)。
+- `NavigationMenuList` 具有 `role="menubar"` 属性。
+- 带有浮出内容面板的触发器具有 `aria-expanded` 和 `aria-haspopup="true"` 属性。
+- 活动链接具有 `aria-current="page"` 属性。
+- 键盘操作：使用 `Tab` 在条目间导航，使用 `Enter`/`Space` 打开浮出面板，使用 `Escape` 关闭。
+走

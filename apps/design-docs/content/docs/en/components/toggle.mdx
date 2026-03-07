@@ -1,0 +1,66 @@
+---
+title: "Toggle"
+description: "A two-state button that can be toggled on or off."
+---
+
+## Demo
+
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <Toggle aria-label="Toggle bold" size="lg">
+    <Bold className="size-4" />
+  </Toggle>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+import { Toggle } from "@nebutra/ui";
+```
+
+## Props
+
+| Prop             | Type                          | Default     | Description                                      |
+| ---------------- | ----------------------------- | ----------- | ------------------------------------------------ |
+| `pressed`        | `boolean`                     | —           | Controlled pressed state.                        |
+| `defaultPressed` | `boolean`                     | `false`     | Initial pressed state (uncontrolled).            |
+| `onPressedChange`| `(pressed: boolean) => void`  | —           | Callback when pressed state changes.             |
+| `variant`        | `"default" \| "outline"`      | `"default"` | Visual variant.                                  |
+| `size`           | `"default" \| "sm" \| "lg"`   | `"default"` | Size variant.                                    |
+| `disabled`       | `boolean`                     | `false`     | Disables the toggle.                             |
+| `asChild`        | `boolean`                     | `false`     | Render as child element.                         |
+
+## Examples
+
+### Outline Variant
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <Toggle variant="outline" aria-label="Toggle italic" size="lg">
+    <Italic className="size-4" />
+  </Toggle>
+</ComponentPreview>
+```
+
+### Controlled
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <Toggle aria-pressed="true" defaultPressed size="lg" className="w-[80px]">
+    On
+  </Toggle>
+</ComponentPreview>
+```
+
+### Text Toggle
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <Toggle aria-label="Toggle underline" size="sm">
+    Underline
+  </Toggle>
+</ComponentPreview>
+```
+
+## Accessibility
+
+Toggle renders a `<button>` with `aria-pressed`. Provide an `aria-label` when the toggle contains only an icon. Keyboard: `Space` or `Enter` activates.

@@ -292,9 +292,9 @@ function hexToRgba(hex: string): [number, number, number, number] {
   if (!result) return [0, 0, 0, 1];
 
   return [
-    Number.parseInt(result[1], 16) / 255,
-    Number.parseInt(result[2], 16) / 255,
-    Number.parseInt(result[3], 16) / 255,
+    Number.parseInt(result[1] as string, 16) / 255,
+    Number.parseInt(result[2] as string, 16) / 255,
+    Number.parseInt(result[3] as string, 16) / 255,
     1,
   ];
 }

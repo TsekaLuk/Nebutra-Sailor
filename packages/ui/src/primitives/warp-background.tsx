@@ -103,7 +103,7 @@ const Beam: React.FC<BeamProps> = ({ width, x, delay, duration }) => {
           "--width": `${width}`,
           "--aspect-ratio": `${aspectRatio}`,
           "--background": `linear-gradient(hsl(${hue} 80% 60%), transparent)`,
-        } as React.CSSProperties
+        } as any
       }
       className="absolute left-[var(--x)] top-0 [aspect-ratio:1/var(--aspect-ratio)] [background:var(--background)] [width:var(--width)]"
       initial={{ y: "100cqmax", x: "-50%" }}

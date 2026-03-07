@@ -1,0 +1,93 @@
+---
+title: 魔法卡片 (MagicCard)
+description: 带有渐变聚光灯和发光边框效果的卡片，视觉效果会追随鼠标指针。非常适合用于价格卡片和特色功能的高亮。
+---
+
+## 使用方法 (Usage)
+
+```tsx
+import { MagicCard } from "@nebutra/ui";
+
+<MagicCard className="rounded-xl p-6">
+  <h3 className="text-xl font-bold">专业版方案 (Pro Plan)</h3>
+  <p className="mt-2 text-muted-foreground">$49/月</p>
+</MagicCard>
+```
+
+## 示例 (Examples)
+
+### 基础卡片 (Basic Card)
+
+```tsx
+<MagicCard className="rounded-xl p-8 cursor-pointer">
+  <h3 className="text-xl font-semibold">移动您的鼠标 (Move your mouse)</h3>
+  <p className="mt-2 text-sm text-muted-foreground">
+    渐变效果会追随您的光标移动。
+  </p>
+</MagicCard>
+```
+
+### 自定义渐变颜色 (Custom Gradient Colors)
+
+```tsx
+<MagicCard
+  gradientFrom="#00C6FF"
+  gradientTo="#0072FF"
+  gradientColor="#0a1a3e"
+  className="rounded-xl p-8"
+>
+  <h3 className="text-xl font-semibold">蓝色主题 (Blue Theme)</h3>
+</MagicCard>
+```
+
+### 价格卡片 (Pricing Card)
+
+```tsx
+<MagicCard className="rounded-2xl p-8 cursor-pointer w-72">
+  <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-primary">
+    最受欢迎 (Most Popular)
+  </div>
+  <div className="text-3xl font-bold">$49<span className="text-lg text-muted-foreground">/月</span></div>
+  <div className="mt-6 space-y-3">
+    {["无限项目", "API 访问权限", "优先技术支持"].map((f) => (
+      <div key={f} className="flex items-center gap-2 text-sm">
+        <Check className="h-4 w-4 text-primary" />
+        {f}
+      </div>
+    ))}
+  </div>
+  <button className="mt-6 w-full rounded-lg bg-primary py-2 text-sm font-medium text-primary-foreground">
+    开启使用 (Get started)
+  </button>
+</MagicCard>
+```
+
+### 魔法卡片网格 (Grid of Magic Cards)
+
+```tsx
+<div className="grid grid-cols-3 gap-4">
+  <MagicCard className="rounded-xl p-6 cursor-pointer">...</MagicCard>
+  <MagicCard className="rounded-xl p-6 cursor-pointer">...</MagicCard>
+  <MagicCard className="rounded-xl p-6 cursor-pointer">...</MagicCard>
+</div>
+```
+
+## 属性 (Props)
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | 卡片内容 |
+| `gradientSize` | `number` | `200` | 聚光灯渐变的半径（像素） |
+| `gradientColor` | `string` | `"#262626"` | 内部聚光灯填充的颜色 |
+| `gradientOpacity` | `number` | `0.8` | 内部聚光灯的透明度 |
+| `gradientFrom` | `string` | `"#9E7AFF"` | 边框渐变效果的起始颜色 |
+| `gradientTo` | `string` | `"#FE8BBB"` | 边框渐变效果的结束颜色 |
+| `className` | `string` | — | 应用于外部包装容器 |
+
+## 注意事项 (Notes)
+
+- `MagicCard` 会将子元素包裹在一个 `relative rounded-[inherit]` 的容器中 —— 应该通过 `className` 来设置圆角半径。
+- 渐变边框仅在光标位于卡片上方时可见（通过 `onPointerMove` 进行追踪）。
+- 当光标离开卡片、窗口失去焦点或标签页处于隐藏状态时，聚光灯效果会自动重置到屏幕外。
+- 为了确保边框效果显示正常，请确保父元素没有裁剪溢出内容（overflow clip）。
+走

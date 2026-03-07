@@ -1,0 +1,182 @@
+---
+title: "Modality"
+description: "Patterns for dialogs, drawers, sheets, and overlay surfaces."
+---
+
+## When to Use
+
+Modal surfaces interrupt the primary flow to demand focused attention. Use them when the user must respond before continuing, or when a task requires context that would disrupt the current view if rendered inline.
+
+| Surface | Use when |
+|---|---|
+| `Dialog` | Compact confirmation, destructive action, critical decision — no scrolling |
+| `Sheet` | Form or detail panel that slides in from a screen edge — can scroll |
+| `Drawer` | Navigation or contextual sidebar — opens beside content |
+| `AnchoredOverlay` / `Popover` | Contextual actions anchored to a trigger — stays near the trigger |
+
+Do not use a modal for:
+- Navigation between pages (use routing)
+- Inline editing that can be done in place
+- Errors that belong in a `Flash` or `Alert` within the page
+
+## Structure
+
+### Dialog
+
+```
+Dialog (portal, traps focus)
+  ├── Dialog.Header
+  │    ├── title (h2)
+  │    └── close button (IconButton)
+  ├── Dialog.Body (scrollable if content overflows)
+  └── Dialog.Footer
+       └── ButtonGroup (confirm + cancel)
+```
+
+### Sheet
+
+```
+Sheet (slides in from edge: left | right | top | bottom)
+  ├── SheetHeader
+  │    ├── SheetTitle
+  │    └── SheetDescription
+  ├── SheetContent (scrollable)
+  └── SheetFooter
+       └── ButtonGroup
+```
+
+### Confirmation dialog (Text Confirm)
+
+```
+Dialog
+  ├── Dialog.Header — destructive action name
+  ├── Dialog.Body
+  │    ├── Flash variant="danger" — consequence description
+  │    └── FormControl — "type NAME to confirm"
+  │         └── TextInput
+  └── Dialog.Footer
+       ├── Button variant="danger" disabled={!confirmed}
+       └── Button variant="invisible" — cancel
+```
+
+## Composition
+
+### Opening and closing
+
+Manage open state in the parent. Never store open state inside the overlay component.
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+<Button onClick={() => setIsOpen(true)}>Open dialog</Button>
+
+<Dialog isOpen={isOpen} onDismiss={() => setIsOpen(false)} aria-labelledby="dialog-title">
+  <Dialog.Header id="dialog-title">Confirm deletion</Dialog.Header>
+  <Dialog.Body>
+    This action cannot be undone.
+  </Dialog.Body>
+  <Dialog.Footer>
+    <ButtonGroup>
+      <Button variant="danger" onClick={handleDelete}>Delete</Button>
+      <Button variant="invisible" onClick={() => setIsOpen(false)}>Cancel</Button>
+    </ButtonGroup>
+  </Dialog.Footer>
+</Dialog>
+```
+
+### Focus management
+
+`Dialog` and `Sheet` trap focus automatically. Ensure the first focusable element inside the overlay is the primary action or the first input — not the close button.
+
+### Destructive confirmation
+
+For irreversible actions (delete, revoke, transfer), use the Text Confirm Dialog fragment which requires the user to type the resource name before the destructive button enables.
+
+```tsx
+import { TextConfirmDialog } from "@nebutra/ui";
+
+<TextConfirmDialog
+  isOpen={isOpen}
+  onDismiss={() => setIsOpen(false)}
+  onConfirm={handleDelete}
+  title="Delete workspace"
+  confirmText={workspace.name}
+  description="All data in this workspace will be permanently removed."
+  confirmButtonLabel="Delete workspace"
+/>
+```
+
+### Confirmation modal fragment
+
+For simpler confirms (no typed verification), use the `ConfirmationModal` fragment. It accepts `title`, `description`, `onConfirm`, `onCancel`, and `variant` (`default` or `danger`).
+
+### Overlay anchoring (ActionMenu, Popover)
+
+`AnchoredOverlay` and `ActionMenu` position themselves relative to a trigger element and close on outside click or Escape. Use them for contextual row actions, inline option menus, and filter dropdowns — not for forms.
+
+```tsx
+import { ActionMenu, ActionList } from "@nebutra/ui";
+
+<ActionMenu>
+  <ActionMenu.Button>Actions</ActionMenu.Button>
+  <ActionMenu.Overlay>
+    <ActionList>
+      <ActionList.Item onSelect={handleEdit}>Edit</ActionList.Item>
+      <ActionList.Item onSelect={handleDelete} variant="danger">Delete</ActionList.Item>
+    </ActionList>
+  </ActionMenu.Overlay>
+</ActionMenu>
+```
+
+## Examples
+
+### Simple confirmation dialog
+
+```tsx
+function DeleteKeyDialog({ keyName, onConfirm, onCancel, isOpen }: Props) {
+  return (
+    <Dialog isOpen={isOpen} onDismiss={onCancel} aria-labelledby="delete-dialog-title">
+      <Dialog.Header id="delete-dialog-title">Delete API key</Dialog.Header>
+      <Dialog.Body>
+        <Flash variant="danger">
+          Deleting <strong>{keyName}</strong> will immediately revoke all requests
+          using this key. This cannot be undone.
+        </Flash>
+      </Dialog.Body>
+      <Dialog.Footer>
+        <ButtonGroup>
+          <Button variant="danger" onClick={onConfirm}>Delete key</Button>
+          <Button variant="invisible" onClick={onCancel}>Cancel</Button>
+        </ButtonGroup>
+      </Dialog.Footer>
+    </Dialog>
+  );
+}
+```
+
+### Edit panel (Sheet)
+
+Use a `Sheet` when the form is long enough to scroll, or when preserving visibility of the underlying page aids context.
+
+```tsx
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@nebutra/ui";
+
+<Sheet open={isOpen} onOpenChange={setIsOpen}>
+  <SheetContent side="right" className="w-[480px]">
+    <SheetHeader>
+      <SheetTitle>Edit key</SheetTitle>
+    </SheetHeader>
+    <EditKeyForm key={selectedKey.id} defaultValues={selectedKey} onSave={handleSave} />
+  </SheetContent>
+</Sheet>
+```
+
+## Related Components
+
+- [Dialog](/atom-components/dialog) — base modal dialog atom
+- [Drawer](/atom-components/drawer) — slide-in side panel atom
+- [Sheet](/atom-components/sheet) — bottom/edge sheet atom
+- [Confirmation Modal fragment](/fragment-components/confirmation-modal) — pre-composed confirm/cancel dialog
+- [Text Confirm Dialog fragment](/fragment-components/text-confirm-dialog) — type-to-confirm destructive dialog
+- [Modal fragment](/fragment-components/modal) — generic modal shell
+- [Popover](/atom-components/popover) — inline contextual overlay

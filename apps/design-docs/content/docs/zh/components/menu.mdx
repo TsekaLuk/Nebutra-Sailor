@@ -1,0 +1,162 @@
+---
+title: "菜单 (Menu)"
+description: "具有内置常用布局模式的高级语义下拉组件。"
+---
+
+import { User, Settings, LogOut, ChevronRight, Lock, Command, Plus } from "lucide-react";
+
+<Note>
+  交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-menu--docs) 中查看。
+</Note>
+
+## 概述 (Overview)
+
+`Menu` 是一个基于 `DropdownMenu` (Radix) 构建的语义下拉组件。它公开了一个高级 API，在每个条目上都提供了 `prefix`、`suffix`、`locked`、`disabled` 和 `href` 插槽 —— 涵盖了所有标准的 UI 菜单变体，而无需在应用侧暴露 Radix 的内部细节。
+
+当您需要原始构建块（如复选框项、单选组或子菜单）时，请直接使用 `DropdownMenu`。对于标准的导航和操作列表，请使用 `Menu`。
+
+## 默认菜单 (Default Menu)
+
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+  <Menu.Root>
+    <Menu.Trigger chevron>账号 (Account)</Menu.Trigger>
+    <Menu.Content align="center" className="w-[200px]">
+      <Menu.Label>我的账号 (My Account)</Menu.Label>
+      <Menu.Separator />
+      <Menu.Item prefix={<User className="h-4 w-4" />}>个人资料 (Profile)</Menu.Item>
+      <Menu.Item prefix={<Settings className="h-4 w-4" />} suffix="⌘S">设置 (Settings)</Menu.Item>
+      <Menu.Item prefix={<Command className="h-4 w-4" />}>键盘快捷键 (Keyboard shortcuts)</Menu.Item>
+      <Menu.Separator />
+      <Menu.Item prefix={<LogOut className="h-4 w-4" />} className="text-destructive focus:bg-destructive focus:text-destructive-foreground">
+        退出登录 (Log out)
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Root>
+</ComponentPreview>
+
+```tsx
+<Menu.Root>
+  <Menu.Trigger chevron>账号 (Account)</Menu.Trigger>
+  <Menu.Content align="center" className="w-[200px]">
+    <Menu.Label>我的账号 (My Account)</Menu.Label>
+    <Menu.Separator />
+    <Menu.Item prefix={<User className="h-4 w-4" />}>个人资料 (Profile)</Menu.Item>
+    <Menu.Item prefix={<Settings className="h-4 w-4" />} suffix="⌘S">设置 (Settings)</Menu.Item>
+    <Menu.Item prefix={<Command className="h-4 w-4" />}>键盘快捷键 (Keyboard shortcuts)</Menu.Item>
+    <Menu.Separator />
+    <Menu.Item prefix={<LogOut className="h-4 w-4" />} className="text-destructive focus:bg-destructive focus:text-destructive-foreground">
+      退出登录 (Log out)
+    </Menu.Item>
+  </Menu.Content>
+</Menu.Root>
+```
+
+## 权限与状态 (Permissions & States)
+
+### 锁定条目 (Locked Items)
+
+锁定条目受权限管控 —— 可见但不可交互，并自动渲染一个锁定图标。在语义上与 `disabled` 有所区别。
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Menu.Root>
+    <Menu.Trigger chevron>工作区 (Workspace)</Menu.Trigger>
+    <Menu.Content align="center" className="w-[220px]">
+      <Menu.Item>常规 (General)</Menu.Item>
+      <Menu.Item>成员 (Members)</Menu.Item>
+      <Menu.Separator />
+      <Menu.Label>管理员设置 (Admin Settings)</Menu.Label>
+      <Menu.Item locked>账单与计划 (Billing & Plans)</Menu.Item>
+      <Menu.Item locked>安全日志 (Security Logs)</Menu.Item>
+    </Menu.Content>
+  </Menu.Root>
+</ComponentPreview>
+
+```tsx
+<Menu.Item locked>账单与计划 (Billing & Plans)</Menu.Item>
+<Menu.Item locked>安全日志 (Security Logs)</Menu.Item>
+```
+
+### 禁用条目 (Disabled Items)
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+  <Menu.Root>
+    <Menu.Trigger chevron>操作 (Actions)</Menu.Trigger>
+    <Menu.Content align="center" className="w-[180px]">
+      <Menu.Item>复制 (Duplicate)</Menu.Item>
+      <Menu.Item disabled>重命名... (Rename...)</Menu.Item>
+      <Menu.Item disabled>删除 (Delete)</Menu.Item>
+    </Menu.Content>
+  </Menu.Root>
+</ComponentPreview>
+
+```tsx
+<Menu.Item disabled>重命名... (Rename...)</Menu.Item>
+```
+
+## 链接条目 (Link Items)
+
+当提供 `href` 属性时，条目会自动渲染为 `<a>` 标签。通过 Radix 的 `asChild` 机制保留了键盘和鼠标导航功能。
+
+<ComponentPreview className="min-h-[200px] flex justify-center items-start pt-10">
+  <Menu.Root>
+    <Menu.Trigger chevron>外部链接 (External Links)</Menu.Trigger>
+    <Menu.Content align="center" className="w-[180px]">
+      <Menu.Item href="https://github.com/cloud-orion" suffix={<ChevronRight className="h-4 w-4" />}>
+        GitHub 仓库
+      </Menu.Item>
+      <Menu.Item href="https://nebutra.dev" suffix={<ChevronRight className="h-4 w-4" />}>
+        文档 (Documentation)
+      </Menu.Item>
+    </Menu.Content>
+  </Menu.Root>
+</ComponentPreview>
+
+## 自定义触发器 (Custom Trigger)
+
+您可以通过覆盖类名或使用其他元素（如果使用原始的 `DropdownMenu` 原语并配合 `asChild`）来完全替换 `Menu.Trigger` 的外观。在 `<Menu.Trigger>` 中，您可以传递自定义的子元素。
+
+<ComponentPreview className="min-h-[200px] flex justify-center items-start pt-10">
+  <Menu.Root>
+    <Menu.Trigger className="h-10 w-10 shrink-0 select-none rounded-[var(--radius-full)] bg-[var(--neutral-4)] p-0 text-[var(--neutral-12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-9)] focus-visible:ring-offset-2 flex items-center justify-center">
+      <User className="h-5 w-5" />
+    </Menu.Trigger>
+    <Menu.Content align="end" className="w-[200px]">
+      <Menu.Item>个人资料 (Profile)</Menu.Item>
+      <Menu.Item>首选项 (Preferences)</Menu.Item>
+    </Menu.Content>
+  </Menu.Root>
+</ComponentPreview>
+
+## 属性 (Props)
+
+该 API 与 Radix DropdownMenu 完全对应，但 `.Item` 接受自定义的渲染属性。
+
+### `Menu.Trigger`
+
+继承 `<button>` 的 HTML 属性。
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `chevron` | `boolean` | `false` | 添加一个旋转的 ChevronDown 图标 |
+| `className` | `string` | — | 覆盖触发器样式 |
+
+### `Menu.Content`
+
+继承 Radix `DropdownMenuContent` 的属性。
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `align` | `"start" \| "center" \| "end"` | `"start"` | 相对于触发器的水平对齐方式 |
+| `sideOffset` | `number` | `4` | 触发器与内容之间的间距（像素） |
+
+### `Menu.Item`
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `prefix` | `ReactNode` | — | 左侧的图标/元素 |
+| `suffix` | `ReactNode` | — | 右侧的图标/元素（当 `locked` 时被锁定图标覆盖） |
+| `disabled` | `boolean` | `false` | 置灰条目，移除指针事件 |
+| `locked` | `boolean` | `false` | 权限管控状态 —— 显示锁定图标，防止交互 |
+| `href` | `string` | — | 将条目渲染为导航到该 URL 的 `<a>` 标签 |
+| `onSelect` | `(e: Event) => void` | — | 条目被选中时的回调 |
+| `className` | `string` | — | 额外的 CSS 类名 |

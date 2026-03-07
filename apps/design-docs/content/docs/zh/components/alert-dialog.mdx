@@ -1,0 +1,131 @@
+---
+title: "警告对话框 (Alert Dialog)"
+description: "中断用户操作并要求显式确认的模态对话框。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+  <AlertDialogDemo />
+</ComponentPreview>
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+
+export function AlertDialogDemo() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive">删除账号 (Delete Account)</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>您确定要执行此操作吗？ (Are you absolutely sure?)</AlertDialogTitle>
+          <AlertDialogDescription>
+            此操作无法撤销。这将永久删除您的账号并从我们的服务器中移除您的所有数据。
+            (This action cannot be undone. This will permanently delete your account and remove your data from our servers.)
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>取消 (Cancel)</AlertDialogCancel>
+          <AlertDialogAction>继续 (Continue)</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
+```
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@nebutra/ui/primitives";
+```
+
+## 属性 (Props)
+
+### AlertDialog (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+| -------------- | ------------------------- | ------- | -------------------------------- |
+| `open` | `boolean` | — | 受控的打开状态 |
+| `defaultOpen` | `boolean` | `false` | 非受控的默认打开状态 |
+| `onOpenChange` | `(open: boolean) => void` | — | 打开状态改变时的回调函数 |
+
+### AlertDialogContent
+
+| 属性 | 类型 | 默认值 | 描述 |
+| ----------- | ----------- | ------- | ---------------------- |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 对话框内容 |
+
+### AlertDialogAction
+
+| 属性 | 类型 | 默认值 | 描述 |
+| ----------- | ------------ | ------- | ------------------------------ |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 确认操作按钮标签 |
+| `onClick` | `() => void` | — | 确认操作的处理函数 |
+
+### AlertDialogCancel
+
+| 属性 | 类型 | 默认值 | 描述 |
+| ----------- | ----------- | ------- | ---------------------- |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 取消按钮标签 |
+
+## 示例 (Examples)
+
+### 自定义操作处理程序 (Custom Action Handler)
+
+```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+  <AlertDialog>
+    <AlertDialogTrigger asChild>
+      <Button variant="outline">移除项目 (Remove Item)</Button>
+    </AlertDialogTrigger>
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>从购物车中移除项目？ (Remove item from cart?)</AlertDialogTitle>
+        <AlertDialogDescription>
+          该项目将从您的购物车中被移除。 (The item will be removed from your shopping cart.)
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>保留项目 (Keep Item)</AlertDialogCancel>
+        <AlertDialogAction onClick={() => console.log("Remove items")}>
+          移除 (Remove)
+        </AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI AlertDialog 构建 — 遵循 WAI-ARIA [警告和消息对话框模式 (Alert and Message Dialogs pattern)](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)。
+- 渲染时带有 `role="alertdialog"` 和 `aria-modal="true"`。
+- 打开时焦点将被锁定在对话框内。
+- 与 `Dialog` 不同，`AlertDialog` 在点击遮罩层 (overlay) 时不会关闭 — 它需要用户执行显式操作。

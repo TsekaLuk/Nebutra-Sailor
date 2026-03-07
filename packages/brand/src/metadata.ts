@@ -13,7 +13,7 @@ export const brand = {
   nameFullEn: "Wuxi Nebutra Intelligent Technology Co., Ltd.",
 
   tagline: "Enterprise SaaS Platform",
-  taglineCn: "智能数据·云端孕育",
+  taglineCn: "云端聚合·引领未来",
   description: "AI-native enterprise platform for multi-tenant systems",
   descriptionCn: "致力于将分散数据在云端整合、处理，并转化为有价值产品与服务",
 

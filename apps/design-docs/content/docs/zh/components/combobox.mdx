@@ -1,0 +1,233 @@
+---
+title: "组合框 (Combobox)"
+description: "可搜索的选择输入组件，结合了触发按钮和经过过滤的下拉列表。支持受控、非受控、禁用、错误、尺寸、标签、分组和复合模式。"
+---
+
+
+<ComponentPreview className="min-h-[300px]">
+  <ComboboxDemo />
+</ComponentPreview>
+
+## 概览 (Overview)
+
+`Combobox` 是一个基于 `Popover` + `cmdk` 构建的自包含可搜索选择器。它支持两种使用模式：
+
+1. **简单模式** — 传入 `options` 数组，组件将处理一切（搜索、过滤、渲染、选择）。
+2. **复合模式** — 使用 `Combobox.Input`、`Combobox.Option`、`Combobox.Group` 等子组件作为 children 进行自定义渲染。
+
+## 安装 (Installation)
+
+```tsx
+import { Combobox } from "@nebutra/ui/primitives"
+```
+
+## 使用方法 (Usage)
+
+### 简单模式 (使用 options 属性)
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    placeholder="选择框架... (Select framework...)"
+  />
+</ComponentPreview>
+
+### 带有标签 (With label)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    label="框架 (Framework)"
+    placeholder="选择框架..."
+  />
+</ComponentPreview>
+```
+
+### 非受控 (Uncontrolled)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    defaultValue="next"
+    placeholder="选择框架..."
+  />
+</ComponentPreview>
+```
+
+### 禁用状态 (Disabled)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    defaultValue="remix"
+    disabled
+    placeholder="选择框架..."
+  />
+</ComponentPreview>
+```
+
+### 错误状态 (Error state)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    error
+    placeholder="选择框架..."
+  />
+</ComponentPreview>
+```
+
+### 尺寸 (Sizes)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex flex-col gap-4 justify-center items-center">
+  <Combobox options={[{ value: "1", label: "选项 1" }]} size="sm" placeholder="小尺寸 (Small)" />
+  <Combobox options={[{ value: "1", label: "选项 1" }]} size="default" placeholder="默认 (Default)" />
+  <Combobox options={[{ value: "1", label: "选项 1" }]} size="lg" placeholder="大尺寸 (Large)" />
+</ComponentPreview>
+```
+
+### 分组选项 (Grouped options)
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js", group: "React" },
+      { value: "remix", label: "Remix", group: "React" },
+      { value: "nuxt", label: "Nuxt", group: "Vue" },
+      { value: "svelte", label: "SvelteKit", group: "Svelte" },
+    ]}
+    label="框架 (Framework)"
+    placeholder="选择框架..."
+  />
+</ComponentPreview>
+```
+
+### 自定义宽度 (Custom width)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    width="w-96"
+    placeholder="选择框架..."
+  />
+</ComponentPreview>
+```
+
+### 复合模式 (Composition mode)
+
+对于高级场景（异步搜索、自定义渲染、分隔符），请使用子组件作为 children。
+
+```tsx
+import { Combobox } from "@nebutra/ui/primitives"
+import { CommandList } from "@nebutra/ui/primitives"
+
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+  <Combobox placeholder="选择框架...">
+    <Combobox.Input placeholder="搜索框架... (Search frameworks...)" />
+    <CommandList>
+      <Combobox.Empty>未找到相关框架。 (No frameworks found.)</Combobox.Empty>
+      <Combobox.Group heading="React">
+        <Combobox.Option value="next">Next.js</Combobox.Option>
+        <Combobox.Option value="remix">Remix</Combobox.Option>
+      </Combobox.Group>
+      <Combobox.Separator />
+      <Combobox.Group heading="Vue">
+        <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
+      </Combobox.Group>
+    </CommandList>
+  </Combobox>
+</ComponentPreview>
+```
+
+## 属性 (Props)
+
+### Combobox
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `options` | `ComboboxOption[]` | — | 简单模式：要渲染的选项数组 |
+| `value` | `string` | — | 受控的选择值 |
+| `onChange` | `(value: string) => void` | — | 选择改变时的回调 |
+| `defaultValue` | `string` | `""` | 非受控使用的初始值 |
+| `disabled` | `boolean` | `false` | 禁用整个组合框 |
+| `error` | `boolean` | `false` | 显示错误样式（红色边框） |
+| `size` | `"sm" \| "default" \| "lg"` | `"default"` | 尺寸变体 — `sm` (32px), `default` (40px), `lg` (48px) |
+| `width` | `string` | — | 应用于触发器和下拉列表的 Tailwind 宽度类 |
+| `label` | `string` | — | 显示在触发器上方的可访问标签 |
+| `hideLabel` | `boolean` | `false` | 视觉上隐藏标签（仍然可通过 aria 访问） |
+| `placeholder` | `string` | `"Select..."` | 未选择任何内容时的文本 |
+| `emptyMessage` | `string` | `"No results found."` | 搜索无匹配项时的文本 |
+| `searchPlaceholder` | `string` | `"Search..."` | 搜索输入框中的占位符 |
+| `children` | `ReactNode` | — | 复合模式：手动提供子组件 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### ComboboxOption (组合框选择项)
+
+| 属性 | 类型 | 描述 |
+|------|------|-------------|
+| `value` | `string` | 用于选择匹配的机器值 |
+| `label` | `string` | 显示在触发器和列表中的人类可读标签 |
+| `disabled` | `boolean` | 禁用此特定选项 |
+| `group` | `string` | 分配到分组标题下 |
+
+### 子组件 (Sub-Components)
+
+| 组件 | 基于 | 描述 |
+|-----------|----------|-------------|
+| `Combobox.Input` | `CommandInput` | 用于过滤选项的搜索输入框 |
+| `Combobox.Option` | `CommandItem` | 带有自动勾选图标的可选项目 |
+| `Combobox.Empty` | `CommandEmpty` | 搜索无结果时显示的信息 |
+| `Combobox.Group` | `CommandGroup` | 相关选项的分组标题 |
+| `Combobox.Separator` | `CommandSeparator` | 组与组之间的视觉分隔线 |
+
+## 可访问性 (Accessibility)
+
+- 触发按钮具有 `role="combobox"` 和 `aria-expanded`。
+- 标签使用 `aria-labelledby` 与触发器关联。
+- `CommandInput` 提供屏幕阅读器可访问的实时搜索。
+- `CommandItem` 元素具有 `role="option"` 和 `aria-selected`。
+- 键盘导航：输入以过滤，`ArrowUp`/`ArrowDown` 导航，`Enter` 选择，`Escape` 关闭。
+
+## 注意事项 (Notes)
+
+- 下拉列表宽度通过 `--radix-popover-trigger-width` 自动匹配触发器宽度。
+- 当在带有分组项目的 `options` 中使用时，选项会自动分拣到 `CommandGroup` 标题下。
+- `Combobox.Option` 接受透传给 `CommandItem` 的 `keywords` 属性，以增强搜索匹配能力。
+- 反选切换：点击已选中的选项会清除该选择。

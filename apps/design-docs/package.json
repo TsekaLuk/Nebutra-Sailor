@@ -10,6 +10,7 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
+    "@nebutra/icons": "workspace:*",
     "@nebutra/tokens": "workspace:*",
     "@nebutra/ui": "workspace:*",
     "framer-motion": "^12.35.0",
@@ -20,7 +21,8 @@
     "motion": "^12.35.0",
     "next": "^16.1.6",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "react-error-boundary": "^6.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.1",

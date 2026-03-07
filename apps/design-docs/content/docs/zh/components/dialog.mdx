@@ -1,0 +1,159 @@
+---
+title: 对话框 (Dialog)
+description: 基于 Radix UI 构建的，用于集中交互的可访问模态覆盖层。
+---
+
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button>打开对话框 (Open Dialog)</Button>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>编辑个人资料 (Edit Profile)</DialogTitle>
+        <DialogDescription>
+          在这里修改您的个人资料。完成后点击保存。 (Make changes to your profile here. Click save when done.)
+        </DialogDescription>
+      </DialogHeader>
+      <div className="py-4">
+        <p className="text-sm text-muted-foreground">对话框主体内容在此处显示。(Dialog body content goes here.)</p>
+      </div>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="outline">取消 (Cancel)</Button>
+        </DialogClose>
+        <Button type="submit">保存更改 (Save changes)</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+  DialogOverlay,
+  DialogPortal,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### Dialog (根组件)
+
+扩展自 `@radix-ui/react-dialog` 中的 `Root` 组件属性。
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | 受控的打开状态 |
+| `defaultOpen` | `boolean` | `false` | 非受控的默认打开状态 |
+| `onOpenChange` | `(open: boolean) => void` | — | 打开状态改变时的回调函数 |
+| `modal` | `boolean` | `true` | 是否使用模态行为（非模态时可与外部交互） |
+
+### DialogTrigger
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | 将属性合并到直接子元素上 |
+| `children` | `ReactNode` | — | 触发器元素 |
+
+### DialogContent
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 对话框内容 |
+
+渲染时会在右上角自带一个内置的关闭按钮 (`X`)。
+
+### DialogHeader / DialogFooter
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 头部或底部内容 |
+
+### DialogTitle
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 对话框标题文本 |
+
+### DialogDescription
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 补充说明文本 |
+
+### DialogClose
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | 将属性合并到直接子元素上 |
+| `children` | `ReactNode` | — | 关闭触发器元素 |
+
+## 示例 (Examples)
+
+### 受控的对话框 (Controlled Dialog)
+
+```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button>打开受控对话框 (Open Controlled)</Button>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>受控对话框 (Controlled Dialog)</DialogTitle>
+      </DialogHeader>
+      <p>此对话框通过状态进行控制。 (This dialog is controlled via state.)</p>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+```
+
+### 确认对话框 (Confirmation Dialog)
+
+```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="destructive">删除账户 (Delete Account)</Button>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>您绝对确定吗？ (Are you absolutely sure?)</DialogTitle>
+        <DialogDescription>
+          此操作无法撤销。这将永久删除您的帐户并从我们的服务器中删除您的数据。 (This action cannot be undone. This will permanently delete your account and remove your data from our servers.)
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="outline">取消 (Cancel)</Button>
+        </DialogClose>
+        <Button variant="destructive">删除 (Delete)</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Dialog 构建 — 遵循 WAI-ARIA 的 [Dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)。
+- `DialogContent` 具有 `role="dialog"` 和 `aria-modal="true"` 属性。
+- `DialogTitle` 通过 `aria-labelledby` 链接，以便屏幕阅读器朗读。
+- `DialogDescription` 通过 `aria-describedby` 链接。
+- 对话框打开时，焦点会被锁定在对话框内。
+- 按下 `Escape` 键可关闭对话框。
+- 关闭后，焦点将返回到触发对话框的元素上。

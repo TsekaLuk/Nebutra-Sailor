@@ -1,0 +1,127 @@
+---
+title: "材质 (Material)"
+description: "表面高度 (Surface Elevation) 原语。通过阴影和背景 Token 表达 UI 深度。"
+---
+
+<Note>
+  交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-material--docs) 中查看。
+</Note>
+
+## 概览 (Overview)
+
+`Material` 是一个构建在 `Stack` 之上的表面高度原语。它将语义化的 `type` 属性映射到项目的 `@theme` 阴影和背景 Token —— 无需手动编写数值。在任何需要表达视觉深度的地方都可以使用它：卡片、下拉菜单、对话框或全屏叠加层。
+
+## 安装 (Installation)
+
+```tsx
+import { Material } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 类型 (Types)
+
+所有四个高度级别均使用 `packages/theme/themes.css` 中定义的 Token。
+
+```tsx
+<Material type="card">
+  <div className="p-6">卡片内容 (Card content)</div>
+</Material>
+
+<Material type="menu">
+  <div className="py-1">菜单项 (Menu items)</div>
+</Material>
+
+<Material type="modal">
+  <div className="p-6">对话框内容 (Dialog content)</div>
+</Material>
+
+<Material type="fullscreen">
+  <div className="p-6">全屏内容 (Full-screen content)</div>
+</Material>
+```
+
+### 卡片 (Card)
+
+用于页面内容的默认表面。应用 `shadow-sm` 和 `bg-card`。
+
+```tsx
+<Material type="card" className="w-80">
+  <div className="p-6">
+    <h2 className="text-sm font-medium">卡片标题 (Card title)</h2>
+    <p className="text-xs text-muted-foreground mt-1">辅助文本 (Supporting text)</p>
+  </div>
+</Material>
+```
+
+### 菜单 (Menu)
+
+下拉菜单和气泡框 (Popover) 表面。应用 `shadow-md` 和 `bg-popover`。
+
+```tsx
+<Material type="menu" className="w-56">
+  <div className="py-1">
+    <button type="button" className="w-full text-left px-3 py-2 text-sm hover:bg-muted">
+      个人资料 (Profile)
+    </button>
+    <button type="button" className="w-full text-left px-3 py-2 text-sm hover:bg-muted">
+      设置 (Settings)
+    </button>
+  </div>
+</Material>
+```
+
+### 模态框 (Modal)
+
+对话框和抽屉表面。应用 `shadow-lg` 和 `bg-popover`。
+
+```tsx
+<Material type="modal" className="w-96">
+  <div className="p-6 flex flex-col gap-4">
+    <h2 className="text-sm font-semibold">确认操作 (Confirm action)</h2>
+    <p className="text-xs text-muted-foreground">此操作无法撤销。</p>
+    <div className="flex justify-end gap-2">
+      <Button variant="outline">取消 (Cancel)</Button>
+      <Button>确认 (Confirm)</Button>
+    </div>
+  </div>
+</Material>
+```
+
+### 全屏 (Fullscreen)
+
+全屏叠加表面。应用 `shadow-none` 和 `bg-background`。
+
+```tsx
+<Material type="fullscreen" className="fixed inset-0">
+  <div className="p-8">全屏内容 (Full-screen content)</div>
+</Material>
+```
+
+## 属性 (Props)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `type` | `"card" \| "menu" \| "modal" \| "fullscreen"` | `"card"` | 表面高度级别 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 表面内容 |
+| `ref` | `Ref<HTMLDivElement>` | — | 转发的引用 (Forwarded ref) |
+
+还支持所有标准的 `div` HTML 属性。
+
+## Token 引用 (Token Reference)
+
+所有值均来自 `packages/theme/themes.css` 的 `@theme` 区块。
+
+| 类型 (type) | 阴影 Token | 背景 Token |
+|------|-------------|-----------------|
+| `card` | `--shadow-sm` | `--color-card` |
+| `menu` | `--shadow-md` | `--color-popover` |
+| `modal` | `--shadow-lg` | `--color-popover` |
+| `fullscreen` | _(无)_ | `--color-background` |
+
+## 可访问性 (Accessibility)
+
+- `Material` 渲染为一个普通的 `<div>` —— 请根据具体用途在调用处添加语义化角色（如 `role="dialog"`、`role="menu"` 等）。
+- 阴影仅作为视觉引导；不要仅依靠阴影向辅助技术传达状态或层级。
+走

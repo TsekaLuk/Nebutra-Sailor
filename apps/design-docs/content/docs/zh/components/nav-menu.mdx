@@ -1,0 +1,104 @@
+---
+title: "导航菜单 (Nav Menu)"
+description: "用于侧边栏和页眉导航模式的紧凑型导航菜单组件。"
+---
+
+## 演示 (Demo)
+
+```tsx
+import { NavMenu, NavMenuItem, NavMenuLink } from "@nebutra/ui/primitives"
+import { LayoutDashboard, Settings, Users, BarChart } from "lucide-react"
+
+export function NavMenuDemo() {
+  return (
+    <NavMenu>
+      <NavMenuItem>
+        <NavMenuLink href="/dashboard" active>
+          <LayoutDashboard className="h-4 w-4" />
+          仪表盘 (Dashboard)
+        </NavMenuLink>
+      </NavMenuItem>
+      <NavMenuItem>
+        <NavMenuLink href="/users">
+          <Users className="h-4 w-4" />
+          用户管理 (Users)
+        </NavMenuLink>
+      </NavMenuItem>
+      <NavMenuItem>
+        <NavMenuLink href="/analytics">
+          <BarChart className="h-4 w-4" />
+          数据分析 (Analytics)
+        </NavMenuLink>
+      </NavMenuItem>
+      <NavMenuItem>
+        <NavMenuLink href="/settings">
+          <Settings className="h-4 w-4" />
+          系统设置 (Settings)
+        </NavMenuLink>
+      </NavMenuItem>
+    </NavMenu>
+  )
+}
+```
+
+## 使用方法 (Usage)
+
+```tsx
+import { NavMenu, NavMenuItem, NavMenuLink } from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### NavMenu (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | `NavMenuItem` 元素 |
+
+### NavMenuLink (链接)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `href` | `string` | — | 导航目标 URL |
+| `active` | `boolean` | `false` | 将链接高亮显示为当前页面 |
+| `disabled` | `boolean` | `false` | 防止导航 |
+| `asChild` | `boolean` | `false` | 将属性合并到直接子元素上（适用于路由链接） |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 链接内容（图标 + 标签） |
+
+## 示例 (Examples)
+
+### 配合 Next.js Link 使用 (With Next.js Link)
+
+```tsx
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+function AppNav() {
+  const pathname = usePathname()
+
+  return (
+    <NavMenu>
+      {navItems.map((item) => (
+        <NavMenuItem key={item.href}>
+          <NavMenuLink asChild active={pathname === item.href}>
+            <Link href={item.href}>
+              <item.icon className="h-4 w-4" />
+              {item.label}
+            </Link>
+          </NavMenuLink>
+        </NavMenuItem>
+      ))}
+    </NavMenu>
+  )
+}
+```
+
+## 可访问性 (Accessibility)
+
+- 渲染为具有 `role="navigation"` 的 `<nav>` 元素。
+- 活动链接具有 `aria-current="page"` 属性，便于屏幕阅读器通报。
+- 禁用链接具有 `aria-disabled="true"` 属性和 `tabIndex={-1}`。
+- 每个链接都处于自然的 Tab 键焦点顺序中。
+走

@@ -1,7 +1,7 @@
 /**
  * Nebutra Brand Motion Language
  *
- * Three core motions derived from the "云端孕育" concept:
+ * Three core motions derived from the "云端聚合" concept:
  * - emerge (涌现): data materializing from the cloud
  * - flow (流动): data streaming through pipelines
  * - pulse (脉动): system breathing / alive indicator

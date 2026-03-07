@@ -131,8 +131,8 @@ export function StarsCanvas({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let w = (canvas.width = window.innerWidth);
-    let h = (canvas.height = window.innerHeight);
+    let w = (canvas.width = canvas.offsetWidth || window.innerWidth);
+    let h = (canvas.height = canvas.offsetHeight || window.innerHeight);
 
     // Star storage
     const stars: Star[] = [];
@@ -251,24 +251,28 @@ export function StarsCanvas({
     animationRef.current = requestAnimationFrame(animate);
 
     // --- Resize handling ---
-    const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === canvas) {
+          w = canvas.width = entry.contentRect.width;
+          h = canvas.height = entry.contentRect.height;
 
-      // Update star orbit centers
-      for (const star of stars) {
-        star.orbitX = w / 2;
-        star.orbitY = h / 2;
+          // Update star orbit centers
+          for (const star of stars) {
+            star.orbitX = w / 2;
+            star.orbitY = h / 2;
+          }
+        }
       }
-    };
+    });
 
-    window.addEventListener("resize", handleResize);
+    resizeObserver.observe(canvas);
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
-      window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
     };
   }, [
     transparent,

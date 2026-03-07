@@ -1,0 +1,158 @@
+---
+title: "Tabs"
+description: "Tabbed content panels with three visual variants, four sizes, and pill shape support."
+---
+
+
+<ComponentPreview className="mt-4">
+  <Tabs defaultValue="profile" className="w-[400px]">
+    <TabsList className="grid w-full grid-cols-3">
+      <TabsTrigger value="profile">Profile</TabsTrigger>
+      <TabsTrigger value="security">Security</TabsTrigger>
+      <TabsTrigger value="settings">Settings</TabsTrigger>
+    </TabsList>
+    <TabsContent value="profile" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">Manage your profile information.</p>
+    </TabsContent>
+    <TabsContent value="security" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">Update your password and 2FA.</p>
+    </TabsContent>
+    <TabsContent value="settings" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">Adjust your email preferences.</p>
+    </TabsContent>
+  </Tabs>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@nebutra/ui/primitives"
+```
+
+## Props
+
+### Tabs (Root)
+
+Extends `@radix-ui/react-tabs` `Root` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | — | Uncontrolled default active tab |
+| `value` | `string` | — | Controlled active tab value |
+| `onValueChange` | `(value: string) => void` | — | Callback when active tab changes |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Tab list orientation |
+| `className` | `string` | — | Additional CSS classes |
+
+### TabsList
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "button" \| "line"` | `"default"` | Visual style of the tab list |
+| `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | Size of the tabs |
+| `shape` | `"default" \| "pill"` | `"default"` | Shape of tab triggers |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | `TabsTrigger` elements |
+
+### TabsTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | **Required.** Unique identifier matching a `TabsContent` |
+| `disabled` | `boolean` | `false` | Prevents this tab from being selected |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Tab label (text + optional icon) |
+
+### TabsContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | **Required.** Matches a `TabsTrigger` value |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Content shown when this tab is active |
+
+## Examples
+
+### Button Variant
+
+```tsx
+<ComponentPreview className="mt-4">
+  <Tabs defaultValue="tab1" className="w-[400px]">
+    <TabsList variant="button" className="grid grid-cols-3">
+      <TabsTrigger value="tab1">Overview</TabsTrigger>
+      <TabsTrigger value="tab2">Analytics</TabsTrigger>
+      <TabsTrigger value="tab3">Reports</TabsTrigger>
+    </TabsList>
+    <TabsContent value="tab1" className="p-4 mt-2">Overview content</TabsContent>
+    <TabsContent value="tab2" className="p-4 mt-2">Analytics content</TabsContent>
+    <TabsContent value="tab3" className="p-4 mt-2">Reports content</TabsContent>
+  </Tabs>
+</ComponentPreview>
+```
+
+### Line Variant (Underline)
+
+```tsx
+<ComponentPreview className="mt-4">
+  <Tabs defaultValue="tab1" className="w-[400px]">
+    <TabsList variant="line" className="w-full">
+      <TabsTrigger value="tab1">All</TabsTrigger>
+      <TabsTrigger value="tab2">Active</TabsTrigger>
+      <TabsTrigger value="tab3">Archived</TabsTrigger>
+    </TabsList>
+    <TabsContent value="tab1" className="p-4 mt-2">All content</TabsContent>
+    <TabsContent value="tab2" className="p-4 mt-2">Active content</TabsContent>
+    <TabsContent value="tab3" className="p-4 mt-2">Archived content</TabsContent>
+  </Tabs>
+</ComponentPreview>
+```
+
+### Pill Shape
+
+```tsx
+<ComponentPreview className="mt-4">
+  <Tabs defaultValue="tab1" className="w-[400px]">
+    <TabsList shape="pill" className="w-full grid-cols-2 grid">
+      <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+      <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+    </TabsList>
+    <TabsContent value="tab1" className="p-4 mt-2">Tab 1 Content</TabsContent>
+    <TabsContent value="tab2" className="p-4 mt-2">Tab 2 Content</TabsContent>
+  </Tabs>
+</ComponentPreview>
+```
+
+### Size Variants
+
+```tsx
+<TabsList size="xs">...</TabsList>
+<TabsList size="sm">...</TabsList>
+<TabsList size="md">...</TabsList>
+<TabsList size="lg">...</TabsList>
+```
+
+### Controlled Tabs
+
+```tsx
+const [activeTab, setActiveTab] = useState("overview")
+
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <TabsList>
+    <TabsTrigger value="overview">Overview</TabsTrigger>
+    <TabsTrigger value="details">Details</TabsTrigger>
+  </TabsList>
+</Tabs>
+```
+
+## Accessibility
+
+- Built on Radix UI Tabs — follows the WAI-ARIA [Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
+- `TabsList` has `role="tablist"`.
+- Each `TabsTrigger` has `role="tab"`, `aria-selected`, and `aria-controls`.
+- Each `TabsContent` has `role="tabpanel"` and `aria-labelledby`.
+- Keyboard navigation: `ArrowLeft`/`ArrowRight` moves between tabs, `Home`/`End` jumps to first/last.
+- Focus management is handled automatically.

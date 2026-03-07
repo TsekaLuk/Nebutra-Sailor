@@ -1,0 +1,94 @@
+---
+title: "Radio Group"
+description: "Single-choice selection control with circular radio button indicators."
+---
+
+## Demo
+
+<ComponentPreview className="max-w-[400px]">
+  <RadioGroup defaultValue="comfortable">
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="default" id="r1" />
+      <Label htmlFor="r1">Default</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="comfortable" id="r2" />
+      <Label htmlFor="r2">Comfortable</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="compact" id="r3" />
+      <Label htmlFor="r3">Compact</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "@nebutra/ui/primitives"
+```
+
+## Props
+
+### RadioGroup (Root)
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | Controlled selected value |
+| `defaultValue` | `string` | — | Uncontrolled default selected value |
+| `onValueChange` | `(value: string) => void` | — | Callback when selection changes |
+| `disabled` | `boolean` | `false` | Disables all radio items |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` | Layout direction |
+| `className` | `string` | — | Additional CSS classes |
+
+### RadioGroupItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | **Required.** Value for this option |
+| `disabled` | `boolean` | `false` | Disables this specific item |
+| `id` | `string` | — | For linking with a `<Label>` |
+| `className` | `string` | — | Additional CSS classes |
+
+## Examples
+
+### Horizontal Layout
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <RadioGroup defaultValue="card" orientation="horizontal" className="flex gap-4">
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="card" id="card" />
+      <Label htmlFor="card">Card</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="paypal" id="paypal" />
+      <Label htmlFor="paypal">PayPal</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+```
+
+### Controlled
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <RadioGroup defaultValue="monthly">
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="monthly" id="monthly" />
+      <Label htmlFor="monthly">Monthly billing</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="annually" id="annually" />
+      <Label htmlFor="annually">Annual billing (save 20%)</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+```
+
+## Accessibility
+
+- Built on Radix UI RadioGroup — has `role="radiogroup"`.
+- Each item has `role="radio"` with `aria-checked`.
+- Always pair items with `<Label>` via matching `id`/`htmlFor`.
+- Keyboard: `ArrowUp`/`ArrowDown` (or `ArrowLeft`/`ArrowRight`) to navigate, `Space` to select.

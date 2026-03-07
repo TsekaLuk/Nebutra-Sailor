@@ -1,0 +1,95 @@
+---
+title: "滑块 (Slider)"
+description: "带有可拖拽手柄的数值范围选择器，基于 Radix UI 构建。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="max-w-[400px]">
+  <div className="space-y-4 w-full">
+    <Slider
+      defaultValue={[50]}
+      max={100}
+      step={1}
+    />
+  </div>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import { Slider } from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+继承自 `@radix-ui/react-slider` 的 `Root` 属性。
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `number[]` | — | 受控的数值数组（每个手柄一个值） |
+| `defaultValue` | `number[]` | `[0]` | 非受控的默认值 |
+| `onValueChange` | `(value: number[]) => void` | — | 拖拽过程中的回调函数 |
+| `onValueCommit` | `(value: number[]) => void` | — | 拖拽结束时的回调函数 |
+| `min` | `number` | `0` | 最小值 |
+| `max` | `number` | `100` | 最大值 |
+| `step` | `number` | `1` | 步进增量 |
+| `disabled` | `boolean` | `false` | 禁用滑块 |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 滑块方向 |
+| `inverted` | `boolean` | `false` | 反转方向 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 示例 (Examples)
+
+### 范围滑块 - 双手柄 (Range Slider - Two Thumbs)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <div className="w-full">
+    <Slider
+      defaultValue={[20, 80]}
+      min={0}
+      max={100}
+      step={5}
+    />
+  </div>
+</ComponentPreview>
+```
+
+### 音量控制 (Volume Control)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <div className="flex items-center gap-3 w-full">
+    <Volume2 className="h-4 w-4 shrink-0 text-muted-foreground" />
+    <Slider defaultValue={[70]} max={100} step={1} />
+  </div>
+</ComponentPreview>
+```
+
+### 价格范围筛选 (Price Range Filter)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <div className="space-y-2 w-full">
+    <div className="flex justify-between text-sm">
+      <span>$200</span>
+      <span>$800</span>
+    </div>
+    <Slider
+      defaultValue={[200, 800]}
+      min={0}
+      max={1000}
+      step={10}
+    />
+  </div>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Slider 构建 —— 每个手柄都具有 `role="slider"` 属性。
+- 设置了 `aria-valuemin`、`aria-valuemax`、`aria-valuenow` 和 `aria-orientation` 属性。
+- 请添加 `aria-label` 或 `aria-labelledby` 以描述滑块的用途。
+- 键盘操作：使用 `ArrowLeft`/`ArrowRight` (或 `ArrowUp`/`ArrowDown`) 调整数值，使用 `Home`/`End` 调至最小/最大值，使用 `PageUp`/`PageDown` 进行大幅度跳转。
+走

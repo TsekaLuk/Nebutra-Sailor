@@ -1,0 +1,95 @@
+---
+title: "单选按钮组 (Radio Group)"
+description: "带有圆形单选按钮指示器的单项选择控件。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="max-w-[400px]">
+  <RadioGroup defaultValue="comfortable">
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="default" id="r1" />
+      <Label htmlFor="r1">默认 (Default)</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="comfortable" id="r2" />
+      <Label htmlFor="r2">舒适 (Comfortable)</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="compact" id="r3" />
+      <Label htmlFor="r3">紧凑 (Compact)</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### RadioGroup (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `string` | — | 受控的选中值 |
+| `defaultValue` | `string` | — | 非受控的默认选中值 |
+| `onValueChange` | `(value: string) => void` | — | 选中项改变时的回调函数 |
+| `disabled` | `boolean` | `false` | 禁用所有单选条目 |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` | 布局方向 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### RadioGroupItem (单选条目)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `value` | `string` | — | **必填。** 该选项的值 |
+| `disabled` | `boolean` | `false` | 禁用该特定条目 |
+| `id` | `string` | — | 用于与 `<Label>` 关联 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 示例 (Examples)
+
+### 水平布局 (Horizontal Layout)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <RadioGroup defaultValue="card" orientation="horizontal" className="flex gap-4">
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="card" id="card" />
+      <Label htmlFor="card">银行卡 (Card)</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="paypal" id="paypal" />
+      <Label htmlFor="paypal">PayPal</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+```
+
+### 受控 (Controlled)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <RadioGroup defaultValue="monthly">
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="monthly" id="monthly" />
+      <Label htmlFor="monthly">按月计费 (Monthly billing)</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="annually" id="annually" />
+      <Label htmlFor="annually">按年计费 (Annual billing) - 节省 20%</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI RadioGroup 构建 —— 具有 `role="radiogroup"` 属性。
+- 每个条目都具有 `role="radio"` 属性，并带有 `aria-checked`。
+- 始终通过匹配的 `id`/`htmlFor` 将条目与 `<Label>` 配对。
+- 键盘操作：使用 `ArrowUp`/`ArrowDown` (或 `ArrowLeft`/`ArrowRight`) 导航，使用 `Space` 选择。
+走

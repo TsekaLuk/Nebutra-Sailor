@@ -1,0 +1,143 @@
+---
+title: "Calendar"
+description: "International date selection component with full keyboard navigation, date constraints, and range support."
+---
+
+## Overview
+
+`Calendar` and `RangeCalendar` are inline calendar grid components powered by HeroUI and `@internationalized/date`. They support 13 international calendar systems, date constraints, and full keyboard/ARIA accessibility.
+
+## Usage
+
+```tsx
+import { Calendar, RangeCalendar, today, getLocalTimeZone } from "@nebutra/ui/primitives";
+```
+
+## Examples
+
+### Basic
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-center">
+  <Calendar className="rounded-xl shadow-sm border border-border" />
+</ComponentPreview>
+```
+
+### Controlled
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-center">
+  <Calendar className="rounded-xl shadow-sm border border-border" />
+</ComponentPreview>
+```
+
+### Month & Year Pickers
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-center">
+  <Calendar showMonthAndYearPickers className="rounded-xl shadow-sm border border-border" />
+</ComponentPreview>
+```
+
+### Multiple Months
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-center overflow-x-auto p-4 w-full">
+  <Calendar visibleMonths={2} className="rounded-xl shadow-sm border border-border p-4 max-w-full" />
+</ComponentPreview>
+```
+
+### Min/Max Constraints
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-center">
+  <Calendar
+    minValue={today(getLocalTimeZone()).subtract({ months: 1 })}
+    maxValue={today(getLocalTimeZone()).add({ months: 1 })}
+    className="rounded-xl shadow-sm border border-border"
+  />
+</ComponentPreview>
+```
+
+### Weekends Unavailable
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-center">
+  <Calendar
+    isDateUnavailable={(date) => isWeekend(date, "en-US")}
+    className="rounded-xl shadow-sm border border-border"
+  />
+</ComponentPreview>
+```
+
+## RangeCalendar
+
+For selecting a date range on an inline calendar grid.
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-center">
+  <RangeCalendar className="rounded-xl shadow-sm border border-border" />
+</ComponentPreview>
+```
+
+### Range — Two Months
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-center overflow-x-auto p-4 w-full">
+  <RangeCalendar visibleMonths={2} className="rounded-xl shadow-sm border border-border p-4 max-w-full" />
+</ComponentPreview>
+```
+
+## Props
+
+### Calendar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `DateValue` | — | Controlled selected date |
+| `defaultValue` | `DateValue` | — | Uncontrolled default |
+| `onChange` | `(value: DateValue) => void` | — | Selection callback |
+| `minValue` | `DateValue` | — | Earliest selectable date |
+| `maxValue` | `DateValue` | — | Latest selectable date |
+| `isDateUnavailable` | `(date: DateValue) => boolean` | — | Predicate for unavailable dates |
+| `visibleMonths` | `number` | `1` | Number of months displayed |
+| `showMonthAndYearPickers` | `boolean` | `false` | Enable month/year dropdown selectors |
+| `isDisabled` | `boolean` | `false` | Disable all interaction |
+| `isReadOnly` | `boolean` | `false` | Read-only mode |
+
+### RangeCalendar
+
+Same props as Calendar, except:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `RangeValue<DateValue>` | — | Selected date range |
+| `onChange` | `(value: RangeValue<DateValue>) => void` | — | Range change callback |
+
+## Date Utilities
+
+Re-exported from `@internationalized/date` for convenience:
+
+```tsx
+import {
+  CalendarDate, CalendarDateTime, ZonedDateTime,
+  today, getLocalTimeZone, now,
+  parseDate, parseDateTime, parseZonedDateTime,
+  isWeekend, isToday, isSameDay, isSameMonth, isSameYear,
+  startOfWeek, startOfMonth, startOfYear,
+  endOfWeek, endOfMonth, endOfYear,
+} from "@nebutra/ui/primitives";
+```
+
+## Accessibility
+
+- Full keyboard navigation: arrow keys between days, Page Up/Down for months
+- ARIA labels and live regions for screen readers
+- Focus management and selection announcements
+- Disabled/unavailable dates have `aria-disabled="true"`
+
+## See Also
+
+- [DatePicker](/design-system/atom-components/date-picker) — Popover-based date picker
+- [CalendarPicker](/design-system/atom-components/calendar-picker) — Geist-style picker with presets
+- [DateInput](/design-system/atom-components/date-input) — Keyboard-editable date segments

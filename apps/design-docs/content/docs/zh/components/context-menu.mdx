@@ -1,0 +1,161 @@
+---
+title: "右键菜单 (Context Menu)"
+description: "支持图标、快捷键提示、禁用状态和链接模式的右键上下文菜单。"
+---
+
+## 概览 (Overview)
+
+`ContextMenu` 是基于 Radix ContextMenu 构建的右键上下文菜单。它支持前缀图标、后缀提示（快捷键/徽章）、禁用项、链接模式以及带有标题的分组。
+
+## 安装 (Installation)
+
+```tsx
+import { ContextMenu } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 基础用法 (Default)
+
+```tsx
+import { ContextMenu } from "@nebutra/ui/primitives"
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+  <ContextMenu.Root>
+    <ContextMenu.Trigger asChild>
+      <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">在此处右键点击</div>
+    </ContextMenu.Trigger>
+    <ContextMenu.Content>
+      <ContextMenu.Item onSelect={() => {}}>编辑 (Edit)</ContextMenu.Item>
+      <ContextMenu.Item onSelect={() => {}}>复制 (Duplicate)</ContextMenu.Item>
+      <ContextMenu.Item onSelect={() => {}}>删除 (Delete)</ContextMenu.Item>
+    </ContextMenu.Content>
+  </ContextMenu.Root>
+</ComponentPreview>
+```
+
+### 带有前缀图标 (With prefix icons)
+
+```tsx
+import { Edit2, Trash2, Copy } from "lucide-react"
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+  <ContextMenu.Root>
+    <ContextMenu.Trigger asChild>
+      <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">在此处右键点击</div>
+    </ContextMenu.Trigger>
+    <ContextMenu.Content>
+      <ContextMenu.Item prefix={<Edit2 className="h-4 w-4" />} onSelect={() => {}}>
+        编辑 (Edit)
+      </ContextMenu.Item>
+      <ContextMenu.Item prefix={<Copy className="h-4 w-4" />} onSelect={() => {}}>
+        拷贝 (Copy)
+      </ContextMenu.Item>
+      <ContextMenu.Separator />
+      <ContextMenu.Item prefix={<Trash2 className="h-4 w-4" />} onSelect={() => {}}>
+        删除 (Delete)
+      </ContextMenu.Item>
+    </ContextMenu.Content>
+  </ContextMenu.Root>
+</ComponentPreview>
+```
+
+### 带有后缀提示（快捷键） (With suffix hints)
+
+```tsx
+<ContextMenu.Item
+  prefix={<Edit2 className="h-4 w-4" />}
+  suffix={<span className="text-xs text-muted-foreground">⌘E</span>}
+  onSelect={() => {}}
+>
+  编辑 (Edit)
+</ContextMenu.Item>
+```
+
+### 带有标签和分组 (With labels and sections)
+
+```tsx
+<ContextMenu.Content>
+  <ContextMenu.Label>操作 (Actions)</ContextMenu.Label>
+  <ContextMenu.Item onSelect={() => {}}>编辑 (Edit)</ContextMenu.Item>
+  <ContextMenu.Item onSelect={() => {}}>拷贝 (Copy)</ContextMenu.Item>
+  <ContextMenu.Separator />
+  <ContextMenu.Label>危险区域 (Danger)</ContextMenu.Label>
+  <ContextMenu.Item
+    onSelect={() => {}}
+    className="text-destructive focus:text-destructive"
+  >
+    删除 (Delete)
+  </ContextMenu.Item>
+</ContextMenu.Content>
+```
+
+### 链接模式 (Link mode)
+
+带有 `href` 属性的项目将渲染为 `<a>` 标签：
+
+```tsx
+<ContextMenu.Item value="docs" href="/docs" prefix={<Link className="h-4 w-4" />}>
+  文档说明 (Documentation)
+</ContextMenu.Item>
+```
+
+### 禁用状态 (Disabled items)
+
+```tsx
+<ContextMenu.Item disabled onSelect={() => {}}>
+  粘贴 (Paste)
+</ContextMenu.Item>
+```
+
+## 属性 (Props)
+
+### ContextMenu.Root
+
+接受所有 Radix `ContextMenu.Root` 的属性。
+
+### ContextMenu.Trigger
+
+接受所有 Radix `ContextMenu.Trigger` 的属性。使用 `asChild` 可以使任何元素成为触发器。
+
+### ContextMenu.Content
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+接受所有 Radix `ContextMenu.Content` 的属性。
+
+### ContextMenu.Item
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | 菜单项标签文本 |
+| `onSelect` | `() => void` | — | 电机或键盘选中时触发（对应 Radix 的 `onSelect`）。当设置了 `href` 时不会触发。 |
+| `disabled` | `boolean` | `false` | 禁用交互 |
+| `href` | `string` | — | 将项目渲染为 `<a>` 链接；跳转行为即为选中动作 |
+| `prefix` | `ReactNode` | — | 位于标签前的元素（如图标） |
+| `suffix` | `ReactNode` | — | 位于标签后的元素（如快捷键/徽章） |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### ContextMenu.Label
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | 标签文本内容 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### ContextMenu.Separator (分割线)
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 无障碍支持 (Accessibility)
+
+- 基于 Radix ContextMenu 构建 —— 完全支持键盘导航。
+- 使用方向键在菜单项间移动；`Enter` 或 `Space` 键进行选中。
+- `Escape` 键关闭菜单。
+- 键盘导航会自动跳过禁用项。
+- 屏幕阅读器通过 `role="menu"` 识别菜单，通过 `role="menuitem"` 识别菜单项。
+走

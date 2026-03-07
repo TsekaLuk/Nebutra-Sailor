@@ -1,0 +1,78 @@
+---
+title: "复选框 (Checkbox)"
+description: "一个在选中和未选中之间切换的控件，支持可选的中间状态 (Indeterminate)。"
+---
+
+<ComponentPreview className="gap-3">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">接受条款和条件 (Accept terms and conditions)</Label>
+</ComponentPreview>
+
+## 概述 (Overview)
+
+`Checkbox` 是基于 Geist 设计系统的实现，通过 [21st.dev](https://21st.dev) 提供。它提供了一个完全可访问的切换控件，支持选中、未选中和中间状态。通过 `--ds-gray-*` CSS 变量支持深色模式。
+
+## 使用方法 (Usage)
+
+```tsx
+import { Checkbox } from "@nebutra/ui/primitives";
+```
+
+## 示例 (Examples)
+
+### 基础用法 (Default)
+
+```tsx
+const [checked, setChecked] = useState(false);
+
+<Checkbox checked={checked} onChange={(v) => setChecked(v)}>
+  选项 1 (Option 1)
+</Checkbox>
+```
+
+### 禁用状态 (Disabled)
+
+```tsx
+<ComponentPreview className="gap-6">
+  <div className="flex items-center gap-2">
+    <Checkbox disabled id="d1" />
+    <Label htmlFor="d1">禁用 (Disabled)</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <Checkbox checked disabled id="d2" />
+    <Label htmlFor="d2">禁用且选中 (Disabled Checked)</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <Checkbox disabled indeterminate id="d3" />
+    <Label htmlFor="d3">禁用且待定 (Disabled Indeterminate)</Label>
+  </div>
+</ComponentPreview>
+```
+
+### 中间状态 (Indeterminate)
+
+```tsx
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <Checkbox indeterminate id="i1" />
+    <Label htmlFor="i1">选项 1 (Option 1)</Label>
+  </div>
+</ComponentPreview>
+```
+
+## 属性 (Props)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `checked` | `boolean` | `false` | 选中状态 |
+| `onChange` | `(checked: boolean) => void` | — | 状态切换时的回调函数 |
+| `disabled` | `boolean` | `false` | 是否禁用复选框 |
+| `indeterminate` | `boolean` | `false` | 是否显示中间状态 (短横线) |
+| `children` | `ReactNode` | — | 标签文本 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 可访问性 (Accessibility)
+
+- 使用带有 `aria-label` 的隐藏原生 `<input type="checkbox">`。
+- 键盘交互：父级 `<div>` 可点击（点击即切换）。
+- 禁用状态会阻止交互并使控件变灰。

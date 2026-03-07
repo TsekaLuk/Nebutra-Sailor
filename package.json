@@ -128,7 +128,7 @@
     "openapi-typescript": "^7.13.0",
     "prettier": "^3.8.1",
     "tsx": "^4.21.0",
-    "turbo": "^2.8.13",
+    "turbo": "^2.8.14",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",
     "vitest": "^4.0.18"

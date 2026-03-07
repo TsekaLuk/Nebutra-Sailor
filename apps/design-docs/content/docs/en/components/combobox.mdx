@@ -1,0 +1,233 @@
+---
+title: Combobox
+description: Searchable select input combining a trigger button with a filtered dropdown list. Supports controlled, uncontrolled, disabled, error, size, label, grouping, and composition modes.
+---
+
+
+<ComponentPreview className="min-h-[300px]">
+  <ComboboxDemo />
+</ComponentPreview>
+
+## Overview
+
+`Combobox` is a self-contained searchable select built on `Popover` + `cmdk`. It supports two usage modes:
+
+1. **Simple mode** — pass an `options` array and the component handles everything (search, filtering, rendering, selection).
+2. **Composition mode** — use `Combobox.Input`, `Combobox.Option`, `Combobox.Group` etc. as children for custom rendering.
+
+## Installation
+
+```tsx
+import { Combobox } from "@nebutra/ui/primitives"
+```
+
+## Usage
+
+### Simple mode (options prop)
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    placeholder="Select framework..."
+  />
+</ComponentPreview>
+
+### With label
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    label="Framework"
+    placeholder="Select framework..."
+  />
+</ComponentPreview>
+```
+
+### Uncontrolled
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    defaultValue="next"
+    placeholder="Select framework..."
+  />
+</ComponentPreview>
+```
+
+### Disabled
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    defaultValue="remix"
+    disabled
+    placeholder="Select framework..."
+  />
+</ComponentPreview>
+```
+
+### Error state
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    error
+    placeholder="Select framework..."
+  />
+</ComponentPreview>
+```
+
+### Sizes
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex flex-col gap-4 justify-center items-center">
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="sm" placeholder="Small" />
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="default" placeholder="Default" />
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="lg" placeholder="Large" />
+</ComponentPreview>
+```
+
+### Grouped options
+
+```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js", group: "React" },
+      { value: "remix", label: "Remix", group: "React" },
+      { value: "nuxt", label: "Nuxt", group: "Vue" },
+      { value: "svelte", label: "SvelteKit", group: "Svelte" },
+    ]}
+    label="Framework"
+    placeholder="Select framework..."
+  />
+</ComponentPreview>
+```
+
+### Custom width
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    width="w-96"
+    placeholder="Select framework..."
+  />
+</ComponentPreview>
+```
+
+### Composition mode
+
+For advanced scenarios (async search, custom rendering, separators), use sub-components as children.
+
+```tsx
+import { Combobox } from "@nebutra/ui/primitives"
+import { CommandList } from "@nebutra/ui/primitives"
+
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+  <Combobox placeholder="Select framework...">
+    <Combobox.Input placeholder="Search frameworks..." />
+    <CommandList>
+      <Combobox.Empty>No frameworks found.</Combobox.Empty>
+      <Combobox.Group heading="React">
+        <Combobox.Option value="next">Next.js</Combobox.Option>
+        <Combobox.Option value="remix">Remix</Combobox.Option>
+      </Combobox.Group>
+      <Combobox.Separator />
+      <Combobox.Group heading="Vue">
+        <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
+      </Combobox.Group>
+    </CommandList>
+  </Combobox>
+</ComponentPreview>
+```
+
+## Props
+
+### Combobox
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `ComboboxOption[]` | — | Simple mode: array of options to render |
+| `value` | `string` | — | Controlled selected value |
+| `onChange` | `(value: string) => void` | — | Callback when selection changes |
+| `defaultValue` | `string` | `""` | Initial value for uncontrolled usage |
+| `disabled` | `boolean` | `false` | Disable the entire combobox |
+| `error` | `boolean` | `false` | Show error styling (red border) |
+| `size` | `"sm" \| "default" \| "lg"` | `"default"` | Size variant — `sm` (32px), `default` (40px), `lg` (48px) |
+| `width` | `string` | — | Tailwind width class applied to both trigger and dropdown |
+| `label` | `string` | — | Accessible label shown above the trigger |
+| `hideLabel` | `boolean` | `false` | Visually hide the label (still accessible via aria) |
+| `placeholder` | `string` | `"Select..."` | Text when nothing is selected |
+| `emptyMessage` | `string` | `"No results found."` | Text when search has no matches |
+| `searchPlaceholder` | `string` | `"Search..."` | Placeholder in the search input |
+| `children` | `ReactNode` | — | Composition mode: provide sub-components manually |
+| `className` | `string` | — | Additional CSS classes |
+
+### ComboboxOption
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `value` | `string` | Machine value used for selection matching |
+| `label` | `string` | Human-readable label displayed in trigger and list |
+| `disabled` | `boolean` | Disable this specific option |
+| `group` | `string` | Assign to a group heading |
+
+### Sub-Components
+
+| Component | Based On | Description |
+|-----------|----------|-------------|
+| `Combobox.Input` | `CommandInput` | Search input for filtering options |
+| `Combobox.Option` | `CommandItem` | Selectable option with auto check icon |
+| `Combobox.Empty` | `CommandEmpty` | Message when no options match search |
+| `Combobox.Group` | `CommandGroup` | Group heading for related options |
+| `Combobox.Separator` | `CommandSeparator` | Visual divider between groups |
+
+## Accessibility
+
+- Trigger button has `role="combobox"` with `aria-expanded`.
+- Label uses `aria-labelledby` to associate with the trigger.
+- `CommandInput` provides a live search accessible to screen readers.
+- `CommandItem` elements have `role="option"` with `aria-selected`.
+- Keyboard navigation: type to filter, `ArrowUp`/`ArrowDown` to navigate, `Enter` to select, `Escape` to close.
+
+## Notes
+
+- The dropdown width automatically matches the trigger width via `--radix-popover-trigger-width`.
+- When using `options` with grouped items, options are automatically sorted into `CommandGroup` headings.
+- `Combobox.Option` accepts `keywords` passthrough to `CommandItem` for enhanced search matching.
+- Toggle-deselect: clicking an already-selected option clears the selection.

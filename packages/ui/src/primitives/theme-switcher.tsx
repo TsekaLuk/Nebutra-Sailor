@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { Monitor, Moon, Sun } from "lucide-react";
+import { motion } from "framer-motion";
 import { cn } from "../utils/cn";
 
 export type ThemeSwitcherValue = "light" | "dark" | "system";
@@ -90,22 +91,22 @@ export function ThemeSwitcher({
     icon: React.ElementType;
     label: string;
   }> = [
-    {
-      key: "system",
-      icon: mergedIcons.system,
-      label: mergedLabels.system,
-    },
-    {
-      key: "light",
-      icon: mergedIcons.light,
-      label: mergedLabels.light,
-    },
-    {
-      key: "dark",
-      icon: mergedIcons.dark,
-      label: mergedLabels.dark,
-    },
-  ];
+      {
+        key: "system",
+        icon: mergedIcons.system,
+        label: mergedLabels.system,
+      },
+      {
+        key: "light",
+        icon: mergedIcons.light,
+        label: mergedLabels.light,
+      },
+      {
+        key: "dark",
+        icon: mergedIcons.dark,
+        label: mergedLabels.dark,
+      },
+    ];
 
   const handleThemeClick = useCallback(
     (themeKey: ThemeSwitcherValue) => {
@@ -158,7 +159,11 @@ export function ThemeSwitcher({
             type="button"
           >
             {isActive && (
-              <div className="absolute inset-0 rounded-full bg-secondary" />
+              <motion.div
+                className="absolute inset-0 rounded-full bg-secondary shadow-sm"
+                layoutId="theme-switcher-bg"
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              />
             )}
             <Icon
               className={cn(

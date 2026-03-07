@@ -1,0 +1,127 @@
+---
+title: 手风琴 (Accordion)
+description: 可折叠的内容区域，用于逐步披露信息。
+---
+
+<ComponentPreview>
+  <AccordionDemo />
+</ComponentPreview>
+
+## 安装 (Installation)
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@nebutra/ui/primitives";
+```
+
+## 属性 (Props)
+
+### Accordion
+
+扩展自 `@radix-ui/react-accordion` 中的 `Root` 组件属性。
+
+| 属性            | 类型                                  | 默认值 | 描述                                                |
+| --------------- | ------------------------------------- | ------- | ---------------------------------------------------------- |
+| `type`          | `"single" \| "multiple"`              | —       | 允许同时打开一个还是多个面板        |
+| `collapsible`   | `boolean`                             | `false` | 当 `type="single"` 时，允许已打开的面板再次点击被折叠 |
+| `defaultValue`  | `string \| string[]`                  | —       | 默认打开的面板的值                   |
+| `value`         | `string \| string[]`                  | —       | 受控状态下打开的面板的值                                   |
+| `onValueChange` | `(value: string \| string[]) => void` | —       | 当打开的面板发生变化时的回调函数                            |
+| `className`     | `string`                              | —       | 额外的 CSS 类名                                     |
+
+### AccordionItem
+
+| 属性        | 类型      | 默认值 | 描述                                   |
+| ----------- | --------- | ------- | --------------------------------------------- |
+| `value`     | `string`  | —       | **必填。** 此面板的唯一标识符 |
+| `disabled`  | `boolean` | `false` | 防止此面板被打开           |
+| `className` | `string`  | —       | 额外的 CSS 类名                        |
+
+### AccordionTrigger
+
+| 属性        | 类型                   | 默认值     | 描述                                               |
+| ----------- | ---------------------- | ----------- | --------------------------------------------------------- |
+| `children`  | `ReactNode`            | —           | 触发器文本内容                                     |
+| `size`      | `"default" \| "small"` | `"default"` | 尺寸大小 — `small` 使用紧凑的内边距和 14px 文本 |
+| `className` | `string`               | —           | 额外的 CSS 类名                                    |
+
+### AccordionContent
+
+| 属性        | 类型                   | 默认值     | 描述                               |
+| ----------- | ---------------------- | ----------- | ----------------------------------------- |
+| `children`  | `ReactNode`            | —           | 当面板打开时显示的内容   |
+| `size`      | `"default" \| "small"` | `"default"` | 尺寸大小 — 将与触发器的尺寸保持一致 |
+| `className` | `string`               | —           | 额外的 CSS 类名                    |
+
+## 示例 (Examples)
+
+### 打开多个面板 (Multiple Open Items)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <Accordion type="multiple" className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>第一节</AccordionTrigger>
+      <AccordionContent>第一节的内容。</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>第二节</AccordionTrigger>
+      <AccordionContent>第二节的内容。</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+```
+
+### 受控的手风琴 (Controlled Accordion)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <Accordion type="single" defaultValue="item-1" className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>受控面板</AccordionTrigger>
+      <AccordionContent>此手风琴组件是受控的。</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+```
+
+### 禁用的面板 (Disabled Item)
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="item-1" disabled>
+      <AccordionTrigger>禁用的区域</AccordionTrigger>
+      <AccordionContent>此面板将无法打开。</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+```
+
+### 小尺寸 (Small Size)
+
+基于更小的内边距和文本大小，等同于 `Geist Collapse` 中 `size="small"` 的变体。
+
+```tsx
+<ComponentPreview className="max-w-[400px]">
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger size="small">紧凑的问题</AccordionTrigger>
+      <AccordionContent size="small">
+        缩减了内边距的紧凑内容。
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 遵循 WAI-ARIA 的 [Accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)。
+- 每个 `AccordionTrigger` 都会渲染为带有 `aria-expanded` 和 `aria-controls` 属性的 `<button>` 元素。
+- 每个 `AccordionContent` 都有 `role="region"` ，并通过 `aria-labelledby` 指向其触发器。
+- 键盘导航可以使用：`Enter`/`Space` 切换打开/折叠状态，`Tab` 在面板中切换焦点。

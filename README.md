@@ -574,6 +574,14 @@ This project is licensed under the **AGPLv3**.
 
 For commercial licensing inquiries, please contact us.
 
+### Brand Assets & Trademarks
+
+While the source code is open-source, the **brand assets** (the "Nebutra" name, "Nebutra Sailor", logos, icons, and illustrations) are protected trademarks of Wuxi Yunyu Intelligent Technology Co., Ltd.
+
+You may not use our brand assets to endorse your own products or services. If you clone or fork this repository to build your own product, you **must** replace all Nebutra logos and branding with your own.
+
+Please see our [Trademark Policy](TRADEMARK.md) and [Brand Guidelines](BRAND_GUIDELINES.md) for more information.
+
 <br />
 
 ---

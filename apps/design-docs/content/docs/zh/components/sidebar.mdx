@@ -1,0 +1,140 @@
+---
+title: "侧边栏 (Sidebar)"
+description: "功能完善的应用侧边栏，支持折叠功能及键盘无障碍操作。"
+---
+
+## 演示 (Demo)
+
+```tsx
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@nebutra/ui/primitives"
+import { LayoutDashboard, Settings, Users, HelpCircle } from "lucide-react"
+
+export function SidebarDemo() {
+  return (
+    <SidebarProvider>
+      <Sidebar>
+        <SidebarHeader>
+          <div className="px-4 py-2 font-semibold">Nebutra</div>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupLabel>应用 (Application)</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <a href="/dashboard">
+                      <LayoutDashboard />
+                      仪表盘
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <a href="/users">
+                      <Users />
+                      用户管理
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+        <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <a href="/settings">
+                  <Settings />
+                  设置
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
+      </Sidebar>
+      <main>
+        <SidebarTrigger />
+        {/* 页面主要内容 */}
+      </main>
+    </SidebarProvider>
+  )
+}
+```
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset,
+  SidebarRail,
+  useSidebar,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### SidebarProvider
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `defaultOpen` | `boolean` | `true` | 非受控状态下的默认开启状态 |
+| `open` | `boolean` | — | 受控模式下的开启状态 |
+| `onOpenChange` | `(open: boolean) => void` | — | 开启状态改变时的回调函数 |
+
+### Sidebar
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `side` | `"left" \| "right"` | `"left"` | 侧边栏所在位置（左侧或右侧） |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` | 视觉风格变体 |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` | 折叠行为模式 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### SidebarMenuButton
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `isActive` | `boolean` | `false` | 高亮按钮以表示当前处于活跃路由 |
+| `asChild` | `boolean` | `false` | 将属性合并到子元素上（常用于整合 `next/link`） |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | 按钮尺寸 |
+| `tooltip` | `string \| TooltipContent` | — | 在折叠图标模式下显示的浮窗提示 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 无障碍支持 (Accessibility)
+
+- `Sidebar` 会渲染为带有 `aria-label` 的 `<aside>` 元素。
+- `SidebarTrigger` 带有 `aria-expanded` 属性以传达侧边栏状态。
+- 活跃状态的菜单按钮带有 `aria-current="page"`。
+- 键盘快捷键：使用 `⌘B` (或 `Ctrl+B`) 通过 `useSidebar()` 钩子切换侧边栏状态。
+- 在“仅显示图标”的折叠模式下，可以通过 `tooltip` 为仅有图标的按钮提供屏幕阅读器文本支持。
+走

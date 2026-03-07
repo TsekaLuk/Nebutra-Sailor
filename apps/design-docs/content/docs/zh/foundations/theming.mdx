@@ -1,0 +1,245 @@
+---
+title: Theming
+description: Theme modes, the DesignSystemProvider, createTheme API, and marketing token injection.
+---
+
+## Overview
+
+The theming layer controls how design tokens are delivered to components at runtime. It has two distinct concerns:
+
+1. **Application theming** — `createTheme()` + `DesignSystemProvider` for light/dark mode across product UI
+2. **Marketing token injection** — `generateMarketingCSSVars()` for landing page surfaces
+
+Tokens originate in `default.ts` (Primer baseline), are optionally overridden in `brand.ts` via `BrandOverrides`, and the marketing extension lives in `marketing.ts`.
+
+## Application Theming
+
+### `createTheme(mode, overrides?)`
+
+Located in `apps/docs-hub/design-system/src/theme/brand.ts`.
+
+```ts
+import { createTheme } from "@nebutra/ui/theme/brand";
+
+// Light theme with no overrides (Primer defaults)
+const theme = createTheme("light");
+
+// Dark theme
+const darkTheme = createTheme("dark");
+
+// Light theme with brand overrides
+const brandTheme = createTheme("light", {
+  colors: {
+    accent: {
+      fg: "#6366f1",
+      emphasis: "#4f46e5",
+      muted: "rgba(99,102,241,0.4)",
+      subtle: "rgba(99,102,241,0.1)",
+    },
+  },
+  typography: {
+    fontFamily: {
+      normal: '"BrandFont", Inter, sans-serif',
+      mono: '"BrandMono", "JetBrains Mono", monospace',
+      display: '"BrandDisplay", Inter, sans-serif',
+    },
+  },
+  radii: {
+    lg: "16px",
+    xl: "24px",
+  },
+  shadows: {
+    brand: "0 0 40px rgba(99,102,241,0.25)",
+  },
+});
+```
+
+**Signature:**
+```ts
+function createTheme(
+  mode: "light" | "dark",
+  overrides?: BrandOverrides
+): DefaultTheme
+```
+
+**`BrandOverrides` interface:**
+
+| Field | Type | Description |
+|---|---|---|
+| `colors` | `Partial<semanticColorsLight>` | Override semantic color tokens |
+| `typography.fontFamily.normal` | `string` | Body / UI font stack |
+| `typography.fontFamily.mono` | `string` | Code / monospace stack |
+| `typography.fontFamily.display` | `string` | Display / hero font stack |
+| `radii` | `Partial<typeof defaultTheme.radii>` | Border radius overrides |
+| `shadows` | `Record<string, string>` | Named shadow additions |
+
+### Pre-built Themes
+
+Two pre-built themes are exported directly:
+
+```ts
+import { lightTheme, darkTheme } from "@nebutra/ui/theme/brand";
+```
+
+Both are `DefaultTheme` objects — Primer semantic tokens with no brand overrides applied.
+
+### `DesignSystemProvider`
+
+<Info>
+The `DesignSystemProvider` component is the integration point between the design system and React applications. It delivers the active theme via context.
+</Info>
+
+```tsx
+import { DesignSystemProvider } from "@nebutra/ui";
+
+// Default mode: system preference
+<DesignSystemProvider>
+  <App />
+</DesignSystemProvider>
+
+// Force light mode
+<DesignSystemProvider defaultMode="light">
+  <App />
+</DesignSystemProvider>
+
+// Force dark mode
+<DesignSystemProvider defaultMode="dark">
+  <App />
+</DesignSystemProvider>
+```
+
+**Props:**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `defaultMode` | `"light" \| "dark" \| "system"` | `"system"` | Initial color mode |
+| `theme` | `DefaultTheme` | `lightTheme` | Custom theme object from `createTheme()` |
+| `children` | `ReactNode` | — | Application subtree |
+
+### `useDesignSystem` Hook
+
+Access the current theme and mode toggle from any component inside `DesignSystemProvider`.
+
+```tsx
+import { useDesignSystem } from "@nebutra/ui";
+
+function ThemeToggle() {
+  const { mode, setMode, theme } = useDesignSystem();
+
+  return (
+    <button onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+      Current: {mode}
+    </button>
+  );
+}
+```
+
+**Return value:**
+
+| Property | Type | Description |
+|---|---|---|
+| `mode` | `"light" \| "dark"` | Active color mode |
+| `setMode` | `(mode: "light" \| "dark") => void` | Imperatively switch modes |
+| `theme` | `DefaultTheme` | Full resolved theme object |
+
+## Marketing Token Injection
+
+Marketing tokens are not part of the theme context. They are CSS custom properties injected at the page level.
+
+### `generateMarketingCSSVars()`
+
+Located in `apps/docs-hub/design-system/src/theme/marketing.ts`.
+
+```ts
+import { generateMarketingCSSVars } from "@nebutra/ui/theme/marketing";
+
+// Returns a string of CSS custom property declarations
+const cssVars = generateMarketingCSSVars();
+```
+
+Generated properties:
+
+```css
+/* Marketing Spacing */
+--marketing-section-sm: 64px;
+--marketing-section-md: 96px;
+--marketing-section-lg: 128px;
+--marketing-section-xl: 160px;
+--marketing-hero-min-height: 100vh;
+--marketing-content-max-width: 1200px;
+
+/* Marketing Radii */
+--marketing-radius-sm: 8px;
+--marketing-radius-card: 16px;
+--marketing-radius-card-lg: 24px;
+--marketing-radius-xl: 32px;
+--marketing-radius-button: 9999px;
+
+/* Marketing Transitions */
+--marketing-transition-fast: 150ms ease;
+--marketing-transition-default: 200ms ease;
+--marketing-transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+--marketing-transition-emphasized: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+--marketing-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+```
+
+Inject this into the page layout of any marketing surface:
+
+```tsx
+// apps/landing-page/src/app/layout.tsx
+import { generateMarketingCSSVars } from "@nebutra/ui/theme/marketing";
+
+export default function Layout({ children }) {
+  return (
+    <html>
+      <head>
+        <style>{`:root { ${generateMarketingCSSVars()} }`}</style>
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+### Full Marketing Token Map
+
+```ts
+import { marketingTokens } from "@nebutra/ui/theme/marketing";
+// marketingTokens.spacing
+// marketingTokens.typography
+// marketingTokens.gradients
+// marketingTokens.effects
+// marketingTokens.radii
+// marketingTokens.transitions
+// marketingTokens.zIndex
+```
+
+See the [Color foundation](/foundations/color) page for gradient and effect token values. See [Typography](/foundations/typography) for marketing typography presets (`display`, `headline`, `subheadline`, `featureTitle`, `cardText`, `label`).
+
+## Z-Index Scale (Marketing)
+
+| Token | Value | Layer |
+|---|---|---|
+| `marketingZIndex.background` | −1 | Decorative backgrounds |
+| `marketingZIndex.base` | 0 | Default content |
+| `marketingZIndex.elevated` | 10 | Hover-state cards |
+| `marketingZIndex.sticky` | 100 | Sticky headers |
+| `marketingZIndex.nav` | 1000 | Navigation bar |
+| `marketingZIndex.dropdown` | 1100 | Dropdowns / Popovers |
+| `marketingZIndex.modal` | 1200 | Modals / Dialogs |
+| `marketingZIndex.toast` | 1300 | Toasts / Notifications |
+| `marketingZIndex.tooltip` | 1400 | Tooltips |
+
+## Do / Don't
+
+**Do** wrap your application root with `DesignSystemProvider` exactly once, at the top level.
+
+**Do** use `useDesignSystem()` to read the active mode and toggle it — do not manage theme state independently.
+
+**Do** call `generateMarketingCSSVars()` only in marketing page layouts, not in the application shell.
+
+**Don't** import `marketingTokens` inside shared UI components — they belong exclusively in marketing surface code.
+
+**Don't** override semantic tokens with hardcoded hex values. Use `createTheme()` with `BrandOverrides` instead.
+
+**Don't** nest multiple `DesignSystemProvider` instances. A single provider at the root governs the entire tree.

@@ -11,6 +11,7 @@ export * from "./layout";
 export * from "./spacing";
 export * from "./accessibility";
 export * from "./responsive";
+export * from "./dropdown-menu";
 
 // Legacy typography (deprecated - use typography/ module)
 export { textStyles, type TextStyle } from "./typography";
@@ -59,6 +60,8 @@ export {
   type ButtonLinkProps,
 } from "./button";
 
+export * from "./animated-gradient-text";
+
 export {
   Checkbox,
   CheckboxGroup,
@@ -82,6 +85,8 @@ export {
 } from "./dialog";
 
 export { Input, type InputProps } from "./input";
+export * from "./dithering-shader";
+export * from "./magic-card";
 
 export { Label, labelVariants, type LabelProps } from "./label";
 
@@ -122,3 +127,29 @@ export {
   TooltipContent,
   TooltipProvider,
 } from "./tooltip";
+
+export * from "./animated-beam";
+export * from "./animated-list";
+export * from "./flickering-grid";
+export * from "./card";
+export * from "./carousel";
+export * from "./collapsible";
+export * from "./command";
+export * from "./context-menu";
+export * from "./date-picker";
+export * from "./drawer";
+export * from "./hover-card";
+export * from "./menu";
+export * from "./navigation-menu";
+export * from "./popover";
+export * from "./progress";
+export * from "./sheet";
+export * from "./skeleton";
+export * from "./slider";
+export * from "./textarea";
+export * from "./hex-grid";
+export * from "./warp-background";
+export * from "./stars-canvas";
+export * from "./theme-switcher";
+export * from "./apple-liquid-glass-switcher";
+export * from "./interactive-frosted-glass-card";

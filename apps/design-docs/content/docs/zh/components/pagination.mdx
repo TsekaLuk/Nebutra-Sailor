@@ -1,0 +1,115 @@
+---
+title: "分页 (Pagination)"
+description: "用于在内容页面之间切换的导航控件。"
+---
+
+## 演示 (Demo)
+
+```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem>
+        <PaginationPrevious href="#prev" />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#1">1</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#2" isActive>2</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#3">3</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationEllipsis />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#10">10</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationNext href="#next" />
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>
+</ComponentPreview>
+```
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### PaginationLink
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `href` | `string` | — | 页面导航 URL |
+| `isActive` | `boolean` | `false` | 标记为当前页面 |
+| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"icon"` | 按钮尺寸 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 页码或标签 |
+
+### PaginationPrevious / PaginationNext
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `href` | `string` | — | 导航 URL |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 示例 (Examples)
+
+### 受控分页 (Controlled Pagination)
+
+```tsx
+function PaginatedList({ totalPages }: { totalPages: number }) {
+  const [page, setPage] = useState(1)
+
+  return (
+    <>
+      <DataList page={page} />
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              aria-disabled={page === 1}
+            />
+          </PaginationItem>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+            <PaginationItem key={p}>
+              <PaginationLink isActive={p === page} onClick={() => setPage(p)}>
+                {p}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              aria-disabled={page === totalPages}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </>
+  )
+}
+```
+
+## 可访问性 (Accessibility)
+
+- 根级 `<nav>` 具有 `aria-label="Pagination"` 属性。
+- 激活的页面链接具有 `aria-current="page"` 属性。
+- `PaginationEllipsis` 具有 `aria-hidden="true"` 属性。
+- “上一页”和“下一页”按钮具有描述性的 `aria-label` 属性。

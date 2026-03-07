@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   transpilePackages: [
     "@nebutra/ui",
     "@nebutra/tokens",
+    "fumadocs-ui",
+    "fumadocs-core",
+    "fumadocs-mdx"
   ],
   reactStrictMode: true,
 };

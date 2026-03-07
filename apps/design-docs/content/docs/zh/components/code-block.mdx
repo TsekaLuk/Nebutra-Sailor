@@ -1,0 +1,177 @@
+---
+title: 代码块 (CodeBlock)
+description: 支持多文件标签页、语法高亮、行高亮、差异装饰、可点击的行引用以及语言切换的代码查看器。
+---
+
+## 概览 (Overview)
+
+`CodeBlock` 渲染一个带标签页的代码查看器，其强大的语法高亮由 `react-syntax-highlighter` (Prism) 提供支持。它能根据文件扩展名自动识别语言，适应浅色/深色模式，并为每个标签页提供独立的“复制到剪贴板”功能。
+
+其具备符合 Geist 设计风格的特性，包括行高亮、差异样式（新增/删除行）、可点击的行引用锚点以及语言切换下拉菜单。
+
+## 安装 (Installation)
+
+```tsx
+import { CodeBlock } from "@nebutra/ui/primitives";
+```
+
+`react-syntax-highlighter` 是一个同级依赖（peer dependency）：
+
+```bash
+pnpm add react-syntax-highlighter @types/react-syntax-highlighter
+```
+
+## 使用方法 (Usage)
+
+### 单文件 (Single file)
+
+```tsx
+<CodeBlock
+  files={[{
+    title: "hello.ts",
+    code: `const greeting = "Hello World";\nconsole.log(greeting);`
+  }]}
+/>
+```
+
+### 多文件 (Multiple files)
+
+```tsx
+<CodeBlock
+  files={[
+    {
+      title: "theme.ts",
+      code: `export const theme = { primary: "#7C3AED" };`,
+      language: "typescript",
+    },
+    {
+      title: "styles.css",
+      code: `:root { --primary: #7C3AED; }`,
+      language: "css",
+    },
+  ]}
+  defaultTitle="theme.ts"
+/>
+```
+
+### 带有行号和自定义高度 (With line numbers and custom height)
+
+```tsx
+<CodeBlock
+  files={[{ title: "config.json", code: JSON.stringify(config, null, 2) }]}
+  maxHeight={300}
+  showLineNumbers
+/>
+```
+
+### 行高亮 (Highlighted lines)
+
+通过强调背景和左边框指示器来突出显示特定行。
+
+```tsx
+<CodeBlock
+  files={[{
+    title: "counter.tsx",
+    code: counterCode,
+    highlightedLines: [3, 4, 5],
+  }]}
+  showLineNumbers
+/>
+```
+
+### 差异行（新增/删除） (Diff lines)
+
+显示带有绿色/红色背景装饰以及 `+`/`-` 槽标记的差异样式。
+
+```tsx
+<CodeBlock
+  files={[{
+    title: "counter.tsx",
+    code: diffCode,
+    addedLines: [5, 9, 10],
+    removedLines: [4],
+  }]}
+  showLineNumbers
+/>
+```
+
+### 行引用 (Referenced lines)
+
+点击行号可将 `#L{n}` 锚点链接复制到剪贴板。
+
+```tsx
+<CodeBlock
+  files={[{ title: "app.tsx", code: appCode }]}
+  showLineNumbers
+  enableLineReferences
+  onLineReference={(line) => console.log(`已引用行 ${line}`)}
+/>
+```
+
+### 语言切换器 (Language switcher)
+
+可以通过页头中的下拉菜单手动覆盖自动识别的语言。
+
+```tsx
+<CodeBlock
+  files={[{ title: "example.txt", code: someCode }]}
+  showLanguageSwitcher
+  languages={["typescript", "javascript", "python", "go"]}
+/>
+```
+
+## 属性 (Props)
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `files` | `CodeBlockFile[]` | — | **必需。** 要显示的代码文件数组 |
+| `defaultTitle` | `string` | `files[0].title` | 初始激活的文件标签页 |
+| `className` | `string` | — | 外部容器的额外 CSS 类名 |
+| `maxHeight` | `string \| number` | `400` | 代码区域的最大高度（数值单位为 px） |
+| `showLineNumbers` | `boolean` | `false` | 是否显示行号 |
+| `enableLineReferences` | `boolean` | `false` | 点击行号是否复制 `#L{n}` 锚点 |
+| `showLanguageSwitcher` | `boolean` | `false` | 是否在页头显示语言下拉菜单 |
+| `languages` | `string[]` | 预设列表 | 切换器中可选的语言列表 |
+| `onLineReference` | `(lineNumber: number) => void` | — | 点击行引用时的回调函数 |
+
+### CodeBlockFile
+
+| 属性 (Prop) | 类型 | 描述 |
+|------|------|-------------|
+| `title` | `string` | 标签页中显示的文件名 |
+| `code` | `string` | 要展示和复制的代码内容 |
+| `language` | `string` | 语法高亮语言（缺省时从扩展名自动识别） |
+| `highlightedLines` | `number[]` | 需要高亮显示的行号（从 1 开始计数的数组） |
+| `addedLines` | `number[]` | 标记为“已添加”的行号（绿色背景，从 1 开始） |
+| `removedLines` | `number[]` | 标记为“已删除”的行号（红色背景，从 1 开始） |
+
+## 自动识别的语言 (Auto-Detected Languages)
+
+未明确提供 `language` 时，将根据文件扩展名推断：
+
+| 扩展名 | 对应语言 |
+|-----------|---------|
+| `.js` `.jsx` | javascript / jsx |
+| `.ts` `.tsx` | typescript / tsx |
+| `.html` | html |
+| `.css` `.scss` | css / scss |
+| `.json` | json |
+| `.md` | markdown |
+| `.py` | python |
+| `.go` | go |
+| `.rs` | rust |
+| `.sh` `.bash` `.zsh` | bash |
+| `.yaml` `.yml` | yaml |
+| `.sql` | sql |
+| `.graphql` `.gql` | graphql |
+
+## 注意事项 (Notes)
+
+- 浅色/深色主题通过 `MutationObserver` 监听 `<html>` 上的 `dark` 类名来自动检测。
+- 浅色主题使用了定制的夜猫 (nightOwl) 风格，契合设计系统的 CSS 变量。
+- 标签页中会显示文件图标：JS/TS 使用 `FileCode`，CSS 使用 `FileText`，其他使用 `File`。
+- 在移动端会隐藏标签文字（`hidden sm:inline`）以节省空间。
+- 高亮行和差异行的样式使用内联 `rgba()` 颜色，能够自适应深浅色模式。
+- 差异标记（`+`/`-`) 通过限定范围的 CSS `::before` 伪元素渲染。
+- 切换文件标签页时，手动选择的语言将被重置。
+走

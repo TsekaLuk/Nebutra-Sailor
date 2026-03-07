@@ -1,0 +1,91 @@
+---
+title: "折叠面板 (Collapsible)"
+description: "使用切换控件显示或隐藏内容，基于 Radix UI 构建。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Collapsible className="w-80 space-y-2">
+    <div className="flex items-center justify-between px-4">
+      <h4 className="text-sm font-semibold">团队成员 (Team Members)</h4>
+      <CollapsibleTrigger className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-md)] text-sm font-medium transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-10 w-10">
+        <span>↕️</span>
+        <span className="sr-only">切换 (Toggle)</span>
+      </CollapsibleTrigger>
+    </div>
+    <div className="rounded-md border px-4 py-2 text-sm">爱丽丝·约翰逊 (Alice Johnson)</div>
+    <CollapsibleContent className="space-y-2">
+      <div className="rounded-md border px-4 py-2 text-sm">鲍勃·史密斯 (Bob Smith)</div>
+      <div className="rounded-md border px-4 py-2 text-sm">卡罗尔·怀特 (Carol White)</div>
+    </CollapsibleContent>
+  </Collapsible>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### Collapsible (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | 受控的打开状态 |
+| `defaultOpen` | `boolean` | `false` | 非受控的默认打开状态 |
+| `onOpenChange` | `(open: boolean) => void` | — | 打开状态改变时的回调函数 |
+| `disabled` | `boolean` | `false` | 防止切换状态 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+### CollapsibleTrigger (触发器)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | 将属性合并到直接子元素上 |
+| `children` | `ReactNode` | — | 触发元素 |
+
+### CollapsibleContent (内容区)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 折叠主体内容 |
+
+## 示例 (Examples)
+
+### 带有常显标题和可折叠主体的示例 (Always-visible Header with Collapsible Body)
+
+```tsx
+import { ChevronDown } from "lucide-react"
+
+<ComponentPreview className="min-h-[200px] flex justify-center items-start pt-10">
+  <Collapsible className="w-80 border rounded-md p-4 bg-background shadow-sm">
+    <CollapsibleTrigger className="flex w-full items-center justify-between font-medium">
+      高级选项 (Advanced Options)
+      <ChevronDown className="h-4 w-4" />
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <div className="space-y-2 pt-4">
+        <p className="text-sm text-muted-foreground">此处包含高级配置。 (Advanced configuration here.)</p>
+        <div className="rounded-md border p-3 font-mono text-xs text-muted-foreground bg-muted/50">
+          {"{ \"debug\": true, \"level\": \"verbose\" }"}
+        </div>
+      </div>
+    </CollapsibleContent>
+  </Collapsible>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI Collapsible 构建。
+- `CollapsibleTrigger` 具有 `aria-expanded` 属性，用于通报打开/关闭状态。
+- `CollapsibleContent` 在折叠时具有 `aria-hidden="true"` 属性。
+- 请为 `CollapsibleTrigger` 使用描述性文本或 `aria-label`，以便屏幕阅读器清晰识别。

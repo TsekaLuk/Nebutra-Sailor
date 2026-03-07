@@ -1,0 +1,24 @@
+{
+  "title": "组合组件 (Fragment Components)",
+  "pages": [
+    "introduction",
+    "admonition",
+    "assistant-chat",
+    "confirmation-modal",
+    "data-input",
+    "empty-state",
+    "filter-bar",
+    "form-item-layout",
+    "info-tooltip",
+    "inner-side-menu",
+    "logs-bar-chart",
+    "metric-card",
+    "modal",
+    "multi-select",
+    "page-container",
+    "page-header",
+    "page-section",
+    "table-of-contents",
+    "text-confirm-dialog"
+  ]
+}

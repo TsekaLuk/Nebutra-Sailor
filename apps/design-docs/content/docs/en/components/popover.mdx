@@ -1,0 +1,116 @@
+---
+title: "Popover"
+description: "Floating content container anchored to a trigger element, built on Radix UI."
+---
+
+## Demo
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="outline">Open Popover</Button>
+    </PopoverTrigger>
+    <PopoverContent className="w-72">
+      <div className="space-y-2">
+        <h4 className="font-medium leading-none">Dimensions</h4>
+        <p className="text-sm text-muted-foreground">
+          Set the dimensions for the layer.
+        </p>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverAnchor,
+} from "@nebutra/ui/primitives"
+```
+
+## Props
+
+### Popover (Root)
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled default open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Callback when open state changes |
+| `modal` | `boolean` | `false` | Whether to use modal behavior |
+
+### PopoverTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props onto the immediate child element |
+| `children` | `ReactNode` | — | Trigger element |
+
+### PopoverContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | Preferred side to open |
+| `sideOffset` | `number` | `4` | Distance from trigger |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment along trigger |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Popover body content |
+
+## Examples
+
+### Settings Popover
+
+```tsx
+import { Settings } from "lucide-react"
+import { Switch, Label } from "@nebutra/ui/primitives"
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <Settings className="h-4 w-4" />
+      </Button>
+    </PopoverTrigger>
+    <PopoverContent side="right" align="start" className="w-64">
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <Label htmlFor="notifications">Notifications</Label>
+          <Switch id="notifications" />
+        </div>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="marketing">Marketing emails</Label>
+          <Switch id="marketing" />
+        </div>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+```
+
+### Controlled Popover
+
+```tsx
+<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+  <Popover defaultOpen={true}>
+    <PopoverTrigger asChild>
+      <Button>Toggle Popover</Button>
+    </PopoverTrigger>
+    <PopoverContent>
+      <p className="mb-4 text-sm">Controlled popover content</p>
+      <Button variant="outline" size="sm">Close</Button>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+```
+
+## Accessibility
+
+- Built on Radix UI Popover — `PopoverContent` has `role="dialog"`.
+- Trigger has `aria-expanded` and `aria-haspopup="dialog"`.
+- Focus is moved into the popover when opened; returns to trigger on close.
+- Pressing `Escape` closes the popover.
+- Clicking outside the popover closes it by default.

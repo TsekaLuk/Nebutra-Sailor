@@ -1,0 +1,113 @@
+---
+title: "面包屑 (Breadcrumb)"
+description: "显示用户当前位置的分层导航路径。"
+---
+
+## 演示 (Demo)
+
+```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">首页 (Home)</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#docs">文档 (Documentation)</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>面包屑 (Breadcrumb)</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</ComponentPreview>
+```
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+  BreadcrumbEllipsis,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### Breadcrumb
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | `BreadcrumbList` |
+
+### BreadcrumbLink
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `href` | `string` | — | 导航目标 URL |
+| `asChild` | `boolean` | `false` | 将属性合并到直接子元素（用于路由链接）上 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 链接文本 |
+
+### BreadcrumbPage
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 当前页面名称 |
+
+### BreadcrumbSeparator
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | `ChevronRight` | 自定义分隔图标 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 示例 (Examples)
+
+### 带有折叠的中间项 (With Collapsed Middle Items)
+
+```tsx
+<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#home">首页 (Home)</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbEllipsis />
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>当前页面 (Current Page)</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</ComponentPreview>
+```
+
+### 配合 Next.js Link (With Next.js Link)
+
+```tsx
+import Link from "next/link"
+
+<BreadcrumbLink asChild>
+  <Link href="/products">产品 (Products)</Link>
+</BreadcrumbLink>
+```
+
+## 可访问性 (Accessibility)
+
+- 根级 `<nav>` 元素具有 `aria-label="breadcrumb"` 属性。
+- `BreadcrumbPage` （当前页面项）具有 `aria-current="page"` 属性。
+- `BreadcrumbSeparator` 具有 `aria-hidden="true"` 属性，以避免屏幕阅读器冗余播报。
+- `BreadcrumbEllipsis` 具有 `aria-hidden="true"` 属性。

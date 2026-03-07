@@ -1,0 +1,94 @@
+---
+title: "悬停卡片 (Hover Card)"
+description: "悬停时显示的浮动卡片，非常适合用于用户预览和链接预览。"
+---
+
+## 演示 (Demo)
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-center">
+  <HoverCard>
+    <HoverCardTrigger className="text-sm font-medium underline underline-offset-4 cursor-pointer">
+      @johndoe
+    </HoverCardTrigger>
+    <HoverCardContent className="w-80">
+      <div className="flex gap-4">
+        <Avatar>
+          <AvatarImage src="https://github.com/johndoe.png" />
+          <AvatarFallback>JD</AvatarFallback>
+        </Avatar>
+        <div className="space-y-1">
+          <h4 className="text-sm font-semibold">@johndoe</h4>
+          <p className="text-sm text-muted-foreground">全栈工程师。致力于打造优秀产品。 (Full-stack engineer. Building great products.)</p>
+          <p className="text-xs text-muted-foreground">加入日期：2022年1月 (Joined January 2022)</p>
+        </div>
+      </div>
+    </HoverCardContent>
+  </HoverCard>
+</ComponentPreview>
+
+## 使用方法 (Usage)
+
+```tsx
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@nebutra/ui/primitives"
+```
+
+## 属性 (Props)
+
+### HoverCard (根组件)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | 受控的打开状态 |
+| `onOpenChange` | `(open: boolean) => void` | — | 打开状态改变时的回调函数 |
+| `openDelay` | `number` | `700` | 打开前的延迟（毫秒） |
+| `closeDelay` | `number` | `300` | 关闭前的延迟（毫秒） |
+
+### HoverCardTrigger (触发器)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | 将属性合并到直接子元素上 |
+| `children` | `ReactNode` | — | 触发悬停卡片的元素 |
+
+### HoverCardContent (内容区)
+
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | 首选显示侧 |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | 对齐方式 |
+| `sideOffset` | `number` | `4` | 距离触发器的距离 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+| `children` | `ReactNode` | — | 卡片内容 |
+
+## 示例 (Examples)
+
+### 链接预览卡片 (Link Preview Card)
+
+```tsx
+import { Button } from "@nebutra/ui/primitives"
+
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+  <HoverCard>
+    <HoverCardTrigger className="inline-flex items-center justify-center whitespace-nowrap rounded-[var(--radius-md)] text-sm font-medium transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 hover:underline h-10 px-4 py-2 cursor-pointer">
+      访问文档 (Visit documentation)
+    </HoverCardTrigger>
+    <HoverCardContent side="top" className="w-72">
+      <div className="space-y-2">
+        <h4 className="font-semibold">Nebutra 文档 (Nebutra Docs)</h4>
+        <p className="text-sm text-muted-foreground">使用 Nebutra 构建应用的全面指南和 API 参考。 (Comprehensive guides and API references for building with Nebutra.)</p>
+      </div>
+    </HoverCardContent>
+  </HoverCard>
+</ComponentPreview>
+```
+
+## 可访问性 (Accessibility)
+
+- 基于 Radix UI HoverCard 构建。
+- 悬停卡片的内容对于通过 Tab 键导航的屏幕阅读器用户不可见 — 它仅作为视觉补充。
+- 对于键盘用户，请考虑使用 `Tooltip` 或 `Popover` 作为关键信息的替代方案。
+- 一旦通过鼠标悬停打开，该卡片是可聚焦且可探索的。

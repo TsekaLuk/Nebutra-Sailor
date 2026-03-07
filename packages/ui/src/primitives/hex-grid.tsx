@@ -102,7 +102,10 @@ export function HexGrid({
   className,
   ...props
 }: HexGridProps) {
-  const id = useId();
+  const rawId = useId();
+  // Sanitize the React useId() output (which often contains colons like ':R1:')
+  // so it's safe to use as a CSS class/animation name without CSS.escape() which fails in SSR.
+  const id = rawId.replace(/:/g, "");
   const containerRef = useRef<SVGSVGElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -195,7 +198,7 @@ export function HexGrid({
       <style>
         {glow
           ? `
-          @keyframes hex-glow-${CSS.escape(id)} {
+          @keyframes hex-glow-${id} {
             0%, 100% { opacity: ${hexOpacity}; }
             50% { opacity: ${Math.min(hexOpacity * 3, 0.6)}; }
           }
@@ -213,8 +216,8 @@ export function HexGrid({
           style={
             glow
               ? {
-                  animation: `hex-glow-${CSS.escape(id)} ${hex.duration}s ease-in-out ${hex.delay}s infinite`,
-                }
+                animation: `hex-glow-${CSS.escape(id)} ${hex.duration}s ease-in-out ${hex.delay}s infinite`,
+              }
               : undefined
           }
         />

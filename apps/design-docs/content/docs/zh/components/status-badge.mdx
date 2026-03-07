@@ -1,0 +1,75 @@
+---
+title: 状态徽章 (StatusBadge)
+description: 两部分组成的状态指示徽章，包含左右标签、图标，并支持基于状态的着色方案。
+---
+
+## 概览 (Overview)
+
+`StatusBadge` 通过细垂直分隔线显示两个标签。左侧为加粗字体（主要标签），右侧为柔和/调淡字体（次要标签）。每个标签前都可以添加可选图标，其颜色会根据 `status` 属性自动调整。
+
+## 安装 (Installation)
+
+```tsx
+import { StatusBadge } from "@nebutra/ui/primitives";
+```
+
+## 使用方法 (Usage)
+
+### 基础用法 (Basic)
+
+```tsx
+import { ShieldCheck, XCircle } from "lucide-react";
+
+<StatusBadge
+  leftIcon={ShieldCheck}
+  rightIcon={XCircle}
+  leftLabel="安全防护 (Protection)"
+  rightLabel="SSO 已禁用"
+  status="success"
+/>
+```
+
+### 多种状态展示 (Multiple statuses)
+
+```tsx
+import { CheckCircle2, AlertCircle, XCircle } from "lucide-react";
+
+<div className="flex gap-2 flex-wrap">
+  <StatusBadge leftIcon={CheckCircle2} leftLabel="在线 (Live)" rightLabel="v2.1.0" status="success" />
+  <StatusBadge leftIcon={AlertCircle} leftLabel="运行降级 (Degraded)" rightLabel="3 起事件" status="warning" />
+  <StatusBadge leftIcon={XCircle} leftLabel="服务中断 (Outage)" rightLabel="5 个受影响" status="error" />
+</div>
+```
+
+### 无图标模式 (No icons)
+
+```tsx
+<StatusBadge leftLabel="区域 (Region)" rightLabel="us-east-1" status="info" />
+```
+
+## 属性 (Props)
+
+| 属性 (Prop) | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `leftLabel` | `string` | — | **必需。** 主要标签（加粗，前景显示） |
+| `rightLabel` | `string` | — | **必需。** 次要标签（调淡/柔和显示） |
+| `leftIcon` | `LucideIcon` | — | 左标签前的图标 |
+| `rightIcon` | `LucideIcon` | — | 右标签前的图标 |
+| `status` | `"success" \| "error" \| "warning" \| "info" \| "default"` | `"default"` | 决定图标的颜色 |
+| `className` | `string` | — | 额外的 CSS 类名 |
+
+## 状态图标颜色对照表 (Status Icon Colors)
+
+| 状态 | 图标颜色 |
+|--------|-----------|
+| `success` | `text-emerald-600` (深色模式: `text-emerald-500`) |
+| `error` | `text-red-600` (深色模式: `text-red-500`) |
+| `warning` | `text-amber-600` (深色模式: `text-amber-500`) |
+| `info` | `text-blue-600` (深色模式: `text-blue-500`) |
+| `default` | `text-muted-foreground` |
+
+## 注意事项 (Notes)
+
+- `status` 仅影响图标颜色 —— 徽章容器始终使用 `bg-background` 并带有 `border`。
+- 标签之间的分隔线是一个 `1px` 宽的 `bg-border` 元素。
+走
