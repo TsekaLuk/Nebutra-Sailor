@@ -176,7 +176,7 @@ export const DEFAULT_BRAND: BrandConfig = {
   },
   social: {
     twitter: "https://twitter.com/nebutra",
-    github: "https://github.com/TsekaLuk/Nebutra-Sailor",
+    github: "https://github.com/Nebutra/Nebutra-Sailor",
     discord: "https://discord.gg/nebutra",
     linkedin: "https://linkedin.com/company/nebutra",
   },

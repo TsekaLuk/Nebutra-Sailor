@@ -270,16 +270,16 @@ Every 2 hours, record:
 
 ## Quick Links (Fill Before Launch)
 
-| Resource            | Link                                       |
-| ------------------- | ------------------------------------------ |
-| PH Product Page     |                                            |
-| PH Ship Page        |                                            |
-| Twitter Thread      |                                            |
-| LinkedIn Post       |                                            |
-| HN Post             |                                            |
-| Email Campaign      |                                            |
-| Analytics Dashboard |                                            |
-| GitHub Repo         | https://github.com/TsekaLuk/Nebutra-Sailor |
+| Resource            | Link                                      |
+| ------------------- | ----------------------------------------- |
+| PH Product Page     |                                           |
+| PH Ship Page        |                                           |
+| Twitter Thread      |                                           |
+| LinkedIn Post       |                                           |
+| HN Post             |                                           |
+| Email Campaign      |                                           |
+| Analytics Dashboard |                                           |
+| GitHub Repo         | https://github.com/Nebutra/Nebutra-Sailor |
 
 ---
 

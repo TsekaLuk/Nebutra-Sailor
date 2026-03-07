@@ -359,7 +359,7 @@ To get updates from the original Nebutra Sailor repository:
 
 ```bash
 # Add upstream remote (one time)
-git remote add upstream https://github.com/TsekaLuk/Nebutra-Sailor.git
+git remote add upstream https://github.com/Nebutra/Nebutra-Sailor.git
 
 # Fetch and merge updates
 git fetch upstream
@@ -402,5 +402,5 @@ pnpm install
 
 For questions about white-labeling:
 
-- Open an issue on [GitHub](https://github.com/TsekaLuk/Nebutra-Sailor/issues)
+- Open an issue on [GitHub](https://github.com/Nebutra/Nebutra-Sailor/issues)
 - Tag with `white-label` label

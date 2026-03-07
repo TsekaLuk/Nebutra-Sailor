@@ -28,7 +28,7 @@ export function FooterMinimal() {
     { label: t("links.docs"), href: "https://docs.nebutra.com/sailor" },
     {
       label: t("links.github"),
-      href: "https://github.com/TsekaLuk/Nebutra-Sailor",
+      href: "https://github.com/Nebutra/Nebutra-Sailor",
     },
     { label: t("links.discord"), href: "https://discord.gg/nebutra" },
   ];

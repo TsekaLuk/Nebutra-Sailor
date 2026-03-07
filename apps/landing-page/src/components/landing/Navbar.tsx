@@ -32,7 +32,7 @@ export function Navbar() {
     { label: t("docs"), href: "https://docs.nebutra.com" },
     {
       label: t("github"),
-      href: "https://github.com/TsekaLuk/Nebutra-Sailor",
+      href: "https://github.com/Nebutra/Nebutra-Sailor",
       icon: Github,
     },
   ];

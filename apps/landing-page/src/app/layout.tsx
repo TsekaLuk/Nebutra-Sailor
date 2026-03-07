@@ -67,7 +67,7 @@ const jsonLd = [
     url: "https://nebutra.com",
     logo: "https://nebutra.com/icon.png",
     sameAs: [
-      "https://github.com/TsekaLuk/Nebutra-Sailor",
+      "https://github.com/Nebutra/Nebutra-Sailor",
       "https://x.com/nebutra",
     ],
   },
@@ -103,7 +103,11 @@ export default async function RootLayout({
           Skip to content
         </a>
 
-        <Script id="nebutra-jsonld" type="application/ld+json" strategy="beforeInteractive">
+        <Script
+          id="nebutra-jsonld"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+        >
           {toSafeJsonLd(jsonLd)}
         </Script>
 

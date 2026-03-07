@@ -146,7 +146,7 @@ We're AGPLv3 — free for personal/internal use, open source required for commer
 ### For Feature Requests
 
 ```
-Love this idea! 💡 Added to our roadmap. Would you mind opening an issue on GitHub so we can track it? github.com/TsekaLuk/Nebutra-Sailor/issues
+Love this idea! 💡 Added to our roadmap. Would you mind opening an issue on GitHub so we can track it? github.com/Nebutra/Nebutra-Sailor/issues
 ```
 
 ### For Criticism
@@ -229,7 +229,7 @@ Fully open source (AGPLv3)
 → Fork for your project
 → Ship your SaaS
 
-GitHub: github.com/TsekaLuk/Nebutra-Sailor
+GitHub: github.com/Nebutra/Nebutra-Sailor
 ```
 
 **Tweet 6 (CTA)**
@@ -266,7 +266,7 @@ Built for solo founders and small teams who want enterprise-grade infrastructure
 If you're building a SaaS in 2024/2025, I'd love your feedback.
 
 🔗 Product Hunt: [link]
-📂 GitHub: github.com/TsekaLuk/Nebutra-Sailor
+📂 GitHub: github.com/Nebutra/Nebutra-Sailor
 
 #ProductHunt #OpenSource #SaaS #Startup #AI
 ```

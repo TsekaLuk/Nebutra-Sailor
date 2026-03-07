@@ -169,10 +169,10 @@ Built with the latest technologies including Next.js 16, React 19, and Prisma 7,
 <td>
   <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
   <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
-  <img src="https://img.shields.io/badge/Lobe_UI-000?style=flat-square&logo=react&logoColor=white" alt="Lobe UI" />
-  <img src="https://img.shields.io/badge/Lobe_Icons-000?style=flat-square" alt="Lobe Icons" />
-  <img src="https://img.shields.io/badge/Inter-000?style=flat-square" alt="Inter" />
-  <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square" alt="JetBrains Mono" />
+  <img src="https://img.shields.io/badge/Lobe_UI-000?style=flat-square&logo=lobehub&logoColor=white" alt="Lobe UI" />
+  <img src="https://img.shields.io/badge/Lobe_Icons-000?style=flat-square&logo=lobehub&logoColor=white" alt="Lobe Icons" />
+  <img src="https://img.shields.io/badge/Inter-000?style=flat-square&logo=googlefonts&logoColor=white" alt="Inter" />
+  <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square&logo=jetbrains&logoColor=white" alt="JetBrains Mono" />
   <img src="https://img.shields.io/badge/Design_Tokens-gray?style=flat-square" alt="Design Tokens" />
 </td>
 </tr>
@@ -222,7 +222,7 @@ Built with the latest technologies including Next.js 16, React 19, and Prisma 7,
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
   <a href="https://openrouter.ai/"><img src="https://img.shields.io/badge/OpenRouter-6366F1?style=flat-square" alt="OpenRouter" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
-  <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square" alt="Anthropic" />
+  <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square&logo=anthropic&logoColor=white" alt="Anthropic" />
   <img src="https://img.shields.io/badge/Google_AI-4285F4?style=flat-square&logo=google&logoColor=white" alt="Google AI" />
   <img src="https://img.shields.io/badge/SiliconFlow-6366F1?style=flat-square" alt="SiliconFlow" />
 </td>
@@ -236,13 +236,13 @@ Built with the latest technologies including Next.js 16, React 19, and Prisma 7,
 <tr>
 <td><strong>Email</strong></td>
 <td>
-  <a href="https://resend.com/"><img src="https://img.shields.io/badge/Resend-black?style=flat-square" alt="Resend" /></a>
+  <a href="https://resend.com/"><img src="https://img.shields.io/badge/Resend-black?style=flat-square&logo=resend&logoColor=white" alt="Resend" /></a>
 </td>
 </tr>
 <tr>
 <td><strong>CMS</strong></td>
 <td>
-  <a href="https://sanity.io/"><img src="https://img.shields.io/badge/Sanity-F03E2F?style=flat-square" alt="Sanity" /></a>
+  <a href="https://sanity.io/"><img src="https://img.shields.io/badge/Sanity-F03E2F?style=flat-square&logo=sanity&logoColor=white" alt="Sanity" /></a>
 </td>
 </tr>
 <tr>

@@ -169,10 +169,10 @@
 <td>
   <a href="https://primer.style/react"><img src="https://img.shields.io/badge/Primer-24292F?style=flat-square&logo=github&logoColor=white" alt="Primer" /></a>
   <a href="https://primer.style/octicons"><img src="https://img.shields.io/badge/Octicons-24292F?style=flat-square&logo=github&logoColor=white" alt="Octicons" /></a>
-  <img src="https://img.shields.io/badge/Lobe_UI-000?style=flat-square&logo=react&logoColor=white" alt="Lobe UI" />
-  <img src="https://img.shields.io/badge/Lobe_Icons-000?style=flat-square" alt="Lobe Icons" />
-  <img src="https://img.shields.io/badge/Inter-000?style=flat-square" alt="Inter" />
-  <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square" alt="JetBrains Mono" />
+  <img src="https://img.shields.io/badge/Lobe_UI-000?style=flat-square&logo=lobehub&logoColor=white" alt="Lobe UI" />
+  <img src="https://img.shields.io/badge/Lobe_Icons-000?style=flat-square&logo=lobehub&logoColor=white" alt="Lobe Icons" />
+  <img src="https://img.shields.io/badge/Inter-000?style=flat-square&logo=googlefonts&logoColor=white" alt="Inter" />
+  <img src="https://img.shields.io/badge/JetBrains_Mono-000?style=flat-square&logo=jetbrains&logoColor=white" alt="JetBrains Mono" />
   <img src="https://img.shields.io/badge/设计令牌-gray?style=flat-square" alt="Design Tokens" />
 </td>
 </tr>
@@ -204,7 +204,7 @@
 <td>
   <a href="https://sdk.vercel.ai/"><img src="https://img.shields.io/badge/Vercel_AI_SDK-black?style=flat-square&logo=vercel" alt="Vercel AI" /></a>
   <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
-  <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square" alt="Anthropic" />
+  <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square&logo=anthropic&logoColor=white" alt="Anthropic" />
 </td>
 </tr>
 <tr>

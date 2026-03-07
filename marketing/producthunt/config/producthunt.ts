@@ -14,7 +14,7 @@ export const PHConfig = {
     slug: "nebutra-sailor", // URL slug on PH (TBD until launch)
     tagline: "Open-source SaaS platform for the Vibe Business era",
     website: "https://nebutra.com",
-    github: "https://github.com/TsekaLuk/Nebutra-Sailor",
+    github: "https://github.com/Nebutra/Nebutra-Sailor",
   },
 
   // ===================

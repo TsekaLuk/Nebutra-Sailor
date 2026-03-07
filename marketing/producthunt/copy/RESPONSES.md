@@ -102,7 +102,7 @@ Love this idea! 💡
 
 Adding to our roadmap. Would you mind opening an issue on GitHub so we can track it and discuss details?
 
-github.com/TsekaLuk/Nebutra-Sailor/issues
+github.com/Nebutra/Nebutra-Sailor/issues
 
 Thanks for the suggestion!
 ```
@@ -248,7 +248,7 @@ Love the technical depth! This deserves a longer discussion.
 
 Would you mind opening a GitHub discussion? We can dive into the architecture details there.
 
-github.com/TsekaLuk/Nebutra-Sailor/discussions
+github.com/Nebutra/Nebutra-Sailor/discussions
 ```
 
 ---

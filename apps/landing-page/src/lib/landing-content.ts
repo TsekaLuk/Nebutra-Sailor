@@ -184,7 +184,7 @@ export const footerContent = {
   links: [
     { label: "Product", href: "/features" },
     { label: "Docs", href: "https://docs.nebutra.com/sailor" },
-    { label: "GitHub", href: "https://github.com/TsekaLuk/Nebutra-Sailor" },
+    { label: "GitHub", href: "https://github.com/Nebutra/Nebutra-Sailor" },
     { label: "Discord", href: "https://discord.gg/nebutra" },
   ],
   social: [

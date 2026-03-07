@@ -65,7 +65,7 @@ export function HeroSection() {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
                 <a
-                  href="https://github.com/TsekaLuk/Nebutra-Sailor"
+                  href="https://github.com/Nebutra/Nebutra-Sailor"
                   className="inline-flex items-center gap-2 text-sm font-medium text-neutral-11 transition-colors hover:text-neutral-12 dark:text-white/70 dark:hover:text-white"
                 >
                   {t("ctaViewGitHub")}
