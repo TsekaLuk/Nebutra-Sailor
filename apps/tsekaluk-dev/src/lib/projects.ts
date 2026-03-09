@@ -18,8 +18,8 @@ export const projects: Project[] = [
     icon: "file-text",
     tagline: "Where other converters lose 40% of context, this one keeps 93%",
     description:
-      "Most PDF-to-Markdown tools silently drop formulas, tables, and cross-references. any2md solves this with a dual-engine architecture\u2014PyMuPDF extracts semantic text while Qwen-VL reads visual layout\u2014then DeepSeek LLM reconstructs the missing links via layered prompt + few-shot + chain-of-thought. Tested on 20,000+ real-world pages across research papers and enterprise archives, cutting manual cleanup by 70%.",
-    metric: "93% context retention",
+      "Most converters silently drop formulas, tables, and cross-references. any2md uses a dual-engine\u2014PyMuPDF for text + Qwen-VL for vision\u2014then DeepSeek LLM reconstructs context via layered prompt + few-shot + CoT. Processes 68 pages/min with 85% table structuring and 90% LaTeX formula preservation. Imported 20,000+ pages into a team knowledge base in one week, cutting manual cleanup by 70%.",
+    metric: "93% \u00b7 68 pages/min",
     tags: ["Python", "VLM", "LLM", "Context Engineering"],
     github: "https://github.com/TsekaLuk/any2md",
     status: "shipped",
@@ -89,9 +89,10 @@ export const projects: Project[] = [
     tagline:
       "86% less time on knowledge management\u2014one-click conversation export",
     description:
-      "Built a Cursor IDE extension that exports AI conversations to structured Markdown with layered parsing of thinking blocks, code segments, and context. Handles cross-platform compatibility with error rollback. Reduced per-conversation organization time from ~15 min to ~2 min (5x efficiency) across a 20-person team.",
-    metric: "86% time reduction",
+      "Cursor IDE extension (7 GitHub stars) that exports AI conversations to structured Markdown. Tested on 214 conversations (1,980 messages): processing time dropped from 5.8 min to 0.8 min per conversation, code snippet loss rate under 0.5%, throughput 12.5 conversations/min. Cross-platform VSIX with >98% install success rate across Windows/macOS/Linux.",
+    metric: "86% \u00b7 \u26057 stars",
     tags: ["TypeScript", "VSCode API", "Developer Tool"],
+    github: "https://github.com/TsekaLuk/Cursor-export-extension",
     status: "shipped",
   },
   {
@@ -131,14 +132,16 @@ export const projects: Project[] = [
     status: "shipped",
   },
   {
-    slug: "breakdown",
-    name: "Breakdown",
-    icon: "zap",
-    tagline: "Lighthouse 96, sub-1.2s LCP, 12 scroll-driven animations",
+    slug: "cdtmp",
+    name: "CDTMP Agent Protocol",
+    icon: "brain",
+    tagline:
+      "Task success rate +18pp by turning prompt tricks into reusable protocol",
     description:
-      "AI product marketing OS with dark-theme \u6e05\u534e\u7d2b brand system. Built with Next.js 15 and Framer Motion, featuring 12 scroll-driven animation sequences choreographed to 60fps. Lighthouse performance 96, accessibility 98, LCP under 1.2 seconds. Mobile-first with zero layout shift.",
-    metric: "Lighthouse 96",
-    tags: ["Next.js", "Framer Motion", "Design"],
+      "Turned ad-hoc prompt engineering into a structured agent protocol: task decomposition, state machines, retry strategies, and auditable intermediate states. Tested on 120 cross-domain tasks: success rate jumped from 63% to 81%, JSON compliance from 72% to 94%, rework rounds dropped 29%. Framework-agnostic\u2014plugs into LangGraph, Semantic Kernel, or custom executors.",
+    metric: "81% success rate",
+    tags: ["Agent Protocol", "LLM", "Open Source"],
+    github: "https://github.com/TsekaLuk/CDTMP-Agent-Instructions",
     status: "shipped",
   },
   {
@@ -146,11 +149,11 @@ export const projects: Project[] = [
     name: "HydroGem",
     icon: "droplets",
     tagline:
-      "12 water quality parameters, real-time alerts, sub-second refresh",
+      "Real-time water quality dashboard with 5-second refresh and alerts",
     description:
-      "Real-time water quality monitoring dashboard processing 10,000+ sensor readings daily across 12 parameters (pH, turbidity, dissolved oxygen, etc.). Sub-second data refresh with configurable alert thresholds. Built on React with streaming data visualization and historical trend analysis.",
-    metric: "10,000+ readings/day",
-    tags: ["React", "IoT", "Data Viz", "Real-time"],
+      "React + TypeScript monitoring system tracking 12 water quality parameters (pH, turbidity, dissolved oxygen, etc.) with 5-second auto-refresh and configurable alert thresholds. Built with streaming data visualization and historical trend analysis for environmental monitoring.",
+    metric: "12 parameters \u00b7 5s refresh",
+    tags: ["React", "TypeScript", "IoT", "Data Viz"],
     github: "https://github.com/TsekaLuk/hydrogem-web",
     status: "shipped",
   },
