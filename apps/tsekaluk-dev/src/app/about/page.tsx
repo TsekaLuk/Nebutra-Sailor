@@ -59,6 +59,7 @@ const TIMELINE: { year: string; label: string; icon: React.ReactNode }[] = [
 const AWARDS: {
   title: string;
   level: string;
+  detail: string;
   year: string;
   icon: React.ReactNode;
   highlight?: boolean;
@@ -66,6 +67,8 @@ const AWARDS: {
   {
     title: "MCM/ICM Mathematical Modeling",
     level: "Honorable Mention",
+    detail:
+      "NSGA-III tourism optimizer, 8.3% prediction error vs. 28,000+ teams",
     year: "2025",
     icon: <Trophy className="h-4 w-4 text-amber-500" />,
     highlight: true,
@@ -73,13 +76,16 @@ const AWARDS: {
   {
     title: "Lanqiao Cup C/C++ (Jiangsu)",
     level: "First Prize",
+    detail: "Top 1% in provincial algorithmic programming",
     year: "2025",
     icon: <Medal className="h-4 w-4 text-amber-500" />,
     highlight: true,
   },
   {
-    title: "TAM-SEM Low-Altitude Economy Research",
-    level: "First Prize",
+    title: "TAM-SEM Low-Altitude Economy",
+    level: "First Prize (Provincial)",
+    detail:
+      "2,609 respondents, discovered \u2018risk paradox\u2019 (\u03b2=0.262, p<0.001)",
     year: "2025",
     icon: <Medal className="h-4 w-4 text-amber-500" />,
     highlight: true,
@@ -87,6 +93,8 @@ const AWARDS: {
   {
     title: "APMCM Mathematical Modeling",
     level: "First Prize",
+    detail:
+      "Pet industry forecast: LASSO R\u00b2=0.9850, predicted $52B market",
     year: "2024",
     icon: <Medal className="h-4 w-4 text-amber-500" />,
     highlight: true,
@@ -94,6 +102,8 @@ const AWARDS: {
   {
     title: "Shuwei Cup Math Modeling",
     level: "First Prize + Grand Innovation",
+    detail:
+      "Biomass co-pyrolysis: found 28.44% optimal ratio via LightGBM + PSO",
     year: "2024",
     icon: <Trophy className="h-4 w-4 text-amber-500" />,
     highlight: true,
@@ -101,30 +111,36 @@ const AWARDS: {
   {
     title: "Brand Strategy Competition",
     level: "Second Prize (National)",
+    detail: "1,200+ samples, Claude + Flux + Midjourney AIGC pipeline",
     year: "2025",
     icon: <Award className="h-4 w-4 text-gray-400" />,
   },
   {
     title: "Global AI Algorithm Elite",
     level: "Third Prize (National Final)",
+    detail: "Warehouse drone: 95% recognition accuracy, 3-min shelf traversal",
     year: "2024",
     icon: <Award className="h-4 w-4 text-gray-400" />,
   },
   {
     title: "National Math Modeling (Jiangsu)",
     level: "Second Prize",
+    detail: "Real estate cost prediction: Random Forest outperformed CNN-LSTM",
     year: "2024",
     icon: <Award className="h-4 w-4 text-gray-400" />,
   },
   {
     title: "Electronic Design (TI Cup)",
     level: "Second Prize",
+    detail: "Self-aiming system: adaptive PID + Kalman filter on MSPM0G3507",
     year: "2024",
     icon: <Award className="h-4 w-4 text-gray-400" />,
   },
   {
     title: "Translation Competition",
     level: "Grand Prize (National Final)",
+    detail:
+      "Non-English major, highest national honor in bilingual translation",
     year: "2023",
     icon: <Trophy className="h-4 w-4 text-amber-500" />,
     highlight: true,
@@ -254,14 +270,18 @@ export default function AboutPage() {
             </p>
 
             {/* Quick stats */}
-            <div className="mt-4 grid grid-cols-3 gap-4 pt-4">
+            <div className="mt-4 grid grid-cols-4 gap-3 pt-4">
+              <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">
+                <p className="text-2xl font-bold text-gray-900">12</p>
+                <p className="text-xs text-gray-500">Projects</p>
+              </div>
               <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">
                 <p className="text-2xl font-bold text-gray-900">10</p>
                 <p className="text-xs text-gray-500">Awards</p>
               </div>
               <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">
-                <p className="text-2xl font-bold text-gray-900">50+</p>
-                <p className="text-xs text-gray-500">Open Source</p>
+                <p className="text-2xl font-bold text-gray-900">6</p>
+                <p className="text-xs text-gray-500">First Prizes</p>
               </div>
               <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">
                 <p className="text-2xl font-bold text-gray-900">8</p>
@@ -320,6 +340,9 @@ export default function AboutPage() {
                     {award.title}
                   </p>
                   <p className="text-xs text-gray-500">{award.level}</p>
+                  <p className="mt-0.5 text-[11px] leading-snug text-gray-400">
+                    {award.detail}
+                  </p>
                 </div>
                 <span className="shrink-0 font-mono text-xs text-gray-400">
                   {award.year}

@@ -14,6 +14,11 @@ import {
   Leaf,
   ClipboardCheck,
   Droplets,
+  BarChart3,
+  Flame,
+  TrendingUp,
+  FileOutput,
+  Megaphone,
 } from "lucide-react";
 import type { Project } from "@/lib/projects";
 
@@ -26,6 +31,11 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   leaf: <Leaf className="h-5 w-5" />,
   "clipboard-check": <ClipboardCheck className="h-5 w-5" />,
   droplets: <Droplets className="h-5 w-5" />,
+  "bar-chart-3": <BarChart3 className="h-5 w-5" />,
+  flame: <Flame className="h-5 w-5" />,
+  "trending-up": <TrendingUp className="h-5 w-5" />,
+  "file-output": <FileOutput className="h-5 w-5" />,
+  megaphone: <Megaphone className="h-5 w-5" />,
 };
 
 const STATUS_STYLES: Record<Project["status"], { label: string; dot: string }> =
@@ -66,6 +76,16 @@ function ProjectCard({ project }: { project: Project }) {
       <p className="mt-1 font-serif italic text-base text-gray-500">
         {project.tagline}
       </p>
+
+      {/* Key metric */}
+      {project.metric && (
+        <div className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-[var(--color-accent)]/10 px-3 py-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent-dark)]" />
+          <span className="text-xs font-semibold text-[var(--color-accent-dark)]">
+            {project.metric}
+          </span>
+        </div>
+      )}
 
       {/* Description */}
       <p className="mt-4 flex-1 text-sm leading-relaxed text-gray-500">
