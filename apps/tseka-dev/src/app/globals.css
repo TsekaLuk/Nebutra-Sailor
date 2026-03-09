@@ -1,0 +1,20 @@
+@import "@nebutra/tokens/styles.css";
+@import "tailwindcss";
+
+:root {
+  --color-accent: #a3e635;
+  --color-accent-dark: #84cc16;
+  --color-accent-muted: #d9f99d;
+  --page-bg: #fafafa;
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+body {
+  background-color: var(--page-bg);
+  font-family: var(--font-sans);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
