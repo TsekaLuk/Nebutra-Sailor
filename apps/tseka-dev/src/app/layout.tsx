@@ -18,8 +18,24 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Tseka Luk — AI-Native Builder",
+  title: {
+    default: "Tseka Luk — AI-Native Builder",
+    template: "%s — Tseka Luk",
+  },
+  description:
+    "I design and build AI-powered products from zero to one. Shipping fast and iterating in public.",
   metadataBase: new URL("https://tsekaluk.dev"),
+  openGraph: {
+    title: "Tseka Luk — AI-Native Builder",
+    description: "I design and build AI-powered products from zero to one.",
+    url: "https://tsekaluk.dev",
+    siteName: "TsekaLuk.dev",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@tseka_luk",
+  },
 };
 
 export default function RootLayout({

@@ -47,19 +47,25 @@ export function getArticles(): ArticleMeta[] {
 
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
 
-  const articles: ArticleMeta[] = files.map((file) => {
-    const raw = fs.readFileSync(path.join(contentDir, file), "utf-8");
-    const { meta } = parseFrontmatter(raw);
-    const slug = file.replace(/\.mdx$/, "");
+  const articles: ArticleMeta[] = files
+    .map((file) => {
+      try {
+        const raw = fs.readFileSync(path.join(contentDir, file), "utf-8");
+        const { meta } = parseFrontmatter(raw);
+        const slug = file.replace(/\.mdx$/, "");
 
-    return {
-      slug,
-      title: meta["title"] ?? slug,
-      date: meta["date"] ?? "",
-      excerpt: meta["excerpt"] ?? "",
-      tags: meta["tags"] ? parseTags(meta["tags"]) : [],
-    };
-  });
+        return {
+          slug,
+          title: meta["title"] ?? slug,
+          date: meta["date"] ?? "",
+          excerpt: meta["excerpt"] ?? "",
+          tags: meta["tags"] ? parseTags(meta["tags"]) : [],
+        };
+      } catch {
+        return null;
+      }
+    })
+    .filter((a): a is ArticleMeta => a !== null);
 
   return articles.sort((a, b) => b.date.localeCompare(a.date));
 }

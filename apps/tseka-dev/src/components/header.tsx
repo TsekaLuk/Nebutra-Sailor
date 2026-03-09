@@ -39,7 +39,7 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/about#contact"
               className="rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800"
             >
               Let&apos;s talk
@@ -80,7 +80,7 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/about#contact"
               className="mt-2 w-fit rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800"
               onClick={() => setMobileOpen(false)}
             >

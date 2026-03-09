@@ -2,10 +2,13 @@
 @import "tailwindcss";
 
 :root {
-  --color-accent: #a3e635;
-  --color-accent-dark: #84cc16;
-  --color-accent-muted: #d9f99d;
-  --page-bg: #fafafa;
+  /* Lime brand accent — overrides Nebutra blue for this app */
+  --accent: 82 84% 56%;
+  --color-accent: hsl(82 84% 56%);
+  --color-accent-dark: hsl(82 77% 44%);
+  --color-accent-muted: hsl(82 92% 80%);
+  --color-accent-shadow: hsla(82 84% 56% / 0.15);
+  --page-bg: var(--neutral-2, #fafafa);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
 }
@@ -17,4 +20,11 @@ body {
 
 .font-serif {
   font-family: var(--font-serif);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--blue-9, #0033fe);
+  outline-offset: 2px;
+  border-radius: 2px;
 }

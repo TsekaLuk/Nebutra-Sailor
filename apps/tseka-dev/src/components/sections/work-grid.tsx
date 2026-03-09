@@ -23,7 +23,7 @@ function ProjectCard({ project }: { project: Project }) {
       className={cn(
         "group flex flex-col rounded-3xl border border-gray-100 bg-white p-8",
         "transition-all duration-300",
-        "hover:border-[var(--color-accent-dark)] hover:shadow-[0_4px_24px_rgba(163,230,53,0.15)]",
+        "hover:border-[var(--color-accent-dark)] hover:shadow-[0_4px_24px_var(--color-accent-shadow)]",
       )}
     >
       {/* Status label */}

@@ -6,7 +6,7 @@ import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 const CONTEXT_PILLS = [
   { label: "Full-stack AI Engineer", position: "top-32 left-8 lg:left-16" },
   { label: "TypeScript + Python", position: "top-48 right-8 lg:right-16" },
-  { label: "Shanghai, China", position: "bottom-48 left-8 lg:left-20" },
+  { label: "Wuxi, China", position: "bottom-48 left-8 lg:left-20" },
   { label: "Building in Public", position: "bottom-32 right-8 lg:right-20" },
 ] as const;
 

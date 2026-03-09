@@ -37,8 +37,20 @@ function getLatestNowEntry(): NowData | null {
     return null;
   }
 
-  const raw = fs.readFileSync(path.join(contentDir, files[0]!), "utf-8");
-  return JSON.parse(raw) as NowData;
+  try {
+    const raw = fs.readFileSync(path.join(contentDir, files[0]!), "utf-8");
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+
+    return {
+      date: typeof parsed.date === "string" ? parsed.date : "",
+      building: Array.isArray(parsed.building) ? parsed.building : [],
+      thinking: Array.isArray(parsed.thinking) ? parsed.thinking : [],
+      shipped: Array.isArray(parsed.shipped) ? parsed.shipped : [],
+      reading: Array.isArray(parsed.reading) ? parsed.reading : [],
+    };
+  } catch {
+    return null;
+  }
 }
 
 function NowSection({ label, items }: { label: string; items: string[] }) {
