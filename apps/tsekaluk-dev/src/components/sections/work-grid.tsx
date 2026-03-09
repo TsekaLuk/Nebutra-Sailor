@@ -3,17 +3,37 @@
 import Link from "next/link";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 import { cn } from "@nebutra/ui/utils";
-import { ExternalLink, Github } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  Ship,
+  FileText,
+  Pickaxe,
+  Plane,
+  Zap,
+  Leaf,
+  ClipboardCheck,
+  Droplets,
+} from "lucide-react";
 import type { Project } from "@/lib/projects";
 
-const STATUS_STYLES: Record<
-  Project["status"],
-  { label: string; color: string }
-> = {
-  live: { label: "Live", color: "text-green-600" },
-  building: { label: "Building", color: "text-amber-600" },
-  shipped: { label: "Shipped", color: "text-blue-600" },
+const ICON_MAP: Record<string, React.ReactNode> = {
+  ship: <Ship className="h-5 w-5" />,
+  "file-text": <FileText className="h-5 w-5" />,
+  pickaxe: <Pickaxe className="h-5 w-5" />,
+  plane: <Plane className="h-5 w-5" />,
+  zap: <Zap className="h-5 w-5" />,
+  leaf: <Leaf className="h-5 w-5" />,
+  "clipboard-check": <ClipboardCheck className="h-5 w-5" />,
+  droplets: <Droplets className="h-5 w-5" />,
 };
+
+const STATUS_STYLES: Record<Project["status"], { label: string; dot: string }> =
+  {
+    live: { label: "Live", dot: "bg-green-500" },
+    building: { label: "Building", dot: "bg-amber-500" },
+    shipped: { label: "Shipped", dot: "bg-blue-500" },
+  };
 
 function ProjectCard({ project }: { project: Project }) {
   const status = STATUS_STYLES[project.status];
@@ -26,15 +46,16 @@ function ProjectCard({ project }: { project: Project }) {
         "hover:border-[var(--color-accent-dark)] hover:shadow-[0_4px_24px_var(--color-accent-shadow)]",
       )}
     >
-      {/* Status label */}
-      <span
-        className={cn(
-          "mb-4 text-[11px] font-semibold uppercase tracking-widest",
-          status.color,
-        )}
-      >
-        {status.label}
-      </span>
+      {/* Icon + Status row */}
+      <div className="mb-5 flex items-center justify-between">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-50 text-gray-400 transition-colors group-hover:bg-[var(--color-accent)]/10 group-hover:text-[var(--color-accent-dark)]">
+          {ICON_MAP[project.icon]}
+        </div>
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-gray-400">
+          <span className={cn("h-1.5 w-1.5 rounded-full", status.dot)} />
+          {status.label}
+        </span>
+      </div>
 
       {/* Name */}
       <h3 className="text-xl font-bold tracking-tight text-gray-900">
@@ -56,7 +77,7 @@ function ProjectCard({ project }: { project: Project }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-gray-50 px-3 py-1 text-xs font-medium text-gray-500"
+            className="rounded-full border border-gray-100 bg-gray-50/70 px-3 py-1 text-xs font-medium text-gray-500"
           >
             {tag}
           </span>

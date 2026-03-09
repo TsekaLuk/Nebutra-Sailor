@@ -2,91 +2,191 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import {
+  Mail,
+  Trophy,
+  Award,
+  Medal,
+  GraduationCap,
+  ShieldCheck,
+  FileCode2,
+  Cpu,
+  Languages,
+  Sparkles,
+  BookOpen,
+  Binary,
+} from "lucide-react";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 
-const TIMELINE: { year: string; label: string }[] = [
-  { year: "2020", label: "Self-taught web development & digital marketing" },
-  { year: "2022", label: "CS undergrad, Jiangsu Ocean University" },
-  { year: "2023", label: "AI-native engineering, competitive programming" },
-  { year: "2024", label: "Founded Wuxi Yunyu Intelligent Technology" },
+const TIMELINE: { year: string; label: string; icon: React.ReactNode }[] = [
+  {
+    year: "2020",
+    icon: <BookOpen className="h-4 w-4" />,
+    label: "Self-taught web development & digital marketing",
+  },
+  {
+    year: "2022",
+    icon: <GraduationCap className="h-4 w-4" />,
+    label: "CS undergrad, Jiangsu Ocean University",
+  },
+  {
+    year: "2023",
+    icon: <Binary className="h-4 w-4" />,
+    label: "AI-native engineering, competitive programming",
+  },
+  {
+    year: "2024",
+    icon: <Sparkles className="h-4 w-4" />,
+    label: "Founded Wuxi Yunyu Intelligent Technology",
+  },
   {
     year: "2025",
+    icon: <Cpu className="h-4 w-4" />,
     label: "CEO, Nebutra Intelligence \u2014 building for global markets",
   },
-  { year: "Now", label: "Shipping AI-native products, one commit at a time" },
+  {
+    year: "Now",
+    icon: (
+      <span className="relative flex h-2 w-2">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent-dark)]" />
+      </span>
+    ),
+    label: "Shipping AI-native products, one commit at a time",
+  },
 ];
 
-const AWARDS: { title: string; level: string; year: string }[] = [
+const AWARDS: {
+  title: string;
+  level: string;
+  year: string;
+  icon: React.ReactNode;
+  highlight?: boolean;
+}[] = [
   {
     title: "MCM/ICM Mathematical Modeling",
-    level: "Honorable Mention (International)",
+    level: "Honorable Mention",
     year: "2025",
+    icon: <Trophy className="h-4 w-4 text-amber-500" />,
+    highlight: true,
   },
   {
     title: "Lanqiao Cup C/C++ (Jiangsu)",
-    level: "First Prize (Provincial)",
+    level: "First Prize",
     year: "2025",
+    icon: <Medal className="h-4 w-4 text-amber-500" />,
+    highlight: true,
   },
   {
-    title: "Market Research \u2014 TAM-SEM Low-Altitude Economy",
-    level: "First Prize (Provincial)",
+    title: "TAM-SEM Low-Altitude Economy Research",
+    level: "First Prize",
     year: "2025",
+    icon: <Medal className="h-4 w-4 text-amber-500" />,
+    highlight: true,
   },
   {
     title: "APMCM Mathematical Modeling",
-    level: "First Prize (International)",
+    level: "First Prize",
     year: "2024",
+    icon: <Medal className="h-4 w-4 text-amber-500" />,
+    highlight: true,
   },
   {
-    title: "Shuwei Cup Mathematical Modeling",
-    level: "First Prize + Grand Innovation Award",
+    title: "Shuwei Cup Math Modeling",
+    level: "First Prize + Grand Innovation",
     year: "2024",
+    icon: <Trophy className="h-4 w-4 text-amber-500" />,
+    highlight: true,
   },
   {
-    title: "Business Elite Brand Strategy (National)",
-    level: "Second Prize",
+    title: "Brand Strategy Competition",
+    level: "Second Prize (National)",
     year: "2025",
+    icon: <Award className="h-4 w-4 text-gray-400" />,
   },
   {
-    title: "Global AI Algorithm Elite (National Final)",
-    level: "Third Prize",
+    title: "Global AI Algorithm Elite",
+    level: "Third Prize (National Final)",
     year: "2024",
+    icon: <Award className="h-4 w-4 text-gray-400" />,
   },
   {
     title: "National Math Modeling (Jiangsu)",
-    level: "Second Prize (Provincial)",
+    level: "Second Prize",
     year: "2024",
+    icon: <Award className="h-4 w-4 text-gray-400" />,
   },
   {
-    title: "Electronic Design Competition (TI Cup)",
-    level: "Second Prize (Provincial)",
+    title: "Electronic Design (TI Cup)",
+    level: "Second Prize",
     year: "2024",
+    icon: <Award className="h-4 w-4 text-gray-400" />,
   },
   {
-    title: "Translation Competition (National Final)",
-    level: "Grand Prize",
+    title: "Translation Competition",
+    level: "Grand Prize (National Final)",
     year: "2023",
+    icon: <Trophy className="h-4 w-4 text-amber-500" />,
+    highlight: true,
   },
 ];
 
-const CERTS: string[] = [
-  "Columbia University \u2014 Numerical Models & Applications (Grade A)",
-  "Huawei HCIA-Datacom Certified Network Engineer",
-  "HarmonyOS Advanced Developer Certification",
-  "Utility Patent: Communication Cable Distribution Equipment",
-  "3 Software Copyrights (Power System Optimization, OD Classification, Graph Solver)",
-  "CET-6: 543 \u00b7 CET-4: 575",
-  "Macau UST \u2014 Innovation & Entrepreneurship Leadership Program",
-  "Prompt Engineer Certification (Datawhale \u00d7 iFLYTEK)",
+const CERTS: { label: string; icon: React.ReactNode }[] = [
+  {
+    label: "Columbia University \u2014 Numerical Models (Grade A)",
+    icon: <GraduationCap className="h-4 w-4 text-[var(--color-accent-dark)]" />,
+  },
+  {
+    label: "Huawei HCIA-Datacom Network Engineer",
+    icon: <ShieldCheck className="h-4 w-4 text-[var(--color-accent-dark)]" />,
+  },
+  {
+    label: "HarmonyOS Advanced Developer",
+    icon: <Cpu className="h-4 w-4 text-[var(--color-accent-dark)]" />,
+  },
+  {
+    label: "Utility Patent \u2014 Cable Distribution Equipment",
+    icon: <FileCode2 className="h-4 w-4 text-[var(--color-accent-dark)]" />,
+  },
+  {
+    label: "3 Software Copyrights (Power Opt, OD Classify, Graph Solver)",
+    icon: <FileCode2 className="h-4 w-4 text-[var(--color-accent-dark)]" />,
+  },
+  {
+    label: "CET-6: 543 \u00b7 CET-4: 575",
+    icon: <Languages className="h-4 w-4 text-[var(--color-accent-dark)]" />,
+  },
+  {
+    label: "Macau UST \u2014 Innovation & Entrepreneurship",
+    icon: <GraduationCap className="h-4 w-4 text-[var(--color-accent-dark)]" />,
+  },
+  {
+    label: "Prompt Engineer (Datawhale \u00d7 iFLYTEK)",
+    icon: <Sparkles className="h-4 w-4 text-[var(--color-accent-dark)]" />,
+  },
 ];
 
-function TimelineItem({ year, label }: { year: string; label: string }) {
+function TimelineItem({
+  year,
+  label,
+  icon,
+}: {
+  year: string;
+  label: string;
+  icon: React.ReactNode;
+}) {
   return (
     <AnimateIn preset="fadeUp" inView>
-      <div className="flex items-start justify-between gap-6 border-t border-gray-200 py-4">
-        <span className="font-mono text-sm text-gray-400">{year}</span>
-        <span className="text-right text-base text-gray-700">{label}</span>
+      <div className="flex items-center gap-4 border-t border-gray-100 py-4">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-50 text-gray-400">
+          {icon}
+        </span>
+        <div className="flex flex-1 items-start justify-between gap-4">
+          <span className="text-base text-gray-700">{label}</span>
+          <span className="shrink-0 font-mono text-sm text-gray-400">
+            {year}
+          </span>
+        </div>
       </div>
     </AnimateIn>
   );
@@ -98,7 +198,7 @@ export default function AboutPage() {
       {/* Header */}
       <div className="mb-16">
         <AnimateIn preset="fade">
-          <p className="font-serif italic text-lg text-gray-400">/ Who I am</p>
+          <p className="font-serif italic text-lg text-gray-400">/ About</p>
         </AnimateIn>
 
         <AnimateIn preset="fadeUp" delay={0.1}>
@@ -112,7 +212,7 @@ export default function AboutPage() {
       </div>
 
       {/* Photo + Bio */}
-      <div className="mb-20 grid gap-12 md:grid-cols-[280px_1fr]">
+      <div className="mb-24 grid gap-12 md:grid-cols-[280px_1fr]">
         <AnimateIn preset="fade" delay={0.15}>
           <div className="relative mx-auto w-56 md:mx-0 md:w-full">
             <div className="overflow-hidden rounded-3xl border border-gray-100 shadow-sm">
@@ -124,6 +224,12 @@ export default function AboutPage() {
                 className="h-auto w-full object-cover"
                 priority
               />
+            </div>
+            {/* Floating badge */}
+            <div className="absolute -right-4 -bottom-4 rounded-2xl border border-gray-100 bg-white px-4 py-2 shadow-sm">
+              <p className="text-xs font-semibold text-gray-500">
+                INTP \u00b7 Wuxi, China
+              </p>
             </div>
           </div>
         </AnimateIn>
@@ -143,19 +249,34 @@ export default function AboutPage() {
               feature earns its place.
             </p>
             <p>
-              I&apos;m an INTP who ships. I think in systems, obsess over
-              details, and believe the best way to predict the future is to
-              build it&mdash;one commit at a time.
+              I think in systems, obsess over details, and believe the best way
+              to predict the future is to build it&mdash;one commit at a time.
             </p>
+
+            {/* Quick stats */}
+            <div className="mt-4 grid grid-cols-3 gap-4 pt-4">
+              <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">
+                <p className="text-2xl font-bold text-gray-900">10</p>
+                <p className="text-xs text-gray-500">Awards</p>
+              </div>
+              <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">
+                <p className="text-2xl font-bold text-gray-900">50+</p>
+                <p className="text-xs text-gray-500">Open Source</p>
+              </div>
+              <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">
+                <p className="text-2xl font-bold text-gray-900">8</p>
+                <p className="text-xs text-gray-500">Certs</p>
+              </div>
+            </div>
           </div>
         </AnimateIn>
       </div>
 
       {/* Timeline */}
-      <div className="mb-20">
+      <div className="mb-24">
         <AnimateIn preset="fade" inView>
           <h2 className="mb-8 font-serif italic text-2xl text-gray-400">
-            / Timeline
+            / Journey
           </h2>
         </AnimateIn>
         <div>
@@ -164,34 +285,41 @@ export default function AboutPage() {
               key={entry.year}
               year={entry.year}
               label={entry.label}
+              icon={entry.icon}
             />
           ))}
         </div>
       </div>
 
       {/* Awards */}
-      <div className="mb-20">
+      <div className="mb-24">
         <AnimateIn preset="fade" inView>
-          <h2 className="mb-2 font-serif italic text-2xl text-gray-400">
-            / Awards
-          </h2>
-          <p className="mb-8 text-sm text-gray-400">
-            10 competition awards across math modeling, AI, brand strategy &amp;
-            translation
-          </p>
+          <div className="mb-8 flex items-center gap-3">
+            <h2 className="font-serif italic text-2xl text-gray-400">
+              / Awards
+            </h2>
+            <span className="rounded-full bg-[var(--color-accent)]/20 px-3 py-0.5 text-xs font-medium text-[var(--color-accent-dark)]">
+              10 competitions
+            </span>
+          </div>
         </AnimateIn>
 
         <AnimateInGroup stagger="normal" inView className="space-y-0">
           {AWARDS.map((award) => (
             <AnimateIn key={award.title} preset="fadeUp" inView>
-              <div className="flex items-start justify-between gap-4 border-t border-gray-100 py-3">
+              <div
+                className={`flex items-center gap-3 border-t py-3 ${
+                  award.highlight
+                    ? "border-amber-50 bg-amber-50/30"
+                    : "border-gray-100"
+                } rounded-lg px-3 transition-colors hover:bg-gray-50`}
+              >
+                <span className="shrink-0">{award.icon}</span>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium text-gray-800">
                     {award.title}
                   </p>
-                  <p className="text-xs text-[var(--color-accent-dark)]">
-                    {award.level}
-                  </p>
+                  <p className="text-xs text-gray-500">{award.level}</p>
                 </div>
                 <span className="shrink-0 font-mono text-xs text-gray-400">
                   {award.year}
@@ -202,8 +330,8 @@ export default function AboutPage() {
         </AnimateInGroup>
       </div>
 
-      {/* Certifications */}
-      <div className="mb-20">
+      {/* Credentials */}
+      <div className="mb-24">
         <AnimateIn preset="fade" inView>
           <h2 className="mb-8 font-serif italic text-2xl text-gray-400">
             / Credentials
@@ -216,16 +344,17 @@ export default function AboutPage() {
           className="grid gap-3 sm:grid-cols-2"
         >
           {CERTS.map((cert) => (
-            <AnimateIn key={cert} preset="fadeUp" inView>
-              <div className="rounded-xl border border-gray-100 bg-gray-50/50 px-4 py-3">
-                <p className="text-sm text-gray-600">{cert}</p>
+            <AnimateIn key={cert.label} preset="fadeUp" inView>
+              <div className="flex items-start gap-3 rounded-xl border border-gray-100 bg-white px-4 py-3 transition-colors hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/5">
+                <span className="mt-0.5 shrink-0">{cert.icon}</span>
+                <p className="text-sm text-gray-600">{cert.label}</p>
               </div>
             </AnimateIn>
           ))}
         </AnimateInGroup>
       </div>
 
-      {/* Contact anchor */}
+      {/* Contact */}
       <div id="contact" className="border-t border-gray-200 pt-12 text-center">
         <AnimateIn preset="fadeUp" inView>
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
