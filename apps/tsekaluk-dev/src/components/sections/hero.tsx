@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 
@@ -43,8 +44,21 @@ export function Hero() {
           </div>
         </AnimateIn>
 
-        {/* Headlines */}
+        {/* Portrait + Headlines */}
         <div className="text-center">
+          <AnimateIn preset="scale" delay={0.05}>
+            <div className="mx-auto mb-8 h-28 w-28 overflow-hidden rounded-full border-2 border-white shadow-lg">
+              <Image
+                src="/images/headshot.jpg"
+                alt="Tseka Luk"
+                width={112}
+                height={112}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </div>
+          </AnimateIn>
+
           <AnimateIn preset="fadeUp" delay={0.1}>
             <h1 className="text-5xl font-bold tracking-tight text-gray-900 md:text-[6vw] md:leading-[1.1]">
               Hi, I&apos;m Tseka
