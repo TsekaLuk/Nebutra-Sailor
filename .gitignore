@@ -58,3 +58,4 @@ brand.config/
 # Misc
 *.tsbuildinfo
 artifacts/
+.vercel
