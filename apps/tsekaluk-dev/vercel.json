@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "pnpm turbo build --filter=@nebutra/tseka-dev",
+  "buildCommand": "pnpm turbo build --filter=@nebutra/tsekaluk-dev",
   "installCommand": "pnpm install",
   "outputDirectory": ".next",
   "regions": ["iad1"],
