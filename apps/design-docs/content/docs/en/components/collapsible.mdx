@@ -23,7 +23,23 @@ description: "Show and hide content with a toggle control, built on Radix UI."
 
 ## Usage
 
-```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-start pt-10">
+    <Collapsible className="w-80 border rounded-md p-4 bg-background shadow-sm">
+    <CollapsibleTrigger className="flex w-full items-center justify-between font-medium">
+      Advanced Options
+      <ChevronDown className="h-4 w-4" />
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <div className="space-y-2 pt-4">
+        <p className="text-sm text-muted-foreground">Advanced configuration here.</p>
+        <div className="rounded-md border p-3 font-mono text-xs text-muted-foreground bg-muted/50">
+          {"{ \"debug\": true, \"level\": \"verbose\" }"}
+        </div>
+      </div>
+    </CollapsibleContent>
+  </Collapsible>
+
+  ```tsx
 import {
   Collapsible,
   CollapsibleTrigger,
@@ -64,23 +80,22 @@ import {
 ```tsx
 import { ChevronDown } from "lucide-react"
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-start pt-10">
-  <Collapsible className="w-80 border rounded-md p-4 bg-background shadow-sm">
-    <CollapsibleTrigger className="flex w-full items-center justify-between font-medium">
-      Advanced Options
-      <ChevronDown className="h-4 w-4" />
-    </CollapsibleTrigger>
-    <CollapsibleContent>
-      <div className="space-y-2 pt-4">
-        <p className="text-sm text-muted-foreground">Advanced configuration here.</p>
-        <div className="rounded-md border p-3 font-mono text-xs text-muted-foreground bg-muted/50">
-          {"{ \"debug\": true, \"level\": \"verbose\" }"}
-        </div>
+<Collapsible className="w-80 border rounded-md p-4 bg-background shadow-sm">
+  <CollapsibleTrigger className="flex w-full items-center justify-between font-medium">
+    Advanced Options
+    <ChevronDown className="h-4 w-4" />
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    <div className="space-y-2 pt-4">
+      <p className="text-sm text-muted-foreground">Advanced configuration here.</p>
+      <div className="rounded-md border p-3 font-mono text-xs text-muted-foreground bg-muted/50">
+        {"{ \"debug\": true, \"level\": \"verbose\" }"}
       </div>
-    </CollapsibleContent>
-  </Collapsible>
-</ComponentPreview>
+    </div>
+  </CollapsibleContent>
+</Collapsible>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
+import { getLocale } from "next-intl/server";
 import { Providers } from "./providers";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { seoContent } from "@/lib/landing-content";
@@ -16,6 +17,13 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-mono",
+  preload: false,
+});
+
+const notoSansSC = Noto_Sans_SC({
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-cn",
   preload: false,
 });
 
@@ -89,10 +97,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
   return (
     <html
-      lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      lang={locale}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${notoSansSC.variable}`}
       suppressHydrationWarning
     >
       <body className="antialiased">

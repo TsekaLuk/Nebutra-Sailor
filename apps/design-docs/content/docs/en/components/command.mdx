@@ -84,9 +84,8 @@ import {
 
 ### Command Dialog (Modal)
 
-```tsx
 <ComponentPreview className="min-h-[400px] flex justify-center items-start pt-10">
-  <CommandDialog open={true}>
+    <CommandDialog open={true}>
     <CommandInput placeholder="Type a command or search..." />
     <CommandList>
       <CommandEmpty>No results found.</CommandEmpty>
@@ -95,8 +94,19 @@ import {
       </CommandGroup>
     </CommandList>
   </CommandDialog>
-</ComponentPreview>
+
+  ```tsx
+<CommandDialog open={true}>
+  <CommandInput placeholder="Type a command or search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Pages">
+      <CommandItem onSelect={() => console.log("/dashboard")}>Dashboard</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</CommandDialog>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

@@ -46,21 +46,21 @@ export type ContextMenuContentProps = React.ComponentPropsWithoutRef<
 // ContextMenuRoot
 // =============================================================================
 
-const ContextMenuRoot = ContextMenuPrimitive.Root;
+export const ContextMenuRoot = ContextMenuPrimitive.Root;
 ContextMenuRoot.displayName = "ContextMenu";
 
 // =============================================================================
 // ContextMenuTrigger
 // =============================================================================
 
-const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
+export const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
 ContextMenuTrigger.displayName = "ContextMenu.Trigger";
 
 // =============================================================================
 // ContextMenuContent
 // =============================================================================
 
-const ContextMenuContent = React.forwardRef<
+export const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Content>,
   ContextMenuContentProps
 >(({ className, ...props }, ref) => (
@@ -87,14 +87,14 @@ ContextMenuContent.displayName = "ContextMenu.Content";
 // ContextMenuGroup
 // =============================================================================
 
-const ContextMenuGroup = ContextMenuPrimitive.Group;
+export const ContextMenuGroup = ContextMenuPrimitive.Group;
 ContextMenuGroup.displayName = "ContextMenu.Group";
 
 // =============================================================================
 // ContextMenuLabel
 // =============================================================================
 
-const ContextMenuLabel = React.forwardRef<
+export const ContextMenuLabel = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Label>,
   ContextMenuLabelProps
 >(({ className, ...props }, ref) => (
@@ -113,7 +113,7 @@ ContextMenuLabel.displayName = "ContextMenu.Label";
 // ContextMenuSeparator
 // =============================================================================
 
-const ContextMenuSeparator = React.forwardRef<
+export const ContextMenuSeparator = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Separator>,
   ContextMenuSeparatorProps
 >(({ className, ...props }, ref) => (
@@ -129,7 +129,7 @@ ContextMenuSeparator.displayName = "ContextMenu.Separator";
 // ContextMenuItem
 // =============================================================================
 
-const ContextMenuItem = React.forwardRef<
+export const ContextMenuItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Item>,
   ContextMenuItemProps
 >(({ children, onSelect, disabled, href, prefix, suffix, className }, ref) => {

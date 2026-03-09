@@ -9,7 +9,14 @@ description: 带有可选的前缀/后缀装饰以及内置可清除模式的单
 
 ## 使用方法 (Usage)
 
-```tsx
+<ComponentPreview className="max-w-[350px] flex-col gap-4">
+    {/* Search icon */}
+  <Input prefix={<span className="text-xs">🔍</span>} placeholder="搜索… (Search…)" />
+
+  {/* Mail icon */}
+  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+
+  ```tsx
 import { Input } from "@nebutra/ui"
 ```
 
@@ -66,14 +73,13 @@ import { Input } from "@nebutra/ui"
 ```tsx
 import { Search, Mail } from "lucide-react"
 
-<ComponentPreview className="max-w-[350px] flex-col gap-4">
-  {/* Search icon */}
-  <Input prefix={<span className="text-xs">🔍</span>} placeholder="搜索… (Search…)" />
+{/* Search icon */}
+<Input prefix={<span className="text-xs">🔍</span>} placeholder="搜索… (Search…)" />
 
-  {/* Mail icon */}
-  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
-</ComponentPreview>
+{/* Mail icon */}
+<Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
 ```
+</ComponentPreview>
 
 ---
 
@@ -87,9 +93,8 @@ import { Search, Mail } from "lucide-react"
   请参阅下面的 [密码显示](#password-reveal) 示例。
 </Warning>
 
-```tsx
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-  {/* Domain hint */}
+    {/* Domain hint */}
   <Input suffix={<span className="text-xs">@nebutra.com</span>} placeholder="用户名 (username)" />
 
   {/* Currency */}
@@ -99,8 +104,20 @@ import { Search, Mail } from "lucide-react"
     type="number"
     placeholder="0.00"
   />
-</ComponentPreview>
+
+  ```tsx
+{/* Domain hint */}
+<Input suffix={<span className="text-xs">@nebutra.com</span>} placeholder="用户名 (username)" />
+
+{/* Currency */}
+<Input
+  prefix={<span className="text-xs">$</span>}
+  suffix={<span className="text-xs font-medium border-l pl-2">USD</span>}
+  type="number"
+  placeholder="0.00"
+/>
 ```
+</ComponentPreview>
 
 ---
 
@@ -110,11 +127,13 @@ import { Search, Mail } from "lucide-react"
 
 ### 非受控用法 (Uncontrolled)
 
-```tsx
 <ComponentPreview className="max-w-[350px]">
-  <Input clearable defaultValue="contact@nebutra.com" placeholder="输入内容以查看 × 按钮… (Type to see the × button…)" />
-</ComponentPreview>
+    <Input clearable defaultValue="contact@nebutra.com" placeholder="输入内容以查看 × 按钮… (Type to see the × button…)" />
+
+  ```tsx
+<Input clearable defaultValue="contact@nebutra.com" placeholder="输入内容以查看 × 按钮… (Type to see the × button…)" />
 ```
+</ComponentPreview>
 
 ### 受控用法 (Controlled)
 

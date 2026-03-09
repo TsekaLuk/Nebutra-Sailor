@@ -23,7 +23,17 @@ description: "带有独立字符插槽的一次性密码输入框，基于 input
 
 ## 使用方法 (Usage)
 
-```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+    <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
+    <InputOTPGroup>
+      <InputOTPSlot index={0} />
+      <InputOTPSlot index={1} />
+      <InputOTPSlot index={2} />
+      <InputOTPSlot index={3} />
+    </InputOTPGroup>
+  </InputOTP>
+
+  ```tsx
 import {
   InputOTP,
   InputOTPGroup,
@@ -59,17 +69,16 @@ import {
 ```tsx
 import { REGEXP_ONLY_DIGITS } from "input-otp"
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
-    <InputOTPGroup>
-      <InputOTPSlot index={0} />
-      <InputOTPSlot index={1} />
-      <InputOTPSlot index={2} />
-      <InputOTPSlot index={3} />
-    </InputOTPGroup>
-  </InputOTP>
-</ComponentPreview>
+<InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSlot index={3} />
+  </InputOTPGroup>
+</InputOTP>
 ```
+</ComponentPreview>
 
 ### 受控 OTP (Controlled OTP)
 

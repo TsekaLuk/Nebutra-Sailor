@@ -80,7 +80,7 @@ const alertVariants = cva(
         variant: "mono",
         appearance: "solid",
         className:
-          "bg-[var(--neutral-1)] text-white dark:bg-zinc-300 dark:text-black *:data-slot-[alert=close]:text-white",
+          "bg-[var(--neutral-11)] text-[var(--neutral-1)] dark:bg-[var(--neutral-3)] dark:text-[var(--neutral-12)] *:data-slot-[alert=close]:text-[var(--neutral-1)]",
       },
 
       /* Outline */
@@ -149,19 +149,19 @@ const alertVariants = cva(
         variant: "success",
         appearance: "light",
         className:
-          "bg-[var(--color-success-soft,var(--color-green-50))] border border-[var(--color-success-alpha,var(--color-green-200))] text-foreground [&_[data-slot=alert-icon]]:text-[var(--color-success-foreground,var(--color-green-600))] dark:bg-[var(--color-success-soft,var(--color-green-950))] dark:border-[var(--color-success-alpha,var(--color-green-900))]",
+          "bg-[var(--color-success-soft,var(--color-green-50))] border border-[var(--color-success-alpha,var(--color-green-200))] text-foreground [&_[data-slot=alert-icon]]:text-[var(--color-success,var(--color-green-600))] dark:bg-[var(--color-success-soft,var(--color-green-950))] dark:border-[var(--color-success-alpha,var(--color-green-900))]",
       },
       {
         variant: "info",
         appearance: "light",
         className:
-          "bg-[var(--color-info-soft,var(--color-violet-50))] border border-[var(--color-info-alpha,var(--color-violet-100))] text-foreground [&_[data-slot=alert-icon]]:text-[var(--color-info-foreground,var(--color-violet-600))] dark:bg-[var(--color-info-soft,var(--color-violet-950))] dark:border-[var(--color-info-alpha,var(--color-violet-900))]",
+          "bg-[var(--color-info-soft,var(--color-violet-50))] border border-[var(--color-info-alpha,var(--color-violet-100))] text-foreground [&_[data-slot=alert-icon]]:text-[var(--color-info,var(--color-violet-600))] dark:bg-[var(--color-info-soft,var(--color-violet-950))] dark:border-[var(--color-info-alpha,var(--color-violet-900))]",
       },
       {
         variant: "warning",
         appearance: "light",
         className:
-          "bg-[var(--color-warning-soft,var(--color-yellow-50))] border border-[var(--color-warning-alpha,var(--color-yellow-200))] text-foreground [&_[data-slot=alert-icon]]:text-[var(--color-warning-foreground,var(--color-yellow-600))] dark:bg-[var(--color-warning-soft,var(--color-yellow-950))] dark:border-[var(--color-warning-alpha,var(--color-yellow-900))]",
+          "bg-[var(--color-warning-soft,var(--color-yellow-50))] border border-[var(--color-warning-alpha,var(--color-yellow-200))] text-foreground [&_[data-slot=alert-icon]]:text-[var(--color-warning,var(--color-yellow-600))] dark:bg-[var(--color-warning-soft,var(--color-yellow-950))] dark:border-[var(--color-warning-alpha,var(--color-yellow-900))]",
       },
 
       /* Mono icon colors */
@@ -174,13 +174,13 @@ const alertVariants = cva(
         variant: "mono",
         icon: "warning",
         className:
-          "[&_[data-slot=alert-icon]]:text-[var(--color-warning-foreground,var(--color-yellow-600))]",
+          "[&_[data-slot=alert-icon]]:text-[var(--color-warning,var(--color-yellow-600))]",
       },
       {
         variant: "mono",
         icon: "success",
         className:
-          "[&_[data-slot=alert-icon]]:text-[var(--color-success-foreground,var(--color-green-600))]",
+          "[&_[data-slot=alert-icon]]:text-[var(--color-success,var(--color-green-600))]",
       },
       {
         variant: "mono",
@@ -191,7 +191,7 @@ const alertVariants = cva(
         variant: "mono",
         icon: "info",
         className:
-          "[&_[data-slot=alert-icon]]:text-[var(--color-info-foreground,var(--color-violet-600))]",
+          "[&_[data-slot=alert-icon]]:text-[var(--color-info,var(--color-violet-600))]",
       },
     ],
     defaultVariants: {
@@ -249,8 +249,8 @@ export type AlertSize = "sm" | "md" | "lg";
  */
 export interface AlertProps
   extends
-    React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof alertVariants> {
+  React.HTMLAttributes<HTMLDivElement>,
+  VariantProps<typeof alertVariants> {
   /**
    * Show close button
    * @default false
@@ -264,8 +264,8 @@ export interface AlertProps
 
 export interface AlertIconProps
   extends
-    React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof alertVariants> {}
+  React.HTMLAttributes<HTMLDivElement>,
+  VariantProps<typeof alertVariants> { }
 
 export type AlertTitleProps = React.HTMLAttributes<HTMLDivElement>;
 

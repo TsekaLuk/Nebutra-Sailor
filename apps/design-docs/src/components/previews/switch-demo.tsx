@@ -1,19 +1,53 @@
 "use client";
+
 import { Switch } from "@nebutra/ui/primitives";
+import { Moon, Sun } from "lucide-react";
+
 export function SwitchDemo() {
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-3">
-        <Switch />
-        <span className="text-sm">Default (off)</span>
+    <div className="flex flex-col gap-8 w-full max-w-sm">
+      <div className="flex flex-col gap-2">
+        <h4 className="text-sm font-medium text-muted-foreground">Default</h4>
+        <Switch name="default">
+          <Switch.Control defaultChecked label="List view" value="list" />
+          <Switch.Control label="Grid view" value="grid" />
+        </Switch>
       </div>
-      <div className="flex items-center gap-3">
-        <Switch defaultSelected />
-        <span className="text-sm">Default (on)</span>
+
+      <div className="flex flex-col gap-2">
+        <h4 className="text-sm font-medium text-muted-foreground">Disabled</h4>
+        <Switch name="disabled">
+          <Switch.Control defaultChecked disabled label="List view" value="list" />
+          <Switch.Control disabled label="Grid view" value="grid" />
+        </Switch>
       </div>
-      <div className="flex items-center gap-3">
-        <Switch color="primary" defaultSelected />
-        <span className="text-sm">Primary</span>
+
+      <div className="flex flex-col gap-2">
+        <h4 className="text-sm font-medium text-muted-foreground">Sizes</h4>
+        <div className="flex items-center gap-4">
+          <Switch name="size-sm" size="small">
+            <Switch.Control label="Small" value="sm" defaultChecked />
+            <Switch.Control label="Auto" value="auto" />
+          </Switch>
+          <Switch name="size-md" size="medium">
+            <Switch.Control label="Medium" value="md" defaultChecked />
+            <Switch.Control label="Auto" value="auto" />
+          </Switch>
+          <Switch name="size-lg" size="large">
+            <Switch.Control label="Large" value="lg" defaultChecked />
+            <Switch.Control label="Auto" value="auto" />
+          </Switch>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <h4 className="text-sm font-medium text-muted-foreground">Icons</h4>
+        <div className="flex gap-4">
+          <Switch name="theme" size="small">
+            <Switch.Control icon={<Sun className="h-4 w-4" />} value="light" defaultChecked />
+            <Switch.Control icon={<Moon className="h-4 w-4" />} value="dark" />
+          </Switch>
+        </div>
       </div>
     </div>
   );

@@ -38,9 +38,8 @@ All props from native `<textarea>` are supported, plus:
 
 ### With Character Count
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col gap-1 w-full">
     <Textarea
       defaultValue=""
       placeholder="Type here..."
@@ -50,18 +49,34 @@ All props from native `<textarea>` are supported, plus:
       0/500
     </span>
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="flex flex-col gap-1 w-full">
+  <Textarea
+    defaultValue=""
+    placeholder="Type here..."
+    maxLength={500}
+  />
+  <span className="text-xs text-muted-foreground text-right w-full">
+    0/500
+  </span>
+</div>
 ```
+</ComponentPreview>
 
 ### Disabled
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="w-full">
+    <div className="w-full">
     <Textarea disabled value="This field is read-only" />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="w-full">
+  <Textarea disabled value="This field is read-only" />
+</div>
 ```
+</ComponentPreview>
 
 ### In a Form
 

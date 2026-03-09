@@ -32,7 +32,29 @@ description: "Slide-over overlay panel anchored to any edge of the screen, built
 
 ## Usage
 
-```tsx
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+    <Sheet>
+    <SheetTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <Menu className="h-5 w-5" />
+      </Button>
+    </SheetTrigger>
+    <SheetContent side="left" className="w-64">
+      <SheetHeader>
+        <SheetTitle>Navigation</SheetTitle>
+      </SheetHeader>
+      <nav className="flex flex-col gap-2 mt-4">
+        <SheetClose asChild>
+          <Link href="/docs/components/sheet">Dashboard</Link>
+        </SheetClose>
+        <SheetClose asChild>
+          <Link href="/docs/components/sheet">Settings</Link>
+        </SheetClose>
+      </nav>
+    </SheetContent>
+  </Sheet>
+
+  ```tsx
 import {
   Sheet,
   SheetTrigger,
@@ -72,35 +94,33 @@ import {
 ```tsx
 import { Menu } from "lucide-react"
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-center">
-  <Sheet>
-    <SheetTrigger asChild>
-      <Button variant="ghost" size="icon">
-        <Menu className="h-5 w-5" />
-      </Button>
-    </SheetTrigger>
-    <SheetContent side="left" className="w-64">
-      <SheetHeader>
-        <SheetTitle>Navigation</SheetTitle>
-      </SheetHeader>
-      <nav className="flex flex-col gap-2 mt-4">
-        <SheetClose asChild>
-          <Link href="/docs/components/sheet">Dashboard</Link>
-        </SheetClose>
-        <SheetClose asChild>
-          <Link href="/docs/components/sheet">Settings</Link>
-        </SheetClose>
-      </nav>
-    </SheetContent>
-  </Sheet>
-</ComponentPreview>
+<Sheet>
+  <SheetTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <Menu className="h-5 w-5" />
+    </Button>
+  </SheetTrigger>
+  <SheetContent side="left" className="w-64">
+    <SheetHeader>
+      <SheetTitle>Navigation</SheetTitle>
+    </SheetHeader>
+    <nav className="flex flex-col gap-2 mt-4">
+      <SheetClose asChild>
+        <Link href="/docs/components/sheet">Dashboard</Link>
+      </SheetClose>
+      <SheetClose asChild>
+        <Link href="/docs/components/sheet">Settings</Link>
+      </SheetClose>
+    </nav>
+  </SheetContent>
+</Sheet>
 ```
+</ComponentPreview>
 
 ### Bottom Sheet (Mobile)
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-center">
-  <Sheet>
+    <Sheet>
     <SheetTrigger asChild>
       <Button>Share</Button>
     </SheetTrigger>
@@ -111,8 +131,21 @@ import { Menu } from "lucide-react"
       <div className="py-4">Share options here</div>
     </SheetContent>
   </Sheet>
-</ComponentPreview>
+
+  ```tsx
+<Sheet>
+  <SheetTrigger asChild>
+    <Button>Share</Button>
+  </SheetTrigger>
+  <SheetContent side="bottom" className="rounded-t-2xl">
+    <SheetHeader>
+      <SheetTitle>Share this page</SheetTitle>
+    </SheetHeader>
+    <div className="py-4">Share options here</div>
+  </SheetContent>
+</Sheet>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

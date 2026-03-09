@@ -17,58 +17,77 @@ import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 
 ### 单个日期 (Single Date)
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-  <DatePicker label="活动日期" />
-</ComponentPreview>
+    <DatePicker label="活动日期" />
+
+  ```tsx
+<DatePicker label="活动日期" />
 ```
+</ComponentPreview>
 
 ### 日期范围 (Date Range)
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-  <DateRangePicker label="行程日期" />
-</ComponentPreview>
+    <DateRangePicker label="行程日期" />
+
+  ```tsx
+<DateRangePicker label="行程日期" />
 ```
+</ComponentPreview>
 
 ### 受控模式 (Controlled)
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-  <DatePicker label="日期" defaultValue={parseDate("2024-04-04")} />
-</ComponentPreview>
+    <DatePicker label="日期" defaultValue={parseDate("2024-04-04")} />
+
+  ```tsx
+<DatePicker label="日期" defaultValue={parseDate("2024-04-04")} />
 ```
+</ComponentPreview>
 
 ### 带有最小/最大限制 (With Min/Max)
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-  <DateRangePicker
+    <DateRangePicker
     label="时段"
     minValue={today(getLocalTimeZone())}
     maxValue={today(getLocalTimeZone()).add({ months: 3 })}
   />
-</ComponentPreview>
+
+  ```tsx
+<DateRangePicker
+  label="时段"
+  minValue={today(getLocalTimeZone())}
+  maxValue={today(getLocalTimeZone()).add({ months: 3 })}
+/>
 ```
+</ComponentPreview>
 
 ### 变体 (Variants)
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex flex-col items-center justify-start gap-4 pt-8 w-full max-w-sm mx-auto">
-  <DatePicker label="默认 (Default)" />
+    <DatePicker label="默认 (Default)" />
   <DatePicker label="带边框 (Bordered)" variant="bordered" />
   <DatePicker label="带下划线 (Underlined)" variant="underlined" />
   <DatePicker label="淡出风格 (Faded)" variant="faded" />
-</ComponentPreview>
+
+  ```tsx
+<DatePicker label="默认 (Default)" />
+<DatePicker label="带边框 (Bordered)" variant="bordered" />
+<DatePicker label="带下划线 (Underlined)" variant="underlined" />
+<DatePicker label="淡出风格 (Faded)" variant="faded" />
 ```
+</ComponentPreview>
 
 ### 显示两个月份 (Two Visible Months)
 
-```tsx
 <ComponentPreview className="min-h-[350px] flex justify-center items-start pt-8">
-  <DateRangePicker label="住宿时间" visibleMonths={2} />
-</ComponentPreview>
+    <DateRangePicker label="住宿时间" visibleMonths={2} />
+
+  ```tsx
+<DateRangePicker label="住宿时间" visibleMonths={2} />
 ```
+</ComponentPreview>
 
 ## 属性 (Props)
 

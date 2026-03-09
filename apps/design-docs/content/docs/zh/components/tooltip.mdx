@@ -19,7 +19,22 @@ description: "在浮动弹出框中显示的上下文悬停信息，基于 Radix
 
 ## 使用方法 (Usage)
 
-```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+    <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <span>⚙️</span>
+          <span className="sr-only">设置 (Settings)</span>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>设置 (Settings)</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+
+  ```tsx
 import {
   Tooltip,
   TooltipTrigger,
@@ -76,28 +91,26 @@ import {
 ```tsx
 import { Settings } from "lucide-react"
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipProvider>
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <span>⚙️</span>
-          <span className="sr-only">设置 (Settings)</span>
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>设置 (Settings)</p>
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
-</ComponentPreview>
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <span>⚙️</span>
+        <span className="sr-only">设置 (Settings)</span>
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>设置 (Settings)</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+</ComponentPreview>
 
 ### 自定义显示位置和偏移 (Custom Side and Offset)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipProvider>
+    <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
         <Button variant="outline">悬停 (Hover)</Button>
@@ -107,14 +120,25 @@ import { Settings } from "lucide-react"
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
-</ComponentPreview>
+
+  ```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">悬停 (Hover)</Button>
+    </TooltipTrigger>
+    <TooltipContent side="right" sideOffset={8}>
+      <p>显示在右侧的提示 (Tooltip on the right)</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+</ComponentPreview>
 
 ### 即时显示 - 无延迟 (Instant Tooltip - No Delay)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipProvider>
+    <TooltipProvider>
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <Button>即时显示 (Instant)</Button>
@@ -122,14 +146,23 @@ import { Settings } from "lucide-react"
       <TooltipContent>立即显示内容 (Shows immediately)</TooltipContent>
     </Tooltip>
   </TooltipProvider>
-</ComponentPreview>
+
+  ```tsx
+<TooltipProvider>
+  <Tooltip delayDuration={0}>
+    <TooltipTrigger asChild>
+      <Button>即时显示 (Instant)</Button>
+    </TooltipTrigger>
+    <TooltipContent>立即显示内容 (Shows immediately)</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+</ComponentPreview>
 
 ### 丰富的文字提示内容 (Rich Tooltip Content)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipProvider>
+    <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
         <span className="cursor-help font-medium border-b border-dashed border-muted-foreground pb-px">悬停获取信息 (Hover for info)</span>
@@ -142,8 +175,23 @@ import { Settings } from "lucide-react"
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
-</ComponentPreview>
+
+  ```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <span className="cursor-help font-medium border-b border-dashed border-muted-foreground pb-px">悬停获取信息 (Hover for info)</span>
+    </TooltipTrigger>
+    <TooltipContent className="max-w-xs">
+      <p className="font-medium mb-1">小提示 (Pro tip)</p>
+      <p className="text-xs text-muted-foreground">
+        您可以在项目首选项面板中配置高级设置。 (You can configure advanced settings in the project preferences panel.)
+      </p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

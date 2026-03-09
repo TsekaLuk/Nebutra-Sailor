@@ -48,7 +48,7 @@ export function IconGallery() {
     );
 }
 
-function IconCard({ name, icon: Icon }: { name: string; icon: React.ElementType }) {
+function IconCard({ name, icon: Icon }: { name: string; icon: React.ComponentType<{ size?: number | string; className?: string }> }) {
     const [copied, setCopied] = React.useState<"Name" | "Import" | "JSX" | null>(null);
     const [open, setOpen] = React.useState(false);
 
@@ -65,11 +65,13 @@ function IconCard({ name, icon: Icon }: { name: string; icon: React.ElementType 
         <DropdownMenu open={open} onOpenChange={setOpen}>
             <DropdownMenuTrigger asChild>
                 <button
-                    className="group relative flex flex-col items-center justify-center p-6 h-32 border-r border-b border-border bg-card/10 hover:bg-card focus:bg-card focus:outline-none focus:relative focus:ring-2 focus:ring-ring focus:z-10 transition-colors"
+                    className="group relative flex flex-col items-center justify-center p-4 border-r border-b border-border bg-card/10 hover:bg-card focus:bg-card focus:outline-none focus:relative focus:ring-2 focus:ring-ring focus:z-10 transition-colors h-[120px]"
                     aria-label={`Copy options for ${name}`}
                 >
-                    <Icon size={24} className="mb-4 text-foreground transition-transform group-hover:scale-110" />
-                    <span className="text-[11px] text-muted-foreground break-all text-center px-2">{name}</span>
+                    <div className="flex-1 flex items-center justify-center min-h-0 mb-2">
+                        <Icon size={24} className="text-foreground transition-transform group-hover:scale-110 shrink-0" />
+                    </div>
+                    <span className="text-[11px] text-muted-foreground text-center px-1 font-medium truncate w-full" title={name}>{name}</span>
 
                     {copied && (
                         <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">

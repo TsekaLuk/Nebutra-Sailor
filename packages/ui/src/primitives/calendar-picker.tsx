@@ -104,7 +104,7 @@ function formatRange(range: RangeValue<DateValue> | undefined): string {
 
 interface PresetListProps {
   presets: Record<string, CalendarPreset>;
-  activeKey?: string;
+  activeKey?: string | undefined;
   onSelect: (key: string, preset: CalendarPreset) => void;
   size: CalendarPickerSize;
   direction: "vertical" | "horizontal";
@@ -213,11 +213,13 @@ export function CalendarPicker({
       if (key) {
         didInitRef.current = true;
         const preset = presets[key];
-        setActivePresetKey(key);
-        onChange?.({
-          start: dateToCalendarDate(preset.start),
-          end: dateToCalendarDate(preset.end),
-        });
+        if (preset) {
+          setActivePresetKey(key);
+          onChange?.({
+            start: dateToCalendarDate(preset.start),
+            end: dateToCalendarDate(preset.end),
+          });
+        }
       }
     }
   }, [presetIndex, presets, value, onChange]);
@@ -310,10 +312,10 @@ export function CalendarPicker({
           <div className={contentLayoutClass}>
             {/* Calendar grid */}
             <RangeCalendar
-              value={value ?? undefined}
+              value={(value as unknown as React.ComponentProps<typeof RangeCalendar>["value"]) ?? null}
               onChange={handleCalendarChange}
-              minValue={calendarMinValue}
-              maxValue={calendarMaxValue}
+              minValue={calendarMinValue ?? null}
+              maxValue={calendarMaxValue ?? null}
               visibleMonths={horizontalLayout ? 2 : 1}
               classNames={{
                 base: cn(isSmall && "scale-[0.85] origin-top-left"),

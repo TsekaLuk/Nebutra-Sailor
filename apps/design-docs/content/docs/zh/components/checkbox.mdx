@@ -32,9 +32,8 @@ const [checked, setChecked] = useState(false);
 
 ### 禁用状态 (Disabled)
 
-```tsx
 <ComponentPreview className="gap-6">
-  <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2">
     <Checkbox disabled id="d1" />
     <Label htmlFor="d1">禁用 (Disabled)</Label>
   </div>
@@ -46,19 +45,38 @@ const [checked, setChecked] = useState(false);
     <Checkbox disabled indeterminate id="d3" />
     <Label htmlFor="d3">禁用且待定 (Disabled Indeterminate)</Label>
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="flex items-center gap-2">
+  <Checkbox disabled id="d1" />
+  <Label htmlFor="d1">禁用 (Disabled)</Label>
+</div>
+<div className="flex items-center gap-2">
+  <Checkbox checked disabled id="d2" />
+  <Label htmlFor="d2">禁用且选中 (Disabled Checked)</Label>
+</div>
+<div className="flex items-center gap-2">
+  <Checkbox disabled indeterminate id="d3" />
+  <Label htmlFor="d3">禁用且待定 (Disabled Indeterminate)</Label>
+</div>
 ```
+</ComponentPreview>
 
 ### 中间状态 (Indeterminate)
 
-```tsx
 <ComponentPreview>
-  <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2">
     <Checkbox indeterminate id="i1" />
     <Label htmlFor="i1">选项 1 (Option 1)</Label>
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="flex items-center gap-2">
+  <Checkbox indeterminate id="i1" />
+  <Label htmlFor="i1">选项 1 (Option 1)</Label>
+</div>
 ```
+</ComponentPreview>
 
 ## 属性 (Props)
 

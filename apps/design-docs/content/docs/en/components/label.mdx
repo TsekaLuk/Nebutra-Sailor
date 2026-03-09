@@ -39,44 +39,67 @@ Extends `@radix-ui/react-label` `Root` props (extends `React.LabelHTMLAttributes
 
 ### Required Field Label
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <div className="space-y-2 w-full max-w-sm">
+    <div className="space-y-2 w-full max-w-sm">
     <Label htmlFor="name">
       Full name
       <span className="ml-1 text-destructive" aria-hidden="true">*</span>
     </Label>
     <Input id="name" required aria-required="true" />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-2 w-full max-w-sm">
+  <Label htmlFor="name">
+    Full name
+    <span className="ml-1 text-destructive" aria-hidden="true">*</span>
+  </Label>
+  <Input id="name" required aria-required="true" />
+</div>
 ```
+</ComponentPreview>
 
 ### Label with Description
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <div className="space-y-1 w-full max-w-sm">
+    <div className="space-y-1 w-full max-w-sm">
     <Label htmlFor="bio">Bio</Label>
     <p id="bio-hint" className="text-xs text-muted-foreground mb-2">
       Tell us a bit about yourself. Max 200 characters.
     </p>
     <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-1 w-full max-w-sm">
+  <Label htmlFor="bio">Bio</Label>
+  <p id="bio-hint" className="text-xs text-muted-foreground mb-2">
+    Tell us a bit about yourself. Max 200 characters.
+  </p>
+  <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
+</div>
 ```
+</ComponentPreview>
 
 ### Disabled Label
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <div className="space-y-2 w-full max-w-sm">
+    <div className="space-y-2 w-full max-w-sm">
     <Label htmlFor="disabled-input" className="opacity-50 cursor-not-allowed">
       Disabled field
     </Label>
     <Input id="disabled-input" disabled />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-2 w-full max-w-sm">
+  <Label htmlFor="disabled-input" className="opacity-50 cursor-not-allowed">
+    Disabled field
+  </Label>
+  <Input id="disabled-input" disabled />
+</div>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

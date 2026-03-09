@@ -17,58 +17,77 @@ import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 
 ### Single Date
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-  <DatePicker label="Event date" />
-</ComponentPreview>
+    <DatePicker label="Event date" />
+
+  ```tsx
+<DatePicker label="Event date" />
 ```
+</ComponentPreview>
 
 ### Date Range
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-  <DateRangePicker label="Trip dates" />
-</ComponentPreview>
+    <DateRangePicker label="Trip dates" />
+
+  ```tsx
+<DateRangePicker label="Trip dates" />
 ```
+</ComponentPreview>
 
 ### Controlled
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-  <DatePicker label="Date" defaultValue={parseDate("2024-04-04")} />
-</ComponentPreview>
+    <DatePicker label="Date" defaultValue={parseDate("2024-04-04")} />
+
+  ```tsx
+<DatePicker label="Date" defaultValue={parseDate("2024-04-04")} />
 ```
+</ComponentPreview>
 
 ### With Min/Max
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-  <DateRangePicker
+    <DateRangePicker
     label="Period"
     minValue={today(getLocalTimeZone())}
     maxValue={today(getLocalTimeZone()).add({ months: 3 })}
   />
-</ComponentPreview>
+
+  ```tsx
+<DateRangePicker
+  label="Period"
+  minValue={today(getLocalTimeZone())}
+  maxValue={today(getLocalTimeZone()).add({ months: 3 })}
+/>
 ```
+</ComponentPreview>
 
 ### Variants
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex flex-col items-center justify-start gap-4 pt-8 w-full max-w-sm mx-auto">
-  <DatePicker label="Default" />
+    <DatePicker label="Default" />
   <DatePicker label="Bordered" variant="bordered" />
   <DatePicker label="Underlined" variant="underlined" />
   <DatePicker label="Faded" variant="faded" />
-</ComponentPreview>
+
+  ```tsx
+<DatePicker label="Default" />
+<DatePicker label="Bordered" variant="bordered" />
+<DatePicker label="Underlined" variant="underlined" />
+<DatePicker label="Faded" variant="faded" />
 ```
+</ComponentPreview>
 
 ### Two Visible Months
 
-```tsx
 <ComponentPreview className="min-h-[350px] flex justify-center items-start pt-8">
-  <DateRangePicker label="Stay" visibleMonths={2} />
-</ComponentPreview>
+    <DateRangePicker label="Stay" visibleMonths={2} />
+
+  ```tsx
+<DateRangePicker label="Stay" visibleMonths={2} />
 ```
+</ComponentPreview>
 
 ## Props
 

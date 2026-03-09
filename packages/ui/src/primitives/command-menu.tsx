@@ -48,7 +48,7 @@ export interface CommandMenuItemProps
 // CommandMenuRoot
 // =============================================================================
 
-function CommandMenuRoot({
+export function CommandMenuRoot({
   open,
   setOpen,
   label = "Command Menu",
@@ -96,7 +96,7 @@ CommandMenuRoot.displayName = "CommandMenu.Root";
 // CommandMenuItem
 // =============================================================================
 
-const CommandMenuItem = React.forwardRef<
+export const CommandMenuItem = React.forwardRef<
   React.ElementRef<typeof CommandItem>,
   CommandMenuItemProps
 >(({ callback, className, ...props }, ref) => (
@@ -113,37 +113,37 @@ CommandMenuItem.displayName = "CommandMenu.Item";
 // Pass-through sub-components (typed aliases)
 // =============================================================================
 
-const CommandMenuInput = React.forwardRef<
+export const CommandMenuInput = React.forwardRef<
   React.ElementRef<typeof CommandInput>,
   CommandInputProps
 >((props, ref) => <CommandInput ref={ref} {...props} />);
 CommandMenuInput.displayName = "CommandMenu.Input";
 
-const CommandMenuList = React.forwardRef<
+export const CommandMenuList = React.forwardRef<
   React.ElementRef<typeof CommandList>,
   CommandListProps
 >((props, ref) => <CommandList ref={ref} {...props} />);
 CommandMenuList.displayName = "CommandMenu.List";
 
-const CommandMenuEmpty = React.forwardRef<
+export const CommandMenuEmpty = React.forwardRef<
   React.ElementRef<typeof CommandEmpty>,
   CommandEmptyProps
 >((props, ref) => <CommandEmpty ref={ref} {...props} />);
 CommandMenuEmpty.displayName = "CommandMenu.Empty";
 
-const CommandMenuGroup = React.forwardRef<
+export const CommandMenuGroup = React.forwardRef<
   React.ElementRef<typeof CommandGroup>,
   CommandGroupProps
 >((props, ref) => <CommandGroup ref={ref} {...props} />);
 CommandMenuGroup.displayName = "CommandMenu.Group";
 
-const CommandMenuSeparator = React.forwardRef<
+export const CommandMenuSeparator = React.forwardRef<
   React.ElementRef<typeof CommandSeparator>,
   CommandSeparatorProps
 >((props, ref) => <CommandSeparator ref={ref} {...props} />);
 CommandMenuSeparator.displayName = "CommandMenu.Separator";
 
-const CommandMenuShortcut = ({ ...props }: CommandShortcutProps) => (
+export const CommandMenuShortcut = ({ ...props }: CommandShortcutProps) => (
   <CommandShortcut {...props} />
 );
 CommandMenuShortcut.displayName = "CommandMenu.Shortcut";

@@ -51,9 +51,8 @@ import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui";
 
 ### 多选模式 (Multiple Selection)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
+    <ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
     <ToggleGroupItem value="bold" aria-label="切换加粗 (Toggle bold)">
       <Bold className="size-4" />
     </ToggleGroupItem>
@@ -64,20 +63,39 @@ import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui";
       <Underline className="size-4" />
     </ToggleGroupItem>
   </ToggleGroup>
-</ComponentPreview>
+
+  ```tsx
+<ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
+  <ToggleGroupItem value="bold" aria-label="切换加粗 (Toggle bold)">
+    <Bold className="size-4" />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="italic" aria-label="切换斜体 (Toggle italic)">
+    <Italic className="size-4" />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="underline" aria-label="切换下划线 (Toggle underline)">
+    <Underline className="size-4" />
+  </ToggleGroupItem>
+</ToggleGroup>
 ```
+</ComponentPreview>
 
 ### 受控单选 (Controlled Single Selection)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <ToggleGroup type="single" defaultValue="center">
+    <ToggleGroup type="single" defaultValue="center">
     <ToggleGroupItem value="left">左 (Left)</ToggleGroupItem>
     <ToggleGroupItem value="center">中 (Center)</ToggleGroupItem>
     <ToggleGroupItem value="right">右 (Right)</ToggleGroupItem>
   </ToggleGroup>
-</ComponentPreview>
+
+  ```tsx
+<ToggleGroup type="single" defaultValue="center">
+  <ToggleGroupItem value="left">左 (Left)</ToggleGroupItem>
+  <ToggleGroupItem value="center">中 (Center)</ToggleGroupItem>
+  <ToggleGroupItem value="right">右 (Right)</ToggleGroupItem>
+</ToggleGroup>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

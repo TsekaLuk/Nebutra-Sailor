@@ -8,6 +8,7 @@ interface InteractiveFrostedGlassCardProps {
     description: string;
     icon?: React.ReactNode;
     className?: string;
+    variant?: "surface" | "elevated";
 }
 
 export function InteractiveFrostedGlassCard({
@@ -15,6 +16,7 @@ export function InteractiveFrostedGlassCard({
     description,
     icon,
     className = "",
+    variant = "surface",
 }: InteractiveFrostedGlassCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -29,24 +31,45 @@ export function InteractiveFrostedGlassCard({
         });
     };
 
+    const isElevated = variant === "elevated";
+
+    const cardClasses = isElevated
+        ? `group relative w-full overflow-hidden rounded-3xl border border-[#0BF1C3]/25 bg-[#0A0A0A]/60 p-8 backdrop-blur-[48px] transition-all duration-500 hover:border-[#0BF1C3]/40 shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_60px_rgba(11,241,195,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.5),0_0_80px_rgba(11,241,195,0.12)]`
+        : `group relative w-full overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-8 backdrop-blur-[32px] transition-all duration-500 hover:border-white/[0.15] shadow-none hover:shadow-[0_4px_16px_rgba(255,255,255,0.05)]`;
+
+    const glowColor = isElevated
+        ? `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(11,241,195,0.15), transparent 40%)`
+        : `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.06), transparent 40%)`;
+
+    const iconBgClass = isElevated
+        ? "flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0BF1C3]/10 text-[#0BF1C3] backdrop-blur-md border border-[#0BF1C3]/20 shadow-[0_0_20px_rgba(11,241,195,0.1)]"
+        : "flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.06] text-white/80 backdrop-blur-md border border-white/10";
+
+    const noiseFilterId = `cardNoise_${variant}`;
+
     return (
         <div
             ref={cardRef}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className={`group relative w-full overflow-hidden rounded-3xl border border-white/10 bg-black/20 p-8 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-white/20 hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] ${className}`}
+            className={`${cardClasses} ${className}`}
             style={{
                 transform: isHovered
                     ? `perspective(1000px) rotateX(${(mousePosition.y - 150) / 20}deg) rotateY(${-(mousePosition.x - 150) / 20}deg)`
                     : "perspective(1000px) rotateX(0deg) rotateY(0deg)",
-                transition: "transform 0.1s ease-out, border 0.3s ease",
+                transition: "transform 0.1s ease-out, border 0.3s ease, box-shadow 0.5s ease",
             }}
         >
+            {/* Elevated: top gradient accent line */}
+            {isElevated && (
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0BF1C3]/50 to-transparent" />
+            )}
+
             {/* Noise Texture */}
-            <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mix-blend-overlay">
+            <div className={`pointer-events-none absolute inset-0 z-0 mix-blend-overlay ${isElevated ? "opacity-15" : "opacity-[0.08]"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 h-full w-full">
-                    <filter id="cardNoise">
+                    <filter id={noiseFilterId}>
                         <feTurbulence
                             type="fractalNoise"
                             baseFrequency="0.65"
@@ -54,34 +77,32 @@ export function InteractiveFrostedGlassCard({
                             stitchTiles="stitch"
                         />
                     </filter>
-                    <rect width="100%" height="100%" filter="url(#cardNoise)" />
+                    <rect width="100%" height="100%" filter={`url(#${noiseFilterId})`} />
                 </svg>
             </div>
 
             {/* Mouse Follow Glow */}
             <div
                 className="pointer-events-none absolute -inset-px z-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={{
-                    background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.1), transparent 40%)`,
-                }}
+                style={{ background: glowColor }}
             />
 
             {/* Content */}
             <div className="relative z-10 flex h-full flex-col justify-between space-y-8">
                 <div className="flex items-start justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md border border-white/20 shadow-inner">
+                    <div className={iconBgClass}>
                         {icon}
                     </div>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white/50 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/20 group-hover:text-white">
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300 ${isElevated ? "bg-[#0BF1C3]/5 text-[#0BF1C3]/50 group-hover:bg-[#0BF1C3]/20 group-hover:text-[#0BF1C3]" : "bg-white/5 text-white/30 group-hover:bg-white/10 group-hover:text-white/60"}`}>
                         <MoveUpRight className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </div>
                 </div>
 
                 <div>
-                    <h3 className="mb-2 text-2xl font-semibold tracking-tight text-white">
+                    <h3 className={`mb-2 text-2xl font-semibold tracking-tight ${isElevated ? "text-white" : "text-white/90"}`}>
                         {title}
                     </h3>
-                    <p className="text-sm font-medium leading-relaxed text-white/60">
+                    <p className={`text-sm font-medium leading-relaxed ${isElevated ? "text-white/50" : "text-white/40"}`}>
                         {description}
                     </p>
                 </div>

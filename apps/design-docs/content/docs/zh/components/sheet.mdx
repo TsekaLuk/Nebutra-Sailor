@@ -32,7 +32,29 @@ description: "锚定在屏幕边缘的滑出式覆盖面板，基于 Radix UI Di
 
 ## 使用方法 (Usage)
 
-```tsx
+<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+    <Sheet>
+    <SheetTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <Menu className="h-5 w-5" />
+      </Button>
+    </SheetTrigger>
+    <SheetContent side="left" className="w-64">
+      <SheetHeader>
+        <SheetTitle>导航 (Navigation)</SheetTitle>
+      </SheetHeader>
+      <nav className="flex flex-col gap-2 mt-4">
+        <SheetClose asChild>
+          <Link href="/docs/components/sheet">仪表盘 (Dashboard)</Link>
+        </SheetClose>
+        <SheetClose asChild>
+          <Link href="/docs/components/sheet">设置 (Settings)</Link>
+        </SheetClose>
+      </nav>
+    </SheetContent>
+  </Sheet>
+
+  ```tsx
 import {
   Sheet,
   SheetTrigger,
@@ -72,35 +94,33 @@ import {
 ```tsx
 import { Menu } from "lucide-react"
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-center">
-  <Sheet>
-    <SheetTrigger asChild>
-      <Button variant="ghost" size="icon">
-        <Menu className="h-5 w-5" />
-      </Button>
-    </SheetTrigger>
-    <SheetContent side="left" className="w-64">
-      <SheetHeader>
-        <SheetTitle>导航 (Navigation)</SheetTitle>
-      </SheetHeader>
-      <nav className="flex flex-col gap-2 mt-4">
-        <SheetClose asChild>
-          <Link href="/docs/components/sheet">仪表盘 (Dashboard)</Link>
-        </SheetClose>
-        <SheetClose asChild>
-          <Link href="/docs/components/sheet">设置 (Settings)</Link>
-        </SheetClose>
-      </nav>
-    </SheetContent>
-  </Sheet>
-</ComponentPreview>
+<Sheet>
+  <SheetTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <Menu className="h-5 w-5" />
+    </Button>
+  </SheetTrigger>
+  <SheetContent side="left" className="w-64">
+    <SheetHeader>
+      <SheetTitle>导航 (Navigation)</SheetTitle>
+    </SheetHeader>
+    <nav className="flex flex-col gap-2 mt-4">
+      <SheetClose asChild>
+        <Link href="/docs/components/sheet">仪表盘 (Dashboard)</Link>
+      </SheetClose>
+      <SheetClose asChild>
+        <Link href="/docs/components/sheet">设置 (Settings)</Link>
+      </SheetClose>
+    </nav>
+  </SheetContent>
+</Sheet>
 ```
+</ComponentPreview>
 
 ### 底部抽屉 - 移动端 (Bottom Sheet - Mobile)
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-center">
-  <Sheet>
+    <Sheet>
     <SheetTrigger asChild>
       <Button>分享 (Share)</Button>
     </SheetTrigger>
@@ -111,8 +131,21 @@ import { Menu } from "lucide-react"
       <div className="py-4">此处为分享选项 (Share options here)</div>
     </SheetContent>
   </Sheet>
-</ComponentPreview>
+
+  ```tsx
+<Sheet>
+  <SheetTrigger asChild>
+    <Button>分享 (Share)</Button>
+  </SheetTrigger>
+  <SheetContent side="bottom" className="rounded-t-2xl">
+    <SheetHeader>
+      <SheetTitle>分享此页面 (Share this page)</SheetTitle>
+    </SheetHeader>
+    <div className="py-4">此处为分享选项 (Share options here)</div>
+  </SheetContent>
+</Sheet>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

@@ -8,7 +8,7 @@ import { cn } from "../utils/cn";
 // ─── Variants ─────────────────────────────────────────────────────────────────
 
 const badgeVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-full border font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "inline-flex justify-center items-center shrink-0 rounded-full font-sans font-medium whitespace-nowrap tabular-nums transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-transparent",
   {
     variants: {
       variant: {
@@ -28,40 +28,31 @@ const badgeVariants = cva(
         error:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         // ─── Geist-style color palette ────────────────────────────────────────
-        gray: "border-transparent bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200",
-        "gray-subtle":
-          "border-neutral-300 bg-transparent text-neutral-700 dark:border-neutral-600 dark:text-neutral-300",
-        blue: "border-transparent bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200",
-        "blue-subtle":
-          "border-blue-300 bg-transparent text-blue-700 dark:border-blue-700 dark:text-blue-300",
-        purple:
-          "border-transparent bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-200",
-        "purple-subtle":
-          "border-purple-300 bg-transparent text-purple-700 dark:border-purple-700 dark:text-purple-300",
-        amber:
-          "border-transparent bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200",
-        "amber-subtle":
-          "border-amber-300 bg-transparent text-amber-700 dark:border-amber-700 dark:text-amber-300",
-        red: "border-transparent bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200",
-        "red-subtle":
-          "border-red-300 bg-transparent text-red-700 dark:border-red-700 dark:text-red-300",
-        pink: "border-transparent bg-pink-100 text-pink-800 dark:bg-pink-900/50 dark:text-pink-200",
-        "pink-subtle":
-          "border-pink-300 bg-transparent text-pink-700 dark:border-pink-700 dark:text-pink-300",
-        green:
-          "border-transparent bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200",
-        "green-subtle":
-          "border-green-300 bg-transparent text-green-700 dark:border-green-700 dark:text-green-300",
-        teal: "border-transparent bg-teal-100 text-teal-800 dark:bg-teal-900/50 dark:text-teal-200",
-        "teal-subtle":
-          "border-teal-300 bg-transparent text-teal-700 dark:border-teal-700 dark:text-teal-300",
-        inverted:
-          "border-transparent bg-neutral-900 text-white dark:bg-white dark:text-neutral-900",
+        gray: "bg-geist-gray-700 text-white fill-white",
+        "gray-subtle": "bg-geist-gray-200 text-geist-gray-1000 fill-geist-gray-1000 border-transparent",
+        blue: "bg-blue-700 text-white fill-white",
+        "blue-subtle": "bg-blue-200 text-blue-900 fill-blue-900 border-transparent",
+        purple: "bg-purple-700 text-white fill-white",
+        "purple-subtle": "bg-purple-200 text-purple-900 fill-purple-900 border-transparent",
+        amber: "bg-amber-700 text-black fill-black",
+        "amber-subtle": "bg-amber-200 text-amber-900 fill-amber-900 border-transparent",
+        red: "bg-red-700 text-white fill-white",
+        "red-subtle": "bg-red-200 text-red-900 fill-red-900 border-transparent",
+        pink: "bg-pink-700 text-white fill-white",
+        "pink-subtle": "bg-pink-300 text-pink-900 fill-pink-900 border-transparent",
+        green: "bg-green-700 text-white fill-white",
+        "green-subtle": "bg-green-200 text-green-900 fill-green-900 border-transparent",
+        teal: "bg-teal-700 text-white fill-white",
+        "teal-subtle": "bg-teal-300 text-teal-900 fill-teal-900 border-transparent",
+        inverted: "bg-geist-gray-1000 text-geist-gray-100 fill-geist-gray-100",
+        trial: "bg-gradient-to-br from-trial-start to-trial-end text-white fill-white",
+        turbo: "bg-gradient-to-br from-turbo-start to-turbo-end text-white fill-white",
+        pill: "bg-background text-foreground fill-foreground !border-gray-alpha-400 dark:!border-neutral-800",
       },
       size: {
-        sm: "px-1.5 py-px text-[10px] leading-[18px]",
-        md: "px-2.5 py-0.5 text-xs",
-        lg: "px-3 py-1 text-sm",
+        sm: "text-[11px] h-5 px-1.5 tracking-[0.2px] gap-[3px] [&_svg]:h-[11px] [&_svg]:w-[11px]",
+        md: "text-[12px] h-6 px-2.5 tracking-normal gap-1 [&_svg]:h-[14px] [&_svg]:w-[14px]",
+        lg: "text-[14px] h-8 px-3 tracking-normal gap-1.5 [&_svg]:h-[16px] [&_svg]:w-[16px]",
       },
     },
     defaultVariants: {
@@ -71,23 +62,29 @@ const badgeVariants = cva(
   },
 );
 
-// Maps semantic variants → dot color class
-const dotColorMap: Partial<Record<NonNullable<BadgeProps["variant"]>, string>> =
-  {
-    success: "bg-success",
-    warning: "bg-warning",
-    info: "bg-info",
-    error: "bg-destructive",
-    destructive: "bg-destructive",
-    default: "bg-primary-foreground",
-    secondary: "bg-secondary-foreground",
-    outline: "bg-muted-foreground",
-  };
+const dotColorMap: Partial<Record<NonNullable<BadgeProps["variant"]>, string>> = {
+  success: "bg-success-foreground",
+  warning: "bg-warning-foreground",
+  info: "bg-info-foreground",
+  error: "bg-destructive-foreground",
+  destructive: "bg-destructive-foreground",
+  "gray-subtle": "bg-geist-gray-500",
+  "green-subtle": "bg-green-500",
+  "amber-subtle": "bg-amber-500",
+  "red-subtle": "bg-red-500",
+  "blue-subtle": "bg-blue-500",
+  "purple-subtle": "bg-purple-500",
+  "pink-subtle": "bg-pink-500",
+  "teal-subtle": "bg-teal-500",
+  default: "bg-primary-foreground",
+  secondary: "bg-secondary-foreground",
+  outline: "bg-muted-foreground",
+};
 
 export interface BadgeProps
   extends
-    React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof badgeVariants> {
+  React.HTMLAttributes<HTMLElement>,
+  VariantProps<typeof badgeVariants> {
   /** Renders a 6×6px status dot before the badge label */
   dot?: boolean;
   /** Icon element rendered before the label (auto-sized to 12×12px) */
@@ -122,7 +119,7 @@ function Badge({
         />
       )}
       {icon && (
-        <span aria-hidden="true" className="shrink-0 [&>svg]:h-3 [&>svg]:w-3">
+        <span aria-hidden="true" className="shrink-0 flex items-center justify-center">
           {icon}
         </span>
       )}

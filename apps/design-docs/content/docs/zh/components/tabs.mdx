@@ -79,9 +79,8 @@ import {
 
 ### 按钮变体 (Button Variant)
 
-```tsx
 <ComponentPreview className="mt-4">
-  <Tabs defaultValue="tab1" className="w-[400px]">
+    <Tabs defaultValue="tab1" className="w-[400px]">
     <TabsList variant="button" className="grid grid-cols-3">
       <TabsTrigger value="tab1">概览 (Overview)</TabsTrigger>
       <TabsTrigger value="tab2">分析 (Analytics)</TabsTrigger>
@@ -91,14 +90,25 @@ import {
     <TabsContent value="tab2" className="p-4 mt-2">分析内容 (Analytics content)</TabsContent>
     <TabsContent value="tab3" className="p-4 mt-2">报告内容 (Reports content)</TabsContent>
   </Tabs>
-</ComponentPreview>
+
+  ```tsx
+<Tabs defaultValue="tab1" className="w-[400px]">
+  <TabsList variant="button" className="grid grid-cols-3">
+    <TabsTrigger value="tab1">概览 (Overview)</TabsTrigger>
+    <TabsTrigger value="tab2">分析 (Analytics)</TabsTrigger>
+    <TabsTrigger value="tab3">报告 (Reports)</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1" className="p-4 mt-2">概览内容 (Overview content)</TabsContent>
+  <TabsContent value="tab2" className="p-4 mt-2">分析内容 (Analytics content)</TabsContent>
+  <TabsContent value="tab3" className="p-4 mt-2">报告内容 (Reports content)</TabsContent>
+</Tabs>
 ```
+</ComponentPreview>
 
 ### 线条变体 - 下划线 (Line Variant)
 
-```tsx
 <ComponentPreview className="mt-4">
-  <Tabs defaultValue="tab1" className="w-[400px]">
+    <Tabs defaultValue="tab1" className="w-[400px]">
     <TabsList variant="line" className="w-full">
       <TabsTrigger value="tab1">全部 (All)</TabsTrigger>
       <TabsTrigger value="tab2">进行中 (Active)</TabsTrigger>
@@ -108,14 +118,25 @@ import {
     <TabsContent value="tab2" className="p-4 mt-2">进行中内容 (Active content)</TabsContent>
     <TabsContent value="tab3" className="p-4 mt-2">已归档内容 (Archived content)</TabsContent>
   </Tabs>
-</ComponentPreview>
+
+  ```tsx
+<Tabs defaultValue="tab1" className="w-[400px]">
+  <TabsList variant="line" className="w-full">
+    <TabsTrigger value="tab1">全部 (All)</TabsTrigger>
+    <TabsTrigger value="tab2">进行中 (Active)</TabsTrigger>
+    <TabsTrigger value="tab3">已归档 (Archived)</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1" className="p-4 mt-2">全部内容 (All content)</TabsContent>
+  <TabsContent value="tab2" className="p-4 mt-2">进行中内容 (Active content)</TabsContent>
+  <TabsContent value="tab3" className="p-4 mt-2">已归档内容 (Archived content)</TabsContent>
+</Tabs>
 ```
+</ComponentPreview>
 
 ### 胶囊形状 (Pill Shape)
 
-```tsx
 <ComponentPreview className="mt-4">
-  <Tabs defaultValue="tab1" className="w-[400px]">
+    <Tabs defaultValue="tab1" className="w-[400px]">
     <TabsList shape="pill" className="w-full grid-cols-2 grid">
       <TabsTrigger value="tab1">选项卡 1 (Tab 1)</TabsTrigger>
       <TabsTrigger value="tab2">选项卡 2 (Tab 2)</TabsTrigger>
@@ -123,8 +144,18 @@ import {
     <TabsContent value="tab1" className="p-4 mt-2">选项卡 1 内容 (Tab 1 Content)</TabsContent>
     <TabsContent value="tab2" className="p-4 mt-2">选项卡 2 内容 (Tab 2 Content)</TabsContent>
   </Tabs>
-</ComponentPreview>
+
+  ```tsx
+<Tabs defaultValue="tab1" className="w-[400px]">
+  <TabsList shape="pill" className="w-full grid-cols-2 grid">
+    <TabsTrigger value="tab1">选项卡 1 (Tab 1)</TabsTrigger>
+    <TabsTrigger value="tab2">选项卡 2 (Tab 2)</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1" className="p-4 mt-2">选项卡 1 内容 (Tab 1 Content)</TabsContent>
+  <TabsContent value="tab2" className="p-4 mt-2">选项卡 2 内容 (Tab 2 Content)</TabsContent>
+</Tabs>
 ```
+</ComponentPreview>
 
 ### 尺寸变体 (Size Variants)
 

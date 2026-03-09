@@ -69,9 +69,8 @@ import {
 
 ### 受控抽屉 (Controlled Drawer)
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <Drawer>
+    <Drawer>
     <DrawerTrigger asChild>
       <Button>打开设置 (Open Settings)</Button>
     </DrawerTrigger>
@@ -86,14 +85,30 @@ import {
       </DrawerFooter>
     </DrawerContent>
   </Drawer>
-</ComponentPreview>
+
+  ```tsx
+<Drawer>
+  <DrawerTrigger asChild>
+    <Button>打开设置 (Open Settings)</Button>
+  </DrawerTrigger>
+  <DrawerContent className="p-4">
+    <DrawerHeader>
+      <DrawerTitle>设置 (Settings)</DrawerTitle>
+    </DrawerHeader>
+    <DrawerFooter>
+      <DrawerClose asChild>
+        <Button variant="outline">关闭 (Close)</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
 ```
+</ComponentPreview>
 
 ### 右侧抽屉 (Right-Side Drawer)
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-center">
-  <Drawer direction="right">
+    <Drawer direction="right">
     <DrawerTrigger asChild>
       <Button>打开侧边栏 (Open Sidebar)</Button>
     </DrawerTrigger>
@@ -103,8 +118,20 @@ import {
       </DrawerHeader>
     </DrawerContent>
   </Drawer>
-</ComponentPreview>
+
+  ```tsx
+<Drawer direction="right">
+  <DrawerTrigger asChild>
+    <Button>打开侧边栏 (Open Sidebar)</Button>
+  </DrawerTrigger>
+  <DrawerContent className="w-80 h-full p-4 mt-0 ml-auto mr-0 mb-0">
+    <DrawerHeader>
+      <DrawerTitle>导航 (Navigation)</DrawerTitle>
+    </DrawerHeader>
+  </DrawerContent>
+</Drawer>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

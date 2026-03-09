@@ -5,9 +5,8 @@ description: "用于显示结构化表格数据的语义化 HTML 表格组件。
 
 ## 演示 (Demo)
 
-```tsx
 <ComponentPreview className="min-h-[400px] flex justify-center items-center w-full max-w-3xl">
-  <Table>
+    <Table>
     <TableCaption>您最近的发票列表。 (A list of your recent invoices.)</TableCaption>
     <TableHeader>
       <TableRow>
@@ -44,8 +43,47 @@ description: "用于显示结构化表格数据的语义化 HTML 表格组件。
       </TableRow>
     </TableFooter>
   </Table>
-</ComponentPreview>
+
+  ```tsx
+<Table>
+  <TableCaption>您最近的发票列表。 (A list of your recent invoices.)</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>发票 (Invoice)</TableHead>
+      <TableHead>状态 (Status)</TableHead>
+      <TableHead>支付方式 (Method)</TableHead>
+      <TableHead className="text-right">金额 (Amount)</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell className="font-medium">INV-001</TableCell>
+      <TableCell>已支付 (Paid)</TableCell>
+      <TableCell>信用卡 (Credit Card)</TableCell>
+      <TableCell className="text-right">$250.00</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">INV-002</TableCell>
+      <TableCell>等待中 (Pending)</TableCell>
+      <TableCell>银行转账 (Bank Transfer)</TableCell>
+      <TableCell className="text-right">$150.00</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">INV-003</TableCell>
+      <TableCell>未支付 (Unpaid)</TableCell>
+      <TableCell>PayPal</TableCell>
+      <TableCell className="text-right">$350.00</TableCell>
+    </TableRow>
+  </TableBody>
+  <TableFooter>
+    <TableRow>
+      <TableCell colSpan={3}>总计 (Total)</TableCell>
+      <TableCell className="text-right">$750.00</TableCell>
+    </TableRow>
+  </TableFooter>
+</Table>
 ```
+</ComponentPreview>
 
 ## 使用方法 (Usage)
 

@@ -43,9 +43,8 @@ Extends `@radix-ui/react-slider` `Root` props.
 
 ### Range Slider (Two Thumbs)
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="w-full">
+    <div className="w-full">
     <Slider
       defaultValue={[20, 80]}
       min={0}
@@ -53,25 +52,39 @@ Extends `@radix-ui/react-slider` `Root` props.
       step={5}
     />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="w-full">
+  <Slider
+    defaultValue={[20, 80]}
+    min={0}
+    max={100}
+    step={5}
+  />
+</div>
 ```
+</ComponentPreview>
 
 ### Volume Control
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="flex items-center gap-3 w-full">
+    <div className="flex items-center gap-3 w-full">
     <Volume2 className="h-4 w-4 shrink-0 text-muted-foreground" />
     <Slider defaultValue={[70]} max={100} step={1} />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="flex items-center gap-3 w-full">
+  <Volume2 className="h-4 w-4 shrink-0 text-muted-foreground" />
+  <Slider defaultValue={[70]} max={100} step={1} />
+</div>
 ```
+</ComponentPreview>
 
 ### Price Range Filter
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="space-y-2 w-full">
+    <div className="space-y-2 w-full">
     <div className="flex justify-between text-sm">
       <span>$200</span>
       <span>$800</span>
@@ -83,8 +96,22 @@ Extends `@radix-ui/react-slider` `Root` props.
       step={10}
     />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-2 w-full">
+  <div className="flex justify-between text-sm">
+    <span>$200</span>
+    <span>$800</span>
+  </div>
+  <Slider
+    defaultValue={[200, 800]}
+    min={0}
+    max={1000}
+    step={10}
+  />
+</div>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

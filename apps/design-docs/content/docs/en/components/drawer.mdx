@@ -69,9 +69,8 @@ import {
 
 ### Controlled Drawer
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <Drawer>
+    <Drawer>
     <DrawerTrigger asChild>
       <Button>Open Settings</Button>
     </DrawerTrigger>
@@ -86,14 +85,30 @@ import {
       </DrawerFooter>
     </DrawerContent>
   </Drawer>
-</ComponentPreview>
+
+  ```tsx
+<Drawer>
+  <DrawerTrigger asChild>
+    <Button>Open Settings</Button>
+  </DrawerTrigger>
+  <DrawerContent className="p-4">
+    <DrawerHeader>
+      <DrawerTitle>Settings</DrawerTitle>
+    </DrawerHeader>
+    <DrawerFooter>
+      <DrawerClose asChild>
+        <Button variant="outline">Close</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
 ```
+</ComponentPreview>
 
 ### Right-Side Drawer
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-center">
-  <Drawer direction="right">
+    <Drawer direction="right">
     <DrawerTrigger asChild>
       <Button>Open Sidebar</Button>
     </DrawerTrigger>
@@ -103,8 +118,20 @@ import {
       </DrawerHeader>
     </DrawerContent>
   </Drawer>
-</ComponentPreview>
+
+  ```tsx
+<Drawer direction="right">
+  <DrawerTrigger asChild>
+    <Button>Open Sidebar</Button>
+  </DrawerTrigger>
+  <DrawerContent className="w-80 h-full p-4 mt-0 ml-auto mr-0 mb-0">
+    <DrawerHeader>
+      <DrawerTitle>Navigation</DrawerTitle>
+    </DrawerHeader>
+  </DrawerContent>
+</Drawer>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

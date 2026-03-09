@@ -23,7 +23,28 @@ description: "Floating content container anchored to a trigger element, built on
 
 ## Usage
 
-```tsx
+<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+    <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <Settings className="h-4 w-4" />
+      </Button>
+    </PopoverTrigger>
+    <PopoverContent side="right" align="start" className="w-64">
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <Label htmlFor="notifications">Notifications</Label>
+          <Switch id="notifications" />
+        </div>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="marketing">Marketing emails</Label>
+          <Switch id="marketing" />
+        </div>
+      </div>
+    </PopoverContent>
+  </Popover>
+
+  ```tsx
 import {
   Popover,
   PopoverTrigger,
@@ -68,34 +89,32 @@ import {
 import { Settings } from "lucide-react"
 import { Switch, Label } from "@nebutra/ui/primitives"
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
-  <Popover>
-    <PopoverTrigger asChild>
-      <Button variant="ghost" size="icon">
-        <Settings className="h-4 w-4" />
-      </Button>
-    </PopoverTrigger>
-    <PopoverContent side="right" align="start" className="w-64">
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="notifications">Notifications</Label>
-          <Switch id="notifications" />
-        </div>
-        <div className="flex items-center justify-between">
-          <Label htmlFor="marketing">Marketing emails</Label>
-          <Switch id="marketing" />
-        </div>
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <Settings className="h-4 w-4" />
+    </Button>
+  </PopoverTrigger>
+  <PopoverContent side="right" align="start" className="w-64">
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <Label htmlFor="notifications">Notifications</Label>
+        <Switch id="notifications" />
       </div>
-    </PopoverContent>
-  </Popover>
-</ComponentPreview>
+      <div className="flex items-center justify-between">
+        <Label htmlFor="marketing">Marketing emails</Label>
+        <Switch id="marketing" />
+      </div>
+    </div>
+  </PopoverContent>
+</Popover>
 ```
+</ComponentPreview>
 
 ### Controlled Popover
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
-  <Popover defaultOpen={true}>
+    <Popover defaultOpen={true}>
     <PopoverTrigger asChild>
       <Button>Toggle Popover</Button>
     </PopoverTrigger>
@@ -104,8 +123,19 @@ import { Switch, Label } from "@nebutra/ui/primitives"
       <Button variant="outline" size="sm">Close</Button>
     </PopoverContent>
   </Popover>
-</ComponentPreview>
+
+  ```tsx
+<Popover defaultOpen={true}>
+  <PopoverTrigger asChild>
+    <Button>Toggle Popover</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <p className="mb-4 text-sm">Controlled popover content</p>
+    <Button variant="outline" size="sm">Close</Button>
+  </PopoverContent>
+</Popover>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

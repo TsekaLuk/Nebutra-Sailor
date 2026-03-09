@@ -5,9 +5,8 @@ description: "用于在内容页面之间切换的导航控件。"
 
 ## 演示 (Demo)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <Pagination>
+    <Pagination>
     <PaginationContent>
       <PaginationItem>
         <PaginationPrevious href="#prev" />
@@ -32,8 +31,35 @@ description: "用于在内容页面之间切换的导航控件。"
       </PaginationItem>
     </PaginationContent>
   </Pagination>
-</ComponentPreview>
+
+  ```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#prev" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#1">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#2" isActive>2</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#3">3</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#10">10</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#next" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
 ```
+</ComponentPreview>
 
 ## 使用方法 (Usage)
 

@@ -43,7 +43,7 @@ export function HexGridDemo() {
     );
 }
 
-export function DotPatternDemo() {
+export function DotPatternCardDemo() {
     return (
         <MagicCard className="w-full h-[300px] p-0 rounded-3xl border-[var(--neutral-5)] flex flex-col overflow-hidden bg-[var(--neutral-1)] shadow-sm relative" gradientColor="var(--neutral-3)">
             <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,51,254,0.15)_1px,transparent_1px)] dark:bg-[radial-gradient(circle,rgba(255,255,255,0.15)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(circle_at_center,white_40%,transparent_100%)] pointer-events-none" />
@@ -59,7 +59,7 @@ export function DotPatternDemo() {
     );
 }
 
-export function FlickeringGridDemo() {
+export function FlickeringGridCardDemo() {
     return (
         <MagicCard className="w-full h-[400px] p-0 rounded-3xl border-[var(--neutral-5)] flex flex-col overflow-hidden bg-[var(--neutral-1)] shadow-sm relative" gradientColor="var(--neutral-3)">
             <FlickeringGrid
@@ -147,7 +147,23 @@ export function StarsCanvasDemo() {
     );
 }
 
-export function GlassmorphismDemo() {
+export function GlassmorphismDemo({ lang = "en" }: { lang?: string }) {
+    const texts = lang === "zh" ? {
+        heading: "高级玻璃拟态",
+        subheading: "展示我们的高级液态玻璃和磨砂质感，由 SVG 分形噪声驱动。",
+        surfaceTitle: "基础玻璃 (Surface Glass)",
+        surfaceDesc: "极致轻薄的精致处理。使用极低的背景填充 bg-white/[0.02]，柔和的背景模糊 backdrop-blur-[32px]，以及细腻的边框 border-white/[0.08]。",
+        elevatedTitle: "悬浮玻璃 (Elevated Glass)",
+        elevatedDesc: "用于突出的对话框悬浮层。采用更深的基底色 bg-[#0A0A0A]/60，强烈的背景模糊 backdrop-blur-[48px]，青色品牌色边框以及发光阴影。",
+    } : {
+        heading: "Advanced Glassmorphism",
+        subheading: "Highlighting our premium liquid glass and frosted textures, powered by SVG fractal noise.",
+        surfaceTitle: "Surface Glass",
+        surfaceDesc: "Ultra-thin, delicate treatment. Uses minimal background fill bg-white/[0.02], soft backdrop blur backdrop-blur-[32px], and subtle border border-white/[0.08].",
+        elevatedTitle: "Elevated Glass",
+        elevatedDesc: "For prominent dialogs and floating layers. Uses a deeper base bg-[#0A0A0A]/60, stronger backdrop-blur-[48px], cyan brand border, and a glowing shadow.",
+    };
+
     return (
         <div className="w-full rounded-3xl overflow-hidden relative border border-white/5 bg-[#050505]">
             {/* Background elements to show off the glass blur */}
@@ -159,8 +175,8 @@ export function GlassmorphismDemo() {
 
             <div className="relative z-10 flex flex-col items-center gap-12 p-12 max-w-5xl w-full mx-auto">
                 <div className="flex flex-col items-center gap-4 text-center">
-                    <h2 className="text-3xl font-medium tracking-tight text-white">Advanced Glassmorphism</h2>
-                    <p className="text-zinc-400 max-w-md">Highlighting our premium liquid glass and frosted textures, powered by SVG fractal noise.</p>
+                    <h2 className="text-3xl font-medium tracking-tight text-white">{texts.heading}</h2>
+                    <p className="text-zinc-400 max-w-md">{texts.subheading}</p>
                 </div>
 
                 <div className="flex items-center justify-center p-8 border border-white/10 rounded-3xl bg-white/5 shadow-2xl backdrop-blur-md w-full max-w-sm mx-auto">
@@ -169,14 +185,16 @@ export function GlassmorphismDemo() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mt-4">
                     <InteractiveFrostedGlassCard
-                        title="基础玻璃 (Surface Glass)"
-                        description="极致轻薄的精致处理。使用极低的背景填充 bg-white/[0.02]，柔和的背景模糊 backdrop-blur-[32px]，以及细腻的边框 border-white-[0.08]。"
+                        title={texts.surfaceTitle}
+                        description={texts.surfaceDesc}
+                        variant="surface"
                         icon={<div className="font-mono text-xs font-bold w-full h-full flex items-center justify-center">01</div>}
                     />
                     <InteractiveFrostedGlassCard
-                        title="悬浮玻璃 (Elevated Glass)"
-                        description="用于突出的对话框悬浮层。采用更深的基底色 bg-[#0A0A0A]/40，强烈的背景模糊 backdrop-blur-[48px]，以及清晰的高光边缘。"
-                        icon={<div className="font-mono text-xs font-bold text-[#0BF1C3] w-full h-full flex items-center justify-center">02</div>}
+                        title={texts.elevatedTitle}
+                        description={texts.elevatedDesc}
+                        variant="elevated"
+                        icon={<div className="font-mono text-xs font-bold w-full h-full flex items-center justify-center">02</div>}
                     />
                 </div>
             </div>

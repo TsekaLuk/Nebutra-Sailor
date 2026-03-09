@@ -47,9 +47,8 @@ import { ScrollArea, ScrollBar } from "@nebutra/ui/primitives"
 
 ### 水平滚动区域 (Horizontal Scroll Area)
 
-```tsx
 <ComponentPreview className="min-h-[300px] flex items-center justify-center w-full">
-  <ScrollArea className="w-full max-w-[400px] whitespace-nowrap rounded-md border text-left mb-6">
+    <ScrollArea className="w-full max-w-[400px] whitespace-nowrap rounded-md border text-left mb-6">
     <div className="flex w-max space-x-4 p-4">
       {Array.from({ length: 10 }, (_, i) => (
         <figure key={i} className="shrink-0">
@@ -59,14 +58,25 @@ import { ScrollArea, ScrollBar } from "@nebutra/ui/primitives"
     </div>
     <ScrollBar orientation="horizontal" />
   </ScrollArea>
-</ComponentPreview>
+
+  ```tsx
+<ScrollArea className="w-full max-w-[400px] whitespace-nowrap rounded-md border text-left mb-6">
+  <div className="flex w-max space-x-4 p-4">
+    {Array.from({ length: 10 }, (_, i) => (
+      <figure key={i} className="shrink-0">
+        <div className="h-40 w-40 rounded-md bg-muted flex items-center justify-center text-muted-foreground">图片 (Image) {i+1}</div>
+      </figure>
+    ))}
+  </div>
+  <ScrollBar orientation="horizontal" />
+</ScrollArea>
 ```
+</ComponentPreview>
 
 ### 固定高度内容列表 (Fixed Height Content List)
 
-```tsx
 <ComponentPreview className="min-h-[300px] flex items-center justify-center pt-2">
-  <ScrollArea className="h-[250px] w-[350px] rounded-md border text-left">
+    <ScrollArea className="h-[250px] w-[350px] rounded-md border text-left">
     {Array.from({ length: 15 }, (_, i) => (
       <div key={i} className="p-4 border-b last:border-0 border-border/50 hover:bg-muted/50 transition-colors">
         <p className="text-sm font-medium mb-1">通知 (Notification) {i+1}</p>
@@ -74,8 +84,18 @@ import { ScrollArea, ScrollBar } from "@nebutra/ui/primitives"
       </div>
     ))}
   </ScrollArea>
-</ComponentPreview>
+
+  ```tsx
+<ScrollArea className="h-[250px] w-[350px] rounded-md border text-left">
+  {Array.from({ length: 15 }, (_, i) => (
+    <div key={i} className="p-4 border-b last:border-0 border-border/50 hover:bg-muted/50 transition-colors">
+      <p className="text-sm font-medium mb-1">通知 (Notification) {i+1}</p>
+      <p className="text-xs text-muted-foreground">{10 * (i+1)} 分钟前</p>
+    </div>
+  ))}
+</ScrollArea>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

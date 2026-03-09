@@ -33,33 +33,45 @@ import { Toggle } from "@nebutra/ui";
 
 ### 轮廓变体 (Outline Variant)
 
-```tsx
 <ComponentPreview className="min-h-[100px] flex justify-center items-center">
-  <Toggle variant="outline" aria-label="切换斜体 (Toggle italic)" size="lg">
+    <Toggle variant="outline" aria-label="切换斜体 (Toggle italic)" size="lg">
     <Italic className="size-4" />
   </Toggle>
-</ComponentPreview>
+
+  ```tsx
+<Toggle variant="outline" aria-label="切换斜体 (Toggle italic)" size="lg">
+  <Italic className="size-4" />
+</Toggle>
 ```
+</ComponentPreview>
 
 ### 受控模式 (Controlled)
 
-```tsx
 <ComponentPreview className="min-h-[100px] flex justify-center items-center">
-  <Toggle aria-pressed="true" defaultPressed size="lg" className="w-[80px]">
+    <Toggle aria-pressed="true" defaultPressed size="lg" className="w-[80px]">
     开启 (On)
   </Toggle>
-</ComponentPreview>
+
+  ```tsx
+<Toggle aria-pressed="true" defaultPressed size="lg" className="w-[80px]">
+  开启 (On)
+</Toggle>
 ```
+</ComponentPreview>
 
 ### 文本开关 (Text Toggle)
 
-```tsx
 <ComponentPreview className="min-h-[100px] flex justify-center items-center">
-  <Toggle aria-label="切换下划线 (Toggle underline)" size="sm">
+    <Toggle aria-label="切换下划线 (Toggle underline)" size="sm">
     下划线 (Underline)
   </Toggle>
-</ComponentPreview>
+
+  ```tsx
+<Toggle aria-label="切换下划线 (Toggle underline)" size="sm">
+  下划线 (Underline)
+</Toggle>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

@@ -55,7 +55,7 @@ export interface MenuSeparatorProps {
 // MenuRoot
 // =============================================================================
 
-function MenuRoot(
+export function MenuRoot(
   props: React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Root>,
 ) {
   return <DropdownMenuPrimitive.Root {...props} />;
@@ -66,7 +66,7 @@ MenuRoot.displayName = "Menu";
 // MenuTrigger
 // =============================================================================
 
-const MenuTrigger = React.forwardRef<HTMLButtonElement, MenuTriggerProps>(
+export const MenuTrigger = React.forwardRef<HTMLButtonElement, MenuTriggerProps>(
   ({ chevron = false, className, children, ...props }, ref) => (
     <DropdownMenuPrimitive.Trigger asChild>
       <button
@@ -100,7 +100,7 @@ MenuTrigger.displayName = "Menu.Trigger";
 // MenuContent
 // =============================================================================
 
-const MenuContent = React.forwardRef<
+export const MenuContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Content>,
   MenuContentProps
 >(({ className, sideOffset = 4, align = "start", ...props }, ref) => (
@@ -137,7 +137,7 @@ const itemBaseClass = cn(
   "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
 );
 
-function MenuItem({
+export function MenuItem({
   prefix,
   suffix,
   disabled = false,
@@ -199,7 +199,7 @@ MenuItem.displayName = "Menu.Item";
 // MenuLabel
 // =============================================================================
 
-function MenuLabel({ children, className }: MenuLabelProps) {
+export function MenuLabel({ children, className }: MenuLabelProps) {
   return (
     <DropdownMenuPrimitive.Label
       className={cn(
@@ -217,7 +217,7 @@ MenuLabel.displayName = "Menu.Label";
 // MenuSeparator
 // =============================================================================
 
-function MenuSeparator({ className }: MenuSeparatorProps) {
+export function MenuSeparator({ className }: MenuSeparatorProps) {
   return (
     <DropdownMenuPrimitive.Separator
       className={cn("-mx-1 my-1 h-px bg-[var(--neutral-6)]", className)}

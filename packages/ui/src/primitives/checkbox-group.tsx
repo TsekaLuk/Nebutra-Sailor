@@ -17,11 +17,14 @@ import { cn } from "../utils/cn";
 
 export interface CheckboxProps {
   checked?: boolean;
+  defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;
   disabled?: boolean;
   indeterminate?: boolean;
   children?: React.ReactNode;
   className?: string;
+  id?: string;
+  name?: string;
 }
 
 export interface CheckboxGroupProps {
@@ -76,27 +79,44 @@ const getInputClasses = (
 // =============================================================================
 
 export const Checkbox = ({
-  checked = false,
+  checked: controlledChecked,
+  defaultChecked = false,
   onChange,
   disabled = false,
   indeterminate = false,
   children,
   className,
+  id,
+  name,
 }: CheckboxProps) => {
+  const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
+  const isControlled = controlledChecked !== undefined;
+  const checked = isControlled ? controlledChecked : internalChecked;
+
   return (
-    <div
+    <label
       className={cn(
-        "flex items-center cursor-pointer text-[13px] font-sans group",
-        disabled ? "text-geist-gray-500" : "text-geist-gray-1000",
+        "flex items-center text-[13px] font-sans group",
+        disabled ? "text-geist-gray-500 cursor-not-allowed" : "text-geist-gray-1000 cursor-pointer",
         className,
       )}
-      onClick={() => onChange && !indeterminate && !disabled && onChange(!checked)}
     >
       <input
+        id={id}
+        name={name}
         disabled={disabled}
         type="checkbox"
         checked={checked}
-        readOnly
+        onChange={(e) => {
+          if (!indeterminate) {
+            if (!isControlled) {
+              setInternalChecked(e.target.checked);
+            }
+            if (onChange) {
+              onChange(e.target.checked);
+            }
+          }
+        }}
         aria-label={typeof children === "string" ? children : "checkbox"}
         className="sr-only"
       />
@@ -128,7 +148,7 @@ export const Checkbox = ({
         </svg>
       </span>
       {children && <span className="ml-2">{children}</span>}
-    </div>
+    </label>
   );
 };
 

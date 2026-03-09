@@ -10,7 +10,13 @@ description: Interactive click target with eight visual variants, five size opti
 
 ## Installation
 
-```tsx
+<ComponentPreview className="gap-3">
+    {/* Note: In MDX, you cannot import Lucide icons inline. 
+      For exact icon usage, see the actual React code. */}
+  <Button prefix={<span>✉️</span>}>Login with Email</Button>
+  <Button suffix={<span>➔</span>}>Continue</Button>
+
+  ```tsx
 import { Button, ButtonLink } from "@nebutra/ui/primitives"
 ```
 
@@ -44,21 +50,22 @@ import { Button, ButtonLink } from "@nebutra/ui/primitives"
 ```tsx
 import { Mail, ArrowRight } from "lucide-react"
 
-<ComponentPreview className="gap-3">
-  {/* Note: In MDX, you cannot import Lucide icons inline. 
-      For exact icon usage, see the actual React code. */}
-  <Button prefix={<span>✉️</span>}>Login with Email</Button>
-  <Button suffix={<span>➔</span>}>Continue</Button>
-</ComponentPreview>
+{/* Note: In MDX, you cannot import Lucide icons inline. 
+    For exact icon usage, see the actual React code. */}
+<Button prefix={<span>✉️</span>}>Login with Email</Button>
+<Button suffix={<span>➔</span>}>Continue</Button>
 ```
+</ComponentPreview>
 
 ## Loading State
 
-```tsx
 <ComponentPreview>
-  <Button loading>Saving…</Button>
-</ComponentPreview>
+    <Button loading>Saving…</Button>
+
+  ```tsx
+<Button loading>Saving…</Button>
 ```
+</ComponentPreview>
 
 ## Props
 

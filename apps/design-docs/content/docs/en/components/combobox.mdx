@@ -17,16 +17,8 @@ description: Searchable select input combining a trigger button with a filtered 
 
 ## Installation
 
-```tsx
-import { Combobox } from "@nebutra/ui/primitives"
-```
-
-## Usage
-
-### Simple mode (options prop)
-
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <Combobox
+    <Combobox
     options={[
       { value: "next", label: "Next.js" },
       { value: "remix", label: "Remix" },
@@ -51,12 +43,62 @@ import { Combobox } from "@nebutra/ui/primitives"
     label="Framework"
     placeholder="Select framework..."
   />
-</ComponentPreview>
+
+  ```tsx
+import { Combobox } from "@nebutra/ui/primitives"
 ```
+
+## Usage
+
+### Simple mode (options prop)
+
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  placeholder="Select framework..."
+/>
+</ComponentPreview>
+
+### With label
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  label="Framework"
+  placeholder="Select framework..."
+/>
+```
+</ComponentPreview>
 
 ### Uncontrolled
 
-```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+    <Combobox placeholder="Select framework...">
+    <Combobox.Input placeholder="Search frameworks..." />
+    <CommandList>
+      <Combobox.Empty>No frameworks found.</Combobox.Empty>
+      <Combobox.Group heading="React">
+        <Combobox.Option value="next">Next.js</Combobox.Option>
+        <Combobox.Option value="remix">Remix</Combobox.Option>
+      </Combobox.Group>
+      <Combobox.Separator />
+      <Combobox.Group heading="Vue">
+        <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
+      </Combobox.Group>
+    </CommandList>
+  </Combobox>
+
+  ```tsx
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
@@ -158,23 +200,22 @@ For advanced scenarios (async search, custom rendering, separators), use sub-com
 import { Combobox } from "@nebutra/ui/primitives"
 import { CommandList } from "@nebutra/ui/primitives"
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
-  <Combobox placeholder="Select framework...">
-    <Combobox.Input placeholder="Search frameworks..." />
-    <CommandList>
-      <Combobox.Empty>No frameworks found.</Combobox.Empty>
-      <Combobox.Group heading="React">
-        <Combobox.Option value="next">Next.js</Combobox.Option>
-        <Combobox.Option value="remix">Remix</Combobox.Option>
-      </Combobox.Group>
-      <Combobox.Separator />
-      <Combobox.Group heading="Vue">
-        <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
-      </Combobox.Group>
-    </CommandList>
-  </Combobox>
-</ComponentPreview>
+<Combobox placeholder="Select framework...">
+  <Combobox.Input placeholder="Search frameworks..." />
+  <CommandList>
+    <Combobox.Empty>No frameworks found.</Combobox.Empty>
+    <Combobox.Group heading="React">
+      <Combobox.Option value="next">Next.js</Combobox.Option>
+      <Combobox.Option value="remix">Remix</Combobox.Option>
+    </Combobox.Group>
+    <Combobox.Separator />
+    <Combobox.Group heading="Vue">
+      <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
+    </Combobox.Group>
+  </CommandList>
+</Combobox>
 ```
+</ComponentPreview>
 
 ## Props
 

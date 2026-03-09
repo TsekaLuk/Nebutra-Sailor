@@ -77,9 +77,8 @@ import {
 
 ### With Checkbox Items
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
-  <DropdownMenu>
+    <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="outline">Appearance</Button>
     </DropdownMenuTrigger>
@@ -94,14 +93,30 @@ import {
       </DropdownMenuCheckboxItem>
     </DropdownMenuContent>
   </DropdownMenu>
-</ComponentPreview>
+
+  ```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Appearance</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuCheckboxItem checked={true}>
+      Toolbar
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem checked={false}>
+      Sidebar
+    </DropdownMenuCheckboxItem>
+  </DropdownMenuContent>
+</DropdownMenu>
 ```
+</ComponentPreview>
 
 ### With Radio Group
 
-```tsx
 <ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
-  <DropdownMenu>
+    <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="outline">Sort by</Button>
     </DropdownMenuTrigger>
@@ -114,16 +129,30 @@ import {
       </DropdownMenuRadioGroup>
     </DropdownMenuContent>
   </DropdownMenu>
-</ComponentPreview>
+
+  ```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Sort by</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Sort order</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuRadioGroup value="asc">
+      <DropdownMenuRadioItem value="asc">Ascending</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="desc">Descending</DropdownMenuRadioItem>
+    </DropdownMenuRadioGroup>
+  </DropdownMenuContent>
+</DropdownMenu>
 ```
+</ComponentPreview>
 
 ### With Submenus
 
 You can nest `DropdownMenuSub` within `DropdownMenuContent` to create cascading menus.
 
-```tsx
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <DropdownMenu>
+    <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="outline">Share Design</Button>
     </DropdownMenuTrigger>
@@ -142,8 +171,29 @@ You can nest `DropdownMenuSub` within `DropdownMenuContent` to create cascading 
       <DropdownMenuItem className="text-destructive focus:bg-destructive focus:text-destructive-foreground">Delete</DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
-</ComponentPreview>
+
+  ```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Share Design</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-48">
+    <DropdownMenuItem>Email Link</DropdownMenuItem>
+    <DropdownMenuItem>Copy Link</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>Invite Users</DropdownMenuSubTrigger>
+      <DropdownMenuSubContent className="w-40">
+        <DropdownMenuItem>Via Email</DropdownMenuItem>
+        <DropdownMenuItem>From Workspace</DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem className="text-destructive focus:bg-destructive focus:text-destructive-foreground">Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

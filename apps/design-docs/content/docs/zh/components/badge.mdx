@@ -27,13 +27,17 @@ import { Badge } from "@nebutra/ui/primitives";
 | `md`   | 12px | `px-2.5 py-0.5` | 默认 — 大多数环境               |
 | `lg`   | 14px | `px-3 py-1`     | 突出的标签, 头图区域            |
 
-```tsx
 <ComponentPreview className="gap-3 items-center">
-  <Badge size="sm">小 (Small)</Badge>
+    <Badge size="sm">小 (Small)</Badge>
   <Badge size="md">中 (Medium)</Badge>
   <Badge size="lg">大 (Large)</Badge>
-</ComponentPreview>
+
+  ```tsx
+<Badge size="sm">小 (Small)</Badge>
+<Badge size="md">中 (Medium)</Badge>
+<Badge size="lg">大 (Large)</Badge>
 ```
+</ComponentPreview>
 
 ---
 
@@ -41,9 +45,8 @@ import { Badge } from "@nebutra/ui/primitives";
 
 使用品牌语义标记的状态驱动变体。
 
-```tsx
 <ComponentPreview className="gap-2 flex-wrap">
-  <Badge variant="default">激活 (Active)</Badge>
+    <Badge variant="default">激活 (Active)</Badge>
   <Badge variant="secondary">草稿 (Draft)</Badge>
   <Badge variant="outline">测试 (Beta)</Badge>
   <Badge variant="success">已部署 (Deployed)</Badge>
@@ -51,8 +54,18 @@ import { Badge } from "@nebutra/ui/primitives";
   <Badge variant="info">信息 (Info)</Badge>
   <Badge variant="error">失败 (Failed)</Badge>
   <Badge variant="destructive">危险 (Danger)</Badge>
-</ComponentPreview>
+
+  ```tsx
+<Badge variant="default">激活 (Active)</Badge>
+<Badge variant="secondary">草稿 (Draft)</Badge>
+<Badge variant="outline">测试 (Beta)</Badge>
+<Badge variant="success">已部署 (Deployed)</Badge>
+<Badge variant="warning">降级 (Degraded)</Badge>
+<Badge variant="info">信息 (Info)</Badge>
+<Badge variant="error">失败 (Failed)</Badge>
+<Badge variant="destructive">危险 (Danger)</Badge>
 ```
+</ComponentPreview>
 
 ---
 

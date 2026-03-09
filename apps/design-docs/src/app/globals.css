@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
+@import "fumadocs-python/preset.css";
+@import "@fumadocs/story/css/preset.css";
+@import "fumadocs-openapi/css/preset.css";
 
 /* 
  * Inlined `fumadocs-ui/components/image-zoom.css` 

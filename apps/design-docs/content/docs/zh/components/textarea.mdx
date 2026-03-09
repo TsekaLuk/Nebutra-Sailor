@@ -38,9 +38,8 @@ import { Textarea } from "@nebutra/ui";
 
 ### 带有字符计数 (With Character Count)
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col gap-1 w-full">
     <Textarea
       defaultValue=""
       placeholder="在此输入... (Type here...)"
@@ -50,18 +49,34 @@ import { Textarea } from "@nebutra/ui";
       0/500
     </span>
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="flex flex-col gap-1 w-full">
+  <Textarea
+    defaultValue=""
+    placeholder="在此输入... (Type here...)"
+    maxLength={500}
+  />
+  <span className="text-xs text-muted-foreground text-right w-full">
+    0/500
+  </span>
+</div>
 ```
+</ComponentPreview>
 
 ### 禁用状态 (Disabled)
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="w-full">
+    <div className="w-full">
     <Textarea disabled value="该字段为只读状态 (This field is read-only)" />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="w-full">
+  <Textarea disabled value="该字段为只读状态 (This field is read-only)" />
+</div>
 ```
+</ComponentPreview>
 
 ### 在表单中使用 (In a Form)
 

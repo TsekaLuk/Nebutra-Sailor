@@ -1,5 +1,10 @@
 import { redirect } from "next/navigation";
 
-export default function Page() {
-  redirect("/docs");
+interface PageProps {
+  params: Promise<{ lang: string }>;
+}
+
+export default async function Page({ params }: PageProps) {
+  const { lang } = await params;
+  redirect(`/${lang}/docs`);
 }

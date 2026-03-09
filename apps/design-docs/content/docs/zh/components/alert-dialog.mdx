@@ -99,9 +99,8 @@ import {
 
 ### 自定义操作处理程序 (Custom Action Handler)
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <AlertDialog>
+    <AlertDialog>
     <AlertDialogTrigger asChild>
       <Button variant="outline">移除项目 (Remove Item)</Button>
     </AlertDialogTrigger>
@@ -120,8 +119,29 @@ import {
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>
-</ComponentPreview>
+
+  ```tsx
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="outline">移除项目 (Remove Item)</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>从购物车中移除项目？ (Remove item from cart?)</AlertDialogTitle>
+      <AlertDialogDescription>
+        该项目将从您的购物车中被移除。 (The item will be removed from your shopping cart.)
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>保留项目 (Keep Item)</AlertDialogCancel>
+      <AlertDialogAction onClick={() => console.log("Remove items")}>
+        移除 (Remove)
+      </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

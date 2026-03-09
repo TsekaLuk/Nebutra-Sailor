@@ -25,7 +25,7 @@
   --font-primary: "Inter", "Public Sans", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-  /* Heading font stack (same as primary, can be customized for brand) */
+  /* Heading font stack — intentionally matches primary for current design; customize here for brand differentiation */
   --font-heading: "Inter", "Public Sans", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
@@ -34,8 +34,8 @@
     "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
   /* CJK font stack - Chinese/Japanese/Korean */
-  --font-cjk: "Source Han Sans SC", "Noto Sans CJK SC", "Noto Sans SC",
-    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-cjk: "Noto Sans SC", "Noto Sans CJK SC", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 
   /* Aliases for Tailwind/shadcn compatibility */
   --font-sans: var(--font-primary);
@@ -97,15 +97,11 @@ code, kbd, pre, samp {
    CJK Support (Optional)
    ============================================ */
 
-/* Uncomment if CJK support is needed */
-/*
 :lang(zh),
 :lang(ja),
 :lang(ko) {
-  font-family: "Inter", "Source Han Sans SC", "Noto Sans CJK SC",
-    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-cn, var(--font-cjk));
 }
-*/
 
 /* ============================================
    Self-Hosted Fonts (Alternative)

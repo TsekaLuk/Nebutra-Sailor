@@ -107,9 +107,8 @@ Renders with a built-in close button (`X`) in the top-right corner.
 
 ### Controlled Dialog
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <Dialog>
+    <Dialog>
     <DialogTrigger asChild>
       <Button>Open Controlled</Button>
     </DialogTrigger>
@@ -120,14 +119,26 @@ Renders with a built-in close button (`X`) in the top-right corner.
       <p>This dialog is controlled via state.</p>
     </DialogContent>
   </Dialog>
-</ComponentPreview>
+
+  ```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open Controlled</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Controlled Dialog</DialogTitle>
+    </DialogHeader>
+    <p>This dialog is controlled via state.</p>
+  </DialogContent>
+</Dialog>
 ```
+</ComponentPreview>
 
 ### Confirmation Dialog
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <Dialog>
+    <Dialog>
     <DialogTrigger asChild>
       <Button variant="destructive">Delete Account</Button>
     </DialogTrigger>
@@ -147,8 +158,30 @@ Renders with a built-in close button (`X`) in the top-right corner.
       </DialogFooter>
     </DialogContent>
   </Dialog>
-</ComponentPreview>
+
+  ```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="destructive">Delete Account</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Are you absolutely sure?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DialogClose>
+      <Button variant="destructive">Delete</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

@@ -27,13 +27,17 @@ Three sizes controlled by the `size` prop:
 | `md`   | 12px | `px-2.5 py-0.5` | Default — most contexts         |
 | `lg`   | 14px | `px-3 py-1`     | Prominent labels, hero sections |
 
-```tsx
 <ComponentPreview className="gap-3 items-center">
-  <Badge size="sm">Small</Badge>
+    <Badge size="sm">Small</Badge>
   <Badge size="md">Medium</Badge>
   <Badge size="lg">Large</Badge>
-</ComponentPreview>
+
+  ```tsx
+<Badge size="sm">Small</Badge>
+<Badge size="md">Medium</Badge>
+<Badge size="lg">Large</Badge>
 ```
+</ComponentPreview>
 
 ---
 
@@ -41,9 +45,8 @@ Three sizes controlled by the `size` prop:
 
 Status-driven variants using brand semantic tokens.
 
-```tsx
 <ComponentPreview className="gap-2 flex-wrap">
-  <Badge variant="default">Active</Badge>
+    <Badge variant="default">Active</Badge>
   <Badge variant="secondary">Draft</Badge>
   <Badge variant="outline">Beta</Badge>
   <Badge variant="success">Deployed</Badge>
@@ -51,8 +54,18 @@ Status-driven variants using brand semantic tokens.
   <Badge variant="info">Info</Badge>
   <Badge variant="error">Failed</Badge>
   <Badge variant="destructive">Danger</Badge>
-</ComponentPreview>
+
+  ```tsx
+<Badge variant="default">Active</Badge>
+<Badge variant="secondary">Draft</Badge>
+<Badge variant="outline">Beta</Badge>
+<Badge variant="success">Deployed</Badge>
+<Badge variant="warning">Degraded</Badge>
+<Badge variant="info">Info</Badge>
+<Badge variant="error">Failed</Badge>
+<Badge variant="destructive">Danger</Badge>
 ```
+</ComponentPreview>
 
 ---
 

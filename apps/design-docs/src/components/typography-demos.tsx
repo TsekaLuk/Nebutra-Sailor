@@ -111,25 +111,18 @@ export function TypographyHierarchyDemos() {
     return (
         <div className="mt-8 flex flex-col gap-8">
             <FontFaceDemo
-                fontName="Geist Sans"
-                fontClass="font-display"
-                letters="Aa"
-                sampleText="Enterprise SaaS Platform"
-                usage="Display & Hero"
-            />
-            <FontFaceDemo
-                fontName="Poppins"
+                fontName="Inter"
                 fontClass="font-sans"
                 letters="Aa"
-                sampleText="Transform raw data into intelligent cloud-native outcomes."
-                usage="English Body"
+                sampleText="Enterprise SaaS Platform for AI-Native Products"
+                usage="English · UI & Body"
             />
             <FontFaceDemo
-                fontName="vivo Sans"
+                fontName="Noto Sans SC"
                 fontClass="font-cn"
                 letters="啊"
                 sampleText="云端聚合 · 引领未来"
-                usage="Chinese Body"
+                usage="Chinese · UI & Body"
             />
             <FontFaceDemo
                 fontName="JetBrains Mono"
@@ -138,6 +131,28 @@ export function TypographyHierarchyDemos() {
                 sampleText="npm install @nebutra/ui"
                 usage="Code & Data"
             />
+        </div>
+    );
+}
+
+export function CJKWeightDemo() {
+    const weights = [
+        { label: "Light · 300", weight: 300, sample: "云端聚合，引领未来" },
+        { label: "Regular · 400", weight: 400, sample: "云端聚合，引领未来" },
+        { label: "Medium · 500", weight: 500, sample: "云端聚合，引领未来" },
+        { label: "SemiBold · 600", weight: 600, sample: "云端聚合，引领未来" },
+        { label: "Bold · 700", weight: 700, sample: "云端聚合，引领未来" },
+    ];
+    return (
+        <div className="mt-6 flex flex-col divide-y divide-[var(--neutral-6)] rounded-xl border border-[var(--neutral-6)] overflow-hidden">
+            {weights.map(({ label, weight, sample }) => (
+                <div key={weight} className="flex items-center justify-between px-6 py-4 hover:bg-[var(--neutral-2)] transition-colors">
+                    <span className="font-cn text-xl text-foreground" style={{ fontWeight: weight }}>
+                        {sample}
+                    </span>
+                    <span className="text-xs text-muted-foreground font-mono">{label}</span>
+                </div>
+            ))}
         </div>
     );
 }

@@ -39,44 +39,67 @@ import { Label } from "@nebutra/ui/primitives"
 
 ### 必填字段标签 (Required Field Label)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <div className="space-y-2 w-full max-w-sm">
+    <div className="space-y-2 w-full max-w-sm">
     <Label htmlFor="name">
       全名 (Full name)
       <span className="ml-1 text-destructive" aria-hidden="true">*</span>
     </Label>
     <Input id="name" required aria-required="true" />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-2 w-full max-w-sm">
+  <Label htmlFor="name">
+    全名 (Full name)
+    <span className="ml-1 text-destructive" aria-hidden="true">*</span>
+  </Label>
+  <Input id="name" required aria-required="true" />
+</div>
 ```
+</ComponentPreview>
 
 ### 带有描述的标签 (Label with Description)
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <div className="space-y-1 w-full max-w-sm">
+    <div className="space-y-1 w-full max-w-sm">
     <Label htmlFor="bio">个人简介 (Bio)</Label>
     <p id="bio-hint" className="text-xs text-muted-foreground mb-2">
       请简要介绍一下您自己。最多 200 个字符。 (Tell us a bit about yourself. Max 200 characters.)
     </p>
     <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-1 w-full max-w-sm">
+  <Label htmlFor="bio">个人简介 (Bio)</Label>
+  <p id="bio-hint" className="text-xs text-muted-foreground mb-2">
+    请简要介绍一下您自己。最多 200 个字符。 (Tell us a bit about yourself. Max 200 characters.)
+  </p>
+  <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
+</div>
 ```
+</ComponentPreview>
 
 ### 禁用的标签 (Disabled Label)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <div className="space-y-2 w-full max-w-sm">
+    <div className="space-y-2 w-full max-w-sm">
     <Label htmlFor="disabled-input" className="opacity-50 cursor-not-allowed">
       禁用的字段 (Disabled field)
     </Label>
     <Input id="disabled-input" disabled />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-2 w-full max-w-sm">
+  <Label htmlFor="disabled-input" className="opacity-50 cursor-not-allowed">
+    禁用的字段 (Disabled field)
+  </Label>
+  <Input id="disabled-input" disabled />
+</div>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

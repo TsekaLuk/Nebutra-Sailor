@@ -5,7 +5,22 @@ description: "Content container using compound component pattern. Five visual va
 
 ## Usage
 
-```tsx
+<ComponentPreview className="max-w-[400px]">
+    <Card variant="bordered" padding="md">
+    <CardHeader>
+      <CardIcon size="md">
+        <span>⚡️</span>
+      </CardIcon>
+      <CardTitle>Fast Deployments</CardTitle>
+    </CardHeader>
+    <CardBody>
+      <CardDescription>
+        Deploy to production in seconds with zero downtime.
+      </CardDescription>
+    </CardBody>
+  </Card>
+
+  ```tsx
 import { Card } from "@nebutra/ui/patterns"
 ```
 
@@ -72,28 +87,26 @@ The Card uses a **compound component** API — subcomponents are accessed as `Ca
 ```tsx
 import { Zap } from "lucide-react"
 
-<ComponentPreview className="max-w-[400px]">
-  <Card variant="bordered" padding="md">
-    <CardHeader>
-      <CardIcon size="md">
-        <span>⚡️</span>
-      </CardIcon>
-      <CardTitle>Fast Deployments</CardTitle>
-    </CardHeader>
-    <CardBody>
-      <CardDescription>
-        Deploy to production in seconds with zero downtime.
-      </CardDescription>
-    </CardBody>
-  </Card>
-</ComponentPreview>
+<Card variant="bordered" padding="md">
+  <CardHeader>
+    <CardIcon size="md">
+      <span>⚡️</span>
+    </CardIcon>
+    <CardTitle>Fast Deployments</CardTitle>
+  </CardHeader>
+  <CardBody>
+    <CardDescription>
+      Deploy to production in seconds with zero downtime.
+    </CardDescription>
+  </CardBody>
+</Card>
 ```
+</ComponentPreview>
 
 ### Gradient Featured Card
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <Card variant="gradient" padding="lg">
+    <Card variant="gradient" padding="lg">
     <CardHeader>
       <CardTitle>Pro Plan</CardTitle>
       <CardDescription>Everything you need to ship faster.</CardDescription>
@@ -105,8 +118,22 @@ import { Zap } from "lucide-react"
       <Button className="w-full">Get started</Button>
     </CardFooter>
   </Card>
-</ComponentPreview>
+
+  ```tsx
+<Card variant="gradient" padding="lg">
+  <CardHeader>
+    <CardTitle>Pro Plan</CardTitle>
+    <CardDescription>Everything you need to ship faster.</CardDescription>
+  </CardHeader>
+  <CardBody>
+    <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/mo</span></p>
+  </CardBody>
+  <CardFooter>
+    <Button className="w-full">Get started</Button>
+  </CardFooter>
+</Card>
 ```
+</ComponentPreview>
 
 ## Props
 

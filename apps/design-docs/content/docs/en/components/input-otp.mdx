@@ -23,7 +23,17 @@ description: "One-time password input with individual character slots, built on 
 
 ## Usage
 
-```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+    <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
+    <InputOTPGroup>
+      <InputOTPSlot index={0} />
+      <InputOTPSlot index={1} />
+      <InputOTPSlot index={2} />
+      <InputOTPSlot index={3} />
+    </InputOTPGroup>
+  </InputOTP>
+
+  ```tsx
 import {
   InputOTP,
   InputOTPGroup,
@@ -59,17 +69,16 @@ import {
 ```tsx
 import { REGEXP_ONLY_DIGITS } from "input-otp"
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
-    <InputOTPGroup>
-      <InputOTPSlot index={0} />
-      <InputOTPSlot index={1} />
-      <InputOTPSlot index={2} />
-      <InputOTPSlot index={3} />
-    </InputOTPGroup>
-  </InputOTP>
-</ComponentPreview>
+<InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSlot index={3} />
+  </InputOTPGroup>
+</InputOTP>
 ```
+</ComponentPreview>
 
 ### Controlled OTP
 

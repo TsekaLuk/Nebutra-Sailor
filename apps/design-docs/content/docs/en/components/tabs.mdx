@@ -79,9 +79,8 @@ Extends `@radix-ui/react-tabs` `Root` props.
 
 ### Button Variant
 
-```tsx
 <ComponentPreview className="mt-4">
-  <Tabs defaultValue="tab1" className="w-[400px]">
+    <Tabs defaultValue="tab1" className="w-[400px]">
     <TabsList variant="button" className="grid grid-cols-3">
       <TabsTrigger value="tab1">Overview</TabsTrigger>
       <TabsTrigger value="tab2">Analytics</TabsTrigger>
@@ -91,14 +90,25 @@ Extends `@radix-ui/react-tabs` `Root` props.
     <TabsContent value="tab2" className="p-4 mt-2">Analytics content</TabsContent>
     <TabsContent value="tab3" className="p-4 mt-2">Reports content</TabsContent>
   </Tabs>
-</ComponentPreview>
+
+  ```tsx
+<Tabs defaultValue="tab1" className="w-[400px]">
+  <TabsList variant="button" className="grid grid-cols-3">
+    <TabsTrigger value="tab1">Overview</TabsTrigger>
+    <TabsTrigger value="tab2">Analytics</TabsTrigger>
+    <TabsTrigger value="tab3">Reports</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1" className="p-4 mt-2">Overview content</TabsContent>
+  <TabsContent value="tab2" className="p-4 mt-2">Analytics content</TabsContent>
+  <TabsContent value="tab3" className="p-4 mt-2">Reports content</TabsContent>
+</Tabs>
 ```
+</ComponentPreview>
 
 ### Line Variant (Underline)
 
-```tsx
 <ComponentPreview className="mt-4">
-  <Tabs defaultValue="tab1" className="w-[400px]">
+    <Tabs defaultValue="tab1" className="w-[400px]">
     <TabsList variant="line" className="w-full">
       <TabsTrigger value="tab1">All</TabsTrigger>
       <TabsTrigger value="tab2">Active</TabsTrigger>
@@ -108,14 +118,25 @@ Extends `@radix-ui/react-tabs` `Root` props.
     <TabsContent value="tab2" className="p-4 mt-2">Active content</TabsContent>
     <TabsContent value="tab3" className="p-4 mt-2">Archived content</TabsContent>
   </Tabs>
-</ComponentPreview>
+
+  ```tsx
+<Tabs defaultValue="tab1" className="w-[400px]">
+  <TabsList variant="line" className="w-full">
+    <TabsTrigger value="tab1">All</TabsTrigger>
+    <TabsTrigger value="tab2">Active</TabsTrigger>
+    <TabsTrigger value="tab3">Archived</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1" className="p-4 mt-2">All content</TabsContent>
+  <TabsContent value="tab2" className="p-4 mt-2">Active content</TabsContent>
+  <TabsContent value="tab3" className="p-4 mt-2">Archived content</TabsContent>
+</Tabs>
 ```
+</ComponentPreview>
 
 ### Pill Shape
 
-```tsx
 <ComponentPreview className="mt-4">
-  <Tabs defaultValue="tab1" className="w-[400px]">
+    <Tabs defaultValue="tab1" className="w-[400px]">
     <TabsList shape="pill" className="w-full grid-cols-2 grid">
       <TabsTrigger value="tab1">Tab 1</TabsTrigger>
       <TabsTrigger value="tab2">Tab 2</TabsTrigger>
@@ -123,8 +144,18 @@ Extends `@radix-ui/react-tabs` `Root` props.
     <TabsContent value="tab1" className="p-4 mt-2">Tab 1 Content</TabsContent>
     <TabsContent value="tab2" className="p-4 mt-2">Tab 2 Content</TabsContent>
   </Tabs>
-</ComponentPreview>
+
+  ```tsx
+<Tabs defaultValue="tab1" className="w-[400px]">
+  <TabsList shape="pill" className="w-full grid-cols-2 grid">
+    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1" className="p-4 mt-2">Tab 1 Content</TabsContent>
+  <TabsContent value="tab2" className="p-4 mt-2">Tab 2 Content</TabsContent>
+</Tabs>
 ```
+</ComponentPreview>
 
 ### Size Variants
 

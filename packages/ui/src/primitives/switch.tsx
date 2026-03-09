@@ -1,199 +1,100 @@
 "use client";
 
-import React from "react";
-import {
-  Switch as HeroUISwitchBase,
-} from "@heroui/switch";
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const HeroUISwitch = HeroUISwitchBase as any;
-import type {
-  SwitchProps as HeroUISwitchProps,
-} from "@heroui/switch";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
-// =============================================================================
-// Types
-// =============================================================================
+const SwitchContext = createContext<{
+  value: string | null;
+  setValue: React.Dispatch<React.SetStateAction<string | null>>;
+} | null>(null);
 
-/**
- * Switch color variants
- */
-export type SwitchColor =
-  | "default"
-  | "primary"
-  | "secondary"
-  | "success"
-  | "warning"
-  | "danger";
-
-/**
- * Switch size variants
- */
-export type SwitchSize = "sm" | "md" | "lg";
-
-/**
- * Thumb icon props type
- */
-export interface ThumbIconProps {
-  isSelected: boolean;
-  className: string;
-}
-
-/**
- * Props for Switch component
- *
- * @description
- * A toggle switch component for binary on/off states.
- * Supports icons, labels, and custom thumb icons.
- *
- * **UX Scenarios:**
- * - Settings toggles (dark mode, notifications)
- * - Feature flags / preferences
- * - Enable/disable options
- * - Boolean form inputs
- * - Quick action toggles
- *
- * **Accessibility:**
- * - Native input element for form autofill
- * - Keyboard navigation (Tab, Space)
- * - ARIA switch role
- * - Focus ring support
- */
-export interface SwitchProps extends Omit<HeroUISwitchProps, "color" | "size"> {
-  /**
-   * Label content
-   */
-  children?: React.ReactNode;
-  /**
-   * Value for form submission
-   */
-  value?: string;
-  /**
-   * Name attribute for form
-   */
+export interface SwitchProps {
+  children: React.ReactNode;
   name?: string;
-  /**
-   * Size variant
-   * @default "md"
-   */
-  size?: SwitchSize;
-  /**
-   * Color variant
-   * @default "primary"
-   */
-  color?: SwitchColor;
-  /**
-   * Custom thumb icon (receives isSelected state)
-   */
-  thumbIcon?: React.ReactNode | ((props: ThumbIconProps) => React.ReactNode);
-  /**
-   * Content at the start of the switch (before thumb)
-   */
-  startContent?: React.ReactNode;
-  /**
-   * Content at the end of the switch (after thumb)
-   */
-  endContent?: React.ReactNode;
-  /**
-   * Controlled selected state
-   */
-  isSelected?: boolean;
-  /**
-   * Default selected state (uncontrolled)
-   */
-  defaultSelected?: boolean;
-  /**
-   * Whether the switch is read-only
-   * @default false
-   */
-  isReadOnly?: boolean;
-  /**
-   * Whether the switch is disabled
-   * @default false
-   */
-  isDisabled?: boolean;
-  /**
-   * Disable animations
-   * @default false
-   */
-  disableAnimation?: boolean;
-  /**
-   * Native onChange handler
-   */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  /**
-   * Callback when selected state changes
-   */
-  onValueChange?: (isSelected: boolean) => void;
-  /**
-   * Custom class names for slots
-   */
-  classNames?: Partial<
-    Record<
-      | "base"
-      | "wrapper"
-      | "thumb"
-      | "label"
-      | "startContent"
-      | "endContent"
-      | "thumbIcon",
-      string
-    >
-  >;
+  size?: "small" | "medium" | "large";
+  style?: React.CSSProperties;
 }
 
-// =============================================================================
-// Component
-// =============================================================================
+export const Switch = ({ children, name = "default", size = "medium", style }: SwitchProps) => {
+  const [value, setValue] = useState<string | null>(null);
 
-/**
- * Switch - Toggle switch for binary states
- *
- * @example
- * ```tsx
- * import { Switch } from "@nebutra/ui";
- *
- * // Basic usage
- * <Switch>Enable notifications</Switch>
- *
- * // Controlled
- * const [isEnabled, setIsEnabled] = useState(false);
- * <Switch isSelected={isEnabled} onValueChange={setIsEnabled}>
- *   Dark mode
- * </Switch>
- *
- * // Different colors and sizes
- * <Switch color="success" size="lg">Active</Switch>
- * <Switch color="danger" size="sm">Delete mode</Switch>
- *
- * // With thumb icon
- * <Switch
- *   thumbIcon={({ isSelected }) =>
- *     isSelected ? <SunIcon /> : <MoonIcon />
- *   }
- * >
- *   Theme
- * </Switch>
- *
- * // With start/end icons
- * <Switch
- *   startContent={<MoonIcon />}
- *   endContent={<SunIcon />}
- * />
- *
- * // Custom styling
- * <Switch
- *   classNames={{
- *     base: "inline-flex flex-row-reverse gap-4",
- *     wrapper: "bg-default-200",
- *     thumb: "bg-primary",
- *   }}
- * >
- *   Custom styled
- * </Switch>
- * ```
- */
-export const Switch: React.FC<SwitchProps> = (props) => {
-  return <HeroUISwitch {...props} />;
+  return (
+    <SwitchContext.Provider value={{ value, setValue }}>
+      <div
+        className={clsx(
+          "flex bg-background-100 p-1 border border-gray-alpha-400",
+          size === "small" && "h-8 rounded-md",
+          size === "medium" && "h-10 rounded-md",
+          size === "large" && "h-12 rounded-lg"
+        )}
+        style={style}>
+        {React.Children.map(children, (child) =>
+          React.cloneElement(child as React.ReactElement<SwitchControlProps>, { size, name }))}
+      </div>
+    </SwitchContext.Provider>
+  );
 };
 
-export default Switch;
+interface SwitchControlProps {
+  label?: string;
+  value: string;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  name?: string;
+  size?: "small" | "medium" | "large";
+  icon?: React.ReactNode;
+}
+
+const SwitchControl = ({
+  label,
+  value,
+  defaultChecked,
+  disabled = false,
+  name,
+  size = "medium",
+  icon
+}: SwitchControlProps) => {
+  const context = useContext(SwitchContext);
+  const checked = value === context?.value;
+
+  useEffect(() => {
+    if (defaultChecked) {
+      context?.setValue(value);
+    }
+  }, []);
+
+  return (
+    <label
+      className={clsx("flex flex-1 h-full", disabled && "cursor-not-allowed pointer-events-none")}
+      onClick={() => context?.setValue(value)}
+    >
+      <input
+        type="radio"
+        name={name}
+        value={value}
+        disabled={disabled}
+        checked={checked}
+        className="hidden"
+        readOnly
+      />
+      <span
+        className={twMerge(clsx(
+          "flex items-center justify-center flex-1 cursor-pointer font-medium font-sans duration-150",
+          checked ? "bg-gray-100 text-gray-1000 fill-gray-1000 rounded-sm" : "text-gray-900 hover:text-gray-1000 fill-gray-900 hover:fill-gray-1000",
+          disabled && "text-gray-800 fill-gray-800",
+          !icon && size === "small" && "text-sm px-3",
+          !icon && size === "medium" && "text-sm px-3",
+          !icon && size === "large" && "text-base px-4",
+          icon && size === "small" && "py-1 px-2",
+          icon && size === "medium" && "py-2 px-3",
+          icon && size === "large" && "p-3"
+        ))}
+      >
+        {icon ? <span className={clsx(size === "large" && "scale-125")}>{icon}</span> : label}
+      </span>
+    </label>
+  );
+};
+
+Switch.Control = SwitchControl;

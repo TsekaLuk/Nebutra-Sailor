@@ -36,9 +36,8 @@ import { Switch } from "@nebutra/ui/primitives"
 
 ### 受控开关 (Controlled Switch)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex items-center justify-center">
-  <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2">
     <Switch
       id="notifications"
     />
@@ -46,14 +45,23 @@ import { Switch } from "@nebutra/ui/primitives"
       通知 (Notifications)
     </Label>
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="flex items-center space-x-2">
+  <Switch
+    id="notifications"
+  />
+  <Label htmlFor="notifications">
+    通知 (Notifications)
+  </Label>
+</div>
 ```
+</ComponentPreview>
 
 ### 设置列表 (Settings List)
 
-```tsx
 <ComponentPreview className="min-h-[300px] flex items-center justify-center">
-  <div className="space-y-4 w-full max-w-md p-6 border rounded-xl shadow-sm">
+    <div className="space-y-4 w-full max-w-md p-6 border rounded-xl shadow-sm">
     <div className="flex items-center justify-between">
       <div>
         <Label htmlFor="wifi" className="text-base">Wi-Fi</Label>
@@ -76,8 +84,33 @@ import { Switch } from "@nebutra/ui/primitives"
       <Switch id="location" disabled />
     </div>
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-4 w-full max-w-md p-6 border rounded-xl shadow-sm">
+  <div className="flex items-center justify-between">
+    <div>
+      <Label htmlFor="wifi" className="text-base">Wi-Fi</Label>
+      <p className="text-xs text-muted-foreground">连接到本地网络 (Connect to local networks)</p>
+    </div>
+    <Switch id="wifi" defaultChecked />
+  </div>
+  <div className="flex items-center justify-between">
+    <div>
+      <Label htmlFor="bluetooth" className="text-base">蓝牙 (Bluetooth)</Label>
+      <p className="text-xs text-muted-foreground">发现附近的设备 (Discover devices nearby)</p>
+    </div>
+    <Switch id="bluetooth" />
+  </div>
+  <div className="flex items-center justify-between opacity-50">
+    <div>
+      <Label htmlFor="location" className="text-base cursor-not-allowed">位置 (Location)</Label>
+      <p className="text-xs text-muted-foreground">GPS 追踪 (GPS tracking)</p>
+    </div>
+    <Switch id="location" disabled />
+  </div>
+</div>
 ```
+</ComponentPreview>
 
 ### 在表单中使用 (In a Form)
 

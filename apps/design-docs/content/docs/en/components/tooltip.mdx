@@ -19,7 +19,22 @@ description: "Contextual hover information displayed in a floating popover, buil
 
 ## Usage
 
-```tsx
+<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+    <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <span>⚙️</span>
+          <span className="sr-only">Settings</span>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Settings</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+
+  ```tsx
 import {
   Tooltip,
   TooltipTrigger,
@@ -76,28 +91,26 @@ import {
 ```tsx
 import { Settings } from "lucide-react"
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipProvider>
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <span>⚙️</span>
-          <span className="sr-only">Settings</span>
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>Settings</p>
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
-</ComponentPreview>
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <span>⚙️</span>
+        <span className="sr-only">Settings</span>
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Settings</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+</ComponentPreview>
 
 ### Custom Side and Offset
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipProvider>
+    <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
         <Button variant="outline">Hover</Button>
@@ -107,14 +120,25 @@ import { Settings } from "lucide-react"
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
-</ComponentPreview>
+
+  ```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Hover</Button>
+    </TooltipTrigger>
+    <TooltipContent side="right" sideOffset={8}>
+      <p>Tooltip on the right</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+</ComponentPreview>
 
 ### Instant Tooltip (No Delay)
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipProvider>
+    <TooltipProvider>
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <Button>Instant</Button>
@@ -122,14 +146,23 @@ import { Settings } from "lucide-react"
       <TooltipContent>Shows immediately</TooltipContent>
     </Tooltip>
   </TooltipProvider>
-</ComponentPreview>
+
+  ```tsx
+<TooltipProvider>
+  <Tooltip delayDuration={0}>
+    <TooltipTrigger asChild>
+      <Button>Instant</Button>
+    </TooltipTrigger>
+    <TooltipContent>Shows immediately</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+</ComponentPreview>
 
 ### Rich Tooltip Content
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipProvider>
+    <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
         <span className="cursor-help font-medium border-b border-dashed border-muted-foreground pb-px">Hover for info</span>
@@ -142,8 +175,23 @@ import { Settings } from "lucide-react"
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
-</ComponentPreview>
+
+  ```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <span className="cursor-help font-medium border-b border-dashed border-muted-foreground pb-px">Hover for info</span>
+    </TooltipTrigger>
+    <TooltipContent className="max-w-xs">
+      <p className="font-medium mb-1">Pro tip</p>
+      <p className="text-xs text-muted-foreground">
+        You can configure advanced settings in the project preferences panel.
+      </p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 ```
+</ComponentPreview>
 
 ## Accessibility
 

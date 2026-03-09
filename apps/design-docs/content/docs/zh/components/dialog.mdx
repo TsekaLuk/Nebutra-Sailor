@@ -106,9 +106,8 @@ import {
 
 ### 受控的对话框 (Controlled Dialog)
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <Dialog>
+    <Dialog>
     <DialogTrigger asChild>
       <Button>打开受控对话框 (Open Controlled)</Button>
     </DialogTrigger>
@@ -119,14 +118,26 @@ import {
       <p>此对话框通过状态进行控制。 (This dialog is controlled via state.)</p>
     </DialogContent>
   </Dialog>
-</ComponentPreview>
+
+  ```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>打开受控对话框 (Open Controlled)</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>受控对话框 (Controlled Dialog)</DialogTitle>
+    </DialogHeader>
+    <p>此对话框通过状态进行控制。 (This dialog is controlled via state.)</p>
+  </DialogContent>
+</Dialog>
 ```
+</ComponentPreview>
 
 ### 确认对话框 (Confirmation Dialog)
 
-```tsx
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <Dialog>
+    <Dialog>
     <DialogTrigger asChild>
       <Button variant="destructive">删除账户 (Delete Account)</Button>
     </DialogTrigger>
@@ -145,8 +156,29 @@ import {
       </DialogFooter>
     </DialogContent>
   </Dialog>
-</ComponentPreview>
+
+  ```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="destructive">删除账户 (Delete Account)</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>您绝对确定吗？ (Are you absolutely sure?)</DialogTitle>
+      <DialogDescription>
+        此操作无法撤销。这将永久删除您的帐户并从我们的服务器中删除您的数据。 (This action cannot be undone. This will permanently delete your account and remove your data from our servers.)
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">取消 (Cancel)</Button>
+      </DialogClose>
+      <Button variant="destructive">删除 (Delete)</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

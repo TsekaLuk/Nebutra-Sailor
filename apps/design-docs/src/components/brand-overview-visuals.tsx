@@ -2,7 +2,6 @@
 
 import React from "react";
 import { LogomarkSVG, WordmarkEnSVG } from "@nebutra/brand";
-// Removed Lucide icons
 import { MagicCard } from "@nebutra/ui/primitives";
 
 export function LogoShowcase() {
@@ -14,8 +13,8 @@ export function LogoShowcase() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* Color Logo */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-[var(--neutral-1)]" gradientColor="var(--neutral-3)">
-                        <div className="h-40 flex items-center justify-center p-8 bg-zinc-50 dark:bg-black relative">
-                            <img src="/logo/logo-color.svg" alt="Nebutra Color Logo" className="max-h-full max-w-full relative z-10 drop-shadow-sm" />
+                        <div className="h-40 w-full flex items-center justify-center p-8 bg-zinc-50 dark:bg-black relative">
+                            <img src="/logo/logo-color.svg" alt="Nebutra Color Logo" className="h-full w-full object-contain relative z-10 drop-shadow-sm" />
                         </div>
                         <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-card">
                             <span className="text-sm font-medium text-foreground">Color (Default)</span>
@@ -25,8 +24,8 @@ export function LogoShowcase() {
 
                     {/* Inverse Logo */}
                     <MagicCard className="p-0 rounded border-zinc-800 flex flex-col overflow-hidden" gradientColor="#1a1a1a" gradientFrom="#0033FE" gradientTo="#0BF1C3">
-                        <div className="h-40 flex items-center justify-center p-8 bg-[#0a0a0a] relative">
-                            <img src="/logo/logo-inverse.svg" alt="Nebutra Inverse Logo" className="max-h-full max-w-full relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.08)]" />
+                        <div className="h-40 w-full flex items-center justify-center p-8 bg-[#0a0a0a] relative">
+                            <img src="/logo/logo-inverse.svg" alt="Nebutra Inverse Logo" className="h-full w-full object-contain relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.08)]" />
                         </div>
                         <div className="p-3 border-t border-zinc-800 flex justify-between items-center bg-zinc-950">
                             <span className="text-sm font-medium text-white">Inverse (Dark Mode)</span>
@@ -36,8 +35,8 @@ export function LogoShowcase() {
 
                     {/* Mono Logo */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-[var(--neutral-1)]" gradientColor="var(--neutral-3)">
-                        <div className="h-40 flex items-center justify-center p-8 bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--neutral-5)]">
-                            <img src="/logo/logo-mono.svg" alt="Nebutra Mono Logo" className="max-h-full max-w-full relative z-10 opacity-80" />
+                        <div className="h-40 w-full flex items-center justify-center p-8 bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--neutral-5)]">
+                            <img src="/logo/logo-mono.svg" alt="Nebutra Mono Logo" className="h-full w-full object-contain relative z-10 opacity-80" />
                         </div>
                         <div className="p-3 bg-card border-t border-[var(--neutral-5)] flex justify-between items-center">
                             <span className="text-sm font-medium text-foreground">Monochrome</span>
@@ -53,8 +52,8 @@ export function LogoShowcase() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* EN */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-[var(--neutral-1)]" gradientColor="var(--neutral-3)">
-                        <div className="h-32 flex items-center justify-center p-6 bg-card">
-                            <img src="/logo/logo-en.svg" alt="Nebutra EN Logo" className="max-h-full max-w-full" />
+                        <div className="h-32 w-full flex items-center justify-center p-6 bg-card">
+                            <img src="/logo/logo-en.svg" alt="Nebutra EN Logo" className="h-full w-full object-contain" />
                         </div>
                         <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-2)]">
                             <span className="text-sm font-medium">English (Default)</span>
@@ -64,8 +63,8 @@ export function LogoShowcase() {
 
                     {/* ZH */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-[var(--neutral-1)]" gradientColor="var(--neutral-3)">
-                        <div className="h-32 flex items-center justify-center p-6 bg-card">
-                            <img src="/logo/logo-zh.svg" alt="Nebutra ZH Logo" className="max-h-full max-w-full" />
+                        <div className="h-32 w-full flex items-center justify-center p-6 bg-card">
+                            <img src="/logo/logo-zh.svg" alt="Nebutra ZH Logo" className="h-full w-full object-contain" />
                         </div>
                         <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-2)]">
                             <span className="text-sm font-medium">Chinese</span>
@@ -75,8 +74,8 @@ export function LogoShowcase() {
 
                     {/* ZH-EN */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-[var(--neutral-1)]" gradientColor="var(--neutral-3)">
-                        <div className="h-32 flex items-center justify-center p-6 bg-card">
-                            <img src="/logo/logo-zh-en.svg" alt="Nebutra ZH-EN Logo" className="max-h-full max-w-full" />
+                        <div className="h-32 w-full flex items-center justify-center p-6 bg-card">
+                            <img src="/logo/logo-zh-en.svg" alt="Nebutra ZH-EN Logo" className="h-full w-full object-contain" />
                         </div>
                         <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-2)]">
                             <span className="text-sm font-medium">Bilingual</span>
@@ -92,8 +91,8 @@ export function LogoShowcase() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     {/* Horizontal EN */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-white dark:bg-black" gradientColor="var(--neutral-3)">
-                        <div className="h-24 flex items-center justify-center p-4">
-                            <img src="/logo/logo-horizontal-en.svg" alt="Horizontal EN Logo" className="max-h-full max-w-[80%]" />
+                        <div className="h-24 w-full flex items-center justify-center p-4">
+                            <img src="/logo/logo-horizontal-en.svg" alt="Horizontal EN Logo" className="h-full w-[80%] object-contain" />
                         </div>
                         <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-1)]">
                             <span className="text-xs font-medium text-foreground">Horizontal (EN)</span>
@@ -102,8 +101,8 @@ export function LogoShowcase() {
 
                     {/* Horizontal ZH */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-white dark:bg-black" gradientColor="var(--neutral-3)">
-                        <div className="h-24 flex items-center justify-center p-4">
-                            <img src="/logo/logo-horizontal-zh.svg" alt="Horizontal ZH Logo" className="max-h-full max-w-[80%]" />
+                        <div className="h-24 w-full flex items-center justify-center p-4">
+                            <img src="/logo/logo-horizontal-zh.svg" alt="Horizontal ZH Logo" className="h-full w-[80%] object-contain" />
                         </div>
                         <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-1)]">
                             <span className="text-xs font-medium text-foreground">Horizontal (ZH)</span>
@@ -112,8 +111,8 @@ export function LogoShowcase() {
 
                     {/* Vertical EN */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-white dark:bg-black" gradientColor="var(--neutral-3)">
-                        <div className="h-32 flex items-center justify-center p-4 border-b border-[var(--neutral-5)]">
-                            <img src="/logo/logo-vertical-en.svg" alt="Vertical EN Logo" className="max-h-full max-w-[60%]" />
+                        <div className="h-32 w-full flex items-center justify-center p-4 border-b border-[var(--neutral-5)]">
+                            <img src="/logo/logo-vertical-en.svg" alt="Vertical EN Logo" className="h-full w-[60%] object-contain" />
                         </div>
                         <div className="p-3 flex justify-between items-center bg-[var(--neutral-1)]">
                             <span className="text-xs font-medium text-foreground">Vertical (EN)</span>
@@ -122,8 +121,8 @@ export function LogoShowcase() {
 
                     {/* Vertical ZH */}
                     <MagicCard className="p-0 rounded border-[var(--neutral-5)] flex flex-col overflow-hidden bg-white dark:bg-black" gradientColor="var(--neutral-3)">
-                        <div className="h-32 flex items-center justify-center p-4 border-b border-[var(--neutral-5)]">
-                            <img src="/logo/logo-vertical-zh.svg" alt="Vertical ZH Logo" className="max-h-full max-w-[60%]" />
+                        <div className="h-32 w-full flex items-center justify-center p-4 border-b border-[var(--neutral-5)]">
+                            <img src="/logo/logo-vertical-zh.svg" alt="Vertical ZH Logo" className="h-full w-[60%] object-contain" />
                         </div>
                         <div className="p-3 flex justify-between items-center bg-[var(--neutral-1)]">
                             <span className="text-xs font-medium text-foreground">Vertical (ZH)</span>

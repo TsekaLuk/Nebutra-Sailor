@@ -10,7 +10,14 @@ description: "Single-line text input with optional prefix/suffix adornments and 
 
 ## Usage
 
-```tsx
+<ComponentPreview className="max-w-[350px] flex-col gap-4">
+    {/* Search icon */}
+  <Input prefix={<span className="text-xs">🔍</span>} placeholder="Search…" />
+
+  {/* Mail icon */}
+  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+
+  ```tsx
 import { Input } from "@nebutra/ui"
 ```
 
@@ -67,14 +74,13 @@ Use the `prefix` prop to render a non-interactive icon or node inside the left e
 ```tsx
 import { Search, Mail } from "lucide-react"
 
-<ComponentPreview className="max-w-[350px] flex-col gap-4">
-  {/* Search icon */}
-  <Input prefix={<span className="text-xs">🔍</span>} placeholder="Search…" />
+{/* Search icon */}
+<Input prefix={<span className="text-xs">🔍</span>} placeholder="Search…" />
 
-  {/* Mail icon */}
-  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
-</ComponentPreview>
+{/* Mail icon */}
+<Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
 ```
+</ComponentPreview>
 
 ---
 
@@ -88,9 +94,8 @@ Use the `suffix` prop to render a non-interactive label or icon inside the right
   See the [Password Reveal](#password-reveal) example below.
 </Warning>
 
-```tsx
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-  {/* Domain hint */}
+    {/* Domain hint */}
   <Input suffix={<span className="text-xs">@nebutra.com</span>} placeholder="username" />
 
   {/* Currency */}
@@ -100,8 +105,20 @@ Use the `suffix` prop to render a non-interactive label or icon inside the right
     type="number"
     placeholder="0.00"
   />
-</ComponentPreview>
+
+  ```tsx
+{/* Domain hint */}
+<Input suffix={<span className="text-xs">@nebutra.com</span>} placeholder="username" />
+
+{/* Currency */}
+<Input
+  prefix={<span className="text-xs">$</span>}
+  suffix={<span className="text-xs font-medium border-l pl-2">USD</span>}
+  type="number"
+  placeholder="0.00"
+/>
 ```
+</ComponentPreview>
 
 ---
 
@@ -111,11 +128,13 @@ Set `clearable` to render a ✕ button whenever the field has a value. The butto
 
 ### Uncontrolled
 
-```tsx
 <ComponentPreview className="max-w-[350px]">
-  <Input clearable defaultValue="contact@nebutra.com" placeholder="Type to see the × button…" />
-</ComponentPreview>
+    <Input clearable defaultValue="contact@nebutra.com" placeholder="Type to see the × button…" />
+
+  ```tsx
+<Input clearable defaultValue="contact@nebutra.com" placeholder="Type to see the × button…" />
 ```
+</ComponentPreview>
 
 ### Controlled
 

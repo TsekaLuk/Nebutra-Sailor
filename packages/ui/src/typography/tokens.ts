@@ -12,20 +12,19 @@
 /**
  * Primary font stack - Used for body text and UI
  *
- * Inter is a highly legible open-source font designed for screens.
+ * Poppins is the primary font for English text. vivo Sans is for Chinese.
  * Falls back through system fonts for maximum compatibility.
  */
 export const FONT_FAMILY_PRIMARY =
-  '"Inter", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  '"Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
 
 /**
  * Heading font stack - Used for titles and emphasis
  *
- * Can be same as primary or a display/serif font for brand differentiation.
- * Currently using Inter for consistency; can be swapped for brand font later.
+ * Geist Sans is the primary display typeface.
  */
 export const FONT_FAMILY_HEADING =
-  '"Inter", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  '"Geist", "Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
 
 /**
  * Monospace font stack - Used for code and technical content
@@ -36,11 +35,11 @@ export const FONT_FAMILY_MONO =
 /**
  * CJK (Chinese/Japanese/Korean) fallback stack
  *
- * Source Han Sans (思源黑体) is an open-source pan-CJK font.
+ * vivo Sans is the primary Chinese font.
  * Provides consistent rendering for Chinese, Japanese, and Korean text.
  */
 export const FONT_FAMILY_CJK =
-  '"Source Han Sans SC", "Source Han Sans", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif';
+  '"vivo Sans", "Source Han Sans SC", "Source Han Sans", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif';
 
 /**
  * Complete font stacks with CJK fallback

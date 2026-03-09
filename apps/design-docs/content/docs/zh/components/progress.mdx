@@ -59,50 +59,73 @@ import { Progress } from "@nebutra/ui/primitives"
 
 ### 动画进度条 (Animated Progress)
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="w-full">
+    <div className="w-full">
     <Progress value={65} className="w-full" />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="w-full">
+  <Progress value={65} className="w-full" />
+</div>
 ```
+</ComponentPreview>
 
 ### 带有标签 (With Label)
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="space-y-1 w-full">
+    <div className="space-y-1 w-full">
     <div className="flex justify-between text-sm">
       <span>正在上传 (Uploading...)</span>
       <span>65%</span>
     </div>
     <Progress value={65} />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="space-y-1 w-full">
+  <div className="flex justify-between text-sm">
+    <span>正在上传 (Uploading...)</span>
+    <span>65%</span>
+  </div>
+  <Progress value={65} />
+</div>
 ```
+</ComponentPreview>
 
 ### 待定状态 - 加载中 (Indeterminate - Loading)
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="w-full">
+    <div className="w-full">
     <Progress value={undefined} className="w-full" />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="w-full">
+  <Progress value={undefined} className="w-full" />
+</div>
 ```
+</ComponentPreview>
 
 ### 自定义颜色 (Custom Color)
 
-```tsx
 <ComponentPreview className="max-w-[400px]">
-  <div className="w-full">
+    <div className="w-full">
     <Progress
       value={75}
       className="w-full [&>div]:bg-green-500"
     />
   </div>
-</ComponentPreview>
+
+  ```tsx
+<div className="w-full">
+  <Progress
+    value={75}
+    className="w-full [&>div]:bg-green-500"
+  />
+</div>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

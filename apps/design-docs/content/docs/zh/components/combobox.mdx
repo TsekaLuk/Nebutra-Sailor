@@ -17,16 +17,8 @@ description: "可搜索的选择输入组件，结合了触发按钮和经过过
 
 ## 安装 (Installation)
 
-```tsx
-import { Combobox } from "@nebutra/ui/primitives"
-```
-
-## 使用方法 (Usage)
-
-### 简单模式 (使用 options 属性)
-
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <Combobox
+    <Combobox
     options={[
       { value: "next", label: "Next.js" },
       { value: "remix", label: "Remix" },
@@ -51,12 +43,62 @@ import { Combobox } from "@nebutra/ui/primitives"
     label="框架 (Framework)"
     placeholder="选择框架..."
   />
-</ComponentPreview>
+
+  ```tsx
+import { Combobox } from "@nebutra/ui/primitives"
 ```
+
+## 使用方法 (Usage)
+
+### 简单模式 (使用 options 属性)
+
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  placeholder="选择框架... (Select framework...)"
+/>
+</ComponentPreview>
+
+### 带有标签 (With label)
+
+```tsx
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  label="框架 (Framework)"
+  placeholder="选择框架..."
+/>
+```
+</ComponentPreview>
 
 ### 非受控 (Uncontrolled)
 
-```tsx
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+    <Combobox placeholder="选择框架...">
+    <Combobox.Input placeholder="搜索框架... (Search frameworks...)" />
+    <CommandList>
+      <Combobox.Empty>未找到相关框架。 (No frameworks found.)</Combobox.Empty>
+      <Combobox.Group heading="React">
+        <Combobox.Option value="next">Next.js</Combobox.Option>
+        <Combobox.Option value="remix">Remix</Combobox.Option>
+      </Combobox.Group>
+      <Combobox.Separator />
+      <Combobox.Group heading="Vue">
+        <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
+      </Combobox.Group>
+    </CommandList>
+  </Combobox>
+
+  ```tsx
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
@@ -158,23 +200,22 @@ import { Combobox } from "@nebutra/ui/primitives"
 import { Combobox } from "@nebutra/ui/primitives"
 import { CommandList } from "@nebutra/ui/primitives"
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
-  <Combobox placeholder="选择框架...">
-    <Combobox.Input placeholder="搜索框架... (Search frameworks...)" />
-    <CommandList>
-      <Combobox.Empty>未找到相关框架。 (No frameworks found.)</Combobox.Empty>
-      <Combobox.Group heading="React">
-        <Combobox.Option value="next">Next.js</Combobox.Option>
-        <Combobox.Option value="remix">Remix</Combobox.Option>
-      </Combobox.Group>
-      <Combobox.Separator />
-      <Combobox.Group heading="Vue">
-        <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
-      </Combobox.Group>
-    </CommandList>
-  </Combobox>
-</ComponentPreview>
+<Combobox placeholder="选择框架...">
+  <Combobox.Input placeholder="搜索框架... (Search frameworks...)" />
+  <CommandList>
+    <Combobox.Empty>未找到相关框架。 (No frameworks found.)</Combobox.Empty>
+    <Combobox.Group heading="React">
+      <Combobox.Option value="next">Next.js</Combobox.Option>
+      <Combobox.Option value="remix">Remix</Combobox.Option>
+    </Combobox.Group>
+    <Combobox.Separator />
+    <Combobox.Group heading="Vue">
+      <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
+    </Combobox.Group>
+  </CommandList>
+</Combobox>
 ```
+</ComponentPreview>
 
 ## 属性 (Props)
 

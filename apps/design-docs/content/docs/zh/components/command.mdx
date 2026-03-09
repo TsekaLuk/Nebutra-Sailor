@@ -84,9 +84,8 @@ import {
 
 ### 命令对话框 (模态框) (Command Dialog)
 
-```tsx
 <ComponentPreview className="min-h-[400px] flex justify-center items-start pt-10">
-  <CommandDialog open={true}>
+    <CommandDialog open={true}>
     <CommandInput placeholder="输入命令或进行搜索... (Type a command or search...)" />
     <CommandList>
       <CommandEmpty>未找到结果。 (No results found.)</CommandEmpty>
@@ -95,8 +94,19 @@ import {
       </CommandGroup>
     </CommandList>
   </CommandDialog>
-</ComponentPreview>
+
+  ```tsx
+<CommandDialog open={true}>
+  <CommandInput placeholder="输入命令或进行搜索... (Type a command or search...)" />
+  <CommandList>
+    <CommandEmpty>未找到结果。 (No results found.)</CommandEmpty>
+    <CommandGroup heading="页面 (Pages)">
+      <CommandItem onSelect={() => console.log("/dashboard")}>控制台 (Dashboard)</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</CommandDialog>
 ```
+</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

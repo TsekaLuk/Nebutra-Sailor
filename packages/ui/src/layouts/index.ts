@@ -23,3 +23,15 @@ export {
   type SectionThemeConfig,
   type ThemedSectionProps,
 } from "./SectionTheme";
+
+export {
+  SectionContainer,
+  SectionContainerRoot,
+  SectionHeader,
+  SectionContent,
+  SectionFooter,
+  type SectionContainerProps,
+  type SectionHeaderProps,
+  type SectionContentProps,
+  type SectionFooterProps,
+} from "./SectionContainer";

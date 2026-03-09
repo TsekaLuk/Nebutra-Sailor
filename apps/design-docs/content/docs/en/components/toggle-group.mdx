@@ -51,9 +51,8 @@ import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui";
 
 ### Multiple Selection
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
+    <ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
     <ToggleGroupItem value="bold" aria-label="Toggle bold">
       <Bold className="size-4" />
     </ToggleGroupItem>
@@ -64,20 +63,39 @@ import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui";
       <Underline className="size-4" />
     </ToggleGroupItem>
   </ToggleGroup>
-</ComponentPreview>
+
+  ```tsx
+<ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
+  <ToggleGroupItem value="bold" aria-label="Toggle bold">
+    <Bold className="size-4" />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="italic" aria-label="Toggle italic">
+    <Italic className="size-4" />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="underline" aria-label="Toggle underline">
+    <Underline className="size-4" />
+  </ToggleGroupItem>
+</ToggleGroup>
 ```
+</ComponentPreview>
 
 ### Controlled Single Selection
 
-```tsx
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <ToggleGroup type="single" defaultValue="center">
+    <ToggleGroup type="single" defaultValue="center">
     <ToggleGroupItem value="left">Left</ToggleGroupItem>
     <ToggleGroupItem value="center">Center</ToggleGroupItem>
     <ToggleGroupItem value="right">Right</ToggleGroupItem>
   </ToggleGroup>
-</ComponentPreview>
+
+  ```tsx
+<ToggleGroup type="single" defaultValue="center">
+  <ToggleGroupItem value="left">Left</ToggleGroupItem>
+  <ToggleGroupItem value="center">Center</ToggleGroupItem>
+  <ToggleGroupItem value="right">Right</ToggleGroupItem>
+</ToggleGroup>
 ```
+</ComponentPreview>
 
 ## Accessibility
 
