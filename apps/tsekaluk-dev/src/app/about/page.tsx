@@ -272,7 +272,7 @@ export default function AboutPage() {
             {/* Quick stats */}
             <div className="mt-4 grid grid-cols-4 gap-3 pt-4">
               <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">
-                <p className="text-2xl font-bold text-gray-900">12</p>
+                <p className="text-2xl font-bold text-gray-900">19</p>
                 <p className="text-xs text-gray-500">Projects</p>
               </div>
               <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-3 text-center">

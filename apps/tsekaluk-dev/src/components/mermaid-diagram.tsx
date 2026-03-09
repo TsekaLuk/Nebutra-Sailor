@@ -1,0 +1,42 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+export function MermaidDiagram({ chart }: { chart: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [svg, setSvg] = useState<string>("");
+
+  useEffect(() => {
+    let cancelled = false;
+    import("mermaid").then(({ default: mermaid }) => {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: "neutral",
+        fontFamily: "var(--font-inter)",
+      });
+      const id = `mermaid-${Math.random().toString(36).slice(2, 9)}`;
+      mermaid.render(id, chart).then(({ svg: renderedSvg }) => {
+        if (!cancelled) setSvg(renderedSvg);
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [chart]);
+
+  if (!svg) {
+    return (
+      <div className="flex h-32 items-center justify-center text-sm text-gray-400">
+        Loading diagram...
+      </div>
+    );
+  }
+
+  return (
+    <div
+      ref={ref}
+      className="mermaid-container [&_svg]:mx-auto [&_svg]:max-w-full"
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  );
+}
