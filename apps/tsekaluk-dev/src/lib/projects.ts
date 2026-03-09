@@ -120,14 +120,14 @@ export const projects: Project[] = [
     status: "live",
   },
   {
-    slug: "appen-sop",
-    name: "Appen SOP System",
-    icon: "clipboard-check",
-    tagline: "50,000+ AI annotations per week, QA time cut by 60%",
+    slug: "warehouse-drone",
+    name: "Warehouse Inventory Drone",
+    icon: "radar",
+    tagline: "95% recognition accuracy, full shelf scan in under 3 minutes",
     description:
-      "Designed the V4 SOP framework at Appen handling 50,000+ AI data annotations weekly across TCS, BW, and DP pipelines. Automated report dashboards replaced 8+ hours/week of manual QA review. Built the HM3D dataset evaluation pipeline for 3D spatial annotation quality scoring.",
-    metric: "60% QA time saved",
-    tags: ["Node.js", "Automation", "AI Data", "Appen"],
+      "Multi-rotor drone system for automated warehouse stocktaking. Integrated STM32 flight controller + OpenMV vision + BLE communication for autonomous waypoint navigation and QR code scanning across 3D shelf structures. 95% barcode recognition accuracy with laser calibration, completing full inventory traversal in under 3 minutes.",
+    metric: "95% accuracy",
+    tags: ["STM32", "OpenMV", "PID", "Embedded"],
     status: "shipped",
   },
   {
