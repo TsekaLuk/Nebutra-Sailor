@@ -12,15 +12,26 @@ const staticPaths = [
   { path: "/contact", changeFreq: "monthly" as const, priority: 0.4 },
 ];
 
+function localizedUrl(base: string, locale: string, path: string): string {
+  return locale === routing.defaultLocale
+    ? `${base}${path}`
+    : `${base}/${locale}${path}`;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://nebutra.com";
 
-  return routing.locales.flatMap((locale) =>
-    staticPaths.map((page) => ({
-      url: `${baseUrl}/${locale}${page.path}`,
+  return staticPaths.flatMap((page) => {
+    const languages = Object.fromEntries(
+      routing.locales.map((l) => [l, localizedUrl(baseUrl, l, page.path)]),
+    );
+
+    return routing.locales.map((locale) => ({
+      url: localizedUrl(baseUrl, locale, page.path),
       lastModified: new Date(),
       changeFrequency: page.changeFreq,
       priority: page.priority,
-    })),
-  );
+      alternates: { languages },
+    }));
+  });
 }
