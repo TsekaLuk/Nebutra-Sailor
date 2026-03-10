@@ -17,16 +17,16 @@ export default function ThinkingPage() {
     <section className="mx-auto max-w-3xl px-6 py-24 md:py-32">
       {/* Section header */}
       <div className="mb-16">
-        <p className="font-serif italic text-lg text-gray-400">
+        <p className="font-serif italic text-lg text-gray-400 dark:text-gray-500">
           / Essays &amp; ideas
         </p>
-        <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
+        <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-5xl">
           Thinking
         </h1>
       </div>
 
       {/* Article list */}
-      <div className="divide-y divide-gray-100">
+      <div className="divide-y divide-gray-100 dark:divide-gray-800">
         {articles.map((article) => (
           <Link
             key={article.slug}
@@ -36,13 +36,13 @@ export default function ThinkingPage() {
             <div className="flex flex-col gap-3">
               {/* Date + tags row */}
               <div className="flex items-center gap-3">
-                <time className="font-mono text-sm text-gray-400">
+                <time className="font-mono text-sm text-gray-400 dark:text-gray-500">
                   {article.date}
                 </time>
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-gray-50 px-2.5 py-0.5 text-xs font-medium text-gray-400"
+                    className="rounded-full bg-gray-50 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-400 dark:text-gray-500"
                   >
                     {tag}
                   </span>
@@ -50,12 +50,12 @@ export default function ThinkingPage() {
               </div>
 
               {/* Title */}
-              <h2 className="text-xl font-bold tracking-tight text-gray-900 transition-colors group-hover:text-[var(--color-accent-dark)]">
+              <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 transition-colors group-hover:text-[var(--color-accent-dark)]">
                 {article.title}
               </h2>
 
               {/* Excerpt */}
-              <p className="text-sm leading-relaxed text-gray-500">
+              <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                 {article.excerpt}
               </p>
             </div>
@@ -63,7 +63,7 @@ export default function ThinkingPage() {
         ))}
 
         {articles.length === 0 && (
-          <p className="text-gray-400">No articles yet.</p>
+          <p className="text-gray-400 dark:text-gray-500">No articles yet.</p>
         )}
       </div>
     </section>

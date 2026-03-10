@@ -1,17 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
 export function MermaidDiagram({ chart }: { chart: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     let cancelled = false;
     import("mermaid").then(({ default: mermaid }) => {
       mermaid.initialize({
         startOnLoad: false,
-        theme: "neutral",
+        theme: resolvedTheme === "dark" ? "dark" : "neutral",
         fontFamily: "var(--font-inter)",
       });
       const id = `mermaid-${Math.random().toString(36).slice(2, 9)}`;
@@ -22,11 +24,11 @@ export function MermaidDiagram({ chart }: { chart: string }) {
     return () => {
       cancelled = true;
     };
-  }, [chart]);
+  }, [chart, resolvedTheme]);
 
   if (!svg) {
     return (
-      <div className="flex h-32 items-center justify-center text-sm text-gray-400">
+      <div className="flex h-32 items-center justify-center text-sm text-gray-400 dark:text-gray-500">
         Loading diagram...
       </div>
     );

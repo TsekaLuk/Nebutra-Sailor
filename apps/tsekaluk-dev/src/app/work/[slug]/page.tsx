@@ -128,7 +128,7 @@ export default async function ProjectDetailPage({
         {/* Fallback to description if no story */}
         {!project.story && (
           <AnimateIn preset="fadeUp" inView>
-            <p className="text-base leading-relaxed text-gray-600">
+            <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
               {project.description}
             </p>
           </AnimateIn>
@@ -136,13 +136,13 @@ export default async function ProjectDetailPage({
       </div>
 
       {/* Section 3: Tags + Images + Links */}
-      <div className="mt-16 space-y-8 border-t border-gray-100 pt-8">
+      <div className="mt-16 space-y-8 border-t border-gray-100 dark:border-gray-800 pt-8">
         <AnimateIn preset="fadeUp" inView>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-gray-100 bg-gray-50/70 px-4 py-1.5 text-sm font-medium text-gray-500"
+                className="rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50/70 dark:bg-gray-800/70 px-4 py-1.5 text-sm font-medium text-gray-500 dark:text-gray-400"
               >
                 {tag}
               </span>
@@ -156,7 +156,7 @@ export default async function ProjectDetailPage({
               {project.images.map((src) => (
                 <div
                   key={src}
-                  className="overflow-hidden rounded-2xl border border-gray-100"
+                  className="overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-800"
                 >
                   <Image
                     src={src}
@@ -179,7 +179,7 @@ export default async function ProjectDetailPage({
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                  className="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
                 >
                   <Github className="h-4 w-4" />
                   Source Code
@@ -190,7 +190,7 @@ export default async function ProjectDetailPage({
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+                  className="inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-gray-100 px-5 py-2.5 text-sm font-medium text-white dark:text-gray-900 transition-colors hover:bg-gray-800 dark:hover:bg-gray-200"
                 >
                   <ExternalLink className="h-4 w-4" />
                   Live Demo
