@@ -15,7 +15,7 @@ export function MultipleSelectorDemo() {
     return (
         <div className="w-full max-w-sm mx-auto p-8 flex flex-col gap-6 h-[400px]">
             <div className="space-y-2">
-                <label className="text-sm font-medium">Frameworks</label>
+                <span className="text-sm font-medium">Frameworks</span>
                 <MultipleSelector
                     defaultOptions={OPTIONS}
                     placeholder="Select frameworks..."
@@ -28,7 +28,7 @@ export function MultipleSelectorDemo() {
             </div>
 
             <div className="space-y-2">
-                <label className="text-sm font-medium">Creatable Frameworks</label>
+                <span className="text-sm font-medium">Creatable Frameworks</span>
                 <MultipleSelector
                     creatable
                     defaultOptions={OPTIONS}

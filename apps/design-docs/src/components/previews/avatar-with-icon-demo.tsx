@@ -1,5 +1,5 @@
 import { AvatarWithIcon } from "@nebutra/ui/primitives";
-import { ArrowDownCircle, CheckCircle2, Clock } from "lucide-react";
+import { ArrowDownCircle } from "lucide-react";
 
 export function AvatarWithIconDemo() {
     return (

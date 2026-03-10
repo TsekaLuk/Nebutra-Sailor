@@ -1,8 +1,6 @@
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import type { ReactNode } from "react";
 import { source } from "@/lib/source";
-import { CustomThemeToggle } from "../../../components/custom-theme-toggle";
-import { LanguageSwitcher } from "../../../components/language-switcher";
 import { Banner } from "fumadocs-ui/components/banner";
 import type * as PageTree from "fumadocs-core/page-tree";
 
@@ -55,9 +53,16 @@ export default async function Layout({
     <DocsLayout
       tree={dynamicTree}
       nav={{
-        title: "Nebutra Design System",
+        title: (
+          <div className="flex items-center gap-2">
+            <img
+              src="/logo/logo-horizontal-en.svg"
+              alt="Nebutra Design System Logo"
+              className="h-6 w-auto"
+            />
+          </div>
+        ),
         url: `/${lang}/docs`,
-        children: <LanguageSwitcher />,
         transparentMode: 'top',
       }}
 
@@ -83,10 +88,7 @@ export default async function Layout({
           </Banner>
         )
       }}
-      i18n={false}
-      themeSwitch={{
-        component: <CustomThemeToggle />,
-      }}
+      i18n={true}
       githubUrl="https://github.com/TsekaLuk/Nebutra-Sailor"
     >
       {children}

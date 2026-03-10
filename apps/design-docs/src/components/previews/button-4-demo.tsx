@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Button4 } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
 
 export function Button4Demo() {
   return (

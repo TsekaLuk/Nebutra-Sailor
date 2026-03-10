@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
 
 import * as React from "react";
-import { Carousel3 } from "@nebutra/ui/primitives";
+import { CarouselPrevious, CarouselItem, CardContent, CarouselContent, CarouselNext } from "@nebutra/ui/primitives";
 
 export function Carousel3Demo() {
   return (

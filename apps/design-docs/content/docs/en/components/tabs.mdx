@@ -21,6 +21,25 @@ description: "Tabbed content panels with three visual variants, four sizes, and 
       <p className="text-sm text-foreground">Adjust your email preferences.</p>
     </TabsContent>
   </Tabs>
+
+  ```tsx
+<Tabs defaultValue="profile" className="w-[400px]">
+    <TabsList className="grid w-full grid-cols-3">
+      <TabsTrigger value="profile">Profile</TabsTrigger>
+      <TabsTrigger value="security">Security</TabsTrigger>
+      <TabsTrigger value="settings">Settings</TabsTrigger>
+    </TabsList>
+    <TabsContent value="profile" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">Manage your profile information.</p>
+    </TabsContent>
+    <TabsContent value="security" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">Update your password and 2FA.</p>
+    </TabsContent>
+    <TabsContent value="settings" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">Adjust your email preferences.</p>
+    </TabsContent>
+  </Tabs>
+  ```
 </ComponentPreview>
 
 ## Usage

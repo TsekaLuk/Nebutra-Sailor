@@ -17,6 +17,20 @@ description: "Custom scrollable container with styled scrollbars, built on Radix
       ))}
     </div>
   </ScrollArea>
+
+  ```tsx
+<ScrollArea className="h-72 w-48 rounded-md border text-left">
+    <div className="p-4">
+      <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
+      {Array.from({ length: 50 }, (_, i) => `Tag ${i + 1}`).map((tag, i, tags) => (
+        <React.Fragment key={tag}>
+          <div className="text-sm">{tag}</div>
+          {i < tags.length - 1 && <Separator className="my-2" />}
+        </React.Fragment>
+      ))}
+    </div>
+  </ScrollArea>
+  ```
 </ComponentPreview>
 
 ## Usage

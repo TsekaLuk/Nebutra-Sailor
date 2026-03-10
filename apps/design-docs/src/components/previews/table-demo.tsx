@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Table } from "@nebutra/ui/primitives";
+import { TableHead, TableHeader, TableCell, TableBody, TableRow, TableFooter, TableCaption, Table } from "@nebutra/ui/primitives";
 
 export function TableDemo() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Menu2 } from "@nebutra/ui/primitives";
+import { Menu } from "@nebutra/ui/primitives";
 
 export function Menu2Demo() {
   return (

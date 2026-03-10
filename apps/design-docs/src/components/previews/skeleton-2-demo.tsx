@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Skeleton2 } from "@nebutra/ui/primitives";
+import { Skeleton } from "@nebutra/ui/primitives";
 
 export function Skeleton2Demo() {
   return (

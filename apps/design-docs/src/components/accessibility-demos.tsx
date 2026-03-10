@@ -280,9 +280,10 @@ export function SkipLinkStyleDemo() {
                 <p className="text-sm text-fd-muted-foreground w-full max-w-lg mb-4">
                     The skip link is visually hidden but appears when it receives keyboard focus. Click the area below, then press Tab.
                 </p>
-                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
                 <div
                     className="w-full h-[150px] border border-dashed border-fd-border rounded-lg bg-fd-muted/30 relative flex items-center justify-center p-4 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all overflow-hidden"
+                    role="tabpanel"
+                    aria-label="Skip link demo container"
                     tabIndex={0}
                 >
                     <span className="text-xs text-fd-muted-foreground absolute bottom-4">Interactive Area Container</span>

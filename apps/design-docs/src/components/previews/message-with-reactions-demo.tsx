@@ -1,4 +1,4 @@
-import { ReactionChip, ReactionBadge, MessageWithReactions } from "@nebutra/ui/primitives";
+import { ReactionChip, MessageWithReactions } from "@nebutra/ui/primitives";
 import { useState } from "react";
 
 export default function MessageWithReactionsDemo() {

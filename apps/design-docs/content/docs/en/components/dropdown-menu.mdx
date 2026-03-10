@@ -29,6 +29,32 @@ description: "Contextual action list triggered by a button click, built on Radix
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
+
+  ```tsx
+<DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Open Menu</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-48">
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>
+        Profile
+        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Billing
+        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>Settings</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem className="text-destructive">
+        Log out
+        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+  ```
 </ComponentPreview>
 
 ## Usage

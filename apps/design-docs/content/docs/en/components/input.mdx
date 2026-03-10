@@ -19,21 +19,23 @@ description: "Single-line text input with optional prefix/suffix adornments and 
 
   ```tsx
 import { Input } from "@nebutra/ui"
-```
+  ```
+</ComponentPreview>
 
 ## Examples
 
 ### Basic
 
-```tsx
 <ComponentPreview className="max-w-[350px]">
   <Input placeholder="Enter value…" />
+
+  ```tsx
+<Input placeholder="Enter value…" />
+  ```
 </ComponentPreview>
-```
 
 ### With Label
 
-```tsx
 <ComponentPreview className="max-w-[350px]">
   <div className="flex flex-col gap-1.5 w-full">
     <Label htmlFor="email">
@@ -41,12 +43,19 @@ import { Input } from "@nebutra/ui"
     </Label>
     <Input id="email" type="email" placeholder="contact@nebutra.com" />
   </div>
+
+  ```tsx
+<div className="flex flex-col gap-1.5 w-full">
+  <Label htmlFor="email">
+    Email address
+  </Label>
+  <Input id="email" type="email" placeholder="contact@nebutra.com" />
+</div>
+  ```
 </ComponentPreview>
-```
 
 ### With Error State
 
-```tsx
 <ComponentPreview className="max-w-[350px]">
   <div className="flex flex-col gap-1.5 w-full">
     <Label htmlFor="email-err">Email address</Label>
@@ -62,8 +71,24 @@ import { Input } from "@nebutra/ui"
       Please enter a valid email address.
     </p>
   </div>
+
+  ```tsx
+<div className="flex flex-col gap-1.5 w-full">
+  <Label htmlFor="email-err">Email address</Label>
+  <Input
+    id="email-err"
+    type="email"
+    defaultValue="not-an-email"
+    className="border-destructive focus-visible:ring-destructive"
+    aria-invalid="true"
+    aria-describedby="email-error"
+  />
+  <p id="email-error" className="text-xs text-destructive">
+    Please enter a valid email address.
+  </p>
+</div>
+  ```
 </ComponentPreview>
-```
 
 ---
 
@@ -71,7 +96,14 @@ import { Input } from "@nebutra/ui"
 
 Use the `prefix` prop to render a non-interactive icon or node inside the left edge. Clicks on the prefix area pass through to the input (it gets focused).
 
-```tsx
+<ComponentPreview className="max-w-[350px] flex-col gap-4">
+  {/* Search icon */}
+  <Input prefix={<span className="text-xs">🔍</span>} placeholder="Search…" />
+
+  {/* Mail icon */}
+  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+
+  ```tsx
 import { Search, Mail } from "lucide-react"
 
 {/* Search icon */}
@@ -79,7 +111,7 @@ import { Search, Mail } from "lucide-react"
 
 {/* Mail icon */}
 <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
-```
+  ```
 </ComponentPreview>
 
 ---
@@ -152,13 +184,21 @@ const [value, setValue] = useState("")
 
 ### With Prefix
 
-```tsx
+<ComponentPreview className="max-w-[350px]">
+  <Input
+    prefix={<Search className="h-4 w-4" />}
+    clearable
+    placeholder="Search…"
+  />
+
+  ```tsx
 <Input
   prefix={<Search className="h-4 w-4" />}
   clearable
   placeholder="Search…"
 />
-```
+  ```
+</ComponentPreview>
 
 <Callout>
   When `clearable` and `suffix` are both set, the ✕ button replaces the suffix while the field has a value.
@@ -171,7 +211,10 @@ const [value, setValue] = useState("")
 
 For interactive right-side controls, use `className="pr-9"` and position a button with `absolute`:
 
-```tsx
+<ComponentPreview className="max-w-[350px]">
+  <Input3Demo />
+
+  ```tsx
 const [shown, setShown] = useState(false)
 const Icon = shown ? EyeOff : Eye
 
@@ -188,7 +231,8 @@ const Icon = shown ? EyeOff : Eye
     <Icon className="h-3.5 w-3.5" />
   </button>
 </div>
-```
+  ```
+</ComponentPreview>
 
 ---
 

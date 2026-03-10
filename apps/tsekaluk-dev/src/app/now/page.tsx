@@ -4,6 +4,9 @@ import { NowEntry } from "@/components/sections/now-entry";
 export const metadata: Metadata = {
   title: "Now — Tseka Luk",
   description: "What I'm currently working on, thinking about, and shipping.",
+  alternates: {
+    canonical: "https://tsekaluk.dev/now",
+  },
 };
 
 export default function NowPage() {

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Pagination } from "@nebutra/ui/primitives";
+import { PaginationItem, PaginationEllipsis, Pagination, PaginationLink, PaginationNext, PaginationPrevious, PaginationContent } from "@nebutra/ui/primitives";
 
 export function PaginationDemo() {
   return (

@@ -19,6 +19,23 @@ description: "基于 Radix UI 构建的下拉选择控件，具有完善的键�
       </SelectGroup>
     </SelectContent>
   </Select>
+
+  ```tsx
+<Select>
+    <SelectTrigger className="w-[200px]">
+      <SelectValue placeholder="选择一种水果 (Select a fruit)" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>水果 (Fruits)</SelectLabel>
+        <SelectItem value="apple">苹果 (Apple)</SelectItem>
+        <SelectItem value="banana">香蕉 (Banana)</SelectItem>
+        <SelectItem value="orange">橙子 (Orange)</SelectItem>
+        <SelectItem value="grape">葡萄 (Grape)</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+  ```
 </ComponentPreview>
 
 ## 使用方法 (Usage)

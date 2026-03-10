@@ -979,3 +979,8 @@ export const XPostCardDemo = dynamic(
   () => import("./x-post-card-demo").then((m) => ({ default: m.XPostCardDemo })),
   { ssr: false },
 );
+
+export const BookDemo = dynamic(
+  () => import("./book-demo").then((m) => ({ default: m.BookDemo })),
+  { ssr: false },
+);

@@ -1,214 +1,135 @@
 "use client";
 
-import * as React from "react";
-import { cn } from "../utils/cn";
+import React from "react";
+import { useResponsive } from "../hooks/use-responsive";
+import clsx from "clsx";
 
-// ─── Overlay layers ───────────────────────────────────────────────────────────
+const DefaultIllustration = (
+  <svg fill="none" height="56" viewBox="0 0 36 56" width="36" xmlns="http://www.w3.org/2000/svg">
+    <path
+      clipRule="evenodd"
+      d="M3.03113 28.0005C6.26017 23.1765 11.7592 20.0005 18 20.0005C24.2409 20.0005 29.7399 23.1765 32.9689 28.0005C29.7399 32.8244 24.2409 36.0005 18 36.0005C11.7592 36.0005 6.26017 32.8244 3.03113 28.0005Z"
+      fill="#0070F3"
+      fillRule="evenodd"
+    />
+    <path
+      clipRule="evenodd"
+      d="M32.9691 28.0012C34.8835 25.1411 36 21.7017 36 18.0015C36 8.06034 27.9411 0.00146484 18 0.00146484C8.05887 0.00146484 0 8.06034 0 18.0015C0 21.7017 1.11648 25.1411 3.03094 28.0012C6.25996 23.1771 11.7591 20.001 18 20.001C24.2409 20.001 29.74 23.1771 32.9691 28.0012Z"
+      fill="#45DEC4"
+      fillRule="evenodd"
+    />
+    <path
+      clipRule="evenodd"
+      d="M32.9692 28.0005C29.7402 32.8247 24.241 36.001 18 36.001C11.759 36.001 6.25977 32.8247 3.03077 28.0005C1.11642 30.8606 0 34.2999 0 38C0 47.9411 8.05887 56 18 56C27.9411 56 36 47.9411 36 38C36 34.2999 34.8836 30.8606 32.9692 28.0005Z"
+      fill="#E5484D"
+      fillRule="evenodd"
+    />
+  </svg>
+);
 
-/** Left-to-right gradient simulating the book spine shadow */
-const SPINE_GRADIENT =
-  "linear-gradient(90deg, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.09) 12%, rgba(0,0,0,0.02) 22%, transparent 30%)";
-
-/** Subtle top-left gloss highlight */
-const GLOSS_GRADIENT =
-  "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 55%)";
-
-/** SVG fractal noise — used for the textured variant */
-const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.14'/%3E%3C/svg%3E")`;
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-/** Responsive width — static number or `{ sm, md }` breakpoints */
-export type BookWidth = number | { sm?: number; md?: number };
-
-export interface BookProps {
-  /** Book cover title rendered at the bottom of the cover */
-  title: string;
-  /**
-   * Visual variant:
-   * - `"default"` — 3-D book with perspective + spine shadow
-   * - `"simple"` — flat cover, no spine effect
-   */
-  variant?: "default" | "simple";
-  /** Cover background color (any CSS color string). Default: amber */
-  color?: string;
-  /** Title text color. Default: `"#000000"` */
-  textColor?: string;
-  /** JSX illustration rendered in the upper ~55 % of the cover */
-  illustration?: React.ReactNode;
-  /**
-   * Cover width in px, or a responsive object `{ sm, md }`.
-   * Height is computed automatically at a 1 : 1.45 aspect ratio.
-   */
-  width?: BookWidth;
-  /** Apply a grain / paper texture effect to the cover */
-  textured?: boolean;
-  /**
-   * Brand mark rendered bottom-right over the cover.
-   * Pass an icon or logomark element.
-   */
-  logo?: React.ReactNode;
-  className?: string;
+export interface ResponsiveProp<T> {
+  sm?: T;
+  md?: T;
+  lg?: T;
+  xl?: T;
 }
 
-// ─── Defaults ────────────────────────────────────────────────────────────────
+export interface BookProps {
+  title: string;
+  variant?: "simple" | "stripe";
+  width?: number | ResponsiveProp<number>;
+  color?: string;
+  textColor?: string;
+  illustration?: React.ReactNode;
+  textured?: boolean;
+}
 
-const DEFAULT_COLOR = "#f59e0b"; // amber-400
-const DEFAULT_WIDTH = 160;
-const ASPECT_RATIO = 1.45; // height = width × ASPECT_RATIO
-
-// ─── Book ─────────────────────────────────────────────────────────────────────
-
-/**
- * Book — a 3-D book cover component.
- *
- * Supports two variants (3-D spine / flat), custom cover color, illustration
- * slot, responsive width, grain texture, and a logo slot.
- *
- * @example Default
- * ```tsx
- * <Book title="The user experience of the Frontend Cloud" />
- * ```
- *
- * @example Custom color + simple variant
- * ```tsx
- * <Book
- *   title="Design Engineering at Vercel"
- *   color="#7DC1C1"
- *   textColor="white"
- *   variant="simple"
- * />
- * ```
- *
- * @example Responsive width
- * ```tsx
- * <Book title="AI-Powered Search" width={{ sm: 130, md: 196 }} />
- * ```
- *
- * @example With illustration
- * ```tsx
- * <Book
- *   title="Intro to TypeScript"
- *   color="#0033FE"
- *   textColor="white"
- *   illustration={<img src="/cover-art.png" className="w-full h-full object-cover" />}
- * />
- * ```
- */
-export function Book({
+export const Book = ({
   title,
-  variant = "default",
-  color = DEFAULT_COLOR,
-  textColor = "#000000",
+  variant = "stripe",
+  width = 196,
+  color,
+  textColor = "var(--ds-gray-1000)",
   illustration,
-  width = DEFAULT_WIDTH,
-  textured = false,
-  logo,
-  className,
-}: BookProps) {
-  const isDefault = variant === "default";
-
-  // ── Width resolution ──────────────────────────────────────────────────────
-  const wLg = typeof width === "number" ? width : (width.md ?? DEFAULT_WIDTH);
-  const wSm = typeof width === "object" && width.sm != null ? width.sm : wLg;
-  const isResponsive =
-    typeof width === "object" &&
-    width.sm !== undefined &&
-    width.md !== undefined;
-
-  const widthCSS = isResponsive
-    ? `clamp(${wSm}px, 45vw, ${wLg}px)`
-    : `${wLg}px`;
-  const heightCSS = isResponsive
-    ? `clamp(${Math.round(wSm * ASPECT_RATIO)}px, calc(45vw * ${ASPECT_RATIO}), ${Math.round(wLg * ASPECT_RATIO)}px)`
-    : `${Math.round(wLg * ASPECT_RATIO)}px`;
-
-  // Title font scales with book width
-  const fontSize = Math.max(10, Math.round(wLg * 0.073));
+  textured = false
+}: BookProps) => {
+  const _width = useResponsive(width);
+  const _color = color ? color : variant === "simple" ? "var(--ds-background-200)" : "var(--ds-amber-600)";
+  const _illustration = illustration ? illustration : DefaultIllustration;
 
   return (
-    <div
-      className={cn("relative inline-block select-none", className)}
-      style={{ width: widthCSS, height: heightCSS }}
-    >
-      {/* ── Book body ──────────────────────────────────────────────────────── */}
+    <div className="inline-block w-fit" style={{ perspective: 900 }}>
       <div
-        className="absolute inset-0 overflow-hidden"
-        style={{
-          borderRadius: "3px 4px 4px 3px",
-          background: color,
-          ...(isDefault
-            ? {
-                transform: "perspective(700px) rotateY(-10deg)",
-                transformOrigin: "right center",
-                boxShadow:
-                  "10px 20px 48px rgba(0,0,0,0.22), 5px 8px 16px rgba(0,0,0,0.12)",
-              }
-            : {
-                boxShadow: "2px 6px 18px rgba(0,0,0,0.1)",
-              }),
-        }}
+        className="aspect-[49/60] w-fit relative rotate-0 duration-[250ms] book-rotate"
+        style={{ transformStyle: "preserve-3d", minWidth: _width, containerType: "inline-size" }}
       >
-        {/* Spine shadow (default only) */}
-        {isDefault && (
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-20"
-            style={{ background: SPINE_GRADIENT }}
-          />
-        )}
-
-        {/* Gloss highlight */}
         <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 z-20"
-          style={{ background: GLOSS_GRADIENT }}
-        />
-
-        {/* Grain texture */}
-        {textured && (
+          className="flex flex-col h-full rounded-l-md rounded-r overflow-hidden shadow-book translate-x-0 relative after:absolute after:border after:border-gray-alpha-400 after:w-full after:h-full after:shadow-book-border after:rounded-l-md after:rounded-r"
+          style={{ width: _width, backgroundColor: "var(--ds-background-200)" }}
+        >
           <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-20 mix-blend-overlay opacity-75"
-            style={{
-              backgroundImage: NOISE_SVG,
-              backgroundSize: "200px 200px",
-              backgroundRepeat: "repeat",
-            }}
-          />
-        )}
-
-        {/* Illustration (upper 55 %) */}
-        {illustration && (
-          <div
-            aria-hidden
-            className="absolute inset-x-0 top-0 overflow-hidden"
-            style={{ height: "55%" }}
+            className={clsx(
+              "w-full relative overflow-hidden",
+              variant === "stripe" && "flex-1"
+            )}
+            style={{ background: _color }}
           >
-            {illustration}
+            {variant === "stripe" && illustration && (
+              <div className="absolute h-full w-full">
+                {_illustration}
+              </div>
+            )}
+            <div className="absolute h-full w-[8.2%] mix-blend-overlay" style={{ background: "var(--ds-book-bind)" }} />
           </div>
-        )}
-
-        {/* Title */}
-        <div className="absolute inset-x-0 bottom-0 z-10 p-4">
-          <p
-            className="font-semibold leading-snug"
-            style={{ color: textColor, fontSize }}
+          <div
+            className={clsx(
+              "relative flex-1",
+              (variant === "stripe" || (variant === "simple" && color === undefined)) && "bg-book-gradient"
+            )}
+            style={{ background: variant === "simple" && color !== undefined ? _color : undefined }}
           >
-            {title}
-          </p>
+            <div className="absolute h-full w-[8.2%] opacity-20" style={{ background: "var(--ds-book-bind)" }} />
+            <div
+              className={clsx(
+                "flex flex-col w-full p-[6.1%] pl-[14.3%]",
+                variant === "simple" ? "gap-4" : "justify-between"
+              )}
+              style={{ containerType: "inline-size", gap: `calc((24px / 196) * ${_width})` }}
+            >
+              <span
+                className={clsx(
+                  "leading-[1.25em] tracking-[-.02em] text-balance font-semibold",
+                  variant === "simple" ? "text-[12cqw]" : "text-[10.5cqw]"
+                )}
+                style={{ color: textColor }}
+              >
+                {title}
+              </span>
+              {variant === "stripe" ? (
+                <svg className="scale-75 -ml-1 -mb-1" height="24" width="24" style={{ fill: textColor }}>
+                  <path d="M21,21H3L12,3Z" />
+                </svg>
+              ) : _illustration}
+            </div>
+          </div>
+          {textured && (
+            <div
+              className="absolute top-0 left-0 inset-0 rotate-180 rounded-l-md rounded-r mix-blend-hard-light pointer-events-none bg-cover bg-no-repeat opacity-50 brightness-110 bg-[url('https://assets.vercel.com/image/upload/v1720554484/front/design/book-texture.avif')]" />
+          )}
         </div>
 
-        {/* Logo mark (bottom-right) */}
-        {logo && (
-          <div
-            className="absolute bottom-3 right-3 z-10"
-            style={{ color: textColor, opacity: 0.65 }}
-          >
-            {logo}
-          </div>
-        )}
+        <div
+          className="h-[calc(100%_-_2_*_3px)] w-[calc(29cqw_-_2px)] absolute top-[3px]"
+          style={{
+            background: "linear-gradient(90deg, #eaeaea, transparent 70%), linear-gradient(#fff, #fafafa)",
+            transform: `translateX(calc(${_width} * 1px - 29cqw / 2 - 3px)) rotateY(90deg) translateX(calc(29cqw / 2))`
+          }}
+        />
+        <div
+          className="absolute left-0 top-0 rounded-l-md rounded-r h-full"
+          style={{ width: _width, transform: "translateZ(calc(-1 * 29cqw))", backgroundColor: "var(--ds-gray-200)" }}
+        />
       </div>
     </div>
   );
-}
+};

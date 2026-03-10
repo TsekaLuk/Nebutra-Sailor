@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Popover } from "@nebutra/ui/primitives";
+import { PopoverTrigger, PopoverContent, Popover, Button } from "@nebutra/ui/primitives";
 
 export function PopoverDemo() {
   return (

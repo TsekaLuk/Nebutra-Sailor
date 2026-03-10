@@ -20,6 +20,23 @@ description: "带有圆形单选按钮指示器的单项选择控件。"
       <Label htmlFor="r3">紧凑 (Compact)</Label>
     </div>
   </RadioGroup>
+
+  ```tsx
+<RadioGroup defaultValue="comfortable">
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="default" id="r1" />
+      <Label htmlFor="r1">默认 (Default)</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="comfortable" id="r2" />
+      <Label htmlFor="r2">舒适 (Comfortable)</Label>
+    </div>
+    <div className="flex items-center space-x-2">
+      <RadioGroupItem value="compact" id="r3" />
+      <Label htmlFor="r3">紧凑 (Compact)</Label>
+    </div>
+  </RadioGroup>
+  ```
 </ComponentPreview>
 
 ## 使用方法 (Usage)

@@ -17,7 +17,7 @@ export function FeatureArrowCardDemo() {
                         <span className="text-2xl font-bold text-blue-500">99.9%</span>
                     </div>
                 }
-                onArrowClick={() => console.log('Performance clicked')}
+                onArrowClick={() => console.warn('Performance clicked')}
                 className="rounded-xl"
             />
 
@@ -31,7 +31,7 @@ export function FeatureArrowCardDemo() {
                         <Shield className="size-8 text-emerald-500" />
                     </div>
                 }
-                onArrowClick={() => console.log('Security clicked')}
+                onArrowClick={() => console.warn('Security clicked')}
                 className="rounded-xl"
             />
 
@@ -49,7 +49,7 @@ export function FeatureArrowCardDemo() {
                         </div>
                     </div>
                 }
-                onArrowClick={() => console.log('AI clicked')}
+                onArrowClick={() => console.warn('AI clicked')}
                 className="rounded-xl md:col-span-2"
             />
 

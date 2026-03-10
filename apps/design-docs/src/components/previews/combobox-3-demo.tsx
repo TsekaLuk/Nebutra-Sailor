@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Combobox3 } from "@nebutra/ui/primitives";
+import { Combobox } from "@nebutra/ui/primitives";
 
 export function Combobox3Demo() {
   return (

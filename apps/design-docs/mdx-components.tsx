@@ -7,6 +7,7 @@ import { Files, Folder, File } from "fumadocs-ui/components/files";
 import { TypeTable } from "fumadocs-ui/components/type-table";
 import { ImageZoom } from "fumadocs-ui/components/image-zoom";
 import { InlineTOC } from "fumadocs-ui/components/inline-toc";
+import { GithubInfo } from "fumadocs-ui/components/github-info";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { ComponentPreview } from "@/components/component-preview";
@@ -125,6 +126,7 @@ import {
   TreeViewDemo,
   WaveAnimationDemo,
   XPostCardDemo,
+  BookDemo,
 } from "@/components/previews/dynamic-demos";
 import { FormDemo } from "@/components/previews/form-demo";
 import { AspectRatioDemo } from "@/components/previews/aspect-ratio-demo";
@@ -187,6 +189,15 @@ import {
   AlertIcon,
   AlertContent,
   AlertToolbar,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   Avatar,
   AvatarImage,
   AvatarFallback,
@@ -369,6 +380,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ImageZoom,
     InlineTOC,
     Mermaid,
+    GithubInfo,
     FeedbackBlock: (props: React.ComponentPropsWithoutRef<typeof FeedbackBlock>) => (
       <FeedbackBlock {...props} onSendAction={onBlockFeedbackAction} />
     ),
@@ -505,6 +517,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TreeViewDemo,
     WaveAnimationDemo,
     XPostCardDemo,
+    BookDemo,
     // Custom preview wrapper
     ComponentPreview,
     APIPage,
@@ -576,6 +589,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     AlertIcon,
     AlertContent,
     AlertToolbar,
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
     Avatar,
     AvatarImage,
     AvatarFallback,

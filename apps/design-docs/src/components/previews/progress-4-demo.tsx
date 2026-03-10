@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Progress4 } from "@nebutra/ui/primitives";
+import { Progress } from "@nebutra/ui/primitives";
 
 export function Progress4Demo() {
   return (

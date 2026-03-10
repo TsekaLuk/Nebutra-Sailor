@@ -4,8 +4,12 @@ description: Searchable select input combining a trigger button with a filtered 
 ---
 
 
-<ComponentPreview className="min-h-[300px]">
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
   <ComboboxDemo />
+
+  ```tsx
+<ComboboxDemo />
+  ```
 </ComponentPreview>
 
 ## Overview
@@ -18,7 +22,7 @@ description: Searchable select input combining a trigger button with a filtered 
 ## Installation
 
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-    <Combobox
+  <Combobox
     options={[
       { value: "next", label: "Next.js" },
       { value: "remix", label: "Remix" },
@@ -27,11 +31,22 @@ description: Searchable select input combining a trigger button with a filtered 
     ]}
     placeholder="Select framework..."
   />
+
+  ```tsx
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  placeholder="Select framework..."
+/>
+  ```
 </ComponentPreview>
 
 ### With label
 
-```tsx
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
@@ -45,28 +60,6 @@ description: Searchable select input combining a trigger button with a filtered 
   />
 
   ```tsx
-import { Combobox } from "@nebutra/ui/primitives"
-```
-
-## Usage
-
-### Simple mode (options prop)
-
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  placeholder="Select framework..."
-/>
-</ComponentPreview>
-
-### With label
-
-```tsx
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
 <Combobox
   options={[
     { value: "next", label: "Next.js" },
@@ -77,13 +70,69 @@ import { Combobox } from "@nebutra/ui/primitives"
   label="Framework"
   placeholder="Select framework..."
 />
-```
+  ```
+</ComponentPreview>
+
+## Usage
+
+### Simple mode (options prop)
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    placeholder="Select framework..."
+  />
+
+  ```tsx
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  placeholder="Select framework..."
+/>
+  ```
+</ComponentPreview>
+
+### With label
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    label="Framework"
+    placeholder="Select framework..."
+  />
+
+  ```tsx
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  label="Framework"
+  placeholder="Select framework..."
+/>
+  ```
 </ComponentPreview>
 
 ### Uncontrolled
 
 <ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
-    <Combobox placeholder="Select framework...">
+  <Combobox placeholder="Select framework...">
     <Combobox.Input placeholder="Search frameworks..." />
     <CommandList>
       <Combobox.Empty>No frameworks found.</Combobox.Empty>
@@ -99,107 +148,6 @@ import { Combobox } from "@nebutra/ui/primitives"
   </Combobox>
 
   ```tsx
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <Combobox
-    options={[
-      { value: "next", label: "Next.js" },
-      { value: "remix", label: "Remix" },
-      { value: "astro", label: "Astro" },
-      { value: "nuxt", label: "Nuxt" },
-    ]}
-    defaultValue="next"
-    placeholder="Select framework..."
-  />
-</ComponentPreview>
-```
-
-### Disabled
-
-```tsx
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <Combobox
-    options={[
-      { value: "next", label: "Next.js" },
-      { value: "remix", label: "Remix" },
-      { value: "astro", label: "Astro" },
-      { value: "nuxt", label: "Nuxt" },
-    ]}
-    defaultValue="remix"
-    disabled
-    placeholder="Select framework..."
-  />
-</ComponentPreview>
-```
-
-### Error state
-
-```tsx
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <Combobox
-    options={[
-      { value: "next", label: "Next.js" },
-      { value: "remix", label: "Remix" },
-      { value: "astro", label: "Astro" },
-      { value: "nuxt", label: "Nuxt" },
-    ]}
-    error
-    placeholder="Select framework..."
-  />
-</ComponentPreview>
-```
-
-### Sizes
-
-```tsx
-<ComponentPreview className="min-h-[300px] flex flex-col gap-4 justify-center items-center">
-  <Combobox options={[{ value: "1", label: "Option 1" }]} size="sm" placeholder="Small" />
-  <Combobox options={[{ value: "1", label: "Option 1" }]} size="default" placeholder="Default" />
-  <Combobox options={[{ value: "1", label: "Option 1" }]} size="lg" placeholder="Large" />
-</ComponentPreview>
-```
-
-### Grouped options
-
-```tsx
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
-  <Combobox
-    options={[
-      { value: "next", label: "Next.js", group: "React" },
-      { value: "remix", label: "Remix", group: "React" },
-      { value: "nuxt", label: "Nuxt", group: "Vue" },
-      { value: "svelte", label: "SvelteKit", group: "Svelte" },
-    ]}
-    label="Framework"
-    placeholder="Select framework..."
-  />
-</ComponentPreview>
-```
-
-### Custom width
-
-```tsx
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <Combobox
-    options={[
-      { value: "next", label: "Next.js" },
-      { value: "remix", label: "Remix" },
-      { value: "astro", label: "Astro" },
-      { value: "nuxt", label: "Nuxt" },
-    ]}
-    width="w-96"
-    placeholder="Select framework..."
-  />
-</ComponentPreview>
-```
-
-### Composition mode
-
-For advanced scenarios (async search, custom rendering, separators), use sub-components as children.
-
-```tsx
-import { Combobox } from "@nebutra/ui/primitives"
-import { CommandList } from "@nebutra/ui/primitives"
-
 <Combobox placeholder="Select framework...">
   <Combobox.Input placeholder="Search frameworks..." />
   <CommandList>
@@ -214,7 +162,175 @@ import { CommandList } from "@nebutra/ui/primitives"
     </Combobox.Group>
   </CommandList>
 </Combobox>
-```
+  ```
+</ComponentPreview>
+
+### Disabled
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    defaultValue="remix"
+    disabled
+    placeholder="Select framework..."
+  />
+
+  ```tsx
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  defaultValue="remix"
+  disabled
+  placeholder="Select framework..."
+/>
+  ```
+</ComponentPreview>
+
+### Error state
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    error
+    placeholder="Select framework..."
+  />
+
+  ```tsx
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  error
+  placeholder="Select framework..."
+/>
+  ```
+</ComponentPreview>
+
+### Sizes
+
+<ComponentPreview className="min-h-[300px] flex flex-col gap-4 justify-center items-center">
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="sm" placeholder="Small" />
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="default" placeholder="Default" />
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="lg" placeholder="Large" />
+
+  ```tsx
+<div className="flex flex-col gap-4 justify-center items-center">
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="sm" placeholder="Small" />
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="default" placeholder="Default" />
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="lg" placeholder="Large" />
+</div>
+  ```
+</ComponentPreview>
+
+### Grouped options
+
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js", group: "React" },
+      { value: "remix", label: "Remix", group: "React" },
+      { value: "nuxt", label: "Nuxt", group: "Vue" },
+      { value: "svelte", label: "SvelteKit", group: "Svelte" },
+    ]}
+    label="Framework"
+    placeholder="Select framework..."
+  />
+
+  ```tsx
+<Combobox
+  options={[
+    { value: "next", label: "Next.js", group: "React" },
+    { value: "remix", label: "Remix", group: "React" },
+    { value: "nuxt", label: "Nuxt", group: "Vue" },
+    { value: "svelte", label: "SvelteKit", group: "Svelte" },
+  ]}
+  label="Framework"
+  placeholder="Select framework..."
+/>
+  ```
+</ComponentPreview>
+
+### Custom width
+
+<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+  <Combobox
+    options={[
+      { value: "next", label: "Next.js" },
+      { value: "remix", label: "Remix" },
+      { value: "astro", label: "Astro" },
+      { value: "nuxt", label: "Nuxt" },
+    ]}
+    width="w-96"
+    placeholder="Select framework..."
+  />
+
+  ```tsx
+<Combobox
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+    { value: "nuxt", label: "Nuxt" },
+  ]}
+  width="w-96"
+  placeholder="Select framework..."
+/>
+  ```
+</ComponentPreview>
+
+### Composition mode
+
+For advanced scenarios (async search, custom rendering, separators), use sub-components as children.
+
+<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+  <Combobox placeholder="Select framework...">
+    <Combobox.Input placeholder="Search frameworks..." />
+    <CommandList>
+      <Combobox.Empty>No frameworks found.</Combobox.Empty>
+      <Combobox.Group heading="React">
+        <Combobox.Option value="next">Next.js</Combobox.Option>
+        <Combobox.Option value="remix">Remix</Combobox.Option>
+      </Combobox.Group>
+      <Combobox.Separator />
+      <Combobox.Group heading="Vue">
+        <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
+      </Combobox.Group>
+    </CommandList>
+  </Combobox>
+
+  ```tsx
+<Combobox placeholder="Select framework...">
+  <Combobox.Input placeholder="Search frameworks..." />
+  <CommandList>
+    <Combobox.Empty>No frameworks found.</Combobox.Empty>
+    <Combobox.Group heading="React">
+      <Combobox.Option value="next">Next.js</Combobox.Option>
+      <Combobox.Option value="remix">Remix</Combobox.Option>
+    </Combobox.Group>
+    <Combobox.Separator />
+    <Combobox.Group heading="Vue">
+      <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
+    </Combobox.Group>
+  </CommandList>
+</Combobox>
+  ```
 </ComponentPreview>
 
 ## Props

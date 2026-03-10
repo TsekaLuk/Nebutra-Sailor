@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { DropdownMenu2 } from "@nebutra/ui/primitives";
+import { DropdownMenuTrigger, DropdownMenu, DropdownMenuRadioGroup, DropdownMenuContent, DropdownMenuSeparator, Button, DropdownMenuLabel, DropdownMenuRadioItem } from "@nebutra/ui/primitives";
 
 export function DropdownMenu2Demo() {
   return (

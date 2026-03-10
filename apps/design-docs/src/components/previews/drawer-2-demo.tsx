@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Drawer2 } from "@nebutra/ui/primitives";
+import { DrawerTitle, DrawerTrigger, DrawerContent, DrawerHeader, Drawer, Button } from "@nebutra/ui/primitives";
 
 export function Drawer2Demo() {
   return (

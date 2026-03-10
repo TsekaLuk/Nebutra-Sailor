@@ -3,7 +3,6 @@ import { I18nProvider } from "fumadocs-ui/contexts/i18n";
 import type { ReactNode } from "react";
 import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
 import { i18n } from "@/lib/i18n";
-import { CustomAISearch } from '@/components/custom-ai-search';
 import "../globals.css";
 
 const inter = Inter({
@@ -62,7 +61,6 @@ export default async function RootLayout({
             ]}
           >
             {children}
-            <CustomAISearch />
           </I18nProvider>
         </RootProvider>
       </body>

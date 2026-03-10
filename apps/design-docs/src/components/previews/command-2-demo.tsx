@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Command2 } from "@nebutra/ui/primitives";
+import { CommandInput, CommandItem, CommandDialog, CommandList, CommandGroup, CommandEmpty } from "@nebutra/ui/primitives";
 
 export function Command2Demo() {
   return (

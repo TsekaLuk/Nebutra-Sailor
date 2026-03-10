@@ -1,15 +1,16 @@
 "use client";
 
-import { Mail, ArrowRight } from "lucide-react"
-
-<div className="flex gap-3">
-  <Button prefix={<Mail className="w-4 h-4" />}>Login with Email</Button>
-  <Button suffix={<ArrowRight className="w-4 h-4" />}>Continue</Button>
-</div>
+import { Button } from "@nebutra/ui/primitives";
 
 export function Button3Demo() {
   return (
-    <Button prefix={<span>✉️</span>}>Login with Email</Button>
-  <Button suffix={<span>➔</span>}>Continue</Button>
+    <div className="flex gap-4 items-center flex-wrap">
+      <Button>
+        <span className="mr-2">✉️</span> Login with Email
+      </Button>
+      <Button>
+        Continue <span className="ml-2">➔</span>
+      </Button>
+    </div>
   );
 }

@@ -34,7 +34,7 @@ export function Hero() {
         {/* Status badge */}
         <AnimateIn preset="fade">
           <div className="mb-10 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/80 px-4 py-1.5 text-sm text-gray-600 shadow-sm backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/80 px-4 py-1.5 text-sm text-gray-600 dark:text-gray-400 shadow-sm dark:shadow-gray-900/30 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
@@ -47,7 +47,7 @@ export function Hero() {
         {/* Portrait + Headlines */}
         <div className="text-center">
           <AnimateIn preset="scale" delay={0.05}>
-            <div className="mx-auto mb-8 h-28 w-28 overflow-hidden rounded-full border-2 border-white shadow-lg">
+            <div className="mx-auto mb-8 h-28 w-28 overflow-hidden rounded-full border-2 border-white dark:border-gray-800 shadow-lg dark:shadow-gray-900/50">
               <Image
                 src="/images/headshot.jpg"
                 alt="Tseka Luk"
@@ -60,19 +60,19 @@ export function Hero() {
           </AnimateIn>
 
           <AnimateIn preset="fadeUp" delay={0.1}>
-            <h1 className="text-5xl font-bold tracking-tight text-gray-900 md:text-[6vw] md:leading-[1.1]">
+            <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-[6vw] md:leading-[1.1]">
               Hi, I&apos;m Tseka
             </h1>
           </AnimateIn>
 
           <AnimateIn preset="fadeUp" delay={0.2}>
-            <h2 className="mt-2 font-serif italic text-6xl tracking-tight text-gray-800 md:text-[8vw] md:leading-[1.1]">
+            <h2 className="mt-2 font-serif italic text-6xl tracking-tight text-gray-800 dark:text-gray-200 md:text-[8vw] md:leading-[1.1]">
               AI-Native Builder
             </h2>
           </AnimateIn>
 
           <AnimateIn preset="fadeUp" delay={0.35}>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-gray-500">
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-gray-500 dark:text-gray-400">
               I design and build AI-powered products from zero to one. Focused
               on making complex technology feel simple, useful, and
               beautiful&mdash;shipping fast and iterating in public.
@@ -85,14 +85,14 @@ export function Hero() {
           <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/work"
-              className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+              className="inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-gray-100 px-7 py-3 text-sm font-medium text-white dark:text-gray-900 transition-colors hover:bg-gray-800 dark:hover:bg-gray-200"
             >
               See my work
               <span aria-hidden="true">&rarr;</span>
             </Link>
             <Link
               href="/now"
-              className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-7 py-3 text-sm font-medium text-gray-700 transition-colors hover:border-gray-400 hover:text-gray-900"
+              className="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 px-7 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors hover:border-gray-400 dark:hover:border-gray-500 hover:text-gray-900 dark:hover:text-gray-100"
             >
               What I&apos;m doing now
             </Link>
@@ -104,7 +104,7 @@ export function Hero() {
           {CONTEXT_PILLS.map((pill) => (
             <AnimateIn key={pill.label} preset="fade">
               <div
-                className={`absolute ${pill.position} rounded-full border border-gray-200 bg-white/70 px-4 py-1.5 text-xs font-medium text-gray-500 shadow-sm backdrop-blur-sm`}
+                className={`absolute ${pill.position} rounded-full border border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-900/70 px-4 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 shadow-sm dark:shadow-gray-900/30 backdrop-blur-sm`}
               >
                 {pill.label}
               </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { DatePicker5 } from "@nebutra/ui/primitives";
+import { DateRangePicker } from "@nebutra/ui/primitives";
 
 export function DatePicker5Demo() {
   return (

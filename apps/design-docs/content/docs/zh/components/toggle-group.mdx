@@ -17,6 +17,20 @@ description: "一组开关按钮，可以同时按下一个或多个。"
       <AlignRight className="size-4" />
     </ToggleGroupItem>
   </ToggleGroup>
+
+  ```tsx
+<ToggleGroup type="single" defaultValue="center">
+    <ToggleGroupItem value="left" aria-label="左对齐 (Align left)">
+      <AlignLeft className="size-4" />
+    </ToggleGroupItem>
+    <ToggleGroupItem value="center" aria-label="居中对齐 (Align center)">
+      <AlignCenter className="size-4" />
+    </ToggleGroupItem>
+    <ToggleGroupItem value="right" aria-label="右对齐 (Align right)">
+      <AlignRight className="size-4" />
+    </ToggleGroupItem>
+  </ToggleGroup>
+  ```
 </ComponentPreview>
 
 ## 使用方法 (Usage)

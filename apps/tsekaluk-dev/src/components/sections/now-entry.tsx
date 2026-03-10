@@ -56,14 +56,14 @@ function getLatestNowEntry(): NowData | null {
 function NowSection({ label, items }: { label: string; items: string[] }) {
   return (
     <div>
-      <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gray-400">
+      <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
         {label}
       </h2>
       <ul className="space-y-3">
         {items.map((item) => (
           <li
             key={item}
-            className="border-l-2 border-[var(--color-accent)] pl-4 text-base leading-relaxed text-gray-700"
+            className="border-l-2 border-[var(--color-accent)] pl-4 text-base leading-relaxed text-gray-700 dark:text-gray-300"
           >
             {item}
           </li>
@@ -77,7 +77,7 @@ export function NowEntry({ preview = false }: { preview?: boolean }) {
   const data = getLatestNowEntry();
 
   if (!data) {
-    return <p className="text-gray-400">No updates yet.</p>;
+    return <p className="text-gray-400 dark:text-gray-500">No updates yet.</p>;
   }
 
   const visibleSections = preview
@@ -86,7 +86,7 @@ export function NowEntry({ preview = false }: { preview?: boolean }) {
 
   return (
     <div className="space-y-10">
-      <p className="text-sm font-mono text-gray-400">
+      <p className="text-sm font-mono text-gray-400 dark:text-gray-500">
         Last updated: {data.date}
       </p>
 

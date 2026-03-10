@@ -24,6 +24,27 @@ description: "悬停时显示的浮动卡片，非常适合用于用户预览和
       </div>
     </HoverCardContent>
   </HoverCard>
+
+  ```tsx
+<HoverCard>
+    <HoverCardTrigger className="text-sm font-medium underline underline-offset-4 cursor-pointer">
+      @johndoe
+    </HoverCardTrigger>
+    <HoverCardContent className="w-80">
+      <div className="flex gap-4">
+        <Avatar>
+          <AvatarImage src="https://github.com/johndoe.png" />
+          <AvatarFallback>JD</AvatarFallback>
+        </Avatar>
+        <div className="space-y-1">
+          <h4 className="text-sm font-semibold">@johndoe</h4>
+          <p className="text-sm text-muted-foreground">全栈工程师。致力于打造优秀产品。 (Full-stack engineer. Building great products.)</p>
+          <p className="text-xs text-muted-foreground">加入日期：2022年1月 (Joined January 2022)</p>
+        </div>
+      </div>
+    </HoverCardContent>
+  </HoverCard>
+  ```
 </ComponentPreview>
 
 ## 使用方法 (Usage)

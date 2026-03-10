@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Textarea3 } from "@nebutra/ui/primitives";
+import { Textarea } from "@nebutra/ui/primitives";
 
 export function Textarea3Demo() {
   return (

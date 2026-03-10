@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Playfair_Display } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { websiteJsonLd } from "@/lib/json-ld";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,10 +34,24 @@ export const metadata: Metadata = {
     url: "https://tsekaluk.dev",
     siteName: "TsekaLuk.dev",
     type: "website",
+    images: [
+      {
+        url: "https://tsekaluk.dev/og?title=Tseka+Luk&subtitle=AI-Native+Builder",
+        width: 1200,
+        height: 630,
+        alt: "Tseka Luk — AI-Native Builder",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@tseka_luk",
+  },
+  alternates: {
+    canonical: "https://tsekaluk.dev",
+    types: {
+      "application/rss+xml": "https://tsekaluk.dev/rss.xml",
+    },
   },
 };
 
@@ -47,11 +64,26 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${playfair.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
+      <head>
+        <Script
+          defer
+          data-domain="tsekaluk.dev"
+          src="https://plausible.io/js/script.js"
+          strategy="afterInteractive"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
+        />
+      </head>
       <body>
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

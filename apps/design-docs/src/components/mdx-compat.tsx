@@ -2,7 +2,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Card as FumaCard, Cards } from "fumadocs-ui/components/card";
-import type { ReactNode, ComponentProps } from "react";
+import type { ReactNode } from "react";
 
 // Mintlify <Tip> → fumadocs <Callout type="info">
 export function Tip({ children, title }: { children?: ReactNode; title?: string }) {

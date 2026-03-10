@@ -5,6 +5,9 @@ import { getArticles } from "@/lib/articles";
 export const metadata: Metadata = {
   title: "Thinking — Tseka Luk",
   description: "Essays on building, growth, and AI.",
+  alternates: {
+    canonical: "https://tsekaluk.dev/thinking",
+  },
 };
 
 export default function ThinkingPage() {

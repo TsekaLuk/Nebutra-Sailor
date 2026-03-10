@@ -18,21 +18,23 @@ description: 带有可选的前缀/后缀装饰以及内置可清除模式的单
 
   ```tsx
 import { Input } from "@nebutra/ui"
-```
+  ```
+</ComponentPreview>
 
 ## 示例 (Examples)
 
 ### 基础用法 (Basic)
 
-```tsx
 <ComponentPreview className="max-w-[350px]">
   <Input placeholder="输入内容… (Enter value…)" />
+
+  ```tsx
+<Input placeholder="输入内容… (Enter value…)" />
+  ```
 </ComponentPreview>
-```
 
 ### 带有标签 (With Label)
 
-```tsx
 <ComponentPreview className="max-w-[350px]">
   <div className="flex flex-col gap-1.5 w-full">
     <Label htmlFor="email">
@@ -40,12 +42,19 @@ import { Input } from "@nebutra/ui"
     </Label>
     <Input id="email" type="email" placeholder="contact@nebutra.com" />
   </div>
+
+  ```tsx
+<div className="flex flex-col gap-1.5 w-full">
+  <Label htmlFor="email">
+    电子邮箱地址 (Email address)
+  </Label>
+  <Input id="email" type="email" placeholder="contact@nebutra.com" />
+</div>
+  ```
 </ComponentPreview>
-```
 
 ### 错误状态 (With Error State)
 
-```tsx
 <ComponentPreview className="max-w-[350px]">
   <div className="flex flex-col gap-1.5 w-full">
     <Label htmlFor="email-err">电子邮箱地址 (Email address)</Label>
@@ -61,8 +70,24 @@ import { Input } from "@nebutra/ui"
       请输入有效的电子邮箱地址。 (Please enter a valid email address.)
     </p>
   </div>
+
+  ```tsx
+<div className="flex flex-col gap-1.5 w-full">
+  <Label htmlFor="email-err">电子邮箱地址 (Email address)</Label>
+  <Input
+    id="email-err"
+    type="email"
+    defaultValue="not-an-email"
+    className="border-destructive focus-visible:ring-destructive"
+    aria-invalid="true"
+    aria-describedby="email-error"
+  />
+  <p id="email-error" className="text-xs text-destructive">
+    请输入有效的电子邮箱地址。 (Please enter a valid email address.)
+  </p>
+</div>
+  ```
 </ComponentPreview>
-```
 
 ---
 
@@ -70,7 +95,14 @@ import { Input } from "@nebutra/ui"
 
 使用 `prefix` 属性在输入框左侧边缘渲染一个不可交互的图标或节点。点击前缀区域将穿透到输入框（输入框会获得焦点）。
 
-```tsx
+<ComponentPreview className="max-w-[350px] flex-col gap-4">
+  {/* Search icon */}
+  <Input prefix={<span className="text-xs">🔍</span>} placeholder="搜索… (Search…)" />
+
+  {/* Mail icon */}
+  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+
+  ```tsx
 import { Search, Mail } from "lucide-react"
 
 {/* Search icon */}
@@ -78,7 +110,7 @@ import { Search, Mail } from "lucide-react"
 
 {/* Mail icon */}
 <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
-```
+  ```
 </ComponentPreview>
 
 ---
@@ -137,7 +169,10 @@ import { Search, Mail } from "lucide-react"
 
 ### 受控用法 (Controlled)
 
-```tsx
+<ComponentPreview className="max-w-[350px]">
+  <Input clearable defaultValue="contact@nebutra.com" placeholder="受控的可清除输入框… (Controlled clearable…)" />
+
+  ```tsx
 const [value, setValue] = useState("")
 
 <Input
@@ -147,17 +182,26 @@ const [value, setValue] = useState("")
   onClear={() => setValue("")}
   placeholder="受控的可清除输入框… (Controlled clearable…)"
 />
-```
+  ```
+</ComponentPreview>
 
 ### 带有前缀 (With Prefix)
 
-```tsx
+<ComponentPreview className="max-w-[350px]">
+  <Input
+    prefix={<Search className="h-4 w-4" />}
+    clearable
+    placeholder="搜索… (Search…)"
+  />
+
+  ```tsx
 <Input
   prefix={<Search className="h-4 w-4" />}
   clearable
   placeholder="搜索… (Search…)"
 />
-```
+  ```
+</ComponentPreview>
 
 <Callout>
   当同时设置 `clearable` 和 `suffix` 时，只要字段有值，✕ 按钮就会替换后缀。
@@ -170,7 +214,10 @@ const [value, setValue] = useState("")
 
 对于具有交互的右侧控件，请使用 `className="pr-9"` 并绝对定位 (`absolute`) 配置该按钮：
 
-```tsx
+<ComponentPreview className="max-w-[350px]">
+  <Input3Demo />
+
+  ```tsx
 const [shown, setShown] = useState(false)
 const Icon = shown ? EyeOff : Eye
 
@@ -187,7 +234,8 @@ const Icon = shown ? EyeOff : Eye
     <Icon className="h-3.5 w-3.5" />
   </button>
 </div>
-```
+  ```
+</ComponentPreview>
 
 ---
 

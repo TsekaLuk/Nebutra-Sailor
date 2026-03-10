@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Check, ChevronDown, Copy, ExternalLinkIcon, TextIcon } from 'lucide-react';
 import { cn } from '../lib/cn';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
@@ -71,8 +71,15 @@ export function ViewOptions({
    */
   githubUrl: string;
 }) {
+  const [pageUrl, setPageUrl] = useState('loading');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setPageUrl(window.location.href);
+    setMounted(true);
+  }, []);
+
   const items = useMemo(() => {
-    const pageUrl = typeof window !== 'undefined' ? window.location.href : 'loading';
     const q = `Read ${pageUrl}, I want to ask questions about it.`;
 
     return [
@@ -208,7 +215,25 @@ export function ViewOptions({
         })}`,
       },
     ];
-  }, [githubUrl, markdownUrl]);
+  }, [githubUrl, markdownUrl, pageUrl]);
+
+  if (!mounted) {
+    return (
+      <button
+        disabled
+        className={cn(
+          buttonVariants({
+            color: 'secondary',
+            size: 'sm',
+            className: 'gap-2',
+          }),
+        )}
+      >
+        Open
+        <ChevronDown className="size-3.5 text-fd-muted-foreground" />
+      </button>
+    );
+  }
 
   return (
     <Popover>

@@ -1,7 +1,8 @@
 "use client";
+import { Volume2 } from "lucide-react";
 
 import * as React from "react";
-import { Slider2 } from "@nebutra/ui/primitives";
+import { Slider } from "@nebutra/ui/primitives";
 
 export function Slider2Demo() {
   return (

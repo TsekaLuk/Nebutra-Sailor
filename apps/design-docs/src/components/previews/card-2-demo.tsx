@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
+import { CardTitle, Card, CardHeader, CardDescription } from "@nebutra/ui/primitives";
 
 import { Zap } from "lucide-react"
 

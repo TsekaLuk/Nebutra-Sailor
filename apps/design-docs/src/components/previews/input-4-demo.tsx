@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Input4 } from "@nebutra/ui/primitives";
+import { Label, Input } from "@nebutra/ui/primitives";
 
 export function Input4Demo() {
   return (

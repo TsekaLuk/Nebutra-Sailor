@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Input7 } from "@nebutra/ui/primitives";
+import { Input } from "@nebutra/ui/primitives";
 
 export function Input7Demo() {
   return (

@@ -17,6 +17,20 @@ description: "A set of toggle buttons that can have one or multiple pressed at a
       <AlignRight className="size-4" />
     </ToggleGroupItem>
   </ToggleGroup>
+
+  ```tsx
+<ToggleGroup type="single" defaultValue="center">
+    <ToggleGroupItem value="left" aria-label="Align left">
+      <AlignLeft className="size-4" />
+    </ToggleGroupItem>
+    <ToggleGroupItem value="center" aria-label="Align center">
+      <AlignCenter className="size-4" />
+    </ToggleGroupItem>
+    <ToggleGroupItem value="right" aria-label="Align right">
+      <AlignRight className="size-4" />
+    </ToggleGroupItem>
+  </ToggleGroup>
+  ```
 </ComponentPreview>
 
 ## Usage

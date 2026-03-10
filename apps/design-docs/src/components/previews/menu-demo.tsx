@@ -1,4 +1,5 @@
 "use client";
+import { Settings, Command, User, LogOut } from "lucide-react";
 
 import * as React from "react";
 import { Menu } from "@nebutra/ui/primitives";

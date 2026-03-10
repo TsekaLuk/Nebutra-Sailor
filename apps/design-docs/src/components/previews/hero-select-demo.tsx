@@ -4,7 +4,7 @@ import { HeroSelect, HeroSelectItem, HeroSelectSection } from "@nebutra/ui/primi
 import { useState } from "react";
 
 export function HeroSelectDemo() {
-    const [value, setValue] = useState<Set<string>>(new Set(["cat"]));
+    const [_value, _setValue] = useState<Set<string>>(new Set(["cat"]));
 
     return (
         <div className="flex flex-col gap-12 w-full max-w-sm mx-auto p-4 py-12 min-h-[400px]">

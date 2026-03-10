@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Calendar3 } from "@nebutra/ui/primitives";
+import { Calendar } from "@nebutra/ui/primitives";
 
 export function Calendar3Demo() {
   return (

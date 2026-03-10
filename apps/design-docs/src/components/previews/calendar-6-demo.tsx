@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Calendar6 } from "@nebutra/ui/primitives";
+import { RangeCalendar } from "@nebutra/ui/primitives";
 
 export function Calendar6Demo() {
   return (

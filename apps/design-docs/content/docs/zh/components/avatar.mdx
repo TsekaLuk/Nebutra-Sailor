@@ -41,6 +41,24 @@ import {
   <Avatar size="xl">
     <AvatarFallback size="xl">XL</AvatarFallback>
   </Avatar>
+
+  ```tsx
+<Avatar size="xs">
+    <AvatarFallback size="xs">XS</AvatarFallback>
+  </Avatar>
+  <Avatar size="sm">
+    <AvatarFallback size="sm">SM</AvatarFallback>
+  </Avatar>
+  <Avatar size="md">
+    <AvatarFallback size="md">MD</AvatarFallback>
+  </Avatar>
+  <Avatar size="lg">
+    <AvatarFallback size="lg">LG</AvatarFallback>
+  </Avatar>
+  <Avatar size="xl">
+    <AvatarFallback size="xl">XL</AvatarFallback>
+  </Avatar>
+  ```
 </ComponentPreview>
 
 ```tsx
@@ -73,6 +91,12 @@ import {
   <Avatar size="md">
     <AvatarFallback size="md">NN</AvatarFallback>
   </Avatar>
+
+  ```tsx
+<Avatar size="md">
+    <AvatarFallback size="md">NN</AvatarFallback>
+  </Avatar>
+  ```
 </ComponentPreview>
 
 ```tsx
@@ -103,6 +127,20 @@ import {
     max={4}
     size="sm"
   />
+
+  ```tsx
+<AvatarGroup
+    items={[
+      { alt: "user1", fallback: "U1" },
+      { alt: "user2", fallback: "U2" },
+      { alt: "user3", fallback: "U3" },
+      { alt: "user4", fallback: "U4" },
+      { alt: "user5", fallback: "U5" },
+    ]}
+    max={4}
+    size="sm"
+  />
+  ```
 </ComponentPreview>
 
 ```tsx
@@ -139,6 +177,12 @@ import {
   <GitHubAvatar username="rauchg" size="md" />
   <GitLabAvatar username="leerob" size="md" />
   <BitbucketAvatar username="evilrabbit" size="md" />
+
+  ```tsx
+<GitHubAvatar username="rauchg" size="md" />
+  <GitLabAvatar username="leerob" size="md" />
+  <BitbucketAvatar username="evilrabbit" size="md" />
+  ```
 </ComponentPreview>
 
 ```tsx
@@ -177,6 +221,16 @@ import {
     iconBackground="bg-background"
     size="md"
   />
+
+  ```tsx
+<AvatarWithIcon
+    alt="rauchg"
+    fallback="GR"
+    icon={<span className="block h-2 w-2 rounded-full bg-green-500" />}
+    iconBackground="bg-background"
+    size="md"
+  />
+  ```
 </ComponentPreview>
 
 ```tsx
@@ -214,6 +268,18 @@ import {
   />
   <DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
   <DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
+
+  ```tsx
+<DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
+  <DiceBearAvatar
+    seed="user@example.com"
+    avatarStyle="pixel-art"
+    options={{ radius: 50 }}
+    size="md"
+  />
+  <DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
+  <DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
+  ```
 </ComponentPreview>
 
 ```tsx

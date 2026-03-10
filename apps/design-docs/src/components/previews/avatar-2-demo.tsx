@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Avatar2 } from "@nebutra/ui/primitives";
+import { Avatar, AvatarFallback } from "@nebutra/ui/primitives";
 
 export function Avatar2Demo() {
   return (

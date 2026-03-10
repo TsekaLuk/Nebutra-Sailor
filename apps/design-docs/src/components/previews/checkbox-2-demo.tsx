@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Checkbox2 } from "@nebutra/ui/primitives";
+import { Checkbox, Label } from "@nebutra/ui/primitives";
 
 export function Checkbox2Demo() {
   return (

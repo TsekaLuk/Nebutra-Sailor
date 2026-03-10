@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Tabs3 } from "@nebutra/ui/primitives";
+import { Tabs, TabsTrigger, TabsList, TabsContent } from "@nebutra/ui/primitives";
 
 export function Tabs3Demo() {
   return (

@@ -62,14 +62,14 @@ function ProjectCard({ project }: { project: Project }) {
     <Link href={`/work/${project.slug}`} className="block">
       <article
         className={cn(
-          "group flex h-full flex-col rounded-3xl border border-gray-100 bg-white p-8",
+          "group flex h-full flex-col rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-8",
           "transition-all duration-300",
           "hover:border-[var(--color-accent-dark)] hover:shadow-[0_4px_24px_var(--color-accent-shadow)]",
         )}
       >
         {/* Icon + Status row */}
         <div className="mb-5 flex items-center justify-between">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-50 text-gray-400 transition-colors group-hover:bg-[var(--color-accent)]/10 group-hover:text-[var(--color-accent-dark)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-400 dark:text-gray-500 transition-colors group-hover:bg-[var(--color-accent)]/10 group-hover:text-[var(--color-accent-dark)]">
             {ICON_MAP[project.icon]}
           </div>
           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-gray-400">
@@ -79,12 +79,12 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         {/* Name */}
-        <h3 className="text-xl font-bold tracking-tight text-gray-900">
+        <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
           {project.name}
         </h3>
 
         {/* Tagline */}
-        <p className="mt-1 font-serif italic text-base text-gray-500">
+        <p className="mt-1 font-serif italic text-base text-gray-500 dark:text-gray-400">
           {project.tagline}
         </p>
 
@@ -99,7 +99,7 @@ function ProjectCard({ project }: { project: Project }) {
         )}
 
         {/* Description */}
-        <p className="mt-4 flex-1 text-sm leading-relaxed text-gray-500">
+        <p className="mt-4 flex-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
           {project.description}
         </p>
 
@@ -108,7 +108,7 @@ function ProjectCard({ project }: { project: Project }) {
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-gray-100 bg-gray-50/70 px-3 py-1 text-xs font-medium text-gray-500"
+              className="rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50/70 dark:bg-gray-800/70 px-3 py-1 text-xs font-medium text-gray-500 dark:text-gray-400"
             >
               {tag}
             </span>

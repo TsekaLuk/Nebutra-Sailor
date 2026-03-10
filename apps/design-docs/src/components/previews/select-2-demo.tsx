@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Select2 } from "@nebutra/ui/primitives";
+import { SelectValue, SelectSeparator, SelectContent, Select, SelectGroup, SelectLabel, SelectTrigger, SelectItem } from "@nebutra/ui/primitives";
 
 export function Select2Demo() {
   return (

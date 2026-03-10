@@ -7,6 +7,7 @@ import {
   type SyntheticEvent,
   useEffect,
   useEffectEvent,
+  useRef,
   useState,
   useTransition,
 } from 'react';
@@ -61,6 +62,17 @@ export function Feedback({
   const [opinion, setOpinion] = useState<'good' | 'bad' | null>(null);
   const [message, setMessage] = useState('');
   const [isPending, startTransition] = useTransition();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (opinion === null && previous === null) return;
+    textareaRef.current?.focus();
+  }, [opinion, previous]);
 
   function submit(e?: SyntheticEvent) {
     if (opinion == null) return;
@@ -85,6 +97,38 @@ export function Feedback({
   }
 
   const activeOpinion = previous?.opinion ?? opinion;
+
+  if (!mounted) {
+    return (
+      <div className="border-y py-3">
+        <div className="flex flex-row items-center gap-2">
+          <p className="text-sm font-medium pe-2">How is this guide?</p>
+          <button
+            disabled
+            className={cn(
+              rateButtonVariants({
+                active: false,
+              }),
+            )}
+          >
+            <ThumbsUp />
+            Good
+          </button>
+          <button
+            disabled
+            className={cn(
+              rateButtonVariants({
+                active: false,
+              }),
+            )}
+          >
+            <ThumbsDown />
+            Bad
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Collapsible
@@ -163,6 +207,7 @@ export function Feedback({
         ) : (
           <form className="flex flex-col gap-3" onSubmit={submit}>
             <textarea
+              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
               required
               value={message}
@@ -213,6 +258,18 @@ export function FeedbackBlock({
   const [message, setMessage] = useState('');
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (open && !previous) {
+      setTimeout(() => textareaRef.current?.focus(), 0);
+    }
+  }, [open, previous]);
 
   function submit(e?: SyntheticEvent) {
     startTransition(async () => {
@@ -234,6 +291,14 @@ export function FeedbackBlock({
     e?.preventDefault();
   }
 
+  if (!mounted) {
+    return (
+      <div className="relative group/feedback">
+        <div className="in-[.prose-no-margin]:prose-no-margin">{children}</div>
+      </div>
+    );
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="relative group/feedback">
@@ -250,7 +315,7 @@ export function FeedbackBlock({
             buttonVariants({ variant: 'secondary', size: 'sm' }),
             'absolute -top-7 end-0 backdrop-blur-sm text-fd-muted-foreground gap-1.5 transition-all duration-100 data-[state=open]:bg-fd-accent data-[state=open]:text-fd-accent-foreground',
             !open &&
-              'opacity-0 pointer-events-none group-hover/feedback:pointer-events-auto group-hover/feedback:opacity-100 group-hover/feedback:delay-100 hover:pointer-events-auto hover:opacity-100 hover:delay-100',
+            'opacity-0 pointer-events-none group-hover/feedback:pointer-events-auto group-hover/feedback:opacity-100 group-hover/feedback:delay-100 hover:pointer-events-auto hover:opacity-100 hover:delay-100',
           )}
           onClick={(e) => {
             setOpen((prev) => !prev);
@@ -302,6 +367,7 @@ export function FeedbackBlock({
         ) : (
           <form className="flex flex-col gap-2" onSubmit={submit}>
             <textarea
+              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
               required
               value={message}

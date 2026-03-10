@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Tooltip3 } from "@nebutra/ui/primitives";
+import { TooltipTrigger, Tooltip, TooltipProvider, TooltipContent } from "@nebutra/ui/primitives";
 
 export function Tooltip3Demo() {
   return (

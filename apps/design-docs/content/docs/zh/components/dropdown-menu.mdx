@@ -29,6 +29,32 @@ description: "通过点击按钮触发的上下文操作列表，基于 Radix UI
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
+
+  ```tsx
+<DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">打开菜单 (Open Menu)</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-48">
+      <DropdownMenuLabel>我的账号 (My Account)</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>
+        个人资料 (Profile)
+        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        账单 (Billing)
+        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>设置 (Settings)</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem className="text-destructive">
+        退出登录 (Log out)
+        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+  ```
 </ComponentPreview>
 
 ## 使用方法 (Usage)

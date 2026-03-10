@@ -21,6 +21,25 @@ description: "具有三种视觉变体、四种尺寸并支持胶囊形状的选
       <p className="text-sm text-foreground">调整您的电子邮件偏好。 (Adjust your email preferences.)</p>
     </TabsContent>
   </Tabs>
+
+  ```tsx
+<Tabs defaultValue="profile" className="w-[400px]">
+    <TabsList className="grid w-full grid-cols-3">
+      <TabsTrigger value="profile">个人资料 (Profile)</TabsTrigger>
+      <TabsTrigger value="security">安全 (Security)</TabsTrigger>
+      <TabsTrigger value="settings">设置 (Settings)</TabsTrigger>
+    </TabsList>
+    <TabsContent value="profile" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">管理您的个人资料信息。 (Manage your profile information.)</p>
+    </TabsContent>
+    <TabsContent value="security" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">更新您的密码和双因素认证 (2FA)。 (Update your password and 2FA.)</p>
+    </TabsContent>
+    <TabsContent value="settings" className="p-4 border rounded-md mt-2">
+      <p className="text-sm text-foreground">调整您的电子邮件偏好。 (Adjust your email preferences.)</p>
+    </TabsContent>
+  </Tabs>
+  ```
 </ComponentPreview>
 
 ## 使用方法 (Usage)
