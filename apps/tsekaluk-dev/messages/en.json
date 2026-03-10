@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "work": "Work",
+    "thinking": "Thinking",
+    "now": "Now",
+    "about": "About",
+    "links": "Links",
+    "contact": "Let's talk"
+  },
+  "hero": {
+    "status": "Available for select collaborations",
+    "greeting": "Hi, I'm Tseka",
+    "tagline": "AI-Native Builder",
+    "description": "I design and build AI-powered products from zero to one. Focused on making complex technology feel simple, useful, and beautiful—shipping fast and iterating in public.",
+    "cta_primary": "See my work",
+    "cta_secondary": "What I'm doing now",
+    "pills": {
+      "role": "Full-stack AI Engineer",
+      "stack": "TypeScript + Python",
+      "location": "Wuxi, China",
+      "mode": "Building in Public"
+    }
+  },
+  "focus": {
+    "label": "Mission",
+    "headline": "My focus is on robust engineering, AI-native products, and scalable systems to",
+    "headline_muted": "deliver real-world impact."
+  },
+  "process": {
+    "label": "/ How I work",
+    "headline": "Path to shipped features",
+    "step1_title": "Architecture",
+    "step1_desc": "Mapping out the system constraints, data flow, and UI surface. Deciding exactly what to build and what not to build.",
+    "step2_title": "Implementation",
+    "step2_desc": "Deep focus engineering. Translating the mental model into solid Next.js and Python code with robust AI integrations.",
+    "step3_title": "Refinement",
+    "step3_desc": "Polishing the sharp edges. Adding micro-animations, optimizing performance, and listening closely to telemetry and user feedback."
+  },
+  "works": {
+    "label": "/ Selected Works",
+    "headline": "Shipped to production",
+    "view_all": "View all {count} projects"
+  },
+  "now_preview": {
+    "headline": "What I'm doing <em>now</em>",
+    "view_all": "Full log"
+  },
+  "cta": {
+    "headline": "Let's build something",
+    "description": "I work with teams and founders who see digital presence and AI not just as a duty, but as a strategic growth driver.",
+    "email": "Start a project",
+    "calendar": "Book a call"
+  },
+  "footer": {
+    "built_with": "Built with",
+    "rss_label": "RSS Feed",
+    "github_label": "GitHub",
+    "x_label": "X (Twitter)",
+    "linkedin_label": "LinkedIn"
+  },
+  "pages": {
+    "work": {
+      "label": "/ 19 shipped projects",
+      "headline": "Things I've built",
+      "description": "Shipped products, research tools, and AI experiments. Most are real projects with real users.",
+      "metadata_title": "Work — Tseka Luk",
+      "metadata_desc": "Shipped products, research tools, and AI experiments."
+    },
+    "thinking": {
+      "label": "/ Essays & ideas",
+      "headline": "Thinking",
+      "metadata_title": "Thinking — Tseka Luk",
+      "metadata_desc": "Essays on building, growth, and AI."
+    },
+    "now": {
+      "label": "/ Updated daily",
+      "headline": "Now",
+      "description": "This page is updated daily by an AI agent that reviews my work and distills the highlights. Think of it as a living changelog for what I'm building, thinking, and shipping.",
+      "metadata_title": "Now — Tseka Luk",
+      "metadata_desc": "What I'm currently working on, thinking about, and shipping."
+    },
+    "about": {
+      "metadata_title": "About — Tseka Luk",
+      "metadata_desc": "CEO & AI-Native Builder at Nebutra Intelligence. Building intelligent systems, not just products."
+    },
+    "links": {
+      "headline": "Links",
+      "description": "Find me across the internet.",
+      "international": "International",
+      "china": "China Platforms",
+      "wechat_click": "Click to see QR code",
+      "metadata_title": "Links — Tseka Luk",
+      "metadata_desc": "Find me across the internet."
+    }
+  }
+}

@@ -1,17 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 
-const CONTEXT_PILLS = [
-  { label: "Full-stack AI Engineer", position: "top-32 left-8 lg:left-16" },
-  { label: "TypeScript + Python", position: "top-48 right-8 lg:right-16" },
-  { label: "Wuxi, China", position: "bottom-48 left-8 lg:left-20" },
-  { label: "Building in Public", position: "bottom-32 right-8 lg:right-20" },
+const PILL_POSITIONS = [
+  "top-32 left-8 lg:left-16",
+  "top-48 right-8 lg:right-16",
+  "bottom-48 left-8 lg:left-20",
+  "bottom-32 right-8 lg:right-20",
 ] as const;
 
 export function Hero() {
+  const t = useTranslations("hero");
+
+  const CONTEXT_PILLS = [
+    { label: t("pills.role"), position: PILL_POSITIONS[0] },
+    { label: t("pills.stack"), position: PILL_POSITIONS[1] },
+    { label: t("pills.location"), position: PILL_POSITIONS[2] },
+    { label: t("pills.mode"), position: PILL_POSITIONS[3] },
+  ];
+
   return (
     <section className="relative min-h-[90vh] overflow-hidden">
       {/* Background gradient */}
@@ -39,7 +49,7 @@ export function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
               </span>
-              Available for select collaborations
+              {t("status")}
             </div>
           </div>
         </AnimateIn>
@@ -61,21 +71,19 @@ export function Hero() {
 
           <AnimateIn preset="fadeUp" delay={0.1}>
             <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-[6vw] md:leading-[1.1]">
-              Hi, I&apos;m Tseka
+              {t("greeting")}
             </h1>
           </AnimateIn>
 
           <AnimateIn preset="fadeUp" delay={0.2}>
             <h2 className="mt-2 font-serif italic text-6xl tracking-tight text-gray-800 dark:text-gray-200 md:text-[8vw] md:leading-[1.1]">
-              AI-Native Builder
+              {t("tagline")}
             </h2>
           </AnimateIn>
 
           <AnimateIn preset="fadeUp" delay={0.35}>
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-gray-500 dark:text-gray-400">
-              I design and build AI-powered products from zero to one. Focused
-              on making complex technology feel simple, useful, and
-              beautiful&mdash;shipping fast and iterating in public.
+              {t("description")}
             </p>
           </AnimateIn>
         </div>
@@ -87,14 +95,14 @@ export function Hero() {
               href="/work"
               className="inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-gray-100 px-7 py-3 text-sm font-medium text-white dark:text-gray-900 transition-colors hover:bg-gray-800 dark:hover:bg-gray-200"
             >
-              See my work
+              {t("cta_primary")}
               <span aria-hidden="true">&rarr;</span>
             </Link>
             <Link
               href="/now"
               className="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 px-7 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors hover:border-gray-400 dark:hover:border-gray-500 hover:text-gray-900 dark:hover:text-gray-100"
             >
-              What I&apos;m doing now
+              {t("cta_secondary")}
             </Link>
           </div>
         </AnimateIn>

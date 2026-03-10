@@ -7,6 +7,7 @@ import { ArrowLeft, Github, ExternalLink } from "lucide-react";
 import { projects } from "@/lib/projects";
 import { projectJsonLd } from "@/lib/json-ld";
 import { MermaidDiagram } from "@/components/mermaid-diagram";
+import { Link as LocaleLink } from "@/i18n/navigation";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -15,16 +16,20 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
   return {
     title: `${project.name} — Tseka Luk`,
     description: project.tagline,
     alternates: {
-      canonical: `https://tsekaluk.dev/work/${slug}`,
+      canonical: `https://tsekaluk.dev/${locale}/work/${slug}`,
+      languages: {
+        en: `https://tsekaluk.dev/en/work/${slug}`,
+        zh: `https://tsekaluk.dev/zh/work/${slug}`,
+      },
     },
     openGraph: {
       title: `${project.name} — Tseka Luk`,
@@ -53,20 +58,22 @@ export default async function ProjectDetailPage({
     <section className="mx-auto max-w-4xl px-6 py-24 md:py-32">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd(project)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(projectJsonLd(project)),
+        }}
       />
       {/* Back link */}
       <AnimateIn preset="fade">
-        <Link
+        <LocaleLink
           href="/work"
           className="mb-12 inline-flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 transition-colors hover:text-gray-700 dark:hover:text-gray-300"
         >
           <ArrowLeft className="h-4 w-4" />
           All Projects
-        </Link>
+        </LocaleLink>
       </AnimateIn>
 
-      {/* Section 1: Header + Highlights */}
+      {/* Header + Highlights */}
       <AnimateIn preset="fadeUp" delay={0.1}>
         <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-5xl">
           {project.name}
@@ -98,14 +105,16 @@ export default async function ProjectDetailPage({
                 <p className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
                   {h.value}
                 </p>
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{h.label}</p>
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  {h.label}
+                </p>
               </div>
             ))}
           </div>
         </AnimateIn>
       )}
 
-      {/* Section 2: Architecture + Story */}
+      {/* Architecture + Story */}
       <div className="mt-16 space-y-8">
         {project.architecture && (
           <AnimateIn preset="fadeUp" inView>
@@ -125,7 +134,6 @@ export default async function ProjectDetailPage({
           </AnimateIn>
         )}
 
-        {/* Fallback to description if no story */}
         {!project.story && (
           <AnimateIn preset="fadeUp" inView>
             <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
@@ -135,7 +143,7 @@ export default async function ProjectDetailPage({
         )}
       </div>
 
-      {/* Section 3: Tags + Images + Links */}
+      {/* Tags + Images + Links */}
       <div className="mt-16 space-y-8 border-t border-gray-100 dark:border-gray-800 pt-8">
         <AnimateIn preset="fadeUp" inView>
           <div className="flex flex-wrap gap-2">

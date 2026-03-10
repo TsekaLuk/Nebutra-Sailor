@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import {
   Mail,
   Trophy,
@@ -18,13 +18,25 @@ import {
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 import { personJsonLd } from "@/lib/json-ld";
 
-export const metadata: Metadata = {
-  title: "About — Tseka Luk",
-  description: "CEO & AI-Native Builder at Nebutra Intelligence. Building intelligent systems, not just products.",
-  alternates: {
-    canonical: "https://tsekaluk.dev/about",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "pages.about" });
+  return {
+    title: t("metadata_title"),
+    description: t("metadata_desc"),
+    alternates: {
+      canonical: `https://tsekaluk.dev/${locale}/about`,
+      languages: {
+        en: "https://tsekaluk.dev/en/about",
+        zh: "https://tsekaluk.dev/zh/about",
+      },
+    },
+  };
+}
 
 const TIMELINE: { year: string; label: string; icon: React.ReactNode }[] = [
   {
@@ -50,7 +62,7 @@ const TIMELINE: { year: string; label: string; icon: React.ReactNode }[] = [
   {
     year: "2025",
     icon: <Cpu className="h-4 w-4" />,
-    label: "CEO, Nebutra Intelligence \u2014 building for global markets",
+    label: "CEO, Nebutra Intelligence — building for global markets",
   },
   {
     year: "Now",
@@ -92,8 +104,7 @@ const AWARDS: {
   {
     title: "TAM-SEM Low-Altitude Economy",
     level: "First Prize (Provincial)",
-    detail:
-      "2,609 respondents, discovered \u2018risk paradox\u2019 (\u03b2=0.262, p<0.001)",
+    detail: "2,609 respondents, discovered 'risk paradox' (β=0.262, p<0.001)",
     year: "2025",
     icon: <Medal className="h-4 w-4 text-amber-500" />,
     highlight: true,
@@ -101,8 +112,7 @@ const AWARDS: {
   {
     title: "APMCM Mathematical Modeling",
     level: "First Prize",
-    detail:
-      "Pet industry forecast: LASSO R\u00b2=0.9850, predicted $52B market",
+    detail: "Pet industry forecast: LASSO R²=0.9850, predicted $52B market",
     year: "2024",
     icon: <Medal className="h-4 w-4 text-amber-500" />,
     highlight: true,
@@ -157,7 +167,7 @@ const AWARDS: {
 
 const CERTS: { label: string; icon: React.ReactNode }[] = [
   {
-    label: "Columbia University \u2014 Numerical Models (Grade A)",
+    label: "Columbia University — Numerical Models (Grade A)",
     icon: <GraduationCap className="h-4 w-4 text-[var(--color-accent-dark)]" />,
   },
   {
@@ -169,7 +179,7 @@ const CERTS: { label: string; icon: React.ReactNode }[] = [
     icon: <Cpu className="h-4 w-4 text-[var(--color-accent-dark)]" />,
   },
   {
-    label: "Utility Patent \u2014 Cable Distribution Equipment",
+    label: "Utility Patent — Cable Distribution Equipment",
     icon: <FileCode2 className="h-4 w-4 text-[var(--color-accent-dark)]" />,
   },
   {
@@ -177,15 +187,15 @@ const CERTS: { label: string; icon: React.ReactNode }[] = [
     icon: <FileCode2 className="h-4 w-4 text-[var(--color-accent-dark)]" />,
   },
   {
-    label: "CET-6: 543 \u00b7 CET-4: 575",
+    label: "CET-6: 543 · CET-4: 575",
     icon: <Languages className="h-4 w-4 text-[var(--color-accent-dark)]" />,
   },
   {
-    label: "Macau UST \u2014 Innovation & Entrepreneurship",
+    label: "Macau UST — Innovation & Entrepreneurship",
     icon: <GraduationCap className="h-4 w-4 text-[var(--color-accent-dark)]" />,
   },
   {
-    label: "Prompt Engineer (Datawhale \u00d7 iFLYTEK)",
+    label: "Prompt Engineer (Datawhale × iFLYTEK)",
     icon: <Sparkles className="h-4 w-4 text-[var(--color-accent-dark)]" />,
   },
 ];
@@ -206,7 +216,9 @@ function TimelineItem({
           {icon}
         </span>
         <div className="flex flex-1 items-start justify-between gap-4">
-          <span className="text-base text-gray-700 dark:text-gray-300">{label}</span>
+          <span className="text-base text-gray-700 dark:text-gray-300">
+            {label}
+          </span>
           <span className="shrink-0 font-mono text-sm text-gray-400 dark:text-gray-500">
             {year}
           </span>
@@ -216,7 +228,7 @@ function TimelineItem({
   );
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
   return (
     <section className="mx-auto max-w-5xl px-6 py-24 md:py-32">
       <script
@@ -226,7 +238,9 @@ export default function AboutPage() {
       {/* Header */}
       <div className="mb-16">
         <AnimateIn preset="fade">
-          <p className="font-serif italic text-lg text-gray-400 dark:text-gray-500">/ About</p>
+          <p className="font-serif italic text-lg text-gray-400 dark:text-gray-500">
+            / About
+          </p>
         </AnimateIn>
 
         <AnimateIn preset="fadeUp" delay={0.1}>
@@ -253,10 +267,9 @@ export default function AboutPage() {
                 priority
               />
             </div>
-            {/* Floating badge */}
             <div className="absolute -right-4 -bottom-4 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-2 shadow-sm dark:shadow-gray-900/30">
               <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-                INTP \u00b7 Wuxi, China
+                INTP · Wuxi, China
               </p>
             </div>
           </div>
@@ -267,8 +280,8 @@ export default function AboutPage() {
             <p>
               I&apos;m Tseka Luk, CEO of Nebutra Intelligence, based in Wuxi,
               China. I build AI-native products designed for global
-              markets&mdash;tools that are not just technically sophisticated
-              but genuinely useful and beautifully simple.
+              markets—tools that are not just technically sophisticated but
+              genuinely useful and beautifully simple.
             </p>
             <p>
               My philosophy is what I call <em>Vibe Business</em>: build with
@@ -278,27 +291,28 @@ export default function AboutPage() {
             </p>
             <p>
               I think in systems, obsess over details, and believe the best way
-              to predict the future is to build it&mdash;one commit at a time.
+              to predict the future is to build it—one commit at a time.
             </p>
 
-            {/* Quick stats */}
             <div className="mt-4 grid grid-cols-4 gap-3 pt-4">
-              <div className="rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 p-3 text-center">
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">19</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Projects</p>
-              </div>
-              <div className="rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 p-3 text-center">
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">10</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Awards</p>
-              </div>
-              <div className="rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 p-3 text-center">
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">6</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">First Prizes</p>
-              </div>
-              <div className="rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 p-3 text-center">
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">8</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Certs</p>
-              </div>
+              {[
+                { value: "19", label: "Projects" },
+                { value: "10", label: "Awards" },
+                { value: "6", label: "First Prizes" },
+                { value: "8", label: "Certs" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 p-3 text-center"
+                >
+                  <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </AnimateIn>
@@ -351,7 +365,9 @@ export default function AboutPage() {
                   <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
                     {award.title}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{award.level}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {award.level}
+                  </p>
                   <p className="mt-0.5 text-[11px] leading-snug text-gray-400 dark:text-gray-500">
                     {award.detail}
                   </p>
@@ -382,7 +398,9 @@ export default function AboutPage() {
             <AnimateIn key={cert.label} preset="fadeUp" inView>
               <div className="flex items-start gap-3 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-3 transition-colors hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/5">
                 <span className="mt-0.5 shrink-0">{cert.icon}</span>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{cert.label}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {cert.label}
+                </p>
               </div>
             </AnimateIn>
           ))}
@@ -390,20 +408,22 @@ export default function AboutPage() {
       </div>
 
       {/* Contact */}
-      <div id="contact" className="border-t border-gray-200 dark:border-gray-700 pt-12 text-center">
+      <div
+        id="contact"
+        className="border-t border-gray-200 dark:border-gray-700 pt-12 text-center"
+      >
         <AnimateIn preset="fadeUp" inView>
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-4xl">
             Let&apos;s build something
           </h2>
-
           <div className="mt-8">
-            <Link
+            <a
               href="mailto:tseka@nebutra.com"
               className="inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-gray-100 px-7 py-3 text-sm font-medium text-white dark:text-gray-900 transition-colors hover:bg-gray-800 dark:hover:bg-gray-200"
             >
               <Mail className="h-4 w-4" />
               tseka@nebutra.com
-            </Link>
+            </a>
           </div>
         </AnimateIn>
       </div>

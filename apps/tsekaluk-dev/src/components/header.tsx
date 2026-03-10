@@ -1,21 +1,24 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@nebutra/ui/utils";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
-
-const NAV_ITEMS = [
-  { label: "Work", href: "/work" },
-  { label: "Thinking", href: "/thinking" },
-  { label: "Now", href: "/now" },
-  { label: "About", href: "/about" },
-  { label: "Links", href: "/links" },
-] as const;
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function Header() {
+  const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const NAV_ITEMS = [
+    { label: t("work"), href: "/work" },
+    { label: t("thinking"), href: "/thinking" },
+    { label: t("now"), href: "/now" },
+    { label: t("about"), href: "/about" },
+    { label: t("links"), href: "/links" },
+  ] as const;
 
   return (
     <header className="relative z-40">
@@ -30,7 +33,7 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-6 md:flex">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
@@ -40,12 +43,15 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <ThemeToggle />
+            <div className="flex items-center gap-2 ml-2">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
             <Link
               href="/about#contact"
               className="rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200"
             >
-              Let&apos;s talk
+              {t("contact")}
             </Link>
           </div>
 
@@ -82,14 +88,15 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <div className="flex items-center gap-4 mt-2">
+            <div className="flex items-center gap-3 mt-2">
+              <LanguageSwitcher />
               <ThemeToggle />
               <Link
                 href="/about#contact"
                 className="w-fit rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200"
                 onClick={() => setMobileOpen(false)}
               >
-                Let&apos;s talk
+                {t("contact")}
               </Link>
             </div>
           </div>

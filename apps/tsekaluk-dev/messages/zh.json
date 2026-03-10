@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "work": "作品",
+    "thinking": "思考",
+    "now": "近况",
+    "about": "关于",
+    "links": "链接",
+    "contact": "开始合作"
+  },
+  "hero": {
+    "status": "开放部分合作机会",
+    "greeting": "你好，我是 Tseka",
+    "tagline": "AI 原生构建者",
+    "description": "我从零开始设计和构建 AI 驱动的产品，让复杂技术变得简单、有用、美观——快速交付，公开迭代。",
+    "cta_primary": "查看我的作品",
+    "cta_secondary": "我现在在做什么",
+    "pills": {
+      "role": "全栈 AI 工程师",
+      "stack": "TypeScript + Python",
+      "location": "中国 · 无锡",
+      "mode": "公开构建中"
+    }
+  },
+  "focus": {
+    "label": "使命",
+    "headline": "专注于扎实工程、AI 原生产品与可扩展系统，",
+    "headline_muted": "创造真实世界的影响力。"
+  },
+  "process": {
+    "label": "/ 工作方式",
+    "headline": "从想法到上线",
+    "step1_title": "系统架构",
+    "step1_desc": "梳理系统约束、数据流和 UI 层。明确该做什么，更重要的是——不做什么。",
+    "step2_title": "工程实现",
+    "step2_desc": "深度专注的工程阶段。将心智模型转化为稳健的 Next.js 和 Python 代码，集成 AI 能力。",
+    "step3_title": "精打细磨",
+    "step3_desc": "磨平边角。加入微动效，优化性能，仔细聆听数据与用户反馈。"
+  },
+  "works": {
+    "label": "/ 精选作品",
+    "headline": "已上线产品",
+    "view_all": "查看全部 {count} 个项目"
+  },
+  "now_preview": {
+    "headline": "我的<em>近况</em>",
+    "view_all": "查看完整记录"
+  },
+  "cta": {
+    "headline": "一起构建些什么",
+    "description": "我与那些把数字化和 AI 视为战略增长引擎（而非例行公事）的团队和创始人合作。",
+    "email": "开始项目",
+    "calendar": "预约通话"
+  },
+  "footer": {
+    "built_with": "使用",
+    "rss_label": "RSS 订阅",
+    "github_label": "GitHub",
+    "x_label": "X (Twitter)",
+    "linkedin_label": "领英"
+  },
+  "pages": {
+    "work": {
+      "label": "/ 19 个已上线项目",
+      "headline": "我构建的产品",
+      "description": "已上线产品、研究工具和 AI 实验，大多数是有真实用户的真实项目。",
+      "metadata_title": "作品集 — Tseka Luk",
+      "metadata_desc": "已上线产品、研究工具和 AI 实验。"
+    },
+    "thinking": {
+      "label": "/ 文章 & 想法",
+      "headline": "思考",
+      "metadata_title": "思考 — Tseka Luk",
+      "metadata_desc": "关于构建、成长和 AI 的文章。"
+    },
+    "now": {
+      "label": "/ 每日更新",
+      "headline": "近况",
+      "description": "此页面由 AI 智能体每日自动更新，梳理我的工作亮点。可以把它理解为我正在构建、思考、交付内容的动态更新日志。",
+      "metadata_title": "近况 — Tseka Luk",
+      "metadata_desc": "我当前正在做什么、思考什么、交付什么。"
+    },
+    "about": {
+      "metadata_title": "关于 — Tseka Luk",
+      "metadata_desc": "Nebutra Intelligence CEO & AI 原生构建者。构建智能系统，而非仅仅是产品。"
+    },
+    "links": {
+      "headline": "链接",
+      "description": "在这里找到我。",
+      "international": "国际平台",
+      "china": "中国平台",
+      "wechat_click": "点击查看二维码",
+      "metadata_title": "链接 — Tseka Luk",
+      "metadata_desc": "在这里找到我。"
+    }
+  }
+}
