@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 import { Terminal, FileCode2, Cpu, Box } from "lucide-react";
@@ -90,15 +91,35 @@ const TERMINALS: ToolItem[] = [
 ];
 
 const AI_TOOLS: AITool[] = [
-  { icon: <ClaudeCode.Avatar size={44} />, name: "ClaudeCode", label: "Claude Code" },
+  {
+    icon: <ClaudeCode.Avatar size={44} />,
+    name: "ClaudeCode",
+    label: "Claude Code",
+  },
   { icon: <Cursor.Avatar size={44} />, name: "Cursor", label: "Cursor" },
   { icon: <Gemini.Avatar size={44} />, name: "Gemini", label: "Gemini" },
   { icon: <Codex.Avatar size={44} />, name: "Codex", label: "Codex" },
-  { icon: <Midjourney.Avatar size={44} />, name: "Midjourney", label: "Midjourney" },
-  { icon: <Perplexity.Avatar size={44} />, name: "Perplexity", label: "Perplexity" },
-  { icon: <NotebookLM.Avatar size={44} />, name: "NotebookLM", label: "NotebookLM" },
+  {
+    icon: <Midjourney.Avatar size={44} />,
+    name: "Midjourney",
+    label: "Midjourney",
+  },
+  {
+    icon: <Perplexity.Avatar size={44} />,
+    name: "Perplexity",
+    label: "Perplexity",
+  },
+  {
+    icon: <NotebookLM.Avatar size={44} />,
+    name: "NotebookLM",
+    label: "NotebookLM",
+  },
   { icon: <Notion.Avatar size={44} />, name: "Notion", label: "Notion AI" },
-  { icon: <CherryStudio.Avatar size={44} />, name: "CherryStudio", label: "Cherry Studio" },
+  {
+    icon: <CherryStudio.Avatar size={44} />,
+    name: "CherryStudio",
+    label: "Cherry Studio",
+  },
   { icon: <LobeHub.Avatar size={44} />, name: "LobeHub", label: "LobeChat" },
   { icon: <Ollama.Avatar size={44} />, name: "Ollama", label: "Ollama" },
   { icon: <Flowith.Avatar size={44} />, name: "Flowith", label: "Flowith" },
@@ -137,7 +158,9 @@ function ToolRow({ item }: { item: ToolItem }) {
               </span>
             )}
           </div>
-          <p className="mt-0.5 text-xs leading-relaxed text-gray-500 dark:text-gray-400">{item.desc}</p>
+          <p className="mt-0.5 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+            {item.desc}
+          </p>
         </div>
       </div>
     </AnimateIn>
@@ -153,7 +176,9 @@ export default function UsesPage() {
       {/* Header */}
       <div className="mb-16">
         <AnimateIn preset="fade">
-          <p className="font-serif italic text-lg text-gray-400 dark:text-gray-500">{t("label")}</p>
+          <p className="font-serif italic text-lg text-gray-400 dark:text-gray-500">
+            {t("label")}
+          </p>
         </AnimateIn>
         <AnimateIn preset="fadeUp" delay={0.1}>
           <h1 className="mt-2 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
@@ -164,6 +189,21 @@ export default function UsesPage() {
           <p className="mt-4 text-base leading-relaxed text-gray-500 dark:text-gray-400">
             {t("description")}
           </p>
+        </AnimateIn>
+      </div>
+
+      {/* Workstation Hero */}
+      <div className="mb-16">
+        <AnimateIn preset="fadeUp" inView delay={0.3}>
+          <div className="relative h-[200px] w-full overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-800">
+            <Image
+              src="https://images.unsplash.com/photo-1537498425277-c283d32ef9db?auto=format&fit=crop&q=80&w=1200&h=400"
+              alt="Workspace Hero"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </AnimateIn>
       </div>
 
@@ -183,7 +223,9 @@ export default function UsesPage() {
                 Apple M4 · 24 GB · macOS 26
               </p>
               <p className="mt-2 text-xs leading-relaxed text-gray-400 dark:text-gray-500">
-                The right balance of portability and power for shipping AI-native products. M4 handles local model inference without complaint.
+                The right balance of portability and power for shipping
+                AI-native products. M4 handles local model inference without
+                complaint.
               </p>
             </div>
           </div>
@@ -261,14 +303,19 @@ export default function UsesPage() {
                 <Cpu className="h-5 w-5 text-[var(--color-accent-dark)]" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">Nebutra-Sailor</p>
+                <p className="text-sm font-semibold text-foreground">
+                  Nebutra-Sailor
+                </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Internal monorepo framework
                 </p>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              Every new project starts with Nebutra-Sailor — the same monorepo powering this site. Next.js 16, Tailwind v4, Turbo, shared UI + token system. Build once, deploy everywhere. This forces me to maintain the framework by actually living in it.
+              Every new project starts with Nebutra-Sailor — the same monorepo
+              powering this site. Next.js 16, Tailwind v4, Turbo, shared UI +
+              token system. Build once, deploy everywhere. This forces me to
+              maintain the framework by actually living in it.
             </p>
           </div>
         </AnimateIn>

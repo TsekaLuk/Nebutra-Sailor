@@ -8,6 +8,7 @@ import { getTranslations } from "next-intl/server";
 import { projects, getLocalizedProjects } from "@/lib/projects";
 import { projectJsonLd } from "@/lib/json-ld";
 import { MermaidDiagram } from "@/components/mermaid-diagram";
+import { TechBadge } from "@/components/tech-badge";
 import { Link as LocaleLink } from "@/i18n/navigation";
 
 export function generateStaticParams() {
@@ -147,17 +148,21 @@ export default async function ProjectDetailPage({
         )}
       </div>
 
-      {/* Tags + Images + Links */}
+      {/* Tech Stack + Tags + Images + Links */}
       <div className="mt-16 space-y-8 border-t border-gray-100 dark:border-gray-800 pt-8">
+        {project.techStack && project.techStack.length > 0 && (
+          <AnimateIn preset="fadeUp" inView>
+            <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
+              {project.techStack.map((tech) => (
+                <TechBadge key={tech} tech={tech} variant="card" colorful />
+              ))}
+            </div>
+          </AnimateIn>
+        )}
         <AnimateIn preset="fadeUp" inView>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50/70 dark:bg-gray-800/70 px-4 py-1.5 text-sm font-medium text-gray-500 dark:text-gray-400"
-              >
-                {tag}
-              </span>
+              <TechBadge key={tag} tech={tag} variant="tag" colorful />
             ))}
           </div>
         </AnimateIn>

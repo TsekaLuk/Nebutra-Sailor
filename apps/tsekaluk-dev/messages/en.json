@@ -87,8 +87,18 @@
   },
   "pricing": {
     "label": "/ Engagement Models",
-    "description": "Every domain delivered to professional standards.",
+    "headline": "Choose how we work together",
+    "description": "Not a Swiss army knife — a studio that delivers every domain to professional standards.",
+    "recommended": "Recommended",
+    "availability": "Accepting new projects · ~2 weeks to start",
+    "capabilities_label": "/ Capabilities",
     "radar_title": "Capability",
+    "stats": [
+      { "value": 50, "suffix": "+", "label": "Projects delivered" },
+      { "value": 6, "suffix": "", "label": "Service lines" },
+      { "value": 3, "suffix": "+", "label": "Years independent" },
+      { "value": 4, "suffix": "+", "label": "Timezones covered" }
+    ],
     "tiers": {
       "chat": {
         "name": "Chat",
@@ -148,7 +158,12 @@
       },
       "ai": {
         "name": "AI & Automation",
-        "items": ["AI Agent architecture", "OpenClaw workflows", "Enterprise Skill design", "AIGC content pipeline"]
+        "items": [
+          "AI Agent architecture",
+          "OpenClaw workflows",
+          "Enterprise Skill design",
+          "AIGC content pipeline"
+        ]
       },
       "design": {
         "name": "Design & Product",
@@ -156,15 +171,29 @@
       },
       "growth": {
         "name": "Growth & Global",
-        "items": ["Marketing strategy", "Growth hacking", "Software internationalization", "Localization & cross-cultural narrative", "Data analysis & A/B testing"]
+        "items": [
+          "Marketing strategy",
+          "Growth hacking",
+          "Software internationalization",
+          "Localization & cross-cultural narrative",
+          "Data analysis & A/B testing"
+        ]
       },
       "consulting": {
         "name": "Consulting",
-        "items": ["Mathematical modeling", "Business English", "IT project management"]
+        "items": [
+          "Mathematical modeling",
+          "Business English",
+          "IT project management"
+        ]
       },
       "strategy": {
         "name": "VC & Strategy",
-        "items": ["Venture research", "YC-ready startup planning", "Unicorn-level product thinking"]
+        "items": [
+          "Venture research",
+          "YC-ready startup planning",
+          "Unicorn-level product thinking"
+        ]
       }
     }
   },
@@ -466,9 +495,21 @@
       "tagline": "4.62/5 evaluation score across 1,000 real 3D scenes—8/8 acceptance criteria passed",
       "description": "Comprehensive quality evaluation framework for the Habitat-Matterport 3D Research Dataset (1,000 real 3D scenes). Assessed 15+ dimensions including mesh quality, texture integrity, semantic annotation accuracy, and metadata completeness. Achieved 4.62/5 overall score with 100% acceptance pass rate (8/8 criteria). 95% requirement compliance."
     },
-    "douxing-tea": {
-      "tagline": "60,000-word thesis, 7 database tables with RLS, 6 business modules—production-grade",
-      "description": "Full-stack tea enterprise ERP system built as a graduation thesis project. React 19 + TypeScript + Supabase + PostgreSQL with 15 Row-Level Security policies. 6 business modules (production tracking, quality control, inventory, sales orders, user permissions, analytics) across 7 database tables. Complete 60,000-word thesis with 29 screenshots and 21 tables."
+    "appen-dashboard": {
+      "tagline": "Enterprise SaaS for a NASDAQ data company: the B2B demo mode playbook in production",
+      "description": "Built multi-tenant reporting infrastructure for Appen (NASDAQ: APT). Next.js 16 monorepo (5 apps + 10 packages) serves TCS, ByteWorks, and DataPower dashboards with Upstash QStash async job queues and Pusher real-time. The breakthrough: a production-grade demo mode with MSW + tRPC mock interception, privacy redaction pipeline (schema validate → redact → normalize → value protocol), and 4 behavioral strategies—solving the #1 enterprise SaaS sales problem."
+    },
+    "t2v-relabeling": {
+      "tagline": "Using better AI to fix worse AI's labeling mistakes—at the cost human reviewers can't match",
+      "description": "Meta-labeling pipeline that audits and corrects mislabeled AI-generated video training data using Gemini 2.5 Flash. Classifies 6 attributes (quality, gender, age, race, scene, season) per video with EWMA-adaptive rate limiting and HTTP/2 concurrency. Processes 60MB+ videos via Gemini Files API without local download. 3 iterative rounds with incremental merge. Human labeling: ~$1/video. This pipeline: ~$0.01/video at scale."
+    },
+    "url-annotation": {
+      "tagline": "The TLS fingerprint arms race: when IP blocking fails, impersonate Chrome at the handshake",
+      "description": "Production URL consistency pipeline that defeats TLS-fingerprint bot detection at zero marginal LLM cost. curl_cffi spoofs Chrome 124's full ClientHello (cipher suites, extensions, ordering)—not just User-Agent. Playwright renders JS-heavy SPAs. Local Qwen3:1.7b via Ollama compares semantics without API fees or GDPR exposure. Rotating-ad detection re-fetches 3× to flag domain changes. 30 HTTP + 5 Playwright + 5 LLM concurrent."
+    },
+    "3dgs-eval": {
+      "tagline": "3DGS had 2,000+ citations in 6 months but zero enterprise quality standards—we wrote the spec",
+      "description": "First systematic vendor evaluation framework for 3D Gaussian Splatting content production. Multi-round scored assessment across 6 dimensions: HP/LP geometry (pivot + retopology), PBR texture completeness (BaseColor/Normal/Metallic/AO), file naming conventions, semantic annotation, preview standards (8+ renders), and communication SLA. The revelation: vendors weren't technically incapable—they were operationally immature. Multi-round CSV tracker makes every revision cycle auditable."
     }
   }
 }

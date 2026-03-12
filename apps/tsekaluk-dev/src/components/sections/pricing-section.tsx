@@ -1,16 +1,44 @@
 "use client";
 
 import * as React from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { AnimateIn } from "@nebutra/ui/components";
+import { DotPattern } from "@nebutra/ui/primitives";
 import {
+  Message,
+  Sparkles,
+  Target,
   Code,
-  Bot,
-  Palette,
-  TrendingUp,
-  Calculator,
-  Telescope,
-} from "lucide-react";
+  Brain,
+  Layers,
+  Globe,
+  Briefcase,
+  Compass,
+  CheckCircleFill,
+  ArrowRight,
+  type IconProps,
+} from "@nebutra/icons";
+import { Coffee, ChevronDown } from "lucide-react";
+import {
+  Anthropic,
+  OpenAI,
+  Midjourney,
+  Flux,
+  Cursor as CursorIcon,
+  LangChain,
+  ComfyUI,
+  OpenClaw,
+  N8n,
+  Dify,
+  Figma,
+  Adobe,
+  V0,
+  Google,
+  Notion,
+  Zapier,
+  Vercel,
+} from "@lobehub/icons";
 import {
   RadarChart,
   PolarGrid,
@@ -19,6 +47,8 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { NumberTicker } from "@/components/ui/number-ticker";
+import { Marquee } from "@/components/ui/marquee";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -33,7 +63,15 @@ const CAPABILITY_DATA = [
   { dimension: "Strategy", score: 82 },
 ];
 
-const SERVICE_ICONS = [Code, Bot, Palette, TrendingUp, Calculator, Telescope];
+const SERVICE_ICONS: React.ComponentType<IconProps>[] = [
+  Code,
+  Brain,
+  Layers,
+  Globe,
+  Briefcase,
+  Compass,
+];
+
 const SERVICE_KEYS = [
   "engineering",
   "ai",
@@ -44,6 +82,163 @@ const SERVICE_KEYS = [
 ] as const;
 
 const TIER_KEYS = ["chat", "coffee", "hire", "partner"] as const;
+
+const TIER_ICONS: Record<
+  (typeof TIER_KEYS)[number],
+  React.ComponentType<IconProps | { className?: string; size?: number }>
+> = { chat: Message, coffee: Coffee, hire: Sparkles, partner: Target };
+
+/* ------------------------------------------------------------------ */
+/*  Tech stack data                                                    */
+/* ------------------------------------------------------------------ */
+
+interface TechItem {
+  name: string;
+  slug?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Icon?: React.ComponentType<any>;
+}
+
+const TECH_STACKS: Record<(typeof SERVICE_KEYS)[number], TechItem[]> = {
+  engineering: [
+    { name: "Next.js", slug: "nextdotjs" },
+    { name: "React", slug: "react" },
+    { name: "TypeScript", slug: "typescript" },
+    { name: "Tailwind CSS", slug: "tailwindcss" },
+    { name: "Prisma", slug: "prisma" },
+    { name: "PostgreSQL", slug: "postgresql" },
+    { name: "Vercel", Icon: Vercel },
+    { name: "Turborepo", slug: "turborepo" },
+  ],
+  ai: [
+    { name: "Claude", Icon: Anthropic },
+    { name: "OpenAI", Icon: OpenAI },
+    { name: "Midjourney", Icon: Midjourney },
+    { name: "Flux", Icon: Flux },
+    { name: "Cursor", Icon: CursorIcon },
+    { name: "LangChain", Icon: LangChain },
+    { name: "ComfyUI", Icon: ComfyUI },
+    { name: "OpenClaw", Icon: OpenClaw },
+    { name: "n8n", Icon: N8n },
+    { name: "Dify", Icon: Dify },
+  ],
+  design: [
+    { name: "Figma", Icon: Figma },
+    { name: "Adobe CC", Icon: Adobe },
+    { name: "v0", Icon: V0 },
+    { name: "Framer", slug: "framer" },
+    { name: "Storybook", slug: "storybook" },
+    { name: "Radix UI", slug: "radixui" },
+  ],
+  growth: [
+    { name: "Google Analytics", Icon: Google },
+    { name: "PostHog", slug: "posthog" },
+    { name: "Product Hunt", slug: "producthunt" },
+    { name: "Notion", Icon: Notion },
+    { name: "Zapier", Icon: Zapier },
+    { name: "Mixpanel", slug: "mixpanel" },
+    { name: "X", slug: "x" },
+    { name: "微信公众号", slug: "wechat" },
+  ],
+  consulting: [
+    { name: "Notion", Icon: Notion },
+    { name: "Linear", slug: "linear" },
+    { name: "Jira", slug: "jira" },
+    { name: "LaTeX", slug: "latex" },
+    { name: "Python", slug: "python" },
+  ],
+  strategy: [
+    { name: "Y Combinator", slug: "ycombinator" },
+    { name: "Notion", Icon: Notion },
+    { name: "Google Sheets", slug: "googlesheets" },
+    { name: "Stripe", slug: "stripe" },
+  ],
+};
+
+/* All tech items flattened for the marquee strip */
+const ALL_TECH_ITEMS: TechItem[] = Object.values(TECH_STACKS)
+  .flat()
+  .filter(
+    (item, idx, arr) => arr.findIndex((t) => t.name === item.name) === idx,
+  );
+
+/* ------------------------------------------------------------------ */
+/*  Tech badge                                                         */
+/* ------------------------------------------------------------------ */
+
+function TechBadge({ item }: { item: TechItem }) {
+  return (
+    <div className="flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3 py-1.5 transition-colors hover:border-[var(--color-accent-muted)]">
+      {item.Icon ? (
+        <item.Icon size={14} />
+      ) : item.slug ? (
+        <img
+          src={`https://cdn.simpleicons.org/${item.slug}`}
+          alt=""
+          className="h-3.5 w-3.5 brightness-0 dark:invert"
+          loading="lazy"
+        />
+      ) : null}
+      <span className="text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap">
+        {item.name}
+      </span>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Stats strip                                                        */
+/* ------------------------------------------------------------------ */
+
+function StatsStrip() {
+  const t = useTranslations("pricing");
+  const stats = t.raw("stats") as {
+    value: number;
+    suffix: string;
+    label: string;
+  }[];
+
+  return (
+    <AnimateIn preset="fadeUp" delay={0.1} inView>
+      <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 py-12">
+        {stats.map((stat, i) => (
+          <div key={i} className="text-center">
+            <div className="flex items-baseline justify-center gap-0.5">
+              <NumberTicker
+                value={stat.value}
+                className="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white"
+              />
+              <span className="text-3xl font-bold text-[var(--color-accent)]">
+                {stat.suffix}
+              </span>
+            </div>
+            <p className="mt-1 font-mono text-xs text-gray-500 dark:text-gray-400">
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </AnimateIn>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Tech marquee                                                       */
+/* ------------------------------------------------------------------ */
+
+function TechMarquee() {
+  return (
+    <div className="relative mt-16">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[var(--page-bg)] to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[var(--page-bg)] to-transparent z-10" />
+      <Marquee pauseOnHover className="[--duration:60s] [--gap:0.75rem]">
+        {ALL_TECH_ITEMS.map((item) => (
+          <TechBadge key={item.name} item={item} />
+        ))}
+      </Marquee>
+    </div>
+  );
+}
 
 /* ------------------------------------------------------------------ */
 /*  Tier card                                                          */
@@ -58,48 +253,124 @@ function TierCard({
 }) {
   const t = useTranslations("pricing");
   const isAccent = tierKey === "hire";
-
+  const TierIcon = TIER_ICONS[tierKey];
   const features = t.raw(`tiers.${tierKey}.features`) as string[];
   const href = t(`tiers.${tierKey}.href`);
 
   return (
-    <AnimateIn preset="fadeUp" delay={index * 0.08} inView>
+    <AnimateIn preset="fadeUp" delay={index * 0.1} inView>
       <a
         href={href}
-        className={`group flex flex-col justify-between rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-0.5 h-full ${
+        className={`group relative flex flex-col justify-between rounded-3xl border p-8 lg:p-10 transition-all duration-500 h-full overflow-hidden ${
           isAccent
-            ? "border-[var(--color-accent)] dark:border-[var(--color-accent-dark)] shadow-[0_8px_30px_var(--color-accent-shadow)] bg-white dark:bg-gray-900"
-            : "border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 opacity-80 hover:opacity-100 hover:shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:hover:shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+            ? "border-[var(--color-accent)] bg-gray-900 dark:bg-gray-900 shadow-[0_20px_60px_var(--color-accent-shadow)] scale-[1.02] hover:scale-[1.04]"
+            : "border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950/80 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)]"
         }`}
       >
-        <div>
-          {/* Name & Price */}
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {t(`tiers.${tierKey}.name`)}
-            </h3>
-            <p
-              className={`mt-1 text-2xl font-bold tracking-tight ${
+        {/* Hire card internal glow */}
+        {isAccent && (
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at 30% 0%, hsla(82 84% 56% / 0.08) 0%, transparent 60%)",
+            }}
+          />
+        )}
+
+        {/* Recommended badge */}
+        {isAccent && (
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-[var(--color-accent)] px-4 py-1.5 text-xs font-bold text-gray-900 tracking-wide uppercase z-10">
+            <Sparkles size={14} />
+            {t("recommended")}
+          </div>
+        )}
+
+        <div className="relative z-[1]">
+          {/* Icon */}
+          <div
+            className={`mb-5 flex h-12 w-12 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${
+              isAccent
+                ? "bg-[var(--color-accent)]/15"
+                : "bg-gray-100 dark:bg-gray-800"
+            }`}
+          >
+            <TierIcon
+              size={24}
+              className={
                 isAccent
-                  ? "text-[var(--color-accent)] dark:text-[var(--color-accent-dark)]"
-                  : "text-gray-900 dark:text-white"
-              }`}
-            >
-              {t(`tiers.${tierKey}.price`)}
-            </p>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {t(`tiers.${tierKey}.description`)}
-            </p>
+                  ? "text-[var(--color-accent)]"
+                  : "text-gray-600 dark:text-gray-300"
+              }
+            />
           </div>
 
+          {/* Name */}
+          <h3
+            className={`text-xl font-bold ${
+              isAccent ? "text-white" : "text-gray-900 dark:text-white"
+            }`}
+          >
+            {t(`tiers.${tierKey}.name`)}
+          </h3>
+
+          {/* Price */}
+          <p
+            className={`mt-3 text-4xl font-extrabold tracking-tight ${
+              isAccent
+                ? "text-[var(--color-accent)]"
+                : "text-gray-900 dark:text-white"
+            }`}
+          >
+            {t(`tiers.${tierKey}.price`)}
+          </p>
+
+          {/* Description */}
+          <p
+            className={`mt-2 text-sm leading-relaxed ${
+              isAccent ? "text-gray-400" : "text-gray-500 dark:text-gray-400"
+            }`}
+          >
+            {t(`tiers.${tierKey}.description`)}
+          </p>
+
+          {/* Availability (hire card only) */}
+          {isAccent && (
+            <div className="mt-3 flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
+              <span className="text-xs text-gray-400">{t("availability")}</span>
+            </div>
+          )}
+
+          {/* Divider */}
+          <div
+            className={`my-6 h-px ${
+              isAccent ? "bg-gray-700" : "bg-gray-100 dark:bg-gray-800"
+            }`}
+          />
+
           {/* Features */}
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {features.map((f, i) => (
               <li
                 key={i}
-                className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300"
+                className={`flex items-start gap-3 text-sm ${
+                  isAccent
+                    ? "text-gray-300"
+                    : "text-gray-600 dark:text-gray-300"
+                }`}
               >
-                <span className="mt-0.5 text-[var(--color-accent)]">·</span>
+                <CheckCircleFill
+                  size={16}
+                  className={`mt-0.5 shrink-0 ${
+                    isAccent
+                      ? "text-[var(--color-accent)]"
+                      : "text-[var(--color-accent-dark)]"
+                  }`}
+                />
                 {f}
               </li>
             ))}
@@ -108,13 +379,17 @@ function TierCard({
 
         {/* CTA */}
         <div
-          className={`mt-6 text-center rounded-lg py-2 text-sm font-medium transition-colors ${
+          className={`relative z-[1] mt-8 flex items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold transition-all duration-300 ${
             isAccent
-              ? "bg-[var(--color-accent)] text-gray-900 group-hover:brightness-110"
-              : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-700"
+              ? "bg-[var(--color-accent)] text-gray-900 group-hover:brightness-110 group-hover:shadow-[0_8px_24px_var(--color-accent-shadow)]"
+              : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 group-hover:bg-gray-200 dark:group-hover:bg-gray-700"
           }`}
         >
           {t(`tiers.${tierKey}.cta`)}
+          <ArrowRight
+            size={16}
+            className="transition-transform group-hover:translate-x-1"
+          />
         </div>
       </a>
     </AnimateIn>
@@ -129,13 +404,13 @@ function CapabilityRadar() {
   const t = useTranslations("pricing");
 
   return (
-    <div className="flex items-center justify-center">
-      <ResponsiveContainer width="100%" height={360}>
+    <div className="flex items-center justify-center rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950/80 p-8">
+      <ResponsiveContainer width="100%" height={380}>
         <RadarChart data={CAPABILITY_DATA} cx="50%" cy="50%" outerRadius="75%">
           <PolarGrid stroke="var(--color-accent-muted)" strokeOpacity={0.3} />
           <PolarAngleAxis
             dataKey="dimension"
-            tick={{ fill: "currentColor", fontSize: 12 }}
+            tick={{ fill: "currentColor", fontSize: 13 }}
             className="text-gray-500 dark:text-gray-400"
           />
           <Radar
@@ -143,16 +418,18 @@ function CapabilityRadar() {
             dataKey="score"
             stroke="var(--color-accent)"
             fill="var(--color-accent)"
-            fillOpacity={0.2}
+            fillOpacity={0.15}
             strokeWidth={2}
           />
           <Tooltip
             contentStyle={{
               backgroundColor: "var(--color-accent)",
               border: "none",
-              borderRadius: "8px",
+              borderRadius: "12px",
               color: "#111",
               fontSize: 13,
+              fontWeight: 600,
+              padding: "8px 14px",
             }}
           />
         </RadarChart>
@@ -162,35 +439,87 @@ function CapabilityRadar() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Service lines list                                                 */
+/*  Service line card (expandable)                                     */
+/* ------------------------------------------------------------------ */
+
+function ServiceLineCard({
+  serviceKey,
+  index,
+}: {
+  serviceKey: (typeof SERVICE_KEYS)[number];
+  index: number;
+}) {
+  const t = useTranslations("pricing");
+  const [expanded, setExpanded] = useState(false);
+  const Icon = SERVICE_ICONS[index];
+  const items = t.raw(`services.${serviceKey}.items`) as string[];
+  const techStack = TECH_STACKS[serviceKey];
+
+  return (
+    <AnimateIn preset="fadeUp" delay={index * 0.06} inView>
+      <div
+        className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950/80 transition-all duration-300 hover:border-[var(--color-accent-muted)] cursor-pointer"
+        onClick={() => setExpanded((v) => !v)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setExpanded((v) => !v);
+          }
+        }}
+      >
+        <div className="flex gap-4 p-5">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-accent)]/10">
+            <Icon size={20} className="text-[var(--color-accent-dark)]" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between gap-2">
+              <h4 className="text-sm font-bold text-gray-900 dark:text-white">
+                {t(`services.${serviceKey}.name`)}
+              </h4>
+              <ChevronDown
+                className={`h-4 w-4 shrink-0 text-gray-400 transition-transform duration-300 ${
+                  expanded ? "rotate-180" : ""
+                }`}
+              />
+            </div>
+            <p className="mt-1 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+              {items.join(" · ")}
+            </p>
+          </div>
+        </div>
+
+        <div
+          className={`grid transition-all duration-300 ease-in-out ${
+            expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="px-5 pb-5 pt-1 border-t border-gray-100 dark:border-gray-800">
+              <div className="flex flex-wrap gap-2 mt-3">
+                {techStack.map((tech) => (
+                  <TechBadge key={tech.name} item={tech} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </AnimateIn>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Service lines grid                                                 */
 /* ------------------------------------------------------------------ */
 
 function ServiceLines() {
-  const t = useTranslations("pricing");
-
   return (
-    <div className="space-y-6">
-      {SERVICE_KEYS.map((key, idx) => {
-        const Icon = SERVICE_ICONS[idx];
-
-        const items = t.raw(`services.${key}.items`) as string[];
-
-        return (
-          <AnimateIn key={key} preset="fadeUp" delay={idx * 0.06} inView>
-            <div className="flex gap-3">
-              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-accent)]" />
-              <div>
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {t(`services.${key}.name`)}
-                </h4>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  {items.join(" · ")}
-                </p>
-              </div>
-            </div>
-          </AnimateIn>
-        );
-      })}
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {SERVICE_KEYS.map((key, idx) => (
+        <ServiceLineCard key={key} serviceKey={key} index={idx} />
+      ))}
     </div>
   );
 }
@@ -203,36 +532,62 @@ export function PricingSection() {
   const t = useTranslations("pricing");
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 border-t border-gray-100 dark:border-gray-800">
+    <section className="mx-auto max-w-7xl px-6 py-32">
       {/* Header */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-20">
         <AnimateIn preset="fade" inView>
-          <p className="font-serif italic text-2xl text-gray-400 dark:text-gray-500 mb-4 tracking-tight">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 mb-4">
             {t("label")}
           </p>
         </AnimateIn>
         <AnimateIn preset="fadeUp" delay={0.1} inView>
-          <p className="text-base text-gray-500 dark:text-gray-400">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-5xl">
+            {t("headline")}
+          </h2>
+        </AnimateIn>
+        <AnimateIn preset="fadeUp" delay={0.15} inView>
+          <p className="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             {t("description")}
           </p>
         </AnimateIn>
       </div>
 
-      {/* Tier cards — 4-col grid */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Tier cards */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-start">
         {TIER_KEYS.map((key, i) => (
           <TierCard key={key} tierKey={key} index={i} />
         ))}
       </div>
 
-      {/* Capability showcase — RadarChart + Service lines */}
-      <div className="mt-20 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-        <AnimateIn preset="fade" delay={0.1} inView>
-          <CapabilityRadar />
+      {/* Stats strip */}
+      <div className="relative mt-16 border-y border-gray-100 dark:border-gray-800 overflow-hidden">
+        <DotPattern
+          width={24}
+          height={24}
+          cr={0.8}
+          className="text-gray-400/15 dark:text-gray-500/10 [mask-image:radial-gradient(ellipse_at_center,white_40%,transparent_75%)]"
+        />
+        <StatsStrip />
+      </div>
+
+      {/* Tech marquee */}
+      <TechMarquee />
+
+      {/* Capability showcase */}
+      <div className="mt-24">
+        <AnimateIn preset="fade" inView>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 mb-10 text-center">
+            {t("capabilities_label")}
+          </p>
         </AnimateIn>
-        <AnimateIn preset="fadeUp" delay={0.2} inView>
-          <ServiceLines />
-        </AnimateIn>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
+          <AnimateIn preset="fade" delay={0.1} inView>
+            <CapabilityRadar />
+          </AnimateIn>
+          <AnimateIn preset="fadeUp" delay={0.2} inView>
+            <ServiceLines />
+          </AnimateIn>
+        </div>
       </div>
     </section>
   );

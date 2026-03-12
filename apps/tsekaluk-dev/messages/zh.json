@@ -87,56 +87,48 @@
   },
   "pricing": {
     "label": "/ 合作方式",
-    "description": "每个领域都以专业标准交付。",
+    "headline": "选择你的合作方式",
+    "description": "不是瑞士军刀，是每个领域都以专业标准交付的独立工作室。",
+    "recommended": "推荐",
+    "availability": "目前接受新项目 · 预计 2 周内可启动",
+    "capabilities_label": "/ 专业能力",
     "radar_title": "能力维度",
+    "stats": [
+      { "value": 50, "suffix": "+", "label": "项目交付" },
+      { "value": 6, "suffix": "", "label": "专业服务线" },
+      { "value": 3, "suffix": "+", "label": "年独立交付" },
+      { "value": 4, "suffix": "+", "label": "跨时区协作" }
+    ],
     "tiers": {
       "chat": {
-        "name": "💬 聊一聊",
+        "name": "聊一聊",
         "price": "免费",
         "description": "15 分钟快聊",
-        "features": [
-          "方向建议",
-          "技术选型参考",
-          "快速 Q&A"
-        ],
+        "features": ["方向建议", "技术选型参考", "快速 Q&A"],
         "cta": "和灵魂对话",
         "href": "/soul"
       },
       "coffee": {
-        "name": "☕ Coffee",
+        "name": "Coffee",
         "price": "¥18",
         "description": "一杯咖啡的价格",
-        "features": [
-          "以上所有",
-          "Code Review",
-          "UX 快速诊断",
-          "增长策略建议"
-        ],
+        "features": ["以上所有", "Code Review", "UX 快速诊断", "增长策略建议"],
         "cta": "请我喝咖啡",
         "href": "https://buymeacoffee.com/tsekaluk"
       },
       "hire": {
-        "name": "⭐ 雇佣关系",
+        "name": "雇佣关系",
         "price": "按项目报价",
         "description": "完整专业交付",
-        "features": [
-          "以上所有",
-          "6 条服务线全部解锁",
-          "按需组合交付"
-        ],
+        "features": ["以上所有", "6 条服务线全部解锁", "按需组合交付"],
         "cta": "联系我",
         "href": "mailto:tseka@nebutra.com?subject=Hire"
       },
       "partner": {
-        "name": "🚀 梦想合伙",
+        "name": "梦想合伙",
         "price": "共同成长",
         "description": "长期共创关系",
-        "features": [
-          "以上所有",
-          "产品共创",
-          "黑客增长体系",
-          "股权 / 利润分成"
-        ],
+        "features": ["以上所有", "产品共创", "黑客增长体系", "股权 / 利润分成"],
         "cta": "聊聊愿景",
         "href": "mailto:tseka@nebutra.com?subject=Partnership"
       }
@@ -148,7 +140,12 @@
       },
       "ai": {
         "name": "AI & 自动化",
-        "items": ["AI Agent 架构研发", "OpenClaw 自动化工作流", "企业 Skill 研发设计", "AIGC 内容工作流"]
+        "items": [
+          "AI Agent 架构研发",
+          "OpenClaw 自动化工作流",
+          "企业 Skill 研发设计",
+          "AIGC 内容工作流"
+        ]
       },
       "design": {
         "name": "设计 & 产品",
@@ -156,7 +153,13 @@
       },
       "growth": {
         "name": "增长 & 全球化",
-        "items": ["市场营销策略", "黑客增长", "软件出海", "本地化 & 跨文化叙事", "数据分析 & A/B 测试"]
+        "items": [
+          "市场营销策略",
+          "黑客增长",
+          "软件出海",
+          "本地化 & 跨文化叙事",
+          "数据分析 & A/B 测试"
+        ]
       },
       "consulting": {
         "name": "专业咨询",
@@ -466,9 +469,21 @@
       "tagline": "1,000 个真实 3D 场景评估得分 4.62/5——8/8 验收标准全通过",
       "description": "面向 Habitat-Matterport 3D Research Dataset（1,000 个真实 3D 场景）的综合质量评估框架。评估 15+ 维度，涵盖网格质量、纹理完整性、语义标注准确性和元数据完备性。整体得分 4.62/5，验收通过率 100%（8/8 标准）。需求符合度 95%。"
     },
-    "douxing-tea": {
-      "tagline": "6 万字毕业论文、7 张数据表 + RLS、6 大业务模块——生产级系统",
-      "description": "作为毕业设计的全栈茶企 ERP 系统。React 19 + TypeScript + Supabase + PostgreSQL，配备 15 条行级安全策略。6 大业务模块（生产追踪、质量管控、库存管理、销售订单、用户权限、数据分析），7 张数据表。完整 6 万字论文，含 29 张系统截图与 21 张数据表。"
+    "appen-dashboard": {
+      "tagline": "为纳斯达克上市数据公司构建企业 SaaS — B2B 演示模式架构的生产级实践",
+      "description": "为 Appen（纳斯达克：APT）构建多租户报表基础设施。Next.js 16 monorepo（5 个应用 + 10 个共享包）服务 TCS、ByteWorks、DataPower 三客户绩效看板，Upstash QStash 异步任务队列驱动 CSV 导入 → 报告生成 → 邮件发送全流程。核心突破：MSW + tRPC 请求拦截级别的演示模式，配备「schema 校验 → 数据脱敏 → 归一化 → 值协议」隐私保护管道，4 种行为策略，彻底解决企业 SaaS 销售的核心难题。"
+    },
+    "t2v-relabeling": {
+      "tagline": "用更强的 AI 修正更弱 AI 的标注错误 — 以人工审核无法企及的成本",
+      "description": "元标注流水线：使用 Gemini 2.5 Flash 多模态对 AI 生成视频训练数据进行审计和纠错。每个视频分类 6 个属性（质量判断、性别、年龄、种族、场景、季节），EWMA 自适应限流 + HTTP/2 并发。通过 Gemini Files API 处理 60MB+ 远程视频，无需本地下载。3 轮迭代标注 + 增量合并：高置信度标签保留，低置信度重新审查。人工标注成本约 ¥7/条，本管线约 ¥0.07/条，规模化后差距扩大十倍。"
+    },
+    "url-annotation": {
+      "tagline": "TLS 指纹军备竞赛：当 IP 封锁失效时，在握手层伪装成 Chrome",
+      "description": "生产级 URL 一致性标注流水线，在击败 TLS 指纹反爬的同时实现零边际 LLM 成本。curl_cffi 完整伪装 Chrome 124 的 ClientHello（加密套件、扩展项、顺序），而非仅修改 User-Agent。Playwright 渲染 JS 驱动的 SPA；本地 Qwen3:1.7b（Ollama）语义对比，无 API 费用、无 GDPR 风险。旋转广告检测三次重抓取识别域名变更。30 并发 HTTP + 5 Playwright + 5 LLM。"
+    },
+    "3dgs-eval": {
+      "tagline": "3DGS 六个月内获 2000+ 引用，却没有任何企业级质量标准 — 我们写了这份规范",
+      "description": "首个 3D 高斯散射（3DGS）内容供应商能力系统化评估框架。跨 6 维度多轮评分：HP/LP 几何精度（枢轴对齐 + retopo 验证）、PBR 贴图完整性（BaseColor/Normal/Metallic/AO）、文件命名规范、语义标注精度、预览图标准（8 张以上）及沟通 SLA。核心发现：供应商技术上并非无能，而是流程上不成熟。结构化 CSV 让每轮修改迭代可追溯、可审计。"
     }
   }
 }
