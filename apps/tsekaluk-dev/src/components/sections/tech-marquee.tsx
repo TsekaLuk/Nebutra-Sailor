@@ -1,7 +1,7 @@
 "use client";
 
 import { useId } from "react";
-
+import { GithubMetrics } from "@/components/ui/github-metrics";
 
 const TECHNOLOGIES = [
     { name: "Antigravity", icon: <img src="https://cdn.simpleicons.org/googlegemini/000000" alt="Antigravity (Gemini)" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
@@ -20,7 +20,7 @@ export function TechMarquee() {
 
     return (
         <section className="mx-auto max-w-7xl px-6 py-12 relative z-30">
-            <div className="shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] bg-white/40 dark:bg-white_5 border-gray-200/60 dark:border-white/10 border rounded-3xl p-4 md:p-6 backdrop-blur-md relative">
+            <div className="shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] bg-white/40 dark:bg-white_5 border-gray-200/60 dark:border-white/10 border rounded-3xl p-4 md:p-6 backdrop-blur-md relative mb-8">
                 <div className="flex flex-col md:flex-row gap-4 items-stretch">
 
                     <div className="flex md:w-64 rounded-xl p-4 items-center justify-center text-center md:text-left bg-white/50 dark:bg-white_10 border border-gray-100/50 dark:border-white/10 shrink-0">
@@ -79,6 +79,8 @@ export function TechMarquee() {
                     </div>
                 </div>
             </div>
+            {/* The new Github Metrics */}
+            <GithubMetrics />
         </section>
     );
 }

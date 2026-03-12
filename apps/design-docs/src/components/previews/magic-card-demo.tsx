@@ -15,7 +15,7 @@ export function MagicCardDemo() {
             <MagicCard
                 className="p-8 h-64 flex flex-col justify-between cursor-pointer border"
                 gradientFrom="#f59e0b"
-                gradientTo="#ef4444"
+                gradientTo="#d31212"
                 gradientColor="rgba(245, 158, 11, 0.15)"
             >
                 <div>

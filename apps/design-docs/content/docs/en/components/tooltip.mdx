@@ -5,10 +5,10 @@ description: "Contextual hover information displayed in a floating popover, buil
 
 
 import { TooltipDemo } from "@/components/previews/tooltip-demo";
-import { Tooltip2Demo } from "@/components/previews/tooltip-2-demo";
-import { Tooltip3Demo } from "@/components/previews/tooltip-3-demo";
-import { Tooltip4Demo } from "@/components/previews/tooltip-4-demo";
-import { Tooltip5Demo } from "@/components/previews/tooltip-5-demo";
+import { TooltipInstantDemo } from "@/components/previews/tooltip-instant-demo";
+import { TooltipRichContentDemo } from "@/components/previews/tooltip-rich-content-demo";
+import { TooltipIconButtonDemo } from "@/components/previews/tooltip-icon-button-demo";
+import { TooltipSideRightDemo } from "@/components/previews/tooltip-side-right-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
@@ -31,7 +31,7 @@ import { ComponentPreview } from "@/components/component-preview";
 ## Usage
 
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <Tooltip4Demo />
+  <TooltipIconButtonDemo />
 
   ```tsx
 import {
@@ -109,7 +109,7 @@ import { Settings } from "lucide-react"
 ### Custom Side and Offset
 
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <Tooltip5Demo />
+  <TooltipSideRightDemo />
 
   ```tsx
 <TooltipProvider>
@@ -128,7 +128,7 @@ import { Settings } from "lucide-react"
 ### Instant Tooltip (No Delay)
 
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <Tooltip2Demo />
+  <TooltipInstantDemo />
 
   ```tsx
 <TooltipProvider>
@@ -145,7 +145,7 @@ import { Settings } from "lucide-react"
 ### Rich Tooltip Content
 
 <ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <Tooltip3Demo />
+  <TooltipRichContentDemo />
 
   ```tsx
 <TooltipProvider>

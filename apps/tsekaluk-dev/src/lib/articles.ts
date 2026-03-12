@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { loader } from 'fumadocs-core/source';
 import { toFumadocsSource } from 'fumadocs-mdx/runtime/server';
 import { blogPosts } from '../../.source/server';
@@ -29,6 +31,29 @@ export const blog = loader({
 function normalizeDateStr(date: unknown): string {
   if (date instanceof Date) return date.toISOString().split('T')[0] ?? '';
   return String(date ?? '');
+}
+
+/** Returns estimated reading time in minutes (200 WPM). */
+export function getReadingTime(slug: string): number {
+  try {
+    const raw = readFileSync(
+      join(process.cwd(), 'content', 'thinking', `${slug}.mdx`),
+      'utf-8',
+    );
+    // Strip frontmatter then count words in plain text
+    const body = raw.replace(/^---[\s\S]*?---\n?/, '');
+    const text = body
+      .replace(/```[\s\S]*?```/g, '')   // code blocks
+      .replace(/`[^`]*`/g, '')          // inline code
+      .replace(/!\[.*?\]\(.*?\)/g, '')  // images
+      .replace(/\[.*?\]\(.*?\)/g, '$1') // links → text
+      .replace(/#{1,6}\s/g, '')         // headings
+      .replace(/[*_~>]/g, '');          // formatting chars
+    const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.ceil(wordCount / 200));
+  } catch {
+    return 1;
+  }
 }
 
 // Compatibility helper used by sitemap, rss, and admin pages

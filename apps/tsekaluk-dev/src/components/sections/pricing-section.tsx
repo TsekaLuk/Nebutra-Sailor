@@ -208,7 +208,7 @@ function StatsStrip() {
                 value={stat.value}
                 className="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white"
               />
-              <span className="text-3xl font-bold text-[var(--color-accent)]">
+              <span className="text-3xl font-bold text-[var(--color-accent-fg)]">
                 {stat.suffix}
               </span>
             </div>
@@ -299,7 +299,7 @@ function TierCard({
               size={24}
               className={
                 isAccent
-                  ? "text-[var(--color-accent)]"
+                  ? "text-[var(--color-accent-fg)]"
                   : "text-gray-600 dark:text-gray-300"
               }
             />
@@ -318,7 +318,7 @@ function TierCard({
           <p
             className={`mt-3 text-4xl font-extrabold tracking-tight ${
               isAccent
-                ? "text-[var(--color-accent)]"
+                ? "text-[var(--color-accent-fg)]"
                 : "text-gray-900 dark:text-white"
             }`}
           >
@@ -367,7 +367,7 @@ function TierCard({
                   size={16}
                   className={`mt-0.5 shrink-0 ${
                     isAccent
-                      ? "text-[var(--color-accent)]"
+                      ? "text-[var(--color-accent-fg)]"
                       : "text-[var(--color-accent-dark)]"
                   }`}
                 />

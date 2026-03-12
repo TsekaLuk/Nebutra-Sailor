@@ -153,7 +153,7 @@ function ToolRow({ item }: { item: ToolItem }) {
           <div className="flex items-center gap-2">
             <p className="text-sm font-semibold text-foreground">{item.name}</p>
             {item.tag && (
-              <span className="rounded-full bg-[var(--color-accent)]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-accent-dark)]">
+              <span className="rounded-full bg-[var(--color-accent)]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-accent-fg)]">
                 {item.tag}
               </span>
             )}

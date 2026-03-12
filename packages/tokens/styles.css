@@ -199,12 +199,12 @@
   --accent-foreground: 228 100% 50%;
   /* nebutra-blue-500 */
 
-  /* Destructive */
-  --destructive: 0 84% 60%;
+  /* Destructive - Darken slightly to pass 4.5:1 with white text */
+  --destructive: 0 84% 45%;
   --destructive-foreground: 0 0% 100%;
 
-  /* Success — VI manual specifies #22c55e = HSL(142 71% 45%) */
-  --success: 142 71% 45%;
+  /* Success — Darken to pass 4.5:1 with white text */
+  --success: 142 71% 29%;
   --success-foreground: 0 0% 100%;
 
   /* Warning */
@@ -474,14 +474,14 @@
   --destructive: 0 63% 31%;
   --destructive-foreground: 210 40% 98%;
 
-  /* Success — darker for dark mode */
+  /* Success — Dark text on vibrant green background */
   --success: 142 76% 36%;
   /* #16a34a */
-  --success-foreground: 210 40% 98%;
+  --success-foreground: 222 47% 4%;
 
-  /* Warning */
+  /* Warning — Dark text on vibrant yellow/orange background MUST be used */
   --warning: 38 80% 45%;
-  --warning-foreground: 210 40% 98%;
+  --warning-foreground: 222 47% 4%;
 
   /* Info — lighter brand blue for dark mode */
   --info: 228 95% 67%;

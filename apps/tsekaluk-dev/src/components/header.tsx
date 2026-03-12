@@ -4,10 +4,11 @@ import * as React from "react";
 import { useTranslations } from "next-intl";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { useCommandPalette } from "@/components/providers/command-palette-provider";
 
 function AuthIndicator() {
   const { data: session, status } = useSession();
@@ -55,6 +56,7 @@ function AuthIndicator() {
 export function Header() {
   const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { setOpen: openCommandPalette } = useCommandPalette();
 
   const NAV_ITEMS = [
     { label: t("work"), href: "/work" },
@@ -69,6 +71,12 @@ export function Header() {
 
   return (
     <header className="relative z-40">
+      <a
+        href="#main-content"
+        className="absolute left-4 top-4 z-50 -translate-y-20 rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-transform focus:translate-y-0 dark:bg-white dark:text-gray-900"
+      >
+        Skip to content
+      </a>
       <div className="mx-auto max-w-7xl px-6 py-8">
         <nav aria-label="Main navigation" className="flex items-center justify-between">
           {/* Logo */}
@@ -97,6 +105,15 @@ export function Header() {
               </Link>
             ))}
             <div className="flex items-center gap-2 ml-2">
+              <button
+                type="button"
+                aria-label="Open command palette"
+                onClick={() => openCommandPalette(true)}
+                className="flex items-center gap-1.5 rounded-md border border-gray-200 dark:border-gray-700 px-2.5 py-1.5 text-xs text-gray-400 transition-colors hover:text-gray-600 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600"
+              >
+                <Search className="h-3 w-3" />
+                <kbd className="font-mono">⌘K</kbd>
+              </button>
               <LanguageSwitcher />
               <ThemeToggle />
               <AuthIndicator />

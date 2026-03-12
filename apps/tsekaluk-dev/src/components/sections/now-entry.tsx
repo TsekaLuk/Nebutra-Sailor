@@ -1,6 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
 import { getTranslations } from "next-intl/server";
+import { prisma } from "@/lib/prisma";
 import { NowEntryView } from "./now-entry-view";
 
 interface NowData {
@@ -11,33 +10,18 @@ interface NowData {
   reading: string[];
 }
 
-function getLatestNowEntry(): NowData | null {
-  const contentDir = path.join(process.cwd(), "content", "now");
-
-  if (!fs.existsSync(contentDir)) {
-    return null;
-  }
-
-  const files = fs
-    .readdirSync(contentDir)
-    .filter((f) => f.endsWith(".json"))
-    .sort()
-    .reverse();
-
-  if (files.length === 0) {
-    return null;
-  }
-
+async function getLatestNowEntry(): Promise<NowData | null> {
   try {
-    const raw = fs.readFileSync(path.join(contentDir, files[0]!), "utf-8");
-    const parsed = JSON.parse(raw) as Record<string, unknown>;
-
+    const entry = await prisma.nowEntry.findFirst({
+      orderBy: { createdAt: "desc" },
+    });
+    if (!entry) return null;
     return {
-      date: typeof parsed.date === "string" ? parsed.date : "",
-      building: Array.isArray(parsed.building) ? parsed.building : [],
-      thinking: Array.isArray(parsed.thinking) ? parsed.thinking : [],
-      shipped: Array.isArray(parsed.shipped) ? parsed.shipped : [],
-      reading: Array.isArray(parsed.reading) ? parsed.reading : [],
+      date: entry.date,
+      building: entry.building,
+      thinking: entry.thinking,
+      shipped: entry.shipped,
+      reading: entry.reading,
     };
   } catch {
     return null;
@@ -46,7 +30,7 @@ function getLatestNowEntry(): NowData | null {
 
 export async function NowEntry({ preview = false }: { preview?: boolean }) {
   const t = await getTranslations("now");
-  const data = getLatestNowEntry();
+  const data = await getLatestNowEntry();
 
   const sections: {
     key: keyof Omit<NowData, "date">;

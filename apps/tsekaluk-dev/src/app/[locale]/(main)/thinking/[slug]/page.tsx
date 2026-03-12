@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { AnimateIn } from "@nebutra/ui/components";
 import { Link } from "@/i18n/navigation";
-import { blog, type BlogFrontmatter } from "@/lib/articles";
+import { blog, type BlogFrontmatter, getReadingTime } from "@/lib/articles";
+import { articleJsonLd } from "@/lib/json-ld";
 
 export function generateStaticParams() {
   return blog.getPages().map((page) => ({
@@ -58,6 +59,7 @@ export default async function ArticlePage({
   const data = page.data as unknown as BlogFrontmatter;
   const { title, date, tags, excerpt } = data;
   const MDXContent = data.body;
+  const readingTime = getReadingTime(slug);
 
   const dateStr =
     date instanceof Date
@@ -66,6 +68,12 @@ export default async function ArticlePage({
 
   return (
     <section className="mx-auto max-w-2xl px-6 py-24 md:py-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd({ title, slug, date: dateStr, excerpt: excerpt ?? "" })),
+        }}
+      />
       {/* Back link */}
       <AnimateIn preset="fade">
         <Link
@@ -87,6 +95,9 @@ export default async function ArticlePage({
             >
               {dateStr}
             </time>
+            <span className="font-mono text-sm text-gray-400 dark:text-gray-500">
+              {readingTime} min read
+            </span>
             {tags.map((tag) => (
               <span
                 key={tag}

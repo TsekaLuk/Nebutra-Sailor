@@ -1,8 +1,8 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, FolderOpen, FileText, MessageSquare, type LucideIcon } from "lucide-react"
+import { LayoutDashboard, FolderOpen, FileText, MessageSquare, Star, Clock, type LucideIcon } from "lucide-react"
 
 interface NavItem {
   href: string
@@ -16,6 +16,8 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/admin/projects", label: "Projects", icon: FolderOpen, exact: false },
   { href: "/admin/articles", label: "Articles", icon: FileText, exact: false },
   { href: "/admin/guestbook", label: "Guestbook", icon: MessageSquare, exact: false },
+  { href: "/admin/feedback", label: "Feedback", icon: Star, exact: false },
+  { href: "/admin/now", label: "Now", icon: Clock, exact: false },
 ]
 
 export function AdminNav() {
@@ -25,7 +27,6 @@ export function AdminNav() {
     <nav className="flex-1 px-3 py-4">
       <ul className="flex flex-col gap-1">
         {NAV_ITEMS.map(({ href, label, icon: Icon, exact }) => {
-          // Match against locale-prefixed paths like /en/admin or /zh/admin
           const isActive = exact
             ? pathname === href || /^\/[a-z]{2}\/admin$/.test(pathname)
             : pathname.includes(href)

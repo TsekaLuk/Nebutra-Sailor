@@ -5,9 +5,9 @@ description: "具有三种视觉变体、四种尺寸并支持胶囊形状的选
 
 
 import { TabsDemo } from "@/components/previews/tabs-demo";
-import { Tabs2Demo } from "@/components/previews/tabs-2-demo";
-import { Tabs3Demo } from "@/components/previews/tabs-3-demo";
-import { Tabs4Demo } from "@/components/previews/tabs-4-demo";
+import { TabsButtonDemo } from "@/components/previews/tabs-button-demo";
+import { TabsPillDemo } from "@/components/previews/tabs-pill-demo";
+import { TabsLineDemo } from "@/components/previews/tabs-line-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
 <ComponentPreview className="mt-4">
@@ -90,7 +90,7 @@ import {
 ### 按钮变体 (Button Variant)
 
 <ComponentPreview className="mt-4">
-  <Tabs4Demo />
+  <TabsLineDemo />
 
   ```tsx
 <Tabs defaultValue="tab1" className="w-[400px]">
@@ -109,7 +109,7 @@ import {
 ### 线条变体 - 下划线 (Line Variant)
 
 <ComponentPreview className="mt-4">
-  <Tabs2Demo />
+  <TabsButtonDemo />
 
   ```tsx
 <Tabs defaultValue="tab1" className="w-[400px]">
@@ -128,7 +128,7 @@ import {
 ### 胶囊形状 (Pill Shape)
 
 <ComponentPreview className="mt-4">
-  <Tabs3Demo />
+  <TabsPillDemo />
 
   ```tsx
 <Tabs defaultValue="tab1" className="w-[400px]">

@@ -18,6 +18,7 @@ import {
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 import { personJsonLd } from "@/lib/json-ld";
 import { CountUp } from "@/components/count-up";
+import { ResumeDownloadButton } from "@/components/resume-download-button";
 
 export async function generateMetadata({
   params,
@@ -432,7 +433,7 @@ export default async function AboutPage({
             <h2 className="font-serif italic text-2xl text-gray-400">
               {t("awards_label")}
             </h2>
-            <span className="rounded-full bg-[var(--color-accent)]/20 px-3 py-0.5 text-xs font-medium text-[var(--color-accent-dark)]">
+            <span className="rounded-full bg-[var(--color-accent)]/20 px-3 py-0.5 text-xs font-medium text-[var(--color-accent-fg)]">
               {t("awards_count")}
             </span>
           </div>
@@ -636,12 +637,13 @@ export default async function AboutPage({
           </h2>
           <div className="mt-8">
             <a
-              href="mailto:tseka@nebutra.com"
+              href="mailto:contact@tsekaluk.dev"
               className="inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-white px-7 py-3 text-sm font-medium text-white dark:text-gray-900 transition-colors hover:bg-gray-800 dark:hover:bg-gray-200"
             >
               <Mail className="h-4 w-4" />
-              tseka@nebutra.com
+              contact@tsekaluk.dev
             </a>
+            <ResumeDownloadButton label={t("resume_download")} />
           </div>
         </AnimateIn>
       </div>

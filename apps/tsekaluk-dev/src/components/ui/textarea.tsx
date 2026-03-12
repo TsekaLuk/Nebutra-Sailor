@@ -1,18 +1,65 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import React, { useState } from "react";
+import { Error } from "@/components/ui/error";
+import clsx from "clsx";
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<"textarea">>(
-  ({ className, ...props }, ref) => (
-    <textarea
-      className={cn(
-        "flex min-h-[80px] w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-sm text-gray-900 dark:text-white shadow-sm transition-shadow placeholder:text-gray-400 dark:placeholder:text-gray-500 focus-visible:border-gray-400 dark:focus-visible:border-gray-500 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-gray-200/50 dark:focus-visible:ring-gray-700/50 disabled:cursor-not-allowed disabled:opacity-50",
-        className,
-      )}
-      ref={ref}
-      {...props}
-    />
-  ),
-);
+interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  error?: string;
+  sizeType?: "xSmall" | "small" | "mediumSmall" | "large";
+  onValueChange?: (value: string) => void;
+}
+
+export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({
+  defaultValue,
+  placeholder,
+  disabled,
+  error,
+  sizeType,
+  style,
+  value,
+  onChange,
+  onValueChange,
+  className,
+  ...props
+}, ref) => {
+  const [_value, set_value] = useState(value || defaultValue || "");
+
+  const _onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    set_value(e.target.value);
+    if (onChange) {
+      onChange(e);
+    }
+    if (onValueChange) {
+      onValueChange(e.target.value);
+    }
+  };
+
+  return (
+    <div className="w-full flex flex-col gap-2">
+      <textarea
+        className={clsx(
+          "rounded-[var(--radius-md)] resize-none font-sans bg-background-100 text-geist-foreground placeholder:text-gray-900 outline-none w-full duration-150 border border-gray-alpha-400 hover:border-gray-alpha-500 hover:ring-0",
+          sizeType === "large" ? "h-12 py-2.5 px-3 text-base" : "h-10 p-2.5 text-sm",
+          disabled && "bg-gray-100 text-gray-700 placeholder:text-gray-700 placeholder:opacity-50 cursor-not-allowed",
+          error ? "ring-red-300 ring-4 border-red-900 text-error" : "focus:border-gray-alpha-600 focus:shadow-focus-input",
+          className
+        )}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        disabled={disabled}
+        style={style}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        value={value !== undefined ? value : _value}
+        onChange={_onChange}
+        ref={ref}
+        {...props}
+      />
+      {error && <Error size={sizeType === "large" ? "large" : "small"}>{error}</Error>}
+    </div>
+  );
+});
+
 Textarea.displayName = "Textarea";
-
-export { Textarea };

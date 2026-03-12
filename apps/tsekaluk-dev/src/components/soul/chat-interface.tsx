@@ -6,6 +6,7 @@ import { useSession, signIn } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimateIn } from "@nebutra/ui/components";
 import { Send, Loader2 } from "lucide-react";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 interface Message {
   role: "user" | "assistant";
@@ -24,7 +25,7 @@ function SoulOrb({ size = "sm" }: { size?: "sm" | "lg" }) {
   const spinnerFrames = ["|", "/", "-", "\\"];
 
   return (
-    <div className={`relative shrink-0 flex items-center justify-center font-mono text-[var(--color-accent)] ${isLg ? "w-20 h-20 text-4xl" : "w-10 h-10 text-base"}`}>
+    <div className={`relative shrink-0 flex items-center justify-center font-mono text-[var(--color-accent-fg)] ${isLg ? "w-20 h-20 text-4xl" : "w-10 h-10 text-base"}`}>
       {isLg ? (
         <div className="flex flex-col items-center justify-center leading-none z-10">
           <span>{spinnerFrames[frame]}</span>
@@ -50,9 +51,10 @@ function TypingDots() {
   );
 }
 
-export function ChatInterface() {
+export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
   const t = useTranslations("soul");
   const { data: session, status } = useSession();
+  const { track } = useAnalytics();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
@@ -72,6 +74,7 @@ export function ChatInterface() {
     const nextMessages = [...messages, userMsg];
     setMessages(nextMessages);
     setInput("");
+    track("soul_chat_message_sent", { message_count: nextMessages.length });
     setIsTyping(true);
     setIsStreaming(true);
 
@@ -173,13 +176,39 @@ export function ChatInterface() {
 
   if (!session?.user) {
     return (
-      <div className="flex h-full items-center justify-center px-6">
+      <div className={`flex h-full flex-col items-center justify-center gap-6 text-center ${isWidget ? "px-4 py-6" : "px-6 py-8"}`}>
         <AnimateIn preset="fade">
-          <div className="flex flex-col items-center gap-5 text-center">
-            <SoulOrb size="lg" />
-            <h2 className="font-serif text-xl italic text-foreground">
-              {t("auth_required")}
-            </h2>
+          <SoulOrb size="lg" />
+        </AnimateIn>
+
+        <AnimateIn preset="fadeUp" delay={0.1}>
+          <div className="space-y-1.5">
+            <p className="text-base font-semibold text-foreground">
+              {t("greeting_title")}
+            </p>
+            <p className="max-w-xs text-sm text-muted-foreground">
+              {t("greeting_desc")}
+            </p>
+          </div>
+        </AnimateIn>
+
+        {/* Starter chips — tease what users can ask */}
+        <AnimateIn preset="fadeUp" delay={0.18}>
+          <div className="flex flex-wrap justify-center gap-2 max-w-sm pointer-events-none opacity-50 select-none">
+            {starters.map((s) => (
+              <span
+                key={s}
+                className="font-mono rounded-lg border border-border bg-muted/50 px-4 py-2 text-[11px] uppercase tracking-wider text-muted-foreground"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+        </AnimateIn>
+
+        <AnimateIn preset="fadeUp" delay={0.26}>
+          <div className="flex flex-col items-center gap-3">
+            <p className="text-xs text-muted-foreground">{t("auth_required")}</p>
             <button
               type="button"
               onClick={() => signIn("github")}
@@ -208,7 +237,7 @@ export function ChatInterface() {
   return (
     <div className="flex h-full flex-col">
       {/* Messages */}
-      <div aria-live="polite" role="log" className="flex-1 overflow-y-auto px-5 py-6">
+      <div aria-live="polite" role="log" className={`flex-1 overflow-y-auto ${isWidget ? "px-3 py-4" : "px-5 py-6"}`}>
         {messages.length === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -282,53 +311,36 @@ export function ChatInterface() {
 
       {/* Input */}
       <div className="border-t border-border px-5 py-4">
-        {!session?.user ? (
-          <AnimateIn
-            delay={0.2}
-            className="flex flex-col items-center justify-center gap-3 py-6"
+        <div className="flex items-end gap-3 rounded-lg border border-border bg-background px-4 py-3 shadow-sm transition-colors focus-within:border-[#a3e635]/60">
+          <textarea
+            ref={textareaRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder={t("placeholder")}
+            rows={1}
+            className="flex-1 resize-none bg-transparent text-sm text-foreground focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none disabled:opacity-50 placeholder:text-muted-foreground font-mono"
+            style={{ maxHeight: "120px" }}
+            onInput={(e) => {
+              const el = e.currentTarget;
+              el.style.height = "auto";
+              el.style.height = `${el.scrollHeight}px`;
+            }}
+          />
+          <button
+            type="button"
+            onClick={sendMessage}
+            disabled={!input.trim() || isStreaming}
+            aria-label="Send message"
+            className="shrink-0 rounded-md bg-foreground p-2 text-background transition-all hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            <p className="text-sm font-medium text-foreground">
-              {t("auth_required")}
-            </p>
-            <button
-              onClick={() => signIn("github")}
-              className="rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-transform hover:scale-105"
-            >
-              {t("auth_button")}
-            </button>
-          </AnimateIn>
-        ) : (
-          <div className="flex items-end gap-3 rounded-lg border border-border bg-background px-4 py-3 shadow-sm transition-colors focus-within:border-[#a3e635]/60">
-            <textarea
-              ref={textareaRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder={t("placeholder")}
-              rows={1}
-              className="flex-1 resize-none bg-transparent text-sm text-foreground focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none disabled:opacity-50 placeholder:text-muted-foreground font-mono"
-              style={{ maxHeight: "120px" }}
-              onInput={(e) => {
-                const el = e.currentTarget;
-                el.style.height = "auto";
-                el.style.height = `${el.scrollHeight}px`;
-              }}
-            />
-            <button
-              type="button"
-              onClick={sendMessage}
-              disabled={!input.trim() || isStreaming}
-              aria-label="Send message"
-              className="shrink-0 rounded-md bg-foreground p-2 text-background transition-all hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {isStreaming ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Send className="h-4 w-4" />
-              )}
-            </button>
-          </div>
-        )}
+            {isStreaming ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Send className="h-4 w-4" />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );

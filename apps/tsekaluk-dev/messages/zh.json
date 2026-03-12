@@ -94,17 +94,37 @@
     "capabilities_label": "/ 专业能力",
     "radar_title": "能力维度",
     "stats": [
-      { "value": 50, "suffix": "+", "label": "项目交付" },
-      { "value": 6, "suffix": "", "label": "专业服务线" },
-      { "value": 3, "suffix": "+", "label": "年独立交付" },
-      { "value": 4, "suffix": "+", "label": "跨时区协作" }
+      {
+        "value": 50,
+        "suffix": "+",
+        "label": "项目交付"
+      },
+      {
+        "value": 6,
+        "suffix": "",
+        "label": "专业服务线"
+      },
+      {
+        "value": 3,
+        "suffix": "+",
+        "label": "年独立交付"
+      },
+      {
+        "value": 4,
+        "suffix": "+",
+        "label": "跨时区协作"
+      }
     ],
     "tiers": {
       "chat": {
         "name": "聊一聊",
         "price": "免费",
         "description": "15 分钟快聊",
-        "features": ["方向建议", "技术选型参考", "快速 Q&A"],
+        "features": [
+          "方向建议",
+          "技术选型参考",
+          "快速 Q&A"
+        ],
         "cta": "和灵魂对话",
         "href": "/soul"
       },
@@ -112,7 +132,12 @@
         "name": "Coffee",
         "price": "¥18",
         "description": "一杯咖啡的价格",
-        "features": ["以上所有", "Code Review", "UX 快速诊断", "增长策略建议"],
+        "features": [
+          "以上所有",
+          "Code Review",
+          "UX 快速诊断",
+          "增长策略建议"
+        ],
         "cta": "请我喝咖啡",
         "href": "https://buymeacoffee.com/tsekaluk"
       },
@@ -120,23 +145,35 @@
         "name": "雇佣关系",
         "price": "按项目报价",
         "description": "完整专业交付",
-        "features": ["以上所有", "6 条服务线全部解锁", "按需组合交付"],
+        "features": [
+          "以上所有",
+          "6 条服务线全部解锁",
+          "按需组合交付"
+        ],
         "cta": "联系我",
-        "href": "mailto:tseka@nebutra.com?subject=Hire"
+        "href": "mailto:contact@tsekaluk.dev?subject=Hire"
       },
       "partner": {
         "name": "梦想合伙",
         "price": "共同成长",
         "description": "长期共创关系",
-        "features": ["以上所有", "产品共创", "黑客增长体系", "股权 / 利润分成"],
+        "features": [
+          "以上所有",
+          "产品共创",
+          "黑客增长体系",
+          "股权 / 利润分成"
+        ],
         "cta": "聊聊愿景",
-        "href": "mailto:tseka@nebutra.com?subject=Partnership"
+        "href": "mailto:contact@tsekaluk.dev?subject=Partnership"
       }
     },
     "services": {
       "engineering": {
         "name": "产品工程",
-        "items": ["Next.js 全栈开发", "React 前端架构"]
+        "items": [
+          "Next.js 全栈开发",
+          "React 前端架构"
+        ]
       },
       "ai": {
         "name": "AI & 自动化",
@@ -149,7 +186,10 @@
       },
       "design": {
         "name": "设计 & 产品",
-        "items": ["UI/UX 设计", "产品研发"]
+        "items": [
+          "UI/UX 设计",
+          "产品研发"
+        ]
       },
       "growth": {
         "name": "增长 & 全球化",
@@ -163,62 +203,29 @@
       },
       "consulting": {
         "name": "专业咨询",
-        "items": ["数学建模", "商务英语", "IT 项目管理"]
+        "items": [
+          "数学建模",
+          "商务英语",
+          "IT 项目管理"
+        ]
       },
       "strategy": {
         "name": "创投 & 战略",
-        "items": ["创投调研", "YC-ready 创业规划", "独角兽级产品思维"]
+        "items": [
+          "创投调研",
+          "YC-ready 创业规划",
+          "独角兽级产品思维"
+        ]
       }
     }
   },
   "constellation": {
     "label": "/ 星图",
-    "headline": "来自朋友的片段",
-    "description": "和子凯产生交集的人，经历过的一些小事。",
-    "cta": "留下一个片段",
-    "cta_hint": "写下你和子凯发生过的一件小事",
-    "fragments": {
-      "maya": {
-        "quote": "有一次帮他看个按钮颜色，结果聊了两小时为什么人会点某个东西。",
-        "author": "Maya",
-        "role": "产品经理"
-      },
-      "lina": {
-        "quote": "他给我看了一个他做的仪表盘，我说这不像后台管理，像游戏界面。他说对，这就是我想要的。",
-        "author": "Lina",
-        "role": "设计师"
-      },
-      "david": {
-        "quote": "凌晨三点他突然发消息说把那个 bug 修好了，顺便重构了整个模块。",
-        "author": "David",
-        "role": "工程师"
-      },
-      "sam": {
-        "quote": "他推荐的那些工具，我现在每天都在用。",
-        "author": "Sam",
-        "role": "大三学生"
-      },
-      "alex": {
-        "quote": "说好帮我看个技术方案，结果他直接写了个 demo 出来。",
-        "author": "Alex",
-        "role": "创业者"
-      },
-      "wei": {
-        "quote": "每次跟他吃饭，话题都会从火锅拐到某个很奇怪的哲学问题上。",
-        "author": "Wei",
-        "role": "高中同学"
-      },
-      "yuki": {
-        "quote": "他是那种会认真听你说完一个不成熟想法、然后帮你想清楚的人。",
-        "author": "Yuki",
-        "role": "合伙人"
-      },
-      "chen": {
-        "quote": "我原来觉得做网站就是做网站，跟他聊完发现不是。",
-        "author": "Chen",
-        "role": "客户"
-      }
-    }
+    "headline": "了解他的人",
+    "description": "和他共过事。见过他做事。以下是他们的评价。",
+    "cta": "留下评价",
+    "cta_hint": "说实话。",
+    "empty": "还没有人说。"
   },
   "cta": {
     "headline": "一起做点有意思的事",
@@ -227,11 +234,24 @@
     "calendar": "预约通话"
   },
   "footer": {
-    "built_with": "使用",
+    "tagline": "构建未来，探索未至之境。",
+    "status_available": "接受优质合作咨询",
+    "location": "中国 · 无锡",
+    "nav_work": "项目",
+    "nav_thinking": "思考",
+    "nav_now": "现况",
+    "nav_about": "关于",
+    "nav_soul": "数字灵魂",
+    "nav_links": "链接",
+    "email_cta": "开启合作 →",
+    "built_with": "开放源码",
+    "back_to_top": "↑ 返回顶部",
     "rss_label": "RSS 订阅",
     "github_label": "GitHub",
     "x_label": "X (Twitter)",
-    "linkedin_label": "领英"
+    "linkedin_label": "领英",
+    "wechat_label": "微信",
+    "wechat_copied": "微信号已复制！"
   },
   "pages": {
     "work": {
@@ -315,6 +335,7 @@
       "award_10_level": "特等奖（全国总决赛）",
       "award_10_detail": "非英语专业，双语翻译全国最高荣誉",
       "credentials_label": "/ 资质证书",
+      "resume_download": "下载简历",
       "cred_1": "Columbia University — Numerical Models（成绩 A）",
       "cred_2": "华为 HCIA-Datacom 网络工程师",
       "cred_3": "HarmonyOS 高级开发者",
@@ -485,5 +506,10 @@
       "tagline": "3DGS 六个月内获 2000+ 引用，却没有任何企业级质量标准 — 我们写了这份规范",
       "description": "首个 3D 高斯散射（3DGS）内容供应商能力系统化评估框架。跨 6 维度多轮评分：HP/LP 几何精度（枢轴对齐 + retopo 验证）、PBR 贴图完整性（BaseColor/Normal/Metallic/AO）、文件命名规范、语义标注精度、预览图标准（8 张以上）及沟通 SLA。核心发现：供应商技术上并非无能，而是流程上不成熟。结构化 CSV 让每轮修改迭代可追溯、可审计。"
     }
+  },
+  "thinking": {
+    "latest_label": "最新思考",
+    "latest_headline": "近期的文章",
+    "view_all": "查看所有文章"
   }
 }

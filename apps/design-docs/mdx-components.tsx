@@ -55,18 +55,18 @@ import {
   CollapsibleDemo,
   DialogDemo,
   SelectDemo,
-  Select2Demo,
-  Select3Demo,
+  SelectGroupsDemo,
+  SelectDisabledDemo,
   SwitchDemo,
   TabsDemo,
-  Tabs2Demo,
-  Tabs3Demo,
-  Tabs4Demo,
+  TabsButtonDemo,
+  TabsPillDemo,
+  TabsLineDemo,
   TooltipDemo,
-  Tooltip2Demo,
-  Tooltip3Demo,
-  Tooltip4Demo,
-  Tooltip5Demo,
+  TooltipInstantDemo,
+  TooltipRichContentDemo,
+  TooltipIconButtonDemo,
+  TooltipSideRightDemo,
   EmptyStateDemo,
   ErrorMessageDemo,
   StatusBadgeDemo,
@@ -127,7 +127,7 @@ import {
   AnnouncementDemo,
   LoaderDemo,
   SpinnerDemo,
-  Slider1Demo,
+  SliderStatefulDemo,
   SliderNumberFlowDemo,
   MermaidDemo,
   SonnerDemo,
@@ -136,12 +136,12 @@ import {
   XPostCardDemo,
   BookDemo,
   InputDemo,
-  Input2Demo,
-  Input3Demo,
-  Input4Demo,
-  Input5Demo,
-  Input6Demo,
-  Input7Demo,
+  InputBasicDemo,
+  InputWithLabelDemo,
+  InputErrorDemo,
+  InputWithIconDemo,
+  InputWithAddonsDemo,
+  InputClearableDemo,
   InputOtpDemo,
 
   AgentPlanDemo,
@@ -175,11 +175,12 @@ import {
   MaterialDemo,
   NoisePatternCardDemo,
   ProgressiveBlurDemo,
-  Progress1Demo,
+  ProgressBasicDemo,
   AnimatedCircularProgressBarDemo,
   ScrollVelocityDemo,
   SidebarDemo,
 } from "@/components/previews/dynamic-demos";
+import { InputPasswordRevealDemo } from "@/components/previews/input-password-reveal-demo";
 import { FormDemo } from "@/components/previews/form-demo";
 import { AspectRatioDemo } from "@/components/previews/aspect-ratio-demo";
 import { AvatarSmartGroupDemo } from "@/components/avatar-smart-group-demo";
@@ -193,10 +194,10 @@ import { SheetDemo } from "@/components/demos/sheet-demo";
 import { SheetSideDemo } from "@/components/demos/sheet-side-demo";
 import { SheetMobileDemo } from "@/components/demos/sheet-mobile-demo";
 import { BasePopoverDemo } from "@/components/demos/base-popover-demo";
-import { Dialog1Demo } from "@/components/demos/dialog-1-demo";
-import { Dialog2Demo } from "@/components/demos/dialog-2-demo";
-import { Dialog8Demo } from "@/components/demos/dialog-8-demo";
-import { Dialog9Demo } from "@/components/demos/dialog-9-demo";
+import { DialogSuccessDemo } from "@/components/demos/dialog-success-demo";
+import { DialogDeactivateDemo } from "@/components/demos/dialog-deactivate-demo";
+import { DialogPasswordDemo } from "@/components/demos/dialog-password-demo";
+import { DialogShareDemo } from "@/components/demos/dialog-share-demo";
 import {
   BadgeVariantsDemo,
   BadgeSizesDemo,
@@ -206,7 +207,7 @@ import {
   BadgeNotificationDemo,
   BadgeFeatureTagDemo,
 } from "@/components/badge-demos";
-import { Badge1Demo } from "@/components/previews/dynamic-demos";
+import { BadgeAllColorsDemo } from "@/components/previews/dynamic-demos";
 import { AvatarSmartGroup } from "@nebutra/ui/primitives";
 import { IconGallery } from "@/components/icon-gallery";
 import { ColorPalette } from "@/components/color-palette";
@@ -544,7 +545,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     BadgeTableDemo,
     BadgeNotificationDemo,
     BadgeFeatureTagDemo,
-    Badge1Demo,
+    BadgeAllColorsDemo,
     AvatarSmartGroup,
     BadgeDemo,
     ButtonDemo,
@@ -562,18 +563,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     DialogDemo,
     FormDemo,
     SelectDemo,
-    Select2Demo,
-    Select3Demo,
+    SelectGroupsDemo,
+    SelectDisabledDemo,
     SwitchDemo,
     TabsDemo,
-    Tabs2Demo,
-    Tabs3Demo,
-    Tabs4Demo,
+    TabsButtonDemo,
+    TabsPillDemo,
+    TabsLineDemo,
     TooltipDemo,
-    Tooltip2Demo,
-    Tooltip3Demo,
-    Tooltip4Demo,
-    Tooltip5Demo,
+    TooltipInstantDemo,
+    TooltipRichContentDemo,
+    TooltipIconButtonDemo,
+    TooltipSideRightDemo,
     EmptyStateDemo,
     ErrorMessageDemo,
     StatusBadgeDemo,
@@ -597,12 +598,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     DatePickerDefaultDemo,
     DatePickerMinMaxDemo,
     InputDemo,
-    Input2Demo,
-    Input3Demo,
-    Input4Demo,
-    Input5Demo,
-    Input6Demo,
-    Input7Demo,
+    InputBasicDemo,
+    InputWithLabelDemo,
+    InputErrorDemo,
+    InputWithIconDemo,
+    InputWithAddonsDemo,
+    InputClearableDemo,
+    InputPasswordRevealDemo,
     InputOtpDemo,
     AnimatedBeamDemo,
     MacbookProDemo,
@@ -652,7 +654,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     AnnouncementDemo,
     LoaderDemo,
     SpinnerDemo,
-    Slider1Demo,
+    SliderStatefulDemo,
     SliderNumberFlowDemo,
     MermaidDemo,
     SonnerDemo,
@@ -692,7 +694,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MaterialDemo,
     NoisePatternCardDemo,
     ProgressiveBlurDemo,
-    Progress1Demo,
+    ProgressBasicDemo,
     AnimatedCircularProgressBarDemo,
     ScrollVelocityDemo,
     SidebarDemo,
@@ -748,10 +750,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ToggleGroup,
     ToggleGroupItem,
     BasePopoverDemo,
-    Dialog1Demo,
-    Dialog2Demo,
-    Dialog8Demo,
-    Dialog9Demo,
+    DialogSuccessDemo,
+    DialogDeactivateDemo,
+    DialogPasswordDemo,
+    DialogShareDemo,
     "CommandMenu.Root": CommandMenu.Root,
     "CommandMenu.Input": CommandMenu.Input,
     "CommandMenu.List": CommandMenu.List,

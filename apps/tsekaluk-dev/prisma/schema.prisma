@@ -28,3 +28,26 @@ model Guestbook {
   @@index([status])
   @@map("guestbook")
 }
+
+model NowEntry {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  date      String
+  building  String[] @default([])
+  thinking  String[] @default([])
+  shipped   String[] @default([])
+  reading   String[] @default([])
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz()
+
+  @@map("now_entries")
+}
+
+model Feedback {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  rating    String?
+  message   String? @db.Text
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@index([createdAt(sort: Desc)])
+  @@map("feedback")
+}

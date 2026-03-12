@@ -1,4 +1,6 @@
 import { auth } from "@/auth"
+import { Langfuse } from "langfuse"
+import { createRateLimiter, getClientIp } from "@/lib/rate-limit"
 
 const SYSTEM_PROMPT = `You are Tseka's Soul — the digital consciousness of Tseka Luk (陆子凯).
 
@@ -31,108 +33,55 @@ When responding:
 - Keep responses concise (2-4 paragraphs max unless asked for more)
 - Reference specific projects, metrics, or experiences when relevant
 - If the user writes in Chinese, respond naturally in Chinese
-- Share genuine, specific insights — not generic advice`;
+- Share genuine, specific insights — not generic advice`
 
-const VALID_ROLES = new Set(["user", "assistant"]);
-const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX_REQUESTS = 10;
-const MAX_MESSAGES_PER_REQUEST = 20;
-const MAX_MESSAGE_LENGTH = 4000;
-
-interface RateLimitEntry {
-  readonly count: number;
-  readonly resetAt: number;
-}
-
-const rateLimitMap = new Map<string, RateLimitEntry>();
-
-function cleanupRateLimits(): void {
-  const now = Date.now();
-  for (const [key, entry] of rateLimitMap) {
-    if (now >= entry.resetAt) {
-      rateLimitMap.delete(key);
-    }
-  }
-}
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-
-  if (!entry || now >= entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-    return true;
-  }
-
-  if (entry.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return false;
-  }
-
-  rateLimitMap.set(ip, { ...entry, count: entry.count + 1 });
-  return true;
-}
-
-// Periodic cleanup every 60s
-setInterval(cleanupRateLimits, RATE_LIMIT_WINDOW_MS);
+const VALID_ROLES = new Set(["user", "assistant"])
+const MAX_MESSAGES_PER_REQUEST = 20
+const MAX_MESSAGE_LENGTH = 4000
+const checkRateLimit = createRateLimiter(60_000, 10)
 
 interface Message {
-  role: "user" | "assistant";
-  content: string;
+  role: "user" | "assistant"
+  content: string
 }
 
 function validateMessages(
   messages: unknown,
 ): { valid: true; data: Message[] } | { valid: false; error: string } {
   if (!Array.isArray(messages) || messages.length === 0) {
-    return { valid: false, error: "Messages must be a non-empty array" };
+    return { valid: false, error: "Messages must be a non-empty array" }
   }
-
   if (messages.length > MAX_MESSAGES_PER_REQUEST) {
-    return {
-      valid: false,
-      error: `Too many messages. Maximum is ${MAX_MESSAGES_PER_REQUEST}`,
-    };
+    return { valid: false, error: `Too many messages. Maximum is ${MAX_MESSAGES_PER_REQUEST}` }
   }
-
   for (let i = 0; i < messages.length; i++) {
-    const msg = messages[i];
-
+    const msg = messages[i]
     if (!msg || typeof msg !== "object") {
-      return { valid: false, error: `Message at index ${i} is invalid` };
+      return { valid: false, error: `Message at index ${i} is invalid` }
     }
-
     if (!VALID_ROLES.has(msg.role)) {
-      return {
-        valid: false,
-        error: `Message at index ${i} has invalid role. Must be "user" or "assistant"`,
-      };
+      return { valid: false, error: `Message at index ${i} has invalid role` }
     }
-
     if (typeof msg.content !== "string" || msg.content.length === 0) {
-      return {
-        valid: false,
-        error: `Message at index ${i} must have non-empty string content`,
-      };
+      return { valid: false, error: `Message at index ${i} must have non-empty string content` }
     }
-
     if (msg.content.length > MAX_MESSAGE_LENGTH) {
-      return {
-        valid: false,
-        error: `Message at index ${i} exceeds maximum length of ${MAX_MESSAGE_LENGTH} characters`,
-      };
+      return { valid: false, error: `Message at index ${i} exceeds maximum length` }
     }
   }
-
-  return { valid: true, data: messages as Message[] };
+  return { valid: true, data: messages as Message[] }
 }
 
-// OpenClaw integration point — swap this function when OpenClaw is ready
-async function callLLM(messages: Message[]): Promise<Response> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+function getLangfuse(): Langfuse | null {
+  const publicKey = process.env.LANGFUSE_PUBLIC_KEY
+  const secretKey = process.env.LANGFUSE_SECRET_KEY
+  if (!publicKey || !secretKey) return null
+  return new Langfuse({ publicKey, secretKey })
+}
 
-  if (!apiKey) {
-    throw new Error("ANTHROPIC_API_KEY not configured");
-  }
+async function callLLM(messages: Message[]): Promise<Response> {
+  const apiKey = process.env.ANTHROPIC_API_KEY
+  if (!apiKey) throw new Error("ANTHROPIC_API_KEY not configured")
 
   return fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -146,51 +95,61 @@ async function callLLM(messages: Message[]): Promise<Response> {
       max_tokens: 1024,
       stream: true,
       system: SYSTEM_PROMPT,
-      messages: messages.map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
+      messages: messages.map((m) => ({ role: m.role, content: m.content })),
     }),
-  });
+  })
 }
 
 export async function POST(req: Request) {
+  const langfuse = getLangfuse()
+
   try {
-    const session = await auth();
+    const session = await auth()
     if (!session?.user) {
-      return Response.json(
-        { error: "Authentication required" },
-        { status: 401 },
-      );
+      return Response.json({ error: "Authentication required" }, { status: 401 })
     }
 
-    const ip =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-      req.headers.get("x-real-ip") ??
-      "unknown";
-
-    if (!checkRateLimit(ip)) {
+    const ip = getClientIp(req)
+    const rl = checkRateLimit(ip)
+    if (!rl.allowed) {
       return Response.json(
         { error: "Too many requests. Please try again later." },
-        { status: 429 },
-      );
+        { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
+      )
     }
 
-    const body = await req.json();
-    const validation = validateMessages(body.messages);
+    const body = await req.json()
+    const validation = validateMessages(body.messages)
 
     if (!validation.valid) {
-      return Response.json({ error: validation.error }, { status: 400 });
+      return Response.json({ error: validation.error }, { status: 400 })
     }
 
-    const upstream = await callLLM(validation.data);
+    // Langfuse: start trace
+    const trace = langfuse?.trace({
+      name: "soul-chat",
+      userId: session.user.email ?? session.user.id ?? "unknown",
+      metadata: { ip, messageCount: validation.data.length },
+    })
+
+    const generation = trace?.generation({
+      name: "soul-response",
+      model: "claude-haiku-4-5-20251001",
+      input: validation.data,
+      modelParameters: { maxTokens: 1024 },
+    })
+
+    const upstream = await callLLM(validation.data)
 
     if (!upstream.ok) {
-      return Response.json(
-        { error: "Failed to get response from AI" },
-        { status: 502 },
-      );
+      generation?.end({ level: "ERROR", statusMessage: `Upstream error: ${upstream.status}` })
+      langfuse?.flushAsync().catch(() => {})
+      return Response.json({ error: "Failed to get response from AI" }, { status: 502 })
     }
+
+    // End generation optimistically — streaming output not captured to avoid buffering latency
+    generation?.end({ output: "[streaming]" })
+    langfuse?.flushAsync().catch(() => {})
 
     return new Response(upstream.body, {
       headers: {
@@ -198,10 +157,10 @@ export async function POST(req: Request) {
         "Cache-Control": "no-cache",
         Connection: "keep-alive",
       },
-    });
+    })
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Internal server error";
-    return Response.json({ error: message }, { status: 500 });
+    langfuse?.flushAsync().catch(() => {})
+    const message = error instanceof Error ? error.message : "Internal server error"
+    return Response.json({ error: message }, { status: 500 })
   }
 }

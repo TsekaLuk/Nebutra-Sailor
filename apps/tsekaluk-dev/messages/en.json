@@ -94,10 +94,26 @@
     "capabilities_label": "/ Capabilities",
     "radar_title": "Capability",
     "stats": [
-      { "value": 50, "suffix": "+", "label": "Projects delivered" },
-      { "value": 6, "suffix": "", "label": "Service lines" },
-      { "value": 3, "suffix": "+", "label": "Years independent" },
-      { "value": 4, "suffix": "+", "label": "Timezones covered" }
+      {
+        "value": 50,
+        "suffix": "+",
+        "label": "Projects delivered"
+      },
+      {
+        "value": 6,
+        "suffix": "",
+        "label": "Service lines"
+      },
+      {
+        "value": 3,
+        "suffix": "+",
+        "label": "Years independent"
+      },
+      {
+        "value": 4,
+        "suffix": "+",
+        "label": "Timezones covered"
+      }
     ],
     "tiers": {
       "chat": {
@@ -135,7 +151,7 @@
           "Custom scope & delivery"
         ],
         "cta": "Get in touch",
-        "href": "mailto:tseka@nebutra.com?subject=Hire"
+        "href": "mailto:contact@tsekaluk.dev?subject=Hire"
       },
       "partner": {
         "name": "Dream Partner",
@@ -148,13 +164,16 @@
           "Equity / revenue share"
         ],
         "cta": "Share your vision",
-        "href": "mailto:tseka@nebutra.com?subject=Partnership"
+        "href": "mailto:contact@tsekaluk.dev?subject=Partnership"
       }
     },
     "services": {
       "engineering": {
         "name": "Product Engineering",
-        "items": ["Next.js full-stack", "React frontend architecture"]
+        "items": [
+          "Next.js full-stack",
+          "React frontend architecture"
+        ]
       },
       "ai": {
         "name": "AI & Automation",
@@ -167,7 +186,10 @@
       },
       "design": {
         "name": "Design & Product",
-        "items": ["UI/UX design", "Product R&D"]
+        "items": [
+          "UI/UX design",
+          "Product R&D"
+        ]
       },
       "growth": {
         "name": "Growth & Global",
@@ -199,52 +221,11 @@
   },
   "constellation": {
     "label": "/ Constellation",
-    "headline": "Fragments from friends",
-    "description": "What happens when you cross paths with Tseka.",
+    "headline": "The people who know",
+    "description": "They've worked with him. They've seen the work. Here's what they think.",
     "cta": "Leave a fragment",
-    "cta_hint": "Share a moment you had with Tseka",
-    "fragments": {
-      "maya": {
-        "quote": "I asked him to check a button color once. Two hours later we were still talking about why people click things.",
-        "author": "Maya",
-        "role": "Product Manager"
-      },
-      "lina": {
-        "quote": "He showed me a dashboard he built. I said it doesn't look like an admin panel, it looks like a game. He said yeah, that's the point.",
-        "author": "Lina",
-        "role": "Designer"
-      },
-      "david": {
-        "quote": "3 AM message: fixed the bug, also refactored the entire module while I was at it.",
-        "author": "David",
-        "role": "Engineer"
-      },
-      "sam": {
-        "quote": "The tools he recommended — I use them every single day now.",
-        "author": "Sam",
-        "role": "Junior, CS"
-      },
-      "alex": {
-        "quote": "Asked him to review a technical plan. He came back with a working demo.",
-        "author": "Alex",
-        "role": "Founder"
-      },
-      "wei": {
-        "quote": "Every time we grab dinner, the conversation somehow drifts from hotpot to some weird philosophy question.",
-        "author": "Wei",
-        "role": "High school friend"
-      },
-      "yuki": {
-        "quote": "He's the kind of person who'll actually listen to your half-baked idea and help you think it through.",
-        "author": "Yuki",
-        "role": "Co-founder"
-      },
-      "chen": {
-        "quote": "I used to think building a website is just building a website. After talking to him, I realized it's not.",
-        "author": "Chen",
-        "role": "Client"
-      }
-    }
+    "cta_hint": "Be honest.",
+    "empty": "Nothing here yet."
   },
   "cta": {
     "headline": "Let's build something",
@@ -253,11 +234,24 @@
     "calendar": "Book a call"
   },
   "footer": {
+    "tagline": "Building what doesn't exist yet.",
+    "status_available": "Available for select collaborations",
+    "location": "Wuxi, China",
+    "nav_work": "Work",
+    "nav_thinking": "Thinking",
+    "nav_now": "Now",
+    "nav_about": "About",
+    "nav_soul": "Soul",
+    "nav_links": "Links",
+    "email_cta": "Start a project →",
     "built_with": "Built with",
+    "back_to_top": "↑ Back to top",
     "rss_label": "RSS Feed",
     "github_label": "GitHub",
     "x_label": "X (Twitter)",
-    "linkedin_label": "LinkedIn"
+    "linkedin_label": "LinkedIn",
+    "wechat_label": "WeChat",
+    "wechat_copied": "WeChat ID copied!"
   },
   "pages": {
     "work": {
@@ -300,6 +294,7 @@
       "stat_awards": "Awards",
       "stat_first_prizes": "First Prizes",
       "stat_certs": "Certs",
+      "resume_download": "Download Resume",
       "journey_label": "/ Journey",
       "journey_2020": "Self-taught web development & digital marketing",
       "journey_2022": "BSc in Information & Computing Science and BEng in Computer Science & Technology, Jiangsu Ocean University",
@@ -429,7 +424,7 @@
     },
     "low-altitude-economy": {
       "tagline": "Discovered a paradox: risk perception actually increases adoption",
-      "description": "Everyone assumed perceived risk would deter UAM adoption. Our TAM\u2013SEM model on 2,609 respondents (93.1% recovery rate, KMO=0.951) proved the opposite: risk positively drives willingness to adopt (\u03b2=0.262, p<0.001). We also mined 1,695 Bilibili comments with SnowNLP to map public sentiment. The \u201crisk paradox\u201d finding challenged a decade of technology adoption literature. Provincial First Prize."
+      "description": "Everyone assumed perceived risk would deter UAM adoption. Our TAM–SEM model on 2,609 respondents (93.1% recovery rate, KMO=0.951) proved the opposite: risk positively drives willingness to adopt (β=0.262, p<0.001). We also mined 1,695 Bilibili comments with SnowNLP to map public sentiment. The “risk paradox” finding challenged a decade of technology adoption literature. Provincial First Prize."
     },
     "nebutra-sailor": {
       "tagline": "One monorepo, 4 production apps, 12,000+ lines of shared code",
@@ -453,7 +448,7 @@
     },
     "brand-strategy": {
       "tagline": "1,200+ consumer samples × AIGC pipeline = 40% engagement lift",
-      "description": "Led a PEST-SWOT driven brand overhaul for Suzhou\u2019s \u201c\u6797\u8393\u8393\u201d agricultural product. Surveyed 1,200+ consumers to map purchase drivers and price sensitivity. Deployed Claude + Flux + Midjourney AIGC toolchain for brand stories and mascot concepts, cutting creative iteration from weeks to days. Projected 40%+ user engagement increase. National Second Prize."
+      "description": "Led a PEST-SWOT driven brand overhaul for Suzhou’s “林莓莓” agricultural product. Surveyed 1,200+ consumers to map purchase drivers and price sensitivity. Deployed Claude + Flux + Midjourney AIGC toolchain for brand stories and mascot concepts, cutting creative iteration from weeks to days. Projected 40%+ user engagement increase. National Second Prize."
     },
     "mineru-skill": {
       "tagline": "Zero-config Claude Code skill—PDF to Markdown in one command",
@@ -511,5 +506,10 @@
       "tagline": "3DGS had 2,000+ citations in 6 months but zero enterprise quality standards—we wrote the spec",
       "description": "First systematic vendor evaluation framework for 3D Gaussian Splatting content production. Multi-round scored assessment across 6 dimensions: HP/LP geometry (pivot + retopology), PBR texture completeness (BaseColor/Normal/Metallic/AO), file naming conventions, semantic annotation, preview standards (8+ renders), and communication SLA. The revelation: vendors weren't technically incapable—they were operationally immature. Multi-round CSV tracker makes every revision cycle auditable."
     }
+  },
+  "thinking": {
+    "latest_label": "Latest Thinking",
+    "latest_headline": "Recent Writings",
+    "view_all": "View All Writings"
   }
 }

@@ -459,8 +459,8 @@ export const VideoTextDemo = dynamic(
 );
 
 // Phase 9 components
-export const Slider1Demo = dynamic(
-  () => import("./slider-1-demo"),
+export const SliderStatefulDemo = dynamic(
+  () => import("./slider-stateful-demo"),
   { ssr: false },
 );
 
@@ -490,45 +490,45 @@ export const DatePickerMinMaxDemo = dynamic(
 );
 
 
-export const Carousel3Demo = dynamic(
-  () => import("./carousel-3-demo").then((m) => ({ default: m.Carousel3Demo })),
+export const CarouselVerticalDemo = dynamic(
+  () => import("./carousel-vertical-demo").then((m) => ({ default: m.CarouselVerticalDemo })),
   { ssr: false },
 );
 
-export const Input2Demo = dynamic(
-  () => import("./input-2-demo").then((m) => ({ default: m.Input2Demo })),
+export const InputBasicDemo = dynamic(
+  () => import("./input-basic-demo").then((m) => ({ default: m.InputBasicDemo })),
   { ssr: false },
 );
 
-export const DropdownMenu3Demo = dynamic(
-  () => import("./dropdown-menu-3-demo").then((m) => ({ default: m.DropdownMenu3Demo })),
+export const DropdownMenuSubDemo = dynamic(
+  () => import("./dropdown-menu-sub-demo").then((m) => ({ default: m.DropdownMenuSubDemo })),
   { ssr: false },
 );
 
-export const Button4Demo = dynamic(
-  () => import("./button-4-demo").then((m) => ({ default: m.Button4Demo })),
+export const ButtonLoadingDemo = dynamic(
+  () => import("./button-loading-demo").then((m) => ({ default: m.ButtonLoadingDemo })),
   { ssr: false },
 );
 
 
 
-export const Calendar4Demo = dynamic(
-  () => import("./calendar-4-demo").then((m) => ({ default: m.Calendar4Demo })),
+export const CalendarMultiMonthDemo = dynamic(
+  () => import("./calendar-multi-month-demo").then((m) => ({ default: m.CalendarMultiMonthDemo })),
   { ssr: false },
 );
 
-export const Calendar5Demo = dynamic(
-  () => import("./calendar-5-demo").then((m) => ({ default: m.Calendar5Demo })),
+export const CalendarRangeDemo = dynamic(
+  () => import("./calendar-range-demo").then((m) => ({ default: m.CalendarRangeDemo })),
   { ssr: false },
 );
 
-export const Combobox2Demo = dynamic(
-  () => import("./combobox-2-demo").then((m) => ({ default: m.Combobox2Demo })),
+export const ComboboxDefaultValueDemo = dynamic(
+  () => import("./combobox-default-value-demo").then((m) => ({ default: m.ComboboxDefaultValueDemo })),
   { ssr: false },
 );
 
-export const Card2Demo = dynamic(
-  () => import("./card-2-demo").then((m) => ({ default: m.Card2Demo })),
+export const CardWithIconDemo = dynamic(
+  () => import("./card-with-icon-demo").then((m) => ({ default: m.CardWithIconDemo })),
   { ssr: false },
 );
 
@@ -537,8 +537,8 @@ export const CommandDemo = dynamic(
   { ssr: false },
 );
 
-export const Popover2Demo = dynamic(
-  () => import("./popover-2-demo").then((m) => ({ default: m.Popover2Demo })),
+export const PopoverSettingsDemo = dynamic(
+  () => import("./popover-settings-demo").then((m) => ({ default: m.PopoverSettingsDemo })),
   { ssr: false },
 );
 
@@ -547,8 +547,8 @@ export const ToggleDemo = dynamic(
   { ssr: false },
 );
 
-export const Badge2Demo = dynamic(
-  () => import("./badge-2-demo").then((m) => ({ default: m.Badge2Demo })),
+export const BadgeStatusDotDemo = dynamic(
+  () => import("./badge-status-dot-demo").then((m) => ({ default: m.BadgeStatusDotDemo })),
   { ssr: false },
 );
 
@@ -557,18 +557,18 @@ export const CalendarDemo = dynamic(
   { ssr: false },
 );
 
-export const Separator2Demo = dynamic(
-  () => import("./separator-2-demo").then((m) => ({ default: m.Separator2Demo })),
+export const SeparatorVerticalDemo = dynamic(
+  () => import("./separator-vertical-demo").then((m) => ({ default: m.SeparatorVerticalDemo })),
   { ssr: false },
 );
 
-export const Skeleton2Demo = dynamic(
-  () => import("./skeleton-2-demo").then((m) => ({ default: m.Skeleton2Demo })),
+export const SkeletonListDemo = dynamic(
+  () => import("./skeleton-list-demo").then((m) => ({ default: m.SkeletonListDemo })),
   { ssr: false },
 );
 
-export const RadioGroup3Demo = dynamic(
-  () => import("./radio-group-3-demo").then((m) => ({ default: m.RadioGroup3Demo })),
+export const RadioGroupBillingDemo = dynamic(
+  () => import("./radio-group-billing-demo").then((m) => ({ default: m.RadioGroupBillingDemo })),
   { ssr: false },
 );
 
@@ -582,73 +582,76 @@ export const PaginationDemo = dynamic(
   { ssr: false },
 );
 
-export const Slider2Demo = dynamic(
-  () => import("./slider-2-demo").then((m) => ({ default: m.Slider2Demo })),
+export const SliderIconDemo = dynamic(
+  () => import("./slider-icon-demo").then((m) => ({ default: m.SliderIconDemo })),
   { ssr: false },
 );
 
-export const Input7Demo = dynamic(
-  () => import("./input-7-demo").then((m) => ({ default: m.Input7Demo })),
-  { ssr: false },
+export const InputClearableDemo = dynamic(
+  () => import("./input-clearable-demo").then((m) => ({ default: m.InputClearableDemo })),
+  { ssr: false }
 );
-
+export const InputPasswordRevealDemo = dynamic(
+  () => import("./input-password-reveal-demo").then((m) => ({ default: m.InputPasswordRevealDemo })),
+  { ssr: false }
+);
 export const ResizableDemo = dynamic(
   () => import("./resizable-demo").then((m) => ({ default: m.ResizableDemo })),
   { ssr: false },
 );
 
-export const Textarea3Demo = dynamic(
-  () => import("./textarea-3-demo").then((m) => ({ default: m.Textarea3Demo })),
+export const TextareaDisabledDemo = dynamic(
+  () => import("./textarea-disabled-demo").then((m) => ({ default: m.TextareaDisabledDemo })),
   { ssr: false },
 );
 
-export const Combobox5Demo = dynamic(
-  () => import("./combobox-5-demo").then((m) => ({ default: m.Combobox5Demo })),
+export const ComboboxSizesDemo = dynamic(
+  () => import("./combobox-sizes-demo").then((m) => ({ default: m.ComboboxSizesDemo })),
   { ssr: false },
 );
 
-export const Input4Demo = dynamic(
-  () => import("./input-4-demo").then((m) => ({ default: m.Input4Demo })),
+export const InputErrorDemo = dynamic(
+  () => import("./input-error-demo").then((m) => ({ default: m.InputErrorDemo })),
   { ssr: false },
 );
 
-export const Avatar5Demo = dynamic(
-  () => import("./avatar-5-demo").then((m) => ({ default: m.Avatar5Demo })),
+export const AvatarDicebearSimpleDemo = dynamic(
+  () => import("./avatar-dicebear-simple-demo").then((m) => ({ default: m.AvatarDicebearSimpleDemo })),
   { ssr: false },
 );
 
-export const Command2Demo = dynamic(
-  () => import("./command-2-demo").then((m) => ({ default: m.Command2Demo })),
+export const CommandDialogSimpleDemo = dynamic(
+  () => import("./command-dialog-simple-demo").then((m) => ({ default: m.CommandDialogSimpleDemo })),
   { ssr: false },
 );
 
-export const Label3Demo = dynamic(
-  () => import("./label-3-demo").then((m) => ({ default: m.Label3Demo })),
+export const LabelDisabledDemo = dynamic(
+  () => import("./label-disabled-demo").then((m) => ({ default: m.LabelDisabledDemo })),
   { ssr: false },
 );
 
-export const Carousel2Demo = dynamic(
-  () => import("./carousel-2-demo").then((m) => ({ default: m.Carousel2Demo })),
+export const CarouselMultipleDemo = dynamic(
+  () => import("./carousel-multiple-demo").then((m) => ({ default: m.CarouselMultipleDemo })),
   { ssr: false },
 );
 
-export const Combobox4Demo = dynamic(
-  () => import("./combobox-4-demo").then((m) => ({ default: m.Combobox4Demo })),
+export const ComboboxErrorDemo = dynamic(
+  () => import("./combobox-error-demo").then((m) => ({ default: m.ComboboxErrorDemo })),
   { ssr: false },
 );
 
-export const Combobox6Demo = dynamic(
-  () => import("./combobox-6-demo").then((m) => ({ default: m.Combobox6Demo })),
+export const ComboboxGroupsDemo = dynamic(
+  () => import("./combobox-groups-demo").then((m) => ({ default: m.ComboboxGroupsDemo })),
   { ssr: false },
 );
 
-export const Tooltip2Demo = dynamic(
-  () => import("./tooltip-2-demo").then((m) => ({ default: m.Tooltip2Demo })),
+export const TooltipInstantDemo = dynamic(
+  () => import("./tooltip-instant-demo").then((m) => ({ default: m.TooltipInstantDemo })),
   { ssr: false },
 );
 
-export const Select3Demo = dynamic(
-  () => import("./select-3-demo").then((m) => ({ default: m.Select3Demo })),
+export const SelectDisabledDemo = dynamic(
+  () => import("./select-disabled-demo").then((m) => ({ default: m.SelectDisabledDemo })),
   { ssr: false },
 );
 
@@ -657,13 +660,13 @@ export const ScrollAreaDemo = dynamic(
   { ssr: false },
 );
 
-export const Button3Demo = dynamic(
-  () => import("./button-3-demo").then((m) => ({ default: m.Button3Demo })),
+export const ButtonWithIconDemo = dynamic(
+  () => import("./button-with-icon-demo").then((m) => ({ default: m.ButtonWithIconDemo })),
   { ssr: false },
 );
 
-export const Card3Demo = dynamic(
-  () => import("./card-3-demo").then((m) => ({ default: m.Card3Demo })),
+export const CardPricingDemo = dynamic(
+  () => import("./card-pricing-demo").then((m) => ({ default: m.CardPricingDemo })),
   { ssr: false },
 );
 
@@ -677,18 +680,18 @@ export const SkeletonDemo = dynamic(
   { ssr: false },
 );
 
-export const Progress3Demo = dynamic(
-  () => import("./progress-3-demo").then((m) => ({ default: m.Progress3Demo })),
+export const ProgressIndeterminateDemo = dynamic(
+  () => import("./progress-indeterminate-demo").then((m) => ({ default: m.ProgressIndeterminateDemo })),
   { ssr: false },
 );
 
-export const Dialog2Demo = dynamic(
-  () => import("./dialog-2-demo").then((m) => ({ default: m.Dialog2Demo })),
+export const DialogDestructiveDemo = dynamic(
+  () => import("./dialog-destructive-demo").then((m) => ({ default: m.DialogDestructiveDemo })),
   { ssr: false },
 );
 
-export const DatePicker5Demo = dynamic(
-  () => import("./date-picker-5-demo").then((m) => ({ default: m.DatePicker5Demo })),
+export const DatePickerMultiMonthDemo = dynamic(
+  () => import("./date-picker-multi-month-demo").then((m) => ({ default: m.DatePickerMultiMonthDemo })),
   { ssr: false },
 );
 
@@ -702,8 +705,8 @@ export const InputOtpDemo = dynamic(
   { ssr: false },
 );
 
-export const Accordion2Demo = dynamic(
-  () => import("./accordion-2-demo").then((m) => ({ default: m.Accordion2Demo })),
+export const AccordionControlledDemo = dynamic(
+  () => import("./accordion-controlled-demo").then((m) => ({ default: m.AccordionControlledDemo })),
   { ssr: false },
 );
 
@@ -712,8 +715,8 @@ export const PopoverDemo = dynamic(
   { ssr: false },
 );
 
-export const Button2Demo = dynamic(
-  () => import("./button-2-demo").then((m) => ({ default: m.Button2Demo })),
+export const ButtonSizesDemo = dynamic(
+  () => import("./button-sizes-demo").then((m) => ({ default: m.ButtonSizesDemo })),
   { ssr: false },
 );
 
@@ -727,28 +730,28 @@ export const SliderDemo = dynamic(
   { ssr: false },
 );
 
-export const DatePicker3Demo = dynamic(
-  () => import("./date-picker-3-demo").then((m) => ({ default: m.DatePicker3Demo })),
+export const DatePickerRangeMinMaxDemo = dynamic(
+  () => import("./date-picker-range-min-max-demo").then((m) => ({ default: m.DatePickerRangeMinMaxDemo })),
   { ssr: false },
 );
 
-export const Separator4Demo = dynamic(
-  () => import("./separator-4-demo").then((m) => ({ default: m.Separator4Demo })),
+export const SeparatorWithTextI18nDemo = dynamic(
+  () => import("./separator-with-text-i18n-demo").then((m) => ({ default: m.SeparatorWithTextI18nDemo })),
   { ssr: false },
 );
 
-export const Combobox3Demo = dynamic(
-  () => import("./combobox-3-demo").then((m) => ({ default: m.Combobox3Demo })),
+export const ComboboxDisabledDemo = dynamic(
+  () => import("./combobox-disabled-demo").then((m) => ({ default: m.ComboboxDisabledDemo })),
   { ssr: false },
 );
 
-export const ScrollArea2Demo = dynamic(
-  () => import("./scroll-area-2-demo").then((m) => ({ default: m.ScrollArea2Demo })),
+export const ScrollAreaListDemo = dynamic(
+  () => import("./scroll-area-list-demo").then((m) => ({ default: m.ScrollAreaListDemo })),
   { ssr: false },
 );
 
-export const Input5Demo = dynamic(
-  () => import("./input-5-demo").then((m) => ({ default: m.Input5Demo })),
+export const InputWithIconDemo = dynamic(
+  () => import("./input-with-icon-demo").then((m) => ({ default: m.InputWithIconDemo })),
   { ssr: false },
 );
 
@@ -759,33 +762,33 @@ export const ToggleGroupDemo = dynamic(
   { ssr: false },
 );
 
-export const DatePicker2Demo = dynamic(
-  () => import("./date-picker-2-demo").then((m) => ({ default: m.DatePicker2Demo })),
+export const DatePickerRangeDemo = dynamic(
+  () => import("./date-picker-range-demo").then((m) => ({ default: m.DatePickerRangeDemo })),
   { ssr: false },
 );
 
-export const Calendar3Demo = dynamic(
-  () => import("./calendar-3-demo").then((m) => ({ default: m.Calendar3Demo })),
+export const CalendarMonthYearDemo = dynamic(
+  () => import("./calendar-month-year-demo").then((m) => ({ default: m.CalendarMonthYearDemo })),
   { ssr: false },
 );
 
-export const Avatar4Demo = dynamic(
-  () => import("./avatar-4-demo").then((m) => ({ default: m.Avatar4Demo })),
+export const AvatarGitSimpleDemo = dynamic(
+  () => import("./avatar-git-simple-demo").then((m) => ({ default: m.AvatarGitSimpleDemo })),
   { ssr: false },
 );
 
-export const DropdownMenu2Demo = dynamic(
-  () => import("./dropdown-menu-2-demo").then((m) => ({ default: m.DropdownMenu2Demo })),
+export const DropdownMenuRadioGroupDemo = dynamic(
+  () => import("./dropdown-menu-radio-group-demo").then((m) => ({ default: m.DropdownMenuRadioGroupDemo })),
   { ssr: false },
 );
 
-export const Calendar2Demo = dynamic(
-  () => import("./calendar-2-demo").then((m) => ({ default: m.Calendar2Demo })),
+export const CalendarSimpleDemo = dynamic(
+  () => import("./calendar-simple-demo").then((m) => ({ default: m.CalendarSimpleDemo })),
   { ssr: false },
 );
 
-export const Tooltip3Demo = dynamic(
-  () => import("./tooltip-3-demo").then((m) => ({ default: m.Tooltip3Demo })),
+export const TooltipRichContentDemo = dynamic(
+  () => import("./tooltip-rich-content-demo").then((m) => ({ default: m.TooltipRichContentDemo })),
   { ssr: false },
 );
 
@@ -794,9 +797,9 @@ export const ProgressDemo = dynamic(
   { ssr: false },
 );
 
-export const Progress1Demo = dynamic(
-  () => import("./progress-1-demo").then((m) => ({ default: m.Progress1Demo })),
-  { ssr: false }
+export const ProgressBasicDemo = dynamic(
+  () => import("./progress-basic-demo").then((m) => ({ default: m.ProgressBasicDemo })),
+  { ssr: false },
 );
 
 export const AnimatedCircularProgressBarDemo = dynamic(
@@ -806,58 +809,53 @@ export const AnimatedCircularProgressBarDemo = dynamic(
 
 
 
-export const Combobox7Demo = dynamic(
-  () => import("./combobox-7-demo").then((m) => ({ default: m.Combobox7Demo })),
+export const ComboboxWidthDemo = dynamic(
+  () => import("./combobox-width-demo").then((m) => ({ default: m.ComboboxWidthDemo })),
   { ssr: false },
 );
 
-export const DatePicker4Demo = dynamic(
-  () => import("./date-picker-4-demo").then((m) => ({ default: m.DatePicker4Demo })),
+export const DatePickerVariantsDemo = dynamic(
+  () => import("./date-picker-variants-demo").then((m) => ({ default: m.DatePickerVariantsDemo })),
   { ssr: false },
 );
 
-export const Textarea2Demo = dynamic(
-  () => import("./textarea-2-demo").then((m) => ({ default: m.Textarea2Demo })),
+export const TextareaWithLimitDemo = dynamic(
+  () => import("./textarea-with-limit-demo").then((m) => ({ default: m.TextareaWithLimitDemo })),
   { ssr: false },
 );
 
-export const Separator3Demo = dynamic(
-  () => import("./separator-3-demo").then((m) => ({ default: m.Separator3Demo })),
+export const SeparatorWithTextDemo = dynamic(
+  () => import("./separator-with-text-demo").then((m) => ({ default: m.SeparatorWithTextDemo })),
   { ssr: false },
 );
 
-export const Label2Demo = dynamic(
-  () => import("./label-2-demo").then((m) => ({ default: m.Label2Demo })),
+export const LabelDescriptionDemo = dynamic(
+  () => import("./label-description-demo").then((m) => ({ default: m.LabelDescriptionDemo })),
   { ssr: false },
 );
 
-export const Input6Demo = dynamic(
-  () => import("./input-6-demo").then((m) => ({ default: m.Input6Demo })),
+export const InputWithAddonsDemo = dynamic(
+  () => import("./input-with-addons-demo").then((m) => ({ default: m.InputWithAddonsDemo })),
   { ssr: false },
 );
 
-export const Toggle3Demo = dynamic(
-  () => import("./toggle-3-demo").then((m) => ({ default: m.Toggle3Demo })),
+export const ToggleSmallDemo = dynamic(
+  () => import("./toggle-small-demo").then((m) => ({ default: m.ToggleSmallDemo })),
   { ssr: false },
 );
 
-export const Breadcrumb2Demo = dynamic(
-  () => import("./breadcrumb-2-demo").then((m) => ({ default: m.Breadcrumb2Demo })),
+export const BreadcrumbEllipsisDemo = dynamic(
+  () => import("./breadcrumb-ellipsis-demo").then((m) => ({ default: m.BreadcrumbEllipsisDemo })),
   { ssr: false },
 );
 
-export const Tabs3Demo = dynamic(
-  () => import("./tabs-3-demo").then((m) => ({ default: m.Tabs3Demo })),
+export const TabsPillDemo = dynamic(
+  () => import("./tabs-pill-demo").then((m) => ({ default: m.TabsPillDemo })),
   { ssr: false },
 );
 
-export const ToggleGroup2Demo = dynamic(
-  () => import("./toggle-group-2-demo").then((m) => ({ default: m.ToggleGroup2Demo })),
-  { ssr: false },
-);
-
-export const LabelDemo = dynamic(
-  () => import("./label-demo").then((m) => ({ default: m.LabelDemo })),
+export const ToggleGroupSingleDemo = dynamic(
+  () => import("./toggle-group-single-demo").then((m) => ({ default: m.ToggleGroupSingleDemo })),
   { ssr: false },
 );
 
@@ -866,18 +864,18 @@ export const DropdownMenuDemo = dynamic(
   { ssr: false },
 );
 
-export const Select2Demo = dynamic(
-  () => import("./select-2-demo").then((m) => ({ default: m.Select2Demo })),
+export const SelectGroupsDemo = dynamic(
+  () => import("./select-groups-demo").then((m) => ({ default: m.SelectGroupsDemo })),
   { ssr: false },
 );
 
-export const Calendar6Demo = dynamic(
-  () => import("./calendar-6-demo").then((m) => ({ default: m.Calendar6Demo })),
+export const CalendarRangeMultiMonthDemo = dynamic(
+  () => import("./calendar-range-multi-month-demo").then((m) => ({ default: m.CalendarRangeMultiMonthDemo })),
   { ssr: false },
 );
 
-export const Avatar3Demo = dynamic(
-  () => import("./avatar-3-demo").then((m) => ({ default: m.Avatar3Demo })),
+export const AvatarGroupSimpleDemo = dynamic(
+  () => import("./avatar-group-simple-demo").then((m) => ({ default: m.AvatarGroupSimpleDemo })),
   { ssr: false },
 );
 
@@ -886,68 +884,68 @@ export const DrawerDemo = dynamic(
   { ssr: false },
 );
 
-export const Popover3Demo = dynamic(
-  () => import("./popover-3-demo").then((m) => ({ default: m.Popover3Demo })),
+export const PopoverControlledDemo = dynamic(
+  () => import("./popover-controlled-demo").then((m) => ({ default: m.PopoverControlledDemo })),
   { ssr: false },
 );
 
-export const Progress4Demo = dynamic(
-  () => import("./progress-4-demo").then((m) => ({ default: m.Progress4Demo })),
+export const ProgressCustomColorDemo = dynamic(
+  () => import("./progress-custom-color-demo").then((m) => ({ default: m.ProgressCustomColorDemo })),
   { ssr: false },
 );
 
-export const Progress2Demo = dynamic(
-  () => import("./progress-2-demo").then((m) => ({ default: m.Progress2Demo })),
+export const ProgressWithLabelDemo = dynamic(
+  () => import("./progress-with-label-demo").then((m) => ({ default: m.ProgressWithLabelDemo })),
   { ssr: false },
 );
 
-export const Tabs2Demo = dynamic(
-  () => import("./tabs-2-demo").then((m) => ({ default: m.Tabs2Demo })),
+export const TabsLineDemo = dynamic(
+  () => import("./tabs-line-demo").then((m) => ({ default: m.TabsLineDemo })),
   { ssr: false },
 );
 
-export const Tabs4Demo = dynamic(
-  () => import("./tabs-4-demo").then((m) => ({ default: m.Tabs4Demo })),
+export const TabsButtonDemo = dynamic(
+  () => import("./tabs-button-demo").then((m) => ({ default: m.TabsButtonDemo })),
   { ssr: false },
 );
 
-export const Tooltip4Demo = dynamic(
-  () => import("./tooltip-4-demo").then((m) => ({ default: m.Tooltip4Demo })),
+export const TooltipIconButtonDemo = dynamic(
+  () => import("./tooltip-icon-button-demo").then((m) => ({ default: m.TooltipIconButtonDemo })),
   { ssr: false },
 );
 
-export const Tooltip5Demo = dynamic(
-  () => import("./tooltip-5-demo").then((m) => ({ default: m.Tooltip5Demo })),
+export const TooltipSideRightDemo = dynamic(
+  () => import("./tooltip-side-right-demo").then((m) => ({ default: m.TooltipSideRightDemo })),
   { ssr: false },
 );
 
-export const Input3Demo = dynamic(
-  () => import("./input-3-demo").then((m) => ({ default: m.Input3Demo })),
+export const InputWithLabelDemo = dynamic(
+  () => import("./input-with-label-demo").then((m) => ({ default: m.InputWithLabelDemo })),
   { ssr: false },
 );
 
-export const Avatar2Demo = dynamic(
-  () => import("./avatar-2-demo").then((m) => ({ default: m.Avatar2Demo })),
+export const AvatarFallbackSimpleDemo = dynamic(
+  () => import("./avatar-fallback-simple-demo").then((m) => ({ default: m.AvatarFallbackSimpleDemo })),
   { ssr: false },
 );
 
-export const Accordion4Demo = dynamic(
-  () => import("./accordion-4-demo").then((m) => ({ default: m.Accordion4Demo })),
+export const AccordionCompactDemo = dynamic(
+  () => import("./accordion-compact-demo").then((m) => ({ default: m.AccordionCompactDemo })),
   { ssr: false },
 );
 
-export const Toggle2Demo = dynamic(
-  () => import("./toggle-2-demo").then((m) => ({ default: m.Toggle2Demo })),
+export const ToggleLargeDemo = dynamic(
+  () => import("./toggle-large-demo").then((m) => ({ default: m.ToggleLargeDemo })),
   { ssr: false },
 );
 
-export const Checkbox2Demo = dynamic(
-  () => import("./checkbox-2-demo").then((m) => ({ default: m.Checkbox2Demo })),
+export const CheckboxIndeterminateDemo = dynamic(
+  () => import("./checkbox-indeterminate-demo").then((m) => ({ default: m.CheckboxIndeterminateDemo })),
   { ssr: false },
 );
 
-export const Accordion3Demo = dynamic(
-  () => import("./accordion-3-demo").then((m) => ({ default: m.Accordion3Demo })),
+export const AccordionDisabledDemo = dynamic(
+  () => import("./accordion-disabled-demo").then((m) => ({ default: m.AccordionDisabledDemo })),
   { ssr: false },
 );
 
@@ -956,13 +954,13 @@ export const SheetDemo = dynamic(
   { ssr: false },
 );
 
-export const RadioGroup2Demo = dynamic(
-  () => import("./radio-group-2-demo").then((m) => ({ default: m.RadioGroup2Demo })),
+export const RadioGroupHorizontalDemo = dynamic(
+  () => import("./radio-group-horizontal-demo").then((m) => ({ default: m.RadioGroupHorizontalDemo })),
   { ssr: false },
 );
 
-export const Drawer2Demo = dynamic(
-  () => import("./drawer-2-demo").then((m) => ({ default: m.Drawer2Demo })),
+export const DrawerSideRightDemo = dynamic(
+  () => import("./drawer-side-right-demo").then((m) => ({ default: m.DrawerSideRightDemo })),
   { ssr: false },
 );
 
@@ -1038,8 +1036,8 @@ export const ColorBadgeDemo = dynamic(
   { ssr: false },
 );
 
-export const Badge1Demo = dynamic(
-  () => import("./badge-1-demo").then((m) => ({ default: m.Badge1Demo })),
+export const BadgeAllColorsDemo = dynamic(
+  () => import("./badge-all-colors-demo").then((m) => ({ default: m.BadgeAllColorsDemo })),
   { ssr: false },
 );
 

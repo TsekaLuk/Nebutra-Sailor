@@ -8,7 +8,9 @@ import { ConstellationSection } from "@/components/sections/constellation-sectio
 import { PricingSection } from "@/components/sections/pricing-section";
 import { NowPreview } from "@/components/sections/now-preview";
 import { CtaSection } from "@/components/sections/cta-section";
+import { LatestThinking } from "@/components/sections/latest-thinking";
 import { getLocalizedProjects } from "@/lib/projects";
+import { getArticles } from "@/lib/articles";
 
 const BASE_URL = "https://tsekaluk.dev";
 
@@ -61,10 +63,12 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   const localizedProjects = await getLocalizedProjects(locale);
+  const articles = getArticles();
 
   return (
     <>
       <Hero />
+      <LatestThinking articles={articles} />
       <TechMarquee />
       <FocusSection />
       <ProcessSection />

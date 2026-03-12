@@ -44,7 +44,7 @@ export function CtaSection() {
         <AnimateIn preset="fadeUp" delay={0.2} inView>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
-              href="mailto:tseka@nebutra.com"
+              href="mailto:contact@tsekaluk.dev"
               className="inline-flex items-center justify-center gap-3 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-10 py-5 rounded-full text-lg font-normal hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors shadow-lg dark:shadow-gray-900/50"
             >
               <Mail className="w-5 h-5" /> {t("email")}

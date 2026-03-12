@@ -4,22 +4,24 @@ description: 带有可选的前缀/后缀装饰以及内置可清除模式的单
 ---
 
 import { InputDemo } from "@/components/previews/input-demo";
-import { Input2Demo } from "@/components/previews/input-2-demo";
-import { Input3Demo } from "@/components/previews/input-3-demo";
-import { Input4Demo } from "@/components/previews/input-4-demo";
-import { Input5Demo } from "@/components/previews/input-5-demo";
-import { Input6Demo } from "@/components/previews/input-6-demo";
-import { Input7Demo } from "@/components/previews/input-7-demo";
+import { InputBasicDemo } from "@/components/previews/input-basic-demo";
+import { InputWithLabelDemo } from "@/components/previews/input-with-label-demo";
+import { InputErrorDemo } from "@/components/previews/input-error-demo";
+import { InputWithIconDemo } from "@/components/previews/input-with-icon-demo";
+import { InputWithAddonsDemo } from "@/components/previews/input-with-addons-demo";
+import { InputClearableDemo } from "@/components/previews/input-clearable-demo";
+
+import { InputPasswordRevealDemo } from "@/components/previews/input-password-reveal-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
 <ComponentPreview className="max-w-[350px]">
-  <InputDemo />
+  <InputBasicDemo />
 </ComponentPreview>
 
 ## 使用方法 (Usage)
 
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-  <Input5Demo />
+  <InputWithIconDemo />
 
   ```tsx
 import { Input } from "@nebutra/ui"
@@ -41,7 +43,7 @@ import { Input } from "@nebutra/ui"
 ### 带有标签 (With Label)
 
 <ComponentPreview className="max-w-[350px]">
-  <Input2Demo />
+  <InputWithLabelDemo />
 
   ```tsx
 <div className="flex flex-col gap-1.5 w-full">
@@ -56,7 +58,7 @@ import { Input } from "@nebutra/ui"
 ### 错误状态 (With Error State)
 
 <ComponentPreview className="max-w-[350px]">
-  <Input4Demo />
+  <InputErrorDemo />
 
   ```tsx
 <div className="flex flex-col gap-1.5 w-full">
@@ -83,7 +85,7 @@ import { Input } from "@nebutra/ui"
 使用 `prefix` 属性在输入框左侧边缘渲染一个不可交互的图标或节点。点击前缀区域将穿透到输入框（输入框会获得焦点）。
 
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-  <Input5Demo />
+  <InputWithIconDemo />
 
   ```tsx
 import { Search, Mail } from "lucide-react"
@@ -109,7 +111,7 @@ import { Search, Mail } from "lucide-react"
 </Warning>
 
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-  <Input6Demo />
+  <InputWithAddonsDemo />
 
   ```tsx
 {/* Domain hint */}
@@ -134,7 +136,7 @@ import { Search, Mail } from "lucide-react"
 ### 非受控用法 (Uncontrolled)
 
 <ComponentPreview className="max-w-[350px]">
-  <Input7Demo />
+  <InputClearableDemo />
 
   ```tsx
 <Input clearable defaultValue="contact@nebutra.com" placeholder="输入内容以查看 × 按钮… (Type to see the × button…)" />
@@ -189,7 +191,7 @@ const [value, setValue] = useState("")
 对于具有交互的右侧控件，请使用 `className="pr-9"` 并绝对定位 (`absolute`) 配置该按钮：
 
 <ComponentPreview className="max-w-[350px]">
-  <Input3Demo />
+  <InputPasswordRevealDemo />
 
   ```tsx
 const [shown, setShown] = useState(false)

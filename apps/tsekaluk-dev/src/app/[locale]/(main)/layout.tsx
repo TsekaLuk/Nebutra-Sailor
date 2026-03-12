@@ -1,5 +1,6 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { AgentWidget } from "@/components/ui/agent-widget";
 
 export default function MainLayout({
   children,
@@ -15,6 +16,7 @@ export default function MainLayout({
         {children}
       </main>
       <Footer />
+      <AgentWidget />
     </>
   );
 }

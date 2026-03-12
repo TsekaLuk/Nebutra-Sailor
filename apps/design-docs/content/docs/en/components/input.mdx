@@ -5,16 +5,18 @@ description: "Single-line text input with optional prefix/suffix adornments and 
 
 
 import { InputDemo } from "@/components/previews/input-demo";
-import { Input2Demo } from "@/components/previews/input-2-demo";
-import { Input3Demo } from "@/components/previews/input-3-demo";
-import { Input4Demo } from "@/components/previews/input-4-demo";
-import { Input5Demo } from "@/components/previews/input-5-demo";
-import { Input6Demo } from "@/components/previews/input-6-demo";
-import { Input7Demo } from "@/components/previews/input-7-demo";
+import { InputBasicDemo } from "@/components/previews/input-basic-demo";
+import { InputWithLabelDemo } from "@/components/previews/input-with-label-demo";
+import { InputErrorDemo } from "@/components/previews/input-error-demo";
+import { InputWithIconDemo } from "@/components/previews/input-with-icon-demo";
+import { InputWithAddonsDemo } from "@/components/previews/input-with-addons-demo";
+import { InputClearableDemo } from "@/components/previews/input-clearable-demo";
+
+import { InputPasswordRevealDemo } from "@/components/previews/input-password-reveal-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview className="max-w-[350px]">
-  <InputDemo />
+<ComponentPreview name="InputBasicDemo">
+  <InputBasicDemo />
 </ComponentPreview>
 
 ## Usage
@@ -46,7 +48,7 @@ import { Input } from "@nebutra/ui"
 ### With Label
 
 <ComponentPreview className="max-w-[350px]">
-  <Input2Demo />
+  <InputWithLabelDemo />
 
   ```tsx
 <div className="flex flex-col gap-1.5 w-full">
@@ -62,7 +64,7 @@ import { Input } from "@nebutra/ui"
 ### With Error State
 
 <ComponentPreview className="max-w-[350px]">
-  <Input4Demo />
+  <InputErrorDemo />
 
   ```tsx
 <div className="flex flex-col gap-1.5 w-full">
@@ -89,7 +91,7 @@ import { Input } from "@nebutra/ui"
 Use the `prefix` prop to render a non-interactive icon or node inside the left edge. Clicks on the prefix area pass through to the input (it gets focused).
 
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-  <Input5Demo />
+  <InputWithIconDemo />
 
   ```tsx
 import { Search, Mail } from "lucide-react"
@@ -115,7 +117,7 @@ Use the `suffix` prop to render a non-interactive label or icon inside the right
 </Warning>
 
 <ComponentPreview className="max-w-[350px]">
-  <Input6Demo />
+  <InputWithAddonsDemo />
 
   ```tsx
 {/* Domain hint */}
@@ -140,7 +142,7 @@ Set `clearable` to render a ✕ button whenever the field has a value. The butto
 ### Uncontrolled
 
 <ComponentPreview className="max-w-[350px]">
-  <Input7Demo />
+  <InputClearableDemo />
 
   ```tsx
 <Input clearable defaultValue="contact@nebutra.com" placeholder="Type to see the × button…" />
@@ -191,7 +193,7 @@ const [value, setValue] = useState("")
 For interactive right-side controls, use `className="pr-9"` and position a button with `absolute`:
 
 <ComponentPreview className="max-w-[350px]">
-  <Input3Demo />
+  <InputPasswordRevealDemo />
 
   ```tsx
 const [shown, setShown] = useState(false)

@@ -5,9 +5,9 @@ description: "Tabbed content panels with three visual variants, four sizes, and 
 
 
 import { TabsDemo } from "@/components/previews/tabs-demo";
-import { Tabs2Demo } from "@/components/previews/tabs-2-demo";
-import { Tabs3Demo } from "@/components/previews/tabs-3-demo";
-import { Tabs4Demo } from "@/components/previews/tabs-4-demo";
+import { TabsButtonDemo } from "@/components/previews/tabs-button-demo";
+import { TabsPillDemo } from "@/components/previews/tabs-pill-demo";
+import { TabsLineDemo } from "@/components/previews/tabs-line-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
 <ComponentPreview className="mt-4">
@@ -90,7 +90,7 @@ Extends `@radix-ui/react-tabs` `Root` props.
 ### Button Variant
 
 <ComponentPreview className="mt-4">
-  <Tabs4Demo />
+  <TabsLineDemo />
 
   ```tsx
 <Tabs defaultValue="tab1" className="w-[400px]">
@@ -109,7 +109,7 @@ Extends `@radix-ui/react-tabs` `Root` props.
 ### Line Variant (Underline)
 
 <ComponentPreview className="mt-4">
-  <Tabs2Demo />
+  <TabsButtonDemo />
 
   ```tsx
 <Tabs defaultValue="tab1" className="w-[400px]">
@@ -128,7 +128,7 @@ Extends `@radix-ui/react-tabs` `Root` props.
 ### Pill Shape
 
 <ComponentPreview className="mt-4">
-  <Tabs3Demo />
+  <TabsPillDemo />
 
   ```tsx
 <Tabs defaultValue="tab1" className="w-[400px]">

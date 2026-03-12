@@ -1,19 +1,21 @@
-import { auth } from "@/auth"
-import { writeFile, mkdir } from "node:fs/promises"
-import { join } from "node:path"
+import { put } from "@vercel/blob"
 import { randomUUID } from "node:crypto"
+import { createRateLimiter, getClientIp } from "@/lib/rate-limit"
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"]
 const MAX_SIZE = 2 * 1024 * 1024 // 2MB
+const checkRateLimit = createRateLimiter(60_000, 3)
 
 export async function POST(req: Request) {
+  const ip = getClientIp(req)
+  const rl = checkRateLimit(ip)
+  if (!rl.allowed) {
+    return Response.json(
+      { success: false, error: "Too many uploads. Please try again later." },
+      { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
+    )
+  }
   try {
-    const session = await auth()
-
-    if (!session?.user) {
-      return Response.json({ success: false, error: "Authentication required" }, { status: 401 })
-    }
-
     const formData = await req.formData()
     const file = formData.get("file") as File | null
 
@@ -22,7 +24,7 @@ export async function POST(req: Request) {
     }
 
     if (!ALLOWED_TYPES.includes(file.type)) {
-      return Response.json({ success: false, error: "Invalid file type" }, { status: 400 })
+      return Response.json({ success: false, error: "Invalid file type. Use JPEG, PNG, WebP, or GIF." }, { status: 400 })
     }
 
     if (file.size > MAX_SIZE) {
@@ -30,17 +32,11 @@ export async function POST(req: Request) {
     }
 
     const ext = file.type.split("/")[1] === "jpeg" ? "jpg" : file.type.split("/")[1]
-    const filename = `${randomUUID()}.${ext}`
+    const filename = `avatars/${randomUUID()}.${ext}`
 
-    const uploadDir = join(process.cwd(), "public", "uploads", "avatars")
-    await mkdir(uploadDir, { recursive: true })
+    const blob = await put(filename, file, { access: "public" })
 
-    const buffer = Buffer.from(await file.arrayBuffer())
-    await writeFile(join(uploadDir, filename), buffer)
-
-    const url = `/uploads/avatars/${filename}`
-
-    return Response.json({ success: true, url })
+    return Response.json({ success: true, url: blob.url })
   } catch {
     return Response.json({ success: false, error: "Upload failed" }, { status: 500 })
   }

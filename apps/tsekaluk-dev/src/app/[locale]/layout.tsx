@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -33,6 +32,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@tseka_luk",
   },
+  other: {
+    "theme-color": "#ffffff",
+    "color-scheme": "light dark",
+  },
   alternates: {
     canonical: "https://tsekaluk.dev",
     languages: {
@@ -62,12 +65,6 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Script
-        defer
-        data-domain="tsekaluk.dev"
-        src="https://plausible.io/js/script.js"
-        strategy="afterInteractive"
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}

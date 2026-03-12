@@ -54,10 +54,10 @@ export default async function PrivacyPage() {
                   <>
                     {" "}
                     <a
-                      href="mailto:tsekaluk@nebutra.com"
+                      href="mailto:contact@tsekaluk.dev"
                       className="text-gray-900 dark:text-white underline underline-offset-4"
                     >
-                      tsekaluk@nebutra.com
+                      contact@tsekaluk.dev
                     </a>
                   </>
                 )}

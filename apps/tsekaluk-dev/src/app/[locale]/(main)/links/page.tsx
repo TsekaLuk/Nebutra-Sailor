@@ -186,11 +186,11 @@ export default async function LinksPage({
       {/* Email CTA */}
       <div className="mt-12 text-center">
         <a
-          href="mailto:tseka@nebutra.com"
+          href="mailto:contact@tsekaluk.dev"
           className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
         >
           <Mail className="h-4 w-4" />
-          tseka@nebutra.com
+          contact@tsekaluk.dev
         </a>
       </div>
     </section>

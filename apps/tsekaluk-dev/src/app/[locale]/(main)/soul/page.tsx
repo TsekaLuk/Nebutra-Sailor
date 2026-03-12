@@ -40,14 +40,14 @@ export default async function SoulPage({
     <section className="mx-auto max-w-2xl px-6 py-12 md:py-16">
       {/* Page header */}
       <div className="mb-8">
-        <p className="mb-3 text-xs font-medium uppercase tracking-widest text-[var(--color-accent)] opacity-70">
+        <p className="mb-3 text-xs font-medium uppercase tracking-widest text-[var(--color-accent-fg)] opacity-70">
           {t("page_label")}
         </p>
         <div className="flex items-center gap-3">
           <h1 className="font-serif text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
             {t("page_headline")}
           </h1>
-          <span className="font-mono flex items-center gap-2 text-[10px] uppercase tracking-widest text-[var(--color-accent)]">
+          <span className="font-mono flex items-center gap-2 text-[10px] uppercase tracking-widest text-[var(--color-accent-fg)]">
             <span className="animate-pulse">{">_"}</span>
             {t("status")}
           </span>
