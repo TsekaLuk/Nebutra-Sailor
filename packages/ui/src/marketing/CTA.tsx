@@ -29,7 +29,7 @@ import * as React from "react";
 import type { CTAProps } from "./types";
 
 export function CTA({
-  locale = "en",
+  locale: _locale = "en",
   variant = "centered",
   headline,
   subheadline,

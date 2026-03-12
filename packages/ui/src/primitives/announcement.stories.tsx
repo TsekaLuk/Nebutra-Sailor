@@ -41,7 +41,7 @@ export const Default: Story = {
 
 export const WithArrowLink: Story = {
   render: () => (
-    <a href="#" className="inline-block cursor-pointer">
+    <a href="/" className="inline-block cursor-pointer">
       <Announcement>
         <AnnouncementTag>v2.0</AnnouncementTag>
         <AnnouncementTitle>

@@ -33,7 +33,7 @@ import * as React from "react";
 import type { FAQProps } from "./types";
 
 export function FAQ({
-  locale = "en",
+  locale: _locale = "en",
   items = [],
   showCategories = false,
   layout = "accordion",

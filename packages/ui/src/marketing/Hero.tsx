@@ -42,7 +42,7 @@ import * as React from "react";
 import type { HeroProps } from "./types";
 
 export function Hero({
-  locale = "en",
+  locale: _locale = "en",
   variant = "default",
   backgroundType = "gradient",
   headline,

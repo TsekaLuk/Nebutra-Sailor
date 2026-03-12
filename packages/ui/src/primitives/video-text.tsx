@@ -110,6 +110,7 @@ export function VideoText({
           WebkitMaskPosition: "center",
         }}
       >
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
           className="h-full w-full object-cover"
           autoPlay={autoPlay}

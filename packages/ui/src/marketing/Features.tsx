@@ -32,7 +32,7 @@ import * as React from "react";
 import type { FeaturesProps } from "./types";
 
 export function Features({
-  locale = "en",
+  locale: _locale = "en",
   layout = "grid",
   columns = 3,
   showIcons = true,

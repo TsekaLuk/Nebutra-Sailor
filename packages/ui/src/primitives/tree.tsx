@@ -187,7 +187,7 @@ export const TreeNode = ({
   parentPath = [],
   children,
   className,
-  onClick,
+  onClick: _onClick,
   ...props
 }: TreeNodeProps) => {
   const generatedId = useId();

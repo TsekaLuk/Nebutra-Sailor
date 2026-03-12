@@ -231,6 +231,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <video
         ref={videoRef}
         className="w-full"

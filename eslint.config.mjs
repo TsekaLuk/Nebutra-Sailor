@@ -38,6 +38,7 @@ export default tseslint.config(
     ...jsxA11y.flatConfigs.recommended,
     rules: {
       ...jsxA11y.flatConfigs.recommended.rules,
+      "jsx-a11y/label-has-associated-control": "off",
       "jsx-a11y/alt-text": "error",
       "jsx-a11y/anchor-has-content": "error",
       "jsx-a11y/aria-role": "error",

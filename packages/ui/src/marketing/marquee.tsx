@@ -3,7 +3,6 @@
 import React, {
   ComponentPropsWithoutRef,
   useRef,
-  useMemo,
   useEffect,
 } from "react";
 import { cn } from "../utils/cn";

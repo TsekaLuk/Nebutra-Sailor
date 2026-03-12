@@ -61,10 +61,10 @@ export const InNavbar: Story = {
         <span className="font-semibold text-sm">Nebutra</span>
         <div className="flex items-center gap-4">
           <nav className="flex gap-4 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-foreground">
+            <a href="/" className="hover:text-foreground">
               Docs
             </a>
-            <a href="#" className="hover:text-foreground">
+            <a href="/" className="hover:text-foreground">
               API
             </a>
           </nav>

@@ -28,21 +28,21 @@ export const Default: Story = {
         description="Built-in intelligence that learns from your workflow and makes smarter suggestions over time."
         Icon={Sparkles}
         className="lg:col-span-2"
-        href="#"
+        href="/"
         cta="Explore AI features"
       />
       <BentoCard
         name="Lightning fast"
         description="Sub-second response times, globally distributed across 35+ regions."
         Icon={Zap}
-        href="#"
+        href="/"
         cta="See benchmarks"
       />
       <BentoCard
         name="Enterprise security"
         description="SOC 2 Type II certified. GDPR and HIPAA compliant out of the box."
         Icon={Lock}
-        href="#"
+        href="/"
         cta="View compliance"
       />
       <BentoCard
@@ -50,7 +50,7 @@ export const Default: Story = {
         description="Deploy anywhere. Serve everyone. One platform, worldwide coverage."
         Icon={Globe}
         className="lg:col-span-2"
-        href="#"
+        href="/"
         cta="See regions"
       />
     </BentoGrid>
@@ -67,7 +67,7 @@ export const WithBackground: Story = {
         background={
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
         }
-        href="#"
+        href="/"
         cta="View analytics"
       />
       <BentoCard
@@ -77,7 +77,7 @@ export const WithBackground: Story = {
         background={
           <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-teal-500/20" />
         }
-        href="#"
+        href="/"
         cta="Read docs"
       />
     </BentoGrid>
@@ -91,13 +91,13 @@ export const SingleColumn: Story = {
         name="Feature One"
         description="Comprehensive first feature description."
         Icon={Sparkles}
-        href="#"
+        href="/"
       />
       <BentoCard
         name="Feature Two"
         description="Comprehensive second feature description."
         Icon={Zap}
-        href="#"
+        href="/"
       />
     </BentoGrid>
   ),

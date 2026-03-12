@@ -32,10 +32,10 @@ import * as React from "react";
 import type { TestimonialsProps } from "./types";
 
 export function Testimonials({
-  locale = "en",
+  locale: _locale = "en",
   testimonials = [],
   layout = "carousel",
-  autoRotate = true,
+  autoRotate: _autoRotate = true,
   title,
   subtitle,
   className,

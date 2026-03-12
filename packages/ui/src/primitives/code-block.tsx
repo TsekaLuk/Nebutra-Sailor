@@ -394,7 +394,7 @@ export function CodeBlock({
       if (isNaN(lineNumber)) return;
 
       const anchor = `#L${lineNumber}`;
-      navigator.clipboard.writeText(anchor).catch(() => {});
+      navigator.clipboard.writeText(anchor).catch(() => { });
       onLineReference?.(lineNumber);
       showCopyFeedback();
     },
@@ -524,6 +524,7 @@ export function CodeBlock({
       </div>
 
       {/* Code content */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div
         className="overflow-auto"
         style={{

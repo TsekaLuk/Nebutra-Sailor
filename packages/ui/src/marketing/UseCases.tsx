@@ -30,7 +30,7 @@ import * as React from "react";
 import type { UseCasesProps } from "./types";
 
 export function UseCases({
-  locale = "en",
+  locale: _locale = "en",
   layout = "tabs",
   useCases = [],
   title,

@@ -27,9 +27,12 @@ export interface StatsCounterProps {
 }
 
 export function StatsCounter({
-  stats,
-  animate = true,
-  duration = 2000,
+  value: _value,
+  prefix: _prefix = "",
+  suffix: _suffix = "",
+  label: _label,
+  animate: _animate = true,
+  duration: _duration = 2000,
   className,
 }: StatsCounterProps) {
   // TODO: Implement with:

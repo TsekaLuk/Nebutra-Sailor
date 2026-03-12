@@ -29,12 +29,12 @@ import * as React from "react";
 import type { SocialProofProps } from "./types";
 
 export function SocialProof({
-  locale = "en",
+  locale: _locale = "en",
   logos = [],
   stats = [],
   variant = "combined",
   title,
-  animateStats = true,
+  animateStats: _animateStats = true,
   className,
   id,
   density = "normal",

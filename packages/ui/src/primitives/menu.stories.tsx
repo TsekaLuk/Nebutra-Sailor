@@ -119,9 +119,9 @@ export const LinkItems: Story = {
     <Menu.Root>
       <Menu.Trigger>Menu</Menu.Trigger>
       <Menu.Content>
-        <Menu.Item href="#">Documentation</Menu.Item>
-        <Menu.Item href="#">Changelog</Menu.Item>
-        <Menu.Item href="#">GitHub</Menu.Item>
+        <Menu.Item href="/">Documentation</Menu.Item>
+        <Menu.Item href="/">Changelog</Menu.Item>
+        <Menu.Item href="/">GitHub</Menu.Item>
         <Menu.Separator />
         <Menu.Item>Sign out</Menu.Item>
       </Menu.Content>
@@ -176,7 +176,7 @@ export const PrefixAndSuffix: Story = {
         </Menu.Item>
         <Menu.Item prefix={<Settings className="h-4 w-4" />}>Settings</Menu.Item>
         <Menu.Separator />
-        <Menu.Item prefix={<HelpCircle className="h-4 w-4" />} href="#">
+        <Menu.Item prefix={<HelpCircle className="h-4 w-4" />} href="/">
           Help
         </Menu.Item>
         <Menu.Item prefix={<LogOut className="h-4 w-4" />}>Sign out</Menu.Item>
@@ -216,7 +216,7 @@ export const KitchenSink: Story = {
       <Menu.Trigger chevron>Options</Menu.Trigger>
       <Menu.Content className="w-56">
         <Menu.Label>Navigation</Menu.Label>
-        <Menu.Item prefix={<User className="h-4 w-4" />} href="#">
+        <Menu.Item prefix={<User className="h-4 w-4" />} href="/">
           Profile
         </Menu.Item>
         <Menu.Item

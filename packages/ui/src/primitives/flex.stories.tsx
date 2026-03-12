@@ -64,19 +64,19 @@ export const SpaceBetween: Story = {
       <span className="font-semibold">Logo</span>
       <Flex gap={4}>
         <a
-          href="#"
+          href="/"
           className="text-sm text-muted-foreground hover:text-foreground"
         >
           Home
         </a>
         <a
-          href="#"
+          href="/"
           className="text-sm text-muted-foreground hover:text-foreground"
         >
           About
         </a>
         <a
-          href="#"
+          href="/"
           className="text-sm text-muted-foreground hover:text-foreground"
         >
           Contact

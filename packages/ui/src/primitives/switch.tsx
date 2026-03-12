@@ -68,6 +68,7 @@ const SwitchControl = ({
   }, []);
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
     <label
       className={clsx("flex flex-1 h-full", disabled && "cursor-not-allowed pointer-events-none")}
       onClick={() => context?.setValue(value)}
@@ -85,7 +86,7 @@ const SwitchControl = ({
         className={twMerge(clsx(
           "flex items-center justify-center flex-1 cursor-pointer font-medium font-sans duration-150",
           checked ? "bg-muted text-muted-foreground fill-muted-foreground rounded-sm" : "text-foreground hover:text-muted-foreground fill-foreground hover:fill-muted-foreground",
-          disabled && "text-gray-800 fill-gray-800",
+          disabled && "text-neutral-8 fill-neutral-8",
           !icon && size === "small" && "text-sm px-3",
           !icon && size === "medium" && "text-sm px-3",
           !icon && size === "large" && "text-base px-4",

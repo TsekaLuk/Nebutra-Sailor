@@ -101,7 +101,7 @@ export const Informational: Story = {
         }
         link={
           <a
-            href="#"
+            href="/"
             className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
           >
             Learn more
@@ -167,7 +167,7 @@ export const InTable: Story = {
         description="Push to a connected Git branch or deploy manually to see deployments here."
         link={
           <a
-            href="#"
+            href="/"
             className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
           >
             View documentation

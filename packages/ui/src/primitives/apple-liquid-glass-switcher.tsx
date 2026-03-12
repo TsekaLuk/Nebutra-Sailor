@@ -78,11 +78,14 @@ export function AppleLiquidGlassSwitcher({
                     return (
                         <label
                             key={option.value}
+                            htmlFor={`theme-switch-${option.value}`}
                             className={`relative cursor-pointer p-3 rounded-full transition-colors duration-300 ease-in-out ${isActive ? "text-white" : "text-white/50 hover:text-white/80"
                                 }`}
                             title={option.label}
                         >
+                            <span className="sr-only">{option.label}</span>
                             <input
+                                id={`theme-switch-${option.value}`}
                                 className="sr-only"
                                 type="radio"
                                 name="theme"

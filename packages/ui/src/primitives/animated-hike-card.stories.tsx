@@ -45,7 +45,7 @@ export const Default: Story = {
         { icon: <TrendingUp className="h-4 w-4" />, label: "Hard" },
       ]}
       description="A beautiful trail through alpine meadows and rocky peaks with panoramic summit views."
-      href="#"
+      href="/"
     />
   ),
 };
@@ -61,7 +61,7 @@ export const EasyTrail: Story = {
         { icon: <TrendingUp className="h-4 w-4" />, label: "Easy" },
       ]}
       description="Follow the stunning coastline with panoramic ocean views and gentle sea breezes."
-      href="#"
+      href="/"
     />
   ),
 };
@@ -77,7 +77,7 @@ export const ProductShowcase: Story = {
         { icon: <BookOpen className="h-4 w-4" />, label: "Full Docs" },
       ]}
       description="A complete design system for modern web applications — tokens, primitives, and patterns."
-      href="#"
+      href="/"
     />
   ),
 };
@@ -93,7 +93,7 @@ export const Grid: Story = {
           { icon: <Map className="h-4 w-4" />, label: "8 km" },
         ]}
         description="A challenging high-altitude route with panoramic views."
-        href="#"
+        href="/"
       />
       <AnimatedHikeCard
         title="Coastal Walk"
@@ -103,7 +103,7 @@ export const Grid: Story = {
           { icon: <Map className="h-4 w-4" />, label: "12 km" },
         ]}
         description="A relaxing coastal trail with ocean views."
-        href="#"
+        href="/"
       />
     </div>
   ),
