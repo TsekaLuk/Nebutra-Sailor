@@ -236,7 +236,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
           ];
           const currentIndex = statuses.indexOf(task.status);
           const nextIndex = (currentIndex + 1) % statuses.length;
-          const newStatus = statuses[nextIndex];
+          const newStatus = statuses[nextIndex] ?? "pending";
 
           onTaskStatusChange?.(taskId, newStatus);
 
@@ -246,9 +246,9 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
             subtasks:
               newStatus === "completed"
                 ? task.subtasks.map((s) => ({
-                    ...s,
-                    status: "completed" as TaskStatus,
-                  }))
+                  ...s,
+                  status: "completed" as TaskStatus,
+                }))
                 : task.subtasks,
           };
         }
@@ -474,7 +474,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                                       className={cn(
                                         "cursor-pointer text-sm",
                                         subtask.status === "completed" &&
-                                          "text-muted-foreground line-through",
+                                        "text-muted-foreground line-through",
                                       )}
                                     >
                                       {subtask.title}

@@ -104,7 +104,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
           value={currentValue}
           onChange={handleChange}
           ref={ref}
-          className="nebutra-native-slider w-full h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="nebutra-native-slider w-full h-1.5 bg-muted rounded-full appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           style={{
             background: `linear-gradient(to right, var(--color-primary) ${((currentValue - min) / (max - min)) * 100
               }%, ${isDarkMode ? "var(--color-neutral-800)" : "var(--color-neutral-200)"} ${((currentValue - min) / (max - min)) * 100

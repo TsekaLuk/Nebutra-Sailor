@@ -1,81 +1,110 @@
-"use client";
+import * as React from 'react';
+import { Popover as PopoverPrimitive } from '@base-ui-components/react/popover';
+import { cn } from '../utils/cn';
 
-import * as React from "react";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { cn } from "../utils/cn";
-import { withHtmlProps } from "../utils/primitive-props";
+function Popover({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Root>) {
+  return <PopoverPrimitive.Root data-slot="popover" {...props} />;
+}
 
-// =============================================================================
-// Types
-// =============================================================================
-
-// Radix types don't resolve HTML props with React 19 + exactOptionalPropertyTypes.
-const RadixContent = withHtmlProps<
-  "div",
-  {
-    align?: "start" | "center" | "end";
-    sideOffset?: number;
-    side?: "top" | "right" | "bottom" | "left";
-  }
->(PopoverPrimitive.Content);
-
-export type PopoverProps = React.ComponentPropsWithoutRef<
-  typeof PopoverPrimitive.Root
->;
-
-export type PopoverTriggerProps = React.ComponentPropsWithoutRef<"button"> & {
+type PopoverTriggerProps = React.ComponentProps<typeof PopoverPrimitive.Trigger> & {
   asChild?: boolean;
 };
 
-export type PopoverContentProps = React.ComponentPropsWithoutRef<"div"> & {
-  align?: "start" | "center" | "end";
-  sideOffset?: number;
-  side?: "top" | "right" | "bottom" | "left";
-};
+function PopoverTrigger({ asChild, children, render, ...props }: PopoverTriggerProps) {
+  const renderElement = asChild && React.isValidElement(children) ? children : render;
+  return (
+    <PopoverPrimitive.Trigger
+      data-slot="popover-trigger"
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      render={renderElement as any}
+      {...(renderElement ? props : { ...props, children })}
+    />
+  );
+}
 
-export type PopoverAnchorProps = React.ComponentPropsWithoutRef<"div">;
-
-// =============================================================================
-// Root / Trigger / Anchor
-// =============================================================================
-
-const Popover = PopoverPrimitive.Root;
-
-const PopoverTrigger = withHtmlProps<"button", { asChild?: boolean }>(
-  PopoverPrimitive.Trigger,
-);
-
-const PopoverAnchor = withHtmlProps<"div">(PopoverPrimitive.Anchor);
-
-// =============================================================================
-// Content
-// =============================================================================
-
-const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
-  ({ className, align = "start", sideOffset = 4, ...props }, ref) => (
+function PopoverPositioner({ sideOffset = 4, ...props }: React.ComponentProps<typeof PopoverPrimitive.Positioner>) {
+  return (
     <PopoverPrimitive.Portal>
-      <RadixContent
-        ref={ref}
-        align={align}
-        sideOffset={sideOffset}
-        className={cn(
-          "z-50 min-w-[8rem] overflow-hidden rounded-[var(--radius-lg)] border bg-popover p-0 text-popover-foreground shadow-md outline-none",
-          "data-[state=open]:animate-in data-[state=closed]:animate-out",
-          "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-          "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-          "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2",
-          "data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          className,
-        )}
-        {...props}
-      />
+      <PopoverPrimitive.Positioner data-slot="popover-positioner" sideOffset={sideOffset} {...props} />
     </PopoverPrimitive.Portal>
-  ),
-);
-PopoverContent.displayName = PopoverPrimitive.Content.displayName;
+  );
+}
 
-// =============================================================================
-// Exports
-// =============================================================================
+export interface PopoverContentProps extends React.ComponentProps<typeof PopoverPrimitive.Popup> {
+  align?: PopoverPrimitive.Positioner.Props['align'];
+  sideOffset?: PopoverPrimitive.Positioner.Props['sideOffset'];
+  alignOffset?: PopoverPrimitive.Positioner.Props['alignOffset'];
+  side?: PopoverPrimitive.Positioner.Props['side'];
+  showArrow?: boolean;
+}
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };
+function PopoverContent({
+  className,
+  align = 'center',
+  sideOffset = 8,
+  alignOffset = 0,
+  side = 'bottom',
+  children,
+  showArrow = false,
+  ...props
+}: PopoverContentProps) {
+  return (
+    <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Positioner
+        data-slot="popover-positioner"
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        side={side}
+      >
+        <PopoverPrimitive.Popup
+          data-slot="popover-content"
+          className={cn(
+            `
+              w-72 z-50 bg-background/90 backdrop-blur-md text-popover-foreground rounded-xl border p-4 shadow-xl outline-hidden
+              data-[open]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[open]:fade-in-0 data-[closed]:zoom-out-95 
+              data-[open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 
+              data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 
+              origin-(--radix-popover-content-transform-origin)
+            `,
+            className,
+          )}
+          {...props}
+        >
+          {children}
+          {showArrow && <PopoverArrow />}
+        </PopoverPrimitive.Popup>
+      </PopoverPrimitive.Positioner>
+    </PopoverPrimitive.Portal>
+  );
+}
+
+function PopoverArrow({ className, ...props }: React.ComponentProps<typeof PopoverPrimitive.Arrow>) {
+  return (
+    <PopoverPrimitive.Arrow
+      data-slot="popover-arrow"
+      className={cn(
+        'z-50 data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180',
+        className,
+      )}
+      {...props}
+    >
+      <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+        <path
+          d="M9.66437 2.60207L4.80758 6.97318C4.07308 7.63423 3.11989 8 2.13172 8H0V9H20V8H18.5349C17.5468 8 16.5936 7.63423 15.8591 6.97318L11.0023 2.60207C10.622 2.2598 10.0447 2.25979 9.66437 2.60207Z"
+          className="fill-popover"
+        />
+        <path
+          d="M10.3333 3.34539L5.47654 7.71648C4.55842 8.54279 3.36693 9 2.13172 9H0V8H2.13172C3.11989 8 4.07308 7.63423 4.80758 6.97318L9.66437 2.60207C10.0447 2.25979 10.622 2.2598 11.0023 2.60207L15.8591 6.97318C16.5936 7.63423 17.5468 8 18.5349 8H20V9H18.5349C17.2998 9 16.1083 8.54278 15.1901 7.71648L10.3333 3.34539Z"
+          className="fill-border"
+        />
+      </svg>
+    </PopoverPrimitive.Arrow>
+  );
+}
+
+function PopoverAnchor({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Arrow>) {
+  return <PopoverPrimitive.Arrow data-slot="popover-anchor" {...props} />;
+}
+
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor, PopoverPositioner };

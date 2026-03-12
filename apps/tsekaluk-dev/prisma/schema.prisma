@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum GuestbookStatus {
+  pending
+  approved
+  rejected
+}
+
+model Guestbook {
+  id             String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  authorName     String          @map("author_name")
+  authorImage    String?         @map("author_image")
+  authorProvider String          @default("oauth") @map("author_provider")
+  nickname       String
+  relationship   String          @default("other")
+  message        String          @db.Text
+  status         GuestbookStatus @default(pending)
+  createdAt      DateTime        @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@index([createdAt(sort: Desc)])
+  @@index([status])
+  @@map("guestbook")
+}

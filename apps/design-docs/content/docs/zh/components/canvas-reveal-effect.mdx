@@ -3,6 +3,38 @@ title: "画布显示效果 (Canvas Reveal Effect)"
 description: "由 Three.js 驱动的 WebGL 点阵动画。着色的动态点在画布上扫过，在运动中展现出图案。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <CanvasRevealEffectDemo />
+
+```tsx title="canvas-reveal-effect-demo.tsx"
+"use client";
+
+import { CanvasRevealEffect } from "@nebutra/ui/primitives";
+
+export function CanvasRevealEffectDemo() {
+    return (
+        <div className="flex w-full items-center justify-center p-4">
+            <div className="h-[300px] w-full max-w-2xl overflow-hidden rounded-xl border">
+                <CanvasRevealEffect
+                    animationSpeed={0.5}
+                    colors={[
+                        [59, 130, 246],
+                        [139, 92, 246],
+                    ]}
+                    dotSize={3}
+                    containerClassName="bg-slate-950"
+                />
+            </div>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 依赖 (Dependencies)
 
 需要安装 `three` 和 `@react-three/fiber`：

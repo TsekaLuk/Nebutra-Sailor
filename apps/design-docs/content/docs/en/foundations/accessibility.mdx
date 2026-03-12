@@ -31,6 +31,8 @@ These primitives establish the baseline. They do not replace semantic HTML. Use 
 
 Removes an element from the visual layout while keeping it in the accessibility tree.
 
+<VisuallyHiddenDemo />
+
 ```ts
 import { visuallyHidden } from "@nebutra/ui/primitives/accessibility";
 
@@ -57,6 +59,8 @@ Do not use `display: none` or `visibility: hidden` to hide content that screen r
 
 Standard keyboard focus ring that meets WCAG 2.4.7 (Focus Visible).
 
+<FocusRingDemo />
+
 ```ts
 import { focusRing } from "@nebutra/ui/primitives/accessibility";
 
@@ -78,6 +82,8 @@ Use `:focus-visible` (not `:focus`) to show the ring only for keyboard users. Mo
 
 A skip navigation link visible only on keyboard focus. Required for WCAG 2.4.1 (Bypass Blocks).
 
+<SkipLinkStyleDemo />
+
 ```tsx
 import { skipLinkStyle } from "@nebutra/ui/primitives/accessibility";
 
@@ -92,6 +98,8 @@ The link is visually hidden at rest and becomes visible (fixed to top-left, styl
 ## `ariaPatterns`
 
 Pre-composed ARIA attribute objects for common UI states.
+
+<AriaPatternsDemo />
 
 ### `ariaPatterns.loading`
 
@@ -143,6 +151,8 @@ import { ariaPatterns } from "@nebutra/ui/primitives/accessibility";
 
 WCAG 2.5.5 (Target Size) requires a minimum 44×44px interactive area.
 
+<MinTouchTargetDemo />
+
 ```ts
 import { minTouchTarget } from "@nebutra/ui/primitives/accessibility";
 
@@ -158,6 +168,8 @@ Apply to any interactive element whose visible area is smaller than 44×44px —
 ## `prefersReducedMotion()`
 
 Runtime check for the OS-level reduce-motion preference.
+
+<PrefersReducedMotionDemo />
 
 ```ts
 import { prefersReducedMotion } from "@nebutra/ui/primitives/accessibility";
@@ -175,6 +187,8 @@ Returns `false` on the server (SSR-safe). Use in combination with CSS `@media (p
 ## `contrastRequirements`
 
 WCAG contrast ratio thresholds for programmatic contrast checking.
+
+<ContrastRequirementsDemo />
 
 | Token | Value | Standard | Context |
 |---|---|---|---|

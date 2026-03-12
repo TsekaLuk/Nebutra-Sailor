@@ -43,7 +43,7 @@ export function NoisePatternCard({
     <motion.div
       className={cn(
         "w-full overflow-hidden rounded-[var(--radius-md)] border",
-        "bg-[var(--neutral-1)]",
+        "bg-card",
         "border-border",
         className
       )}
@@ -58,7 +58,7 @@ export function NoisePatternCard({
           patternClassName
         )}
       >
-        <div className={cn("bg-[var(--neutral-1)]", overlayClassName)}>{children}</div>
+        <div className={cn("bg-card", overlayClassName)}>{children}</div>
       </div>
     </motion.div>
   );

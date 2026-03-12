@@ -18,7 +18,7 @@ export function personJsonLd() {
       "https://x.com/tseka_luk",
       "https://linkedin.com/in/tsekaluk",
     ],
-    image: `${BASE_URL}/images/headshot.jpg`,
+    image: `${BASE_URL}/images/black.jpeg`,
     description: "I design and build AI-powered products from zero to one. Shipping fast and iterating in public.",
   };
 }

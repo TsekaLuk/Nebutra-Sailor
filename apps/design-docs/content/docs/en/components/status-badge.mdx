@@ -3,6 +3,33 @@ title: StatusBadge
 description: Two-part status indicator badge with left/right labels, icons, and status-based coloring.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <StatusBadgeDemo />
+
+```tsx title="status-badge-demo.tsx"
+"use client";
+
+import { StatusBadge } from "@nebutra/ui/primitives";
+import { ShieldCheck, XCircle } from "lucide-react";
+
+export function StatusBadgeDemo() {
+    return (
+        <StatusBadge
+            leftIcon={ShieldCheck}
+            rightIcon={XCircle}
+            leftLabel="Protection"
+            rightLabel="SSO disabled"
+            status="success"
+        />
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `StatusBadge` displays two labels separated by a thin vertical divider. The left side is bold (primary label) and the right side is muted (secondary label). Optional icons can precede each label and are colorized based on the `status` prop.

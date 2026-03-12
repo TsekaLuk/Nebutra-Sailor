@@ -1,11 +1,41 @@
 ---
-title: 事件
-description: 事件采集管道
-full: true
-_openapi:
-  operations:
-    - path: /api/v1/events/ingest
-      method: post
+title: 事件 (Events)
+description: 事件采集与处理管道
 ---
 
-<APIPage operations={[{path:"/api/v1/events/ingest",method:"post"}]} />
+# 事件采集 API (Event Ingestion API)
+
+事件采集 API 允许您将衡量用户行为、系统操作或其他指标的自定义事件发送到 Nebutra 生态系统中。
+
+## 接口地址 (Endpoint)
+
+`POST /api/v1/events/ingest`
+
+### 请求体 (Request Body)
+
+```json
+{
+  "events": [
+    {
+      "eventName": "user_signed_up",
+      "context": {
+        "tenantId": "tenant_123",
+        "occurredAt": "2024-03-10T12:00:00Z"
+      },
+      "payload": {
+        "plan": "premium"
+      },
+      "source": "web"
+    }
+  ]
+}
+```
+
+### 响应 (Response)
+
+```json
+{
+  "success": true,
+  "ingested": 1
+}
+```

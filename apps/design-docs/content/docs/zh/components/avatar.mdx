@@ -1,6 +1,6 @@
 ---
-title: "头像 (Avatar)"
-description: "用户个人资料图片，支持自动回退到首字母。包含多种尺寸变体、堆叠组、Git 平台徽章、状态图标及自动生成头像等功能。"
+title: "Avatar (头像)"
+description: "具有自动回退到首字母缩写功能的用户头像组件。支持尺寸变体、堆叠分组、Git 平台徽章、状态图标和代码生成的生成头像。"
 ---
 
 ## 导入 (Import)
@@ -23,289 +23,125 @@ import {
 
 ## 尺寸变体 (Size Variants)
 
-通过 `size` 属性控制五种尺寸。
+通过 `size` 属性提供五种尺寸控制。
 
-<ComponentPreview className="gap-4 items-center">
-  <Avatar size="xs">
-    <AvatarFallback size="xs">XS</AvatarFallback>
-  </Avatar>
-  <Avatar size="sm">
-    <AvatarFallback size="sm">SM</AvatarFallback>
-  </Avatar>
-  <Avatar size="md">
-    <AvatarFallback size="md">MD</AvatarFallback>
-  </Avatar>
-  <Avatar size="lg">
-    <AvatarFallback size="lg">LG</AvatarFallback>
-  </Avatar>
-  <Avatar size="xl">
-    <AvatarFallback size="xl">XL</AvatarFallback>
-  </Avatar>
-
-  ```tsx
-<Avatar size="xs">
-    <AvatarFallback size="xs">XS</AvatarFallback>
-  </Avatar>
-  <Avatar size="sm">
-    <AvatarFallback size="sm">SM</AvatarFallback>
-  </Avatar>
-  <Avatar size="md">
-    <AvatarFallback size="md">MD</AvatarFallback>
-  </Avatar>
-  <Avatar size="lg">
-    <AvatarFallback size="lg">LG</AvatarFallback>
-  </Avatar>
-  <Avatar size="xl">
-    <AvatarFallback size="xl">XL</AvatarFallback>
-  </Avatar>
-  ```
+<ComponentPreview>
+  <AvatarSizeDemo />
 </ComponentPreview>
 
-```tsx
-<Avatar size="xs">
-  <AvatarImage src="https://avatar.vercel.sh/user" alt="user" />
-  <AvatarFallback size="xs">XS</AvatarFallback>
-</Avatar>
-
-<Avatar size="sm">...</Avatar>
-<Avatar size="md">...</Avatar>
-<Avatar size="lg">...</Avatar>
-<Avatar size="xl">...</Avatar>
-```
-
-| `size` | 像素 (px) | Tailwind 类名 |
+| `size` | px  | Tailwind 类名         |
 | ------ | --- | --------------------- |
 | `xs`   | 20  | `h-5 w-5`             |
 | `sm`   | 32  | `h-8 w-8`             |
-| `md`   | 40  | `h-10 w-10` (默认) |
+| `md`   | 40  | `h-10 w-10` (默认)    |
 | `lg`   | 56  | `h-14 w-14`           |
 | `xl`   | 80  | `h-20 w-20`           |
 
 ---
 
-## 回退机制 (Fallback)
+## 降级回退 (Fallback)
 
-当图片地址失效或未提供时，`AvatarFallback` 会在柔和背景上渲染首字母。
+当图片 URL 加载失败或未提供时，`AvatarFallback` 会在柔和的背景上呈现用户的首字母。
 
 <ComponentPreview>
-  <Avatar size="md">
-    <AvatarFallback size="md">NN</AvatarFallback>
-  </Avatar>
-
-  ```tsx
-<Avatar size="md">
-    <AvatarFallback size="md">NN</AvatarFallback>
-  </Avatar>
-  ```
+  <AvatarFallbackDemo />
 </ComponentPreview>
 
-```tsx
-<Avatar size="md">
-  <AvatarFallback size="md">AC</AvatarFallback>
-</Avatar>
-```
-
 <Tip>
-  请务必为 `Avatar` 和 `AvatarFallback` 传入相同的 `size` — 这能确保字体大小与容器匹配。
+  始终为 `Avatar` 和 `AvatarFallback` 传递相同的 `size` — 这能确保字体大小与容器正确匹配。
 </Tip>
 
 ---
 
 ## 头像组 (Group)
 
-`AvatarGroup` 可以将头像堆叠显示，并带有自动生成的 `+N` 溢出指示器。下方的第二行示例包含 5 个成员，设置 `max={4}`，显示为 `+2`。
+`AvatarGroup` 可以将多个头像堆叠显示，并带有自动的 `+N` 溢出指示器。下面的第二行有 5 个成员并且设置了 `max={4}`，因此显示 `+2`。
 
 <ComponentPreview>
-  <AvatarGroup
-    items={[
-      { alt: "user1", fallback: "U1" },
-      { alt: "user2", fallback: "U2" },
-      { alt: "user3", fallback: "U3" },
-      { alt: "user4", fallback: "U4" },
-      { alt: "user5", fallback: "U5" },
-    ]}
-    max={4}
-    size="sm"
-  />
-
-  ```tsx
-<AvatarGroup
-    items={[
-      { alt: "user1", fallback: "U1" },
-      { alt: "user2", fallback: "U2" },
-      { alt: "user3", fallback: "U3" },
-      { alt: "user4", fallback: "U4" },
-      { alt: "user5", fallback: "U5" },
-    ]}
-    max={4}
-    size="sm"
-  />
-  ```
+  <AvatarGroupDemo />
 </ComponentPreview>
 
-```tsx
-<AvatarGroup
-  items={[
-    {
-      src: "https://avatar.vercel.sh/evilrabbit",
-      alt: "evilrabbit",
-      fallback: "ER",
-    },
-    { src: "https://avatar.vercel.sh/leerob", alt: "leerob", fallback: "LR" },
-    { src: "https://avatar.vercel.sh/rauchg", alt: "rauchg", fallback: "RG" },
-    { src: "https://avatar.vercel.sh/shuding", alt: "shuding", fallback: "SH" },
-    { src: "https://avatar.vercel.sh/almonk", alt: "almonk", fallback: "AL" },
-  ]}
-  max={4}
-  size="sm"
-/>
-```
-
-| 属性 | 类型 | 默认值 | 描述 |
+| 属性    | 类型                | 默认值  | 描述                                  |
 | ------- | ------------------- | ------- | ------------------------------------- |
-| `items` | `AvatarGroupItem[]` | — | `{ src?, alt, fallback }` 的数组 |
-| `max` | `number` | `4` | 折叠前允许显示的最大头像数 |
-| `size` | `AvatarSize` | `"sm"` | 应用于所有头像的尺寸 |
+| `items` | `AvatarGroupItem[]` | —       | `{ src?, alt, fallback }` 的数组对象  |
+| `max`   | `number`            | `4`     | 自动折叠成 `+N` 前的最大头像显示数量 |
+| `size`  | `AvatarSize`        | `"sm"`  | 应用于组内所有头像的尺寸              |
 
 ---
 
 ## Git 平台头像 (Git Platform Avatars)
 
-单行组件，从平台 CDN 获取图片，并在左下角显示对应的 **平台 Logo 徽章**。
-
-<ComponentPreview className="gap-4">
-  <GitHubAvatar username="rauchg" size="md" />
-  <GitLabAvatar username="leerob" size="md" />
-  <BitbucketAvatar username="evilrabbit" size="md" />
-
-  ```tsx
-<GitHubAvatar username="rauchg" size="md" />
-  <GitLabAvatar username="leerob" size="md" />
-  <BitbucketAvatar username="evilrabbit" size="md" />
-  ```
-</ComponentPreview>
-
-```tsx
-{
-  /* GitHub — 徽章：深色圆角，GitHub 图标 */
-}
-<GitHubAvatar username="rauchg" size="md" />;
-
-{
-  /* GitLab — 徽章：#6b4fbb 紫色，GitLab 图标 */
-}
-<GitLabAvatar username="leerob" size="md" />;
-
-{
-  /* Bitbucket — 徽章：#0052cc 蓝色，Bitbucket 图标 */
-}
-<BitbucketAvatar username="evilrabbit" size="md" />;
-```
-
-| 属性 | 类型 | 默认值 | 描述 |
-| ---------- | ------------ | ------- | ---------------------------------- |
-| `username` | `string` | — | 平台用户名 / 工作区别名 (slug) |
-| `size` | `AvatarSize` | `"sm"` | 尺寸预设 |
-
----
-
-## 带有状态图标的头像 (Avatar with Status Icon)
-
-`AvatarWithIcon` 在右下角添加了一个小型徽章。适用于在线状态指示、角色标识或验证标记。
+单行代码生成的头像，自动从平台 CDN 获取图片，并在左下角显示**平台标志徽章**。
 
 <ComponentPreview>
-  <AvatarWithIcon
-    alt="rauchg"
-    fallback="GR"
-    icon={<span className="block h-2 w-2 rounded-full bg-green-500" />}
-    iconBackground="bg-background"
-    size="md"
-  />
-
-  ```tsx
-<AvatarWithIcon
-    alt="rauchg"
-    fallback="GR"
-    icon={<span className="block h-2 w-2 rounded-full bg-green-500" />}
-    iconBackground="bg-background"
-    size="md"
-  />
-  ```
+  <AvatarGitPlatformDemo />
 </ComponentPreview>
 
-```tsx
-<AvatarWithIcon
-  src="https://avatar.vercel.sh/rauchg"
-  alt="rauchg"
-  icon={<span className="block h-2 w-2 rounded-full bg-green-500" />}
-  iconBackground="bg-background"
-  size="md"
-/>
-```
-
-| 属性 | 类型 | 默认值 | 描述 |
-| ---------------- | ------------ | ----------------- | ------------------------------- |
-| `icon` | `ReactNode` | — | 徽章中的图标元素 |
-| `iconBackground` | `string` | `"bg-background"` | 徽章的 Tailwind 背景类名 |
-| `src` | `string` | — | 头像图片 URL |
-| `alt` | `string` | `"Avatar"` | 替代文本 |
-| `fallback` | `string` | 自动首字母 | 图片失败时的回退文字 |
-| `size` | `AvatarSize` | `"md"` | 尺寸预设 |
+| 属性       | 类型         | 默认值  | 描述                           |
+| ---------- | ------------ | ------- | ------------------------------ |
+| `username` | `string`     | —       | 平台用户名 / 工作区别名 (slug) |
+| `size`     | `AvatarSize` | `"sm"`  | 尺寸预设                       |
 
 ---
 
-## 生成式头像 (DiceBear)
+## 带状态图标的头像 (Avatar with Status Icon)
 
-通过 [DiceBear](https://www.dicebear.com/) 程序化生成的头像 — 对于相同的 `seed` 是确定性的。无需安装附加 npm 包。
+`AvatarWithIcon` 在右下角添加一个小徽章。这通常非常适用于在线状态指示器、角色徽章或验证标记。
 
-<ComponentPreview className="gap-4">
-  <DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
-  <DiceBearAvatar
-    seed="user@example.com"
-    avatarStyle="pixel-art"
-    options={{ radius: 50 }}
-    size="md"
-  />
-  <DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
-  <DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
-
-  ```tsx
-<DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
-  <DiceBearAvatar
-    seed="user@example.com"
-    avatarStyle="pixel-art"
-    options={{ radius: 50 }}
-    size="md"
-  />
-  <DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
-  <DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
-  ```
+<ComponentPreview>
+  <AvatarWithIconDemo />
 </ComponentPreview>
 
-```tsx
-<DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
+| 属性             | 类型         | 默认值            | 描述                            |
+| ---------------- | ------------ | ----------------- | ------------------------------- |
+| `icon`           | `ReactNode`  | —                 | 徽章中的图标元素                |
+| `iconBackground` | `string`     | `"bg-background"` | 徽章的 Tailwind 背景类名        |
+| `src`            | `string`     | —                 | 头像图片 URL                    |
+| `alt`            | `string`     | `"Avatar"`        | 替代文本 (Alt Text)             |
+| `fallback`       | `string`     | 自动首字母        | 图片加载失败时的回退内容        |
+| `size`           | `AvatarSize` | `"md"`            | 尺寸预设                        |
 
-<DiceBearAvatar
-  seed="user@example.com"
-  avatarStyle="pixel-art"
-  options={{ radius: 50 }}
-  size="md"
-/>
+---
 
-<DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
+## 生成头像 (DiceBear Generated)
 
-<DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
-```
+通过 [DiceBear](https://www.dicebear.com/) 过程化生成的头像 — 对于相同的 `seed`，生成结果是确定性的。无需安装额外的 npm 包。
 
-| 属性 | 类型 | 默认值 | 描述 |
-| ------------- | ---------------------------------- | ------------------ | ------------------------------------------- |
-| `seed` | `string` | — | 确定性种子 (用户名、邮箱、UUID 等) |
-| `avatarStyle` | `DiceBearStyle` | `"bottts-neutral"` | 头像集合样式 |
-| `options` | `Record<string, string \| number>` | `{}` | 额外的 DiceBear 查询参数 |
-| `size` | `AvatarSize` | `"md"` | 尺寸预设 |
+<ComponentPreview>
+  <DiceBearAvatarDemo />
+</ComponentPreview>
+
+| 属性          | 类型                               | 默认值             | 描述                                    |
+| ------------- | ---------------------------------- | ------------------ | --------------------------------------- |
+| `seed`        | `string`                           | —                  | 确定性种子 (用户名，电子邮件，UUID 等) |
+| `avatarStyle` | `DiceBearStyle`                    | `"bottts-neutral"` | 头像主题样式系列                        |
+| `options`     | `Record<string, string \| number>` | `{}`               | 额外的 DiceBear URL 查询参数            |
+| `size`        | `AvatarSize`                       | `"md"`             | 尺寸预设                                |
 
 <Tip>
   对系统/机器人实体使用 `bottts-neutral`；对人类占位符使用 `avataaars` 或 `lorelei`；对匿名/访客会话使用 `fun-emoji`。
+</Tip>
+
+---
+
+## 智能悬停头像组 (Smart Avatar Group)
+
+`AvatarSmartGroup` 是一个动态的动画头像堆叠组件，由 `framer-motion` 驱动。它可以在悬停或展开组时优雅地显示隐藏的头像。
+
+<ComponentPreview>
+  <AvatarSmartGroupDemo />
+</ComponentPreview>
+
+| 属性                | 类型                                            | 默认值                 | 描述                                                                          |
+| ------------------- | ----------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------- |
+| `avatars`           | `{ src: string; fallback: string; alt: string; }[]` | —                  | 包含图像来源和回退信息的头像对象数组                                            |
+| `maxVisible`        | `number`                                        | `3`                    | 组件处于堆叠状态时可直接看到的最大头像数量                                    |
+| `mode`              | `"expand" \| "stack"`                           | `"stack"`              | 决定布局行为：完全展开或堆叠重叠                                              |
+| `size`              | `"sm" \| "md" \| "lg"`                          | `"md"`                 | 单个头像的尺寸预设                                                            |
+| `onAvatarClick`     | `(avatar) => void`                              | `undefined`            | 可选事件处理程序，点击单个头像时触发                                          |
+
+<Tip>
+  将鼠标悬停在堆叠组件上，或者将 \`mode\` 属性更改为 \`expand\`，可以看到隐藏配置文件的平滑展开动画。
 </Tip>
 
 ---

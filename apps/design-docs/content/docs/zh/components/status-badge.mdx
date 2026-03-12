@@ -3,6 +3,33 @@ title: 状态徽章 (StatusBadge)
 description: 两部分组成的状态指示徽章，包含左右标签、图标，并支持基于状态的着色方案。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <StatusBadgeDemo />
+
+```tsx title="status-badge-demo.tsx"
+"use client";
+
+import { StatusBadge } from "@nebutra/ui/primitives";
+import { ShieldCheck, XCircle } from "lucide-react";
+
+export function StatusBadgeDemo() {
+    return (
+        <StatusBadge
+            leftIcon={ShieldCheck}
+            rightIcon={XCircle}
+            leftLabel="Protection"
+            rightLabel="SSO disabled"
+            status="success"
+        />
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `StatusBadge` 通过细垂直分隔线显示两个标签。左侧为加粗字体（主要标签），右侧为柔和/调淡字体（次要标签）。每个标签前都可以添加可选图标，其颜色会根据 `status` 属性自动调整。

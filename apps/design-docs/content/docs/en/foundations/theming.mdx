@@ -12,6 +12,8 @@ The theming layer controls how design tokens are delivered to components at runt
 
 Tokens originate in `default.ts` (Primer baseline), are optionally overridden in `brand.ts` via `BrandOverrides`, and the marketing extension lives in `marketing.ts`.
 
+<ThemeColorsDemo />
+
 ## Application Theming
 
 ### `createTheme(mode, overrides?)`
@@ -72,6 +74,8 @@ function createTheme(
 | `typography.fontFamily.display` | `string` | Display / hero font stack |
 | `radii` | `Partial<typeof defaultTheme.radii>` | Border radius overrides |
 | `shadows` | `Record<string, string>` | Named shadow additions |
+
+<BrandOverridesDemo />
 
 ### Pre-built Themes
 
@@ -141,6 +145,8 @@ function ThemeToggle() {
 | `mode` | `"light" \| "dark"` | Active color mode |
 | `setMode` | `(mode: "light" \| "dark") => void` | Imperatively switch modes |
 | `theme` | `DefaultTheme` | Full resolved theme object |
+
+<ThemeSwitcherDemo />
 
 ## Marketing Token Injection
 
@@ -229,6 +235,8 @@ See the [Color foundation](/foundations/color) page for gradient and effect toke
 | `marketingZIndex.modal` | 1200 | Modals / Dialogs |
 | `marketingZIndex.toast` | 1300 | Toasts / Notifications |
 | `marketingZIndex.tooltip` | 1400 | Tooltips |
+
+<ZIndexDemo />
 
 ## Do / Don't
 

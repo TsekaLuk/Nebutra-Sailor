@@ -58,13 +58,11 @@ import { Calendar, RangeCalendar, today, getLocalTimeZone } from "@nebutra/ui/pr
 ### 最小/最大日期限制 (Min/Max Constraints)
 
 <ComponentPreview className="min-h-[350px] flex justify-center items-center">
-    <Calendar
-    minValue={today(getLocalTimeZone()).subtract({ months: 1 })}
-    maxValue={today(getLocalTimeZone()).add({ months: 1 })}
-    className="rounded-xl shadow-sm border border-border"
-  />
+    <CalendarMinMaxDemo />
 
   ```tsx
+import { Calendar, today, getLocalTimeZone } from "@nebutra/ui/primitives";
+
 <Calendar
   minValue={today(getLocalTimeZone()).subtract({ months: 1 })}
   maxValue={today(getLocalTimeZone()).add({ months: 1 })}
@@ -76,12 +74,11 @@ import { Calendar, RangeCalendar, today, getLocalTimeZone } from "@nebutra/ui/pr
 ### 周末不可选 (Weekends Unavailable)
 
 <ComponentPreview className="min-h-[350px] flex justify-center items-center">
-    <Calendar
-    isDateUnavailable={(date) => isWeekend(date, "en-US")}
-    className="rounded-xl shadow-sm border border-border"
-  />
+    <CalendarUnavailableDemo />
 
   ```tsx
+import { Calendar, isWeekend } from "@nebutra/ui/primitives";
+
 <Calendar
   isDateUnavailable={(date) => isWeekend(date, "en-US")}
   className="rounded-xl shadow-sm border border-border"

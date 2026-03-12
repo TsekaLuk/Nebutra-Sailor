@@ -6,34 +6,32 @@ description: "Floating content container anchored to a trigger element, built on
 ## Demo
 
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <Popover>
-    <PopoverTrigger asChild>
-      <Button variant="outline">Open Popover</Button>
-    </PopoverTrigger>
-    <PopoverContent className="w-72">
-      <div className="space-y-2">
-        <h4 className="font-medium leading-none">Dimensions</h4>
-        <p className="text-sm text-muted-foreground">
-          Set the dimensions for the layer.
-        </p>
-      </div>
-    </PopoverContent>
-  </Popover>
+  <BasePopoverDemo />
 
   ```tsx
-<Popover>
-    <PopoverTrigger asChild>
-      <Button variant="outline">Open Popover</Button>
-    </PopoverTrigger>
-    <PopoverContent className="w-72">
-      <div className="space-y-2">
-        <h4 className="font-medium leading-none">Dimensions</h4>
-        <p className="text-sm text-muted-foreground">
-          Set the dimensions for the layer.
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+
+export default function BasePopoverDemo() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Show Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent className="max-w-[300px] text-sm space-y-2" side="top">
+        <p className="font-medium">Premium Plan</p>
+        <p className="text-muted-foreground">
+          Advanced analytics provides deeper insights into your data, including trends, predictions, and detailed user behavior.
         </p>
-      </div>
-    </PopoverContent>
-  </Popover>
+        <p className="flex items-center space-x-1">
+          <Badge variant="destructive" size="sm">Note!</Badge>
+          <span className="text-xs text-muted-foreground">Plan upgrade is required.</span>
+        </p>
+      </PopoverContent>
+    </Popover>
+  )
+}
   ```
 </ComponentPreview>
 

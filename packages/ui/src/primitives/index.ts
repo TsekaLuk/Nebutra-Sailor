@@ -76,7 +76,17 @@ export {
   type CheckboxGroupProps,
 } from "./checkbox-group";
 
-export { Combobox, type ComboboxProps, type ComboboxOption } from "./combobox";
+export {
+  Combobox,
+  ComboboxRoot,
+  ComboboxInput,
+  ComboboxOptionItem,
+  ComboboxEmpty,
+  ComboboxGroupSub,
+  ComboboxSeparator,
+  type ComboboxProps,
+  type ComboboxOption
+} from "./combobox";
 
 export {
   Dialog,
@@ -202,6 +212,7 @@ export * from "./confetti";
 
 // Phase 8: Advanced Media & Mockups
 export * from "./iphone-mockup";
+export * from "./macbook-pro";
 export * from "./safari";
 export * from "./terminal";
 export * from "./video-player";
@@ -222,7 +233,7 @@ export * from "./drawer";
 export * from "./hover-card";
 export * from "./input-otp";
 export * from "./menubar";
-export * from "./menu";
+
 export * from "./navigation-menu";
 export * from "./popover";
 export * from "./progress";
@@ -239,6 +250,7 @@ export * from "./textarea";
 export * from "./hex-grid";
 export * from "./warp-background";
 export * from "./stars-canvas";
+export * from "./animated-circular-progress-bar";
 export * from "./theme-switcher";
 export * from "./apple-liquid-glass-switcher";
 export * from "./interactive-frosted-glass-card";
@@ -278,3 +290,6 @@ export * from "./scroll-velocity";
 export * from "./tree";
 export * from "./wave-animation";
 export * from "./x-post-card";
+export * from "./base-badge";
+export * from "./base-button";
+export * from "./badge-1";

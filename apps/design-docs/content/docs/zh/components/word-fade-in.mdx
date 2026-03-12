@@ -3,6 +3,30 @@ title: "单词淡入 (Word Fade In)"
 description: "由 Framer Motion 驱动的逐词交错淡入动画。为大标题、名言和欢迎消息提供优雅的揭示效果。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <WordFadeInDemo />
+
+```tsx title="word-fade-in-demo.tsx"
+import { WordFadeIn } from "@nebutra/ui/primitives";
+
+export default function WordFadeInDemo() {
+    return (
+        <div className="flex h-[300px] items-center justify-center">
+            <WordFadeIn
+                words="Take your time focusing on each word"
+                delay={0.15}
+                className="text-center text-4xl font-bold"
+            />
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

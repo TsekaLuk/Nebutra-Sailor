@@ -510,10 +510,7 @@ export const Button4Demo = dynamic(
   { ssr: false },
 );
 
-export const Menu3Demo = dynamic(
-  () => import("./menu-3-demo").then((m) => ({ default: m.Menu3Demo })),
-  { ssr: false },
-);
+
 
 export const Calendar4Demo = dynamic(
   () => import("./calendar-4-demo").then((m) => ({ default: m.Calendar4Demo })),
@@ -755,10 +752,7 @@ export const Input5Demo = dynamic(
   { ssr: false },
 );
 
-export const Menu2Demo = dynamic(
-  () => import("./menu-2-demo").then((m) => ({ default: m.Menu2Demo })),
-  { ssr: false },
-);
+
 
 export const ToggleGroupDemo = dynamic(
   () => import("./toggle-group-demo").then((m) => ({ default: m.ToggleGroupDemo })),
@@ -800,10 +794,17 @@ export const ProgressDemo = dynamic(
   { ssr: false },
 );
 
-export const MenuDemo = dynamic(
-  () => import("./menu-demo").then((m) => ({ default: m.MenuDemo })),
-  { ssr: false },
+export const Progress1Demo = dynamic(
+  () => import("./progress-1-demo").then((m) => ({ default: m.Progress1Demo })),
+  { ssr: false }
 );
+
+export const AnimatedCircularProgressBarDemo = dynamic(
+  () => import("./animated-circular-progress-bar-demo").then((m) => ({ default: m.AnimatedCircularProgressBarDemo })),
+  { ssr: false }
+);
+
+
 
 export const Combobox7Demo = dynamic(
   () => import("./combobox-7-demo").then((m) => ({ default: m.Combobox7Demo })),
@@ -905,6 +906,21 @@ export const Tabs2Demo = dynamic(
   { ssr: false },
 );
 
+export const Tabs4Demo = dynamic(
+  () => import("./tabs-4-demo").then((m) => ({ default: m.Tabs4Demo })),
+  { ssr: false },
+);
+
+export const Tooltip4Demo = dynamic(
+  () => import("./tooltip-4-demo").then((m) => ({ default: m.Tooltip4Demo })),
+  { ssr: false },
+);
+
+export const Tooltip5Demo = dynamic(
+  () => import("./tooltip-5-demo").then((m) => ({ default: m.Tooltip5Demo })),
+  { ssr: false },
+);
+
 export const Input3Demo = dynamic(
   () => import("./input-3-demo").then((m) => ({ default: m.Input3Demo })),
   { ssr: false },
@@ -982,5 +998,177 @@ export const XPostCardDemo = dynamic(
 
 export const BookDemo = dynamic(
   () => import("./book-demo").then((m) => ({ default: m.BookDemo })),
+  { ssr: false },
+);
+
+// Auto-injected missing components
+
+export const AgentPlanDemo = dynamic(
+  () => import("./agent-plan-demo").then((m) => ({ default: m.AgentPlanDemo })),
+  { ssr: false },
+);
+
+export const AnimatedHikeCardDemo = dynamic(
+  () => import("./animated-hike-card-demo").then((m) => ({ default: m.AnimatedHikeCardDemo })),
+  { ssr: false },
+);
+
+export const AssistedPasswordConfirmationDemo = dynamic(
+  () => import("./assisted-password-confirmation-demo").then((m) => ({ default: m.AssistedPasswordConfirmationDemo })),
+  { ssr: false },
+);
+
+export const AwardsDemo = dynamic(
+  () => import("./awards-demo").then((m) => ({ default: m.AwardsDemo })),
+  { ssr: false },
+);
+
+export const CalendarPickerDemo = dynamic(
+  () => import("./calendar-picker-demo").then((m) => ({ default: m.CalendarPickerDemo })),
+  { ssr: false },
+);
+
+export const CodeBlockDemo = dynamic(
+  () => import("./code-block-demo").then((m) => ({ default: m.CodeBlockDemo })),
+  { ssr: false },
+);
+
+export const ColorBadgeDemo = dynamic(
+  () => import("./color-badge-demo").then((m) => ({ default: m.ColorBadgeDemo })),
+  { ssr: false },
+);
+
+export const Badge1Demo = dynamic(
+  () => import("./badge-1-demo").then((m) => ({ default: m.Badge1Demo })),
+  { ssr: false },
+);
+
+export const DisplayCardsDemo = dynamic(
+  () => import("./display-cards-demo").then((m) => ({ default: m.DisplayCardsDemo })),
+  { ssr: false },
+);
+
+export const DitheringBackgroundDemo = dynamic(
+  () => import("./dithering-background-demo").then((m) => ({ default: m.DitheringBackgroundDemo })),
+  { ssr: false },
+);
+
+export const DitheringShaderDemo = dynamic(
+  () => import("./dithering-shader-demo").then((m) => ({ default: m.DitheringShaderDemo })),
+  { ssr: false },
+);
+
+export const DottedMapDemo = dynamic(
+  () => import("./dotted-map-demo").then((m) => ({ default: m.DottedMapDemo })),
+  { ssr: false },
+);
+
+export const DottedWorldMapDemo = dynamic(
+  () => import("./dotted-world-map-demo").then((m) => ({ default: m.DottedWorldMapDemo })),
+  { ssr: false },
+);
+
+export const EntityDemo = dynamic(
+  () => import("./entity-demo").then((m) => ({ default: m.EntityDemo })),
+  { ssr: false },
+);
+
+export const FeatureArrowCardDemo = dynamic(
+  () => import("./feature-arrow-card-demo").then((m) => ({ default: m.FeatureArrowCardDemo })),
+  { ssr: false },
+);
+
+export const FeatureCheckItemDemo = dynamic(
+  () => import("./feature-check-item-demo").then((m) => ({ default: m.FeatureCheckItemDemo })),
+  { ssr: false },
+);
+
+export const FeatureIconItemDemo = dynamic(
+  () => import("./feature-icon-item-demo").then((m) => ({ default: m.FeatureIconItemDemo })),
+  { ssr: false },
+);
+
+export const GithubCalendarDemo = dynamic(
+  () => import("./github-calendar-demo").then((m) => ({ default: m.GithubCalendarDemo })),
+  { ssr: false },
+);
+
+export const GithubInlineDiffDemo = dynamic(
+  () => import("./github-inline-diff-demo").then((m) => ({ default: m.GithubInlineDiffDemo })),
+  { ssr: false },
+);
+
+export const GrainGradientBackgroundDemo = dynamic(
+  () => import("./grain-gradient-background-demo").then((m) => ({ default: m.GrainGradientBackgroundDemo })),
+  { ssr: false },
+);
+
+export const GridFeatureCardDemo = dynamic(
+  () => import("./grid-feature-card-demo").then((m) => ({ default: m.GridFeatureCardDemo })),
+  { ssr: false },
+);
+
+export const GridPatternCardDemo = dynamic(
+  () => import("./grid-pattern-card-demo").then((m) => ({ default: m.GridPatternCardDemo })),
+  { ssr: false },
+);
+
+export const HeroPopoverDemo = dynamic(
+  () => import("./hero-popover-demo").then((m) => ({ default: m.HeroPopoverDemo })),
+  { ssr: false },
+);
+
+export const HeroSelectDemo = dynamic(
+  () => import("./hero-select-demo").then((m) => ({ default: m.HeroSelectDemo })),
+  { ssr: false },
+);
+
+export const HeroSkeletonDemo = dynamic(
+  () => import("./hero-skeleton-demo").then((m) => ({ default: m.HeroSkeletonDemo })),
+  { ssr: false },
+);
+
+export const HighlighterDemo = dynamic(
+  () => import("./highlighter-demo").then((m) => ({ default: m.HighlighterDemo })),
+  { ssr: false },
+);
+
+export const InfiniteSliderDemo = dynamic(
+  () => import("./infinite-slider-demo").then((m) => ({ default: m.InfiniteSliderDemo })),
+  { ssr: false },
+);
+
+export const IntroductionDemo = dynamic(
+  () => import("./introduction-demo").then((m) => ({ default: m.IntroductionDemo })),
+  { ssr: false },
+);
+
+export const LightRaysDemo = dynamic(
+  () => import("./light-rays-demo").then((m) => ({ default: m.LightRaysDemo })),
+  { ssr: false },
+);
+
+export const MaterialDemo = dynamic(
+  () => import("./material-demo").then((m) => ({ default: m.MaterialDemo })),
+  { ssr: false },
+);
+
+export const NoisePatternCardDemo = dynamic(
+  () => import("./noise-pattern-card-demo").then((m) => ({ default: m.NoisePatternCardDemo })),
+  { ssr: false },
+);
+
+export const ProgressiveBlurDemo = dynamic(
+  () => import("./progressive-blur-demo").then((m) => ({ default: m.ProgressiveBlurDemo })),
+  { ssr: false },
+);
+
+export const ScrollVelocityDemo = dynamic(
+  () => import("./scroll-velocity-demo").then((m) => ({ default: m.ScrollVelocityDemo })),
+  { ssr: false },
+);
+
+export const SidebarDemo = dynamic(
+  () => import("./sidebar-demo").then((m) => ({ default: m.SidebarDemo })),
   { ssr: false },
 );

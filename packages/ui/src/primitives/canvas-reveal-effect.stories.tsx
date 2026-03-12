@@ -46,7 +46,7 @@ export const BlueViolet: Story = {
           [139, 92, 246],
         ]}
         dotSize={3}
-        containerClassName="bg-slate-950"
+        containerClassName="bg-background"
       />
     </div>
   ),

@@ -14,7 +14,7 @@ export interface ReactionChipProps {
   /** Available emoji options */
   emojis?: string[];
   /** Currently selected emoji */
-  selected?: string;
+  selected?: string | undefined;
   /** Additional CSS classes */
   className?: string;
 }

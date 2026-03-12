@@ -4,21 +4,14 @@ description: "基于 Radix UI 构建的下拉选择控件，具有完善的键�
 ---
 
 
+import { SelectDemo } from "@/components/previews/select-demo";
+import { Select2Demo } from "@/components/previews/select-2-demo";
+import { Select3Demo } from "@/components/previews/select-3-demo";
+import { ComponentPreview } from "@/components/component-preview";
+
 <ComponentPreview className="min-h-[300px] flex items-start justify-center pt-8">
-  <Select>
-    <SelectTrigger className="w-[200px]">
-      <SelectValue placeholder="选择一种水果 (Select a fruit)" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectGroup>
-        <SelectLabel>水果 (Fruits)</SelectLabel>
-        <SelectItem value="apple">苹果 (Apple)</SelectItem>
-        <SelectItem value="banana">香蕉 (Banana)</SelectItem>
-        <SelectItem value="orange">橙子 (Orange)</SelectItem>
-        <SelectItem value="grape">葡萄 (Grape)</SelectItem>
-      </SelectGroup>
-    </SelectContent>
-  </Select>
+  <SelectDemo />
+
 
   ```tsx
 <Select>
@@ -114,16 +107,7 @@ import {
 ### 受控选择器 (Controlled Select)
 
 <ComponentPreview className="min-h-[300px] flex items-start justify-center pt-8">
-    <Select defaultValue="banana">
-    <SelectTrigger className="w-48">
-      <SelectValue />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="apple">苹果 (Apple)</SelectItem>
-      <SelectItem value="banana">香蕉 (Banana)</SelectItem>
-      <SelectItem value="orange">橙子 (Orange)</SelectItem>
-    </SelectContent>
-  </Select>
+  <SelectDemo />
 
   ```tsx
 <Select defaultValue="banana">
@@ -140,25 +124,7 @@ import {
 </ComponentPreview>
 
 <ComponentPreview className="min-h-[350px] flex items-start justify-center pt-8">
-    <Select>
-    <SelectTrigger className="w-56">
-      <SelectValue placeholder="选择时区 (Select timezone)" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectGroup>
-        <SelectLabel>北美 (North America)</SelectLabel>
-        <SelectItem value="est">东部标准时间 (EST)</SelectItem>
-        <SelectItem value="cst">中部标准时间 (CST)</SelectItem>
-        <SelectItem value="pst">太平洋标准时间 (PST)</SelectItem>
-      </SelectGroup>
-      <SelectSeparator />
-      <SelectGroup>
-        <SelectLabel>欧洲 (Europe)</SelectLabel>
-        <SelectItem value="gmt">格林威治标准时间 (GMT)</SelectItem>
-        <SelectItem value="cet">中央欧洲时间 (CET)</SelectItem>
-      </SelectGroup>
-    </SelectContent>
-  </Select>
+  <Select2Demo />
 
   ```tsx
 <Select>
@@ -186,16 +152,7 @@ import {
 ### 禁用条目 (Disabled Items)
 
 <ComponentPreview className="min-h-[250px] flex items-start justify-center pt-8">
-    <Select>
-    <SelectTrigger className="w-48">
-      <SelectValue placeholder="选择计划 (Select plan)" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="free">免费版 (Free)</SelectItem>
-      <SelectItem value="pro">专业版 (Pro)</SelectItem>
-      <SelectItem value="enterprise" disabled>企业版 (Enterprise) - 联系销售</SelectItem>
-    </SelectContent>
-  </Select>
+  <Select3Demo />
 
   ```tsx
 <Select>
@@ -217,5 +174,3 @@ import {
 - `SelectTrigger` 具有 `role="combobox"` 属性，并带有 `aria-expanded` 和 `aria-haspopup="listbox"`。
 - `SelectContent` 具有 `role="listbox"` 属性。
 - 每个 `SelectItem` 具有 `role="option"` 属性和 `aria-selected`。
-- 完善的键盘导航：使用 `ArrowUp`/`ArrowDown` 导航，使用 `Enter`/`Space` 选择，使用 `Escape` 关闭。
-走

@@ -1,6 +1,61 @@
 ---
-title: Nebutra 设计系统
-description: 带有实时预览的组件库文档。
+title: 介绍
+description: 欢迎来到 Nebutra 设计系统文档。
 ---
 
-欢迎来到 Nebutra 设计系统文档。请在侧边栏中浏览组件。
+欢迎来到 **Nebutra 设计系统**。这是所有 Nebutra SaaS 产品的官方组件库和设计语言，基于 React、Tailwind CSS v4 和 framer-motion 构建。
+
+<Cards>
+  <Card 
+    title="快速开始" 
+    href="/zh/docs/getting-started" 
+    description="在 2 分钟内安装依赖包并配置好您的开发环境。" 
+  />
+  <Card 
+    title="组件画廊" 
+    href="/zh/docs/components" 
+    description="探索我们丰富的高级互动和无障碍组件集合。" 
+  />
+  <Card 
+    title="设计理念" 
+    href="/zh/docs/design-philosophy" 
+    description="了解关于色彩系统、排版层级和动效指南的详细信息。" 
+  />
+  <Card 
+    title="Figma UI 套件" 
+    href="https://figma.com/community" 
+    description="获取我们完整的 Figma 变量和组件变体设计资源。" 
+    external
+  />
+</Cards>
+
+## 为什么选择 Nebutra？
+
+Nebutra 建立在现代前端原生能力之上，以确保最佳的性能和 DX（开发者体验）。
+
+<CardGroup>
+  <Card title="开箱即用的美观" icon={<Sparkles className="text-blue-500" />}>
+    精心打磨的美学设计，包含高级排版、优化的间距，以及开箱即用的无缝暗色模式支持。
+  </Card>
+  <Card title="极致性能" icon={<Zap className="text-yellow-500" />}>
+    针对 React Server Components 进行优化。极小的客户端 JavaScript 开销，Tailwind v4 带来零运行时 CSS 体积。
+  </Card>
+  <Card title="无障碍访问 (a11y)" icon={<UserCircle className="text-green-500" />}>
+    完全符合 WAI-ARIA 标准。严格保障键盘导航和屏幕阅读器支持。
+  </Card>
+  <Card title="复制可用" icon={<FileCode className="text-purple-500" />}>
+    拒绝臃肿的 npm 包，将代码的控制权交还给你。你可以完全控制、调整和微调每一个组件的代码。
+  </Card>
+</CardGroup>
+
+## 快速上手 
+
+准备好开始了吗？直接跳转到演练场，或者通过 CLI 安装。
+
+```bash title="Terminal"
+npm install @nebutra/ui my-project
+```
+
+<Callout type="info">
+  **早期体验者注意事项：** 我们目前处于公开测试阶段。如果您遇到任何视觉细节问题或水合（hydration）错误，请在我们的 GitHub 仓库中提交 issue。
+</Callout>

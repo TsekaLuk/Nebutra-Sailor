@@ -2,30 +2,30 @@
 
 import * as React from "react"
 import NumberFlow, { continuous } from '@number-flow/react'
-import * as RadixSlider from '@radix-ui/react-slider'
+import { Slider as BaseSlider } from "@base-ui-components/react/slider";
 import { cn } from "@nebutra/ui/utils"
 
 export const SliderNumberFlow = React.forwardRef<
-    React.ElementRef<typeof RadixSlider.Root>,
-    React.ComponentPropsWithoutRef<typeof RadixSlider.Root>
+    React.ElementRef<typeof BaseSlider.Root>,
+    React.ComponentPropsWithoutRef<typeof BaseSlider.Root>
 >(({ className, value, ...props }, ref) => (
-    <RadixSlider.Root
+    <BaseSlider.Root
         ref={ref}
         {...(value != null ? { value } : {})}
         className={cn("relative flex h-5 w-full touch-none select-none items-center", className)}
         {...props}
     >
-        <RadixSlider.Track className="relative h-[3px] grow rounded-full bg-neutral-200 dark:bg-neutral-800">
-            <RadixSlider.Range className="absolute h-full rounded-full bg-neutral-900 dark:bg-neutral-50" />
-        </RadixSlider.Track>
-        <RadixSlider.Thumb
+        <BaseSlider.Track className="relative h-[3px] grow rounded-full bg-muted">
+            <BaseSlider.Indicator className="absolute h-full rounded-full bg-primary" />
+        </BaseSlider.Track>
+        <BaseSlider.Thumb
             className="relative block h-5 w-5 rounded-full bg-white shadow-md ring ring-black/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
             aria-label="Slider Value"
         >
-            {value?.[0] != null && (
+            {(Array.isArray(value) ? value[0] : value) != null && (
                 <NumberFlow
                     willChange
-                    value={value[0]}
+                    value={Array.isArray(value) ? value[0] : (value as number)}
                     isolate
                     plugins={[continuous]}
                     opacityTiming={{
@@ -39,8 +39,8 @@ export const SliderNumberFlow = React.forwardRef<
                     className="absolute bottom-8 left-1/2 -translate-x-1/2 text-lg font-semibold"
                 />
             )}
-        </RadixSlider.Thumb>
-    </RadixSlider.Root>
+        </BaseSlider.Thumb>
+    </BaseSlider.Root>
 ))
 
 SliderNumberFlow.displayName = "SliderNumberFlow"

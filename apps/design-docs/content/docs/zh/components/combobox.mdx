@@ -7,9 +7,33 @@ description: "可搜索的选择输入组件，结合了触发按钮和经过过
 <ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
   <ComboboxDemo />
 
-  ```tsx
-<ComboboxDemo />
-  ```
+  ```tsx title="combobox-demo.tsx"
+"use client";
+
+import { useState } from "react";
+import { Combobox } from "@nebutra/ui/primitives";
+
+const frameworks = [
+  { value: "next", label: "Next.js" },
+  { value: "remix", label: "Remix" },
+  { value: "astro", label: "Astro" },
+  { value: "nuxt", label: "Nuxt" },
+];
+
+export function ComboboxDemo() {
+  const [value, setValue] = useState("");
+
+  return (
+    <Combobox
+      options={frameworks}
+      value={value}
+      onChange={setValue}
+      placeholder="Select framework..."
+    />
+  );
+}
+
+```
 </ComponentPreview>
 
 ## 概览 (Overview)

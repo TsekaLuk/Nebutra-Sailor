@@ -127,8 +127,8 @@ function GridPatternSvg({
               strokeWidth="0"
               width={width + 1}
               height={height + 1}
-              x={squareX * width}
-              y={squareY * height}
+              x={(squareX ?? 0) * width}
+              y={(squareY ?? 0) * height}
             />
           ))}
         </svg>

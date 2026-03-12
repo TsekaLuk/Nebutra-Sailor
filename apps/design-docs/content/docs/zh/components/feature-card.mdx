@@ -3,6 +3,38 @@ title: 功能卡片 (FeatureCard)
 description: 带有装饰性角标的卡片容器。由 FeatureCard, FeatureCardHeader 和 FeatureCardContent 组合而成。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <FeatureCardDemo />
+
+```tsx title="feature-card-demo.tsx"
+"use client";
+
+import { FeatureCard, FeatureCardHeader, FeatureCardContent } from "@nebutra/ui/primitives";
+import { Zap } from "lucide-react";
+
+export function FeatureCardDemo() {
+    return (
+        <FeatureCard className="w-80">
+            <FeatureCardHeader
+                icon={Zap}
+                title="Lightning fast"
+                description="Sub-second response times worldwide."
+            />
+            <FeatureCardContent className="p-6">
+                <div className="flex h-24 items-center justify-center rounded bg-muted/20 text-sm text-muted-foreground">
+                    Visual content area
+                </div>
+            </FeatureCardContent>
+        </FeatureCard>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

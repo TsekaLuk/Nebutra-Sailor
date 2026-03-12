@@ -29,6 +29,9 @@ const notoSansSC = Noto_Sans_SC({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
   title: "Nebutra - SaaS Platform",
   description: "Enterprise-grade AI-native SaaS platform",
   robots: {

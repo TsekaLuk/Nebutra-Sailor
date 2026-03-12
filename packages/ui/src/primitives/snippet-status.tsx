@@ -29,8 +29,8 @@ const variant = {
     fill: "fill-gray-1000",
   },
   inverted: {
-    background: "bg-gray-1000",
-    text: "text-[var(--neutral-12)]",
+    background: "bg-muted-foreground",
+    text: "text-foreground",
     fill: "fill-gray-100",
   },
   success: {

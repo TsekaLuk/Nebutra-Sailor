@@ -7,11 +7,11 @@ import { AccordionTrigger, AccordionContent, AccordionItem } from "@nebutra/ui/p
 
 export function Accordion3Demo() {
   return (
-    <NebutraAccordion type="single" collapsible className="w-full">
-    <AccordionItem value="item-1" disabled>
-      <AccordionTrigger>Disabled Section</AccordionTrigger>
-      <AccordionContent>This will not open.</AccordionContent>
-    </AccordionItem>
-  </NebutraAccordion>
+    <NebutraAccordion type="single" className="w-full">
+      <AccordionItem value="item-1" disabled>
+        <AccordionTrigger>Disabled Section</AccordionTrigger>
+        <AccordionContent>This will not open.</AccordionContent>
+      </AccordionItem>
+    </NebutraAccordion>
   );
 }

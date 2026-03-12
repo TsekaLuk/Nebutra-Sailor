@@ -25,12 +25,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: { children: <></> },
   render: () => (
     <CardSpotlight className="h-80 w-80">
       <h2 className="relative z-20 mt-2 text-lg font-bold text-white">
         Hover over this card
       </h2>
-      <p className="relative z-20 mt-4 text-sm text-neutral-300">
+      <p className="relative z-20 mt-4 text-sm text-muted-foreground">
         The spotlight follows your cursor. A canvas dot animation appears on
         hover.
       </p>
@@ -39,6 +40,7 @@ export const Default: Story = {
 };
 
 export const ChecklistContent: Story = {
+  args: { children: <></> },
   render: () => (
     <CardSpotlight className="w-96 p-10">
       <h2 className="relative z-20 text-lg font-bold text-white mb-6">
@@ -54,7 +56,7 @@ export const ChecklistContent: Story = {
         ].map((item) => (
           <div key={item} className="flex items-center gap-3">
             <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-400" />
-            <span className="text-sm text-neutral-300">{item}</span>
+            <span className="text-sm text-muted-foreground">{item}</span>
           </div>
         ))}
       </div>
@@ -63,12 +65,13 @@ export const ChecklistContent: Story = {
 };
 
 export const PurpleSpotlight: Story = {
+  args: { children: <></>, color: "#1a0533", radius: 300 },
   render: () => (
     <CardSpotlight color="#1a0533" radius={300} className="h-80 w-80">
       <h2 className="relative z-20 text-xl font-bold text-white">
         Purple Spotlight
       </h2>
-      <p className="relative z-20 mt-3 text-sm text-neutral-300">
+      <p className="relative z-20 mt-3 text-sm text-muted-foreground">
         Custom color via the `color` prop.
       </p>
     </CardSpotlight>
@@ -76,12 +79,13 @@ export const PurpleSpotlight: Story = {
 };
 
 export const SmallRadius: Story = {
+  args: { children: <></>, radius: 150 },
   render: () => (
     <CardSpotlight radius={150} className="h-80 w-80">
       <h2 className="relative z-20 text-lg font-bold text-white">
         Tight Spotlight
       </h2>
-      <p className="relative z-20 mt-3 text-sm text-neutral-300">
+      <p className="relative z-20 mt-3 text-sm text-muted-foreground">
         radius=150 — spotlight stays close to cursor.
       </p>
     </CardSpotlight>

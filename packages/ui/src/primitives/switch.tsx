@@ -9,14 +9,14 @@ const SwitchContext = createContext<{
   setValue: React.Dispatch<React.SetStateAction<string | null>>;
 } | null>(null);
 
-export interface SwitchProps {
-  children: React.ReactNode;
+export interface SwitchProps extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {
+  children?: React.ReactNode;
   name?: string;
   size?: "small" | "medium" | "large";
   style?: React.CSSProperties;
 }
 
-export const Switch = ({ children, name = "default", size = "medium", style }: SwitchProps) => {
+export const Switch = ({ children, name = "default", size = "medium", style, className, ...props }: SwitchProps) => {
   const [value, setValue] = useState<string | null>(null);
 
   return (
@@ -26,9 +26,12 @@ export const Switch = ({ children, name = "default", size = "medium", style }: S
           "flex bg-background-100 p-1 border border-gray-alpha-400",
           size === "small" && "h-8 rounded-md",
           size === "medium" && "h-10 rounded-md",
-          size === "large" && "h-12 rounded-lg"
+          size === "large" && "h-12 rounded-lg",
+          className
         )}
-        style={style}>
+        style={style}
+        {...props}
+      >
         {React.Children.map(children, (child) =>
           React.cloneElement(child as React.ReactElement<SwitchControlProps>, { size, name }))}
       </div>
@@ -81,7 +84,7 @@ const SwitchControl = ({
       <span
         className={twMerge(clsx(
           "flex items-center justify-center flex-1 cursor-pointer font-medium font-sans duration-150",
-          checked ? "bg-gray-100 text-gray-1000 fill-gray-1000 rounded-sm" : "text-gray-900 hover:text-gray-1000 fill-gray-900 hover:fill-gray-1000",
+          checked ? "bg-muted text-muted-foreground fill-muted-foreground rounded-sm" : "text-foreground hover:text-muted-foreground fill-foreground hover:fill-muted-foreground",
           disabled && "text-gray-800 fill-gray-800",
           !icon && size === "small" && "text-sm px-3",
           !icon && size === "medium" && "text-sm px-3",

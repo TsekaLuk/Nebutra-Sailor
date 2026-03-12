@@ -3,6 +3,33 @@ title: "上下文卡片 (Context Card)"
 description: "悬停或聚焦时显示富内容的悬停卡片。支持顶部、底部、左侧和右侧放置。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <ContextCardDemo />
+
+```tsx title="context-card-demo.tsx"
+"use client";
+
+import { ContextCard } from "@nebutra/ui/primitives";
+
+export function ContextCardDemo() {
+    return (
+        <ContextCard.Trigger
+            content="The Evil Rabbit Jumped over the Fence"
+            side="top"
+        >
+            <span className="cursor-default underline decoration-dotted underline-offset-4">
+                Hover over me
+            </span>
+        </ContextCard.Trigger>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `ContextCard` 是一款基于 Radix Tooltip 构建的悬停激活卡片。与普通提示框不同，它支持任意 `ReactNode` 内容 —— 文本、富标记、图像或链接。它会根据请求侧自动定位并带有动画。

@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 export interface Project {
   slug: string;
   name: string;
@@ -12,6 +14,7 @@ export interface Project {
   highlights?: { value: string; label: string }[];
   architecture?: string;
   story?: string;
+  cover?: string;
   images?: string[];
 }
 
@@ -557,3 +560,14 @@ export const projects: Project[] = [
       "Most graduation projects are CRUD demos\u2014this one is a production-grade ERP system for a real tea enterprise. The system covers the entire tea business lifecycle: production tracking with batch kanban boards, quality control with radar chart scoring, inventory management with automatic alerts, and sales order processing with status flow automation.\n\nBuilt on React + TypeScript + Supabase with PostgreSQL Row-Level Security ensuring data isolation across roles. The 60,000-word thesis documents every design decision across 85-90 pages, with 29 system screenshots, 21 data tables, and 20 code examples. 7 database tables with full RLS policies, 4 user role types, and responsive dark mode UI. Not a demo\u2014a deployable business system.",
   },
 ];
+
+export async function getLocalizedProjects(
+  locale: string,
+): Promise<Project[]> {
+  const t = await getTranslations({ locale, namespace: "projects" });
+  return projects.map((p) => ({
+    ...p,
+    tagline: t(`${p.slug}.tagline`),
+    description: t(`${p.slug}.description`),
+  }));
+}

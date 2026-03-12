@@ -3,6 +3,30 @@ title: 浏览器 (Browser)
 description: Geist 风格的浏览器窗口框架，带有导航按钮、带点击复制功能的地址栏以及灵活的内容区域。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <BrowserMockupDemo />
+
+```tsx title="browser-mockup-demo.tsx"
+import { Browser } from "@nebutra/ui/primitives";
+
+export function BrowserMockupDemo() {
+    return (
+        <div className="w-full max-w-3xl px-4 py-8">
+            <Browser address="nebutra.dev" className="h-[400px]">
+                <div className="flex h-full w-full items-center justify-center bg-muted/50">
+                    <p className="text-muted-foreground">Your SaaS content goes here</p>
+                </div>
+            </Browser>
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `Browser` 渲染一个受 Vercel Geist 设计系统启发的装饰性浏览器框架。它包括：

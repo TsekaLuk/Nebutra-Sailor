@@ -4,12 +4,17 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
 import { AnimateIn } from "@nebutra/ui/components";
-import { projects } from "@/lib/projects";
+import { projects as defaultProjects, type Project } from "@/lib/projects";
 import { WorkGrid } from "./work-grid";
 
-export function SelectedWorks() {
+export function SelectedWorks({
+  projects: projectsProp,
+}: {
+  projects?: Project[];
+}) {
   const t = useTranslations("works");
-  const topProjects = projects.slice(0, 4);
+  const allProjects = projectsProp ?? defaultProjects;
+  const topProjects = allProjects.slice(0, 4);
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-24 border-t border-gray-100 dark:border-gray-800">
@@ -21,7 +26,7 @@ export function SelectedWorks() {
         </AnimateIn>
 
         <AnimateIn preset="fadeUp" delay={0.1} inView>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-8">
+          <h2 className="text-6xl md:text-7xl font-normal tracking-tight text-gray-900 dark:text-white mb-8">
             {t("headline")}
           </h2>
         </AnimateIn>
@@ -31,7 +36,7 @@ export function SelectedWorks() {
             href="/work"
             className="group inline-flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
           >
-            {t("view_all", { count: projects.length })}
+            {t("view_all", { count: allProjects.length })}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </AnimateIn>

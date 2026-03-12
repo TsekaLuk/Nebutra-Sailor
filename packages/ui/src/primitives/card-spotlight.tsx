@@ -27,7 +27,7 @@ export interface CardSpotlightProps extends React.HTMLAttributes<HTMLDivElement>
  * ```tsx
  * <CardSpotlight className="h-96 w-96">
  *   <h2 className="text-xl font-bold text-white">Title</h2>
- *   <p className="text-neutral-300">Description content</p>
+ *   <p className="text-muted-foreground">Description content</p>
  * </CardSpotlight>
  * ```
  */
@@ -58,7 +58,7 @@ export function CardSpotlight({
   return (
     <div
       className={cn(
-        "group/spotlight p-10 rounded-[var(--radius-md)] relative border border-neutral-800 bg-black dark:border-neutral-800",
+        "group/spotlight p-10 rounded-[var(--radius-md)] relative border bg-card",
         className
       )}
       onMouseMove={handleMouseMove}

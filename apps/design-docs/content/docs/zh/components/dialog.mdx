@@ -3,54 +3,11 @@ title: 对话框 (Dialog)
 description: 基于 Radix UI 构建的，用于集中交互的可访问模态覆盖层。
 ---
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <Dialog>
-    <DialogTrigger asChild>
-      <Button>打开对话框 (Open Dialog)</Button>
-    </DialogTrigger>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>编辑个人资料 (Edit Profile)</DialogTitle>
-        <DialogDescription>
-          在这里修改您的个人资料。完成后点击保存。 (Make changes to your profile here. Click save when done.)
-        </DialogDescription>
-      </DialogHeader>
-      <div className="py-4">
-        <p className="text-sm text-muted-foreground">对话框主体内容在此处显示。(Dialog body content goes here.)</p>
-      </div>
-      <DialogFooter>
-        <DialogClose asChild>
-          <Button variant="outline">取消 (Cancel)</Button>
-        </DialogClose>
-        <Button type="submit">保存更改 (Save changes)</Button>
-      </DialogFooter>
-    </DialogContent>
-  </Dialog>
+import { DialogDemo } from "@/components/previews/dialog-demo"
+import { ComponentPreview } from "@/components/component-preview"
 
-  ```tsx
-<Dialog>
-    <DialogTrigger asChild>
-      <Button>打开对话框 (Open Dialog)</Button>
-    </DialogTrigger>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>编辑个人资料 (Edit Profile)</DialogTitle>
-        <DialogDescription>
-          在这里修改您的个人资料。完成后点击保存。 (Make changes to your profile here. Click save when done.)
-        </DialogDescription>
-      </DialogHeader>
-      <div className="py-4">
-        <p className="text-sm text-muted-foreground">对话框主体内容在此处显示。(Dialog body content goes here.)</p>
-      </div>
-      <DialogFooter>
-        <DialogClose asChild>
-          <Button variant="outline">取消 (Cancel)</Button>
-        </DialogClose>
-        <Button type="submit">保存更改 (Save changes)</Button>
-      </DialogFooter>
-    </DialogContent>
-  </Dialog>
-  ```
+<ComponentPreview>
+  <DialogDemo />
 </ComponentPreview>
 
 ## 使用方法 (Usage)
@@ -127,83 +84,7 @@ import {
 | `asChild` | `boolean` | `false` | 将属性合并到直接子元素上 |
 | `children` | `ReactNode` | — | 关闭触发器元素 |
 
-## 示例 (Examples)
 
-### 受控的对话框 (Controlled Dialog)
-
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-    <Dialog>
-    <DialogTrigger asChild>
-      <Button>打开受控对话框 (Open Controlled)</Button>
-    </DialogTrigger>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>受控对话框 (Controlled Dialog)</DialogTitle>
-      </DialogHeader>
-      <p>此对话框通过状态进行控制。 (This dialog is controlled via state.)</p>
-    </DialogContent>
-  </Dialog>
-
-  ```tsx
-<Dialog>
-  <DialogTrigger asChild>
-    <Button>打开受控对话框 (Open Controlled)</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>受控对话框 (Controlled Dialog)</DialogTitle>
-    </DialogHeader>
-    <p>此对话框通过状态进行控制。 (This dialog is controlled via state.)</p>
-  </DialogContent>
-</Dialog>
-```
-</ComponentPreview>
-
-### 确认对话框 (Confirmation Dialog)
-
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-    <Dialog>
-    <DialogTrigger asChild>
-      <Button variant="destructive">删除账户 (Delete Account)</Button>
-    </DialogTrigger>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>您绝对确定吗？ (Are you absolutely sure?)</DialogTitle>
-        <DialogDescription>
-          此操作无法撤销。这将永久删除您的帐户并从我们的服务器中删除您的数据。 (This action cannot be undone. This will permanently delete your account and remove your data from our servers.)
-        </DialogDescription>
-      </DialogHeader>
-      <DialogFooter>
-        <DialogClose asChild>
-          <Button variant="outline">取消 (Cancel)</Button>
-        </DialogClose>
-        <Button variant="destructive">删除 (Delete)</Button>
-      </DialogFooter>
-    </DialogContent>
-  </Dialog>
-
-  ```tsx
-<Dialog>
-  <DialogTrigger asChild>
-    <Button variant="destructive">删除账户 (Delete Account)</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>您绝对确定吗？ (Are you absolutely sure?)</DialogTitle>
-      <DialogDescription>
-        此操作无法撤销。这将永久删除您的帐户并从我们的服务器中删除您的数据。 (This action cannot be undone. This will permanently delete your account and remove your data from our servers.)
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="outline">取消 (Cancel)</Button>
-      </DialogClose>
-      <Button variant="destructive">删除 (Delete)</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
-```
-</ComponentPreview>
 
 ## 可访问性 (Accessibility)
 

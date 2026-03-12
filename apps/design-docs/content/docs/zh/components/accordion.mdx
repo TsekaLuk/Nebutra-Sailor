@@ -6,8 +6,40 @@ description: 可折叠的内容区域，用于逐步披露信息。
 <ComponentPreview>
   <AccordionDemo />
 
-  ```tsx
-<AccordionDemo />
+  ```tsx title="accordion-demo.tsx"
+"use client";
+
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@nebutra/ui/primitives";
+
+export function AccordionDemo() {
+  return (
+    <Accordion type="single" collapsible className="w-full max-w-md">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It comes with default styles matching the design system.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Is it animated?</AccordionTrigger>
+        <AccordionContent>
+          Yes. Animated by default, but can be disabled with CSS.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
   ```
 </ComponentPreview>
 
@@ -66,7 +98,7 @@ import {
 ### 打开多个面板 (Multiple Open Items)
 
 <ComponentPreview className="max-w-[400px]">
-    <Accordion type="multiple" className="w-full">
+    <NebutraAccordion type="multiple" className="w-full">
     <AccordionItem value="item-1">
       <AccordionTrigger>第一节</AccordionTrigger>
       <AccordionContent>第一节的内容。</AccordionContent>
@@ -75,10 +107,10 @@ import {
       <AccordionTrigger>第二节</AccordionTrigger>
       <AccordionContent>第二节的内容。</AccordionContent>
     </AccordionItem>
-  </Accordion>
+  </NebutraAccordion>
 
   ```tsx
-<Accordion type="multiple" className="w-full">
+<NebutraAccordion type="multiple" className="w-full">
   <AccordionItem value="item-1">
     <AccordionTrigger>第一节</AccordionTrigger>
     <AccordionContent>第一节的内容。</AccordionContent>
@@ -87,47 +119,47 @@ import {
     <AccordionTrigger>第二节</AccordionTrigger>
     <AccordionContent>第二节的内容。</AccordionContent>
   </AccordionItem>
-</Accordion>
+</NebutraAccordion>
 ```
 </ComponentPreview>
 
 ### 受控的手风琴 (Controlled Accordion)
 
 <ComponentPreview className="max-w-[400px]">
-    <Accordion type="single" defaultValue="item-1" className="w-full">
+    <NebutraAccordion type="single" defaultValue="item-1" className="w-full">
     <AccordionItem value="item-1">
       <AccordionTrigger>受控面板</AccordionTrigger>
       <AccordionContent>此手风琴组件是受控的。</AccordionContent>
     </AccordionItem>
-  </Accordion>
+  </NebutraAccordion>
 
   ```tsx
-<Accordion type="single" defaultValue="item-1" className="w-full">
+<NebutraAccordion type="single" defaultValue="item-1" className="w-full">
   <AccordionItem value="item-1">
     <AccordionTrigger>受控面板</AccordionTrigger>
     <AccordionContent>此手风琴组件是受控的。</AccordionContent>
   </AccordionItem>
-</Accordion>
+</NebutraAccordion>
 ```
 </ComponentPreview>
 
 ### 禁用的面板 (Disabled Item)
 
 <ComponentPreview className="max-w-[400px]">
-    <Accordion type="single" collapsible className="w-full">
+    <NebutraAccordion type="single" className="w-full">
     <AccordionItem value="item-1" disabled>
       <AccordionTrigger>禁用的区域</AccordionTrigger>
       <AccordionContent>此面板将无法打开。</AccordionContent>
     </AccordionItem>
-  </Accordion>
+  </NebutraAccordion>
 
   ```tsx
-<Accordion type="single" collapsible className="w-full">
+<NebutraAccordion type="single" className="w-full">
   <AccordionItem value="item-1" disabled>
     <AccordionTrigger>禁用的区域</AccordionTrigger>
     <AccordionContent>此面板将无法打开。</AccordionContent>
   </AccordionItem>
-</Accordion>
+</NebutraAccordion>
 ```
 </ComponentPreview>
 
@@ -136,24 +168,24 @@ import {
 基于更小的内边距和文本大小，等同于 `Geist Collapse` 中 `size="small"` 的变体。
 
 <ComponentPreview className="max-w-[400px]">
-    <Accordion type="single" collapsible className="w-full">
+    <NebutraAccordion type="single" className="w-full">
     <AccordionItem value="item-1">
       <AccordionTrigger size="small">紧凑的问题</AccordionTrigger>
       <AccordionContent size="small">
         缩减了内边距的紧凑内容。
       </AccordionContent>
     </AccordionItem>
-  </Accordion>
+  </NebutraAccordion>
 
   ```tsx
-<Accordion type="single" collapsible className="w-full">
+<NebutraAccordion type="single" className="w-full">
   <AccordionItem value="item-1">
     <AccordionTrigger size="small">紧凑的问题</AccordionTrigger>
     <AccordionContent size="small">
       缩减了内边距的紧凑内容。
     </AccordionContent>
   </AccordionItem>
-</Accordion>
+</NebutraAccordion>
 ```
 </ComponentPreview>
 

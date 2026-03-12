@@ -31,7 +31,7 @@ export const Default: Story = {
         <TooltipTrigger asChild>
           <button
             type="button"
-            className="rounded-md border border-[color:var(--neutral-7)] px-3 py-2 text-sm"
+            className="rounded-md border border-border px-3 py-2 text-sm"
           >
             Hover me
           </button>

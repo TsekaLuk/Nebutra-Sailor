@@ -4,8 +4,17 @@ description: "Single-line text input with optional prefix/suffix adornments and 
 ---
 
 
+import { InputDemo } from "@/components/previews/input-demo";
+import { Input2Demo } from "@/components/previews/input-2-demo";
+import { Input3Demo } from "@/components/previews/input-3-demo";
+import { Input4Demo } from "@/components/previews/input-4-demo";
+import { Input5Demo } from "@/components/previews/input-5-demo";
+import { Input6Demo } from "@/components/previews/input-6-demo";
+import { Input7Demo } from "@/components/previews/input-7-demo";
+import { ComponentPreview } from "@/components/component-preview";
+
 <ComponentPreview className="max-w-[350px]">
-  <Input placeholder="Enter value…" />
+  <InputDemo />
 </ComponentPreview>
 
 ## Usage
@@ -37,12 +46,7 @@ import { Input } from "@nebutra/ui"
 ### With Label
 
 <ComponentPreview className="max-w-[350px]">
-  <div className="flex flex-col gap-1.5 w-full">
-    <Label htmlFor="email">
-      Email address
-    </Label>
-    <Input id="email" type="email" placeholder="contact@nebutra.com" />
-  </div>
+  <Input2Demo />
 
   ```tsx
 <div className="flex flex-col gap-1.5 w-full">
@@ -54,23 +58,11 @@ import { Input } from "@nebutra/ui"
   ```
 </ComponentPreview>
 
+
 ### With Error State
 
 <ComponentPreview className="max-w-[350px]">
-  <div className="flex flex-col gap-1.5 w-full">
-    <Label htmlFor="email-err">Email address</Label>
-    <Input
-      id="email-err"
-      type="email"
-      defaultValue="not-an-email"
-      className="border-destructive focus-visible:ring-destructive"
-      aria-invalid="true"
-      aria-describedby="email-error"
-    />
-    <p id="email-error" className="text-xs text-destructive">
-      Please enter a valid email address.
-    </p>
-  </div>
+  <Input4Demo />
 
   ```tsx
 <div className="flex flex-col gap-1.5 w-full">
@@ -97,11 +89,7 @@ import { Input } from "@nebutra/ui"
 Use the `prefix` prop to render a non-interactive icon or node inside the left edge. Clicks on the prefix area pass through to the input (it gets focused).
 
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-  {/* Search icon */}
-  <Input prefix={<span className="text-xs">🔍</span>} placeholder="Search…" />
-
-  {/* Mail icon */}
-  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+  <Input5Demo />
 
   ```tsx
 import { Search, Mail } from "lucide-react"
@@ -126,17 +114,8 @@ Use the `suffix` prop to render a non-interactive label or icon inside the right
   See the [Password Reveal](#password-reveal) example below.
 </Warning>
 
-<ComponentPreview className="max-w-[350px] flex-col gap-4">
-    {/* Domain hint */}
-  <Input suffix={<span className="text-xs">@nebutra.com</span>} placeholder="username" />
-
-  {/* Currency */}
-  <Input
-    prefix={<span className="text-xs">$</span>}
-    suffix={<span className="text-xs font-medium border-l pl-2">USD</span>}
-    type="number"
-    placeholder="0.00"
-  />
+<ComponentPreview className="max-w-[350px]">
+  <Input6Demo />
 
   ```tsx
 {/* Domain hint */}
@@ -161,7 +140,7 @@ Set `clearable` to render a ✕ button whenever the field has a value. The butto
 ### Uncontrolled
 
 <ComponentPreview className="max-w-[350px]">
-    <Input clearable defaultValue="contact@nebutra.com" placeholder="Type to see the × button…" />
+  <Input7Demo />
 
   ```tsx
 <Input clearable defaultValue="contact@nebutra.com" placeholder="Type to see the × button…" />

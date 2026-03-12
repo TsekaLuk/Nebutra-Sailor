@@ -2,11 +2,55 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
-import { cn } from "@nebutra/ui/utils";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
+
+function AuthIndicator() {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return null;
+  }
+
+  if (session?.user) {
+    const initial = session.user.name?.charAt(0).toUpperCase() ?? "?";
+    return (
+      <button
+        type="button"
+        onClick={() => signOut()}
+        className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        aria-label="Sign out"
+        title={`Signed in as ${session.user.name ?? session.user.email}`}
+      >
+        {session.user.image ? (
+          <img
+            src={session.user.image}
+            alt=""
+            className="h-6 w-6 rounded-full"
+          />
+        ) : (
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-200">
+            {initial}
+          </span>
+        )}
+      </button>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => signIn()}
+      className="text-sm text-gray-500 transition-colors hover:text-gray-900 dark:hover:text-white"
+    >
+      Sign in
+    </button>
+  );
+}
 
 export function Header() {
   const t = useTranslations("nav");
@@ -18,17 +62,25 @@ export function Header() {
     { label: t("now"), href: "/now" },
     { label: t("about"), href: "/about" },
     { label: t("links"), href: "/links" },
+    { label: t("soul"), href: "/soul" },
+    { label: t("uses"), href: "/uses" },
+    { label: t("guestbook"), href: "/guestbook" },
   ] as const;
 
   return (
     <header className="relative z-40">
       <div className="mx-auto max-w-7xl px-6 py-8">
-        <nav className="flex items-center justify-between">
+        <nav aria-label="Main navigation" className="flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="font-serif italic text-2xl tracking-tight text-gray-900 dark:text-gray-100"
+            className="flex items-center gap-2 font-serif italic text-2xl tracking-tight text-foreground"
           >
+            <img
+              src="/images/logo-mono.svg"
+              alt=""
+              className="h-6 w-6 dark:invert"
+            />
             Tseka
           </Link>
 
@@ -38,18 +90,20 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                className="group relative text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {item.label}
+                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-foreground transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
             <div className="flex items-center gap-2 ml-2">
               <LanguageSwitcher />
               <ThemeToggle />
+              <AuthIndicator />
             </div>
             <Link
               href="/about#contact"
-              className="rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200"
+              className="rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-gray-800 hover:scale-[1.03] active:scale-[0.97] dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
             >
               {t("contact")}
             </Link>
@@ -59,7 +113,7 @@ export function Header() {
           <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="rounded-md p-2 text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--blue-9)] focus:ring-offset-1 md:hidden"
+            className="rounded-md p-2 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--blue-9)] focus:ring-offset-1 md:hidden"
             onClick={() => setMobileOpen((prev) => !prev)}
           >
             {mobileOpen ? (
@@ -71,36 +125,42 @@ export function Header() {
         </nav>
 
         {/* Mobile dropdown */}
-        <div
-          className={cn(
-            "overflow-hidden transition-[max-height] duration-300 ease-in-out md:hidden",
-            mobileOpen ? "max-h-96" : "max-h-0",
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              className="overflow-hidden md:hidden"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <div className="flex flex-col gap-4 pt-6 pb-4">
+                {NAV_ITEMS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-base text-muted-foreground transition-colors hover:text-foreground"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="flex items-center gap-3 mt-2">
+                  <LanguageSwitcher />
+                  <ThemeToggle />
+                  <AuthIndicator />
+                  <Link
+                    href="/about#contact"
+                    className="w-fit rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {t("contact")}
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
           )}
-        >
-          <div className="flex flex-col gap-4 pt-6 pb-4">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-base text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="flex items-center gap-3 mt-2">
-              <LanguageSwitcher />
-              <ThemeToggle />
-              <Link
-                href="/about#contact"
-                className="w-fit rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200"
-                onClick={() => setMobileOpen(false)}
-              >
-                {t("contact")}
-              </Link>
-            </div>
-          </div>
-        </div>
+        </AnimatePresence>
       </div>
     </header>
   );

@@ -3,6 +3,72 @@ title: CodeBlock
 description: Multi-file tabbed code viewer with syntax highlighting, line highlighting, diff decoration, clickable line references, and language switching.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <CodeBlockDemo />
+
+```tsx title="code-block-demo.tsx"
+import { CodeBlock } from "@nebutra/ui/primitives";
+
+export function CodeBlockDemo() {
+    const codeFiles = [
+        {
+            title: "button.tsx",
+            language: "tsx",
+            code: `import { Button } from "@/components/ui/button"
+
+export function ButtonDemo() {
+  return (
+    <Button variant="default" size="lg">
+      Click me
+    </Button>
+  )
+}`,
+            highlightedLines: [4, 5, 6],
+        },
+        {
+            title: "tailwind.config.ts",
+            language: "typescript",
+            code: `import type { Config } from "tailwindcss"
+
+const config = {
+  darkMode: ["class"],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+  ],
+  prefix: "",
+  theme: {
+    extend: {},
+  },
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config
+
+export default config`,
+            addedLines: [15],
+            removedLines: [11],
+        },
+    ];
+
+    return (
+        <div className="w-full max-w-3xl mx-auto p-8">
+            <CodeBlock
+                files={codeFiles}
+                defaultTitle="button.tsx"
+                showLineNumbers={true}
+                showLanguageSwitcher={true}
+            />
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `CodeBlock` renders a tabbed code viewer with full syntax highlighting powered by `react-syntax-highlighter` (Prism). It auto-detects the language from the file extension, adapts to light/dark mode, and provides copy-to-clipboard on a per-tab basis.

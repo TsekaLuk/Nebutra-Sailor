@@ -3,6 +3,33 @@ title: "Text Loop"
 description: "Cycles through an array of text/content items with smooth Framer Motion slide animations. Ideal for rotating taglines, testimonials, or hero subtitles."
 ---
 
+## Demo
+
+<ComponentPreview>
+  <TextLoopDemo />
+
+```tsx title="text-loop-demo.tsx"
+import { TextLoop } from "@nebutra/ui/primitives";
+
+export default function TextLoopDemo() {
+    return (
+        <div className="flex h-[300px] items-center justify-center">
+            <p className="text-2xl">
+                Built for{" "}
+                <TextLoop interval={1.5} className="font-bold text-primary">
+                    {["speed", "scale", "simplicity"].map((t) => (
+                        <span key={t}>{t}</span>
+                    ))}
+                </TextLoop>
+            </p>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Usage
 
 ```tsx

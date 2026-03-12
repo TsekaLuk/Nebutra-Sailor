@@ -61,7 +61,7 @@ export const SideBySide: Story = {
 
 export const DarkTheme: Story = {
   render: () => (
-    <div className="dark bg-zinc-950 p-12 rounded-xl">
+    <div className="dark bg-background p-12 rounded-xl">
       <div className="w-48">
         <IphoneMockup src="https://picsum.photos/400/860" />
       </div>

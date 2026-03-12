@@ -11,8 +11,8 @@ import { cn } from "../utils/cn";
  * If not defined, fallback to standard Tailwind colors.
  */
 const colorBadgeVariants = {
-  gray: "bg-[var(--neutral-11)] text-white fill-white",
-  "gray-subtle": "bg-[var(--neutral-4)] text-[var(--neutral-12)] fill-gray-900",
+  gray: "bg-muted text-white fill-white",
+  "gray-subtle": "bg-muted text-muted-foreground fill-gray-900",
   blue: "bg-blue-700 text-white fill-white",
   "blue-subtle": "bg-blue-200 text-blue-900 fill-blue-900",
   purple: "bg-purple-700 text-white fill-white",
@@ -28,7 +28,7 @@ const colorBadgeVariants = {
   teal: "bg-teal-700 text-white fill-white",
   "teal-subtle": "bg-teal-300 text-teal-900 fill-teal-900",
   inverted:
-    "bg-[var(--neutral-2)] text-[var(--neutral-12)] fill-gray-100 dark:fill-gray-900",
+    "bg-muted text-muted-foreground fill-gray-100 dark:fill-gray-900",
   trial: "bg-gradient-to-br from-blue-500 to-pink-500 text-white fill-white",
   turbo: "bg-gradient-to-br from-rose-500 to-blue-500 text-white fill-white",
   pill: "bg-background text-foreground fill-foreground border border-border",
@@ -130,15 +130,15 @@ export function ColorBadge({
         >
           {React.isValidElement(icon)
             ? React.cloneElement(
-                icon as React.ReactElement<{ className?: string }>,
-                {
-                  className: cn(
-                    "size-full",
-                    (icon as React.ReactElement<{ className?: string }>).props
-                      .className,
-                  ),
-                },
-              )
+              icon as React.ReactElement<{ className?: string }>,
+              {
+                className: cn(
+                  "size-full",
+                  (icon as React.ReactElement<{ className?: string }>).props
+                    .className,
+                ),
+              },
+            )
             : icon}
         </span>
       )}

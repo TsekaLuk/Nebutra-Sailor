@@ -47,7 +47,7 @@ const badgeVariants = cva(
         inverted: "bg-geist-gray-1000 text-geist-gray-100 fill-geist-gray-100",
         trial: "bg-gradient-to-br from-trial-start to-trial-end text-white fill-white",
         turbo: "bg-gradient-to-br from-turbo-start to-turbo-end text-white fill-white",
-        pill: "bg-background text-foreground fill-foreground !border-gray-alpha-400 dark:!border-neutral-800",
+        pill: "bg-background text-foreground fill-foreground !border-gray-alpha-400 dark:!border-border",
       },
       size: {
         sm: "text-[11px] h-5 px-1.5 tracking-[0.2px] gap-[3px] [&_svg]:h-[11px] [&_svg]:w-[11px]",

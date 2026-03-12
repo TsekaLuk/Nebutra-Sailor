@@ -1,7 +1,7 @@
 import { Badge } from "@nebutra/ui/primitives";
 import { Sparkles } from "lucide-react";
 
-export default function BadgeFeatureTagDemo() {
+export function BadgeFeatureTagDemo() {
   return (
     <div className="flex items-center gap-2">
       <h3 className="text-lg font-medium">AI Generation</h3>

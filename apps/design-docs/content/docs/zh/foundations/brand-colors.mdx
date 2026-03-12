@@ -28,21 +28,21 @@ description: "Complete Nebutra color system — primary blue, accent cyan, neutr
 ```css
 :root {
   /* Brand */
-  --color-brand-blue: #0033FE;
-  --color-brand-cyan: #0BF1C3;
+  --color-brand-blue: #6366f1;
+  --color-brand-cyan: #80ffe0;
 
-  /* Blue scale */
-  --color-blue-50: #f0f4ff;
-  --color-blue-100: #dbe4ff;
-  --color-blue-200: #bac8ff;
-  --color-blue-300: #91a7ff;
-  --color-blue-400: #5c7cfa;
-  --color-blue-500: #0033FE;
-  --color-blue-600: #002ad4;
-  --color-blue-700: #0021ab;
-  --color-blue-800: #001882;
-  --color-blue-900: #000f59;
-  --color-blue-950: #000830;
+  /* Blue scale (Indigo) */
+  --color-blue-50: #eef2ff;
+  --color-blue-100: #e0e7ff;
+  --color-blue-200: #c7d2fe;
+  --color-blue-300: #a5b4fc;
+  --color-blue-400: #818cf8;
+  --color-blue-500: #6366f1;
+  --color-blue-600: #4F46E5;
+  --color-blue-700: #4338ca;
+  --color-blue-800: #3730a3;
+  --color-blue-900: #312e81;
+  --color-blue-950: #1e1b4b;
 
   /* Cyan scale */
   --color-cyan-50: #e6fff8;
@@ -50,7 +50,7 @@ description: "Complete Nebutra color system — primary blue, accent cyan, neutr
   --color-cyan-200: #80ffe0;
   --color-cyan-300: #4dfcd4;
   --color-cyan-400: #1af7c8;
-  --color-cyan-500: #0BF1C3;
+  --color-cyan-500: #80ffe0;
   --color-cyan-600: #09c9a3;
   --color-cyan-700: #07a183;
   --color-cyan-800: #057963;
@@ -61,7 +61,7 @@ description: "Complete Nebutra color system — primary blue, accent cyan, neutr
   --color-success: #22c55e;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
-  --color-info: #0033FE;
+  --color-info: #6366f1;
 }
 ```
 
@@ -92,8 +92,8 @@ description: "Complete Nebutra color system — primary blue, accent cyan, neutr
 import { colors } from "@nebutra/brand"
 
 // Access brand colors programmatically
-colors.blue[500]   // "#0033FE"
-colors.cyan[500]   // "#0BF1C3"
+colors.blue[500]   // "#6366f1"
+colors.cyan[500]   // "#80ffe0"
 colors.neutral[950] // "#020617"
 ```
 
@@ -107,30 +107,38 @@ colors.neutral[950] // "#020617"
 
 | Prohibited | Reason |
 |-----------|--------|
-| Tailwind `sky-500` for brand blue | Sky blue is not Nebutra blue |
+| Tailwind `indigo-*` 或 `blue-*` 作为品牌蓝 | 严禁直接套用，请务必使用全局指定的原生命名 CSS 变量。 |
 | Tailwind `teal-500` for brand cyan | Teal is not Nebutra cyan |
 | Tailwind `gray-*` for neutrals | Nebutra neutrals have a blue undertone |
 | Orange or red as primary action color | Only brand blue is used for primary actions |
 | Cyan as text on light backgrounds | Fails WCAG contrast — use only on dark backgrounds |
 | Brand blue as a flat background fill | Use the brand gradient for hero/CTA surfaces |
-| Any non-brand color for `info` semantic | Info must use brand blue `#0033FE`, not sky/teal |
+| Any non-brand color for `info` semantic | Info must use brand blue `#6366f1`, not sky/teal |
 
 ---
 
+## 不要 （Don't）
+
+不要将 Tailwind 的默认 `bg-secondary` 或变量 `--secondary` 用作组件的弱化背景轨道（例如进度条 Progress、滑块 Sliders 等组件的底轨）。因为在云毓规范中，`--secondary` 被明确映射为了高饱和度的云毓青 `#0BF1C3`。若直接套用，会导致背景轨道呈现出难以直视的赛博亮色，且无法满足无障碍对比度要求。如果需要弱化轨道颜色，请务必使用带透明度的品牌主色（如 `bg-primary/20`）。
+
 ## Do / Don't
 
-**Do** use `blue-500` (`#0033FE`) for all primary interactive elements (buttons, links, focus rings).
+**Do** 始终使用全局变量（如 `bg-primary`、`text-primary` 或自定义色名 `blue-500` 即 `#6366f1`）应用于所有的主交互（如按钮、链接、输入框高光等）。
 
 **Do** use the full 11-step scale for subtle tints, hover states, and dark mode adaptations.
 
-**Do** pair `blue-500` with `cyan-500` exclusively in gradients — this is the brand signature.
+**Do** 将 `blue-500` 与 `cyan-500` 结合起来组构为品牌的专属高定渐变色（Brand Signature）。
 
 **Do** use `neutral-950` as the dark mode page background.
 
+**Don't** 严禁直接在组件代码里写明 `bg-indigo-500` 或是 `bg-blue-500` 等 Tailwind 默认调色盘色系。一切色彩映射都要回源到 `bg-primary` 或者全局的语义变量上，以确保支持一键更替（比如之后出黑夜/暗网特型）。
+
 **Don't** use cyan on white — it fails WCAG contrast.
 
-**Don't** approximate brand colors with Tailwind defaults (`blue-600`, `emerald-400`).
+**Don't** approximate brand colors with Tailwind defaults (`blue-500`, `emerald-400`).
 
 **Don't** introduce new color scales outside the defined blue, cyan, neutral, and semantic palettes.
 
 **Don't** use brand blue as a solid fill where the brand gradient is expected (hero sections, primary CTAs).
+
+**Don't** 不要将 Tailwind 的默认 `bg-secondary` 或变量 `--secondary` 用作组件的弱化背景轨道（例如进度条 Progress、滑块 Sliders 等）。在云毓主题中，`--secondary` 被映射为高饱和度的青色 `#80ffe0`。若直接套用，会导致背景轨道呈现出难以直视的赛博亮色，且大幅破坏无障碍阅读。请务必使用带透明度的品牌主色（如 `bg-primary/20`）作为任何组件的底层轨道。

@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Rss } from "lucide-react";
+import { AsciiText } from "@nebutra/ui";
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -52,6 +53,11 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-100 dark:border-gray-800">
       <div className="mx-auto max-w-7xl px-6 py-12">
+        <div className="mb-16 flex flex-col items-center justify-center opacity-80 mt-8 hidden sm:flex">
+          <div className="text-[var(--color-accent)] overflow-hidden scale-75 md:scale-100 origin-center">
+            <AsciiText text="TSEKA  LUK" className="text-[6px] md:text-[8px] lg:text-[10px]" />
+          </div>
+        </div>
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
           <div className="text-center sm:text-left">
             <p className="text-sm text-gray-400 dark:text-gray-500">
@@ -73,36 +79,36 @@ export function Footer() {
             <a
               href="/rss.xml"
               aria-label={t("rss_label")}
-              className="text-gray-400 transition-colors hover:text-gray-600 dark:hover:text-gray-300"
+              className="group text-gray-400 transition-colors transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-gray-600 dark:hover:text-gray-300"
             >
-              <Rss className="h-4 w-4" />
+              <Rss className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
             </a>
             <a
               href="https://github.com/TsekaLuk"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("github_label")}
-              className="text-gray-400 transition-colors hover:text-gray-600 dark:hover:text-gray-300"
+              className="group text-gray-400 transition-colors transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-gray-600 dark:hover:text-gray-300"
             >
-              <GitHubIcon className="h-4 w-4" />
+              <GitHubIcon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
             </a>
             <a
               href="https://x.com/tseka_luk"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("x_label")}
-              className="text-gray-400 transition-colors hover:text-gray-600 dark:hover:text-gray-300"
+              className="group text-gray-400 transition-colors transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-gray-600 dark:hover:text-gray-300"
             >
-              <XIcon className="h-4 w-4" />
+              <XIcon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
             </a>
             <a
               href="https://linkedin.com/in/tsekaluk"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("linkedin_label")}
-              className="text-gray-400 transition-colors hover:text-gray-600 dark:hover:text-gray-300"
+              className="group text-gray-400 transition-colors transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-gray-600 dark:hover:text-gray-300"
             >
-              <LinkedInIcon className="h-4 w-4" />
+              <LinkedInIcon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
             </a>
           </div>
         </div>

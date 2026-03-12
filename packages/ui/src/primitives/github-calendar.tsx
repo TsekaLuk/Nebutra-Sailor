@@ -157,19 +157,21 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
 
   // Get color based on contribution count
   const getColor = (count: number): string => {
+    const fallback = colors[0] ?? "#ebedf0";
+
     if (thresholds && thresholds.length === colors.length) {
       for (let i = thresholds.length - 1; i >= 0; i--) {
-        if (count >= thresholds[i]) return colors[i];
+        if (count >= (thresholds[i] ?? 0)) return colors[i] ?? fallback;
       }
-      return colors[0];
+      return fallback;
     }
 
     // Default threshold logic
-    if (count === 0) return colors[0];
-    if (count === 1) return colors[1] ?? colors[0];
-    if (count === 2) return colors[2] ?? colors[1] ?? colors[0];
-    if (count === 3) return colors[3] ?? colors[2] ?? colors[1] ?? colors[0];
-    return colors[4] ?? colors[colors.length - 1];
+    if (count === 0) return fallback;
+    if (count === 1) return colors[1] ?? fallback;
+    if (count === 2) return colors[2] ?? colors[1] ?? fallback;
+    if (count === 3) return colors[3] ?? colors[2] ?? colors[1] ?? fallback;
+    return colors[4] ?? colors[colors.length - 1] ?? fallback;
   };
 
   // Format tooltip
@@ -205,6 +207,7 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
 
     weeksArray.forEach((week, weekIndex) => {
       const firstDayOfWeek = week.days[0];
+      if (!firstDayOfWeek) return;
       const month = firstDayOfWeek.getMonth();
 
       if (month !== currentMonth) {

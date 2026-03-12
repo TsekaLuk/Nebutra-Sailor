@@ -74,10 +74,10 @@ export const SingleCard: Story = {
 
 export const InHeroSection: Story = {
   render: () => (
-    <div className="relative flex h-80 w-[500px] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 p-8">
+    <div className="relative flex h-80 w-[500px] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-background to-muted p-8">
       <div className="absolute left-8 top-8">
         <h2 className="text-2xl font-bold text-white">Latest Updates</h2>
-        <p className="mt-1 text-sm text-slate-400">Hover to explore</p>
+        <p className="mt-1 text-sm text-muted-foreground">Hover to explore</p>
       </div>
       <DisplayCards />
     </div>

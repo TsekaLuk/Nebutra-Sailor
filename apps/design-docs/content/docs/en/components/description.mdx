@@ -3,6 +3,28 @@ title: "Description"
 description: "Displays a brief heading and subheading to communicate any additional information or context a user needs to continue."
 ---
 
+## Demo
+
+<ComponentPreview>
+  <DescriptionDemo />
+
+```tsx title="description-demo.tsx"
+import { Description } from "@nebutra/ui/primitives";
+
+export function DescriptionDemo() {
+    return (
+        <Description
+            title="Section Title"
+            content="Data about this section."
+            tooltip="Additional context about what this section refers to."
+        />
+    );
+}
+
+```
+</ComponentPreview>
+
+
 <Note>
   Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-description--docs).
 </Note>

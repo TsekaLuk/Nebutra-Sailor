@@ -3,6 +3,40 @@ title: HeroCard
 description: Beautiful card container from HeroUI with blur effects, press interactions, and flexible slots.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <HeroCardDemo />
+
+```tsx title="hero-card-demo.tsx"
+"use client";
+
+import { HeroCard, HeroCardHeader, HeroCardBody, HeroCardFooter } from "@nebutra/ui/primitives";
+
+export function HeroCardDemo() {
+    return (
+        <HeroCard className="w-72">
+            <HeroCardHeader>
+                <h4 className="font-semibold">Card Title</h4>
+            </HeroCardHeader>
+            <HeroCardBody>
+                <p className="text-sm text-foreground/80">
+                    Make beautiful websites regardless of your design experience.
+                </p>
+            </HeroCardBody>
+            <HeroCardFooter>
+                <button className="text-sm text-primary hover:underline">
+                    Learn more →
+                </button>
+            </HeroCardFooter>
+        </HeroCard>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `HeroCard` wraps [HeroUI's Card](https://www.heroui.com/docs/components/card) component. It supports blur effects, press interactions (renders as a `<button>`), hover animations, and a three-part slot layout (Header / Body / Footer).

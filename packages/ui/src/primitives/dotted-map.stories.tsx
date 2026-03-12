@@ -51,7 +51,7 @@ export const WithMarkers: Story = {
 
 export const CustomColors: Story = {
   render: () => (
-    <div className="h-[300px] w-[600px] bg-zinc-950 rounded-xl p-4">
+    <div className="h-[300px] w-[600px] bg-background rounded-xl p-4">
       <DottedMap
         markers={[
           { lat: 40.7128, lng: -74.006, size: 0.4 },
@@ -59,7 +59,7 @@ export const CustomColors: Story = {
           { lat: 35.6762, lng: 139.6503, size: 0.3 },
         ]}
         markerColor="#00e5ff"
-        className="text-zinc-700"
+        className="text-muted-foreground"
       />
     </div>
   ),

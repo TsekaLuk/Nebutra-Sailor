@@ -1,29 +1,21 @@
 "use client";
 
 import * as React from "react";
-import * as SeparatorPrimitive from "@radix-ui/react-separator";
+import { Separator as BaseSeparator } from "@base-ui-components/react/separator";
 import { cn } from "../utils/cn";
-import { withHtmlProps } from "../utils/primitive-props";
 
-const RadixRoot = withHtmlProps<
-  "div",
-  { decorative?: boolean; orientation?: "horizontal" | "vertical" }
->(SeparatorPrimitive.Root);
+// Base UI natively supports exactOptionalPropertyTypes and doesn't need withHtmlProps.
 
 const Separator = React.forwardRef<
   HTMLDivElement,
-  React.ComponentPropsWithoutRef<"div"> & {
-    decorative?: boolean;
-    orientation?: "horizontal" | "vertical";
-  }
+  React.ComponentPropsWithoutRef<typeof BaseSeparator> & { decorative?: boolean }
 >(
   (
-    { className, orientation = "horizontal", decorative = true, ...props },
+    { className, orientation = "horizontal", decorative: _decorative = true, ...props },
     ref,
   ) => (
-    <RadixRoot
+    <BaseSeparator
       ref={ref}
-      decorative={decorative}
       orientation={orientation}
       className={cn(
         "shrink-0 bg-border",

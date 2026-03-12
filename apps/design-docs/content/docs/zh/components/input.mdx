@@ -3,18 +3,23 @@ title: 输入框 (Input)
 description: 带有可选的前缀/后缀装饰以及内置可清除模式的单行文本输入框。
 ---
 
+import { InputDemo } from "@/components/previews/input-demo";
+import { Input2Demo } from "@/components/previews/input-2-demo";
+import { Input3Demo } from "@/components/previews/input-3-demo";
+import { Input4Demo } from "@/components/previews/input-4-demo";
+import { Input5Demo } from "@/components/previews/input-5-demo";
+import { Input6Demo } from "@/components/previews/input-6-demo";
+import { Input7Demo } from "@/components/previews/input-7-demo";
+import { ComponentPreview } from "@/components/component-preview";
+
 <ComponentPreview className="max-w-[350px]">
-  <Input placeholder="输入内容… (Enter value…)" />
+  <InputDemo />
 </ComponentPreview>
 
 ## 使用方法 (Usage)
 
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-    {/* Search icon */}
-  <Input prefix={<span className="text-xs">🔍</span>} placeholder="搜索… (Search…)" />
-
-  {/* Mail icon */}
-  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+  <Input5Demo />
 
   ```tsx
 import { Input } from "@nebutra/ui"
@@ -26,7 +31,7 @@ import { Input } from "@nebutra/ui"
 ### 基础用法 (Basic)
 
 <ComponentPreview className="max-w-[350px]">
-  <Input placeholder="输入内容… (Enter value…)" />
+  <InputDemo />
 
   ```tsx
 <Input placeholder="输入内容… (Enter value…)" />
@@ -36,12 +41,7 @@ import { Input } from "@nebutra/ui"
 ### 带有标签 (With Label)
 
 <ComponentPreview className="max-w-[350px]">
-  <div className="flex flex-col gap-1.5 w-full">
-    <Label htmlFor="email">
-      电子邮箱地址 (Email address)
-    </Label>
-    <Input id="email" type="email" placeholder="contact@nebutra.com" />
-  </div>
+  <Input2Demo />
 
   ```tsx
 <div className="flex flex-col gap-1.5 w-full">
@@ -56,20 +56,7 @@ import { Input } from "@nebutra/ui"
 ### 错误状态 (With Error State)
 
 <ComponentPreview className="max-w-[350px]">
-  <div className="flex flex-col gap-1.5 w-full">
-    <Label htmlFor="email-err">电子邮箱地址 (Email address)</Label>
-    <Input
-      id="email-err"
-      type="email"
-      defaultValue="not-an-email"
-      className="border-destructive focus-visible:ring-destructive"
-      aria-invalid="true"
-      aria-describedby="email-error"
-    />
-    <p id="email-error" className="text-xs text-destructive">
-      请输入有效的电子邮箱地址。 (Please enter a valid email address.)
-    </p>
-  </div>
+  <Input4Demo />
 
   ```tsx
 <div className="flex flex-col gap-1.5 w-full">
@@ -96,11 +83,7 @@ import { Input } from "@nebutra/ui"
 使用 `prefix` 属性在输入框左侧边缘渲染一个不可交互的图标或节点。点击前缀区域将穿透到输入框（输入框会获得焦点）。
 
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-  {/* Search icon */}
-  <Input prefix={<span className="text-xs">🔍</span>} placeholder="搜索… (Search…)" />
-
-  {/* Mail icon */}
-  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+  <Input5Demo />
 
   ```tsx
 import { Search, Mail } from "lucide-react"
@@ -126,16 +109,7 @@ import { Search, Mail } from "lucide-react"
 </Warning>
 
 <ComponentPreview className="max-w-[350px] flex-col gap-4">
-    {/* Domain hint */}
-  <Input suffix={<span className="text-xs">@nebutra.com</span>} placeholder="用户名 (username)" />
-
-  {/* Currency */}
-  <Input
-    prefix={<span className="text-xs">$</span>}
-    suffix={<span className="text-xs font-medium border-l pl-2">USD</span>}
-    type="number"
-    placeholder="0.00"
-  />
+  <Input6Demo />
 
   ```tsx
 {/* Domain hint */}
@@ -160,7 +134,7 @@ import { Search, Mail } from "lucide-react"
 ### 非受控用法 (Uncontrolled)
 
 <ComponentPreview className="max-w-[350px]">
-    <Input clearable defaultValue="contact@nebutra.com" placeholder="输入内容以查看 × 按钮… (Type to see the × button…)" />
+  <Input7Demo />
 
   ```tsx
 <Input clearable defaultValue="contact@nebutra.com" placeholder="输入内容以查看 × 按钮… (Type to see the × button…)" />

@@ -4,30 +4,30 @@ import { cn } from "../utils/cn";
 
 export interface LoaderProps {
   variant?:
-    | "circular"
-    | "classic"
-    | "pulse"
-    | "pulse-dot"
-    | "dots"
-    | "typing"
-    | "wave"
-    | "bars"
-    | "terminal"
-    | "text-blink"
-    | "text-shimmer"
-    | "loading-dots";
+  | "circular"
+  | "classic"
+  | "pulse"
+  | "pulse-dot"
+  | "dots"
+  | "typing"
+  | "wave"
+  | "bars"
+  | "terminal"
+  | "text-blink"
+  | "text-shimmer"
+  | "loading-dots";
   size?: "sm" | "md" | "lg";
   text?: string;
   className?: string;
 }
 
 export interface LoaderSizeProps {
-  className?: string;
+  className?: string | undefined;
   size?: "sm" | "md" | "lg";
 }
 
 export interface TextLoaderProps extends LoaderSizeProps {
-  text?: string;
+  text?: string | undefined;
 }
 
 /**

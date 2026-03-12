@@ -1,6 +1,6 @@
 import { Badge } from "@nebutra/ui/primitives";
 
-export default function BadgeTableDemo() {
+export function BadgeTableDemo() {
   return (
     <table>
       <tbody>

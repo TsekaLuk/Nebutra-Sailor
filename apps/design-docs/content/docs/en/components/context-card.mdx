@@ -3,6 +3,33 @@ title: "Context Card"
 description: "Hover card that shows rich content on hover or focus. Supports top, bottom, left, and right placements."
 ---
 
+## Demo
+
+<ComponentPreview>
+  <ContextCardDemo />
+
+```tsx title="context-card-demo.tsx"
+"use client";
+
+import { ContextCard } from "@nebutra/ui/primitives";
+
+export function ContextCardDemo() {
+    return (
+        <ContextCard.Trigger
+            content="The Evil Rabbit Jumped over the Fence"
+            side="top"
+        >
+            <span className="cursor-default underline decoration-dotted underline-offset-4">
+                Hover over me
+            </span>
+        </ContextCard.Trigger>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `ContextCard` is a hover-activated card built on Radix Tooltip. Unlike a plain tooltip, it supports arbitrary `ReactNode` content — text, rich markup, images, or links. It automatically positions itself on the requested side with animation.

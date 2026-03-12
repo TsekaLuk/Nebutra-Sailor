@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import { cn } from "../utils/cn";
@@ -71,7 +71,7 @@ const Ray = ({
         {
           "--ray-left": `${left}%`,
           "--ray-width": `${width}px`,
-        } as CSSProperties
+        } as any // eslint-disable-line @typescript-eslint/no-explicit-any
       }
       initial={{ rotate: rotate }}
       animate={{
@@ -144,7 +144,7 @@ export function LightRays({
           "--light-rays-blur": `${blur}px`,
           "--light-rays-length": length,
           ...style,
-        } as CSSProperties
+        } as any
       }
       {...props}
     >
@@ -156,7 +156,7 @@ export function LightRays({
             {
               background:
                 "radial-gradient(circle at 20% 15%, color-mix(in srgb, var(--light-rays-color) 45%, transparent), transparent 70%)",
-            } as CSSProperties
+            } as any // eslint-disable-line @typescript-eslint/no-explicit-any
           }
         />
         <div
@@ -166,7 +166,7 @@ export function LightRays({
             {
               background:
                 "radial-gradient(circle at 80% 10%, color-mix(in srgb, var(--light-rays-color) 35%, transparent), transparent 75%)",
-            } as CSSProperties
+            } as any // eslint-disable-line @typescript-eslint/no-explicit-any
           }
         />
         {rays.map((ray) => (

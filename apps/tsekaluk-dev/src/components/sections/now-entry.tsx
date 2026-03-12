@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import { getTranslations } from "next-intl/server";
+import { NowEntryView } from "./now-entry-view";
 
 interface NowData {
   date: string;
@@ -8,17 +10,6 @@ interface NowData {
   shipped: string[];
   reading: string[];
 }
-
-const SECTIONS: {
-  key: keyof Omit<NowData, "date">;
-  label: string;
-  previewOnly?: boolean;
-}[] = [
-  { key: "building", label: "Building", previewOnly: true },
-  { key: "shipped", label: "Shipped", previewOnly: true },
-  { key: "thinking", label: "Thinking" },
-  { key: "reading", label: "Reading" },
-];
 
 function getLatestNowEntry(): NowData | null {
   const contentDir = path.join(process.cwd(), "content", "now");
@@ -53,50 +44,24 @@ function getLatestNowEntry(): NowData | null {
   }
 }
 
-function NowSection({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div>
-      <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-        {label}
-      </h2>
-      <ul className="space-y-3">
-        {items.map((item) => (
-          <li
-            key={item}
-            className="border-l-2 border-[var(--color-accent)] pl-4 text-base leading-relaxed text-gray-700 dark:text-gray-300"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export function NowEntry({ preview = false }: { preview?: boolean }) {
+export async function NowEntry({ preview = false }: { preview?: boolean }) {
+  const t = await getTranslations("now");
   const data = getLatestNowEntry();
 
+  const sections: {
+    key: keyof Omit<NowData, "date">;
+    label: string;
+    previewOnly?: boolean;
+  }[] = [
+    { key: "building", label: t("sections.building"), previewOnly: true },
+    { key: "shipped", label: t("sections.shipped"), previewOnly: true },
+    { key: "thinking", label: t("sections.thinking") },
+    { key: "reading", label: t("sections.reading") },
+  ];
+
   if (!data) {
-    return <p className="text-gray-400 dark:text-gray-500">No updates yet.</p>;
+    return <p className="text-gray-400 dark:text-gray-500">{t("no_updates")}</p>;
   }
 
-  const visibleSections = preview
-    ? SECTIONS.filter((s) => s.previewOnly)
-    : SECTIONS;
-
-  return (
-    <div className="space-y-10">
-      <p className="text-sm font-mono text-gray-400 dark:text-gray-500">
-        Last updated: {data.date}
-      </p>
-
-      {visibleSections.map((section) => {
-        const items = data[section.key];
-        if (!items || items.length === 0) return null;
-        return (
-          <NowSection key={section.key} label={section.label} items={items} />
-        );
-      })}
-    </div>
-  );
+  return <NowEntryView data={data} preview={preview} sections={sections} lastUpdatedLabel={t("last_updated")} />;
 }

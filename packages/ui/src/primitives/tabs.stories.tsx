@@ -28,13 +28,13 @@ export const Default: Story = {
           <TabsTrigger value="usage">Usage</TabsTrigger>
           <TabsTrigger value="logs">Logs</TabsTrigger>
         </TabsList>
-        <TabsContent value="overview" className="text-sm text-[color:var(--neutral-11)]">
+        <TabsContent value="overview" className="text-sm text-muted-foreground">
           Overview metrics for the selected tenant.
         </TabsContent>
-        <TabsContent value="usage" className="text-sm text-[color:var(--neutral-11)]">
+        <TabsContent value="usage" className="text-sm text-muted-foreground">
           Daily usage and quota trends.
         </TabsContent>
-        <TabsContent value="logs" className="text-sm text-[color:var(--neutral-11)]">
+        <TabsContent value="logs" className="text-sm text-muted-foreground">
           Recent system events.
         </TabsContent>
       </Tabs>

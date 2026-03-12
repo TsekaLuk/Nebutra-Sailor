@@ -40,14 +40,7 @@ description: "带有独立字符插槽的一次性密码输入框，基于 input
 ## 使用方法 (Usage)
 
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-    <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
-    <InputOTPGroup>
-      <InputOTPSlot index={0} />
-      <InputOTPSlot index={1} />
-      <InputOTPSlot index={2} />
-      <InputOTPSlot index={3} />
-    </InputOTPGroup>
-  </InputOTP>
+    <InputOTPNumericDemo />
 
   ```tsx
 import {
@@ -57,6 +50,7 @@ import {
   InputOTPSeparator,
 } from "@nebutra/ui/primitives"
 ```
+</ComponentPreview>
 
 ## 属性 (Props)
 
@@ -82,7 +76,10 @@ import {
 
 ### 仅限数字 (4 位 PIN 码)
 
-```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+    <InputOTPNumericDemo />
+
+  ```tsx
 import { REGEXP_ONLY_DIGITS } from "input-otp"
 
 <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
@@ -119,4 +116,3 @@ const [otp, setOtp] = useState("")
 - 自动递进：输入后焦点会自动移至下一个插槽。
 - 支持粘贴完整的 OTP 字符串。
 - 输入框上带有描述性的 `aria-label="One-time password"`。
-走

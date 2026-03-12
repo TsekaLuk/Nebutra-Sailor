@@ -3,6 +3,26 @@ title: 日期输入 (DateInput)
 description: 可通过键盘编辑的日期和时间输入框，具有独立的分割字段。由 HeroUI 重新导出。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <DateInputDemo />
+
+```tsx title="date-input-demo.tsx"
+import { DateInput } from "@nebutra/ui/primitives";
+
+export function DateInputDemo() {
+    return (
+        <div className="w-full max-w-sm px-4 py-12 flex justify-center items-center">
+            <DateInput label="Event date" />
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `DateInput` 重新导出了 `@heroui/date-input` 作为直接替代方案。每个日期部分（年、月、日）都是一个可独立编辑的段。由 `@internationalized/date` 提供驱动。

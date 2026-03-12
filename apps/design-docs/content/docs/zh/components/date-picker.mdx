@@ -37,31 +37,11 @@ import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 
 ### 受控模式 (Controlled)
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-    <DatePicker label="日期" defaultValue={parseDate("2024-04-04")} />
-
-  ```tsx
-<DatePicker label="日期" defaultValue={parseDate("2024-04-04")} />
-```
-</ComponentPreview>
+<DatePickerDefaultDemo />
 
 ### 带有最小/最大限制 (With Min/Max)
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-    <DateRangePicker
-    label="时段"
-    minValue={today(getLocalTimeZone())}
-    maxValue={today(getLocalTimeZone()).add({ months: 3 })}
-  />
-
-  ```tsx
-<DateRangePicker
-  label="时段"
-  minValue={today(getLocalTimeZone())}
-  maxValue={today(getLocalTimeZone()).add({ months: 3 })}
-/>
-```
-</ComponentPreview>
+<DatePickerMinMaxDemo />
 
 ### 变体 (Variants)
 

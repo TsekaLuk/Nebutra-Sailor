@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { Accordion as BaseAccordion } from "@base-ui-components/react/accordion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "../utils/cn";
 import { withHtmlProps } from "../utils/primitive-props";
@@ -14,16 +14,16 @@ type AccordionSize = "default" | "small";
 
 // Radix types don't resolve HTML props (className, children) with React 19 +
 // exactOptionalPropertyTypes. Create properly-typed aliases for JSX usage.
-const RadixItem = withHtmlProps<"div">(AccordionPrimitive.Item);
-const RadixHeader = withHtmlProps<"h3">(AccordionPrimitive.Header);
-const RadixTrigger = withHtmlProps<"button">(AccordionPrimitive.Trigger);
-const RadixContent = withHtmlProps<"div">(AccordionPrimitive.Content);
+const RadixItem = withHtmlProps<"div">(BaseAccordion.Item);
+const RadixHeader = withHtmlProps<"h3">(BaseAccordion.Header);
+const RadixTrigger = withHtmlProps<"button">(BaseAccordion.Trigger);
+const RadixContent = withHtmlProps<"div">(BaseAccordion.Panel);
 
 // =============================================================================
 // Root
 // =============================================================================
 
-const Accordion = AccordionPrimitive.Root;
+const Accordion = BaseAccordion.Root;
 
 // =============================================================================
 // Item
@@ -56,7 +56,7 @@ const AccordionTrigger = React.forwardRef<
     <RadixTrigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between font-medium transition-all hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&[data-state=open]>svg]:rotate-180",
+        "flex flex-1 items-center justify-between font-medium transition-all duration-200 hover:text-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&[data-panel-open]>svg]:rotate-180",
         size === "small" ? "py-2.5 text-sm" : "py-4",
         className,
       )}
@@ -72,7 +72,7 @@ const AccordionTrigger = React.forwardRef<
     </RadixTrigger>
   </RadixHeader>
 ));
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+AccordionTrigger.displayName = "AccordionTrigger";
 
 // =============================================================================
 // Content
@@ -87,7 +87,7 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, size = "default", ...props }, ref) => (
   <RadixContent
     ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className="overflow-hidden text-sm transition-all data-[ending-style]:animate-accordion-up data-[open]:animate-accordion-down"
     {...props}
   >
     <div
@@ -97,7 +97,7 @@ const AccordionContent = React.forwardRef<
     </div>
   </RadixContent>
 ));
-AccordionContent.displayName = AccordionPrimitive.Content.displayName;
+AccordionContent.displayName = "AccordionContent";
 
 // =============================================================================
 // Exports

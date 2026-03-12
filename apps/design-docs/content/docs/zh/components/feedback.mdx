@@ -3,6 +3,33 @@ title: "反馈 (Feedback)"
 description: "收集带有情感倾向的文本反馈。支持触发按钮打开的气泡面板以及行内的评价栏。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <FeedbackDemo />
+
+```tsx title="feedback-demo.tsx"
+"use client";
+
+import { Feedback } from "@nebutra/ui/primitives";
+
+export function FeedbackDemo() {
+    return (
+        <div className="flex h-40 w-full items-center justify-center px-4 py-8">
+            <Feedback
+                label="my-app"
+                onSubmit={async (payload) => {
+                    console.warn("Feedback submitted", payload)
+                }}
+            />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 <Note>
   交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-feedback--docs) 中查看。
 </Note>

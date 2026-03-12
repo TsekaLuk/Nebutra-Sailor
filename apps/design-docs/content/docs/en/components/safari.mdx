@@ -3,6 +3,30 @@ title: Safari
 description: Safari browser window SVG mockup for showcasing websites and web apps.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <SafariDemo />
+
+```tsx title="safari-demo.tsx"
+import { Safari } from "@nebutra/ui/primitives";
+
+export function SafariDemo() {
+    return (
+        <div className="w-full max-w-4xl px-4 py-8">
+            <Safari
+                url="nebutra.dev"
+                className="h-[400px] w-full"
+                imageSrc="https://nebutra.com/og-image.png"
+            />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `Safari` renders a macOS Safari browser window SVG frame. Unlike `BrowserMockup`, it uses a detailed SVG with native-looking toolbar icons (back/forward, share, tabs) in `"default"` mode, or a simplified clean address bar in `"simple"` mode.

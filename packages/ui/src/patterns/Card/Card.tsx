@@ -201,21 +201,19 @@ CardTitle.displayName = "Card.Title";
 
 /* ─────────────────────────────────────────────────────────────────────────── */
 
-export type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
+export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement | HTMLDivElement> {
+  as?: React.ElementType;
+}
 
 const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
+  HTMLParagraphElement | HTMLDivElement,
   CardDescriptionProps
->(({ className, children, ...props }, ref) => {
-  return (
-    <p
-      ref={ref}
-      className={cn("text-sm text-muted-foreground leading-relaxed", className)}
-      {...props}
-    >
-      {children}
-    </p>
-  );
+>(({ className, as: Tag = "p", children, ...props }, ref) => {
+  return React.createElement(Tag, {
+    ref,
+    className: cn("text-sm text-muted-foreground leading-relaxed", className),
+    ...props
+  }, children);
 });
 CardDescription.displayName = "Card.Description";
 

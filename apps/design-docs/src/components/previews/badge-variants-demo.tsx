@@ -1,13 +1,16 @@
 import { Badge } from "@nebutra/ui/primitives";
 
-export default function BadgeVariantsDemo() {
+export function BadgeVariantsDemo() {
   return (
     <div className="flex gap-4 flex-wrap">
-      <Badge variant="default">default</Badge>
-      <Badge variant="secondary">secondary</Badge>
-      <Badge variant="destructive">destructive</Badge>
-      <Badge variant="outline">outline</Badge>
-      {/* Supports 22 color variants... */}
+      <Badge variant="gray">gray</Badge>
+      <Badge variant="blue">blue</Badge>
+      <Badge variant="purple">purple</Badge>
+      <Badge variant="amber">amber</Badge>
+      <Badge variant="red">red</Badge>
+      <Badge variant="pink">pink</Badge>
+      <Badge variant="green">green</Badge>
+      <Badge variant="teal">teal</Badge>
     </div>
   );
 }

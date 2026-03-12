@@ -177,14 +177,14 @@
   --popover: 0 0% 100%;
   --popover-foreground: 222 47% 11%;
 
-  /* Primary - Nebutra Blue 500 */
-  --primary: 228 100% 50%;
-  /* #0033FE */
+  /* Primary - Softer Brand Blue */
+  --primary: 228 85% 56%;
+  /* #254bfa */
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary - Nebutra Cyan 500 */
-  --secondary: 168 91% 49%;
-  /* #0BF1C3 */
+  /* Secondary - Low emphasis neutral (matches standard Shadcn behavior) */
+  --secondary: 210 40% 96%;
+  /* nebutra-neutral-100 */
   --secondary-foreground: 222 47% 11%;
 
   /* Muted - Neutral scale */
@@ -448,15 +448,15 @@
   --popover: 222 47% 7%;
   --popover-foreground: 210 40% 98%;
 
-  /* Primary - Nebutra Blue 400 (brighter for dark mode) */
-  --primary: 228 95% 67%;
-  /* #5c7cfa - nebutra-blue-400 */
+  /* Primary - Softer Brand Blue for dark mode */
+  --primary: 228 90% 72%;
+  /* #7394ff */
   --primary-foreground: 222 47% 4%;
 
-  /* Secondary - Nebutra Cyan 400 */
-  --secondary: 168 96% 54%;
-  /* #1af7c8 - nebutra-cyan-400 */
-  --secondary-foreground: 222 47% 4%;
+  /* Secondary - Low emphasis neutral for dark mode */
+  --secondary: 217 33% 17%;
+  /* nebutra-neutral-800 */
+  --secondary-foreground: 210 40% 98%;
 
   /* Muted - Dark neutral */
   --muted: 217 33% 17%;

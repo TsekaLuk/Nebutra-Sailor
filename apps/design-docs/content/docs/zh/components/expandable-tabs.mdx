@@ -3,6 +3,42 @@ title: 可展开标签 (ExpandableTabs)
 description: 动画标签栏，选中的标签会展开并显示其文字标签。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <ExpandableTabsDemo />
+
+```tsx title="expandable-tabs-demo.tsx"
+"use client";
+
+import { ExpandableTabs } from "@nebutra/ui/primitives";
+import { Home, Search, Bell, User } from "lucide-react";
+import { useState } from "react";
+
+export function ExpandableTabsDemo() {
+    const [activeTab, setActiveTab] = useState<number | null>(null);
+
+    const tabs = [
+        { title: "Home", icon: Home },
+        { title: "Search", icon: Search },
+        { title: "Notifications", icon: Bell },
+        { title: "Profile", icon: User },
+    ];
+
+    return (
+        <div className="flex w-full flex-col items-center justify-center p-8 gap-4">
+            <ExpandableTabs tabs={tabs} onChange={setActiveTab} />
+            <p className="text-sm text-muted-foreground">
+                Active tab: <strong>{activeTab !== null ? tabs[activeTab]?.title : "None"}</strong>
+            </p>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `ExpandableTabs` 使用仅图标的按钮渲染水平标签栏，在选中时会平滑地展开以显示其标签文本。点击标签栏外部会取消选中当前活动的标签。支持在标签组之间添加可选的分隔线。

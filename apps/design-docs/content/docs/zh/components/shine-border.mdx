@@ -3,6 +3,36 @@ title: "发光边框 (Shine Border)"
 description: "动态旋转的渐变发光边框。支持两种模式：覆盖模式（无子元素）用于包裹现有元素，或容器模式（有子元素）作为独立卡片展示。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <ShineBorderDemo />
+
+```tsx title="shine-border-demo.tsx"
+import { ShineBorder } from "@nebutra/ui/primitives";
+
+export function ShineBorderDemo() {
+    return (
+        <div className="flex w-full items-center justify-center p-8">
+            <ShineBorder
+                shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+                borderRadius={16}
+                borderWidth={2}
+                className="w-full max-w-sm bg-background"
+            >
+                <div className="text-center p-8">
+                    <h2 className="text-2xl font-bold tracking-tight mb-2">Shine Card</h2>
+                    <p className="text-sm text-muted-foreground">Animated gradient border effect</p>
+                </div>
+            </ShineBorder>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

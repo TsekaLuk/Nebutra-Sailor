@@ -6,23 +6,20 @@ description: "Content container using compound component pattern. Five visual va
 ## Usage
 
 <ComponentPreview className="max-w-[400px]">
-    <Card variant="bordered" padding="md">
+    <NebutraCard variant="bordered" padding="md">
     <CardHeader>
-      <CardIcon size="md">
-        <span>⚡️</span>
-      </CardIcon>
+      <CardIcon size="md"><span>⚡️</span></CardIcon>
       <CardTitle>Fast Deployments</CardTitle>
     </CardHeader>
     <CardBody>
-      <CardDescription>
-        Deploy to production in seconds with zero downtime.
-      </CardDescription>
+      <CardDescription>Deploy to production in seconds with zero downtime.</CardDescription>
     </CardBody>
-  </Card>
+  </NebutraCard>
 
   ```tsx
 import { Card } from "@nebutra/ui/patterns"
 ```
+</ComponentPreview>
 
 The Card uses a **compound component** API — subcomponents are accessed as `Card.Header`, `Card.Body`, etc.
 
@@ -32,20 +29,18 @@ The Card uses a **compound component** API — subcomponents are accessed as `Ca
 
 ```tsx
 <ComponentPreview className="max-w-[400px]">
-  <Card variant="default" padding="md">
+  <NebutraCard variant="default" padding="md">
     <CardHeader>
       <CardTitle>Create project</CardTitle>
     </CardHeader>
     <CardBody>
-      <CardDescription>
-        Fill out the details below to get started.
-      </CardDescription>
+      <CardDescription>Fill out the details below to get started.</CardDescription>
     </CardBody>
     <CardFooter className="flex justify-end gap-2">
       <Button variant="outline">Cancel</Button>
       <Button>Create</Button>
     </CardFooter>
-  </Card>
+  </NebutraCard>
 </ComponentPreview>
 ```
 
@@ -95,21 +90,18 @@ import { Zap } from "lucide-react"
     <CardTitle>Fast Deployments</CardTitle>
   </CardHeader>
   <CardBody>
-    <CardDescription>
-      Deploy to production in seconds with zero downtime.
-    </CardDescription>
+    <CardDescription>Deploy to production in seconds with zero downtime.</CardDescription>
   </CardBody>
 </Card>
 ```
-</ComponentPreview>
 
 ### Gradient Featured Card
 
 <ComponentPreview className="max-w-[400px]">
-    <Card variant="gradient" padding="lg">
+    <NebutraCard variant="gradient" padding="lg">
     <CardHeader>
       <CardTitle>Pro Plan</CardTitle>
-      <CardDescription>Everything you need to ship faster.</CardDescription>
+      <CardDescription as="div">Everything you need to ship faster.</CardDescription>
     </CardHeader>
     <CardBody>
       <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/mo</span></p>
@@ -117,7 +109,7 @@ import { Zap } from "lucide-react"
     <CardFooter>
       <Button className="w-full">Get started</Button>
     </CardFooter>
-  </Card>
+  </NebutraCard>
 
   ```tsx
 <Card variant="gradient" padding="lg">

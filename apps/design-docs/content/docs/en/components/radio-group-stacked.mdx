@@ -5,43 +5,50 @@ description: "Full-width stacked radio group variant with detailed descriptions 
 
 ## Demo
 
-```tsx
-import { RadioGroupStacked, RadioGroupStackedItem } from "@nebutra/ui/primitives"
+<ComponentPreview>
+  <RadioGroupStackedDemo />
+
+```tsx title="radio-group-stacked-demo.tsx"
+import { RadioGroupStacked, RadioGroupStackedItem } from "@nebutra/ui/primitives";
 
 export function RadioGroupStackedDemo() {
-  return (
-    <RadioGroupStacked defaultValue="standard" className="w-96">
-      <RadioGroupStackedItem value="standard" id="delivery-standard">
-        <div className="flex justify-between w-full">
-          <div>
-            <div className="font-medium">Standard Shipping</div>
-            <div className="text-sm text-muted-foreground">5–7 business days</div>
-          </div>
-          <div className="font-medium">Free</div>
+    return (
+        <div className="w-full max-w-md px-4 py-8">
+            <RadioGroupStacked defaultValue="standard" className="w-full">
+                <RadioGroupStackedItem value="standard" id="delivery-standard">
+                    <div className="flex justify-between w-full">
+                        <div>
+                            <div className="font-medium">Standard Shipping</div>
+                            <div className="text-sm text-muted-foreground mt-1">5–7 business days</div>
+                        </div>
+                        <div className="font-medium">Free</div>
+                    </div>
+                </RadioGroupStackedItem>
+                <RadioGroupStackedItem value="express" id="delivery-express">
+                    <div className="flex justify-between w-full">
+                        <div>
+                            <div className="font-medium">Express Shipping</div>
+                            <div className="text-sm text-muted-foreground mt-1">2–3 business days</div>
+                        </div>
+                        <div className="font-medium">$9.99</div>
+                    </div>
+                </RadioGroupStackedItem>
+                <RadioGroupStackedItem value="overnight" id="delivery-overnight">
+                    <div className="flex justify-between w-full">
+                        <div>
+                            <div className="font-medium">Overnight Shipping</div>
+                            <div className="text-sm text-muted-foreground mt-1">Next business day</div>
+                        </div>
+                        <div className="font-medium">$19.99</div>
+                    </div>
+                </RadioGroupStackedItem>
+            </RadioGroupStacked>
         </div>
-      </RadioGroupStackedItem>
-      <RadioGroupStackedItem value="express" id="delivery-express">
-        <div className="flex justify-between w-full">
-          <div>
-            <div className="font-medium">Express Shipping</div>
-            <div className="text-sm text-muted-foreground">2–3 business days</div>
-          </div>
-          <div className="font-medium">$9.99</div>
-        </div>
-      </RadioGroupStackedItem>
-      <RadioGroupStackedItem value="overnight" id="delivery-overnight">
-        <div className="flex justify-between w-full">
-          <div>
-            <div className="font-medium">Overnight Shipping</div>
-            <div className="text-sm text-muted-foreground">Next business day</div>
-          </div>
-          <div className="font-medium">$24.99</div>
-        </div>
-      </RadioGroupStackedItem>
-    </RadioGroupStacked>
-  )
+    );
 }
+
 ```
+</ComponentPreview>
 
 ## Usage
 

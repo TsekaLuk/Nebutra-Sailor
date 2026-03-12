@@ -36,7 +36,7 @@ export const Default: Story = {
 
 export const PurplePalette: Story = {
   render: () => (
-    <div className="relative h-[400px] w-full bg-slate-950 overflow-hidden">
+    <div className="relative h-[400px] w-full bg-background overflow-hidden">
       <WaveAnimation
         position="absolute"
         zIndex={0}

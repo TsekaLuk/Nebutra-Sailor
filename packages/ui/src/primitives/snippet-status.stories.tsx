@@ -36,6 +36,7 @@ export const Default: Story = {
 };
 
 export const AllStatuses: Story = {
+  args: { text: "" },
   render: () => (
     <div className="flex flex-col gap-3 w-80">
       <SnippetStatus text="npm install package" />
@@ -47,8 +48,9 @@ export const AllStatuses: Story = {
 };
 
 export const DarkTheme: Story = {
+  args: { text: "" },
   render: () => (
-    <div className="flex flex-col gap-3 w-80 p-4 bg-zinc-900 rounded-lg">
+    <div className="flex flex-col gap-3 w-80 p-4 bg-muted rounded-lg">
       <SnippetStatus text="npm run dev" dark />
       <SnippetStatus text="npm run build" dark />
     </div>
@@ -56,6 +58,7 @@ export const DarkTheme: Story = {
 };
 
 export const Multiline: Story = {
+  args: { text: "" },
   render: () => (
     <div className="w-80">
       <SnippetStatus text={["npm install", "npm run build", "npm run start"]} />
@@ -64,6 +67,7 @@ export const Multiline: Story = {
 };
 
 export const NoPrompt: Story = {
+  args: { text: "" },
   render: () => (
     <div className="flex flex-col gap-3 w-80">
       <SnippetStatus text="const x = 1" prompt={false} />
@@ -76,6 +80,7 @@ export const NoPrompt: Story = {
 };
 
 export const InContext: Story = {
+  args: { text: "" },
   render: () => (
     <div className="max-w-sm rounded-lg border bg-card p-4 space-y-3">
       <h3 className="font-semibold text-sm">Quick start</h3>

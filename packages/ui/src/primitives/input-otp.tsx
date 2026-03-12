@@ -22,6 +22,8 @@ export interface InputOTPProps {
   containerClassName?: string;
   /** Input class name */
   className?: string;
+  /** Input pattern validation */
+  pattern?: string;
   /** Text alignment */
   textAlign?: "left" | "center" | "right";
   /** Disabled state */
@@ -67,7 +69,10 @@ const InputOTPSlot = React.forwardRef<
   InputOTPSlotProps
 >(({ index, className, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext);
-  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];
+  const slot = inputOTPContext.slots[index];
+  const char = slot?.char ?? "";
+  const hasFakeCaret = slot?.hasFakeCaret ?? false;
+  const isActive = slot?.isActive ?? false;
 
   return (
     <div

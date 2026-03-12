@@ -39,7 +39,7 @@ export const Default: Story = {
 
 export const BlueGrid: Story = {
   render: () => (
-    <div className="relative h-[400px] w-full overflow-hidden bg-slate-950">
+    <div className="relative h-[400px] w-full overflow-hidden bg-background">
       <FlickeringGrid
         className="absolute inset-0"
         color="rgb(59, 130, 246)"

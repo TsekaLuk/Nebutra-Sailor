@@ -1,21 +1,13 @@
 ---
-title: "开关 (Switch)"
-description: "用于二元设置的开/关切换控制，基于 Radix UI 构建。"
+title: "开关 (Switch / Segmented Control)"
+description: "一个分段控制组件，用于二元或多个互斥选项的切换。"
 ---
 
+import { SwitchDemo } from "@/components/previews/switch-demo";
+import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview>
-  <div className="flex items-center space-x-2">
-    <Switch id="airplane-mode" />
-    <Label htmlFor="airplane-mode">飞行模式 (Airplane Mode)</Label>
-  </div>
-
-  ```tsx
-<div className="flex items-center space-x-2">
-    <Switch id="airplane-mode" />
-    <Label htmlFor="airplane-mode">飞行模式 (Airplane Mode)</Label>
-  </div>
-  ```
+<ComponentPreview className="min-h-[400px] flex items-center justify-center p-8">
+  <SwitchDemo />
 </ComponentPreview>
 
 ## 使用方法 (Usage)
@@ -26,123 +18,21 @@ import { Switch } from "@nebutra/ui/primitives"
 
 ## 属性 (Props)
 
-继承自 `@radix-ui/react-switch` 的 `Root` 属性。
+### Switch (根组件)
 
 | 属性 | 类型 | 默认值 | 描述 |
 |------|------|---------|-------------|
-| `checked` | `boolean` | — | 受控的选中状态 |
-| `defaultChecked` | `boolean` | `false` | 非受控的默认选中状态 |
-| `onCheckedChange` | `(checked: boolean) => void` | — | 状态改变时的回调函数 |
-| `disabled` | `boolean` | `false` | 禁用开关 |
-| `required` | `boolean` | `false` | 在表单上下文中标记为必填 |
-| `name` | `string` | — | 表单字段名称 |
-| `value` | `string` | `"on"` | 随表单提交的值 |
+| `name` | `string` | `"default"` | 内部单选输入组合的表单名称 |
+| `size` | `"small" \| "medium" \| "large"` | `"medium"` | 定义控件的大小 |
 | `className` | `string` | — | 额外的 CSS 类名 |
+| `style` | `React.CSSProperties` | — | 额外的内联样式 |
 
-## 示例 (Examples)
+### Switch.Control (子控件)
 
-### 受控开关 (Controlled Switch)
-
-<ComponentPreview className="min-h-[150px] flex items-center justify-center">
-    <div className="flex items-center space-x-2">
-    <Switch
-      id="notifications"
-    />
-    <Label htmlFor="notifications">
-      通知 (Notifications)
-    </Label>
-  </div>
-
-  ```tsx
-<div className="flex items-center space-x-2">
-  <Switch
-    id="notifications"
-  />
-  <Label htmlFor="notifications">
-    通知 (Notifications)
-  </Label>
-</div>
-```
-</ComponentPreview>
-
-### 设置列表 (Settings List)
-
-<ComponentPreview className="min-h-[300px] flex items-center justify-center">
-    <div className="space-y-4 w-full max-w-md p-6 border rounded-xl shadow-sm">
-    <div className="flex items-center justify-between">
-      <div>
-        <Label htmlFor="wifi" className="text-base">Wi-Fi</Label>
-        <p className="text-xs text-muted-foreground">连接到本地网络 (Connect to local networks)</p>
-      </div>
-      <Switch id="wifi" defaultChecked />
-    </div>
-    <div className="flex items-center justify-between">
-      <div>
-        <Label htmlFor="bluetooth" className="text-base">蓝牙 (Bluetooth)</Label>
-        <p className="text-xs text-muted-foreground">发现附近的设备 (Discover devices nearby)</p>
-      </div>
-      <Switch id="bluetooth" />
-    </div>
-    <div className="flex items-center justify-between opacity-50">
-      <div>
-        <Label htmlFor="location" className="text-base cursor-not-allowed">位置 (Location)</Label>
-        <p className="text-xs text-muted-foreground">GPS 追踪 (GPS tracking)</p>
-      </div>
-      <Switch id="location" disabled />
-    </div>
-  </div>
-
-  ```tsx
-<div className="space-y-4 w-full max-w-md p-6 border rounded-xl shadow-sm">
-  <div className="flex items-center justify-between">
-    <div>
-      <Label htmlFor="wifi" className="text-base">Wi-Fi</Label>
-      <p className="text-xs text-muted-foreground">连接到本地网络 (Connect to local networks)</p>
-    </div>
-    <Switch id="wifi" defaultChecked />
-  </div>
-  <div className="flex items-center justify-between">
-    <div>
-      <Label htmlFor="bluetooth" className="text-base">蓝牙 (Bluetooth)</Label>
-      <p className="text-xs text-muted-foreground">发现附近的设备 (Discover devices nearby)</p>
-    </div>
-    <Switch id="bluetooth" />
-  </div>
-  <div className="flex items-center justify-between opacity-50">
-    <div>
-      <Label htmlFor="location" className="text-base cursor-not-allowed">位置 (Location)</Label>
-      <p className="text-xs text-muted-foreground">GPS 追踪 (GPS tracking)</p>
-    </div>
-    <Switch id="location" disabled />
-  </div>
-</div>
-```
-</ComponentPreview>
-
-### 在表单中使用 (In a Form)
-
-```tsx
-<FormField
-  control={form.control}
-  name="marketingEmails"
-  render={({ field }) => (
-    <FormItem className="flex items-center justify-between rounded-lg border p-4">
-      <div>
-        <FormLabel>营销邮件 (Marketing emails)</FormLabel>
-        <FormLabel>获取我们的最新消息和优惠。 (Receive our latest news and offers.)</FormLabel>
-      </div>
-      <FormControl>
-        <Switch checked={field.value} onCheckedChange={field.onChange} />
-      </FormControl>
-    </FormItem>
-  )}
-/>
-```
-
-## 可访问性 (Accessibility)
-
-- 基于 Radix UI Switch 构建 —— 具有 `role="switch"` 属性并带有 `aria-checked`。
-- 始终通过 `htmlFor`/`id` 将开关与 `<Label>` 配对。
-- 键盘操作：使用 `Space` 键切换开关。
-- 通过 `aria-checked="true"` / `"false"` 向屏幕阅读器传达状态变化。
-走
+| 属性 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `label` | `string` | — | 控件选项的文本标签 |
+| `value` | `string` | — | **必填。** 该特定选项的值 |
+| `defaultChecked` | `boolean` | `false` | 此选项是否应默认选中 |
+| `disabled` | `boolean` | `false` | 禁用此特定控件 |
+| `icon` | `ReactNode` | — | 可选图标，显示以代替文本标签 |

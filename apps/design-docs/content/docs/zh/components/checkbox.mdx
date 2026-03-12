@@ -3,14 +3,11 @@ title: "复选框 (Checkbox)"
 description: "一个在选中和未选中之间切换的控件，支持可选的中间状态 (Indeterminate)。"
 ---
 
-<ComponentPreview className="gap-3">
-  <Checkbox id="terms" />
-  <Label htmlFor="terms">接受条款和条件 (Accept terms and conditions)</Label>
+import { CheckboxDemo } from "@/components/previews/checkbox-demo";
+import { ComponentPreview } from "@/components/component-preview";
 
-  ```tsx
-<Checkbox id="terms" />
-  <Label htmlFor="terms">接受条款和条件 (Accept terms and conditions)</Label>
-  ```
+<ComponentPreview>
+  <CheckboxDemo />
 </ComponentPreview>
 
 ## 概述 (Overview)
@@ -35,23 +32,9 @@ const [checked, setChecked] = useState(false);
 </Checkbox>
 ```
 
-### 禁用状态 (Disabled)
+### 禁用/中间状态 (Disabled/Indeterminate)
 
-<ComponentPreview className="gap-6">
-    <div className="flex items-center gap-2">
-    <Checkbox disabled id="d1" />
-    <Label htmlFor="d1">禁用 (Disabled)</Label>
-  </div>
-  <div className="flex items-center gap-2">
-    <Checkbox checked disabled id="d2" />
-    <Label htmlFor="d2">禁用且选中 (Disabled Checked)</Label>
-  </div>
-  <div className="flex items-center gap-2">
-    <Checkbox disabled indeterminate id="d3" />
-    <Label htmlFor="d3">禁用且待定 (Disabled Indeterminate)</Label>
-  </div>
-
-  ```tsx
+```tsx
 <div className="flex items-center gap-2">
   <Checkbox disabled id="d1" />
   <Label htmlFor="d1">禁用 (Disabled)</Label>
@@ -64,24 +47,13 @@ const [checked, setChecked] = useState(false);
   <Checkbox disabled indeterminate id="d3" />
   <Label htmlFor="d3">禁用且待定 (Disabled Indeterminate)</Label>
 </div>
-```
-</ComponentPreview>
-
-### 中间状态 (Indeterminate)
-
-<ComponentPreview>
-    <div className="flex items-center gap-2">
-    <Checkbox indeterminate id="i1" />
-    <Label htmlFor="i1">选项 1 (Option 1)</Label>
-  </div>
-
-  ```tsx
 <div className="flex items-center gap-2">
   <Checkbox indeterminate id="i1" />
   <Label htmlFor="i1">选项 1 (Option 1)</Label>
 </div>
 ```
-</ComponentPreview>
+
+
 
 ## 属性 (Props)
 

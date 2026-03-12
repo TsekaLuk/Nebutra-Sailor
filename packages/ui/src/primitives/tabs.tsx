@@ -1,16 +1,16 @@
 "use client";
 
 import * as React from "react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { Tabs as BaseTabs } from "@base-ui-components/react/tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils";
 import { withHtmlProps } from "../utils/primitive-props";
 
 // Radix types don't resolve HTML props with React 19 + exactOptionalPropertyTypes.
-const RadixRoot = withHtmlProps<"div">(TabsPrimitive.Root);
-const RadixList = withHtmlProps<"div">(TabsPrimitive.List);
-const RadixTrigger = withHtmlProps<"button">(TabsPrimitive.Trigger);
-const RadixContent = withHtmlProps<"div">(TabsPrimitive.Content);
+const RadixRoot = withHtmlProps<"div">(BaseTabs.Root);
+const RadixList = withHtmlProps<"div">(BaseTabs.List);
+const RadixTrigger = withHtmlProps<"button">(BaseTabs.Tab);
+const RadixContent = withHtmlProps<"div">(BaseTabs.Panel);
 
 // =============================================================================
 // Variants
@@ -88,15 +88,15 @@ const tabsListVariants = cva("flex items-center shrink-0", {
 });
 
 const tabsTriggerVariants = cva(
-  "shrink-0 cursor-pointer whitespace-nowrap inline-flex justify-center items-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:shrink-0 [&_svg]:text-muted-foreground [&:hover_svg]:text-primary [&[data-state=active]_svg]:text-primary",
+  "shrink-0 cursor-pointer whitespace-nowrap inline-flex justify-center items-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:shrink-0 [&_svg]:text-muted-foreground [&:hover_svg]:text-primary [&[data-selected]_svg]:text-primary",
   {
     variants: {
       variant: {
         default:
-          "text-muted-foreground data-[state=active]:bg-background hover:text-foreground data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+          "text-muted-foreground hover:text-foreground data-[selected]:text-foreground",
         button:
-          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-[var(--radius-lg)] text-accent-foreground hover:text-foreground data-[state=active]:bg-accent data-[state=active]:text-foreground",
-        line: "border-b-2 text-muted-foreground border-transparent data-[state=active]:border-primary hover:text-primary data-[state=active]:text-primary",
+          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-[var(--radius-lg)] text-accent-foreground hover:text-foreground data-[selected]:text-foreground",
+        line: "text-muted-foreground hover:text-primary data-[selected]:text-primary",
       },
       size: {
         lg: "gap-2.5 [&_svg]:size-5 text-sm",
@@ -249,8 +249,8 @@ export type TabsTriggerProps = React.ComponentPropsWithoutRef<"button"> & {
 
 export interface TabsContentProps
   extends
-    React.ComponentPropsWithoutRef<"div">,
-    VariantProps<typeof tabsContentVariants> {
+  React.ComponentPropsWithoutRef<"div">,
+  VariantProps<typeof tabsContentVariants> {
   value: string;
   forceMount?: true;
 }
@@ -319,6 +319,7 @@ function TabsList({
   variant = "default",
   shape = "default",
   size = "md",
+  children,
   ...props
 }: TabsListProps) {
   return (
@@ -327,9 +328,27 @@ function TabsList({
     >
       <RadixList
         data-slot="tabs-list"
-        className={cn(tabsListVariants({ variant, shape, size }), className)}
+        className={cn(tabsListVariants({ variant, shape, size }), "relative z-0", className)}
         {...props}
-      />
+      >
+        <BaseTabs.Indicator
+          className={cn(
+            "absolute z-[-1] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            variant === "default" && "bg-background shadow-sm rounded-md",
+            variant === "button" && "bg-accent rounded-md",
+            variant === "line" && "bg-primary rounded-none",
+            shape === "pill" && "rounded-full"
+          )}
+          style={{
+            left: "var(--active-tab-left)",
+            width: "var(--active-tab-width)",
+            top: variant === "line" ? "auto" : "var(--active-tab-top)",
+            bottom: variant === "line" ? "0" : "auto",
+            height: variant === "line" ? "2px" : "var(--active-tab-height)",
+          }}
+        />
+        {children}
+      </RadixList>
     </TabsContext.Provider>
   );
 }

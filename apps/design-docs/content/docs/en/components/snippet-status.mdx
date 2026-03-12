@@ -3,6 +3,26 @@ title: SnippetStatus
 description: Vercel-style code snippet with status-colored backgrounds and animated copy feedback.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <SnippetStatusDemo />
+
+```tsx title="snippet-status-demo.tsx"
+import { SnippetStatus } from "@nebutra/ui/primitives";
+
+export function SnippetStatusDemo() {
+    return (
+        <div className="w-full max-w-sm px-4 py-8">
+            <SnippetStatus text="npm install @nebutra/ui" />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `SnippetStatus` is a compact code snippet inspired by Vercel's design system. It features status-colored backgrounds (success/warning/error), a `$` prompt prefix, multiline support, and animated copy-to-clipboard with icon swap animation.

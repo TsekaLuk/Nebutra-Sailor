@@ -80,13 +80,13 @@ export function Browser({
   return (
     <div
       className={cn(
-        "rounded-[var(--radius-xl)] border border-[var(--neutral-6)] bg-[var(--neutral-1)] shadow-sm overflow-hidden",
+        "rounded-[var(--radius-xl)] border border-border bg-card shadow-sm overflow-hidden",
         className,
       )}
       {...props}
     >
       {/* ── Toolbar ────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-3 border-b border-[var(--neutral-6)] bg-[var(--neutral-3)] px-4 py-2.5">
+      <div className="flex items-center gap-3 border-b border-border bg-muted px-4 py-2.5">
         {/* Traffic lights */}
         <div className="flex items-center gap-1.5" aria-hidden="true">
           <span className="size-3 rounded-full bg-[#FF5F57]" />
@@ -96,28 +96,28 @@ export function Browser({
 
         {/* Navigation buttons */}
         <div className="flex items-center gap-1" aria-hidden="true">
-          <span className="flex size-6 items-center justify-center rounded text-[var(--neutral-9)]">
+          <span className="flex size-6 items-center justify-center rounded text-muted-foreground">
             <ArrowLeft className="size-3.5" />
           </span>
-          <span className="flex size-6 items-center justify-center rounded text-[var(--neutral-9)]">
+          <span className="flex size-6 items-center justify-center rounded text-muted-foreground">
             <ArrowRight className="size-3.5" />
           </span>
-          <span className="flex size-6 items-center justify-center rounded text-[var(--neutral-9)]">
+          <span className="flex size-6 items-center justify-center rounded text-muted-foreground">
             <RotateCw className="size-3.5" />
           </span>
         </div>
 
         {/* Address bar */}
-        <div className="flex flex-1 items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--neutral-1)]/80 px-3 py-1">
+        <div className="flex flex-1 items-center justify-center gap-2 rounded-[var(--radius-md)] bg-background/80 px-3 py-1">
           {address ? (
             <>
-              <span className="flex-1 truncate text-center text-xs text-[var(--neutral-9)]">
+              <span className="flex-1 truncate text-center text-xs text-muted-foreground">
                 {address}
               </span>
               <button
                 type="button"
                 onClick={handleCopy}
-                className="flex-shrink-0 rounded p-0.5 text-[var(--neutral-9)] transition-colors hover:text-[var(--neutral-10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex-shrink-0 rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label={copied ? "Copied" : "Copy address"}
               >
                 {copied ? (
@@ -134,7 +134,7 @@ export function Browser({
       </div>
 
       {/* ── Content area ───────────────────────────────────────────── */}
-      <div className="bg-[var(--neutral-1)]">
+      <div className="bg-background">
         {children ??
           (imageSrc ? (
             <img
@@ -145,7 +145,7 @@ export function Browser({
               className="block w-full"
             />
           ) : (
-            <div className="flex aspect-video items-center justify-center bg-[var(--neutral-2)] text-sm text-[var(--neutral-9)]">
+            <div className="flex aspect-video items-center justify-center bg-muted text-sm text-muted-foreground">
               No content
             </div>
           ))}

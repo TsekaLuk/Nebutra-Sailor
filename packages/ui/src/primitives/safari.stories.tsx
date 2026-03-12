@@ -56,7 +56,7 @@ export const SimpleMode: Story = {
 
 export const DarkTheme: Story = {
   render: () => (
-    <div className="dark bg-zinc-950 p-8 rounded-xl">
+    <div className="dark bg-background p-8 rounded-xl">
       <div className="w-[700px]">
         <Safari
           url="https://app.nebutra.com"

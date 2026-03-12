@@ -70,6 +70,7 @@ export {
   brandSpring,
   emerge,
   flow,
+  float,
   pulse,
   stagger,
   interactive,

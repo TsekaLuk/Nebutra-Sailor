@@ -71,6 +71,8 @@ export { Form, FormGroup, FormItem } from "@lobehub/ui";
 
 // Theme
 export { ThemeProvider } from "@lobehub/ui";
+export * from "./ascii-text";
+export * from "./ai-prompt-box";
 
 // Animation
 export {

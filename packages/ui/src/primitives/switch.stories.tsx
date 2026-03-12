@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Switch } from "./switch";
 
@@ -21,20 +20,24 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => <Switch defaultSelected>Enable notifications</Switch>,
+  render: () => (
+    <div className="flex h-12 w-32 items-center gap-3">
+      <Switch name="notifications">
+        <Switch.Control value="on" label="Enable notifications" defaultChecked />
+        <Switch.Control value="off" label="Off" />
+      </Switch>
+    </div>
+  ),
 };
 
 export const Controlled: Story = {
   render: () => {
-    const [enabled, setEnabled] = useState(true);
     return (
-      <div className="flex items-center gap-3">
-        <Switch isSelected={enabled} onValueChange={setEnabled}>
-          Usage alerts
+      <div className="flex h-12 w-32 items-center gap-3">
+        <Switch name="usage-alerts">
+          <Switch.Control value="on" label="On" defaultChecked />
+          <Switch.Control value="off" label="Off" />
         </Switch>
-        <span className="text-sm text-[color:var(--neutral-11)]">
-          {enabled ? "On" : "Off"}
-        </span>
       </div>
     );
   },

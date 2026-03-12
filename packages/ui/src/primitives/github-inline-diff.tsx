@@ -115,7 +115,7 @@ function InlineThread({
               "h-5 gap-1 px-1.5 text-[11px]",
               resolved
                 ? "bg-emerald-600 text-white hover:bg-emerald-600/90 dark:bg-emerald-500 dark:hover:bg-emerald-500/90"
-                : "bg-secondary text-foreground dark:bg-neutral-800 dark:text-neutral-100",
+                : "bg-secondary text-foreground dark:bg-muted dark:text-foreground",
             )}
           >
             {resolved ? <CheckCircle2 className="h-3.5 w-3.5" /> : null}
@@ -310,7 +310,7 @@ export function GithubInlineDiff({
                   "group relative flex items-stretch text-[13px]",
                   line.kind === "hunk" && "bg-muted/50 text-muted-foreground",
                   line.kind === "add" &&
-                    "bg-emerald-50/60 dark:bg-emerald-950/20",
+                  "bg-emerald-50/60 dark:bg-emerald-950/20",
                   line.kind === "del" && "bg-rose-50/60 dark:bg-rose-950/20",
                 )}
               >

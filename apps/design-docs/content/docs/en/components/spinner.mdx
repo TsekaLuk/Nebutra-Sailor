@@ -3,6 +3,28 @@ title: Spinner
 description: Multi-variant loading spinner using Lucide icons and custom SVG animations. Accepts all LucideProps for size and color control.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <SpinnerDemo />
+
+```tsx title="spinner-demo.tsx"
+import { Spinner } from "@nebutra/ui/primitives";
+
+export function SpinnerDemo() {
+    return (
+        <div className="w-full max-w-sm px-4 py-8 flex items-center justify-center space-x-4">
+            <Spinner />
+            <Spinner variant="ring" size={32} />
+            <Spinner variant="infinite" className="text-primary" />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## Usage
 
 ```tsx

@@ -5,32 +5,36 @@ description: "复合表单字段包装器，集成了标签 (Label)、输入框 
 
 ## 演示 (Demo)
 
-```tsx
-import { Field } from "@nebutra/ui/primitives"
-import { Input } from "@nebutra/ui/primitives"
+<ComponentPreview>
+  <FieldDemo />
+
+```tsx title="field-demo.tsx"
+import { Field, Input } from "@nebutra/ui/primitives";
 
 export function FieldDemo() {
-  return (
-    <div className="space-y-4 w-80">
-      <Field
-        label="邮箱地址 (Email address)"
-        description="我们绝不会分享您的电子邮件。"
-        htmlFor="email"
-      >
-        <Input id="email" type="email" placeholder="you@example.com" />
-      </Field>
+    return (
+        <div className="space-y-4 w-80 py-8 px-4">
+            <Field
+                label="Email address"
+                description="We'll never share your email."
+                htmlFor="email"
+            >
+                <Input id="email" type="email" placeholder="you@example.com" />
+            </Field>
 
-      <Field
-        label="用户名 (Username)"
-        error="用户名已被占用。"
-        htmlFor="username"
-      >
-        <Input id="username" placeholder="johndoe" />
-      </Field>
-    </div>
-  )
+            <Field
+                label="Username"
+                error="Username is already taken."
+                htmlFor="username"
+            >
+                <Input id="username" placeholder="johndoe" />
+            </Field>
+        </div>
+    );
 }
+
 ```
+</ComponentPreview>
 
 ## 使用方法 (Usage)
 

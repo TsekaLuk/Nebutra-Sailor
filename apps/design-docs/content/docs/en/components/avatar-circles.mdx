@@ -3,6 +3,59 @@ title: AvatarCircles
 description: Overlapping circular avatar stack with an optional overflow count indicator.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <AvatarCirclesDemo />
+
+```tsx title="avatar-circles-demo.tsx"
+"use client";
+
+import { AvatarCircles } from "@nebutra/ui/primitives";
+
+const sampleAvatars = [
+    {
+        imageUrl: "https://avatars.githubusercontent.com/u/20110627",
+        profileUrl: "https://github.com/rdev",
+        alt: "User 1",
+    },
+    {
+        imageUrl: "https://avatars.githubusercontent.com/u/4211028",
+        profileUrl: "https://github.com/user2",
+        alt: "User 2",
+    },
+    {
+        imageUrl: "https://avatars.githubusercontent.com/u/583231",
+        profileUrl: "https://github.com/octocat",
+        alt: "Octocat",
+    },
+    {
+        imageUrl: "https://avatars.githubusercontent.com/u/9919",
+        profileUrl: "https://github.com/user4",
+        alt: "User 4",
+    },
+];
+
+export function AvatarCirclesDemo() {
+    return (
+        <div className="flex w-full items-center justify-center p-8">
+            <div className="flex items-center gap-4">
+                <AvatarCircles avatarUrls={sampleAvatars} numPeople={1200} />
+                <div>
+                    <p className="text-sm font-semibold">Join 1,200+ developers</p>
+                    <p className="text-xs text-muted-foreground">
+                        Building with Nebutra today
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `AvatarCircles` renders a row of overlapping circular avatar images with `-space-x-4` negative spacing. An optional overflow counter (e.g., `+99`) appears after the last avatar, linking to `overflowUrl`.
@@ -57,7 +110,7 @@ const avatars = [
 | ------------ | -------- | ----------------------------------------- |
 | `imageUrl`   | `string` | Avatar image URL                          |
 | `profileUrl` | `string` | Link URL when avatar is clicked           |
-| `alt`        | `string` | Alt text (defaults to `"Avatar {index}"`) |
+| `alt`        | `string` | Alt text (defaults to `"Avatar &#123;index&#125;"`) |
 
 ## Notes
 

@@ -92,15 +92,27 @@ import { Progress } from "@nebutra/ui/primitives"
 
 ### 动画进度条 (Animated Progress)
 
-<ComponentPreview className="max-w-[400px]">
-    <div className="w-full">
-    <Progress value={65} className="w-full" />
-  </div>
+<ComponentPreview name="progress-1-demo" className="max-w-[400px]">
+  <Progress1Demo />
 
   ```tsx
-<div className="w-full">
-  <Progress value={65} className="w-full" />
-</div>
+import * as React from "react"
+import { Progress } from "@nebutra/ui/primitives"
+
+export function ProgressAnimatedDemo() {
+  const [progress, setProgress] = React.useState(13)
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setProgress(65), 500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <div className="w-full">
+      <Progress value={progress} className="w-full" />
+    </div>
+  )
+}
 ```
 </ComponentPreview>
 
@@ -157,6 +169,40 @@ import { Progress } from "@nebutra/ui/primitives"
     className="w-full [&>div]:bg-green-500"
   />
 </div>
+```
+</ComponentPreview>
+
+### 环形进度条 (Circular Progress)
+
+<ComponentPreview name="animated-circular-progress-bar-demo" className="max-w-[400px]">
+  <AnimatedCircularProgressBarDemo />
+
+  ```tsx
+import { useEffect, useState } from "react"
+import { AnimatedCircularProgressBar } from "@nebutra/ui/primitives"
+
+export function AnimatedCircularProgressBarDemo() {
+  const [value, setValue] = useState(0)
+
+  useEffect(() => {
+    const handleIncrement = (prev: number) => {
+      if (prev === 100) return 0
+      return prev + 10
+    }
+    setValue(handleIncrement)
+    const interval = setInterval(() => setValue(handleIncrement), 2000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <AnimatedCircularProgressBar
+      max={100}
+      min={0}
+      value={value}
+      gaugePrimaryColor="hsl(var(--primary))"
+    />
+  )
+}
 ```
 </ComponentPreview>
 

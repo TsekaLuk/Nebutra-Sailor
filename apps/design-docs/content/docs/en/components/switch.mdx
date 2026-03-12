@@ -1,21 +1,13 @@
 ---
 title: "Switch"
-description: "Toggle on/off control for binary settings, built on Radix UI."
+description: "A Segmented Control toggle used for binary or multiple exclusive choices."
 ---
 
+import { SwitchDemo } from "@/components/previews/switch-demo";
+import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview>
-  <div className="flex items-center space-x-2">
-    <Switch id="airplane-mode" />
-    <Label htmlFor="airplane-mode">Airplane Mode</Label>
-  </div>
-
-  ```tsx
-<div className="flex items-center space-x-2">
-    <Switch id="airplane-mode" />
-    <Label htmlFor="airplane-mode">Airplane Mode</Label>
-  </div>
-  ```
+<ComponentPreview className="min-h-[400px] flex items-center justify-center p-8">
+  <SwitchDemo />
 </ComponentPreview>
 
 ## Usage
@@ -26,122 +18,21 @@ import { Switch } from "@nebutra/ui/primitives"
 
 ## Props
 
-Extends `@radix-ui/react-switch` `Root` props.
+### Switch (Root)
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `checked` | `boolean` | — | Controlled checked state |
-| `defaultChecked` | `boolean` | `false` | Uncontrolled default checked state |
-| `onCheckedChange` | `(checked: boolean) => void` | — | Callback when state changes |
-| `disabled` | `boolean` | `false` | Disables the switch |
-| `required` | `boolean` | `false` | Marks as required in form context |
-| `name` | `string` | — | Form field name |
-| `value` | `string` | `"on"` | Value submitted with form |
+| `name` | `string` | `"default"` | Form field name group for the internal radio inputs |
+| `size` | `"small" \| "medium" \| "large"` | `"medium"` | Defines the size of the controls |
 | `className` | `string` | — | Additional CSS classes |
+| `style` | `React.CSSProperties` | — | Additional inline styles |
 
-## Examples
+### Switch.Control
 
-### Controlled Switch
-
-<ComponentPreview className="min-h-[150px] flex items-center justify-center">
-    <div className="flex items-center space-x-2">
-    <Switch
-      id="notifications"
-    />
-    <Label htmlFor="notifications">
-      Notifications
-    </Label>
-  </div>
-
-  ```tsx
-<div className="flex items-center space-x-2">
-  <Switch
-    id="notifications"
-  />
-  <Label htmlFor="notifications">
-    Notifications
-  </Label>
-</div>
-```
-</ComponentPreview>
-
-### Settings List
-
-<ComponentPreview className="min-h-[300px] flex items-center justify-center">
-    <div className="space-y-4 w-full max-w-md p-6 border rounded-xl shadow-sm">
-    <div className="flex items-center justify-between">
-      <div>
-        <Label htmlFor="wifi" className="text-base">Wi-Fi</Label>
-        <p className="text-xs text-muted-foreground">Connect to local networks</p>
-      </div>
-      <Switch id="wifi" defaultChecked />
-    </div>
-    <div className="flex items-center justify-between">
-      <div>
-        <Label htmlFor="bluetooth" className="text-base">Bluetooth</Label>
-        <p className="text-xs text-muted-foreground">Discover devices nearby</p>
-      </div>
-      <Switch id="bluetooth" />
-    </div>
-    <div className="flex items-center justify-between opacity-50">
-      <div>
-        <Label htmlFor="location" className="text-base cursor-not-allowed">Location</Label>
-        <p className="text-xs text-muted-foreground">GPS tracking</p>
-      </div>
-      <Switch id="location" disabled />
-    </div>
-  </div>
-
-  ```tsx
-<div className="space-y-4 w-full max-w-md p-6 border rounded-xl shadow-sm">
-  <div className="flex items-center justify-between">
-    <div>
-      <Label htmlFor="wifi" className="text-base">Wi-Fi</Label>
-      <p className="text-xs text-muted-foreground">Connect to local networks</p>
-    </div>
-    <Switch id="wifi" defaultChecked />
-  </div>
-  <div className="flex items-center justify-between">
-    <div>
-      <Label htmlFor="bluetooth" className="text-base">Bluetooth</Label>
-      <p className="text-xs text-muted-foreground">Discover devices nearby</p>
-    </div>
-    <Switch id="bluetooth" />
-  </div>
-  <div className="flex items-center justify-between opacity-50">
-    <div>
-      <Label htmlFor="location" className="text-base cursor-not-allowed">Location</Label>
-      <p className="text-xs text-muted-foreground">GPS tracking</p>
-    </div>
-    <Switch id="location" disabled />
-  </div>
-</div>
-```
-</ComponentPreview>
-
-### In a Form
-
-```tsx
-<FormField
-  control={form.control}
-  name="marketingEmails"
-  render={({ field }) => (
-    <FormItem className="flex items-center justify-between rounded-lg border p-4">
-      <div>
-        <FormLabel>Marketing emails</FormLabel>
-        <FormDescription>Receive our latest news and offers.</FormDescription>
-      </div>
-      <FormControl>
-        <Switch checked={field.value} onCheckedChange={field.onChange} />
-      </FormControl>
-    </FormItem>
-  )}
-/>
-```
-
-## Accessibility
-
-- Built on Radix UI Switch — has `role="switch"` with `aria-checked`.
-- Always pair with a `<Label>` linked via `htmlFor`/`id`.
-- Keyboard: `Space` toggles the switch.
-- Communicates state changes to screen readers via `aria-checked="true"` / `"false"`.
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Text label for the control option |
+| `value` | `string` | — | **Required.** The value of this specific option |
+| `defaultChecked` | `boolean` | `false` | Whether this option should be selected by default |
+| `disabled` | `boolean` | `false` | Disables this specific control |
+| `icon` | `ReactNode` | — | Optional icon to display instead of a text label |

@@ -20,11 +20,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: { children: <></> },
   render: () => (
     <NoisePatternCard className="max-w-sm">
       <NoisePatternCardBody>
         <h3 className="text-lg font-semibold text-white">Noise Pattern Card</h3>
-        <p className="mt-2 text-sm text-zinc-400">
+        <p className="mt-2 text-sm text-muted-foreground">
           A sophisticated dark card with an organic grain texture that adds
           depth and visual interest.
         </p>
@@ -34,10 +35,11 @@ export const Default: Story = {
 };
 
 export const WithStats: Story = {
+  args: { children: <></> },
   render: () => (
     <NoisePatternCard className="max-w-sm">
       <NoisePatternCardBody>
-        <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           This Month
         </p>
         <div className="mt-4 grid grid-cols-3 gap-4">
@@ -48,7 +50,7 @@ export const WithStats: Story = {
           ].map((stat) => (
             <div key={stat.label}>
               <div className="text-2xl font-bold text-white">{stat.value}</div>
-              <div className="text-xs text-zinc-500">{stat.label}</div>
+              <div className="text-xs text-muted-foreground">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -58,6 +60,7 @@ export const WithStats: Story = {
 };
 
 export const Grid: Story = {
+  args: { children: <></> },
   render: () => (
     <div className="grid grid-cols-2 gap-4 w-[500px]">
       {[
@@ -69,7 +72,7 @@ export const Grid: Story = {
         <NoisePatternCard key={item.title}>
           <NoisePatternCardBody>
             <h4 className="font-semibold text-white">{item.title}</h4>
-            <p className="mt-1 text-xs text-zinc-400">{item.desc}</p>
+            <p className="mt-1 text-xs text-muted-foreground">{item.desc}</p>
           </NoisePatternCardBody>
         </NoisePatternCard>
       ))}
@@ -78,6 +81,7 @@ export const Grid: Story = {
 };
 
 export const CustomOverlay: Story = {
+  args: { children: <></> },
   render: () => (
     <NoisePatternCard overlayClassName="bg-purple-950/20" className="max-w-sm">
       <NoisePatternCardBody>

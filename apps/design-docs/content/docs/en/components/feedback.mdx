@@ -3,6 +3,33 @@ title: "Feedback"
 description: "Gather text feedback with an associated emotion. Supports a trigger-button popover and an inline reaction bar."
 ---
 
+## Demo
+
+<ComponentPreview>
+  <FeedbackDemo />
+
+```tsx title="feedback-demo.tsx"
+"use client";
+
+import { Feedback } from "@nebutra/ui/primitives";
+
+export function FeedbackDemo() {
+    return (
+        <div className="flex h-40 w-full items-center justify-center px-4 py-8">
+            <Feedback
+                label="my-app"
+                onSubmit={async (payload) => {
+                    console.warn("Feedback submitted", payload)
+                }}
+            />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 <Note>
   Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-feedback--docs).
 </Note>

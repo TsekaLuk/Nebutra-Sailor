@@ -137,7 +137,7 @@ export const CustomTrigger: Story = {
   render: () => (
     <Menu.Root>
       <Menu.Trigger
-        className="h-8 w-8 rounded-full bg-[var(--neutral-3)] p-0 flex items-center justify-center"
+        className="h-8 w-8 rounded-full bg-muted p-0 flex items-center justify-center"
         aria-label="Open menu"
       >
         <Star className="h-4 w-4" />

@@ -3,6 +3,26 @@ title: 状态代码片段 (SnippetStatus)
 description: Vercel 风格的代码片段，带有状态配色背景和动画点击反馈。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <SnippetStatusDemo />
+
+```tsx title="snippet-status-demo.tsx"
+import { SnippetStatus } from "@nebutra/ui/primitives";
+
+export function SnippetStatusDemo() {
+    return (
+        <div className="w-full max-w-sm px-4 py-8">
+            <SnippetStatus text="npm install @nebutra/ui" />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `SnippetStatus` 是一款受 Vercel 设计系统启发的精简型代码片段组件。它具有状态配色背景（成功/警告/错误）、`$` 提示符前缀、对多行文本的支持，以及带有图标点击切换动画的剪切板复制功能。

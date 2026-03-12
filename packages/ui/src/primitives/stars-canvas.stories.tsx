@@ -31,7 +31,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <div className="relative h-[400px] w-full overflow-hidden bg-slate-950 rounded-xl">
+    <div className="relative h-[400px] w-full overflow-hidden bg-background rounded-xl">
       <StarsCanvas position="absolute" zIndex={0} />
       <div className="relative z-10 flex h-full items-center justify-center">
         <h2 className="text-3xl font-bold text-white">Starfield</h2>

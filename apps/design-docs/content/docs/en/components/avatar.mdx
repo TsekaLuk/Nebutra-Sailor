@@ -25,53 +25,9 @@ import {
 
 Five sizes controlled by the `size` prop.
 
-<ComponentPreview className="gap-4 items-center">
-  <Avatar size="xs">
-    <AvatarFallback size="xs">XS</AvatarFallback>
-  </Avatar>
-  <Avatar size="sm">
-    <AvatarFallback size="sm">SM</AvatarFallback>
-  </Avatar>
-  <Avatar size="md">
-    <AvatarFallback size="md">MD</AvatarFallback>
-  </Avatar>
-  <Avatar size="lg">
-    <AvatarFallback size="lg">LG</AvatarFallback>
-  </Avatar>
-  <Avatar size="xl">
-    <AvatarFallback size="xl">XL</AvatarFallback>
-  </Avatar>
-
-  ```tsx
-<Avatar size="xs">
-    <AvatarFallback size="xs">XS</AvatarFallback>
-  </Avatar>
-  <Avatar size="sm">
-    <AvatarFallback size="sm">SM</AvatarFallback>
-  </Avatar>
-  <Avatar size="md">
-    <AvatarFallback size="md">MD</AvatarFallback>
-  </Avatar>
-  <Avatar size="lg">
-    <AvatarFallback size="lg">LG</AvatarFallback>
-  </Avatar>
-  <Avatar size="xl">
-    <AvatarFallback size="xl">XL</AvatarFallback>
-  </Avatar>
-  ```
+<ComponentPreview>
+  <AvatarSizeDemo />
 </ComponentPreview>
-
-```tsx
-<Avatar size="xs">
-  <AvatarImage src="https://avatar.vercel.sh/user" alt="user" />
-  <AvatarFallback size="xs">XS</AvatarFallback>
-</Avatar>
-
-<Avatar size="sm">...</Avatar>
-<Avatar size="md">...</Avatar>
-<Avatar size="lg">...</Avatar>
-<Avatar size="xl">...</Avatar>
-```
 
 | `size` | px  | Tailwind class        |
 | ------ | --- | --------------------- |
@@ -88,22 +44,8 @@ Five sizes controlled by the `size` prop.
 When the image URL fails or is omitted, `AvatarFallback` renders initials on a muted background.
 
 <ComponentPreview>
-  <Avatar size="md">
-    <AvatarFallback size="md">NN</AvatarFallback>
-  </Avatar>
-
-  ```tsx
-<Avatar size="md">
-    <AvatarFallback size="md">NN</AvatarFallback>
-  </Avatar>
-  ```
+  <AvatarFallbackDemo />
 </ComponentPreview>
-
-```tsx
-<Avatar size="md">
-  <AvatarFallback size="md">AC</AvatarFallback>
-</Avatar>
-```
 
 <Tip>
   Always pass the same `size` to both `Avatar` and `AvatarFallback` — this
@@ -117,50 +59,8 @@ When the image URL fails or is omitted, `AvatarFallback` renders initials on a m
 `AvatarGroup` stacks avatars with an automatic `+N` overflow indicator. The second row below has 5 members with `max={4}`, showing `+2`.
 
 <ComponentPreview>
-  <AvatarGroup
-    items={[
-      { alt: "user1", fallback: "U1" },
-      { alt: "user2", fallback: "U2" },
-      { alt: "user3", fallback: "U3" },
-      { alt: "user4", fallback: "U4" },
-      { alt: "user5", fallback: "U5" },
-    ]}
-    max={4}
-    size="sm"
-  />
-
-  ```tsx
-<AvatarGroup
-    items={[
-      { alt: "user1", fallback: "U1" },
-      { alt: "user2", fallback: "U2" },
-      { alt: "user3", fallback: "U3" },
-      { alt: "user4", fallback: "U4" },
-      { alt: "user5", fallback: "U5" },
-    ]}
-    max={4}
-    size="sm"
-  />
-  ```
+  <AvatarGroupDemo />
 </ComponentPreview>
-
-```tsx
-<AvatarGroup
-  items={[
-    {
-      src: "https://avatar.vercel.sh/evilrabbit",
-      alt: "evilrabbit",
-      fallback: "ER",
-    },
-    { src: "https://avatar.vercel.sh/leerob", alt: "leerob", fallback: "LR" },
-    { src: "https://avatar.vercel.sh/rauchg", alt: "rauchg", fallback: "RG" },
-    { src: "https://avatar.vercel.sh/shuding", alt: "shuding", fallback: "SH" },
-    { src: "https://avatar.vercel.sh/almonk", alt: "almonk", fallback: "AL" },
-  ]}
-  max={4}
-  size="sm"
-/>
-```
 
 | Prop    | Type                | Default | Description                           |
 | ------- | ------------------- | ------- | ------------------------------------- |
@@ -174,34 +74,9 @@ When the image URL fails or is omitted, `AvatarFallback` renders initials on a m
 
 One-line avatars that fetch images from the platform CDN and display a **platform logo badge** at the bottom-left corner.
 
-<ComponentPreview className="gap-4">
-  <GitHubAvatar username="rauchg" size="md" />
-  <GitLabAvatar username="leerob" size="md" />
-  <BitbucketAvatar username="evilrabbit" size="md" />
-
-  ```tsx
-<GitHubAvatar username="rauchg" size="md" />
-  <GitLabAvatar username="leerob" size="md" />
-  <BitbucketAvatar username="evilrabbit" size="md" />
-  ```
+<ComponentPreview>
+  <AvatarGitPlatformDemo />
 </ComponentPreview>
-
-```tsx
-{
-  /* GitHub — badge: dark rounded, GitHub mark */
-}
-<GitHubAvatar username="rauchg" size="md" />;
-
-{
-  /* GitLab — badge: #6b4fbb purple, GitLab mark */
-}
-<GitLabAvatar username="leerob" size="md" />;
-
-{
-  /* Bitbucket — badge: #0052cc blue, Bitbucket mark */
-}
-<BitbucketAvatar username="evilrabbit" size="md" />;
-```
 
 | Prop       | Type         | Default | Description                        |
 | ---------- | ------------ | ------- | ---------------------------------- |
@@ -215,34 +90,8 @@ One-line avatars that fetch images from the platform CDN and display a **platfor
 `AvatarWithIcon` adds a small badge anchored to the bottom-right corner. Useful for presence indicators, role badges, or verification marks.
 
 <ComponentPreview>
-  <AvatarWithIcon
-    alt="rauchg"
-    fallback="GR"
-    icon={<span className="block h-2 w-2 rounded-full bg-green-500" />}
-    iconBackground="bg-background"
-    size="md"
-  />
-
-  ```tsx
-<AvatarWithIcon
-    alt="rauchg"
-    fallback="GR"
-    icon={<span className="block h-2 w-2 rounded-full bg-green-500" />}
-    iconBackground="bg-background"
-    size="md"
-  />
-  ```
+  <AvatarWithIconDemo />
 </ComponentPreview>
-
-```tsx
-<AvatarWithIcon
-  src="https://avatar.vercel.sh/rauchg"
-  alt="rauchg"
-  icon={<span className="block h-2 w-2 rounded-full bg-green-500" />}
-  iconBackground="bg-background"
-  size="md"
-/>
-```
 
 | Prop             | Type         | Default           | Description                     |
 | ---------------- | ------------ | ----------------- | ------------------------------- |
@@ -259,44 +108,9 @@ One-line avatars that fetch images from the platform CDN and display a **platfor
 
 Procedurally generated avatars via [DiceBear](https://www.dicebear.com/) — deterministic for the same `seed`. No npm package required.
 
-<ComponentPreview className="gap-4">
-  <DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
-  <DiceBearAvatar
-    seed="user@example.com"
-    avatarStyle="pixel-art"
-    options={{ radius: 50 }}
-    size="md"
-  />
-  <DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
-  <DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
-
-  ```tsx
-<DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
-  <DiceBearAvatar
-    seed="user@example.com"
-    avatarStyle="pixel-art"
-    options={{ radius: 50 }}
-    size="md"
-  />
-  <DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
-  <DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
-  ```
+<ComponentPreview>
+  <DiceBearAvatarDemo />
 </ComponentPreview>
-
-```tsx
-<DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
-
-<DiceBearAvatar
-  seed="user@example.com"
-  avatarStyle="pixel-art"
-  options={{ radius: 50 }}
-  size="md"
-/>
-
-<DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
-
-<DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
-```
 
 | Prop          | Type                               | Default            | Description                                 |
 | ------------- | ---------------------------------- | ------------------ | ------------------------------------------- |
@@ -308,6 +122,28 @@ Procedurally generated avatars via [DiceBear](https://www.dicebear.com/) — det
 <Tip>
   Use `bottts-neutral` for system/bot entities, `avataaars` or `lorelei` for
   human placeholders, `fun-emoji` for anonymous/guest sessions.
+</Tip>
+
+---
+
+## Smart Avatar Group
+
+`AvatarSmartGroup` is a dynamic, animated stack of avatars powered by `framer-motion`. It elegantly reveals hidden avatars upon hovering or expanding the group.
+
+<ComponentPreview>
+  <AvatarSmartGroupDemo />
+</ComponentPreview>
+
+| Prop                | Type                                            | Default                | Description                                                                  |
+| ------------------- | ----------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------- |
+| `avatars`           | `{ src: string; fallback: string; alt: string; }[]` | —                  | Array of avatar objects containing image sources and fallbacks               |
+| `maxVisible`        | `number`                                        | `3`                    | Maximum number of avatars directly visible when the component is stacked     |
+| `mode`              | `"expand" \| "stack"`                           | `"stack"`              | Determines the layout behavior: either fully expanded or stacked with overlap|
+| `size`              | `"sm" \| "md" \| "lg"`                          | `"md"`                 | Size preset for the individual avatars                                       |
+| `onAvatarClick`     | `(avatar) => void`                              | `undefined`            | Optional event handler, triggered when an individual avatar is clicked       |
+
+<Tip>
+  Hover over the stacked component or change the \`mode\` prop to \`expand\` to see the smooth, animated unveiling of the hidden profiles.
 </Tip>
 
 ---

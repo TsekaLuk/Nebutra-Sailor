@@ -6,23 +6,20 @@ description: "使用复合组件模式的内容容器。包含五种视觉变体
 ## 使用方法 (Usage)
 
 <ComponentPreview className="max-w-[400px]">
-    <Card variant="bordered" padding="md">
+    <NebutraCard variant="bordered" padding="md">
     <CardHeader>
-      <CardIcon size="md">
-        <span>⚡️</span>
-      </CardIcon>
+      <CardIcon size="md"><span>⚡️</span></CardIcon>
       <CardTitle>快速部署 (Fast Deployments)</CardTitle>
     </CardHeader>
     <CardBody>
-      <CardDescription>
-        几秒钟内即可部署到生产环境，零停机时间。 (Deploy to production in seconds with zero downtime.)
-      </CardDescription>
+      <CardDescription>几秒钟内即可部署到生产环境，零停机时间。 (Deploy to production in seconds with zero downtime.)</CardDescription>
     </CardBody>
-  </Card>
+  </NebutraCard>
 
   ```tsx
 import { Card } from "@nebutra/ui/patterns"
 ```
+</ComponentPreview>
 
 Card 组件使用了 **复合组件 (Compound Component)** API — 可以通过 `Card.Header`、`Card.Body` 等方式访问子组件。
 
@@ -32,20 +29,18 @@ Card 组件使用了 **复合组件 (Compound Component)** API — 可以通过 
 
 ```tsx
 <ComponentPreview className="max-w-[400px]">
-  <Card variant="default" padding="md">
+  <NebutraCard variant="default" padding="md">
     <CardHeader>
       <CardTitle>创建项目 (Create project)</CardTitle>
     </CardHeader>
     <CardBody>
-      <CardDescription>
-        请填写下方详细信息以开始创作。 (Fill out the details below to get started.)
-      </CardDescription>
+      <CardDescription>请填写下方详细信息以开始创作。 (Fill out the details below to get started.)</CardDescription>
     </CardBody>
     <CardFooter className="flex justify-end gap-2">
       <Button variant="outline">取消 (Cancel)</Button>
       <Button>创建 (Create)</Button>
     </CardFooter>
-  </Card>
+  </NebutraCard>
 </ComponentPreview>
 ```
 
@@ -95,21 +90,18 @@ import { Zap } from "lucide-react"
     <CardTitle>快速部署 (Fast Deployments)</CardTitle>
   </CardHeader>
   <CardBody>
-    <CardDescription>
-      几秒钟内即可部署到生产环境，零停机时间。 (Deploy to production in seconds with zero downtime.)
-    </CardDescription>
+    <CardDescription>几秒钟内即可部署到生产环境，零停机时间。 (Deploy to production in seconds with zero downtime.)</CardDescription>
   </CardBody>
 </Card>
 ```
-</ComponentPreview>
 
 ### 渐变特色卡片 (Gradient Featured Card)
 
 <ComponentPreview className="max-w-[400px]">
-    <Card variant="gradient" padding="lg">
+    <NebutraCard variant="gradient" padding="lg">
     <CardHeader>
       <CardTitle>专业版方案 (Pro Plan)</CardTitle>
-      <CardDescription>助您更快交付所需的一切。 (Everything you need to ship faster.)</CardDescription>
+      <CardDescription as="div">助您更快交付所需的一切。 (Everything you need to ship faster.)</CardDescription>
     </CardHeader>
     <CardBody>
       <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/月 (mo)</span></p>
@@ -117,7 +109,7 @@ import { Zap } from "lucide-react"
     <CardFooter>
       <Button className="w-full">立即开始 (Get started)</Button>
     </CardFooter>
-  </Card>
+  </NebutraCard>
 
   ```tsx
 <Card variant="gradient" padding="lg">

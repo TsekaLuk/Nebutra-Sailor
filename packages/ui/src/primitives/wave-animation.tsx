@@ -177,7 +177,7 @@ export function WaveAnimation({
         const waveHeight =
           2 - (Math.sin(i + time / 200) / 2) * canvas.height * amplitude;
 
-        ctx.fillStyle = palette[Math.floor(i + time / 200) % palette.length];
+        ctx.fillStyle = palette[Math.floor(i + time / 200) % palette.length] ?? "#000";
         ctx.fillRect(x, canvas.height / 2, barWidth, waveHeight);
         x += barWidth;
       }

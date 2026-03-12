@@ -17,8 +17,8 @@
    ============================================ */
 :root {
   /* Wide-gamut bridge: default to sRGB, upgrade to Display-P3 when available. */
-  --nebutra-brand-blue: #0033FE;
-  --nebutra-brand-cyan: #0BF1C3;
+  --nebutra-brand-blue: #6366f1;
+  --nebutra-brand-cyan: #80ffe0;
 
   /* ===========================================
      Nebutra Brand Color Scales
@@ -26,18 +26,17 @@
      =========================================== */
 
   /* 云毓蓝 (Nebutra Blue) - Primary Brand Color Scale */
-  --nebutra-blue-50: #f0f4ff;
-  --nebutra-blue-100: #dbe4ff;
-  --nebutra-blue-200: #bac8ff;
-  --nebutra-blue-300: #91a7ff;
-  --nebutra-blue-400: #5c7cfa;
+  --nebutra-blue-50: #eef2ff;
+  --nebutra-blue-100: #e0e7ff;
+  --nebutra-blue-200: #c7d2fe;
+  --nebutra-blue-300: #a5b4fc;
+  --nebutra-blue-400: #818cf8;
   --nebutra-blue-500: var(--nebutra-brand-blue);
   /* Base brand color */
-  --nebutra-blue-600: #002ad4;
-  --nebutra-blue-700: #0021ab;
-  --nebutra-blue-800: #001882;
-  --nebutra-blue-900: #000f59;
-  --nebutra-blue-950: #000830;
+  --nebutra-blue-600: #4f46e5;
+  --nebutra-blue-800: #3730a3;
+  --nebutra-blue-900: #312e81;
+  --nebutra-blue-950: #1e1b4b;
 
   /* 云毓青 (Nebutra Cyan) - Accent Brand Color Scale */
   --nebutra-cyan-50: #e6fff8;
@@ -180,13 +179,13 @@
   --popover-foreground: 222 47% 11%;
 
   /* Primary - Nebutra Blue 500 */
-  --primary: 228 100% 50%;
-  /* #0033FE */
+  --primary: 239 84% 67%;
+  /* #6366f1 */
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary - Nebutra Cyan 500 */
-  --secondary: 168 91% 49%;
-  /* #0BF1C3 */
+  /* Secondary - Nebutra Cyan 200 */
+  --secondary: 165 100% 75%;
+  /* #80ffe0 */
   --secondary-foreground: 222 47% 11%;
 
   /* Muted - Neutral scale */
@@ -196,9 +195,9 @@
   /* nebutra-neutral-500 */
 
   /* Accent - Light blue tint */
-  --accent: 228 100% 97%;
+  --accent: 238 100% 97%;
   /* nebutra-blue-50 */
-  --accent-foreground: 228 100% 50%;
+  --accent-foreground: 239 84% 67%;
   /* nebutra-blue-500 */
 
   /* Destructive */
@@ -214,15 +213,15 @@
   --warning-foreground: 222 47% 11%;
 
   /* Info — VI: Info = Brand Blue, not sky/teal */
-  --info: 228 100% 50%;
-  /* #0033FE — same as primary */
+  --info: 239 84% 67%;
+  /* #6366f1 — same as primary */
   --info-foreground: 0 0% 100%;
 
   /* Border, Input, Ring */
   --border: 240 5.9% 90%;
   /* precise neutral per Geist spec */
   --input: 240 5.9% 90%;
-  --ring: 228 100% 50%;
+  --ring: 239 84% 67%;
   /* nebutra-blue-500 — focus ring = brand blue */
 
   /* Geist Design System color scale (used by 21st.dev components and badges) */
@@ -259,8 +258,8 @@
   --ds-turbo-start: #ff1e56;
   --ds-turbo-end: #0096ff;
 
-  /* Border Radius — 6px (Geist-matching, more rounded than 4px) */
-  --radius: 0.375rem;
+  /* Border Radius — 21st.dev style highly rounded geometry */
+  --radius: 0.75rem;
 
   /* Transition tokens — 150ms ease-out universal */
   --transition-duration: 150ms;
@@ -274,23 +273,23 @@
   --sidebar: 210 40% 98%;
   /* nebutra-neutral-50 */
   --sidebar-foreground: 215 25% 27%;
-  --sidebar-primary: 228 100% 50%;
+  --sidebar-primary: 239 84% 67%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 228 100% 97%;
-  --sidebar-accent-foreground: 228 100% 50%;
+  --sidebar-accent: 238 100% 97%;
+  --sidebar-accent-foreground: 239 84% 67%;
   --sidebar-border: 214 32% 91%;
-  --sidebar-ring: 228 100% 50%;
+  --sidebar-ring: 239 84% 67%;
 
   /* Chart colors (for data visualization) */
-  --chart-1: 228 100% 50%;
+  --chart-1: 239 84% 67%;
   /* nebutra-blue */
-  --chart-2: 168 91% 49%;
-  /* nebutra-cyan */
-  --chart-3: 228 100% 70%;
-  /* nebutra-blue-300 */
+  --chart-2: 165 100% 75%;
+  /* nebutra-cyan-200 */
+  --chart-3: 239 84% 67%;
+  /* nebutra-blue-500 */
   --chart-4: 168 91% 70%;
   /* nebutra-cyan-300 */
-  --chart-5: 228 100% 35%;
+  --chart-5: 244 60% 41%;
   /* nebutra-blue-700 */
 
   /* ===========================================
@@ -308,13 +307,18 @@
      Dark mode overrides are in .dark below.
      =========================================== */
   --elevation-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --elevation-sm: 0 1px 3px 0 rgb(0 0 0 / 0.10), 0 1px 2px -1px rgb(0 0 0 / 0.10);
-  --elevation-md: 0 4px 6px -1px rgb(0 0 0 / 0.10), 0 2px 4px -2px rgb(0 0 0 / 0.10);
-  --elevation-lg: 0 10px 15px -3px rgb(0 0 0 / 0.10), 0 4px 6px -4px rgb(0 0 0 / 0.10);
-  --elevation-xl: 0 20px 25px -5px rgb(0 0 0 / 0.10), 0 8px 10px -6px rgb(0 0 0 / 0.10);
-  --elevation-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --elevation-brand: 0 0 0 1px rgb(0 51 254 / 0.15), 0 4px 20px -2px rgb(0 51 254 / 0.20);
-  --elevation-brand-lg: 0 0 0 1px rgb(0 51 254 / 0.20), 0 8px 40px -4px rgb(0 51 254 / 0.30);
+  --elevation-sm: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+  /* Upgraded from sm to md dimensions */
+  --elevation-md: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  /* Upgraded from md to lg dimensions */
+  --elevation-lg: 0 20px 25px -5px rgb(0 0 0 / 0.10), 0 8px 10px -6px rgb(0 0 0 / 0.10);
+  /* Upgraded from lg to xl dimensions */
+  --elevation-xl: 0 25px 50px -12px rgb(0 0 0 / 0.15);
+  /* Upgraded from xl to 2xl dimensions */
+  --elevation-2xl: 0 35px 60px -15px rgb(0 0 0 / 0.20);
+  /* Deeper than standard */
+  --elevation-brand: 0 0 0 1px rgb(79 70 229 / 0.15), 0 8px 30px -4px rgb(79 70 229 / 0.25);
+  --elevation-brand-lg: 0 0 0 1px rgb(79 70 229 / 0.20), 0 12px 50px -6px rgb(79 70 229 / 0.35);
 }
 
 /* oklch overrides for --ds-gray-* (light mode) — all modern browsers as of 2024.
@@ -341,8 +345,8 @@
 @supports (color: color(display-p3 1 1 1)) {
   :root {
     /* Richer neon brand values on P3 displays with sRGB fallback above. */
-    --nebutra-brand-blue: color(display-p3 0.03 0.19 0.99);
-    --nebutra-brand-cyan: color(display-p3 0.07 0.94 0.79);
+    --nebutra-brand-blue: color(display-p3 0.294 0.263 0.89);
+    --nebutra-brand-cyan: color(display-p3 0.5 1 0.88);
   }
 }
 
@@ -451,13 +455,13 @@
   --popover-foreground: 210 40% 98%;
 
   /* Primary - Nebutra Blue 400 (brighter for dark mode) */
-  --primary: 228 95% 67%;
-  /* #5c7cfa - nebutra-blue-400 */
+  --primary: 234 89% 74%;
+  /* #818cf8 - nebutra-blue-400 */
   --primary-foreground: 222 47% 4%;
 
-  /* Secondary - Nebutra Cyan 400 */
-  --secondary: 168 96% 54%;
-  /* #1af7c8 - nebutra-cyan-400 */
+  /* Secondary - Nebutra Cyan 200 (brighter for dark mode) */
+  --secondary: 165 100% 75%;
+  /* #80ffe0 - nebutra-cyan-200 */
   --secondary-foreground: 222 47% 4%;
 
   /* Muted - Dark neutral */
@@ -467,9 +471,9 @@
   /* nebutra-neutral-400 */
 
   /* Accent - Dark blue */
-  --accent: 228 100% 12%;
-  /* dark nebutra-blue */
-  --accent-foreground: 228 95% 67%;
+  --accent: 244 47% 15%;
+  /* nebutra-blue-950 */
+  --accent-foreground: 234 89% 74%;
   /* nebutra-blue-400 */
 
   /* Destructive */
@@ -486,7 +490,7 @@
   --warning-foreground: 210 40% 98%;
 
   /* Info — lighter brand blue for dark mode */
-  --info: 228 95% 67%;
+  --info: 234 89% 74%;
   /* nebutra-blue-400 */
   --info-foreground: 222 47% 4%;
 
@@ -494,7 +498,7 @@
   --border: 217 33% 17%;
   /* nebutra-neutral-800 */
   --input: 217 33% 17%;
-  --ring: 228 95% 67%;
+  --ring: 234 89% 74%;
   /* nebutra-blue-400 */
 
   /* Geist Design System color scale — dark mode */
@@ -530,35 +534,34 @@
   /* Sidebar */
   --sidebar: 222 47% 6%;
   --sidebar-foreground: 210 40% 96%;
-  --sidebar-primary: 228 95% 67%;
+  --sidebar-primary: 234 89% 74%;
   --sidebar-primary-foreground: 222 47% 4%;
-  --sidebar-accent: 228 100% 12%;
-  --sidebar-accent-foreground: 228 95% 67%;
+  --sidebar-accent: 244 47% 15%;
+  --sidebar-accent-foreground: 234 89% 74%;
   --sidebar-border: 217 33% 17%;
-  --sidebar-ring: 228 95% 67%;
+  --sidebar-ring: 234 89% 74%;
 
   /* Chart colors - brighter for dark mode */
-  --chart-1: 228 95% 67%;
+  --chart-1: 234 89% 74%;
+  /* nebutra-blue-500 */
+  --chart-2: 165 100% 75%;
+  /* nebutra-cyan-200 */
+  --chart-3: 234 89% 74%;
   /* nebutra-blue-400 */
-  --chart-2: 168 96% 54%;
-  /* nebutra-cyan-400 */
-  --chart-3: 228 100% 82%;
-  /* nebutra-blue-200 */
   --chart-4: 168 100% 75%;
   /* nebutra-cyan-200 */
-  --chart-5: 228 100% 50%;
-  /* nebutra-blue-500 */
+  --chart-5: 243 75% 59%;
+  /* nebutra-blue-600 */
 
-  /* Shadow — dark mode (pure black backdrop, higher opacity)
-     Brand glow uses 云毓蓝-400 #5c7cfa for visibility on dark background */
+  /* Shadow — dark mode (pure black backdrop, higher opacity but softer blur per 21st.dev) */
   --elevation-xs: 0 1px 2px 0 rgb(0 0 0 / 0.30);
-  --elevation-sm: 0 1px 3px 0 rgb(0 0 0 / 0.40), 0 1px 2px -1px rgb(0 0 0 / 0.40);
-  --elevation-md: 0 4px 6px -1px rgb(0 0 0 / 0.40), 0 2px 4px -2px rgb(0 0 0 / 0.40);
-  --elevation-lg: 0 10px 15px -3px rgb(0 0 0 / 0.50), 0 4px 6px -4px rgb(0 0 0 / 0.50);
-  --elevation-xl: 0 20px 25px -5px rgb(0 0 0 / 0.60), 0 8px 10px -6px rgb(0 0 0 / 0.60);
-  --elevation-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.80);
-  --elevation-brand: 0 0 0 1px rgb(92 124 250 / 0.25), 0 4px 20px -2px rgb(92 124 250 / 0.30);
-  --elevation-brand-lg: 0 0 0 1px rgb(92 124 250 / 0.30), 0 8px 40px -4px rgb(92 124 250 / 0.40);
+  --elevation-sm: 0 4px 6px -1px rgb(0 0 0 / 0.50), 0 2px 4px -2px rgb(0 0 0 / 0.50);
+  --elevation-md: 0 10px 15px -3px rgb(0 0 0 / 0.60), 0 4px 6px -4px rgb(0 0 0 / 0.60);
+  --elevation-lg: 0 20px 25px -5px rgb(0 0 0 / 0.70), 0 8px 10px -6px rgb(0 0 0 / 0.70);
+  --elevation-xl: 0 25px 50px -12px rgb(0 0 0 / 0.85);
+  --elevation-2xl: 0 40px 70px -15px rgb(0 0 0 / 1.0);
+  --elevation-brand: 0 0 0 1px rgb(99 102 241 / 0.25), 0 8px 30px -4px rgb(99 102 241 / 0.40);
+  --elevation-brand-lg: 0 0 0 1px rgb(99 102 241 / 0.30), 0 12px 50px -6px rgb(99 102 241 / 0.50);
 }
 
 /* oklch overrides for --ds-gray-* (dark mode) — all modern browsers as of 2024.
@@ -901,13 +904,13 @@ html {
   }
 
   to {
-    height: var(--radix-accordion-content-height);
+    height: var(--accordion-panel-height);
   }
 }
 
 @keyframes accordion-up {
   from {
-    height: var(--radix-accordion-content-height);
+    height: var(--accordion-panel-height);
   }
 
   to {

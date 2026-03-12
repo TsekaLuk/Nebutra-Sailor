@@ -3,6 +3,30 @@ title: "极光文本 (Aurora Text)"
 description: "动态的极光渐变文本。颜色持续变换和滚动 —— 非常适合用于 Hero 标题和品牌点缀。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <AuroraTextDemo />
+
+```tsx title="aurora-text-demo.tsx"
+"use client";
+
+import { AuroraText } from "@nebutra/ui/primitives";
+
+export function AuroraTextDemo() {
+    return (
+        <div className="flex w-full items-center justify-center p-12 text-center">
+            <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl">
+                Build <AuroraText>beautiful</AuroraText> apps
+            </h1>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

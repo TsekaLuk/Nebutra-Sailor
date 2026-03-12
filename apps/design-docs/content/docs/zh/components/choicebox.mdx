@@ -3,6 +3,46 @@ title: "选择框 (Choicebox)"
 description: "卡片样式的选择控件，支持单选 (radio) 和多选 (checkbox) 模式。具有更大的点击热区，包含标题、描述和可选的自定义内容。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <ChoiceboxDemo />
+
+```tsx title="choicebox-demo.tsx"
+import { useState } from "react";
+import { ChoiceboxGroup } from "@nebutra/ui/primitives";
+
+export function ChoiceboxDemo() {
+    const [value, setValue] = useState("trial");
+
+    return (
+        <div className="w-full max-w-2xl px-4 py-8">
+            <ChoiceboxGroup
+                direction="row"
+                label="Select a plan"
+                type="radio"
+                value={value}
+                onChange={(v) => setValue(v as string)}
+            >
+                <ChoiceboxGroup.Item
+                    title="Pro Trial"
+                    description="Free for two weeks"
+                    value="trial"
+                />
+                <ChoiceboxGroup.Item
+                    title="Pro"
+                    description="Get started now"
+                    value="pro"
+                />
+            </ChoiceboxGroup>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `ChoiceboxGroup` 是一个提供卡片样式选择项的复合组件。每个条目都有标题、描述以及在选中时显示的可选自定义内容。支持单选（radio）和多选（checkbox）模式。

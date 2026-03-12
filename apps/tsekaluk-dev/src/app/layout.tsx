@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import { getLocale } from "next-intl/server";
+import { Providers } from "@/components/providers";
 import "./globals.css";
+
+export const metadata: Metadata = {
+  manifest: "/site.webmanifest",
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,15 +34,10 @@ export default async function RootLayout({
       className={`${inter.variable} ${playfair.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <body className="antialiased overflow-x-hidden text-gray-900 relative bg-[#fafafa] dark:bg-[#0a0a0a] dark:text-white">
+        <Providers>
           {children}
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

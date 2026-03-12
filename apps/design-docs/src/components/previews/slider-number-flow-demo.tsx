@@ -10,7 +10,7 @@ export function SliderNumberFlowDemo() {
         <div className="flex w-full items-center justify-center py-8">
             <SliderNumberFlow
                 value={value}
-                onValueChange={setValue}
+                onValueChange={(val) => setValue(Array.isArray(val) ? [...val] : [val])}
                 min={0}
                 max={100}
                 step={1}

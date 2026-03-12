@@ -3,6 +3,59 @@ title: 头像圈 (AvatarCircles)
 description: 重叠的圆形头像堆栈，带有可选的超出数量指示器。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <AvatarCirclesDemo />
+
+```tsx title="avatar-circles-demo.tsx"
+"use client";
+
+import { AvatarCircles } from "@nebutra/ui/primitives";
+
+const sampleAvatars = [
+    {
+        imageUrl: "https://avatars.githubusercontent.com/u/20110627",
+        profileUrl: "https://github.com/rdev",
+        alt: "User 1",
+    },
+    {
+        imageUrl: "https://avatars.githubusercontent.com/u/4211028",
+        profileUrl: "https://github.com/user2",
+        alt: "User 2",
+    },
+    {
+        imageUrl: "https://avatars.githubusercontent.com/u/583231",
+        profileUrl: "https://github.com/octocat",
+        alt: "Octocat",
+    },
+    {
+        imageUrl: "https://avatars.githubusercontent.com/u/9919",
+        profileUrl: "https://github.com/user4",
+        alt: "User 4",
+    },
+];
+
+export function AvatarCirclesDemo() {
+    return (
+        <div className="flex w-full items-center justify-center p-8">
+            <div className="flex items-center gap-4">
+                <AvatarCircles avatarUrls={sampleAvatars} numPeople={1200} />
+                <div>
+                    <p className="text-sm font-semibold">Join 1,200+ developers</p>
+                    <p className="text-xs text-muted-foreground">
+                        Building with Nebutra today
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `AvatarCircles` 渲染一行重叠的圆形头像图像，采用 `-space-x-4` 的负间距。在最后一个头像后会显示一个可选的超出计数器（例如 `+99`），该计数器可以链接至 `overflowUrl`。
@@ -57,7 +110,7 @@ const avatars = [
 | ------------ | -------- | ----------------------------------------- |
 | `imageUrl`   | `string` | 头像图像 URL |
 | `profileUrl` | `string` | 点击头像时的链接地址 |
-| `alt`        | `string` | 替代文本（默认为 "Avatar {index}"） |
+| `alt`        | `string` | 替代文本（默认为 "Avatar &#123;index&#125;"） |
 
 ## 注意事项 (Notes)
 

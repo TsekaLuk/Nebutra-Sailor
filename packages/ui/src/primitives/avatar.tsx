@@ -1,9 +1,8 @@
 "use client";
 
 import * as React from "react";
-import * as AvatarPrimitive from "@radix-ui/react-avatar";
+import { Avatar as BaseAvatar } from "@base-ui-components/react/avatar";
 import { cn } from "../utils/cn";
-import { withHtmlProps } from "../utils/primitive-props";
 
 // ─── Size Map ─────────────────────────────────────────────────────────────────
 // Matches avatarTokens: xs=20 sm=32 md=40 lg=56 xl=80
@@ -18,21 +17,18 @@ const sizeClasses = {
 
 type AvatarSize = keyof typeof sizeClasses;
 
-// Radix types don't resolve HTML props with React 19 + exactOptionalPropertyTypes.
-const RadixRoot = withHtmlProps<"span">(AvatarPrimitive.Root);
-const RadixImage = withHtmlProps<"img">(AvatarPrimitive.Image);
-const RadixFallback = withHtmlProps<"span">(AvatarPrimitive.Fallback);
+// Base UI handles standard HTML props natively.
 
 // ─── Avatar ───────────────────────────────────────────────────────────────────
 
-export interface AvatarProps extends React.ComponentPropsWithoutRef<"span"> {
+export type AvatarProps = React.ComponentPropsWithoutRef<typeof BaseAvatar.Root> & {
   /** Size preset — xs=20px sm=32px md=40px lg=56px xl=80px */
   size?: AvatarSize;
-}
+};
 
 const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
   ({ className, size = "md", ...props }, ref) => (
-    <RadixRoot
+    <BaseAvatar.Root
       ref={ref}
       className={cn(
         "relative flex shrink-0 overflow-hidden rounded-full",
@@ -43,32 +39,32 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
     />
   ),
 );
-Avatar.displayName = AvatarPrimitive.Root.displayName;
+Avatar.displayName = "Avatar";
 
 // ─── AvatarImage ──────────────────────────────────────────────────────────────
 
 const AvatarImage = React.forwardRef<
   HTMLImageElement,
-  React.ComponentPropsWithoutRef<"img">
+  React.ComponentPropsWithoutRef<typeof BaseAvatar.Image>
 >(({ className, ...props }, ref) => (
-  <RadixImage
+  <BaseAvatar.Image
     ref={ref}
     className={cn("aspect-square h-full w-full", className)}
     {...props}
   />
 ));
-AvatarImage.displayName = AvatarPrimitive.Image.displayName;
+AvatarImage.displayName = "AvatarImage";
 
 // ─── AvatarFallback ───────────────────────────────────────────────────────────
 
-export interface AvatarFallbackProps extends React.ComponentPropsWithoutRef<"span"> {
+export type AvatarFallbackProps = React.ComponentPropsWithoutRef<typeof BaseAvatar.Fallback> & {
   /** Pass the same size as the parent Avatar for correct font size */
   size?: AvatarSize;
-}
+};
 
 const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
   ({ className, size = "md", ...props }, ref) => (
-    <RadixFallback
+    <BaseAvatar.Fallback
       ref={ref}
       className={cn(
         "flex h-full w-full items-center justify-center rounded-full bg-muted font-medium text-muted-foreground",
@@ -79,7 +75,7 @@ const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
     />
   ),
 );
-AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
+AvatarFallback.displayName = "AvatarFallback";
 
 // ─── AvatarGroup ──────────────────────────────────────────────────────────────
 
@@ -161,7 +157,7 @@ function AvatarGroup({
           >
             <AvatarFallback
               size={size}
-              className="bg-[var(--neutral-3)] text-[0.625rem] font-semibold leading-none text-[var(--neutral-11)]"
+              className="bg-muted text-[0.625rem] font-semibold leading-none text-muted-foreground"
             >
               +{overflowCount}
             </AvatarFallback>

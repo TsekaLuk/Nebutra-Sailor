@@ -3,6 +3,28 @@ title: CheckboxGroup
 description: A layout wrapper for grouping multiple Checkbox items with accessible labeling.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <CheckboxGroupDemo />
+
+```tsx title="checkbox-group-demo.tsx"
+import { CheckboxGroup, Checkbox } from "@nebutra/ui/primitives";
+
+export function CheckboxGroupDemo() {
+    return (
+        <CheckboxGroup label="Select features">
+            <Checkbox>Analytics</Checkbox>
+            <Checkbox>API Access</Checkbox>
+            <Checkbox>SSO</Checkbox>
+        </CheckboxGroup>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `CheckboxGroup` is a simple layout wrapper that groups multiple `Checkbox` items with:

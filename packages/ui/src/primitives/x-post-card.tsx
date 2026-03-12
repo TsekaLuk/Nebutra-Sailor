@@ -59,11 +59,11 @@ function MagicXPost({ tweet: t, components, className }: MagicXPostProps) {
         className,
       )}
     >
-      <TweetHeader tweet={tweet} components={components} />
+      <TweetHeader tweet={tweet} {...(components && { components })} />
       {tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />}
       <TweetBody tweet={tweet} />
       {tweet.mediaDetails?.length ? (
-        <TweetMedia tweet={tweet} components={components} />
+        <TweetMedia tweet={tweet} {...(components && { components })} />
       ) : null}
       <TweetInfo tweet={tweet} />
       <TweetReplies tweet={tweet} />
@@ -112,7 +112,7 @@ export function ClientXPostCard({
   }
 
   return (
-    <MagicXPost tweet={data} components={components} className={className} />
+    <MagicXPost tweet={data} {...(components && { components })} className={cn(className)} />
   );
 }
 

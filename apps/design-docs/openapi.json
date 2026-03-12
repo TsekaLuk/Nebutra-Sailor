@@ -123,7 +123,9 @@
                                     "properties": {
                                         "ready": {
                                             "type": "boolean",
-                                            "const": true
+                                            "enum": [
+                                                true
+                                            ]
                                         }
                                     },
                                     "required": [
@@ -142,7 +144,9 @@
                                     "properties": {
                                         "ready": {
                                             "type": "boolean",
-                                            "const": false
+                                            "enum": [
+                                                false
+                                            ]
                                         },
                                         "reason": {
                                             "type": "string"
@@ -177,7 +181,9 @@
                                     "properties": {
                                         "live": {
                                             "type": "boolean",
-                                            "const": true
+                                            "enum": [
+                                                true
+                                            ]
                                         }
                                     },
                                     "required": [
@@ -200,7 +206,22 @@
                 "operationId": "getPing",
                 "responses": {
                     "200": {
-                        "description": "pong"
+                        "description": "pong",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "enum": [
+                                                "pong"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -543,7 +564,7 @@
                                     "type": "object",
                                     "properties": {
                                         "document": {
-                                            "type": "object"
+                                            "$ref": "#/components/schemas/DocumentItem"
                                         }
                                     }
                                 }
@@ -592,7 +613,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "const": true
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -898,8 +925,10 @@
                         "type": "boolean"
                     },
                     "consentedVersion": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "currentVersion": {
                         "type": "string"
@@ -908,9 +937,11 @@
                         "type": "boolean"
                     },
                     "lastConsentedAt": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
                     }
                 },
                 "required": [
@@ -1009,8 +1040,10 @@
                         "type": "boolean"
                     },
                     "preferences": {
-                        "type": "object",
-                        "nullable": true,
+                        "type": [
+                            "object",
+                            "null"
+                        ],
                         "properties": {
                             "necessary": {
                                 "type": "boolean"
@@ -1053,43 +1086,58 @@
                     "documents": {
                         "type": "array",
                         "items": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "slug": {
-                                    "type": "string"
-                                },
-                                "type": {
-                                    "type": "string"
-                                },
-                                "locale": {
-                                    "type": "string"
-                                },
-                                "version": {
-                                    "type": "string"
-                                },
-                                "title": {
-                                    "type": "string"
-                                },
-                                "summary": {
-                                    "type": "string",
-                                    "nullable": true
-                                },
-                                "effectiveAt": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                },
-                                "isRequired": {
-                                    "type": "boolean"
-                                }
-                            }
+                            "$ref": "#/components/schemas/DocumentItem"
                         }
                     }
                 },
                 "required": [
                     "documents"
+                ]
+            },
+            "DocumentItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "locale": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "effectiveAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "isRequired": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "id",
+                    "slug",
+                    "type",
+                    "locale",
+                    "version",
+                    "title",
+                    "effectiveAt",
+                    "isRequired"
                 ]
             },
             "IngestRequest": {

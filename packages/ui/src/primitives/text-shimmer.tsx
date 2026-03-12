@@ -108,7 +108,7 @@ export function TextShimmer({
         className,
       )}
       initial={{ backgroundPosition: "100% center" }}
-      animate={paused ? undefined : { backgroundPosition: "0% center" }}
+      {...(paused ? {} : { animate: { backgroundPosition: "0% center" } })}
       transition={{
         repeat: Infinity,
         duration,
@@ -118,7 +118,7 @@ export function TextShimmer({
         {
           "--spread": `${dynamicSpread}px`,
           backgroundImage: `var(--bg), linear-gradient(var(--base-color), var(--base-color))`,
-        } as React.CSSProperties
+        } as any // eslint-disable-line @typescript-eslint/no-explicit-any
       }
     >
       {children}

@@ -7,13 +7,13 @@ import { AccordionTrigger, AccordionContent, AccordionItem } from "@nebutra/ui/p
 
 export function Accordion4Demo() {
   return (
-    <NebutraAccordion type="single" collapsible className="w-full">
-    <AccordionItem value="item-1">
-      <AccordionTrigger size="small">Compact Question</AccordionTrigger>
-      <AccordionContent size="small">
-        Compact content with reduced padding.
-      </AccordionContent>
-    </AccordionItem>
-  </NebutraAccordion>
+    <NebutraAccordion type="single" className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger size="small">Compact Question</AccordionTrigger>
+        <AccordionContent size="small">
+          Compact content with reduced padding.
+        </AccordionContent>
+      </AccordionItem>
+    </NebutraAccordion>
   );
 }

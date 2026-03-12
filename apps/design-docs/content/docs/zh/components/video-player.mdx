@@ -3,6 +3,31 @@ title: 视频播放器 (VideoPlayer)
 description: 自定义视频播放器，带有动态控制层、进度条、音量调节和播放倍速设置。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <VideoPlayerDemo />
+
+```tsx title="video-player-demo.tsx"
+import { VideoPlayer } from "@nebutra/ui/primitives";
+
+export function VideoPlayerDemo() {
+    return (
+        <div className="w-full max-w-4xl px-4 py-8">
+            <VideoPlayer
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                autoPlay={false}
+                loop={true}
+                className="rounded-xl overflow-hidden shadow-lg border border-border"
+            />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `VideoPlayer` 是一个基于 HTML5 `<video>` 和 Framer Motion 动画构建的功能完备视频播放器：

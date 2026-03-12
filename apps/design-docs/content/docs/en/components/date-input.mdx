@@ -3,6 +3,26 @@ title: DateInput
 description: Keyboard-editable date and time input with individually segmented fields, re-exported from HeroUI.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <DateInputDemo />
+
+```tsx title="date-input-demo.tsx"
+import { DateInput } from "@nebutra/ui/primitives";
+
+export function DateInputDemo() {
+    return (
+        <div className="w-full max-w-sm px-4 py-12 flex justify-center items-center">
+            <DateInput label="Event date" />
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `DateInput` re-exports `@heroui/date-input` as a drop-in. Each date part (year, month, day) is an individually editable segment. Powered by `@internationalized/date`.

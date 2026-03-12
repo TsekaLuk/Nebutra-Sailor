@@ -3,6 +3,26 @@ title: iPhone 模型 (IphoneMockup)
 description: 写实的 iPhone 15 风格 SVG 设备框架，用于展示移动端应用。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <IphoneMockupDemo />
+
+```tsx title="iphone-mockup-demo.tsx"
+import { IphoneMockup } from "@nebutra/ui/primitives";
+
+export function IphoneMockupDemo() {
+    return (
+        <div className="w-full max-w-xs px-4 py-8 mx-auto">
+            <IphoneMockup className="w-full" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `IphoneMockup` 渲染一个像素级精确的 iPhone 15 Pro SVG 框架。屏幕内容（图片或视频）会被裁剪成与真机一致的圆角。组件具有完全响应式特性 —— 可以通过容器宽度来控制尺寸。

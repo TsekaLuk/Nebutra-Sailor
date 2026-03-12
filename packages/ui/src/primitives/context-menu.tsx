@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
+import { ContextMenu as BaseContextMenu } from "@base-ui-components/react/context-menu";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -16,7 +16,7 @@ export interface ContextMenuItemProps {
    * Maps to Radix's onSelect — fires for both pointer and keyboard interactions.
    * When `href` is set, navigation itself is the selection action and onSelect is not wired.
    */
-  onSelect?: (event: Event) => void;
+  onSelect?: (event: Event | React.SyntheticEvent) => void;
   /** Disable the item */
   disabled?: boolean;
   /** Navigate to this URL when selected (renders as <a>) */
@@ -38,48 +38,66 @@ export interface ContextMenuSeparatorProps {
   className?: string;
 }
 
-export type ContextMenuContentProps = React.ComponentPropsWithoutRef<
-  typeof ContextMenuPrimitive.Content
->;
+export interface ContextMenuContentProps extends React.ComponentPropsWithoutRef<typeof BaseContextMenu.Popup> {
+  align?: React.ComponentProps<typeof BaseContextMenu.Positioner>['align'];
+  sideOffset?: React.ComponentProps<typeof BaseContextMenu.Positioner>['sideOffset'];
+  alignOffset?: React.ComponentProps<typeof BaseContextMenu.Positioner>['alignOffset'];
+  side?: React.ComponentProps<typeof BaseContextMenu.Positioner>['side'];
+}
 
 // =============================================================================
 // ContextMenuRoot
 // =============================================================================
 
-export const ContextMenuRoot = ContextMenuPrimitive.Root;
-ContextMenuRoot.displayName = "ContextMenu";
+export const ContextMenuRoot = BaseContextMenu.Root;
 
 // =============================================================================
 // ContextMenuTrigger
 // =============================================================================
 
-export const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
+export const ContextMenuTrigger = React.forwardRef<
+  React.ElementRef<typeof BaseContextMenu.Trigger>,
+  React.ComponentPropsWithoutRef<typeof BaseContextMenu.Trigger> & { asChild?: boolean }
+>(({ asChild, children, render, ...props }, ref) => {
+  const renderElement = asChild && React.isValidElement(children) ? children : render;
+  return (
+    <BaseContextMenu.Trigger
+      ref={ref}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      render={renderElement as any}
+      {...(renderElement ? props : { ...props, children })}
+    />
+  );
+});
 ContextMenuTrigger.displayName = "ContextMenu.Trigger";
 
 // =============================================================================
 // ContextMenuContent
 // =============================================================================
 
+// =============================================================================
+// ContextMenuContent
+// =============================================================================
+
 export const ContextMenuContent = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Content>,
+  React.ElementRef<typeof BaseContextMenu.Popup>,
   ContextMenuContentProps
->(({ className, ...props }, ref) => (
-  <ContextMenuPrimitive.Portal>
-    <ContextMenuPrimitive.Content
-      ref={ref}
-      className={cn(
-        "z-50 min-w-[10rem] overflow-hidden rounded-[var(--radius-md)] border bg-popover",
-        "p-1 text-popover-foreground shadow-md",
-        "data-[state=open]:animate-in data-[state=closed]:animate-out",
-        "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-        "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-        "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2",
-        "data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-        className,
-      )}
-      {...props}
-    />
-  </ContextMenuPrimitive.Portal>
+>(({ className, alignOffset = 0, align = "start", sideOffset = 4, side = "bottom", ...props }, ref) => (
+  <BaseContextMenu.Portal>
+    <BaseContextMenu.Positioner alignOffset={alignOffset} align={align} sideOffset={sideOffset} side={side}>
+      <BaseContextMenu.Popup
+        ref={ref}
+        className={cn(
+          "z-50 min-w-[10rem] overflow-hidden rounded-xl border bg-background/90 backdrop-blur-md",
+          "p-1 text-popover-foreground shadow-xl transition-all outline-none",
+          "data-[starting-style]:zoom-out-95 data-[ending-style]:zoom-out-95",
+          "data-[starting-style]:fade-out-0 data-[ending-style]:fade-out-0",
+          className,
+        )}
+        {...props}
+      />
+    </BaseContextMenu.Positioner>
+  </BaseContextMenu.Portal>
 ));
 ContextMenuContent.displayName = "ContextMenu.Content";
 
@@ -87,7 +105,7 @@ ContextMenuContent.displayName = "ContextMenu.Content";
 // ContextMenuGroup
 // =============================================================================
 
-export const ContextMenuGroup = ContextMenuPrimitive.Group;
+export const ContextMenuGroup = BaseContextMenu.Group;
 ContextMenuGroup.displayName = "ContextMenu.Group";
 
 // =============================================================================
@@ -95,10 +113,10 @@ ContextMenuGroup.displayName = "ContextMenu.Group";
 // =============================================================================
 
 export const ContextMenuLabel = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Label>,
+  React.ElementRef<typeof BaseContextMenu.GroupLabel>,
   ContextMenuLabelProps
 >(({ className, ...props }, ref) => (
-  <ContextMenuPrimitive.Label
+  <BaseContextMenu.GroupLabel
     ref={ref}
     className={cn(
       "px-2 py-1 text-xs font-medium text-muted-foreground",
@@ -114,10 +132,10 @@ ContextMenuLabel.displayName = "ContextMenu.Label";
 // =============================================================================
 
 export const ContextMenuSeparator = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Separator>,
+  React.ElementRef<typeof BaseContextMenu.Separator>,
   ContextMenuSeparatorProps
 >(({ className, ...props }, ref) => (
-  <ContextMenuPrimitive.Separator
+  <BaseContextMenu.Separator
     ref={ref}
     className={cn("-mx-1 my-1 h-px bg-muted", className)}
     {...props}
@@ -130,7 +148,7 @@ ContextMenuSeparator.displayName = "ContextMenu.Separator";
 // =============================================================================
 
 export const ContextMenuItem = React.forwardRef<
-  React.ElementRef<typeof ContextMenuPrimitive.Item>,
+  React.ElementRef<typeof BaseContextMenu.Item>,
   ContextMenuItemProps
 >(({ children, onSelect, disabled, href, prefix, suffix, className }, ref) => {
   const inner = (
@@ -150,21 +168,21 @@ export const ContextMenuItem = React.forwardRef<
   );
 
   return (
-    <ContextMenuPrimitive.Item
+    <BaseContextMenu.Item
       ref={ref}
       {...(disabled !== undefined && { disabled })}
-      {...(onSelect && !href ? { onSelect } : {})}
+      {...(onSelect && !href ? { onClick: (e) => onSelect(e) } : {})}
+      {...(href ? { render: <a href={href} aria-label={typeof children === 'string' ? children : "Link"} /> } : {})}
       className={cn(
         "relative flex cursor-default select-none items-center rounded-[var(--radius-md)] px-2 py-1.5",
         "text-sm outline-none transition-colors",
-        "focus:bg-accent focus:text-accent-foreground",
+        "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
-      asChild={!!href}
     >
-      {href ? <a href={href}>{inner}</a> : inner}
-    </ContextMenuPrimitive.Item>
+      {inner}
+    </BaseContextMenu.Item>
   );
 });
 ContextMenuItem.displayName = "ContextMenu.Item";

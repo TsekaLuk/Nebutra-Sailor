@@ -414,4 +414,12 @@ const Combobox = Object.assign(ComboboxRoot, {
   Separator: ComboboxSeparator,
 });
 
-export { Combobox };
+export {
+  Combobox,
+  ComboboxRoot,
+  ComboboxInput,
+  ComboboxOptionItem,
+  ComboboxEmpty,
+  ComboboxGroupSub,
+  ComboboxSeparator
+};

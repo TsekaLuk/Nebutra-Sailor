@@ -3,6 +3,31 @@ title: "Empty State"
 description: "Fill spaces when no content has been added yet, or is temporarily empty due to the nature of the feature."
 ---
 
+## Demo
+
+<ComponentPreview>
+  <EmptyStateDemo />
+
+```tsx title="empty-state-demo.tsx"
+import { EmptyState } from "@nebutra/ui/primitives";
+import { Activity } from "lucide-react";
+
+export function EmptyStateDemo() {
+    return (
+        <div className="w-full max-w-md mx-auto border rounded-xl p-8 bg-background my-8">
+            <EmptyState.Root
+                icon={<EmptyState.Icon icon={<Activity size={20} />} />}
+                title="Title"
+                description="A message conveying the state of the product."
+            />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 <Note>
   Interactive examples available in [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-emptystate--docs).
 </Note>

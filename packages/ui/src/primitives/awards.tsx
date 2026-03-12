@@ -23,7 +23,7 @@ const levelColors = {
   bronze: "from-amber-600 to-amber-800",
   silver: "from-gray-400 to-gray-600",
   gold: "from-yellow-400 to-yellow-600",
-  platinum: "from-slate-300 to-slate-500",
+  platinum: "from-muted to-muted-foreground",
 };
 
 export function Awards({

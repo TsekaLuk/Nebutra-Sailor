@@ -23,7 +23,7 @@ export function LanguageSwitcher() {
     <div
       role="group"
       aria-label="Language switcher"
-      className="flex items-center rounded-full border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 p-0.5"
+      className="flex items-center rounded-full border border-border bg-muted p-0.5"
     >
       {LOCALES.map((loc) => {
         const isActive = locale === loc.code;
@@ -34,21 +34,20 @@ export function LanguageSwitcher() {
             onClick={() => switchLocale(loc.code)}
             aria-pressed={isActive}
             aria-label={`Switch to ${loc.label}`}
-            className="relative px-3 py-1 text-xs font-medium rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-9)] focus-visible:ring-offset-1"
+            className="relative px-3 py-1 text-xs font-medium rounded-full transition-transform duration-150 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-9)] focus-visible:ring-offset-1"
           >
             {isActive && (
               <motion.div
                 layoutId="lang-pill"
-                className="absolute inset-0 bg-white dark:bg-gray-900 rounded-full shadow-sm"
+                className="absolute inset-0 bg-background rounded-full shadow-sm"
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
             )}
             <span
-              className={`relative z-10 transition-colors duration-150 ${
-                isActive
-                  ? "text-gray-900 dark:text-gray-100"
-                  : "text-gray-500 dark:text-gray-400"
-              }`}
+              className={`relative z-10 transition-colors duration-150 ${isActive
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+                }`}
             >
               {loc.label}
             </span>

@@ -3,6 +3,26 @@ title: "仪表盘 (Gauge)"
 description: "用于传达百分比的圆形视觉组件。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <GaugeDemo />
+
+```tsx title="gauge-demo.tsx"
+import { Gauge } from "@nebutra/ui/primitives";
+
+export function GaugeDemo() {
+    return (
+        <div className="w-full max-w-sm px-4 py-8 flex items-center justify-center space-x-4">
+            <Gauge value={72} size={64} label />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 <Note>
   交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-gauge--docs) 中查看。
 </Note>

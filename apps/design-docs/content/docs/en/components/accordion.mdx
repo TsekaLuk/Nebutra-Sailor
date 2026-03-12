@@ -6,8 +6,40 @@ description: Collapsible content sections for progressively disclosing informati
 <ComponentPreview>
   <AccordionDemo />
 
-  ```tsx
-<AccordionDemo />
+  ```tsx title="accordion-demo.tsx"
+"use client";
+
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@nebutra/ui/primitives";
+
+export function AccordionDemo() {
+  return (
+    <Accordion type="single" collapsible className="w-full max-w-md">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It comes with default styles matching the design system.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Is it animated?</AccordionTrigger>
+        <AccordionContent>
+          Yes. Animated by default, but can be disabled with CSS.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
   ```
 </ComponentPreview>
 
@@ -66,7 +98,7 @@ Extends `@radix-ui/react-accordion` `Root` props.
 ### Multiple Open Items
 
 <ComponentPreview className="max-w-[400px]">
-    <Accordion type="multiple" className="w-full">
+    <NebutraAccordion type="multiple" className="w-full">
     <AccordionItem value="item-1">
       <AccordionTrigger>Section One</AccordionTrigger>
       <AccordionContent>Content for section one.</AccordionContent>
@@ -75,10 +107,10 @@ Extends `@radix-ui/react-accordion` `Root` props.
       <AccordionTrigger>Section Two</AccordionTrigger>
       <AccordionContent>Content for section two.</AccordionContent>
     </AccordionItem>
-  </Accordion>
+  </NebutraAccordion>
 
   ```tsx
-<Accordion type="multiple" className="w-full">
+<NebutraAccordion type="multiple" className="w-full">
   <AccordionItem value="item-1">
     <AccordionTrigger>Section One</AccordionTrigger>
     <AccordionContent>Content for section one.</AccordionContent>
@@ -87,47 +119,47 @@ Extends `@radix-ui/react-accordion` `Root` props.
     <AccordionTrigger>Section Two</AccordionTrigger>
     <AccordionContent>Content for section two.</AccordionContent>
   </AccordionItem>
-</Accordion>
+</NebutraAccordion>
 ```
 </ComponentPreview>
 
 ### Controlled Accordion
 
 <ComponentPreview className="max-w-[400px]">
-    <Accordion type="single" defaultValue="item-1" className="w-full">
+    <NebutraAccordion type="single" defaultValue="item-1" className="w-full">
     <AccordionItem value="item-1">
       <AccordionTrigger>Controlled Item</AccordionTrigger>
       <AccordionContent>This accordion is controlled.</AccordionContent>
     </AccordionItem>
-  </Accordion>
+  </NebutraAccordion>
 
   ```tsx
-<Accordion type="single" defaultValue="item-1" className="w-full">
+<NebutraAccordion type="single" defaultValue="item-1" className="w-full">
   <AccordionItem value="item-1">
     <AccordionTrigger>Controlled Item</AccordionTrigger>
     <AccordionContent>This accordion is controlled.</AccordionContent>
   </AccordionItem>
-</Accordion>
+</NebutraAccordion>
 ```
 </ComponentPreview>
 
 ### Disabled Item
 
 <ComponentPreview className="max-w-[400px]">
-    <Accordion type="single" collapsible className="w-full">
+    <NebutraAccordion type="single" className="w-full">
     <AccordionItem value="item-1" disabled>
       <AccordionTrigger>Disabled Section</AccordionTrigger>
       <AccordionContent>This will not open.</AccordionContent>
     </AccordionItem>
-  </Accordion>
+  </NebutraAccordion>
 
   ```tsx
-<Accordion type="single" collapsible className="w-full">
+<NebutraAccordion type="single" className="w-full">
   <AccordionItem value="item-1" disabled>
     <AccordionTrigger>Disabled Section</AccordionTrigger>
     <AccordionContent>This will not open.</AccordionContent>
   </AccordionItem>
-</Accordion>
+</NebutraAccordion>
 ```
 </ComponentPreview>
 
@@ -136,24 +168,24 @@ Extends `@radix-ui/react-accordion` `Root` props.
 A compact variant with reduced padding and smaller text, matching the Geist Collapse `size="small"` variant.
 
 <ComponentPreview className="max-w-[400px]">
-    <Accordion type="single" collapsible className="w-full">
+    <NebutraAccordion type="single" className="w-full">
     <AccordionItem value="item-1">
       <AccordionTrigger size="small">Compact Question</AccordionTrigger>
       <AccordionContent size="small">
         Compact content with reduced padding.
       </AccordionContent>
     </AccordionItem>
-  </Accordion>
+  </NebutraAccordion>
 
   ```tsx
-<Accordion type="single" collapsible className="w-full">
+<NebutraAccordion type="single" className="w-full">
   <AccordionItem value="item-1">
     <AccordionTrigger size="small">Compact Question</AccordionTrigger>
     <AccordionContent size="small">
       Compact content with reduced padding.
     </AccordionContent>
   </AccordionItem>
-</Accordion>
+</NebutraAccordion>
 ```
 </ComponentPreview>
 

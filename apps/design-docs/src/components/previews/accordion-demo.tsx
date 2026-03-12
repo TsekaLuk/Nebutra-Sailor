@@ -9,7 +9,7 @@ import {
 
 export function AccordionDemo() {
   return (
-    <Accordion type="single" collapsible className="w-full max-w-md">
+    <Accordion multiple={false} className="w-full max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>

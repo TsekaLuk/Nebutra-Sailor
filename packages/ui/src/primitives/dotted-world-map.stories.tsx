@@ -34,7 +34,7 @@ export const Default: Story = {
 
 export const DarkTheme: Story = {
   render: () => (
-    <div className="w-[600px] rounded-xl bg-zinc-950 p-4">
+    <div className="w-[600px] rounded-xl bg-background p-4">
       <DottedWorldMap dotColor="#3f3f46" backgroundColor="transparent" />
     </div>
   ),

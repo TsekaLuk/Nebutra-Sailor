@@ -1,12 +1,41 @@
 ---
 title: Events
 description: Event ingestion pipeline
-full: true
-_openapi:
-  operations:
-    - path: /api/v1/events/ingest
-      method: post
 ---
 
-{/* Auto-generated OpenAPI page — rendered by APIPage component */}
-<APIPage operations={[{path:"/api/v1/events/ingest",method:"post"}]} />
+# Event Ingestion API
+
+The Event Ingestion API allows you to send custom events measuring user behavior, system actions, or other metrics into the Nebutra ecosystem.
+
+## Endpoint
+
+`POST /api/v1/events/ingest`
+
+### Request Body
+
+```json
+{
+  "events": [
+    {
+      "eventName": "user_signed_up",
+      "context": {
+        "tenantId": "tenant_123",
+        "occurredAt": "2024-03-10T12:00:00Z"
+      },
+      "payload": {
+        "plan": "premium"
+      },
+      "source": "web"
+    }
+  ]
+}
+```
+
+### Response
+
+```json
+{
+  "success": true,
+  "ingested": 1
+}
+```

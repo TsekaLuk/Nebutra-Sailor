@@ -3,6 +3,73 @@ title: "日历选择器 (Calendar Picker)"
 description: "Geist 风格的日期范围选择器，带有预设快捷方式、多种布局模式和弹出式日历。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <CalendarPickerDemo />
+
+```tsx title="calendar-picker-demo.tsx"
+"use client";
+
+import { CalendarPicker } from "@nebutra/ui/primitives";
+import { useState } from "react";
+
+export function CalendarPickerDemo() {
+    const [range, setRange] = useState<React.ComponentProps<typeof CalendarPicker>["value"]>();
+
+    const presets = {
+        today: {
+            text: "Today",
+            start: new Date(),
+            end: new Date(),
+        },
+        yesterday: {
+            text: "Yesterday",
+            start: new Date(new Date().setDate(new Date().getDate() - 1)),
+            end: new Date(new Date().setDate(new Date().getDate() - 1)),
+        },
+        last7: {
+            text: "Last 7 days",
+            start: new Date(new Date().setDate(new Date().getDate() - 7)),
+            end: new Date(),
+        },
+        last30: {
+            text: "Last 30 days",
+            start: new Date(new Date().setDate(new Date().getDate() - 30)),
+            end: new Date(),
+        },
+    };
+
+    return (
+        <div className="flex flex-col gap-6 w-full max-w-sm mx-auto p-4 py-12 items-center justify-center min-h-[300px]">
+            <div className="flex flex-col gap-2">
+                <span className="text-sm font-medium">Select Date Range</span>
+                <CalendarPicker
+                    value={range}
+                    onChange={setRange}
+                    presets={presets}
+                    allowClear
+                />
+            </div>
+
+            <div className="flex flex-col gap-2">
+                <span className="text-sm font-medium">Compact Layout</span>
+                <CalendarPicker
+                    value={range}
+                    onChange={setRange}
+                    presets={presets}
+                    compact
+                    allowClear
+                />
+            </div>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `CalendarPicker` 是一款受 Geist 启发的日期范围选择器，它结合了 `RangeCalendar` 弹出层和可选的预设快捷方式。它支持多种布局模式：默认（并排）、紧凑、堆叠和水平。

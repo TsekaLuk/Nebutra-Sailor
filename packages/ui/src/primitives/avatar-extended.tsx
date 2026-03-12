@@ -240,7 +240,7 @@ export function DiceBearAvatar({
   const url = `https://api.dicebear.com/9.x/${avatarStyle}/svg?${params}`;
 
   return (
-    <Avatar size={size} className={className} {...props}>
+    <Avatar size={size} className={cn(className)} {...props}>
       <AvatarImage src={url} alt={`Avatar for ${seed}`} />
       <AvatarFallback size={size}>{initials(seed)}</AvatarFallback>
     </Avatar>

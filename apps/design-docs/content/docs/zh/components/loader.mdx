@@ -3,6 +3,28 @@ title: 加载器 (Loader)
 description: 通用的加载指示器，包含 12 种视觉变体 —— 从旋转的圆形到 AI 打字效果。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <LoaderDemo />
+
+```tsx title="loader-demo.tsx"
+import { Loader } from "@nebutra/ui/primitives";
+
+export function LoaderDemo() {
+    return (
+        <div className="w-full max-w-sm px-4 py-8 flex items-center justify-center space-x-4">
+            <Loader />
+            <Loader variant="dots" size="lg" />
+            <Loader variant="loading-dots" text="Processing" />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

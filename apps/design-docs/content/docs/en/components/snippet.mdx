@@ -3,6 +3,24 @@ title: Snippet
 description: Code snippet display with copy-to-clipboard functionality, multiple variants, and multiline support.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <SnippetDemo />
+
+```tsx title="snippet-demo.tsx"
+"use client";
+
+import { Snippet } from "@nebutra/ui/primitives";
+
+export function SnippetDemo() {
+    return <Snippet>npm install @nebutra/ui</Snippet>;
+}
+
+```
+</ComponentPreview>
+
+
 ## Overview
 
 `Snippet` renders code with a `$` prefix and a copy button. Supports single-line and multiline code, 4 visual variants, 6 color schemes, 3 sizes, and configurable border radius.

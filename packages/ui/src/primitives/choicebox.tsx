@@ -445,12 +445,14 @@ function ChoiceboxGroupRoot({
         idx = (idx + dir + order.length) % order.length;
         attempts++;
       } while (
-        itemRefs.current.get(order[idx])?.getAttribute("aria-disabled") ===
-          "true" &&
+        itemRefs.current.get(order[idx] ?? "")?.getAttribute("aria-disabled") ===
+        "true" &&
         attempts < order.length
       );
 
       const nextValue = order[idx];
+      if (nextValue === undefined) return;
+
       const nextEl = itemRefs.current.get(nextValue);
       if (nextEl && nextEl.getAttribute("aria-disabled") !== "true") {
         nextEl.focus();

@@ -8,9 +8,63 @@ description: "Modal dialog that interrupts the user and requires an explicit con
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
   <AlertDialogDemo />
 
-  ```tsx
-<AlertDialogDemo />
-  ```
+  ```tsx title="alert-dialog-demo.tsx"
+"use client";
+
+import { useState } from "react";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@nebutra/ui/primitives";
+
+export function AlertDialogDemo() {
+  const [deleted, setDeleted] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="destructive">
+          {deleted ? "Account Deleted" : "Delete Account"}
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button
+            variant="outline"
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="destructive"
+            onClick={() => {
+              setDeleted(true);
+              setOpen(false);
+            }}
+          >
+            Continue
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+```
 </ComponentPreview>
 
 ```tsx
@@ -36,10 +90,7 @@ export function AlertDialogDemo() {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </AlertDialogDescription>
+          <AlertDialogDescription>This action cannot be undone. This will permanently delete your account and remove your data from our servers.</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -111,13 +162,11 @@ import {
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>Remove item from cart?</AlertDialogTitle>
-        <AlertDialogDescription>
-          The item will be removed from your shopping cart.
-        </AlertDialogDescription>
+        <AlertDialogDescription>The item will be removed from your shopping cart.</AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Keep Item</AlertDialogCancel>
-        <AlertDialogAction onClick={() => console.log("Remove items")}>
+        <AlertDialogAction >
           Remove
         </AlertDialogAction>
       </AlertDialogFooter>
@@ -132,13 +181,11 @@ import {
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>Remove item from cart?</AlertDialogTitle>
-      <AlertDialogDescription>
-        The item will be removed from your shopping cart.
-      </AlertDialogDescription>
+      <AlertDialogDescription>The item will be removed from your shopping cart.</AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
       <AlertDialogCancel>Keep Item</AlertDialogCancel>
-      <AlertDialogAction onClick={() => console.log("Remove items")}>
+      <AlertDialogAction >
         Remove
       </AlertDialogAction>
     </AlertDialogFooter>

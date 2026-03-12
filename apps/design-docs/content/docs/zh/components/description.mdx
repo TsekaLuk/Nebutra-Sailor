@@ -3,6 +3,28 @@ title: "描述 (Description)"
 description: "显示简短的标题和副标题，用以传达用户继续操作所需的额外信息或背景。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <DescriptionDemo />
+
+```tsx title="description-demo.tsx"
+import { Description } from "@nebutra/ui/primitives";
+
+export function DescriptionDemo() {
+    return (
+        <Description
+            title="Section Title"
+            content="Data about this section."
+            tooltip="Additional context about what this section refers to."
+        />
+    );
+}
+
+```
+</ComponentPreview>
+
+
 <Note>
   交互式示例可在 [Storybook](https://storybook.nebutra.dev/?path=/docs/primitives-description--docs) 中查看。
 </Note>

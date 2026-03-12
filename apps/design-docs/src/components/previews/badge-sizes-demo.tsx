@@ -1,6 +1,6 @@
 import { Badge } from "@nebutra/ui/primitives";
 
-export default function BadgeSizesDemo() {
+export function BadgeSizesDemo() {
   return (
     <div className="flex items-end gap-4">
       <Badge size="sm">Small</Badge>

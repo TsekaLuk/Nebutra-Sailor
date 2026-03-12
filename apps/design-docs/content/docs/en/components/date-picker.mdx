@@ -37,31 +37,11 @@ import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 
 ### Controlled
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-    <DatePicker label="Date" defaultValue={parseDate("2024-04-04")} />
-
-  ```tsx
-<DatePicker label="Date" defaultValue={parseDate("2024-04-04")} />
-```
-</ComponentPreview>
+<DatePickerDefaultDemo />
 
 ### With Min/Max
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-    <DateRangePicker
-    label="Period"
-    minValue={today(getLocalTimeZone())}
-    maxValue={today(getLocalTimeZone()).add({ months: 3 })}
-  />
-
-  ```tsx
-<DateRangePicker
-  label="Period"
-  minValue={today(getLocalTimeZone())}
-  maxValue={today(getLocalTimeZone()).add({ months: 3 })}
-/>
-```
-</ComponentPreview>
+<DatePickerMinMaxDemo />
 
 ### Variants
 

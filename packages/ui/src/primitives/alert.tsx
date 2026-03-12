@@ -80,7 +80,7 @@ const alertVariants = cva(
         variant: "mono",
         appearance: "solid",
         className:
-          "bg-[var(--neutral-11)] text-[var(--neutral-1)] dark:bg-[var(--neutral-3)] dark:text-[var(--neutral-12)] *:data-slot-[alert=close]:text-[var(--neutral-1)]",
+          "bg-muted text-muted-foreground dark:bg-muted dark:text-foreground *:data-slot-[alert=close]:text-muted-foreground",
       },
 
       /* Outline */

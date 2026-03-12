@@ -3,6 +3,28 @@ title: Loader
 description: Universal loading indicator with 12 visual variants — from spinning circles to AI typing effects.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <LoaderDemo />
+
+```tsx title="loader-demo.tsx"
+import { Loader } from "@nebutra/ui/primitives";
+
+export function LoaderDemo() {
+    return (
+        <div className="w-full max-w-sm px-4 py-8 flex items-center justify-center space-x-4">
+            <Loader />
+            <Loader variant="dots" size="lg" />
+            <Loader variant="loading-dots" text="Processing" />
+        </div>
+    )
+}
+
+```
+</ComponentPreview>
+
+
 ## Usage
 
 ```tsx

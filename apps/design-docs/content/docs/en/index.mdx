@@ -1,6 +1,69 @@
 ---
-title: Nebutra Design System
-description: Component library documentation with live previews.
+title: Introduction
+description: Welcome to the Nebutra Design System documentation.
 ---
 
-Welcome to the Nebutra Design System documentation. Browse components in the sidebar.
+Welcome to the **Nebutra Design System**. This is the official component library and design language for all Nebutra SaaS products, engineered with React, Tailwind CSS v4, and framer-motion.
+
+<Cards>
+  <Card 
+    title="Getting Started" 
+    href="/en/docs/getting-started" 
+    description="Install the package and set up your environment in under 2 minutes." 
+  />
+  <Card 
+    title="Component Gallery" 
+    href="/en/docs/components" 
+    description="Explore our rich collection of interactive and accessible components." 
+  />
+  <Card 
+    title="Design Philosophy" 
+    href="/en/docs/design-philosophy" 
+    description="Learn about the color systems, typography, and motion guidelines." 
+  />
+  <Card 
+    title="Figma UI Kit" 
+    href="https://figma.com/community" 
+    description="Grab our complete Figma variables and component variants." 
+    external
+  />
+</Cards>
+
+## Why Nebutra?
+
+Nebutra is built on top of modern primitives to ensure maximum performance and DX (Developer Experience).
+
+<CardGroup>
+  <Card 
+    title="Beautiful by Default" 
+    icon={<Sparkles className="text-blue-500" />}
+    description="Carefully crafted aesthetics with premium typography, refined spacing, and seamless dark mode support out of the box."
+  />
+  <Card 
+    title="Highly Performant" 
+    icon={<Zap className="text-yellow-500" />}
+    description="Optimized for React Server Components. Minimal client-side JavaScript overhead and zero runtime CSS footprint with Tailwind v4."
+  />
+  <Card 
+    title="Accessible (a11y)" 
+    icon={<UserCircle className="text-green-500" />}
+    description="Fully compliant with WAI-ARIA standards. Keyboard navigation and screen reader support are strictly enforced."
+  />
+  <Card 
+    title="Copy & Paste Driven" 
+    icon={<FileCode className="text-purple-500" />}
+    description="Instead of bloated npm packages, take ownership of the code. We give you full control to adjust and tweak every component."
+  />
+</CardGroup>
+
+## Quick Start 
+
+Ready to dive in? Jump directly into a playground or install via CLI.
+
+```bash title="Terminal"
+npm install @nebutra/ui my-project
+```
+
+<Callout type="info">
+  **Note for early adopters:** We are currently in public beta. If you encounter any visual quirks or hydration issues, please open an issue on our GitHub repository.
+</Callout>

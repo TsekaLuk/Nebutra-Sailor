@@ -44,11 +44,7 @@ Tone: neutral, direct, recovery-focused.
 
 State what happened, why it happened (if knowable), and what to do next. Never blame the user.
 
-| Wrong | Correct |
-|---|---|
-| "Something went wrong." | "Your payment could not be processed. Check your card details and try again." |
-| "Invalid input." | "Email address must include @." |
-| "Error 422." | "We could not save your changes. Your session may have expired — sign in again." |
+<CopywritingErrorsDemo />
 
 ### Empty states
 
@@ -56,19 +52,13 @@ Tone: helpful, action-oriented.
 
 Empty states are an opportunity to guide the user toward their first action. Do not describe the absence — suggest what to do.
 
-| Wrong | Correct |
-|---|---|
-| "No projects found." | "Create your first project to get started." |
-| "Nothing here yet." | "Invite teammates to collaborate on this workspace." |
+<CopywritingEmptyStateDemo />
 
 ### Confirmations and success
 
 Tone: brief, affirming, then out of the way.
 
-```
-File deleted.       ← Correct (past tense, 2 words)
-Your file has been successfully deleted!  ← Wrong (verbose, hollow)
-```
+<CopywritingSuccessDemo />
 
 ### Destructive actions
 
@@ -76,12 +66,7 @@ Tone: calm, precise, irreversibility is factual — not alarming.
 
 Make the consequence clear without creating panic.
 
-```
-Delete project?
-This cannot be undone. All tasks, files, and history will be permanently removed.
-
-[Cancel]  [Delete project]
-```
+<CopywritingDestructiveDemo />
 
 ### Buttons and CTAs
 
@@ -89,14 +74,11 @@ This cannot be undone. All tasks, files, and history will be permanently removed
 - Match the button label to the dialog title or action being confirmed
 - Avoid generic labels: **OK**, **Submit**, **Confirm** — these force the user to re-read context
 
-| Wrong | Correct |
-|---|---|
-| Submit | Save changes |
-| OK | Got it |
-| Confirm | Delete project |
-| Yes | Remove member |
+<CopywritingButtonsDemo />
 
 ### Loading and progress
+
+<CopywritingProgressDemo />
 
 - Use present progressive: **Uploading…**, **Saving…**, **Processing payment…**
 - If the wait is long, give a specific reason: **Analyzing 3,400 records…**
@@ -110,13 +92,7 @@ This cannot be undone. All tasks, files, and history will be permanently removed
 - **Title Case** for product names, feature names, and proper nouns only
 - **ALL CAPS** only for overline labels and badges — never for body text
 
-```
-Wrong: Save Changes   ← Title case on button
-Correct: Save changes
-
-Wrong: this is a section heading
-Correct: This is a section heading
-```
+<CopywritingCapitalizationDemo />
 
 ### Punctuation
 

@@ -107,7 +107,7 @@ export function AvatarCircles({
       ))}
       {(numPeople ?? 0) > 0 && (
         <a
-          className="flex items-center justify-center rounded-full border-2 border-white bg-black text-center text-xs font-medium text-white hover:bg-[var(--neutral-10)] dark:bg-white dark:text-black"
+          className="flex items-center justify-center rounded-full border-2 border-background bg-foreground text-center text-xs font-medium text-background hover:bg-muted-foreground dark:bg-foreground dark:text-background"
           style={{ width: size, height: size }}
           href={overflowUrl}
         >

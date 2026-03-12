@@ -3,6 +3,38 @@ title: "文本微光 (Text Shimmer)"
 description: "平滑的微光/闪烁效果持续扫过文本。非常适合 AI 加载状态、高级标签以及强调操作调用 (Call-to-action)。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <TextShimmerDemo />
+
+```tsx title="text-shimmer-demo.tsx"
+import { TextShimmer } from "@nebutra/ui/primitives";
+
+export default function TextShimmerDemo() {
+    return (
+        <div className="flex h-[300px] flex-col items-center justify-center gap-8 bg-zinc-950">
+            <div className="flex flex-col items-center justify-center gap-4">
+                <TextShimmer className="text-xl" duration={2}>
+                    Generating code...
+                </TextShimmer>
+
+                <TextShimmer
+                    as="h1"
+                    className="text-4xl font-bold [--base-color:theme(colors.blue.600)] [--base-gradient-color:theme(colors.blue.200)]"
+                    duration={3}
+                >
+                    Premium Feature
+                </TextShimmer>
+            </div>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { source } from "@/lib/source";
 import { Banner } from "fumadocs-ui/components/banner";
 import type * as PageTree from "fumadocs-core/page-tree";
+import { notFound } from "next/navigation";
 
 // ----------------------------------------------------------------------
 // HYBRID ARCHITECTURE EXAMPLE:
@@ -47,6 +48,11 @@ export default async function Layout({
 
   // Apply our custom Low-Level tree modification
   const originalTree = source.pageTree[lang as keyof typeof source.pageTree] as PageTree.Root;
+
+  if (!originalTree) {
+    notFound();
+  }
+
   const dynamicTree = filterSidebarTree(originalTree, userRole);
 
   return (

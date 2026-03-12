@@ -456,8 +456,9 @@ const MultipleSelector = React.forwardRef<
             ? commandProps.shouldFilter
             : !onSearch
         }
-        filter={commandFilter()}
+        {...(commandFilter() ? { filter: commandFilter() as any } : {})} // eslint-disable-line @typescript-eslint/no-explicit-any
       >
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div
           className={cn(
             "relative min-h-[38px] rounded-[var(--radius-lg)] border border-input text-sm transition-shadow focus-within:border-ring focus-within:outline-none focus-within:ring-[3px] focus-within:ring-ring/20 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50",
@@ -548,7 +549,7 @@ const MultipleSelector = React.forwardRef<
                   disabled ||
                   selected.length < 1 ||
                   selected.filter((s) => s.fixed).length === selected.length) &&
-                  "hidden",
+                "hidden",
               )}
               aria-label="Clear all"
             >
@@ -591,7 +592,7 @@ const MultipleSelector = React.forwardRef<
                           <CommandItem
                             key={option.value}
                             value={option.value}
-                            disabled={option.disable}
+                            {...(option.disable ? { disabled: option.disable } : {})}
                             onMouseDown={(e) => {
                               e.preventDefault();
                               e.stopPropagation();

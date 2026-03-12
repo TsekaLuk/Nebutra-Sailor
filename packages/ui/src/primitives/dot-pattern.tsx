@@ -125,7 +125,7 @@ export function DotPattern({
       ref={containerRef}
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0 h-full w-full text-neutral-400/80",
+        "pointer-events-none absolute inset-0 h-full w-full text-foreground/20",
         className,
       )}
       {...props}
@@ -143,26 +143,17 @@ export function DotPattern({
           cy={dot.y}
           r={cr}
           fill={glow ? `url(#${id}-gradient)` : "currentColor"}
-          initial={glow ? { opacity: 0.4, scale: 1 } : undefined}
-          animate={
-            glow
-              ? {
-                  opacity: [0.4, 1, 0.4],
-                  scale: [1, 1.5, 1],
-                }
-              : undefined
-          }
-          transition={
-            glow
-              ? {
-                  duration: dot.duration,
-                  repeat: Infinity,
-                  repeatType: "reverse" as const,
-                  delay: dot.delay,
-                  ease: "easeInOut",
-                }
-              : undefined
-          }
+          {...(glow ? {
+            initial: { opacity: 0.4, scale: 1 },
+            animate: { opacity: [0.4, 1, 0.4], scale: [1, 1.5, 1] },
+            transition: {
+              duration: dot.duration,
+              repeat: Infinity,
+              repeatType: "reverse" as const,
+              delay: dot.delay,
+              ease: "easeInOut",
+            }
+          } : {})}
         />
       ))}
     </svg>

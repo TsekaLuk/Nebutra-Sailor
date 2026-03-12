@@ -3,46 +3,49 @@ title: "Badge"
 description: "Compact label for status, category, or count. Supports 22 color variants, 3 sizes, icon slot, status dot, and link (asChild) mode."
 ---
 
-<ComponentPreview className="gap-3">
-  <Badge variant="default">Active</Badge>
-  <Badge variant="outline">Preview</Badge>
-  <Badge variant="destructive">Deprecated</Badge>
 
-  ```tsx
-<Badge variant="default">Active</Badge>
-  <Badge variant="outline">Preview</Badge>
-  <Badge variant="destructive">Deprecated</Badge>
-  ```
+import { BadgeDemo } from "@/components/previews/badge-demo";
+import { BadgeSizesDemo } from "@/components/previews/badge-sizes-demo";
+import { BadgeVariantsDemo } from "@/components/previews/badge-variants-demo";
+import { BadgeIconDemo } from "@/components/previews/badge-icon-demo";
+import { BadgeTableDemo } from "@/components/previews/badge-table-demo";
+import { Badge1Demo } from "@/components/previews/badge-1-demo";
+
+import { BadgeFeatureTagDemo } from "@/components/previews/badge-feature-tag-demo";
+import { ComponentPreview } from "@/components/component-preview";
+
+<ComponentPreview>
+  <BadgeDemo />
 </ComponentPreview>
 
 ## Import
 
 ```tsx
-import { Badge } from "@nebutra/ui/primitives";
+import { Badge } from "@nebutra/custom-ui/primitives"
 ```
 
 ---
+
+## Color Palette Variants
+
+The `Badge1` component comes with 22 built-in color utilities bridging the brand palette and generic scale.
+
+<ComponentPreview>
+  <Badge1Demo />
+</ComponentPreview>
 
 ## Sizes
 
 Three sizes controlled by the `size` prop:
 
-| `size` | Font | Padding         | Use case                        |
-| ------ | ---- | --------------- | ------------------------------- |
-| `sm`   | 10px | `px-1.5 py-px`  | Tight UI, table cells           |
-| `md`   | 12px | `px-2.5 py-0.5` | Default — most contexts         |
-| `lg`   | 14px | `px-3 py-1`     | Prominent labels, hero sections |
+| `size` | Font | Padding | Use case |
+|--------|------|---------|----------|
+| `sm` | 10px | `px-1.5 py-px` | Tight UI, table cells |
+| `md` | 12px | `px-2.5 py-0.5` | Default — most contexts |
+| `lg` | 14px | `px-3 py-1` | Prominent labels, hero sections |
 
-<ComponentPreview className="gap-3 items-center">
-    <Badge size="sm">Small</Badge>
-  <Badge size="md">Medium</Badge>
-  <Badge size="lg">Large</Badge>
-
-  ```tsx
-<Badge size="sm">Small</Badge>
-<Badge size="md">Medium</Badge>
-<Badge size="lg">Large</Badge>
-```
+<ComponentPreview>
+  <BadgeSizesDemo />
 </ComponentPreview>
 
 ---
@@ -51,26 +54,8 @@ Three sizes controlled by the `size` prop:
 
 Status-driven variants using brand semantic tokens.
 
-<ComponentPreview className="gap-2 flex-wrap">
-    <Badge variant="default">Active</Badge>
-  <Badge variant="secondary">Draft</Badge>
-  <Badge variant="outline">Beta</Badge>
-  <Badge variant="success">Deployed</Badge>
-  <Badge variant="warning">Degraded</Badge>
-  <Badge variant="info">Info</Badge>
-  <Badge variant="error">Failed</Badge>
-  <Badge variant="destructive">Danger</Badge>
-
-  ```tsx
-<Badge variant="default">Active</Badge>
-<Badge variant="secondary">Draft</Badge>
-<Badge variant="outline">Beta</Badge>
-<Badge variant="success">Deployed</Badge>
-<Badge variant="warning">Degraded</Badge>
-<Badge variant="info">Info</Badge>
-<Badge variant="error">Failed</Badge>
-<Badge variant="destructive">Danger</Badge>
-```
+<ComponentPreview>
+  <BadgeDemo />
 </ComponentPreview>
 
 ---
@@ -81,17 +66,9 @@ Geist-style palette variants — solid and subtle (outline) for each hue.
 
 ### Solid
 
-```tsx
-<Badge variant="gray">Gray</Badge>
-<Badge variant="blue">Blue</Badge>
-<Badge variant="purple">Purple</Badge>
-<Badge variant="amber">Amber</Badge>
-<Badge variant="red">Red</Badge>
-<Badge variant="pink">Pink</Badge>
-<Badge variant="green">Green</Badge>
-<Badge variant="teal">Teal</Badge>
-<Badge variant="inverted">Inverted</Badge>
-```
+<ComponentPreview>
+  <BadgeVariantsDemo />
+</ComponentPreview>
 
 ### Subtle (outline)
 
@@ -114,14 +91,9 @@ Transparent background with a colored border — use on colored surfaces.
 
 Pass any ReactNode to the `icon` prop. The icon is auto-sized to 12×12px.
 
-```tsx
-import { CheckCircle, AlertTriangle, Zap, Globe } from "lucide-react"
-
-<Badge variant="success" icon={<CheckCircle />}>Verified</Badge>
-<Badge variant="warning" icon={<AlertTriangle />}>Review</Badge>
-<Badge variant="blue" icon={<Zap />}>Pro</Badge>
-<Badge variant="gray" icon={<Globe />}>Public</Badge>
-```
+<ComponentPreview>
+  <BadgeIconDemo />
+</ComponentPreview>
 
 ---
 
@@ -162,56 +134,35 @@ import Link from "next/link"
 
 ### Table status column
 
-```tsx
-<TableRow>
-  <TableCell>Deploy #1024</TableCell>
-  <TableCell>
-    <Badge variant="success" dot>
-      Success
-    </Badge>
-  </TableCell>
-</TableRow>
-```
+<ComponentPreview>
+  <BadgeTableDemo />
+</ComponentPreview>
 
 ### Notification count
 
-```tsx
-<div className="relative inline-flex">
-  <Bell className="h-5 w-5" />
-  <Badge
-    variant="red"
-    size="sm"
-    className="absolute -top-2 -right-2 h-4 w-4 justify-center p-0 text-[10px]"
-  >
-    3
-  </Badge>
-</div>
-```
+<ComponentPreview>
+  <BadgeNotificationDemo />
+</ComponentPreview>
 
 ### Feature tag
 
-```tsx
-<h2 className="flex items-center gap-2">
-  AI Assistant
-  <Badge variant="purple" size="sm">
-    Beta
-  </Badge>
-</h2>
-```
+<ComponentPreview>
+  <BadgeFeatureTagDemo />
+</ComponentPreview>
 
 ---
 
 ## Props
 
-| Prop        | Type                   | Default     | Description                                       |
-| ----------- | ---------------------- | ----------- | ------------------------------------------------- |
-| `variant`   | see below              | `"default"` | Color / semantic variant                          |
-| `size`      | `"sm" \| "md" \| "lg"` | `"md"`      | Size preset                                       |
-| `icon`      | `ReactNode`            | —           | Icon rendered before label, auto-sized to 12×12px |
-| `dot`       | `boolean`              | `false`     | Renders a 6px status dot before label             |
-| `asChild`   | `boolean`              | `false`     | Renders as child element via Radix Slot           |
-| `className` | `string`               | —           | Additional CSS classes                            |
-| `children`  | `ReactNode`            | —           | Badge label                                       |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | see below | `"default"` | Color / semantic variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset |
+| `icon` | `ReactNode` | — | Icon rendered before label, auto-sized to 12×12px |
+| `dot` | `boolean` | `false` | Renders a 6px status dot before label |
+| `asChild` | `boolean` | `false` | Renders as child element via Radix Slot |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Badge label |
 
 ### Variant values
 

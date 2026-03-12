@@ -76,6 +76,12 @@ export const pulse = {
   transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
 } as const;
 
+/** 漂浮 — gentle vertical drift for floating UI elements */
+export const float = {
+  animate: { y: [0, -8, 0] },
+  transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+} as const;
+
 // =============================================================================
 // Composition Helpers
 // =============================================================================
@@ -113,6 +119,7 @@ export const brandMotion = {
   emerge,
   flow,
   pulse,
+  float,
   stagger,
   interactive,
   viewport,

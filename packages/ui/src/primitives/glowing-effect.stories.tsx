@@ -60,7 +60,7 @@ export const AlwaysGlowing: Story = {
 
 export const WhiteVariant: Story = {
   render: () => (
-    <div className="bg-slate-900 p-8 rounded-2xl">
+    <div className="bg-card p-8 rounded-2xl">
       <div className="relative rounded-xl border border-white/20 bg-black p-8 w-64">
         <GlowingEffect
           variant="white"

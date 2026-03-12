@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <div className="relative h-[400px] w-full overflow-hidden rounded-xl border bg-slate-950">
+    <div className="relative h-[400px] w-full overflow-hidden rounded-xl border bg-background">
       <LightRays />
       <div className="relative z-10 flex h-full items-center justify-center">
         <h2 className="text-3xl font-bold text-white">Light Rays</h2>
@@ -55,7 +55,7 @@ export const GoldenRays: Story = {
 
 export const SubtleAmbient: Story = {
   render: () => (
-    <div className="relative h-[400px] w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-900">
+    <div className="relative h-[400px] w-full overflow-hidden rounded-xl bg-muted">
       <LightRays
         count={5}
         color="rgba(99, 102, 241, 0.15)"

@@ -3,6 +3,41 @@ title: 动画徒步卡片 (AnimatedHikeCard)
 description: 交互式卡片，具有在悬停时展开的堆叠图像，以及状态标签和描述。适用于活动卡片、产品展示和作品集项目。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <AnimatedHikeCardDemo />
+
+```tsx title="animated-hike-card-demo.tsx"
+import { AnimatedHikeCard } from "@nebutra/ui/primitives";
+import { Clock, Mountain, MapPin } from "lucide-react";
+
+export function AnimatedHikeCardDemo() {
+    return (
+        <div className="flex items-center justify-center p-8 w-full">
+            <AnimatedHikeCard
+                title="Yosemite Valley"
+                images={[
+                    "https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&q=80&w=400",
+                    "https://images.unsplash.com/photo-1519681393774-d08959eb4a39?auto=format&fit=crop&q=80&w=400",
+                    "https://images.unsplash.com/photo-1444090542259-0af8afa965cb?auto=format&fit=crop&q=80&w=400",
+                ]}
+                stats={[
+                    { icon: <Clock className="h-4 w-4" />, label: "~6 Hours" },
+                    { icon: <Mountain className="h-4 w-4" />, label: "8 km" },
+                    { icon: <MapPin className="h-4 w-4" />, label: "California" },
+                ]}
+                description="Experience the breathtaking cliffs, spectacular waterfalls, and ancient sequoia trees in this unforgettable day hike."
+                href="#"
+            />
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

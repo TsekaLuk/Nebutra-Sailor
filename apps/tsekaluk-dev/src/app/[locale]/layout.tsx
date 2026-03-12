@@ -4,8 +4,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 import { websiteJsonLd } from "@/lib/json-ld";
 
 export const metadata: Metadata = {
@@ -74,9 +72,7 @@ export default async function LocaleLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
       />
-      <Header />
-      <main id="main-content">{children}</main>
-      <Footer />
+      {children}
     </NextIntlClientProvider>
   );
 }

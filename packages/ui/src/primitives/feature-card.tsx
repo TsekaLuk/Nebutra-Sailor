@@ -47,7 +47,7 @@ export function FeatureCard({ children, className }: FeatureCardProps) {
   return (
     <Card
       className={cn(
-        "group relative rounded-none shadow-zinc-950/5",
+        "group relative rounded-none shadow-sm",
         className
       )}
     >

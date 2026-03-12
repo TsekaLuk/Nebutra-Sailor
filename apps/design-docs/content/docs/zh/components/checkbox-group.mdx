@@ -3,6 +3,28 @@ title: 复选框组 (CheckboxGroup)
 description: 用于对多个复选框进行分组的布局包装器，带有可访问的标签。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <CheckboxGroupDemo />
+
+```tsx title="checkbox-group-demo.tsx"
+import { CheckboxGroup, Checkbox } from "@nebutra/ui/primitives";
+
+export function CheckboxGroupDemo() {
+    return (
+        <CheckboxGroup label="Select features">
+            <Checkbox>Analytics</Checkbox>
+            <Checkbox>API Access</Checkbox>
+            <Checkbox>SSO</Checkbox>
+        </CheckboxGroup>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概述 (Overview)
 
 `CheckboxGroup` 是一个简单的布局包装器，它将多个 `Checkbox` 项分组，并提供以下功能：

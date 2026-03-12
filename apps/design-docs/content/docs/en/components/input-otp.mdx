@@ -40,14 +40,7 @@ description: "One-time password input with individual character slots, built on 
 ## Usage
 
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
-    <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
-    <InputOTPGroup>
-      <InputOTPSlot index={0} />
-      <InputOTPSlot index={1} />
-      <InputOTPSlot index={2} />
-      <InputOTPSlot index={3} />
-    </InputOTPGroup>
-  </InputOTP>
+    <InputOTPNumericDemo />
 
   ```tsx
 import {
@@ -57,6 +50,7 @@ import {
   InputOTPSeparator,
 } from "@nebutra/ui/primitives"
 ```
+</ComponentPreview>
 
 ## Props
 
@@ -82,7 +76,10 @@ import {
 
 ### Numeric Only (4-digit PIN)
 
-```tsx
+<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+    <InputOTPNumericDemo />
+
+  ```tsx
 import { REGEXP_ONLY_DIGITS } from "input-otp"
 
 <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>

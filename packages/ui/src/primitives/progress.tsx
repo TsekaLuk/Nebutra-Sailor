@@ -1,201 +1,132 @@
 "use client";
 
-import React from "react";
-import {
-  Progress as HeroUIProgressBase,
-} from "@heroui/progress";
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const HeroUIProgress = HeroUIProgressBase as any;
-import type {
-  ProgressProps as HeroUIProgressProps,
-} from "@heroui/progress";
+import * as React from "react";
+import { Progress as BaseProgress } from "@base-ui-components/react/progress";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "../utils/cn";
+import { motion } from "motion/react";
 
-// =============================================================================
-// Types
-// =============================================================================
+const progressVariants = cva(
+  "relative overflow-hidden rounded-full",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary/20",
+        primary: "bg-primary/20",
+        secondary: "bg-secondary/20",
+        destructive: "bg-destructive/20",
+        outline:
+          "bg-transparent border border-border",
+      },
+      size: {
+        sm: "h-1.5",
+        default: "h-2.5",
+        lg: "h-3",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+);
 
-/**
- * Progress color variants
- */
-export type ProgressColor =
-  | "default"
-  | "primary"
-  | "secondary"
-  | "success"
-  | "warning"
-  | "danger";
+const progressIndicatorVariants = cva(
+  "h-full w-full flex-1 rounded-full transition-all duration-500 ease-out",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary",
+        primary: "bg-primary",
+        secondary: "bg-foreground",
+        destructive: "bg-destructive",
+        outline: "bg-primary",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
 
-/**
- * Progress size variants
- */
-export type ProgressSize = "sm" | "md" | "lg";
 
-/**
- * Progress radius variants
- */
-export type ProgressRadius = "none" | "sm" | "md" | "lg" | "full";
 
-/**
- * Props for Progress component
- *
- * @description
- * A linear progress bar component for displaying completion status.
- * Supports determinate and indeterminate states, labels, and value formatting.
- *
- * **UX Scenarios:**
- * - File upload progress
- * - Form completion status
- * - Loading indicators
- * - Task/goal progress
- * - Storage/quota usage
- * - Multi-step process tracking
- *
- * **Accessibility:**
- * - ARIA progressbar role
- * - aria-valuenow, aria-valuemin, aria-valuemax
- * - Internationalized number formatting
- * - Screen reader announcements
- */
-export interface ProgressProps extends Omit<
-  HeroUIProgressProps,
-  "color" | "size" | "radius"
-> {
-  /**
-   * Label displayed above the progress bar
-   */
-  label?: React.ReactNode;
-  /**
-   * Size variant
-   * @default "md"
-   */
-  size?: ProgressSize;
-  /**
-   * Color variant
-   * @default "primary"
-   */
-  color?: ProgressColor;
-  /**
-   * Border radius
-   * @default "full"
-   */
-  radius?: ProgressRadius;
-  /**
-   * Current progress value (0-100 by default)
-   */
-  value?: number;
-  /**
-   * Custom value label (overrides formatted value)
-   */
-  valueLabel?: React.ReactNode;
-  /**
-   * Minimum value
-   * @default 0
-   */
-  minValue?: number;
-  /**
-   * Maximum value
-   * @default 100
-   */
-  maxValue?: number;
-  /**
-   * Number format options for value display
-   * @default { style: 'percent' }
-   */
-  formatOptions?: Intl.NumberFormatOptions;
-  /**
-   * Show indeterminate loading animation
-   * @default false
-   */
-  isIndeterminate?: boolean;
-  /**
-   * Show striped pattern on the indicator
-   * @default false
-   */
-  isStriped?: boolean;
-  /**
-   * Show the value label
-   * @default true
-   */
-  showValueLabel?: boolean;
-  /**
-   * Whether the progress is disabled
-   * @default false
-   */
-  isDisabled?: boolean;
-  /**
-   * Disable animations
-   * @default false
-   */
-  disableAnimation?: boolean;
-  /**
-   * Custom class names for slots
-   */
-  classNames?: Partial<
-    Record<
-      "base" | "labelWrapper" | "label" | "track" | "value" | "indicator",
-      string
-    >
-  >;
-}
+export type ProgressProps =
+  Omit<React.ComponentPropsWithoutRef<typeof BaseProgress.Root>, "value"> &
+  VariantProps<typeof progressVariants> & {
+    value?: number | null;
+    /** Toggle numeric value label */
+    showValue?: boolean;
+    animated?: boolean;
+    label?: string;
+  }
 
-// =============================================================================
-// Component
-// =============================================================================
+const Progress = React.forwardRef<
+  React.ElementRef<typeof BaseProgress.Root>,
+  ProgressProps
+>(
+  (
+    {
+      className,
+      value = 0,
+      variant,
+      size,
+      showValue = false,
+      animated = true,
+      label,
+      ...props
+    },
+    ref,
+  ) => {
+    const isIndeterminate = value === undefined || value === null;
+    const progress = Math.min(Math.max((value as number) || 0, 0), 100);
 
-/**
- * Progress - Linear progress bar
- *
- * @example
- * ```tsx
- * import { Progress } from "@nebutra/ui";
- *
- * // Basic usage
- * <Progress value={60} aria-label="Loading" />
- *
- * // With label
- * <Progress label="Loading..." value={45} />
- *
- * // Indeterminate (unknown duration)
- * <Progress isIndeterminate label="Processing..." />
- *
- * // Striped style
- * <Progress value={70} isStriped color="success" />
- *
- * // Custom value formatting (currency)
- * <Progress
- *   label="Monthly expenses"
- *   value={4000}
- *   maxValue={10000}
- *   formatOptions={{ style: "currency", currency: "USD" }}
- * />
- *
- * // Different sizes
- * <Progress size="sm" value={30} />
- * <Progress size="md" value={50} />
- * <Progress size="lg" value={70} />
- *
- * // Different colors
- * <Progress color="primary" value={20} />
- * <Progress color="success" value={100} />
- * <Progress color="warning" value={60} />
- * <Progress color="danger" value={80} />
- *
- * // Custom styling
- * <Progress
- *   label="Lose weight"
- *   value={65}
- *   classNames={{
- *     base: "max-w-md",
- *     track: "drop-shadow-md border border-default",
- *     indicator: "bg-gradient-to-r from-pink-500 to-yellow-500",
- *     label: "font-medium",
- *     value: "text-foreground/60",
- *   }}
- * />
- * ```
- */
-export const Progress: React.FC<ProgressProps> = (props) => {
-  return <HeroUIProgress {...props} />;
-};
+    // Default Linear type
+    return (
+      <div className="space-y-2 w-full">
+        {label && (
+          <div className="text-sm font-medium text-foreground text-left">
+            {label}
+          </div>
+        )}
+        <BaseProgress.Root
+          {...props}
+          ref={ref}
+          value={value ?? null}
+          className={cn(progressVariants({ variant, size }), className)}
+        >
+          <BaseProgress.Indicator
+            className={cn(
+              progressIndicatorVariants({ variant: variant === "outline" ? "default" : variant }),
+              isIndeterminate && "animate-pulse"
+            )}
+            render={
+              <motion.div
+                initial={{ transform: "translateX(-100%)" }}
+                animate={{ transform: `translateX(-${100 - progress}%)` }}
+                transition={{
+                  duration: animated ? 1.2 : 0,
+                  ease: "easeInOut",
+                }}
+              />
+            }
+          />
+        </BaseProgress.Root>
+        {showValue && !isIndeterminate && (
+          <motion.div
+            className="text-right text-xs font-semibold text-muted-foreground tabular-nums"
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: animated ? 0.3 : 0, duration: 0.2 }}
+          >
+            {Math.round(progress)}%
+          </motion.div>
+        )}
+      </div>
+    );
+  },
+);
 
-export default Progress;
+Progress.displayName = "Progress";
+
+export { Progress, progressVariants, progressIndicatorVariants };

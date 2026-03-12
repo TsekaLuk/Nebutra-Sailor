@@ -5,18 +5,25 @@ description: "自动调整大小的文本域，随着用户输入内容在垂直
 
 ## 演示 (Demo)
 
-```tsx
-import { ExpandingTextarea } from "@nebutra/ui/primitives"
+<ComponentPreview>
+  <ExpandingTextareaDemo />
+
+```tsx title="expanding-textarea-demo.tsx"
+import { ExpandingTextarea } from "@nebutra/ui/primitives";
 
 export function ExpandingTextareaDemo() {
-  return (
-    <ExpandingTextarea
-      placeholder="开始输入... 文本域会自动扩展。"
-      className="w-full"
-    />
-  )
+    return (
+        <div className="w-full max-w-md px-4 py-12 flex items-center justify-center">
+            <ExpandingTextarea
+                placeholder="Start typing... the textarea will expand automatically."
+                className="w-full"
+            />
+        </div>
+    );
 }
+
 ```
+</ComponentPreview>
 
 ## 使用方法 (Usage)
 

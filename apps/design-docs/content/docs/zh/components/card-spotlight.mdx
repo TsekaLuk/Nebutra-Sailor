@@ -3,6 +3,33 @@ title: 卡片聚光灯 (CardSpotlight)
 description: 带有随鼠标光标移动的径向聚光灯的卡片，悬停时结合了 WebGL 画布显示效果。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <CardSpotlightDemo />
+
+```tsx title="card-spotlight-demo.tsx"
+import { CardSpotlight } from "@nebutra/ui/primitives";
+import { ShieldAlert } from "lucide-react";
+
+export function CardSpotlightDemo() {
+    return (
+        <div className="flex items-center justify-center p-8 w-full">
+            <CardSpotlight className="h-96 w-96 flex flex-col items-center justify-center text-center">
+                <ShieldAlert className="h-16 w-16 text-white mb-6" />
+                <h2 className="text-2xl font-bold text-white mb-2">High Security</h2>
+                <p className="text-neutral-300">
+                    We use state-of-the-art encryption protocols to keep your data safe and private. Hover to discover more.
+                </p>
+            </CardSpotlight>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

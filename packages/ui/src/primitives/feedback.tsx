@@ -97,7 +97,7 @@ interface FeedbackFormProps {
   dryRun?: boolean;
   onSuccess?: () => void;
   /** Pre-selected emotion (inline variant passes this in) */
-  initialEmotion?: Emotion;
+  initialEmotion?: Emotion | undefined;
 }
 
 function FeedbackForm({
@@ -123,8 +123,8 @@ function FeedbackForm({
 
     const payload: FeedbackPayload = {
       label,
-      emotion,
       message: message.trim(),
+      ...(emotion ? { emotion } : {}),
       ...(topic ? { topic } : {}),
       ...(metadata ? { metadata } : {}),
     };
@@ -268,10 +268,10 @@ function FeedbackDefault({
 
           <FeedbackForm
             label={label}
-            topics={topics}
-            metadata={metadata}
-            onSubmit={onSubmit}
-            dryRun={dryRun}
+            {...(topics ? { topics } : {})}
+            {...(metadata ? { metadata } : {})}
+            {...(onSubmit ? { onSubmit } : {})}
+            {...(dryRun !== undefined ? { dryRun } : {})}
             onSuccess={() => {
               // Close after a brief delay to show thank-you message
               setTimeout(() => setOpen(false), 1800);
@@ -317,10 +317,10 @@ function FeedbackInline({
       <div className={cn("w-80 rounded-[var(--radius-lg)] border bg-background p-4 shadow-md", className)}>
         <FeedbackForm
           label={label}
-          topics={topics}
-          metadata={metadata}
-          onSubmit={onSubmit}
-          dryRun={dryRun}
+          {...(topics ? { topics } : {})}
+          {...(metadata ? { metadata } : {})}
+          {...(onSubmit ? { onSubmit } : {})}
+          {...(dryRun !== undefined ? { dryRun } : {})}
           initialEmotion={selectedEmotion}
           onSuccess={() => {
             setSubmitted(true);

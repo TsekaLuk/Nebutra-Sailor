@@ -1,6 +1,8 @@
-import fs from "node:fs";
-import path from "node:path";
+import { loader } from 'fumadocs-core/source';
+import { toFumadocsSource } from 'fumadocs-mdx/runtime/server';
+import { blogPosts } from '../../.source/server';
 
+// Re-export ArticleMeta for backward compatibility
 export interface ArticleMeta {
   slug: string;
   title: string;
@@ -9,63 +11,37 @@ export interface ArticleMeta {
   tags: string[];
 }
 
-function parseFrontmatter(raw: string): {
-  meta: Record<string, string>;
-  content: string;
-} {
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) {
-    return { meta: {}, content: raw };
-  }
-
-  const meta: Record<string, string> = {};
-  for (const line of match[1]!.split("\n")) {
-    const colonIndex = line.indexOf(":");
-    if (colonIndex === -1) continue;
-    const key = line.slice(0, colonIndex).trim();
-    const value = line.slice(colonIndex + 1).trim();
-    meta[key] = value;
-  }
-
-  return { meta, content: match[2]! };
+// Frontmatter shape from source.config.ts schema
+export interface BlogFrontmatter {
+  title: string;
+  date: string | Date;
+  excerpt: string;
+  tags: string[];
+  body: React.ComponentType;
 }
 
-function parseTags(raw: string): string[] {
-  const trimmed = raw.replace(/^\[/, "").replace(/]$/, "");
-  return trimmed
-    .split(",")
-    .map((t) => t.trim().replace(/^["']|["']$/g, ""))
-    .filter(Boolean);
+export const blog = loader({
+  baseUrl: '/thinking',
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  source: toFumadocsSource(blogPosts as any, []),
+});
+
+function normalizeDateStr(date: unknown): string {
+  if (date instanceof Date) return date.toISOString().split('T')[0] ?? '';
+  return String(date ?? '');
 }
 
+// Compatibility helper used by sitemap, rss, and admin pages
 export function getArticles(): ArticleMeta[] {
-  const contentDir = path.join(process.cwd(), "content", "thinking");
-
-  if (!fs.existsSync(contentDir)) {
-    return [];
-  }
-
-  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
-
-  const articles: ArticleMeta[] = files
-    .map((file) => {
-      try {
-        const raw = fs.readFileSync(path.join(contentDir, file), "utf-8");
-        const { meta } = parseFrontmatter(raw);
-        const slug = file.replace(/\.mdx$/, "");
-
-        return {
-          slug,
-          title: meta["title"] ?? slug,
-          date: meta["date"] ?? "",
-          excerpt: meta["excerpt"] ?? "",
-          tags: meta["tags"] ? parseTags(meta["tags"]) : [],
-        };
-      } catch {
-        return null;
-      }
-    })
-    .filter((a): a is ArticleMeta => a !== null);
-
-  return articles.sort((a, b) => b.date.localeCompare(a.date));
+  return blog.getPages().map((page) => {
+    const data = page.data as unknown as BlogFrontmatter;
+    const slug = page.slugs[0] ?? page.url.split('/').pop() ?? '';
+    return {
+      slug,
+      title: data.title ?? '',
+      date: normalizeDateStr(data.date),
+      excerpt: data.excerpt ?? '',
+      tags: data.tags ?? [],
+    };
+  }).sort((a, b) => b.date.localeCompare(a.date));
 }

@@ -3,6 +3,28 @@ title: Text
 description: Typography primitive for rendering body text, captions, labels, and other inline content with semantic styling.
 ---
 
+## Demo
+
+<ComponentPreview>
+  <TextDemo />
+
+```tsx title="text-demo.tsx"
+import { Text } from "@nebutra/ui/primitives";
+
+export function TextDemo() {
+    return (
+        <div className="flex flex-col gap-4">
+            <Text variant="body">Body text — default paragraph style</Text>
+            <Text variant="body-sm">Small body — captions and secondary content</Text>
+            <Text variant="label" color="muted">Label — form labels and metadata</Text>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## Usage
 
 ```tsx

@@ -25,16 +25,16 @@ export const Default: Story = {
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="rounded-md border border-[color:var(--neutral-7)] px-3 py-2 text-sm"
+          className="rounded-md border border-border px-3 py-2 text-sm"
         >
           Open popover
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-72 p-4">
-        <p className="text-sm font-medium text-[color:var(--neutral-12)]">
+        <p className="text-sm font-medium text-foreground">
           API key scope
         </p>
-        <p className="mt-2 text-xs text-[color:var(--neutral-11)]">
+        <p className="mt-2 text-xs text-muted-foreground">
           Restrict this key to analytics read-only access.
         </p>
       </PopoverContent>

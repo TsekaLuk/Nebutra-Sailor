@@ -3,6 +3,72 @@ title: 代码块 (CodeBlock)
 description: 支持多文件标签页、语法高亮、行高亮、差异装饰、可点击的行引用以及语言切换的代码查看器。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <CodeBlockDemo />
+
+```tsx title="code-block-demo.tsx"
+import { CodeBlock } from "@nebutra/ui/primitives";
+
+export function CodeBlockDemo() {
+    const codeFiles = [
+        {
+            title: "button.tsx",
+            language: "tsx",
+            code: `import { Button } from "@/components/ui/button"
+
+export function ButtonDemo() {
+  return (
+    <Button variant="default" size="lg">
+      Click me
+    </Button>
+  )
+}`,
+            highlightedLines: [4, 5, 6],
+        },
+        {
+            title: "tailwind.config.ts",
+            language: "typescript",
+            code: `import type { Config } from "tailwindcss"
+
+const config = {
+  darkMode: ["class"],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+  ],
+  prefix: "",
+  theme: {
+    extend: {},
+  },
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config
+
+export default config`,
+            addedLines: [15],
+            removedLines: [11],
+        },
+    ];
+
+    return (
+        <div className="w-full max-w-3xl mx-auto p-8">
+            <CodeBlock
+                files={codeFiles}
+                defaultTitle="button.tsx"
+                showLineNumbers={true}
+                showLanguageSwitcher={true}
+            />
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `CodeBlock` 渲染一个带标签页的代码查看器，其强大的语法高亮由 `react-syntax-highlighter` (Prism) 提供支持。它能根据文件扩展名自动识别语言，适应浅色/深色模式，并为每个标签页提供独立的“复制到剪贴板”功能。

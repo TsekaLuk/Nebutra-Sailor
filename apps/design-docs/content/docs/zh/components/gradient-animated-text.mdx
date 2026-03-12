@@ -3,6 +3,36 @@ title: "渐变动画文本 (Gradient Animated Text)"
 description: "在渐变和纯色状态之间循环切换的文本，具有错开的时间逻辑。将 3 个变体合用可实现 建立/发布/扩展 (Build/Ship/Scale) 的文字揭示效果。"
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <GradientAnimatedTextDemo />
+
+```tsx title="gradient-animated-text-demo.tsx"
+import { GradientAnimatedText } from "@nebutra/ui/primitives";
+
+export default function GradientAnimatedTextDemo() {
+    return (
+        <div className="flex h-[300px] flex-col items-center justify-center gap-4 bg-black/95">
+            <div className="flex gap-2 text-5xl font-black">
+                <GradientAnimatedText variant={1} theme="neon">
+                    Build.
+                </GradientAnimatedText>
+                <GradientAnimatedText variant={2} theme="neon">
+                    Ship.
+                </GradientAnimatedText>
+                <GradientAnimatedText variant={3} theme="neon">
+                    Scale.
+                </GradientAnimatedText>
+            </div>
+        </div>
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

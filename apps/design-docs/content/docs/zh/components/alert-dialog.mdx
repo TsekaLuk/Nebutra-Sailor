@@ -8,9 +8,63 @@ description: "中断用户操作并要求显式确认的模态对话框。"
 <ComponentPreview className="min-h-[200px] flex justify-center items-center">
   <AlertDialogDemo />
 
-  ```tsx
-<AlertDialogDemo />
-  ```
+  ```tsx title="alert-dialog-demo.tsx"
+"use client";
+
+import { useState } from "react";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@nebutra/ui/primitives";
+
+export function AlertDialogDemo() {
+  const [deleted, setDeleted] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="destructive">
+          {deleted ? "Account Deleted" : "Delete Account"}
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button
+            variant="outline"
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="destructive"
+            onClick={() => {
+              setDeleted(true);
+              setOpen(false);
+            }}
+          >
+            Continue
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+```
 </ComponentPreview>
 
 ```tsx
@@ -36,10 +90,7 @@ export function AlertDialogDemo() {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>您确定要执行此操作吗？ (Are you absolutely sure?)</AlertDialogTitle>
-          <AlertDialogDescription>
-            此操作无法撤销。这将永久删除您的账号并从我们的服务器中移除您的所有数据。
-            (This action cannot be undone. This will permanently delete your account and remove your data from our servers.)
-          </AlertDialogDescription>
+          <AlertDialogDescription>此操作无法撤销。这将永久删除您的账号并从我们的服务器中移除您的所有数据。 (This action cannot be undone. This will permanently delete your account and remove your data from our servers.)</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>取消 (Cancel)</AlertDialogCancel>
@@ -111,13 +162,11 @@ import {
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>从购物车中移除项目？ (Remove item from cart?)</AlertDialogTitle>
-        <AlertDialogDescription>
-          该项目将从您的购物车中被移除。 (The item will be removed from your shopping cart.)
-        </AlertDialogDescription>
+        <AlertDialogDescription>该项目将从您的购物车中被移除。 (The item will be removed from your shopping cart.)</AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>保留项目 (Keep Item)</AlertDialogCancel>
-        <AlertDialogAction onClick={() => console.log("Remove items")}>
+        <AlertDialogAction >
           移除 (Remove)
         </AlertDialogAction>
       </AlertDialogFooter>
@@ -132,13 +181,11 @@ import {
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>从购物车中移除项目？ (Remove item from cart?)</AlertDialogTitle>
-      <AlertDialogDescription>
-        该项目将从您的购物车中被移除。 (The item will be removed from your shopping cart.)
-      </AlertDialogDescription>
+      <AlertDialogDescription>该项目将从您的购物车中被移除。 (The item will be removed from your shopping cart.)</AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
       <AlertDialogCancel>保留项目 (Keep Item)</AlertDialogCancel>
-      <AlertDialogAction onClick={() => console.log("Remove items")}>
+      <AlertDialogAction >
         移除 (Remove)
       </AlertDialogAction>
     </AlertDialogFooter>

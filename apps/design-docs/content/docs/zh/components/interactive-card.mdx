@@ -3,6 +3,30 @@ title: 交互式卡片 (InteractiveCard)
 description: 带有步骤指示的卡片，包含一个默认在悬停时播放动画的导出/上传图标。使用了 Framer Motion 的组级悬停变体（group hover variants）。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <InteractiveCardDemo />
+
+```tsx title="interactive-card-demo.tsx"
+"use client";
+
+import { InteractiveCard } from "@nebutra/ui/primitives";
+
+export function InteractiveCardDemo() {
+    return (
+        <InteractiveCard
+            step="STEP 1"
+            title="Export Project"
+            description="Download your project as a PowerPoint presentation ready to share."
+        />
+    );
+}
+
+```
+</ComponentPreview>
+
+
 ## 使用方法 (Usage)
 
 ```tsx

@@ -3,6 +3,24 @@ title: 代码片段 (Snippet)
 description: 展示代码片段，支持点击复制、多种风格变体以及多行文本显示。
 ---
 
+## 演示 (Demo)
+
+<ComponentPreview>
+  <SnippetDemo />
+
+```tsx title="snippet-demo.tsx"
+"use client";
+
+import { Snippet } from "@nebutra/ui/primitives";
+
+export function SnippetDemo() {
+    return <Snippet>npm install @nebutra/ui</Snippet>;
+}
+
+```
+</ComponentPreview>
+
+
 ## 概览 (Overview)
 
 `Snippet` 组件用于渲染带有 `$` 前缀和复制按钮的代码。支持单行及多行代码展示，提供 4 种视觉变体、6 种配色方案、3 种尺寸规格，且支持自定义圆角。

@@ -40,7 +40,7 @@ export const AvatarAndCard: Story = {
           <SkeletonText lines={2} />
         </div>
       </div>
-      <div className="w-80 rounded-lg border border-[color:var(--neutral-7)]">
+      <div className="w-80 rounded-lg border border-border">
         <SkeletonCard />
       </div>
     </div>
