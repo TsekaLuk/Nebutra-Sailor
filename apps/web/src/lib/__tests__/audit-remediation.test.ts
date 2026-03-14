@@ -263,7 +263,7 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("includes skip-to-content links in both app layouts", () => {
-    const landingLayout = readFromRepo("apps/landing-page/src/app/layout.tsx");
+    const landingLayout = readFromRepo("apps/landing-page/src/app/[lang]/layout.tsx");
     const webLayout = readFromRepo("apps/web/src/app/layout.tsx");
 
     expect(landingLayout).toMatch(/main-content|skip/i);
@@ -271,7 +271,7 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("uses safe JSON-LD script injection without dangerouslySetInnerHTML", () => {
-    const landingLayout = readFromRepo("apps/landing-page/src/app/layout.tsx");
+    const landingLayout = readFromRepo("apps/landing-page/src/app/[lang]/layout.tsx");
 
     expect(landingLayout).toContain("toSafeJsonLd");
     expect(landingLayout).toContain('type="application/ld+json"');
