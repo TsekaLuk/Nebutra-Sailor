@@ -511,7 +511,7 @@ jobs:
           CI: true
 
       - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: playwright-report-shard-${{ matrix.shard }}-${{ github.run_id }}
@@ -572,7 +572,7 @@ jobs:
           SKIP_ENV_VALIDATION: true
 
       - name: Upload spec artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: openapi-spec-${{ github.run_id }}
           path: apps/api-gateway/openapi.json
@@ -612,7 +612,7 @@ jobs:
           SKIP_ENV_VALIDATION: true
 
       - name: Upload bundle analysis report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: bundle-analysis-${{ github.run_id }}
           path: apps/web/.next/analyze/
@@ -655,7 +655,7 @@ jobs:
       - name: Merge into single HTML report
         run: pnpm exec playwright merge-reports --reporter html ./all-blob-reports
       - name: Upload merged report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report-merged-${{ github.run_id }}
           path: playwright-report/
