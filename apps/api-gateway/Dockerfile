@@ -1,5 +1,5 @@
 # ── Stage 1: Install dependencies ──────────────────────────────────────────
-FROM node:22-alpine@sha256:92d51e5f20b7ff58faa5a969af1a1cec6cbec3fbff7e0f523242b9b5c85ad887 AS deps
+FROM node:25-alpine@sha256:5209bcaca9836eb3448b650396213dbe9d9a34d31840c2ae1f206cb2986a8543 AS deps
 WORKDIR /app
 
 RUN corepack enable pnpm
@@ -20,7 +20,7 @@ COPY packages/rate-limit/package.json ./packages/rate-limit/
 RUN pnpm install --frozen-lockfile --filter @nebutra/api-gateway... --filter @nebutra/db...
 
 # ── Stage 2: Build ──────────────────────────────────────────────────────────
-FROM node:22-alpine@sha256:92d51e5f20b7ff58faa5a969af1a1cec6cbec3fbff7e0f523242b9b5c85ad887 AS builder
+FROM node:25-alpine@sha256:5209bcaca9836eb3448b650396213dbe9d9a34d31840c2ae1f206cb2986a8543 AS builder
 WORKDIR /app
 
 RUN corepack enable pnpm
@@ -34,7 +34,7 @@ RUN pnpm --filter @nebutra/db db:generate
 RUN pnpm --filter @nebutra/api-gateway build
 
 # ── Stage 3: Runtime ────────────────────────────────────────────────────────
-FROM node:22-alpine@sha256:92d51e5f20b7ff58faa5a969af1a1cec6cbec3fbff7e0f523242b9b5c85ad887 AS runner
+FROM node:25-alpine@sha256:5209bcaca9836eb3448b650396213dbe9d9a34d31840c2ae1f206cb2986a8543 AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
