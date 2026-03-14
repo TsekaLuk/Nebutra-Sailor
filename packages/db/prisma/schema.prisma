@@ -77,8 +77,32 @@ model Organization {
   integrations Integration[]
   wallets      Wallet[]
   nfts         Nft[]
+  apiKeys      APIKey[]
 
   @@map("organizations")
+}
+
+// ── API Keys ──────────────────────────────────────────────────────────────────
+// Keys are hashed on creation; the plaintext is shown once and never stored.
+// Soft-deleted via revokedAt so audit log references remain meaningful.
+model APIKey {
+  id             String    @id @default(cuid())
+  name           String    @db.VarChar(64)
+  keyHash        String    @unique @map("key_hash")
+  keyPrefix      String    @map("key_prefix") @db.VarChar(16)
+  organizationId String    @map("organization_id")
+  createdById    String?   @map("created_by_id")
+  lastUsedAt     DateTime? @map("last_used_at")
+  revokedAt      DateTime? @map("revoked_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([keyHash])
+  @@index([organizationId, revokedAt])
+  @@map("api_keys")
 }
 
 model User {

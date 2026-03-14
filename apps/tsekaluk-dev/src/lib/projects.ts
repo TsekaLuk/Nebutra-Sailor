@@ -48,11 +48,11 @@ export const projects: Project[] = [
       { value: "70%", label: "Cleanup Reduced" },
     ],
     architecture: `graph LR
-  PDF[PDF / DOCX] --> PyMuPDF[PyMuPDF\\nText Engine]
-  PDF --> QwenVL[Qwen-VL\\nVision Engine]
+  PDF[PDF / DOCX] --> PyMuPDF[PyMuPDF<br/>Text Engine]
+  PDF --> QwenVL[Qwen-VL<br/>Vision Engine]
   PyMuPDF --> Merge[Context Merger]
   QwenVL --> Merge
-  Merge --> DeepSeek[DeepSeek LLM\\nLayered Prompt + CoT]
+  Merge --> DeepSeek[DeepSeek LLM<br/>Layered Prompt + CoT]
   DeepSeek --> MD[Structured Markdown]`,
     story:
       "Most document converters treat pages as flat text\u2014they silently drop formulas, break tables, and lose cross-references. We measured 40% context loss on competitors. any2md uses a dual-engine approach: PyMuPDF extracts text structure while Qwen-VL reads the visual layout. DeepSeek LLM then reconstructs the missing context through layered prompting with few-shot examples and chain-of-thought reasoning.\n\nThe result: 93% context retention at 68 pages/min, with 85% table structuring accuracy and 90% LaTeX formula preservation. One team imported 20,000+ pages into their knowledge base in a single week, cutting manual cleanup by 70%. The tool processes everything from scanned PDFs to complex academic papers with multi-column layouts.",
@@ -82,8 +82,8 @@ export const projects: Project[] = [
   Bilibili[1,695 Bilibili Comments] --> SnowNLP[SnowNLP Sentiment]
   TAM --> SEM[Structural Equation Modeling]
   SnowNLP --> Sentiment[Sentiment Map]
-  SEM --> Paradox[Risk Paradox Discovery\\n\u03b2=0.262 p<0.001]
-  Sentiment --> Policy[4-Pillar Policy\\nRecommendations]`,
+  SEM --> Paradox[Risk Paradox Discovery<br/>\u03b2=0.262 p<0.001]
+  Sentiment --> Policy[4-Pillar Policy<br/>Recommendations]`,
     story:
       "Every technology adoption model in the last decade predicted the same thing: perceived risk deters adoption. We set out to test this for urban air mobility with 2,609 respondents (93.1% recovery rate, KMO=0.951). The TAM\u2013SEM model proved the opposite\u2014risk perception positively drives willingness to adopt (\u03b2=0.262, p<0.001). People who see the risk also see the reward.\n\nWe cross-validated with 1,695 Bilibili comments mined via SnowNLP sentiment analysis, confirming the paradox in public discourse. The finding challenged a decade of technology adoption literature and earned a Provincial First Prize. We delivered 4-pillar policy recommendations covering airspace management, infrastructure, regulation, and public participation.",
   },
@@ -122,12 +122,12 @@ export const projects: Project[] = [
     Studio[Sanity Studio]
   end
   subgraph Packages
-    UI[ui\\nRadix + HeroUI + Lobe]
-    Tokens[tokens\\nCSS Variables]
-    Theme[theme\\n6 oklch Themes]
-    Icons[icons\\n541 Geist TSX]
-    Brand[brand\\nGradients + Motion]
-    Preset[preset\\nSaaS Starter Config]
+    UI[ui<br/>Radix + HeroUI + Lobe]
+    Tokens[tokens<br/>CSS Variables]
+    Theme[theme<br/>6 oklch Themes]
+    Icons[icons<br/>541 Geist TSX]
+    Brand[brand<br/>Gradients + Motion]
+    Preset[preset<br/>SaaS Starter Config]
   end
   Packages --> Apps
   Turbo[Turborepo] --> Apps`,
@@ -154,12 +154,12 @@ export const projects: Project[] = [
       { value: "3", label: "Objectives Balanced" },
     ],
     architecture: `graph TB
-  Data[Historical Tourism Data] --> SD[System Dynamics\\nCausal Loop Model]
-  Data --> PCA[PCA-KMeans\\nDestination Clustering]
-  SD --> Coupled[3D Coupled Model\\nTourist \u00d7 Environment \u00d7 Social]
+  Data[Historical Tourism Data] --> SD[System Dynamics<br/>Causal Loop Model]
+  Data --> PCA[PCA-KMeans<br/>Destination Clustering]
+  SD --> Coupled[3D Coupled Model<br/>Tourist \u00d7 Environment \u00d7 Social]
   PCA --> Coupled
-  Coupled --> NSGA[NSGA-III\\nMulti-Objective Optimizer]
-  NSGA --> Pareto[Pareto Frontier\\nPolicy Recommendations]`,
+  Coupled --> NSGA[NSGA-III<br/>Multi-Objective Optimizer]
+  NSGA --> Pareto[Pareto Frontier<br/>Policy Recommendations]`,
     story:
       "Tourism and environmental sustainability are a zero-sum game\u2014or so the standard models assume. MCM/ICM 2025 (Problem B) challenged us to find synergies. We built a three-dimensional coupled model linking tourist flow, environmental quality, and social satisfaction through system dynamics, then optimized with NSGA-III to find the Pareto frontier.\n\nAchieved 8.3% tourist prediction error with R\u00b2>0.5 on the coupled model. PCA-KMeans clustering identified distinct destination archetypes with different optimal strategies. Competed against 28,000+ teams globally\u2014Honorable Mention.",
   },
@@ -184,13 +184,13 @@ export const projects: Project[] = [
       { value: "PSO", label: "Global Optimizer" },
     ],
     architecture: `graph TB
-  Raw[Biomass + Coal\\nPyrolysis Data] --> FE[Feature Engineering\\nEntropy-Weighted Fuzzy]
-  FE --> LGB[LightGBM\\nYield Prediction]
-  FE --> GPR[Gaussian Process\\nUncertainty Bounds]
-  LGB --> Coupled[Non-Linear\\nInteraction Model]
+  Raw[Biomass + Coal<br/>Pyrolysis Data] --> FE[Feature Engineering<br/>Entropy-Weighted Fuzzy]
+  FE --> LGB[LightGBM<br/>Yield Prediction]
+  FE --> GPR[Gaussian Process<br/>Uncertainty Bounds]
+  LGB --> Coupled[Non-Linear<br/>Interaction Model]
   GPR --> Coupled
-  Coupled --> PSO[Particle Swarm\\nOptimization]
-  PSO --> Optimal[28.44% Optimal\\nBiomass Ratio]`,
+  Coupled --> PSO[Particle Swarm<br/>Optimization]
+  PSO --> Optimal[28.44% Optimal<br/>Biomass Ratio]`,
     story:
       "Clean energy from biomass-coal co-pyrolysis sounds straightforward\u2014mix and burn. But the non-linear interactions between mixing ratios and gas/char/liquid yields make brute-force optimization impossible. We built a three-model ensemble: LightGBM for yield prediction, Gaussian Process Regression for uncertainty quantification, and Particle Swarm Optimization to search the non-convex solution space.\n\nThe entropy-weighted fuzzy evaluation framework captured interactions that single-objective models miss entirely. PSO converged on 28.44% as the optimal biomass-to-coal ratio\u2014a specific, actionable number that maximizes clean energy output. Judges at Shuwei Cup praised the methodology as transferable across energy domains, awarding First Prize plus the Grand Innovation Award.",
   },
@@ -214,16 +214,16 @@ export const projects: Project[] = [
       { value: "82.8%", label: "Capacity Utilization" },
     ],
     architecture: `graph TB
-  Data[Multi-Source Data\\nMarket + Population + Manufacturing] --> ARIMAX[ARIMAX-GARCH\\nTime Series]
-  Data --> VAR[VAR Model\\nCross-Variable Dynamics]
-  Data --> LASSO[LASSO Regression\\nR²=0.9850]
-  Data --> Prophet[Prophet\\nSeasonal Decomposition]
+  Data[Multi-Source Data<br/>Market + Population + Manufacturing] --> ARIMAX[ARIMAX-GARCH<br/>Time Series]
+  Data --> VAR[VAR Model<br/>Cross-Variable Dynamics]
+  Data --> LASSO[LASSO Regression<br/>R²=0.9850]
+  Data --> Prophet[Prophet<br/>Seasonal Decomposition]
   ARIMAX --> Ensemble[Ensemble Forecast]
   VAR --> Ensemble
   LASSO --> Ensemble
   Prophet --> Ensemble
-  Ensemble --> HHI[HHI Concentration\\nUS/EU Comparison]
-  Ensemble --> Forecast[2026 Projections\\n144.68M Pets · $52B Market]`,
+  Ensemble --> HHI[HHI Concentration<br/>US/EU Comparison]
+  Ensemble --> Forecast[2026 Projections<br/>144.68M Pets · $52B Market]`,
     story:
       "China\u2019s pet industry is growing faster than any forecasting model can keep up with. We built an integrated framework spanning four model families\u2014ARIMAX-GARCH for temporal dynamics, VAR for cross-variable interactions, LASSO for driver identification (R\u00b2=0.9850), and Prophet for seasonal decomposition. Each model captures a dimension the others miss.\n\nThe HHI concentration index comparison against US and EU markets revealed China\u2019s market is still fragmenting\u2014the opposite of mature markets. Our ensemble projected 144.68M pets and 82.8% manufacturing capacity utilization by 2026, with a total market size exceeding $52 billion. The framework earned recognition at APMCM for methodological rigor.",
   },
@@ -377,11 +377,11 @@ export const projects: Project[] = [
       { value: "-29%", label: "Rework Rounds" },
     ],
     architecture: `graph LR
-  Task[Complex Task] --> CD[Context\\nDecomposition]
-  CD --> TM[Task Manager\\nState Machine]
-  TM --> P[Prompt Protocol\\nRetry + Audit]
+  Task[Complex Task] --> CD[Context<br/>Decomposition]
+  CD --> TM[Task Manager<br/>State Machine]
+  TM --> P[Prompt Protocol<br/>Retry + Audit]
   P --> LLM[Any LLM Backend]
-  LLM --> Validate[Output Validation\\nJSON Schema]
+  LLM --> Validate[Output Validation<br/>JSON Schema]
   Validate -->|Pass| Result[Auditable Result]
   Validate -->|Fail| P`,
     story:
@@ -409,10 +409,10 @@ export const projects: Project[] = [
     ],
     architecture: `graph LR
   Codebase[Your Codebase] --> Scanner[Static Scanner]
-  Scanner --> Context7[Context7 MCP\\nReal-time Docs]
-  Context7 --> Analysis[Gap Analysis\\n+ Replacement Match]
-  Analysis --> Plan[Migration Plan\\n+ Delete Checklist]
-  Plan --> Agent[Claude Code / Cursor\\n/ OpenCode / 35+]`,
+  Scanner --> Context7[Context7 MCP<br/>Real-time Docs]
+  Context7 --> Analysis[Gap Analysis<br/>+ Replacement Match]
+  Analysis --> Plan[Migration Plan<br/>+ Delete Checklist]
+  Plan --> Agent[Claude Code / Cursor<br/>/ OpenCode / 35+]`,
     story:
       "Snyk, Dependabot, and Renovate manage your existing dependencies. But they can\u2019t find code you wrote that should become a dependency\u2014or capabilities your project is missing entirely. Next-Unicorn does all three: replacement, gap analysis, and dependency management, verified against real documentation via Context7 MCP.\n\nPublished on Smithery, npm, and GitHub Packages, it supports 35+ AI agents out of the box. 176 tests passed with 29 property-based verifications ensure reliability. The core insight: every codebase accumulates Vibe Coding debt\u2014hand-rolled date formatters, DIY loggers, bespoke state machines\u2014and the cost compounds silently until someone audits it.",
   },

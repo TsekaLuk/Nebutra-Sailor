@@ -5,8 +5,8 @@ export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
-  const title = searchParams.get("title") ?? "Tseka Luk";
-  const subtitle = searchParams.get("subtitle") ?? "AI-Native Builder";
+  const title = (searchParams.get("title") ?? "Tseka Luk").slice(0, 100);
+  const subtitle = (searchParams.get("subtitle") ?? "AI-Native Builder").slice(0, 200);
 
   return new ImageResponse(
     (

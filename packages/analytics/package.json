@@ -1,7 +1,8 @@
 {
   "name": "@nebutra/analytics",
   "version": "0.0.1",
-  "description": "Link attribution, conversion tracking, and growth analytics powered by Dub",
+  "private": true,
+  "description": "Link attribution, conversion tracking, and product analytics (Dub + PostHog)",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -20,6 +21,11 @@
       "import": "./dist/server.mjs",
       "require": "./dist/server.js",
       "types": "./dist/server.d.ts"
+    },
+    "./posthog": {
+      "import": "./dist/posthog.mjs",
+      "require": "./dist/posthog.js",
+      "types": "./dist/posthog.d.ts"
     }
   },
   "scripts": {
@@ -28,7 +34,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "dub": "^0.71.5"
+    "dub": "^0.71.5",
+    "posthog-js": "^1.360.1"
   },
   "devDependencies": {
     "@types/node": "^22.19.15",

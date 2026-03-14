@@ -22,6 +22,7 @@ spec:
         app.kubernetes.io/name: ecommerce-service
         app.kubernetes.io/component: service
     spec:
+      serviceAccountName: ecommerce-service
       terminationGracePeriodSeconds: 30
       containers:
         - name: ecommerce-service

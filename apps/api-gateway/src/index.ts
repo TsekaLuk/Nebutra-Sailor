@@ -1,30 +1,40 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { serve } from "@hono/node-server";
 import { bodyLimit } from "hono/body-limit";
+import { compress } from "hono/compress";
 import { cors } from "hono/cors";
 import { logger as honoLogger } from "hono/logger";
 import { requestId } from "hono/request-id";
+import { secureHeaders } from "hono/secure-headers";
 import { swaggerUI } from "@hono/swagger-ui";
 import { trace } from "@opentelemetry/api";
 import { logger, initOtel } from "@nebutra/logger";
+import { toApiError, getStatusCode } from "@nebutra/errors";
 import { setAlertErrorHandler, initializeFromEnv } from "@nebutra/alerting";
 import { prisma } from "@nebutra/db";
+import { initSentry, captureRequestError } from "./config/sentry.js";
 
 import { healthRoutes } from "./routes/misc/health.js";
 import { statusRoutes } from "./routes/system/status.js";
 import { consentRoutes } from "./routes/legal/consent.js";
 import { eventRoutes } from "./routes/events/index.js";
+import { aiRoutes } from "./routes/ai/index.js";
+import { billingRoutes } from "./routes/billing/index.js";
+import { adminRoutes } from "./routes/admin/index.js";
 import {
   stripeWebhookRoutes,
   clerkWebhookRoutes,
 } from "./routes/webhooks/index.js";
 import { inngestHandler } from "./inngest/index.js";
 import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
+import { auditMutationMiddleware } from "./middlewares/auditMutation.js";
 import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
 import { apiVersionMiddleware } from "./middlewares/apiVersion.js";
+import { usageMeteringMiddleware } from "./middlewares/usageMetering.js";
 import { env, DOMAINS } from "./config/env.js";
 
 initOtel({ serviceName: "api-gateway" });
+initSentry();
 
 // Wire logger into alerting error handler
 setAlertErrorHandler((ctx, err) => logger.error(ctx, err));
@@ -61,6 +71,10 @@ const corsOrigins = [
 ].filter(Boolean) as string[];
 
 // Global middlewares
+// Compression — gzip/deflate/brotli for all JSON/text responses
+app.use("*", compress());
+// Security headers: X-Content-Type-Options, X-Frame-Options, HSTS, etc.
+app.use("*", secureHeaders());
 app.use("*", requestId());
 
 // Wire requestId and OTel traceId into structured logger context for log
@@ -119,6 +133,12 @@ app.use(
 // Tenant context extraction (before rate limiting)
 app.use("*", tenantContextMiddleware);
 
+// Usage metering — non-blocking, fire-and-forget, runs after response
+app.use("/api/v1/*", usageMeteringMiddleware);
+
+// Audit logging for all state-changing requests (POST/PUT/PATCH/DELETE)
+app.use("/api/v1/*", auditMutationMiddleware);
+
 // API versioning — sets API-Version header, supports Sunset for deprecated versions
 app.use("/api/*", apiVersionMiddleware({
   // deprecated: { "v1": "2027-06-30" }, // Uncomment when v2 is ready
@@ -153,6 +173,11 @@ app.route("/system", statusRoutes);
 // the skip list so they receive full rate limiting.
 app.route("/api/v1/legal", consentRoutes);
 app.route("/api/v1/events", eventRoutes);
+app.route("/api/v1/ai", aiRoutes);
+app.route("/api/v1/billing", billingRoutes);
+
+// Admin routes — protected by X-Admin-Key, not exposed through public ingress
+app.route("/api/v1/admin", adminRoutes);
 
 // Webhook routes (raw body — bypass rate limiting)
 app.route("/api/webhooks", stripeWebhookRoutes);
@@ -191,14 +216,11 @@ app.notFound((c) => {
 
 // Error handler
 app.onError((err, c) => {
-  logger.error("Unhandled error", err, { path: c.req.path });
-  return c.json(
-    {
-      error: "Internal Server Error",
-      message: process.env.NODE_ENV === "development" ? err.message : undefined,
-    },
-    500,
-  );
+  const requestId = c.req.header("x-request-id");
+  const tenant = c.get("tenant");
+  logger.error("Unhandled error", err, { path: c.req.path, requestId });
+  captureRequestError(err, requestId, tenant?.organizationId);
+  return c.json(toApiError(err, requestId), getStatusCode(err) as 400 | 401 | 403 | 404 | 409 | 429 | 500 | 502 | 503 | 504);
 });
 
 const port = parseInt(process.env.PORT || "3002", 10);

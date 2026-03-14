@@ -23,7 +23,7 @@ export default async function AdminLayout({
   const adminEmail = process.env.ADMIN_EMAIL
   const userEmail = session.user.email
 
-  if (!adminEmail || userEmail !== adminEmail) {
+  if (!adminEmail || userEmail?.toLowerCase() !== adminEmail.toLowerCase()) {
     return (
       <div className="flex min-h-screen items-center justify-center px-6">
         <div className="text-center">

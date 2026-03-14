@@ -1,316 +1,298 @@
 {
   "nav": {
-    "features": "Funktionen",
-    "pricing": "Preise",
-    "docs": "Dokumentation",
+    "features": "Features",
+    "pricing": "Pricing",
+    "docs": "Documentation",
     "github": "GitHub",
-    "signIn": "Anmelden",
-    "getStarted": "Jetzt starten"
+    "signIn": "Sign In",
+    "getStarted": "Get Started"
   },
   "hero": {
-    "badge": "AGPLv3-Lizenz · Produktionsreif",
-    "headline1": "Starten Sie Ihr SaaS",
-    "headline2": "in Wochen, nicht Monaten.",
-    "subheadline": "Produktionsfertiges Monorepo mit Multi-Tenancy, KI-Infrastruktur, Abrechnung und allem, was Sie für den Launch benötigen.",
-    "copyLabel": "Kopieren",
-    "copiedLabel": "Kopiert!",
-    "ctaGetStarted": "Jetzt starten",
-    "ctaViewGitHub": "Auf GitHub ansehen →"
+    "badge": "Nebutra Intelligence · Leading AI Infrastructure",
+    "headline1": "The engineering foundation",
+    "headline2": "for production-grade AI.",
+    "subheadline": "Nebutra Sailor is a Next.js SaaS framework engineered for AI founders. It natively integrates Agent orchestration, multi-modal capabilities, and an enterprise-level monetization suite, turning AI concepts into scalable commercial products—not just technical demos.",
+    "copyLabel": "Copy Command",
+    "copiedLabel": "Copied",
+    "ctaGetStarted": "Start Building",
+    "ctaViewGitHub": "View on GitHub →"
   },
   "features": {
-    "sectionTitle": "Von Anfang an für den Produktionsbetrieb konzipiert.",
+    "sectionTitle": "Out-of-the-box infrastructure, from prototype to scale.",
     "item0": {
-      "title": "Multi-Tenancy von Grund auf",
-      "description": "Zeilensicherheit, Org-Isolation und Tenant-Routing sind in jede Schicht eingebaut. Keine nachträglich hinzugefügten Lösungen."
+      "title": "AI Application Infrastructure",
+      "description": "Built-in, production-tested Agent Frameworks and LLM orchestration engines. Bypass complex underlying abstractions and interact directly with structured intelligence APIs."
     },
     "item1": {
-      "title": "KI-native Infrastruktur",
-      "description": "Provider-Abstraktion über OpenAI, Anthropic und Gemini. Wechseln Sie Modelle, ohne Ihren Anwendungscode zu ändern."
+      "title": "Open Product Community (OPC)",
+      "description": "Future AI products require ecosystems, not silos. Designed with the OPC philosophy to provide standardized plugin structures connecting creators with developer networks."
     },
     "item2": {
-      "title": "Abrechnung vollständig integriert",
-      "description": "Stripe-Abonnements, Nutzungsmessung und Webhook-Handler — produktionsreif, kein Demo-Ware."
+      "title": "Enterprise SaaS Automation",
+      "description": "Deeply integrating the modern tech stack of Vercel, Supabase, and Stripe. Provides out-of-the-box row-level security, complex multi-tenant isolation, and global subscription billing."
     }
   },
   "cta": {
-    "heading": "Bereit zum Starten?",
-    "subheading": "In weniger als 5 Minuten loslegen.",
-    "copyLabel": "Kopieren",
-    "copiedLabel": "Kopiert!",
-    "startBuilding": "Jetzt entwickeln"
+    "heading": "Ready to deploy your next AI product?",
+    "subheading": "Initialize a complete, cloud-native SaaS architecture locally with a single terminal command.",
+    "copyLabel": "Copy Command",
+    "copiedLabel": "Copied",
+    "startBuilding": "Start Building"
   },
   "footer": {
     "links": {
-      "product": "Produkt",
-      "docs": "Dokumentation",
-      "github": "GitHub",
-      "discord": "Discord"
+      "product": "Ecosystem",
+      "docs": "Developer Docs",
+      "github": "Source Code",
+      "discord": "Community"
     },
-    "copyright": "© 2024 Nebutra Intelligence",
-    "statusOnline": "Online"
+    "copyright": "© 2026 Nebutra Intelligence. All rights reserved.",
+    "statusOnline": "All systems operational"
   },
   "logoStrip": {
-    "tagline": "Aufgebaut auf dem Stack, dem Sie bereits vertrauen"
+    "tagline": "Engineered upon the premier technologies driving the modern web"
   },
   "legal": {
     "nav": {
-      "home": "Startseite",
-      "contact": "Kontakt"
+      "home": "Home",
+      "contact": "Contact"
     },
     "footer": {
-      "privacy": "Datenschutzrichtlinie",
-      "terms": "Nutzungsbedingungen",
-      "cookies": "Cookie-Richtlinie",
-      "refund": "Rückerstattungsrichtlinie",
-      "copyright": "Nebutra, Inc. Alle Rechte vorbehalten."
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy",
+      "refund": "Refund Policy",
+      "copyright": "© Nebutra. All rights reserved."
     }
   },
   "legalPages": {
     "about": {
-      "title": "Über Uns — Nebutra",
-      "description": "Lernen Sie über Nebutra, unsere Mission, Werte und die Team, der die open-source Enterprise SaaS-Plattform hinterlegt.",
-      "heading": "Über Nebutra",
-      "subheading": "Die Zukunft der Enterprise SaaS - open-source, AI-native und produziert.",
-      "missionTitle": "Unsere Mission",
-      "missionP1": "Nebutra existiert, um die Monate des Boilerplate-Work, das jede SaaS-Team face, zu eliminieren. Wir glauben, dass der beste Weg, gute Produkte zu bauen, ist, mit einem guten Grundstein zu beginnen.",
-      "missionP2": "Unser open-source Framework bietet Multi-tenancy, Billing, Authentication und AI-Infrastruktur direkt aus dem Startpunkt — so können Teams sich auf das was ihre Produkte einzigartig macht konzentrieren.",
-      "valuesTitle": "Unsere Werte",
+      "title": "About Us — Nebutra Intelligence",
+      "description": "Discover the commercial vision and core engineering principles driving Nebutra Intelligence.",
+      "heading": "Company Overview",
+      "subheading": "A leading provider of AI Native & OPC Infrastructure solutions.",
+      "missionTitle": "Corporate Mission",
+      "missionP1": "Nebutra Intelligence is dedicated to eliminating the engineering friction between experimental AI prototypes and fully commercialized products. We deliver standardized AI Application Infrastructure and SaaS tooling, allowing developers to focus purely on business logic rather than underlying operational complexities.",
+      "missionP2": "Guided by the Open Product Community (OPC) philosophy, we believe that next-generation AI products represent a dense intersection of rigorous code architecture, hacker culture, and expansive developer networks.",
+      "valuesTitle": "Core Technical Principles",
       "values": {
         "0": {
-          "title": "Open Source First",
-          "description": "Wir bauen in der offenen. Der Kern der Framework ist AGPLv3-licensed und bleibt immer so."
+          "title": "System-Level Engineering",
+          "description": "Constructing software with a stringent systems engineering mindset. We ship only heavily tested, fault-tolerant architectures, rejecting fragile, experimental demos."
         },
         "1": {
-          "title": "Production-Ready",
-          "description": "Jede Funktion wird mit einem Battle-Test ausgeliefert. Kein Demo-ware, kein halbgebautes Abstraktions."
+          "title": "Production Readiness",
+          "description": "No compromises. Every system component is forged in high-concurrency, authentic commercial environments to guarantee sustained enterprise-grade performance."
         },
         "2": {
-          "title": "Developer Experience",
-          "description": "Große DX ist nicht optional. Wir fokussieren uns auf APIs, Dokumentation und Fehlermeldungen."
+          "title": "Open Source Innovation",
+          "description": "Transparency creates trust. By open-sourcing our core infrastructure, we enable global technical experts to audit and iterate upon our logic, accelerating architectural evolution."
         },
         "3": {
-          "title": "Security by Default",
-          "description": "Row-Level-Sicherheit, verschlüsselte Geheimnisse und Audit-Logs sind von Anfang an integriert."
+          "title": "Inviolable Security",
+          "description": "From the very first line of code, our architecture defaults to enforcement of Row-Level Security (RLS), transit encryption, and comprehensive system auditing."
         },
         "4": {
-          "title": "Community Driven",
-          "description": "Unser Roadmap ist von den Entwicklern geprägt, die Nebutra jeden Tag nutzen."
+          "title": "Developer Velocity",
+          "description": "R&D efficiency is a critical product metric. We relentlessly optimize for low API latency, elegant interfaces, and highly structured technical documentation."
         },
         "5": {
-          "title": "Ship Fast, Ship Often",
-          "description": "Wir veröffentlichen häufig, iterieren schnell und lassen nie perfekt, das Feind des gestellten."
+          "title": "Continuous Delivery",
+          "description": "Deploying agile iteration protocols. We establish rapid feedback loops through rigorous testing and frequent deployments, scaling the product capabilities responsively."
         }
       },
-      "companyInfoTitle": "Unternehmensinformationen",
+      "companyInfoTitle": "Organizational Compliance",
       "companyInfo": {
-        "legalName": "Firmenname",
-        "founded": "Gegründet",
-        "headquarters": "Hauptsitz",
-        "jurisdiction": "Rechtsgebiet"
+        "legalName": "Legal Entity Registration",
+        "founded": "Registration Date",
+        "headquarters": "Global Operations Center",
+        "jurisdiction": "Governing Jurisdiction"
       },
-      "ctaHeading": "Möchten Sie mehr erfahren?",
-      "ctaDescription": "Kontaktieren Sie uns mit unserem Team oder erkunden Sie unsere Dokumentation.",
-      "ctaButton": "Kontakt aufnehmen"
+      "ctaHeading": "Require deeper technical evaluation?",
+      "ctaDescription": "Contact our engineering specialists for an enterprise integration assessment or review the deployment documentation.",
+      "ctaButton": "Establish Contact"
     },
     "contact": {
-      "title": "Kontaktieren Sie uns — Nebutra",
-      "description": "Kontaktieren Sie uns mit dem Nebutra-Team für Vertrieb, Support, Rechtsangelegenheiten oder allgemeine Fragen.",
-      "heading": "Kontakt",
-      "subheading": "Wir wären sehr happy, Sie zu hören. Kontakten Sie den richtigen Team unten.",
+      "title": "Technical & Commercial Inquiry — Nebutra Intelligence",
+      "description": "The dedicated communication channel for commercial licensing, enterprise self-hosting, and advanced technical support.",
+      "heading": "Establish Support Connection",
+      "subheading": "We will dispatch a dedicated technical specialist or architect to evaluate your explicit requirements.",
       "contacts": {
         "general": {
-          "title": "Allgemeine Anfragen",
-          "description": "Frage über Nebutra, Partnerbeziehungen oder sonstiges."
+          "title": "Enterprise Consultation",
+          "description": "Preliminary discussions concerning ecological strategic partnerships and overarching architectural evolution."
         },
         "sales": {
-          "title": "Vertrieb",
-          "description": "Preis, Enterprise-Pläne und individuelle Deployment."
+          "title": "Commercial Deployment",
+          "description": "Negotiation regarding closed-source licensing and specifics pertaining to private cluster-environment deployments."
         },
         "support": {
-          "title": "Technische Support",
-          "description": "Hilfe bei Integration, Bugs oder technischen Problemen."
+          "title": "Expert-Level Support",
+          "description": "Targeted architectural guidance and troubleshooting services for active business integrations and core system debugging."
         },
         "legal": {
-          "title": "Rechtliches",
-          "description": "Konditionen, Lizenzierung und rechtliche Angelegenheiten."
+          "title": "Legal & Compliance",
+          "description": "Inquiries related to open-source boundary definitions, enterprise compliance audits, and contract terms."
         },
         "privacy": {
-          "title": "Datenschutz",
-          "description": "Datenschutz, GDPR und Privatschutzanfragen."
+          "title": "Data Center Privacy",
+          "description": "Technical verification and compliance directives regarding GDPR and subsequent international data protection laws."
         },
         "security": {
-          "title": "Sicherheit",
-          "description": "Vulnerabilitätsberichte und Sicherheitsbedenken."
+          "title": "Security Disclosures",
+          "description": "Securely submit technical reproduction reports concerning potential software vulnerabilities directly to our infrastructure team."
         }
       },
-      "formTitle": "Senden Sie uns eine Nachricht",
+      "formTitle": "Submission Portal",
       "form": {
-        "name": "Name",
-        "email": "E-Mail",
-        "company": "Unternehmen",
-        "category": "Kategorie",
+        "name": "Submitter Designation",
+        "email": "Official Email Address",
+        "company": "Affiliated Organization",
+        "category": "Domain of Requirement",
         "categories": {
-          "general": "Allgemeine Anfrage",
-          "sales": "Vertrieb",
-          "support": "Technische Support",
-          "legal": "Rechtliches",
-          "privacy": "Datenschutz",
-          "partnership": "Partnerschaft",
-          "press": "Presse"
+          "general": "Corporate Consultation",
+          "sales": "Licensing & Architecture",
+          "support": "Developer Assistance",
+          "legal": "Legal & Compliance Boundaries",
+          "privacy": "Data Processing Policies",
+          "partnership": "Ecosystem Integrations",
+          "press": "Public Relations"
         },
-        "subject": "Betreff",
-        "message": "Nachricht",
-        "submit": "Nachricht senden",
-        "privacyNotice": "Mit dem Absenden dieses Formulars stimmen Sie unserer",
-        "privacyLink": "Datenschutzrichtlinie zu"
+        "subject": "Core Issue Summary",
+        "message": "Detailed Technical/Commercial Specifications",
+        "submit": "Transmit to Backend",
+        "privacyNotice": "Executing this network request signifies reading and consenting to our",
+        "privacyLink": "Systemic Privacy Infrastructure",
+        "submitting": "Entering processing queue...",
+        "successMessage": "Data transmitted successfully. The responsible operational team will issue a detailed response within 1-2 standard business days."
       },
-      "companyInfoTitle": "Unternehmensinformationen",
-      "socialMedia": "Soziale Medien"
+      "companyInfoTitle": "Operational Telemetry",
+      "socialMedia": "Primary Network Links"
     },
     "cookies": {
-      "title": "Cookie-Policy — Nebutra",
-      "description": "Lernen Sie, wie Nebutra Cookies und ähnliche Technologien auf seiner Website und den Dienstleistungen verwendet.",
-      "heading": "Cookie-Richtlinie",
-      "effectiveDate": "Datum des Inkrafttretens",
-      "lastUpdated": "Zuletzt aktualisiert"
+      "title": "Data Retention Protocols — Nebutra",
+      "description": "Elucidating the platform's execution of necessary technical storage mechanics to maintain session states and platform analytics.",
+      "heading": "Technical Tracking Mechanics",
+      "effectiveDate": "Mandatory Enforcement Date",
+      "lastUpdated": "Latest Technical Revision"
     },
     "faq": {
-      "title": "FAQ — Nebutra",
-      "description": "häufig gestellte Fragen über Nebutra, Preise, Features und Support.",
-      "heading": "Häufig gestellte Fragen",
-      "subheading": "Finde Antworten zu häufig gestellten Fragen über Nebutra.",
+      "title": "Engineering Guidance & FAQ — Nebutra",
+      "description": "Comprehensive analysis of framework architecture, baseline topologies, and commercial deployment strategies.",
+      "heading": "Executive Deep Dive",
+      "subheading": "Supporting material optimized for systems engineering integration and executive commercial decision-making.",
       "categories": {
         "0": {
-          "name": "Erste Schritte",
+          "name": "Architectural Overview",
           "questions": {
             "0": {
-              "q": "Was ist Nebutra Sailor?",
-              "a": "Nebutra Sailor ist eine open-source, produziert SaaS-Plattform, die mit Next.js gebaut ist, mit Multi-tenancy, Billing, Authentication und AI-Infrastruktur direkt aus dem Startpunkt."
+              "q": "What is the explicit operational purpose of Nebutra Sailor?",
+              "a": "Nebutra Sailor is a highly structured, production-ready Next.js AI SaaS framework. It bundles microservice functionalities, including corporate billing, multi-factor authentication, and multi-tenant isolation, eliminating boilerplate development overhead and allowing teams to hyper-focus on core structural AI implementation."
             },
             "1": {
-              "q": "Ist Nebutra kostenlos?",
-              "a": "Ja, Nebutra Sailor ist AGPLv3-licensed und kostenlos. Wir bieten auch Managed Cloud-Pläne an, die für Teams mit hosted Infrastruktur und Premium Support verfügbar sind."
+              "q": "How is the repository licensing structured?",
+              "a": "The underlying infrastructure strictly enforces the OSS AGPLv3 agreement, guaranteeing transparency and zero-cost usage. For organizations necessitating proprietary obfuscation and elevated rewrite guarantees, explicit closed-source commercial contracts are available."
             },
             "2": {
-              "q": "Wie beginne ich?",
-              "a": "Führen Sie unseren CLI-Befehl aus, um eine neue Projekt zu sichten, und folgen Sie anschließend der Quickstart-Guide in unserer Dokumentation. Sie können unter 5 Minuten up and running sein."
+              "q": "What is the speed of initial commercial evaluation?",
+              "a": "Extremely high-velocity. Using our customized Node CLI toolchain alongside the precise technical specification, a junior engineer can stand up an autonomous local Minimum Viable Product (MVP) instance within single-digit minutes."
             }
           }
         },
         "1": {
-          "name": "Preise & Abrechnung",
+          "name": "Commercial Operations",
           "questions": {
             "0": {
-              "q": "Welche Pläne sind verfügbar?",
-              "a": "Wir bieten Free, Starter, Pro und Enterprise Pläne an. Besuchen Sie unsere Preise-Seite für vollständige Details."
+              "q": "How wide is the tolerance for commercial scaling?",
+              "a": "Designed heavily on micro-component paradigms, structural load capacity maps seamlessly from zero-demand Free Tiers dynamically up to Enterprise thresholds serving multi-million monthly requests, entirely configured via dashboard constraints."
             },
             "1": {
-              "q": "Kann ich bei beliebigen Zeiten meine Pläne ändern?",
-              "a": "Ja, Sie können Ihre Pläne jederzeit upgraden oder downgrade. Upgrades wirken sofort, Downgrades bei nächsten Billing-Zyklus."
+              "q": "How does subscription volatility affect standard accounting?",
+              "a": "We operate utilizing precise, second-level structural logging of resources and API throughput. Shifting constraints instantly reconciles against the accounting layer—either refunding prorated differentials or issuing automatic credits. There is absolutely no tier-freeze period."
             },
             "2": {
-              "q": "Bieten Sie jährliche Billing an?",
-              "a": "Ja, jährliche Billing ist bei Rabatten verfügbar. Kontaktieren Sie uns für Enterprise-Preise."
-            },
-            "3": {
-              "q": "Welche Zahlungsmethoden werden akzeptiert?",
-              "a": "Wir akzeptieren alle großen Kreditkarten über Stripe. Enterprise-Kunden können via Rechnung zahlen."
-            },
-            "4": {
-              "q": "Ist es kostenlos, einen Trial zu erhalten?",
-              "a": "Ja, alle gezahlten Pläne enthalten eine 14-Tage kostenlose Trial. Kein Kreditkarten erforderlich."
+              "q": "What processing infrastructure isolates payment vectors?",
+              "a": "Global cash routing fundamentally defers to Stripe server interfaces, guaranteeing strict PCI-DSS telemetry and processing integrity. Enterprise deployments may integrate private financial audit pipelines governed by custom SLA commitments."
             }
           }
         },
         "2": {
-          "name": "Features & Technical",
+          "name": "System Engineering Layer",
           "questions": {
             "0": {
-              "q": "Welche AI-Provider werden unterstützt?",
-              "a": "Wir unterstützen OpenAI, Anthropic und Google Gemini direkt, mit einem einheitlichen API, das es ermöglicht, Provider zu wechseln, ohne Codeänderungen."
+              "q": "Which fundamental intelligence abstractions are supported natively?",
+              "a": "The primary interaction logic dictates native interoperability over OpenAI, Anthropic, and Gemini standard specifications. This yields massive flexibility to hot-swap reasoning endpoints efficiently via variable mapping with zero degradation to the upstream commercial logic."
             },
             "1": {
-              "q": "Wie funktioniert Multi-tenancy?",
-              "a": "Multi-tenancy ist in jedem Schicht integriert — von Postgres Row-Level-Sicherheit bis Middleware-basierte Tenant-Routing und isoliertem Org-Daten."
+              "q": "How is the risk of database obfuscation addressed?",
+              "a": "Implementation defaults intrinsically deploy Postgres Row-Level Security (RLS) policies tightly coupled with our serverless Tenant Resolution Routing primitives. This ensures hard partitions actively prevent critical application-level data contamination and execution overlap."
             },
             "2": {
-              "q": "Kann ich Nebutra selbsthosten?",
-              "a": "Absolut. Nebutra ist für Selbsthosting gedacht. Deploy zu beliebten Plattformen, die Node.js und Postgres unterstützen."
-            },
-            "3": {
-              "q": "Welche Datenbank verwendet Nebutra?",
-              "a": "Nebutra verwendet eine Datenbank, die von uns entwickelt wurde."
+              "q": "Are there architectural restrictions on self-managed deployments?",
+              "a": "Absolutely none. The topology is fully decoupled. If the environment executes independent Node.js runtimes alongside healthy PostgreSQL clusters, full functionality is inherently preserved."
             }
           }
         },
         "3": {
-          "name": "Sicherheit & Compliance",
+          "name": "Systematic Integrity",
           "questions": {
             "0": {
-              "q": "Sind meine Daten sicher?",
-              "a": "Ja. Wir setzen Verschlüsselung bei der Übertragung und im Ruhezustand, Zeilensicherheit, Audit-Protokollierung und regelmäßige Sicherheitsbewertungen ein."
+              "q": "What protocols determine the perimeter's mechanical defense?",
+              "a": "Mechanisms execute mandatory TLS encryption through transmission, deterministic hashing algorithms for secrets mapping, and the ubiquitous recording of mutation events written strictly into internal time-series tracking ledgers."
             },
             "1": {
-              "q": "Sind Sie DSGVO-konform?",
-              "a": "Ja. Wir stellen Werkzeuge für den Datenexport, die Datenlöschung und das Einwilligungsmanagement bereit, um Ihnen die Einhaltung der DSGVO und anderer Datenschutzbestimmungen zu erleichtern."
+              "q": "Does the topology respect major international privacy statutes?",
+              "a": "Yes, profoundly. Business modules supply out-of-the-box algorithmic implementations targeting consent withdrawal states, hard-deletion logic, and deep export queries conforming optimally to the GDPR and localized regulatory frameworks."
             },
             "2": {
-              "q": "Haben Sie eine SOC 2-Zertifizierung?",
-              "a": "Wir streben derzeit die SOC 2 Typ II-Zertifizierung an. Für unsere aktuelle Sicherheitsdokumentation kontaktieren Sie uns bitte."
-            },
-            "3": {
-              "q": "Wie gehen Sie mit Datenpannen um?",
-              "a": "Wir verfügen über einen Incident-Response-Plan, der Benachrichtigungen innerhalb von 72 Stunden, eine Ursachenanalyse und Abhilfemaßnahmen umfasst."
+              "q": "What executes upon an anomalous catastrophic incident?",
+              "a": "Automated sentinels instantly alert core engineering vectors who force circuit blocks and implement swift triage. Governed by an advanced resolution handbook, fully transparent Incident Postmortems are universally disseminated within an absolute 72-hour window."
             }
           }
         },
         "4": {
-          "name": "Support",
+          "name": "Technical Assistance Directives",
           "questions": {
             "0": {
-              "q": "Wie erhalte ich Hilfe?",
-              "a": "Community-Support ist über Discord und GitHub Discussions verfügbar. Kostenpflichtige Pläne beinhalten E-Mail- und Prioritätssupport."
+              "q": "How is operational bottleneck troubleshooting resolved?",
+              "a": "Initial triage vectors target the rigorously maintained and peer-reviewed documentation matrix and verified community interactions. Procuring a standard or enterprise-level license decrypts access to private escalation queues resolving through direct internal engineering nodes."
             },
             "1": {
-              "q": "Was sind Ihre Supportzeiten?",
-              "a": "Community-Support ist rund um die Uhr über Discord verfügbar. Kostenpflichtiger Support ist montags bis freitags von 9 bis 18 Uhr PST erreichbar."
-            },
-            "2": {
-              "q": "Bieten Sie Beratungsleistungen an?",
-              "a": "Ja, wir bieten Architekturreviews, individuelle Integrationen und Migrationsunterstützung an. Für Details wenden Sie sich bitte an den Vertrieb."
+              "q": "Do you extend physical or specialized environmental integration operations?",
+              "a": "This falls under our bespoke premium execution tier for upper-echelon corporate conglomerates. Our most senior architects deploy outly to perform code auditing against legacy architecture, manage delicate cloud relocations, and validate highly isolated network partitions."
             }
           }
         }
       },
-      "ctaHeading": "Haben Sie noch Fragen?",
-      "ctaDescription": "Unsere Team ist happy, Ihnen zu helfen. Kontakten Sie uns direkt.",
-      "ctaButton": "Kontaktieren Sie uns",
-      "ctaEmail": "E-Mail Support"
+      "ctaHeading": "Require immediate technical synchronization?",
+      "ctaDescription": "Whether validating a specific API behavior schema or executing long-term integration agreements, interface directly with the engineering hierarchy.",
+      "ctaButton": "Receive Integration Instructions",
+      "ctaEmail": "Transmit Direct Message"
     },
     "privacy": {
-      "title": "Privacy Policy — Nebutra",
-      "description": "Lernen Sie, wie Nebutra Ihre persönlichen Informationen sammelt, verwendet und schützt.",
-      "heading": "Datenschutzrichtlinie",
-      "effectiveDate": "Datum des Inkrafttretens",
-      "lastUpdated": "Zuletzt aktualisiert"
+      "title": "Privacy & Information Defense Protocol — Nebutra",
+      "description": "Extensively documenting precisely how the infrastructure mechanics govern user autonomy and machine data isolation.",
+      "heading": "Information Protection Directives",
+      "effectiveDate": "Enforcement Epoch",
+      "lastUpdated": "Latest Structural Revision"
     },
     "refund": {
-      "title": "Refund Policy — Nebutra",
-      "description": "Verständnis der Refund-Policy für Abonnements und Dienste.",
-      "heading": "Rückerstattungsrichtlinie",
-      "effectiveDate": "Datum des Inkrafttretens",
-      "lastUpdated": "Zuletzt aktualisiert"
+      "title": "Transaction Anomaly Protocols — Nebutra",
+      "description": "Rigorous delineation regarding exact capital rollback parameters across diverse structural engagement models.",
+      "heading": "Dispute Execution Framework",
+      "effectiveDate": "Enforcement Implementation Date",
+      "lastUpdated": "Revision Tracing Epoch"
     },
     "terms": {
-      "title": "Terms of Service — Nebutra",
-      "description": "Lesen Sie die Bedingungen und Vorschriften für die Nutzung der Dienste von Nebutra.",
-      "heading": "Nutzungsbedingungen",
-      "effectiveDate": "Datum des Inkrafttretens",
-      "lastUpdated": "Zuletzt aktualisiert"
+      "title": "Platform Interaction Treaty — Nebutra",
+      "description": "The exact defining technical guidelines outlining the required engagement behaviors between the software framework provider and executing agents.",
+      "heading": "Software Supply License Mechanics (Terms)",
+      "effectiveDate": "Execution Enforcement Date",
+      "lastUpdated": "Final Network Update"
     }
   },
   "metadata": {
-    "title": "Nebutra Sailor — Das Open-Source-Enterprise-SaaS-Framework",
-    "description": "Starten Sie Ihr SaaS in Wochen, nicht Monaten. Multi-Tenancy, Abrechnung, Authentifizierung und KI bereits integriert. Produktionsreif, AGPLv3-lizenziert."
+    "title": "Nebutra Intelligence | AI Native & SaaS Architecture",
+    "description": "The next-generation engineering framework tailored for mainstream AI startups and enterprises. Designed utilizing stringent permission frameworks, it provides an immediate, fully functional commercial value platform."
   }
 }

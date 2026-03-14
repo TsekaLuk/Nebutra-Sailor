@@ -9,6 +9,7 @@ import {
   WebhookEventRepository,
   type JsonValue,
 } from "@nebutra/repositories";
+import { inngest } from "../../inngest/client.js";
 
 const log = logger.child({ service: "clerk-webhook" });
 
@@ -370,7 +371,7 @@ async function handleOrganizationCreated(
   data: ClerkOrganizationData,
   repo: OrganizationRepository,
 ): Promise<void> {
-  await repo.create({
+  const org = await repo.create({
     clerkId: data.id,
     name: data.name,
     slug: data.slug,
@@ -381,6 +382,29 @@ async function handleOrganizationCreated(
     name: data.name,
     slug: data.slug,
   });
+
+  // Trigger async tenant provisioning (default API key + welcome email).
+  // Fire-and-forget — a provisioning failure must NOT fail the webhook response.
+  void inngest
+    .send({
+      name: "clerk/organization.created",
+      data: {
+        organizationId: org.id,
+        organizationClerkId: data.id,
+        organizationName: data.name,
+        // Owner email/name are resolved inside the Inngest function from the DB
+        // (the OWNER member is created via a subsequent organizationMembership.created event)
+        ownerEmail: "",
+        ownerFirstName: "",
+      },
+    })
+    .catch((err) => {
+      log.warn("Failed to enqueue tenant provisioning event", {
+        clerkId: data.id,
+        orgId: org.id,
+        err,
+      });
+    });
 }
 
 async function handleOrganizationUpdated(

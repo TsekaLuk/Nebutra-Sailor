@@ -11,42 +11,36 @@ import { useAnalytics } from "@/hooks/use-analytics";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  isError?: boolean;
 }
 
-function SoulOrb({ size = "sm" }: { size?: "sm" | "lg" }) {
+function SoulOrb({ size = "sm", isError = false }: { size?: "sm" | "lg"; isError?: boolean }) {
   const isLg = size === "lg";
-  const [frame, setFrame] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => setFrame((f) => (f + 1) % 4), 250);
-    return () => clearInterval(interval);
-  }, []);
-
-  const spinnerFrames = ["|", "/", "-", "\\"];
-
   return (
-    <div className={`relative shrink-0 flex items-center justify-center font-mono text-[var(--color-accent-fg)] ${isLg ? "w-20 h-20 text-4xl" : "w-10 h-10 text-base"}`}>
+    <div className={`relative shrink-0 flex items-center justify-center font-mono ${isError ? "text-destructive" : "text-foreground"} ${isLg ? "w-16 h-16 text-4xl" : "w-10 h-10 text-base"}`}>
       {isLg ? (
-        <div className="flex flex-col items-center justify-center leading-none z-10">
-          <span>{spinnerFrames[frame]}</span>
+        <div className="flex flex-col items-center justify-center leading-none z-10 transition-transform duration-700 ease-in-out hover:scale-110">
+          <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
+            <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM12 4C16.418 4 20 7.582 20 12C20 16.418 16.418 20 12 20C7.582 20 4 16.418 4 12C4 7.582 7.582 4 12 4ZM12 6C8.686 6 6 8.686 6 12C6 15.314 8.686 18 12 18C15.314 18 18 15.314 18 12C18 8.686 15.314 6 12 6Z" fill="currentColor"/>
+          </svg>
         </div>
       ) : (
-        <span className="z-10 animate-[pulse_2s_ease-in-out_infinite]">{">_"}</span>
+        <span className="z-10 animate-[pulse_1s_steps(2,start)_infinite] opacity-60">{">_"}</span>
       )}
     </div>
   );
 }
 
 function TypingDots() {
-  const [frame, setFrame] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => setFrame((f) => (f + 1) % 4), 250);
-    return () => clearInterval(interval);
-  }, []);
-  const frames = ["[=   ]", "[==  ]", "[=== ]", "[ ===]"];
   return (
-    <div className="flex items-center gap-1 font-mono text-sm px-4 py-3 text-[#a3e635]">
-      {frames[frame]}
+    <div className="flex items-center gap-[3px] px-4 py-3 h-8">
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className="w-1.5 h-1.5 rounded-full bg-foreground/50 animate-[pulse_1.5s_ease-in-out_infinite]"
+          style={{ animationDelay: `${i * 200}ms` }}
+        />
+      ))}
     </div>
   );
 }
@@ -61,10 +55,18 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
   const [isTyping, setIsTyping] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
+
+  // Abort any in-flight request on unmount
+  useEffect(() => {
+    return () => {
+      abortControllerRef.current?.abort();
+    };
+  }, []);
 
   const sendMessage = useCallback(async () => {
     const text = input.trim();
@@ -83,11 +85,15 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
       textareaRef.current.style.height = "auto";
     }
 
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: nextMessages }),
+        signal: controller.signal,
       });
 
       if (!res.ok || !res.body) throw new Error("Request failed");
@@ -135,22 +141,24 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
                 return updated;
               });
             }
-          } catch {
-            // skip malformed SSE chunks
+          } catch (parseErr) {
+            console.warn("[chat] Malformed SSE chunk:", { raw, error: parseErr });
           }
         }
       }
-    } catch {
+    } catch (err) {
+      if ((err as Error).name === "AbortError") return;
+      console.error("[chat] Message send failed:", err);
       setIsTyping(false);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: t("error") },
+        { role: "assistant", content: t("error"), isError: true },
       ]);
     } finally {
       setIsStreaming(false);
       setIsTyping(false);
     }
-  }, [input, isStreaming, messages, t]);
+  }, [input, isStreaming, messages, t, track]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -212,7 +220,7 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
             <button
               type="button"
               onClick={() => signIn("github")}
-              className="flex items-center gap-2 rounded-full bg-gray-900 px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-gray-800 hover:scale-[1.03] active:scale-[0.97] dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+              className="flex items-center gap-2 rounded-full bg-gray-900 px-6 py-2.5 text-body-14 text-white transition-all duration-200 hover:bg-gray-800 hover:scale-[1.03] active:scale-[0.97] dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200 will-change-transform"
             >
               <svg
                 className="h-4 w-4"
@@ -240,10 +248,10 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
       <div aria-live="polite" role="log" className={`flex-1 overflow-y-auto ${isWidget ? "px-3 py-4" : "px-5 py-6"}`}>
         {messages.length === 0 && (
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="flex h-full flex-col items-center justify-center gap-5 text-center"
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            className="flex h-full flex-col items-center justify-center gap-6 text-center"
           >
             <SoulOrb size="lg" />
             <div>
@@ -260,7 +268,7 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
                   key={s}
                   type="button"
                   onClick={() => handleStarter(s)}
-                  className="font-mono rounded-lg border border-border bg-muted/50 px-4 py-2 text-[11px] uppercase tracking-wider text-muted-foreground transition-colors hover:border-[#a3e635]/50 hover:text-foreground"
+                  className="font-mono rounded-md border border-border bg-muted/30 px-4 py-2 text-[11px] uppercase tracking-wider text-muted-foreground transition-all duration-200 hover:border-[var(--color-accent-foreground)] hover:text-foreground"
                 >
                   {s}
                 </button>
@@ -269,24 +277,27 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
           </motion.div>
         )}
 
-        <div className="space-y-5">
+        <div className="space-y-8 max-w-3xl mx-auto">
           <AnimatePresence initial={false}>
             {messages.map((msg, i) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-                className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                key={`${msg.role}-${i}`}
+                initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                className={`flex gap-4 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
               >
-                {msg.role === "assistant" && <SoulOrb />}
+                {msg.role === "assistant" && <SoulOrb isError={msg.isError} />}
                 <div
-                  className={`max-w-[85%] px-5 py-3.5 text-sm leading-relaxed whitespace-pre-wrap font-sans ${msg.role === "user"
-                    ? "rounded-2xl rounded-br-sm bg-foreground text-background"
-                    : "rounded-lg border border-border bg-background text-foreground shadow-sm"
-                    }`}
+                  className={`flex items-start max-w-[85%] text-body-14 leading-relaxed whitespace-pre-wrap font-sans ${
+                    msg.role === "user"
+                      ? "text-foreground font-medium"
+                      : msg.isError
+                        ? "text-destructive"
+                        : "text-muted-foreground"
+                  }`}
                 >
-                  {msg.content}
+                  <p className="pt-2">{msg.content}</p>
                 </div>
               </motion.div>
             ))}
@@ -294,12 +305,13 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
 
           {isTyping && (
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex gap-3"
+              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="flex gap-4"
             >
               <SoulOrb />
-              <div className="rounded-lg border border-border bg-background shadow-sm flex items-center justify-center">
+              <div className="flex items-center justify-center pt-1">
                 <TypingDots />
               </div>
             </motion.div>
@@ -310,21 +322,26 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
       </div>
 
       {/* Input */}
-      <div className="border-t border-border px-5 py-4">
-        <div className="flex items-end gap-3 rounded-lg border border-border bg-background px-4 py-3 shadow-sm transition-colors focus-within:border-[#a3e635]/60">
+      <div className="relative border-t border-border/40 bg-background/80 backdrop-blur-md px-5 py-4 pb-safe supports-[padding:max(0px)]:pb-[max(1rem,env(safe-area-inset-bottom))]">
+        <div className="max-w-3xl mx-auto flex items-end gap-3 rounded-xl border border-border bg-background/50 px-4 py-3 shadow-sm transition-all duration-300 focus-within:border-[var(--color-accent-foreground)] focus-within:shadow-md focus-within:bg-background">
           <textarea
             ref={textareaRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t("placeholder")}
+            aria-label={t("placeholder")}
+            maxLength={4000}
             rows={1}
-            className="flex-1 resize-none bg-transparent text-sm text-foreground focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none disabled:opacity-50 placeholder:text-muted-foreground font-mono"
-            style={{ maxHeight: "120px" }}
+            className="flex-1 resize-none bg-transparent text-body-14 text-foreground focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none disabled:opacity-50 placeholder:text-muted-foreground font-sans min-h-[24px]"
+            style={{ maxHeight: "160px" }}
             onInput={(e) => {
+              // Minimalize repaints, only adjust if scrollHeight changes significantly
               const el = e.currentTarget;
-              el.style.height = "auto";
-              el.style.height = `${el.scrollHeight}px`;
+              if (el.scrollHeight !== el.clientHeight) {
+                el.style.height = "auto";
+                el.style.height = `${el.scrollHeight}px`;
+              }
             }}
           />
           <button

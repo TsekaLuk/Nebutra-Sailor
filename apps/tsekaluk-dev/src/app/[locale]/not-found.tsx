@@ -3,7 +3,7 @@ import { AnimateIn } from "@nebutra/ui/components";
 
 export default function NotFound() {
   return (
-    <section className="mx-auto max-w-3xl px-6 py-32 text-center">
+    <section className="mx-auto grid min-h-[100dvh] max-w-3xl place-items-center px-6 py-32 text-center">
       <AnimateIn preset="fade">
         <p className="font-serif italic text-8xl text-gray-200 dark:text-gray-800">
           404

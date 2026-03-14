@@ -6,6 +6,19 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
+
+    // Clerk server secret — required for protected API routes and server actions
+    CLERK_SECRET_KEY: z.string().min(1),
+
+    // Database — used by server components and server actions calling Prisma
+    DATABASE_URL: z.string().url(),
+
+    // Stripe — required for billing webhooks and checkout sessions
+    STRIPE_SECRET_KEY: z.string().startsWith("sk_").optional(),
+    STRIPE_WEBHOOK_SECRET: z.string().startsWith("whsec_").optional(),
+
+    // Sentry release tracking
+    SENTRY_RELEASE: z.string().optional(),
   },
 
   client: {
@@ -15,8 +28,8 @@ export const env = createEnv({
     NEXT_PUBLIC_API_URL: z.string().url().default("http://localhost:3002"),
     NEXT_PUBLIC_STUDIO_URL: z.string().url().default("http://localhost:3003"),
 
-    // Clerk auth
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().optional(),
+    // Clerk auth — required; authentication will silently fail without this key
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().default("/sign-in"),
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().default("/sign-up"),
 

@@ -60,7 +60,7 @@ export const Error = ({ error, label, size = "medium", children }: ErrorProps) =
             className="font-medium flex items-center gap-0.5 -ml-1 hover:no-underline hover:opacity-60 duration-150 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[1px] after:bg-[var(--ds-red-900)]"
             href={error.link}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             {error.action}
             <ErrorLinkIcon />

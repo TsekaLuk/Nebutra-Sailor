@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { useLocale } from "next-intl"
+import Image from "next/image"
 import * as Dialog from "@radix-ui/react-dialog"
 import { Trash2, RefreshCw, MessageSquare, Check, X, AlertTriangle } from "lucide-react"
 
@@ -22,6 +24,7 @@ const STATUS_STYLES = {
 }
 
 export default function AdminGuestbookPage() {
+  const locale = useLocale()
   const [entries, setEntries] = useState<GuestbookEntry[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -33,7 +36,7 @@ export default function AdminGuestbookPage() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch("/api/guestbook?all=true")
+      const res = await fetch("/api/guestbook?all=true", { signal: AbortSignal.timeout(15_000) })
       const json = await res.json()
       if (!json.success) throw new Error(json.error ?? "Failed to fetch")
       setEntries(json.data ?? [])
@@ -55,6 +58,7 @@ export default function AdminGuestbookPage() {
       const res = await fetch("/api/guestbook", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(15_000),
         body: JSON.stringify({ id, status }),
       })
       const json = await res.json()
@@ -74,7 +78,7 @@ export default function AdminGuestbookPage() {
     setActionError(null)
     setDeleteTarget(null)
     try {
-      const res = await fetch(`/api/guestbook?id=${id}`, { method: "DELETE" })
+      const res = await fetch(`/api/guestbook?id=${id}`, { method: "DELETE", signal: AbortSignal.timeout(15_000) })
       const json = await res.json()
       if (!json.success) throw new Error(json.error ?? "Delete failed")
       setEntries((prev) => prev.filter((e) => e.id !== id))
@@ -161,8 +165,7 @@ export default function AdminGuestbookPage() {
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       {entry.authorImage ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={entry.authorImage} alt={entry.nickname} className="h-6 w-6 rounded-full object-cover" />
+                        <Image src={entry.authorImage} alt={entry.nickname} width={24} height={24} className="rounded-full object-cover" unoptimized />
                       ) : (
                         <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs text-gray-500">
                           {entry.nickname.charAt(0).toUpperCase()}
@@ -183,7 +186,7 @@ export default function AdminGuestbookPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3 font-mono text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                    {new Date(entry.createdAt).toLocaleDateString("en-US", {
+                    {new Date(entry.createdAt).toLocaleDateString(locale, {
                       year: "numeric",
                       month: "short",
                       day: "numeric",

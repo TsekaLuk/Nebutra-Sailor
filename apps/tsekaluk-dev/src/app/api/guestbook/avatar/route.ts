@@ -15,6 +15,11 @@ export async function POST(req: Request) {
       { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
     )
   }
+  const contentLength = parseInt(req.headers.get("content-length") ?? "0", 10)
+  if (contentLength > MAX_SIZE + 4 * 1024) {
+    return Response.json({ success: false, error: "File too large (max 2MB)" }, { status: 413 })
+  }
+
   try {
     const formData = await req.formData()
     const file = formData.get("file") as File | null
@@ -31,7 +36,8 @@ export async function POST(req: Request) {
       return Response.json({ success: false, error: "File too large (max 2MB)" }, { status: 400 })
     }
 
-    const ext = file.type.split("/")[1] === "jpeg" ? "jpg" : file.type.split("/")[1]
+    const EXT_MAP: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" }
+    const ext = EXT_MAP[file.type]
     const filename = `avatars/${randomUUID()}.${ext}`
 
     const blob = await put(filename, file, { access: "public" })

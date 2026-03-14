@@ -19,7 +19,10 @@ models:
     +materialized: table
     bronze:
       +schema: bronze
+      +ttl: "event_time + INTERVAL 90 DAY DELETE"
     silver:
       +schema: silver
+      +ttl: "event_time + INTERVAL 180 DAY DELETE"
     gold:
       +schema: gold
+      +ttl: "event_date + INTERVAL 365 DAY DELETE"

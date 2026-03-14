@@ -1,5 +1,6 @@
 export { prisma, type PrismaClient } from "./client.js";
 export { Prisma } from "./generated/prisma/client.js";
+export { withOrgContext, withAdminContext } from "./rls.js";
 
 // Re-export all Prisma types for convenience
 export type {

@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { AnimateIn } from "@nebutra/ui/components";
+import { motion } from "framer-motion";
 
 interface NowData {
   date: string;
@@ -17,32 +16,8 @@ interface SectionDef {
   previewOnly?: boolean;
 }
 
-const SECTION_IMAGES: Record<string, string[]> = {
-  building: [
-    "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=500",
-    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=500",
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=500",
-  ],
-  shipped: [
-    "https://images.unsplash.com/photo-1555529733-0e670560f8e1?auto=format&fit=crop&q=80&w=500",
-    "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&q=80&w=500",
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=500",
-  ],
-  thinking: [
-    "https://images.unsplash.com/photo-1506506200949-df6c1593c6f4?auto=format&fit=crop&q=80&w=500",
-    "https://images.unsplash.com/photo-1513258496099-48166314a108?auto=format&fit=crop&q=80&w=500",
-    "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=500",
-  ],
-  reading: [
-    "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=500",
-    "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=500",
-    "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=500",
-  ],
-};
-
 function NowSection({
   label,
-  sectionKey,
   items,
   indexOffset,
 }: {
@@ -51,38 +26,41 @@ function NowSection({
   items: string[];
   indexOffset: number;
 }) {
-  const images = SECTION_IMAGES[sectionKey] || SECTION_IMAGES["thinking"];
   return (
-    <div>
-      <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+    <div className="mb-16 md:mb-24 relative">
+      <h2 className="mb-8 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 sticky top-24 z-10 bg-background/80 backdrop-blur-md py-4">
         {label}
       </h2>
-      <ul className="space-y-3">
-        {items.map((item, i) => (
-          <AnimateIn
-            key={item}
-            preset="fadeUp"
-            delay={(indexOffset + i) * 0.08}
-            inView
-          >
-            <li className="flex flex-col sm:flex-row gap-5 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 transition-all hover:-translate-y-0.5 hover:shadow-sm">
-              <div className="relative h-40 w-full sm:h-24 sm:w-32 shrink-0 overflow-hidden rounded-xl">
-                <Image
-                  src={images[i % images.length]!}
-                  alt={label}
-                  fill
-                  className="object-cover transition-transform duration-500 hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, 128px"
-                />
+      <ul className="group relative border-t border-gray-200 dark:border-gray-800">
+        {items.map((item, i) => {
+          const globalIndex = indexOffset + i;
+          return (
+            <motion.li
+              key={item}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{
+                type: "spring",
+                stiffness: 70,
+                damping: 20,
+                delay: i * 0.05,
+              }}
+              className="group/item flex flex-col md:flex-row gap-4 border-b border-gray-200 dark:border-gray-800 py-6 md:py-8 transition-colors duration-500 hover:bg-gray-50/50 dark:hover:bg-gray-900/50"
+            >
+              <div className="md:w-24 shrink-0 pt-1">
+                <span className="font-mono text-sm text-gray-300 dark:text-gray-600 transition-colors duration-300 group-hover/item:text-foreground">
+                  {(globalIndex + 1).toString().padStart(2, "0")}
+                </span>
               </div>
-              <div className="flex flex-1 items-center">
-                <p className="text-base leading-relaxed text-gray-700 dark:text-gray-300">
+              <div className="flex-1">
+                <p className="text-xl md:text-2xl font-medium tracking-tight leading-snug text-gray-700 dark:text-gray-300 transition-all duration-300 transform origin-left group-hover/item:text-foreground group-hover/item:scale-[1.01]">
                   {item}
                 </p>
               </div>
-            </li>
-          </AnimateIn>
-        ))}
+            </motion.li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -106,26 +84,33 @@ export function NowEntryView({
   let globalIndex = 0;
 
   return (
-    <div className="space-y-10">
-      <p className="text-sm font-mono text-gray-400 dark:text-gray-500">
-        {lastUpdatedLabel ?? "Last updated:"} {data.date}
-      </p>
+    <div className="relative">
+      <motion.p 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="mb-12 font-mono text-xs tracking-widest text-gray-400 dark:text-gray-500 uppercase"
+      >
+        {lastUpdatedLabel ?? "Last updated:"} <span className="text-foreground">{data.date}</span>
+      </motion.p>
 
-      {visibleSections.map((section) => {
-        const items = data[section.key];
-        if (!items || items.length === 0) return null;
-        const offset = globalIndex;
-        globalIndex += items.length;
-        return (
-          <NowSection
-            key={section.key}
-            label={section.label}
-            sectionKey={section.key}
-            items={items}
-            indexOffset={offset}
-          />
-        );
-      })}
+      <div className="relative">
+        {visibleSections.map((section) => {
+          const items = data[section.key];
+          if (!items || items.length === 0) return null;
+          const offset = globalIndex;
+          globalIndex += items.length;
+          return (
+            <NowSection
+              key={section.key}
+              label={section.label}
+              sectionKey={section.key}
+              items={items}
+              indexOffset={offset}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

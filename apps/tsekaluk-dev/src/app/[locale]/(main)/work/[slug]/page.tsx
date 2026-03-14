@@ -32,6 +32,7 @@ export async function generateMetadata({
       languages: {
         en: `https://tsekaluk.dev/en/work/${slug}`,
         zh: `https://tsekaluk.dev/zh/work/${slug}`,
+        ja: `https://tsekaluk.dev/ja/work/${slug}`,
       },
     },
     openGraph: {
@@ -132,8 +133,8 @@ export default async function ProjectDetailPage({
         {project.story && (
           <AnimateIn preset="fadeUp" inView>
             <div className="space-y-4 text-base leading-relaxed text-gray-600 dark:text-gray-400">
-              {project.story.split("\n\n").map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
+              {project.story.split("\n\n").map((paragraph) => (
+                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
               ))}
             </div>
           </AnimateIn>

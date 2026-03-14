@@ -65,7 +65,7 @@ function IconCard({ name, icon: Icon }: { name: string; icon: React.ComponentTyp
         <DropdownMenu open={open} onOpenChange={setOpen}>
             <DropdownMenuTrigger asChild>
                 <button
-                    className="group relative flex flex-col items-center justify-center p-4 border-r border-b border-border bg-card/10 hover:bg-card focus:bg-card focus:outline-none focus:relative focus:ring-2 focus:ring-ring focus:z-10 transition-colors h-[120px]"
+                    className="group relative flex flex-col items-center justify-center p-4 border-r border-b border-border bg-card/10 hover:bg-card focus-visible:bg-card focus-visible:outline-none focus-visible:relative focus-visible:ring-1 focus-visible:ring-ring focus-visible:z-10 transition-colors h-[120px] outline-none"
                     aria-label={`Copy options for ${name}`}
                 >
                     <div className="flex-1 flex items-center justify-center min-h-0 mb-2">

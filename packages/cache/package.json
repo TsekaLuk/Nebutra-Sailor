@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@nebutra/logger": "workspace:*",
     "@upstash/redis": "^1.36.3"
   },
   "devDependencies": {

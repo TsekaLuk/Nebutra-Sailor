@@ -4,8 +4,10 @@ import { routing } from "./i18n/routing";
 export const proxy = createMiddleware(routing);
 
 export const config = {
-    matcher: [
-        // Match all pathnames except static files, api routes, and special Next.js paths
-        "/((?!api|_next|_vercel|og|rss\\.xml|sitemap\\.xml|robots\\.txt|.*\\..*).*)",
-    ],
+  matcher: [
+    // Match root and locale-prefixed paths, skip Next.js internals and static files
+    "/",
+    "/(en|zh|ja)/:path*",
+    "/((?!_next|_vercel|api|.*\\..*).*)",
+  ],
 };

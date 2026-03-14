@@ -9,6 +9,8 @@ resources:
 
   # ConfigMaps — non-secret environment configuration
   - configmaps/nebutra-config.yaml
+  # PgBouncer connection pooler (Deployment + Service + PDB + ConfigMap)
+  - configmaps/pgbouncer-config.yaml
 
   # Deployments — one per service
   - deployments/web.yaml
@@ -21,6 +23,7 @@ resources:
   - deployments/recsys-service.yaml
   - deployments/event-ingest-service.yaml
   - deployments/web3-service.yaml
+  - deployments/studio.yaml
 
   # Services — ClusterIP, one per deployment
   - services/web.yaml
@@ -33,14 +36,49 @@ resources:
   - services/recsys-service.yaml
   - services/event-ingest-service.yaml
   - services/web3-service.yaml
+  - services/studio.yaml
 
   # Ingress — nginx, with TLS via cert-manager
   - ingress/nginx-ingress.yaml
 
-  # Secrets — reference template / ExternalSecrets operator config
-  # The actual Secret object (app-secrets) must be created out-of-band.
-  # See secrets/external-secrets.yaml for instructions.
+  # Network policies — default-deny + selective allow rules
+  - network-policies/default-deny.yaml
+  # Inter-service communication allow rules (zero-trust mesh)
+  - network-policies/inter-service.yaml
+
+  # PodDisruptionBudgets — min availability during node maintenance
+  - pdbs/pdbs.yaml
+
+  # HorizontalPodAutoscalers — CPU-based autoscaling for stateless services
+  - hpas/hpas.yaml
+
+  # VerticalPodAutoscalers — resource right-sizing recommendations (mode: Off)
+  # Requires VPA operator: https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler
+  # Switch updateMode to "Auto" only after migrating HPA to custom metrics (KEDA)
+  - vpas/vpas.yaml
+
+  # Prometheus ServiceMonitors + alerting rules
+  # Requires kube-prometheus-stack: helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack
+  - monitoring/service-monitors.yaml
+  # SLO burn-rate multi-window alerts (Google SRE Workbook methodology)
+  - monitoring/slo-rules.yaml
+
+  # ResourceQuota + LimitRange — cap total namespace CPU/memory/pod consumption
+  # and inject default requests/limits for containers that omit them.
+  - quotas/resource-quota.yaml
+
+  # Kyverno ClusterPolicies — pod security, image hygiene, resource enforcement.
+  # Requires Kyverno operator: kubectl apply -f https://github.com/kyverno/kyverno/releases/latest/download/install.yaml
+  # All policies run in Audit mode — switch validationFailureAction to Enforce after verification.
+  - policies/kyverno-policies.yaml
+
+  # Secrets — External Secrets Operator CRDs (ClusterSecretStore + ExternalSecret)
+  # Operator install: helm install external-secrets external-secrets/external-secrets -n external-secrets-system --create-namespace
   - secrets/external-secrets.yaml
+
+  # RBAC — ServiceAccounts + least-privilege Roles + RoleBindings per workload
+  - rbac/service-accounts.yaml
+  - rbac/roles.yaml
 
 commonLabels:
   app.kubernetes.io/part-of: nebutra-sailor

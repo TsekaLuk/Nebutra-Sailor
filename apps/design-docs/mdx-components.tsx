@@ -207,7 +207,7 @@ import {
   BadgeNotificationDemo,
   BadgeFeatureTagDemo,
 } from "@/components/badge-demos";
-import { BadgeAllColorsDemo } from "@/components/previews/dynamic-demos";
+import { BadgeAllColorsDemo, BadgeIconColorsDemo, BadgePillMatrixDemo } from "@/components/previews/dynamic-demos";
 import { AvatarSmartGroup } from "@nebutra/ui/primitives";
 import { IconGallery } from "@/components/icon-gallery";
 import { ColorPalette } from "@/components/color-palette";
@@ -546,6 +546,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     BadgeNotificationDemo,
     BadgeFeatureTagDemo,
     BadgeAllColorsDemo,
+    BadgeIconColorsDemo,
+    BadgePillMatrixDemo,
     AvatarSmartGroup,
     BadgeDemo,
     ButtonDemo,

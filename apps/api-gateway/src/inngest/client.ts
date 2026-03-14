@@ -1,15 +1,18 @@
-import { Inngest } from "inngest";
+import { Inngest, EventSchemas } from "inngest";
+import { inngestSchemas } from "@nebutra/event-bus/schemas";
 
 /**
- * Shared Inngest client for the API Gateway.
+ * Type-safe Inngest client for the API Gateway.
  *
- * The SDK automatically reads the following environment variables:
+ * All events are validated against Zod schemas defined in
+ * @nebutra/event-bus/schemas — event.data is fully typed in function handlers,
+ * eliminating the need for manual type assertions.
+ *
+ * The SDK automatically reads:
  *   INNGEST_EVENT_KEY   – used when sending events to Inngest Cloud
  *   INNGEST_SIGNING_KEY – used to verify webhook signatures from Inngest Cloud
- *
- * Both values are available from https://app.inngest.com once you have created
- * an Inngest account and application.
  */
 export const inngest = new Inngest({
   id: "nebutra-api-gateway",
+  schemas: new EventSchemas().fromZod(inngestSchemas),
 });

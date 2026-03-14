@@ -20,9 +20,12 @@ model Guestbook {
   authorProvider String          @default("oauth") @map("author_provider")
   nickname       String
   relationship   String          @default("other")
+  company        String?
+  title          String?
   message        String          @db.Text
   status         GuestbookStatus @default(pending)
   createdAt      DateTime        @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt      DateTime        @updatedAt @map("updated_at") @db.Timestamptz()
 
   @@index([createdAt(sort: Desc)])
   @@index([status])
@@ -39,6 +42,7 @@ model NowEntry {
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz()
 
+  @@index([createdAt(sort: Desc)])
   @@map("now_entries")
 }
 

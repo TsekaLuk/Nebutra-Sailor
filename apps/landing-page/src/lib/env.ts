@@ -6,6 +6,10 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
+    // Resend — contact form email delivery
+    RESEND_API_KEY: z.string().optional(),
+    // Override recipient for contact form (defaults to contact@nebutra.com)
+    CONTACT_FORM_TO: z.string().email().default("contact@nebutra.com"),
   },
 
   client: {

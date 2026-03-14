@@ -1,11 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { getLocale } from "next-intl/server";
-import { Providers } from "@/components/providers";
+import "@/lib/env"; // validate required env vars at startup
 import "./globals.css";
 
 export const metadata: Metadata = {
   manifest: "/site.webmanifest",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 };
 
 const inter = Inter({
@@ -35,9 +44,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased overflow-x-hidden text-gray-900 relative bg-[#fafafa] dark:bg-[#0a0a0a] dark:text-white">
-        <Providers>
-          {children}
-        </Providers>
+        {children}
       </body>
     </html>
   );

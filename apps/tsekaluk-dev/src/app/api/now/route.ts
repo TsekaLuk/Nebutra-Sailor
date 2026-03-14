@@ -1,17 +1,48 @@
+import { z } from "zod"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
+import { createRateLimiter, getClientIp } from "@/lib/rate-limit"
+
+const checkRateLimit = createRateLimiter(60_000, 30)
 
 function isAdmin(email: string | null | undefined): boolean {
-  return Boolean(process.env.ADMIN_EMAIL && email === process.env.ADMIN_EMAIL)
+  return Boolean(process.env.ADMIN_EMAIL && email?.toLowerCase() === process.env.ADMIN_EMAIL.toLowerCase())
 }
 
-export async function GET() {
+const nowEntrySchema = z.object({
+  date: z.string().min(1),
+  building: z.array(z.string()).default([]),
+  thinking: z.array(z.string()).default([]),
+  shipped: z.array(z.string()).default([]),
+  reading: z.array(z.string()).default([]),
+})
+
+const nowPatchSchema = z.object({
+  id: z.string().uuid(),
+  date: z.string().min(1).optional(),
+  building: z.array(z.string()).optional(),
+  thinking: z.array(z.string()).optional(),
+  shipped: z.array(z.string()).optional(),
+  reading: z.array(z.string()).optional(),
+})
+
+export async function GET(req: Request) {
+  const ip = getClientIp(req)
+  const rl = checkRateLimit(ip)
+  if (!rl.allowed) {
+    return Response.json(
+      { success: false, error: "Too many requests. Please try again later." },
+      { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
+    )
+  }
+
   try {
     const entry = await prisma.nowEntry.findFirst({
       orderBy: { createdAt: "desc" },
     })
     return Response.json({ success: true, data: entry })
-  } catch {
+  } catch (err) {
+    console.error("[now/get] Unexpected error:", err)
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }
@@ -23,25 +54,21 @@ export async function POST(req: Request) {
       return Response.json({ success: false, error: "Admin access required" }, { status: 403 })
     }
 
-    const body = await req.json()
-    const { date, building, thinking, shipped, reading } = body
-
-    if (!date) {
-      return Response.json({ success: false, error: "Date is required" }, { status: 400 })
+    const contentLength = parseInt(req.headers.get("content-length") ?? "0", 10)
+    if (contentLength > 64 * 1024) {
+      return Response.json({ success: false, error: "Payload too large" }, { status: 413 })
     }
 
-    const entry = await prisma.nowEntry.create({
-      data: {
-        date,
-        building: building ?? [],
-        thinking: thinking ?? [],
-        shipped: shipped ?? [],
-        reading: reading ?? [],
-      },
-    })
+    const body = await req.json()
+    const parsed = nowEntrySchema.safeParse(body)
+    if (!parsed.success) {
+      return Response.json({ success: false, error: parsed.error.flatten().fieldErrors }, { status: 400 })
+    }
 
+    const entry = await prisma.nowEntry.create({ data: parsed.data })
     return Response.json({ success: true, data: entry }, { status: 201 })
-  } catch {
+  } catch (err) {
+    console.error("[now/post] Unexpected error:", err)
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }
@@ -53,20 +80,22 @@ export async function PATCH(req: Request) {
       return Response.json({ success: false, error: "Admin access required" }, { status: 403 })
     }
 
-    const body = await req.json()
-    const { id, date, building, thinking, shipped, reading } = body
-
-    if (!id) {
-      return Response.json({ success: false, error: "Entry ID is required" }, { status: 400 })
+    const contentLength = parseInt(req.headers.get("content-length") ?? "0", 10)
+    if (contentLength > 64 * 1024) {
+      return Response.json({ success: false, error: "Payload too large" }, { status: 413 })
     }
 
-    const entry = await prisma.nowEntry.update({
-      where: { id },
-      data: { date, building, thinking, shipped, reading },
-    })
+    const body = await req.json()
+    const parsed = nowPatchSchema.safeParse(body)
+    if (!parsed.success) {
+      return Response.json({ success: false, error: parsed.error.flatten().fieldErrors }, { status: 400 })
+    }
 
+    const { id, ...data } = parsed.data
+    const entry = await prisma.nowEntry.update({ where: { id }, data })
     return Response.json({ success: true, data: entry })
-  } catch {
+  } catch (err) {
+    console.error("[now/patch] Unexpected error:", err)
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }

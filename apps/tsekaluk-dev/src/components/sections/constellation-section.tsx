@@ -35,15 +35,21 @@ export function ConstellationSection() {
   const t = useTranslations("constellation");
   const [entries, setEntries] = React.useState<GuestbookEntry[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const [fetchError, setFetchError] = React.useState(false);
 
   React.useEffect(() => {
-    fetch("/api/guestbook")
+    const controller = new AbortController();
+    fetch("/api/guestbook", { signal: controller.signal })
       .then((res) => res.json())
       .then((json) => {
         if (json.success) setEntries(json.data);
+        else setFetchError(true);
       })
-      .catch(() => {})
+      .catch((err) => {
+        if ((err as Error).name !== "AbortError") setFetchError(true);
+      })
       .finally(() => setLoading(false));
+    return () => controller.abort();
   }, []);
 
   return (
@@ -92,8 +98,8 @@ export function ConstellationSection() {
         </div>
       )}
 
-      {/* Empty state */}
-      {!loading && entries.length === 0 && (
+      {/* Error state */}
+      {!loading && fetchError && (
         <AnimateIn preset="fade" inView>
           <div className="text-center py-16 text-gray-400 dark:text-gray-600">
             <p className="font-serif italic text-xl">{t("empty")}</p>
@@ -101,48 +107,59 @@ export function ConstellationSection() {
         </AnimateIn>
       )}
 
-      {/* Fragment wall — CSS columns for natural masonry */}
-      {!loading && entries.length > 0 && (
-        <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
-          {entries.map((entry, i) => (
-            <AnimateIn key={entry.id} preset="fadeUp" delay={i * 0.06} inView>
-              <div
-                className={`mb-5 break-inside-avoid rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-0.5 ${
-                  i === 0
-                    ? "border-[var(--color-accent)] dark:border-[var(--color-accent-dark)] shadow-[0_8px_30px_var(--color-accent-shadow)] bg-white dark:bg-gray-900"
-                    : "border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 opacity-80 hover:opacity-100 hover:shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:hover:shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
-                }`}
-              >
-                <p className="font-serif italic text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                  &ldquo;{entry.message}&rdquo;
-                </p>
+      {/* Empty state */}
+      {!loading && !fetchError && entries.length === 0 && (
+        <AnimateIn preset="fade" inView>
+          <div className="text-center py-16 text-gray-400 dark:text-gray-600">
+            <p className="font-serif italic text-xl">{t("empty")}</p>
+          </div>
+        </AnimateIn>
+      )}
 
-                <div className="mt-6 flex items-center gap-3">
-                  {entry.authorImage ? (
-                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-100 dark:border-gray-800">
-                      <Image
-                        src={entry.authorImage}
-                        alt={entry.nickname}
-                        fill
-                        className="object-cover"
-                        sizes="40px"
-                      />
+      {/* Fragment wall — Organic Grid */}
+      {!loading && !fetchError && entries.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {entries.map((entry, i) => {
+            // Create a pseudo-random, organic stagger effect based on index
+            const isOffset = i % 2 !== 0;
+            const marginTop = isOffset ? "lg:mt-12" : "lg:mt-0";
+
+            return (
+              <AnimateIn key={entry.id} preset="fadeUp" delay={i * 0.05} inView>
+                <div
+                  className={`h-full flex flex-col justify-between rounded-none border-b border-gray-200 dark:border-gray-800 pb-8 pt-4 transition-colors hover:border-gray-900 dark:hover:border-white ${marginTop}`}
+                >
+                  <p className="font-serif italic text-xl leading-relaxed text-gray-900 dark:text-gray-100 flex-1">
+                    &ldquo;{entry.message}&rdquo;
+                  </p>
+
+                  <div className="mt-8 flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-base font-medium text-gray-900 dark:text-white uppercase tracking-tight">
+                        {entry.nickname}
+                      </span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {entry.relationship}
+                      </span>
                     </div>
-                  ) : (
-                    <AvatarFallback name={entry.nickname} />
-                  )}
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-900 dark:text-white">
-                      {entry.nickname}
-                    </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {entry.relationship}
-                    </span>
+                    {entry.authorImage ? (
+                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-gray-100 dark:border-gray-800 filter grayscale transition-all hover:grayscale-0">
+                        <Image
+                          src={entry.authorImage}
+                          alt={entry.nickname}
+                          fill
+                          className="object-cover"
+                          sizes="48px"
+                        />
+                      </div>
+                    ) : (
+                      <AvatarFallback name={entry.nickname} />
+                    )}
                   </div>
                 </div>
-              </div>
-            </AnimateIn>
-          ))}
+              </AnimateIn>
+            );
+          })}
         </div>
       )}
 

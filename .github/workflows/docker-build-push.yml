@@ -35,8 +35,9 @@ concurrency:
 
 permissions:
   contents: read
-  packages: write # Required to push to ghcr.io
-  security-events: write # Required to upload Trivy SARIF results to GitHub Security
+  packages: write        # push to ghcr.io
+  security-events: write # upload Trivy SARIF
+  id-token: write        # OIDC token for AWS role assumption (keyless auth)
 
 env:
   # ── Turborepo remote cache ──────────────────────────────────────────────────
@@ -46,7 +47,8 @@ env:
   # ── Registry base paths (populated from secrets at run time) ────────────────
   GHCR_REGISTRY: ghcr.io/${{ github.repository_owner }}
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-  AWS_REGION: ${{ secrets.AWS_REGION }}
+  # AWS_REGION is a non-sensitive var — store in GitHub Actions Variables, not Secrets
+  AWS_REGION: ${{ vars.AWS_REGION }}
   ALIYUN_ACR_USERNAME: ${{ secrets.ALIYUN_ACR_USERNAME }}
   TENCENT_TCR_HOST: ${{ secrets.TENCENT_TCR_HOST }}
 
@@ -94,17 +96,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # AWS ECR — requires AWS_ACCOUNT_ID and AWS_REGION secrets
-      - name: Configure AWS credentials
-        if: env.AWS_ACCOUNT_ID != '' && env.AWS_REGION != ''
+      # AWS ECR — OIDC keyless auth (no long-lived credentials stored as secrets).
+      # Prerequisites:
+      #   1. Create an IAM OIDC provider for token.actions.githubusercontent.com
+      #   2. Create an IAM role with trust policy scoped to this repo + ECR push permissions
+      #   3. Set AWS_ECR_ROLE_ARN secret to arn:aws:iam::<account>:role/<role-name>
+      - name: Configure AWS credentials (OIDC)
+        if: env.AWS_ACCOUNT_ID != '' && vars.AWS_REGION != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ECR_ROLE_ARN }}
+          role-session-name: github-actions-ecr-push-${{ github.run_id }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Log in to AWS ECR
-        if: env.AWS_ACCOUNT_ID != '' && env.AWS_REGION != ''
+        if: env.AWS_ACCOUNT_ID != '' && vars.AWS_REGION != ''
         uses: aws-actions/amazon-ecr-login@v2
 
       # Alibaba Cloud ACR — requires ALIYUN_ACR_USERNAME + ALIYUN_ACR_PASSWORD
@@ -150,8 +156,13 @@ jobs:
             org.opencontainers.image.title=nebutra-${{ matrix.app }}
             org.opencontainers.image.vendor=Nebutra
 
+      # ── Install cosign (keyless signing via Sigstore OIDC) ───────────────────
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3
+
       # ── Build & push ─────────────────────────────────────────────────────────
       - name: Build and push image
+        id: build
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -160,22 +171,36 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            SENTRY_RELEASE=${{ github.ref_name }}+${{ github.sha }}
+            GITHUB_SHA=${{ github.sha }}
           # Use GHCR as the layer cache backend — avoids cold-cache on every run
           cache-from: type=registry,ref=ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.app }}:buildcache
           cache-to: type=registry,ref=ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.app }}:buildcache,mode=max
 
+      # ── Sign image with cosign (keyless, Sigstore OIDC — no keys to rotate) ──
+      # Signs only on main pushes and semver tags to avoid signing PR images.
+      # Verification: cosign verify --certificate-identity-regexp="github.com/..."
+      - name: Sign container image
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+        run: |
+          cosign sign --yes \
+            ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.app }}@${{ steps.build.outputs.digest }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+
       # ── Trivy vulnerability scan ─────────────────────────────────────────────
       - name: Scan image for vulnerabilities
         id: trivy
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@915b19bbe73b92a6cf82a1bc12b087c9a19a5fe2 # 0.28.0
         if: success()
         with:
           image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           format: "sarif"
           output: "trivy-results.sarif"
           severity: "CRITICAL,HIGH"
-          exit-code: "0"
-          ignore-unfixed: true
+          exit-code: "1"
+          ignore-unfixed: false
 
       - name: Ensure SARIF file exists
         if: always()
@@ -185,7 +210,7 @@ jobs:
           fi
 
       - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@9792ccaef0455e446c567163589397e8c3ac2e0d # v3
         if: always() && steps.trivy.outcome != 'skipped'
         with:
           sarif_file: "trivy-results.sarif"
@@ -237,16 +262,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Configure AWS credentials
-        if: env.AWS_ACCOUNT_ID != '' && env.AWS_REGION != ''
+      - name: Configure AWS credentials (OIDC)
+        if: env.AWS_ACCOUNT_ID != '' && vars.AWS_REGION != ''
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ECR_ROLE_ARN }}
+          role-session-name: github-actions-ecr-push-${{ github.run_id }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       - name: Log in to AWS ECR
-        if: env.AWS_ACCOUNT_ID != '' && env.AWS_REGION != ''
+        if: env.AWS_ACCOUNT_ID != '' && vars.AWS_REGION != ''
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Log in to Aliyun Container Registry
@@ -284,10 +309,15 @@ jobs:
             org.opencontainers.image.title=nebutra-${{ matrix.service }}
             org.opencontainers.image.vendor=Nebutra
 
+      # ── Install cosign (keyless signing via Sigstore OIDC) ───────────────────
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3
+
       # ── Build & push ─────────────────────────────────────────────────────────
       # Uses the shared Dockerfile.python with SERVICE build arg to select
       # the correct service directory inside services/<SERVICE>/
       - name: Build and push image
+        id: build
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -301,3 +331,38 @@ jobs:
           # Registry-backed layer cache using GHCR — shared across branches
           cache-from: type=registry,ref=ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.service }}:buildcache
           cache-to: type=registry,ref=ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.service }}:buildcache,mode=max
+
+      # ── Sign image with cosign (keyless, Sigstore OIDC) ──────────────────────
+      - name: Sign container image
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+        run: |
+          cosign sign --yes \
+            ghcr.io/${{ steps.lowercase.outputs.owner }}/nebutra-${{ matrix.service }}@${{ steps.build.outputs.digest }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+
+      # ── Trivy vulnerability scan ─────────────────────────────────────────────
+      - name: Scan image for vulnerabilities
+        id: trivy
+        uses: aquasecurity/trivy-action@915b19bbe73b92a6cf82a1bc12b087c9a19a5fe2 # 0.28.0
+        if: success()
+        with:
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          format: "sarif"
+          output: "trivy-results.sarif"
+          severity: "CRITICAL,HIGH"
+          exit-code: "1"
+          ignore-unfixed: false
+
+      - name: Ensure SARIF file exists
+        if: always()
+        run: |
+          if [ ! -f "trivy-results.sarif" ]; then
+            echo '{"version":"2.1.0","runs":[{"tool":{"driver":{"name":"Trivy"}},"results":[]}]}' > trivy-results.sarif
+          fi
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@9792ccaef0455e446c567163589397e8c3ac2e0d # v3
+        if: always() && steps.trivy.outcome != 'skipped'
+        with:
+          sarif_file: "trivy-results.sarif"

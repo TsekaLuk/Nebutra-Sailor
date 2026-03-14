@@ -1,4 +1,5 @@
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+import { aiServiceBreaker, billingServiceBreaker } from "../../services/circuitBreaker.js";
 
 const serviceStatusEnum = z.enum(["available", "unavailable", "unknown"]);
 const checkStatusEnum = z.enum(["pass", "fail"]);
@@ -134,6 +135,22 @@ statusRoutes.openapi(statusRoute, async (c) => {
       serviceStatuses[serviceName] = "unavailable";
     }
   });
+
+  // Include circuit breaker states as observability checks
+  const aiBreakerStatus = aiServiceBreaker.status();
+  const billingBreakerStatus = billingServiceBreaker.status();
+  checks.push(
+    {
+      name: "circuit-breaker:ai",
+      status: aiBreakerStatus.state === "OPEN" ? "fail" : "pass",
+      message: `state=${aiBreakerStatus.state}${aiBreakerStatus.state !== "CLOSED" ? ` failures=${aiBreakerStatus.failures}` : ""}`,
+    },
+    {
+      name: "circuit-breaker:billing",
+      status: billingBreakerStatus.state === "OPEN" ? "fail" : "pass",
+      message: `state=${billingBreakerStatus.state}${billingBreakerStatus.state !== "CLOSED" ? ` failures=${billingBreakerStatus.failures}` : ""}`,
+    },
+  );
 
   // Count failures
   const failedServices = checks.filter(

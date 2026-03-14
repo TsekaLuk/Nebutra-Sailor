@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { useLocale } from "next-intl"
 import { RefreshCw, MessageSquare } from "lucide-react"
 
 interface FeedbackEntry {
@@ -18,6 +19,7 @@ const RATING_META: Record<string, { label: string; color: string }> = {
 }
 
 export default function AdminFeedbackPage() {
+  const locale = useLocale()
   const [entries, setEntries] = useState<FeedbackEntry[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -26,7 +28,7 @@ export default function AdminFeedbackPage() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch("/api/feedback")
+      const res = await fetch("/api/feedback", { signal: AbortSignal.timeout(15_000) })
       const json = await res.json()
       if (!json.success) throw new Error(json.error ?? "Failed to fetch")
       setEntries(json.data ?? [])
@@ -123,7 +125,7 @@ export default function AdminFeedbackPage() {
                     )}
                   </div>
                   <span className="shrink-0 font-mono text-xs text-gray-400 dark:text-gray-600">
-                    {new Date(entry.createdAt).toLocaleDateString("en-US", {
+                    {new Date(entry.createdAt).toLocaleDateString(locale, {
                       month: "short",
                       day: "numeric",
                     })}

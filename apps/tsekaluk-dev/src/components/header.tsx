@@ -6,6 +6,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
 import { Menu, X, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useCommandPalette } from "@/components/providers/command-palette-provider";
@@ -28,10 +29,13 @@ function AuthIndicator() {
         title={`Signed in as ${session.user.name ?? session.user.email}`}
       >
         {session.user.image ? (
-          <img
+          <Image
             src={session.user.image}
             alt=""
-            className="h-6 w-6 rounded-full"
+            width={24}
+            height={24}
+            className="rounded-full"
+            unoptimized
           />
         ) : (
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-200">
@@ -84,12 +88,14 @@ export function Header() {
             href="/"
             className="flex items-center gap-2 font-serif italic text-2xl tracking-tight text-foreground"
           >
-            <img
+            <Image
               src="/images/logo-mono.svg"
               alt=""
-              className="h-6 w-6 dark:invert"
+              width={24}
+              height={24}
+              className="dark:invert"
             />
-            Tseka
+            Tseka Luk
           </Link>
 
           {/* Desktop nav */}
@@ -109,10 +115,10 @@ export function Header() {
                 type="button"
                 aria-label="Open command palette"
                 onClick={() => openCommandPalette(true)}
-                className="flex items-center gap-1.5 rounded-md border border-gray-200 dark:border-gray-700 px-2.5 py-1.5 text-xs text-gray-400 transition-colors hover:text-gray-600 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600"
+                className="flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
               >
-                <Search className="h-3 w-3" />
-                <kbd className="font-mono">⌘K</kbd>
+                <Search className="h-[18px] w-[18px] stroke-[1.5]" />
+                <span className="text-[11px] font-medium opacity-60">⌘K</span>
               </button>
               <LanguageSwitcher />
               <ThemeToggle />

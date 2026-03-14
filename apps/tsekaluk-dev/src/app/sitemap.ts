@@ -3,7 +3,7 @@ import { projects } from "@/lib/projects";
 import { getArticles } from "@/lib/articles";
 
 const BASE_URL = "https://tsekaluk.dev";
-const LOCALES = ["en", "zh"] as const;
+const LOCALES = ["en", "zh", "ja"] as const;
 
 type StaticRoute = {
   path: string;
@@ -50,7 +50,7 @@ function withLocales(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticLastModified = new Date("2025-01-01");
+  const staticLastModified = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = STATIC_ROUTES.flatMap((route) =>
     withLocales(route.path, {

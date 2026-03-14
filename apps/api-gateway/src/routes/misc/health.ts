@@ -18,6 +18,7 @@ const healthResponseSchema = z.object({
   timestamp: z.string(),
   dependencies: z.object({
     database: dependencyStatusSchema,
+    cache: dependencyStatusSchema,
   }),
 });
 
@@ -53,35 +54,41 @@ const healthRoute = createRoute({
 });
 
 // ============================================
-// Helper: database check with 3s timeout
+// Helpers: dependency checks with 3s timeout
 // ============================================
 
-async function checkDatabase(): Promise<{
-  status: "up" | "down";
-  latencyMs: number;
-}> {
+async function withTimeout(
+  fn: () => Promise<unknown>,
+  ms = 3000,
+): Promise<{ status: "up" | "down"; latencyMs: number }> {
   const start = Date.now();
-
-  const dbCheck = new Promise<void>(async (resolve, reject) => {
-    try {
-      const { prisma } = await import("@nebutra/db");
-      await prisma.$queryRaw`SELECT 1`;
-      resolve();
-    } catch (err) {
-      reject(err);
-    }
-  });
-
-  const timeout = new Promise<never>((_, reject) =>
-    setTimeout(() => reject(new Error("Database check timed out")), 3000),
-  );
-
   try {
-    await Promise.race([dbCheck, timeout]);
+    await Promise.race([
+      fn(),
+      new Promise<never>((_, r) =>
+        setTimeout(() => r(new Error("timeout")), ms),
+      ),
+    ]);
     return { status: "up", latencyMs: Date.now() - start };
   } catch {
     return { status: "down", latencyMs: Date.now() - start };
   }
+}
+
+function checkDatabase() {
+  return withTimeout(async () => {
+    const { prisma } = await import("@nebutra/db");
+    await prisma.$queryRaw`SELECT 1`;
+  });
+}
+
+function checkCache() {
+  // Upstash Redis REST ping — getRedis() throws if credentials are missing,
+  // which correctly marks cache as "down" → pod shows "degraded", not "unhealthy".
+  return withTimeout(async () => {
+    const { getRedis } = await import("@nebutra/cache");
+    await getRedis().ping();
+  });
 }
 
 // ============================================
@@ -91,11 +98,11 @@ async function checkDatabase(): Promise<{
 healthRoutes.openapi(healthRoute, async (c) => {
   c.header("Cache-Control", "no-cache, no-store");
 
-  const database = await checkDatabase();
+  // Run dependency checks in parallel to minimize latency
+  const [database, cache] = await Promise.all([checkDatabase(), checkCache()]);
 
-  // Aggregate dependency statuses for overall health determination.
-  // Rule: all deps down → unhealthy (503); any dep down → degraded (200); else healthy (200).
-  const depStatuses = [database.status];
+  // Aggregate: all deps down → unhealthy (503); any dep down → degraded (200); else healthy (200).
+  const depStatuses = [database.status, cache.status];
   const downCount = depStatuses.filter((s) => s === "down").length;
 
   const overallStatus: "healthy" | "degraded" | "unhealthy" =
@@ -112,6 +119,7 @@ healthRoutes.openapi(healthRoute, async (c) => {
     timestamp: new Date().toISOString(),
     dependencies: {
       database,
+      cache,
     },
   };
 

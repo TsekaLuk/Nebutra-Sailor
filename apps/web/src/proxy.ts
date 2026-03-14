@@ -74,14 +74,20 @@ export const proxy = hasClerkKey
       const response = NextResponse.next();
       return withNonce(req, response);
     })
-  : function devNoopProxy(req: NextRequest) {
-      console.warn(
-        "[Nebutra] Running without Clerk authentication. " +
-          "This is only allowed in development.",
-      );
-      const response = NextResponse.next();
-      return withNonce(req, response);
-    };
+  : (() => {
+      let devWarned = false;
+      return function devNoopProxy(req: NextRequest) {
+        if (!devWarned) {
+          devWarned = true;
+          console.warn(
+            "[Nebutra] Running without Clerk authentication. " +
+              "This is only allowed in development.",
+          );
+        }
+        const response = NextResponse.next();
+        return withNonce(req, response);
+      };
+    })();
 
 export default proxy;
 

@@ -24,6 +24,7 @@ export async function generateMetadata({
       languages: {
         en: "https://tsekaluk.dev/en/thinking",
         zh: "https://tsekaluk.dev/zh/thinking",
+        ja: "https://tsekaluk.dev/ja/thinking",
       },
     },
   };

@@ -1,0 +1,6 @@
+# Re-install dependencies if lock file changed after a merge/pull.
+# Prevents "module not found" errors when pnpm-lock.yaml was updated upstream.
+if git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep -q "pnpm-lock.yaml"; then
+  echo "pnpm-lock.yaml changed — running pnpm install"
+  pnpm install --frozen-lockfile
+fi

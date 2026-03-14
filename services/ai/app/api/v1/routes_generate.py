@@ -30,5 +30,5 @@ async def generate(request: GenerateRequest):
             model=request.model,
         )
         return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except Exception:
+        raise HTTPException(status_code=500, detail="Internal server error")

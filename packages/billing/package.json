@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@nebutra/contracts": "workspace:*",
+    "@nebutra/logger": "workspace:*",
     "@prisma/client": "^7.4.2",
     "stripe": "^20.4.0",
     "zod": "^4.3.6"

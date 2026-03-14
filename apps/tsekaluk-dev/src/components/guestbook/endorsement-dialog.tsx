@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useId } from "react";
+import { useState, useId, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useAnalytics } from "@/hooks/use-analytics";
 import { useCharacterLimit } from "@/hooks/use-character-limit";
@@ -48,6 +48,9 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
   const [submitted, setSubmitted] = useState(false);
   const [nickname, setNickname] = useState("");
   const [relationship, setRelationship] = useState("");
+  const [company, setCompany] = useState("");
+  const [title, setTitle] = useState("");
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
   const { value, characterCount, handleChange, maxLength } = useCharacterLimit({
@@ -76,9 +79,16 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
     (isAuthenticated ? (session!.user!.image ?? null) : null) ??
     dicebearUrl(displayName);
 
+  // Clear pending close timer on unmount
+  useEffect(() => () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+  }, []);
+
   function resetForm() {
     setNickname("");
     setRelationship("");
+    setCompany("");
+    setTitle("");
     setAvatarFile(null);
     setSubmitted(false);
   }
@@ -89,7 +99,7 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
     setSubmitting(true);
     try {
       let avatarUrl: string | null = isAuthenticated
-        ? (session!.user!.image ?? null)
+        ? (session?.user?.image ?? null)
         : null;
 
       if (avatarFile) {
@@ -98,6 +108,7 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
         const uploadRes = await fetch("/api/guestbook/avatar", {
           method: "POST",
           body: formData,
+          signal: AbortSignal.timeout(30_000),
         });
         if (uploadRes.ok) {
           const uploadData = await uploadRes.json();
@@ -111,10 +122,13 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
       const res = await fetch("/api/guestbook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(30_000),
         body: JSON.stringify({
           message: value.trim(),
           nickname: nickname.trim(),
           relationship,
+          company: company.trim() || undefined,
+          title: title.trim() || undefined,
           avatar_url: avatarUrl,
         }),
       });
@@ -127,7 +141,7 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
         });
         setSubmitted(true);
         onSubmitted?.();
-        setTimeout(() => {
+        closeTimerRef.current = setTimeout(() => {
           setOpen(false);
           resetForm();
         }, 2000);
@@ -235,6 +249,31 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
                       </option>
                     ))}
                   </select>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1 space-y-1.5">
+                  <Label htmlFor={`${id}-company`}>
+                    Company/Organization <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
+                  </Label>
+                  <Input
+                    id={`${id}-company`}
+                    placeholder="E.g. Acme Corp"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                  />
+                </div>
+                <div className="flex-1 space-y-1.5">
+                  <Label htmlFor={`${id}-title`}>
+                    Title/Profession <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
+                  </Label>
+                  <Input
+                    id={`${id}-title`}
+                    placeholder="E.g. Product Manager"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
                 </div>
               </div>
 

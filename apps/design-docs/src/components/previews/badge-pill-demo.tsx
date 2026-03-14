@@ -1,12 +1,49 @@
+"use client";
+
 import { Badge } from "@nebutra/ui/primitives";
+import { LogoSlackColor } from "@nebutra/icons";
 import Link from "next/link";
 
-export function BadgePillDemo() {
+export function BadgePillMatrixDemo() {
   return (
-    <Badge asChild variant="secondary" className="rounded-full px-3 py-1 hover:bg-secondary/80 transition-colors">
-      <Link href="/new-feature">
-        New Updates Available →
-      </Link>
-    </Badge>
+    <div className="flex flex-col items-center justify-center gap-4 w-full">
+      <div className="flex flex-row items-center justify-center gap-2 flex-initial">
+        <Badge asChild size="sm" variant="pill">
+          <Link href="#badge-pill">Label</Link>
+        </Badge>
+        <Badge asChild size="md" variant="pill">
+          <Link href="#badge-pill">Label</Link>
+        </Badge>
+        <Badge asChild size="lg" variant="pill">
+          <Link href="#badge-pill">Label</Link>
+        </Badge>
+      </div>
+      <div className="flex flex-row items-center justify-center gap-2 flex-initial">
+        <Badge
+          asChild
+          icon={<LogoSlackColor />}
+          size="sm"
+          variant="pill"
+        >
+          <Link href="#badge-pill">Label</Link>
+        </Badge>
+        <Badge
+          asChild
+          icon={<LogoSlackColor />}
+          size="md"
+          variant="pill"
+        >
+          <Link href="#badge-pill">Label</Link>
+        </Badge>
+        <Badge
+          asChild
+          icon={<LogoSlackColor />}
+          size="lg"
+          variant="pill"
+        >
+          <Link href="#badge-pill">Label</Link>
+        </Badge>
+      </div>
+    </div>
   );
 }

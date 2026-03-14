@@ -3,22 +3,18 @@ import type { ContentfulStatusCode } from "hono/utils/http-status";
 import { env } from "@/config/env.js";
 import { requireAuth } from "@/middlewares/tenantContext.js";
 
-const eventContextSchema = z
-  .object({
-    tenantId: z.string().min(1),
-    occurredAt: z.union([z.string().min(1), z.date()]),
-  })
-  .passthrough();
+const eventContextSchema = z.object({
+  tenantId: z.string().min(1),
+  occurredAt: z.union([z.string().min(1), z.date()]),
+});
 
-const eventEnvelopeSchema = z
-  .object({
-    eventName: z.string().min(1),
-    context: eventContextSchema,
-    payload: z.record(z.string(), z.unknown()).default({}),
-    eventId: z.string().min(1).optional(),
-    source: z.string().min(1).default("web"),
-  })
-  .passthrough();
+const eventEnvelopeSchema = z.object({
+  eventName: z.string().min(1),
+  context: eventContextSchema,
+  payload: z.record(z.string(), z.unknown()).default({}),
+  eventId: z.string().min(1).optional(),
+  source: z.string().min(1).default("web"),
+});
 
 const ingestRequestSchema = z.object({
   events: z.array(eventEnvelopeSchema).min(1).max(1000),

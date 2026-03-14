@@ -9,6 +9,9 @@
     ".": "./src/index.ts"
   },
   "scripts": {},
+  "dependencies": {
+    "@nebutra/logger": "workspace:*"
+  },
   "devDependencies": {
     "@types/node": "^22.19.15",
     "typescript": "^5.9.3",

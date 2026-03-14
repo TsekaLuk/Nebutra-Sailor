@@ -1,0 +1,107 @@
+name: CodeQL Security Analysis
+
+# Runs GitHub's CodeQL SAST scanner on TypeScript and Python source code.
+# Results appear in the Security tab → Code scanning alerts.
+#
+# Runs on:
+#   - Every push to main/develop
+#   - Every PR targeting main/develop
+#   - Weekly schedule (Saturday 02:00 UTC) to catch new CVEs in unchanged code
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Weekly scan — catches newly published CVEs in code that hasn't changed
+    - cron: "0 2 * * 6"
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: CodeQL Analysis (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - javascript-typescript
+          - python
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── TypeScript: initialize CodeQL ─────────────────────────────────────
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          # Use the extended query suite for security-and-quality checks
+          queries: security-extended,security-and-quality
+          # Exclude generated files and third-party code
+          config: |
+            paths-ignore:
+              - "**/node_modules/**"
+              - "**/.next/**"
+              - "**/dist/**"
+              - "**/build/**"
+              - "**/*.min.js"
+              - "**/coverage/**"
+              - "apps/storybook/**"
+
+      # ── TypeScript: build for analysis ────────────────────────────────────
+      - name: Setup pnpm
+        if: matrix.language == 'javascript-typescript'
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        if: matrix.language == 'javascript-typescript'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies (Node)
+        if: matrix.language == 'javascript-typescript'
+        run: pnpm install --frozen-lockfile
+
+      # ── Python: setup for analysis ────────────────────────────────────────
+      - name: Setup Python
+        if: matrix.language == 'python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        if: matrix.language == 'python'
+        uses: astral-sh/setup-uv@v5
+
+      # CodeQL auto-builds Python; no explicit build needed for interpreted language
+
+      # ── Run CodeQL analysis ───────────────────────────────────────────────
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
+          # Upload results as SARIF to GitHub Security tab
+          upload: true
+
+      # ── Upload SARIF for non-PR runs (already done above, explicit for PRs) ─
+      - name: Upload SARIF to GitHub Security
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{ runner.temp }}/codeql_databases
+        continue-on-error: true

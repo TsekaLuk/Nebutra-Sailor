@@ -47,6 +47,18 @@ const nextConfig: NextConfig = {
 
   reactCompiler: true,
 
+  // Allow Next.js Image to load from external sources used by this app.
+  // Add new hostnames here rather than disabling optimization globally.
+  images: {
+    remotePatterns: [
+      // Clerk user profile avatars
+      { protocol: "https", hostname: "img.clerk.com" },
+      { protocol: "https", hostname: "images.clerk.com" },
+      // Nebutra CDN
+      { protocol: "https", hostname: "cdn.nebutra.com" },
+    ],
+  },
+
   // Attach security headers to every route.
   async headers() {
     return [

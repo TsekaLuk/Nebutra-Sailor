@@ -30,7 +30,8 @@ export async function rateLimitMiddleware(c: Context, next: Next) {
   // Try to consume tokens
   const result = await limiter.consume(key, weight);
 
-  // Add rate limit headers
+  // Add standard rate limit headers (draft-ietf-httpapi-ratelimit-headers)
+  c.header("X-RateLimit-Limit", limiter.maxTokens.toString());
   c.header("X-RateLimit-Remaining", result.remaining.toString());
   c.header("X-RateLimit-Reset", result.resetAt.toString());
 

@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { logger } from "@nebutra/logger";
 import { prisma } from "@/lib/prisma";
 import { NowEntryView } from "./now-entry-view";
 
@@ -23,7 +24,15 @@ async function getLatestNowEntry(): Promise<NowData | null> {
       shipped: entry.shipped,
       reading: entry.reading,
     };
-  } catch {
+  } catch (err: unknown) {
+    const isConnRefused =
+      (err as { code?: string }).code === "ECONNREFUSED" ||
+      (err instanceof Error && err.message.includes("ECONNREFUSED"));
+    if (isConnRefused) {
+      logger.warn("[now-entry] Database connection refused. Using fallback layout.");
+    } else {
+      logger.error("[now-entry] Failed to fetch latest entry", err);
+    }
     return null;
   }
 }

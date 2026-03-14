@@ -11,6 +11,7 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
+    "test:ci": "turbo run test:ci",
     "test:coverage": "turbo run test -- --coverage",
     "test:arch": "vitest run --config vitest.arch.config.ts",
     "check-env": "npx tsx infra/scripts/check-env.ts",
@@ -53,7 +54,9 @@
     "build:marketing": "turbo run build --filter=@nebutra/landing-page --filter=@nebutra/blog --filter=@nebutra/studio",
     "build:dashboard": "turbo run build --filter=@nebutra/web --filter=@nebutra/admin --filter=@nebutra/api-gateway",
     "preset:env": "tsx packages/preset/src/cli.ts",
-    "generate:api-types": "tsx scripts/generate-api-types.ts"
+    "generate:api-types": "tsx scripts/generate-api-types.ts",
+    "size": "size-limit",
+    "size:why": "size-limit --why"
   },
   "keywords": [
     "saas",
@@ -64,10 +67,10 @@
   ],
   "author": "Nebutra",
   "license": "AGPL-3.0",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.32.1",
   "engines": {
     "node": ">=22.0.0",
-    "pnpm": ">=9.0.0"
+    "pnpm": ">=10.32.0"
   },
   "pnpm": {
     "overrides": {
@@ -105,6 +108,8 @@
     }
   },
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^11.2.0",
+    "size-limit": "^11.2.0",
     "@commitlint/cli": "^20.4.3",
     "@commitlint/config-conventional": "^20.4.3",
     "@eslint/js": "^9.39.3",
@@ -128,10 +133,10 @@
     "openapi-typescript": "^7.13.0",
     "prettier": "^3.8.1",
     "tsx": "^4.21.0",
-    "turbo": "^2.8.15",
+    "turbo": "^2.8.16",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.2",

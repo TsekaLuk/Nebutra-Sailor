@@ -1,0 +1,45 @@
+"use client";
+
+import { useOrganization } from "@clerk/nextjs";
+import {
+  resolveRole,
+  hasPermission,
+  hasAllPermissions,
+  hasAnyPermission,
+  type Role,
+  type Scope,
+} from "@/lib/permissions";
+
+interface UsePermissionReturn {
+  /** The resolved role for the current org member. */
+  role: Role;
+  /** True while Clerk is still loading membership data. */
+  isLoading: boolean;
+  /** Check a single scope. */
+  can: (scope: Scope) => boolean;
+  /** Check that ALL listed scopes are granted. */
+  canAll: (scopes: Scope[]) => boolean;
+  /** Check that ANY of the listed scopes is granted. */
+  canAny: (scopes: Scope[]) => boolean;
+}
+
+/**
+ * Client-side hook for permission checks based on the current Clerk org role.
+ *
+ * Usage:
+ *   const { can, role } = usePermission();
+ *   if (can("project:delete")) { ... }
+ */
+export function usePermission(): UsePermissionReturn {
+  const { membership, isLoaded } = useOrganization();
+
+  const role = resolveRole(membership?.role);
+
+  return {
+    role,
+    isLoading: !isLoaded,
+    can: (scope) => hasPermission(role, scope),
+    canAll: (scopes) => hasAllPermissions(role, scopes),
+    canAny: (scopes) => hasAnyPermission(role, scopes),
+  };
+}

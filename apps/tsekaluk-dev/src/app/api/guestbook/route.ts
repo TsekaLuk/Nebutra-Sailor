@@ -1,20 +1,38 @@
+import { z } from "zod"
 import { Resend } from "resend"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { createRateLimiter, getClientIp } from "@/lib/rate-limit"
+import { escapeHtml } from "@/lib/escape-html"
 
-const MAX_MESSAGE_LENGTH = 280
 const checkRateLimit = createRateLimiter(60_000, 3)
+
+const guestbookPostSchema = z.object({
+  message: z.string().min(1).max(280),
+  nickname: z.string().min(1).max(100),
+  relationship: z.enum(["friend", "colleague", "client", "partner", "classmate", "mentor", "fan", "other"]),
+  company: z.string().max(100).optional().nullable(),
+  title: z.string().max(100).optional().nullable(),
+  avatar_url: z.string().url().optional().nullable(),
+})
+
+const guestbookPatchSchema = z.object({
+  id: z.string().uuid(),
+  status: z.enum(["approved", "rejected"]),
+})
+
 
 function isAdmin(email: string | null | undefined): boolean {
   const adminEmail = process.env.ADMIN_EMAIL
-  return Boolean(adminEmail && email === adminEmail)
+  return Boolean(adminEmail && email?.toLowerCase() === adminEmail.toLowerCase())
 }
 
 async function notifyAdmin(entry: {
   nickname: string
   relationship: string
   message: string
+  company?: string | null
+  title?: string | null
 }) {
   const adminEmail = process.env.ADMIN_EMAIL
   const resendKey = process.env.RESEND_API_KEY
@@ -35,15 +53,15 @@ async function notifyAdmin(entry: {
         <table style="width:100%;border-collapse:collapse;margin-bottom:16px">
           <tr>
             <td style="padding:8px 0;color:#6b7280;font-size:14px;width:120px">From</td>
-            <td style="padding:8px 0;font-size:14px;font-weight:600">${entry.nickname}</td>
+            <td style="padding:8px 0;font-size:14px;font-weight:600">${escapeHtml(entry.nickname)}</td>
           </tr>
           <tr>
             <td style="padding:8px 0;color:#6b7280;font-size:14px">Relationship</td>
-            <td style="padding:8px 0;font-size:14px">${entry.relationship}</td>
+            <td style="padding:8px 0;font-size:14px">${escapeHtml(entry.relationship)}${entry.company || entry.title ? ` (${[entry.title, entry.company].filter(Boolean).map(s => escapeHtml(s!)).join(' @ ')})` : ''}</td>
           </tr>
         </table>
         <blockquote style="border-left:3px solid #e5e7eb;margin:0 0 24px;padding:12px 16px;color:#374151;font-style:italic;font-size:15px">
-          ${entry.message}
+          ${escapeHtml(entry.message)}
         </blockquote>
         <a href="${siteUrl}/admin/guestbook" style="display:inline-block;background:#111827;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500">
           Review in admin panel →
@@ -83,13 +101,16 @@ export async function GET(req: Request) {
         authorImage: true,
         nickname: true,
         relationship: true,
+        company: true,
+        title: true,
         message: true,
         createdAt: true,
       },
     })
 
     return Response.json({ success: true, data })
-  } catch {
+  } catch (err) {
+    console.error("[guestbook/get] Unexpected error:", err)
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }
@@ -106,40 +127,29 @@ export async function POST(req: Request) {
       )
     }
 
+    const contentLength = parseInt(req.headers.get("content-length") ?? "0", 10)
+    if (contentLength > 16 * 1024) {
+      return Response.json({ success: false, error: "Payload too large" }, { status: 413 })
+    }
+
     const session = await auth()
 
     const body = await req.json()
-    const { message, nickname, relationship, avatar_url } = body
-
-    if (!message || typeof message !== "string") {
-      return Response.json({ success: false, error: "Message is required" }, { status: 400 })
-    }
-
-    const trimmed = message.trim()
-
-    if (trimmed.length === 0) {
-      return Response.json({ success: false, error: "Message cannot be empty" }, { status: 400 })
-    }
-
-    if (trimmed.length > MAX_MESSAGE_LENGTH) {
+    const parsed = guestbookPostSchema.safeParse(body)
+    if (!parsed.success) {
       return Response.json(
-        { success: false, error: `Message must be ${MAX_MESSAGE_LENGTH} characters or fewer` },
+        { success: false, error: parsed.error.flatten().fieldErrors },
         { status: 400 },
       )
     }
 
-    if (!nickname || typeof nickname !== "string" || nickname.trim().length === 0) {
-      return Response.json({ success: false, error: "Nickname is required" }, { status: 400 })
-    }
-
-    if (!relationship || typeof relationship !== "string") {
-      return Response.json({ success: false, error: "Relationship is required" }, { status: 400 })
-    }
+    const { message, nickname, relationship, company, title, avatar_url } = parsed.data
+    const trimmed = message.trim()
 
     const isAuthenticated = Boolean(session?.user)
     const status = isAuthenticated ? "approved" : "pending"
     const authorName = session?.user?.name ?? nickname.trim()
-    const authorImage = avatar_url ?? (isAuthenticated ? (session!.user!.image ?? null) : null)
+    const authorImage = avatar_url ?? (isAuthenticated ? (session?.user?.image ?? null) : null)
     const authorProvider = isAuthenticated ? "oauth" : "anonymous"
 
     const data = await prisma.guestbook.create({
@@ -149,6 +159,8 @@ export async function POST(req: Request) {
         authorProvider,
         nickname: nickname.trim(),
         relationship,
+        company: company?.trim() || null,
+        title: title?.trim() || null,
         message: trimmed,
         status,
       },
@@ -156,11 +168,12 @@ export async function POST(req: Request) {
 
     // Notify admin for submissions that need review
     if (status === "pending") {
-      notifyAdmin({ nickname: nickname.trim(), relationship, message: trimmed }).catch(() => {})
+      notifyAdmin({ nickname: nickname.trim(), relationship, company: company?.trim(), title: title?.trim(), message: trimmed }).catch((err: unknown) => { console.error("[guestbook] Admin notification failed:", err) })
     }
 
     return Response.json({ success: true, data }, { status: 201 })
-  } catch {
+  } catch (err) {
+    console.error("[guestbook/post] Unexpected error:", err)
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }
@@ -178,20 +191,29 @@ export async function PATCH(req: Request) {
       return Response.json({ success: false, error: "Admin access required" }, { status: 403 })
     }
 
-    const body = await req.json()
-    const { id, status } = body
-
-    if (!id || !status || !["approved", "rejected"].includes(status)) {
-      return Response.json({ success: false, error: "Invalid id or status" }, { status: 400 })
+    const contentLength = parseInt(req.headers.get("content-length") ?? "0", 10)
+    if (contentLength > 4 * 1024) {
+      return Response.json({ success: false, error: "Payload too large" }, { status: 413 })
     }
 
+    const body = await req.json()
+    const parsed = guestbookPatchSchema.safeParse(body)
+    if (!parsed.success) {
+      return Response.json(
+        { success: false, error: parsed.error.flatten().fieldErrors },
+        { status: 400 },
+      )
+    }
+
+    const { id, status } = parsed.data
     await prisma.guestbook.update({
       where: { id },
       data: { status },
     })
 
     return Response.json({ success: true })
-  } catch {
+  } catch (err) {
+    console.error("[guestbook/patch] Unexpected error:", err)
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }
@@ -216,12 +238,17 @@ export async function DELETE(req: Request) {
       return Response.json({ success: false, error: "Entry ID is required" }, { status: 400 })
     }
 
+    if (!z.string().uuid().safeParse(id).success) {
+      return Response.json({ success: false, error: "Invalid ID format" }, { status: 400 })
+    }
+
     await prisma.guestbook.delete({
       where: { id },
     })
 
     return Response.json({ success: true })
-  } catch {
+  } catch (err) {
+    console.error("[guestbook/delete] Unexpected error:", err)
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 })
   }
 }

@@ -28,12 +28,13 @@ const MSupportedIcon = () => (
   </svg>
 );
 
-const LoveItIcon = ({ pathClassName }: { pathClassName: string }) => (
+const LoveItIcon = ({ pathClassName }: { pathClassName?: string }) => (
   <svg
     height="16"
     strokeLinejoin="round"
     viewBox="0 0 16 16"
     width="16"
+    fill="currentColor"
   >
     <path
       fillRule="evenodd"
@@ -55,6 +56,7 @@ const ItsOkayIcon = () => (
     strokeLinejoin="round"
     viewBox="0 0 16 16"
     width="16"
+    fill="currentColor"
   >
     <path
       fillRule="evenodd"
@@ -70,6 +72,7 @@ const NotGreaterIcon = () => (
     strokeLinejoin="round"
     viewBox="0 0 16 16"
     width="16"
+    fill="currentColor"
   >
     <path
       fillRule="evenodd"
@@ -85,11 +88,11 @@ const HateIcon = () => (
     strokeLinejoin="round"
     viewBox="0 0 16 16"
     width="16"
+    fill="currentColor"
   >
     <path
       fillRule="evenodd"
       clipRule="evenodd" d="M4 9V16H5.5V9H4ZM12 9V16H10.5V9H12Z"
-      fill="var(--color-blue-700)"
     />
     <path
       fillRule="evenodd"
@@ -108,7 +111,12 @@ const Default = ({ label }: { label: string }) => {
   const [position, setPosition] = useState<{ top?: number, bottom?: number }>();
   const inputRef = useRef<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { track } = useAnalytics();
+
+  useEffect(() => () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+  }, []);
 
   useEffect(() => {
     const getPosition = () => {
@@ -151,17 +159,19 @@ const Default = ({ label }: { label: string }) => {
     setSending(true);
     try {
       const rating = selectedEmoji !== null ? EMOJI_KEYS[selectedEmoji] : null;
-      await fetch("/api/feedback", {
+      const res = await fetch("/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ rating, message: message.trim() }),
+        signal: AbortSignal.timeout(30_000),
       });
+      if (!res.ok) return;
       track("feedback_submitted", {
         rating,
         has_message: Boolean(message.trim()),
       });
       setSent(true);
-      setTimeout(() => {
+      closeTimerRef.current = setTimeout(() => {
         setIsOpen(false);
         setSent(false);
         setSelectedEmoji(null);
@@ -186,7 +196,7 @@ const Default = ({ label }: { label: string }) => {
       <Surface
         type="menu"
         className={clsx(
-          "absolute bg-background-100 w-[340px] duration-200 font-sans left-1/2 -translate-x-1/2",
+          "absolute w-[340px] duration-200 font-sans left-1/2 -translate-x-1/2 shadow-xl bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden",
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
         style={{ ...position }}
@@ -200,6 +210,7 @@ const Default = ({ label }: { label: string }) => {
           <form>
             <div className="flex flex-col gap-2 p-2">
               <Textarea
+                aria-label="Your feedback"
                 placeholder="Your feedback..."
                 className="h-[100px]"
                 value={message}
@@ -209,33 +220,30 @@ const Default = ({ label }: { label: string }) => {
                 <MSupportedIcon /> supported.
               </div>
             </div>
-            <div className="flex justify-between p-3 bg-accents-1 border-t border-accents-2">
+            <div className="flex justify-between p-3 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
               <span className="flex items-center justify-start cursor-pointer">
                 <Button
                   variant="unstyled"
                   svgOnly
                   shape="rounded"
                   className={clsx(
-                    "group hover:!bg-blue-300 hover:fill-blue-900 !w-8 !h-8 p-0 duration-200",
-                    selectedEmoji === 0 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900"
+                    "hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white !w-8 !h-8 p-0 duration-200 transition-colors",
+                    selectedEmoji === 0 ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white" : "bg-transparent text-gray-400 dark:text-gray-500"
                   )}
                   onClick={(event) => {
                     event.preventDefault();
                     setSelectedEmoji(selectedEmoji === 0 ? null : 0);
                   }}
                 >
-                  <LoveItIcon pathClassName={clsx(
-                    "group-hover:fill-blue-900 duration-200",
-                    selectedEmoji === 0 ? "fill-blue-900" : "fill-amber-800"
-                  )} />
+                  <LoveItIcon />
                 </Button>
                 <Button
                   variant="unstyled"
                   svgOnly
                   shape="rounded"
                   className={clsx(
-                    "hover:!bg-blue-300 hover:fill-blue-900 !w-8 !h-8 p-0 duration-200",
-                    selectedEmoji === 1 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900"
+                    "hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white !w-8 !h-8 p-0 duration-200 transition-colors",
+                    selectedEmoji === 1 ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white" : "bg-transparent text-gray-400 dark:text-gray-500"
                   )}
                   onClick={(event) => {
                     event.preventDefault();
@@ -249,8 +257,8 @@ const Default = ({ label }: { label: string }) => {
                   svgOnly
                   shape="rounded"
                   className={clsx(
-                    "hover:!bg-blue-300 hover:fill-blue-900 !w-8 !h-8 p-0 duration-200",
-                    selectedEmoji === 2 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900"
+                    "hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white !w-8 !h-8 p-0 duration-200 transition-colors",
+                    selectedEmoji === 2 ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white" : "bg-transparent text-gray-400 dark:text-gray-500"
                   )}
                   onClick={(event) => {
                     event.preventDefault();
@@ -264,8 +272,8 @@ const Default = ({ label }: { label: string }) => {
                   svgOnly
                   shape="rounded"
                   className={clsx(
-                    "hover:!bg-blue-300 hover:fill-blue-900 !w-8 !h-8 p-0 duration-200",
-                    selectedEmoji === 3 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900"
+                    "hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white !w-8 !h-8 p-0 duration-200 transition-colors",
+                    selectedEmoji === 3 ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white" : "bg-transparent text-gray-400 dark:text-gray-500"
                   )}
                   onClick={(event) => {
                     event.preventDefault();
@@ -275,7 +283,7 @@ const Default = ({ label }: { label: string }) => {
                   <HateIcon />
                 </Button>
               </span>
-              <Button size="small" onClick={handleSend} disabled={sending}>
+              <Button className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200" size="small" onClick={handleSend} disabled={sending}>
                 {sending ? "Sending..." : "Send"}
               </Button>
             </div>
@@ -320,11 +328,13 @@ const Inline = ({ label }: { label: string }) => {
     setSending(true);
     try {
       const rating = selectedEmoji !== null ? EMOJI_KEYS[selectedEmoji] : null;
-      await fetch("/api/feedback", {
+      const res = await fetch("/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ rating, message: message.trim() }),
+        signal: AbortSignal.timeout(30_000),
       });
+      if (!res.ok) return;
       track("feedback_submitted", {
         rating,
         has_message: Boolean(message.trim()),
@@ -345,7 +355,7 @@ const Inline = ({ label }: { label: string }) => {
   return (
     <div
       className={clsx(
-        "bg-background-100 shadow-border-small duration-200 overflow-hidden w-fit flex flex-col justify-start",
+        "shadow-lg duration-200 overflow-hidden w-fit flex flex-col justify-start bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800",
         expanded ? "max-h-[243px] rounded-xl" : "max-h-12 rounded-[30px]"
       )}
       ref={ref}
@@ -433,6 +443,7 @@ const Inline = ({ label }: { label: string }) => {
           <form className="w-full transition-opacity duration-300 opacity-100">
             <div className="flex flex-col gap-2 p-2 w-full">
               <Textarea
+                aria-label="Your feedback"
                 placeholder="Your feedback..."
                 className="h-[100px]"
                 ref={textAreaRef}
@@ -443,7 +454,7 @@ const Inline = ({ label }: { label: string }) => {
                 <MSupportedIcon /> supported.
               </div>
             </div>
-            <div className="flex justify-end p-3 bg-accents-1 border-t border-accents-2">
+            <div className="flex justify-end p-3 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
               <Button size="small" onClick={handleSend} disabled={sending}>
                 {sending ? "Sending..." : "Send"}
               </Button>

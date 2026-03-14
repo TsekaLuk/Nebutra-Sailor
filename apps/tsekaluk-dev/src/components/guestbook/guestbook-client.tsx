@@ -1,15 +1,20 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
+import { useLocale } from "next-intl"
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components"
+import { motion } from "framer-motion"
 import { EndorsementDialog } from "./endorsement-dialog"
 
-interface Endorsement {
+export interface Endorsement {
   id: string
   authorName: string
   authorImage: string | null
   nickname: string
   relationship: string
+  company?: string | null
+  title?: string | null
   message: string
   createdAt: string
 }
@@ -25,103 +30,124 @@ const RELATIONSHIP_LABELS: Record<string, { en: string; zh: string }> = {
   other: { en: "Other", zh: "其他" },
 }
 
-function formatRelativeTime(dateStr: string): string {
-  const date = new Date(dateStr)
-  const now = new Date()
-  const diffMs = now.getTime() - date.getTime()
-  const diffSeconds = Math.floor(diffMs / 1000)
-  const diffMinutes = Math.floor(diffSeconds / 60)
-  const diffHours = Math.floor(diffMinutes / 60)
-  const diffDays = Math.floor(diffHours / 24)
-  const diffWeeks = Math.floor(diffDays / 7)
-  const diffMonths = Math.floor(diffDays / 30)
-  const diffYears = Math.floor(diffDays / 365)
+function formatRelativeTime(dateStr: string, locale: string): string {
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" })
+  const diffMs = new Date(dateStr).getTime() - Date.now()
+  const diffSeconds = Math.round(diffMs / 1000)
+  const diffMinutes = Math.round(diffSeconds / 60)
+  const diffHours = Math.round(diffMinutes / 60)
+  const diffDays = Math.round(diffHours / 24)
+  const diffWeeks = Math.round(diffDays / 7)
+  const diffMonths = Math.round(diffDays / 30)
+  const diffYears = Math.round(diffDays / 365)
 
-  if (diffSeconds < 60) return "just now"
-  if (diffMinutes < 60) return `${diffMinutes}m ago`
-  if (diffHours < 24) return `${diffHours}h ago`
-  if (diffDays < 7) return `${diffDays}d ago`
-  if (diffWeeks < 5) return `${diffWeeks}w ago`
-  if (diffMonths < 12) return `${diffMonths}mo ago`
-  return `${diffYears}y ago`
+  if (Math.abs(diffSeconds) < 60) return rtf.format(diffSeconds, "second")
+  if (Math.abs(diffMinutes) < 60) return rtf.format(diffMinutes, "minute")
+  if (Math.abs(diffHours) < 24) return rtf.format(diffHours, "hour")
+  if (Math.abs(diffDays) < 7) return rtf.format(diffDays, "day")
+  if (Math.abs(diffWeeks) < 5) return rtf.format(diffWeeks, "week")
+  if (Math.abs(diffMonths) < 12) return rtf.format(diffMonths, "month")
+  return rtf.format(diffYears, "year")
 }
 
-function EndorsementCard({ entry }: { entry: Endorsement }) {
+function stringToColor(str: string) {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  const c1 = `hsl(${Math.abs(hash % 360)}, 70%, 65%)`
+  const c2 = `hsl(${Math.abs((hash + 40) % 360)}, 80%, 75%)`
+  return `linear-gradient(135deg, ${c1}, ${c2})`
+}
+
+function EndorsementCard({ entry, locale }: { entry: Endorsement; locale: string }) {
   const initial = entry.nickname.charAt(0).toUpperCase()
   const rel = RELATIONSHIP_LABELS[entry.relationship]
+  const gradient = stringToColor(entry.nickname + entry.id)
 
   return (
     <AnimateIn preset="fadeUp" inView>
-      <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 transition-shadow hover:shadow-md">
-        <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 break-words">
+      <motion.div
+        whileHover={{ y: -4, scale: 1.01 }}
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        className="group relative rounded-3xl border border-black/5 dark:border-white/5 bg-white/70 dark:bg-black/40 p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl transition-colors hover:bg-white/90 dark:hover:bg-black/60 overflow-hidden break-inside-avoid"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/0 dark:from-white/5 dark:to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+        
+        <p className="relative z-10 text-[15px] leading-relaxed text-gray-700 dark:text-gray-300 break-words mix-blend-normal">
           &ldquo;{entry.message}&rdquo;
         </p>
-        <div className="mt-4 flex items-center gap-3">
+
+        <div className="mt-8 flex items-center gap-4 relative z-10">
           {entry.authorImage ? (
-            <img
+            <Image
               src={entry.authorImage}
               alt={entry.nickname}
-              width={36}
-              height={36}
-              className="h-9 w-9 rounded-full shrink-0 object-cover"
+              width={44}
+              height={44}
+              sizes="44px"
+              className="h-11 w-11 rounded-full shrink-0 object-cover ring-2 ring-white/50 dark:ring-white/10 shadow-sm"
+              loading="lazy"
+              unoptimized
             />
           ) : (
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-sm font-serif italic text-gray-500">
-              {initial}
-            </span>
+            <div
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full ring-2 ring-white/50 dark:ring-white/10 shadow-inner"
+              style={{ background: gradient }}
+            >
+              <span className="text-sm font-medium text-white mix-blend-overlay drop-shadow-md">
+                {initial}
+              </span>
+            </div>
           )}
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-              {entry.nickname}
+            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate flex items-center gap-2">
+              <span>{entry.nickname}</span>
+              {(entry.title || entry.company) && (
+                <span className="inline-flex items-center rounded-full bg-gray-100/80 dark:bg-white/10 px-2 py-0.5 text-[10px] font-medium text-gray-600 dark:text-gray-400 backdrop-blur-sm">
+                  {[entry.title, entry.company].filter(Boolean).join(" @ ")}
+                </span>
+              )}
             </p>
-            <p className="text-xs text-gray-400 dark:text-gray-500">
-              {rel ? `${rel.en} / ${rel.zh}` : entry.relationship}
-              {" · "}
-              {formatRelativeTime(entry.createdAt)}
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 flex items-center gap-1.5">
+              <span className="capitalize">{rel ? (locale === "zh" ? rel.zh : rel.en) : entry.relationship}</span>
+              <span className="h-1 w-1 rounded-full bg-gray-300 dark:bg-gray-700" />
+              <span>{formatRelativeTime(entry.createdAt, locale)}</span>
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </AnimateIn>
   )
 }
 
-export function GuestbookClient() {
-  const [entries, setEntries] = React.useState<Endorsement[]>([])
-  const [loading, setLoading] = React.useState(true)
+export function GuestbookClient({ initialEntries }: { initialEntries: Endorsement[] }) {
+  const locale = useLocale()
+  const [entries] = React.useState<Endorsement[]>(initialEntries)
   const [submitted, setSubmitted] = React.useState(false)
-
-  const fetchEntries = React.useCallback(async () => {
-    try {
-      const res = await fetch("/api/guestbook")
-      const json = await res.json()
-      if (json.success) {
-        setEntries(json.data ?? [])
-      }
-    } catch {
-      // show empty state
-    } finally {
-      setLoading(false)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    fetchEntries()
-  }, [fetchEntries])
 
   function handleSubmitted() {
     setSubmitted(true)
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-16">
       {/* CTA */}
       <AnimateIn preset="fade">
         <div className="flex flex-col items-center gap-4 text-center">
           {submitted ? (
-            <p className="text-sm text-green-600 dark:text-green-400">
-              Thanks! Your endorsement is under review and will appear soon.
-            </p>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="rounded-full border border-green-500/20 bg-green-50/50 dark:bg-green-500/10 px-6 py-3 backdrop-blur-md"
+            >
+              <p className="text-sm font-medium text-green-700 dark:text-green-400 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Thanks! Your endorsement is under review and will appear soon.
+              </p>
+            </motion.div>
           ) : (
             <EndorsementDialog onSubmitted={handleSubmitted} />
           )}
@@ -129,23 +155,17 @@ export function GuestbookClient() {
       </AnimateIn>
 
       {/* Endorsement wall */}
-      {loading ? (
-        <AnimateIn preset="fade">
-          <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-12">
-            Loading endorsements...
-          </p>
-        </AnimateIn>
-      ) : entries.length === 0 ? (
+      {entries.length === 0 ? (
         <AnimateIn preset="fade">
           <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-12">
             No endorsements yet. Be the first to leave one!
           </p>
         </AnimateIn>
       ) : (
-        <AnimateInGroup stagger="normal" className="columns-1 gap-4 sm:columns-2">
+        <AnimateInGroup stagger="fast" className="columns-1 gap-6 sm:columns-2">
           {entries.map((entry) => (
-            <div key={entry.id} className="mb-4 break-inside-avoid">
-              <EndorsementCard entry={entry} />
+            <div key={entry.id} className="mb-6 break-inside-avoid">
+              <EndorsementCard entry={entry} locale={locale} />
             </div>
           ))}
         </AnimateInGroup>

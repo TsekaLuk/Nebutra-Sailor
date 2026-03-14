@@ -1,56 +1,56 @@
 {
   "nav": {
-    "features": "功能",
-    "pricing": "定价",
-    "docs": "文档",
+    "features": "产品特性",
+    "pricing": "价格方案",
+    "docs": "技术文档",
     "github": "GitHub",
-    "signIn": "登录",
-    "getStarted": "立即开始"
+    "signIn": "后台登录",
+    "getStarted": "开始使用"
   },
   "hero": {
-    "badge": "AGPLv3 许可 · 生产就绪",
-    "headline1": "快速交付您的 SaaS",
-    "headline2": "以周计，而非月计。",
-    "subheadline": "生产就绪的 Monorepo，内置多租户、AI 基础设施、计费及一切所需。",
-    "copyLabel": "复制",
-    "copiedLabel": "已复制！",
-    "ctaGetStarted": "立即开始",
-    "ctaViewGitHub": "在 GitHub 上查看 →"
+    "badge": "Nebutra Intelligence · 领先的 AI Native 基础设施",
+    "headline1": "构建生产级 AI 产品的",
+    "headline2": "全栈工程底座。",
+    "subheadline": "Nebutra Sailor 是为 AI 创客量身定制的 Next.js SaaS 框架。原生集成 Agent 编排、多模态组件与企业级商业化体系。用可靠的系统工程，将前沿的 AI 构想转化为可扩展的商业产品，而不仅仅是又一个技术演示。",
+    "copyLabel": "复制环境配置",
+    "copiedLabel": "代码已复制",
+    "ctaGetStarted": "立即构建",
+    "ctaViewGitHub": "获取开源仓库 →"
   },
   "features": {
-    "sectionTitle": "从第一天起就为生产环境而生。",
+    "sectionTitle": "从原型验证到亿级并发，我们提供开箱即用的技术栈。",
     "item0": {
-      "title": "原生多租户",
-      "description": "行级安全、组织隔离和租户路由内置于每一层。没有事后拼凑。"
+      "title": "AI Application Infrastructure",
+      "description": "将大型语言模型与 Agent 调度引擎深度工程化。赋能开发者跳过繁琐的底层封装，用结构化的 API 高效调用 AI 能力。"
     },
     "item1": {
-      "title": "AI 原生基础设施",
-      "description": "对 OpenAI、Anthropic 和 Gemini 的提供商抽象。无需更改应用代码即可切换模型。"
+      "title": "开放产品社区 (OPC)",
+      "description": "未来的 AI 软件不再是孤立的信息孤岛。基于 OPC 理念设计的插件标准与开发者网络，帮助产品与社区生态同频共振。"
     },
     "item2": {
-      "title": "计费已就绪",
-      "description": "Stripe 订阅、用量计量和 Webhook 处理 — 生产就绪，非演示版。"
+      "title": "企业级 SaaS 商业化套件",
+      "description": "深度整合 Vercel、Supabase 与 Stripe。原生支持严密的行级数据安全、复杂的多租户隔离与灵活的全球订阅计费中心。"
     }
   },
   "cta": {
-    "heading": "准备好发布了吗？",
-    "subheading": "5 分钟内即可上手。",
+    "heading": "即刻启动您的 AI 原生产品。",
+    "subheading": "通过单一命令，在本地极速初始化完整的云原生与 AI 架构。",
     "copyLabel": "复制",
-    "copiedLabel": "已复制！",
-    "startBuilding": "开始构建"
+    "copiedLabel": "已复制",
+    "startBuilding": "开始使用"
   },
   "footer": {
     "links": {
-      "product": "产品",
-      "docs": "文档",
-      "github": "GitHub",
-      "discord": "Discord"
+      "product": "产品矩阵",
+      "docs": "开发者文档",
+      "github": "开源代码",
+      "discord": "开发者社区"
     },
-    "copyright": "© 2024 Nebutra Intelligence",
-    "statusOnline": "在线"
+    "copyright": "© 2026 无锡云毓智能有限公司 (Nebutra Intelligence). 保留所有权利。",
+    "statusOnline": "全系统运行正常"
   },
   "logoStrip": {
-    "tagline": "基于您信赖的技术栈构建"
+    "tagline": "基于驱动现代互联网底层的顶尖技术构建"
   },
   "legal": {
     "nav": {
@@ -58,259 +58,241 @@
       "contact": "联系我们"
     },
     "footer": {
-      "privacy": "隐私政策",
-      "terms": "服务条款",
-      "cookies": "Cookie 政策",
-      "refund": "退款政策",
-      "copyright": "Nebutra, Inc. 版权所有。"
+      "privacy": "隐私政策要求",
+      "terms": "核心服务条款",
+      "cookies": "数据存储政策",
+      "refund": "商业退款细则",
+      "copyright": "© Nebutra. 保留所有权利。"
     }
   },
   "legalPages": {
     "about": {
-      "title": "关于我们 — Nebutra",
-      "description": "了解Nebutra，我们的使命、价值观以及支撑该开源企业SaaS框架的团队。",
-      "heading": "关于 Nebutra",
-      "subheading": "构建企业SaaS的未来 — 开源、AI原生且生产就绪。",
-      "missionTitle": "我们的使命",
-      "missionP1": "Nebutra的存在是为了消除每个SaaS团队所面临的数月冗余工作。我们认为，最好的方式是先建立一个优秀的基础来构建出色的产品。",
-      "missionP2": "我们的开源框架默认提供多租户、计费、身份验证和AI基础设施，因此团队可以专注于使产品独特之处。",
-      "valuesTitle": "我们的价值观",
+      "title": "关于我们 — Nebutra Intelligence",
+      "description": "了解 Nebutra 的商业愿景以及对构建 AI Native + OPC Infrastructure 解决方案的承诺。",
+      "heading": "公司概况",
+      "subheading": "领先的 AI Native + OPC Infrastructure 解决方案提供商。",
+      "missionTitle": "企业使命",
+      "missionP1": "云毓智能致力于消除从 AI 模型原型到完整商业化产品之间的工程壁垒。我们通过交付标准化的 AI Application Infrastructure 与 SaaS 平台工具，使开发者能够纯粹地聚焦于商业价值的创造，而不必在底层运维上耗费算力。",
+      "missionP2": "我们秉持“开放产品社区”（OPC）的建设理念，深信下一代 AI 产品是优异代码架构、极客文化与庞大开发者阵列的高密度结合体。",
+      "valuesTitle": "核心技术价值观",
       "values": {
         "0": {
-          "title": "开源优先",
-          "description": "我们以开放的方式构建。我们的核心框架采用AGPLv3许可证，始终如此。"
+          "title": "系统级工程化 (Engineering Focus)",
+          "description": "坚持以系统级的工程思维构建软件应用。只向市场输送经得起严苛测试的架构，拒绝脆弱的实验性 Demo。"
         },
         "1": {
-          "title": "生产就绪",
-          "description": "每个功能都经过严格测试。没有演示软件，没有半成品抽象。"
+          "title": "生产即用性 (Production Ready)",
+          "description": "没有任何妥协空间。我们在真实商业环境与高并发场景中淬炼每个系统组件，以保证企业级的持续供能。"
         },
         "2": {
-          "title": "开发体验",
-          "description": "优秀的开发体验并非可选。我们专注于API、文档和错误信息。"
+          "title": "开源驱动创新 (Open Source)",
+          "description": "透明创造信任。我们通过开源基础架构，并允许全网技术专家共同审查和迭代代码逻辑，以驱动架构进化。"
         },
         "3": {
-          "title": "默认安全",
-          "description": "行级安全、加密密钥和审计日志从一开始就内置。"
+          "title": "不可侵犯的安全 (Enterprise Security)",
+          "description": "自建立底层架构的第一行代码起，即默认内置强制的行级别数据访问控制（RLS）、传输加密及全面审计日志。"
         },
         "4": {
-          "title": "社区驱动",
-          "description": "我们的路线图由每天使用Nebutra的开发者塑造。"
+          "title": "开发者性能 (Developer Velocity)",
+          "description": "产品团队的研发效率是第一生产力。我们追求极低的 API 延迟、优雅的代码接口以及结构化的技术指引手册。"
         },
         "5": {
-          "title": "快速发布，频繁迭代",
-          "description": "我们频繁发布，快速迭代，从不让完美成为已发布的敌人。"
+          "title": "持续高速演进 (Continuous Delivery)",
+          "description": "执行敏捷迭代管理策略。通过频繁的测试和微小变更部署，响应社区的需求信号并实现高速的产品架构爬升。"
         }
       },
-      "companyInfoTitle": "公司信息",
+      "companyInfoTitle": "组织与合规信息",
       "companyInfo": {
-        "legalName": "法律名称",
-        "founded": "成立时间",
-        "headquarters": "总部",
-        "jurisdiction": "管辖区"
+        "legalName": "法定实体名称",
+        "founded": "实体注册年份",
+        "headquarters": "全球运营总部",
+        "jurisdiction": "管辖适用法律"
       },
-      "ctaHeading": "想了解更多？",
-      "ctaDescription": "与我们的团队联系，或探索我们的文档。",
-      "ctaButton": "联系我们"
+      "ctaHeading": "期望更深入的探讨？",
+      "ctaDescription": "联系我们的技术团队进行企业级系统集成的评估，或查阅开发者文档。",
+      "ctaButton": "建立通讯"
     },
     "contact": {
-      "title": "联系Nebutra",
-      "description": "与Nebutra团队联系以获取销售、支持、法律或一般咨询。",
-      "heading": "联系我们",
-      "subheading": "我们很乐意与您联系。请在下方联系正确的团队。",
+      "title": "技术与商务联络 — Nebutra Intelligence",
+      "description": "针对商务授权、企业私有化部署以及疑难技术支持的联系通道。",
+      "heading": "建立支持联结",
+      "subheading": "我们将指派对应的技术专员或架构师跟进您的具体需求。",
       "contacts": {
         "general": {
-          "title": "一般咨询",
-          "description": "有关Nebutra、合作伙伴或任何其他问题。"
+          "title": "企业综合咨询",
+          "description": "针对生态战略合作及产品整体演进规划的初步探讨。"
         },
         "sales": {
-          "title": "销售",
-          "description": "定价、企业计划和定制部署。"
+          "title": "商业部署方案",
+          "description": "深入沟通商业闭源授权方案与特定私有化集群环境的部署细节。"
         },
         "support": {
-          "title": "技术支持",
-          "description": "关于集成、问题或技术问题的帮助。"
+          "title": "专家级支持",
+          "description": "为当前业务集成和核心系统调试提供针对性的架构指导与排障服务。"
         },
         "legal": {
-          "title": "法律",
-          "description": "条款、许可和法律事务。"
+          "title": "法务与商业合规",
+          "description": "涉及开源协议边界设定、企业使用合规审查与合同约定解读。"
         },
         "privacy": {
-          "title": "隐私",
-          "description": "数据保护、GDPR和隐私请求。"
+          "title": "数据中心隐私",
+          "description": "GDPR 与国内外其他数据隐私保护法的技术侧验证及遵循规范问题。"
         },
         "security": {
-          "title": "安全",
-          "description": "漏洞报告和安全问题。"
+          "title": "系统安全报告",
+          "description": "向我们的基础设施团队安全地提交针对软件服务潜在漏洞的技术复现报告。"
         }
       },
-      "formTitle": "发送消息",
+      "formTitle": "信息递交口",
       "form": {
-        "name": "姓名",
-        "email": "电子邮件",
-        "company": "公司",
-        "category": "类别",
+        "name": "递交人名称",
+        "email": "官方邮件地址",
+        "company": "所属机构组织",
+        "category": "需求归属领域",
         "categories": {
-          "general": "一般咨询",
-          "sales": "销售",
-          "support": "技术支持",
-          "legal": "法律",
-          "privacy": "隐私",
-          "partnership": "合作伙伴",
-          "press": "媒体"
+          "general": "企业综合咨询",
+          "sales": "商业授权与架构方案",
+          "support": "开发者技术支持",
+          "legal": "法务边界与合规",
+          "privacy": "数据与隐私处理",
+          "partnership": "产品与生态联动",
+          "press": "公关与舆论"
         },
-        "subject": "主题",
-        "message": "消息",
-        "submit": "发送消息",
-        "privacyNotice": "提交此表单即表示您同意我们的",
-        "privacyLink": "隐私政策"
+        "subject": "关键议题提要",
+        "message": "技术或商务考量详情",
+        "submit": "递交后台系统",
+        "privacyNotice": "触发递交动作表明您已阅读并赞同我们的",
+        "privacyLink": "系统化隐私政策",
+        "submitting": "正在进入队列...",
+        "successMessage": "数据流转成功。相关的责任团队将会在 1-2 个基准工作日内予以详实答复。"
       },
-      "companyInfoTitle": "公司信息",
-      "socialMedia": "社交媒体"
+      "companyInfoTitle": "对外运营资讯",
+      "socialMedia": "主流社交链路"
     },
     "cookies": {
-      "title": "Cookie政策 — Nebutra",
-      "description": "了解Nebutra如何在我们的网站和服务上使用cookie和类似技术。",
-      "heading": "Cookie 政策",
-      "effectiveDate": "生效日期",
-      "lastUpdated": "最后更新"
+      "title": "数据留存机制 — Nebutra",
+      "description": "阐述了平台系统如何运用必要的技术存储元件以记录用户特征数据。",
+      "heading": "技术性追踪处理机制",
+      "effectiveDate": "条款强制生效日",
+      "lastUpdated": "末次技术侧修订"
     },
     "faq": {
-      "title": "常见问题 — Nebutra",
-      "description": "关于Nebutra、定价、功能和支持的常见问题。",
-      "heading": "常见问题",
-      "subheading": "找到关于Nebutra的常见问题答案。",
+      "title": "技术指导与应用问答 (FAQ) — Nebutra",
+      "description": "关于系统框架搭建、技术栈原理和商业实施策略的详细说明与解析。",
+      "heading": "执行级深度解析",
+      "subheading": "为系统的工程集成和高管商业决策提供有力支撑的资料。",
       "categories": {
         "0": {
-          "name": "入门指南",
+          "name": "工程架构综述",
           "questions": {
             "0": {
-              "q": "什么是Nebutra Sailor？",
-              "a": "Nebutra Sailor是一个开源的生产就绪SaaS框架，使用Next.js构建，具备多租户、计费、身份验证和AI基础设施。"
+              "q": "Nebutra Sailor 准确的业务作用是什么？",
+              "a": "Nebutra Sailor 是一套高度结构化的生产级 Next.js AI SaaS 基础建设框架。它内置整合了包括企业计费、鉴权认证以及多端隔离在内的微服务能力，让研发团队得以摆脱边缘业务开发负担，直达核心 AI 功能变现环节。"
             },
             "1": {
-              "q": "Nebutra是否免费使用？",
-              "a": "是的，Nebutra Sailor是AGPLv3许可证，免费使用。我们还为希望托管基础设施和高级支持的团队提供托管云计划。"
+              "q": "项目本身的授权许可费用如何界定？",
+              "a": "系统核心组件的架构遵循 AGPLv3 协议向社区完整开源并承诺永久免费。对希望不暴露业务代码及获得深层面系统重构保障的组织机构，则可通过获取高规格商业合同中的闭源授权来保障商业私隐。"
             },
             "2": {
-              "q": "我该如何开始？",
-              "a": "运行我们的CLI命令来创建新项目，然后遵循我们的文档中的快速入门指南。您可以在不到5分钟内完成。"
+              "q": "团队能够多快地验证本产品的商业适用性？",
+              "a": "极其迅捷。借助提供的标准化 CLI 构建工具及严谨的开发规范文档摘要，一名初级网络开发工程师只需数分钟即可构建起本地端的系统最小化运行实例（MVP）。"
             }
           }
         },
         "1": {
-          "name": "定价和计费",
+          "name": "商业运营系统",
           "questions": {
             "0": {
-              "q": "有哪些计划？",
-              "a": "我们提供免费、入门、专业和企业计划。访问我们的定价页面获取详细信息。"
+              "q": "产品对商业扩展的容纳程度是怎样的？",
+              "a": "基于微服务组件模型，系统的承载力可自 Free Tier 无缝扩展至数百万月请求的 Enterprise Level。企业只需在其仪表盘修改资源规模限制要求接口参数。"
             },
             "1": {
-              "q": "我可以随时更改计划吗？",
-              "a": "是的，您可以随时升级或降级您的计划。升级立即生效，降级将在下一次计费周期生效。"
+              "q": "不同层级的订阅变更是怎么反映在财务状态中的？",
+              "a": "我们采用了精确到核心秒的资源用量记录和 API 调用统计。升降级状态的迁移即时在账单系统中结算成按比例退还差额或附加抵扣凭证。技术上不存在变更冷冻期。"
             },
             "2": {
-              "q": "你们提供年度计费吗？",
-              "a": "是的，年度计费在折扣价下提供。联系销售以获取企业定价。"
-            },
-            "3": {
-              "q": "接受哪些付款方式？",
-              "a": "我们通过Stripe接受所有主要信用卡。企业客户可以通过发票支付。"
-            },
-            "4": {
-              "q": "有没有免费试用？",
-              "a": "是的，所有付费计划都包含14天免费试用。无需信用卡。"
+              "q": "结算核心依托哪个处理中心完成验证？",
+              "a": "全球订单流向 Stripe 后端进行符合 PCI-DSS 高安全等级的信息流验证和转账交割。特殊地区可根据商务安排接入企业内部财务合规审计。"
             }
           }
         },
         "2": {
-          "name": "功能与技术",
+          "name": "系统开发层",
           "questions": {
             "0": {
-              "q": "支持哪些AI提供商？",
-              "a": "我们默认支持OpenAI、Anthropic和Google Gemini，通过统一API，您可以轻松更换提供商，无需代码更改。"
+              "q": "预置了对哪些基础模型底盘的支持？",
+              "a": "统一封装的网关层可自动承接针对 OpenAI、Anthropic、 以及 Gemini 数据交互标准规范，并在极低延迟下对数据清洗重包后送至模型推理服务端点。业务侧实现代码层零修改式切换。"
             },
             "1": {
-              "q": "多租户是如何工作的？",
-              "a": "多租户内置在每一层中 — 从Postgres行级安全到中间件基于租户路由和隔离的组织数据。"
+              "q": "面对数据混淆风险系统的表现如何？",
+              "a": "利用 Postgres 内置特性实现行级别数据不可变控制（RLS），搭配基于边缘端点中间件级别的租户解析机制（Tenant Resolution Routing），杜绝应用层逻辑漏洞造成的高危越权和数据意外渗漏现象。"
             },
             "2": {
-              "q": "我可以自己托管Nebutra吗？",
-              "a": "当然可以。Nebutra专为自托管设计。部署到任何支持Node.js和Postgres的平台。"
-            },
-            "3": {
-              "q": "Nebutra使用什么数据库？",
-              "a": "Nebutra使用PostgreSQL（通过Neon或Supabase）并使用Drizzle ORM实现类型安全的数据库访问。"
+              "q": "可以自行主导服务器集群与部署事宜吗？",
+              "a": "毫无约束。本系统组件的设计基准就是面向任意独立云架构，只要部署现场具有健康的 Node.js 和 PostgreSQL 实例，一切即可顺畅运转。"
             }
           }
         },
         "3": {
-          "name": "安全与合规",
+          "name": "系统性安全管理",
           "questions": {
             "0": {
-              "q": "我的数据是否安全？",
-              "a": "是的。我们实施了传输和静态的加密，行级安全，审计日志以及定期的安全评估。"
+              "q": "安全防卫具体落实在什么细节？",
+              "a": "主要落点在：客户端到数据库物理环境全程强制加密传输、针对环境变量和令牌的底层强散列脱敏加密储存，以及所有写访问和特殊行为都会永久刻印在内部时间序列跟踪表单内。"
             },
             "1": {
-              "q": "你们是否符合GDPR？",
-              "a": "是的。我们提供数据导出、删除和同意管理工具，帮助您符合GDPR和其他隐私法规。"
+              "q": "它有针对全球隐私法例作出反应吗？",
+              "a": "非常重视且落到了实处。业务模块预组装了对于数据所有主体请求撤销授权同意（Consent withdraw）、提取与全部清除记录的关键实现功能代码，对标通用数据保护条例 (GDPR)。"
             },
             "2": {
-              "q": "你们有SOC 2认证吗？",
-              "a": "我们目前正在寻求SOC 2 Type II认证。请联系我们获取当前的安全文档。"
-            },
-            "3": {
-              "q": "你们如何处理数据泄露？",
-              "a": "我们有24/7的Discord社区支持。企业支持可在周一至周五，太平洋时间上午9点至下午6点提供。"
+              "q": "事故发生下的企业应对规程是什么？",
+              "a": "依靠自动执行的哨兵检测系统，系统在预警或识别攻击后通过专门渠道上报。工程团队会采取强制阻断并介入诊断，并遵循向利益相关方提供不超过 3 个自然日的全面公开事故通报协议 (Incident Postmortems)。"
             }
           }
         },
         "4": {
-          "name": "支持",
+          "name": "技术支援指引",
           "questions": {
             "0": {
-              "q": "你们提供咨询服务吗？",
-              "a": "是的，我们提供架构审查、定制集成和迁移协助。请联系我们获取详情。"
+              "q": "面对使用瓶颈时如何定位资源？",
+              "a": "首推阅读随版本高度覆盖并经过严格同行校验的基础文档库和社区问答库。购买标准授权及更高等级的企业用户激活优先技术工单队列获取内部支持团队的点对点支援响应。"
             },
             "1": {
-              "q": "支持时间是什么？",
-              "a": "社区支持通过 Discord 全天候提供。付费支持时间为周一至周五，太平洋时间上午 9 点至下午 6 点。"
-            },
-            "2": {
-              "q": "你们提供咨询服务吗？",
-              "a": "是的，我们提供架构审查、自定义集成和迁移协助。详情请联系销售。"
+              "q": "有额外提供的个性化环境配置服务计划吗？",
+              "a": "这处于我们面向高端集团提供的商业覆盖范畴。从对用户既有老旧产品环境进行的源码技术审核、复杂的外部环境迁徙、跨网域验证等深层次要求均会抽调资深实施小组专门负责。"
             }
           }
         }
       },
-      "ctaHeading": "还有问题？",
-      "ctaDescription": "我们的团队很高兴帮助。请直接联系我们。",
-      "ctaButton": "联系Nebutra",
-      "ctaEmail": "邮件支持"
+      "ctaHeading": "需要对接进一步的系统调研工作？",
+      "ctaDescription": "无论是希望深入了解 API 调用范式，或是推进相关合作事宜，都可与执行技术专家联络。",
+      "ctaButton": "获取系统接入指南",
+      "ctaEmail": "投递至专职对接账户"
     },
     "privacy": {
-      "title": "隐私政策 — Nebutra",
-      "description": "了解Nebutra如何收集、使用和保护您的个人资料。",
-      "heading": "隐私政策",
-      "effectiveDate": "生效日期",
-      "lastUpdated": "最后更新"
+      "title": "隐私及信息保护协定 — Nebutra",
+      "description": "详尽透明地剖析公司系统基础设施架构在对个人乃至设备机密数据管控的机制。",
+      "heading": "信息保护及治理细则",
+      "effectiveDate": "约束生效时令",
+      "lastUpdated": "最后编修基线"
     },
     "refund": {
-      "title": "退款政策 — Nebutra",
-      "description": "了解Nebutra的退款政策，包括订阅和服务。",
-      "heading": "退款政策",
-      "effectiveDate": "生效日期",
-      "lastUpdated": "最后更新"
+      "title": "订单结算异常协定 — Nebutra",
+      "description": "严格约束退费及金额返还程序和相关符合执行标准的重要政策规章。",
+      "heading": "执行类订单争端处理框架",
+      "effectiveDate": "正式强制实施日",
+      "lastUpdated": "条文演化追踪时间"
     },
     "terms": {
-      "title": "服务条款 — Nebutra",
-      "description": "阅读使用Nebutra服务的条款和条件。",
-      "heading": "服务条款",
-      "effectiveDate": "生效日期",
-      "lastUpdated": "最后更新"
+      "title": "平台交互条约 — Nebutra",
+      "description": "明晰软件本体使用者及框架供给方互相遵循和履行法条约束边界的协议主体文件。",
+      "heading": "软件供给基础许可范本（Terms）",
+      "effectiveDate": "适用该协定日",
+      "lastUpdated": "官方最后更改发布点"
     }
   },
   "metadata": {
-    "title": "Nebutra Sailor — 开源企业级 SaaS 框架",
-    "description": "以周计交付 SaaS，内置多租户、计费、认证和 AI。生产就绪，AGPLv3 许可。"
+    "title": "Nebutra Intelligence | AI Native与全栈SaaS底层架构",
+    "description": "专为主流 AI 初创公司和企业准备的新一代工程化开发框架。基于高度严密的权限安全标准设计与强大的技术模块封装、提供即装即用的全领域开箱即用商用价值平台赋能。"
   }
 }

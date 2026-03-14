@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";

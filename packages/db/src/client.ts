@@ -1,6 +1,7 @@
 import { PrismaClient } from "./generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import pg from "pg";
+import { logger } from "@nebutra/logger";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -34,7 +35,22 @@ function createPrismaClient(): PrismaClient {
   // Surface pool-level errors without crashing the process — Prisma will
   // propagate the error to the caller through normal query failure paths.
   pool.on("error", (err) => {
-    console.error("[db] Unexpected pool error", err);
+    logger.error("[db] Unexpected pool error", err);
+  });
+
+  // Set PostgreSQL statement_timeout on every new connection.
+  // This prevents runaway queries from holding locks or exhausting the pool.
+  // Override via DB_STATEMENT_TIMEOUT_MS env var (default 30 s).
+  const statementTimeout = parseInt(
+    process.env.DB_STATEMENT_TIMEOUT_MS ?? "30000",
+    10
+  );
+  pool.on("connect", (client) => {
+    client
+      .query(`SET statement_timeout = ${statementTimeout}`)
+      .catch((err: unknown) => {
+        logger.error("[db] Failed to set statement_timeout", err);
+      });
   });
 
   const adapter = new PrismaPg(pool);

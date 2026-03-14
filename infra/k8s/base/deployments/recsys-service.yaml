@@ -22,6 +22,7 @@ spec:
         app.kubernetes.io/name: recsys-service
         app.kubernetes.io/component: service
     spec:
+      serviceAccountName: recsys-service
       terminationGracePeriodSeconds: 30
       containers:
         - name: recsys-service

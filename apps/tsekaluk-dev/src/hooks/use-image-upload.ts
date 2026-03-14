@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
+const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB — matches server limit in /api/guestbook/avatar
+const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"]
+
 interface UseImageUploadProps {
   onUpload?: (url: string) => void;
 }
@@ -18,6 +21,8 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
       if (file) {
+        if (file.size > MAX_FILE_SIZE) return;
+        if (!ALLOWED_MIME_TYPES.includes(file.type)) return;
         setFileName(file.name);
         const url = URL.createObjectURL(file);
         setPreviewUrl(url);

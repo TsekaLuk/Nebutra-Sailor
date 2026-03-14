@@ -1,0 +1,84 @@
+name: Load Test
+
+on:
+  # Run weekly on Monday 02:00 UTC (off-peak hours)
+  schedule:
+    - cron: "0 2 * * 1"
+  # Allow manual trigger with scenario selection
+  workflow_dispatch:
+    inputs:
+      scenario:
+        description: "k6 scenario to run"
+        required: true
+        default: "ramp-up"
+        type: choice
+        options: [smoke, ramp-up, stress, soak]
+      base_url:
+        description: "Target API base URL"
+        required: false
+        default: "https://api.nebutra.ai"
+
+permissions:
+  contents: read
+  # For uploading results to GitHub Actions artifacts
+  actions: write
+
+jobs:
+  load-test:
+    name: k6 Load Test (${{ inputs.scenario || 'ramp-up' }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 90  # accommodate 1h soak test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install k6
+        run: |
+          sudo gpg -k
+          sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg \
+            --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" \
+            | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install -y k6
+
+      - name: Create results directory
+        run: mkdir -p tests/load/results
+
+      - name: Run k6 load test
+        run: |
+          k6 run \
+            --env SCENARIO=${{ inputs.scenario || 'ramp-up' }} \
+            --env BASE_URL=${{ inputs.base_url || 'https://api.nebutra.ai' }} \
+            --env API_TOKEN=${{ secrets.LOAD_TEST_API_TOKEN }} \
+            --out json=tests/load/results/raw.json \
+            tests/load/k6.js
+        env:
+          K6_CLOUD_TOKEN: ${{ secrets.K6_CLOUD_TOKEN }}
+
+      - name: Upload k6 results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: k6-results-${{ inputs.scenario || 'ramp-up' }}-${{ github.run_id }}
+          path: tests/load/results/
+          retention-days: 90
+
+      - name: Comment results on PR (if triggered manually)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "### k6 Load Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Scenario:** ${{ inputs.scenario || 'ramp-up' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Target:** ${{ inputs.base_url || 'https://api.nebutra.ai' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f tests/load/results/summary.json ]; then
+            echo '```json' >> $GITHUB_STEP_SUMMARY
+            cat tests/load/results/summary.json | python3 -c "
+          import json, sys
+          d = json.load(sys.stdin)
+          print(json.dumps(d, indent=2))
+            " >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi

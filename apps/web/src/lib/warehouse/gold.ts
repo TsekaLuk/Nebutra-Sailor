@@ -111,6 +111,7 @@ FORMAT JSON
       headers: { "content-type": "text/plain" },
       body: sql,
       cache: "no-store",
+      signal: AbortSignal.timeout(10_000),
     });
 
     if (!response.ok) {
@@ -142,4 +143,69 @@ export async function getGrowthSummary(tenantId?: string): Promise<GrowthSummary
 
   const resolvedTenant = sanitizeTenantId(rawTenant);
   return getCachedGrowthSummary(resolvedTenant);
+}
+
+// ── Time-series (last N days) ─────────────────────────────────────────────────
+
+async function fetchGrowthTimeSeries(
+  tenantId: string,
+  days: number,
+): Promise<GrowthSummary[]> {
+  const database = sanitizeDatabaseName(process.env.CLICKHOUSE_DATABASE);
+  const clickhouseUrl = buildClickHouseUrl();
+  clickhouseUrl.searchParams.set("param_tenant_id", tenantId);
+
+  const sql = `
+SELECT
+  tenant_id,
+  toString(day) AS day,
+  signups,
+  activations,
+  conversions,
+  revenue,
+  active_users,
+  total_events
+FROM ${database}.growth_metrics_daily
+WHERE tenant_id = {tenant_id:String}
+  AND day >= today() - ${days}
+ORDER BY day ASC
+FORMAT JSON
+`.trim();
+
+  try {
+    const response = await fetch(clickhouseUrl, {
+      method: "POST",
+      headers: { "content-type": "text/plain" },
+      body: sql,
+      cache: "no-store",
+      signal: AbortSignal.timeout(10_000),
+    });
+
+    if (!response.ok) return [];
+
+    const payload = (await response.json()) as ClickHouseJsonResponse;
+    return (payload.data ?? []).map(toGrowthSummary);
+  } catch {
+    return [];
+  }
+}
+
+const getCachedGrowthTimeSeries = unstable_cache(
+  async (tenantId: string, days: number) =>
+    fetchGrowthTimeSeries(tenantId, days),
+  ["growth-time-series-v1"],
+  { revalidate: 300, tags: ["growth-time-series"] },
+);
+
+export async function getGrowthTimeSeries(
+  tenantId?: string,
+  days = 30,
+): Promise<GrowthSummary[]> {
+  const rawTenant =
+    (tenantId && tenantId.trim()) ||
+    process.env.DEFAULT_DASHBOARD_TENANT_ID ||
+    DEFAULT_DASHBOARD_TENANT;
+
+  const resolvedTenant = sanitizeTenantId(rawTenant);
+  return getCachedGrowthTimeSeries(resolvedTenant, days);
 }

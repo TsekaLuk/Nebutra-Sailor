@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Hero } from "@/components/sections/hero";
 import { TechMarquee } from "@/components/sections/tech-marquee";
+import { GithubMetrics } from "@/components/ui/github-metrics";
 import { FocusSection } from "@/components/sections/focus-section";
 import { ProcessSection } from "@/components/sections/process-section";
 import { SelectedWorks } from "@/components/sections/selected-works";
 import { ConstellationSection } from "@/components/sections/constellation-section";
 import { PricingSection } from "@/components/sections/pricing-section";
 import { NowPreview } from "@/components/sections/now-preview";
-import { CtaSection } from "@/components/sections/cta-section";
-import { LatestThinking } from "@/components/sections/latest-thinking";
 import { getLocalizedProjects } from "@/lib/projects";
-import { getArticles } from "@/lib/articles";
 
 const BASE_URL = "https://tsekaluk.dev";
 
@@ -63,20 +62,35 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   const localizedProjects = await getLocalizedProjects(locale);
-  const articles = getArticles();
 
   return (
     <>
       <Hero />
-      <LatestThinking articles={articles} />
-      <TechMarquee />
+      <TechMarquee>
+        <Suspense
+          fallback={
+            <div className="mt-12 w-full">
+              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-100 dark:divide-white/[0.05]">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="flex flex-col items-center justify-center gap-0 py-10 px-6">
+                    <div className="h-14 w-24 rounded-md bg-gray-100 dark:bg-gray-800 animate-pulse" />
+                    <div className="mt-4 h-3 w-16 rounded bg-gray-100 dark:bg-gray-800 animate-pulse" />
+                    <div className="mt-1 h-2.5 w-20 rounded bg-gray-100 dark:bg-gray-800 animate-pulse" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          }
+        >
+          <GithubMetrics />
+        </Suspense>
+      </TechMarquee>
       <FocusSection />
       <ProcessSection />
       <SelectedWorks projects={localizedProjects} />
       <ConstellationSection />
       <PricingSection />
       <NowPreview />
-      <CtaSection />
     </>
   );
 }

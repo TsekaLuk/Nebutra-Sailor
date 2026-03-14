@@ -175,3 +175,56 @@ export const FLAGS = {
 } as const;
 
 export type FeatureFlag = (typeof FLAGS)[keyof typeof FLAGS];
+
+// ============================================
+// Hono Middleware Factory
+// ============================================
+
+/**
+ * Returns a Hono middleware that gates a route behind a feature flag.
+ *
+ * The tenant context (userId, tenantId, plan) is read from `c.get("tenant")`
+ * if it has been populated by tenantContextMiddleware upstream.
+ *
+ * @param flag - Feature flag name (use `FLAGS.*` constants for type safety)
+ * @param options.onDisabled - Optional custom response when flag is off.
+ *   Defaults to 403 JSON error.
+ *
+ * @example
+ * import { featureFlagMiddleware, FLAGS } from "@nebutra/feature-flags";
+ *
+ * app.use("/api/v1/ai/vision/*", featureFlagMiddleware(FLAGS.AI_VISION));
+ */
+export function featureFlagMiddleware(
+  flag: string,
+  options: {
+    onDisabled?: (c: unknown) => unknown;
+  } = {},
+) {
+  return async (c: {
+    get: (key: string) => { userId?: string; organizationId?: string; plan?: string } | undefined;
+    json: (body: unknown, status?: number) => unknown;
+  }, next: () => Promise<void>) => {
+    const tenant = c.get("tenant") as { userId?: string; organizationId?: string; plan?: string } | undefined;
+
+    const context: FeatureFlagContext = {
+      userId: tenant?.userId,
+      tenantId: tenant?.organizationId,
+      plan: tenant?.plan as FeatureFlagContext["plan"],
+    };
+
+    const enabled = await isFeatureEnabled(flag, context);
+
+    if (!enabled) {
+      if (options.onDisabled) {
+        return options.onDisabled(c);
+      }
+      return (c as { json: (body: unknown, status: number) => unknown }).json(
+        { error: "Feature not available", feature: flag },
+        403,
+      );
+    }
+
+    return next();
+  };
+}

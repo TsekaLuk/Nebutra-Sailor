@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main, develop]
 
+permissions:
+  contents: read
+  pull-requests: read
+  security-events: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -19,6 +24,7 @@ jobs:
   detect-changes:
     name: Detect Changed Apps
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       web: ${{ steps.filter.outputs.web }}
       api-gateway: ${{ steps.filter.outputs.api-gateway }}
@@ -30,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
         id: filter
         with:
           filters: |
@@ -58,6 +64,7 @@ jobs:
   commitlint:
     name: Lint Commit Messages
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout
@@ -84,6 +91,7 @@ jobs:
   lint-typecheck:
     name: Lint & Typecheck
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -104,7 +112,6 @@ jobs:
 
       - name: Architecture smoke checks
         run: |
-          python3 -m compileall -q services
           pnpm test:arch
 
       - name: Generate Prisma Client
@@ -131,10 +138,60 @@ jobs:
       - name: Typecheck (affected)
         run: pnpm turbo typecheck --filter="...[${TURBO_BASE_REF}]..."
 
+  # ── Python services — lint + test (matrix, parallel) ──────────────────────
+  python-ci:
+    name: Python CI (${{ matrix.service }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [ai, billing, content, ecommerce, event-ingest, recsys, web3]
+    defaults:
+      run:
+        working-directory: services/${{ matrix.service }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c6ebb0acf3c7 # v5
+        with:
+          version: "0.5.x"
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies (including dev)
+        run: uv pip install --system -r requirements.txt ruff pytest pytest-asyncio mypy bandit
+
+      - name: Lint (ruff)
+        run: ruff check . --output-format=github
+
+      - name: Format check (ruff)
+        run: ruff format --check .
+
+      - name: Type check (mypy)
+        run: mypy . --ignore-missing-imports --no-error-summary || true
+
+      - name: Security check (bandit)
+        run: |
+          bandit -r . -x ./tests -f json -o bandit-report.json --severity-level medium || true
+          # Fail only on high-severity findings
+          bandit -r . -x ./tests --severity-level high -q
+
+      - name: Run tests
+        run: |
+          if [ -d "tests" ]; then
+            pytest --tb=short -q --cov --cov-report=term-missing --cov-fail-under=70
+          else
+            echo "No tests directory — skipping"
+          fi
+
   # ── Build (affected packages only) ──────────────────────────────────────
   build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: lint-typecheck
     steps:
       - name: Checkout
@@ -181,6 +238,7 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: lint-typecheck
     steps:
       - name: Checkout
@@ -223,6 +281,7 @@ jobs:
   coverage:
     name: Coverage Gate
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: [detect-changes, test]
     if: needs.detect-changes.outputs.packages == 'true'
     steps:
@@ -251,10 +310,44 @@ jobs:
         env:
           CI: true
 
+  # ── Bundle size budget ───────────────────────────────────────────────────
+  # Measures built package sizes against .size-limit.json thresholds.
+  # Runs only when shared packages change (avoids expensive builds on app-only changes).
+  bundle-size:
+    name: Bundle Size Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [detect-changes, build]
+    if: needs.detect-changes.outputs.packages == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build shared packages
+        run: pnpm turbo build --filter="./packages/*"
+        env:
+          SKIP_ENV_VALIDATION: true
+
+      - name: Check bundle sizes
+        run: pnpm size
+
   # ── Database schema validation (only when db/ changed) ──────────────────
   db-check:
     name: Database Schema Check
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: detect-changes
     if: needs.detect-changes.outputs.db == 'true'
     steps:
@@ -274,12 +367,28 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Validate Prisma schema
-        run: pnpm db:generate
+        run: pnpm --filter @nebutra/db db:generate
+
+      - name: Validate Prisma schema syntax
+        working-directory: packages/db
+        run: pnpm exec prisma validate
+
+      - name: Check migration history is consistent
+        working-directory: packages/db
+        # prisma migrate diff exits non-zero if schema is ahead of migrations —
+        # catches "forgot to create a migration" before it reaches production.
+        run: |
+          pnpm exec prisma migrate diff \
+            --from-migrations ./prisma/migrations \
+            --to-schema-datamodel ./prisma/schema.prisma \
+            --shadow-database-url "${{ secrets.SHADOW_DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/shadow_nebutra' }}" \
+            --exit-code || echo "::warning::Schema has drift vs migrations — run prisma migrate dev"
 
   # ── Security scanning ────────────────────────────────────────────────────
   security:
     name: Security Scan
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -364,15 +473,20 @@ jobs:
           SKIP_ENV_VALIDATION: true
 
       - name: Run Lighthouse CI
-        run: npx @lhci/cli@0.14.x autorun
+        run: npx @lhci/cli@0.14.0 autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
-  # ── E2E Tests ─────────────────────────────────────────────────────────────
+  # ── E2E Tests (sharded 4× for parallelism) ───────────────────────────────
   e2e:
-    name: E2E Tests
+    name: E2E Tests (shard ${{ matrix.shard }}/4)
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: [build]
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
@@ -391,7 +505,158 @@ jobs:
             playwright-${{ runner.os }}-
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
-      - name: Run E2E tests
-        run: pnpm turbo run e2e
+      - name: Run E2E tests (shard ${{ matrix.shard }}/4)
+        run: pnpm exec playwright test --shard=${{ matrix.shard }}/4
         env:
           CI: true
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-shard-${{ matrix.shard }}-${{ github.run_id }}
+          path: |
+            **/playwright-report/
+            **/test-results/
+          retention-days: 14
+
+  # ── OpenAPI spec validation + client type generation ─────────────────────
+  # Exports the live spec from the Hono app, validates it with Redocly,
+  # and regenerates the openapi-fetch types to catch spec/client drift.
+  # Runs only when api-gateway or web changed.
+  openapi-validate:
+    name: OpenAPI Spec Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [detect-changes, build]
+    if: |
+      needs.detect-changes.outputs.api-gateway == 'true' ||
+      needs.detect-changes.outputs.web == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build api-gateway
+        run: pnpm --filter @nebutra/api-gateway build
+        env:
+          SKIP_ENV_VALIDATION: true
+
+      - name: Export OpenAPI spec
+        run: pnpm --filter @nebutra/api-gateway generate:spec
+        env:
+          DATABASE_URL: "postgresql://stub:stub@localhost:5432/stub"
+          REDIS_URL: "redis://localhost:6379"
+          CLERK_SECRET_KEY: "sk_test_stub"
+
+      - name: Validate spec with Redocly
+        run: pnpm --filter @nebutra/api-gateway exec redocly lint openapi.json --format=stylish
+
+      - name: Generate typed API client
+        run: pnpm --filter @nebutra/web generate:api-types
+
+      - name: Typecheck web with generated types
+        run: pnpm --filter @nebutra/web typecheck
+        env:
+          SKIP_ENV_VALIDATION: true
+
+      - name: Upload spec artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openapi-spec-${{ github.run_id }}
+          path: apps/api-gateway/openapi.json
+          retention-days: 7
+
+  # ── Web app bundle analysis (PRs only) ───────────────────────────────────
+  # Builds the web app with @next/bundle-analyzer and uploads the report.
+  # Does NOT block the PR — purely informational for size regression tracking.
+  bundle-analysis:
+    name: Web Bundle Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [detect-changes, build]
+    if: |
+      github.event_name == 'pull_request' &&
+      (needs.detect-changes.outputs.web == 'true' || needs.detect-changes.outputs.packages == 'true')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build web app with bundle analyzer
+        run: pnpm --filter @nebutra/web build
+        env:
+          ANALYZE: "true"
+          SKIP_ENV_VALIDATION: true
+
+      - name: Upload bundle analysis report
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-analysis-${{ github.run_id }}
+          path: apps/web/.next/analyze/
+          retention-days: 30
+
+      - name: Comment PR with bundle analysis link
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## Bundle Analysis\n\nBundle analysis report uploaded. [View artifacts](${runUrl})\n\n> \`client.html\` — client bundle treemap\n> \`edge.html\` — edge runtime bundle`,
+            });
+
+  # ── Merge E2E shard reports ───────────────────────────────────────────────
+  e2e-report:
+    name: Merge E2E Reports
+    runs-on: ubuntu-latest
+    needs: [e2e]
+    if: always()
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Download all shard reports
+        uses: actions/download-artifact@v4
+        with:
+          pattern: playwright-report-shard-*-${{ github.run_id }}
+          path: all-blob-reports
+          merge-multiple: true
+      - name: Merge into single HTML report
+        run: pnpm exec playwright merge-reports --reporter html ./all-blob-reports
+      - name: Upload merged report
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-merged-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 30

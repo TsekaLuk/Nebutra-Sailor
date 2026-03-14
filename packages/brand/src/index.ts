@@ -62,6 +62,12 @@ export type {
   BrandGuidelines,
 } from "./guidelines";
 
+// Product Positioning DNA (产品定位)
+export {
+  positioning,
+} from "./positioning";
+export type { Positioning, ProductPillar, UseCase } from "./positioning";
+
 // Brand Motion Language (品牌运动语言)
 export {
   brandMotion,

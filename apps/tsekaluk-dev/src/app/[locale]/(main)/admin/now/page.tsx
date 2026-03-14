@@ -46,7 +46,7 @@ export default function AdminNowPage() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch("/api/now")
+      const res = await fetch("/api/now", { signal: AbortSignal.timeout(15_000) })
       const json = await res.json()
       if (json.success && json.data) {
         const e: NowEntry = json.data
@@ -87,11 +87,13 @@ export default function AdminNowPage() {
         ? await fetch("/api/now", {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
+            signal: AbortSignal.timeout(15_000),
             body: JSON.stringify({ id: entry.id, ...payload }),
           })
         : await fetch("/api/now", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            signal: AbortSignal.timeout(15_000),
             body: JSON.stringify(payload),
           })
 

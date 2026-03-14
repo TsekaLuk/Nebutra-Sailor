@@ -196,6 +196,69 @@ jobs:
           echo "=== Deployment summary for namespace: $NAMESPACE ==="
           kubectl get deployments --namespace "$NAMESPACE" || true
 
+      # ── Smoke tests ───────────────────────────────────────────────────────────
+      # After rollout, hit public health/readiness endpoints to verify the
+      # deployment is actually serving traffic.  Fails the job (and triggers
+      # Slack failure notification) if any check returns non-2xx.
+      #
+      # URL mapping (from infra/k8s/base/ingress):
+      #   staging → *.staging.nebutra.com
+      #   prod    → *.nebutra.com
+      - name: Smoke test — API Gateway
+        run: |
+          if [ "$DEPLOY_ENV" = "prod" ]; then
+            BASE="https://api.nebutra.com"
+          else
+            BASE="https://api.$DEPLOY_ENV.nebutra.com"
+          fi
+
+          echo "Smoke testing $BASE/health …"
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "$BASE/health" 2>/dev/null || echo "000")
+            if [ "$STATUS" = "200" ]; then
+              echo "✅ /health returned 200"
+              break
+            fi
+            echo "Attempt $i: /health returned $STATUS, retrying in 10s …"
+            sleep 10
+          done
+          [ "$STATUS" = "200" ] || (echo "❌ Smoke test failed: $BASE/health" && exit 1)
+
+      - name: Smoke test — Landing Page
+        run: |
+          if [ "$DEPLOY_ENV" = "prod" ]; then
+            BASE="https://nebutra.com"
+          else
+            BASE="https://$DEPLOY_ENV.nebutra.com"
+          fi
+
+          echo "Smoke testing $BASE …"
+          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "$BASE" 2>/dev/null || echo "000")
+          if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
+            echo "✅ Landing page returned $STATUS"
+          else
+            echo "❌ Smoke test failed: $BASE returned $STATUS"
+            exit 1
+          fi
+
+      - name: Smoke test — Web App
+        run: |
+          if [ "$DEPLOY_ENV" = "prod" ]; then
+            BASE="https://app.nebutra.com"
+          else
+            BASE="https://app.$DEPLOY_ENV.nebutra.com"
+          fi
+
+          echo "Smoke testing $BASE …"
+          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "$BASE" 2>/dev/null || echo "000")
+          # Expect 200 (logged-out landing) or 307/302 (redirect to sign-in)
+          if echo "$STATUS" | grep -qE "^(200|301|302|307)$"; then
+            echo "✅ Web app returned $STATUS"
+          else
+            echo "❌ Smoke test failed: $BASE returned $STATUS"
+            exit 1
+          fi
+
       # ── Slack notification ────────────────────────────────────────────────────
       # Only runs when SLACK_WEBHOOK_URL secret is configured.
       # Sends a success or failure notification with deployment details.

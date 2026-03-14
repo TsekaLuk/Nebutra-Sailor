@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
+import { ContactForm } from "./ContactForm";
 
 export async function generateMetadata({
   params,
@@ -105,140 +105,7 @@ export default async function ContactPage({
         <h2 className="text-2xl font-bold text-[var(--neutral-12)] dark:text-white mb-6">
           {t("contact.formTitle")}
         </h2>
-        <form className="space-y-6">
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-[var(--neutral-11)]"
-              >
-                {t("contact.form.name")} *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-[var(--neutral-11)]"
-              >
-                {t("contact.form.email")} *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
-              />
-            </div>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div>
-              <label
-                htmlFor="company"
-                className="block text-sm font-medium text-[var(--neutral-11)]"
-              >
-                {t("contact.form.company")}
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="category"
-                className="block text-sm font-medium text-[var(--neutral-11)]"
-              >
-                {t("contact.form.category")} *
-              </label>
-              <select
-                id="category"
-                name="category"
-                required
-                className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
-              >
-                <option value="general">
-                  {t("contact.form.categories.general")}
-                </option>
-                <option value="sales">
-                  {t("contact.form.categories.sales")}
-                </option>
-                <option value="support">
-                  {t("contact.form.categories.support")}
-                </option>
-                <option value="legal">
-                  {t("contact.form.categories.legal")}
-                </option>
-                <option value="privacy">
-                  {t("contact.form.categories.privacy")}
-                </option>
-                <option value="partnership">
-                  {t("contact.form.categories.partnership")}
-                </option>
-                <option value="press">
-                  {t("contact.form.categories.press")}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label
-              htmlFor="subject"
-              className="block text-sm font-medium text-[var(--neutral-11)]"
-            >
-              {t("contact.form.subject")} *
-            </label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              required
-              className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium text-[var(--neutral-11)]"
-            >
-              {t("contact.form.message")} *
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={5}
-              required
-              className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:ring-[color:var(--blue-8)] dark:text-white"
-            />
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="w-full rounded-[var(--radius-lg)] bg-[color:var(--blue-9)] px-6 py-3 font-semibold text-white transition hover:bg-[color:var(--blue-10)] focus:outline-none focus:ring-2 focus:ring-[color:var(--blue-8)] focus:ring-offset-2"
-            >
-              {t("contact.form.submit")}
-            </button>
-          </div>
-          <p className="text-sm text-[var(--neutral-9)]">
-            {t("contact.form.privacyNotice")}{" "}
-            <Link
-              href="/privacy"
-              className="text-[color:var(--blue-11)] hover:underline dark:text-[color:var(--blue-9)]"
-            >
-              {t("contact.form.privacyLink")}
-            </Link>
-            .
-          </p>
-        </form>
+        <ContactForm />
       </section>
 
       {/* Office Info */}
@@ -249,10 +116,12 @@ export default async function ContactPage({
         <div className="space-y-4 text-[var(--neutral-10)]">
           <div>
             <h3 className="font-semibold text-[var(--neutral-12)] dark:text-white">
-              Nebutra, Inc.
+              无锡云毓智能科技有限公司
             </h3>
-            <p>San Francisco, California</p>
-            <p>United States</p>
+            <p className="text-sm text-[var(--neutral-10)]">
+              Wuxi Nebutra Intelligent Technology Co., Ltd.
+            </p>
+            <p>无锡市，江苏省，中国</p>
           </div>
           <div>
             <h3 className="font-semibold text-[var(--neutral-12)] dark:text-white">

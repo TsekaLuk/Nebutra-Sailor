@@ -4,6 +4,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { websiteJsonLd } from "@/lib/json-ld";
+import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
   title: {
@@ -33,7 +34,6 @@ export const metadata: Metadata = {
     creator: "@tseka_luk",
   },
   other: {
-    "theme-color": "#ffffff",
     "color-scheme": "light dark",
   },
   alternates: {
@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     languages: {
       en: "https://tsekaluk.dev/en",
       zh: "https://tsekaluk.dev/zh",
+      ja: "https://tsekaluk.dev/ja",
     },
     types: {
       "application/rss+xml": "https://tsekaluk.dev/rss.xml",
@@ -57,7 +58,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as "en" | "zh")) {
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
 
@@ -69,7 +70,9 @@ export default async function LocaleLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
       />
-      {children}
+      <Providers>
+        {children}
+      </Providers>
     </NextIntlClientProvider>
   );
 }

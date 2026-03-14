@@ -2,11 +2,15 @@ import { serve } from "inngest/hono";
 import { inngest } from "./client.js";
 import { syncUserToDB, deleteUserFromDB } from "./functions/userSync.js";
 import { processBillingEvent } from "./functions/billingSync.js";
+import { processGdprDeletion } from "./functions/gdprDeletion.js";
+import { provisionTenant } from "./functions/tenantProvisioning.js";
 
 export const inngestFunctions = [
   syncUserToDB,
   deleteUserFromDB,
   processBillingEvent,
+  processGdprDeletion,
+  provisionTenant,
 ];
 export { inngest };
 

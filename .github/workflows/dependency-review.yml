@@ -1,0 +1,37 @@
+name: Dependency Review
+
+# Checks new dependencies introduced in PRs for known vulnerabilities.
+# Blocks merge on High/Critical CVEs; warns on Medium.
+#
+# Requires: GitHub Advanced Security or public repo.
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+  pull-requests: write
+  security-events: write
+
+jobs:
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          # Block on High/Critical — warn on Medium/Low
+          fail-on-severity: high
+          # Allow GPL-licensed packages (monorepo template, not shipping a product)
+          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, CC0-1.0, Unlicense, LGPL-2.1, LGPL-3.0, GPL-2.0, GPL-3.0, MPL-2.0, AGPL-3.0
+          # Comment a summary on the PR
+          comment-summary-in-pr: always
+          # Warn about packages not in the license allowlist
+          warn-only: false

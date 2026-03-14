@@ -15,19 +15,26 @@ interface Entry {
   resetAt: number
 }
 
+// NOTE: Uses in-memory storage — rate limits are per-instance.
+// For multi-instance / serverless deployments, migrate to a shared store (e.g. Upstash Redis).
+//
+// No setInterval — cleanup happens opportunistically on every lookup to avoid
+// timer leaks in serverless environments where intervals never fire.
+const MAX_MAP_SIZE = 5_000
+
 export function createRateLimiter(windowMs: number, maxRequests: number) {
   const map = new Map<string, Entry>()
-
-  setInterval(() => {
-    const now = Date.now()
-    for (const [key, entry] of map) {
-      if (now >= entry.resetAt) map.delete(key)
-    }
-  }, windowMs)
 
   return function check(key: string): RateLimitCheck {
     const now = Date.now()
     const entry = map.get(key)
+
+    // Opportunistic cleanup when map grows large
+    if (map.size > MAX_MAP_SIZE) {
+      for (const [k, e] of map) {
+        if (now >= e.resetAt) map.delete(k)
+      }
+    }
 
     if (!entry || now >= entry.resetAt) {
       map.set(key, { count: 1, resetAt: now + windowMs })

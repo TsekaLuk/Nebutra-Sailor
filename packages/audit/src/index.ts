@@ -8,6 +8,8 @@
  * - Billing verification
  */
 
+import { logger } from "@nebutra/logger";
+
 export type AuditAction =
   | "user.login"
   | "user.logout"
@@ -197,9 +199,8 @@ export async function audit(event: Omit<AuditEvent, "id" | "timestamp">): Promis
   try {
     await storage.store(fullEvent);
   } catch (error) {
-    // Log to console as fallback, but don't throw
-    console.error("Audit log storage failed:", error);
-    console.log("Audit event (fallback):", JSON.stringify(fullEvent));
+    // Log via structured logger as fallback, but don't throw
+    logger.error("Audit log storage failed", error, { event: fullEvent });
   }
 }
 

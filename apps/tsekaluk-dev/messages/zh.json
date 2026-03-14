@@ -150,7 +150,7 @@
           "6 条服务线全部解锁",
           "按需组合交付"
         ],
-        "cta": "联系我",
+        "cta": "抛出橄榄枝",
         "href": "mailto:contact@tsekaluk.dev?subject=Hire"
       },
       "partner": {
@@ -356,10 +356,6 @@
       "beliefs_label": "/ 我相信的事",
       "belief_1": "那些疯狂到认为自己能改变世界的人，最终真的改变了世界。",
       "belief_1_credit": "— Steve Jobs",
-      "belief_2": "知识在分享中复利增长。人类文明中最伟大的成就，都是集体智慧的结晶。",
-      "belief_3": "速度是产品特性。快速交付不是偷工减料——是尊重用户的时间。",
-      "belief_4": "AI 是协作者，不是工具。这个区别决定了你如何与它一起构建。",
-      "belief_5": "简洁是刻意的选择。每个功能都应该赢得它的位置，否则就该被砍掉。",
       "life_label": "/ 生活",
       "life_music": "音乐",
       "life_philosophy": "哲学",

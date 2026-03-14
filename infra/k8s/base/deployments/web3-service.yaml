@@ -22,6 +22,7 @@ spec:
         app.kubernetes.io/name: web3-service
         app.kubernetes.io/component: service
     spec:
+      serviceAccountName: web3-service
       terminationGracePeriodSeconds: 30
       containers:
         - name: web3-service

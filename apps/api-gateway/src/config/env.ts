@@ -25,6 +25,17 @@ const envSchema = z.object({
   INNGEST_EVENT_KEY: z.string().optional(),
   INNGEST_SIGNING_KEY: z.string().optional(),
 
+  // Sentry (optional — disabled when absent)
+  SENTRY_DSN: z.string().url().optional(),
+  SENTRY_RELEASE: z.string().optional(),
+
+  // Email / Resend
+  RESEND_API_KEY: z.string().optional(),
+  EMAIL_FROM: z.string().optional(),
+
+  // Admin API (min 32 chars; generate with: openssl rand -hex 32)
+  ADMIN_API_KEY: z.string().min(32).optional(),
+
   // Service URLs
   AI_SERVICE_URL: z.string().optional(),
   CONTENT_SERVICE_URL: z.string().optional(),
@@ -63,8 +74,8 @@ export function validateEnv(): Env {
   const result = envSchema.safeParse(process.env);
 
   if (!result.success) {
-    console.error("❌ Invalid environment variables:");
-    console.error(result.error.format());
+    process.stderr.write("❌ Invalid environment variables:\n");
+    process.stderr.write(JSON.stringify(result.error.format(), null, 2) + "\n");
     throw new Error("Invalid environment variables");
   }
 

@@ -13,6 +13,7 @@ export async function generateMetadata({
   return {
     title: t("metadata_title"),
     description: t("metadata_desc"),
+    robots: { index: false, follow: false },
     openGraph: {
       images: [
         `/og?title=${encodeURIComponent(t("metadata_title"))}&subtitle=${encodeURIComponent(t("metadata_desc"))}`,
@@ -23,6 +24,7 @@ export async function generateMetadata({
       languages: {
         en: "https://tsekaluk.dev/en/soul",
         zh: "https://tsekaluk.dev/zh/soul",
+        ja: "https://tsekaluk.dev/ja/soul",
       },
     },
   };
@@ -37,31 +39,28 @@ export default async function SoulPage({
   const t = await getTranslations({ locale, namespace: "soul" });
 
   return (
-    <section className="mx-auto max-w-2xl px-6 py-12 md:py-16">
+    <section className="mx-auto w-full max-w-5xl px-6 py-12 md:py-24 flex flex-col min-h-[calc(100vh-8rem)]">
       {/* Page header */}
-      <div className="mb-8">
-        <p className="mb-3 text-xs font-medium uppercase tracking-widest text-[var(--color-accent-fg)] opacity-70">
+      <div className="mb-12">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-foreground/50">
           {t("page_label")}
         </p>
-        <div className="flex items-center gap-3">
-          <h1 className="font-serif text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+        <div className="flex items-baseline gap-4 mb-3">
+          <h1 className="font-sans text-3xl font-semibold tracking-tight text-foreground md:text-5xl">
             {t("page_headline")}
           </h1>
-          <span className="font-mono flex items-center gap-2 text-[10px] uppercase tracking-widest text-[var(--color-accent-fg)]">
-            <span className="animate-pulse">{">_"}</span>
+          <span className="font-mono flex items-center gap-2 text-[10px] uppercase tracking-widest text-foreground/50">
+            <span className="animate-[pulse_1s_steps(2,start)_infinite] opacity-60">{">_"}</span>
             {t("status")}
           </span>
         </div>
-        <p className="mt-3 max-w-lg text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+        <p className="max-w-2xl text-base text-muted-foreground leading-relaxed">
           {t("page_desc")}
         </p>
       </div>
 
       {/* Chat container */}
-      <div
-        className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-950"
-        style={{ height: "min(600px, calc(100vh - 320px))" }}
-      >
+      <div className="flex-1 w-full relative">
         <ChatInterface />
       </div>
     </section>

@@ -7,7 +7,9 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./client": "./src/client.ts"
+    "./client": "./src/client.ts",
+    "./pool": "./src/pool.ts",
+    "./rls": "./src/rls.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -15,12 +17,14 @@
   "scripts": {
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@nebutra/logger": "workspace:*",
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
     "@prisma/client-runtime-utils": "^7.4.2",

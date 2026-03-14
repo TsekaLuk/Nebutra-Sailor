@@ -1,86 +1,128 @@
 "use client";
 
 import { useId } from "react";
-import { GithubMetrics } from "@/components/ui/github-metrics";
+import Image from "next/image";
+import { OpenAI } from "@lobehub/icons";
+
+function TechIcon({ src, alt }: { src: string; alt: string }) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={24}
+      height={24}
+      unoptimized
+      className="w-6 h-6 object-contain dark:invert"
+    />
+  );
+}
+
+const si = (slug: string, alt: string) => (
+  <TechIcon src={`https://cdn.simpleicons.org/${slug}/000000`} alt={alt} />
+);
 
 const TECHNOLOGIES = [
-    { name: "Antigravity", icon: <img src="https://cdn.simpleicons.org/googlegemini/000000" alt="Antigravity (Gemini)" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
-    { name: "Claude Code", icon: <img src="https://cdn.simpleicons.org/anthropic/000000" alt="Claude Code" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
-    { name: "OpenAI Codex", icon: <img src="https://cdn.simpleicons.org/openai/000000" alt="OpenAI Codex" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
-    { name: "Next.js", icon: <img src="https://cdn.simpleicons.org/nextdotjs/000000" alt="Next.js" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
-    { name: "React 19", icon: <img src="https://cdn.simpleicons.org/react/000000" alt="React" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
-    { name: "Tailwind v4", icon: <img src="https://cdn.simpleicons.org/tailwindcss/000000" alt="Tailwind CSS" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
-    { name: "TypeScript", icon: <img src="https://cdn.simpleicons.org/typescript/000000" alt="TypeScript" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
-    { name: "Python", icon: <img src="https://cdn.simpleicons.org/python/000000" alt="Python" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
-    { name: "PyTorch", icon: <img src="https://cdn.simpleicons.org/pytorch/000000" alt="PyTorch" width={24} height={24} loading="lazy" className="w-6 h-6 object-contain dark:invert" /> },
+  // AI & Agents
+  { name: "Claude Code",    icon: si("anthropic",      "Claude Code") },
+  { name: "Antigravity",    icon: si("googlegemini",   "Antigravity") },
+  { name: "OpenAI Codex",   icon: <OpenAI size={24} className="w-6 h-6 dark:text-white" /> },
+  { name: "LangChain",      icon: si("langchain",      "LangChain") },
+  { name: "n8n",            icon: si("n8n",            "n8n") },
+  { name: "PyTorch",        icon: si("pytorch",        "PyTorch") },
+  // Frontend
+  { name: "Next.js",        icon: si("nextdotjs",      "Next.js") },
+  { name: "React 19",       icon: si("react",          "React 19") },
+  { name: "TypeScript",     icon: si("typescript",     "TypeScript") },
+  { name: "Tailwind v4",    icon: si("tailwindcss",    "Tailwind CSS") },
+  // Backend & Infra
+  { name: "Python",         icon: si("python",         "Python") },
+  { name: "PostgreSQL",     icon: si("postgresql",     "PostgreSQL") },
+  { name: "Prisma",         icon: si("prisma",         "Prisma") },
+  { name: "Vercel",         icon: si("vercel",         "Vercel") },
+  { name: "Turborepo",      icon: si("turborepo",      "Turborepo") },
+  // Design & Product
+  { name: "Figma",          icon: si("figma",          "Figma") },
+  { name: "Framer",         icon: si("framer",         "Framer") },
+  { name: "Storybook",      icon: si("storybook",      "Storybook") },
+  // Tools
+  { name: "PostHog",        icon: si("posthog",        "PostHog") },
+  { name: "Notion",         icon: si("notion",         "Notion") },
+  { name: "Linear",         icon: si("linear",         "Linear") },
+  { name: "Stripe",         icon: si("stripe",         "Stripe") },
 ];
 
-export function TechMarquee() {
-    const id = useId();
+export function TechMarquee({ children }: { children?: React.ReactNode }) {
+  const id = useId();
 
-    return (
-        <section className="mx-auto max-w-7xl px-6 py-12 relative z-30">
-            <div className="shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] bg-white/40 dark:bg-white_5 border-gray-200/60 dark:border-white/10 border rounded-3xl p-4 md:p-6 backdrop-blur-md relative mb-8">
-                <div className="flex flex-col md:flex-row gap-4 items-stretch">
+  return (
+    <section className="w-full relative z-30 pt-24 pb-32 overflow-hidden flex flex-col items-center justify-center">
+      {/* Kicker Header */}
+      <div className="mx-auto max-w-7xl px-6 w-full mb-12 flex items-center justify-between z-10">
+        <div className="flex items-center gap-4">
+          <div className="w-2 h-2 rounded-full bg-lime-400/80 animate-pulse ring-4 ring-lime-400/20" />
+          <p className="text-xs md:text-[13px] font-semibold tracking-[0.2em] text-gray-500 uppercase">
+            Core Infrastructure & Platforms
+          </p>
+        </div>
+      </div>
 
-                    <div className="flex md:w-64 rounded-xl p-4 items-center justify-center text-center md:text-left bg-white/50 dark:bg-white_10 border border-gray-100/50 dark:border-white/10 shrink-0">
-                        <p className="text-base md:text-lg leading-snug font-normal text-gray-800 dark:text-gray-300 tracking-tight">
-                            Technologies &amp; <br className="hidden md:block" /> Platforms
-                        </p>
-                    </div>
+      {/* Marquee Track */}
+      <div
+        className="group/marquee w-full max-w-[100vw] overflow-hidden relative flex"
+        style={{ maskImage: "linear-gradient(90deg, transparent, black 15%, black 85%, transparent)" }}
+      >
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes scrollLogos-${id} {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(calc(-50% - 1rem)); } /* -1rem adjustment for gap */
+            }
+            .logo-scroll-container-${id} {
+              display: flex;
+              width: max-content;
+              animation: scrollLogos-${id} 50s linear infinite;
+              will-change: transform;
+            }
+            .logo-scroll-container-${id}:hover {
+              animation-play-state: paused;
+            }
+          `}} />
 
-                    <div
-                        className="flex-1 overflow-hidden bg-gray-50/50 dark:bg-black/50 border-gray-100/80 dark:border-white/5 border rounded-2xl py-6 px-0 shadow-inner relative"
-                        style={{ maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)" }}
-                    >
-                        <style dangerouslySetInnerHTML={{
-                            __html: `
-              @keyframes scrollLogos-${id} {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(calc(-50% - 1rem)); }
-              }
-              .logo-scroll-container-${id} {
-                display: flex;
-                width: max-content;
-                animation: scrollLogos-${id} 25s linear infinite;
-                will-change: transform;
-              }
-              .logo-scroll-container-${id}:hover {
-                animation-play-state: paused;
-              }
-            `}} />
-
-                        <div className={`logo-scroll-container-${id}`}>
-                            {/* Set 1 */}
-                            <div className="flex gap-4 shrink-0 pl-4 pr-4">
-                                {TECHNOLOGIES.map((tech) => (
-                                    <div key={`${tech.name}-2`} className="group rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white dark:bg-white/[0.02] p-4 shadow-[0_2px_10px_rgb(0,0,0,0.02)] dark:shadow-[0_2px_10px_rgb(0,0,0,0.1)] w-56 flex items-center gap-4 hover:border-lime-200 dark:hover:border-lime-700 transition-colors transition-transform duration-200 hover:-translate-y-0.5 hover:scale-105 cursor-default">
-                                        <div className="rounded-xl border border-gray-100 dark:border-white/10 bg-gray-50/80 dark:bg-white_5 w-10 h-10 flex items-center justify-center shrink-0 text-gray-900 dark:text-white transition-transform duration-300 group-hover:rotate-12">
-                                            {tech.icon}
-                                        </div>
-                                        <span className="text-base font-normal tracking-tight text-gray-900 dark:text-white">{tech.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* Set 2 (Duplicate for loop) */}
-                            <div className="flex gap-4 shrink-0 pr-4">
-                                {TECHNOLOGIES.map((tech) => (
-                                    <div key={`${tech.name}-2`} className="group rounded-2xl border border-gray-200/50 dark:border-gray-700/50 bg-white dark:bg-gray-900 p-4 shadow-[0_2px_10px_rgb(0,0,0,0.02)] dark:shadow-[0_2px_10px_rgb(0,0,0,0.1)] w-56 flex items-center gap-4 hover:border-lime-200 dark:hover:border-lime-700 transition-colors transition-transform duration-200 hover:-translate-y-0.5 hover:scale-105 cursor-default">
-                                        <div className="rounded-xl border border-gray-100 dark:border-white/10 bg-gray-50/80 dark:bg-white_5 w-10 h-10 flex items-center justify-center shrink-0 text-gray-900 dark:text-white transition-transform duration-300 group-hover:rotate-12">
-                                            {tech.icon}
-                                        </div>
-                                        <span className="text-base font-normal tracking-tight text-gray-900 dark:text-white">{tech.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                    </div>
+        <div className={`logo-scroll-container-${id} flex items-center`}>
+          {[1, 2].map((set) => (
+            <div key={set} className="flex gap-4 md:gap-6 shrink-0 pl-4 md:pl-6 pr-4 md:pr-6">
+              {TECHNOLOGIES.map((tech) => (
+                <div
+                  key={`${tech.name}-${set}`}
+                  className="
+                    relative group/pill flex items-center gap-4 px-6 py-4 
+                    rounded-2xl shrink-0 cursor-default
+                    bg-white dark:bg-[#0A0A0A]
+                    border border-gray-100 dark:border-white/[0.04]
+                    shadow-[0_4px_30px_rgb(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgb(0,0,0,0.3)]
+                    hover:border-gray-300 dark:hover:border-white/10
+                    opacity-100 transition-all duration-500 ease-out
+                    group-hover/marquee:opacity-40 hover:!opacity-100 
+                    hover:scale-[1.02] hover:-translate-y-1
+                  "
+                >
+                  <div className="w-8 h-8 flex items-center justify-center shrink-0 opacity-70 transition-all duration-300 group-hover/pill:opacity-100 group-hover/pill:rotate-12 group-hover/pill:scale-110">
+                    {tech.icon}
+                  </div>
+                  <span className="text-[15px] font-medium tracking-tight text-gray-700 dark:text-gray-300 transition-colors duration-300 group-hover/pill:text-black dark:group-hover/pill:text-white">
+                    {tech.name}
+                  </span>
                 </div>
+              ))}
             </div>
-            {/* The new Github Metrics */}
-            <GithubMetrics />
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+      
+      {/* Decorative gradient floor */}
+      <div className="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-white/5 to-transparent z-10" />
+      
+      {children}
+    </section>
+  );
 }

@@ -17,12 +17,15 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://us-assets.i.posthog.com https://us.i.posthog.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://us-assets.i.posthog.com https://us.i.posthog.com https://accounts.google.com",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https: https://api.dicebear.com https://lh3.googleusercontent.com",
+      "img-src 'self' data: blob: https://api.dicebear.com https://lh3.googleusercontent.com https://avatars.githubusercontent.com https://cdn.simpleicons.org https://*.public.blob.vercel-storage.com https://images.unsplash.com",
       "font-src 'self'",
-      "connect-src 'self' https://api.anthropic.com https://us.i.posthog.com https://us-assets.i.posthog.com https://*.ingest.langfuse.com",
+      "connect-src 'self' https://api.anthropic.com https://us.i.posthog.com https://us-assets.i.posthog.com https://*.ingest.langfuse.com https://accounts.google.com https://connect.linux.do",
+      "frame-src https://accounts.google.com",
+      "form-action 'self' https://github.com https://accounts.google.com https://connect.linux.do",
       "frame-ancestors 'none'",
+      "base-uri 'self'",
     ].join("; "),
   },
 ]
@@ -43,11 +46,9 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "api.dicebear.com" },
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
+      { protocol: "https", hostname: "cdn.simpleicons.org" },
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
     ],
-  },
-
-  experimental: {
-    mdxRs: true,
   },
 
   transpilePackages: [
@@ -56,6 +57,8 @@ const nextConfig: NextConfig = {
     "@nebutra/tokens",
     "@nebutra/marketing",
   ],
+
+  serverExternalPackages: ["@prisma/client", "@prisma/adapter-pg"],
 };
 
 const withMDX = createMDX();

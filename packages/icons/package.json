@@ -2,6 +2,7 @@
   "name": "@nebutra/icons",
   "version": "0.1.0",
   "description": "Geist icon set (541 icons) packaged as TypeScript React components",
+  "sideEffects": false,
   "private": true,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

@@ -59,3 +59,7 @@ brand.config/
 *.tsbuildinfo
 artifacts/
 .vercel
+
+# Generated API client artifacts — produced by pnpm generate:api-types
+apps/web/src/lib/api/types.generated.ts
+apps/api-gateway/openapi.json

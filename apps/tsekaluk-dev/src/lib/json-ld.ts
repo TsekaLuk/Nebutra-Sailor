@@ -7,12 +7,23 @@ export function personJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Tseka Luk",
+    givenName: "Tseka",
+    familyName: "Luk",
     url: BASE_URL,
     jobTitle: "CEO & AI-Native Builder",
     worksFor: {
       "@type": "Organization",
       name: "Nebutra Intelligence",
+      url: "https://nebutra.ai",
     },
+    knowsAbout: [
+      "Artificial Intelligence",
+      "AI Agents",
+      "Next.js",
+      "TypeScript",
+      "Product Design",
+      "SaaS Architecture",
+    ],
     sameAs: [
       "https://github.com/TsekaLuk",
       "https://x.com/tseka_luk",
@@ -29,20 +40,32 @@ export function websiteJsonLd() {
     "@type": "WebSite",
     name: "TsekaLuk.dev",
     url: BASE_URL,
+    inLanguage: ["en", "zh", "ja"],
     author: personJsonLd(),
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${BASE_URL}/thinking?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 }
 
 export function projectJsonLd(project: Project) {
+  const hasTechStack = project.techStack && project.techStack.length > 0;
   return {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
+    "@type": hasTechStack ? "SoftwareApplication" : "CreativeWork",
     name: project.name,
     description: project.tagline,
     url: `${BASE_URL}/work/${project.slug}`,
-    author: { "@type": "Person", name: "Tseka Luk" },
+    author: { "@type": "Person", name: "Tseka Luk", url: BASE_URL },
     ...(project.github ? { codeRepository: project.github } : {}),
+    ...(project.url ? { installUrl: project.url } : {}),
     keywords: project.tags.join(", "),
+    ...(hasTechStack ? { applicationCategory: "WebApplication" } : {}),
   };
 }
 
@@ -53,7 +76,17 @@ export function articleJsonLd(article: { title: string; slug: string; date: stri
     headline: article.title,
     url: `${BASE_URL}/thinking/${article.slug}`,
     datePublished: article.date,
+    dateModified: article.date,
     description: article.excerpt,
-    author: { "@type": "Person", name: "Tseka Luk" },
+    author: { "@type": "Person", name: "Tseka Luk", url: BASE_URL },
+    publisher: {
+      "@type": "Person",
+      name: "Tseka Luk",
+      url: BASE_URL,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${BASE_URL}/thinking/${article.slug}`,
+    },
   };
 }

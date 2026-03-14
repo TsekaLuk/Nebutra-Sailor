@@ -78,6 +78,10 @@ export class TokenBucket {
 
   constructor(private config: TokenBucketConfig) {}
 
+  get maxTokens(): number {
+    return this.config.maxTokens;
+  }
+
   async consume(key: string, tokens: number = 1): Promise<RateLimitResult> {
     const namespacedKey = buildKey(key);
     const now = Date.now();
@@ -164,4 +168,18 @@ export function getRateLimiter(plan: string): TokenBucket {
     rateLimiters.set(plan, createRateLimiter(plan));
   }
   return rateLimiters.get(plan)!;
+}
+
+// Purge stale per-tenant buckets every 30 minutes.
+// Buckets idle for >1 hour are removed; this prevents unbounded memory growth
+// in long-running Node processes with many unique tenant keys.
+if (typeof setInterval !== "undefined") {
+  setInterval(
+    () => {
+      for (const limiter of rateLimiters.values()) {
+        limiter.cleanup(3_600_000); // 1 hour idle threshold
+      }
+    },
+    30 * 60 * 1000, // every 30 minutes
+  ).unref?.(); // don't keep the Node process alive for cleanup alone
 }

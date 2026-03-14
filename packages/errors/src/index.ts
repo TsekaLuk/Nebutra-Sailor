@@ -250,7 +250,19 @@ interface HonoContext {
   json: (data: unknown, status?: number) => unknown;
 }
 
-export function errorHandler() {
+export interface ErrorHandlerOptions {
+  /**
+   * Called for every caught error so callers can route it to their structured
+   * logger (e.g. @nebutra/logger).  Defaults to a no-op — DO NOT rely on the
+   * previous process.stderr.write behaviour; pass an onError callback instead.
+   */
+  onError?: (
+    error: unknown,
+    meta: { requestId?: string; statusCode: number },
+  ) => void;
+}
+
+export function errorHandler(options: ErrorHandlerOptions = {}) {
   return async (c: HonoContext, next: () => Promise<void>) => {
     try {
       await next();
@@ -259,12 +271,10 @@ export function errorHandler() {
       const statusCode = getStatusCode(error);
       const response = toApiError(error, requestId);
 
-      // Log non-operational errors
-      if (error instanceof AppError && !error.isOperational) {
-        process.stderr.write(`Non-operational error: ${String(error)}\n`);
-      } else if (!(error instanceof AppError)) {
-        process.stderr.write(`Unexpected error: ${String(error)}\n`);
-      }
+      options.onError?.(
+        error,
+        requestId !== undefined ? { requestId, statusCode } : { statusCode },
+      );
 
       return c.json(response, statusCode);
     }

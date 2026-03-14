@@ -73,6 +73,16 @@ export const BadgeDemo = dynamic(
   { ssr: false },
 );
 
+export const BadgeIconColorsDemo = dynamic(
+  () => import("./badge-icon-colors-demo").then((m) => ({ default: m.BadgeIconColorsDemo })),
+  { ssr: false },
+);
+
+export const BadgePillMatrixDemo = dynamic(
+  () => import("./badge-pill-demo").then((m) => ({ default: m.BadgePillMatrixDemo })),
+  { ssr: false },
+);
+
 export const ButtonDemo = dynamic(
   () => import("./button-demo").then((m) => ({ default: m.ButtonDemo })),
   { ssr: false },

@@ -22,6 +22,7 @@ spec:
         app.kubernetes.io/name: ai-service
         app.kubernetes.io/component: service
     spec:
+      serviceAccountName: ai-service
       terminationGracePeriodSeconds: 60
       containers:
         - name: ai-service

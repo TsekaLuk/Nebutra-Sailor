@@ -6,6 +6,8 @@ import { ThemeShell } from "./providers/theme-provider";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { QueryProvider } from "./providers";
 import { getNonce } from "@/lib/nonce";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const inter = Inter({
@@ -75,6 +77,8 @@ export default async function RootLayout({
               </QueryProvider>
             </DesignSystemProvider>
           </ThemeShell>
+          <SpeedInsights />
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>

@@ -9,9 +9,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.privacy" });
+  const title = t("metadata_title");
+  const description = t("metadata_desc");
   return {
-    title: t("metadata_title"),
-    description: t("metadata_desc"),
+    title,
+    description,
+    openGraph: {
+      images: [
+        `/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(description)}`,
+      ],
+    },
+    alternates: {
+      canonical: `https://tsekaluk.dev/${locale}/privacy`,
+      languages: {
+        en: "https://tsekaluk.dev/en/privacy",
+        zh: "https://tsekaluk.dev/zh/privacy",
+        ja: "https://tsekaluk.dev/ja/privacy",
+      },
+    },
   };
 }
 

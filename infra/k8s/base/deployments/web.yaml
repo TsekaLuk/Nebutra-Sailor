@@ -22,6 +22,7 @@ spec:
         app.kubernetes.io/name: web
         app.kubernetes.io/component: frontend
     spec:
+      serviceAccountName: web
       terminationGracePeriodSeconds: 30
       containers:
         - name: web
@@ -61,7 +62,7 @@ spec:
               memory: "256Mi"
               cpu: "100m"
             limits:
-              memory: "512Mi"
+              memory: "768Mi"
               cpu: "500m"
           livenessProbe:
             httpGet:
@@ -83,6 +84,6 @@ spec:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
             runAsUser: 1000
-            readOnlyRootFilesystem: false
+            readOnlyRootFilesystem: true
       securityContext:
         fsGroup: 1000

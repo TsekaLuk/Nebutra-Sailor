@@ -83,7 +83,12 @@ export default async function AboutPage({
             <dt className="font-semibold">
               {t("about.companyInfo.legalName")}
             </dt>
-            <dd className="text-[var(--neutral-10)]">Nebutra, Inc.</dd>
+            <dd className="text-[var(--neutral-10)]">
+              无锡云毓智能科技有限公司
+              <span className="ml-2 text-sm text-[var(--neutral-9)]">
+                (Wuxi Nebutra Intelligent Technology Co., Ltd.)
+              </span>
+            </dd>
           </div>
           <div>
             <dt className="font-semibold">{t("about.companyInfo.founded")}</dt>
@@ -94,7 +99,10 @@ export default async function AboutPage({
               {t("about.companyInfo.headquarters")}
             </dt>
             <dd className="text-[var(--neutral-10)]">
-              San Francisco, California
+              无锡市，江苏省，中国
+              <span className="ml-2 text-sm text-[var(--neutral-9)]">
+                (Wuxi, Jiangsu, China)
+              </span>
             </dd>
           </div>
           <div>
@@ -102,7 +110,10 @@ export default async function AboutPage({
               {t("about.companyInfo.jurisdiction")}
             </dt>
             <dd className="text-[var(--neutral-10)]">
-              Delaware, United States
+              中华人民共和国
+              <span className="ml-2 text-sm text-[var(--neutral-9)]">
+                (People's Republic of China)
+              </span>
             </dd>
           </div>
         </dl>

@@ -22,7 +22,38 @@ spec:
         app.kubernetes.io/name: api-gateway
         app.kubernetes.io/component: gateway
     spec:
+      serviceAccountName: api-gateway
       terminationGracePeriodSeconds: 30
+      initContainers:
+        # Run Prisma migrations before the gateway starts.
+        # Uses the same app-secrets to connect to the database.
+        - name: db-migrate
+          image: nebutra/api-gateway:latest
+          imagePullPolicy: Always
+          command: ["node", "--experimental-strip-types", "node_modules/.bin/prisma", "migrate", "deploy", "--schema", "node_modules/@nebutra/db/prisma/schema.prisma"]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DATABASE_URL
+            - name: DIRECT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DIRECT_URL
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1001
+            readOnlyRootFilesystem: false
       containers:
         - name: api-gateway
           # CI pipeline overrides this tag via kustomize image transforms
@@ -61,7 +92,7 @@ spec:
               memory: "256Mi"
               cpu: "100m"
             limits:
-              memory: "512Mi"
+              memory: "768Mi"
               cpu: "500m"
           livenessProbe:
             httpGet:

@@ -1,0 +1,31 @@
+[
+  {
+    "name": "@nebutra/ui (core components)",
+    "path": "packages/ui/dist/index.js",
+    "limit": "120 kB",
+    "import": "*"
+  },
+  {
+    "name": "@nebutra/tokens (CSS variables)",
+    "path": "packages/tokens/styles.css",
+    "limit": "10 kB"
+  },
+  {
+    "name": "@nebutra/icons (full set)",
+    "path": "packages/icons/dist/index.js",
+    "limit": "200 kB",
+    "import": "*"
+  },
+  {
+    "name": "@nebutra/billing (entry)",
+    "path": "packages/billing/dist/index.js",
+    "limit": "50 kB",
+    "import": "*"
+  },
+  {
+    "name": "@nebutra/errors",
+    "path": "packages/errors/dist/index.js",
+    "limit": "10 kB",
+    "import": "*"
+  }
+]

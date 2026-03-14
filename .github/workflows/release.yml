@@ -18,6 +18,8 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write   # required for SLSA provenance attestation
+  packages: write   # required for SBOM upload to GitHub packages
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -123,6 +125,37 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── Supply-chain security ─────────────────────────────────────────────────
+      # SBOM: machine-readable inventory of every dependency in this release.
+      # Upload to GitHub Dependency Graph so Security tab shows known CVEs.
+      - name: Generate SBOM
+        if: (steps.check_commits.outputs.has_releasable_commits == 'true' || github.event_name == 'workflow_dispatch') && github.event.inputs.dry_run != 'true'
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: sbom.cyclonedx.json
+          upload-artifact: true
+          artifact-name: sbom-${{ steps.get_version.outputs.version }}.cyclonedx.json
+
+      # SLSA provenance: cryptographically signed attestation linking this
+      # build to its source commit + workflow run (SLSA Build Level 2).
+      - name: Attest build provenance
+        if: (steps.check_commits.outputs.has_releasable_commits == 'true' || github.event_name == 'workflow_dispatch') && github.event.inputs.dry_run != 'true'
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: sbom.cyclonedx.json
+
+      # Attach SBOM to the GitHub Release as a downloadable asset
+      - name: Upload SBOM to GitHub Release
+        if: (steps.check_commits.outputs.has_releasable_commits == 'true' || github.event_name == 'workflow_dispatch') && github.event.inputs.dry_run != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          files: sbom.cyclonedx.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { MessageCircle, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -27,9 +28,11 @@ export function AgentWidget() {
                 <div className="relative">
                   <div className="h-2 w-2 rounded-full border border-white dark:border-gray-950 bg-green-500 absolute -bottom-0.5 -right-0.5 z-10" />
                   <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
-                    <img
-                      src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=150&h=150"
+                    <Image
+                      src="/images/black-nobg.webp"
                       alt="Tseka"
+                      width={32}
+                      height={32}
                       className="object-cover w-full h-full"
                     />
                   </div>
@@ -44,6 +47,7 @@ export function AgentWidget() {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={() => setIsOpen(false)}
                 className="p-1.5 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-gray-800/50 transition-colors"
                 aria-label="Close chat"
@@ -61,8 +65,9 @@ export function AgentWidget() {
       </AnimatePresence>
 
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent)] text-white shadow-[0_8px_30px_var(--color-accent-shadow)] transition-transform hover:scale-105 active:scale-95"
+        className="fixed bottom-6 right-6 z-[51] flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent)] text-white shadow-[0_8px_30px_var(--color-accent-shadow)] transition-transform hover:scale-105 active:scale-95"
         aria-label="Toggle chat"
       >
         <AnimatePresence mode="wait">

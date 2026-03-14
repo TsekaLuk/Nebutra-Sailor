@@ -34,14 +34,14 @@ export function Hero() {
       </AnimateIn>
 
       {/* Main Headlines */}
-      <div className="z-20 flex flex-col text-center w-full pr-4 pl-4 relative scale-125 items-center">
+      <div className="z-20 flex flex-col items-center text-center w-full px-4 relative mt-4 md:mt-8">
         <AnimateIn preset="fadeUp" delay={0.1}>
-          <h1 className="leading-none md:text-[7vw] text-6xl font-normal text-gray-900 dark:text-white tracking-tighter z-20 my-7 relative">
+          <h1 className="leading-[0.9] text-[clamp(4rem,10vw,8rem)] font-normal text-gray-900 dark:text-white tracking-[-0.04em] z-20 relative">
             {t("greeting")}
           </h1>
         </AnimateIn>
         <AnimateIn preset="fadeUp" delay={0.2}>
-          <h2 className="text-7xl md:text-[9.5vw] leading-none font-normal italic font-serif text-gray-900 dark:text-white tracking-tighter -mt-3 md:-mt-8 relative z-30">
+          <h2 className="leading-[0.9] text-[clamp(4.5rem,11vw,9rem)] font-normal italic font-serif text-gray-900 dark:text-white tracking-[-0.04em] z-30 -mt-2 md:-mt-4">
             {t("tagline")}
           </h2>
         </AnimateIn>
@@ -50,25 +50,25 @@ export function Hero() {
       {/* Central Layout Area Area */}
       <div className="md:mt-0 md:h-[650px] flex flex-col md:block w-full h-auto max-w-7xl mt-8 mr-auto ml-auto relative items-center justify-center">
 
-        {/* Center Portrait */}
-        <AnimateIn preset="scale" delay={0.3} className="relative z-10 w-full max-w-[85vw] md:max-w-[42vw] lg:max-w-[550px] mx-auto pointer-events-none md:absolute md:-top-12 md:left-1/2 md:-translate-x-1/2">
+        <AnimateIn preset="fadeUp" delay={0.3} className="relative z-10 w-full max-w-[85vw] md:max-w-[42vw] lg:max-w-[550px] mx-auto pointer-events-none md:absolute md:-top-16 md:left-1/2 md:-translate-x-1/2">
           <Image
             src="/images/black-nobg.webp"
-            alt="Portrait of Tseka Luk"
+            alt="Portrait of Tseka Luk, CEO & AI-Native Builder"
             width={550}
             height={733}
             priority
-            className="w-full h-auto object-contain [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)] drop-shadow-2xl contrast-105"
+            sizes="(max-width: 768px) 85vw, (max-width: 1024px) 42vw, 550px"
+            className="w-full h-auto object-contain [mask-image:linear-gradient(to_bottom,black_40%,transparent_90%)] contrast-105"
           />
         </AnimateIn>
 
         {/* Left Mid Badge (Desktop) */}
-        <AnimateIn preset="fade" delay={0.4} className="hidden md:flex absolute top-[30%] left-4 lg:left-12 z-30 items-center gap-3 px-6 py-4 bg-white dark:bg-gray-900 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(255,255,255,0.02)] border border-gray-100 dark:border-gray-800 transition-shadow">
-          <span className="relative flex h-3.5 w-3.5">
+        <AnimateIn preset="fade" delay={0.4} className="hidden md:flex absolute top-[25%] left-4 lg:left-12 z-30 items-center gap-3 px-5 py-2.5 bg-white dark:bg-gray-950 rounded-full border border-gray-200 dark:border-gray-800 shadow-sm transition-transform hover:-translate-y-0.5">
+          <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#84cc16]"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#84cc16]"></span>
           </span>
-          <span className="text-lg font-normal text-gray-900 dark:text-white tracking-tight">AI &amp; System Builder</span>
+          <span className="text-sm font-medium text-gray-900 dark:text-white tracking-wide uppercase">AI &amp; System Builder</span>
         </AnimateIn>
 
         {/* Right Mid Text (Desktop) */}
@@ -93,35 +93,31 @@ export function Hero() {
         </AnimateIn>
 
         {/* Right Bottom Button (Desktop) */}
-        <AnimateIn preset="fadeUp" delay={0.7} className="hidden md:block absolute bottom-8 right-4 lg:right-12 z-30">
-          <div className="p-1.5 bg-white/40 dark:bg-gray-900/40 backdrop-blur-md rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-white/60 dark:border-gray-800/60 inline-block">
-            <Link href="/now" className="inline-flex items-center justify-center gap-3 bg-[#111] dark:bg-gray-800 text-white px-8 py-4 rounded-full text-lg font-normal hover:bg-gray-900 transition-colors">
-              <ArrowRight className="w-5 h-5 text-gray-300 dark:text-gray-400" /> {t("cta_primary")}
-            </Link>
-          </div>
+        <AnimateIn preset="fadeUp" delay={0.7} className="hidden md:block absolute bottom-12 right-4 lg:right-12 z-30">
+          <Link href="/now" className="group inline-flex items-center justify-center gap-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-7 py-3.5 rounded-full text-base font-medium transition-all hover:bg-gray-800 dark:hover:bg-gray-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl">
+            {t("cta_primary")} <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </AnimateIn>
 
       </div>
 
       {/* Mobile Layout */}
       <div className="flex flex-col gap-10 md:hidden w-full px-6 mt-0 z-30 relative items-center text-center -mt-16">
-        <div className="flex items-center gap-3 px-6 py-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full shadow-sm w-fit mx-auto border border-gray-100 dark:border-gray-800">
-          <span className="relative flex h-3 w-3">
+        <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-950 rounded-full border border-gray-200 dark:border-gray-800 shadow-sm w-fit mx-auto mt-6">
+          <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#84cc16]"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#84cc16]"></span>
           </span>
-          <span className="text-base font-normal text-gray-900 dark:text-white tracking-tight">AI &amp; System Builder</span>
+          <span className="text-xs font-medium text-gray-900 dark:text-white tracking-wide uppercase">AI &amp; System Builder</span>
         </div>
 
-        <p className="text-xl text-gray-900 dark:text-white leading-snug tracking-tight font-normal max-w-sm mx-auto">
+        <p className="text-lg text-gray-900 dark:text-white leading-snug tracking-tight font-normal max-w-sm mx-auto">
           {t("description")}
         </p>
 
-        <div className="p-1.5 bg-white/40 dark:bg-gray-900/40 backdrop-blur-md rounded-full border border-white/60 dark:border-gray-800/60 mt-2 shadow-lg inline-block mx-auto">
-          <Link href="/now" className="inline-flex items-center justify-center gap-2 bg-[#111] dark:bg-gray-800 text-white px-8 py-4 rounded-full text-base font-normal hover:bg-gray-900">
-            <ArrowRight className="w-5 h-5 text-gray-300 dark:text-gray-400" /> {t("cta_primary")}
-          </Link>
-        </div>
+        <Link href="/now" className="group inline-flex items-center justify-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-full text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md mx-auto">
+          {t("cta_primary")} <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        </Link>
       </div>
 
     </section>

@@ -13,7 +13,9 @@ function escapeXml(str: string): string {
 }
 
 export function GET() {
+  try {
   const articles = getArticles();
+  const buildDate = new Date().toUTCString();
 
   const articleItems = articles.map(
     (a) => `
@@ -23,6 +25,8 @@ export function GET() {
       <description>${escapeXml(a.excerpt)}</description>
       <pubDate>${new Date(a.date).toUTCString()}</pubDate>
       <guid isPermaLink="true">${BASE_URL}/thinking/${a.slug}</guid>
+      <author>tseka@tsekaluk.dev (Tseka Luk)</author>
+      ${a.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join("\n      ")}
     </item>`
   );
 
@@ -32,6 +36,7 @@ export function GET() {
       <title>${escapeXml(p.name)} — ${escapeXml(p.tagline)}</title>
       <link>${BASE_URL}/work/${p.slug}</link>
       <description>${escapeXml(p.description)}</description>
+      <pubDate>${buildDate}</pubDate>
       <guid isPermaLink="true">${BASE_URL}/work/${p.slug}</guid>
     </item>`
   );
@@ -44,6 +49,7 @@ export function GET() {
     <description>Essays, projects, and updates from Tseka Luk.</description>
     <language>en</language>
     <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>${buildDate}</lastBuildDate>
     ${articleItems.join("")}
     ${projectItems.join("")}
   </channel>
@@ -55,4 +61,8 @@ export function GET() {
       "Cache-Control": "s-maxage=3600, stale-while-revalidate",
     },
   });
+  } catch (err) {
+    console.error("[rss] Feed generation failed:", err);
+    return new Response("Internal server error", { status: 500 });
+  }
 }

@@ -3,32 +3,5 @@
   "buildCommand": "pnpm turbo build --filter=@nebutra/tsekaluk-dev",
   "installCommand": "pnpm install",
   "outputDirectory": ".next",
-  "regions": ["iad1"],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.simpleicons.org https://*.lobehub.com https://*.googleusercontent.com https://avatars.githubusercontent.com https://connect.linux.do; font-src 'self'; connect-src 'self' https://plausible.io https://accounts.google.com https://connect.linux.do; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://github.com https://accounts.google.com https://connect.linux.do"
-        }
-      ]
-    }
-  ]
+  "regions": ["iad1"]
 }

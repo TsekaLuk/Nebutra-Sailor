@@ -1,5 +1,5 @@
 # ── Stage 1: Install dependencies ──────────────────────────────────────────
-FROM node:22-alpine AS deps
+FROM node:22-alpine@sha256:92d51e5f20b7ff58faa5a969af1a1cec6cbec3fbff7e0f523242b9b5c85ad887 AS deps
 WORKDIR /app
 
 RUN corepack enable pnpm
@@ -20,7 +20,7 @@ COPY packages/rate-limit/package.json ./packages/rate-limit/
 RUN pnpm install --frozen-lockfile --filter @nebutra/api-gateway... --filter @nebutra/db...
 
 # ── Stage 2: Build ──────────────────────────────────────────────────────────
-FROM node:22-alpine AS builder
+FROM node:22-alpine@sha256:92d51e5f20b7ff58faa5a969af1a1cec6cbec3fbff7e0f523242b9b5c85ad887 AS builder
 WORKDIR /app
 
 RUN corepack enable pnpm
@@ -34,15 +34,21 @@ RUN pnpm --filter @nebutra/db db:generate
 RUN pnpm --filter @nebutra/api-gateway build
 
 # ── Stage 3: Runtime ────────────────────────────────────────────────────────
-FROM node:22-alpine AS runner
+FROM node:22-alpine@sha256:92d51e5f20b7ff58faa5a969af1a1cec6cbec3fbff7e0f523242b9b5c85ad887 AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
 
-COPY --from=builder /app/apps/api-gateway/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/apps/api-gateway/node_modules ./apps/api-gateway/node_modules
-COPY --from=builder /app/packages ./packages
+# Drop root — run as unprivileged user (mirrors Next.js Dockerfile convention)
+RUN addgroup --system --gid 1001 nodejs \
+ && adduser  --system --uid 1001 appuser
+
+COPY --from=builder --chown=appuser:nodejs /app/apps/api-gateway/dist ./dist
+COPY --from=builder --chown=appuser:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:nodejs /app/apps/api-gateway/node_modules ./apps/api-gateway/node_modules
+COPY --from=builder --chown=appuser:nodejs /app/packages ./packages
+
+USER appuser
 
 EXPOSE 3002
 

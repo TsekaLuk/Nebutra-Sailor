@@ -1,21 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import {
-  Mail,
-  Trophy,
-  Award,
-  Medal,
-  GraduationCap,
-  ShieldCheck,
-  FileCode2,
-  Cpu,
-  Languages,
-  Sparkles,
-  BookOpen,
-  Binary,
-} from "lucide-react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import { Mail } from "lucide-react";
+import { AnimateIn } from "@nebutra/ui/components";
 import { personJsonLd } from "@/lib/json-ld";
 import { CountUp } from "@/components/count-up";
 import { ResumeDownloadButton } from "@/components/resume-download-button";
@@ -40,37 +27,10 @@ export async function generateMetadata({
       languages: {
         en: "https://tsekaluk.dev/en/about",
         zh: "https://tsekaluk.dev/zh/about",
+        ja: "https://tsekaluk.dev/ja/about",
       },
     },
   };
-}
-
-function TimelineItem({
-  year,
-  label,
-  icon,
-}: {
-  year: string;
-  label: string;
-  icon: React.ReactNode;
-}) {
-  return (
-    <AnimateIn preset="fadeUp" inView>
-      <div className="flex items-center gap-4 border-t border-gray-100 dark:border-gray-800 py-4">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-50 dark:bg-gray-800 text-gray-400 dark:text-gray-500">
-          {icon}
-        </span>
-        <div className="flex flex-1 items-start justify-between gap-4">
-          <span className="text-base text-gray-700 dark:text-gray-300">
-            {label}
-          </span>
-          <span className="shrink-0 font-mono text-sm text-gray-400 dark:text-gray-500">
-            {year}
-          </span>
-        </div>
-      </div>
-    </AnimateIn>
-  );
 }
 
 export default async function AboutPage({
@@ -81,572 +41,324 @@ export default async function AboutPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.about" });
 
-  const TIMELINE: { year: string; label: string; icon: React.ReactNode }[] = [
-    {
-      year: "2020",
-      icon: <BookOpen className="h-4 w-4" />,
-      label: t("journey_2020"),
-    },
-    {
-      year: "2022",
-      icon: <GraduationCap className="h-4 w-4" />,
-      label: t("journey_2022"),
-    },
-    {
-      year: "2023",
-      icon: <Binary className="h-4 w-4" />,
-      label: t("journey_2023"),
-    },
-    {
-      year: "2024",
-      icon: <Sparkles className="h-4 w-4" />,
-      label: t("journey_2024"),
-    },
-    {
-      year: "2025",
-      icon: <Cpu className="h-4 w-4" />,
-      label: t("journey_2025"),
-    },
-    {
-      year: "Now",
-      icon: (
-        <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent-dark)]" />
-        </span>
-      ),
-      label: t("journey_now"),
-    },
+  const TIMELINE = [
+    { year: "2020", label: t("journey_2020") },
+    { year: "2022", label: t("journey_2022") },
+    { year: "2023", label: t("journey_2023") },
+    { year: "2024", label: t("journey_2024") },
+    { year: "2025", label: t("journey_2025") },
+    { year: "Now", label: t("journey_now") },
   ];
 
-  const AWARDS: {
-    title: string;
-    level: string;
-    detail: string;
-    year: string;
-    icon: React.ReactNode;
-    highlight?: boolean;
-  }[] = [
-      {
-        title: t("award_1_title"),
-        level: t("award_1_level"),
-        detail: t("award_1_detail"),
-        year: "2025",
-        icon: <Trophy className="h-4 w-4 text-amber-500" />,
-        highlight: true,
-      },
-      {
-        title: t("award_2_title"),
-        level: t("award_2_level"),
-        detail: t("award_2_detail"),
-        year: "2025",
-        icon: <Medal className="h-4 w-4 text-amber-500" />,
-        highlight: true,
-      },
-      {
-        title: t("award_3_title"),
-        level: t("award_3_level"),
-        detail: t("award_3_detail"),
-        year: "2025",
-        icon: <Medal className="h-4 w-4 text-amber-500" />,
-        highlight: true,
-      },
-      {
-        title: t("award_4_title"),
-        level: t("award_4_level"),
-        detail: t("award_4_detail"),
-        year: "2024",
-        icon: <Medal className="h-4 w-4 text-amber-500" />,
-        highlight: true,
-      },
-      {
-        title: t("award_5_title"),
-        level: t("award_5_level"),
-        detail: t("award_5_detail"),
-        year: "2024",
-        icon: <Trophy className="h-4 w-4 text-amber-500" />,
-        highlight: true,
-      },
-      {
-        title: t("award_6_title"),
-        level: t("award_6_level"),
-        detail: t("award_6_detail"),
-        year: "2025",
-        icon: <Award className="h-4 w-4 text-gray-400" />,
-      },
-      {
-        title: t("award_7_title"),
-        level: t("award_7_level"),
-        detail: t("award_7_detail"),
-        year: "2024",
-        icon: <Award className="h-4 w-4 text-gray-400" />,
-      },
-      {
-        title: t("award_8_title"),
-        level: t("award_8_level"),
-        detail: t("award_8_detail"),
-        year: "2024",
-        icon: <Award className="h-4 w-4 text-gray-400" />,
-      },
-      {
-        title: t("award_9_title"),
-        level: t("award_9_level"),
-        detail: t("award_9_detail"),
-        year: "2024",
-        icon: <Award className="h-4 w-4 text-gray-400" />,
-      },
-      {
-        title: t("award_10_title"),
-        level: t("award_10_level"),
-        detail: t("award_10_detail"),
-        year: "2023",
-        icon: <Trophy className="h-4 w-4 text-amber-500" />,
-        highlight: true,
-      },
-    ];
-
-  const CERTS: { label: string; icon: React.ReactNode }[] = [
-    {
-      label: t("cred_1"),
-      icon: <GraduationCap className="h-4 w-4 text-[var(--color-accent-dark)]" />,
-    },
-    {
-      label: t("cred_2"),
-      icon: <ShieldCheck className="h-4 w-4 text-[var(--color-accent-dark)]" />,
-    },
-    {
-      label: t("cred_3"),
-      icon: <Cpu className="h-4 w-4 text-[var(--color-accent-dark)]" />,
-    },
-    {
-      label: t("cred_4"),
-      icon: <FileCode2 className="h-4 w-4 text-[var(--color-accent-dark)]" />,
-    },
-    {
-      label: t("cred_5"),
-      icon: <FileCode2 className="h-4 w-4 text-[var(--color-accent-dark)]" />,
-    },
-    {
-      label: t("cred_6"),
-      icon: <Languages className="h-4 w-4 text-[var(--color-accent-dark)]" />,
-    },
-    {
-      label: t("cred_7"),
-      icon: <GraduationCap className="h-4 w-4 text-[var(--color-accent-dark)]" />,
-    },
-    {
-      label: t("cred_8"),
-      icon: <Sparkles className="h-4 w-4 text-[var(--color-accent-dark)]" />,
-    },
+  const AWARDS = [
+    { title: t("award_1_title"), level: t("award_1_level"), detail: t("award_1_detail"), year: "2025" },
+    { title: t("award_2_title"), level: t("award_2_level"), detail: t("award_2_detail"), year: "2025" },
+    { title: t("award_3_title"), level: t("award_3_level"), detail: t("award_3_detail"), year: "2025" },
+    { title: t("award_4_title"), level: t("award_4_level"), detail: t("award_4_detail"), year: "2024" },
+    { title: t("award_5_title"), level: t("award_5_level"), detail: t("award_5_detail"), year: "2024" },
+    { title: t("award_6_title"), level: t("award_6_level"), detail: t("award_6_detail"), year: "2025" },
+    { title: t("award_7_title"), level: t("award_7_level"), detail: t("award_7_detail"), year: "2024" },
+    { title: t("award_8_title"), level: t("award_8_level"), detail: t("award_8_detail"), year: "2024" },
+    { title: t("award_9_title"), level: t("award_9_level"), detail: t("award_9_detail"), year: "2024" },
+    { title: t("award_10_title"), level: t("award_10_level"), detail: t("award_10_detail"), year: "2023" },
   ];
 
-  const beliefs: { quote: string; credit: string | null }[] = [
+  const CERTS = [
+    t("cred_1"), t("cred_2"), t("cred_3"), t("cred_4"),
+    t("cred_5"), t("cred_6"), t("cred_7"), t("cred_8"),
+  ];
+
+  const beliefs = [
     { quote: t("belief_1"), credit: t("belief_1_credit") },
-    { quote: t("belief_2"), credit: null },
-    { quote: t("belief_3"), credit: null },
-    { quote: t("belief_4"), credit: null },
-    { quote: t("belief_5"), credit: null },
+  ];
+
+  const MUSIC = [
+    "Glass Animals", "NINEONE# 乃万", "Metro Boomin", "Marshmello", "San Holo",
+    "Claude Debussy", "美波", "milet", "法老", "C418", "Troye Sivan",
+    "Juice WRLD", "Rich Brian", "Coi Leray", "Cardi B", "Nicki Minaj",
+    "Lizzo", "Ed Sheeran", "Taylor Swift", "Justin Bieber", "OneOne",
+  ];
+
+  const PHILOSOPHY = [
+    "Nietzsche", "Sartre", "Schopenhauer", "Kant", "Freud",
+    "Russell", "Maslow", "Thoreau", "周国平",
+  ];
+
+  const GAMES = [
+    "Minecraft · Deer_Sama", "Detroit: Become Human", "Kingdom Rush", "美丽水世界",
   ];
 
   return (
-    <section className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+    <section className="mx-auto max-w-4xl px-8 py-24 md:py-32">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
       />
+      
       {/* Header */}
-      <div className="mb-16">
-        <AnimateIn preset="fade">
-          <p className="font-serif italic text-lg text-gray-400 dark:text-gray-500">
-            {t("label")}
-          </p>
-        </AnimateIn>
-
-        <AnimateIn preset="fadeUp" delay={0.1}>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-            {t("headline")}{" "}
-            <span className="font-serif italic text-gray-400 dark:text-gray-500">
-              {t("headline_muted")}
-            </span>
-          </h1>
-        </AnimateIn>
-      </div>
+      <AnimateIn preset="fadeUp" className="mb-24">
+        <p className="mb-6 text-xs font-mono tracking-widest text-gray-400 uppercase">
+          {t("label")}
+        </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl max-w-2xl leading-tight">
+          {t("headline")}{" "}
+          <span className="text-gray-400 dark:text-gray-500">
+            {t("headline_muted")}
+          </span>
+        </h1>
+      </AnimateIn>
 
       {/* Photo + Bio */}
-      <div className="mb-24 grid gap-12 md:grid-cols-[280px_1fr]">
-        <AnimateIn preset="fade" delay={0.15}>
-          <div className="relative mx-auto w-56 md:mx-0 md:w-full">
-            <div className="overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm dark:shadow-gray-900/30">
-              <Image
-                src="/images/black.jpeg"
-                alt="Tseka Luk"
-                width={400}
-                height={500}
-                className="h-auto w-full object-cover"
-                priority
-              />
-            </div>
-            <div className="absolute -right-4 -bottom-4 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-2.5 shadow-sm dark:shadow-gray-900/30 space-y-0.5">
-              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-                {t("photo_tag")}
-              </p>
-              <p className="text-[10px] text-gray-400 dark:text-gray-500">
-                {t("photo_location")}
-              </p>
-            </div>
+      <AnimateIn preset="fadeUp" delay={0.1} className="mb-32 grid gap-12 md:grid-cols-[280px_1fr]">
+        <figure className="relative mx-auto w-full max-w-[280px] md:mx-0 group">
+          <div className="aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm transition-all duration-700">
+            <Image
+              src="/images/black.jpeg"
+              alt="Tseka Luk"
+              width={400}
+              height={500}
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              priority
+            />
           </div>
-        </AnimateIn>
+          <figcaption className="mt-4 flex justify-between text-[10px] font-mono tracking-widest text-gray-400 uppercase">
+            <span>{t("photo_tag")}</span>
+            <span>{t("photo_location")}</span>
+          </figcaption>
+        </figure>
 
-        <AnimateIn preset="fadeUp" delay={0.2}>
-          <div className="space-y-6 text-base leading-relaxed text-gray-600 dark:text-gray-400">
+        <div className="flex flex-col justify-center space-y-12 text-base leading-relaxed text-gray-600 dark:text-gray-400">
+          <div className="space-y-6">
             <p>{t("bio_1")}</p>
             <p>{t("bio_2")}</p>
             <p>{t("bio_3")}</p>
-
-            <div className="mt-4 grid grid-cols-4 gap-3 pt-4">
-              {[
-                { target: 19, label: t("stat_projects") },
-                { target: 10, label: t("stat_awards") },
-                { target: 6, label: t("stat_first_prizes") },
-                { target: 8, label: t("stat_certs") },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 p-3 text-center"
-                >
-                  <p className="text-2xl font-bold text-foreground">
-                    <CountUp target={stat.target} />
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
-        </AnimateIn>
-      </div>
+
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 pt-6 border-t border-gray-100 dark:border-gray-800/50">
+            {[
+              { target: 19, label: t("stat_projects") },
+              { target: 10, label: t("stat_awards") },
+              { target: 6, label: t("stat_first_prizes") },
+              { target: 8, label: t("stat_certs") },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <p className="text-2xl font-light text-foreground mb-1">
+                  <CountUp target={stat.target} />
+                </p>
+                <p className="text-[11px] uppercase tracking-widest text-gray-400 dark:text-gray-500">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </AnimateIn>
 
       {/* Personality */}
-      <div className="mb-24">
-        <AnimateIn preset="fade" inView>
-          <h2 className="mb-8 font-serif italic text-2xl text-gray-400 dark:text-gray-500">
-            {t("personality_label")}
-          </h2>
-        </AnimateIn>
-
-        {/* INTP logician illustration */}
-        <AnimateIn preset="fade" inView>
-          <div className="overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900">
-            <img
+      <AnimateIn preset="fadeUp" className="mb-32">
+        <h2 className="mb-12 text-sm font-mono tracking-widest text-gray-500 dark:text-gray-400 uppercase">
+          {t("personality_label")}
+        </h2>
+        <div className="grid gap-12 md:grid-cols-2 items-center">
+          <div className="overflow-hidden rounded-2xl bg-gray-50/50 dark:bg-gray-900/50">
+            <Image
               src="/images/intp-logician.svg"
-              alt="INTP The Logician — 16Personalities"
+              alt="INTP The Logician"
               width={800}
               height={400}
-              loading="lazy"
-              className="w-full h-auto"
+              className="w-full h-auto mix-blend-multiply dark:mix-blend-screen opacity-90 transition-opacity hover:opacity-100"
             />
           </div>
-        </AnimateIn>
-
-        {/* Badge cards */}
-        <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          <AnimateIn preset="fadeUp" inView delay={0.1}>
-            <div className="flex items-center gap-5 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 transition-colors hover:border-[var(--color-accent)]/40 hover:bg-[var(--color-accent)]/5">
-              <img
+          <div className="space-y-10">
+            <div className="group flex gap-5 items-start">
+              <Image
                 src="/images/intp-badge.svg"
                 alt="INTP"
-                width={80}
-                height={80}
-                loading="lazy"
-                className="h-20 w-20 shrink-0"
+                width={64}
+                height={64}
+                className="h-16 w-16 shrink-0 opacity-80 transition-opacity group-hover:opacity-100"
               />
               <div>
-                <p className="text-lg font-bold tracking-tight text-foreground">
-                  {t("personality_intp_name")}
-                </p>
-                <p className="text-sm font-medium text-[var(--color-accent-dark)]">
-                  {t("personality_intp_subtitle")}
-                </p>
-                <p className="mt-1.5 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+                <div className="flex items-baseline gap-4 mb-2">
+                  <h3 className="text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-[var(--color-accent)]">
+                    {t("personality_intp_name")}
+                  </h3>
+                  <span className="text-sm text-gray-400">{t("personality_intp_subtitle")}</span>
+                </div>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
                   {t("personality_intp_desc")}
                 </p>
-                <p className="mt-2.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                  {t("personality_intp_source")}
-                </p>
+                <p className="text-[10px] font-mono text-gray-400/80 uppercase tracking-widest">{t("personality_intp_source")}</p>
               </div>
             </div>
-          </AnimateIn>
 
-          <AnimateIn preset="fadeUp" inView delay={0.2}>
-            <div className="flex items-center gap-5 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 transition-colors hover:border-[var(--color-accent)]/40 hover:bg-[var(--color-accent)]/5">
-              <img
+            <div className="group flex gap-5 items-start">
+              <Image
                 src="/images/4w5-badge.svg"
                 alt="4w5"
-                width={80}
-                height={80}
-                loading="lazy"
-                className="h-20 w-20 shrink-0"
+                width={64}
+                height={64}
+                className="h-16 w-16 shrink-0 opacity-80 transition-opacity group-hover:opacity-100"
               />
               <div>
-                <p className="text-lg font-bold tracking-tight text-foreground">
-                  {t("personality_4w5_name")}
-                </p>
-                <p className="text-sm font-medium text-[var(--color-accent-dark)]">
-                  {t("personality_4w5_subtitle")}
-                </p>
-                <p className="mt-1.5 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+                <div className="flex items-baseline gap-4 mb-2">
+                  <h3 className="text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-[var(--color-accent)]">
+                    {t("personality_4w5_name")}
+                  </h3>
+                  <span className="text-sm text-gray-400">{t("personality_4w5_subtitle")}</span>
+                </div>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
                   {t("personality_4w5_desc")}
                 </p>
-                <p className="mt-2.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                  {t("personality_4w5_source")}
-                </p>
+                <p className="text-[10px] font-mono text-gray-400/80 uppercase tracking-widest">{t("personality_4w5_source")}</p>
               </div>
             </div>
-          </AnimateIn>
+          </div>
         </div>
-      </div>
+      </AnimateIn>
 
       {/* Timeline */}
-      <div className="mb-24">
-        <AnimateIn preset="fade" inView>
-          <h2 className="mb-8 font-serif italic text-2xl text-gray-400 dark:text-gray-500">
-            {t("journey_label")}
-          </h2>
-        </AnimateIn>
-        <div>
+      <AnimateIn preset="fadeUp" className="mb-32">
+        <h2 className="mb-12 text-sm font-mono tracking-widest text-gray-500 dark:text-gray-400 uppercase">
+          {t("journey_label")}
+        </h2>
+        <div className="flex flex-col">
           {TIMELINE.map((entry) => (
-            <TimelineItem
-              key={entry.year}
-              year={entry.year}
-              label={entry.label}
-              icon={entry.icon}
-            />
+            <div key={entry.year} className="group grid gap-4 py-5 md:grid-cols-[120px_1fr] border-b border-gray-100 dark:border-gray-800/50 last:border-0 hover:border-gray-300 dark:hover:border-gray-700 transition-colors">
+              <span className="font-mono text-sm tracking-widest text-gray-400 dark:text-gray-500 transition-colors group-hover:text-foreground">
+                {entry.year}
+              </span>
+              <span className="text-base text-gray-700 dark:text-gray-300 transition-colors group-hover:text-foreground">
+                {entry.label}
+              </span>
+            </div>
           ))}
         </div>
-      </div>
+      </AnimateIn>
 
       {/* Awards */}
-      <div className="mb-24">
-        <AnimateIn preset="fade" inView>
-          <div className="mb-8 flex items-center gap-3">
-            <h2 className="font-serif italic text-2xl text-gray-400">
-              {t("awards_label")}
-            </h2>
-            <span className="rounded-full bg-[var(--color-accent)]/20 px-3 py-0.5 text-xs font-medium text-[var(--color-accent-fg)]">
-              {t("awards_count")}
-            </span>
-          </div>
-          <p className="mt-2 text-sm text-gray-400 dark:text-gray-500">
-            {t("awards_description")}
-          </p>
-        </AnimateIn>
-
-        <AnimateInGroup stagger="normal" inView className="space-y-0">
-          {AWARDS.map((award) => (
-            <AnimateIn key={award.title} preset="fadeUp" inView>
-              <div
-                className={`flex items-center gap-3 border-t py-3 ${award.highlight
-                  ? "border-amber-50 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-900/20"
-                  : "border-gray-100 dark:border-gray-800"
-                  } rounded-lg px-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800`}
-              >
-                <span className="shrink-0">{award.icon}</span>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-gray-800 dark:text-gray-300">
-                    {award.title}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {award.level}
-                  </p>
-                  <p className="mt-0.5 text-[11px] leading-snug text-gray-400 dark:text-gray-500">
-                    {award.detail}
-                  </p>
-                </div>
-                <span className="shrink-0 font-mono text-xs text-gray-400 dark:text-gray-500">
-                  {award.year}
-                </span>
+      <AnimateIn preset="fadeUp" className="mb-32">
+        <div className="mb-12 flex items-baseline gap-4">
+          <h2 className="text-sm font-mono tracking-widest text-gray-500 dark:text-gray-400 uppercase">
+            {t("awards_label")}
+          </h2>
+          <span className="text-[10px] font-medium text-[var(--color-accent)] px-2 py-0.5 rounded-full bg-[var(--color-accent)]/10">
+            {t("awards_count")}
+          </span>
+        </div>
+        <div className="flex flex-col">
+          {AWARDS.map((award, i) => (
+            <div
+              key={i}
+              className="group flex flex-col justify-between py-5 border-b border-gray-100 dark:border-gray-800/50 last:border-0 sm:flex-row sm:items-center gap-4 hover:border-gray-300 dark:hover:border-gray-700 transition-colors"
+            >
+              <div className="md:w-3/5">
+                <p className="text-base font-medium text-foreground transition-colors group-hover:text-[var(--color-accent)]">
+                  {award.title}
+                </p>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                  {award.level}
+                </p>
               </div>
-            </AnimateIn>
+              <div className="flex flex-col items-start sm:items-end">
+                <p className="text-sm text-gray-600 dark:text-gray-400">{award.detail}</p>
+                <p className="font-mono text-xs tracking-wider text-gray-400 dark:text-gray-500 mt-1">{award.year}</p>
+              </div>
+            </div>
           ))}
-        </AnimateInGroup>
-      </div>
+        </div>
+      </AnimateIn>
 
       {/* Credentials */}
-      <div className="mb-24">
-        <AnimateIn preset="fade" inView>
-          <h2 className="mb-8 font-serif italic text-2xl text-gray-400 dark:text-gray-500">
-            {t("credentials_label")}
-          </h2>
-        </AnimateIn>
-
-        <AnimateInGroup
-          stagger="normal"
-          inView
-          className="grid gap-3 sm:grid-cols-2"
-        >
-          {CERTS.map((cert) => (
-            <AnimateIn key={cert.label} preset="fadeUp" inView>
-              <div className="flex items-start gap-3 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-3 transition-colors hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/5">
-                <span className="mt-0.5 shrink-0">{cert.icon}</span>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {cert.label}
-                </p>
-              </div>
-            </AnimateIn>
+      <AnimateIn preset="fadeUp" className="mb-32">
+        <h2 className="mb-12 text-sm font-mono tracking-widest text-gray-500 dark:text-gray-400 uppercase">
+          {t("credentials_label")}
+        </h2>
+        <div className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 md:grid-cols-3">
+          {CERTS.map((cert, i) => (
+            <div key={i} className="group flex items-start">
+              <span className="text-sm text-gray-600 dark:text-gray-400 transition-colors group-hover:text-foreground">
+                {cert}
+              </span>
+            </div>
           ))}
-        </AnimateInGroup>
-      </div>
+        </div>
+      </AnimateIn>
 
-      {/* Things I believe */}
-      <div className="mb-24">
-        <AnimateIn preset="fade" inView>
-          <h2 className="mb-8 font-serif italic text-2xl text-gray-400 dark:text-gray-500">
-            {t("beliefs_label")}
-          </h2>
-        </AnimateIn>
-        <AnimateInGroup stagger="normal" inView className="space-y-4">
+      {/* Beliefs */}
+      <AnimateIn preset="fadeUp" className="mb-32">
+        <h2 className="mb-12 text-sm font-mono tracking-widest text-gray-500 dark:text-gray-400 uppercase">
+          {t("beliefs_label")}
+        </h2>
+        <div className="space-y-16 mt-8">
           {beliefs.map((belief, i) => (
-            <AnimateIn key={i} preset="fadeUp" inView>
-              <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-6 py-5">
-                <p className="text-base leading-relaxed text-gray-700 dark:text-gray-300">
-                  &ldquo;{belief.quote}&rdquo;
+            <div key={i} className="max-w-3xl">
+              <p className="text-xl md:text-2xl font-light leading-snug text-foreground">
+                &ldquo;{belief.quote}&rdquo;
+              </p>
+              {belief.credit && (
+                <p className="mt-6 text-xs font-mono tracking-widest text-gray-500 dark:text-gray-400 uppercase">
+                  — {belief.credit}
                 </p>
-                {belief.credit && (
-                  <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">{belief.credit}</p>
-                )}
-              </div>
-            </AnimateIn>
+              )}
+            </div>
           ))}
-        </AnimateInGroup>
-      </div>
+        </div>
+      </AnimateIn>
 
       {/* Life */}
-      <div className="mb-24">
-        <AnimateIn preset="fade" inView>
-          <h2 className="mb-8 font-serif italic text-2xl text-gray-400 dark:text-gray-500">
-            {t("life_label")}
-          </h2>
-        </AnimateIn>
-
-        <div className="space-y-6">
-          {/* Music */}
-          <AnimateIn preset="fadeUp" inView>
-            <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-6">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                {t("life_music")}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Glass Animals",
-                  "NINEONE# 乃万",
-                  "Metro Boomin",
-                  "Marshmello",
-                  "San Holo",
-                  "Claude Debussy",
-                  "美波",
-                  "milet",
-                  "法老",
-                  "C418",
-                  "Troye Sivan",
-                  "Juice WRLD",
-                  "Rich Brian",
-                  "Coi Leray",
-                  "Cardi B",
-                  "Nicki Minaj",
-                  "Lizzo",
-                  "Ed Sheeran",
-                  "Taylor Swift",
-                  "Justin Bieber",
-                  "OneOne",
-                ].map((artist) => (
-                  <span
-                    key={artist}
-                    className="rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-400"
-                  >
-                    {artist}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </AnimateIn>
-
-          {/* Philosophy */}
-          <AnimateIn preset="fadeUp" inView>
-            <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-6">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                {t("life_philosophy")}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Nietzsche",
-                  "Sartre",
-                  "Schopenhauer",
-                  "Kant",
-                  "Freud",
-                  "Russell",
-                  "Maslow",
-                  "Thoreau",
-                  "周国平",
-                ].map((p) => (
-                  <span
-                    key={p}
-                    className="rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-400"
-                  >
-                    {p}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </AnimateIn>
-
-          {/* Games */}
-          <AnimateIn preset="fadeUp" inView>
-            <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-6">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                {t("life_games")}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Minecraft  ·  Deer_Sama",
-                  "Detroit: Become Human",
-                  "Kingdom Rush",
-                  "美丽水世界",
-                ].map((g) => (
-                  <span
-                    key={g}
-                    className="rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-400"
-                  >
-                    {g}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </AnimateIn>
+      <AnimateIn preset="fadeUp" className="mb-32">
+        <h2 className="mb-12 text-sm font-mono tracking-widest text-gray-500 dark:text-gray-400 uppercase">
+          {t("life_label")}
+        </h2>
+        <div className="space-y-12 max-w-3xl">
+          <div>
+            <h3 className="mb-3 text-[10px] font-mono tracking-widest text-gray-400 uppercase">
+              {t("life_music")}
+            </h3>
+            <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
+              {MUSIC.join(" · ")}
+            </p>
+          </div>
+          <div>
+            <h3 className="mb-3 text-[10px] font-mono tracking-widest text-gray-400 uppercase">
+              {t("life_philosophy")}
+            </h3>
+            <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
+              {PHILOSOPHY.join(" · ")}
+            </p>
+          </div>
+          <div>
+            <h3 className="mb-3 text-[10px] font-mono tracking-widest text-gray-400 uppercase">
+              {t("life_games")}
+            </h3>
+            <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
+              {GAMES.join(" · ")}
+            </p>
+          </div>
         </div>
-      </div>
+      </AnimateIn>
 
       {/* Contact */}
-      <div
-        id="contact"
-        className="border-t border-gray-200 dark:border-gray-700 pt-12 text-center"
-      >
-        <AnimateIn preset="fadeUp" inView>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+      <AnimateIn preset="fadeUp" className="pt-24 border-t border-gray-100 dark:border-gray-800/50">
+        <div className="text-center md:text-left md:flex md:items-center md:justify-between">
+          <h2 className="text-2xl font-light tracking-tight text-foreground md:text-4xl mb-8 md:mb-0">
             {t("contact_headline")}
           </h2>
-          <div className="mt-8">
+          <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
             <a
               href="mailto:contact@tsekaluk.dev"
-              className="inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-white px-7 py-3 text-sm font-medium text-white dark:text-gray-900 transition-colors hover:bg-gray-800 dark:hover:bg-gray-200"
+              className="inline-flex h-11 items-center gap-3 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-transform hover:scale-105 hover:bg-foreground/90"
             >
               <Mail className="h-4 w-4" />
               contact@tsekaluk.dev
             </a>
-            <ResumeDownloadButton label={t("resume_download")} />
+            <div className="h-11 flex items-center">
+              <ResumeDownloadButton label={t("resume_download")} />
+            </div>
           </div>
-        </AnimateIn>
-      </div>
+        </div>
+      </AnimateIn>
     </section>
   );
 }

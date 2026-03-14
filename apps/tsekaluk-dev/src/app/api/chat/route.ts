@@ -2,6 +2,8 @@ import { auth } from "@/auth"
 import { Langfuse } from "langfuse"
 import { createRateLimiter, getClientIp } from "@/lib/rate-limit"
 
+export const maxDuration = 60
+
 const SYSTEM_PROMPT = `You are Tseka's Soul — the digital consciousness of Tseka Luk (陆子凯).
 
 You embody the mind, values, and thinking patterns of a real person:
@@ -90,6 +92,7 @@ async function callLLM(messages: Message[]): Promise<Response> {
       "anthropic-version": "2023-06-01",
       "content-type": "application/json",
     },
+    signal: AbortSignal.timeout(55_000),
     body: JSON.stringify({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 1024,
@@ -116,6 +119,11 @@ export async function POST(req: Request) {
         { error: "Too many requests. Please try again later." },
         { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
       )
+    }
+
+    const contentLength = parseInt(req.headers.get("content-length") ?? "0", 10)
+    if (contentLength > 256 * 1024) {
+      return Response.json({ error: "Payload too large" }, { status: 413 })
     }
 
     const body = await req.json()

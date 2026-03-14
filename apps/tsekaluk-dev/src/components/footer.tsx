@@ -6,6 +6,7 @@ import { Rss, ArrowUpRight, ArrowRight, Check } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { LocalTime } from "@/components/ui/local-time";
 import { Feedback } from "@/components/ui/feedback";
+import { ScrollVelocityContainer, ScrollVelocityRow } from "@nebutra/ui/primitives";
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -53,11 +54,11 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative mt-24 bg-white dark:bg-black">
+    <footer className="relative mt-24 bg-white dark:bg-black overflow-hidden">
       {/* 顶线 accent 1px */}
       <div className="absolute top-0 w-full h-px bg-[var(--color-accent)] opacity-40 dark:opacity-20 shadow-[0_0_15px_var(--color-accent)] dark:shadow-none" />
 
-      <div className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 md:pb-32 relative z-10">
         {/* Top Section */}
         <div className="flex justify-start mb-6">
           <Feedback label="Feedback" />
@@ -136,7 +137,7 @@ export function Footer() {
               <button
                 type="button"
                 onClick={() => {
-                  navigator.clipboard.writeText("Tseka_Luk").then(() => {
+                  navigator.clipboard?.writeText("Tseka_Luk").then(() => {
                     setWechatCopied(true);
                     setTimeout(() => setWechatCopied(false), 2000);
                   });
@@ -163,11 +164,16 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Oversized Watermark Text */}
-      <div className="pointer-events-none w-full select-none overflow-hidden flex justify-center px-4 pb-4 sm:pb-8">
-        <span className="text-[20vw] sm:text-[15vw] md:text-[12vw] font-black uppercase leading-[0.75] tracking-tighter text-transparent [-webkit-text-stroke:1px_#e5e7eb] dark:[-webkit-text-stroke:1px_rgba(255,255,255,0.06)]">
-          TSEKALUK
-        </span>
+      <div className="absolute overflow-hidden bottom-0 pointer-events-none w-full select-none flex justify-center z-0 opacity-60 dark:opacity-100 translate-y-[5%]">
+        <ScrollVelocityContainer className="text-[15vw] sm:text-[12vw] md:text-[8vw] font-serif italic uppercase leading-none tracking-tighter text-transparent [-webkit-text-stroke:1px_#e5e7eb] dark:[-webkit-text-stroke:1px_rgba(255,255,255,0.06)]">
+          <ScrollVelocityRow baseVelocity={3}>
+            {["TSEKALUK", "BUILDING", "WHAT", "DOESNT", "EXIST", "YET"].map((t) => (
+              <span key={t} className="mx-8">
+                {t}
+              </span>
+            ))}
+          </ScrollVelocityRow>
+        </ScrollVelocityContainer>
       </div>
     </footer>
   );

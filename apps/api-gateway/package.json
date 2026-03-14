@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "generate:spec": "tsx scripts/export-spec.ts"
   },
   "dependencies": {
     "@clerk/backend": "^3.0.1",
@@ -19,6 +20,8 @@
     "@hono/zod-openapi": "^1.2.2",
     "@hono/zod-validator": "^0.7.6",
     "@nebutra/alerting": "workspace:*",
+    "@nebutra/audit": "workspace:*",
+    "@nebutra/event-bus": "workspace:*",
     "@nebutra/cache": "workspace:*",
     "@nebutra/db": "workspace:*",
     "@nebutra/errors": "workspace:*",
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@prisma/client": "^7.4.2",
+    "@redocly/cli": "^1.34.0",
     "@types/node": "^22.19.15",
     "@vitest/coverage-v8": "^4.0.18",
     "tsx": "^4.21.0",

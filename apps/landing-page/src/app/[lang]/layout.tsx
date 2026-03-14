@@ -1,7 +1,8 @@
 import Script from "next/script";
-import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
 import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import {
   getMessages,
   getTranslations,
@@ -13,26 +14,6 @@ import { routing, type Locale } from "@/i18n/routing";
 import { Providers } from "../providers";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { seoContent } from "@/lib/landing-content";
-
-const inter = Inter({
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
-  variable: "--font-sans",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-mono",
-  preload: false,
-});
-
-const notoSansSC = Noto_Sans_SC({
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-cn",
-  preload: false,
-});
 
 interface LangLayoutProps {
   children: React.ReactNode;
@@ -53,26 +34,83 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://nebutra.com/#organization",
     name: "Nebutra",
+    alternateName: "云毓智能",
+    legalName: "无锡云毓智能科技有限公司",
     url: "https://nebutra.com",
     logo: "https://nebutra.com/icon.png",
+    foundingDate: "2024",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "无锡市",
+      addressRegion: "江苏省",
+      addressCountry: "CN",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: "support@nebutra.com",
+        availableLanguage: ["Chinese", "English"],
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: "sales@nebutra.com",
+        availableLanguage: ["Chinese", "English"],
+      },
+    ],
     sameAs: [
       "https://github.com/Nebutra/Nebutra-Sailor",
       "https://x.com/nebutra",
+      "https://linkedin.com/company/nebutra",
     ],
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Nebutra Sailor",
+    "@id": "https://nebutra.com/#website",
+    name: "Nebutra",
     url: "https://nebutra.com",
     description: seoContent.description,
+    publisher: { "@id": "https://nebutra.com/#organization" },
+    inLanguage: ["en", "zh"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Nebutra Sailor",
+    applicationCategory: "DeveloperApplication",
+    url: "https://github.com/Nebutra/Nebutra-Sailor",
+    description:
+      "Production-ready Next.js monorepo template for AI SaaS products",
+    author: { "@id": "https://nebutra.com/#organization" },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+    },
   },
 ];
 
 function toSafeJsonLd(value: unknown): string {
   return JSON.stringify(value).replace(/</g, "\\u003c");
 }
+
+/** Map next-intl locale codes → hreflang BCP-47 values for <link rel="alternate"> */
+const hreflangMap: Record<string, string> = {
+  en: "en",
+  zh: "zh-Hans",
+  ja: "ja",
+  ko: "ko",
+  es: "es",
+  fr: "fr",
+  de: "de",
+};
+
+const BASE_URL = "https://nebutra.com";
 
 export async function generateMetadata({
   params,
@@ -83,9 +121,26 @@ export async function generateMetadata({
   if (!hasLocale(routing.locales, lang)) return {};
 
   const t = await getTranslations({ locale: lang, namespace: "metadata" });
+
+  // Build hreflang map: each locale → its canonical URL prefix
+  // Default locale (en) uses no path prefix per `localePrefix: "as-needed"`
+  const languages: Record<string, string> = {};
+  for (const locale of routing.locales) {
+    const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+    languages[hreflangMap[locale] ?? locale] = `${BASE_URL}${prefix}`;
+  }
+  languages["x-default"] = BASE_URL;
+
+  const canonicalPrefix =
+    lang === routing.defaultLocale ? "" : `/${lang}`;
+
   return {
     title: t("title"),
     description: t("description"),
+    alternates: {
+      canonical: `${BASE_URL}${canonicalPrefix}`,
+      languages,
+    },
     openGraph: {
       locale: ogLocaleMap[lang] ?? "en_US",
       title: t("title"),
@@ -115,7 +170,7 @@ export default async function LangLayout({
   return (
     <html
       lang={locale}
-      className={`${inter.variable} ${jetbrainsMono.variable} ${notoSansSC.variable}`}
+      className={`min-h-screen antialiased`}
       suppressHydrationWarning
     >
       <body className="antialiased">
@@ -141,6 +196,8 @@ export default async function LangLayout({
             </NextIntlClientProvider>
           </ErrorBoundary>
         </Providers>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

@@ -1,11 +1,30 @@
 import { context, trace } from "@opentelemetry/api";
 import pino from "pino";
-import type { Logger, Meta } from "./types.js";
+import type { Logger, Meta } from "./types";
 
 const isDev = process.env.NODE_ENV === "development";
 const isTest = process.env.NODE_ENV === "test";
 
+const REDACTED_FIELDS = [
+  "password",
+  "token",
+  "secret",
+  "apiKey",
+  "api_key",
+  "authorization",
+  "cookie",
+  "accessToken",
+  "access_token",
+  "refreshToken",
+  "refresh_token",
+  "privateKey",
+  "private_key",
+  "creditCard",
+  "cardNumber",
+];
+
 const pinoInstance = pino({
+  redact: { paths: REDACTED_FIELDS, censor: "[REDACTED]" },
   ...(isTest
     ? { level: "silent" }
     : {

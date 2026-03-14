@@ -1,316 +1,298 @@
 {
   "nav": {
-    "features": "機能",
-    "pricing": "料金",
-    "docs": "ドキュメント",
+    "features": "Features",
+    "pricing": "Pricing",
+    "docs": "Documentation",
     "github": "GitHub",
-    "signIn": "ログイン",
-    "getStarted": "はじめる"
+    "signIn": "Sign In",
+    "getStarted": "Get Started"
   },
   "hero": {
-    "badge": "AGPLv3ライセンス · プロダクション対応",
-    "headline1": "SaaSを",
-    "headline2": "数ヶ月ではなく数週間でリリース。",
-    "subheadline": "マルチテナンシー、AIインフラ、課金機能など、ローンチに必要なすべてを備えたプロダクション対応モノレポ。",
-    "copyLabel": "コピー",
-    "copiedLabel": "コピーしました！",
-    "ctaGetStarted": "はじめる",
-    "ctaViewGitHub": "GitHubで見る →"
+    "badge": "Nebutra Intelligence · Leading AI Infrastructure",
+    "headline1": "The engineering foundation",
+    "headline2": "for production-grade AI.",
+    "subheadline": "Nebutra Sailor is a Next.js SaaS framework engineered for AI founders. It natively integrates Agent orchestration, multi-modal capabilities, and an enterprise-level monetization suite, turning AI concepts into scalable commercial products—not just technical demos.",
+    "copyLabel": "Copy Command",
+    "copiedLabel": "Copied",
+    "ctaGetStarted": "Start Building",
+    "ctaViewGitHub": "View on GitHub →"
   },
   "features": {
-    "sectionTitle": "初日からプロダクション品質で構築。",
+    "sectionTitle": "Out-of-the-box infrastructure, from prototype to scale.",
     "item0": {
-      "title": "初日からマルチテナント対応",
-      "description": "行レベルセキュリティ、組織の分離、テナントルーティングがすべての層に組み込まれています。後付けの対策は不要です。"
+      "title": "AI Application Infrastructure",
+      "description": "Built-in, production-tested Agent Frameworks and LLM orchestration engines. Bypass complex underlying abstractions and interact directly with structured intelligence APIs."
     },
     "item1": {
-      "title": "AIネイティブなインフラ",
-      "description": "OpenAI、Anthropic、Gemini上のプロバイダー抽象化。アプリケーションコードを変更せずにモデルを切り替えられます。"
+      "title": "Open Product Community (OPC)",
+      "description": "Future AI products require ecosystems, not silos. Designed with the OPC philosophy to provide standardized plugin structures connecting creators with developer networks."
     },
     "item2": {
-      "title": "課金機能が統合済み",
-      "description": "Stripeのサブスクリプション、使用量メーター、Webhookハンドラーがプロダクション対応で搭載 — デモ用ではありません。"
+      "title": "Enterprise SaaS Automation",
+      "description": "Deeply integrating the modern tech stack of Vercel, Supabase, and Stripe. Provides out-of-the-box row-level security, complex multi-tenant isolation, and global subscription billing."
     }
   },
   "cta": {
-    "heading": "リリースの準備はできていますか？",
-    "subheading": "5分以内にはじめられます。",
-    "copyLabel": "コピー",
-    "copiedLabel": "コピーしました！",
-    "startBuilding": "構築を開始する"
+    "heading": "Ready to deploy your next AI product?",
+    "subheading": "Initialize a complete, cloud-native SaaS architecture locally with a single terminal command.",
+    "copyLabel": "Copy Command",
+    "copiedLabel": "Copied",
+    "startBuilding": "Start Building"
   },
   "footer": {
     "links": {
-      "product": "プロダクト",
-      "docs": "ドキュメント",
-      "github": "GitHub",
-      "discord": "Discord"
+      "product": "Ecosystem",
+      "docs": "Developer Docs",
+      "github": "Source Code",
+      "discord": "Community"
     },
-    "copyright": "© 2024 Nebutra Intelligence",
-    "statusOnline": "オンライン"
+    "copyright": "© 2026 Nebutra Intelligence. All rights reserved.",
+    "statusOnline": "All systems operational"
   },
   "logoStrip": {
-    "tagline": "すでに信頼しているスタックで構築"
+    "tagline": "Engineered upon the premier technologies driving the modern web"
   },
   "legal": {
     "nav": {
-      "home": "ホーム",
-      "contact": "お問い合わせ"
+      "home": "Home",
+      "contact": "Contact"
     },
     "footer": {
-      "privacy": "プライバシーポリシー",
-      "terms": "利用規約",
-      "cookies": "Cookieポリシー",
-      "refund": "返金ポリシー",
-      "copyright": "Nebutra, Inc. All rights reserved."
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy",
+      "refund": "Refund Policy",
+      "copyright": "© Nebutra. All rights reserved."
     }
   },
   "legalPages": {
     "about": {
-      "title": "About Us — Nebutra",
-      "description": "Nebutra、私たちのミッション、価値観、およびオープンソースのエントリーパイプラインフレームワークの背後にあるチームについて教えてください。",
-      "heading": "Nebutraについて",
-      "subheading": "エントリーパイプラインフレームワークの未来を築く—オープンソース、AIネイティブ、および生産用。",
-      "missionTitle": "私たちのミッション",
-      "missionP1": "Nebutraは、すべてのSaaSチームが直面する月々のボイラープレート作業を削減するために存在する。私たちの考えでは、素晴らしい基盤から素晴らしい製品を構築するのが最も効果的である。",
-      "missionP2": "私たちのオープンソースフレームワークは、マルチテナント、請求、認証、およびAIインフラを既に搭載しており、チームは自分の製品の特徴を注目して作業できるようにする。",
-      "valuesTitle": "私たちの価値観",
+      "title": "About Us — Nebutra Intelligence",
+      "description": "Discover the commercial vision and core engineering principles driving Nebutra Intelligence.",
+      "heading": "Company Overview",
+      "subheading": "A leading provider of AI Native & OPC Infrastructure solutions.",
+      "missionTitle": "Corporate Mission",
+      "missionP1": "Nebutra Intelligence is dedicated to eliminating the engineering friction between experimental AI prototypes and fully commercialized products. We deliver standardized AI Application Infrastructure and SaaS tooling, allowing developers to focus purely on business logic rather than underlying operational complexities.",
+      "missionP2": "Guided by the Open Product Community (OPC) philosophy, we believe that next-generation AI products represent a dense intersection of rigorous code architecture, hacker culture, and expansive developer networks.",
+      "valuesTitle": "Core Technical Principles",
       "values": {
         "0": {
-          "title": "オープンソース最初",
-          "description": "私たちの開発はオープンソースで行われます。私たちのコアフレームワークはAGPLv3ライセンスで、常に開発されます。"
+          "title": "System-Level Engineering",
+          "description": "Constructing software with a stringent systems engineering mindset. We ship only heavily tested, fault-tolerant architectures, rejecting fragile, experimental demos."
         },
         "1": {
-          "title": "生産用",
-          "description": "すべての機能はバトルテスト済みです。デモワーカー、半分の抽象化は一切ありません。"
+          "title": "Production Readiness",
+          "description": "No compromises. Every system component is forged in high-concurrency, authentic commercial environments to guarantee sustained enterprise-grade performance."
         },
         "2": {
-          "title": "開発者体験",
-          "description": "良いDXは選択ではありません。API、ドキュメント、エラーメッセージについて過剰に注目しています。"
+          "title": "Open Source Innovation",
+          "description": "Transparency creates trust. By open-sourcing our core infrastructure, we enable global technical experts to audit and iterate upon our logic, accelerating architectural evolution."
         },
         "3": {
-          "title": "セキュリティがデフォルト",
-          "description": "ロールベースのセキュリティ、暗号化されたセクション、およびアーキブログはデフォルトで搭載されています。"
+          "title": "Inviolable Security",
+          "description": "From the very first line of code, our architecture defaults to enforcement of Row-Level Security (RLS), transit encryption, and comprehensive system auditing."
         },
         "4": {
-          "title": "コミュニティ駆動",
-          "description": "私たちのロードマップは、毎日Nebutraを活用する開発者たちの意見に依存しています。"
+          "title": "Developer Velocity",
+          "description": "R&D efficiency is a critical product metric. We relentlessly optimize for low API latency, elegant interfaces, and highly structured technical documentation."
         },
         "5": {
-          "title": "速く出す、頻繁に出す",
-          "description": "頻繁にリリースし、迅速にイテレーションし、完璧な製品は出産敵対的なものとみなすことはありません。"
+          "title": "Continuous Delivery",
+          "description": "Deploying agile iteration protocols. We establish rapid feedback loops through rigorous testing and frequent deployments, scaling the product capabilities responsively."
         }
       },
-      "companyInfoTitle": "会社情報",
+      "companyInfoTitle": "Organizational Compliance",
       "companyInfo": {
-        "legalName": "法人名",
-        "founded": "設立",
-        "headquarters": "本社所在地",
-        "jurisdiction": "管轄"
+        "legalName": "Legal Entity Registration",
+        "founded": "Registration Date",
+        "headquarters": "Global Operations Center",
+        "jurisdiction": "Governing Jurisdiction"
       },
-      "ctaHeading": "詳しく知りたいですか？",
-      "ctaDescription": "私たちのチームは、あなたのサポートを心から願っています。直接お気軽にお問い合わせください。",
-      "ctaButton": "お問い合わせ"
+      "ctaHeading": "Require deeper technical evaluation?",
+      "ctaDescription": "Contact our engineering specialists for an enterprise integration assessment or review the deployment documentation.",
+      "ctaButton": "Establish Contact"
     },
     "contact": {
-      "title": "お問い合わせ — Nebutra",
-      "description": "Nebutraのチームとお話しして、販売、サポート、法務、または一般質問をください。",
-      "heading": "お問い合わせ",
-      "subheading": "私たちがお待ちしています。下のチームにお気軽にお問い合わせください。",
+      "title": "Technical & Commercial Inquiry — Nebutra Intelligence",
+      "description": "The dedicated communication channel for commercial licensing, enterprise self-hosting, and advanced technical support.",
+      "heading": "Establish Support Connection",
+      "subheading": "We will dispatch a dedicated technical specialist or architect to evaluate your explicit requirements.",
       "contacts": {
         "general": {
-          "title": "一般的なお問い合わせ",
-          "description": "Nebutraに関する質問、パートナーシップ、その他について。"
+          "title": "Enterprise Consultation",
+          "description": "Preliminary discussions concerning ecological strategic partnerships and overarching architectural evolution."
         },
         "sales": {
-          "title": "営業",
-          "description": "価格、エンタープライズプラン、カスタムデプロイメント。"
+          "title": "Commercial Deployment",
+          "description": "Negotiation regarding closed-source licensing and specifics pertaining to private cluster-environment deployments."
         },
         "support": {
-          "title": "技術サポート",
-          "description": "インテグレーション、バグ、または技術的な問題に関するサポート。"
+          "title": "Expert-Level Support",
+          "description": "Targeted architectural guidance and troubleshooting services for active business integrations and core system debugging."
         },
         "legal": {
-          "title": "法務",
-          "description": "契約、ライセンス、および法務に関する質問。"
+          "title": "Legal & Compliance",
+          "description": "Inquiries related to open-source boundary definitions, enterprise compliance audits, and contract terms."
         },
         "privacy": {
-          "title": "プライバシー",
-          "description": "データ保護、GDPR、およびプライバシーリクエスト。"
+          "title": "Data Center Privacy",
+          "description": "Technical verification and compliance directives regarding GDPR and subsequent international data protection laws."
         },
         "security": {
-          "title": "セキュリティ",
-          "description": "脆弱性報告とセキュリティに関する懸念。"
+          "title": "Security Disclosures",
+          "description": "Securely submit technical reproduction reports concerning potential software vulnerabilities directly to our infrastructure team."
         }
       },
-      "formTitle": "お問い合わせ",
+      "formTitle": "Submission Portal",
       "form": {
-        "name": "お名前",
-        "email": "メールアドレス",
-        "company": "会社名",
-        "category": "カテゴリー",
+        "name": "Submitter Designation",
+        "email": "Official Email Address",
+        "company": "Affiliated Organization",
+        "category": "Domain of Requirement",
         "categories": {
-          "general": "一般的なお問い合わせ",
-          "sales": "営業",
-          "support": "技術サポート",
-          "legal": "法務",
-          "privacy": "プライバシー",
-          "partnership": "パートナーシップ",
-          "press": "プレス"
+          "general": "Corporate Consultation",
+          "sales": "Licensing & Architecture",
+          "support": "Developer Assistance",
+          "legal": "Legal & Compliance Boundaries",
+          "privacy": "Data Processing Policies",
+          "partnership": "Ecosystem Integrations",
+          "press": "Public Relations"
         },
-        "subject": "件名",
-        "message": "メッセージ",
-        "submit": "メッセージを送信",
-        "privacyNotice": "このフォームを送信することで、当社の",
-        "privacyLink": "プライバシーポリシー"
+        "subject": "Core Issue Summary",
+        "message": "Detailed Technical/Commercial Specifications",
+        "submit": "Transmit to Backend",
+        "privacyNotice": "Executing this network request signifies reading and consenting to our",
+        "privacyLink": "Systemic Privacy Infrastructure",
+        "submitting": "Entering processing queue...",
+        "successMessage": "Data transmitted successfully. The responsible operational team will issue a detailed response within 1-2 standard business days."
       },
-      "companyInfoTitle": "会社情報",
-      "socialMedia": "ソーシャルメディア"
+      "companyInfoTitle": "Operational Telemetry",
+      "socialMedia": "Primary Network Links"
     },
     "cookies": {
-      "title": "クッキー政策 — Nebutra",
-      "description": "Nebutraのウェブサイトおよびサービス上で使用するクッキーおよび類似技術について教えてください。",
-      "heading": "Cookieポリシー",
-      "effectiveDate": "施行日",
-      "lastUpdated": "最終更新日"
+      "title": "Data Retention Protocols — Nebutra",
+      "description": "Elucidating the platform's execution of necessary technical storage mechanics to maintain session states and platform analytics.",
+      "heading": "Technical Tracking Mechanics",
+      "effectiveDate": "Mandatory Enforcement Date",
+      "lastUpdated": "Latest Technical Revision"
     },
     "faq": {
-      "title": "よくある質問 — Nebutra",
-      "description": "Nebutra、価格、機能、およびサポートに関するよくある質問。",
-      "heading": "よくある質問",
-      "subheading": "よくある質問の答えをここに。",
+      "title": "Engineering Guidance & FAQ — Nebutra",
+      "description": "Comprehensive analysis of framework architecture, baseline topologies, and commercial deployment strategies.",
+      "heading": "Executive Deep Dive",
+      "subheading": "Supporting material optimized for systems engineering integration and executive commercial decision-making.",
       "categories": {
         "0": {
-          "name": "はじめに",
+          "name": "Architectural Overview",
           "questions": {
             "0": {
-              "q": "Nebutra Sailorとは何か？",
-              "a": "Nebutra Sailorは、Next.jsで構築されたオープンソース、生産用のSaaSフレームワークで、マルチテナント、請求、認証、およびAIインフラを既に搭載しています。"
+              "q": "What is the explicit operational purpose of Nebutra Sailor?",
+              "a": "Nebutra Sailor is a highly structured, production-ready Next.js AI SaaS framework. It bundles microservice functionalities, including corporate billing, multi-factor authentication, and multi-tenant isolation, eliminating boilerplate development overhead and allowing teams to hyper-focus on core structural AI implementation."
             },
             "1": {
-              "q": "Nebutraは無料ですか？",
-              "a": "はい、Nebutra SailorはAGPLv3ライセンスで無料です。また、チームがホストインフラとプレミアムサポートを望む場合は、管理クラウドプランも提供しています。"
+              "q": "How is the repository licensing structured?",
+              "a": "The underlying infrastructure strictly enforces the OSS AGPLv3 agreement, guaranteeing transparency and zero-cost usage. For organizations necessitating proprietary obfuscation and elevated rewrite guarantees, explicit closed-source commercial contracts are available."
             },
             "2": {
-              "q": "どのように始めるべきですか？",
-              "a": "NebutraのCLIコマンドを実行して新しいプロジェクトを構築し、ドキュメンテーションのQuickstartガイドを読み進めれば、5分以内で稼働できます。"
+              "q": "What is the speed of initial commercial evaluation?",
+              "a": "Extremely high-velocity. Using our customized Node CLI toolchain alongside the precise technical specification, a junior engineer can stand up an autonomous local Minimum Viable Product (MVP) instance within single-digit minutes."
             }
           }
         },
         "1": {
-          "name": "料金と課金",
+          "name": "Commercial Operations",
           "questions": {
             "0": {
-              "q": "何種類のプランが提供されていますか？",
-              "a": "無料、スターター、プロ、およびエントリーパイプラインプランが提供されます。価格ページをご覧ください。"
+              "q": "How wide is the tolerance for commercial scaling?",
+              "a": "Designed heavily on micro-component paradigms, structural load capacity maps seamlessly from zero-demand Free Tiers dynamically up to Enterprise thresholds serving multi-million monthly requests, entirely configured via dashboard constraints."
             },
             "1": {
-              "q": "いつでもプランを変更できますか？",
-              "a": "はい、いつでもプランをアップグレードまたはダウングレードできます。アップグレードは即座に効果し、ダウングレードは次回の請求サイクルで実施されます。"
+              "q": "How does subscription volatility affect standard accounting?",
+              "a": "We operate utilizing precise, second-level structural logging of resources and API throughput. Shifting constraints instantly reconciles against the accounting layer—either refunding prorated differentials or issuing automatic credits. There is absolutely no tier-freeze period."
             },
             "2": {
-              "q": "年間割引のプランはありますか？",
-              "a": "はい、年間割引のプランはあります。エントリーパイプラインの価格をご覧ください。"
-            },
-            "3": {
-              "q": "どのような支払い方法に対応していますか？",
-              "a": "Stripeを通じてどの主要クレジットカードを支払えますか？"
-            },
-            "4": {
-              "q": "無料トライアルがありますか？",
-              "a": "はい、すべての支払ったプランには14日間の無料トライアルが含まれています。クレジットカードは必要ありません。"
+              "q": "What processing infrastructure isolates payment vectors?",
+              "a": "Global cash routing fundamentally defers to Stripe server interfaces, guaranteeing strict PCI-DSS telemetry and processing integrity. Enterprise deployments may integrate private financial audit pipelines governed by custom SLA commitments."
             }
           }
         },
         "2": {
-          "name": "機能と技術",
+          "name": "System Engineering Layer",
           "questions": {
             "0": {
-              "q": "サポートされるAIプロバイダーはどれですか？",
-              "a": "OpenAI、Anthropic、およびGoogle Geminiは既にサポートされています。統一されたAPIにより、コードの変更なしでプロバイダーを切り替えることができます。"
+              "q": "Which fundamental intelligence abstractions are supported natively?",
+              "a": "The primary interaction logic dictates native interoperability over OpenAI, Anthropic, and Gemini standard specifications. This yields massive flexibility to hot-swap reasoning endpoints efficiently via variable mapping with zero degradation to the upstream commercial logic."
             },
             "1": {
-              "q": "マルチテナントはどのように実現されますか？",
-              "a": "マルチテナントは、Postgresのロールベースのセキュリティ、エントリーパイプラインのインフラ、およびAPIのすべてに含まれています。"
+              "q": "How is the risk of database obfuscation addressed?",
+              "a": "Implementation defaults intrinsically deploy Postgres Row-Level Security (RLS) policies tightly coupled with our serverless Tenant Resolution Routing primitives. This ensures hard partitions actively prevent critical application-level data contamination and execution overlap."
             },
             "2": {
-              "q": "カスタムインテグレーションのサービスは提供していますか？",
-              "a": "はい、アーキテクチャレビュー、カスタムインテグレーション、およびマージアシスタンスを提供しています。詳細については販売チームにお問い合わせください。"
-            },
-            "3": {
-              "q": "Nebutraはどのデータベースを使用しますか？",
-              "a": "NebutraはPostgreSQL（NeonまたはSupabase経由）とDrizzle ORMを使用し、型安全なデータベースアクセスを実現しています。"
+              "q": "Are there architectural restrictions on self-managed deployments?",
+              "a": "Absolutely none. The topology is fully decoupled. If the environment executes independent Node.js runtimes alongside healthy PostgreSQL clusters, full functionality is inherently preserved."
             }
           }
         },
         "3": {
-          "name": "セキュリティとコンプライアンス",
+          "name": "Systematic Integrity",
           "questions": {
             "0": {
-              "q": "データは安全ですか？",
-              "a": "はい。転送中および保存中の暗号化、行レベルセキュリティ、監査ログ、定期的なセキュリティ評価を実施しています。"
+              "q": "What protocols determine the perimeter's mechanical defense?",
+              "a": "Mechanisms execute mandatory TLS encryption through transmission, deterministic hashing algorithms for secrets mapping, and the ubiquitous recording of mutation events written strictly into internal time-series tracking ledgers."
             },
             "1": {
-              "q": "GDPRに準拠していますか？",
-              "a": "はい。GDPRおよびその他のプライバシー規制への準拠を支援するためのデータエクスポート、削除、同意管理ツールを提供しています。"
+              "q": "Does the topology respect major international privacy statutes?",
+              "a": "Yes, profoundly. Business modules supply out-of-the-box algorithmic implementations targeting consent withdrawal states, hard-deletion logic, and deep export queries conforming optimally to the GDPR and localized regulatory frameworks."
             },
             "2": {
-              "q": "SOC 2認証を取得していますか？",
-              "a": "現在、SOC 2 Type II認証の取得を進めています。現在のセキュリティドキュメントについてはお問い合わせください。"
-            },
-            "3": {
-              "q": "データ漏洩が発生した場合、どのように対応しますか？",
-              "a": "72時間以内の通知、根本原因分析、および修復手順を含むインシデント対応計画を備えています。"
+              "q": "What executes upon an anomalous catastrophic incident?",
+              "a": "Automated sentinels instantly alert core engineering vectors who force circuit blocks and implement swift triage. Governed by an advanced resolution handbook, fully transparent Incident Postmortems are universally disseminated within an absolute 72-hour window."
             }
           }
         },
         "4": {
-          "name": "サポート",
+          "name": "Technical Assistance Directives",
           "questions": {
             "0": {
-              "q": "サポートを受けるにはどうすればよいですか？",
-              "a": "コミュニティサポートはDiscordとGitHub Discussionsで利用できます。有料プランにはメールおよび優先サポートが含まれています。"
+              "q": "How is operational bottleneck troubleshooting resolved?",
+              "a": "Initial triage vectors target the rigorously maintained and peer-reviewed documentation matrix and verified community interactions. Procuring a standard or enterprise-level license decrypts access to private escalation queues resolving through direct internal engineering nodes."
             },
             "1": {
-              "q": "サポートの対応時間はいつですか？",
-              "a": "コミュニティサポートはDiscordで24時間365日ご利用いただけます。有料サポートは月曜日から金曜日、PST午前9時から午後6時まで対応しています。"
-            },
-            "2": {
-              "q": "コンサルティングサービスはありますか？",
-              "a": "はい、アーキテクチャレビュー、カスタムインテグレーション、移行支援を提供しています。詳細については営業までお問い合わせください。"
+              "q": "Do you extend physical or specialized environmental integration operations?",
+              "a": "This falls under our bespoke premium execution tier for upper-echelon corporate conglomerates. Our most senior architects deploy outly to perform code auditing against legacy architecture, manage delicate cloud relocations, and validate highly isolated network partitions."
             }
           }
         }
       },
-      "ctaHeading": "まだご質問がありますか？",
-      "ctaDescription": "私たちのチームは、あなたのサポートを心から願っています。直接お気軽にお問い合わせください。",
-      "ctaButton": "お問い合わせ",
-      "ctaEmail": "メールサポート"
+      "ctaHeading": "Require immediate technical synchronization?",
+      "ctaDescription": "Whether validating a specific API behavior schema or executing long-term integration agreements, interface directly with the engineering hierarchy.",
+      "ctaButton": "Receive Integration Instructions",
+      "ctaEmail": "Transmit Direct Message"
     },
     "privacy": {
-      "title": "プライバシーポリシー — Nebutra",
-      "description": "Nebutraが集めた、使用、および保護するあなたの個人情報について教えてください。",
-      "heading": "プライバシーポリシー",
-      "effectiveDate": "施行日",
-      "lastUpdated": "最終更新日"
+      "title": "Privacy & Information Defense Protocol — Nebutra",
+      "description": "Extensively documenting precisely how the infrastructure mechanics govern user autonomy and machine data isolation.",
+      "heading": "Information Protection Directives",
+      "effectiveDate": "Enforcement Epoch",
+      "lastUpdated": "Latest Structural Revision"
     },
     "refund": {
-      "title": "返金ポリシー — Nebutra",
-      "description": "Nebutraのサブスクリプションおよびサービスに関する返金ポリシーについて。",
-      "heading": "返金ポリシー",
-      "effectiveDate": "施行日",
-      "lastUpdated": "最終更新日"
+      "title": "Transaction Anomaly Protocols — Nebutra",
+      "description": "Rigorous delineation regarding exact capital rollback parameters across diverse structural engagement models.",
+      "heading": "Dispute Execution Framework",
+      "effectiveDate": "Enforcement Implementation Date",
+      "lastUpdated": "Revision Tracing Epoch"
     },
     "terms": {
-      "title": "利用規則 — Nebutra",
-      "description": "Nebutraのサービスの利用規則を確認してください。",
-      "heading": "利用規約",
-      "effectiveDate": "施行日",
-      "lastUpdated": "最終更新日"
+      "title": "Platform Interaction Treaty — Nebutra",
+      "description": "The exact defining technical guidelines outlining the required engagement behaviors between the software framework provider and executing agents.",
+      "heading": "Software Supply License Mechanics (Terms)",
+      "effectiveDate": "Execution Enforcement Date",
+      "lastUpdated": "Final Network Update"
     }
   },
   "metadata": {
-    "title": "Nebutra Sailor — オープンソースエンタープライズSaaSフレームワーク",
-    "description": "SaaSを数ヶ月ではなく数週間でリリース。マルチテナンシー、課金、認証、AIが組み込み済み。プロダクション対応、AGPLv3ライセンス。"
+    "title": "Nebutra Intelligence | AI Native & SaaS Architecture",
+    "description": "The next-generation engineering framework tailored for mainstream AI startups and enterprises. Designed utilizing stringent permission frameworks, it provides an immediate, fully functional commercial value platform."
   }
 }

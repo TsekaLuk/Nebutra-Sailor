@@ -22,14 +22,11 @@ function resolvePlanFromStatus(status: string): Plan {
   }
 }
 
-function extractStringField(data: unknown, field: string): string | undefined {
-  if (typeof data !== "object" || data === null) return undefined;
-  const v = (data as Record<string, unknown>)[field];
-  return typeof v === "string" ? v : undefined;
-}
-
 /**
  * Inngest function: react to Stripe billing events.
+ *
+ * event.data is fully typed via the EventSchemas in client.ts —
+ * no manual string extraction needed.
  *
  * Handles:
  *   - stripe/subscription.updated  → update Organization.plan from subscription status
@@ -41,6 +38,8 @@ export const processBillingEvent = inngest.createFunction(
   {
     id: "process-billing-event",
     name: "Process Stripe Billing Event",
+    concurrency: { limit: 5 },
+    retries: 3,
   },
   [
     { event: "stripe/subscription.updated" },
@@ -57,27 +56,18 @@ export const processBillingEvent = inngest.createFunction(
       eventName === "stripe/subscription.updated" ||
       eventName === "stripe/subscription.deleted"
     ) {
-      const organizationId = extractStringField(event.data, "organizationId");
-      const status =
-        eventName === "stripe/subscription.deleted"
-          ? "canceled"
-          : (extractStringField(event.data, "status") ?? "canceled");
+      const { organizationId, status } = event.data;
 
-      if (!organizationId) {
-        logger.warn("Stripe subscription event missing organizationId", {
-          eventName,
-        });
-        return;
-      }
-
-      const targetPlan = resolvePlanFromStatus(status);
+      const resolvedStatus =
+        eventName === "stripe/subscription.deleted" ? "canceled" : status;
+      const targetPlan = resolvePlanFromStatus(resolvedStatus);
 
       await step.run("update-organization-plan", async () => {
         await orgRepo.updateById(organizationId, { plan: targetPlan });
 
         logger.info("Organization plan updated", {
           organizationId,
-          status,
+          status: resolvedStatus,
           plan: targetPlan,
         });
       });
@@ -87,9 +77,7 @@ export const processBillingEvent = inngest.createFunction(
 
     if (eventName === "stripe/invoice.paid") {
       await step.run("log-invoice-paid", async () => {
-        const invoiceId = extractStringField(event.data, "invoiceId");
-        const organizationId = extractStringField(event.data, "organizationId");
-
+        const { invoiceId, organizationId } = event.data;
         logger.info("Stripe invoice paid", { invoiceId, organizationId });
       });
 
@@ -98,14 +86,11 @@ export const processBillingEvent = inngest.createFunction(
 
     if (eventName === "stripe/invoice.payment_failed") {
       await step.run("log-payment-failure", async () => {
-        const invoiceId = extractStringField(event.data, "invoiceId");
-        const organizationId = extractStringField(event.data, "organizationId");
-        const reason = extractStringField(event.data, "failureReason");
-
+        const { invoiceId, organizationId, failureReason } = event.data;
         logger.warn("Stripe invoice payment failed", {
           invoiceId,
           organizationId,
-          reason,
+          reason: failureReason,
         });
       });
 

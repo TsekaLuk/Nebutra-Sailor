@@ -19,15 +19,11 @@ export function getRedis(): Redis {
 }
 
 /**
- * Redis client instance (lazy initialized)
- * Returns null if not configured
+ * Redis client instance (lazy initialized).
+ * Throws at import time if UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN
+ * are not set, so misconfiguration is caught early rather than silently.
+ * Use getRedis() inside try/catch if the feature is truly optional.
  */
-export const redis = (() => {
-  try {
-    return getRedis();
-  } catch {
-    return null;
-  }
-})();
+export const redis = getRedis();
 
 export { Redis };

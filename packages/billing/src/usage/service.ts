@@ -1,3 +1,4 @@
+import { logger } from "@nebutra/logger";
 import type {
   UsageType,
   RecordUsageInput,
@@ -212,6 +213,6 @@ export function formatUsage(
 // Start periodic buffer flush
 if (typeof setInterval !== "undefined") {
   setInterval(() => {
-    flushUsageBuffer().catch(console.error);
+    flushUsageBuffer().catch((err: unknown) => logger.error("Usage buffer flush failed", err));
   }, BUFFER_FLUSH_INTERVAL);
 }

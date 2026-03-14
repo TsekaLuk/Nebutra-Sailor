@@ -22,6 +22,7 @@ spec:
         app.kubernetes.io/name: content-service
         app.kubernetes.io/component: service
     spec:
+      serviceAccountName: content-service
       terminationGracePeriodSeconds: 30
       containers:
         - name: content-service

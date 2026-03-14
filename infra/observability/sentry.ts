@@ -13,7 +13,11 @@ export function initSentry(): void {
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
     environment: process.env.NODE_ENV || "development",
-    release: process.env.npm_package_version,
+    // Format: "1.2.3+sha-abc1234" — links errors to both version and commit
+    release: process.env.SENTRY_RELEASE ??
+      (process.env.npm_package_version && process.env.GITHUB_SHA
+        ? `${process.env.npm_package_version}+${process.env.GITHUB_SHA.slice(0, 7)}`
+        : process.env.npm_package_version),
     
     // Performance monitoring
     tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1.0,

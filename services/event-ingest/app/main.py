@@ -10,6 +10,7 @@ import json
 import logging
 import os
 import sys
+from contextlib import asynccontextmanager
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
@@ -21,6 +22,8 @@ from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
 
+from _shared.errors import generic_exception_handler
+from _shared.middleware import RequestLoggingMiddleware
 from _shared.otel import instrument_app
 
 logging.basicConfig(level=logging.INFO)
@@ -74,19 +77,34 @@ class IngestResponse(BaseModel):
     duplicated: int
 
 
+_clickhouse_client: Client | None = None
+_idempotency_cache: dict[str, datetime] = {}
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        client = get_clickhouse_client()
+        client.command("SELECT 1")
+        logger.info("Event ingest service started and connected to ClickHouse")
+    except Exception as exc:  # pragma: no cover - startup log only
+        logger.warning("ClickHouse unavailable at startup: %s", exc)
+    yield
+
+
 app = FastAPI(
     title="Nebutra Event Ingest Service",
     description="Contract-first event ingestion for warehouse bronze layer",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
 instrument_app(app, service_name="event-ingest-service")
+app.add_middleware(RequestLoggingMiddleware)
+app.add_exception_handler(Exception, generic_exception_handler)
 
 # CORS is handled at the Hono API Gateway layer — do not add CORSMiddleware here.
 # This service is internal and should not be exposed directly to browsers.
-
-_clickhouse_client: Client | None = None
-_idempotency_cache: dict[str, datetime] = {}
 
 
 def _event_id(event: EventEnvelope) -> str:
@@ -148,16 +166,6 @@ def get_clickhouse_client() -> Client:
         _create_tables(_clickhouse_client)
 
     return _clickhouse_client
-
-
-@app.on_event("startup")
-def startup() -> None:
-    try:
-        client = get_clickhouse_client()
-        client.command("SELECT 1")
-        logger.info("Event ingest service started and connected to ClickHouse")
-    except Exception as exc:  # pragma: no cover - startup log only
-        logger.warning("ClickHouse unavailable at startup: %s", exc)
 
 
 @app.get("/")

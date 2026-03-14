@@ -1,9 +1,9 @@
 # Dockerfile for Python FastAPI services
 # Usage: docker build -f infra/docker/Dockerfile.python -t nebutra-SERVICE --build-arg SERVICE=ai .
 
-ARG PYTHON_VERSION=3.11
-
-FROM python:${PYTHON_VERSION}-slim as base
+# Pin to exact digest for reproducible builds.
+# Update monthly via: docker manifest inspect python:3.11-slim --verbose
+FROM python:3.11-slim@sha256:06fa338add3c2ab8daeff7304a6bb204c68f67743b13553a8999605fc8097c58 AS base
 
 # Prevent Python from writing pyc files
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -25,7 +25,7 @@ RUN addgroup --system --gid 1001 appgroup \
 # ============================================
 # Builder stage
 # ============================================
-FROM base as builder
+FROM base AS builder
 
 ARG SERVICE
 
@@ -44,7 +44,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 # ============================================
 # Production stage
 # ============================================
-FROM base as production
+FROM base AS production
 
 ARG SERVICE
 ENV SERVICE=${SERVICE}

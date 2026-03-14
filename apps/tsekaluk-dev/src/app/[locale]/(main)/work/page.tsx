@@ -23,6 +23,7 @@ export async function generateMetadata({
       languages: {
         en: "https://tsekaluk.dev/en/work",
         zh: "https://tsekaluk.dev/zh/work",
+        ja: "https://tsekaluk.dev/ja/work",
       },
     },
   };

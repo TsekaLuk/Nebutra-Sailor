@@ -2,10 +2,9 @@
 
 import * as React from "react"
 import { Command } from "cmdk"
-import { useRouter } from "@/i18n/navigation"
+import { useRouter, usePathname } from "@/i18n/navigation"
 import { useTheme } from "next-themes"
 import { useLocale } from "next-intl"
-import { useRouter as useNextRouter, usePathname } from "@/i18n/navigation"
 import { useAnalytics } from "@/hooks/use-analytics"
 import {
   Home,
@@ -50,7 +49,6 @@ const LOCALE_LABELS: Record<string, string> = {
 
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   const router = useRouter()
-  const nextRouter = useNextRouter()
   const pathname = usePathname()
   const { resolvedTheme, setTheme } = useTheme()
   const locale = useLocale()
@@ -64,7 +62,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
   const switchLocale = (newLocale: string) => {
     track("command_palette_locale_switch", { from: locale, to: newLocale })
-    nextRouter.replace(pathname, { locale: newLocale })
+    router.replace(pathname, { locale: newLocale })
     onOpenChange(false)
   }
 

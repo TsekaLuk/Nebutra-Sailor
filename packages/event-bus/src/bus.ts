@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { logger } from "@nebutra/logger";
 
 // Base event schema
 export const BaseEventSchema = z.object({
@@ -63,11 +64,29 @@ export class EventBus {
 
     await Promise.all(
       allHandlers.map(async (handler) => {
-        try {
-          await handler(validated);
-        } catch (error) {
-          console.error(`Event handler error for ${event.type}:`, error);
+        const MAX_ATTEMPTS = 3;
+        let lastError: unknown;
+
+        for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+          try {
+            await handler(validated);
+            return; // success — exit retry loop
+          } catch (error) {
+            lastError = error;
+            logger.warn(
+              `Event handler error for ${event.type} (attempt ${attempt}/${MAX_ATTEMPTS})`,
+              error,
+            );
+            if (attempt < MAX_ATTEMPTS) {
+              // Exponential backoff: 100ms, 200ms
+              await new Promise((r) => setTimeout(r, 100 * 2 ** (attempt - 1)));
+            }
+          }
         }
+
+        // All retries exhausted — send to DLQ
+        const { recordDeadLetter } = await import("./dlq.js");
+        recordDeadLetter(validated, handler.name || "anonymous", lastError, MAX_ATTEMPTS);
       }),
     );
   }

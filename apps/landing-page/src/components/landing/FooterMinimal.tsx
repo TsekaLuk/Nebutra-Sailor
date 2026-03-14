@@ -81,9 +81,23 @@ export function FooterMinimal() {
 
         {/* Bottom Row */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[color:var(--neutral-7)] pt-8 md:flex-row dark:border-white/10">
-          <p className="text-sm text-[color:var(--neutral-10)] dark:text-white/60">
-            {t("copyright")}
-          </p>
+          <div className="flex flex-col items-center gap-1 md:items-start">
+            <p className="text-sm text-[color:var(--neutral-10)] dark:text-white/60">
+              {t("copyright")}
+            </p>
+            {/* ICP 备案 — required for websites operated in mainland China.
+                Set NEXT_PUBLIC_ICP_NUMBER in .env to enable (e.g. 苏ICP备XXXXXXXX号) */}
+            {process.env.NEXT_PUBLIC_ICP_NUMBER && (
+              <a
+                href="https://beian.miit.gov.cn/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[color:var(--neutral-9)] transition-colors hover:text-[color:var(--neutral-11)] dark:text-white/40 dark:hover:text-white/60"
+              >
+                {process.env.NEXT_PUBLIC_ICP_NUMBER}
+              </a>
+            )}
+          </div>
 
           {/* Status indicator */}
           <a
