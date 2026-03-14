@@ -72,7 +72,7 @@ jobs:
     steps:
       # ── Checkout ─────────────────────────────────────────────────────────────
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Docker registry names must be all-lowercase; bash ,, expansion lowercases.
       - name: Set lowercase owner
@@ -240,7 +240,7 @@ jobs:
     steps:
       # ── Checkout ─────────────────────────────────────────────────────────────
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set lowercase owner
         id: lowercase
