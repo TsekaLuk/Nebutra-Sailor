@@ -20,7 +20,6 @@
     "@nebutra/icons": "workspace:*",
     "@nebutra/tokens": "workspace:*",
     "@nebutra/ui": "workspace:*",
-    "@radix-ui/react-presence": "^1.1.5",
     "@takumi-rs/image-response": "^0.71.4",
     "ai": "^6.0.116",
     "class-variance-authority": "^0.7.1",

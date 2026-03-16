@@ -56,9 +56,9 @@ function LetterGlitch({
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
+          r: parseInt(result[1]!, 16),
+          g: parseInt(result[2]!, 16),
+          b: parseInt(result[3]!, 16),
         }
       : null;
   };
@@ -78,9 +78,9 @@ function LetterGlitch({
   const initializeLetters = (columns: number, rows: number) => {
     grid.current = { columns, rows };
     letters.current = Array.from({ length: columns * rows }, () => ({
-      char: getRandomChar(),
-      color: getRandomColor(),
-      targetColor: getRandomColor(),
+      char: getRandomChar() || " ",
+      color: getRandomColor() || "#000",
+      targetColor: getRandomColor() || "#000",
       colorProgress: 1,
     }));
   };
@@ -122,8 +122,8 @@ function LetterGlitch({
     for (let i = 0; i < updateCount; i++) {
       const idx = Math.floor(Math.random() * letters.current.length);
       if (!letters.current[idx]) continue;
-      letters.current[idx].char = getRandomChar();
-      letters.current[idx].targetColor = getRandomColor();
+      letters.current[idx].char = getRandomChar() || " ";
+      letters.current[idx].targetColor = getRandomColor() || "#000";
       if (!smooth) {
         letters.current[idx].color = letters.current[idx].targetColor;
         letters.current[idx].colorProgress = 1;

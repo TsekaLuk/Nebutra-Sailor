@@ -294,3 +294,14 @@ export * from "./x-post-card";
 export * from "./base-badge";
 export * from "./base-button";
 export * from "./badge-1";
+
+// Phase 10: Missing root exports
+export * from "./animate-in";
+export * from "./chart";
+export * from "./enable-2fa-card";
+export * from "./fallback-card";
+export * from "./kbd";
+export * from "./loading-dots";
+export * from "./mesh-gradient-bg";
+export * from "./neuro-noise-bg";
+export * from "./waves-bg";

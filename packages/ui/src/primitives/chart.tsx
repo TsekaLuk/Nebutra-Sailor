@@ -170,7 +170,8 @@ export const ChartTooltipContent = React.forwardRef<
         return null;
       }
 
-      const [item] = payload;
+      const item = payload[0];
+      if (!item) return null;
       const key = `${labelKey || item.dataKey || item.name || "value"}`;
       const itemConfig = getPayloadConfigFromPayload(config, item, key);
       const value =
@@ -282,9 +283,9 @@ ChartTooltipContent.displayName = "ChartTooltipContent";
 
 export const ChartLegend = RechartsPrimitive.Legend;
 
-export interface ChartLegendContentProps
-  extends React.ComponentProps<"div">,
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> {
+export interface ChartLegendContentProps extends React.ComponentProps<"div"> {
+  payload?: any[];
+  verticalAlign?: "top" | "middle" | "bottom";
   hideIcon?: boolean;
   nameKey?: string;
 }

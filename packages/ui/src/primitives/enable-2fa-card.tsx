@@ -74,7 +74,7 @@ export function Enable2FACard({
       content: (
         <InputOTP
           maxLength={otpLength}
-          onComplete={onOtpComplete}
+          onComplete={onOtpComplete || (() => {})}
           render={({ slots }) => (
             <InputOTPGroup className="gap-2.5">
               {slots.map((_, i) => (

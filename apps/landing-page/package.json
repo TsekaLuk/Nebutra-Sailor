@@ -18,7 +18,6 @@
     "@nebutra/sanity": "workspace:*",
     "@nebutra/tokens": "workspace:*",
     "@nebutra/ui": "workspace:*",
-    "@radix-ui/react-slot": "^1.2.4",
     "@t3-oss/env-nextjs": "^0.13.10",
     "@vercel/analytics": "^1.6.1",
     "@vercel/speed-insights": "^1.3.1",

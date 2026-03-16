@@ -97,7 +97,7 @@ export function AnimateIn({
   className,
 }: AnimateInProps) {
   const shouldReduce = useFramerReducedMotion();
-  const base = PRESETS[preset];
+  const base = PRESETS[preset] || PRESETS.emerge;
 
   // Accessibility: honour prefers-reduced-motion
   const initial: any = shouldReduce ? { opacity: 0 } : base.initial;
@@ -179,7 +179,7 @@ export function AnimateInGroup({
         initial="initial"
         whileInView="animate"
         viewport={viewportSettings.once}
-        variants={container}
+        variants={container as any}
       >
         {children}
       </MotionDiv>
@@ -191,7 +191,7 @@ export function AnimateInGroup({
       className={className}
       initial="initial"
       animate="animate"
-      variants={container}
+      variants={container as any}
     >
       {children}
     </MotionDiv>

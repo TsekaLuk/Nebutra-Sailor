@@ -74,6 +74,10 @@ export { ThemeProvider } from "@lobehub/ui";
 export * from "./ascii-text";
 export * from "./ai-prompt-box";
 
+// Phase 10: Missing root exports
+export * from "./onboarding-checklist";
+export * from "./team-chat";
+
 // Animation
 export {
   AnimateIn,
