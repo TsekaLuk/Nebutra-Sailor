@@ -100,11 +100,15 @@ export function AnimateIn({
   const base = PRESETS[preset] || PRESETS.emerge;
 
   // Accessibility: honour prefers-reduced-motion
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const initial: any = shouldReduce ? { opacity: 0 } : base.initial;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const animate: any = shouldReduce ? { opacity: 1 } : base.animate;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const exit: any = (
     shouldReduce ? { opacity: 0 } : ("exit" in base ? base.exit : undefined)
   );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const transition: any = {
     ...(shouldReduce ? { duration: 0.15 } : base.transition),
     delay,
@@ -179,6 +183,7 @@ export function AnimateInGroup({
         initial="initial"
         whileInView="animate"
         viewport={viewportSettings.once}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         variants={container as any}
       >
         {children}
@@ -191,6 +196,7 @@ export function AnimateInGroup({
       className={className}
       initial="initial"
       animate="animate"
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       variants={container as any}
     >
       {children}

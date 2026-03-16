@@ -284,6 +284,7 @@ ChartTooltipContent.displayName = "ChartTooltipContent";
 export const ChartLegend = RechartsPrimitive.Legend;
 
 export interface ChartLegendContentProps extends React.ComponentProps<"div"> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any[];
   verticalAlign?: "top" | "middle" | "bottom";
   hideIcon?: boolean;
