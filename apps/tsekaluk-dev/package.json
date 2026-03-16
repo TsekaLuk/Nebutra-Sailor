@@ -15,6 +15,7 @@
     "@nebutra/analytics": "workspace:*",
     "@nebutra/brand": "workspace:*",
     "@nebutra/db": "workspace:*",
+    "@nebutra/icons": "workspace:*",
     "@nebutra/logger": "workspace:*",
     "@nebutra/marketing": "workspace:*",
     "@nebutra/tokens": "workspace:*",
