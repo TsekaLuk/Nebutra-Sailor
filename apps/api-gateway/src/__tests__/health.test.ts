@@ -15,11 +15,18 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 // ---------------------------------------------------------------------------
 
 const mockQueryRaw = vi.fn();
+const mockPing = vi.fn();
 
 vi.mock("@nebutra/db", () => ({
   prisma: {
     $queryRaw: mockQueryRaw,
   },
+}));
+
+vi.mock("@nebutra/cache", () => ({
+  getRedis: () => ({
+    ping: mockPing,
+  }),
 }));
 
 import { healthRoutes } from "../routes/misc/health.js";
@@ -38,6 +45,7 @@ function getHealth() {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mockPing.mockResolvedValue("PONG");
 });
 
 // ===========================================================================
@@ -57,6 +65,7 @@ describe("GET /health — status codes", () => {
 
   it("returns 503 with status: 'unhealthy' when the database throws", async () => {
     mockQueryRaw.mockRejectedValueOnce(new Error("connection refused"));
+    mockPing.mockRejectedValueOnce(new Error("cache connection refused"));
 
     const res = await getHealth();
     const body = await res.json();
@@ -102,6 +111,7 @@ describe("GET /health — response structure", () => {
 
   it("dependencies.database.status is 'down' when DB throws", async () => {
     mockQueryRaw.mockRejectedValueOnce(new Error("connection timeout"));
+    mockPing.mockResolvedValueOnce("PONG");
 
     const res = await getHealth();
     const body = await res.json();

@@ -3,7 +3,6 @@
 import { Command } from 'commander';
 import { addCommand } from './commands/add.js';
 import { initCommand } from './commands/init.js';
-import { upCommand } from './commands/up.js';
 
 async function main() {
   const program = new Command();
@@ -28,8 +27,6 @@ async function main() {
     .action(async (components, options) => {
       await addCommand(components, options);
     });
-
-  program.addCommand(upCommand);
 
   program.parse(process.argv);
 }
