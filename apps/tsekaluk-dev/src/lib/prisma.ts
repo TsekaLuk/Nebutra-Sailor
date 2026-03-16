@@ -16,15 +16,10 @@ function createClient(): PrismaClient {
   })
 }
 
-/**
- * Lazy singleton — the client is only created on first property access,
- * so importing this module during `next build` (SSG) won't crash when
- * DATABASE_URL is not set.
- */
-export const prisma = new Proxy({} as PrismaClient, {
-  get(_target, prop, receiver) {
-    const client = globalForPrisma.prisma ?? (globalForPrisma.prisma = createClient())
-    return Reflect.get(client, prop, receiver)
-  },
-})
+const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build"
+
+export const prisma = isBuildPhase
+  ? (null as unknown as PrismaClient)
+  : (globalForPrisma.prisma ?? (globalForPrisma.prisma = createClient()))
+
 
