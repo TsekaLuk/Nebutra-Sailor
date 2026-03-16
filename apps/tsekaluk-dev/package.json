@@ -21,8 +21,8 @@
     "@nebutra/tokens": "workspace:*",
     "@nebutra/ui": "workspace:*",
     "@next/mdx": "^16.1.6",
-    "@prisma/adapter-pg": "^7.4.2",
-    "@prisma/client": "^7.4.2",
+    "@prisma/adapter-pg": "catalog:",
+    "@prisma/client": "catalog:",
     "@tanstack/react-table": "^8.21.3",
     "@vercel/blob": "^2.3.1",
     "@vercel/og": "^0.11.1",
@@ -53,7 +53,7 @@
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.3",
     "eslint-config-next": "16.1.6",
-    "prisma": "^7.4.2",
+    "prisma": "catalog:",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
   }

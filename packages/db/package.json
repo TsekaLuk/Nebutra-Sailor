@@ -26,13 +26,13 @@
   "dependencies": {
     "@nebutra/logger": "workspace:*",
     "@prisma/adapter-pg": "^7.4.2",
-    "@prisma/client": "^7.4.2",
+    "@prisma/client": "catalog:",
     "@prisma/client-runtime-utils": "^7.4.2",
     "pg": "^8.20.0"
   },
   "devDependencies": {
     "@types/pg": "^8.18.0",
-    "prisma": "^7.4.2",
+    "prisma": "catalog:",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
