@@ -284,8 +284,13 @@ ChartTooltipContent.displayName = "ChartTooltipContent";
 export const ChartLegend = RechartsPrimitive.Legend;
 
 export interface ChartLegendContentProps extends React.ComponentProps<"div"> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload?: any[];
+  payload?: Array<{
+    value?: unknown;
+    dataKey?: string | number;
+    name?: string;
+    color?: string;
+    payload?: Record<string, unknown>;
+  }>;
   verticalAlign?: "top" | "middle" | "bottom";
   hideIcon?: boolean;
   nameKey?: string;
@@ -316,7 +321,7 @@ export const ChartLegendContent = React.forwardRef<
 
         return (
           <div
-            key={item.value}
+            key={item.value as React.Key}
             className={cn(
               "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
             )}

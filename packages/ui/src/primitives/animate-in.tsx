@@ -6,6 +6,8 @@ import {
   domAnimation,
   m,
   useReducedMotion as useFramerReducedMotion,
+  TargetAndTransition,
+  VariantLabels,
 } from "framer-motion";
 import { emerge, flow, brandSpring } from "@nebutra/brand";
 import {
@@ -100,20 +102,16 @@ export function AnimateIn({
   const base = PRESETS[preset] || PRESETS.emerge;
 
   // Accessibility: honour prefers-reduced-motion
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const initial: any = shouldReduce ? { opacity: 0 } : base.initial;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const animate: any = shouldReduce ? { opacity: 1 } : base.animate;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const exit: any = (
+  const initial = (shouldReduce ? { opacity: 0 } : base.initial) as TargetAndTransition | VariantLabels;
+  const animate = (shouldReduce ? { opacity: 1 } : base.animate) as TargetAndTransition | VariantLabels;
+  const exit = (
     shouldReduce ? { opacity: 0 } : ("exit" in base ? base.exit : undefined)
-  );
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const transition: any = {
+  ) as TargetAndTransition | VariantLabels | undefined;
+  const transition = {
     ...(shouldReduce ? { duration: 0.15 } : base.transition),
     delay,
     ...(duration ? { duration } : {}),
-  };
+  } as import("framer-motion").Transition;
 
   if (inView) {
     return (
@@ -121,7 +119,7 @@ export function AnimateIn({
         className={className}
         initial={initial}
         whileInView={animate}
-        exit={exit}
+        {...(exit && { exit: exit as TargetAndTransition | VariantLabels })}
         transition={transition}
         viewport={viewportSettings.once}
       >
@@ -135,7 +133,7 @@ export function AnimateIn({
       className={className}
       initial={initial}
       animate={animate}
-      exit={exit}
+      {...(exit && { exit: exit as TargetAndTransition | VariantLabels })}
       transition={transition}
     >
       {children}
@@ -183,8 +181,7 @@ export function AnimateInGroup({
         initial="initial"
         whileInView="animate"
         viewport={viewportSettings.once}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        variants={container as any}
+        variants={container}
       >
         {children}
       </MotionDiv>
@@ -196,8 +193,7 @@ export function AnimateInGroup({
       className={className}
       initial="initial"
       animate="animate"
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      variants={container as any}
+      variants={container}
     >
       {children}
     </MotionDiv>

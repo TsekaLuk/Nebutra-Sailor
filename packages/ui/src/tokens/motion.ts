@@ -146,7 +146,7 @@ export const sectionMotions: Record<string, Variants> = {
 /**
  * Stagger container variants with timing presets.
  */
-export const staggerContainers: Record<string, Variants> = {
+export const staggerContainers: Record<"fast" | "normal" | "slow", Variants> = {
   fast: {
     initial: {},
     animate: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } },
