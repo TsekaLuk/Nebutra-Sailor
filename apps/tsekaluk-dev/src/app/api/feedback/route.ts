@@ -28,7 +28,13 @@ function isAdmin(email: string | null | undefined) {
   return Boolean(process.env.ADMIN_EMAIL && email?.toLowerCase() === process.env.ADMIN_EMAIL.toLowerCase())
 }
 
+const DB_UNAVAILABLE = Response.json(
+  { success: false, error: "Database not configured" },
+  { status: 503 },
+)
+
 export async function GET() {
+  if (!prisma) return DB_UNAVAILABLE
   try {
     const session = await auth()
     if (!session?.user || !isAdmin(session.user.email)) {
@@ -48,6 +54,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  if (!prisma) return DB_UNAVAILABLE
   try {
     const ip = getClientIp(req)
     const rl = checkRateLimit(ip)

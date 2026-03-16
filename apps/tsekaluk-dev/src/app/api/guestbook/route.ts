@@ -71,8 +71,14 @@ async function notifyAdmin(entry: {
   })
 }
 
+const DB_UNAVAILABLE = Response.json(
+  { success: false, error: "Database not configured" },
+  { status: 503 },
+)
+
 // GET: public read (approved only) or admin read (all)
 export async function GET(req: Request) {
+  if (!prisma) return DB_UNAVAILABLE
   try {
     const { searchParams } = new URL(req.url)
     const all = searchParams.get("all")
@@ -117,6 +123,7 @@ export async function GET(req: Request) {
 
 // POST: anyone can submit — authenticated users are auto-approved, others go to pending
 export async function POST(req: Request) {
+  if (!prisma) return DB_UNAVAILABLE
   try {
     const ip = getClientIp(req)
     const rl = checkRateLimit(ip)
@@ -180,6 +187,7 @@ export async function POST(req: Request) {
 
 // PATCH: admin approve/reject
 export async function PATCH(req: Request) {
+  if (!prisma) return DB_UNAVAILABLE
   try {
     const session = await auth()
 
@@ -220,6 +228,7 @@ export async function PATCH(req: Request) {
 
 // DELETE: admin delete
 export async function DELETE(req: Request) {
+  if (!prisma) return DB_UNAVAILABLE
   try {
     const session = await auth()
 

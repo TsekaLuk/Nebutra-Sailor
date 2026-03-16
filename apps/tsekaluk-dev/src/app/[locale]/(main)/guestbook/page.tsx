@@ -38,25 +38,27 @@ export default async function GuestbookPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "pages.guestbook" })
 
-  const rawEntries = await prisma.guestbook.findMany({
-    where: { status: "approved" },
-    orderBy: { createdAt: "desc" },
-    take: 100,
-    select: {
-      id: true,
-      authorName: true,
-      authorImage: true,
-      nickname: true,
-      relationship: true,
-      company: true,
-      title: true,
-      message: true,
-      createdAt: true,
-    },
-  }).catch((err) => {
-    console.error("[guestbook/page] Failed to fetch entries:", err)
-    return []
-  })
+  const rawEntries = prisma
+    ? await prisma.guestbook.findMany({
+        where: { status: "approved" },
+        orderBy: { createdAt: "desc" },
+        take: 100,
+        select: {
+          id: true,
+          authorName: true,
+          authorImage: true,
+          nickname: true,
+          relationship: true,
+          company: true,
+          title: true,
+          message: true,
+          createdAt: true,
+        },
+      }).catch((err: unknown) => {
+        console.error("[guestbook/page] Failed to fetch entries:", err)
+        return [] as never[]
+      })
+    : []
 
   // Serialize dates to strings for proper Client Component hydration
   const initialEntries = rawEntries.map((entry) => ({

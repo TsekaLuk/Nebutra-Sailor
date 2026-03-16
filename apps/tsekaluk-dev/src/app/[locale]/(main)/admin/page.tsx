@@ -10,10 +10,12 @@ export default async function AdminDashboardPage() {
   const projectCount = projects.length
   const articleCount = articles.length
 
-  const [pendingCount, feedbackCount] = await Promise.all([
-    prisma.guestbook.count({ where: { status: "pending" } }).catch(() => 0),
-    prisma.feedback.count().catch(() => 0),
-  ])
+  const [pendingCount, feedbackCount] = prisma
+    ? await Promise.all([
+        prisma.guestbook.count({ where: { status: "pending" } }).catch(() => 0),
+        prisma.feedback.count().catch(() => 0),
+      ])
+    : [0, 0]
 
   const stats = [
     {

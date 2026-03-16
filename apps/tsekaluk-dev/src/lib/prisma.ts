@@ -4,9 +4,10 @@ import { createPgPool } from "@nebutra/db/pool"
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient | undefined }
 
-function createClient(): PrismaClient {
+function createClient(): PrismaClient | null {
   if (!process.env.DATABASE_URL) {
-    throw new Error("[tsekaluk-dev] DATABASE_URL is not set")
+    console.warn("[prisma] DATABASE_URL is not set — database features disabled")
+    return null
   }
   const pool = createPgPool({ connectionString: process.env.DATABASE_URL })
   const adapter = new PrismaPg(pool)
@@ -16,10 +17,9 @@ function createClient(): PrismaClient {
   })
 }
 
-const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build"
-
-export const prisma = isBuildPhase
-  ? (null as unknown as PrismaClient)
-  : (globalForPrisma.prisma ?? (globalForPrisma.prisma = createClient()))
-
-
+export const prisma: PrismaClient | null =
+  globalForPrisma.prisma ?? (() => {
+    const client = createClient()
+    if (client) globalForPrisma.prisma = client
+    return client
+  })()

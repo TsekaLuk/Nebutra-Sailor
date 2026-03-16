@@ -12,6 +12,7 @@ interface NowData {
 }
 
 async function getLatestNowEntry(): Promise<NowData | null> {
+  if (!prisma) return null;
   try {
     const entry = await prisma.nowEntry.findFirst({
       orderBy: { createdAt: "desc" },

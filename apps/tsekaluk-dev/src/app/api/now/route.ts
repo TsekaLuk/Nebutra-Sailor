@@ -26,7 +26,13 @@ const nowPatchSchema = z.object({
   reading: z.array(z.string()).optional(),
 })
 
+const DB_UNAVAILABLE = Response.json(
+  { success: false, error: "Database not configured" },
+  { status: 503 },
+)
+
 export async function GET(req: Request) {
+  if (!prisma) return DB_UNAVAILABLE
   const ip = getClientIp(req)
   const rl = checkRateLimit(ip)
   if (!rl.allowed) {
@@ -48,6 +54,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (!prisma) return DB_UNAVAILABLE
   try {
     const session = await auth()
     if (!session?.user || !isAdmin(session.user.email)) {
@@ -74,6 +81,7 @@ export async function POST(req: Request) {
 }
 
 export async function PATCH(req: Request) {
+  if (!prisma) return DB_UNAVAILABLE
   try {
     const session = await auth()
     if (!session?.user || !isAdmin(session.user.email)) {

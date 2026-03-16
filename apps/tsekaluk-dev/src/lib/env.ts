@@ -1,25 +1,25 @@
 /**
- * Validates required environment variables at module load time.
- * Import this file early (e.g. src/app/layout.tsx) so missing vars
- * surface immediately rather than at the callsite that needs them.
+ * Environment helpers — all variables are **optional**.
+ * Missing vars are logged once as warnings; the app
+ * continues running with graceful degradation.
  */
-const REQUIRED = [
+const OPTIONAL = [
   "DATABASE_URL",
   "AUTH_SECRET",
   "ANTHROPIC_API_KEY",
   "ADMIN_EMAIL",
 ] as const;
 
-const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build";
-const missing = REQUIRED.filter((key) => !process.env[key]);
+const missing = OPTIONAL.filter((key) => !process.env[key]);
 
-if (missing.length > 0 && !isBuildPhase) {
-  throw new Error(
-    `Missing required environment variables: ${missing.join(", ")}`,
+if (missing.length > 0) {
+  console.warn(
+    `[env] Optional environment variables not set: ${missing.join(", ")}`,
   );
 }
 
-export const env = REQUIRED.reduce(
-  (acc, key) => ({ ...acc, [key]: process.env[key] as string }),
-  {} as Record<(typeof REQUIRED)[number], string>,
+export const env = OPTIONAL.reduce(
+  (acc, key) => ({ ...acc, [key]: process.env[key] }),
+  {} as Record<(typeof OPTIONAL)[number], string | undefined>,
 );
+
