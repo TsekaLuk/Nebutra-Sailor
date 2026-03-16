@@ -1,31 +1,22 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 "use client";
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Badge } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
 
 export default function BasePopoverDemo() {
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline">Show Popover</Button>
-      </PopoverTrigger>
-      <PopoverContent className="max-w-[300px] text-sm space-y-2" side="top">
+    <div className="flex items-center gap-3">
+      <Button variant="outline">Show Popover</Button>
+      <div className="rounded-lg border bg-popover p-4 max-w-[300px] text-sm space-y-2 shadow-md">
         <p className="font-medium">Premium Plan</p>
         <p className="text-muted-foreground">
           Advanced analytics provides deeper insights into your data, including trends, predictions, and detailed user behavior.
         </p>
         <p className="flex items-center space-x-1">
-          <Badge variant="destructive" size="sm">Note!</Badge>
+          <Badge variant="destructive">Note!</Badge>
           <span className="text-xs text-muted-foreground">Plan upgrade is required.</span>
         </p>
-      </PopoverContent>
-    </Popover>
-  )
-}
-
-export function BasePopoverDemo() {
-  return null; // Update this with actual rendering logic
+      </div>
+    </div>
+  );
 }

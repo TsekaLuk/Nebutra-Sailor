@@ -397,8 +397,7 @@ async function handleOrganizationCreated(
   };
 
   void inngest
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .send(payload as any)
+    .send(payload)
     .catch((err) => {
       log.warn("Failed to enqueue tenant provisioning event", {
         clerkId: data.id,

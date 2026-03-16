@@ -2,7 +2,12 @@ import { logger } from "@nebutra/logger";
 import { prisma } from "@nebutra/db";
 import type { Plan } from "@nebutra/db";
 import { OrganizationRepository } from "@nebutra/repositories";
+import {
+  StripeSubscriptionDataSchema,
+  StripeInvoiceDataSchema,
+} from "@nebutra/event-bus";
 import { inngest } from "../client.js";
+import { eventType, type InngestFunction } from "inngest";
 
 const orgRepo = new OrganizationRepository(prisma);
 
@@ -25,7 +30,7 @@ function resolvePlanFromStatus(status: string): Plan {
 /**
  * Inngest function: react to Stripe billing events.
  *
- * event.data is fully typed via the EventSchemas in client.ts —
+ * event.data is fully typed via Zod v4 Standard Schema —
  * no manual string extraction needed.
  *
  * Handles:
@@ -34,23 +39,20 @@ function resolvePlanFromStatus(status: string): Plan {
  *   - stripe/invoice.paid          → log successful payment
  *   - stripe/invoice.payment_failed → log payment failure
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const processBillingEvent: any = inngest.createFunction(
+export const processBillingEvent: InngestFunction.Any = inngest.createFunction(
   {
     id: "process-billing-event",
     name: "Process Stripe Billing Event",
     concurrency: { limit: 5 },
     retries: 3,
+    triggers: [
+      { event: eventType("stripe/subscription.updated", { schema: StripeSubscriptionDataSchema }) },
+      { event: eventType("stripe/subscription.deleted", { schema: StripeSubscriptionDataSchema }) },
+      { event: eventType("stripe/invoice.paid", { schema: StripeInvoiceDataSchema }) },
+      { event: eventType("stripe/invoice.payment_failed", { schema: StripeInvoiceDataSchema }) },
+    ],
   },
-  [
-    { event: "stripe/subscription.updated" },
-    { event: "stripe/subscription.deleted" },
-    { event: "stripe/invoice.paid" },
-    { event: "stripe/invoice.payment_failed" },
-  ],
   async ({ event, step }) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const data = event.data as any;
     const eventName = event.name;
 
     logger.info("Processing Stripe billing event", { eventName });
@@ -59,7 +61,7 @@ export const processBillingEvent: any = inngest.createFunction(
       eventName === "stripe/subscription.updated" ||
       eventName === "stripe/subscription.deleted"
     ) {
-      const { organizationId, status } = data;
+      const { organizationId, status } = event.data;
 
       const resolvedStatus =
         eventName === "stripe/subscription.deleted" ? "canceled" : status;
@@ -80,7 +82,7 @@ export const processBillingEvent: any = inngest.createFunction(
 
     if (eventName === "stripe/invoice.paid") {
       await step.run("log-invoice-paid", async () => {
-        const { invoiceId, organizationId } = data;
+        const { invoiceId, organizationId } = event.data;
         logger.info("Stripe invoice paid", { invoiceId, organizationId });
       });
 
@@ -89,7 +91,7 @@ export const processBillingEvent: any = inngest.createFunction(
 
     if (eventName === "stripe/invoice.payment_failed") {
       await step.run("log-payment-failure", async () => {
-        const { invoiceId, organizationId, failureReason } = data;
+        const { invoiceId, organizationId, failureReason } = event.data;
         logger.warn("Stripe invoice payment failed", {
           invoiceId,
           organizationId,

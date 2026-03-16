@@ -1,12 +1,10 @@
-import { Inngest, EventSchemas } from "inngest";
-import { inngestSchemas } from "@nebutra/event-bus";
+import { Inngest } from "inngest";
 
 /**
  * Type-safe Inngest client for the API Gateway.
  *
- * All events are validated against Zod schemas defined in
- * @nebutra/event-bus/schemas — event.data is fully typed in function handlers,
- * eliminating the need for manual type assertions.
+ * Inngest v4 supports Standard Schema natively — Zod v4 schemas are accepted
+ * without any adapter layer. Event data is fully typed in function handlers.
  *
  * The SDK automatically reads:
  *   INNGEST_EVENT_KEY   – used when sending events to Inngest Cloud
@@ -14,6 +12,4 @@ import { inngestSchemas } from "@nebutra/event-bus";
  */
 export const inngest = new Inngest({
   id: "nebutra-api-gateway",
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  schemas: new EventSchemas().fromZod(inngestSchemas as any) as any,
 });

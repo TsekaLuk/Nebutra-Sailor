@@ -1,6 +1,10 @@
 import { logger } from "@nebutra/logger";
 import { prisma } from "@nebutra/db";
+import {
+  GdprDeletionRequestDataSchema,
+} from "@nebutra/event-bus";
 import { inngest } from "../client.js";
+import { eventType, type InngestFunction } from "inngest";
 
 /**
  * GDPR / CCPA data deletion Inngest function.
@@ -20,21 +24,21 @@ import { inngest } from "../client.js";
  *
  * Idempotent: safe to re-run. Each step is a no-op if data is already gone.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const processGdprDeletion: any = inngest.createFunction(
+export const processGdprDeletion: InngestFunction.Any = inngest.createFunction(
   {
     id: "process-gdpr-deletion",
     name: "GDPR / CCPA User Data Deletion",
     concurrency: { limit: 3 },  // low concurrency — heavy DB writes
     retries: 5,
+    triggers: [
+      { event: eventType("nebutra/gdpr.deletion_requested", { schema: GdprDeletionRequestDataSchema }) },
+    ],
   },
-  { event: "nebutra/gdpr.deletion_requested" },
   async ({ event, step }) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const data = event.data as any;
-    const { userId, organizationIds = [], requestedAt } = data;
+    const { userId, organizationIds, requestedAt } = event.data;
+    const orgIds = organizationIds ?? [];
 
-    logger.info("GDPR deletion started", { userId, organizationIds, requestedAt });
+    logger.info("GDPR deletion started", { userId, organizationIds: orgIds, requestedAt });
 
     // ── Step 1: Anonymize user PII ──────────────────────────────────────────
     await step.run("anonymize-user-pii", async () => {
@@ -51,16 +55,16 @@ export const processGdprDeletion: any = inngest.createFunction(
 
     // ── Step 2: Revoke all API keys ─────────────────────────────────────────
     await step.run("revoke-api-keys", async () => {
-      if (organizationIds.length === 0) return;
+      if (orgIds.length === 0) return;
 
       const revoked = await prisma.aPIKey.updateMany({
         where: {
-          organizationId: { in: organizationIds },
+          organizationId: { in: orgIds },
           revokedAt: null,
         },
         data: { revokedAt: new Date() },
       });
-      logger.info("API keys revoked", { organizationIds, count: revoked.count });
+      logger.info("API keys revoked", { organizationIds: orgIds, count: revoked.count });
     });
 
     // ── Step 3: Purge analytics events ─────────────────────────────────────
@@ -91,18 +95,15 @@ export const processGdprDeletion: any = inngest.createFunction(
     });
 
     // ── Step 5: Notify downstream services ─────────────────────────────────
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const payload: any = {
+    await step.sendEvent("notify-downstream", {
       name: "nebutra/gdpr.deletion_completed",
       data: {
         userId,
-        organizationIds,
+        organizationIds: orgIds,
         completedAt: new Date().toISOString(),
         requestedAt,
       },
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await step.sendEvent("notify-downstream", payload as any);
+    });
 
     logger.info("GDPR deletion completed", { userId });
 

@@ -21,7 +21,9 @@ import Stripe from "stripe";
 import { logger } from "@nebutra/logger";
 import { prisma } from "@nebutra/db";
 import { sendWelcomeEmail } from "@nebutra/email";
+import { ClerkOrganizationDataSchema } from "@nebutra/event-bus";
 import { inngest } from "../client.js";
+import { eventType, type InngestFunction } from "inngest";
 
 /** SHA-256 hash of plaintext key (same as API key creation in settings). */
 function hashKey(plaintext: string): string {
@@ -37,24 +39,22 @@ function generateApiKey(): { plaintext: string; prefix: string; hash: string } {
   return { plaintext, prefix, hash };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const provisionTenant: any = inngest.createFunction(
+export const provisionTenant: InngestFunction.Any = inngest.createFunction(
   {
     id: "provision-tenant",
     name: "Provision New Tenant Organization",
     concurrency: { limit: 10 },
     retries: 4,
+    triggers: [
+      { event: eventType("clerk/organization.created", { schema: ClerkOrganizationDataSchema }) },
+    ],
   },
-  { event: "clerk/organization.created" },
   async ({ event, step }) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const data = event.data as any;
-    const organizationId = data.organizationId;
-    const organizationName = data.name;
+    const { organizationId, name: organizationName, createdById } = event.data;
 
     logger.info("Tenant provisioning started", {
       organizationId,
-      createdById: data.createdById,
+      createdById,
     });
 
     // ── Step 1: Verify org exists in DB ───────────────────────────────────
@@ -75,8 +75,8 @@ export const provisionTenant: any = inngest.createFunction(
     });
 
     const owner = await step.run("find-owner", async () => {
-      if (data.createdById) {
-        return await prisma.user.findUnique({ where: { clerkId: data.createdById } });
+      if (createdById) {
+        return await prisma.user.findUnique({ where: { clerkId: createdById } });
       }
       return null;
     });
@@ -194,7 +194,7 @@ export const provisionTenant: any = inngest.createFunction(
     });
 
     // ── Step 4: Emit provisioned event ────────────────────────────────────
-    const payload = {
+    await step.sendEvent("emit-tenant-provisioned", {
       name: "nebutra/tenant.provisioned",
       data: {
         organizationId: org.id,
@@ -206,9 +206,7 @@ export const provisionTenant: any = inngest.createFunction(
         ...(keyPlaintext ? { initialApiKey: keyPlaintext } : {}),
         provisionedAt: new Date().toISOString(),
       },
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await step.sendEvent("emit-tenant-provisioned", payload as any);
+    });
 
     logger.info("Tenant provisioning completed", {
       organizationId: org.id,
