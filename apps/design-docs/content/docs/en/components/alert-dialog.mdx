@@ -5,42 +5,8 @@ description: "Modal dialog that interrupts the user and requires an explicit con
 
 ## Demo
 
-<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center" />
+<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center"  />
 
-```tsx
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@nebutra/ui/primitives";
-import { Button } from "@nebutra/ui/primitives";
-
-export function AlertDialogDemo() {
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructive">Delete Account</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>This action cannot be undone. This will permanently delete your account and remove your data from our servers.</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-}
-```
 
 ## Usage
 
@@ -94,24 +60,8 @@ import {
 
 ### Custom Action Handler
 
-<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center">
-    <AlertDialog>
-    <AlertDialogTrigger asChild>
-      <Button variant="outline">Remove Item</Button>
-    </AlertDialogTrigger>
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>Remove item from cart?</AlertDialogTitle>
-        <AlertDialogDescription>The item will be removed from your shopping cart.</AlertDialogDescription>
-      </AlertDialogHeader>
-      <AlertDialogFooter>
-        <AlertDialogCancel>Keep Item</AlertDialogCancel>
-        <AlertDialogAction >
-          Remove
-        </AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog />
+<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center" />
+
 
 ## Accessibility
 

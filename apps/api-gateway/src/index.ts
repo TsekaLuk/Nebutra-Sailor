@@ -28,9 +28,11 @@ import {
 import { inngestHandler } from "./inngest/index.js";
 import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
 import { auditMutationMiddleware } from "./middlewares/auditMutation.js";
+import { idempotencyMiddleware } from "./middlewares/idempotency.js";
 import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
 import { apiVersionMiddleware } from "./middlewares/apiVersion.js";
 import { usageMeteringMiddleware } from "./middlewares/usageMetering.js";
+import { requestContext, runWithContext } from "./lib/requestContext.js";
 import { env, DOMAINS } from "./config/env.js";
 
 initOtel({ serviceName: "api-gateway" });
@@ -76,6 +78,14 @@ app.use("*", compress());
 // Security headers: X-Content-Type-Options, X-Frame-Options, HSTS, etc.
 app.use("*", secureHeaders());
 app.use("*", requestId());
+
+// AsyncLocalStorage: bind requestId + tenantId into async context so all
+// downstream helpers (DB queries, service calls) can read them without
+// explicit parameter threading.
+app.use("*", async (c, next) => {
+  const reqId = c.get("requestId");
+  await runWithContext({ requestId: reqId }, next);
+});
 
 // Wire requestId and OTel traceId into structured logger context for log
 // correlation, and propagate both IDs to the client as response headers.
@@ -133,11 +143,25 @@ app.use(
 // Tenant context extraction (before rate limiting)
 app.use("*", tenantContextMiddleware);
 
+// Enrich AsyncLocalStorage context with tenant info now that it's resolved
+app.use("*", async (c, next) => {
+  const tenant = c.get("tenant");
+  const ctx = requestContext.getStore();
+  if (ctx && tenant) {
+    ctx.tenantId = tenant.organizationId;
+    ctx.userId = tenant.userId;
+  }
+  await next();
+});
+
 // Usage metering — non-blocking, fire-and-forget, runs after response
 app.use("/api/v1/*", usageMeteringMiddleware);
 
 // Audit logging for all state-changing requests (POST/PUT/PATCH/DELETE)
 app.use("/api/v1/*", auditMutationMiddleware);
+
+// Idempotency — replay protection for POST/PUT/PATCH with Idempotency-Key header
+app.use("/api/v1/*", idempotencyMiddleware);
 
 // API versioning — sets API-Version header, supports Sunset for deprecated versions
 app.use("/api/*", apiVersionMiddleware({

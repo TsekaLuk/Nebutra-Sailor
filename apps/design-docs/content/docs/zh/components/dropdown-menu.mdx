@@ -5,30 +5,8 @@ description: "通过点击按钮触发的上下文操作列表，基于 Radix UI
 
 ## 演示 (Demo)
 
-<ComponentPreview name="dropdown-menu-demo" className="min-h-[300px] flex justify-center items-start pt-10">
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button variant="outline">打开菜单 (Open Menu)</Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="w-48">
-      <DropdownMenuLabel>我的账号 (My Account)</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        个人资料 (Profile)
-        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
-        账单 (Billing)
-        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-      </DropdownMenuItem>
-      <DropdownMenuItem>设置 (Settings)</DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem className="text-destructive">
-        退出登录 (Log out)
-        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu />
+<ComponentPreview name="dropdown-menu-demo" className="min-h-[300px] flex justify-center items-start pt-10" />
+
 
 ## 使用方法 (Usage)
 
@@ -76,64 +54,20 @@ import {
 
 ### 带有复选框条目 (With Checkbox Items)
 
-<ComponentPreview name="dropdown-menu-2-demo" className="min-h-[250px] flex justify-center items-start pt-10">
-    <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button variant="outline">外观 (Appearance)</Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent>
-      <DropdownMenuLabel>外观 (Appearance)</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuCheckboxItem checked={true}>
-        工具栏 (Toolbar)
-      </DropdownMenuCheckboxItem>
-      <DropdownMenuCheckboxItem checked={false}>
-        侧边栏 (Sidebar)
-      </DropdownMenuCheckboxItem>
-    </DropdownMenuContent>
-  </DropdownMenu />
+<ComponentPreview name="dropdown-menu-2-demo" className="min-h-[250px] flex justify-center items-start pt-10" />
+
 
 ### 带有单选按钮组 (With Radio Group)
 
-<ComponentPreview name="dropdown-menu-3-demo" className="min-h-[250px] flex justify-center items-start pt-10">
-    <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button variant="outline">排序方式 (Sort by)</Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent>
-      <DropdownMenuLabel>排序顺序 (Sort order)</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuRadioGroup value="asc">
-        <DropdownMenuRadioItem value="asc">升序 (Ascending)</DropdownMenuRadioItem>
-        <DropdownMenuRadioItem value="desc">降序 (Descending)</DropdownMenuRadioItem>
-      </DropdownMenuRadioGroup>
-    </DropdownMenuContent>
-  </DropdownMenu />
+<ComponentPreview name="dropdown-menu-3-demo" className="min-h-[250px] flex justify-center items-start pt-10" />
+
 
 ### 带有级联子菜单 (With Submenus)
 
 您可以在 `DropdownMenuContent` 中嵌套 `DropdownMenuSub` 来创建级联式菜单。
 
-<ComponentPreview name="dropdown-menu-4-demo" className="min-h-[300px] flex justify-center items-start pt-10">
-    <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button variant="outline">分享设计 (Share Design)</Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="w-48">
-      <DropdownMenuItem>发送电子邮件链接 (Email Link)</DropdownMenuItem>
-      <DropdownMenuItem>复制链接 (Copy Link)</DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuSub>
-        <DropdownMenuSubTrigger>邀请用户 (Invite Users)</DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-40">
-          <DropdownMenuItem>通过电子邮件 (Via Email)</DropdownMenuItem>
-          <DropdownMenuItem>从工作区中选择 (From Workspace)</DropdownMenuItem>
-        </DropdownMenuSubContent>
-      </DropdownMenuSub>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem className="text-destructive focus:bg-destructive focus:text-destructive-foreground">删除 (Delete)</DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu />
+<ComponentPreview name="dropdown-menu-4-demo" className="min-h-[300px] flex justify-center items-start pt-10" />
+
 
 ## 可访问性 (Accessibility)
 

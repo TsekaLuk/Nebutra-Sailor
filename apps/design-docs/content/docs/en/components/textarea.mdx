@@ -5,15 +5,8 @@ description: "Multi-line text input field with consistent styling."
 
 ## Demo
 
-<ComponentPreview name="textarea-demo" className="max-w-[400px]">
-  <div className="flex flex-col gap-1.5 w-full">
-    <Label htmlFor="message">Message</Label>
-    <Textarea
-      id="message"
-      placeholder="Write your message here..."
-      rows={4}
-    />
-  </div />
+<ComponentPreview name="textarea-demo" className="max-w-[400px]" />
+
 
 ## Usage
 
@@ -37,24 +30,13 @@ All props from native `<textarea>` are supported, plus:
 
 ### With Character Count
 
-<ComponentPreview name="textarea-2-demo" className="max-w-[400px]">
-    <div className="flex flex-col gap-1 w-full">
-    <Textarea
-      defaultValue=""
-      placeholder="Type here..."
-      maxLength={500}
-    />
-    <span className="text-xs text-muted-foreground text-right w-full">
-      0/500
-    </span>
-  </div />
+<ComponentPreview name="textarea-2-demo" className="max-w-[400px]" />
+
 
 ### Disabled
 
-<ComponentPreview name="textarea-3-demo" className="max-w-[400px]">
-    <div className="w-full">
-    <Textarea disabled value="This field is read-only" />
-  </div />
+<ComponentPreview name="textarea-3-demo" className="max-w-[400px]" />
+
 
 ### In a Form
 

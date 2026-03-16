@@ -5,61 +5,8 @@ description: "Accessible form building with React Hook Form integration and Zod 
 
 ## Demo
 
-<ComponentPreview name="form-demo" className="min-h-[400px] flex justify-center items-center" />
+<ComponentPreview name="form-demo" className="min-h-[400px] flex justify-center items-center"  />
 
-```tsx
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-} from "@nebutra/ui/primitives"
-import { Input } from "@nebutra/ui/primitives"
-import { Button } from "@nebutra/ui/primitives"
-
-const formSchema = z.object({
-  username: z.string().min(2, "Username must be at least 2 characters."),
-})
-
-export function FormDemo() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { username: "" },
-  })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-  }
-
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-80">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="johndoe" {...field} />
-              </FormControl>
-              <FormDescription>This is your public display name.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
-  )
-}
-```
 
 ## Usage
 

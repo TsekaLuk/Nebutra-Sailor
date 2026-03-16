@@ -134,42 +134,48 @@ export function createPrismaStorage(prisma: {
 }): AuditStorage {
   return {
     store: async (event: AuditEvent) => {
+      // Field mapping: AuditEvent interface → Prisma AuditLog columns
+      //   actorId    → userId          (Prisma model uses userId for the actor)
+      //   tenantId   → organizationId  (Prisma model uses organizationId)
+      //   targetType → entityType      (Prisma model uses entity* naming)
+      //   targetId   → entityId
+      //   actorType, outcome, reason → added in migration 20260316000000
       await prisma.auditLog.create({
         data: {
           id: event.id || crypto.randomUUID(),
           action: event.action,
-          actorId: event.actorId,
+          userId: event.actorId,
           actorType: event.actorType,
-          tenantId: event.tenantId,
-          targetType: event.targetType,
-          targetId: event.targetId,
+          organizationId: event.tenantId,
+          entityType: event.targetType ?? "unknown",
+          entityId: event.targetId,
           metadata: event.metadata ? JSON.stringify(event.metadata) : null,
           ipAddress: event.ipAddress,
           userAgent: event.userAgent,
           outcome: event.outcome,
           reason: event.reason,
-          timestamp: event.timestamp || new Date(),
+          createdAt: event.timestamp || new Date(),
         },
       });
     },
     query: async (filter: AuditQueryFilter) => {
       const where: Record<string, unknown> = {};
 
-      if (filter.tenantId) where.tenantId = filter.tenantId;
-      if (filter.actorId) where.actorId = filter.actorId;
+      if (filter.tenantId) where.organizationId = filter.tenantId;
+      if (filter.actorId) where.userId = filter.actorId;
       if (filter.action) where.action = filter.action;
-      if (filter.targetType) where.targetType = filter.targetType;
-      if (filter.targetId) where.targetId = filter.targetId;
+      if (filter.targetType) where.entityType = filter.targetType;
+      if (filter.targetId) where.entityId = filter.targetId;
 
       if (filter.startDate || filter.endDate) {
-        where.timestamp = {};
-        if (filter.startDate) (where.timestamp as Record<string, Date>).gte = filter.startDate;
-        if (filter.endDate) (where.timestamp as Record<string, Date>).lte = filter.endDate;
+        where.createdAt = {};
+        if (filter.startDate) (where.createdAt as Record<string, Date>).gte = filter.startDate;
+        if (filter.endDate) (where.createdAt as Record<string, Date>).lte = filter.endDate;
       }
 
       const results = await prisma.auditLog.findMany({
         where,
-        orderBy: { timestamp: "desc" },
+        orderBy: { createdAt: "desc" },
         take: filter.limit || 100,
         skip: filter.offset || 0,
       });

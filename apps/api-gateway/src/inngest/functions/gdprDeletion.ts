@@ -80,18 +80,21 @@ export const processGdprDeletion: InngestFunction.Any = inngest.createFunction(
       logger.info("Analytics PII purge step complete", { userId });
     });
 
-    // ── Step 4: Purge audit log PII ─────────────────────────────────────────
+    // ── Step 4: Anonymize audit log PII ────────────────────────────────────
+    // Audit logs must be retained for compliance (typically 7 years) but
+    // direct userId references must be pseudonymized per GDPR Art. 17.
+    // We replace the userId with a one-way SHA-256 hash so records remain
+    // attributable for investigations without storing personal identifiers.
     await step.run("purge-audit-log-pii", async () => {
-      // Audit logs must be retained for compliance (typically 7 years) but
-      // personal identifiers can be anonymized.
-      // Replace userId references with a pseudonymized hash.
-      // Example:
-      //
-      // await prisma.auditLog.updateMany({
-      //   where: { actorId: userId },
-      //   data: { actorId: `anon_${crypto.createHash("sha256").update(userId).digest("hex").slice(0, 16)}` },
-      // });
-      logger.info("Audit log PII anonymized", { userId });
+      const { createHash } = await import("node:crypto");
+      const pseudoId = `anon_${createHash("sha256").update(userId).digest("hex").slice(0, 16)}`;
+
+      const updated = await prisma.auditLog.updateMany({
+        where: { userId },
+        data: { userId: pseudoId },
+      });
+
+      logger.info("Audit log PII anonymized", { userId, count: updated.count, pseudoId });
     });
 
     // ── Step 5: Notify downstream services ─────────────────────────────────

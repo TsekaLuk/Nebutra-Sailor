@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DesignSystemProvider } from "@nebutra/ui/layout";
@@ -27,6 +27,16 @@ const notoSansSC = Noto_Sans_SC({
   display: "swap",
   variable: "--font-cn",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(

@@ -5,42 +5,8 @@ description: "中断用户操作并要求显式确认的模态对话框。"
 
 ## 演示 (Demo)
 
-<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center" />
+<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center"  />
 
-```tsx
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@nebutra/ui/primitives";
-import { Button } from "@nebutra/ui/primitives";
-
-export function AlertDialogDemo() {
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructive">删除账号 (Delete Account)</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>您确定要执行此操作吗？ (Are you absolutely sure?)</AlertDialogTitle>
-          <AlertDialogDescription>此操作无法撤销。这将永久删除您的账号并从我们的服务器中移除您的所有数据。 (This action cannot be undone. This will permanently delete your account and remove your data from our servers.)</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>取消 (Cancel)</AlertDialogCancel>
-          <AlertDialogAction>继续 (Continue)</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-}
-```
 
 ## 使用方法 (Usage)
 
@@ -94,24 +60,8 @@ import {
 
 ### 自定义操作处理程序 (Custom Action Handler)
 
-<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center">
-    <AlertDialog>
-    <AlertDialogTrigger asChild>
-      <Button variant="outline">移除项目 (Remove Item)</Button>
-    </AlertDialogTrigger>
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>从购物车中移除项目？ (Remove item from cart?)</AlertDialogTitle>
-        <AlertDialogDescription>该项目将从您的购物车中被移除。 (The item will be removed from your shopping cart.)</AlertDialogDescription>
-      </AlertDialogHeader>
-      <AlertDialogFooter>
-        <AlertDialogCancel>保留项目 (Keep Item)</AlertDialogCancel>
-        <AlertDialogAction >
-          移除 (Remove)
-        </AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog />
+<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center" />
+
 
 ## 可访问性 (Accessibility)
 

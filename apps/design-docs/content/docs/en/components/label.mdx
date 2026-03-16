@@ -5,18 +5,8 @@ description: "Accessible form label component built on Radix UI Label primitive.
 
 ## Demo
 
-<ComponentPreview name="label-demo" className="min-h-[250px] flex justify-center items-center">
-  <div className="space-y-6 max-w-sm w-full p-4 border rounded-xl shadow-sm">
-    <div className="space-y-2">
-      <Label htmlFor="email">Email address</Label>
-      <Input id="email" type="email" placeholder="you@example.com" />
-    </div>
+<ComponentPreview name="label-demo" className="min-h-[250px] flex justify-center items-center" />
 
-    <div className="flex items-center space-x-2">
-      <Checkbox id="terms" />
-      <Label htmlFor="terms">Accept terms and conditions</Label>
-    </div>
-  </div />
 
 ## Usage
 
@@ -38,35 +28,18 @@ Native HTML `<label>` element with design tokens.
 
 ### Required Field Label
 
-<ComponentPreview name="label-2-demo" className="min-h-[150px] flex justify-center items-center">
-    <div className="space-y-2 w-full max-w-sm">
-    <Label htmlFor="name">
-      Full name
-      <span className="ml-1 text-destructive" aria-hidden="true">*</span>
-    </Label>
-    <Input id="name" required aria-required="true" />
-  </div />
+<ComponentPreview name="label-2-demo" className="min-h-[150px] flex justify-center items-center" />
+
 
 ### Label with Description
 
-<ComponentPreview name="label-3-demo" className="min-h-[200px] flex justify-center items-center">
-    <div className="space-y-1 w-full max-w-sm">
-    <Label htmlFor="bio">Bio</Label>
-    <p id="bio-hint" className="text-xs text-muted-foreground mb-2">
-      Tell us a bit about yourself. Max 200 characters.
-    </p>
-    <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
-  </div />
+<ComponentPreview name="label-3-demo" className="min-h-[200px] flex justify-center items-center" />
+
 
 ### Disabled Label
 
-<ComponentPreview name="label-4-demo" className="min-h-[150px] flex justify-center items-center">
-    <div className="space-y-2 w-full max-w-sm">
-    <Label htmlFor="disabled-input" className="opacity-50 cursor-not-allowed">
-      Disabled field
-    </Label>
-    <Input id="disabled-input" disabled />
-  </div />
+<ComponentPreview name="label-4-demo" className="min-h-[150px] flex justify-center items-center" />
+
 
 ## Accessibility
 

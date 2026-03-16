@@ -5,32 +5,8 @@ description: 基于 cmdk 构建的快速、可组合的命令面板和搜索界�
 
 ## 演示 (Demo)
 
-<ComponentPreview name="command-demo" className="min-h-[400px] flex justify-center items-start pt-10">
-  <Command className="rounded-lg border shadow-md w-96 h-[300px]">
-    <CommandInput placeholder="输入命令或进行搜索... (Type a command or search...)" />
-    <CommandList>
-      <CommandEmpty>未找到结果。 (No results found.)</CommandEmpty>
-      <CommandGroup heading="建议 (Suggestions)">
-        <CommandItem>
-          <Calendar className="mr-2 h-4 w-4" />
-          日历 (Calendar)
-        </CommandItem>
-        <CommandItem>
-          <Search className="mr-2 h-4 w-4" />
-          搜索 (Search)
-          <CommandShortcut>⌘K</CommandShortcut>
-        </CommandItem>
-      </CommandGroup>
-      <CommandSeparator />
-      <CommandGroup heading="设置 (Settings)">
-        <CommandItem>
-          <User className="mr-2 h-4 w-4" />
-          个人资料 (Profile)
-          <CommandShortcut>⌘P</CommandShortcut>
-        </CommandItem>
-      </CommandGroup>
-    </CommandList>
-  </Command />
+<ComponentPreview name="command-demo" className="min-h-[400px] flex justify-center items-start pt-10" />
+
 
 ## 使用方法 (Usage)
 
@@ -83,7 +59,8 @@ import {
 
 ### 命令对话框 (模态框) (Command Dialog)
 
-<ComponentPreview name="command-dialog-demo" className="min-h-[400px] flex justify-center items-start pt-10" />
+<ComponentPreview name="command-dialog-demo" className="min-h-[400px] flex justify-center items-start pt-10"  />
+
 
 ## 可访问性 (Accessibility)
 

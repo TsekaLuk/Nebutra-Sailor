@@ -3,7 +3,8 @@ title: Accordion
 description: Collapsible content sections for progressively disclosing information.
 ---
 
-<ComponentPreview name="accordion-demo" />
+<ComponentPreview name="accordion-demo"  />
+
 
 ## Installation
 
@@ -59,51 +60,25 @@ Built on Base UI accordion primitive.
 
 ### Multiple Open Items
 
-<ComponentPreview name="accordion-demo" className="max-w-[400px]">
-    <NebutraAccordion type="multiple" className="w-full">
-    <AccordionItem value="item-1">
-      <AccordionTrigger>Section One</AccordionTrigger>
-      <AccordionContent>Content for section one.</AccordionContent>
-    </AccordionItem>
-    <AccordionItem value="item-2">
-      <AccordionTrigger>Section Two</AccordionTrigger>
-      <AccordionContent>Content for section two.</AccordionContent>
-    </AccordionItem>
-  </NebutraAccordion />
+<ComponentPreview name="accordion-demo" className="max-w-[400px]" />
+
 
 ### Controlled Accordion
 
-<ComponentPreview name="accordion-2-demo" className="max-w-[400px]">
-    <NebutraAccordion type="single" defaultValue="item-1" className="w-full">
-    <AccordionItem value="item-1">
-      <AccordionTrigger>Controlled Item</AccordionTrigger>
-      <AccordionContent>This accordion is controlled.</AccordionContent>
-    </AccordionItem>
-  </NebutraAccordion />
+<ComponentPreview name="accordion-2-demo" className="max-w-[400px]" />
+
 
 ### Disabled Item
 
-<ComponentPreview name="accordion-3-demo" className="max-w-[400px]">
-    <NebutraAccordion type="single" className="w-full">
-    <AccordionItem value="item-1" disabled>
-      <AccordionTrigger>Disabled Section</AccordionTrigger>
-      <AccordionContent>This will not open.</AccordionContent>
-    </AccordionItem>
-  </NebutraAccordion />
+<ComponentPreview name="accordion-3-demo" className="max-w-[400px]" />
+
 
 ### Small Size
 
 A compact variant with reduced padding and smaller text, matching the Geist Collapse `size="small"` variant.
 
-<ComponentPreview name="accordion-4-demo" className="max-w-[400px]">
-    <NebutraAccordion type="single" className="w-full">
-    <AccordionItem value="item-1">
-      <AccordionTrigger size="small">Compact Question</AccordionTrigger>
-      <AccordionContent size="small">
-        Compact content with reduced padding.
-      </AccordionContent>
-    </AccordionItem>
-  </NebutraAccordion />
+<ComponentPreview name="accordion-4-demo" className="max-w-[400px]" />
+
 
 ## Accessibility
 

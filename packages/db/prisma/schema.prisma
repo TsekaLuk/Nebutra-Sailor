@@ -1047,7 +1047,10 @@ model AuditLog {
   id             String      @id @default(cuid())
   organizationId String?     @map("organization_id")
   userId         String?     @map("user_id")
+  actorType      String?     @map("actor_type") @db.VarChar(20) // "user" | "system" | "api_key" | "admin"
   action         AuditAction
+  outcome        String?     @db.VarChar(10) // "success" | "failure" | "pending"
+  reason         String?     @db.VarChar(255)
   entityType     String      @map("entity_type") @db.VarChar(50)
   entityId       String?     @map("entity_id")
   oldValue       Json?       @map("old_value")
@@ -1061,6 +1064,7 @@ model AuditLog {
   @@index([userId])
   @@index([entityType, entityId])
   @@index([action])
+  @@index([outcome])
   @@index([createdAt])
   @@index([organizationId, createdAt])
   @@index([organizationId, userId])
