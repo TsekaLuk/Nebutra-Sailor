@@ -10,9 +10,10 @@ const REQUIRED = [
   "ADMIN_EMAIL",
 ] as const;
 
+const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build";
 const missing = REQUIRED.filter((key) => !process.env[key]);
 
-if (missing.length > 0) {
+if (missing.length > 0 && !isBuildPhase) {
   throw new Error(
     `Missing required environment variables: ${missing.join(", ")}`,
   );
