@@ -24,7 +24,7 @@
     "powered_by": "由 Claude Haiku 驱动 · 未来接入 OpenClaw",
     "error": "出错了，请重试。",
     "auth_required": "登录后即可与 Tseka 的灵魂对话",
-    "auth_button": "使用 GitHub 登录",
+    "auth_button": "登录以开始对话",
     "metadata_title": "灵魂 — Tseka Luk",
     "metadata_desc": "一个以 Tseka Luk 方式思考和回应的 AI 智能体。"
   },

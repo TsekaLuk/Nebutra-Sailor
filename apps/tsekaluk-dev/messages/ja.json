@@ -24,7 +24,7 @@
     "powered_by": "Claude Haiku 駆動 · 将来：OpenClaw",
     "error": "エラーが発生しました。もう一度お試しください。",
     "auth_required": "Tsekaのソウルと話すにはサインインしてください",
-    "auth_button": "GitHubでサインイン",
+    "auth_button": "サインインしてチャット",
     "metadata_title": "ソウル — Tseka Luk",
     "metadata_desc": "Tseka Lukのように思考し応答するAIエージェント。"
   },
