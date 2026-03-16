@@ -27,7 +27,7 @@ export const processGdprDeletion = inngest.createFunction(
     concurrency: { limit: 3 },  // low concurrency — heavy DB writes
     retries: 5,
   },
-  { event: "compliance/user.deletion_requested" },
+  { event: "nebutra/gdpr.deletion_requested" },
   async ({ event, step }) => {
     const { userId, organizationIds = [], requestedAt } = event.data as {
       userId: string;
@@ -93,7 +93,7 @@ export const processGdprDeletion = inngest.createFunction(
 
     // ── Step 5: Notify downstream services ─────────────────────────────────
     await step.sendEvent("notify-downstream", {
-      name: "compliance/user.deletion_completed",
+      name: "nebutra/gdpr.deletion_completed",
       data: {
         userId,
         organizationIds,

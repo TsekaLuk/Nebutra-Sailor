@@ -20,14 +20,12 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-mono",
-  preload: false,
 });
 
 const notoSansSC = Noto_Sans_SC({
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
   variable: "--font-cn",
-  preload: false,
 });
 
 export const metadata: Metadata = {

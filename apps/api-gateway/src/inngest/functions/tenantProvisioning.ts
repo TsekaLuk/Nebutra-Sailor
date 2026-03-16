@@ -46,19 +46,18 @@ export const provisionTenant = inngest.createFunction(
   },
   { event: "clerk/organization.created" },
   async ({ event, step }) => {
-    const { organizationId, organizationClerkId, ownerEmail, ownerFirstName, organizationName } =
-      event.data as {
-        organizationId: string;       // internal DB cuid
-        organizationClerkId: string;  // clerk org id
-        ownerEmail: string;
-        ownerFirstName: string;
-        organizationName: string;
-      };
+    const data = event.data as {
+      organizationId: string;
+      name: string;
+      slug?: string;
+      createdById?: string;
+    };
+    const organizationId = data.organizationId;
+    const organizationName = data.name;
 
     logger.info("Tenant provisioning started", {
       organizationId,
-      organizationClerkId,
-      ownerEmail,
+      createdById: data.createdById,
     });
 
     // ── Step 1: Verify org exists in DB ───────────────────────────────────
@@ -78,10 +77,21 @@ export const provisionTenant = inngest.createFunction(
       return found;
     });
 
+    const owner = await step.run("find-owner", async () => {
+      if (data.createdById) {
+        return await prisma.user.findUnique({ where: { clerkId: data.createdById } });
+      }
+      return null;
+    });
+
+    const ownerEmail = owner?.email ?? "";
+    const ownerFirstName = owner?.name?.split(" ")[0] ?? "";
+    const organizationClerkId = org.clerkId;
+
     // ── Step 2: Create default API key ────────────────────────────────────
     const { keyPrefix, keyPlaintext } = await step.run(
       "create-default-api-key",
-      async () => {
+      async (): Promise<{ keyPrefix: string; keyPlaintext: string | null }> => {
         // Idempotency: skip if org already has an API key
         const existingKey = await prisma.aPIKey.findFirst({
           where: { organizationId: org.id, revokedAt: null },
@@ -188,7 +198,7 @@ export const provisionTenant = inngest.createFunction(
 
     // ── Step 4: Emit provisioned event ────────────────────────────────────
     await step.sendEvent("emit-tenant-provisioned", {
-      name: "tenant/provisioned",
+      name: "nebutra/tenant.provisioned",
       data: {
         organizationId: org.id,
         organizationClerkId,

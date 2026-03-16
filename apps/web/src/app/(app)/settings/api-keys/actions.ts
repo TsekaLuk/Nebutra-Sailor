@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { auth } from "@clerk/nextjs/server";
-import { db } from "@nebutra/db";
+import { prisma as db } from "@nebutra/db";
 import { hasPermission, resolveRole } from "@/lib/permissions";
 import { randomBytes, createHash } from "crypto";
 

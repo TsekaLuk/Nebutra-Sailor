@@ -39,8 +39,8 @@ async function send(opts: {
     to: Array.isArray(opts.to) ? opts.to : [opts.to],
     subject: opts.subject,
     html: opts.html,
-    reply_to: opts.replyTo,
-    tags: opts.tags,
+    ...(opts.replyTo ? { replyTo: opts.replyTo } : {}),
+    ...(opts.tags ? { tags: opts.tags } : {}),
   });
 
   if (error) {

@@ -1,6 +1,5 @@
-export { prisma, type PrismaClient } from "./client.js";
-export { Prisma } from "./generated/prisma/client.js";
-export { withOrgContext, withAdminContext } from "./rls.js";
+export { prisma, type PrismaClient } from "./client";
+export { Prisma } from "./generated/prisma/client";
 
 // Re-export all Prisma types for convenience
 export type {
@@ -62,4 +61,4 @@ export type {
   UsageLedgerEntry,
   UsageType,
   UsageLedgerSource,
-} from "./generated/prisma/client.js";
+} from "./generated/prisma/client";

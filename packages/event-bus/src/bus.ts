@@ -75,7 +75,7 @@ export class EventBus {
             lastError = error;
             logger.warn(
               `Event handler error for ${event.type} (attempt ${attempt}/${MAX_ATTEMPTS})`,
-              error,
+              { error: error instanceof Error ? error.message : String(error) },
             );
             if (attempt < MAX_ATTEMPTS) {
               // Exponential backoff: 100ms, 200ms

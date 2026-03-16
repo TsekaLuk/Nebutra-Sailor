@@ -1,5 +1,5 @@
 import { Inngest, EventSchemas } from "inngest";
-import { inngestSchemas } from "@nebutra/event-bus/schemas";
+import { inngestSchemas } from "@nebutra/event-bus";
 
 /**
  * Type-safe Inngest client for the API Gateway.

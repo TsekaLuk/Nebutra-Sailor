@@ -91,11 +91,12 @@ export function getDLQByTenant(tenantId: string): DeadLetterEntry[] {
  * Remove a DLQ entry by ID and return the event so the caller can re-publish it.
  * Returns `null` if the entry is not found.
  */
-export function ackDeadLetter(dlqId: string): DeadLetterEntry | null {
-  const idx = queue.findIndex((e) => e.id === dlqId);
+export async function ackDeadLetter(id: string): Promise<DeadLetterEntry | null> {
+  const idx = queue.findIndex((e) => e.id === id);
   if (idx === -1) return null;
   const [entry] = queue.splice(idx, 1);
-  logger.info("DLQ entry acknowledged", { dlqId, eventId: entry.event.id });
+  if (!entry) return null;
+  logger.info("DLQ entry acknowledged", { dlqId: id, eventId: entry.event.id });
   return entry;
 }
 

@@ -225,8 +225,8 @@ export function auditUserLogin(
     actorType: "user",
     tenantId,
     outcome: success ? "success" : "failure",
-    ipAddress,
-    userAgent,
+    ...(ipAddress && { ipAddress }),
+    ...(userAgent && { userAgent }),
   });
 }
 
@@ -315,12 +315,16 @@ export function auditDataExport(
 export function auditMiddleware() {
   return async (c: any, next: () => Promise<void>) => {
     // Store audit context
+    const ipAddress = c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
+    const userAgent = c.req.header("user-agent");
+
     c.set("auditContext", {
-      ipAddress: c.req.header("x-forwarded-for") || c.req.header("x-real-ip"),
-      userAgent: c.req.header("user-agent"),
       tenantId: c.req.header("x-tenant-id"),
+      ...(ipAddress && { ipAddress }),
+      ...(userAgent && { userAgent }),
     });
 
     await next();
   };
 }
+

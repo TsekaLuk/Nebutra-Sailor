@@ -71,17 +71,27 @@ adminRoutes.openapi(
   async (c) => {
     const { limit, offset, plan } = c.req.valid("query");
 
+    const findParams: any = {
+      take: limit,
+      skip: offset,
+      orderBy: { createdAt: "desc" },
+      include: {
+        _count: { select: { members: true, apiKeys: true } },
+      },
+    };
+    if (plan) {
+      findParams.where = { plan };
+    }
+
     const [orgs, total] = await Promise.all([
-      prisma.organization.findMany({
-        where: plan ? { plan } : undefined,
-        take: limit,
-        skip: offset,
-        orderBy: { createdAt: "desc" },
-        include: {
-          _count: { select: { members: true, apiKeys: true } },
-        },
-      }),
-      prisma.organization.count({ where: plan ? { plan } : undefined }),
+      prisma.organization.findMany(findParams),
+      (async () => {
+        const countParams: Parameters<typeof prisma.organization.count>[0] = {};
+        if (plan) {
+          countParams.where = { plan };
+        }
+        return prisma.organization.count(countParams);
+      })(),
     ]);
 
     return c.json({ data: orgs, meta: { total, limit, offset } });
@@ -139,8 +149,6 @@ adminRoutes.openapi(
       where: { organizationId: id, revokedAt: null },
       data: { revokedAt: new Date() },
     });
-
-    logger.warn("Organization suspended by admin", { organizationId: id, keysRevoked: revoked.count });
 
     return c.json({ organizationId: id, status: "suspended", keysRevoked: revoked.count });
   },

@@ -76,8 +76,12 @@ const StripeInvoiceDataSchema = z.object({
 
 const TenantProvisionedDataSchema = z.object({
   organizationId: z.string(),
-  clerkOrganizationId: z.string(),
-  plan: z.enum(["FREE", "PRO", "ENTERPRISE"]),
+  organizationClerkId: z.string(),
+  organizationName: z.string(),
+  ownerEmail: z.string().optional(),
+  keyPrefix: z.string(),
+  initialApiKey: z.string().optional(),
+  provisionedAt: z.string().datetime(),
 });
 
 const GdprDeletionRequestDataSchema = z.object({
@@ -112,6 +116,7 @@ export const inngestSchemas = {
   // Internal platform events
   "nebutra/tenant.provisioned": { data: TenantProvisionedDataSchema },
   "nebutra/gdpr.deletion_requested": { data: GdprDeletionRequestDataSchema },
+  "nebutra/gdpr.deletion_completed": { data: GdprDeletionRequestDataSchema },
 } as const;
 
 // Export individual schemas for direct use in validation

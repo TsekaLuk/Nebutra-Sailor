@@ -47,6 +47,11 @@ export { Prisma }
  */
 export type Organization = Prisma.OrganizationModel
 /**
+ * Model APIKey
+ * 
+ */
+export type APIKey = Prisma.APIKeyModel
+/**
  * Model User
  * 
  */

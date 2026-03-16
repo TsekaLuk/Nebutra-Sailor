@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Organization: 'Organization',
+  APIKey: 'APIKey',
   User: 'User',
   OrganizationMember: 'OrganizationMember',
   Content: 'Content',
@@ -444,7 +445,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "user" | "organizationMember" | "content" | "contentTranslation" | "contentEmbedding" | "product" | "order" | "orderItem" | "integration" | "wallet" | "nft" | "userActivity" | "tenantUsage" | "aIRequest" | "userPreference" | "recommendation" | "featureFlag" | "featureFlagOverride" | "featureDefinition" | "usageLimitDefinition" | "pricingPlan" | "planFeature" | "planUsageLimit" | "customerPlanVersion" | "customerFeatureOverride" | "customerUsageLimit" | "subscription" | "invoice" | "invoiceItem" | "payment" | "paymentMethod" | "usageRecord" | "usageLedgerEntry" | "usageAggregate" | "creditBalance" | "creditTransaction" | "entitlement" | "stripeCustomer" | "webhookEvent" | "auditLog" | "legalDocument" | "userConsent" | "cookieConsent" | "contactSubmission"
+    modelProps: "organization" | "aPIKey" | "user" | "organizationMember" | "content" | "contentTranslation" | "contentEmbedding" | "product" | "order" | "orderItem" | "integration" | "wallet" | "nft" | "userActivity" | "tenantUsage" | "aIRequest" | "userPreference" | "recommendation" | "featureFlag" | "featureFlagOverride" | "featureDefinition" | "usageLimitDefinition" | "pricingPlan" | "planFeature" | "planUsageLimit" | "customerPlanVersion" | "customerFeatureOverride" | "customerUsageLimit" | "subscription" | "invoice" | "invoiceItem" | "payment" | "paymentMethod" | "usageRecord" | "usageLedgerEntry" | "usageAggregate" | "creditBalance" | "creditTransaction" | "entitlement" | "stripeCustomer" | "webhookEvent" | "auditLog" | "legalDocument" | "userConsent" | "cookieConsent" | "contactSubmission"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -519,6 +520,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.OrganizationCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.OrganizationCountAggregateOutputType> | number
+        }
+      }
+    }
+    APIKey: {
+      payload: Prisma.$APIKeyPayload<ExtArgs>
+      fields: Prisma.APIKeyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.APIKeyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.APIKeyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>
+        }
+        findFirst: {
+          args: Prisma.APIKeyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.APIKeyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>
+        }
+        findMany: {
+          args: Prisma.APIKeyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>[]
+        }
+        create: {
+          args: Prisma.APIKeyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>
+        }
+        createMany: {
+          args: Prisma.APIKeyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.APIKeyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>[]
+        }
+        delete: {
+          args: Prisma.APIKeyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>
+        }
+        update: {
+          args: Prisma.APIKeyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>
+        }
+        deleteMany: {
+          args: Prisma.APIKeyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.APIKeyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.APIKeyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>[]
+        }
+        upsert: {
+          args: Prisma.APIKeyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$APIKeyPayload>
+        }
+        aggregate: {
+          args: Prisma.APIKeyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAPIKey>
+        }
+        groupBy: {
+          args: Prisma.APIKeyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.APIKeyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.APIKeyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.APIKeyCountAggregateOutputType> | number
         }
       }
     }
@@ -3814,6 +3889,22 @@ export const OrganizationScalarFieldEnum = {
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
 
 
+export const APIKeyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  keyHash: 'keyHash',
+  keyPrefix: 'keyPrefix',
+  organizationId: 'organizationId',
+  createdById: 'createdById',
+  lastUsedAt: 'lastUsedAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type APIKeyScalarFieldEnum = (typeof APIKeyScalarFieldEnum)[keyof typeof APIKeyScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   clerkId: 'clerkId',
@@ -5069,6 +5160,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   organization?: Prisma.OrganizationOmit
+  aPIKey?: Prisma.APIKeyOmit
   user?: Prisma.UserOmit
   organizationMember?: Prisma.OrganizationMemberOmit
   content?: Prisma.ContentOmit

@@ -37,6 +37,7 @@ interface ClerkOrganizationData {
   name: string;
   slug: string;
   image_url: string | null;
+  created_by?: string;
 }
 
 interface ClerkOrganizationMembershipData {
@@ -390,12 +391,9 @@ async function handleOrganizationCreated(
       name: "clerk/organization.created",
       data: {
         organizationId: org.id,
-        organizationClerkId: data.id,
-        organizationName: data.name,
-        // Owner email/name are resolved inside the Inngest function from the DB
-        // (the OWNER member is created via a subsequent organizationMembership.created event)
-        ownerEmail: "",
-        ownerFirstName: "",
+        name: data.name,
+        slug: data.slug,
+        createdById: data.created_by,
       },
     })
     .catch((err) => {

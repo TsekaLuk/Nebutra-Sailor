@@ -102,7 +102,7 @@ aiRoutes.openapi(chatRoute, async (c) => {
         return c.json({ error: "AI service temporarily unavailable — circuit open" }, 503);
       }
       const apiError = toApiError(err);
-      return c.json({ error: apiError.message }, 503);
+      return c.json({ error: apiError.error.message }, 503);
     } finally {
       span.end();
     }
@@ -150,7 +150,7 @@ aiRoutes.openapi(embedRoute, async (c) => {
         return c.json({ error: "AI service temporarily unavailable — circuit open" }, 503);
       }
       const apiError = toApiError(err);
-      return c.json({ error: apiError.message }, 503);
+      return c.json({ error: apiError.error.message }, 503);
     } finally {
       span.end();
     }

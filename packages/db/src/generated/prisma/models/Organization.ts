@@ -206,6 +206,7 @@ export type OrganizationWhereInput = {
   integrations?: Prisma.IntegrationListRelationFilter
   wallets?: Prisma.WalletListRelationFilter
   nfts?: Prisma.NftListRelationFilter
+  apiKeys?: Prisma.APIKeyListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -224,6 +225,7 @@ export type OrganizationOrderByWithRelationInput = {
   integrations?: Prisma.IntegrationOrderByRelationAggregateInput
   wallets?: Prisma.WalletOrderByRelationAggregateInput
   nfts?: Prisma.NftOrderByRelationAggregateInput
+  apiKeys?: Prisma.APIKeyOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -245,6 +247,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   integrations?: Prisma.IntegrationListRelationFilter
   wallets?: Prisma.WalletListRelationFilter
   nfts?: Prisma.NftListRelationFilter
+  apiKeys?: Prisma.APIKeyListRelationFilter
 }, "id" | "clerkId" | "slug">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -289,6 +292,7 @@ export type OrganizationCreateInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -307,6 +311,7 @@ export type OrganizationUncheckedCreateInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -325,6 +330,7 @@ export type OrganizationUpdateInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -343,6 +349,7 @@ export type OrganizationUncheckedUpdateInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -420,6 +427,20 @@ export type EnumPlanFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type OrganizationCreateNestedOneWithoutApiKeysInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutApiKeysInput, Prisma.OrganizationUncheckedCreateWithoutApiKeysInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutApiKeysInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutApiKeysNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutApiKeysInput, Prisma.OrganizationUncheckedCreateWithoutApiKeysInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutApiKeysInput
+  upsert?: Prisma.OrganizationUpsertWithoutApiKeysInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutApiKeysInput, Prisma.OrganizationUpdateWithoutApiKeysInput>, Prisma.OrganizationUncheckedUpdateWithoutApiKeysInput>
 }
 
 export type OrganizationCreateNestedOneWithoutMembersInput = {
@@ -534,6 +555,94 @@ export type OrganizationUpdateOneRequiredWithoutTenantUsageNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutTenantUsageInput, Prisma.OrganizationUpdateWithoutTenantUsageInput>, Prisma.OrganizationUncheckedUpdateWithoutTenantUsageInput>
 }
 
+export type OrganizationCreateWithoutApiKeysInput = {
+  id?: string
+  clerkId: string
+  name: string
+  slug: string
+  plan?: $Enums.Plan
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.OrganizationMemberCreateNestedManyWithoutOrganizationInput
+  contents?: Prisma.ContentCreateNestedManyWithoutOrganizationInput
+  tenantUsage?: Prisma.TenantUsageCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  orders?: Prisma.OrderCreateNestedManyWithoutOrganizationInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
+  nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutApiKeysInput = {
+  id?: string
+  clerkId: string
+  name: string
+  slug: string
+  plan?: $Enums.Plan
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.OrganizationMemberUncheckedCreateNestedManyWithoutOrganizationInput
+  contents?: Prisma.ContentUncheckedCreateNestedManyWithoutOrganizationInput
+  tenantUsage?: Prisma.TenantUsageUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutOrganizationInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
+  nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutApiKeysInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutApiKeysInput, Prisma.OrganizationUncheckedCreateWithoutApiKeysInput>
+}
+
+export type OrganizationUpsertWithoutApiKeysInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutApiKeysInput, Prisma.OrganizationUncheckedUpdateWithoutApiKeysInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutApiKeysInput, Prisma.OrganizationUncheckedCreateWithoutApiKeysInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutApiKeysInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutApiKeysInput, Prisma.OrganizationUncheckedUpdateWithoutApiKeysInput>
+}
+
+export type OrganizationUpdateWithoutApiKeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.OrganizationMemberUpdateManyWithoutOrganizationNestedInput
+  contents?: Prisma.ContentUpdateManyWithoutOrganizationNestedInput
+  tenantUsage?: Prisma.TenantUsageUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutOrganizationNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
+  nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.OrganizationMemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  contents?: Prisma.ContentUncheckedUpdateManyWithoutOrganizationNestedInput
+  tenantUsage?: Prisma.TenantUsageUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
+  nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
 export type OrganizationCreateWithoutMembersInput = {
   id?: string
   clerkId: string
@@ -549,6 +658,7 @@ export type OrganizationCreateWithoutMembersInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMembersInput = {
@@ -566,6 +676,7 @@ export type OrganizationUncheckedCreateWithoutMembersInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMembersInput = {
@@ -599,6 +710,7 @@ export type OrganizationUpdateWithoutMembersInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMembersInput = {
@@ -616,6 +728,7 @@ export type OrganizationUncheckedUpdateWithoutMembersInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutContentsInput = {
@@ -633,6 +746,7 @@ export type OrganizationCreateWithoutContentsInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutContentsInput = {
@@ -650,6 +764,7 @@ export type OrganizationUncheckedCreateWithoutContentsInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutContentsInput = {
@@ -683,6 +798,7 @@ export type OrganizationUpdateWithoutContentsInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutContentsInput = {
@@ -700,6 +816,7 @@ export type OrganizationUncheckedUpdateWithoutContentsInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProductsInput = {
@@ -717,6 +834,7 @@ export type OrganizationCreateWithoutProductsInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProductsInput = {
@@ -734,6 +852,7 @@ export type OrganizationUncheckedCreateWithoutProductsInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProductsInput = {
@@ -767,6 +886,7 @@ export type OrganizationUpdateWithoutProductsInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProductsInput = {
@@ -784,6 +904,7 @@ export type OrganizationUncheckedUpdateWithoutProductsInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutOrdersInput = {
@@ -801,6 +922,7 @@ export type OrganizationCreateWithoutOrdersInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutOrdersInput = {
@@ -818,6 +940,7 @@ export type OrganizationUncheckedCreateWithoutOrdersInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutOrdersInput = {
@@ -851,6 +974,7 @@ export type OrganizationUpdateWithoutOrdersInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutOrdersInput = {
@@ -868,6 +992,7 @@ export type OrganizationUncheckedUpdateWithoutOrdersInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutIntegrationsInput = {
@@ -885,6 +1010,7 @@ export type OrganizationCreateWithoutIntegrationsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutIntegrationsInput = {
@@ -902,6 +1028,7 @@ export type OrganizationUncheckedCreateWithoutIntegrationsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutIntegrationsInput = {
@@ -935,6 +1062,7 @@ export type OrganizationUpdateWithoutIntegrationsInput = {
   orders?: Prisma.OrderUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutIntegrationsInput = {
@@ -952,6 +1080,7 @@ export type OrganizationUncheckedUpdateWithoutIntegrationsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutWalletsInput = {
@@ -969,6 +1098,7 @@ export type OrganizationCreateWithoutWalletsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutOrganizationInput
   integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutWalletsInput = {
@@ -986,6 +1116,7 @@ export type OrganizationUncheckedCreateWithoutWalletsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutOrganizationInput
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutWalletsInput = {
@@ -1019,6 +1150,7 @@ export type OrganizationUpdateWithoutWalletsInput = {
   orders?: Prisma.OrderUpdateManyWithoutOrganizationNestedInput
   integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutWalletsInput = {
@@ -1036,6 +1168,7 @@ export type OrganizationUncheckedUpdateWithoutWalletsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutOrganizationNestedInput
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutNftsInput = {
@@ -1053,6 +1186,7 @@ export type OrganizationCreateWithoutNftsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutOrganizationInput
   integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutNftsInput = {
@@ -1070,6 +1204,7 @@ export type OrganizationUncheckedCreateWithoutNftsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutOrganizationInput
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutNftsInput = {
@@ -1103,6 +1238,7 @@ export type OrganizationUpdateWithoutNftsInput = {
   orders?: Prisma.OrderUpdateManyWithoutOrganizationNestedInput
   integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutNftsInput = {
@@ -1120,6 +1256,7 @@ export type OrganizationUncheckedUpdateWithoutNftsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutOrganizationNestedInput
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTenantUsageInput = {
@@ -1137,6 +1274,7 @@ export type OrganizationCreateWithoutTenantUsageInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTenantUsageInput = {
@@ -1154,6 +1292,7 @@ export type OrganizationUncheckedCreateWithoutTenantUsageInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutOrganizationInput
   wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutOrganizationInput
   nfts?: Prisma.NftUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.APIKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTenantUsageInput = {
@@ -1187,6 +1326,7 @@ export type OrganizationUpdateWithoutTenantUsageInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTenantUsageInput = {
@@ -1204,6 +1344,7 @@ export type OrganizationUncheckedUpdateWithoutTenantUsageInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutOrganizationNestedInput
   wallets?: Prisma.WalletUncheckedUpdateManyWithoutOrganizationNestedInput
   nfts?: Prisma.NftUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.APIKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -1220,6 +1361,7 @@ export type OrganizationCountOutputType = {
   integrations: number
   wallets: number
   nfts: number
+  apiKeys: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1231,6 +1373,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   integrations?: boolean | OrganizationCountOutputTypeCountIntegrationsArgs
   wallets?: boolean | OrganizationCountOutputTypeCountWalletsArgs
   nfts?: boolean | OrganizationCountOutputTypeCountNftsArgs
+  apiKeys?: boolean | OrganizationCountOutputTypeCountApiKeysArgs
 }
 
 /**
@@ -1299,6 +1442,13 @@ export type OrganizationCountOutputTypeCountNftsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.NftWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountApiKeysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.APIKeyWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1316,6 +1466,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   integrations?: boolean | Prisma.Organization$integrationsArgs<ExtArgs>
   wallets?: boolean | Prisma.Organization$walletsArgs<ExtArgs>
   nfts?: boolean | Prisma.Organization$nftsArgs<ExtArgs>
+  apiKeys?: boolean | Prisma.Organization$apiKeysArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -1359,6 +1510,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   integrations?: boolean | Prisma.Organization$integrationsArgs<ExtArgs>
   wallets?: boolean | Prisma.Organization$walletsArgs<ExtArgs>
   nfts?: boolean | Prisma.Organization$nftsArgs<ExtArgs>
+  apiKeys?: boolean | Prisma.Organization$apiKeysArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1375,6 +1527,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     integrations: Prisma.$IntegrationPayload<ExtArgs>[]
     wallets: Prisma.$WalletPayload<ExtArgs>[]
     nfts: Prisma.$NftPayload<ExtArgs>[]
+    apiKeys: Prisma.$APIKeyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1786,6 +1939,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   integrations<T extends Prisma.Organization$integrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$integrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   wallets<T extends Prisma.Organization$walletsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$walletsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   nfts<T extends Prisma.Organization$nftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$nftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  apiKeys<T extends Prisma.Organization$apiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$APIKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2399,6 +2553,30 @@ export type Organization$nftsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.NftScalarFieldEnum | Prisma.NftScalarFieldEnum[]
+}
+
+/**
+ * Organization.apiKeys
+ */
+export type Organization$apiKeysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the APIKey
+   */
+  select?: Prisma.APIKeySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the APIKey
+   */
+  omit?: Prisma.APIKeyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.APIKeyInclude<ExtArgs> | null
+  where?: Prisma.APIKeyWhereInput
+  orderBy?: Prisma.APIKeyOrderByWithRelationInput | Prisma.APIKeyOrderByWithRelationInput[]
+  cursor?: Prisma.APIKeyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.APIKeyScalarFieldEnum | Prisma.APIKeyScalarFieldEnum[]
 }
 
 /**

@@ -9,7 +9,7 @@ import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 import {
   createCheckoutSession,
   createBillingPortalSession,
-  getSubscription,
+  getStripeSubscription,
   checkUsageLimit,
 } from "@nebutra/billing";
 import { toApiError } from "@nebutra/errors";
@@ -23,7 +23,7 @@ const CheckoutRequestSchema = z.object({
   priceId: z.string().startsWith("price_"),
   successUrl: z.string().url(),
   cancelUrl: z.string().url(),
-  trialDays: z.number().int().min(0).max(30).optional(),
+  trialPeriodDays: z.number().int().min(0).max(30).optional(),
 });
 
 const PortalRequestSchema = z.object({
@@ -46,7 +46,7 @@ const checkoutRoute = createRoute({
 
 billingRoutes.openapi(checkoutRoute, async (c) => {
   const tenant = c.get("tenant");
-  const { priceId, successUrl, cancelUrl, trialDays } = c.req.valid("json");
+  const { priceId, successUrl, cancelUrl, trialPeriodDays } = c.req.valid("json");
 
   try {
     const session = await createCheckoutSession({
@@ -54,12 +54,12 @@ billingRoutes.openapi(checkoutRoute, async (c) => {
       priceId,
       successUrl,
       cancelUrl,
-      trialDays,
+      ...(trialPeriodDays !== undefined && { trialPeriodDays }),
     });
     return c.json({ url: session.url, sessionId: session.id });
   } catch (err) {
     const apiError = toApiError(err);
-    return c.json({ error: apiError.message }, 400);
+    return c.json({ error: apiError.error.message }, 400);
   }
 });
 
@@ -87,7 +87,7 @@ billingRoutes.openapi(portalRoute, async (c) => {
     return c.json({ url: session.url });
   } catch (err) {
     const apiError = toApiError(err);
-    return c.json({ error: apiError.message }, 400);
+    return c.json({ error: apiError.error.message }, 400);
   }
 });
 
@@ -106,12 +106,12 @@ billingRoutes.openapi(subscriptionRoute, async (c) => {
   const tenant = c.get("tenant");
 
   try {
-    const sub = await getSubscription(tenant?.organizationId ?? "");
+    const sub = await getStripeSubscription(tenant?.organizationId ?? "");
     if (!sub) return c.json({ error: "No active subscription" }, 404);
     return c.json(sub);
   } catch (err) {
     const apiError = toApiError(err);
-    return c.json({ error: apiError.message }, 400);
+    return c.json({ error: apiError.error.message }, 400);
   }
 });
 
@@ -130,20 +130,16 @@ billingRoutes.openapi(usageRoute, async (c) => {
   const orgId = tenant?.organizationId ?? "";
 
   try {
-    const [snapshot, limit] = await Promise.all([
-      getUsageSnapshot(orgId),
-      checkUsageLimit(orgId, "api_calls").catch(() => null),
-    ]);
+    const snapshot = await getUsageSnapshot(orgId);
+    // Use the synchronous checkUsageLimit with a default limit of 10000
+    const limitResult = checkUsageLimit(BigInt(snapshot.apiCalls), BigInt(10000), BigInt(0));
 
     return c.json({
       period: snapshot.period,
       apiCalls: {
         used: snapshot.apiCalls,
-        limit: (limit as { limit?: number } | null)?.limit ?? null,
-        percentUsed:
-          (limit as { limit?: number } | null)?.limit
-            ? Math.round((snapshot.apiCalls / ((limit as { limit: number }).limit)) * 100)
-            : null,
+        limit: Number(limitResult.limit),
+        percentUsed: limitResult.percentUsed,
       },
       aiTokens: {
         used: snapshot.aiTokens,
@@ -151,6 +147,6 @@ billingRoutes.openapi(usageRoute, async (c) => {
     });
   } catch (err) {
     const apiError = toApiError(err);
-    return c.json({ error: apiError.message }, 500);
+    return c.json({ error: apiError.error.message }, 500);
   }
 });

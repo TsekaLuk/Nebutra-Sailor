@@ -26,14 +26,14 @@ Sentry.init({
       maskAllText: true,
       blockAllMedia: true,
     }),
-    Sentry.browserTracingIntegration({
-      // Propagate trace context to the Nebutra API
-      tracePropagationTargets: [
-        "localhost",
-        /^https:\/\/api\.nebutra\.ai/,
-        /^https:\/\/api\.nebutra\.com/,
-      ],
-    }),
+    Sentry.browserTracingIntegration(),
+  ],
+
+  // Propagate trace context to the Nebutra API
+  tracePropagationTargets: [
+    "localhost",
+    /^https:\/\/api\.nebutra\.ai/,
+    /^https:\/\/api\.nebutra\.com/,
   ],
 
   beforeSend(event) {

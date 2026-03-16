@@ -542,10 +542,6 @@ export type EnumContentStatusFieldUpdateOperationsInput = {
   set?: $Enums.ContentStatus
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type ContentCreateNestedOneWithoutTranslationsInput = {
   create?: Prisma.XOR<Prisma.ContentCreateWithoutTranslationsInput, Prisma.ContentUncheckedCreateWithoutTranslationsInput>
   connectOrCreate?: Prisma.ContentCreateOrConnectWithoutTranslationsInput

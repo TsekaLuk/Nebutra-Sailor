@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
 
   // Keep Prisma and bcryptjs out of the client bundle — they are Node-only.
-  serverExternalPackages: ["@prisma/client", "bcryptjs"],
+  serverExternalPackages: ["@prisma/client", "@prisma/adapter-pg", "bcryptjs"],
 
   // TODO: Re-enable once all pages add proper <Suspense> boundaries for dynamic data.
   // Multiple pages (auth, home, onboarding, demo) access dynamic data (Clerk auth,
