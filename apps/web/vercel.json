@@ -1,7 +1,7 @@
 {
   "framework": "nextjs",
-"buildCommand": "pnpm turbo build --filter=@nebutra/web",
-  "installCommand": "pnpm install",
+  "buildCommand": "pnpm turbo build --filter=@nebutra/web",
+  "installCommand": "pnpm install --no-frozen-lockfile",
   "outputDirectory": ".next",
   "regions": ["iad1"],
   "env": {

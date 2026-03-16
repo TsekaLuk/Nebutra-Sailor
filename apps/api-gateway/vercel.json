@@ -1,6 +1,6 @@
 {
-"buildCommand": "pnpm turbo build --filter=@nebutra/api-gateway",
-  "installCommand": "pnpm install",
+  "buildCommand": "pnpm turbo build --filter=@nebutra/api-gateway",
+  "installCommand": "pnpm install --no-frozen-lockfile",
   "outputDirectory": "dist",
   "regions": ["iad1"],
   "functions": {
