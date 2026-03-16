@@ -16,13 +16,67 @@ import { ComponentPreview } from "@/components/component-preview";
 
 <ComponentPreview name="input-with-icon-demo" className="max-w-[350px]">
   <InputBasicDemo />
+
+  ```tsx
+<InputBasicDemo />
+  ```
 </ComponentPreview>
 
 ## 使用方法 (Usage)
 
 <ComponentPreview name="input-installation-demo" className="max-w-[350px] flex-col gap-4"  />
+  ## 示例 (Examples)
+
+### 基础用法 (Basic)
+
+<ComponentPreview name="input-demo" className="max-w-[350px]"  />
 
 
+### 带有标签 (With Label)
+
+<ComponentPreview name="input-with-label-demo" className="max-w-[350px]"  />
+
+
+### 错误状态 (With Error State)
+
+<ComponentPreview name="input-error-demo" className="max-w-[350px]"  />
+
+
+## 前缀 (Prefix)
+
+使用 `prefix` 属性在输入框左侧边缘渲染一个不可交互的图标或节点。点击前缀区域将穿透到输入框（输入框会获得焦点）。
+
+<ComponentPreview name="input-with-icon-demo" className="max-w-[350px] flex-col gap-4"  />
+
+
+## 后缀 (Suffix)
+
+使用 `suffix` 属性在输入框右侧边缘渲染一个不可交互的标签或图标。
+
+<Warning>
+  `suffix` 具有 `pointer-events: none` 样式 — 它纯粹是装饰性的。对于有交互的右侧元素
+  (例如密码显示按钮)，请通过 `className="pr-9"` 和 `absolute` 绝对定位按钮来手动构建。
+  请参阅下面的 [密码显示](#password-reveal) 示例。
+</Warning>
+
+<ComponentPreview name="input-with-addons-demo" className="max-w-[350px] flex-col gap-4"  />
+
+
+## 可清除 (Clearable)
+
+设置 `clearable` 属性后，无论输入框何时有值，它都会渲染一个 ✕ 按钮。当输入框为空时，该按钮会消失。
+
+### 非受控用法 (Uncontrolled)
+
+<ComponentPreview name="input-clearable-demo" className="max-w-[350px]"  />
+
+
+### 受控用法 (Controlled)
+
+<ComponentPreview name="input-demo" className="max-w-[350px]">
+  <Input clearable defaultValue="contact@nebutra.com" placeholder="受控的可清除输入框… (Controlled clearable…)" />
+
+  ```tsx
 ## 示例 (Examples)
 
 ### 基础用法 (Basic)
@@ -73,6 +127,7 @@ import { ComponentPreview } from "@/components/component-preview";
 
 <ComponentPreview name="input-demo" className="max-w-[350px]">
   <Input clearable defaultValue="contact@nebutra.com" placeholder="受控的可清除输入框… (Controlled clearable…)" />
+  ```
 </ComponentPreview>
 
 ### 带有前缀 (With Prefix)
@@ -83,6 +138,14 @@ import { ComponentPreview } from "@/components/component-preview";
     clearable
     placeholder="搜索… (Search…)"
   />
+
+  ```tsx
+<Input
+    prefix={<Search className="h-4 w-4" />}
+    clearable
+    placeholder="搜索… (Search…)"
+  />
+  ```
 </ComponentPreview>
 
 <Callout>

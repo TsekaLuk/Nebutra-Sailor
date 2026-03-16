@@ -36,6 +36,39 @@ description: "Visual indicator of task completion progress, built on Radix UI."
       <Progress value={undefined} />
     </div>
   </div>
+
+  ```tsx
+<div className="space-y-8 w-full">
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm">
+        <span>Downloading...</span>
+        <span>33%</span>
+      </div>
+      <Progress value={33} />
+    </div>
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm">
+        <span>Processing...</span>
+        <span>66%</span>
+      </div>
+      <Progress value={66} />
+    </div>
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm">
+        <span>Completed</span>
+        <span>100%</span>
+      </div>
+      <Progress value={100} />
+    </div>
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm">
+        <span>Connecting...</span>
+        <span>Indeterminate</span>
+      </div>
+      <Progress value={undefined} />
+    </div>
+  </div>
+  ```
 </ComponentPreview>
 
 ## Usage
@@ -61,43 +94,76 @@ Built on Base UI progress primitive.
 
 <ComponentPreview name="progress-1-demo" className="max-w-[400px]">
   <ProgressBasicDemo />
+
+  ```tsx
+<ProgressBasicDemo />
+  ```
 </ComponentPreview>
 
 ### With Label
 
 <ComponentPreview name="progress-2-demo" className="max-w-[400px]">
-    <div className="space-y-1 w-full">
+  <div className="space-y-1 w-full">
       <div className="flex justify-between text-sm">
         <span>Uploading...</span>
         <span>65%</span>
       </div>
       <Progress value={65} />
     </div>
+
+  ```tsx
+<div className="space-y-1 w-full">
+      <div className="flex justify-between text-sm">
+        <span>Uploading...</span>
+        <span>65%</span>
+      </div>
+      <Progress value={65} />
+    </div>
+  ```
 </ComponentPreview>
 
 ### Indeterminate (Loading)
 
 <ComponentPreview name="progress-3-demo" className="max-w-[400px]">
-    <div className="w-full">
+  <div className="w-full">
       <Progress value={undefined} className="w-full" />
     </div>
+
+  ```tsx
+<div className="w-full">
+      <Progress value={undefined} className="w-full" />
+    </div>
+  ```
 </ComponentPreview>
 
 ### Custom Color
 
 <ComponentPreview name="progress-4-demo" className="max-w-[400px]">
-    <div className="w-full">
+  <div className="w-full">
       <Progress
         value={75}
         className="w-full [&>div]:bg-green-500"
       />
     </div>
+
+  ```tsx
+<div className="w-full">
+      <Progress
+        value={75}
+        className="w-full [&>div]:bg-green-500"
+      />
+    </div>
+  ```
 </ComponentPreview>
 
 ### Circular Progress
 
 <ComponentPreview name="animated-circular-progress-bar-demo" className="max-w-[400px]">
   <AnimatedCircularProgressBarDemo />
+
+  ```tsx
+<AnimatedCircularProgressBarDemo />
+  ```
 </ComponentPreview>
 
 ## Accessibility

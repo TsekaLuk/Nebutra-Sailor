@@ -17,16 +17,28 @@ import { ComponentPreview } from "@/components/component-preview";
 
 <ComponentPreview name="InputBasicDemo">
   <InputBasicDemo />
+
+  ```tsx
+<InputBasicDemo />
+  ```
 </ComponentPreview>
 
 ## Usage
 
 <ComponentPreview name="input-installation-demo" className="max-w-[350px] flex-col gap-4">
-    {/* Search icon */}
+  {/* Search icon */}
   <Input prefix={<span className="text-xs">🔍</span>} placeholder="Search…" />
 
   {/* Mail icon */}
   <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+
+  ```tsx
+{/* Search icon */}
+  <Input prefix={<span className="text-xs">🔍</span>} placeholder="Search…" />
+
+  {/* Mail icon */}
+  <Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
+  ```
 </ComponentPreview>
 
 ## Examples
@@ -35,6 +47,10 @@ import { ComponentPreview } from "@/components/component-preview";
 
 <ComponentPreview name="input-demo" className="max-w-[350px]">
   <Input placeholder="Enter value…" />
+
+  ```tsx
+<Input placeholder="Enter value…" />
+  ```
 </ComponentPreview>
 
 ### With Label

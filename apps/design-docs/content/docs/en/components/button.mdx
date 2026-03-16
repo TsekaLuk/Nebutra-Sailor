@@ -6,15 +6,26 @@ description: Interactive click target with eight visual variants, five size opti
 
 <ComponentPreview name="button-demo" >
   <ButtonDemo />
+
+  ```tsx
+<ButtonDemo />
+  ```
 </ComponentPreview>
 
 ## Installation
 
 <ComponentPreview name="button-installation-demo" className="gap-3">
-    {/* Note: In MDX, you cannot import Lucide icons inline. 
+  {/* Note: In MDX, you cannot import Lucide icons inline. 
       For exact icon usage, see the actual React code. */}
   <Button prefix={<span>✉️</span>}>Login with Email</Button>
   <Button suffix={<span>➔</span>}>Continue</Button>
+
+  ```tsx
+{/* Note: In MDX, you cannot import Lucide icons inline. 
+      For exact icon usage, see the actual React code. */}
+  <Button prefix={<span>✉️</span>}>Login with Email</Button>
+  <Button suffix={<span>➔</span>}>Continue</Button>
+  ```
 </ComponentPreview>
 
 ## Variants
@@ -27,6 +38,16 @@ description: Interactive click target with eight visual variants, five size opti
   <Button variant="destructive">Delete</Button>
   <Button variant="warning">Warning</Button>
   <Button variant="link">Learn more</Button>
+
+  ```tsx
+<Button variant="default">Default</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="destructive">Delete</Button>
+  <Button variant="warning">Warning</Button>
+  <Button variant="link">Learn more</Button>
+  ```
 </ComponentPreview>
 
 ## Sizes
@@ -36,6 +57,13 @@ description: Interactive click target with eight visual variants, five size opti
   <Button size="sm">Small</Button>
   <Button size="default">Default</Button>
   <Button size="lg">Large</Button>
+
+  ```tsx
+<Button size="tiny">Tiny</Button>
+  <Button size="sm">Small</Button>
+  <Button size="default">Default</Button>
+  <Button size="lg">Large</Button>
+  ```
 </ComponentPreview>
 
 ## With Icons
@@ -43,12 +71,21 @@ description: Interactive click target with eight visual variants, five size opti
 <ComponentPreview name="button-4-demo" className="gap-3 pt-6">
   <Button prefix={<span>✉️</span>}>Login with Email</Button>
   <Button suffix={<span>➔</span>}>Continue</Button>
+
+  ```tsx
+<Button prefix={<span>✉️</span>}>Login with Email</Button>
+  <Button suffix={<span>➔</span>}>Continue</Button>
+  ```
 </ComponentPreview>
 
 ## Loading State
 
 <ComponentPreview name="button-5-demo" >
   <Button loading>Saving…</Button>
+
+  ```tsx
+<Button loading>Saving…</Button>
+  ```
 </ComponentPreview>
 
 ## Props

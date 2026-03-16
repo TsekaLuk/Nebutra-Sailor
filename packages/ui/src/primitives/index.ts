@@ -134,6 +134,7 @@ export {
 export { RadioGroup, RadioGroupItem } from "./radio-group";
 
 export { Switch, type SwitchProps } from "./switch";
+export * from "./toggle";
 
 export {
   Tabs,

@@ -3,8 +3,7 @@
 "use client";
 
 import { Settings } from "lucide-react"
-import { PopoverTrigger, Label, PopoverContent, Popover, Button } from "@nebutra/ui/primitives"
-import { Switch } from "@heroui/switch"
+import { PopoverTrigger, Label, PopoverContent, Popover, Button, Toggle } from "@nebutra/ui/primitives"
 
 export function PopoverSettingsDemo() {
   return (
@@ -18,11 +17,11 @@ export function PopoverSettingsDemo() {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <Label htmlFor="notifications">Notifications</Label>
-            <Switch />
+            <Toggle />
           </div>
           <div className="flex items-center justify-between">
             <Label htmlFor="marketing">Marketing emails</Label>
-            <Switch />
+            <Toggle />
           </div>
         </div>
       </PopoverContent>

@@ -1,4 +1,23 @@
 {
+  "auth": {
+    "signin": {
+      "title": "灵魂对话",
+      "subtitle": "登录并与 Tseka 的 AI 分身对话",
+      "github": "使用 GitHub 继续",
+      "google": "使用 Google 继续",
+      "linuxdo": "使用 Linux DO 继续",
+      "back": "返回首页"
+    },
+    "error": {
+      "title": "认证失败",
+      "subtitle": "登录过程中出现问题。",
+      "configuration": "认证服务未正确配置。如果您是管理员，请在 Vercel 项目设置中检查相关环境变量（AUTH_SECRET、GITHUB_ID 等）是否已填写。",
+      "access_denied": "您的账号被拒绝访问。",
+      "default": "验证过程中发生未知错误。",
+      "try_again": "重试一次",
+      "back": "返回首页"
+    }
+  },
   "nav": {
     "work": "作品",
     "thinking": "思考",

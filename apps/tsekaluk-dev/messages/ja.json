@@ -1,4 +1,23 @@
 {
+  "auth": {
+    "signin": {
+      "title": "ソウルへようこそ",
+      "subtitle": "サインインしてTsekaのAIとチャット",
+      "github": "GitHubで続ける",
+      "google": "Googleで続ける",
+      "linuxdo": "Linux DOで続ける",
+      "back": "ホームに戻る"
+    },
+    "error": {
+      "title": "認証エラー",
+      "subtitle": "サインインできませんでした。",
+      "configuration": "認証プロバイダーが正しく構成されていません。管理者の場合は、Vercelプロジェクト設定で環境変数（AUTH_SECRET、GITHUB_IDなど）を確認してください。",
+      "access_denied": "アカウントへのアクセスが拒否されました。",
+      "default": "認証中に予期しないエラーが発生しました。",
+      "try_again": "もう一度試す",
+      "back": "ホームに戻る"
+    }
+  },
   "nav": {
     "work": "作品",
     "thinking": "思考",

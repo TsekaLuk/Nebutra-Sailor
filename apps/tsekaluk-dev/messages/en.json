@@ -1,4 +1,23 @@
 {
+  "auth": {
+    "signin": {
+      "title": "Welcome to Soul",
+      "subtitle": "Sign in to chat with Tseka's AI agent",
+      "github": "Continue with GitHub",
+      "google": "Continue with Google",
+      "linuxdo": "Continue with Linux DO",
+      "back": "Back to Home"
+    },
+    "error": {
+      "title": "Authentication Error",
+      "subtitle": "We couldn't sign you in.",
+      "configuration": "The authentication provider is not configured properly. If you are the administrator, please check your environment variables (AUTH_SECRET, GITHUB_ID, GITHUB_SECRET, etc.) in your Vercel project settings.",
+      "access_denied": "Access was denied to your account.",
+      "default": "An unexpected error occurred during authentication.",
+      "try_again": "Try Again",
+      "back": "Back to Home"
+    }
+  },
   "nav": {
     "work": "Work",
     "thinking": "Thinking",

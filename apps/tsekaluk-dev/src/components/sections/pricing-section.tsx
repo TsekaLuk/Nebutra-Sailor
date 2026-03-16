@@ -414,11 +414,11 @@ function ServiceCarousel() {
                 onClick={() => setActiveIndex(idx)}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider whitespace-nowrap transition-all duration-300 border shrink-0 ${
                   isActive
-                    ? "bg-white dark:bg-gray-900 text-[var(--color-accent-dark)] border-white dark:border-gray-700 shadow-md"
-                    : "bg-transparent text-white/70 border-white/20 hover:text-white hover:border-white/40"
+                    ? "bg-gray-900 text-[var(--color-accent)] dark:bg-gray-950 shadow-md border-transparent"
+                    : "bg-transparent text-gray-800/70 border-gray-900/10 hover:text-gray-900 hover:border-gray-900/30 dark:text-black/60 dark:border-black/10 dark:hover:text-black dark:hover:border-black/30"
                 }`}
               >
-                <Icon size={14} className={isActive ? "text-[var(--color-accent-dark)]" : "text-white/50"} />
+                <Icon size={14} className={isActive ? "text-[var(--color-accent)] dark:text-[var(--color-accent)]" : "text-gray-800/50 dark:text-black/40"} />
                 {t(`services.${key}.name`)}
               </button>
             );
@@ -453,13 +453,13 @@ function ServiceCarousel() {
                   onClick={() => setActiveIndex(idx)}
                   className={`relative flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-500 text-left border ${
                     isActive
-                      ? "bg-white dark:bg-gray-900 text-[var(--color-accent-dark)] border-white dark:border-gray-700 z-10 shadow-lg"
-                      : "bg-transparent text-white/60 border-white/20 hover:border-white/40 hover:text-white"
+                      ? "bg-gray-900 text-[var(--color-accent)] dark:bg-gray-950 border-transparent z-10 shadow-xl"
+                      : "bg-transparent text-gray-800/70 border-gray-900/10 hover:border-gray-900/40 hover:text-gray-900 dark:text-black/60 dark:border-black/10 dark:hover:border-black/30 dark:hover:text-black"
                   }`}
                 >
                   <Icon
                     size={16}
-                    className={isActive ? "text-[var(--color-accent-dark)]" : "text-white/40"}
+                    className={isActive ? "text-[var(--color-accent)] dark:text-[var(--color-accent)]" : "text-gray-800/40 dark:text-black/40"}
                   />
                   <span className="font-medium text-sm tracking-tight whitespace-nowrap uppercase">
                     {t(`services.${key}.name`)}
