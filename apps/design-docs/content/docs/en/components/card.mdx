@@ -5,20 +5,16 @@ description: "Content container using compound component pattern. Five visual va
 
 ## Usage
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="card-demo" className="max-w-[400px]">
     <NebutraCard variant="bordered" padding="md">
-    <CardHeader>
-      <CardIcon size="md"><span>⚡️</span></CardIcon>
-      <CardTitle>Fast Deployments</CardTitle>
-    </CardHeader>
-    <CardBody>
-      <CardDescription>Deploy to production in seconds with zero downtime.</CardDescription>
-    </CardBody>
-  </NebutraCard>
-
-  ```tsx
-import { Card } from "@nebutra/ui/patterns"
-```
+      <CardHeader>
+        <CardIcon size="md"><span>⚡️</span></CardIcon>
+        <CardTitle>Fast Deployments</CardTitle>
+      </CardHeader>
+      <CardBody>
+        <CardDescription>Deploy to production in seconds with zero downtime.</CardDescription>
+      </CardBody>
+    </NebutraCard>
 </ComponentPreview>
 
 The Card uses a **compound component** API — subcomponents are accessed as `Card.Header`, `Card.Body`, etc.
@@ -27,8 +23,7 @@ The Card uses a **compound component** API — subcomponents are accessed as `Ca
 
 ### Basic
 
-```tsx
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="card-2-demo" className="max-w-[400px]">
   <NebutraCard variant="default" padding="md">
     <CardHeader>
       <CardTitle>Create project</CardTitle>
@@ -42,7 +37,6 @@ The Card uses a **compound component** API — subcomponents are accessed as `Ca
     </CardFooter>
   </NebutraCard>
 </ComponentPreview>
-```
 
 ### All Variants
 
@@ -97,34 +91,19 @@ import { Zap } from "lucide-react"
 
 ### Gradient Featured Card
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="card-gradient-demo" className="max-w-[400px]">
     <NebutraCard variant="gradient" padding="lg">
-    <CardHeader>
-      <CardTitle>Pro Plan</CardTitle>
-      <CardDescription as="div">Everything you need to ship faster.</CardDescription>
-    </CardHeader>
-    <CardBody>
-      <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/mo</span></p>
-    </CardBody>
-    <CardFooter>
-      <Button className="w-full">Get started</Button>
-    </CardFooter>
-  </NebutraCard>
-
-  ```tsx
-<Card variant="gradient" padding="lg">
-  <CardHeader>
-    <CardTitle>Pro Plan</CardTitle>
-    <CardDescription>Everything you need to ship faster.</CardDescription>
-  </CardHeader>
-  <CardBody>
-    <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/mo</span></p>
-  </CardBody>
-  <CardFooter>
-    <Button className="w-full">Get started</Button>
-  </CardFooter>
-</Card>
-```
+      <CardHeader>
+        <CardTitle>Pro Plan</CardTitle>
+        <CardDescription as="div">Everything you need to ship faster.</CardDescription>
+      </CardHeader>
+      <CardBody>
+        <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/mo</span></p>
+      </CardBody>
+      <CardFooter>
+        <Button className="w-full">Get started</Button>
+      </CardFooter>
+    </NebutraCard>
 </ComponentPreview>
 
 ## Props

@@ -5,25 +5,14 @@ description: "动画加载占位图，用于在数据获取期间模拟内容布
 
 ## 演示 (Demo)
 
-<ComponentPreview className="min-h-[200px] flex items-center justify-center">
+<ComponentPreview name="skeleton-demo" className="min-h-[200px] flex items-center justify-center">
   <div className="flex items-center space-x-4 w-80 p-4 border rounded-xl shadow-sm">
     <Skeleton className="h-12 w-12 rounded-full shrink-0" />
     <div className="space-y-2 flex-1">
       <Skeleton className="h-4 w-[200px]" />
       <Skeleton className="h-4 w-[160px]" />
     </div>
-  </div>
-
-  ```tsx
-<div className="flex items-center space-x-4 w-80 p-4 border rounded-xl shadow-sm">
-    <Skeleton className="h-12 w-12 rounded-full shrink-0" />
-    <div className="space-y-2 flex-1">
-      <Skeleton className="h-4 w-[200px]" />
-      <Skeleton className="h-4 w-[160px]" />
-    </div>
-  </div>
-  ```
-</ComponentPreview>
+  </div />
 
 ## 使用方法 (Usage)
 
@@ -45,7 +34,7 @@ import { Skeleton } from "@nebutra/ui/primitives"
 
 ### 卡片骨架屏 (Card Skeleton)
 
-<ComponentPreview className="min-h-[350px] flex items-center justify-center">
+<ComponentPreview name="skeleton-2-demo" className="min-h-[350px] flex items-center justify-center">
     <div className="flex flex-col space-y-4 w-80 p-4 border rounded-xl shadow-sm">
     <Skeleton className="h-40 w-full rounded-lg" />
     <div className="space-y-2 flex-1">
@@ -53,23 +42,11 @@ import { Skeleton } from "@nebutra/ui/primitives"
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-5/6" />
     </div>
-  </div>
-
-  ```tsx
-<div className="flex flex-col space-y-4 w-80 p-4 border rounded-xl shadow-sm">
-  <Skeleton className="h-40 w-full rounded-lg" />
-  <div className="space-y-2 flex-1">
-    <Skeleton className="h-5 w-3/4" />
-    <Skeleton className="h-4 w-full" />
-    <Skeleton className="h-4 w-5/6" />
-  </div>
-</div>
-```
-</ComponentPreview>
+  </div />
 
 ### 列表骨架屏 (List Skeleton)
 
-<ComponentPreview className="min-h-[350px] flex items-center justify-center">
+<ComponentPreview name="skeleton-3-demo" className="min-h-[350px] flex items-center justify-center">
     <div className="space-y-3 w-80 p-4 border rounded-xl shadow-sm">
     {Array.from({ length: 4 }).map((_, i) => (
       <div key={i} className="flex items-center gap-3">
@@ -80,22 +57,7 @@ import { Skeleton } from "@nebutra/ui/primitives"
         </div>
       </div>
     ))}
-  </div>
-
-  ```tsx
-<div className="space-y-3 w-80 p-4 border rounded-xl shadow-sm">
-  {Array.from({ length: 4 }).map((_, i) => (
-    <div key={i} className="flex items-center gap-3">
-      <Skeleton className="h-10 w-10 rounded-full shrink-0" />
-      <div className="space-y-1.5 flex-1">
-        <Skeleton className="h-3.5 w-[140px]" />
-        <Skeleton className="h-3 w-[100px]" />
-      </div>
-    </div>
-  ))}
-</div>
-```
-</ComponentPreview>
+  </div />
 
 ### 条件加载 (Conditional Loading)
 

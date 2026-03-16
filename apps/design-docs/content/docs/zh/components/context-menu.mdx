@@ -9,60 +9,11 @@ description: "支持图标、快捷键提示、禁用状态和链接模式的右
 
 ## 安装 (Installation)
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-center">
-    <ContextMenuDemo />
-
-  ```tsx
-import { ContextMenu } from "@nebutra/ui/primitives";
-```
-
-## 使用方法 (Usage)
-
-### 基础用法 (Default)
-
-```tsx
-import { ContextMenu } from "@nebutra/ui/primitives"
-
-<ContextMenu.Root>
-  <ContextMenu.Trigger asChild>
-    <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">在此处右键点击</div>
-  </ContextMenu.Trigger>
-  <ContextMenu.Content>
-    <ContextMenu.Item onSelect={() => {}}>编辑 (Edit)</ContextMenu.Item>
-    <ContextMenu.Item onSelect={() => {}}>复制 (Duplicate)</ContextMenu.Item>
-    <ContextMenu.Item onSelect={() => {}}>删除 (Delete)</ContextMenu.Item>
-  </ContextMenu.Content>
-</ContextMenu.Root>
-```
-</ComponentPreview>
+<ComponentPreview name="context-menu-demo" className="min-h-[250px] flex justify-center items-center" />
 
 ### 带有前缀图标 (With prefix icons)
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-center">
-    <ContextMenuWithIconsDemo />
-
-  ```tsx
-import { Edit2, Trash2, Copy } from "lucide-react"
-
-<ContextMenu.Root>
-  <ContextMenu.Trigger asChild>
-    <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">在此处右键点击</div>
-  </ContextMenu.Trigger>
-  <ContextMenu.Content>
-    <ContextMenu.Item prefix={<Edit2 className="h-4 w-4" />} onSelect={() => {}}>
-      编辑 (Edit)
-    </ContextMenu.Item>
-    <ContextMenu.Item prefix={<Copy className="h-4 w-4" />} onSelect={() => {}}>
-      拷贝 (Copy)
-    </ContextMenu.Item>
-    <ContextMenu.Separator />
-    <ContextMenu.Item prefix={<Trash2 className="h-4 w-4" />} onSelect={() => {}}>
-      删除 (Delete)
-    </ContextMenu.Item>
-  </ContextMenu.Content>
-</ContextMenu.Root>
-```
-</ComponentPreview>
+<ComponentPreview name="context-menu-with-icons-demo" className="min-h-[250px] flex justify-center items-center" />
 
 ### 带有后缀提示（快捷键） (With suffix hints)
 

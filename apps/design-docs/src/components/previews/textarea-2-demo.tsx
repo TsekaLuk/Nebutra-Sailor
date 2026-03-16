@@ -1,0 +1,22 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+"use client";
+
+import * as React from "react";
+
+export function Textarea2Demo() {
+  return (
+    <>
+<div className="flex flex-col gap-1 w-full">
+  <Textarea
+    defaultValue=""
+    placeholder="Type here..."
+    maxLength={500}
+  />
+  <span className="text-xs text-muted-foreground text-right w-full">
+    0/500
+  </span>
+</div>
+    </>
+  );
+}

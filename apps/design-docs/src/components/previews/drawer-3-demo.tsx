@@ -1,0 +1,22 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+"use client";
+
+import * as React from "react";
+
+export function Drawer3Demo() {
+  return (
+    <>
+<Drawer direction="right">
+  <DrawerTrigger asChild>
+    <Button>Open Sidebar</Button>
+  </DrawerTrigger>
+  <DrawerContent className="w-80 h-full p-4 mt-0 ml-auto mr-0 mb-0">
+    <DrawerHeader>
+      <DrawerTitle>Navigation</DrawerTitle>
+    </DrawerHeader>
+  </DrawerContent>
+</Drawer>
+    </>
+  );
+}

@@ -5,7 +5,7 @@ description: "显示用户当前位置的分层导航路径。"
 
 ## 演示 (Demo)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+<ComponentPreview name="breadcrumb-demo" className="min-h-[150px] flex justify-center items-center">
     <Breadcrumb>
     <BreadcrumbList>
       <BreadcrumbItem>
@@ -20,26 +20,7 @@ description: "显示用户当前位置的分层导航路径。"
         <BreadcrumbPage>面包屑 (Breadcrumb)</BreadcrumbPage>
       </BreadcrumbItem>
     </BreadcrumbList>
-  </Breadcrumb>
-
-  ```tsx
-<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="#">首页 (Home)</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbLink href="#docs">文档 (Documentation)</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>面包屑 (Breadcrumb)</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
-```
-</ComponentPreview>
+  </Breadcrumb />
 
 ## 使用方法 (Usage)
 
@@ -91,7 +72,7 @@ import {
 
 ### 带有折叠的中间项 (With Collapsed Middle Items)
 
-<ComponentPreview className="min-h-[100px] flex justify-center items-center">
+<ComponentPreview name="breadcrumb-2-demo" className="min-h-[100px] flex justify-center items-center">
     <Breadcrumb>
     <BreadcrumbList>
       <BreadcrumbItem>
@@ -106,26 +87,7 @@ import {
         <BreadcrumbPage>当前页面 (Current Page)</BreadcrumbPage>
       </BreadcrumbItem>
     </BreadcrumbList>
-  </Breadcrumb>
-
-  ```tsx
-<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="#home">首页 (Home)</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbEllipsis />
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>当前页面 (Current Page)</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
-```
-</ComponentPreview>
+  </Breadcrumb />
 
 ### 配合 Next.js Link (With Next.js Link)
 

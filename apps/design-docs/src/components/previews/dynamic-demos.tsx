@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
 
 import dynamic from "next/dynamic";
@@ -1178,5 +1180,425 @@ export const ScrollVelocityDemo = dynamic(
 
 export const SidebarDemo = dynamic(
   () => import("./sidebar-demo").then((m) => ({ default: m.SidebarDemo })),
+  { ssr: false },
+);
+
+export const StarsCanvasDemo = dynamic(
+  () => import("./stars-canvas-demo").then((m) => ({ default: m.StarsCanvasDemo })),
+  { ssr: false },
+);
+
+export const SheetSideDemo = dynamic(
+  () => import("./sheet-side-demo").then((m) => ({ default: m.SheetSideDemo })),
+  { ssr: false },
+);
+
+export const SheetMobileDemo = dynamic(
+  () => import("./sheet-mobile-demo").then((m) => ({ default: m.SheetMobileDemo })),
+  { ssr: false },
+);
+
+export const HoverCardDemo = dynamic(
+  () => import("./hover-card-demo").then((m) => ({ default: m.HoverCardDemo })),
+  { ssr: false },
+);
+
+export const HoverCard2Demo = dynamic(
+  () => import("./hover-card-2-demo").then((m) => ({ default: m.HoverCard2Demo })),
+  { ssr: false },
+);
+
+export const Combobox2Demo = dynamic(
+  () => import("./combobox-2-demo").then((m) => ({ default: m.Combobox2Demo })),
+  { ssr: false },
+);
+
+export const Combobox3Demo = dynamic(
+  () => import("./combobox-3-demo").then((m) => ({ default: m.Combobox3Demo })),
+  { ssr: false },
+);
+
+export const Combobox4Demo = dynamic(
+  () => import("./combobox-4-demo").then((m) => ({ default: m.Combobox4Demo })),
+  { ssr: false },
+);
+
+export const Combobox5Demo = dynamic(
+  () => import("./combobox-5-demo").then((m) => ({ default: m.Combobox5Demo })),
+  { ssr: false },
+);
+
+export const Combobox6Demo = dynamic(
+  () => import("./combobox-6-demo").then((m) => ({ default: m.Combobox6Demo })),
+  { ssr: false },
+);
+
+export const Combobox7Demo = dynamic(
+  () => import("./combobox-7-demo").then((m) => ({ default: m.Combobox7Demo })),
+  { ssr: false },
+);
+
+export const Combobox8Demo = dynamic(
+  () => import("./combobox-8-demo").then((m) => ({ default: m.Combobox8Demo })),
+  { ssr: false },
+);
+
+export const Combobox9Demo = dynamic(
+  () => import("./combobox-9-demo").then((m) => ({ default: m.Combobox9Demo })),
+  { ssr: false },
+);
+
+export const Combobox10Demo = dynamic(
+  () => import("./combobox-10-demo").then((m) => ({ default: m.Combobox10Demo })),
+  { ssr: false },
+);
+
+export const Combobox11Demo = dynamic(
+  () => import("./combobox-11-demo").then((m) => ({ default: m.Combobox11Demo })),
+  { ssr: false },
+);
+
+export const Label2Demo = dynamic(
+  () => import("./label-2-demo").then((m) => ({ default: m.Label2Demo })),
+  { ssr: false },
+);
+
+export const Label3Demo = dynamic(
+  () => import("./label-3-demo").then((m) => ({ default: m.Label3Demo })),
+  { ssr: false },
+);
+
+export const Label4Demo = dynamic(
+  () => import("./label-4-demo").then((m) => ({ default: m.Label4Demo })),
+  { ssr: false },
+);
+
+export const ScrollArea2Demo = dynamic(
+  () => import("./scroll-area-2-demo").then((m) => ({ default: m.ScrollArea2Demo })),
+  { ssr: false },
+);
+
+export const ScrollArea3Demo = dynamic(
+  () => import("./scroll-area-3-demo").then((m) => ({ default: m.ScrollArea3Demo })),
+  { ssr: false },
+);
+
+export const Resizable2Demo = dynamic(
+  () => import("./resizable-2-demo").then((m) => ({ default: m.Resizable2Demo })),
+  { ssr: false },
+);
+
+export const Drawer2Demo = dynamic(
+  () => import("./drawer-2-demo").then((m) => ({ default: m.Drawer2Demo })),
+  { ssr: false },
+);
+
+export const Drawer3Demo = dynamic(
+  () => import("./drawer-3-demo").then((m) => ({ default: m.Drawer3Demo })),
+  { ssr: false },
+);
+
+export const Accordion2Demo = dynamic(
+  () => import("./accordion-2-demo").then((m) => ({ default: m.Accordion2Demo })),
+  { ssr: false },
+);
+
+export const Accordion3Demo = dynamic(
+  () => import("./accordion-3-demo").then((m) => ({ default: m.Accordion3Demo })),
+  { ssr: false },
+);
+
+export const Accordion4Demo = dynamic(
+  () => import("./accordion-4-demo").then((m) => ({ default: m.Accordion4Demo })),
+  { ssr: false },
+);
+
+export const NavigationMenuDemo = dynamic(
+  () => import("./navigation-menu-demo").then((m) => ({ default: m.NavigationMenuDemo })),
+  { ssr: false },
+);
+
+export const DatePicker2Demo = dynamic(
+  () => import("./date-picker-2-demo").then((m) => ({ default: m.DatePicker2Demo })),
+  { ssr: false },
+);
+
+export const DatePicker3Demo = dynamic(
+  () => import("./date-picker-3-demo").then((m) => ({ default: m.DatePicker3Demo })),
+  { ssr: false },
+);
+
+export const DatePicker4Demo = dynamic(
+  () => import("./date-picker-4-demo").then((m) => ({ default: m.DatePicker4Demo })),
+  { ssr: false },
+);
+
+export const Progress2Demo = dynamic(
+  () => import("./progress-2-demo").then((m) => ({ default: m.Progress2Demo })),
+  { ssr: false },
+);
+
+export const Progress3Demo = dynamic(
+  () => import("./progress-3-demo").then((m) => ({ default: m.Progress3Demo })),
+  { ssr: false },
+);
+
+export const Progress4Demo = dynamic(
+  () => import("./progress-4-demo").then((m) => ({ default: m.Progress4Demo })),
+  { ssr: false },
+);
+
+export const InputOTPNumericDemo = dynamic(
+  () => import("./input-otp-numeric-demo").then((m) => ({ default: m.InputOTPNumericDemo })),
+  { ssr: false },
+);
+
+export const BasePopoverDemo = dynamic(
+  () => import("./base-popover-demo").then((m) => ({ default: m.BasePopoverDemo })),
+  { ssr: false },
+);
+
+export const Popover2Demo = dynamic(
+  () => import("./popover-2-demo").then((m) => ({ default: m.Popover2Demo })),
+  { ssr: false },
+);
+
+export const Slider2Demo = dynamic(
+  () => import("./slider-2-demo").then((m) => ({ default: m.Slider2Demo })),
+  { ssr: false },
+);
+
+export const Slider3Demo = dynamic(
+  () => import("./slider-3-demo").then((m) => ({ default: m.Slider3Demo })),
+  { ssr: false },
+);
+
+export const Slider4Demo = dynamic(
+  () => import("./slider-4-demo").then((m) => ({ default: m.Slider4Demo })),
+  { ssr: false },
+);
+
+export const Button2Demo = dynamic(
+  () => import("./button-2-demo").then((m) => ({ default: m.Button2Demo })),
+  { ssr: false },
+);
+
+export const Button3Demo = dynamic(
+  () => import("./button-3-demo").then((m) => ({ default: m.Button3Demo })),
+  { ssr: false },
+);
+
+export const Button4Demo = dynamic(
+  () => import("./button-4-demo").then((m) => ({ default: m.Button4Demo })),
+  { ssr: false },
+);
+
+export const Button5Demo = dynamic(
+  () => import("./button-5-demo").then((m) => ({ default: m.Button5Demo })),
+  { ssr: false },
+);
+
+export const Toggle2Demo = dynamic(
+  () => import("./toggle-2-demo").then((m) => ({ default: m.Toggle2Demo })),
+  { ssr: false },
+);
+
+export const Toggle3Demo = dynamic(
+  () => import("./toggle-3-demo").then((m) => ({ default: m.Toggle3Demo })),
+  { ssr: false },
+);
+
+export const Toggle4Demo = dynamic(
+  () => import("./toggle-4-demo").then((m) => ({ default: m.Toggle4Demo })),
+  { ssr: false },
+);
+
+export const BadgeSizesDemo = dynamic(
+  () => import("./badge-sizes-demo").then((m) => ({ default: m.BadgeSizesDemo })),
+  { ssr: false },
+);
+
+export const BadgeVariantsDemo = dynamic(
+  () => import("./badge-variants-demo").then((m) => ({ default: m.BadgeVariantsDemo })),
+  { ssr: false },
+);
+
+export const BadgeIconDemo = dynamic(
+  () => import("./badge-icon-demo").then((m) => ({ default: m.BadgeIconDemo })),
+  { ssr: false },
+);
+
+export const BadgeTableDemo = dynamic(
+  () => import("./badge-table-demo").then((m) => ({ default: m.BadgeTableDemo })),
+  { ssr: false },
+);
+
+export const BadgeNotificationDemo = dynamic(
+  () => import("./badge-notification-demo").then((m) => ({ default: m.BadgeNotificationDemo })),
+  { ssr: false },
+);
+
+export const BadgeFeatureTagDemo = dynamic(
+  () => import("./badge-feature-tag-demo").then((m) => ({ default: m.BadgeFeatureTagDemo })),
+  { ssr: false },
+);
+
+export const Separator2Demo = dynamic(
+  () => import("./separator-2-demo").then((m) => ({ default: m.Separator2Demo })),
+  { ssr: false },
+);
+
+export const Separator3Demo = dynamic(
+  () => import("./separator-3-demo").then((m) => ({ default: m.Separator3Demo })),
+  { ssr: false },
+);
+
+export const Separator4Demo = dynamic(
+  () => import("./separator-4-demo").then((m) => ({ default: m.Separator4Demo })),
+  { ssr: false },
+);
+
+export const Skeleton2Demo = dynamic(
+  () => import("./skeleton-2-demo").then((m) => ({ default: m.Skeleton2Demo })),
+  { ssr: false },
+);
+
+export const Skeleton3Demo = dynamic(
+  () => import("./skeleton-3-demo").then((m) => ({ default: m.Skeleton3Demo })),
+  { ssr: false },
+);
+
+export const Carousel2Demo = dynamic(
+  () => import("./carousel-2-demo").then((m) => ({ default: m.Carousel2Demo })),
+  { ssr: false },
+);
+
+export const Carousel3Demo = dynamic(
+  () => import("./carousel-3-demo").then((m) => ({ default: m.Carousel3Demo })),
+  { ssr: false },
+);
+
+export const FormDemo = dynamic(
+  () => import("./form-demo").then((m) => ({ default: m.FormDemo })),
+  { ssr: false },
+);
+
+export const ContextMenuDemo = dynamic(
+  () => import("./context-menu-demo").then((m) => ({ default: m.ContextMenuDemo })),
+  { ssr: false },
+);
+
+export const ContextMenuWithIconsDemo = dynamic(
+  () => import("./context-menu-with-icons-demo").then((m) => ({ default: m.ContextMenuWithIconsDemo })),
+  { ssr: false },
+);
+
+export const Collapsible2Demo = dynamic(
+  () => import("./collapsible-2-demo").then((m) => ({ default: m.Collapsible2Demo })),
+  { ssr: false },
+);
+
+export const Textarea2Demo = dynamic(
+  () => import("./textarea-2-demo").then((m) => ({ default: m.Textarea2Demo })),
+  { ssr: false },
+);
+
+export const Textarea3Demo = dynamic(
+  () => import("./textarea-3-demo").then((m) => ({ default: m.Textarea3Demo })),
+  { ssr: false },
+);
+
+export const Input2Demo = dynamic(
+  () => import("./input-2-demo").then((m) => ({ default: m.Input2Demo })),
+  { ssr: false },
+);
+
+export const WarpBackgroundDemo = dynamic(
+  () => import("./warp-background-demo").then((m) => ({ default: m.WarpBackgroundDemo })),
+  { ssr: false },
+);
+
+export const DropdownMenu2Demo = dynamic(
+  () => import("./dropdown-menu-2-demo").then((m) => ({ default: m.DropdownMenu2Demo })),
+  { ssr: false },
+);
+
+export const DropdownMenu3Demo = dynamic(
+  () => import("./dropdown-menu-3-demo").then((m) => ({ default: m.DropdownMenu3Demo })),
+  { ssr: false },
+);
+
+export const DropdownMenu4Demo = dynamic(
+  () => import("./dropdown-menu-4-demo").then((m) => ({ default: m.DropdownMenu4Demo })),
+  { ssr: false },
+);
+
+export const CommandDialogDemo = dynamic(
+  () => import("./command-dialog-demo").then((m) => ({ default: m.CommandDialogDemo })),
+  { ssr: false },
+);
+
+export const RadioGroup2Demo = dynamic(
+  () => import("./radio-group-2-demo").then((m) => ({ default: m.RadioGroup2Demo })),
+  { ssr: false },
+);
+
+export const RadioGroup3Demo = dynamic(
+  () => import("./radio-group-3-demo").then((m) => ({ default: m.RadioGroup3Demo })),
+  { ssr: false },
+);
+
+export const ToggleGroup2Demo = dynamic(
+  () => import("./toggle-group-2-demo").then((m) => ({ default: m.ToggleGroup2Demo })),
+  { ssr: false },
+);
+
+export const ToggleGroup3Demo = dynamic(
+  () => import("./toggle-group-3-demo").then((m) => ({ default: m.ToggleGroup3Demo })),
+  { ssr: false },
+);
+
+export const Calendar2Demo = dynamic(
+  () => import("./calendar-2-demo").then((m) => ({ default: m.Calendar2Demo })),
+  { ssr: false },
+);
+
+export const Calendar3Demo = dynamic(
+  () => import("./calendar-3-demo").then((m) => ({ default: m.Calendar3Demo })),
+  { ssr: false },
+);
+
+export const Calendar4Demo = dynamic(
+  () => import("./calendar-4-demo").then((m) => ({ default: m.Calendar4Demo })),
+  { ssr: false },
+);
+
+export const Calendar5Demo = dynamic(
+  () => import("./calendar-5-demo").then((m) => ({ default: m.Calendar5Demo })),
+  { ssr: false },
+);
+
+export const Calendar6Demo = dynamic(
+  () => import("./calendar-6-demo").then((m) => ({ default: m.Calendar6Demo })),
+  { ssr: false },
+);
+
+export const Breadcrumb2Demo = dynamic(
+  () => import("./breadcrumb-2-demo").then((m) => ({ default: m.Breadcrumb2Demo })),
+  { ssr: false },
+);
+
+export const Menu5Demo = dynamic(
+  () => import("./menu-5-demo").then((m) => ({ default: m.Menu5Demo })),
+  { ssr: false },
+);
+
+export const ThemeSwitcherDemo = dynamic(
+  () => import("./theme-switcher-demo").then((m) => ({ default: m.ThemeSwitcherDemo })),
+  { ssr: false },
+);
+
+export const MacbookProDemo = dynamic(
+  () => import("./macbook-pro-demo").then((m) => ({ default: m.MacbookProDemo })),
   { ssr: false },
 );

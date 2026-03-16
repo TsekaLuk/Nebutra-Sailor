@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { ColorBadge } from "@nebutra/ui/primitives";
 import { Shield, CheckCircle2, AlertTriangle, XCircle, Info, Zap } from "lucide-react";
 

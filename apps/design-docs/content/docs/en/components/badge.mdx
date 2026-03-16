@@ -18,23 +18,7 @@ import { BadgeNotificationDemo } from "@/components/previews/badge-notification-
 import { BadgeStatusDotDemo } from "@/components/previews/badge-status-dot-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview>
-  <BadgeDemo />
-```tsx title="badge-demo.tsx"
-"use client";
-import { Badge } from "@nebutra/ui/primitives";
-export function BadgeDemo() {
-  return (
-    <div className="flex flex-wrap gap-2">
-      <Badge>Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="destructive">Destructive</Badge>
-      <Badge variant="outline">Outline</Badge>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-demo" />
 
 ## Import
 
@@ -48,260 +32,11 @@ import { Badge } from "@nebutra/custom-ui/primitives"
 
 The `Badge1` component comes with 22 built-in color utilities bridging the brand palette and generic scale.
 
-<ComponentPreview>
-  <BadgeAllColorsDemo />
-```tsx title="badge-all-colors-demo.tsx"
-"use client";
-
-import { Badge1 } from "@nebutra/ui/primitives";
-
-export function BadgeAllColorsDemo() {
-    return (
-        <div className="flex flex-col gap-2 w-full max-w-sm mx-auto items-center justify-center">
-            <div className="flex gap-2">
-                <Badge1 variant="gray">gray</Badge1>
-                <Badge1 variant="gray-subtle">gray-subtle</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="blue">blue</Badge1>
-                <Badge1 variant="blue-subtle">blue-subtle</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="purple">purple</Badge1>
-                <Badge1 variant="purple-subtle">purple-subtle</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="amber">amber</Badge1>
-                <Badge1 variant="amber-subtle">amber-subtle</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="red">red</Badge1>
-                <Badge1 variant="red-subtle">red-subtle</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="pink">pink</Badge1>
-                <Badge1 variant="pink-subtle">pink-subtle</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="green">green</Badge1>
-                <Badge1 variant="green-subtle">green-subtle</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="teal">teal</Badge1>
-                <Badge1 variant="teal-subtle">teal-subtle</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="inverted">inverted</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="trial">trial</Badge1>
-            </div>
-            <div className="flex gap-2">
-                <Badge1 variant="turbo">turborepo</Badge1>
-            </div>
-        </div>
-    );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-all-colors-demo" />
 
 ### Detailed Matrix
 
-<ComponentPreview>
-  <BadgeIconColorsDemo />
-```tsx title="badge-icon-colors-demo.tsx"
-"use client";
-
-import { Badge } from "@nebutra/ui/primitives";
-import { Shield } from "@nebutra/icons";
-
-export function BadgeIconColorsDemo() {
-  return (
-    <div className="flex flex-col items-stretch justify-start gap-2 flex-initial overflow-x-auto pb-4 max-w-full">
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="gray">
-          gray
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="gray">
-          gray
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="gray">
-          gray
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="gray-subtle">
-          gray
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="gray-subtle">
-          gray
-        </Badge>
-        <Badge icon={<Shield />} size="lg" variant="gray-subtle">
-          gray
-        </Badge>
-      </div>
-
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="blue">
-          blue
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="blue">
-          blue
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="blue">
-          blue
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="blue-subtle">
-          blue
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="blue-subtle">
-          blue
-        </Badge>
-        <Badge icon={<Shield />} size="lg" variant="blue-subtle">
-          blue
-        </Badge>
-      </div>
-
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="purple">
-          purple
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="purple">
-          purple
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="purple">
-          purple
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="purple-subtle">
-          purple
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="purple-subtle">
-          purple
-        </Badge>
-        <Badge icon={<Shield />} size="lg" variant="purple-subtle">
-          purple
-        </Badge>
-      </div>
-
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="amber">
-          amber
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="amber">
-          amber
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="amber">
-          amber
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="amber-subtle">
-          amber
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="amber-subtle">
-          amber
-        </Badge>
-        <Badge icon={<Shield />} size="lg" variant="amber-subtle">
-          amber
-        </Badge>
-      </div>
-
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="red">
-          red
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="red">
-          red
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="red">
-          red
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="red-subtle">
-          red
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="red-subtle">
-          red
-        </Badge>
-        <Badge icon={<Shield />} size="lg" variant="red-subtle">
-          red
-        </Badge>
-      </div>
-
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="pink">
-          pink
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="pink">
-          pink
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="pink">
-          pink
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="pink-subtle">
-          pink
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="pink-subtle">
-          pink
-        </Badge>
-        <Badge icon={<Shield />} size="lg" variant="pink-subtle">
-          pink
-        </Badge>
-      </div>
-
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="green">
-          green
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="green">
-          green
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="green">
-          green
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="green-subtle">
-          green
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="green-subtle">
-          green
-        </Badge>
-        <Badge icon={<Shield />} size="lg" variant="green-subtle">
-          green
-        </Badge>
-      </div>
-
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="teal">
-          teal
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="teal">
-          teal
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="teal">
-          teal
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="teal-subtle">
-          teal
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="teal-subtle">
-          teal
-        </Badge>
-        <Badge icon={<Shield />} size="lg" variant="teal-subtle">
-          teal
-        </Badge>
-      </div>
-
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
-        <Badge icon={<Shield />} size="lg" variant="inverted">
-          inverted
-        </Badge>
-        <Badge icon={<Shield />} size="md" variant="inverted">
-          inverted
-        </Badge>
-        <Badge icon={<Shield />} size="sm" variant="inverted">
-          inverted
-        </Badge>
-      </div>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-icon-colors-demo" />
 
 ## Sizes
 
@@ -313,22 +48,7 @@ Three sizes controlled by the `size` prop:
 | `md` | 12px | `px-2.5 py-0.5` | Default — most contexts |
 | `lg` | 14px | `px-3 py-1` | Prominent labels, hero sections |
 
-<ComponentPreview>
-  <BadgeSizesDemo />
-```tsx title="badge-sizes-demo.tsx"
-import { Badge } from "@nebutra/ui/primitives";
-
-export function BadgeSizesDemo() {
-  return (
-    <div className="flex items-end gap-4">
-      <Badge size="sm">Small</Badge>
-      <Badge size="md">Medium</Badge>
-      <Badge size="lg">Large</Badge>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-sizes-demo" />
 
 ---
 
@@ -336,23 +56,7 @@ export function BadgeSizesDemo() {
 
 Status-driven variants using brand semantic tokens.
 
-<ComponentPreview>
-  <BadgeDemo />
-```tsx title="badge-demo.tsx"
-"use client";
-import { Badge } from "@nebutra/ui/primitives";
-export function BadgeDemo() {
-  return (
-    <div className="flex flex-wrap gap-2">
-      <Badge>Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="destructive">Destructive</Badge>
-      <Badge variant="outline">Outline</Badge>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-demo" />
 
 ---
 
@@ -362,27 +66,7 @@ Geist-style palette variants — solid and subtle (outline) for each hue.
 
 ### Solid
 
-<ComponentPreview>
-  <BadgeVariantsDemo />
-```tsx title="badge-variants-demo.tsx"
-import { Badge } from "@nebutra/ui/primitives";
-
-export function BadgeVariantsDemo() {
-  return (
-    <div className="flex gap-4 flex-wrap">
-      <Badge variant="gray">gray</Badge>
-      <Badge variant="blue">blue</Badge>
-      <Badge variant="purple">purple</Badge>
-      <Badge variant="amber">amber</Badge>
-      <Badge variant="red">red</Badge>
-      <Badge variant="pink">pink</Badge>
-      <Badge variant="green">green</Badge>
-      <Badge variant="teal">teal</Badge>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-variants-demo" />
 
 ### Subtle (outline)
 
@@ -405,60 +89,7 @@ Transparent background with a colored border — use on colored surfaces.
 
 A fully rounded, low-contrast variant often used as a clickable navigation item or prominent tag.
 
-<ComponentPreview>
-  <BadgePillMatrixDemo />
-```tsx title="badge-pill-demo.tsx"
-"use client";
-
-import { Badge } from "@nebutra/ui/primitives";
-import { LogoSlackColor } from "@nebutra/icons";
-import Link from "next/link";
-
-export function BadgePillMatrixDemo() {
-  return (
-    <div className="flex flex-col items-center justify-center gap-4 w-full">
-      <div className="flex flex-row items-center justify-center gap-2 flex-initial">
-        <Badge asChild size="sm" variant="pill">
-          <Link href="#badge-pill">Label</Link>
-        </Badge>
-        <Badge asChild size="md" variant="pill">
-          <Link href="#badge-pill">Label</Link>
-        </Badge>
-        <Badge asChild size="lg" variant="pill">
-          <Link href="#badge-pill">Label</Link>
-        </Badge>
-      </div>
-      <div className="flex flex-row items-center justify-center gap-2 flex-initial">
-        <Badge
-          asChild
-          icon={<LogoSlackColor />}
-          size="sm"
-          variant="pill"
-        >
-          <Link href="#badge-pill">Label</Link>
-        </Badge>
-        <Badge
-          asChild
-          icon={<LogoSlackColor />}
-          size="md"
-          variant="pill"
-        >
-          <Link href="#badge-pill">Label</Link>
-        </Badge>
-        <Badge
-          asChild
-          icon={<LogoSlackColor />}
-          size="lg"
-          variant="pill"
-        >
-          <Link href="#badge-pill">Label</Link>
-        </Badge>
-      </div>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-pill-matrix-demo" />
 
 ---
 
@@ -466,21 +97,7 @@ export function BadgePillMatrixDemo() {
 
 Pass any ReactNode to the `icon` prop. The icon is auto-sized to 12×12px.
 
-<ComponentPreview>
-  <BadgeIconDemo />
-```tsx title="badge-icon-demo.tsx"
-import { Badge } from "@nebutra/ui/primitives";
-import { Check } from "lucide-react";
-
-export function BadgeIconDemo() {
-  return (
-    <Badge variant="outline" icon={<Check />}>
-      Completed
-    </Badge>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-icon-demo" />
 
 ---
 
@@ -488,25 +105,7 @@ export function BadgeIconDemo() {
 
 The `dot` prop renders a 6×6px colored dot before the label. Works with semantic variants.
 
-<ComponentPreview>
-  <BadgeStatusDotDemo />
-```tsx title="badge-status-dot-demo.tsx"
-"use client";
-
-import { Badge } from "@nebutra/ui/primitives";
-
-export function BadgeStatusDotDemo() {
-  return (
-    <div className="flex gap-3">
-      <Badge variant="green-subtle" dot>Online</Badge>
-      <Badge variant="amber-subtle" dot>Degraded</Badge>
-      <Badge variant="red-subtle" dot>Outage</Badge>
-      <Badge variant="gray-subtle" dot>Pending</Badge>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-status-dot-demo" />
 
 ---
 
@@ -534,72 +133,15 @@ import Link from "next/link"
 
 ### Table status column
 
-<ComponentPreview>
-  <BadgeTableDemo />
-```tsx title="badge-table-demo.tsx"
-import { Badge } from "@nebutra/ui/primitives";
-
-export function BadgeTableDemo() {
-  return (
-    <table>
-      <tbody>
-        <tr>
-          <td>Status</td>
-          <td>
-            <Badge variant="success" dot>Paid</Badge>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-table-demo" />
 
 ### Notification count
 
-<ComponentPreview>
-  <BadgeNotificationDemo />
-```tsx title="badge-notification-demo.tsx"
-import { Badge } from "@nebutra/ui/primitives";
-import { Bell } from "lucide-react";
-
-export function BadgeNotificationDemo() {
-  return (
-    <div className="relative">
-      <Bell className="size-5" />
-      <Badge
-        variant="destructive"
-        className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full p-0 text-[10px]"
-      >
-        3
-      </Badge>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-notification-demo" />
 
 ### Feature tag
 
-<ComponentPreview>
-  <BadgeFeatureTagDemo />
-```tsx title="badge-feature-tag-demo.tsx"
-import { Badge } from "@nebutra/ui/primitives";
-import { Sparkles } from "lucide-react";
-
-export function BadgeFeatureTagDemo() {
-  return (
-    <div className="flex items-center gap-2">
-      <h3 className="text-lg font-medium">AI Generation</h3>
-      <Badge variant="purple-subtle" icon={<Sparkles className="text-purple-500" />}>
-        Beta
-      </Badge>
-    </div>
-  );
-}
-```
-</ComponentPreview>
+<ComponentPreview name="badge-feature-tag-demo" />
 
 ---
 

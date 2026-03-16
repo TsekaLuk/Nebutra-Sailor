@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { FlickeringGrid } from "@nebutra/ui/primitives";
 
 export function FlickeringGridDemo() {

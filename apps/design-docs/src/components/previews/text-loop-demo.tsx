@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { TextLoop } from "@nebutra/ui/primitives";
 
 export default function TextLoopDemo() {

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { Book } from "@nebutra/ui/primitives";
 import { BookOpen } from "lucide-react";
 

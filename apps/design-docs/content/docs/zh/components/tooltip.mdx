@@ -11,158 +11,23 @@ import { TooltipIconButtonDemo } from "@/components/previews/tooltip-icon-button
 import { TooltipSideRightDemo } from "@/components/previews/tooltip-side-right-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipDemo />
-
-  ```tsx
-<TooltipProvider>
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline">悬停在我身上 (Hover me)</Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>这是一个文字提示 (This is a tooltip)</p>
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
-  ```
-</ComponentPreview>
+<ComponentPreview name="tooltip-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ## 使用方法 (Usage)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipIconButtonDemo />
-
-  ```tsx
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "@nebutra/ui/primitives"
-```
-
-<Info>
-  请使用 `TooltipProvider` 包裹您的应用（或某个区域）以启用文字提示功能。
-  通常将其放置在组件树的高层 —— 例如您的根布局 (Root Layout) 中。
-</Info>
-
-## 属性 (Props)
-
-### TooltipProvider (提示提供者)
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|---------|-------------|
-| `delayDuration` | `number` | `700` | 文字提示出现前的延迟（毫秒） |
-| `skipDelayDuration` | `number` | `300` | 当另一个文字提示已打开时，新提示打开的速度 |
-| `disableHoverableContent` | `boolean` | `false` | 防止文字提示内容可被悬停选中 |
-
-### Tooltip (根组件)
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|---------|-------------|
-| `open` | `boolean` | — | 受控的打开状态 |
-| `defaultOpen` | `boolean` | `false` | 非受控的默认打开状态 |
-| `onOpenChange` | `(open: boolean) => void` | — | 打开状态改变时的回调函数 |
-| `delayDuration` | `number` | — | 为此特定提示覆盖提供者的延迟时间 |
-
-### TooltipTrigger (触发器)
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|---------|-------------|
-| `asChild` | `boolean" | `false` | 将属性合并到直接子元素上 |
-| `children` | `ReactNode` | — | 触发文字提示的元素 |
-
-### TooltipContent (内容区)
-
-| 属性 | 类型 | 默认值 | 描述 |
-|------|------|---------|-------------|
-| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | 首选显示侧 |
-| `sideOffset` | `number` | `4` | 距离触发器的距离（像素） |
-| `align` | `"start" \| "center" \| "end"` | `"center"` | 沿触发器的对齐方式 |
-| `className` | `string` | — | 额外的 CSS 类名 |
-| `children` | `ReactNode` | — | 文字提示内容 |
-
-## 示例 (Examples)
-
-### 图标按钮上的文字提示 (Tooltip on Icon Button)
-
-```tsx
-import { Settings } from "lucide-react"
-
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="ghost" size="icon">
-        <span>⚙️</span>
-        <span className="sr-only">设置 (Settings)</span>
-      </Button>
-    </TooltipTrigger>
-    <TooltipContent>
-      <p>设置 (Settings)</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-</ComponentPreview>
+<ComponentPreview name="tooltip-icon-button-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ### 自定义显示位置和偏移 (Custom Side and Offset)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipSideRightDemo />
-
-  ```tsx
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">悬停 (Hover)</Button>
-    </TooltipTrigger>
-    <TooltipContent side="right" sideOffset={8}>
-      <p>显示在右侧的提示 (Tooltip on the right)</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-</ComponentPreview>
+<ComponentPreview name="tooltip-side-right-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ### 即时显示 - 无延迟 (Instant Tooltip - No Delay)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipInstantDemo />
-
-  ```tsx
-<TooltipProvider>
-  <Tooltip delayDuration={0}>
-    <TooltipTrigger asChild>
-      <Button>即时显示 (Instant)</Button>
-    </TooltipTrigger>
-    <TooltipContent>立即显示内容 (Shows immediately)</TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-</ComponentPreview>
+<ComponentPreview name="tooltip-instant-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ### 丰富的文字提示内容 (Rich Tooltip Content)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipRichContentDemo />
-
-  ```tsx
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <span className="cursor-help font-medium border-b border-dashed border-muted-foreground pb-px">悬停获取信息 (Hover for info)</span>
-    </TooltipTrigger>
-    <TooltipContent className="max-w-xs">
-      <p className="font-medium mb-1">小提示 (Pro tip)</p>
-      <p className="text-xs text-muted-foreground">
-        您可以在项目首选项面板中配置高级设置。 (You can configure advanced settings in the project preferences panel.)
-      </p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-</ComponentPreview>
+<ComponentPreview name="tooltip-rich-content-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ## 可访问性 (Accessibility)
 

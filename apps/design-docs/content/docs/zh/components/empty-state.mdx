@@ -5,27 +5,7 @@ description: "当尚未添加任何内容，或由于功能特性而暂时为空
 
 ## 演示 (Demo)
 
-<ComponentPreview>
-  <EmptyStateDemo />
-
-```tsx title="empty-state-demo.tsx"
-import { EmptyState } from "@nebutra/ui/primitives";
-import { Activity } from "lucide-react";
-
-export function EmptyStateDemo() {
-    return (
-        <div className="w-full max-w-md mx-auto border rounded-xl p-8 bg-background my-8">
-            <EmptyState.Root
-                icon={<EmptyState.Icon icon={<Activity size={20} />} />}
-                title="Title"
-                description="A message conveying the state of the product."
-            />
-        </div>
-    )
-}
-
-```
-</ComponentPreview>
+<ComponentPreview name="empty-state-demo" />
 
 
 <Note>

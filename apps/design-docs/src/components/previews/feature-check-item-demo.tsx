@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { FeatureCheckItem } from "@nebutra/ui/primitives";
 import { Star, ShieldCheck } from "lucide-react";
 

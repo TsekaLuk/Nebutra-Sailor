@@ -5,7 +5,7 @@ description: "一组开关按钮，可以同时按下一个或多个。"
 
 ## 演示 (Demo)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+<ComponentPreview name="toggle-group-demo" className="min-h-[150px] flex justify-center items-center">
   <ToggleGroup type="single" defaultValue="center">
     <ToggleGroupItem value="left" aria-label="左对齐 (Align left)">
       <AlignLeft className="size-4" />
@@ -16,22 +16,7 @@ description: "一组开关按钮，可以同时按下一个或多个。"
     <ToggleGroupItem value="right" aria-label="右对齐 (Align right)">
       <AlignRight className="size-4" />
     </ToggleGroupItem>
-  </ToggleGroup>
-
-  ```tsx
-<ToggleGroup type="single" defaultValue="center">
-    <ToggleGroupItem value="left" aria-label="左对齐 (Align left)">
-      <AlignLeft className="size-4" />
-    </ToggleGroupItem>
-    <ToggleGroupItem value="center" aria-label="居中对齐 (Align center)">
-      <AlignCenter className="size-4" />
-    </ToggleGroupItem>
-    <ToggleGroupItem value="right" aria-label="右对齐 (Align right)">
-      <AlignRight className="size-4" />
-    </ToggleGroupItem>
-  </ToggleGroup>
-  ```
-</ComponentPreview>
+  </ToggleGroup />
 
 ## 使用方法 (Usage)
 
@@ -65,7 +50,7 @@ import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui";
 
 ### 多选模式 (Multiple Selection)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+<ComponentPreview name="toggle-group-2-demo" className="min-h-[150px] flex justify-center items-center">
     <ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
     <ToggleGroupItem value="bold" aria-label="切换加粗 (Toggle bold)">
       <Bold className="size-4" />
@@ -76,40 +61,16 @@ import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui";
     <ToggleGroupItem value="underline" aria-label="切换下划线 (Toggle underline)">
       <Underline className="size-4" />
     </ToggleGroupItem>
-  </ToggleGroup>
-
-  ```tsx
-<ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
-  <ToggleGroupItem value="bold" aria-label="切换加粗 (Toggle bold)">
-    <Bold className="size-4" />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="italic" aria-label="切换斜体 (Toggle italic)">
-    <Italic className="size-4" />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="underline" aria-label="切换下划线 (Toggle underline)">
-    <Underline className="size-4" />
-  </ToggleGroupItem>
-</ToggleGroup>
-```
-</ComponentPreview>
+  </ToggleGroup />
 
 ### 受控单选 (Controlled Single Selection)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+<ComponentPreview name="toggle-group-3-demo" className="min-h-[150px] flex justify-center items-center">
     <ToggleGroup type="single" defaultValue="center">
     <ToggleGroupItem value="left">左 (Left)</ToggleGroupItem>
     <ToggleGroupItem value="center">中 (Center)</ToggleGroupItem>
     <ToggleGroupItem value="right">右 (Right)</ToggleGroupItem>
-  </ToggleGroup>
-
-  ```tsx
-<ToggleGroup type="single" defaultValue="center">
-  <ToggleGroupItem value="left">左 (Left)</ToggleGroupItem>
-  <ToggleGroupItem value="center">中 (Center)</ToggleGroupItem>
-  <ToggleGroupItem value="right">右 (Right)</ToggleGroupItem>
-</ToggleGroup>
-```
-</ComponentPreview>
+  </ToggleGroup />
 
 ## 可访问性 (Accessibility)
 

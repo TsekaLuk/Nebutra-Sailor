@@ -5,67 +5,7 @@ description: "中断用户操作并要求显式确认的模态对话框。"
 
 ## 演示 (Demo)
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <AlertDialogDemo />
-
-  ```tsx title="alert-dialog-demo.tsx"
-"use client";
-
-import { useState } from "react";
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@nebutra/ui/primitives";
-
-export function AlertDialogDemo() {
-  const [deleted, setDeleted] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="destructive">
-          {deleted ? "Account Deleted" : "Delete Account"}
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <Button
-            variant="outline"
-            onClick={() => setOpen(false)}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => {
-              setDeleted(true);
-              setOpen(false);
-            }}
-          >
-            Continue
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-```
-</ComponentPreview>
+<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center" />
 
 ```tsx
 import {
@@ -154,7 +94,7 @@ import {
 
 ### 自定义操作处理程序 (Custom Action Handler)
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center">
     <AlertDialog>
     <AlertDialogTrigger asChild>
       <Button variant="outline">移除项目 (Remove Item)</Button>
@@ -171,28 +111,7 @@ import {
         </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
-  </AlertDialog>
-
-  ```tsx
-<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button variant="outline">移除项目 (Remove Item)</Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>从购物车中移除项目？ (Remove item from cart?)</AlertDialogTitle>
-      <AlertDialogDescription>该项目将从您的购物车中被移除。 (The item will be removed from your shopping cart.)</AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>保留项目 (Keep Item)</AlertDialogCancel>
-      <AlertDialogAction >
-        移除 (Remove)
-      </AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-```
-</ComponentPreview>
+  </AlertDialog />
 
 ## 可访问性 (Accessibility)
 

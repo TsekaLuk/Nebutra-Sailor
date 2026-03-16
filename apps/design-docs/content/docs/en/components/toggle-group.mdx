@@ -5,7 +5,7 @@ description: "A set of toggle buttons that can have one or multiple pressed at a
 
 ## Demo
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+<ComponentPreview name="toggle-group-demo" className="min-h-[150px] flex justify-center items-center">
   <ToggleGroup type="single" defaultValue="center">
     <ToggleGroupItem value="left" aria-label="Align left">
       <AlignLeft className="size-4" />
@@ -16,22 +16,7 @@ description: "A set of toggle buttons that can have one or multiple pressed at a
     <ToggleGroupItem value="right" aria-label="Align right">
       <AlignRight className="size-4" />
     </ToggleGroupItem>
-  </ToggleGroup>
-
-  ```tsx
-<ToggleGroup type="single" defaultValue="center">
-    <ToggleGroupItem value="left" aria-label="Align left">
-      <AlignLeft className="size-4" />
-    </ToggleGroupItem>
-    <ToggleGroupItem value="center" aria-label="Align center">
-      <AlignCenter className="size-4" />
-    </ToggleGroupItem>
-    <ToggleGroupItem value="right" aria-label="Align right">
-      <AlignRight className="size-4" />
-    </ToggleGroupItem>
-  </ToggleGroup>
-  ```
-</ComponentPreview>
+  </ToggleGroup />
 
 ## Usage
 
@@ -65,7 +50,7 @@ import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui";
 
 ### Multiple Selection
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+<ComponentPreview name="toggle-group-2-demo" className="min-h-[150px] flex justify-center items-center">
     <ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
     <ToggleGroupItem value="bold" aria-label="Toggle bold">
       <Bold className="size-4" />
@@ -76,40 +61,16 @@ import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui";
     <ToggleGroupItem value="underline" aria-label="Toggle underline">
       <Underline className="size-4" />
     </ToggleGroupItem>
-  </ToggleGroup>
-
-  ```tsx
-<ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
-  <ToggleGroupItem value="bold" aria-label="Toggle bold">
-    <Bold className="size-4" />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="italic" aria-label="Toggle italic">
-    <Italic className="size-4" />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="underline" aria-label="Toggle underline">
-    <Underline className="size-4" />
-  </ToggleGroupItem>
-</ToggleGroup>
-```
-</ComponentPreview>
+  </ToggleGroup />
 
 ### Controlled Single Selection
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
+<ComponentPreview name="toggle-group-3-demo" className="min-h-[150px] flex justify-center items-center">
     <ToggleGroup type="single" defaultValue="center">
     <ToggleGroupItem value="left">Left</ToggleGroupItem>
     <ToggleGroupItem value="center">Center</ToggleGroupItem>
     <ToggleGroupItem value="right">Right</ToggleGroupItem>
-  </ToggleGroup>
-
-  ```tsx
-<ToggleGroup type="single" defaultValue="center">
-  <ToggleGroupItem value="left">Left</ToggleGroupItem>
-  <ToggleGroupItem value="center">Center</ToggleGroupItem>
-  <ToggleGroupItem value="right">Right</ToggleGroupItem>
-</ToggleGroup>
-```
-</ComponentPreview>
+  </ToggleGroup />
 
 ## Accessibility
 

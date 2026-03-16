@@ -112,6 +112,7 @@ export * from "./date-input";
 export * from "./expanding-textarea";
 export * from "./field";
 export * from "./form";
+export * from "./geist-tooltip";
 export * from "./multiple-selector";
 export * from "./radio-group-card";
 export * from "./radio-group-stacked";
@@ -159,7 +160,7 @@ export {
   TooltipContent,
   TooltipProvider,
 } from "./tooltip";
-export * from "./shugar-tooltip";
+// Removed: export * from "./geist-tooltip";
 
 export * from "./alert";
 export * from "./alert-dialog";

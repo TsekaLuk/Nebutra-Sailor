@@ -399,7 +399,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                                 {task.dependencies.map((dep, idx) => (
                                   <span
                                     key={idx}
-                                    className="rounded bg-secondary/40 px-1.5 py-0.5 text-[10px] font-medium text-secondary-foreground"
+                                    className="rounded bg-secondary/40 px-1.5 py-0.5 text-xs font-medium text-secondary-foreground"
                                   >
                                     {dep}
                                   </span>
@@ -503,7 +503,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                                                   (tool, idx) => (
                                                     <motion.span
                                                       key={idx}
-                                                      className="rounded bg-secondary/40 px-1.5 py-0.5 text-[10px] font-medium text-secondary-foreground shadow-sm"
+                                                      className="rounded bg-secondary/40 px-1.5 py-0.5 text-xs font-medium text-secondary-foreground shadow-sm"
                                                       initial={{
                                                         opacity: 0,
                                                         y: -5,

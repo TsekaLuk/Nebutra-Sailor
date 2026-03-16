@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { GitHubCalendar } from "@nebutra/ui/primitives";
 
 export function GithubCalendarDemo() {

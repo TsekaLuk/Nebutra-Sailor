@@ -17,23 +17,13 @@ import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 
 ### 单个日期 (Single Date)
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-    <DatePicker label="活动日期" />
-
-  ```tsx
-<DatePicker label="活动日期" />
-```
-</ComponentPreview>
+<ComponentPreview name="date-picker-demo" className="min-h-[250px] flex justify-center items-start pt-8">
+    <DatePicker label="活动日期" / />
 
 ### 日期范围 (Date Range)
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-    <DateRangePicker label="行程日期" />
-
-  ```tsx
-<DateRangePicker label="行程日期" />
-```
-</ComponentPreview>
+<ComponentPreview name="date-picker-2-demo" className="min-h-[250px] flex justify-center items-start pt-8">
+    <DateRangePicker label="行程日期" / />
 
 ### 受控模式 (Controlled)
 
@@ -45,29 +35,16 @@ import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 
 ### 变体 (Variants)
 
-<ComponentPreview className="min-h-[250px] flex flex-col items-center justify-start gap-4 pt-8 w-full max-w-sm mx-auto">
+<ComponentPreview name="date-picker-3-demo" className="min-h-[250px] flex flex-col items-center justify-start gap-4 pt-8 w-full max-w-sm mx-auto">
     <DatePicker label="默认 (Default)" />
   <DatePicker label="带边框 (Bordered)" variant="bordered" />
   <DatePicker label="带下划线 (Underlined)" variant="underlined" />
-  <DatePicker label="淡出风格 (Faded)" variant="faded" />
-
-  ```tsx
-<DatePicker label="默认 (Default)" />
-<DatePicker label="带边框 (Bordered)" variant="bordered" />
-<DatePicker label="带下划线 (Underlined)" variant="underlined" />
-<DatePicker label="淡出风格 (Faded)" variant="faded" />
-```
-</ComponentPreview>
+  <DatePicker label="淡出风格 (Faded)" variant="faded" / />
 
 ### 显示两个月份 (Two Visible Months)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-8">
-    <DateRangePicker label="住宿时间" visibleMonths={2} />
-
-  ```tsx
-<DateRangePicker label="住宿时间" visibleMonths={2} />
-```
-</ComponentPreview>
+<ComponentPreview name="date-picker-4-demo" className="min-h-[350px] flex justify-center items-start pt-8">
+    <DateRangePicker label="住宿时间" visibleMonths={2} / />
 
 ## 属性 (Props)
 

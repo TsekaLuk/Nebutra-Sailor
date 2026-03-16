@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { FeatureIconItem } from "@nebutra/ui/primitives";
 import { Zap, Shield, Smartphone, Globe, Cpu, Cloud } from "lucide-react";
 

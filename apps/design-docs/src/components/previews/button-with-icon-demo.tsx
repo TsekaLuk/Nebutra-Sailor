@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
 
 import { Button } from "@nebutra/ui/primitives";

@@ -9,60 +9,11 @@ description: "Right-click context menu with support for icons, shortcuts, disabl
 
 ## Installation
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-center">
-    <ContextMenuDemo />
-
-  ```tsx
-import { ContextMenu } from "@nebutra/ui/primitives";
-```
-
-## Usage
-
-### Default
-
-```tsx
-import { ContextMenu } from "@nebutra/ui/primitives"
-
-<ContextMenu.Root>
-  <ContextMenu.Trigger asChild>
-    <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">Right-click here</div>
-  </ContextMenu.Trigger>
-  <ContextMenu.Content>
-    <ContextMenu.Item onSelect={() => {}}>Edit</ContextMenu.Item>
-    <ContextMenu.Item onSelect={() => {}}>Duplicate</ContextMenu.Item>
-    <ContextMenu.Item onSelect={() => {}}>Delete</ContextMenu.Item>
-  </ContextMenu.Content>
-</ContextMenu.Root>
-```
-</ComponentPreview>
+<ComponentPreview name="context-menu-demo" className="min-h-[250px] flex justify-center items-center" />
 
 ### With prefix icons
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-center">
-    <ContextMenuWithIconsDemo />
-
-  ```tsx
-import { Edit2, Trash2, Copy } from "lucide-react"
-
-<ContextMenu.Root>
-  <ContextMenu.Trigger asChild>
-    <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">Right-click here</div>
-  </ContextMenu.Trigger>
-  <ContextMenu.Content>
-    <ContextMenu.Item prefix={<Edit2 className="h-4 w-4" />} onSelect={() => {}}>
-      Edit
-    </ContextMenu.Item>
-    <ContextMenu.Item prefix={<Copy className="h-4 w-4" />} onSelect={() => {}}>
-      Copy
-    </ContextMenu.Item>
-    <ContextMenu.Separator />
-    <ContextMenu.Item prefix={<Trash2 className="h-4 w-4" />} onSelect={() => {}}>
-      Delete
-    </ContextMenu.Item>
-  </ContextMenu.Content>
-</ContextMenu.Root>
-```
-</ComponentPreview>
+<ComponentPreview name="context-menu-with-icons-demo" className="min-h-[250px] flex justify-center items-center" />
 
 ### With suffix hints (shortcuts)
 

@@ -17,96 +17,43 @@ import { Calendar, RangeCalendar, today, getLocalTimeZone } from "@nebutra/ui/pr
 
 ### 基础用法 (Basic)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-center">
-    <Calendar className="rounded-xl shadow-sm border border-border" />
-
-  ```tsx
-<Calendar className="rounded-xl shadow-sm border border-border" />
-```
-</ComponentPreview>
+<ComponentPreview name="calendar-demo" className="min-h-[350px] flex justify-center items-center">
+    <Calendar className="rounded-xl shadow-sm border border-border" / />
 
 ### 受控 (Controlled)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-center">
-    <Calendar className="rounded-xl shadow-sm border border-border" />
-
-  ```tsx
-<Calendar className="rounded-xl shadow-sm border border-border" />
-```
-</ComponentPreview>
+<ComponentPreview name="calendar-2-demo" className="min-h-[350px] flex justify-center items-center">
+    <Calendar className="rounded-xl shadow-sm border border-border" / />
 
 ### 月份和年份选择器 (Month & Year Pickers)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-center">
-    <Calendar showMonthAndYearPickers className="rounded-xl shadow-sm border border-border" />
-
-  ```tsx
-<Calendar showMonthAndYearPickers className="rounded-xl shadow-sm border border-border" />
-```
-</ComponentPreview>
+<ComponentPreview name="calendar-3-demo" className="min-h-[350px] flex justify-center items-center">
+    <Calendar showMonthAndYearPickers className="rounded-xl shadow-sm border border-border" / />
 
 ### 多月份显示 (Multiple Months)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-center overflow-x-auto p-4 w-full">
-    <Calendar visibleMonths={2} className="rounded-xl shadow-sm border border-border p-4 max-w-full" />
-
-  ```tsx
-<Calendar visibleMonths={2} className="rounded-xl shadow-sm border border-border p-4 max-w-full" />
-```
-</ComponentPreview>
+<ComponentPreview name="calendar-4-demo" className="min-h-[350px] flex justify-center items-center overflow-x-auto p-4 w-full">
+    <Calendar visibleMonths={2} className="rounded-xl shadow-sm border border-border p-4 max-w-full" / />
 
 ### 最小/最大日期限制 (Min/Max Constraints)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-center">
-    <CalendarMinMaxDemo />
-
-  ```tsx
-import { Calendar, today, getLocalTimeZone } from "@nebutra/ui/primitives";
-
-<Calendar
-  minValue={today(getLocalTimeZone()).subtract({ months: 1 })}
-  maxValue={today(getLocalTimeZone()).add({ months: 1 })}
-  className="rounded-xl shadow-sm border border-border"
-/>
-```
-</ComponentPreview>
+<ComponentPreview name="calendar-min-max-demo" className="min-h-[350px] flex justify-center items-center" />
 
 ### 周末不可选 (Weekends Unavailable)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-center">
-    <CalendarUnavailableDemo />
-
-  ```tsx
-import { Calendar, isWeekend } from "@nebutra/ui/primitives";
-
-<Calendar
-  isDateUnavailable={(date) => isWeekend(date, "en-US")}
-  className="rounded-xl shadow-sm border border-border"
-/>
-```
-</ComponentPreview>
+<ComponentPreview name="calendar-unavailable-demo" className="min-h-[350px] flex justify-center items-center" />
 
 ## 范围日历 (RangeCalendar)
 
 用于在内联日历网格上选择日期范围。
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-center">
-    <RangeCalendar className="rounded-xl shadow-sm border border-border" />
-
-  ```tsx
-<RangeCalendar className="rounded-xl shadow-sm border border-border" />
-```
-</ComponentPreview>
+<ComponentPreview name="calendar-5-demo" className="min-h-[350px] flex justify-center items-center">
+    <RangeCalendar className="rounded-xl shadow-sm border border-border" / />
 
 ### 范围 — 两个月显示 (Range — Two Months)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-center overflow-x-auto p-4 w-full">
-    <RangeCalendar visibleMonths={2} className="rounded-xl shadow-sm border border-border p-4 max-w-full" />
-
-  ```tsx
-<RangeCalendar visibleMonths={2} className="rounded-xl shadow-sm border border-border p-4 max-w-full" />
-```
-</ComponentPreview>
+<ComponentPreview name="calendar-6-demo" className="min-h-[350px] flex justify-center items-center overflow-x-auto p-4 w-full">
+    <RangeCalendar visibleMonths={2} className="rounded-xl shadow-sm border border-border p-4 max-w-full" / />
 
 ## 属性 (Props)
 

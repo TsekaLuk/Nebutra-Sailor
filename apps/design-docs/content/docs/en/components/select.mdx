@@ -9,27 +9,7 @@ import { SelectGroupsDemo } from "@/components/previews/select-groups-demo";
 import { SelectDisabledDemo } from "@/components/previews/select-disabled-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview className="min-h-[300px] flex items-start justify-center pt-8">
-  <SelectDemo />
-
-
-  ```tsx
-<Select>
-    <SelectTrigger className="w-[200px]">
-      <SelectValue placeholder="Select a fruit" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectGroup>
-        <SelectLabel>Fruits</SelectLabel>
-        <SelectItem value="apple">Apple</SelectItem>
-        <SelectItem value="banana">Banana</SelectItem>
-        <SelectItem value="orange">Orange</SelectItem>
-        <SelectItem value="grape">Grape</SelectItem>
-      </SelectGroup>
-    </SelectContent>
-  </Select>
-  ```
-</ComponentPreview>
+<ComponentPreview name="select-demo" className="min-h-[300px] flex items-start justify-center pt-8" />
 
 ## Usage
 
@@ -52,7 +32,7 @@ import {
 
 ### Select (Root)
 
-Extends `@radix-ui/react-select` `Root` props.
+Built on standard Select patterns.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -106,67 +86,13 @@ Extends `@radix-ui/react-select` `Root` props.
 
 ### Controlled Select
 
-<ComponentPreview className="min-h-[300px] flex items-start justify-center pt-8">
-  <SelectDemo />
+<ComponentPreview name="select-demo" className="min-h-[300px] flex items-start justify-center pt-8" />
 
-  ```tsx
-<Select defaultValue="banana">
-  <SelectTrigger className="w-48">
-    <SelectValue />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="apple">Apple</SelectItem>
-    <SelectItem value="banana">Banana</SelectItem>
-    <SelectItem value="orange">Orange</SelectItem>
-  </SelectContent>
-</Select>
-```
-</ComponentPreview>
-
-<ComponentPreview className="min-h-[350px] flex items-start justify-center pt-8">
-  <SelectGroupsDemo />
-
-  ```tsx
-<Select>
-  <SelectTrigger className="w-56">
-    <SelectValue placeholder="Select timezone" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectGroup>
-      <SelectLabel>North America</SelectLabel>
-      <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
-      <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
-      <SelectItem value="pst">Pacific Standard Time (PST)</SelectItem>
-    </SelectGroup>
-    <SelectSeparator />
-    <SelectGroup>
-      <SelectLabel>Europe</SelectLabel>
-      <SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
-      <SelectItem value="cet">Central European Time (CET)</SelectItem>
-    </SelectGroup>
-  </SelectContent>
-</Select>
-```
-</ComponentPreview>
+<ComponentPreview name="select-groups-demo" className="min-h-[350px] flex items-start justify-center pt-8" />
 
 ### Disabled Items
 
-<ComponentPreview className="min-h-[250px] flex items-start justify-center pt-8">
-  <SelectDisabledDemo />
-
-  ```tsx
-<Select>
-  <SelectTrigger className="w-48">
-    <SelectValue placeholder="Select plan" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="free">Free</SelectItem>
-    <SelectItem value="pro">Pro</SelectItem>
-    <SelectItem value="enterprise" disabled>Enterprise (Contact sales)</SelectItem>
-  </SelectContent>
-</Select>
-```
-</ComponentPreview>
+<ComponentPreview name="select-disabled-demo" className="min-h-[250px] flex items-start justify-center pt-8" />
 
 ## Accessibility
 

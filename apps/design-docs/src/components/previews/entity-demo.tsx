@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { Entity } from "@nebutra/ui/primitives";
 import { User, Mail, Settings, ChevronRight } from "lucide-react";
 

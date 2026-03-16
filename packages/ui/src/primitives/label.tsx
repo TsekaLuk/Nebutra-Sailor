@@ -1,10 +1,8 @@
 "use client";
 
 import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils";
-import { withHtmlProps } from "../utils/primitive-props";
 
 // =============================================================================
 // Types
@@ -14,12 +12,8 @@ const labelVariants = cva(
   "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
 );
 
-// Radix types don't resolve HTML props with React 19 + exactOptionalPropertyTypes.
-const RadixLabel = withHtmlProps<"label">(LabelPrimitive.Root);
-
 export interface LabelProps
-  extends
-    React.ComponentPropsWithoutRef<"label">,
+  extends React.LabelHTMLAttributes<HTMLLabelElement>,
     VariantProps<typeof labelVariants> {}
 
 // =============================================================================
@@ -30,7 +24,7 @@ export interface LabelProps
  * Label - Accessible form label component
  *
  * @description
- * A label component built on Radix UI Label primitive.
+ * A label component built as a native HTML label element.
  * Automatically handles accessibility attributes and peer styling.
  *
  * @example Basic usage
@@ -56,14 +50,13 @@ export interface LabelProps
  */
 const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   ({ className, ...props }, ref) => (
-    <RadixLabel
+    <label
       ref={ref}
-      data-slot="label"
       className={cn(labelVariants(), className)}
       {...props}
     />
   ),
 );
-Label.displayName = LabelPrimitive.Root.displayName;
+Label.displayName = "Label";
 
 export { Label, labelVariants };

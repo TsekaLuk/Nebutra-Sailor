@@ -4,26 +4,22 @@ description: Interactive click target with eight visual variants, five size opti
 ---
 
 
-<ComponentPreview>
+<ComponentPreview name="button-demo" >
   <ButtonDemo />
 </ComponentPreview>
 
 ## Installation
 
-<ComponentPreview className="gap-3">
+<ComponentPreview name="button-installation-demo" className="gap-3">
     {/* Note: In MDX, you cannot import Lucide icons inline. 
       For exact icon usage, see the actual React code. */}
   <Button prefix={<span>✉️</span>}>Login with Email</Button>
   <Button suffix={<span>➔</span>}>Continue</Button>
-
-  ```tsx
-import { Button, ButtonLink } from "@nebutra/ui/primitives"
-  ```
 </ComponentPreview>
 
 ## Variants
 
-<ComponentPreview className="gap-3">
+<ComponentPreview name="button-2-demo" className="gap-3">
   <Button variant="default">Default</Button>
   <Button variant="outline">Outline</Button>
   <Button variant="secondary">Secondary</Button>
@@ -31,60 +27,28 @@ import { Button, ButtonLink } from "@nebutra/ui/primitives"
   <Button variant="destructive">Delete</Button>
   <Button variant="warning">Warning</Button>
   <Button variant="link">Learn more</Button>
-
-  ```tsx
-<div className="flex gap-3">
-  <Button variant="default">Default</Button>
-  <Button variant="outline">Outline</Button>
-  <Button variant="secondary">Secondary</Button>
-  <Button variant="ghost">Ghost</Button>
-  <Button variant="destructive">Delete</Button>
-  <Button variant="warning">Warning</Button>
-  <Button variant="link">Learn more</Button>
-</div>
-  ```
 </ComponentPreview>
 
 ## Sizes
 
-<ComponentPreview className="gap-3 items-center">
+<ComponentPreview name="button-3-demo" className="gap-3 items-center">
   <Button size="tiny">Tiny</Button>
   <Button size="sm">Small</Button>
   <Button size="default">Default</Button>
   <Button size="lg">Large</Button>
-
-  ```tsx
-<div className="flex gap-3 items-center">
-  <Button size="tiny">Tiny</Button>
-  <Button size="sm">Small</Button>
-  <Button size="default">Default</Button>
-  <Button size="lg">Large</Button>
-</div>
-  ```
 </ComponentPreview>
 
 ## With Icons
 
-<ComponentPreview className="gap-3 pt-6">
+<ComponentPreview name="button-4-demo" className="gap-3 pt-6">
   <Button prefix={<span>✉️</span>}>Login with Email</Button>
   <Button suffix={<span>➔</span>}>Continue</Button>
-
-  ```tsx
-import { Mail, ArrowRight } from "lucide-react"
-
-<Button prefix={<span>✉️</span>}>Login with Email</Button>
-<Button suffix={<span>➔</span>}>Continue</Button>
-  ```
 </ComponentPreview>
 
 ## Loading State
 
-<ComponentPreview>
+<ComponentPreview name="button-5-demo" >
   <Button loading>Saving…</Button>
-
-  ```tsx
-<Button loading>Saving…</Button>
-  ```
 </ComponentPreview>
 
 ## Props

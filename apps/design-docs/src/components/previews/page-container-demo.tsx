@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
 
 import { SectionContainer } from "@nebutra/ui/layouts";

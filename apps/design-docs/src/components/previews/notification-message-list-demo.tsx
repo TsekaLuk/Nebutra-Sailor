@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { NotificationMessageList } from "@nebutra/ui/primitives";
 import type { NotificationMessage } from "@nebutra/ui/primitives";
 

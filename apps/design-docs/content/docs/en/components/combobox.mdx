@@ -4,37 +4,7 @@ description: Searchable select input combining a trigger button with a filtered 
 ---
 
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <ComboboxDemo />
-
-  ```tsx title="combobox-demo.tsx"
-"use client";
-
-import { useState } from "react";
-import { Combobox } from "@nebutra/ui/primitives";
-
-const frameworks = [
-  { value: "next", label: "Next.js" },
-  { value: "remix", label: "Remix" },
-  { value: "astro", label: "Astro" },
-  { value: "nuxt", label: "Nuxt" },
-];
-
-export function ComboboxDemo() {
-  const [value, setValue] = useState("");
-
-  return (
-    <Combobox
-      options={frameworks}
-      value={value}
-      onChange={setValue}
-      placeholder="Select framework..."
-    />
-  );
-}
-
-```
-</ComponentPreview>
+<ComponentPreview name="combobox-demo" className="min-h-[300px] flex justify-center items-start pt-10" />
 
 ## Overview
 
@@ -45,7 +15,7 @@ export function ComboboxDemo() {
 
 ## Installation
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -54,24 +24,11 @@ export function ComboboxDemo() {
       { value: "nuxt", label: "Nuxt" },
     ]}
     placeholder="Select framework..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  placeholder="Select framework..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### With label
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-2-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -81,27 +38,13 @@ export function ComboboxDemo() {
     ]}
     label="Framework"
     placeholder="Select framework..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  label="Framework"
-  placeholder="Select framework..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ## Usage
 
 ### Simple mode (options prop)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-3-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -110,24 +53,11 @@ export function ComboboxDemo() {
       { value: "nuxt", label: "Nuxt" },
     ]}
     placeholder="Select framework..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  placeholder="Select framework..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### With label
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-4-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -137,25 +67,11 @@ export function ComboboxDemo() {
     ]}
     label="Framework"
     placeholder="Select framework..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  label="Framework"
-  placeholder="Select framework..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### Uncontrolled
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-5-demo" className="min-h-[350px] flex justify-center items-start pt-10">
   <Combobox placeholder="Select framework...">
     <Combobox.Input placeholder="Search frameworks..." />
     <CommandList>
@@ -169,29 +85,11 @@ export function ComboboxDemo() {
         <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
       </Combobox.Group>
     </CommandList>
-  </Combobox>
-
-  ```tsx
-<Combobox placeholder="Select framework...">
-  <Combobox.Input placeholder="Search frameworks..." />
-  <CommandList>
-    <Combobox.Empty>No frameworks found.</Combobox.Empty>
-    <Combobox.Group heading="React">
-      <Combobox.Option value="next">Next.js</Combobox.Option>
-      <Combobox.Option value="remix">Remix</Combobox.Option>
-    </Combobox.Group>
-    <Combobox.Separator />
-    <Combobox.Group heading="Vue">
-      <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
-    </Combobox.Group>
-  </CommandList>
-</Combobox>
-  ```
-</ComponentPreview>
+  </Combobox />
 
 ### Disabled
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-6-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -202,26 +100,11 @@ export function ComboboxDemo() {
     defaultValue="remix"
     disabled
     placeholder="Select framework..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  defaultValue="remix"
-  disabled
-  placeholder="Select framework..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### Error state
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-7-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -231,41 +114,18 @@ export function ComboboxDemo() {
     ]}
     error
     placeholder="Select framework..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  error
-  placeholder="Select framework..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### Sizes
 
-<ComponentPreview className="min-h-[300px] flex flex-col gap-4 justify-center items-center">
+<ComponentPreview name="combobox-8-demo" className="min-h-[300px] flex flex-col gap-4 justify-center items-center">
   <Combobox options={[{ value: "1", label: "Option 1" }]} size="sm" placeholder="Small" />
   <Combobox options={[{ value: "1", label: "Option 1" }]} size="default" placeholder="Default" />
-  <Combobox options={[{ value: "1", label: "Option 1" }]} size="lg" placeholder="Large" />
-
-  ```tsx
-<div className="flex flex-col gap-4 justify-center items-center">
-  <Combobox options={[{ value: "1", label: "Option 1" }]} size="sm" placeholder="Small" />
-  <Combobox options={[{ value: "1", label: "Option 1" }]} size="default" placeholder="Default" />
-  <Combobox options={[{ value: "1", label: "Option 1" }]} size="lg" placeholder="Large" />
-</div>
-  ```
-</ComponentPreview>
+  <Combobox options={[{ value: "1", label: "Option 1" }]} size="lg" placeholder="Large" / />
 
 ### Grouped options
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-9-demo" className="min-h-[350px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js", group: "React" },
@@ -275,25 +135,11 @@ export function ComboboxDemo() {
     ]}
     label="Framework"
     placeholder="Select framework..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js", group: "React" },
-    { value: "remix", label: "Remix", group: "React" },
-    { value: "nuxt", label: "Nuxt", group: "Vue" },
-    { value: "svelte", label: "SvelteKit", group: "Svelte" },
-  ]}
-  label="Framework"
-  placeholder="Select framework..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### Custom width
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-10-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -303,27 +149,13 @@ export function ComboboxDemo() {
     ]}
     width="w-96"
     placeholder="Select framework..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  width="w-96"
-  placeholder="Select framework..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### Composition mode
 
 For advanced scenarios (async search, custom rendering, separators), use sub-components as children.
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-11-demo" className="min-h-[350px] flex justify-center items-start pt-10">
   <Combobox placeholder="Select framework...">
     <Combobox.Input placeholder="Search frameworks..." />
     <CommandList>
@@ -337,25 +169,7 @@ For advanced scenarios (async search, custom rendering, separators), use sub-com
         <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
       </Combobox.Group>
     </CommandList>
-  </Combobox>
-
-  ```tsx
-<Combobox placeholder="Select framework...">
-  <Combobox.Input placeholder="Search frameworks..." />
-  <CommandList>
-    <Combobox.Empty>No frameworks found.</Combobox.Empty>
-    <Combobox.Group heading="React">
-      <Combobox.Option value="next">Next.js</Combobox.Option>
-      <Combobox.Option value="remix">Remix</Combobox.Option>
-    </Combobox.Group>
-    <Combobox.Separator />
-    <Combobox.Group heading="Vue">
-      <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
-    </Combobox.Group>
-  </CommandList>
-</Combobox>
-  ```
-</ComponentPreview>
+  </Combobox />
 
 ## Props
 

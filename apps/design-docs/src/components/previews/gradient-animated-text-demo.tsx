@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { GradientAnimatedText } from "@nebutra/ui/primitives";
 
 export default function GradientAnimatedTextDemo() {

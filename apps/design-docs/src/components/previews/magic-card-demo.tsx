@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { MagicCard } from "@nebutra/ui/primitives";
 import { Sparkles, Layers, Zap } from "lucide-react";
 

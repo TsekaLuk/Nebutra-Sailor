@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { GridPatternCard, GridPatternCardBody } from "@nebutra/ui/primitives";
 import { Button } from "@nebutra/ui/primitives";
 

@@ -3,7 +3,17 @@
 import { useState, useEffect, useCallback } from "react"
 import { useLocale } from "next-intl"
 import Image from "next/image"
-import * as Dialog from "@radix-ui/react-dialog"
+import {
+  Dialog as Root,
+  DialogPortal as Portal,
+  DialogOverlay as Overlay,
+  DialogContent as Content,
+  DialogTitle as Title,
+  DialogDescription as Description,
+  DialogClose as Close,
+} from "@nebutra/ui/primitives";
+
+const Dialog = { Root, Portal, Overlay, Content, Title, Description, Close };
 import { Trash2, RefreshCw, MessageSquare, Check, X, AlertTriangle } from "lucide-react"
 
 interface GuestbookEntry {
@@ -239,7 +249,7 @@ export default function AdminGuestbookPage() {
       )}
 
       {/* Delete confirmation dialog */}
-      <Dialog.Root open={deleteTarget !== null} onOpenChange={(open) => { if (!open) setDeleteTarget(null) }}>
+      <Dialog.Root open={deleteTarget !== null} onOpenChange={(open: boolean) => { if (!open) setDeleteTarget(null) }}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
           <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-6 shadow-2xl">

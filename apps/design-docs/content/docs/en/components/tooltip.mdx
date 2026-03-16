@@ -11,158 +11,23 @@ import { TooltipIconButtonDemo } from "@/components/previews/tooltip-icon-button
 import { TooltipSideRightDemo } from "@/components/previews/tooltip-side-right-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipDemo />
-
-  ```tsx
-<TooltipProvider>
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline">Hover me</Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>This is a tooltip</p>
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
-  ```
-</ComponentPreview>
+<ComponentPreview name="tooltip-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ## Usage
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipIconButtonDemo />
-
-  ```tsx
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "@nebutra/ui/primitives"
-```
-
-<Info>
-  Wrap your app (or a section) in `TooltipProvider` to enable tooltip functionality.
-  Place it high in the component tree — typically in your root layout.
-</Info>
-
-## Props
-
-### TooltipProvider
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `delayDuration` | `number` | `700` | Delay in ms before tooltip appears |
-| `skipDelayDuration` | `number` | `300` | How quickly a new tooltip opens when another is already open |
-| `disableHoverableContent` | `boolean` | `false` | Prevents the tooltip content from being hoverable |
-
-### Tooltip (Root)
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `open` | `boolean` | — | Controlled open state |
-| `defaultOpen` | `boolean` | `false` | Uncontrolled default open state |
-| `onOpenChange` | `(open: boolean) => void` | — | Callback when open state changes |
-| `delayDuration` | `number` | — | Override the provider's delay for this tooltip |
-
-### TooltipTrigger
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Merge props onto the immediate child element |
-| `children` | `ReactNode` | — | The element that triggers the tooltip |
-
-### TooltipContent
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Preferred side to display |
-| `sideOffset` | `number` | `4` | Distance in px from the trigger |
-| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment along the trigger |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Tooltip content |
-
-## Examples
-
-### Tooltip on Icon Button
-
-```tsx
-import { Settings } from "lucide-react"
-
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="ghost" size="icon">
-        <span>⚙️</span>
-        <span className="sr-only">Settings</span>
-      </Button>
-    </TooltipTrigger>
-    <TooltipContent>
-      <p>Settings</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-</ComponentPreview>
+<ComponentPreview name="tooltip-icon-button-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ### Custom Side and Offset
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipSideRightDemo />
-
-  ```tsx
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Hover</Button>
-    </TooltipTrigger>
-    <TooltipContent side="right" sideOffset={8}>
-      <p>Tooltip on the right</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-</ComponentPreview>
+<ComponentPreview name="tooltip-side-right-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ### Instant Tooltip (No Delay)
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipInstantDemo />
-
-  ```tsx
-<TooltipProvider>
-  <Tooltip delayDuration={0}>
-    <TooltipTrigger asChild>
-      <Button>Instant</Button>
-    </TooltipTrigger>
-    <TooltipContent>Shows immediately</TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-</ComponentPreview>
+<ComponentPreview name="tooltip-instant-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ### Rich Tooltip Content
 
-<ComponentPreview className="min-h-[150px] flex justify-center items-center">
-  <TooltipRichContentDemo />
-
-  ```tsx
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <span className="cursor-help font-medium border-b border-dashed border-muted-foreground pb-px">Hover for info</span>
-    </TooltipTrigger>
-    <TooltipContent className="max-w-xs">
-      <p className="font-medium mb-1">Pro tip</p>
-      <p className="text-xs text-muted-foreground">
-        You can configure advanced settings in the project preferences panel.
-      </p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-</ComponentPreview>
+<ComponentPreview name="tooltip-rich-content-demo" className="min-h-[150px] flex justify-center items-center" />
 
 ## Accessibility
 

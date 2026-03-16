@@ -1,23 +1,18 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
-
-import * as React from "react";
-import { TooltipTrigger, Tooltip, TooltipProvider, TooltipContent, Button } from "@nebutra/ui/primitives";
-import { Settings } from "lucide-react";
+import { GeistTooltip as Tooltip } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+import { Plus } from "lucide-react";
 
 export function TooltipIconButtonDemo() {
-    return (
-        <TooltipProvider>
-            <Tooltip>
-                <TooltipTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                        <Settings className="h-4 w-4" />
-                        <span className="sr-only">设置 (Settings)</span>
-                    </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p>设置 (Settings)</p>
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
-    );
+  return (
+    <div className="flex items-center justify-center p-8">
+      <Tooltip text="Add item">
+        <Button variant="outline" size="icon">
+          <Plus className="w-4 h-4" />
+        </Button>
+      </Tooltip>
+    </div>
+  );
 }

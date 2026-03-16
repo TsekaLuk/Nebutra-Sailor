@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { type DialogProps } from "@radix-ui/react-dialog";
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 
@@ -12,7 +11,7 @@ export type CommandProps = React.ComponentPropsWithoutRef<
   typeof CommandPrimitive
 >;
 
-export type CommandDialogProps = DialogProps;
+export type CommandDialogProps = React.ComponentPropsWithoutRef<typeof Dialog> & { children?: React.ReactNode; };
 
 export type CommandInputProps = React.ComponentPropsWithoutRef<
   typeof CommandPrimitive.Input

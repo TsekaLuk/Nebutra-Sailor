@@ -125,7 +125,7 @@ export function Awards({
           </text>
 
           {/* Curved text - bottom */}
-          <text className="text-[10px] tracking-wider">
+          <text className="text-xs tracking-wider">
             <textPath
               href="#bottom-curve"
               startOffset="50%"
@@ -144,10 +144,10 @@ export function Awards({
             </div>
           )}
           {recipient && (
-            <div className="text-primary mt-2 text-[14px]">{recipient}</div>
+            <div className="text-primary mt-2 text-sm">{recipient}</div>
           )}
 
-          {date && <div className="text-[10px] italic">{date}</div>}
+          {date && <div className="text-xs italic">{date}</div>}
         </div>
       </div>
     );
@@ -192,7 +192,7 @@ export function Awards({
           <h1 className={cn("text-4xl font-black tracking-tight")}>{title}</h1>
 
           {/* Decorative Line */}
-          <div className="bg-primary mx-auto my-3 h-[1px] w-40"></div>
+          <div className="bg-primary mx-auto my-3 h-px w-40"></div>
 
           {/* Subtitle */}
           <h2 className={cn("mb-4 w-60 text-xl font-light")}>{subtitle}</h2>

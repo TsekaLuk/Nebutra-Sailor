@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
+import { Popover, PopoverTrigger, PopoverContent } from "./popover";
 import { Smile, Meh, Frown, Plus, X } from "lucide-react";
 import { cn } from "../utils/cn";
 
@@ -228,8 +228,8 @@ function FeedbackDefault({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
-      <PopoverPrimitive.Trigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
         <button
           type="button"
           className={cn(
@@ -241,45 +241,45 @@ function FeedbackDefault({
         >
           Feedback
         </button>
-      </PopoverPrimitive.Trigger>
+      </PopoverTrigger>
 
-      <PopoverPrimitive.Portal>
-        <PopoverPrimitive.Content
-          align="end"
-          sideOffset={8}
-          className={cn(
-            "z-50 w-80 rounded-[var(--radius-lg)] border bg-background p-4 shadow-md",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out",
-            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-            "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-            "data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2",
-          )}
-        >
-          {/* Header */}
-          <div className="mb-3 flex items-center justify-between">
-            <span className="text-sm font-medium text-foreground">Feedback</span>
-            <PopoverPrimitive.Close
-              className="rounded-[var(--radius-md)] p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              aria-label="Close feedback"
-            >
-              <X size={14} aria-hidden="true" />
-            </PopoverPrimitive.Close>
-          </div>
+      <PopoverContent
+        align="end"
+        sideOffset={8}
+        className={cn(
+          "z-50 w-80 rounded-[var(--radius-lg)] border bg-background p-4 shadow-md",
+          "data-[state=open]:animate-in data-[state=closed]:animate-out",
+          "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+          "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+          "data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2",
+        )}
+      >
+        {/* Header */}
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-sm font-medium text-foreground">Feedback</span>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="rounded-[var(--radius-md)] p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label="Close feedback"
+          >
+            <X size={14} aria-hidden="true" />
+          </button>
+        </div>
 
-          <FeedbackForm
-            label={label}
-            {...(topics ? { topics } : {})}
-            {...(metadata ? { metadata } : {})}
-            {...(onSubmit ? { onSubmit } : {})}
-            {...(dryRun !== undefined ? { dryRun } : {})}
-            onSuccess={() => {
-              // Close after a brief delay to show thank-you message
-              setTimeout(() => setOpen(false), 1800);
-            }}
-          />
-        </PopoverPrimitive.Content>
-      </PopoverPrimitive.Portal>
-    </PopoverPrimitive.Root>
+        <FeedbackForm
+          label={label}
+          {...(topics ? { topics } : {})}
+          {...(metadata ? { metadata } : {})}
+          {...(onSubmit ? { onSubmit } : {})}
+          {...(dryRun !== undefined ? { dryRun } : {})}
+          onSuccess={() => {
+            // Close after a brief delay to show thank-you message
+            setTimeout(() => setOpen(false), 1800);
+          }}
+        />
+      </PopoverContent>
+    </Popover>
   );
 }
 

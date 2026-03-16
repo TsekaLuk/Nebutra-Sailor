@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "./tooltip";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -28,42 +28,40 @@ export interface ContextCardTriggerProps {
 // =============================================================================
 
 const ContextCardTrigger = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Trigger>,
+  React.ElementRef<typeof TooltipTrigger>,
   ContextCardTriggerProps
 >(
   (
     { content, side = "top", sideOffset = 8, children, className },
     ref,
   ) => (
-    <TooltipPrimitive.Provider delayDuration={200}>
-      <TooltipPrimitive.Root>
-        <TooltipPrimitive.Trigger ref={ref} asChild>
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger ref={ref} asChild>
           {/* Wrap non-element children in a span so asChild works correctly */}
           {React.isValidElement(children) ? (
             children
           ) : (
             <span>{children}</span>
           )}
-        </TooltipPrimitive.Trigger>
-        <TooltipPrimitive.Portal>
-          <TooltipPrimitive.Content
-            side={side}
-            sideOffset={sideOffset}
-            className={cn(
-              "z-50 max-w-xs overflow-hidden rounded-[var(--radius-lg)] border bg-popover",
-              "px-3 py-2 text-sm text-popover-foreground shadow-md",
-              "animate-in fade-in-0 zoom-in-95",
-              "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
-              "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2",
-              "data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-              className,
-            )}
-          >
-            {content}
-          </TooltipPrimitive.Content>
-        </TooltipPrimitive.Portal>
-      </TooltipPrimitive.Root>
-    </TooltipPrimitive.Provider>
+        </TooltipTrigger>
+        <TooltipContent
+          side={side}
+          sideOffset={sideOffset}
+          className={cn(
+            "z-50 max-w-xs overflow-hidden rounded-[var(--radius-lg)] border bg-popover",
+            "px-3 py-2 text-sm text-popover-foreground shadow-md",
+            "animate-in fade-in-0 zoom-in-95",
+            "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+            "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2",
+            "data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+            className,
+          )}
+        >
+          {content}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   ),
 );
 ContextCardTrigger.displayName = "ContextCard.Trigger";

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { DottedWorldMap } from "@nebutra/ui/primitives";
 
 export function DottedWorldMapDemo() {

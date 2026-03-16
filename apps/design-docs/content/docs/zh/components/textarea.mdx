@@ -5,7 +5,7 @@ description: "具有一致样式的多行文本输入字段。"
 
 ## 演示 (Demo)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="textarea-demo" className="max-w-[400px]">
   <div className="flex flex-col gap-1.5 w-full">
     <Label htmlFor="message">消息 (Message)</Label>
     <Textarea
@@ -13,19 +13,7 @@ description: "具有一致样式的多行文本输入字段。"
       placeholder="在此输入您的消息... (Write your message here...)"
       rows={4}
     />
-  </div>
-
-  ```tsx
-<div className="flex flex-col gap-1.5 w-full">
-    <Label htmlFor="message">消息 (Message)</Label>
-    <Textarea
-      id="message"
-      placeholder="在此输入您的消息... (Write your message here...)"
-      rows={4}
-    />
-  </div>
-  ```
-</ComponentPreview>
+  </div />
 
 ## 使用方法 (Usage)
 
@@ -49,7 +37,7 @@ import { Textarea } from "@nebutra/ui";
 
 ### 带有字符计数 (With Character Count)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="textarea-2-demo" className="max-w-[400px]">
     <div className="flex flex-col gap-1 w-full">
     <Textarea
       defaultValue=""
@@ -59,35 +47,14 @@ import { Textarea } from "@nebutra/ui";
     <span className="text-xs text-muted-foreground text-right w-full">
       0/500
     </span>
-  </div>
-
-  ```tsx
-<div className="flex flex-col gap-1 w-full">
-  <Textarea
-    defaultValue=""
-    placeholder="在此输入... (Type here...)"
-    maxLength={500}
-  />
-  <span className="text-xs text-muted-foreground text-right w-full">
-    0/500
-  </span>
-</div>
-```
-</ComponentPreview>
+  </div />
 
 ### 禁用状态 (Disabled)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="textarea-3-demo" className="max-w-[400px]">
     <div className="w-full">
     <Textarea disabled value="该字段为只读状态 (This field is read-only)" />
-  </div>
-
-  ```tsx
-<div className="w-full">
-  <Textarea disabled value="该字段为只读状态 (This field is read-only)" />
-</div>
-```
-</ComponentPreview>
+  </div />
 
 ### 在表单中使用 (In a Form)
 

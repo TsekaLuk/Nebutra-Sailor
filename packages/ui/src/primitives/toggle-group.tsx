@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "../utils/cn";
 
@@ -42,54 +41,124 @@ const toggleGroupItemVariants = cva(
     },
 );
 
-const ToggleGroupContext = React.createContext<
-    VariantProps<typeof toggleGroupItemVariants>
->({
-    variant: "default",
-    size: "default",
-});
+interface ToggleGroupContextValue extends VariantProps<typeof toggleGroupItemVariants> {
+    type?: "single" | "multiple";
+    value: string | string[];
+    onValueChange: (value: string | string[]) => void;
+    disabled?: boolean | undefined;
+}
 
-const ToggleGroup = React.forwardRef<
-    React.ComponentRef<typeof ToggleGroupPrimitive.Root>,
-    React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
-    VariantProps<typeof toggleGroupVariants> &
-    VariantProps<typeof toggleGroupItemVariants>
->(({ className, variant, size, children, ...props }, ref) => (
-    <ToggleGroupPrimitive.Root
-        ref={ref}
-        className={cn(toggleGroupVariants({ variant }), className)}
-        {...props}
-    >
-        <ToggleGroupContext.Provider value={{ variant, size }}>
-            {children}
-        </ToggleGroupContext.Provider>
-    </ToggleGroupPrimitive.Root>
-));
-ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
+const ToggleGroupContext = React.createContext<ToggleGroupContextValue | null>(null);
 
-const ToggleGroupItem = React.forwardRef<
-    React.ComponentRef<typeof ToggleGroupPrimitive.Item>,
-    React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &
-    VariantProps<typeof toggleGroupItemVariants>
->(({ className, variant, size, children, ...props }, ref) => {
+function useToggleGroup() {
     const context = React.useContext(ToggleGroupContext);
-    return (
-        <ToggleGroupPrimitive.Item
-            ref={ref}
-            className={cn(
-                toggleGroupItemVariants({
-                    variant: variant ?? context.variant,
-                    size: size ?? context.size,
-                }),
-                className,
-            )}
-            {...props}
-        >
-            {children}
-        </ToggleGroupPrimitive.Item>
-    );
-});
-ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;
+    if (!context) {
+        throw new Error("ToggleGroup internal components must be used within a ToggleGroup");
+    }
+    return context;
+}
+
+export interface ToggleGroupProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof toggleGroupVariants>, VariantProps<typeof toggleGroupItemVariants> {
+    type?: "single" | "multiple";
+    value?: string | string[];
+    defaultValue?: string | string[];
+    onValueChange?: (value: string | string[]) => void;
+    disabled?: boolean;
+}
+
+const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
+    ({ className, variant, size, type = "single", value: controlledValue, defaultValue, onValueChange, disabled, children, ...props }, ref) => {
+        const [uncontrolledValue, setUncontrolledValue] = React.useState<string | string[]>(
+            defaultValue !== undefined ? defaultValue : type === "single" ? "" : []
+        );
+
+        const isControlled = controlledValue !== undefined;
+        const value = isControlled ? controlledValue : uncontrolledValue;
+
+        const handleValueChange = React.useCallback(
+            (newValue: string | string[]) => {
+                if (!isControlled) {
+                    setUncontrolledValue(newValue);
+                }
+                onValueChange?.(newValue);
+            },
+            [isControlled, onValueChange]
+        );
+
+        return (
+            <div
+                ref={ref}
+                className={cn(toggleGroupVariants({ variant }), className)}
+                {...props}
+            >
+                <ToggleGroupContext.Provider value={{ variant, size, type, value, onValueChange: handleValueChange, disabled }}>
+                    {children}
+                </ToggleGroupContext.Provider>
+            </div>
+        );
+    }
+);
+ToggleGroup.displayName = "ToggleGroup";
+
+export interface ToggleGroupItemProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "value" | "type">, VariantProps<typeof toggleGroupItemVariants> {
+    value: string;
+}
+
+const ToggleGroupItem = React.forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
+    ({ className, variant, size, value, children, ...props }, ref) => {
+        const context = useToggleGroup();
+        const isDisabled = context.disabled || props.disabled;
+
+        const isSelected = React.useMemo(() => {
+            if (context.type === "single") {
+                return context.value === value;
+            }
+            return Array.isArray(context.value) && context.value.includes(value);
+        }, [context.value, context.type, value]);
+
+        const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+            if (isDisabled) return;
+
+            if (context.type === "single") {
+                // If clicking an already selected item in single mode, we often allow deselect.
+                // Standard radix-ui also does this unless forced otherwise.
+                context.onValueChange(isSelected ? "" : value);
+            } else {
+                const currentArray = Array.isArray(context.value) ? context.value : [];
+                if (isSelected) {
+                    context.onValueChange(currentArray.filter((v) => v !== value));
+                } else {
+                    context.onValueChange([...currentArray, value]);
+                }
+            }
+
+            props.onClick?.(e);
+        };
+
+        return (
+            <button
+                ref={ref}
+                type="button"
+                disabled={isDisabled}
+                data-state={isSelected ? "on" : "off"}
+                aria-pressed={isSelected}
+                className={cn(
+                    toggleGroupItemVariants({
+                        variant: variant ?? context.variant,
+                        size: size ?? context.size,
+                    }),
+                    className,
+                    "focus:z-10" // Prevent focus outline from being clipped by siblings
+                )}
+                onClick={handleClick}
+                {...props}
+            >
+                {children}
+            </button>
+        );
+    }
+);
+ToggleGroupItem.displayName = "ToggleGroupItem";
 
 export {
     ToggleGroup,

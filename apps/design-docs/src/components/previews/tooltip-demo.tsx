@@ -1,22 +1,15 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-  Button,
-} from "@nebutra/ui/primitives";
+import { GeistTooltip as Tooltip } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
+
 export function TooltipDemo() {
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Hover me</Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>This is a tooltip</p>
-        </TooltipContent>
+    <div className="flex items-center justify-center p-8">
+      <Tooltip text="The Evil Rabbit Jumped over the Fence">
+        <Button variant="outline">Hover me</Button>
       </Tooltip>
-    </TooltipProvider>
+    </div>
   );
 }

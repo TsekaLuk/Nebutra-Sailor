@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { Dialog } from "@base-ui-components/react/dialog";
 import { cn } from "../utils/cn";
 import { DialogPortal, DialogOverlay } from "./dialog";
 import {
@@ -55,11 +55,10 @@ export function CommandMenuRoot({
   children,
 }: CommandMenuRootProps) {
   return (
-    <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay />
-        <DialogPrimitive.Content
-          aria-describedby={undefined}
+        <Dialog.Popup
           className={cn(
             "fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%]",
             "overflow-hidden rounded-[var(--radius-lg)] border bg-background shadow-lg",
@@ -70,7 +69,7 @@ export function CommandMenuRoot({
           )}
         >
           {/* Visually-hidden title for screen reader accessibility (WCAG 4.1.2) */}
-          <DialogPrimitive.Title className="sr-only">{label}</DialogPrimitive.Title>
+          <Dialog.Title className="sr-only">{label}</Dialog.Title>
           <Command
             className={cn(
               "[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium",
@@ -85,9 +84,9 @@ export function CommandMenuRoot({
           >
             {children}
           </Command>
-        </DialogPrimitive.Content>
+        </Dialog.Popup>
       </DialogPortal>
-    </DialogPrimitive.Root>
+    </Dialog.Root>
   );
 }
 CommandMenuRoot.displayName = "CommandMenu.Root";

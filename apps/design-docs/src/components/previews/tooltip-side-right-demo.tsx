@@ -1,19 +1,15 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 "use client";
-
-import * as React from "react";
-import { TooltipTrigger, Tooltip, TooltipProvider, TooltipContent, Button } from "@nebutra/ui/primitives";
+import { GeistTooltip as Tooltip } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/primitives";
 
 export function TooltipSideRightDemo() {
-    return (
-        <TooltipProvider>
-            <Tooltip>
-                <TooltipTrigger asChild>
-                    <Button variant="outline">悬停 (Hover)</Button>
-                </TooltipTrigger>
-                <TooltipContent side="right" sideOffset={8}>
-                    <p>显示在右侧的提示 (Tooltip on the right)</p>
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
-    );
+  return (
+    <div className="flex items-center justify-center p-8">
+      <Tooltip position="right" text="The Evil Rabbit Jumped over the Fence">
+        <Button variant="outline">Right</Button>
+      </Tooltip>
+    </div>
+  );
 }

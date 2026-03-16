@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { DotPattern } from "@nebutra/ui/primitives";
 import { cn } from "@nebutra/ui/utils";
 

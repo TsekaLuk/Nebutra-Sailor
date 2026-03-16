@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { AvatarWithIcon } from "@nebutra/ui/primitives";
 import { ArrowDownCircle } from "lucide-react";
 

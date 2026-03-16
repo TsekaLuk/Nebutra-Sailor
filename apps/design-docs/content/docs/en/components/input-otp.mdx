@@ -5,7 +5,7 @@ description: "One-time password input with individual character slots, built on 
 
 ## Demo
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+<ComponentPreview name="input-otp-demo" className="min-h-[200px] flex justify-center items-center">
   <InputOTP maxLength={6}>
     <InputOTPGroup>
       <InputOTPSlot index={0} />
@@ -18,39 +18,11 @@ description: "One-time password input with individual character slots, built on 
       <InputOTPSlot index={4} />
       <InputOTPSlot index={5} />
     </InputOTPGroup>
-  </InputOTP>
-
-  ```tsx
-<InputOTP maxLength={6}>
-    <InputOTPGroup>
-      <InputOTPSlot index={0} />
-      <InputOTPSlot index={1} />
-      <InputOTPSlot index={2} />
-    </InputOTPGroup>
-    <InputOTPSeparator />
-    <InputOTPGroup>
-      <InputOTPSlot index={3} />
-      <InputOTPSlot index={4} />
-      <InputOTPSlot index={5} />
-    </InputOTPGroup>
-  </InputOTP>
-  ```
-</ComponentPreview>
+  </InputOTP />
 
 ## Usage
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-    <InputOTPNumericDemo />
-
-  ```tsx
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-  InputOTPSeparator,
-} from "@nebutra/ui/primitives"
-```
-</ComponentPreview>
+<ComponentPreview name="input-otp-numeric-demo" className="min-h-[200px] flex justify-center items-center" />
 
 ## Props
 
@@ -76,22 +48,7 @@ import {
 
 ### Numeric Only (4-digit PIN)
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-    <InputOTPNumericDemo />
-
-  ```tsx
-import { REGEXP_ONLY_DIGITS } from "input-otp"
-
-<InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
-  <InputOTPGroup>
-    <InputOTPSlot index={0} />
-    <InputOTPSlot index={1} />
-    <InputOTPSlot index={2} />
-    <InputOTPSlot index={3} />
-  </InputOTPGroup>
-</InputOTP>
-```
-</ComponentPreview>
+<ComponentPreview name="input-otp-numeric-demo" className="min-h-[200px] flex justify-center items-center" />
 
 ### Controlled OTP
 

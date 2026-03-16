@@ -5,67 +5,7 @@ description: "Modal dialog that interrupts the user and requires an explicit con
 
 ## Demo
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
-  <AlertDialogDemo />
-
-  ```tsx title="alert-dialog-demo.tsx"
-"use client";
-
-import { useState } from "react";
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@nebutra/ui/primitives";
-
-export function AlertDialogDemo() {
-  const [deleted, setDeleted] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="destructive">
-          {deleted ? "Account Deleted" : "Delete Account"}
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <Button
-            variant="outline"
-            onClick={() => setOpen(false)}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => {
-              setDeleted(true);
-              setOpen(false);
-            }}
-          >
-            Continue
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-```
-</ComponentPreview>
+<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center" />
 
 ```tsx
 import {
@@ -154,7 +94,7 @@ import {
 
 ### Custom Action Handler
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+<ComponentPreview name="alert-dialog-demo" className="min-h-[200px] flex justify-center items-center">
     <AlertDialog>
     <AlertDialogTrigger asChild>
       <Button variant="outline">Remove Item</Button>
@@ -171,28 +111,7 @@ import {
         </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
-  </AlertDialog>
-
-  ```tsx
-<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button variant="outline">Remove Item</Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Remove item from cart?</AlertDialogTitle>
-      <AlertDialogDescription>The item will be removed from your shopping cart.</AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Keep Item</AlertDialogCancel>
-      <AlertDialogAction >
-        Remove
-      </AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-```
-</ComponentPreview>
+  </AlertDialog />
 
 ## Accessibility
 

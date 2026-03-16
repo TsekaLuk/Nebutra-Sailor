@@ -5,7 +5,7 @@ description: "任务完成进度的可视化指示器，基于 Radix UI 构建�
 
 ## 演示 (Demo)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="progress-demo" className="max-w-[400px]">
   <div className="space-y-8 w-full">
     <div className="space-y-2">
       <div className="flex justify-between text-sm">
@@ -36,39 +36,6 @@ description: "任务完成进度的可视化指示器，基于 Radix UI 构建�
       <Progress value={undefined} />
     </div>
   </div>
-
-  ```tsx
-<div className="space-y-8 w-full">
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm">
-        <span>正在下载 (Downloading...)</span>
-        <span>33%</span>
-      </div>
-      <Progress value={33} />
-    </div>
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm">
-        <span>正在处理 (Processing...)</span>
-        <span>66%</span>
-      </div>
-      <Progress value={66} />
-    </div>
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm">
-        <span>已完成 (Completed)</span>
-        <span>100%</span>
-      </div>
-      <Progress value={100} />
-    </div>
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm">
-        <span>正在连接 (Connecting...)</span>
-        <span>待定 (Indeterminate)</span>
-      </div>
-      <Progress value={undefined} />
-    </div>
-  </div>
-  ```
 </ComponentPreview>
 
 ## 使用方法 (Usage)
@@ -79,7 +46,7 @@ import { Progress } from "@nebutra/ui/primitives"
 
 ## 属性 (Props)
 
-继承自 `@radix-ui/react-progress` 的 `Root` 属性。
+基于 Base UI 进度条组件构建。
 
 | 属性 | 类型 | 默认值 | 描述 |
 |------|------|---------|-------------|
@@ -94,116 +61,43 @@ import { Progress } from "@nebutra/ui/primitives"
 
 <ComponentPreview name="progress-1-demo" className="max-w-[400px]">
   <ProgressBasicDemo />
-
-  ```tsx
-import * as React from "react"
-import { Progress } from "@nebutra/ui/primitives"
-
-export function ProgressAnimatedDemo() {
-  const [progress, setProgress] = React.useState(13)
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(65), 500)
-    return () => clearTimeout(timer)
-  }, [])
-
-  return (
-    <div className="w-full">
-      <Progress value={progress} className="w-full" />
-    </div>
-  )
-}
-```
 </ComponentPreview>
 
 ### 带有标签 (With Label)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="progress-2-demo" className="max-w-[400px]">
     <div className="space-y-1 w-full">
-    <div className="flex justify-between text-sm">
-      <span>正在上传 (Uploading...)</span>
-      <span>65%</span>
+      <div className="flex justify-between text-sm">
+        <span>正在上传 (Uploading...)</span>
+        <span>65%</span>
+      </div>
+      <Progress value={65} />
     </div>
-    <Progress value={65} />
-  </div>
-
-  ```tsx
-<div className="space-y-1 w-full">
-  <div className="flex justify-between text-sm">
-    <span>正在上传 (Uploading...)</span>
-    <span>65%</span>
-  </div>
-  <Progress value={65} />
-</div>
-```
 </ComponentPreview>
 
 ### 待定状态 - 加载中 (Indeterminate - Loading)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="progress-3-demo" className="max-w-[400px]">
     <div className="w-full">
-    <Progress value={undefined} className="w-full" />
-  </div>
-
-  ```tsx
-<div className="w-full">
-  <Progress value={undefined} className="w-full" />
-</div>
-```
+      <Progress value={undefined} className="w-full" />
+    </div>
 </ComponentPreview>
 
 ### 自定义颜色 (Custom Color)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="progress-4-demo" className="max-w-[400px]">
     <div className="w-full">
-    <Progress
-      value={75}
-      className="w-full [&>div]:bg-green-500"
-    />
-  </div>
-
-  ```tsx
-<div className="w-full">
-  <Progress
-    value={75}
-    className="w-full [&>div]:bg-green-500"
-  />
-</div>
-```
+      <Progress
+        value={75}
+        className="w-full [&>div]:bg-green-500"
+      />
+    </div>
 </ComponentPreview>
 
 ### 环形进度条 (Circular Progress)
 
 <ComponentPreview name="animated-circular-progress-bar-demo" className="max-w-[400px]">
   <AnimatedCircularProgressBarDemo />
-
-  ```tsx
-import { useEffect, useState } from "react"
-import { AnimatedCircularProgressBar } from "@nebutra/ui/primitives"
-
-export function AnimatedCircularProgressBarDemo() {
-  const [value, setValue] = useState(0)
-
-  useEffect(() => {
-    const handleIncrement = (prev: number) => {
-      if (prev === 100) return 0
-      return prev + 10
-    }
-    setValue(handleIncrement)
-    const interval = setInterval(() => setValue(handleIncrement), 2000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <AnimatedCircularProgressBar
-      max={100}
-      min={0}
-      value={value}
-      gaugePrimaryColor="hsl(var(--primary))"
-    />
-  )
-}
-```
 </ComponentPreview>
 
 ## 可访问性 (Accessibility)

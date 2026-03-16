@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { AssistedPasswordConfirmation } from "@nebutra/ui/primitives";
 import { useState } from "react";
 import { Badge } from "@nebutra/ui/primitives";

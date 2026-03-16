@@ -34,16 +34,16 @@ export function InteractiveFrostedGlassCard({
     const isElevated = variant === "elevated";
 
     const cardClasses = isElevated
-        ? `group relative w-full overflow-hidden rounded-3xl border border-[#0BF1C3]/25 bg-[#0A0A0A]/60 p-8 backdrop-blur-[48px] transition-all duration-500 hover:border-[#0BF1C3]/40 shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_60px_rgba(11,241,195,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.5),0_0_80px_rgba(11,241,195,0.12)]`
-        : `group relative w-full overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-8 backdrop-blur-[32px] transition-all duration-500 hover:border-white/[0.15] shadow-none hover:shadow-[0_4px_16px_rgba(255,255,255,0.05)]`;
+        ? `group relative w-full overflow-hidden rounded-3xl border border-cyan/25 bg-neutral-950/60 p-8 backdrop-blur-3xl transition-all duration-500 hover:border-cyan/40 shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_60px_rgba(11,241,195,0.08)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.5),0_0_80px_rgba(11,241,195,0.12)]`
+        : `group relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-2xl transition-all duration-500 hover:border-white/20 shadow-none hover:shadow-[0_4px_16px_rgba(255,255,255,0.05)]`;
 
     const glowColor = isElevated
         ? `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(11,241,195,0.15), transparent 40%)`
         : `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.06), transparent 40%)`;
 
     const iconBgClass = isElevated
-        ? "flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0BF1C3]/10 text-[#0BF1C3] backdrop-blur-md border border-[#0BF1C3]/20 shadow-[0_0_20px_rgba(11,241,195,0.1)]"
-        : "flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.06] text-white/80 backdrop-blur-md border border-white/10";
+        ? "flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan/10 text-cyan backdrop-blur-md border border-cyan/20 shadow-[0_0_20px_rgba(11,241,195,0.1)]"
+        : "flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-white/80 backdrop-blur-md border border-white/10";
 
     const noiseFilterId = `cardNoise_${variant}`;
 
@@ -63,11 +63,11 @@ export function InteractiveFrostedGlassCard({
         >
             {/* Elevated: top gradient accent line */}
             {isElevated && (
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0BF1C3]/50 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/50 to-transparent" />
             )}
 
             {/* Noise Texture */}
-            <div className={`pointer-events-none absolute inset-0 z-0 mix-blend-overlay ${isElevated ? "opacity-15" : "opacity-[0.08]"}`}>
+            <div className={`pointer-events-none absolute inset-0 z-0 mix-blend-overlay ${isElevated ? "opacity-15" : "opacity-10"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 h-full w-full">
                     <filter id={noiseFilterId}>
                         <feTurbulence
@@ -93,7 +93,7 @@ export function InteractiveFrostedGlassCard({
                     <div className={iconBgClass}>
                         {icon}
                     </div>
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300 ${isElevated ? "bg-[#0BF1C3]/5 text-[#0BF1C3]/50 group-hover:bg-[#0BF1C3]/20 group-hover:text-[#0BF1C3]" : "bg-white/5 text-white/30 group-hover:bg-white/10 group-hover:text-white/60"}`}>
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300 ${isElevated ? "bg-cyan/5 text-cyan/50 group-hover:bg-cyan/20 group-hover:text-cyan" : "bg-white/5 text-white/30 group-hover:bg-white/10 group-hover:text-white/60"}`}>
                         <MoveUpRight className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </div>
                 </div>

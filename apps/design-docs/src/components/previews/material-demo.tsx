@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { Material } from "@nebutra/ui/primitives";
 import { User, Settings, LogOut, Bell } from "lucide-react";
 

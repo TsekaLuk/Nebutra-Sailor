@@ -9,27 +9,7 @@ import { SelectGroupsDemo } from "@/components/previews/select-groups-demo";
 import { SelectDisabledDemo } from "@/components/previews/select-disabled-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview className="min-h-[300px] flex items-start justify-center pt-8">
-  <SelectDemo />
-
-
-  ```tsx
-<Select>
-    <SelectTrigger className="w-[200px]">
-      <SelectValue placeholder="选择一种水果 (Select a fruit)" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectGroup>
-        <SelectLabel>水果 (Fruits)</SelectLabel>
-        <SelectItem value="apple">苹果 (Apple)</SelectItem>
-        <SelectItem value="banana">香蕉 (Banana)</SelectItem>
-        <SelectItem value="orange">橙子 (Orange)</SelectItem>
-        <SelectItem value="grape">葡萄 (Grape)</SelectItem>
-      </SelectGroup>
-    </SelectContent>
-  </Select>
-  ```
-</ComponentPreview>
+<ComponentPreview name="select-demo" className="min-h-[300px] flex items-start justify-center pt-8" />
 
 ## 使用方法 (Usage)
 
@@ -52,7 +32,7 @@ import {
 
 ### Select (根组件)
 
-继承自 `@radix-ui/react-select` 的 `Root` 属性.
+基于标准的选择器模式构建。
 
 | 属性 | 类型 | 默认值 | 描述 |
 |------|------|---------|-------------|
@@ -106,67 +86,13 @@ import {
 
 ### 受控选择器 (Controlled Select)
 
-<ComponentPreview className="min-h-[300px] flex items-start justify-center pt-8">
-  <SelectDemo />
+<ComponentPreview name="select-demo" className="min-h-[300px] flex items-start justify-center pt-8" />
 
-  ```tsx
-<Select defaultValue="banana">
-  <SelectTrigger className="w-48">
-    <SelectValue />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="apple">苹果 (Apple)</SelectItem>
-    <SelectItem value="banana">香蕉 (Banana)</SelectItem>
-    <SelectItem value="orange">橙子 (Orange)</SelectItem>
-  </SelectContent>
-</Select>
-```
-</ComponentPreview>
-
-<ComponentPreview className="min-h-[350px] flex items-start justify-center pt-8">
-  <SelectGroupsDemo />
-
-  ```tsx
-<Select>
-  <SelectTrigger className="w-56">
-    <SelectValue placeholder="选择时区 (Select timezone)" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectGroup>
-      <SelectLabel>北美 (North America)</SelectLabel>
-      <SelectItem value="est">东部标准时间 (EST)</SelectItem>
-      <SelectItem value="cst">中部标准时间 (CST)</SelectItem>
-      <SelectItem value="pst">太平洋标准时间 (PST)</SelectItem>
-    </SelectGroup>
-    <SelectSeparator />
-    <SelectGroup>
-      <SelectLabel>欧洲 (Europe)</SelectLabel>
-      <SelectItem value="gmt">格林威治标准时间 (GMT)</SelectItem>
-      <SelectItem value="cet">中央欧洲时间 (CET)</SelectItem>
-    </SelectGroup>
-  </SelectContent>
-</Select>
-```
-</ComponentPreview>
+<ComponentPreview name="select-groups-demo" className="min-h-[350px] flex items-start justify-center pt-8" />
 
 ### 禁用条目 (Disabled Items)
 
-<ComponentPreview className="min-h-[250px] flex items-start justify-center pt-8">
-  <SelectDisabledDemo />
-
-  ```tsx
-<Select>
-  <SelectTrigger className="w-48">
-    <SelectValue placeholder="选择计划 (Select plan)" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="free">免费版 (Free)</SelectItem>
-    <SelectItem value="pro">专业版 (Pro)</SelectItem>
-    <SelectItem value="enterprise" disabled>企业版 (Enterprise) - 联系销售</SelectItem>
-  </SelectContent>
-</Select>
-```
-</ComponentPreview>
+<ComponentPreview name="select-disabled-demo" className="min-h-[250px] flex items-start justify-center pt-8" />
 
 ## 可访问性 (Accessibility)
 

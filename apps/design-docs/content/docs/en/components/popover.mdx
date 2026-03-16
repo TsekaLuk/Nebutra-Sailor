@@ -5,39 +5,11 @@ description: "Floating content container anchored to a trigger element, built on
 
 ## Demo
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <BasePopoverDemo />
-
-  ```tsx
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-
-export default function BasePopoverDemo() {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline">Show Popover</Button>
-      </PopoverTrigger>
-      <PopoverContent className="max-w-[300px] text-sm space-y-2" side="top">
-        <p className="font-medium">Premium Plan</p>
-        <p className="text-muted-foreground">
-          Advanced analytics provides deeper insights into your data, including trends, predictions, and detailed user behavior.
-        </p>
-        <p className="flex items-center space-x-1">
-          <Badge variant="destructive" size="sm">Note!</Badge>
-          <span className="text-xs text-muted-foreground">Plan upgrade is required.</span>
-        </p>
-      </PopoverContent>
-    </Popover>
-  )
-}
-  ```
-</ComponentPreview>
+<ComponentPreview name="base-popover-demo" className="min-h-[300px] flex justify-center items-start pt-10" />
 
 ## Usage
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+<ComponentPreview name="popover-demo" className="min-h-[250px] flex justify-center items-start pt-10">
     <Popover>
     <PopoverTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -56,78 +28,11 @@ export default function BasePopoverDemo() {
         </div>
       </div>
     </PopoverContent>
-  </Popover>
-
-  ```tsx
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverAnchor,
-} from "@nebutra/ui/primitives"
-```
-
-## Props
-
-### Popover (Root)
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `open` | `boolean` | — | Controlled open state |
-| `defaultOpen` | `boolean` | `false` | Uncontrolled default open state |
-| `onOpenChange` | `(open: boolean) => void` | — | Callback when open state changes |
-| `modal` | `boolean` | `false` | Whether to use modal behavior |
-
-### PopoverTrigger
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Merge props onto the immediate child element |
-| `children` | `ReactNode` | — | Trigger element |
-
-### PopoverContent
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | Preferred side to open |
-| `sideOffset` | `number` | `4` | Distance from trigger |
-| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment along trigger |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Popover body content |
-
-## Examples
-
-### Settings Popover
-
-```tsx
-import { Settings } from "lucide-react"
-import { Switch, Label } from "@nebutra/ui/primitives"
-
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="ghost" size="icon">
-      <Settings className="h-4 w-4" />
-    </Button>
-  </PopoverTrigger>
-  <PopoverContent side="right" align="start" className="w-64">
-    <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <Label htmlFor="notifications">Notifications</Label>
-        <Switch id="notifications" />
-      </div>
-      <div className="flex items-center justify-between">
-        <Label htmlFor="marketing">Marketing emails</Label>
-        <Switch id="marketing" />
-      </div>
-    </div>
-  </PopoverContent>
-</Popover>
-```
-</ComponentPreview>
+  </Popover />
 
 ### Controlled Popover
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+<ComponentPreview name="popover-2-demo" className="min-h-[250px] flex justify-center items-start pt-10">
     <Popover defaultOpen={true}>
     <PopoverTrigger asChild>
       <Button>Toggle Popover</Button>
@@ -136,20 +41,7 @@ import { Switch, Label } from "@nebutra/ui/primitives"
       <p className="mb-4 text-sm">Controlled popover content</p>
       <Button variant="outline" size="sm">Close</Button>
     </PopoverContent>
-  </Popover>
-
-  ```tsx
-<Popover defaultOpen={true}>
-  <PopoverTrigger asChild>
-    <Button>Toggle Popover</Button>
-  </PopoverTrigger>
-  <PopoverContent>
-    <p className="mb-4 text-sm">Controlled popover content</p>
-    <Button variant="outline" size="sm">Close</Button>
-  </PopoverContent>
-</Popover>
-```
-</ComponentPreview>
+  </Popover />
 
 ## Accessibility
 

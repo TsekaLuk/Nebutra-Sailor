@@ -17,23 +17,13 @@ import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 
 ### Single Date
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-    <DatePicker label="Event date" />
-
-  ```tsx
-<DatePicker label="Event date" />
-```
-</ComponentPreview>
+<ComponentPreview name="date-picker-demo" className="min-h-[250px] flex justify-center items-start pt-8">
+    <DatePicker label="Event date" / />
 
 ### Date Range
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-8">
-    <DateRangePicker label="Trip dates" />
-
-  ```tsx
-<DateRangePicker label="Trip dates" />
-```
-</ComponentPreview>
+<ComponentPreview name="date-picker-2-demo" className="min-h-[250px] flex justify-center items-start pt-8">
+    <DateRangePicker label="Trip dates" / />
 
 ### Controlled
 
@@ -45,29 +35,16 @@ import { DatePicker, DateRangePicker } from "@nebutra/ui/primitives";
 
 ### Variants
 
-<ComponentPreview className="min-h-[250px] flex flex-col items-center justify-start gap-4 pt-8 w-full max-w-sm mx-auto">
+<ComponentPreview name="date-picker-3-demo" className="min-h-[250px] flex flex-col items-center justify-start gap-4 pt-8 w-full max-w-sm mx-auto">
     <DatePicker label="Default" />
   <DatePicker label="Bordered" variant="bordered" />
   <DatePicker label="Underlined" variant="underlined" />
-  <DatePicker label="Faded" variant="faded" />
-
-  ```tsx
-<DatePicker label="Default" />
-<DatePicker label="Bordered" variant="bordered" />
-<DatePicker label="Underlined" variant="underlined" />
-<DatePicker label="Faded" variant="faded" />
-```
-</ComponentPreview>
+  <DatePicker label="Faded" variant="faded" / />
 
 ### Two Visible Months
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-8">
-    <DateRangePicker label="Stay" visibleMonths={2} />
-
-  ```tsx
-<DateRangePicker label="Stay" visibleMonths={2} />
-```
-</ComponentPreview>
+<ComponentPreview name="date-picker-4-demo" className="min-h-[350px] flex justify-center items-start pt-8">
+    <DateRangePicker label="Stay" visibleMonths={2} / />
 
 ## Props
 

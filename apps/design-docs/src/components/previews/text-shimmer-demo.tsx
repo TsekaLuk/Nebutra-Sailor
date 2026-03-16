@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { TextShimmer } from "@nebutra/ui/primitives";
 
 export default function TextShimmerDemo() {

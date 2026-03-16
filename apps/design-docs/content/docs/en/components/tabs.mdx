@@ -10,28 +10,7 @@ import { TabsPillDemo } from "@/components/previews/tabs-pill-demo";
 import { TabsLineDemo } from "@/components/previews/tabs-line-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview className="mt-4">
-  <TabsDemo />
-
-  ```tsx
-<Tabs defaultValue="profile" className="w-[400px]">
-    <TabsList className="grid w-full grid-cols-3">
-      <TabsTrigger value="profile">Profile</TabsTrigger>
-      <TabsTrigger value="security">Security</TabsTrigger>
-      <TabsTrigger value="settings">Settings</TabsTrigger>
-    </TabsList>
-    <TabsContent value="profile" className="p-4 border rounded-md mt-2">
-      <p className="text-sm text-foreground">Manage your profile information.</p>
-    </TabsContent>
-    <TabsContent value="security" className="p-4 border rounded-md mt-2">
-      <p className="text-sm text-foreground">Update your password and 2FA.</p>
-    </TabsContent>
-    <TabsContent value="settings" className="p-4 border rounded-md mt-2">
-      <p className="text-sm text-foreground">Adjust your email preferences.</p>
-    </TabsContent>
-  </Tabs>
-  ```
-</ComponentPreview>
+<ComponentPreview name="tabs-demo" className="mt-4" />
 
 ## Usage
 
@@ -48,7 +27,7 @@ import {
 
 ### Tabs (Root)
 
-Extends `@radix-ui/react-tabs` `Root` props.
+Built on Base UI tabs primitive.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -89,58 +68,15 @@ Extends `@radix-ui/react-tabs` `Root` props.
 
 ### Button Variant
 
-<ComponentPreview className="mt-4">
-  <TabsLineDemo />
-
-  ```tsx
-<Tabs defaultValue="tab1" className="w-[400px]">
-  <TabsList variant="button" className="grid grid-cols-3">
-    <TabsTrigger value="tab1">Overview</TabsTrigger>
-    <TabsTrigger value="tab2">Analytics</TabsTrigger>
-    <TabsTrigger value="tab3">Reports</TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab1" className="p-4 mt-2">Overview content</TabsContent>
-  <TabsContent value="tab2" className="p-4 mt-2">Analytics content</TabsContent>
-  <TabsContent value="tab3" className="p-4 mt-2">Reports content</TabsContent>
-</Tabs>
-```
-</ComponentPreview>
+<ComponentPreview name="tabs-line-demo" className="mt-4" />
 
 ### Line Variant (Underline)
 
-<ComponentPreview className="mt-4">
-  <TabsButtonDemo />
-
-  ```tsx
-<Tabs defaultValue="tab1" className="w-[400px]">
-  <TabsList variant="line" className="w-full">
-    <TabsTrigger value="tab1">All</TabsTrigger>
-    <TabsTrigger value="tab2">Active</TabsTrigger>
-    <TabsTrigger value="tab3">Archived</TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab1" className="p-4 mt-2">All content</TabsContent>
-  <TabsContent value="tab2" className="p-4 mt-2">Active content</TabsContent>
-  <TabsContent value="tab3" className="p-4 mt-2">Archived content</TabsContent>
-</Tabs>
-```
-</ComponentPreview>
+<ComponentPreview name="tabs-button-demo" className="mt-4" />
 
 ### Pill Shape
 
-<ComponentPreview className="mt-4">
-  <TabsPillDemo />
-
-  ```tsx
-<Tabs defaultValue="tab1" className="w-[400px]">
-  <TabsList shape="pill" className="w-full grid-cols-2 grid">
-    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
-    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab1" className="p-4 mt-2">Tab 1 Content</TabsContent>
-  <TabsContent value="tab2" className="p-4 mt-2">Tab 2 Content</TabsContent>
-</Tabs>
-```
-</ComponentPreview>
+<ComponentPreview name="tabs-pill-demo" className="mt-4" />
 
 ### Size Variants
 

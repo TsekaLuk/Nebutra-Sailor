@@ -7,7 +7,7 @@ import React from "react"
 
 ## Demo
 
-<ComponentPreview className="min-h-[350px] flex items-center justify-center">
+<ComponentPreview name="scroll-area-demo" className="min-h-[350px] flex items-center justify-center">
   <ScrollArea className="h-72 w-48 rounded-md border text-left">
     <div className="p-4">
       <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
@@ -18,22 +18,7 @@ import React from "react"
         </React.Fragment>
       ))}
     </div>
-  </ScrollArea>
-
-  ```tsx
-<ScrollArea className="h-72 w-48 rounded-md border text-left">
-    <div className="p-4">
-      <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
-      {Array.from({ length: 50 }, (_, i) => `Tag ${i + 1}`).map((tag, i, tags) => (
-        <React.Fragment key={tag}>
-          <div className="text-sm">{tag}</div>
-          {i < tags.length - 1 && <Separator className="my-2" />}
-        </React.Fragment>
-      ))}
-    </div>
-  </ScrollArea>
-  ```
-</ComponentPreview>
+  </ScrollArea />
 
 ## Usage
 
@@ -63,7 +48,7 @@ import { ScrollArea, ScrollBar } from "@nebutra/ui/primitives"
 
 ### Horizontal Scroll Area
 
-<ComponentPreview className="min-h-[300px] flex items-center justify-center w-full">
+<ComponentPreview name="scroll-area-2-demo" className="min-h-[300px] flex items-center justify-center w-full">
     <ScrollArea className="w-full max-w-[400px] whitespace-nowrap rounded-md border text-left mb-6">
     <div className="flex w-max space-x-4 p-4">
       {Array.from({ length: 10 }, (_, i) => (
@@ -73,25 +58,11 @@ import { ScrollArea, ScrollBar } from "@nebutra/ui/primitives"
       ))}
     </div>
     <ScrollBar orientation="horizontal" />
-  </ScrollArea>
-
-  ```tsx
-<ScrollArea className="w-full max-w-[400px] whitespace-nowrap rounded-md border text-left mb-6">
-  <div className="flex w-max space-x-4 p-4">
-    {Array.from({ length: 10 }, (_, i) => (
-      <figure key={i} className="shrink-0">
-        <div className="h-40 w-40 rounded-md bg-muted flex items-center justify-center text-muted-foreground">Image {i+1}</div>
-      </figure>
-    ))}
-  </div>
-  <ScrollBar orientation="horizontal" />
-</ScrollArea>
-```
-</ComponentPreview>
+  </ScrollArea />
 
 ### Fixed Height Content List
 
-<ComponentPreview className="min-h-[300px] flex items-center justify-center pt-2">
+<ComponentPreview name="scroll-area-3-demo" className="min-h-[300px] flex items-center justify-center pt-2">
     <ScrollArea className="h-[250px] w-[350px] rounded-md border text-left">
     {Array.from({ length: 15 }, (_, i) => (
       <div key={i} className="p-4 border-b last:border-0 border-border/50 hover:bg-muted/50 transition-colors">
@@ -99,19 +70,7 @@ import { ScrollArea, ScrollBar } from "@nebutra/ui/primitives"
         <p className="text-xs text-muted-foreground">{10 * (i+1)} minutes ago</p>
       </div>
     ))}
-  </ScrollArea>
-
-  ```tsx
-<ScrollArea className="h-[250px] w-[350px] rounded-md border text-left">
-  {Array.from({ length: 15 }, (_, i) => (
-    <div key={i} className="p-4 border-b last:border-0 border-border/50 hover:bg-muted/50 transition-colors">
-      <p className="text-sm font-medium mb-1">Notification {i+1}</p>
-      <p className="text-xs text-muted-foreground">{10 * (i+1)} minutes ago</p>
-    </div>
-  ))}
-</ScrollArea>
-```
-</ComponentPreview>
+  </ScrollArea />
 
 ## Accessibility
 

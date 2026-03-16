@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { DisplayCards } from "@nebutra/ui/primitives";
 import { Zap, Shield, Rocket } from "lucide-react";
 

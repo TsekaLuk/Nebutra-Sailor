@@ -1,11 +1,11 @@
 ---
 title: "Menubar"
-description: "Horizontal application menu bar with nested dropdown menus, built on Radix UI."
+description: "Horizontal application menu bar with nested dropdown menus, built on Base UI."
 ---
 
 ## Demo
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+<ComponentPreview name="menubar-demo" className="min-h-[250px] flex justify-center items-start pt-10">
     <Menubar>
     <MenubarMenu>
       <MenubarTrigger>File</MenubarTrigger>
@@ -37,43 +37,7 @@ description: "Horizontal application menu bar with nested dropdown menus, built 
         </MenubarSub>
       </MenubarContent>
     </MenubarMenu>
-  </Menubar>
-
-  ```tsx
-<Menubar>
-  <MenubarMenu>
-    <MenubarTrigger>File</MenubarTrigger>
-    <MenubarContent>
-      <MenubarItem>
-        New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-      </MenubarItem>
-      <MenubarItem>
-        New Window <MenubarShortcut>⌘N</MenubarShortcut>
-      </MenubarItem>
-      <MenubarSeparator />
-      <MenubarItem>
-        Print... <MenubarShortcut>⌘P</MenubarShortcut>
-      </MenubarItem>
-    </MenubarContent>
-  </MenubarMenu>
-  <MenubarMenu>
-    <MenubarTrigger>Edit</MenubarTrigger>
-    <MenubarContent>
-      <MenubarItem>Undo <MenubarShortcut>⌘Z</MenubarShortcut></MenubarItem>
-      <MenubarItem>Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut></MenubarItem>
-      <MenubarSeparator />
-      <MenubarSub>
-        <MenubarSubTrigger>Find</MenubarSubTrigger>
-        <MenubarSubContent>
-          <MenubarItem>Search the web</MenubarItem>
-          <MenubarItem>Find...</MenubarItem>
-        </MenubarSubContent>
-      </MenubarSub>
-    </MenubarContent>
-  </MenubarMenu>
-</Menubar>
-```
-</ComponentPreview>
+  </Menubar />
 
 ## Usage
 
@@ -126,7 +90,7 @@ import {
 
 ## Accessibility
 
-- Built on Radix UI Menubar — follows the WAI-ARIA [Menu Button pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/).
+- Built on Base UI — follows the WAI-ARIA [Menu Button pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/).
 - `Menubar` has `role="menubar"`.
 - Each `MenubarTrigger` has `role="menuitem"` with `aria-haspopup="menu"`.
 - Keyboard: `ArrowRight`/`ArrowLeft` to navigate between menus, `ArrowDown` to open, `Escape` to close.

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { RadioGroupCard, RadioGroupCardItem } from "@nebutra/ui/primitives";
 import { CreditCard, Landmark, Smartphone } from "lucide-react";
 

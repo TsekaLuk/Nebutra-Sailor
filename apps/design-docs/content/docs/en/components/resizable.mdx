@@ -5,7 +5,7 @@ description: "Draggable resize handles for split-pane panel layouts, built on re
 
 ## Demo
 
-<ComponentPreview className="min-h-[350px] flex items-center justify-center p-4">
+<ComponentPreview name="resizable-demo" className="min-h-[350px] flex items-center justify-center p-4">
   <ResizablePanelGroup
     direction="horizontal"
     className="max-w-md rounded-lg border h-40 w-full"
@@ -21,27 +21,7 @@ description: "Draggable resize handles for split-pane panel layouts, built on re
         <span className="font-semibold">Two</span>
       </div>
     </ResizablePanel>
-  </ResizablePanelGroup>
-
-  ```tsx
-<ResizablePanelGroup
-    direction="horizontal"
-    className="max-w-md rounded-lg border h-40 w-full"
-  >
-    <ResizablePanel defaultSize={50}>
-      <div className="flex h-full items-center justify-center p-6 bg-background/50">
-        <span className="font-semibold">One</span>
-      </div>
-    </ResizablePanel>
-    <ResizableHandle withHandle />
-    <ResizablePanel defaultSize={50}>
-      <div className="flex h-full items-center justify-center p-6 bg-background/50">
-        <span className="font-semibold">Two</span>
-      </div>
-    </ResizablePanel>
-  </ResizablePanelGroup>
-  ```
-</ComponentPreview>
+  </ResizablePanelGroup />
 
 ## Usage
 
@@ -87,7 +67,7 @@ import {
 
 ### Three Panel Layout
 
-<ComponentPreview className="min-h-[400px] flex items-center justify-center p-4">
+<ComponentPreview name="resizable-2-demo" className="min-h-[400px] flex items-center justify-center p-4">
     <ResizablePanelGroup direction="horizontal" className="h-[300px] w-full max-w-3xl rounded-lg border">
     <ResizablePanel defaultSize={20} minSize={15}>
       <div className="flex h-full items-center justify-center p-6 bg-muted/20">
@@ -106,30 +86,7 @@ import {
         <span className="font-semibold">Right Panel</span>
       </div>
     </ResizablePanel>
-  </ResizablePanelGroup>
-
-  ```tsx
-<ResizablePanelGroup direction="horizontal" className="h-[300px] w-full max-w-3xl rounded-lg border">
-  <ResizablePanel defaultSize={20} minSize={15}>
-    <div className="flex h-full items-center justify-center p-6 bg-muted/20">
-      <span className="font-semibold">Sidebar</span>
-    </div>
-  </ResizablePanel>
-  <ResizableHandle withHandle />
-  <ResizablePanel defaultSize={60}>
-    <div className="flex h-full items-center justify-center p-6 bg-background">
-      <span className="font-semibold text-lg max-w-[200px] text-center">Main Content Area</span>
-    </div>
-  </ResizablePanel>
-  <ResizableHandle withHandle />
-  <ResizablePanel defaultSize={20} minSize={15}>
-    <div className="flex h-full items-center justify-center p-6 bg-muted/20">
-      <span className="font-semibold">Right Panel</span>
-    </div>
-  </ResizablePanel>
-</ResizablePanelGroup>
-```
-</ComponentPreview>
+  </ResizablePanelGroup />
 
 ## Accessibility
 

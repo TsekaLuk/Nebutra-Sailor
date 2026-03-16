@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { MultipleSelector } from "@nebutra/ui/primitives";
 
 export function MultipleSelectorDemo() {

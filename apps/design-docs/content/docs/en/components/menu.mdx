@@ -17,7 +17,7 @@ Use `DropdownMenu` directly when you need raw building blocks like checkbox item
 
 ## Default Menu
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+<ComponentPreview name="menu-demo" className="min-h-[350px] flex justify-center items-start pt-10">
   <Menu.Root>
     <Menu.Trigger chevron>Account</Menu.Trigger>
     <Menu.Content align="center" className="w-[200px]">
@@ -31,25 +31,7 @@ Use `DropdownMenu` directly when you need raw building blocks like checkbox item
         Log out
       </Menu.Item>
     </Menu.Content>
-  </Menu.Root>
-
-  ```tsx
-<Menu.Root>
-    <Menu.Trigger chevron>Account</Menu.Trigger>
-    <Menu.Content align="center" className="w-[200px]">
-      <Menu.Label>My Account</Menu.Label>
-      <Menu.Separator />
-      <Menu.Item prefix={<User className="h-4 w-4" />}>Profile</Menu.Item>
-      <Menu.Item prefix={<Settings className="h-4 w-4" />} suffix="⌘S">Settings</Menu.Item>
-      <Menu.Item prefix={<Command className="h-4 w-4" />}>Keyboard shortcuts</Menu.Item>
-      <Menu.Separator />
-      <Menu.Item prefix={<LogOut className="h-4 w-4" />} className="text-destructive focus:bg-destructive focus:text-destructive-foreground">
-        Log out
-      </Menu.Item>
-    </Menu.Content>
-  </Menu.Root>
-  ```
-</ComponentPreview>
+  </Menu.Root />
 
 ```tsx
 <Menu.Root>
@@ -74,7 +56,7 @@ Use `DropdownMenu` directly when you need raw building blocks like checkbox item
 
 Locked items are permission-gated — visible but non-interactive, automatically rendering a lock icon. Semantically distinct from `disabled`.
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="menu-2-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Menu.Root>
     <Menu.Trigger chevron>Workspace</Menu.Trigger>
     <Menu.Content align="center" className="w-[220px]">
@@ -85,22 +67,7 @@ Locked items are permission-gated — visible but non-interactive, automatically
       <Menu.Item locked>Billing & Plans</Menu.Item>
       <Menu.Item locked>Security Logs</Menu.Item>
     </Menu.Content>
-  </Menu.Root>
-
-  ```tsx
-<Menu.Root>
-    <Menu.Trigger chevron>Workspace</Menu.Trigger>
-    <Menu.Content align="center" className="w-[220px]">
-      <Menu.Item>General</Menu.Item>
-      <Menu.Item>Members</Menu.Item>
-      <Menu.Separator />
-      <Menu.Label>Admin Settings</Menu.Label>
-      <Menu.Item locked>Billing & Plans</Menu.Item>
-      <Menu.Item locked>Security Logs</Menu.Item>
-    </Menu.Content>
-  </Menu.Root>
-  ```
-</ComponentPreview>
+  </Menu.Root />
 
 ```tsx
 <Menu.Item locked>Billing & Plans</Menu.Item>
@@ -109,7 +76,7 @@ Locked items are permission-gated — visible but non-interactive, automatically
 
 ### Disabled Items
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-start pt-10">
+<ComponentPreview name="menu-3-demo" className="min-h-[250px] flex justify-center items-start pt-10">
   <Menu.Root>
     <Menu.Trigger chevron>Actions</Menu.Trigger>
     <Menu.Content align="center" className="w-[180px]">
@@ -117,19 +84,7 @@ Locked items are permission-gated — visible but non-interactive, automatically
       <Menu.Item disabled>Rename...</Menu.Item>
       <Menu.Item disabled>Delete</Menu.Item>
     </Menu.Content>
-  </Menu.Root>
-
-  ```tsx
-<Menu.Root>
-    <Menu.Trigger chevron>Actions</Menu.Trigger>
-    <Menu.Content align="center" className="w-[180px]">
-      <Menu.Item>Duplicate</Menu.Item>
-      <Menu.Item disabled>Rename...</Menu.Item>
-      <Menu.Item disabled>Delete</Menu.Item>
-    </Menu.Content>
-  </Menu.Root>
-  ```
-</ComponentPreview>
+  </Menu.Root />
 
 ```tsx
 <Menu.Item disabled>Rename...</Menu.Item>
@@ -139,7 +94,7 @@ Locked items are permission-gated — visible but non-interactive, automatically
 
 Automatically renders the item as an `<a>` tag when the `href` prop is provided. Keyboard and mouse navigation is preserved via Radix `asChild`.
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-start pt-10">
+<ComponentPreview name="menu-4-demo" className="min-h-[200px] flex justify-center items-start pt-10">
   <Menu.Root>
     <Menu.Trigger chevron>External Links</Menu.Trigger>
     <Menu.Content align="center" className="w-[180px]">
@@ -150,28 +105,13 @@ Automatically renders the item as an `<a>` tag when the `href` prop is provided.
         Documentation
       </Menu.Item>
     </Menu.Content>
-  </Menu.Root>
-
-  ```tsx
-<Menu.Root>
-    <Menu.Trigger chevron>External Links</Menu.Trigger>
-    <Menu.Content align="center" className="w-[180px]">
-      <Menu.Item href="https://github.com/cloud-orion" suffix={<ChevronRight className="h-4 w-4" />}>
-        GitHub Repo
-      </Menu.Item>
-      <Menu.Item href="https://nebutra.dev" suffix={<ChevronRight className="h-4 w-4" />}>
-        Documentation
-      </Menu.Item>
-    </Menu.Content>
-  </Menu.Root>
-  ```
-</ComponentPreview>
+  </Menu.Root />
 
 ## Custom Trigger
 
 You can completely replace the `Menu.Trigger` appearance by overriding classes or using other elements via `asChild` (if you use the raw `DropdownMenu` primitives). With `<Menu.Trigger>`, you can pass custom children.
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-start pt-10">
+<ComponentPreview name="menu-5-demo" className="min-h-[200px] flex justify-center items-start pt-10">
   <Menu.Root>
     <Menu.Trigger className="h-10 w-10 shrink-0 select-none rounded-[var(--radius-full)] bg-[var(--neutral-4)] p-0 text-[var(--neutral-12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-9)] focus-visible:ring-offset-2 flex items-center justify-center">
       <User className="h-5 w-5" />
@@ -180,20 +120,7 @@ You can completely replace the `Menu.Trigger` appearance by overriding classes o
       <Menu.Item>Profile</Menu.Item>
       <Menu.Item>Preferences</Menu.Item>
     </Menu.Content>
-  </Menu.Root>
-
-  ```tsx
-<Menu.Root>
-    <Menu.Trigger className="h-10 w-10 shrink-0 select-none rounded-[var(--radius-full)] bg-[var(--neutral-4)] p-0 text-[var(--neutral-12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-9)] focus-visible:ring-offset-2 flex items-center justify-center">
-      <User className="h-5 w-5" />
-    </Menu.Trigger>
-    <Menu.Content align="end" className="w-[200px]">
-      <Menu.Item>Profile</Menu.Item>
-      <Menu.Item>Preferences</Menu.Item>
-    </Menu.Content>
-  </Menu.Root>
-  ```
-</ComponentPreview>
+  </Menu.Root />
 
 ## Props
 

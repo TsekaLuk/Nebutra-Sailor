@@ -5,20 +5,16 @@ description: "使用复合组件模式的内容容器。包含五种视觉变体
 
 ## 使用方法 (Usage)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="card-demo" className="max-w-[400px]">
     <NebutraCard variant="bordered" padding="md">
-    <CardHeader>
-      <CardIcon size="md"><span>⚡️</span></CardIcon>
-      <CardTitle>快速部署 (Fast Deployments)</CardTitle>
-    </CardHeader>
-    <CardBody>
-      <CardDescription>几秒钟内即可部署到生产环境，零停机时间。 (Deploy to production in seconds with zero downtime.)</CardDescription>
-    </CardBody>
-  </NebutraCard>
-
-  ```tsx
-import { Card } from "@nebutra/ui/patterns"
-```
+      <CardHeader>
+        <CardIcon size="md"><span>⚡️</span></CardIcon>
+        <CardTitle>快速部署 (Fast Deployments)</CardTitle>
+      </CardHeader>
+      <CardBody>
+        <CardDescription>几秒钟内即可部署到生产环境，零停机时间。 (Deploy to production in seconds with zero downtime.)</CardDescription>
+      </CardBody>
+    </NebutraCard>
 </ComponentPreview>
 
 Card 组件使用了 **复合组件 (Compound Component)** API — 可以通过 `Card.Header`、`Card.Body` 等方式访问子组件。
@@ -27,8 +23,7 @@ Card 组件使用了 **复合组件 (Compound Component)** API — 可以通过 
 
 ### 基础用法 (Basic)
 
-```tsx
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="card-2-demo" className="max-w-[400px]">
   <NebutraCard variant="default" padding="md">
     <CardHeader>
       <CardTitle>创建项目 (Create project)</CardTitle>
@@ -42,7 +37,6 @@ Card 组件使用了 **复合组件 (Compound Component)** API — 可以通过 
     </CardFooter>
   </NebutraCard>
 </ComponentPreview>
-```
 
 ### 所有变体 (All Variants)
 
@@ -97,34 +91,19 @@ import { Zap } from "lucide-react"
 
 ### 渐变特色卡片 (Gradient Featured Card)
 
-<ComponentPreview className="max-w-[400px]">
+<ComponentPreview name="card-gradient-demo" className="max-w-[400px]">
     <NebutraCard variant="gradient" padding="lg">
-    <CardHeader>
-      <CardTitle>专业版方案 (Pro Plan)</CardTitle>
-      <CardDescription as="div">助您更快交付所需的一切。 (Everything you need to ship faster.)</CardDescription>
-    </CardHeader>
-    <CardBody>
-      <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/月 (mo)</span></p>
-    </CardBody>
-    <CardFooter>
-      <Button className="w-full">立即开始 (Get started)</Button>
-    </CardFooter>
-  </NebutraCard>
-
-  ```tsx
-<Card variant="gradient" padding="lg">
-  <CardHeader>
-    <CardTitle>专业版方案 (Pro Plan)</CardTitle>
-    <CardDescription>助您更快交付所需的一切。 (Everything you need to ship faster.)</CardDescription>
-  </CardHeader>
-  <CardBody>
-    <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/月 (mo)</span></p>
-  </CardBody>
-  <CardFooter>
-    <Button className="w-full">立即开始 (Get started)</Button>
-  </CardFooter>
-</Card>
-```
+      <CardHeader>
+        <CardTitle>专业版方案 (Pro Plan)</CardTitle>
+        <CardDescription as="div">助您更快交付所需的一切。 (Everything you need to ship faster.)</CardDescription>
+      </CardHeader>
+      <CardBody>
+        <p className="text-3xl font-bold">$49<span className="text-base font-normal text-muted-foreground">/月 (mo)</span></p>
+      </CardBody>
+      <CardFooter>
+        <Button className="w-full">立即开始 (Get started)</Button>
+      </CardFooter>
+    </NebutraCard>
 </ComponentPreview>
 
 ## 属性 (Props)

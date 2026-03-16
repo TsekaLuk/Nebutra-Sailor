@@ -4,37 +4,7 @@ description: "可搜索的选择输入组件，结合了触发按钮和经过过
 ---
 
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
-  <ComboboxDemo />
-
-  ```tsx title="combobox-demo.tsx"
-"use client";
-
-import { useState } from "react";
-import { Combobox } from "@nebutra/ui/primitives";
-
-const frameworks = [
-  { value: "next", label: "Next.js" },
-  { value: "remix", label: "Remix" },
-  { value: "astro", label: "Astro" },
-  { value: "nuxt", label: "Nuxt" },
-];
-
-export function ComboboxDemo() {
-  const [value, setValue] = useState("");
-
-  return (
-    <Combobox
-      options={frameworks}
-      value={value}
-      onChange={setValue}
-      placeholder="Select framework..."
-    />
-  );
-}
-
-```
-</ComponentPreview>
+<ComponentPreview name="combobox-demo" className="min-h-[300px] flex justify-center items-start pt-10" />
 
 ## 概览 (Overview)
 
@@ -45,7 +15,7 @@ export function ComboboxDemo() {
 
 ## 安装 (Installation)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -54,24 +24,11 @@ export function ComboboxDemo() {
       { value: "nuxt", label: "Nuxt" },
     ]}
     placeholder="选择框架... (Select framework...)"
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  placeholder="选择框架... (Select framework...)"
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### 带有标签 (With label)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-2-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -81,27 +38,13 @@ export function ComboboxDemo() {
     ]}
     label="框架 (Framework)"
     placeholder="选择框架..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  label="框架 (Framework)"
-  placeholder="选择框架..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ## 使用方法 (Usage)
 
 ### 简单模式 (使用 options 属性)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-3-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -110,24 +53,11 @@ export function ComboboxDemo() {
       { value: "nuxt", label: "Nuxt" },
     ]}
     placeholder="选择框架... (Select framework...)"
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  placeholder="选择框架... (Select framework...)"
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### 带有标签 (With label)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-4-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -137,25 +67,11 @@ export function ComboboxDemo() {
     ]}
     label="框架 (Framework)"
     placeholder="选择框架..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  label="框架 (Framework)"
-  placeholder="选择框架..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### 非受控 (Uncontrolled)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-5-demo" className="min-h-[350px] flex justify-center items-start pt-10">
   <Combobox placeholder="选择框架...">
     <Combobox.Input placeholder="搜索框架... (Search frameworks...)" />
     <CommandList>
@@ -169,29 +85,11 @@ export function ComboboxDemo() {
         <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
       </Combobox.Group>
     </CommandList>
-  </Combobox>
-
-  ```tsx
-<Combobox placeholder="选择框架...">
-  <Combobox.Input placeholder="搜索框架... (Search frameworks...)" />
-  <CommandList>
-    <Combobox.Empty>未找到相关框架。 (No frameworks found.)</Combobox.Empty>
-    <Combobox.Group heading="React">
-      <Combobox.Option value="next">Next.js</Combobox.Option>
-      <Combobox.Option value="remix">Remix</Combobox.Option>
-    </Combobox.Group>
-    <Combobox.Separator />
-    <Combobox.Group heading="Vue">
-      <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
-    </Combobox.Group>
-  </CommandList>
-</Combobox>
-  ```
-</ComponentPreview>
+  </Combobox />
 
 ### 禁用状态 (Disabled)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-6-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -202,26 +100,11 @@ export function ComboboxDemo() {
     defaultValue="remix"
     disabled
     placeholder="选择框架..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  defaultValue="remix"
-  disabled
-  placeholder="选择框架..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### 错误状态 (Error state)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-7-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -231,41 +114,18 @@ export function ComboboxDemo() {
     ]}
     error
     placeholder="选择框架..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  error
-  placeholder="选择框架..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### 尺寸 (Sizes)
 
-<ComponentPreview className="min-h-[300px] flex flex-col gap-4 justify-center items-center">
+<ComponentPreview name="combobox-8-demo" className="min-h-[300px] flex flex-col gap-4 justify-center items-center">
   <Combobox options={[{ value: "1", label: "选项 1" }]} size="sm" placeholder="小尺寸 (Small)" />
   <Combobox options={[{ value: "1", label: "选项 1" }]} size="default" placeholder="默认 (Default)" />
-  <Combobox options={[{ value: "1", label: "选项 1" }]} size="lg" placeholder="大尺寸 (Large)" />
-
-  ```tsx
-<div className="flex flex-col gap-4 justify-center items-center">
-  <Combobox options={[{ value: "1", label: "选项 1" }]} size="sm" placeholder="小尺寸 (Small)" />
-  <Combobox options={[{ value: "1", label: "选项 1" }]} size="default" placeholder="默认 (Default)" />
-  <Combobox options={[{ value: "1", label: "选项 1" }]} size="lg" placeholder="大尺寸 (Large)" />
-</div>
-  ```
-</ComponentPreview>
+  <Combobox options={[{ value: "1", label: "选项 1" }]} size="lg" placeholder="大尺寸 (Large)" / />
 
 ### 分组选项 (Grouped options)
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-9-demo" className="min-h-[350px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js", group: "React" },
@@ -275,25 +135,11 @@ export function ComboboxDemo() {
     ]}
     label="框架 (Framework)"
     placeholder="选择框架..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js", group: "React" },
-    { value: "remix", label: "Remix", group: "React" },
-    { value: "nuxt", label: "Nuxt", group: "Vue" },
-    { value: "svelte", label: "SvelteKit", group: "Svelte" },
-  ]}
-  label="框架 (Framework)"
-  placeholder="选择框架..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### 自定义宽度 (Custom width)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-10-demo" className="min-h-[300px] flex justify-center items-start pt-10">
   <Combobox
     options={[
       { value: "next", label: "Next.js" },
@@ -303,27 +149,13 @@ export function ComboboxDemo() {
     ]}
     width="w-96"
     placeholder="选择框架..."
-  />
-
-  ```tsx
-<Combobox
-  options={[
-    { value: "next", label: "Next.js" },
-    { value: "remix", label: "Remix" },
-    { value: "astro", label: "Astro" },
-    { value: "nuxt", label: "Nuxt" },
-  ]}
-  width="w-96"
-  placeholder="选择框架..."
-/>
-  ```
-</ComponentPreview>
+  / />
 
 ### 复合模式 (Composition mode)
 
 对于高级场景（异步搜索、自定义渲染、分隔符），请使用子组件作为 children。
 
-<ComponentPreview className="min-h-[350px] flex justify-center items-start pt-10">
+<ComponentPreview name="combobox-11-demo" className="min-h-[350px] flex justify-center items-start pt-10">
   <Combobox placeholder="选择框架...">
     <Combobox.Input placeholder="搜索框架... (Search frameworks...)" />
     <CommandList>
@@ -337,25 +169,7 @@ export function ComboboxDemo() {
         <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
       </Combobox.Group>
     </CommandList>
-  </Combobox>
-
-  ```tsx
-<Combobox placeholder="选择框架...">
-  <Combobox.Input placeholder="搜索框架... (Search frameworks...)" />
-  <CommandList>
-    <Combobox.Empty>未找到相关框架。 (No frameworks found.)</Combobox.Empty>
-    <Combobox.Group heading="React">
-      <Combobox.Option value="next">Next.js</Combobox.Option>
-      <Combobox.Option value="remix">Remix</Combobox.Option>
-    </Combobox.Group>
-    <Combobox.Separator />
-    <Combobox.Group heading="Vue">
-      <Combobox.Option value="nuxt">Nuxt</Combobox.Option>
-    </Combobox.Group>
-  </CommandList>
-</Combobox>
-  ```
-</ComponentPreview>
+  </Combobox />
 
 ## 属性 (Props)
 

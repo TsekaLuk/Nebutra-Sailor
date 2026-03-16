@@ -5,7 +5,7 @@ description: "锚定在视口边缘的滑入式面板覆盖层，基于 Vaul 构
 
 ## 演示 (Demo)
 
-<ComponentPreview className="min-h-[300px] flex justify-center items-center">
+<ComponentPreview name="drawer-demo" className="min-h-[300px] flex justify-center items-center">
   <Drawer>
     <DrawerTrigger asChild>
       <Button variant="outline">打开抽屉 (Open Drawer)</Button>
@@ -27,33 +27,7 @@ description: "锚定在视口边缘的滑入式面板覆盖层，基于 Vaul 构
         </DrawerClose>
       </DrawerFooter>
     </DrawerContent>
-  </Drawer>
-
-  ```tsx
-<Drawer>
-    <DrawerTrigger asChild>
-      <Button variant="outline">打开抽屉 (Open Drawer)</Button>
-    </DrawerTrigger>
-    <DrawerContent>
-      <DrawerHeader>
-        <DrawerTitle>编辑资料 (Edit Profile)</DrawerTitle>
-        <DrawerDescription>
-          在此处修改您的资料详细信息。 (Make changes to your profile here.)
-        </DrawerDescription>
-      </DrawerHeader>
-      <div className="px-4 py-2">
-        <p className="text-sm text-muted-foreground">抽屉主体内容。 (Drawer body content.)</p>
-      </div>
-      <DrawerFooter>
-        <Button>保存更改 (Save changes)</Button>
-        <DrawerClose asChild>
-          <Button variant="outline">取消 (Cancel)</Button>
-        </DrawerClose>
-      </DrawerFooter>
-    </DrawerContent>
-  </Drawer>
-  ```
-</ComponentPreview>
+  </Drawer />
 
 ## 使用方法 (Usage)
 
@@ -94,7 +68,7 @@ import {
 
 ### 受控抽屉 (Controlled Drawer)
 
-<ComponentPreview className="min-h-[200px] flex justify-center items-center">
+<ComponentPreview name="drawer-2-demo" className="min-h-[200px] flex justify-center items-center">
     <Drawer>
     <DrawerTrigger asChild>
       <Button>打开设置 (Open Settings)</Button>
@@ -109,30 +83,11 @@ import {
         </DrawerClose>
       </DrawerFooter>
     </DrawerContent>
-  </Drawer>
-
-  ```tsx
-<Drawer>
-  <DrawerTrigger asChild>
-    <Button>打开设置 (Open Settings)</Button>
-  </DrawerTrigger>
-  <DrawerContent className="p-4">
-    <DrawerHeader>
-      <DrawerTitle>设置 (Settings)</DrawerTitle>
-    </DrawerHeader>
-    <DrawerFooter>
-      <DrawerClose asChild>
-        <Button variant="outline">关闭 (Close)</Button>
-      </DrawerClose>
-    </DrawerFooter>
-  </DrawerContent>
-</Drawer>
-```
-</ComponentPreview>
+  </Drawer />
 
 ### 右侧抽屉 (Right-Side Drawer)
 
-<ComponentPreview className="min-h-[250px] flex justify-center items-center">
+<ComponentPreview name="drawer-3-demo" className="min-h-[250px] flex justify-center items-center">
     <Drawer direction="right">
     <DrawerTrigger asChild>
       <Button>打开侧边栏 (Open Sidebar)</Button>
@@ -142,21 +97,7 @@ import {
         <DrawerTitle>导航 (Navigation)</DrawerTitle>
       </DrawerHeader>
     </DrawerContent>
-  </Drawer>
-
-  ```tsx
-<Drawer direction="right">
-  <DrawerTrigger asChild>
-    <Button>打开侧边栏 (Open Sidebar)</Button>
-  </DrawerTrigger>
-  <DrawerContent className="w-80 h-full p-4 mt-0 ml-auto mr-0 mb-0">
-    <DrawerHeader>
-      <DrawerTitle>导航 (Navigation)</DrawerTitle>
-    </DrawerHeader>
-  </DrawerContent>
-</Drawer>
-```
-</ComponentPreview>
+  </Drawer />
 
 ## 可访问性 (Accessibility)
 

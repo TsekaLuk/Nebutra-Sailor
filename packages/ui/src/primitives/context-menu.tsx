@@ -88,7 +88,7 @@ export const ContextMenuContent = React.forwardRef<
       <BaseContextMenu.Popup
         ref={ref}
         className={cn(
-          "z-50 min-w-[10rem] overflow-hidden rounded-xl border bg-background/90 backdrop-blur-md",
+          "z-50 min-w-40 overflow-hidden rounded-xl border bg-background/90 backdrop-blur-md",
           "p-1 text-popover-foreground shadow-xl transition-all outline-none",
           "data-[starting-style]:zoom-out-95 data-[ending-style]:zoom-out-95",
           "data-[starting-style]:fade-out-0 data-[ending-style]:fade-out-0",

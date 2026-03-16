@@ -14,69 +14,27 @@ import { InputClearableDemo } from "@/components/previews/input-clearable-demo";
 import { InputPasswordRevealDemo } from "@/components/previews/input-password-reveal-demo";
 import { ComponentPreview } from "@/components/component-preview";
 
-<ComponentPreview className="max-w-[350px]">
+<ComponentPreview name="input-with-icon-demo" className="max-w-[350px]">
   <InputBasicDemo />
 </ComponentPreview>
 
 ## 使用方法 (Usage)
 
-<ComponentPreview className="max-w-[350px] flex-col gap-4">
-  <InputWithIconDemo />
-
-  ```tsx
-import { Input } from "@nebutra/ui"
-  ```
-</ComponentPreview>
+<ComponentPreview name="input-installation-demo" className="max-w-[350px] flex-col gap-4" />
 
 ## 示例 (Examples)
 
 ### 基础用法 (Basic)
 
-<ComponentPreview className="max-w-[350px]">
-  <InputDemo />
-
-  ```tsx
-<Input placeholder="输入内容… (Enter value…)" />
-  ```
-</ComponentPreview>
+<ComponentPreview name="input-demo" className="max-w-[350px]" />
 
 ### 带有标签 (With Label)
 
-<ComponentPreview className="max-w-[350px]">
-  <InputWithLabelDemo />
-
-  ```tsx
-<div className="flex flex-col gap-1.5 w-full">
-  <Label htmlFor="email">
-    电子邮箱地址 (Email address)
-  </Label>
-  <Input id="email" type="email" placeholder="contact@nebutra.com" />
-</div>
-  ```
-</ComponentPreview>
+<ComponentPreview name="input-with-label-demo" className="max-w-[350px]" />
 
 ### 错误状态 (With Error State)
 
-<ComponentPreview className="max-w-[350px]">
-  <InputErrorDemo />
-
-  ```tsx
-<div className="flex flex-col gap-1.5 w-full">
-  <Label htmlFor="email-err">电子邮箱地址 (Email address)</Label>
-  <Input
-    id="email-err"
-    type="email"
-    defaultValue="not-an-email"
-    className="border-destructive focus-visible:ring-destructive"
-    aria-invalid="true"
-    aria-describedby="email-error"
-  />
-  <p id="email-error" className="text-xs text-destructive">
-    请输入有效的电子邮箱地址。 (Please enter a valid email address.)
-  </p>
-</div>
-  ```
-</ComponentPreview>
+<ComponentPreview name="input-error-demo" className="max-w-[350px]" />
 
 ---
 
@@ -84,19 +42,7 @@ import { Input } from "@nebutra/ui"
 
 使用 `prefix` 属性在输入框左侧边缘渲染一个不可交互的图标或节点。点击前缀区域将穿透到输入框（输入框会获得焦点）。
 
-<ComponentPreview className="max-w-[350px] flex-col gap-4">
-  <InputWithIconDemo />
-
-  ```tsx
-import { Search, Mail } from "lucide-react"
-
-{/* Search icon */}
-<Input prefix={<span className="text-xs">🔍</span>} placeholder="搜索… (Search…)" />
-
-{/* Mail icon */}
-<Input prefix={<span className="text-xs">✉️</span>} type="email" placeholder="contact@nebutra.com" />
-  ```
-</ComponentPreview>
+<ComponentPreview name="input-with-icon-demo" className="max-w-[350px] flex-col gap-4" />
 
 ---
 
@@ -110,22 +56,7 @@ import { Search, Mail } from "lucide-react"
   请参阅下面的 [密码显示](#password-reveal) 示例。
 </Warning>
 
-<ComponentPreview className="max-w-[350px] flex-col gap-4">
-  <InputWithAddonsDemo />
-
-  ```tsx
-{/* Domain hint */}
-<Input suffix={<span className="text-xs">@nebutra.com</span>} placeholder="用户名 (username)" />
-
-{/* Currency */}
-<Input
-  prefix={<span className="text-xs">$</span>}
-  suffix={<span className="text-xs font-medium border-l pl-2">USD</span>}
-  type="number"
-  placeholder="0.00"
-/>
-```
-</ComponentPreview>
+<ComponentPreview name="input-with-addons-demo" className="max-w-[350px] flex-col gap-4" />
 
 ---
 
@@ -135,48 +66,22 @@ import { Search, Mail } from "lucide-react"
 
 ### 非受控用法 (Uncontrolled)
 
-<ComponentPreview className="max-w-[350px]">
-  <InputClearableDemo />
-
-  ```tsx
-<Input clearable defaultValue="contact@nebutra.com" placeholder="输入内容以查看 × 按钮… (Type to see the × button…)" />
-```
-</ComponentPreview>
+<ComponentPreview name="input-clearable-demo" className="max-w-[350px]" />
 
 ### 受控用法 (Controlled)
 
-<ComponentPreview className="max-w-[350px]">
+<ComponentPreview name="input-demo" className="max-w-[350px]">
   <Input clearable defaultValue="contact@nebutra.com" placeholder="受控的可清除输入框… (Controlled clearable…)" />
-
-  ```tsx
-const [value, setValue] = useState("")
-
-<Input
-  value={value}
-  onChange={(e) => setValue(e.target.value)}
-  clearable
-  onClear={() => setValue("")}
-  placeholder="受控的可清除输入框… (Controlled clearable…)"
-/>
-  ```
 </ComponentPreview>
 
 ### 带有前缀 (With Prefix)
 
-<ComponentPreview className="max-w-[350px]">
+<ComponentPreview name="input-2-demo" className="max-w-[350px]">
   <Input
     prefix={<Search className="h-4 w-4" />}
     clearable
     placeholder="搜索… (Search…)"
   />
-
-  ```tsx
-<Input
-  prefix={<Search className="h-4 w-4" />}
-  clearable
-  placeholder="搜索… (Search…)"
-/>
-  ```
 </ComponentPreview>
 
 <Callout>
@@ -190,28 +95,7 @@ const [value, setValue] = useState("")
 
 对于具有交互的右侧控件，请使用 `className="pr-9"` 并绝对定位 (`absolute`) 配置该按钮：
 
-<ComponentPreview className="max-w-[350px]">
-  <InputPasswordRevealDemo />
-
-  ```tsx
-const [shown, setShown] = useState(false)
-const Icon = shown ? EyeOff : Eye
-
-<div className="relative">
-  <Input type={shown ? "text" : "password"} className="pr-9" placeholder="密码… (Password…)" />
-  <button
-    type="button"
-    aria-label={shown ? "隐藏密码 (Hide password)" : "显示密码 (Show password)"}
-    onClick={() => setShown((v) => !v)}
-    className="absolute right-2 top-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center
-               rounded text-muted-foreground hover:text-foreground transition-colors
-               focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-  >
-    <Icon className="h-3.5 w-3.5" />
-  </button>
-</div>
-  ```
-</ComponentPreview>
+<ComponentPreview name="input-password-reveal-demo" className="max-w-[350px]" />
 
 ---
 

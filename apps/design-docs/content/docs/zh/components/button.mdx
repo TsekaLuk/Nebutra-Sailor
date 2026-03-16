@@ -3,26 +3,22 @@ title: 按钮 (Button)
 description: 提供八种视觉变体、五种尺寸选项和图标插槽的交互式点击目标组件。
 ---
 
-<ComponentPreview>
+<ComponentPreview name="button-demo" >
   <ButtonDemo />
 </ComponentPreview>
 
 ## 安装 (Installation)
 
-<ComponentPreview className="gap-3">
+<ComponentPreview name="button-installation-demo" className="gap-3">
     {/* 注意：在 MDX 中，您无法直接内联引入 Lucide 图标。
       如需查看确切的图标使用方法，请参考实际的 React 代码。 */}
   <Button prefix={<span>✉️</span>}>使用邮箱登录</Button>
   <Button suffix={<span>➔</span>}>继续</Button>
-
-  ```tsx
-import { Button, ButtonLink } from "@nebutra/ui/primitives"
-  ```
 </ComponentPreview>
 
 ## 变体 (Variants)
 
-<ComponentPreview className="gap-3">
+<ComponentPreview name="button-2-demo" className="gap-3">
   <Button variant="default">默认 (Default)</Button>
   <Button variant="outline">轮廓 (Outline)</Button>
   <Button variant="secondary">次要 (Secondary)</Button>
@@ -30,60 +26,28 @@ import { Button, ButtonLink } from "@nebutra/ui/primitives"
   <Button variant="destructive">删除 (Delete)</Button>
   <Button variant="warning">警告 (Warning)</Button>
   <Button variant="link">了解更多 (Learn more)</Button>
-
-  ```tsx
-<div className="flex gap-3">
-  <Button variant="default">默认 (Default)</Button>
-  <Button variant="outline">轮廓 (Outline)</Button>
-  <Button variant="secondary">次要 (Secondary)</Button>
-  <Button variant="ghost">幽灵 (Ghost)</Button>
-  <Button variant="destructive">删除 (Delete)</Button>
-  <Button variant="warning">警告 (Warning)</Button>
-  <Button variant="link">了解更多 (Learn more)</Button>
-</div>
-  ```
 </ComponentPreview>
 
 ## 尺寸 (Sizes)
 
-<ComponentPreview className="gap-3 items-center">
+<ComponentPreview name="button-3-demo" className="gap-3 items-center">
   <Button size="tiny">极小 (Tiny)</Button>
   <Button size="sm">小 (Small)</Button>
   <Button size="default">默认 (Default)</Button>
   <Button size="lg">大 (Large)</Button>
-
-  ```tsx
-<div className="flex gap-3 items-center">
-  <Button size="tiny">极小 (Tiny)</Button>
-  <Button size="sm">小 (Small)</Button>
-  <Button size="default">默认 (Default)</Button>
-  <Button size="lg">大 (Large)</Button>
-</div>
-  ```
 </ComponentPreview>
 
 ## 带图标 (With Icons)
 
-<ComponentPreview className="gap-3 pt-6">
+<ComponentPreview name="button-4-demo" className="gap-3 pt-6">
   <Button prefix={<span>✉️</span>}>使用邮箱登录</Button>
   <Button suffix={<span>➔</span>}>继续</Button>
-
-  ```tsx
-import { Mail, ArrowRight } from "lucide-react"
-
-<Button prefix={<span>✉️</span>}>使用邮箱登录</Button>
-<Button suffix={<span>➔</span>}>继续</Button>
-  ```
 </ComponentPreview>
 
 ## 加载状态 (Loading State)
 
-<ComponentPreview>
+<ComponentPreview name="button-5-demo" >
   <Button loading>保存中…</Button>
-
-  ```tsx
-<Button loading>保存中…</Button>
-  ```
 </ComponentPreview>
 
 ## 属性 (Props)

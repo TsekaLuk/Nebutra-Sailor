@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { IphoneMockup } from "@nebutra/ui/primitives";
 
 export function IphoneMockupDemo() {

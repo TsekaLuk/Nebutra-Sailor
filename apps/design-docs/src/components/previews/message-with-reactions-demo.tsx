@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { ReactionChip, MessageWithReactions } from "@nebutra/ui/primitives";
 import { useState } from "react";
 

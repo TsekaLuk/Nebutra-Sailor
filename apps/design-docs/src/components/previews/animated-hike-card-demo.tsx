@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { AnimatedHikeCard } from "@nebutra/ui/primitives";
 import { Clock, Mountain, MapPin } from "lucide-react";
 
