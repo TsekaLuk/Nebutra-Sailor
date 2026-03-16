@@ -37,7 +37,8 @@ function generateApiKey(): { plaintext: string; prefix: string; hash: string } {
   return { plaintext, prefix, hash };
 }
 
-export const provisionTenant = inngest.createFunction(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const provisionTenant: any = inngest.createFunction(
   {
     id: "provision-tenant",
     name: "Provision New Tenant Organization",
@@ -46,12 +47,8 @@ export const provisionTenant = inngest.createFunction(
   },
   { event: "clerk/organization.created" },
   async ({ event, step }) => {
-    const data = event.data as {
-      organizationId: string;
-      name: string;
-      slug?: string;
-      createdById?: string;
-    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data = event.data as any;
     const organizationId = data.organizationId;
     const organizationName = data.name;
 
@@ -197,7 +194,7 @@ export const provisionTenant = inngest.createFunction(
     });
 
     // ── Step 4: Emit provisioned event ────────────────────────────────────
-    await step.sendEvent("emit-tenant-provisioned", {
+    const payload = {
       name: "nebutra/tenant.provisioned",
       data: {
         organizationId: org.id,
@@ -209,7 +206,9 @@ export const provisionTenant = inngest.createFunction(
         ...(keyPlaintext ? { initialApiKey: keyPlaintext } : {}),
         provisionedAt: new Date().toISOString(),
       },
-    });
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await step.sendEvent("emit-tenant-provisioned", payload as any);
 
     logger.info("Tenant provisioning completed", {
       organizationId: org.id,

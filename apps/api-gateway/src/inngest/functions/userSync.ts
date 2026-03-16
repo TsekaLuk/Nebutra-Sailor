@@ -11,7 +11,8 @@ const userRepo = new UserRepository(prisma);
  * event.data is fully typed via the EventSchemas in client.ts —
  * no manual assertion needed.
  */
-export const syncUserToDB = inngest.createFunction(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const syncUserToDB: any = inngest.createFunction(
   {
     id: "sync-user-to-db",
     name: "Sync Clerk User to Database",
@@ -20,7 +21,9 @@ export const syncUserToDB = inngest.createFunction(
   },
   [{ event: "clerk/user.created" }, { event: "clerk/user.updated" }],
   async ({ event, step }) => {
-    const { userId, email, firstName, lastName, imageUrl } = event.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data = event.data as any;
+    const { userId, email, firstName, lastName, imageUrl } = data;
 
     const fullName =
       [firstName, lastName].filter(Boolean).join(" ").trim() || null;
@@ -40,7 +43,8 @@ export const syncUserToDB = inngest.createFunction(
  * Inngest function: remove a Clerk user from the database on
  * `clerk/user.deleted` events.
  */
-export const deleteUserFromDB = inngest.createFunction(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const deleteUserFromDB: any = inngest.createFunction(
   {
     id: "delete-user-from-db",
     name: "Delete Clerk User from Database",
@@ -49,7 +53,9 @@ export const deleteUserFromDB = inngest.createFunction(
   },
   { event: "clerk/user.deleted" },
   async ({ event, step }) => {
-    const { userId } = event.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data = event.data as any;
+    const { userId } = data;
 
     await step.run("delete-user", async () => {
       await userRepo.deleteIfExistsByClerkId(userId);

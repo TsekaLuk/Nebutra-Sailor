@@ -386,16 +386,19 @@ async function handleOrganizationCreated(
 
   // Trigger async tenant provisioning (default API key + welcome email).
   // Fire-and-forget — a provisioning failure must NOT fail the webhook response.
+  const payload = {
+    name: "clerk/organization.created",
+    data: {
+      organizationId: org.id,
+      name: data.name,
+      slug: data.slug,
+      createdById: data.created_by,
+    },
+  };
+
   void inngest
-    .send({
-      name: "clerk/organization.created",
-      data: {
-        organizationId: org.id,
-        name: data.name,
-        slug: data.slug,
-        createdById: data.created_by,
-      },
-    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .send(payload as any)
     .catch((err) => {
       log.warn("Failed to enqueue tenant provisioning event", {
         clerkId: data.id,

@@ -14,5 +14,6 @@ import { inngestSchemas } from "@nebutra/event-bus";
  */
 export const inngest = new Inngest({
   id: "nebutra-api-gateway",
-  schemas: new EventSchemas().fromZod(inngestSchemas),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schemas: new EventSchemas().fromZod(inngestSchemas as any) as any,
 });

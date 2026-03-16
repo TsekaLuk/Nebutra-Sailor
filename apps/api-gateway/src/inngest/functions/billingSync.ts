@@ -34,7 +34,8 @@ function resolvePlanFromStatus(status: string): Plan {
  *   - stripe/invoice.paid          → log successful payment
  *   - stripe/invoice.payment_failed → log payment failure
  */
-export const processBillingEvent = inngest.createFunction(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const processBillingEvent: any = inngest.createFunction(
   {
     id: "process-billing-event",
     name: "Process Stripe Billing Event",
@@ -48,6 +49,8 @@ export const processBillingEvent = inngest.createFunction(
     { event: "stripe/invoice.payment_failed" },
   ],
   async ({ event, step }) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data = event.data as any;
     const eventName = event.name;
 
     logger.info("Processing Stripe billing event", { eventName });
@@ -56,7 +59,7 @@ export const processBillingEvent = inngest.createFunction(
       eventName === "stripe/subscription.updated" ||
       eventName === "stripe/subscription.deleted"
     ) {
-      const { organizationId, status } = event.data;
+      const { organizationId, status } = data;
 
       const resolvedStatus =
         eventName === "stripe/subscription.deleted" ? "canceled" : status;
@@ -77,7 +80,7 @@ export const processBillingEvent = inngest.createFunction(
 
     if (eventName === "stripe/invoice.paid") {
       await step.run("log-invoice-paid", async () => {
-        const { invoiceId, organizationId } = event.data;
+        const { invoiceId, organizationId } = data;
         logger.info("Stripe invoice paid", { invoiceId, organizationId });
       });
 
@@ -86,7 +89,7 @@ export const processBillingEvent = inngest.createFunction(
 
     if (eventName === "stripe/invoice.payment_failed") {
       await step.run("log-payment-failure", async () => {
-        const { invoiceId, organizationId, failureReason } = event.data;
+        const { invoiceId, organizationId, failureReason } = data;
         logger.warn("Stripe invoice payment failed", {
           invoiceId,
           organizationId,
