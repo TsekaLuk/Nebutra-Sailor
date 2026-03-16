@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { AnimateIn } from "@nebutra/ui/components";
 import { DotPattern } from "@nebutra/ui/primitives";
@@ -19,7 +20,7 @@ import {
   ArrowRight,
   type IconProps,
 } from "@nebutra/icons";
-import { Coffee, ChevronDown } from "lucide-react";
+import { Coffee } from "lucide-react";
 import {
   Anthropic,
   OpenAI,
@@ -357,125 +358,209 @@ function TierCard({
 }
 
 /* ------------------------------------------------------------------ */
-/*  Typographic Capability Matrix                                      */
+/*  Service Carousel                                                   */
 /* ------------------------------------------------------------------ */
 
-function CapabilityMatrix() {
-  const t = useTranslations("pricing");
+const AUTO_PLAY_INTERVAL = 3000;
+const PILL_HEIGHT = 60;
 
-  return (
-    <div className="flex flex-col justify-center h-full rounded-3xl border border-gray-200 dark:border-gray-800/60 bg-white/50 dark:bg-gray-950/40 p-8 md:p-12 shadow-sm backdrop-blur-sm transition-all duration-300">
-      <h3 className="text-xl font-medium tracking-tight text-gray-900 dark:text-white mb-10">
-        {t("radar_title")}
-      </h3>
-      <div className="space-y-6">
-        {CAPABILITY_DATA.map((item, i) => (
-          <div key={i} className="group relative w-full">
-            <div className="flex justify-between items-end mb-2">
-              <span className="text-sm font-mono uppercase tracking-widest text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
-                {item.dimension}
-              </span>
-              <span className="text-2xl font-normal leading-none text-gray-900 dark:text-white">
-                {item.score}
-              </span>
-            </div>
-            <div className="h-0.5 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-[var(--color-accent)] rounded-full origin-left transition-transform duration-1000 ease-out"
-                style={{ width: `${item.score}%` }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+function wrap(min: number, max: number, v: number) {
+  const rangeSize = max - min;
+  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Service line card (expandable)                                     */
-/* ------------------------------------------------------------------ */
-
-function ServiceLineCard({
-  serviceKey,
-  index,
-}: {
-  serviceKey: (typeof SERVICE_KEYS)[number];
-  index: number;
-}) {
+function ServiceCarousel() {
   const t = useTranslations("pricing");
-  const [expanded, setExpanded] = useState(false);
-  const Icon = SERVICE_ICONS[index];
-  const items = t.raw(`services.${serviceKey}.items`) as string[];
-  const techStack = TECH_STACKS[serviceKey];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const len = SERVICE_KEYS.length;
+
+  const nextStep = React.useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % len);
+  }, [len]);
+
+  React.useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(nextStep, AUTO_PLAY_INTERVAL);
+    return () => clearInterval(interval);
+  }, [nextStep, isPaused]);
+
+  const activeKey = SERVICE_KEYS[activeIndex];
+  const ActiveIcon = SERVICE_ICONS[activeIndex];
+  const activeScore = CAPABILITY_DATA[activeIndex];
+  const activeTech = TECH_STACKS[activeKey];
+  const activeItems = t.raw(`services.${activeKey}.items`) as string[];
 
   return (
-    <AnimateIn preset="fadeUp" delay={index * 0.05} inView className="h-full">
-      <div
-        className={`group h-full flex flex-col justify-center rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden ${expanded ? "border-[var(--color-accent-muted)] bg-white dark:bg-gray-900/40 shadow-sm" : "border-gray-200 dark:border-gray-800/60 bg-white/50 dark:bg-gray-950/40 hover:border-gray-300 dark:hover:border-gray-700 hover:bg-white dark:hover:bg-gray-900/60"}`}
-        onClick={() => setExpanded((v) => !v)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setExpanded((v) => !v);
-          }
-        }}
-      >
-        <div className="flex gap-4 p-5">
-          <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${expanded ? "bg-[var(--color-accent)]/15" : "bg-gray-100 dark:bg-gray-800/80 group-hover:bg-[var(--color-accent)]/10"}`}>
-            <Icon size={20} className={expanded ? "text-[var(--color-accent-dark)]" : "text-gray-500 dark:text-gray-400 group-hover:text-[var(--color-accent-dark)]"} />
-          </div>
-          <div className="flex-1 min-w-0 py-0.5">
-            <div className="flex items-center justify-between gap-2">
-              <h4 className={`text-sm font-bold transition-colors ${expanded ? "text-gray-900 dark:text-white" : "text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"}`}>
-                {t(`services.${serviceKey}.name`)}
-              </h4>
-              <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-colors ${expanded ? "bg-gray-100 dark:bg-gray-800" : "bg-transparent group-hover:bg-gray-100 dark:group-hover:bg-gray-800"}`}>
-                <ChevronDown
-                  className={`h-4 w-4 text-gray-400 transition-transform duration-300 ${
-                    expanded ? "rotate-180 text-gray-700 dark:text-gray-300" : "group-hover:text-gray-600 dark:group-hover:text-gray-300"
+    <div
+      className="relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] flex flex-col lg:flex-row min-h-[520px] lg:min-h-[480px] border border-border/40"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* ── Left panel: pill selector ── */}
+      <div className="w-full lg:w-[38%] relative z-30 flex flex-col items-start justify-center overflow-hidden bg-[var(--color-accent)] dark:bg-[var(--color-accent-dark)]">
+        {/* Gradient masks */}
+        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[var(--color-accent)] via-[var(--color-accent)]/80 to-transparent z-40 dark:from-[var(--color-accent-dark)] dark:via-[var(--color-accent-dark)]/80 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--color-accent)] via-[var(--color-accent)]/80 to-transparent z-40 dark:from-[var(--color-accent-dark)] dark:via-[var(--color-accent-dark)]/80 pointer-events-none" />
+
+        {/* Mobile: horizontal scroll */}
+        <div className="flex lg:hidden w-full overflow-x-auto gap-2 px-6 py-6 scrollbar-hide">
+          {SERVICE_KEYS.map((key, idx) => {
+            const Icon = SERVICE_ICONS[idx];
+            const isActive = idx === activeIndex;
+            return (
+              <button
+                key={key}
+                onClick={() => setActiveIndex(idx)}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider whitespace-nowrap transition-all duration-300 border shrink-0 ${
+                  isActive
+                    ? "bg-white dark:bg-gray-900 text-[var(--color-accent-dark)] border-white dark:border-gray-700 shadow-md"
+                    : "bg-transparent text-white/70 border-white/20 hover:text-white hover:border-white/40"
+                }`}
+              >
+                <Icon size={14} className={isActive ? "text-[var(--color-accent-dark)]" : "text-white/50"} />
+                {t(`services.${key}.name`)}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Desktop: vertical animated list */}
+        <div className="hidden lg:flex relative w-full h-full items-center justify-start z-20 pl-10 xl:pl-14">
+          {SERVICE_KEYS.map((key, idx) => {
+            const Icon = SERVICE_ICONS[idx];
+            const isActive = idx === activeIndex;
+            const distance = idx - activeIndex;
+            const wrappedDistance = wrap(-len / 2, len / 2, distance);
+
+            return (
+              <motion.div
+                key={key}
+                style={{ height: PILL_HEIGHT, width: "fit-content" }}
+                animate={{
+                  y: wrappedDistance * PILL_HEIGHT,
+                  opacity: 1 - Math.abs(wrappedDistance) * 0.2,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 90,
+                  damping: 22,
+                  mass: 1,
+                }}
+                className="absolute flex items-center justify-start"
+              >
+                <button
+                  onClick={() => setActiveIndex(idx)}
+                  className={`relative flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-500 text-left border ${
+                    isActive
+                      ? "bg-white dark:bg-gray-900 text-[var(--color-accent-dark)] border-white dark:border-gray-700 z-10 shadow-lg"
+                      : "bg-transparent text-white/60 border-white/20 hover:border-white/40 hover:text-white"
                   }`}
+                >
+                  <Icon
+                    size={16}
+                    className={isActive ? "text-[var(--color-accent-dark)]" : "text-white/40"}
+                  />
+                  <span className="font-medium text-sm tracking-tight whitespace-nowrap uppercase">
+                    {t(`services.${key}.name`)}
+                  </span>
+                </button>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Right panel: detail card ── */}
+      <div className="flex-1 relative bg-white/50 dark:bg-gray-950/40 flex items-center justify-center p-8 md:p-12 lg:p-14 overflow-hidden border-t lg:border-t-0 lg:border-l border-border/20">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeKey}
+            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="w-full max-w-lg"
+          >
+            {/* Header */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-accent)]/15">
+                <ActiveIcon size={24} className="text-[var(--color-accent-dark)]" />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {t(`services.${activeKey}.name`)}
+                </h4>
+                <p className="text-xs font-mono uppercase tracking-widest text-gray-400 dark:text-gray-500 mt-0.5">
+                  {activeScore.dimension}
+                </p>
+              </div>
+            </div>
+
+            {/* Score bar */}
+            <div className="mb-6">
+              <div className="flex justify-between items-end mb-2">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  {t("radar_title")}
+                </span>
+                <motion.span
+                  key={`score-${activeIndex}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-3xl font-bold text-gray-900 dark:text-white tabular-nums"
+                >
+                  {activeScore.score}
+                </motion.span>
+              </div>
+              <div className="h-1.5 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-[var(--color-accent)] rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${activeScore.score}%` }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
                 />
               </div>
             </div>
-            <p className="mt-1 text-xs leading-relaxed text-gray-500 dark:text-gray-400/80 truncate">
-              {items.join(" · ")}
-            </p>
-          </div>
-        </div>
 
-        <div
-          className={`grid transition-all duration-300 ease-in-out ${
-            expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-          }`}
-        >
-          <div className="overflow-hidden">
-            <div className="px-5 pb-5 pt-2 border-t border-gray-100 dark:border-gray-800/60 mx-5">
-              <div className="flex flex-wrap gap-2 mt-3">
-                {techStack.map((tech) => (
-                  <TechBadge key={tech.name} item={tech} />
+            {/* Description items */}
+            <div className="mb-8">
+              <ul className="space-y-2">
+                {activeItems.map((item, i) => (
+                  <motion.li
+                    key={item}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.06 }}
+                    className="flex items-start gap-2.5 text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    <CheckCircleFill size={14} className="text-[var(--color-accent-dark)] mt-0.5 shrink-0" />
+                    {item}
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Tech stack */}
+            <div>
+              <p className="text-xs font-mono uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
+                Tech Stack
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {activeTech.map((tech, i) => (
+                  <motion.div
+                    key={tech.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.03 }}
+                  >
+                    <TechBadge item={tech} />
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
-    </AnimateIn>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Service lines grid                                                 */
-/* ------------------------------------------------------------------ */
-
-function ServiceLines() {
-  return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 h-full lg:content-start">
-      {SERVICE_KEYS.map((key, idx) => (
-        <ServiceLineCard key={key} serviceKey={key} index={idx} />
-      ))}
     </div>
   );
 }
@@ -537,18 +622,9 @@ export function PricingSection() {
             <div className="hidden sm:block h-px w-12 bg-gray-200 dark:bg-gray-800" />
           </div>
         </AnimateIn>
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch">
-          <div className="lg:col-span-5 h-full">
-            <AnimateIn preset="fadeUp" delay={0.1} inView className="h-full">
-              <CapabilityMatrix />
-            </AnimateIn>
-          </div>
-          <div className="lg:col-span-7 h-full">
-            <AnimateIn preset="fadeUp" delay={0.2} inView className="h-full">
-              <ServiceLines />
-            </AnimateIn>
-          </div>
-        </div>
+        <AnimateIn preset="fadeUp" delay={0.1} inView>
+          <ServiceCarousel />
+        </AnimateIn>
       </div>
     </section>
   );
