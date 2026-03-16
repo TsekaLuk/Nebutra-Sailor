@@ -11,7 +11,12 @@
     "./server": "./src/server/index.ts",
     "./middleware": "./src/middleware/index.ts"
   },
+  "bin": {
+    "nebutra-mcp": "./dist/server/contextServer.js"
+  },
   "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

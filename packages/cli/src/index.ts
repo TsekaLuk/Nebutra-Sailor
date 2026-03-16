@@ -3,6 +3,7 @@
 import { Command } from 'commander';
 import { addCommand } from './commands/add.js';
 import { initCommand } from './commands/init.js';
+import { upCommand } from './commands/up.js';
 
 async function main() {
   const program = new Command();
@@ -22,9 +23,13 @@ async function main() {
   program
     .command('add [components...]')
     .description('Add a component or feature to your project')
-    .action(async (components) => {
-      await addCommand(components);
+    .option('--21st <id>', 'Fetch and install a component from 21st.dev')
+    .option('--v0 <url>', 'Fetch and install a component from v0.dev')
+    .action(async (components, options) => {
+      await addCommand(components, options);
     });
+
+  program.addCommand(upCommand);
 
   program.parse(process.argv);
 }
