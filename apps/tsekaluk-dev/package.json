@@ -7,7 +7,7 @@
     "build": "prisma generate && next build",
     "postinstall": "prisma generate",
     "start": "next start",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "fumadocs-mdx && tsc --noEmit",
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
