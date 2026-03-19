@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Request
 import logging
+
+from fastapi import APIRouter, Request
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -8,11 +9,11 @@ logger = logging.getLogger(__name__)
 @router.post("/shopify")
 async def shopify_webhook(request: Request):
     """Handle Shopify webhooks"""
-    body = await request.json()
+    await request.json()
     topic = request.headers.get("X-Shopify-Topic", "unknown")
-    
+
     logger.info(f"Received Shopify webhook: {topic}")
-    
+
     # Process based on topic
     if topic == "orders/create":
         # Handle new order
@@ -23,7 +24,7 @@ async def shopify_webhook(request: Request):
     elif topic == "inventory_levels/update":
         # Handle inventory change
         pass
-    
+
     return {"received": True, "topic": topic}
 
 
@@ -32,7 +33,7 @@ async def shopline_webhook(request: Request):
     """Handle Shopline webhooks"""
     body = await request.json()
     event_type = body.get("event_type", "unknown")
-    
+
     logger.info(f"Received Shopline webhook: {event_type}")
-    
+
     return {"received": True, "event_type": event_type}

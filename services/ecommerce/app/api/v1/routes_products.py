@@ -1,6 +1,6 @@
+
 from fastapi import APIRouter, Header
 from pydantic import BaseModel
-from typing import Optional
 
 router = APIRouter()
 
@@ -15,9 +15,9 @@ class Product(BaseModel):
 
 # Mock products
 PRODUCTS = [
-    {"id": "prod_1", "title": "Widget A", "price": 29.99, "inventory": 100, "status": "active"},
-    {"id": "prod_2", "title": "Gadget B", "price": 49.99, "inventory": 50, "status": "active"},
-    {"id": "prod_3", "title": "Tool C", "price": 19.99, "inventory": 200, "status": "active"},
+    {"id": "prod_1", "title": "Widget A", "price": 29.99, "inventory": 100, "status": "active"},  # noqa: E501
+    {"id": "prod_2", "title": "Gadget B", "price": 49.99, "inventory": 50, "status": "active"},  # noqa: E501
+    {"id": "prod_3", "title": "Tool C", "price": 19.99, "inventory": 200, "status": "active"},  # noqa: E501
 ]
 
 
@@ -25,7 +25,7 @@ PRODUCTS = [
 async def list_products(
     x_organization_id: str = Header(...),
     limit: int = 20,
-    category: Optional[str] = None,
+    category: str | None = None,
 ):
     """List products"""
     return {"products": PRODUCTS[:limit], "total": len(PRODUCTS)}

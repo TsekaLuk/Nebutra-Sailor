@@ -1,6 +1,7 @@
+from datetime import datetime
+
 from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel
-from datetime import datetime
 
 router = APIRouter()
 
@@ -51,9 +52,9 @@ async def create_order(
     global order_counter
     order_counter += 1
     order_id = f"order_{order_counter}"
-    
+
     total = sum(item.price * item.quantity for item in items)
-    
+
     order = {
         "id": order_id,
         "org_id": x_organization_id,

@@ -1,7 +1,7 @@
+import random
+
 from fastapi import APIRouter, Header
 from pydantic import BaseModel
-from typing import Optional
-import random
 
 router = APIRouter()
 
@@ -26,7 +26,7 @@ class NFT(BaseModel):
     contract: str
     token_id: str
     name: str
-    image_url: Optional[str]
+    image_url: str | None
 
 
 @router.get("/balance/{address}", response_model=BalanceResponse)
@@ -37,8 +37,8 @@ async def get_balance(
 ):
     """Get wallet balance"""
     # Mock balance - would call actual blockchain RPC in production
-    mock_balance = round(random.uniform(0.1, 100), 4)
-    
+    mock_balance = round(random.uniform(0.1, 100), 4)  # noqa: S311
+
     return {
         "address": address,
         "chain": chain,
@@ -60,7 +60,7 @@ async def get_transaction(
         "to_address": "0x" + "b" * 40,
         "value": "1.5",
         "status": "confirmed",
-        "block_number": 18500000 + random.randint(0, 10000),
+        "block_number": 18500000 + random.randint(0, 10000),  # noqa: S311
     }
 
 
@@ -81,7 +81,7 @@ async def get_nfts(
         }
         for i in range(min(limit, 10))
     ]
-    
+
     return {"nfts": mock_nfts, "total": len(mock_nfts)}
 
 
