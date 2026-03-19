@@ -166,9 +166,9 @@ jobs:
       - name: Create virtual environment and install dependencies
         # Use .venv/bin/pip directly (not uv pip) to avoid uv's project detection
         # which would trigger an editable install of the service (requiring hatchling).
-        # We only need the packages from requirements.txt to run lint/test.
+        # --seed ensures pip is installed in the venv (uv venv without --seed omits pip).
         run: |
-          uv venv
+          uv venv --seed
           .venv/bin/pip install -r requirements.txt ruff pytest pytest-asyncio mypy bandit
 
       - name: Lint (ruff)
