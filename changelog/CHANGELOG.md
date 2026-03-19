@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.3](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.2...v1.7.3) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* stub OPENAI_API_KEY in ai service test conftest ([838bae1](https://github.com/Nebutra/Nebutra-Sailor/commit/838bae10a3d6a53fcf830a78490cd3e75efdbd4e))
+
 ## [1.7.2](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.1...v1.7.2) (2026-03-19)
 
 
