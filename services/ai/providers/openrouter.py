@@ -7,23 +7,22 @@ Supports provider routing, model fallbacks, and automatic failover.
 https://openrouter.ai/docs
 """
 
-import os
+from collections.abc import AsyncGenerator
+from dataclasses import dataclass
+from typing import Any, Literal
+
 import httpx
-from dataclasses import dataclass, field
-from typing import AsyncGenerator, Optional, List, Dict, Any, Literal
 from openai import AsyncOpenAI
 
 from .base import (
     BaseProvider,
-    ProviderConfig,
-    ChatMessage,
     ChatCompletionRequest,
     ChatCompletionResponse,
     EmbeddingRequest,
     EmbeddingResponse,
     ModelInfo,
+    ProviderConfig,
 )
-
 
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
@@ -31,31 +30,34 @@ OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 @dataclass
 class OpenRouterConfig(ProviderConfig):
     """Configuration for OpenRouter"""
-    http_referer: Optional[str] = None  # App URL for attribution
-    app_title: Optional[str] = None  # App name for attribution
-    default_provider_preferences: Optional[Dict[str, Any]] = None
+
+    http_referer: str | None = None  # App URL for attribution
+    app_title: str | None = None  # App name for attribution
+    default_provider_preferences: dict[str, Any] | None = None
 
 
 @dataclass
 class ProviderPreferences:
     """Provider routing preferences"""
+
     allow_fallbacks: bool = True
     require_parameters: bool = False
-    data_collection: Optional[Literal["deny", "allow"]] = None
-    sort: Optional[Literal["price", "throughput", "latency"]] = None
-    order: Optional[List[str]] = None
-    ignore: Optional[List[str]] = None
-    only: Optional[List[str]] = None
-    quantizations: Optional[List[str]] = None
+    data_collection: Literal["deny", "allow"] | None = None
+    sort: Literal["price", "throughput", "latency"] | None = None
+    order: list[str] | None = None
+    ignore: list[str] | None = None
+    only: list[str] | None = None
+    quantizations: list[str] | None = None
 
 
 @dataclass
 class OpenRouterChatRequest(ChatCompletionRequest):
     """Extended chat request with OpenRouter-specific options"""
-    provider: Optional[Dict[str, Any]] = None
-    models: Optional[List[str]] = None  # Fallback models
-    route: Optional[Literal["fallback"]] = None
-    transforms: Optional[List[str]] = None
+
+    provider: dict[str, Any] | None = None
+    models: list[str] | None = None  # Fallback models
+    route: Literal["fallback"] | None = None
+    transforms: list[str] | None = None
 
 
 # ============================================
@@ -91,7 +93,6 @@ OPENROUTER_MODELS = [
         input_price_per_million=2.0,
         output_price_per_million=8.0,
     ),
-    
     # Anthropic
     ModelInfo(
         id="anthropic/claude-4.6-sonnet",
@@ -111,7 +112,6 @@ OPENROUTER_MODELS = [
         input_price_per_million=0.8,
         output_price_per_million=4,
     ),
-    
     # Google
     ModelInfo(
         id="google/gemini-3.1-flash",
@@ -131,7 +131,6 @@ OPENROUTER_MODELS = [
         input_price_per_million=2.0,
         output_price_per_million=12.0,
     ),
-    
     # DeepSeek
     ModelInfo(
         id="deepseek/deepseek-r1",
@@ -151,7 +150,6 @@ OPENROUTER_MODELS = [
         input_price_per_million=0.14,
         output_price_per_million=0.28,
     ),
-    
     # Meta
     ModelInfo(
         id="meta-llama/llama-4-scout",
@@ -171,7 +169,6 @@ OPENROUTER_MODELS = [
         input_price_per_million=2.0,
         output_price_per_million=2.0,
     ),
-    
     # xAI
     ModelInfo(
         id="x-ai/grok-4.1-fast",
@@ -191,7 +188,6 @@ OPENROUTER_MODELS = [
         input_price_per_million=2.5,
         output_price_per_million=10.0,
     ),
-    
     # Mistral
     ModelInfo(
         id="mistralai/mistral-large-2411",
@@ -202,7 +198,6 @@ OPENROUTER_MODELS = [
         input_price_per_million=2,
         output_price_per_million=6,
     ),
-    
     # Qwen
     ModelInfo(
         id="qwen/qwq-32b",
@@ -213,7 +208,6 @@ OPENROUTER_MODELS = [
         input_price_per_million=0.12,
         output_price_per_million=0.18,
     ),
-    
     # Auto
     ModelInfo(
         id="openrouter/auto",
@@ -227,30 +221,30 @@ OPENROUTER_MODELS = [
 
 # Model Variants
 OPENROUTER_VARIANTS = {
-    "NITRO": ":nitro",      # Fastest provider
-    "FLOOR": ":floor",      # Cheapest provider
-    "EXACTO": ":exacto",    # Better tool-calling accuracy
-    "EXTENDED": ":extended", # Extended context
-    "FREE": ":free",        # Free tier (rate limited)
+    "NITRO": ":nitro",  # Fastest provider
+    "FLOOR": ":floor",  # Cheapest provider
+    "EXACTO": ":exacto",  # Better tool-calling accuracy
+    "EXTENDED": ":extended",  # Extended context
+    "FREE": ":free",  # Free tier (rate limited)
 }
 
 
 class OpenRouterProvider(BaseProvider):
     """OpenRouter unified API provider"""
-    
+
     def __init__(self, config: OpenRouterConfig):
         self._config = config
         self._validate_api_key()
-        
+
         base_url = config.base_url or OPENROUTER_BASE_URL
-        
+
         # Build default headers for attribution
         default_headers = {}
         if config.http_referer:
             default_headers["HTTP-Referer"] = config.http_referer
         if config.app_title:
             default_headers["X-Title"] = config.app_title
-        
+
         self.client = AsyncOpenAI(
             api_key=config.api_key,
             base_url=base_url,
@@ -258,7 +252,7 @@ class OpenRouterProvider(BaseProvider):
             max_retries=config.max_retries,
             default_headers=default_headers,
         )
-        
+
         self.http_client = httpx.AsyncClient(
             base_url=base_url,
             headers={
@@ -267,33 +261,37 @@ class OpenRouterProvider(BaseProvider):
             },
             timeout=config.timeout,
         )
-        
+
         self.default_preferences = config.default_provider_preferences
         self._capabilities = {
-            "chat", "stream", "function-calling", "vision", "reasoning"
+            "chat",
+            "stream",
+            "function-calling",
+            "vision",
+            "reasoning",
         }
-    
+
     @property
     def config(self) -> OpenRouterConfig:
         return self._config
-    
+
     @property
     def name(self) -> str:
         return "openrouter"
-    
+
     @property
     def display_name(self) -> str:
         return "OpenRouter"
-    
+
     # ============================================
     # Chat Completions
     # ============================================
-    
+
     async def chat(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
         """Create a chat completion"""
-        openrouter_request = request if isinstance(request, OpenRouterChatRequest) else request
-        
-        body: Dict[str, Any] = {
+        openrouter_request = request
+
+        body: dict[str, Any] = {
             "model": request.model,
             "messages": [
                 {"role": m.role, "content": m.content, "name": m.name}
@@ -301,7 +299,7 @@ class OpenRouterProvider(BaseProvider):
             ],
             "stream": False,
         }
-        
+
         if request.temperature is not None:
             body["temperature"] = request.temperature
         if request.max_tokens is not None:
@@ -314,7 +312,7 @@ class OpenRouterProvider(BaseProvider):
             body["tools"] = request.tools
         if request.response_format:
             body["response_format"] = request.response_format
-        
+
         # OpenRouter-specific options
         if isinstance(openrouter_request, OpenRouterChatRequest):
             if openrouter_request.provider or self.default_preferences:
@@ -327,9 +325,9 @@ class OpenRouterProvider(BaseProvider):
                 body["route"] = openrouter_request.route or "fallback"
             if openrouter_request.transforms:
                 body["transforms"] = openrouter_request.transforms
-        
+
         response = await self.client.chat.completions.create(**body)
-        
+
         return ChatCompletionResponse(
             id=response.id,
             model=response.model,
@@ -337,7 +335,9 @@ class OpenRouterProvider(BaseProvider):
             finish_reason=response.choices[0].finish_reason,
             usage={
                 "prompt_tokens": response.usage.prompt_tokens if response.usage else 0,
-                "completion_tokens": response.usage.completion_tokens if response.usage else 0,
+                "completion_tokens": response.usage.completion_tokens
+                if response.usage
+                else 0,
                 "total_tokens": response.usage.total_tokens if response.usage else 0,
             },
             tool_calls=[
@@ -350,18 +350,20 @@ class OpenRouterProvider(BaseProvider):
                     },
                 }
                 for tc in (response.choices[0].message.tool_calls or [])
-            ] if response.choices[0].message.tool_calls else None,
+            ]
+            if response.choices[0].message.tool_calls
+            else None,
             # Handle reasoning content from models like o1/DeepSeek-R1
             reasoning_content=getattr(response.choices[0].message, "reasoning", None),
         )
-    
+
     async def chat_stream(
         self, request: ChatCompletionRequest
     ) -> AsyncGenerator[str, None]:
         """Stream a chat completion"""
-        openrouter_request = request if isinstance(request, OpenRouterChatRequest) else request
-        
-        body: Dict[str, Any] = {
+        openrouter_request = request
+
+        body: dict[str, Any] = {
             "model": request.model,
             "messages": [
                 {"role": m.role, "content": m.content, "name": m.name}
@@ -369,7 +371,7 @@ class OpenRouterProvider(BaseProvider):
             ],
             "stream": True,
         }
-        
+
         if request.temperature is not None:
             body["temperature"] = request.temperature
         if request.max_tokens is not None:
@@ -378,7 +380,7 @@ class OpenRouterProvider(BaseProvider):
             body["top_p"] = request.top_p
         if request.stop:
             body["stop"] = request.stop
-        
+
         # OpenRouter-specific options
         if isinstance(openrouter_request, OpenRouterChatRequest):
             if openrouter_request.provider or self.default_preferences:
@@ -389,20 +391,20 @@ class OpenRouterProvider(BaseProvider):
             if openrouter_request.models:
                 body["models"] = openrouter_request.models
                 body["route"] = openrouter_request.route or "fallback"
-        
+
         stream = await self.client.chat.completions.create(**body)
-        
+
         async for chunk in stream:
             # Skip OpenRouter comment payloads
             if chunk.id == "":
                 continue
             if chunk.choices and chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
-    
+
     async def chat_with_fallback(
         self,
         request: ChatCompletionRequest,
-        fallback_models: List[str],
+        fallback_models: list[str],
     ) -> ChatCompletionResponse:
         """Chat with automatic model fallbacks"""
         openrouter_request = OpenRouterChatRequest(
@@ -419,11 +421,11 @@ class OpenRouterProvider(BaseProvider):
             route="fallback",
         )
         return await self.chat(openrouter_request)
-    
+
     # ============================================
     # Embeddings
     # ============================================
-    
+
     async def embed(self, request: EmbeddingRequest) -> EmbeddingResponse:
         """Create embeddings (proxied through OpenRouter)"""
         response = await self.http_client.post(
@@ -434,12 +436,14 @@ class OpenRouterProvider(BaseProvider):
                 "encoding_format": request.encoding_format,
             },
         )
-        
+
         if response.status_code != 200:
-            raise Exception(f"OpenRouter embeddings error: {response.status_code} {response.text}")
-        
+            raise Exception(
+                f"OpenRouter embeddings error: {response.status_code} {response.text}"
+            )
+
         data = response.json()
-        
+
         return EmbeddingResponse(
             model=data["model"],
             embeddings=[d["embedding"] for d in data["data"]],
@@ -448,73 +452,69 @@ class OpenRouterProvider(BaseProvider):
                 "total_tokens": data["usage"]["total_tokens"],
             },
         )
-    
+
     # ============================================
     # OpenRouter Specific APIs
     # ============================================
-    
-    async def list_models(self) -> List[Dict[str, Any]]:
+
+    async def list_models(self) -> list[dict[str, Any]]:
         """Get available models from OpenRouter API"""
         response = await self.http_client.get("/models")
-        
+
         if response.status_code != 200:
             raise Exception(f"Failed to list models: {response.status_code}")
-        
+
         return response.json()["data"]
-    
-    async def get_generation(self, generation_id: str) -> Dict[str, Any]:
+
+    async def get_generation(self, generation_id: str) -> dict[str, Any]:
         """Get generation details by ID (token counts, costs)"""
         response = await self.http_client.get(f"/generation?id={generation_id}")
-        
+
         if response.status_code != 200:
             raise Exception(f"Failed to get generation: {response.status_code}")
-        
+
         return response.json()
-    
-    async def get_credits(self) -> Dict[str, Any]:
+
+    async def get_credits(self) -> dict[str, Any]:
         """Get account credits and usage"""
-        response = await self.http_client.get(
-            "https://openrouter.ai/api/v1/auth/key"
-        )
-        
+        response = await self.http_client.get("https://openrouter.ai/api/v1/auth/key")
+
         if response.status_code != 200:
             raise Exception(f"Failed to get credits: {response.status_code}")
-        
+
         data = response.json()["data"]
         return {
             "credits": data.get("limit") or float("inf"),
             "usage": data.get("usage", 0),
         }
-    
-    async def get_rate_limits(self) -> Dict[str, Any]:
+
+    async def get_rate_limits(self) -> dict[str, Any]:
         """Get rate limit status"""
-        response = await self.http_client.get(
-            "https://openrouter.ai/api/v1/auth/key"
-        )
-        
+        response = await self.http_client.get("https://openrouter.ai/api/v1/auth/key")
+
         if response.status_code != 200:
             raise Exception(f"Failed to get rate limits: {response.status_code}")
-        
+
         return response.json()["data"]
-    
+
     # ============================================
     # Utility Methods
     # ============================================
-    
-    def get_available_models(self) -> List[ModelInfo]:
+
+    def get_available_models(self) -> list[ModelInfo]:
         """Get list of popular models"""
         return OPENROUTER_MODELS
-    
+
     def supports_capability(self, capability: str) -> bool:
         """Check if provider supports a capability"""
         return capability in self._capabilities
-    
+
     @staticmethod
     def get_model_variant(model_id: str, variant: str) -> str:
         """Get model ID with variant suffix"""
         suffix = OPENROUTER_VARIANTS.get(variant, "")
         return f"{model_id}{suffix}"
-    
+
     async def close(self):
         """Close HTTP client"""
         await self.http_client.aclose()

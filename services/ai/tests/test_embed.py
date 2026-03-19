@@ -6,7 +6,6 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-
 EMBED_URL = "/api/v1/embed/"
 
 MOCK_RESULT = {

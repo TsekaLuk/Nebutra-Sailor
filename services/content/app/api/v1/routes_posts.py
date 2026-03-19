@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException, Header
-from pydantic import BaseModel
-from typing import Optional
 from datetime import datetime
+
+from fastapi import APIRouter, Header, HTTPException
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -39,7 +39,7 @@ async def create_post(
     post_counter += 1
     post_id = f"post_{post_counter}"
     now = datetime.utcnow()
-    
+
     post = {
         "id": post_id,
         "organization_id": x_organization_id,
@@ -80,13 +80,15 @@ async def update_post(
         raise HTTPException(status_code=404, detail="Post not found")
     if post["organization_id"] != x_organization_id:
         raise HTTPException(status_code=403, detail="Access denied")
-    
-    post.update({
-        "title": request.title,
-        "body": request.body,
-        "status": request.status,
-        "updated_at": datetime.utcnow(),
-    })
+
+    post.update(
+        {
+            "title": request.title,
+            "body": request.body,
+            "status": request.status,
+            "updated_at": datetime.utcnow(),
+        }
+    )
     return post
 
 
@@ -101,6 +103,6 @@ async def delete_post(
         raise HTTPException(status_code=404, detail="Post not found")
     if post["organization_id"] != x_organization_id:
         raise HTTPException(status_code=403, detail="Access denied")
-    
+
     del posts_db[post_id]
     return {"deleted": True}

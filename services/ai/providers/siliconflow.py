@@ -6,23 +6,23 @@ Supports: Chat, Embeddings, Reranking, Image Generation
 """
 
 import os
+from collections.abc import AsyncGenerator
+
 import httpx
-from typing import AsyncGenerator, List, Optional
 from openai import AsyncOpenAI
 
 from .base import (
     BaseProvider,
-    ProviderConfig,
     ChatCompletionRequest,
     ChatCompletionResponse,
     EmbeddingRequest,
     EmbeddingResponse,
+    ModelInfo,
+    ProviderConfig,
     RerankRequest,
     RerankResponse,
     RerankResult,
-    ModelInfo,
 )
-
 
 # ============================================
 # SiliconFlow Constants
@@ -31,7 +31,7 @@ from .base import (
 SILICONFLOW_BASE_URL_CN = "https://api.siliconflow.cn/v1"
 SILICONFLOW_BASE_URL_INTL = "https://api.siliconflow.com/v1"
 
-SILICONFLOW_MODELS: List[ModelInfo] = [
+SILICONFLOW_MODELS: list[ModelInfo] = [
     # Chat Models - DeepSeek
     ModelInfo(
         id="deepseek-ai/DeepSeek-V3",
@@ -70,7 +70,6 @@ SILICONFLOW_MODELS: List[ModelInfo] = [
         input_price_per_million=1.26,
         output_price_per_million=1.26,
     ),
-    
     # Embedding Models
     ModelInfo(
         id="BAAI/bge-m3",
@@ -96,7 +95,6 @@ SILICONFLOW_MODELS: List[ModelInfo] = [
         context_window=512,
         input_price_per_million=0.01,
     ),
-    
     # Rerank Models
     ModelInfo(
         id="BAAI/bge-reranker-v2-m3",
@@ -110,51 +108,59 @@ SILICONFLOW_MODELS: List[ModelInfo] = [
 
 class SiliconFlowConfig(ProviderConfig):
     """SiliconFlow specific configuration"""
+
     use_international: bool = False
 
 
 class SiliconFlowProvider(BaseProvider):
     """SiliconFlow AI Provider"""
-    
+
     def __init__(self, config: SiliconFlowConfig | ProviderConfig):
         # Determine base URL
         use_intl = getattr(config, "use_international", False)
         if not config.base_url:
-            config.base_url = SILICONFLOW_BASE_URL_INTL if use_intl else SILICONFLOW_BASE_URL_CN
-        
+            config.base_url = (
+                SILICONFLOW_BASE_URL_INTL if use_intl else SILICONFLOW_BASE_URL_CN
+            )
+
         super().__init__(config)
-        
+
         self.client = AsyncOpenAI(
             api_key=self.config.api_key,
             base_url=self.config.base_url,
             timeout=self.config.timeout,
             max_retries=self.config.max_retries,
         )
-        
+
         self._capabilities = {
-            "chat", "chat-stream", "embeddings", "rerank",
-            "image-generation", "function-calling", "reasoning"
+            "chat",
+            "chat-stream",
+            "embeddings",
+            "rerank",
+            "image-generation",
+            "function-calling",
+            "reasoning",
         }
-    
+
     @property
     def name(self) -> str:
         return "siliconflow"
-    
+
     @property
     def display_name(self) -> str:
         return "SiliconFlow"
-    
+
     # ============================================
     # Chat Completions
     # ============================================
-    
+
     async def chat(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
         """Create a chat completion"""
         messages = [
             {"role": m.role, "content": m.content, "name": m.name}
             for m in request.messages
         ]
-        
+
         response = await self.client.chat.completions.create(
             model=request.model,
             messages=messages,  # type: ignore
@@ -166,10 +172,10 @@ class SiliconFlowProvider(BaseProvider):
             response_format=request.response_format,  # type: ignore
             stream=False,
         )
-        
+
         choice = response.choices[0]
         message = choice.message
-        
+
         # Extract tool calls if present
         tool_calls = None
         if message.tool_calls:
@@ -180,14 +186,14 @@ class SiliconFlowProvider(BaseProvider):
                     "function": {
                         "name": tc.function.name,
                         "arguments": tc.function.arguments,
-                    }
+                    },
                 }
                 for tc in message.tool_calls
             ]
-        
+
         # Extract reasoning content for DeepSeek-R1
         reasoning_content = getattr(message, "reasoning_content", None)
-        
+
         return ChatCompletionResponse(
             id=response.id,
             model=response.model,
@@ -195,13 +201,15 @@ class SiliconFlowProvider(BaseProvider):
             finish_reason=choice.finish_reason,
             usage={
                 "prompt_tokens": response.usage.prompt_tokens if response.usage else 0,
-                "completion_tokens": response.usage.completion_tokens if response.usage else 0,
+                "completion_tokens": response.usage.completion_tokens
+                if response.usage
+                else 0,
                 "total_tokens": response.usage.total_tokens if response.usage else 0,
             },
             tool_calls=tool_calls,
             reasoning_content=reasoning_content,
         )
-    
+
     async def chat_stream(
         self, request: ChatCompletionRequest
     ) -> AsyncGenerator[str, None]:
@@ -210,7 +218,7 @@ class SiliconFlowProvider(BaseProvider):
             {"role": m.role, "content": m.content, "name": m.name}
             for m in request.messages
         ]
-        
+
         stream = await self.client.chat.completions.create(
             model=request.model,
             messages=messages,  # type: ignore
@@ -220,15 +228,15 @@ class SiliconFlowProvider(BaseProvider):
             stop=request.stop,
             stream=True,
         )
-        
+
         async for chunk in stream:
             if chunk.choices and chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
-    
+
     # ============================================
     # Embeddings
     # ============================================
-    
+
     async def embed(self, request: EmbeddingRequest) -> EmbeddingResponse:
         """Create embeddings for text"""
         response = await self.client.embeddings.create(
@@ -236,9 +244,9 @@ class SiliconFlowProvider(BaseProvider):
             input=request.input,
             encoding_format=request.encoding_format,  # type: ignore
         )
-        
+
         embeddings = [d.embedding for d in response.data]
-        
+
         return EmbeddingResponse(
             model=response.model,
             embeddings=embeddings,
@@ -247,11 +255,11 @@ class SiliconFlowProvider(BaseProvider):
                 "total_tokens": response.usage.total_tokens,
             },
         )
-    
+
     # ============================================
     # Reranking
     # ============================================
-    
+
     async def rerank(self, request: RerankRequest) -> RerankResponse:
         """Rerank documents by relevance to query"""
         async with httpx.AsyncClient(timeout=self.config.timeout) as client:
@@ -269,10 +277,10 @@ class SiliconFlowProvider(BaseProvider):
                     "return_documents": request.return_documents,
                 },
             )
-            
+
             response.raise_for_status()
             data = response.json()
-        
+
         results = [
             RerankResult(
                 index=r["index"],
@@ -281,7 +289,7 @@ class SiliconFlowProvider(BaseProvider):
             )
             for r in data.get("results", [])
         ]
-        
+
         return RerankResponse(
             model=data.get("model", request.model),
             results=results,
@@ -289,17 +297,17 @@ class SiliconFlowProvider(BaseProvider):
             if data.get("usage")
             else None,
         )
-    
+
     # ============================================
     # Utility Methods
     # ============================================
-    
-    def get_available_models(self) -> List[ModelInfo]:
+
+    def get_available_models(self) -> list[ModelInfo]:
         return SILICONFLOW_MODELS
-    
+
     def supports_capability(self, capability: str) -> bool:
         return capability in self._capabilities
-    
+
     async def get_user_info(self) -> dict:
         """Get user account info including balance"""
         async with httpx.AsyncClient(timeout=self.config.timeout) as client:
@@ -309,7 +317,7 @@ class SiliconFlowProvider(BaseProvider):
             )
             response.raise_for_status()
             data = response.json()
-        
+
         return {
             "balance": data.get("data", {}).get("balance", 0),
             "status": data.get("data", {}).get("status", "unknown"),
@@ -317,14 +325,14 @@ class SiliconFlowProvider(BaseProvider):
 
 
 def create_siliconflow_provider(
-    api_key: Optional[str] = None,
+    api_key: str | None = None,
     use_international: bool = False,
 ) -> SiliconFlowProvider:
     """Factory function to create SiliconFlow provider"""
     key = api_key or os.getenv("SILICONFLOW_API_KEY")
     if not key:
         raise ValueError("SILICONFLOW_API_KEY is required")
-    
+
     config = SiliconFlowConfig(
         api_key=key,
         use_international=use_international,

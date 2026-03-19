@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Header
 from pydantic import BaseModel
-from typing import Optional
+
 from .routes_posts import posts_db
 
 router = APIRouter()
@@ -16,7 +16,7 @@ class FeedItem(BaseModel):
 
 class FeedResponse(BaseModel):
     items: list[FeedItem]
-    next_cursor: Optional[str] = None
+    next_cursor: str | None = None
     has_more: bool = False
 
 
@@ -24,21 +24,22 @@ class FeedResponse(BaseModel):
 async def get_feed(
     x_organization_id: str = Header(...),
     limit: int = 20,
-    cursor: Optional[str] = None,
+    cursor: str | None = None,
 ):
     """Get content feed for organization (reverse chronological)"""
     # Filter posts by organization and published status
     org_posts = [
-        p for p in posts_db.values()
+        p
+        for p in posts_db.values()
         if p["organization_id"] == x_organization_id and p["status"] == "published"
     ]
-    
+
     # Sort by created_at descending
     org_posts.sort(key=lambda x: x["created_at"], reverse=True)
-    
+
     # Simple pagination
     items = org_posts[:limit]
-    
+
     return {
         "items": [
             {
@@ -62,14 +63,15 @@ async def get_trending(
 ):
     """Get trending content (placeholder - would use engagement metrics)"""
     org_posts = [
-        p for p in posts_db.values()
+        p
+        for p in posts_db.values()
         if p["organization_id"] == x_organization_id and p["status"] == "published"
     ]
-    
+
     # For now, just return most recent as "trending"
     org_posts.sort(key=lambda x: x["created_at"], reverse=True)
     items = org_posts[:limit]
-    
+
     return {
         "items": [
             {

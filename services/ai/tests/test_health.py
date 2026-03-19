@@ -23,6 +23,7 @@ async def test_livez_alias(client):
 async def test_readiness_no_deps_returns_200(client):
     """With no DATABASE_URL / REDIS_URL set, no checks run → always ready."""
     import os
+
     os.environ.pop("DATABASE_URL", None)
     os.environ.pop("REDIS_URL", None)
 

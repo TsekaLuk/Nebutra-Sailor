@@ -102,6 +102,8 @@ async def record_usage(
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.get("/{organization_id}", response_model=GetUsageResponse)
 async def get_usage(
     organization_id: str,
@@ -121,6 +123,8 @@ async def get_usage(
         return usage
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/check-limit", response_model=CheckLimitResponse)
 async def check_usage_limit(
     request: CheckLimitRequest,
@@ -136,6 +140,8 @@ async def check_usage_limit(
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.get("/{organization_id}/limits")
 async def get_usage_limits(
     organization_id: str,
@@ -147,6 +153,8 @@ async def get_usage_limits(
         return limits
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/{organization_id}/reset")
 async def reset_usage(
     organization_id: str,

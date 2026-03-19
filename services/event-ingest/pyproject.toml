@@ -41,6 +41,8 @@ ignore = [
     "S101",  # assert statements OK in tests
     "S603",  # subprocess call — needed for service scripts
     "S607",  # partial executable path OK
+    "N815",  # camelCase Pydantic fields match external event schema (JSON API)
+    "S104",  # 0.0.0.0 binding is intentional in containerized services
 ]
 
 [tool.ruff.lint.isort]

@@ -27,4 +27,4 @@ async def embed(request: EmbedRequest):
         )
         return result
     except Exception:
-        raise HTTPException(status_code=500, detail="Internal server error")
+        raise HTTPException(status_code=500, detail="Internal server error") from None

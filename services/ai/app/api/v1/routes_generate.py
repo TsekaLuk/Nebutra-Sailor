@@ -31,4 +31,4 @@ async def generate(request: GenerateRequest):
         )
         return result
     except Exception:
-        raise HTTPException(status_code=500, detail="Internal server error")
+        raise HTTPException(status_code=500, detail="Internal server error") from None

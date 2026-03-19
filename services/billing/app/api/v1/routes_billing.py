@@ -78,6 +78,8 @@ async def create_customer(
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.get("/customers/{organization_id}")
 async def get_customer(
     organization_id: str,
@@ -93,6 +95,8 @@ async def get_customer(
         raise
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/checkout", response_model=CreateCheckoutResponse)
 async def create_checkout_session(
     request: CreateCheckoutRequest,
@@ -113,6 +117,8 @@ async def create_checkout_session(
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/portal", response_model=CreatePortalResponse)
 async def create_billing_portal(
     request: CreatePortalRequest,
@@ -127,6 +133,8 @@ async def create_billing_portal(
         return CreatePortalResponse(portal_url=session["url"])
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.get("/pricing", response_model=GetPricingResponse)
 async def get_pricing():
     """Get available pricing plans"""

@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException, Header
-from pydantic import BaseModel
 from datetime import datetime
+
+from fastapi import APIRouter, Header, HTTPException
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -31,7 +32,7 @@ async def create_comment(
     global comment_counter
     comment_counter += 1
     comment_id = f"comment_{comment_counter}"
-    
+
     comment = {
         "id": comment_id,
         "post_id": request.post_id,
@@ -46,9 +47,7 @@ async def create_comment(
 @router.get("/post/{post_id}")
 async def get_comments_for_post(post_id: str, limit: int = 50):
     """Get comments for a post"""
-    post_comments = [
-        c for c in comments_db.values() if c["post_id"] == post_id
-    ]
+    post_comments = [c for c in comments_db.values() if c["post_id"] == post_id]
     post_comments.sort(key=lambda x: x["created_at"])
     return {"comments": post_comments[:limit]}
 
@@ -64,6 +63,6 @@ async def delete_comment(
         raise HTTPException(status_code=404, detail="Comment not found")
     if comment["author_id"] != x_user_id:
         raise HTTPException(status_code=403, detail="Not your comment")
-    
+
     del comments_db[comment_id]
     return {"deleted": True}

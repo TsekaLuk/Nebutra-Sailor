@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -9,7 +9,7 @@ from _shared.errors import generic_exception_handler
 from _shared.health import router as health_router
 from _shared.middleware import RequestLoggingMiddleware
 from _shared.otel import instrument_app
-from app.api.v1 import routes_posts, routes_feed, routes_comments
+from app.api.v1 import routes_comments, routes_feed, routes_posts
 
 app = FastAPI(
     title="Nebutra Content Service",

@@ -89,6 +89,8 @@ async def create_subscription(
         return subscription
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.get("/{organization_id}", response_model=SubscriptionResponse)
 async def get_subscription(
     organization_id: str,
@@ -104,6 +106,8 @@ async def get_subscription(
         raise
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.patch("/{organization_id}", response_model=SubscriptionResponse)
 async def update_subscription(
     organization_id: str,
@@ -120,6 +124,8 @@ async def update_subscription(
         return subscription
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/{organization_id}/cancel", response_model=SubscriptionResponse)
 async def cancel_subscription(
     organization_id: str,
@@ -136,6 +142,8 @@ async def cancel_subscription(
         return subscription
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/{organization_id}/resume", response_model=SubscriptionResponse)
 async def resume_subscription(
     organization_id: str,
@@ -147,6 +155,8 @@ async def resume_subscription(
         return subscription
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/{organization_id}/pause", response_model=SubscriptionResponse)
 async def pause_subscription(
     organization_id: str,
@@ -158,6 +168,8 @@ async def pause_subscription(
         return subscription
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/{organization_id}/preview-change", response_model=PreviewChangeResponse)
 async def preview_subscription_change(
     organization_id: str,

@@ -8,8 +8,8 @@ via unittest.mock.AsyncMock.
 
 from __future__ import annotations
 
-import sys
 import os
+import sys
 
 import pytest
 import pytest_asyncio

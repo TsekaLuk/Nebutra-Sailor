@@ -13,7 +13,7 @@ class TranslateRequest(BaseModel):
 
 
 class TranslateResponse(BaseModel):
-    translatedText: str
+    translatedText: str  # noqa: N815
     source: str
     target: str
 
@@ -29,4 +29,4 @@ async def translate(request: TranslateRequest):
         )
         return result
     except Exception:
-        raise HTTPException(status_code=500, detail="Internal server error")
+        raise HTTPException(status_code=500, detail="Internal server error") from None

@@ -1,53 +1,53 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
-import { serve } from "@hono/node-server";
-import { bodyLimit } from "hono/body-limit";
-import { compress } from "hono/compress";
-import { cors } from "hono/cors";
-import { logger as honoLogger } from "hono/logger";
-import { requestId } from "hono/request-id";
-import { secureHeaders } from "hono/secure-headers";
-import { swaggerUI } from "@hono/swagger-ui";
-import { trace } from "@opentelemetry/api";
-import { logger, initOtel } from "@nebutra/logger";
-import { toApiError, getStatusCode } from "@nebutra/errors";
-import { setAlertErrorHandler, initializeFromEnv } from "@nebutra/alerting";
-import { prisma } from "@nebutra/db";
-import { initSentry, captureRequestError } from "./config/sentry.js";
+import { OpenAPIHono } from "@hono/zod-openapi"
+import { serve } from "@hono/node-server"
+import { bodyLimit } from "hono/body-limit"
+import { compress } from "hono/compress"
+import { cors } from "hono/cors"
+import { logger as honoLogger } from "hono/logger"
+import { requestId } from "hono/request-id"
+import { secureHeaders } from "hono/secure-headers"
+import { swaggerUI } from "@hono/swagger-ui"
+import { trace } from "@opentelemetry/api"
+import { logger, initOtel } from "@nebutra/logger"
+import { toApiError, getStatusCode } from "@nebutra/errors"
+import { setAlertErrorHandler, initializeFromEnv } from "@nebutra/alerting"
+import { prisma } from "@nebutra/db"
+import { initSentry, captureRequestError } from "./config/sentry.js"
 
-import { healthRoutes } from "./routes/misc/health.js";
-import { statusRoutes } from "./routes/system/status.js";
-import { consentRoutes } from "./routes/legal/consent.js";
-import { eventRoutes } from "./routes/events/index.js";
-import { aiRoutes } from "./routes/ai/index.js";
-import { billingRoutes } from "./routes/billing/index.js";
-import { adminRoutes } from "./routes/admin/index.js";
+import { healthRoutes } from "./routes/misc/health.js"
+import { statusRoutes } from "./routes/system/status.js"
+import { consentRoutes } from "./routes/legal/consent.js"
+import { eventRoutes } from "./routes/events/index.js"
+import { aiRoutes } from "./routes/ai/index.js"
+import { billingRoutes } from "./routes/billing/index.js"
+import { adminRoutes } from "./routes/admin/index.js"
 import {
   stripeWebhookRoutes,
   clerkWebhookRoutes,
-} from "./routes/webhooks/index.js";
-import { inngestHandler } from "./inngest/index.js";
-import { tenantContextMiddleware } from "./middlewares/tenantContext.js";
-import { auditMutationMiddleware } from "./middlewares/auditMutation.js";
-import { idempotencyMiddleware } from "./middlewares/idempotency.js";
-import { rateLimitMiddleware } from "./middlewares/rateLimit.js";
-import { apiVersionMiddleware } from "./middlewares/apiVersion.js";
-import { usageMeteringMiddleware } from "./middlewares/usageMetering.js";
-import { requestContext, runWithContext } from "./lib/requestContext.js";
-import { env, DOMAINS } from "./config/env.js";
+} from "./routes/webhooks/index.js"
+import { inngestHandler } from "./inngest/index.js"
+import { tenantContextMiddleware } from "./middlewares/tenantContext.js"
+import { auditMutationMiddleware } from "./middlewares/auditMutation.js"
+import { idempotencyMiddleware } from "./middlewares/idempotency.js"
+import { rateLimitMiddleware } from "./middlewares/rateLimit.js"
+import { apiVersionMiddleware } from "./middlewares/apiVersion.js"
+import { usageMeteringMiddleware } from "./middlewares/usageMetering.js"
+import { requestContext, runWithContext } from "./lib/requestContext.js"
+import { env, DOMAINS } from "./config/env.js"
 
-initOtel({ serviceName: "api-gateway" });
-initSentry();
+initOtel({ serviceName: "api-gateway" })
+initSentry()
 
 // Wire logger into alerting error handler
-setAlertErrorHandler((ctx, err) => logger.error(ctx, err));
+setAlertErrorHandler((ctx, err) => logger.error(ctx, err))
 
 // Register alerting channels from environment
-const registeredChannels = initializeFromEnv();
+const registeredChannels = initializeFromEnv()
 if (registeredChannels.length > 0) {
-  logger.info("Alerting channels registered", { channels: registeredChannels });
+  logger.info("Alerting channels registered", { channels: registeredChannels })
 }
 
-const app = new OpenAPIHono();
+const app = new OpenAPIHono()
 
 // Build CORS allowlist from constants + env overrides
 const corsOrigins = [
@@ -70,42 +70,42 @@ const corsOrigins = [
   env.STUDIO_URL,
   // Arbitrary extra origins (e.g. Vercel preview URLs)
   ...(env.CORS_ORIGINS?.split(",").map((s) => s.trim()) ?? []),
-].filter(Boolean) as string[];
+].filter(Boolean) as string[]
 
 // Global middlewares
 // Compression — gzip/deflate/brotli for all JSON/text responses
-app.use("*", compress());
+app.use("*", compress())
 // Security headers: X-Content-Type-Options, X-Frame-Options, HSTS, etc.
-app.use("*", secureHeaders());
-app.use("*", requestId());
+app.use("*", secureHeaders())
+app.use("*", requestId())
 
 // AsyncLocalStorage: bind requestId + tenantId into async context so all
 // downstream helpers (DB queries, service calls) can read them without
 // explicit parameter threading.
 app.use("*", async (c, next) => {
-  const reqId = c.get("requestId");
-  await runWithContext({ requestId: reqId }, next);
-});
+  const reqId = c.get("requestId")
+  await runWithContext({ requestId: reqId }, next)
+})
 
 // Wire requestId and OTel traceId into structured logger context for log
 // correlation, and propagate both IDs to the client as response headers.
 app.use("*", async (c, next) => {
-  const reqId = c.get("requestId");
-  const method = c.req.method;
-  const path = new URL(c.req.url).pathname;
+  const reqId = c.get("requestId")
+  const method = c.req.method
+  const path = new URL(c.req.url).pathname
 
-  const activeSpan = trace.getActiveSpan();
-  const traceId = activeSpan?.spanContext().traceId;
+  const activeSpan = trace.getActiveSpan()
+  const traceId = activeSpan?.spanContext().traceId
 
   logger.info("incoming request", {
     requestId: reqId,
     method,
     path,
     ...(traceId ? { traceId } : {}),
-  });
+  })
 
-  const start = Date.now();
-  await next();
+  const start = Date.now()
+  await next()
 
   logger.info("request completed", {
     requestId: reqId,
@@ -114,63 +114,67 @@ app.use("*", async (c, next) => {
     status: c.res.status,
     durationMs: Date.now() - start,
     ...(traceId ? { traceId } : {}),
-  });
+  })
 
-  c.header("X-Request-ID", reqId);
+  c.header("X-Request-ID", reqId)
   if (traceId) {
-    c.header("X-Trace-ID", traceId);
+    c.header("X-Trace-ID", traceId)
   }
-});
+})
 
-app.use("*", honoLogger());
+app.use("*", honoLogger())
 app.use(
   "*",
   cors({
     origin: corsOrigins,
     credentials: true,
-  }),
-);
+  })
+)
 app.use(
   "*",
   bodyLimit({
     maxSize: 1 * 1024 * 1024, // 1MB
     onError: (c) => {
-      return c.json({ error: "Request body too large" }, 413);
+      return c.json({ error: "Request body too large" }, 413)
     },
-  }),
-);
+  })
+)
 
 // Tenant context extraction (before rate limiting)
-app.use("*", tenantContextMiddleware);
+app.use("*", tenantContextMiddleware)
 
 // Enrich AsyncLocalStorage context with tenant info now that it's resolved
 app.use("*", async (c, next) => {
-  const tenant = c.get("tenant");
-  const ctx = requestContext.getStore();
+  const tenant = c.get("tenant")
+  const ctx = requestContext.getStore()
   if (ctx && tenant) {
-    ctx.tenantId = tenant.organizationId;
-    ctx.userId = tenant.userId;
+    if (tenant.organizationId !== undefined)
+      ctx.tenantId = tenant.organizationId
+    if (tenant.userId !== undefined) ctx.userId = tenant.userId
   }
-  await next();
-});
+  await next()
+})
 
 // Usage metering — non-blocking, fire-and-forget, runs after response
-app.use("/api/v1/*", usageMeteringMiddleware);
+app.use("/api/v1/*", usageMeteringMiddleware)
 
 // Audit logging for all state-changing requests (POST/PUT/PATCH/DELETE)
-app.use("/api/v1/*", auditMutationMiddleware);
+app.use("/api/v1/*", auditMutationMiddleware)
 
 // Idempotency — replay protection for POST/PUT/PATCH with Idempotency-Key header
-app.use("/api/v1/*", idempotencyMiddleware);
+app.use("/api/v1/*", idempotencyMiddleware)
 
 // API versioning — sets API-Version header, supports Sunset for deprecated versions
-app.use("/api/*", apiVersionMiddleware({
-  // deprecated: { "v1": "2027-06-30" }, // Uncomment when v2 is ready
-}));
+app.use(
+  "/api/*",
+  apiVersionMiddleware({
+    // deprecated: { "v1": "2027-06-30" }, // Uncomment when v2 is ready
+  })
+)
 
 // Rate limiting (skip for health/status/webhook/inngest endpoints)
 app.use("/api/*", async (c, next) => {
-  const path = new URL(c.req.url).pathname;
+  const path = new URL(c.req.url).pathname
   if (
     path.startsWith("/api/misc") ||
     path.startsWith("/api/system") ||
@@ -179,36 +183,36 @@ app.use("/api/*", async (c, next) => {
     path.startsWith("/api/webhooks") ||
     path.startsWith("/api/inngest")
   ) {
-    return next();
+    return next()
   }
-  return rateLimitMiddleware(c, next);
-});
+  return rateLimitMiddleware(c, next)
+})
 
 // Health & Status routes (public, no rate limiting)
-app.route("/api/misc", healthRoutes);
-app.route("/api/system", statusRoutes);
+app.route("/api/misc", healthRoutes)
+app.route("/api/system", statusRoutes)
 // Backward-compatible aliases (legacy monitors/workflows)
-app.route("/misc", healthRoutes);
-app.route("/system", statusRoutes);
+app.route("/misc", healthRoutes)
+app.route("/system", statusRoutes)
 
 // Legal & Consent routes (v1 API)
 // Rate limiting is applied by the /api/* middleware above (paths not in the
 // skip list). /api/v1/legal/* and /api/v1/events/* are intentionally NOT in
 // the skip list so they receive full rate limiting.
-app.route("/api/v1/legal", consentRoutes);
-app.route("/api/v1/events", eventRoutes);
-app.route("/api/v1/ai", aiRoutes);
-app.route("/api/v1/billing", billingRoutes);
+app.route("/api/v1/legal", consentRoutes)
+app.route("/api/v1/events", eventRoutes)
+app.route("/api/v1/ai", aiRoutes)
+app.route("/api/v1/billing", billingRoutes)
 
 // Admin routes — protected by X-Admin-Key, not exposed through public ingress
-app.route("/api/v1/admin", adminRoutes);
+app.route("/api/v1/admin", adminRoutes)
 
 // Webhook routes (raw body — bypass rate limiting)
-app.route("/api/webhooks", stripeWebhookRoutes);
-app.route("/api/webhooks", clerkWebhookRoutes);
+app.route("/api/webhooks", stripeWebhookRoutes)
+app.route("/api/webhooks", clerkWebhookRoutes)
 
 // Inngest background job handler (GET for SDK handshake, POST/PUT for execution)
-app.on(["GET", "POST", "PUT"], "/api/inngest", (c) => inngestHandler(c));
+app.on(["GET", "POST", "PUT"], "/api/inngest", (c) => inngestHandler(c))
 
 // OpenAPI spec document (auto-generated from createRoute definitions)
 app.doc("/openapi.json", {
@@ -219,10 +223,10 @@ app.doc("/openapi.json", {
     description: "Nebutra SaaS Platform API Gateway",
   },
   servers: [{ url: "/", description: "Current server" }],
-});
+})
 
 // Swagger UI explorer
-app.get("/docs", swaggerUI({ url: "/openapi.json" }));
+app.get("/docs", swaggerUI({ url: "/openapi.json" }))
 
 // Root route
 app.get("/", (c) => {
@@ -230,52 +234,65 @@ app.get("/", (c) => {
     name: "Nebutra API Gateway",
     version: "0.1.0",
     status: "running",
-  });
-});
+  })
+})
 
 // 404 handler
 app.notFound((c) => {
-  return c.json({ error: "Not Found", path: c.req.path }, 404);
-});
+  return c.json({ error: "Not Found", path: c.req.path }, 404)
+})
 
 // Error handler
 app.onError((err, c) => {
-  const requestId = c.req.header("x-request-id");
-  const tenant = c.get("tenant");
-  logger.error("Unhandled error", err, { path: c.req.path, requestId });
-  captureRequestError(err, requestId, tenant?.organizationId);
-  return c.json(toApiError(err, requestId), getStatusCode(err) as 400 | 401 | 403 | 404 | 409 | 429 | 500 | 502 | 503 | 504);
-});
+  const requestId = c.req.header("x-request-id")
+  const tenant = c.get("tenant")
+  logger.error("Unhandled error", err, { path: c.req.path, requestId })
+  captureRequestError(err, requestId, tenant?.organizationId)
+  return c.json(
+    toApiError(err, requestId),
+    getStatusCode(err) as
+      | 400
+      | 401
+      | 403
+      | 404
+      | 409
+      | 429
+      | 500
+      | 502
+      | 503
+      | 504
+  )
+})
 
-const port = parseInt(process.env.PORT || "3002", 10);
+const port = parseInt(process.env.PORT || "3002", 10)
 
-logger.info("API Gateway started", { port });
+logger.info("API Gateway started", { port })
 
 const server = serve({ fetch: app.fetch, port }, (info) => {
-  logger.info(`API Gateway listening on port ${info.port}`);
-});
+  logger.info(`API Gateway listening on port ${info.port}`)
+})
 
 // Graceful shutdown
 const shutdown = async (signal: string) => {
-  logger.info(`Received ${signal}, starting graceful shutdown...`);
+  logger.info(`Received ${signal}, starting graceful shutdown...`)
   server.close(async () => {
-    logger.info("HTTP server closed");
+    logger.info("HTTP server closed")
     try {
-      await prisma.$disconnect();
-      logger.info("Database connection closed");
+      await prisma.$disconnect()
+      logger.info("Database connection closed")
     } catch (err) {
-      logger.error("Error during shutdown", err);
+      logger.error("Error during shutdown", err)
     }
-    process.exit(0);
-  });
+    process.exit(0)
+  })
   // Force exit after 10s if graceful shutdown hangs
   setTimeout(() => {
-    logger.error("Forced shutdown after timeout");
-    process.exit(1);
-  }, 10_000);
-};
+    logger.error("Forced shutdown after timeout")
+    process.exit(1)
+  }, 10_000)
+}
 
-process.on("SIGTERM", () => shutdown("SIGTERM"));
-process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"))
+process.on("SIGINT", () => shutdown("SIGINT"))
 
-export default app;
+export default app

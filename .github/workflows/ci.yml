@@ -182,9 +182,9 @@ jobs:
 
       - name: Security check (bandit)
         run: |
-          .venv/bin/bandit -r . -x ./tests -f json -o bandit-report.json --severity-level medium || true
+          .venv/bin/bandit -r . -x .venv,./tests -f json -o bandit-report.json --severity-level medium || true
           # Fail only on high-severity findings
-          .venv/bin/bandit -r . -x ./tests --severity-level high -q
+          .venv/bin/bandit -r . -x .venv,./tests --severity-level high -q
 
       - name: Run tests
         run: |

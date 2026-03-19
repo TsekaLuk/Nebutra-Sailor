@@ -111,7 +111,7 @@ def _event_id(event: EventEnvelope) -> str:
     if event.eventId:
         return event.eventId
 
-    raw = f"{event.eventName}:{event.context.tenantId}:{event.context.occurredAt.isoformat()}:{json.dumps(event.payload, sort_keys=True)}"
+    raw = f"{event.eventName}:{event.context.tenantId}:{event.context.occurredAt.isoformat()}:{json.dumps(event.payload, sort_keys=True)}"  # noqa: E501
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 

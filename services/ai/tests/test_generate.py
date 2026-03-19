@@ -6,7 +6,6 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-
 GENERATE_URL = "/api/v1/generate/"
 
 MOCK_RESULT = {

@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -9,7 +9,7 @@ from _shared.errors import generic_exception_handler
 from _shared.health import router as health_router
 from _shared.middleware import RequestLoggingMiddleware
 from _shared.otel import instrument_app
-from app.api.v1 import routes_generate, routes_embed, routes_translate
+from app.api.v1 import routes_embed, routes_generate, routes_translate
 
 app = FastAPI(
     title="Nebutra AI Service",
@@ -27,7 +27,9 @@ app.add_exception_handler(Exception, generic_exception_handler)
 app.include_router(health_router)
 app.include_router(routes_generate.router, prefix="/api/v1/generate", tags=["generate"])
 app.include_router(routes_embed.router, prefix="/api/v1/embed", tags=["embed"])
-app.include_router(routes_translate.router, prefix="/api/v1/translate", tags=["translate"])
+app.include_router(
+    routes_translate.router, prefix="/api/v1/translate", tags=["translate"]
+)
 
 
 @app.get("/")

@@ -3,21 +3,21 @@ OpenAI Provider Implementation
 """
 
 import os
-from typing import AsyncGenerator, List, Optional
+from collections.abc import AsyncGenerator
+
 from openai import AsyncOpenAI
 
 from .base import (
     BaseProvider,
-    ProviderConfig,
     ChatCompletionRequest,
     ChatCompletionResponse,
     EmbeddingRequest,
     EmbeddingResponse,
     ModelInfo,
+    ProviderConfig,
 )
 
-
-OPENAI_MODELS: List[ModelInfo] = [
+OPENAI_MODELS: list[ModelInfo] = [
     ModelInfo(
         id="gpt-5.4",
         name="GPT-5.4",
@@ -64,10 +64,10 @@ OPENAI_MODELS: List[ModelInfo] = [
 
 class OpenAIProvider(BaseProvider):
     """OpenAI Provider"""
-    
+
     def __init__(self, config: ProviderConfig):
         super().__init__(config)
-        
+
         self.client = AsyncOpenAI(
             api_key=self.config.api_key,
             organization=self.config.organization,
@@ -75,26 +75,32 @@ class OpenAIProvider(BaseProvider):
             timeout=self.config.timeout,
             max_retries=self.config.max_retries,
         )
-        
+
         self._capabilities = {
-            "chat", "chat-stream", "embeddings", "image-generation",
-            "text-to-speech", "speech-to-text", "function-calling", "vision"
+            "chat",
+            "chat-stream",
+            "embeddings",
+            "image-generation",
+            "text-to-speech",
+            "speech-to-text",
+            "function-calling",
+            "vision",
         }
-    
+
     @property
     def name(self) -> str:
         return "openai"
-    
+
     @property
     def display_name(self) -> str:
         return "OpenAI"
-    
+
     async def chat(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
         messages = [
             {"role": m.role, "content": m.content, "name": m.name}
             for m in request.messages
         ]
-        
+
         response = await self.client.chat.completions.create(
             model=request.model,
             messages=messages,  # type: ignore
@@ -106,10 +112,10 @@ class OpenAIProvider(BaseProvider):
             response_format=request.response_format,  # type: ignore
             stream=False,
         )
-        
+
         choice = response.choices[0]
         message = choice.message
-        
+
         tool_calls = None
         if message.tool_calls:
             tool_calls = [
@@ -119,11 +125,11 @@ class OpenAIProvider(BaseProvider):
                     "function": {
                         "name": tc.function.name,
                         "arguments": tc.function.arguments,
-                    }
+                    },
                 }
                 for tc in message.tool_calls
             ]
-        
+
         return ChatCompletionResponse(
             id=response.id,
             model=response.model,
@@ -131,12 +137,14 @@ class OpenAIProvider(BaseProvider):
             finish_reason=choice.finish_reason,
             usage={
                 "prompt_tokens": response.usage.prompt_tokens if response.usage else 0,
-                "completion_tokens": response.usage.completion_tokens if response.usage else 0,
+                "completion_tokens": response.usage.completion_tokens
+                if response.usage
+                else 0,
                 "total_tokens": response.usage.total_tokens if response.usage else 0,
             },
             tool_calls=tool_calls,
         )
-    
+
     async def chat_stream(
         self, request: ChatCompletionRequest
     ) -> AsyncGenerator[str, None]:
@@ -144,7 +152,7 @@ class OpenAIProvider(BaseProvider):
             {"role": m.role, "content": m.content, "name": m.name}
             for m in request.messages
         ]
-        
+
         stream = await self.client.chat.completions.create(
             model=request.model,
             messages=messages,  # type: ignore
@@ -154,20 +162,20 @@ class OpenAIProvider(BaseProvider):
             stop=request.stop,
             stream=True,
         )
-        
+
         async for chunk in stream:
             if chunk.choices and chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
-    
+
     async def embed(self, request: EmbeddingRequest) -> EmbeddingResponse:
         response = await self.client.embeddings.create(
             model=request.model,
             input=request.input,
             encoding_format=request.encoding_format,  # type: ignore
         )
-        
+
         embeddings = [d.embedding for d in response.data]
-        
+
         return EmbeddingResponse(
             model=response.model,
             embeddings=embeddings,
@@ -176,18 +184,18 @@ class OpenAIProvider(BaseProvider):
                 "total_tokens": response.usage.total_tokens,
             },
         )
-    
-    def get_available_models(self) -> List[ModelInfo]:
+
+    def get_available_models(self) -> list[ModelInfo]:
         return OPENAI_MODELS
-    
+
     def supports_capability(self, capability: str) -> bool:
         return capability in self._capabilities
 
 
-def create_openai_provider(api_key: Optional[str] = None) -> OpenAIProvider:
+def create_openai_provider(api_key: str | None = None) -> OpenAIProvider:
     """Factory function to create OpenAI provider"""
     key = api_key or os.getenv("OPENAI_API_KEY")
     if not key:
         raise ValueError("OPENAI_API_KEY is required")
-    
+
     return OpenAIProvider(ProviderConfig(api_key=key))

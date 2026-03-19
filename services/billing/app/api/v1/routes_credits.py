@@ -108,6 +108,8 @@ async def get_credit_balance(
         return balance
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/purchase", response_model=PurchaseCreditsResponse)
 async def purchase_credits(
     request: PurchaseCreditsRequest,
@@ -123,6 +125,8 @@ async def purchase_credits(
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/deduct", response_model=DeductCreditsResponse)
 async def deduct_credits(
     request: DeductCreditsRequest,
@@ -139,6 +143,8 @@ async def deduct_credits(
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.get("/{organization_id}/transactions", response_model=GetTransactionsResponse)
 async def get_credit_transactions(
     organization_id: str,
@@ -158,6 +164,8 @@ async def get_credit_transactions(
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/refund", response_model=DeductCreditsResponse)
 async def refund_credits(
     request: RefundCreditsRequest,
@@ -174,6 +182,8 @@ async def refund_credits(
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.post("/bonus", response_model=DeductCreditsResponse)
 async def add_bonus_credits(
     request: AddBonusRequest,
@@ -190,6 +200,8 @@ async def add_bonus_credits(
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+
+
 @router.get("/{organization_id}/check/{credits}")
 async def check_credits(
     organization_id: str,
