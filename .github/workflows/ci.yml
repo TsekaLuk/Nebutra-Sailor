@@ -164,11 +164,12 @@ jobs:
         run: uv python install 3.11
 
       - name: Create virtual environment and install dependencies
-        # uv venv + uv pip install: isolated venv avoids PEP 668 (externally managed)
-        # and skips project build, so hatchling is not required
+        # uv --no-project: prevents uv from detecting pyproject.toml and doing an
+        # editable install of the service itself (which would require hatchling).
+        # We only need the packages from requirements.txt to run lint/test.
         run: |
           uv venv
-          uv pip install -r requirements.txt ruff pytest pytest-asyncio mypy bandit
+          uv --no-project pip install -r requirements.txt ruff pytest pytest-asyncio mypy bandit
 
       - name: Lint (ruff)
         run: uv run ruff check . --output-format=github
@@ -662,7 +663,13 @@ jobs:
         continue-on-error: true
       - name: Merge into single HTML report
         if: steps.download.outcome == 'success'
-        run: pnpm exec playwright merge-reports --reporter html ./all-blob-reports
+        # Guard against download-artifact succeeding with 0 artifacts (empty dir / no dir)
+        run: |
+          if [ -d ./all-blob-reports ] && [ -n "$(ls -A ./all-blob-reports 2>/dev/null)" ]; then
+            pnpm exec playwright merge-reports --reporter html ./all-blob-reports
+          else
+            echo "No shard blob reports found — skipping merge"
+          fi
       - name: Upload merged report
         if: steps.download.outcome == 'success'
         uses: actions/upload-artifact@v4
