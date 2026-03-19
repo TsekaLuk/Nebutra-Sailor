@@ -9,7 +9,12 @@
  */
 
 import type { PrismaClient } from "@nebutra/db"
-import type { Adapter, AdapterPayload } from "oidc-provider"
+import type {
+  Adapter,
+  AdapterPayload,
+  ClientAuthMethod,
+  ResponseType,
+} from "oidc-provider"
 import type { Redis } from "ioredis"
 
 const EPHEMERAL_MODELS = new Set([
@@ -65,9 +70,10 @@ class PrismaClientAdapter implements Adapter {
       client_secret: client.clientSecretHash ?? undefined,
       grant_types: client.grantTypes,
       redirect_uris: client.redirectUris,
-      response_types: client.responseTypes,
+      response_types: client.responseTypes as ResponseType[],
       scope: client.allowedScopes.join(" "),
-      token_endpoint_auth_method: client.tokenEndpointAuthMethod,
+      token_endpoint_auth_method:
+        client.tokenEndpointAuthMethod as ClientAuthMethod,
       client_name: client.name,
       logo_uri: client.logoUrl ?? undefined,
       client_uri: client.websiteUrl ?? undefined,

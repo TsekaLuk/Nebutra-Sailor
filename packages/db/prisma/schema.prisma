@@ -78,6 +78,7 @@ model Organization {
   wallets      Wallet[]
   nfts         Nft[]
   apiKeys      APIKey[]
+  oauthClients OAuthClient[]
 
   @@map("organizations")
 }
@@ -114,11 +115,12 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  organizations OrganizationMember[]
-  contents      Content[]
-  orders        Order[]
-  activities    UserActivity[]
-  wallets       Wallet[]
+  organizations      OrganizationMember[]
+  contents           Content[]
+  orders             Order[]
+  activities         UserActivity[]
+  wallets            Wallet[]
+  oauthAuthorizations OAuthAuthorization[]
 
   @@map("users")
 }
@@ -1197,4 +1199,97 @@ model ContactSubmission {
   @@index([status])
   @@index([createdAt])
   @@map("contact_submissions")
+}
+
+// ============================================
+// OAuth 2.0 / OpenID Connect Identity Provider
+// ============================================
+
+enum OAuthClientType {
+  CONFIDENTIAL // Server-side apps (have a secret)
+  PUBLIC       // SPAs, mobile apps, CLIs (no secret)
+}
+
+enum OAuthClientStatus {
+  ACTIVE
+  SUSPENDED
+  REVOKED
+}
+
+// Third-party applications registered in Nebutra's ecosystem
+model OAuthClient {
+  id               String            @id @default(cuid())
+  clientId         String            @unique @map("client_id")
+  clientSecretHash String?           @map("client_secret_hash")
+  type             OAuthClientType   @default(CONFIDENTIAL)
+  status           OAuthClientStatus @default(ACTIVE)
+  name             String
+  description      String?           @db.Text
+  logoUrl          String?           @map("logo_url")
+  websiteUrl       String?           @map("website_url")
+  privacyPolicyUrl String?           @map("privacy_policy_url")
+  tosUrl           String?           @map("tos_url")
+
+  // OAuth configuration
+  redirectUris            String[] @map("redirect_uris")
+  allowedScopes           String[] @default(["openid", "profile"]) @map("allowed_scopes")
+  grantTypes              String[] @default(["authorization_code"]) @map("grant_types")
+  responseTypes           String[] @default(["code"]) @map("response_types")
+  tokenEndpointAuthMethod String   @default("client_secret_basic") @map("token_endpoint_auth_method")
+
+  // Rate limiting & security
+  rateLimitRpm    Int @default(60) @map("rate_limit_rpm")
+  accessTokenTtl  Int @default(3600) @map("access_token_ttl")
+  refreshTokenTtl Int @default(2592000) @map("refresh_token_ttl")
+
+  // Ownership
+  organizationId String  @map("organization_id")
+  createdById    String? @map("created_by_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  authorizations OAuthAuthorization[]
+  accessTokens   OAuthAccessToken[]
+
+  @@index([organizationId])
+  @@index([status])
+  @@map("oauth_clients")
+}
+
+// User consent records — "User X granted App Y these scopes"
+model OAuthAuthorization {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  clientId  String    @map("client_id")
+  scopes    String[]
+  grantedAt DateTime  @default(now()) @map("granted_at")
+  revokedAt DateTime? @map("revoked_at")
+
+  user   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client OAuthClient @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, clientId])
+  @@index([userId])
+  @@map("oauth_authorizations")
+}
+
+// Issued access tokens (for introspection & revocation)
+model OAuthAccessToken {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique @map("token_hash")
+  clientId  String    @map("client_id")
+  userId    String    @map("user_id")
+  scopes    String[]
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  client OAuthClient @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@index([clientId])
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("oauth_access_tokens")
 }
