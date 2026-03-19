@@ -169,6 +169,7 @@ export function getRateLimiter(plan: string): TokenBucket {
 // Purge stale per-tenant buckets every 30 minutes.
 // Buckets idle for >1 hour are removed; this prevents unbounded memory growth
 // in long-running Node processes with many unique tenant keys.
+/* v8 ignore start */
 if (typeof setInterval !== "undefined") {
   setInterval(
     () => {
@@ -179,3 +180,4 @@ if (typeof setInterval !== "undefined") {
     30 * 60 * 1000, // every 30 minutes
   ).unref?.(); // don't keep the Node process alive for cleanup alone
 }
+/* v8 ignore stop */

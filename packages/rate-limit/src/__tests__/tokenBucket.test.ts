@@ -1,5 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { API_WEIGHTS, getApiWeight, PLAN_LIMITS, TokenBucket } from "../tokenBucket.js";
+import {
+  API_WEIGHTS,
+  buildKey,
+  createRateLimiter,
+  getApiWeight,
+  getRateLimiter,
+  PLAN_LIMITS,
+  TokenBucket,
+} from "../tokenBucket.js";
 
 // ---------------------------------------------------------------------------
 // TokenBucket.consume()
@@ -277,5 +285,70 @@ describe("PLAN_LIMITS", () => {
     expect(PLAN_LIMITS.FREE.maxTokens).toBe(100);
     expect(PLAN_LIMITS.PRO.maxTokens).toBe(1000);
     expect(PLAN_LIMITS.ENTERPRISE.maxTokens).toBe(10000);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// buildKey()
+// ---------------------------------------------------------------------------
+
+describe("buildKey()", () => {
+  it("prefixes with sailor:rate-limit namespace", () => {
+    expect(buildKey("org1")).toBe("sailor:rate-limit:org1");
+  });
+
+  it("joins multiple segments with colons", () => {
+    expect(buildKey("org1", "user1", "192.168.1.1")).toBe(
+      "sailor:rate-limit:org1:user1:192.168.1.1",
+    );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// createRateLimiter()
+// ---------------------------------------------------------------------------
+
+describe("createRateLimiter()", () => {
+  it("creates a FREE limiter with correct maxTokens", () => {
+    const limiter = createRateLimiter("FREE");
+    expect(limiter.maxTokens).toBe(PLAN_LIMITS.FREE.maxTokens);
+  });
+
+  it("creates a PRO limiter with correct maxTokens", () => {
+    const limiter = createRateLimiter("PRO");
+    expect(limiter.maxTokens).toBe(PLAN_LIMITS.PRO.maxTokens);
+  });
+
+  it("creates an ENTERPRISE limiter with correct maxTokens", () => {
+    const limiter = createRateLimiter("ENTERPRISE");
+    expect(limiter.maxTokens).toBe(PLAN_LIMITS.ENTERPRISE.maxTokens);
+  });
+
+  it("falls back to FREE limits for unknown plans", () => {
+    const limiter = createRateLimiter("UNKNOWN");
+    expect(limiter.maxTokens).toBe(PLAN_LIMITS.FREE.maxTokens);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// getRateLimiter()
+// ---------------------------------------------------------------------------
+
+describe("getRateLimiter()", () => {
+  it("returns a TokenBucket instance", () => {
+    const limiter = getRateLimiter("FREE");
+    expect(limiter).toBeInstanceOf(TokenBucket);
+  });
+
+  it("returns the same instance on repeated calls for the same plan", () => {
+    const a = getRateLimiter("PRO");
+    const b = getRateLimiter("PRO");
+    expect(a).toBe(b);
+  });
+
+  it("returns different instances for different plans", () => {
+    const free = getRateLimiter("FREE");
+    const enterprise = getRateLimiter("ENTERPRISE");
+    expect(free).not.toBe(enterprise);
   });
 });
