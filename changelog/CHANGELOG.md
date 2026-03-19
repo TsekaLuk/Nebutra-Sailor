@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.1](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.0...v1.7.1) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* add setuptools to ai service for pkg_resources compatibility ([9bc4697](https://github.com/Nebutra/Nebutra-Sailor/commit/9bc46977474bf372858f760e988a35a42358b929))
+
 ## [1.7.0](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.6.0...v1.7.0) (2026-03-19)
 
 
