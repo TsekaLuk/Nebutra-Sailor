@@ -33,7 +33,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": false,
+      "recommended": true,
       "style": {
         "noNonNullAssertion": "off",
         "useImportType": "warn",
@@ -47,12 +47,20 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "noEmptyInterface": "off",
-        "noConsole": "off"
+        "noConsole": "warn",
+        "noGlobalIsNan": "warn"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off",
-        "noUnusedVariables": "off",
-        "noUnusedImports": "off"
+        "useExhaustiveDependencies": "warn",
+        "noUnusedVariables": "warn",
+        "noUnusedImports": "warn"
+      },
+      "performance": {
+        "noImgElement": "warn"
+      },
+      "a11y": {
+        "noNoninteractiveTabindex": "warn",
+        "useButtonType": "warn"
       }
     }
   },
