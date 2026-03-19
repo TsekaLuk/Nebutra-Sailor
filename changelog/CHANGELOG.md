@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.11](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.10...v1.7.11) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* web typecheck in openapi ci — stub types.generated.ts, build deps ([04c930c](https://github.com/Nebutra/Nebutra-Sailor/commit/04c930ca15088f306205b82fc4d5e5f5f1c27fc3))
+
 ## [1.7.10](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.9...v1.7.10) (2026-03-19)
 
 
