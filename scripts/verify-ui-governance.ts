@@ -355,6 +355,8 @@ function main() {
   }
   if (budgetStats && policy.budgets) {
   }
+  // biome-ignore lint/suspicious/noConsole: CI guardrail script
+  console.log("UI governance verification passed ✓");
 }
 
 main();
