@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.6](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.5...v1.7.6) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* v8 ignore syntax, remove billing from size-limit, auth e2e to web app url ([5e14d58](https://github.com/Nebutra/Nebutra-Sailor/commit/5e14d585c5ee914c000218e49bd4ab671a2eadae))
+
 ## [1.7.5](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.4...v1.7.5) (2026-03-19)
 
 
