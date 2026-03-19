@@ -1,5 +1,4 @@
 "use client";
-
 import { motion, type Transition } from "framer-motion";
 import { CheckCircleIcon, StarIcon } from "lucide-react";
 import Link from "next/link";
@@ -10,7 +9,6 @@ import { cn } from "../utils/cn";
 
 type PricingFrequency = "monthly" | "yearly";
 const frequencies: PricingFrequency[] = ["monthly", "yearly"];
-
 export interface PricingPlan {
   name: string;
   info: string;
@@ -28,13 +26,11 @@ export interface PricingPlan {
   };
   highlighted?: boolean;
 }
-
 export interface PricingSectionProps extends React.ComponentProps<"div"> {
   plans: PricingPlan[];
   heading: string;
   description?: string;
 }
-
 export function PricingSection({
   plans,
   heading,
@@ -43,7 +39,6 @@ export function PricingSection({
   ...props
 }: PricingSectionProps) {
   const [frequency, setFrequency] = React.useState<PricingFrequency>("monthly");
-
   return (
     <div
       className={cn("flex w-full flex-col items-center justify-center space-y-5 p-4", className)}
@@ -66,12 +61,10 @@ export function PricingSection({
     </div>
   );
 }
-
 export interface PricingFrequencyToggleProps extends React.ComponentProps<"div"> {
   frequency: PricingFrequency;
   setFrequency: React.Dispatch<React.SetStateAction<PricingFrequency>>;
 }
-
 export function PricingFrequencyToggle({
   frequency,
   setFrequency,
@@ -89,6 +82,7 @@ export function PricingFrequencyToggle({
       {...props}
     >
       {frequencies.map((freq) => (
+        // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
         <button
           type="button"
           key={freq}
@@ -110,12 +104,10 @@ export function PricingFrequencyToggle({
     </div>
   );
 }
-
 export interface PricingCardProps extends React.ComponentProps<"div"> {
   plan: PricingPlan;
   frequency?: PricingFrequency;
 }
-
 export function PricingCard({
   plan,
   className,
@@ -162,7 +154,6 @@ export function PricingCard({
             </p>
           )}
         </div>
-
         <div className="text-lg font-medium">{plan.name}</div>
         <p className="text-muted-foreground text-sm font-normal">{plan.info}</p>
         <h3 className="mt-2 flex items-end gap-1">
@@ -216,7 +207,6 @@ export function PricingCard({
     </div>
   );
 }
-
 // BorderTrail animation component (artistic element - exempt from Primer)
 interface BorderTrailProps {
   className?: string;
@@ -226,7 +216,6 @@ interface BorderTrailProps {
   onAnimationComplete?: () => void;
   style?: React.CSSProperties;
 }
-
 export function BorderTrail({
   className,
   size = 60,
@@ -240,7 +229,6 @@ export function BorderTrail({
     duration: 5,
     ease: "linear",
   };
-
   return (
     <div className="pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent [mask-clip:padding-box,border-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)]">
       <motion.div
@@ -262,7 +250,6 @@ export function BorderTrail({
     </div>
   );
 }
-
 // Default plans for Nebutra
 export const DEFAULT_PRICING_PLANS: PricingPlan[] = [
   {

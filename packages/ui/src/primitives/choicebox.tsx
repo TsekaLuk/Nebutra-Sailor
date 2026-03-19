@@ -1,5 +1,4 @@
 "use client";
-
 import { cva } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "../utils/cn";
@@ -7,10 +6,8 @@ import { cn } from "../utils/cn";
 // =============================================================================
 // Types
 // =============================================================================
-
 type ChoiceboxType = "radio" | "checkbox";
 type ChoiceboxDirection = "row" | "column";
-
 /**
  * Props for ChoiceboxGroup — the container component
  */
@@ -36,7 +33,6 @@ export interface ChoiceboxGroupProps {
   /** ChoiceboxGroup.Item elements */
   children: React.ReactNode;
 }
-
 /**
  * Props for ChoiceboxGroup.Item — an individual selectable card
  */
@@ -54,11 +50,9 @@ export interface ChoiceboxItemProps {
   /** Custom content rendered below title/description when selected */
   children?: React.ReactNode;
 }
-
 // =============================================================================
 // Context
 // =============================================================================
-
 interface ChoiceboxContextType {
   type: ChoiceboxType;
   value: string | string[];
@@ -71,9 +65,7 @@ interface ChoiceboxContextType {
   /** First item value in insertion order (roving tabindex fallback) */
   getFirstItemValue: () => string | undefined;
 }
-
 const ChoiceboxContext = React.createContext<ChoiceboxContextType | null>(null);
-
 function useChoiceboxContext(): ChoiceboxContextType {
   const context = React.useContext(ChoiceboxContext);
   if (!context) {
@@ -81,11 +73,9 @@ function useChoiceboxContext(): ChoiceboxContextType {
   }
   return context;
 }
-
 // =============================================================================
 // CVA Variants
 // =============================================================================
-
 export const choiceboxItemVariants = cva(
   [
     "relative flex flex-1 flex-col gap-1 rounded-[var(--radius-lg)] border p-4",
@@ -117,11 +107,9 @@ export const choiceboxItemVariants = cva(
     },
   },
 );
-
 // =============================================================================
 // ChoiceboxItem
 // =============================================================================
-
 function ChoiceboxItem({
   title,
   description,
@@ -139,41 +127,33 @@ function ChoiceboxItem({
     navigateItem,
     getFirstItemValue,
   } = useChoiceboxContext();
-
   const ref = React.useRef<HTMLDivElement>(null);
   const isDisabled = groupDisabled || itemDisabled;
-
   const isSelected =
     type === "radio"
       ? groupValue === value
       : Array.isArray(groupValue) && groupValue.includes(value);
-
   // Register element ref for roving tabindex
   React.useEffect(() => {
     const registeredValue = value;
     registerItem(registeredValue, ref.current);
     return () => registerItem(registeredValue, null);
   }, [value, registerItem]);
-
   // Radio roving tabindex: only selected (or first enabled) item is tabbable
   const isRadio = type === "radio";
   const hasRadioSelection = isRadio && groupValue !== "" && groupValue !== undefined;
   const isFirstItem = !hasRadioSelection && value === getFirstItemValue();
   const tabIndex = isDisabled ? -1 : isRadio ? (isSelected || isFirstItem ? 0 : -1) : 0;
-
   const handleClick = () => {
     if (!isDisabled) onItemSelect(value);
   };
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isDisabled) return;
-
     if (e.key === " " || e.key === "Enter") {
       e.preventDefault();
       onItemSelect(value);
       return;
     }
-
     // Arrow key navigation for radio mode
     if (isRadio) {
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
@@ -185,12 +165,10 @@ function ChoiceboxItem({
       }
     }
   };
-
   const wrapperClassName = cn(
     choiceboxItemVariants({ selected: isSelected, isDisabled }),
     className,
   );
-
   const content = (
     <>
       <div className="flex items-start justify-between gap-3">
@@ -200,7 +178,6 @@ function ChoiceboxItem({
             <span className="text-xs leading-normal text-muted-foreground">{description}</span>
           )}
         </div>
-
         {/* Visual selection indicator */}
         <span
           aria-hidden="true"
@@ -229,18 +206,17 @@ function ChoiceboxItem({
             ))}
         </span>
       </div>
-
       {/* Custom content — visible when selected */}
       {children && isSelected && (
         <div className="mt-2 border-t border-border/50 pt-2">{children}</div>
       )}
     </>
   );
-
   // Conditional rendering — static ARIA attribute values for Edge Tools analysis
   if (isRadio) {
     if (isSelected) {
       return isDisabled ? (
+        // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
         <div
           ref={ref}
           role="radio"
@@ -254,6 +230,7 @@ function ChoiceboxItem({
           {content}
         </div>
       ) : (
+        // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
         <div
           ref={ref}
           role="radio"
@@ -268,6 +245,7 @@ function ChoiceboxItem({
       );
     }
     return isDisabled ? (
+      // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
       <div
         ref={ref}
         role="radio"
@@ -281,6 +259,7 @@ function ChoiceboxItem({
         {content}
       </div>
     ) : (
+      // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
       <div
         ref={ref}
         role="radio"
@@ -294,9 +273,9 @@ function ChoiceboxItem({
       </div>
     );
   }
-
   if (isSelected) {
     return isDisabled ? (
+      // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
       <div
         ref={ref}
         role="checkbox"
@@ -310,6 +289,7 @@ function ChoiceboxItem({
         {content}
       </div>
     ) : (
+      // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
       <div
         ref={ref}
         role="checkbox"
@@ -323,8 +303,8 @@ function ChoiceboxItem({
       </div>
     );
   }
-
   return isDisabled ? (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       ref={ref}
       role="checkbox"
@@ -338,6 +318,7 @@ function ChoiceboxItem({
       {content}
     </div>
   ) : (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       ref={ref}
       role="checkbox"
@@ -352,11 +333,9 @@ function ChoiceboxItem({
   );
 }
 ChoiceboxItem.displayName = "ChoiceboxGroup.Item";
-
 // =============================================================================
 // ChoiceboxGroup
 // =============================================================================
-
 function ChoiceboxGroupRoot({
   type,
   direction = "row",
@@ -375,13 +354,10 @@ function ChoiceboxGroupRoot({
     if (defaultValue !== undefined) return defaultValue;
     return type === "checkbox" ? [] : "";
   });
-
   const currentValue = controlledValue !== undefined ? controlledValue : internalValue;
-
   // Item ref registry for roving tabindex
   const itemRefs = React.useRef<Map<string, HTMLDivElement>>(new Map());
   const itemOrder = React.useRef<string[]>([]);
-
   const registerItem = React.useCallback((itemValue: string, el: HTMLDivElement | null) => {
     if (el) {
       itemRefs.current.set(itemValue, el);
@@ -394,7 +370,6 @@ function ChoiceboxGroupRoot({
       itemOrder.current = itemOrder.current.filter((v) => v !== itemValue);
     }
   }, []);
-
   const onItemSelect = React.useCallback(
     (itemValue: string) => {
       if (type === "radio") {
@@ -411,13 +386,11 @@ function ChoiceboxGroupRoot({
     },
     [type, currentValue, controlledValue, onChange],
   );
-
   const navigateItem = React.useCallback(
     (fromValue: string, dir: 1 | -1) => {
       const order = itemOrder.current;
       let idx = order.indexOf(fromValue);
       if (idx === -1) return;
-
       // Skip disabled items (check aria-disabled on the element)
       let attempts = 0;
       do {
@@ -427,10 +400,8 @@ function ChoiceboxGroupRoot({
         itemRefs.current.get(order[idx] ?? "")?.getAttribute("aria-disabled") === "true" &&
         attempts < order.length
       );
-
       const nextValue = order[idx];
       if (nextValue === undefined) return;
-
       const nextEl = itemRefs.current.get(nextValue);
       if (nextEl && nextEl.getAttribute("aria-disabled") !== "true") {
         nextEl.focus();
@@ -439,9 +410,7 @@ function ChoiceboxGroupRoot({
     },
     [onItemSelect],
   );
-
   const getFirstItemValue = React.useCallback(() => itemOrder.current[0], []);
-
   // Dev warning for type/value mismatch
   if (process.env.NODE_ENV !== "production") {
     if (type === "checkbox" && typeof controlledValue === "string") {
@@ -449,7 +418,6 @@ function ChoiceboxGroupRoot({
     if (type === "radio" && Array.isArray(controlledValue)) {
     }
   }
-
   const contextValue = React.useMemo(
     () => ({
       type,
@@ -462,7 +430,6 @@ function ChoiceboxGroupRoot({
     }),
     [type, currentValue, onItemSelect, disabled, registerItem, navigateItem, getFirstItemValue],
   );
-
   const labelId = React.useId();
   const containerClass = cn(
     "flex",
@@ -472,7 +439,6 @@ function ChoiceboxGroupRoot({
   );
   const ariaLabelledBy = showLabel ? labelId : undefined;
   const ariaLabel = !showLabel ? label : undefined;
-
   return (
     <ChoiceboxContext.Provider value={contextValue}>
       {showLabel && (
@@ -490,6 +456,7 @@ function ChoiceboxGroupRoot({
           {children}
         </div>
       ) : (
+        // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
         <div
           role="group"
           aria-labelledby={ariaLabelledBy}
@@ -503,11 +470,9 @@ function ChoiceboxGroupRoot({
   );
 }
 ChoiceboxGroupRoot.displayName = "ChoiceboxGroup";
-
 // =============================================================================
 // Compound Export
 // =============================================================================
-
 /**
  * ChoiceboxGroup — Geist-style card selection control
  *

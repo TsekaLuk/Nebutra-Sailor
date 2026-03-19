@@ -140,6 +140,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       className={`inset-0 fixed z-50 ${open ? "flex" : "hidden"} items-start justify-center pt-[20vh]`}
     >
       {/* Backdrop */}
+      {/* biome-ignore lint/a11y/useSemanticElements: ARIA headless structure */}
       <div
         className="inset-0 bg-black/40 backdrop-blur-sm absolute"
         role="button"

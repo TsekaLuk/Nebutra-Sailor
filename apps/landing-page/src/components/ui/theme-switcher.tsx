@@ -1,5 +1,4 @@
 "use client";
-
 import { MonitorIcon, MoonStarIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import type { JSX } from "react";
@@ -18,6 +17,7 @@ function ThemeOption({
   onClick: (value: "light" | "system" | "dark") => void;
 }) {
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <button
       type="button"
       className={cn(
@@ -32,29 +32,24 @@ function ThemeOption({
       onClick={() => onClick(value)}
     >
       {icon}
-
       {isActive && (
         <span className="absolute inset-0 rounded-full border border-[var(--neutral-6)]" />
       )}
     </button>
   );
 }
-
 const THEME_OPTIONS = [
   { icon: <SunIcon />, value: "light" as const },
   { icon: <MonitorIcon />, value: "system" as const },
   { icon: <MoonStarIcon />, value: "dark" as const },
 ];
-
 function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const isMounted = useMount();
   const currentTheme = theme ?? "system";
-
   if (!isMounted) {
     return <div className="flex h-8 w-24" />;
   }
-
   return (
     <div
       className="inline-flex items-center overflow-hidden rounded-full bg-[var(--neutral-1)] ring-1 ring-[var(--neutral-6)] ring-inset"

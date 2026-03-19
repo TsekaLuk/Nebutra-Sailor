@@ -88,6 +88,9 @@ function FloatingPaths({ position }: { position: number }) {
 // Visual separator component
 const AuthSeparator = () => {
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA headless structure
+    // biome-ignore lint/a11y/useFocusableInteractive: Visual separator
+    // biome-ignore lint/a11y/useAriaPropsForRole: Visual separator
     <div className="flex w-full items-center justify-center" role="separator">
       <div className="bg-border h-px w-full" />
       <span className="text-muted-foreground px-2 text-xs">OR</span>
@@ -143,29 +146,30 @@ export function AuthPage({
   redirectUrl = "/dashboard",
   className,
 }: AuthPageProps) {
-  const { signIn, isLoaded: isSignInLoaded } = useSignIn();
-  const { signUp, isLoaded: isSignUpLoaded } = useSignUp();
+  const { signIn } = useSignIn();
+  const { signUp } = useSignUp();
 
   const [email, setEmail] = React.useState("");
   const [isLoading, setIsLoading] = React.useState<string | null>(null);
   const [error, setError] = React.useState<string | null>(null);
 
-  const isLoaded = isSignInLoaded && isSignUpLoaded;
-
   // OAuth sign in handler
   const handleOAuthSignIn = async (
     provider: "oauth_google" | "oauth_github" | "oauth_huggingface",
   ) => {
-    if (!signIn) return;
     setIsLoading(provider);
     setError(null);
 
     try {
-      await signIn.authenticateWithRedirect({
+      const { error: ssoError } = await signIn.sso({
         strategy: provider,
-        redirectUrl: "/sso-callback",
-        redirectUrlComplete: redirectUrl,
+        redirectUrl: `${window.location.origin}/sso-callback`,
+        redirectCallbackUrl: redirectUrl,
       });
+      if (ssoError) {
+        setError("Authentication failed. Please try again.");
+        setIsLoading(null);
+      }
     } catch {
       setError("Authentication failed. Please try again.");
       setIsLoading(null);
@@ -175,40 +179,41 @@ export function AuthPage({
   // Email magic link handler
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!signIn || !signUp) return;
     setIsLoading("email");
     setError(null);
 
     try {
       // Try to sign in with email link
-      const result = await signIn.create({
-        identifier: email,
-      });
+      const { error: createError } = await signIn.create({ identifier: email });
 
-      if (result.status === "needs_first_factor") {
+      if (!createError && signIn.status === "needs_first_factor") {
         // User exists, send magic link
-        await signIn.prepareFirstFactor({
-          strategy: "email_link",
-          emailAddressId: result.supportedFirstFactors?.find((f) => f.strategy === "email_link")
-            ?.emailAddressId as string,
-          redirectUrl: `${window.location.origin}/sso-callback?redirect_url=${redirectUrl}`,
+        const { error: linkError } = await signIn.emailLink.sendLink({
+          verificationUrl: `${window.location.origin}/sso-callback?redirect_url=${redirectUrl}`,
         });
-        setError("Check your email for the sign-in link!");
+        if (linkError) {
+          setError("Failed to send sign-in link. Please try again.");
+        } else {
+          setError("Check your email for the sign-in link!");
+        }
+      } else if (createError) {
+        // User doesn't exist, create account
+        const { error: signUpError } = await signUp.create({ emailAddress: email });
+        if (!signUpError) {
+          const { error: verifyError } = await signUp.verifications.sendEmailLink({
+            verificationUrl: `${window.location.origin}/sso-callback?redirect_url=${redirectUrl}`,
+          });
+          if (verifyError) {
+            setError("Failed to send verification email. Please try again.");
+          } else {
+            setError("Check your email to verify your account!");
+          }
+        } else {
+          setError("Something went wrong. Please try again.");
+        }
       }
     } catch {
-      // User doesn't exist, create account
-      try {
-        await signUp.create({
-          emailAddress: email,
-        });
-        await signUp.prepareEmailAddressVerification({
-          strategy: "email_link",
-          redirectUrl: `${window.location.origin}/sso-callback?redirect_url=${redirectUrl}`,
-        });
-        setError("Check your email to verify your account!");
-      } catch {
-        setError("Something went wrong. Please try again.");
-      }
+      setError("Something went wrong. Please try again.");
     } finally {
       setIsLoading(null);
     }
@@ -297,6 +302,7 @@ export function AuthPage({
           )}
 
           {/* OAuth Buttons */}
+          {/* biome-ignore lint/a11y/useSemanticElements: ARIA headless structure */}
           <div className="space-y-2" role="group" aria-label="Social login options">
             {showGoogle && (
               <Button
@@ -304,7 +310,7 @@ export function AuthPage({
                 size="lg"
                 className="w-full"
                 onClick={() => handleOAuthSignIn("oauth_google")}
-                disabled={!isLoaded || isLoading !== null}
+                disabled={isLoading !== null}
               >
                 {isLoading === "oauth_google" ? (
                   <Loader2 className="size-4 me-2 animate-spin" />
@@ -320,7 +326,7 @@ export function AuthPage({
                 size="lg"
                 className="w-full"
                 onClick={() => handleOAuthSignIn("oauth_github")}
-                disabled={!isLoaded || isLoading !== null}
+                disabled={isLoading !== null}
               >
                 {isLoading === "oauth_github" ? (
                   <Loader2 className="size-4 me-2 animate-spin" />
@@ -336,7 +342,7 @@ export function AuthPage({
                 size="lg"
                 className="w-full"
                 onClick={() => handleOAuthSignIn("oauth_huggingface")}
-                disabled={!isLoaded || isLoading !== null}
+                disabled={isLoading !== null}
               >
                 {isLoading === "oauth_huggingface" ? (
                   <Loader2 className="size-4 me-2 animate-spin" />
@@ -364,14 +370,14 @@ export function AuthPage({
                 onChange={(e) => setEmail(e.target.value)}
                 aria-label="Email address"
                 required
-                disabled={!isLoaded || isLoading !== null}
+                disabled={isLoading !== null}
               />
               <div className="text-muted-foreground pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
                 <AtSignIcon className="size-4" aria-hidden="true" />
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={!isLoaded || isLoading !== null}>
+            <Button type="submit" className="w-full" disabled={isLoading !== null}>
               {isLoading === "email" ? <Loader2 className="size-4 me-2 animate-spin" /> : null}
               <span>Continue With Email</span>
             </Button>

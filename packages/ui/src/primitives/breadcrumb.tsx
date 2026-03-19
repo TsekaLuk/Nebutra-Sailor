@@ -1,14 +1,11 @@
 "use client";
-
 import { ChevronRight, MoreHorizontal } from "lucide-react";
 import * as React from "react";
 import { cn } from "../utils";
 import { Slot } from "../utils/slot";
-
 // =============================================================================
 // Types
 // =============================================================================
-
 /**
  * Props for Breadcrumb component
  *
@@ -35,28 +32,20 @@ export interface BreadcrumbProps extends React.ComponentPropsWithoutRef<"nav"> {
    */
   separator?: React.ReactNode;
 }
-
 export type BreadcrumbListProps = React.ComponentPropsWithoutRef<"ol">;
-
 export type BreadcrumbItemProps = React.ComponentPropsWithoutRef<"li">;
-
 export interface BreadcrumbLinkProps extends React.ComponentPropsWithoutRef<"a"> {
   /**
    * Render as child component (for use with Next.js Link, etc.)
    */
   asChild?: boolean;
 }
-
 export type BreadcrumbPageProps = React.ComponentPropsWithoutRef<"span">;
-
 export type BreadcrumbSeparatorProps = React.ComponentPropsWithoutRef<"li">;
-
 export type BreadcrumbEllipsisProps = React.ComponentPropsWithoutRef<"span">;
-
 // =============================================================================
 // Components
 // =============================================================================
-
 /**
  * Breadcrumb - Root navigation container
  *
@@ -92,7 +81,6 @@ const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(({ ...props },
   <nav ref={ref} aria-label="breadcrumb" {...props} />
 ));
 Breadcrumb.displayName = "Breadcrumb";
-
 /**
  * BreadcrumbList - Ordered list container for breadcrumb items
  */
@@ -109,7 +97,6 @@ const BreadcrumbList = React.forwardRef<HTMLOListElement, BreadcrumbListProps>(
   ),
 );
 BreadcrumbList.displayName = "BreadcrumbList";
-
 /**
  * BreadcrumbItem - Individual breadcrumb item wrapper
  */
@@ -119,7 +106,6 @@ const BreadcrumbItem = React.forwardRef<HTMLLIElement, BreadcrumbItemProps>(
   ),
 );
 BreadcrumbItem.displayName = "BreadcrumbItem";
-
 /**
  * BreadcrumbLink - Clickable link within a breadcrumb item
  *
@@ -143,7 +129,6 @@ BreadcrumbItem.displayName = "BreadcrumbItem";
 const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
   ({ asChild, className, ...props }, ref) => {
     const Comp = asChild ? Slot : "a";
-
     return (
       <Comp
         ref={ref}
@@ -154,12 +139,12 @@ const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
   },
 );
 BreadcrumbLink.displayName = "BreadcrumbLink";
-
 /**
  * BreadcrumbPage - Current page indicator (non-interactive)
  */
 const BreadcrumbPage = React.forwardRef<HTMLSpanElement, BreadcrumbPageProps>(
   ({ className, ...props }, ref) => (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <span
       ref={ref}
       role="link"
@@ -171,7 +156,6 @@ const BreadcrumbPage = React.forwardRef<HTMLSpanElement, BreadcrumbPageProps>(
   ),
 );
 BreadcrumbPage.displayName = "BreadcrumbPage";
-
 /**
  * BreadcrumbSeparator - Visual separator between items
  *
@@ -196,7 +180,6 @@ const BreadcrumbSeparator = ({ children, className, ...props }: BreadcrumbSepara
   </li>
 );
 BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
-
 /**
  * BreadcrumbEllipsis - Collapsed items indicator
  *

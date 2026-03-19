@@ -17,7 +17,9 @@
       "!**/public",
       "!**/build",
       "!**/.turbo",
-      "!**/.vscode"
+      "!**/.vscode",
+      "!**/*.html",
+      "!**/generated"
     ]
   },
   "formatter": {
@@ -29,11 +31,20 @@
     "lineWidth": 100,
     "attributePosition": "auto"
   },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
       "style": {
         "noNonNullAssertion": "off",
         "useImportType": "warn",
@@ -46,9 +57,39 @@
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
+        "noAssignInExpressions": "off",
+        "noImplicitAnyLet": "off",
         "noEmptyInterface": "off",
         "noConsole": "warn",
-        "noGlobalIsNan": "warn"
+        "noGlobalIsNan": "warn",
+        "noDuplicateJsxProps": "warn",
+        "noDuplicateProperties": "warn",
+        "noShadowRestrictedNames": "warn",
+        "noTemplateCurlyInString": "warn",
+        "useIterableCallbackReturn": "warn"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "warn",
+        "useJsxKeyInIterable": "warn",
+        "noInvalidPositionAtImportRule": "warn",
+        "noInvalidDirectionInLinearGradient": "warn",
+        "noUnreachable": "warn"
+      },
+      "performance": {
+        "noAccumulatingSpread": "warn"
+      },
+      "a11y": {
+        "noLabelWithoutControl": "warn",
+        "noStaticElementInteractions": "warn",
+        "noSvgWithoutTitle": "warn",
+        "useButtonType": "warn",
+        "useKeyWithClickEvents": "warn",
+        "useFocusableInteractive": "warn",
+        "useValidAnchor": "warn",
+        "useAriaPropsForRole": "warn",
+        "useAriaPropsSupportedByRole": "warn",
+        "useAnchorContent": "warn"
       }
     }
   },
