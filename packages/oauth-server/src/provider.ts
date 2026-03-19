@@ -10,7 +10,7 @@
  *   app.use("/oidc", provider.callback());
  */
 
-import Provider from "oidc-provider"
+import Provider, { type AccountClaims } from "oidc-provider"
 import type { PrismaClient } from "@nebutra/db"
 import type { Redis } from "ioredis"
 import { createPrismaAdapter } from "./adapters/prisma-adapter.js"
@@ -94,14 +94,6 @@ export function createNebutraOIDCProvider(config: NebutraOIDCConfig): Provider {
 
     // Supported features
     features: {
-      // Authorization Code + PKCE (primary flow)
-      pkce: {
-        required: (_ctx, client) => {
-          // PKCE required for public clients, recommended for confidential
-          return client.tokenEndpointAuthMethod === "none"
-        },
-      },
-
       // Client Credentials (machine-to-machine)
       clientCredentials: { enabled: true },
 
@@ -118,6 +110,8 @@ export function createNebutraOIDCProvider(config: NebutraOIDCConfig): Provider {
       // Device Authorization Grant (for CLI tools — Phase 2)
       devInteractions: { enabled: debug },
     },
+
+    // PKCE is enforced by default in oidc-provider v9 for public clients
 
     // Token TTL configuration
     ttl: {
@@ -171,8 +165,8 @@ export function createNebutraOIDCProvider(config: NebutraOIDCConfig): Provider {
 
       return {
         accountId: id,
-        async claims(_use, scope) {
-          const claims: Record<string, unknown> = {
+        async claims(_use: string, scope: string): Promise<AccountClaims> {
+          const claims: AccountClaims = {
             sub: user.id,
           }
 

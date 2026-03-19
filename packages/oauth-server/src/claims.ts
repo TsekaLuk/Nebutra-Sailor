@@ -34,7 +34,7 @@ export const NEBUTRA_CLAIMS = {
   "content:read": ["nebutra:organization_id"],
   "content:write": ["nebutra:organization_id"],
   "billing:read": ["nebutra:organization_id", "nebutra:plan"],
-} as const
+}
 
 /**
  * All supported scopes

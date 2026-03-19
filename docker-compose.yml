@@ -212,6 +212,32 @@ services:
     profiles: ["analytics"]
 
   # ============================================
+  # Identity Provider (OAuth 2.0 / OIDC)
+  # ============================================
+
+  idp:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.node
+      args:
+        APP: idp
+    container_name: nebutra-idp
+    ports:
+      - "127.0.0.1:3100:3100"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/nebutra
+      - REDIS_URL=redis://redis:6379
+      - OIDC_ISSUER=http://localhost:3100
+      - OIDC_COOKIE_KEYS=dev-cookie-key-1,dev-cookie-key-2
+      - NODE_ENV=development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles: ["idp", "core"]
+
+  # ============================================
   # Observability (optional)
   # ============================================
 
