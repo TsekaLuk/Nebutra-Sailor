@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.2](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.1...v1.7.2) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* lazy-import OTel FastAPI instrumentation to avoid pkg_resources at module load ([a2c7d28](https://github.com/Nebutra/Nebutra-Sailor/commit/a2c7d28365cb222ef11122054f84232d9229d241))
+
 ## [1.7.1](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.0...v1.7.1) (2026-03-19)
 
 
