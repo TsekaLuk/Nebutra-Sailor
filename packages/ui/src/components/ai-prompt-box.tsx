@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -18,7 +20,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../pri
 
 // Utility function for className merging
 const cn = (...classes: (string | undefined | null | false)[]) => classes.filter(Boolean).join(" ");
-
 // Embedded CSS for minimal custom styles
 const styles = `
   *:focus-visible {
@@ -39,14 +40,12 @@ const styles = `
     background-color: hsl(var(--muted-foreground));
   }
 `;
-
 // Inject styles into document
 if (typeof document !== "undefined") {
   const styleSheet = document.createElement("style");
   styleSheet.innerText = styles;
   document.head.appendChild(styleSheet);
 }
-
 // Textarea Component
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
@@ -65,7 +64,6 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ),
 );
 Textarea.displayName = "Textarea";
-
 // Button Component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "outline" | "ghost";
@@ -99,7 +97,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   },
 );
 Button.displayName = "Button";
-
 // VoiceRecorder Component
 interface VoiceRecorderProps {
   isRecording: boolean;
@@ -115,7 +112,6 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
 }) => {
   const [time, setTime] = React.useState(0);
   const timerRef = React.useRef<NodeJS.Timeout | null>(null);
-
   React.useEffect(() => {
     if (isRecording) {
       onStartRecording();
@@ -132,13 +128,11 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [isRecording, time, onStartRecording, onStopRecording]);
-
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
-
   return (
     <div
       className={cn(
@@ -166,7 +160,6 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
     </div>
   );
 };
-
 // ImageViewDialog Component
 interface ImageViewDialogProps {
   imageUrl: string | null;
@@ -185,17 +178,17 @@ const ImageViewDialog: React.FC<ImageViewDialogProps> = ({ imageUrl, onClose }) 
           transition={{ duration: 0.2, ease: "easeOut" }}
           className="relative bg-background rounded-2xl overflow-hidden shadow-2xl"
         >
-          <img
+          <Image
             src={imageUrl}
             alt="Full preview"
             className="w-full max-h-[80vh] object-contain rounded-2xl"
+            fill
           />
         </motion.div>
       </DialogContent>
     </Dialog>
   );
 };
-
 // PromptInput Context and Components
 interface PromptInputContextType {
   isLoading: boolean;
@@ -218,7 +211,6 @@ function usePromptInput() {
   if (!context) throw new Error("usePromptInput must be used within a PromptInput");
   return context;
 }
-
 interface PromptInputProps {
   isLoading?: boolean;
   value?: string;
@@ -266,6 +258,7 @@ const PromptInput = React.forwardRef<HTMLDivElement, PromptInputProps>(
             disabled,
           }}
         >
+          {/* biome-ignore lint/a11y/noStaticElementInteractions: drag-drop zone uses div intentionally */}
           <div
             ref={ref}
             className={cn(
@@ -285,7 +278,6 @@ const PromptInput = React.forwardRef<HTMLDivElement, PromptInputProps>(
   },
 );
 PromptInput.displayName = "PromptInput";
-
 interface PromptInputTextareaProps {
   disableAutosize?: boolean;
   placeholder?: string;
@@ -297,7 +289,6 @@ const PromptInputTextarea: React.FC<
 > = ({ className, onKeyDown, disableAutosize = false, placeholder, ...props }) => {
   const { value, setValue, maxHeight, onSubmit, disabled } = usePromptInput();
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
-
   React.useEffect(() => {
     if (disableAutosize || !textareaRef.current) return;
     textareaRef.current.style.height = "auto";
@@ -306,7 +297,6 @@ const PromptInputTextarea: React.FC<
         ? `${Math.min(textareaRef.current.scrollHeight, maxHeight)}px`
         : `min(${textareaRef.current.scrollHeight}px, ${maxHeight})`;
   }, [maxHeight, disableAutosize]);
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -314,7 +304,6 @@ const PromptInputTextarea: React.FC<
     }
     onKeyDown?.(e);
   };
-
   return (
     <Textarea
       ref={textareaRef}
@@ -328,7 +317,6 @@ const PromptInputTextarea: React.FC<
     />
   );
 };
-
 type PromptInputActionsProps = React.HTMLAttributes<HTMLDivElement>;
 const PromptInputActions: React.FC<PromptInputActionsProps> = ({
   children,
@@ -339,7 +327,6 @@ const PromptInputActions: React.FC<PromptInputActionsProps> = ({
     {children}
   </div>
 );
-
 interface PromptInputActionProps extends Omit<React.ComponentProps<typeof Tooltip>, "children"> {
   tooltip: React.ReactNode;
   children: React.ReactNode;
@@ -365,7 +352,6 @@ const PromptInputAction: React.FC<PromptInputActionProps> = ({
     </Tooltip>
   );
 };
-
 // Custom Divider Component
 const CustomDivider: React.FC = () => (
   <div className="relative h-6 w-[1.5px] mx-1">
@@ -378,7 +364,6 @@ const CustomDivider: React.FC = () => (
     />
   </div>
 );
-
 // Main PromptInputBox Component
 interface PromptInputBoxProps {
   onSend?: (message: string, files?: File[]) => void;
@@ -404,7 +389,6 @@ export const PromptInputBox = React.forwardRef(
     const [showCanvas, setShowCanvas] = React.useState(false);
     const uploadInputRef = React.useRef<HTMLInputElement>(null);
     const promptBoxRef = React.useRef<HTMLDivElement>(null);
-
     const handleToggleChange = (value: string) => {
       if (value === "search") {
         setShowSearch((prev) => !prev);
@@ -414,34 +398,31 @@ export const PromptInputBox = React.forwardRef(
         setShowSearch(false);
       }
     };
-
     const handleCanvasToggle = () => setShowCanvas((prev) => !prev);
-
-    const isImageFile = (file: File) => file.type.startsWith("image/");
-
-    const processFile = (file: File) => {
-      if (!isImageFile(file)) {
-        return;
-      }
-      if (file.size > 10 * 1024 * 1024) {
-        return;
-      }
-      setFiles([file]);
-      const reader = new FileReader();
-      reader.onload = (e) => setFilePreviews({ [file.name]: e.target?.result as string });
-      reader.readAsDataURL(file);
-    };
-
+    const isImageFile = React.useCallback((file: File) => file.type.startsWith("image/"), []);
+    const processFile = React.useCallback(
+      (file: File) => {
+        if (!isImageFile(file)) {
+          return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+          return;
+        }
+        setFiles([file]);
+        const reader = new FileReader();
+        reader.onload = (e) => setFilePreviews({ [file.name]: e.target?.result as string });
+        reader.readAsDataURL(file);
+      },
+      [isImageFile],
+    );
     const handleDragOver = React.useCallback((e: React.DragEvent) => {
       e.preventDefault();
       e.stopPropagation();
     }, []);
-
     const handleDragLeave = React.useCallback((e: React.DragEvent) => {
       e.preventDefault();
       e.stopPropagation();
     }, []);
-
     const handleDrop = React.useCallback(
       (e: React.DragEvent) => {
         e.preventDefault();
@@ -453,7 +434,6 @@ export const PromptInputBox = React.forwardRef(
       },
       [isImageFile, processFile],
     );
-
     const handleRemoveFile = (index: number) => {
       const fileToRemove = files[index];
       if (fileToRemove && filePreviews[fileToRemove.name]) {
@@ -463,9 +443,7 @@ export const PromptInputBox = React.forwardRef(
       }
       setFiles([]);
     };
-
     const openImageModal = (imageUrl: string) => setSelectedImage(imageUrl);
-
     const handlePaste = React.useCallback(
       (e: ClipboardEvent) => {
         const items = e.clipboardData?.items;
@@ -484,12 +462,10 @@ export const PromptInputBox = React.forwardRef(
       },
       [processFile],
     );
-
     React.useEffect(() => {
       document.addEventListener("paste", handlePaste);
       return () => document.removeEventListener("paste", handlePaste);
     }, [handlePaste]);
-
     const handleSubmit = () => {
       if (input.trim() || files.length > 0) {
         let messagePrefix = "";
@@ -503,16 +479,12 @@ export const PromptInputBox = React.forwardRef(
         setFilePreviews({});
       }
     };
-
     const handleStartRecording = () => {};
-
     const handleStopRecording = (duration: number) => {
       setIsRecording(false);
       onSend(`[Voice message - ${duration} seconds]`, []);
     };
-
     const hasContent = input.trim() !== "" || files.length > 0;
-
     return (
       <>
         <PromptInput
@@ -536,6 +508,7 @@ export const PromptInputBox = React.forwardRef(
               {files.map((file, index) => (
                 <div key={index} className="relative group">
                   {file.type.startsWith("image/") && filePreviews[file.name] && (
+                    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
                     <div
                       role="button"
                       tabIndex={0}
@@ -552,10 +525,11 @@ export const PromptInputBox = React.forwardRef(
                         if (preview) openImageModal(preview);
                       }}
                     >
-                      <img
-                        src={filePreviews[file.name]}
+                      <Image
+                        src={filePreviews[file.name] ?? ""}
                         alt={file.name}
                         className="h-full w-full object-cover"
+                        fill
                       />
                       <button
                         type="button"
@@ -573,7 +547,6 @@ export const PromptInputBox = React.forwardRef(
               ))}
             </div>
           )}
-
           <div
             className={cn(
               "transition-all duration-300",
@@ -593,7 +566,6 @@ export const PromptInputBox = React.forwardRef(
               className="text-base"
             />
           </div>
-
           {isRecording && (
             <VoiceRecorder
               isRecording={isRecording}
@@ -601,7 +573,6 @@ export const PromptInputBox = React.forwardRef(
               onStopRecording={handleStopRecording}
             />
           )}
-
           <PromptInputActions className="flex items-center justify-between gap-2 p-0 pt-2">
             <div
               className={cn(
@@ -630,7 +601,6 @@ export const PromptInputBox = React.forwardRef(
                   />
                 </button>
               </PromptInputAction>
-
               <div className="flex items-center">
                 <button
                   type="button"
@@ -669,9 +639,7 @@ export const PromptInputBox = React.forwardRef(
                     )}
                   </AnimatePresence>
                 </button>
-
                 <CustomDivider />
-
                 <button
                   type="button"
                   onClick={() => handleToggleChange("think")}
@@ -711,9 +679,7 @@ export const PromptInputBox = React.forwardRef(
                     )}
                   </AnimatePresence>
                 </button>
-
                 <CustomDivider />
-
                 <button
                   type="button"
                   onClick={handleCanvasToggle}
@@ -755,7 +721,6 @@ export const PromptInputBox = React.forwardRef(
                 </button>
               </div>
             </div>
-
             <PromptInputAction
               tooltip={
                 isLoading
@@ -798,7 +763,6 @@ export const PromptInputBox = React.forwardRef(
             </PromptInputAction>
           </PromptInputActions>
         </PromptInput>
-
         <ImageViewDialog imageUrl={selectedImage} onClose={() => setSelectedImage(null)} />
       </>
     );
