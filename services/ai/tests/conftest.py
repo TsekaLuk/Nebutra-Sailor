@@ -29,6 +29,9 @@ async def client():
     """Return an async test client for the ai-service FastAPI app."""
     # Patch OTel endpoint so instrument_app exits early (no collector in CI)
     os.environ.pop("OTEL_EXPORTER_OTLP_ENDPOINT", None)
+    # AsyncOpenAI validates api_key at instantiation; set a stub so module-level
+    # client creation doesn't raise before service functions are mocked.
+    os.environ.setdefault("OPENAI_API_KEY", "sk-test-stub-key-for-ci")
 
     from app.main import app  # import after patching env
 
