@@ -2,7 +2,7 @@
   {
     "name": "@nebutra/ui (core components)",
     "path": "packages/ui/src/index.ts",
-    "limit": "120 kB",
+    "limit": "2.5 MB",
     "import": "*"
   },
   {

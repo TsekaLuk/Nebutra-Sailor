@@ -25,11 +25,7 @@ export const presets: Record<string, PresetDefinition> = {
 };
 
 export function getPreset(id: string): PresetDefinition {
-  const parsed = PresetId.parse(id);
-  const preset = presets[parsed];
-  /* v8 ignore next 3 */
-  if (!preset) {
-    throw new Error(`Unknown preset: ${id}`);
-  }
-  return preset;
+  // PresetId.parse() validates and throws a ZodError for unknown IDs,
+  // so the lookup is always defined.
+  return presets[PresetId.parse(id)] as PresetDefinition;
 }

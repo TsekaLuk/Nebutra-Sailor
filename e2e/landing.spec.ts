@@ -10,7 +10,7 @@ test.describe("Landing Page", () => {
 
   test("navigation links are present", async ({ page }) => {
     await page.goto("/");
-    const nav = page.getByRole("navigation");
+    const nav = page.getByRole("navigation").first();
     await expect(nav).toBeVisible();
   });
 

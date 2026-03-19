@@ -3,17 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "description": "Transactional email via Resend for Nebutra platform",
-  "main": "./src/index.ts",
+  "type": "module",
+  "main": "./dist/index.js",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
     "resend": "^4.0.1"
   },
   "devDependencies": {
+    "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   }
 }
