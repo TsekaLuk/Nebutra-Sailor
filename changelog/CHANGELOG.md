@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.4](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.3...v1.7.4) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* restore "use client" directives to top of file in @nebutra/ui ([b76f056](https://github.com/Nebutra/Nebutra-Sailor/commit/b76f056b1c973b3c2249b4f17f3a437907a79308))
+
 ## [1.7.3](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.2...v1.7.3) (2026-03-19)
 
 
