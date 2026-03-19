@@ -483,6 +483,10 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Build workspace packages (required by landing-page webServer)
+        run: pnpm turbo build --filter="./packages/*"
+        env:
+          SKIP_ENV_VALIDATION: true
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
@@ -535,8 +539,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build api-gateway
-        run: pnpm --filter @nebutra/api-gateway build
+      - name: Build api-gateway and dependencies
+        run: pnpm turbo build --filter @nebutra/api-gateway
         env:
           SKIP_ENV_VALIDATION: true
 

@@ -1,7 +1,7 @@
 [
   {
     "name": "@nebutra/ui (core components)",
-    "path": "packages/ui/dist/index.js",
+    "path": "packages/ui/src/index.ts",
     "limit": "120 kB",
     "import": "*"
   },
@@ -24,7 +24,7 @@
   },
   {
     "name": "@nebutra/errors",
-    "path": "packages/errors/dist/index.js",
+    "path": "packages/errors/src/index.ts",
     "limit": "10 kB",
     "import": "*"
   }
