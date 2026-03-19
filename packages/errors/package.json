@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Unified error handling and API error responses",
+  "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {

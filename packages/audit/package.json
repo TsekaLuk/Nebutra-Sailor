@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Audit logging for sensitive operations",
+  "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {

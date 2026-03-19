@@ -1,6 +1,7 @@
 {
   "name": "@nebutra/cache",
   "version": "0.0.1",
+  "type": "module",
   "private": true,
   "main": "./src/index.ts",
   "types": "./src/index.ts",

@@ -17,6 +17,9 @@ process.env.DATABASE_URL ??= "postgresql://stub:stub@localhost:5432/stub";
 process.env.REDIS_URL ??= "redis://localhost:6379";
 process.env.CLERK_SECRET_KEY ??= "sk_test_stub";
 process.env.NODE_ENV ??= "production";
+process.env.RESEND_API_KEY ??= "re_stub_key_for_spec_export";
+process.env.UPSTASH_REDIS_REST_URL ??= "https://stub.upstash.io";
+process.env.UPSTASH_REDIS_REST_TOKEN ??= "stub_token_for_spec_export";
 
 const { default: app } = await import("../src/index.js");
 
@@ -30,3 +33,8 @@ const spec = await response.json();
 const outPath = resolve(import.meta.dirname, "../openapi.json");
 
 writeFileSync(outPath, JSON.stringify(spec, null, 2), "utf-8");
+
+// Force exit: importing src/index.js starts the HTTP server as a side effect,
+// which keeps the Node process alive. We must explicitly exit after the spec
+// is written so CI doesn't hang.
+process.exit(0);
