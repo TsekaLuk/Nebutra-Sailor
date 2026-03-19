@@ -36,7 +36,7 @@ test.describe("Landing Page", () => {
   });
 
   test("page has no broken images", async ({ page }) => {
-    const failedImages: string[] = [];
+    const failedImages: Array<{ url: string; status: number }> = [];
     page.on("response", (response) => {
       const url = response.url();
       // Skip Next.js image optimization proxy responses — those may fail in CI
@@ -44,11 +44,11 @@ test.describe("Landing Page", () => {
       // We only care about locally-served static images (e.g. /images/foo.png).
       if (url.includes("/_next/image")) return;
       if (response.request().resourceType() === "image" && !response.ok()) {
-        failedImages.push(url);
+        failedImages.push({ url, status: response.status() });
       }
     });
     await page.goto("/");
     await page.waitForLoadState("networkidle");
-    expect(failedImages).toHaveLength(0);
+    expect(failedImages, `Broken images: ${JSON.stringify(failedImages)}`).toHaveLength(0);
   });
 });
