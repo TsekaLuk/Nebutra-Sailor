@@ -1,10 +1,11 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsup"
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/config.ts", "src/provider.ts", "src/models.ts"],
   format: ["esm"],
   dts: true,
   clean: true,
-  target: "node18",
+  target: "node20",
   outDir: "dist",
-});
+  splitting: true,
+})

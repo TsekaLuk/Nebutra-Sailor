@@ -1,49 +1,161 @@
-import { generateText as _generateText, streamText as _streamText, type ModelMessage } from "ai";
-import { openai } from "@ai-sdk/openai";
+import {
+  generateText as _generateText,
+  streamText as _streamText,
+  embed as _embed,
+  embedMany as _embedMany,
+  type ModelMessage,
+  type GenerateTextResult,
+  type StreamTextResult,
+  type JSONValue,
+} from "ai"
+import {
+  NebutraAIConfigSchema,
+  type NebutraAIConfig,
+  type ResolvedNebutraAIConfig,
+} from "./config.js"
+import { createModel, createEmbeddingModel } from "./provider.js"
 
-export interface NebutraAIOptions {
-  systemPrompt?: string;
-  temperature?: number;
-  maxTokens?: number;
-}
+// ---------------------------------------------------------------------------
+// Singleton config — call `configure()` once at app startup
+// ---------------------------------------------------------------------------
 
-const DEFAULT_OPTIONS = {
-  temperature: 0.7,
-  maxTokens: 1000,
-};
+let _resolved: ResolvedNebutraAIConfig = NebutraAIConfigSchema.parse({})
 
 /**
- * Generates a full text response from the global Nebutra OpenAI configuration.
+ * Initialise the global Nebutra AI configuration.
+ * Call once in your app entry point (e.g. instrumentation.ts or layout.tsx).
+ *
+ * @example
+ * ```ts
+ * import { configure } from "@nebutra/ai-sdk";
+ *
+ * configure({ provider: "openrouter" });
+ * // → reads OPENROUTER_API_KEY from env automatically
+ * ```
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateText(messages: ModelMessage[], options?: NebutraAIOptions): Promise<any> {
-  const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
-  
+export function configure(config: NebutraAIConfig = {}): void {
+  _resolved = NebutraAIConfigSchema.parse(config)
+}
+
+/** Returns the current resolved config (read-only). */
+export function getConfig(): Readonly<ResolvedNebutraAIConfig> {
+  return _resolved
+}
+
+// ---------------------------------------------------------------------------
+// Core generation helpers
+// ---------------------------------------------------------------------------
+
+export interface GenerateOptions {
+  /** Model ID or preset alias (e.g. "flagship", "fast", "anthropic/claude-sonnet-4"). */
+  model?: string
+  /** System prompt prepended to the conversation. */
+  system?: string
+  temperature?: number
+  maxTokens?: number
+  /** OpenRouter-specific provider options (reasoning, cacheControl, etc.). */
+  providerOptions?: Record<string, JSONValue | undefined>
+}
+
+/**
+ * Generate a complete text response.
+ *
+ * @example
+ * ```ts
+ * const { text } = await generateText(
+ *   [{ role: "user", content: "Explain monorepos" }],
+ *   { model: "fast" },
+ * );
+ * ```
+ */
+export async function generateText(
+  messages: ModelMessage[],
+  options: GenerateOptions = {}
+): Promise<GenerateTextResult<Record<string, never>, never>> {
+  const model = createModel(options.model ?? _resolved.defaultModel, _resolved)
+
   return await _generateText({
-    model: openai("gpt-4o-mini"),
+    model,
     messages,
-    ...(mergedOptions.systemPrompt ? { system: mergedOptions.systemPrompt } : {}),
-    temperature: mergedOptions.temperature,
-    // Note: Vercel AI 6+ passes maxTokens natively underneath if supported or defaults. 
-    // If we want constraints, `maxSteps` is preferred for tools, or we omit `maxTokens` 
-    // from the core CallSettings if it was removed in this specific union.
-  });
+    ...(options.system ? { system: options.system } : {}),
+    temperature: options.temperature ?? _resolved.temperature,
+    ...(options.maxTokens ? { maxTokens: options.maxTokens } : {}),
+    ...(options.providerOptions
+      ? { providerOptions: { openrouter: options.providerOptions } }
+      : {}),
+  })
 }
 
 /**
- * Returns a streaming standard Vercel AI text response from the global Nebutra configuration.
+ * Stream a text response for real-time UI.
+ *
+ * @example
+ * ```ts
+ * const result = await streamText(
+ *   [{ role: "user", content: "Write a haiku" }],
+ *   { model: "flagship" },
+ * );
+ * for await (const chunk of result.textStream) {
+ *   process.stdout.write(chunk);
+ * }
+ * ```
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function streamText(messages: ModelMessage[], options?: NebutraAIOptions): Promise<any> {
-  const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
-  
-  return await _streamText({
-    model: openai("gpt-4o-mini"),
+export async function streamText(
+  messages: ModelMessage[],
+  options: GenerateOptions = {}
+): Promise<StreamTextResult<Record<string, never>, never>> {
+  const model = createModel(options.model ?? _resolved.defaultModel, _resolved)
+
+  return _streamText({
+    model,
     messages,
-    ...(mergedOptions.systemPrompt ? { system: mergedOptions.systemPrompt } : {}),
-    temperature: mergedOptions.temperature,
-  });
+    ...(options.system ? { system: options.system } : {}),
+    temperature: options.temperature ?? _resolved.temperature,
+    ...(options.maxTokens ? { maxTokens: options.maxTokens } : {}),
+    ...(options.providerOptions
+      ? { providerOptions: { openrouter: options.providerOptions } }
+      : {}),
+  })
 }
 
-// Re-export core Vercel AI types for downstream consumption
-export type { ModelMessage, Tool } from "ai";
+// ---------------------------------------------------------------------------
+// Embeddings
+// ---------------------------------------------------------------------------
+
+export interface EmbedOptions {
+  /** Embedding model ID or preset alias. Defaults to "embedding". */
+  model?: string
+}
+
+/**
+ * Generate an embedding vector for a single value.
+ */
+export async function embed(value: string, options: EmbedOptions = {}) {
+  const model = createEmbeddingModel(options.model ?? "embedding", _resolved)
+  return await _embed({ model, value })
+}
+
+/**
+ * Generate embedding vectors for multiple values in a single request.
+ */
+export async function embedMany(values: string[], options: EmbedOptions = {}) {
+  const model = createEmbeddingModel(options.model ?? "embedding", _resolved)
+  return await _embedMany({ model, values })
+}
+
+// ---------------------------------------------------------------------------
+// Low-level access — for advanced use cases
+// ---------------------------------------------------------------------------
+
+export { createModel, createEmbeddingModel } from "./provider.js"
+export { resolveModel, models } from "./models.js"
+export type { ModelPreset } from "./models.js"
+export {
+  NebutraAIConfigSchema,
+  type NebutraAIConfig,
+  type ResolvedNebutraAIConfig,
+  type ProviderType,
+} from "./config.js"
+
+// Re-export core AI SDK types for downstream consumption
+export type { ModelMessage, GenerateTextResult, StreamTextResult } from "ai"

@@ -1,28 +1,52 @@
 {
   "name": "@nebutra/ai-sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./models": {
+      "types": "./dist/models.d.ts",
+      "import": "./dist/models.js"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js"
+    },
+    "./provider": {
+      "types": "./dist/provider.d.ts",
+      "import": "./dist/provider.js"
+    }
   },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "ai",
+    "openrouter",
+    "vercel-ai-sdk",
+    "nebutra"
+  ],
+  "author": "Nebutra Intelligence",
   "license": "ISC",
   "packageManager": "pnpm@10.32.1",
   "dependencies": {
     "@ai-sdk/openai": "^3.0.41",
+    "@openrouter/ai-sdk-provider": "^2.3.3",
     "@types/node": "catalog:",
     "ai": "^6.0.116",
     "tsup": "catalog:",
     "typescript": "catalog:",
     "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "ai": "^6.0.0"
   }
 }

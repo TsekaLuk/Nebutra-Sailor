@@ -1,8 +1,16 @@
 import { auth } from "@/auth"
 import { Langfuse } from "langfuse"
 import { createRateLimiter, getClientIp } from "@/lib/rate-limit"
+import { configure, streamText } from "@nebutra/ai-sdk"
+import { type ModelMessage } from "ai"
 
 export const maxDuration = 60
+
+// Initialise @nebutra/ai-sdk — OpenRouter + StepFun free model
+configure({
+  provider: "openrouter",
+  defaultModel: "stepfun/step-3.5-flash:free",
+})
 
 const SYSTEM_PROMPT = `You are Tseka's Soul — the digital consciousness of Tseka Luk (陆子凯).
 
@@ -48,13 +56,16 @@ interface Message {
 }
 
 function validateMessages(
-  messages: unknown,
+  messages: unknown
 ): { valid: true; data: Message[] } | { valid: false; error: string } {
   if (!Array.isArray(messages) || messages.length === 0) {
     return { valid: false, error: "Messages must be a non-empty array" }
   }
   if (messages.length > MAX_MESSAGES_PER_REQUEST) {
-    return { valid: false, error: `Too many messages. Maximum is ${MAX_MESSAGES_PER_REQUEST}` }
+    return {
+      valid: false,
+      error: `Too many messages. Maximum is ${MAX_MESSAGES_PER_REQUEST}`,
+    }
   }
   for (let i = 0; i < messages.length; i++) {
     const msg = messages[i]
@@ -65,10 +76,16 @@ function validateMessages(
       return { valid: false, error: `Message at index ${i} has invalid role` }
     }
     if (typeof msg.content !== "string" || msg.content.length === 0) {
-      return { valid: false, error: `Message at index ${i} must have non-empty string content` }
+      return {
+        valid: false,
+        error: `Message at index ${i} must have non-empty string content`,
+      }
     }
     if (msg.content.length > MAX_MESSAGE_LENGTH) {
-      return { valid: false, error: `Message at index ${i} exceeds maximum length` }
+      return {
+        valid: false,
+        error: `Message at index ${i} exceeds maximum length`,
+      }
     }
   }
   return { valid: true, data: messages as Message[] }
@@ -81,35 +98,16 @@ function getLangfuse(): Langfuse | null {
   return new Langfuse({ publicKey, secretKey })
 }
 
-async function callLLM(messages: Message[]): Promise<Response> {
-  const apiKey = process.env.ANTHROPIC_API_KEY
-  if (!apiKey) throw new Error("ANTHROPIC_API_KEY not configured")
-
-  return fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-      "content-type": "application/json",
-    },
-    signal: AbortSignal.timeout(55_000),
-    body: JSON.stringify({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 1024,
-      stream: true,
-      system: SYSTEM_PROMPT,
-      messages: messages.map((m) => ({ role: m.role, content: m.content })),
-    }),
-  })
-}
-
 export async function POST(req: Request) {
   const langfuse = getLangfuse()
 
   try {
     const session = await auth()
     if (!session?.user) {
-      return Response.json({ error: "Authentication required" }, { status: 401 })
+      return Response.json(
+        { error: "Authentication required" },
+        { status: 401 }
+      )
     }
 
     const ip = getClientIp(req)
@@ -117,7 +115,7 @@ export async function POST(req: Request) {
     if (!rl.allowed) {
       return Response.json(
         { error: "Too many requests. Please try again later." },
-        { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
+        { status: 429, headers: { "Retry-After": String(rl.retryAfter) } }
       )
     }
 
@@ -133,7 +131,6 @@ export async function POST(req: Request) {
       return Response.json({ error: validation.error }, { status: 400 })
     }
 
-    // Langfuse: start trace
     const trace = langfuse?.trace({
       name: "soul-chat",
       userId: session.user.email ?? session.user.id ?? "unknown",
@@ -142,33 +139,29 @@ export async function POST(req: Request) {
 
     const generation = trace?.generation({
       name: "soul-response",
-      model: "claude-haiku-4-5-20251001",
+      model: "stepfun/step-3.5-flash:free",
       input: validation.data,
       modelParameters: { maxTokens: 1024 },
     })
 
-    const upstream = await callLLM(validation.data)
+    const modelMessages: ModelMessage[] = validation.data.map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
 
-    if (!upstream.ok) {
-      generation?.end({ level: "ERROR", statusMessage: `Upstream error: ${upstream.status}` })
-      langfuse?.flushAsync().catch(() => {})
-      return Response.json({ error: "Failed to get response from AI" }, { status: 502 })
-    }
+    const result = await streamText(modelMessages, {
+      system: SYSTEM_PROMPT,
+      maxTokens: 1024,
+    })
 
-    // End generation optimistically — streaming output not captured to avoid buffering latency
     generation?.end({ output: "[streaming]" })
     langfuse?.flushAsync().catch(() => {})
 
-    return new Response(upstream.body, {
-      headers: {
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        Connection: "keep-alive",
-      },
-    })
+    return result.toTextStreamResponse()
   } catch (error) {
     langfuse?.flushAsync().catch(() => {})
-    const message = error instanceof Error ? error.message : "Internal server error"
+    const message =
+      error instanceof Error ? error.message : "Internal server error"
     return Response.json({ error: message }, { status: 500 })
   }
 }
