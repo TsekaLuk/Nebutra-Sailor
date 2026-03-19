@@ -5,8 +5,7 @@
  *   pnpm --filter @nebutra/api-gateway generate:spec
  *   pnpm --filter @nebutra/web generate:api-types
  *
- * The generated file `types.generated.ts` is gitignored and regenerated in CI.
- * If it does not exist locally, run the two commands above first.
+ * The generated file `types.generated.ts` is committed as a stub and overwritten in CI.
  *
  * Usage in Server Components (with Clerk JWT):
  *   import { getTypedApi } from "@/lib/api/client";
@@ -21,10 +20,7 @@
 import createClient, { type Middleware } from "openapi-fetch";
 
 // `types.generated.ts` is produced by `pnpm generate:api-types`.
-// The `// @ts-expect-error` allows the repo to typecheck cleanly before the first
-// generation run — the file will be present in CI after the spec export step.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error – generated file may not exist yet locally
+// A stub is committed so the project typechecks before generation.
 import type { paths } from "./types.generated";
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_GATEWAY_URL ?? "http://localhost:3002";

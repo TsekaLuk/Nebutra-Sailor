@@ -557,6 +557,11 @@ jobs:
       - name: Generate typed API client
         run: pnpm --filter @nebutra/web generate:api-types
 
+      - name: Build web app dependencies
+        run: pnpm turbo build --filter "@nebutra/web^..."
+        env:
+          SKIP_ENV_VALIDATION: true
+
       - name: Typecheck web with generated types
         run: pnpm --filter @nebutra/web typecheck
         env:

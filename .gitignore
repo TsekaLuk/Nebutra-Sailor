@@ -61,5 +61,6 @@ artifacts/
 .vercel
 
 # Generated API client artifacts — produced by pnpm generate:api-types
-apps/web/src/lib/api/types.generated.ts
+# Note: types.generated.ts stub is committed so typecheck works before generation;
+# a real generation run will overwrite it (treat modified state as expected).
 apps/api-gateway/openapi.json
