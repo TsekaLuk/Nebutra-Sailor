@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.9](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.8...v1.7.9) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* openapi spec generation — add type:module to workspace packages, stub env vars ([ff3d3de](https://github.com/Nebutra/Nebutra-Sailor/commit/ff3d3de7f23d5e9c638d72f9d7526a045efbfb59))
+
 ## [1.7.8](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.7...v1.7.8) (2026-03-19)
 
 
