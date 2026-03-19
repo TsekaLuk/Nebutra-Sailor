@@ -48,10 +48,7 @@ export interface SectionContainerProps extends React.HTMLAttributes<HTMLElement>
   noPadding?: boolean;
 }
 
-const SectionContainerRoot = React.forwardRef<
-  HTMLElement,
-  SectionContainerProps
->(
+const SectionContainerRoot = React.forwardRef<HTMLElement, SectionContainerProps>(
   (
     {
       className,
@@ -76,9 +73,7 @@ const SectionContainerRoot = React.forwardRef<
         )}
         {...props}
       >
-        <div className={cn("w-full", maxWidthMap[size], centered && "mx-auto")}>
-          {children}
-        </div>
+        <div className={cn("w-full", maxWidthMap[size], centered && "mx-auto")}>{children}</div>
       </Component>
     );
   },
@@ -103,11 +98,7 @@ const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          spacingMap[spacing],
-          centered && "text-center",
-          className,
-        )}
+        className={cn(spacingMap[spacing], centered && "text-center", className)}
         {...props}
       >
         {children}
@@ -150,11 +141,7 @@ const SectionFooter = React.forwardRef<HTMLDivElement, SectionFooterProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          spacingMap[spacing],
-          centered && "text-center",
-          className,
-        )}
+        className={cn(spacingMap[spacing], centered && "text-center", className)}
         {...props}
       >
         {children}
@@ -174,4 +161,4 @@ export const SectionContainer = Object.assign(SectionContainerRoot, {
 });
 
 // Named exports
-export { SectionContainerRoot, SectionHeader, SectionContent, SectionFooter };
+export { SectionContainerRoot, SectionContent, SectionFooter, SectionHeader };

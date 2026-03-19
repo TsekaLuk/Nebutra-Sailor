@@ -68,9 +68,7 @@ export const RichContent: Story = {
         </div>
       }
     >
-      <span className="cursor-default underline decoration-dotted">
-        Hover for details
-      </span>
+      <span className="cursor-default underline decoration-dotted">Hover for details</span>
     </ContextCard.Trigger>
   ),
 };

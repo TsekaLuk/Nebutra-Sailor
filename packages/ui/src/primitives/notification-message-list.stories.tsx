@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { NotificationMessageList } from "./notification-message-list";
 import type { NotificationMessage } from "./notification-message-list";
+import { NotificationMessageList } from "./notification-message-list";
 
 const messages: NotificationMessage[] = [
   {

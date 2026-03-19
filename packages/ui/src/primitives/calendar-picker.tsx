@@ -1,16 +1,12 @@
 "use client";
 
+import { Calendar as CalendarIcon, ChevronDown, X } from "lucide-react";
 import * as React from "react";
-import { useState, useCallback, useMemo, useEffect } from "react";
-import { Calendar as CalendarIcon, X, ChevronDown } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { cn } from "../utils/cn";
-import { CalendarDate, type DateValue, type RangeValue, RangeCalendar } from "./calendar";
 import { Button } from "./button";
-import {
-  HeroPopover,
-  HeroPopoverTrigger,
-  HeroPopoverContent,
-} from "./hero-popover";
+import { CalendarDate, type DateValue, RangeCalendar, type RangeValue } from "./calendar";
+import { HeroPopover, HeroPopoverContent, HeroPopoverTrigger } from "./hero-popover";
 
 // =============================================================================
 // Types
@@ -68,11 +64,7 @@ export interface CalendarPickerProps {
 // =============================================================================
 
 function dateToCalendarDate(date: Date): CalendarDate {
-  return new CalendarDate(
-    date.getFullYear(),
-    date.getMonth() + 1,
-    date.getDate(),
-  );
+  return new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
 }
 
 function formatRange(range: RangeValue<DateValue> | undefined): string {
@@ -87,11 +79,7 @@ function formatRange(range: RangeValue<DateValue> | undefined): string {
     return `${d.year}-${month}-${day}`;
   };
 
-  if (
-    start.year === end.year &&
-    start.month === end.month &&
-    start.day === end.day
-  ) {
+  if (start.year === end.year && start.month === end.month && start.day === end.day) {
     return fmt(start);
   }
 
@@ -110,25 +98,14 @@ interface PresetListProps {
   direction: "vertical" | "horizontal";
 }
 
-function PresetList({
-  presets,
-  activeKey,
-  onSelect,
-  size,
-  direction,
-}: PresetListProps) {
+function PresetList({ presets, activeKey, onSelect, size, direction }: PresetListProps) {
   const entries = Object.entries(presets);
   if (entries.length === 0) return null;
 
   const isSmall = size === "small";
 
   return (
-    <div
-      className={cn(
-        "flex gap-1",
-        direction === "vertical" ? "flex-col" : "flex-row flex-wrap",
-      )}
-    >
+    <div className={cn("flex gap-1", direction === "vertical" ? "flex-col" : "flex-row flex-wrap")}>
       {entries.map(([key, preset]) => (
         <button
           key={key}
@@ -139,9 +116,7 @@ function PresetList({
             "hover:bg-accent hover:text-accent-foreground",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             isSmall && "px-2 py-1 text-xs",
-            activeKey === key
-              ? "bg-primary text-primary-foreground"
-              : "text-muted-foreground",
+            activeKey === key ? "bg-primary text-primary-foreground" : "text-muted-foreground",
           )}
         >
           {preset.text}
@@ -262,9 +237,7 @@ export function CalendarPicker({
 
   // Guard: compact, stacked, horizontalLayout are mutually exclusive
   if (process.env.NODE_ENV !== "production") {
-    const exclusiveCount = [compact, stacked, horizontalLayout].filter(
-      Boolean,
-    ).length;
+    const exclusiveCount = [compact, stacked, horizontalLayout].filter(Boolean).length;
     if (exclusiveCount > 1) {
       console.warn(
         "[CalendarPicker] compact, stacked, and horizontalLayout are mutually exclusive. Only one should be set.",
@@ -297,12 +270,7 @@ export function CalendarPicker({
             suffix={<ChevronDown />}
             className="min-w-[200px] justify-between font-normal"
           >
-            <span
-              className={cn(
-                "flex-1 truncate text-left",
-                !value && "text-muted-foreground",
-              )}
-            >
+            <span className={cn("flex-1 truncate text-left", !value && "text-muted-foreground")}>
               {formatRange(value)}
             </span>
           </Button>
@@ -312,7 +280,9 @@ export function CalendarPicker({
           <div className={contentLayoutClass}>
             {/* Calendar grid */}
             <RangeCalendar
-              value={(value as unknown as React.ComponentProps<typeof RangeCalendar>["value"]) ?? null}
+              value={
+                (value as unknown as React.ComponentProps<typeof RangeCalendar>["value"]) ?? null
+              }
               onChange={handleCalendarChange}
               minValue={calendarMinValue ?? null}
               maxValue={calendarMaxValue ?? null}
@@ -326,15 +296,11 @@ export function CalendarPicker({
             {hasPresets && !compact && (
               <div
                 className={cn(
-                  stacked
-                    ? "border-t border-border pt-3"
-                    : "border-l border-border pl-4",
+                  stacked ? "border-t border-border pt-3" : "border-l border-border pl-4",
                   "min-w-[140px]",
                 )}
               >
-                <p className="mb-2 text-xs font-medium text-muted-foreground">
-                  Select Period
-                </p>
+                <p className="mb-2 text-xs font-medium text-muted-foreground">Select Period</p>
                 <PresetList
                   presets={presets}
                   activeKey={activePresetKey}

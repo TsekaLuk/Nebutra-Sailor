@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -67,10 +67,7 @@ const getMaskGradient = (
   return `linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)`;
 };
 
-const getEdgeMask = (
-  position: "top" | "bottom" | "both",
-  isFirst: boolean,
-): string => {
+const getEdgeMask = (position: "top" | "bottom" | "both", isFirst: boolean): string => {
   if (position === "both") {
     return `linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)`;
   }
@@ -154,12 +151,7 @@ export function ProgressiveBlur({
         const startPercent = blurIndex * 12.5;
         const midPercent = (blurIndex + 1) * 12.5;
         const endPercent = (blurIndex + 2) * 12.5;
-        const maskGradient = getMaskGradient(
-          position,
-          startPercent,
-          midPercent,
-          endPercent,
-        );
+        const maskGradient = getMaskGradient(position, startPercent, midPercent, endPercent);
 
         return (
           <div

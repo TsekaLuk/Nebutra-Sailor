@@ -12,40 +12,38 @@
  * ```
  */
 
-// Server exports
-export {
-  getPusherServer,
-  pusherServer,
-  triggerEvent,
-  triggerBatch,
-  broadcastToTenant,
-  notifyUser,
-  notifyUsers,
-  authorizeChannel,
-  PusherEvents,
-  type PusherEvent,
-} from "./server";
+// Auth utilities
+export { type User, validateChannelAccess } from "./auth";
 
 // Client exports
 export {
+  type Channel,
+  Channels,
+  disconnect,
   getPusherClient,
+  type Members,
+  type PresenceChannel,
   pusherClient,
   subscribeChannel,
   unsubscribeChannel,
-  disconnect,
-  Channels,
-  type Channel,
-  type PresenceChannel,
-  type Members,
 } from "./client";
-
-// Auth utilities
-export { validateChannelAccess, type User } from "./auth";
-
 // Event bridge
 export {
-  initEventBridge,
   addEventMapping,
-  removeEventMapping,
   type BroadcastConfig,
+  initEventBridge,
+  removeEventMapping,
 } from "./event-bridge";
+// Server exports
+export {
+  authorizeChannel,
+  broadcastToTenant,
+  getPusherServer,
+  notifyUser,
+  notifyUsers,
+  type PusherEvent,
+  PusherEvents,
+  pusherServer,
+  triggerBatch,
+  triggerEvent,
+} from "./server";

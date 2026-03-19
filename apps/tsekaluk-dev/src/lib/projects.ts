@@ -63,8 +63,7 @@ export const projects: Project[] = [
     icon: "plane",
     cover:
       "https://images.unsplash.com/photo-1760377964851-29a6d3e3259a?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "Discovered a paradox: risk perception actually increases adoption",
+    tagline: "Discovered a paradox: risk perception actually increases adoption",
     description:
       "Everyone assumed perceived risk would deter UAM adoption. Our TAM\u2013SEM model on 2,609 respondents (93.1% recovery rate, KMO=0.951) proved the opposite: risk positively drives willingness to adopt (\u03b2=0.262, p<0.001). We also mined 1,695 Bilibili comments with SnowNLP to map public sentiment. The \u201crisk paradox\u201d finding challenged a decade of technology adoption literature. Provincial First Prize.",
     metric: "\u03b2=0.262, p<0.001",
@@ -98,14 +97,7 @@ export const projects: Project[] = [
       "Enterprise-grade monorepo powering 4 apps (marketing, dashboard, docs, studio) from 6 shared packages. Next.js 16 + React 19 + Tailwind v4, with a custom design token pipeline, 541 tree-shakable icons, and multi-theme engine supporting 6 oklch color schemes. Ships features 3x faster than separate repos.",
     metric: "6 packages \u00b7 4 apps",
     tags: ["Next.js 16", "Turborepo", "AI SaaS", "Open Source"],
-    techStack: [
-      "Next.js 16",
-      "React",
-      "TypeScript",
-      "Turborepo",
-      "Vercel",
-      "Open Source",
-    ],
+    techStack: ["Next.js 16", "React", "TypeScript", "Turborepo", "Vercel", "Open Source"],
     github: "https://github.com/Nebutra/Nebutra-Sailor",
     status: "building",
     highlights: [
@@ -169,8 +161,7 @@ export const projects: Project[] = [
     icon: "flame",
     cover:
       "https://images.unsplash.com/photo-1752136519704-0ed3d735e9da?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "Found the exact 28.44% ratio\u2014won Grand Innovation Award for it",
+    tagline: "Found the exact 28.44% ratio\u2014won Grand Innovation Award for it",
     description:
       "Three-model ensemble (LightGBM + Gaussian Process Regression + PSO) tested across 500+ pyrolysis data points to discover that 28.44% biomass-to-coal ratio maximizes clean energy output with R\u00b2>0.95 prediction accuracy. The entropy-weighted fuzzy evaluation framework quantified non-linear interactions between 3 yield types (gas, char, liquid). Judges praised the methodology as transferable across energy domains. First Prize + Grand Innovation Award at Shuwei Cup.",
     metric: "28.44% optimal ratio",
@@ -233,19 +224,12 @@ export const projects: Project[] = [
     icon: "file-output",
     cover:
       "https://images.unsplash.com/photo-1568716353609-12ddc5c67f04?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "86% less time on knowledge management\u2014one-click conversation export",
+    tagline: "86% less time on knowledge management\u2014one-click conversation export",
     description:
       "Cursor IDE extension (7 GitHub stars) that exports AI conversations to structured Markdown. Tested on 214 conversations (1,980 messages): processing time dropped from 5.8 min to 0.8 min per conversation, code snippet loss rate under 0.5%, throughput 12.5 conversations/min. Cross-platform VSIX with >98% install success rate across Windows/macOS/Linux.",
     metric: "86% \u00b7 \u26057 stars",
     tags: ["TypeScript", "VSCode API", "Developer Tool"],
-    techStack: [
-      "TypeScript",
-      "VSCode Extension",
-      "Cursor IDE",
-      "Developer Tool",
-      "Open Source",
-    ],
+    techStack: ["TypeScript", "VSCode Extension", "Cursor IDE", "Developer Tool", "Open Source"],
     github: "https://github.com/TsekaLuk/Cursor-export-extension",
     status: "shipped",
     highlights: [
@@ -269,8 +253,7 @@ export const projects: Project[] = [
     icon: "megaphone",
     cover:
       "https://images.unsplash.com/photo-1763705857736-2b4f16a33758?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "1,200+ consumer samples \u00d7 AIGC pipeline = 40% engagement lift",
+    tagline: "1,200+ consumer samples \u00d7 AIGC pipeline = 40% engagement lift",
     description:
       "Led a PEST-SWOT driven brand overhaul for Suzhou\u2019s \u201c\u6797\u8393\u8393\u201d agricultural product. Surveyed 1,200+ consumers to map purchase drivers and price sensitivity. Deployed Claude + Flux + Midjourney AIGC toolchain for brand stories and mascot concepts, cutting creative iteration from weeks to days. Projected 40%+ user engagement increase. National Second Prize.",
     metric: "1,200+ samples",
@@ -299,8 +282,7 @@ export const projects: Project[] = [
     icon: "pickaxe",
     cover:
       "https://images.unsplash.com/photo-1693045181254-08462917f681?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "Zero-config Claude Code skill\u2014PDF to Markdown in one command",
+    tagline: "Zero-config Claude Code skill\u2014PDF to Markdown in one command",
     description:
       "Open-source Claude Code skill that wraps MinerU for layout-aware PDF/document conversion. One-command install, no API keys, 3 supported formats (PDF, DOCX, PPTX). Handles 100+ page documents with table and formula preservation. Published on Smithery marketplace, 5+ community installs in first week. Built for the Claude Code ecosystem with auto-detection of document type and intelligent chunking.",
     metric: "0 config needed",
@@ -361,8 +343,7 @@ export const projects: Project[] = [
     icon: "brain",
     cover:
       "https://images.unsplash.com/photo-1770210217380-d78a69acdc77?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "Task success rate +18pp by turning prompt tricks into reusable protocol",
+    tagline: "Task success rate +18pp by turning prompt tricks into reusable protocol",
     description:
       "Turned ad-hoc prompt engineering into a structured agent protocol: task decomposition, state machines, retry strategies, and auditable intermediate states. Tested on 120 cross-domain tasks: success rate jumped from 63% to 81%, JSON compliance from 72% to 94%, rework rounds dropped 29%. Framework-agnostic\u2014plugs into LangGraph, Semantic Kernel, or custom executors.",
     metric: "81% success rate",
@@ -422,20 +403,12 @@ export const projects: Project[] = [
     icon: "droplets",
     cover:
       "https://images.unsplash.com/photo-1771788893925-f817bad1f563?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "Real-time water quality dashboard with 5-second refresh and alerts",
+    tagline: "Real-time water quality dashboard with 5-second refresh and alerts",
     description:
       "React + TypeScript monitoring system tracking 12 water quality parameters (pH, turbidity, dissolved oxygen, etc.) with 5-second auto-refresh and configurable alert thresholds. Built with streaming data visualization and historical trend analysis for environmental monitoring.",
     metric: "12 parameters \u00b7 5s refresh",
     tags: ["React", "TypeScript", "IoT", "Data Viz"],
-    techStack: [
-      "React",
-      "TypeScript",
-      "IoT",
-      "WebSocket",
-      "REST API",
-      "Data Viz",
-    ],
+    techStack: ["React", "TypeScript", "IoT", "WebSocket", "REST API", "Data Viz"],
     github: "https://github.com/TsekaLuk/hydrogem-web",
     status: "shipped",
     highlights: [
@@ -460,8 +433,7 @@ export const projects: Project[] = [
     icon: "scan-line",
     cover:
       "https://images.unsplash.com/photo-1646776174801-0d1918cb4d2b?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "100% bbox accuracy on 50 element types\u2014from 65% to 92% in 10 prompt iterations",
+    tagline: "100% bbox accuracy on 50 element types\u2014from 65% to 92% in 10 prompt iterations",
     description:
       "Production-grade automated annotation system for document page elements. Async 4-stage pipeline with Qwen VL models identifies 50 element types (12 code languages, 13 interaction formats, 12 content elements, 13 other tags). Three-layer fault tolerance (Retry + RateLimit + CircuitBreaker), SHA256 content-addressed cache, and real-time SSE monitoring dashboard.",
     metric: "100% bbox \u00b7 50 labels",
@@ -490,8 +462,7 @@ export const projects: Project[] = [
     icon: "search",
     cover:
       "https://images.unsplash.com/photo-1762340273332-89b40f2868ab?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "8-dimensional annotation across 19 prompt iterations\u2014edge cases included",
+    tagline: "8-dimensional annotation across 19 prompt iterations\u2014edge cases included",
     description:
       "Multi-modal visual search relevance labeling pipeline using LLMs. Processes image + text signals across 8 annotation dimensions (visual relevance, content relevance, query/doc drop, functional parity, category granularity, visual similarity, modal corroboration). 19 prompt versions with automated comparison and reflection analysis tools.",
     metric: "8 dimensions \u00b7 19 versions",
@@ -527,13 +498,7 @@ export const projects: Project[] = [
       "Multi-platform video content analysis system covering YouTube, Instagram, TikTok, VK, and Facebook. Refactored from legacy monolith to modular architecture: 5 platform fetchers, 6 batch processors, 5 video analyzers. Fast text analysis achieves 90%+ accuracy with 460x acceleration over manual review, processing 1,207+ videos across batch runs.",
     metric: "460x faster \u00b7 1,207+ videos",
     tags: ["Python", "AI Analysis", "Multi-Platform", "Video"],
-    techStack: [
-      "Python",
-      "Gemini 2.5",
-      "Video AI",
-      "Analytics",
-      "Async Pipeline",
-    ],
+    techStack: ["Python", "Gemini 2.5", "Video AI", "Analytics", "Async Pipeline"],
     status: "shipped",
     highlights: [
       { value: "5", label: "Platforms Covered" },
@@ -558,8 +523,7 @@ export const projects: Project[] = [
     icon: "line-chart",
     cover:
       "https://images.unsplash.com/photo-1768242079046-c9c633187db1?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "8 microservices, real-time GraphQL, TUI cockpit\u2014from raw data to trade thesis",
+    tagline: "8 microservices, real-time GraphQL, TUI cockpit\u2014from raw data to trade thesis",
     description:
       "Open-source quantitative trading copilot for crypto markets. 8 microservices + 9 infrastructure services (17 containers total) with unified TUI cockpit, 41 technical indicators, real-time market data streaming, and in-context AI copilot. TypeScript 5.7 + Python 3.11+, CI/CD with GitHub Actions.",
     metric: "17 containers \u00b7 41 indicators",
@@ -625,8 +589,7 @@ export const projects: Project[] = [
     icon: "monitor",
     cover:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=900&fit=crop&auto=format",
-    tagline:
-      "Enterprise SaaS for a NASDAQ data company: the B2B demo mode playbook in production",
+    tagline: "Enterprise SaaS for a NASDAQ data company: the B2B demo mode playbook in production",
     description:
       "Built multi-tenant reporting infrastructure for Appen (NASDAQ: APT), one of the world's largest AI training data companies. Next.js 16 monorepo (5 apps + 10 packages) serves TCS, ByteWorks, and DataPower dashboards with Upstash QStash async job queues and Pusher real-time. The breakthrough: a production-grade demo mode with MSW + tRPC mock interception, privacy redaction pipeline, and 4 behavioral strategies—solving the #1 enterprise SaaS sales problem (can't show real data).",
     metric: "5 apps · 10 packages · 3 clients",
@@ -712,14 +675,7 @@ export const projects: Project[] = [
       "Production URL consistency annotation pipeline that defeats modern bot detection at zero marginal LLM cost. curl_cffi spoofs Chrome 124's TLS ClientHello (cipher suites, extensions, ordering)—not just user-agent headers. Playwright handles JS-rendered SPAs. Local Qwen3:1.7b via Ollama compares page content semantically without API fees or GDPR exposure. Rotating-ad detection re-fetches each URL 3× to flag domain changes. 30 HTTP + 5 Playwright + 5 LLM concurrent—brand/product extracted per landing page with domain fallback.",
     metric: "Chrome TLS · $0 LLM cost",
     tags: ["Python", "Playwright", "Local LLM", "Anti-Bot"],
-    techStack: [
-      "Python",
-      "Playwright",
-      "Ollama",
-      "Qwen3",
-      "Local LLM",
-      "Anti-Bot",
-    ],
+    techStack: ["Python", "Playwright", "Ollama", "Qwen3", "Local LLM", "Anti-Bot"],
     status: "shipped",
     highlights: [
       { value: "Chrome 124", label: "TLS Impersonation" },
@@ -752,13 +708,7 @@ export const projects: Project[] = [
       "First systematic vendor capability evaluation framework for 3D Gaussian Splatting (3DGS) content production. Multi-round scored assessment across 6 dimensions: HP/LP geometry (pivot alignment, retopology proof), PBR texture completeness (BaseColor + Normal + Metallic + AO), file management conventions, semantic annotation accuracy, preview image standards (8+ renders), and communication SLA. Structured CSV tracks multi-vendor revision cycles with decision rationale—enabling repeatable procurement at enterprise content pipeline scale.",
     metric: "6 dimensions · frontier tech",
     tags: ["3DGS", "Quality Framework", "Enterprise", "3D Content"],
-    techStack: [
-      "Python",
-      "3DGS",
-      "3D Evaluation",
-      "Quality Assurance",
-      "Enterprise",
-    ],
+    techStack: ["Python", "3DGS", "3D Evaluation", "Quality Assurance", "Enterprise"],
     status: "shipped",
     highlights: [
       { value: "2023", label: "Tech Breakthrough" },

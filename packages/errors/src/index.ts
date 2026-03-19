@@ -125,9 +125,7 @@ export class ForbiddenError extends AppError {
 
 export class NotFoundError extends AppError {
   constructor(resource = "Resource", id?: string) {
-    const message = id
-      ? `${resource} with id '${id}' not found`
-      : `${resource} not found`;
+    const message = id ? `${resource} with id '${id}' not found` : `${resource} not found`;
     super({ code: ERROR_CODES.NOT_FOUND, message, statusCode: 404 });
     this.name = "NotFoundError";
   }
@@ -209,10 +207,7 @@ export interface ApiErrorResponse {
   requestId?: string;
 }
 
-export function toApiError(
-  error: unknown,
-  requestId?: string,
-): ApiErrorResponse {
+export function toApiError(error: unknown, requestId?: string): ApiErrorResponse {
   if (error instanceof AppError) {
     return {
       error: {
@@ -256,10 +251,7 @@ export interface ErrorHandlerOptions {
    * logger (e.g. @nebutra/logger).  Defaults to a no-op — DO NOT rely on the
    * previous process.stderr.write behaviour; pass an onError callback instead.
    */
-  onError?: (
-    error: unknown,
-    meta: { requestId?: string; statusCode: number },
-  ) => void;
+  onError?: (error: unknown, meta: { requestId?: string; statusCode: number }) => void;
 }
 
 export function errorHandler(options: ErrorHandlerOptions = {}) {

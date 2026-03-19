@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Skeleton } from "@nebutra/ui/primitives"
+import { Skeleton } from "@nebutra/ui/primitives";
 
 export function SkeletonDemo() {
   return (
@@ -11,5 +11,5 @@ export function SkeletonDemo() {
         <Skeleton className="h-4 w-[160px]" />
       </div>
     </div>
-  )
+  );
 }

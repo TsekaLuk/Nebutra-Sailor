@@ -46,126 +46,113 @@
  * ```
  */
 
-// Types
-export type {
-  Plan,
-  SubscriptionStatus,
-  BillingInterval,
-  InvoiceStatus,
-  PaymentMethodType,
-  UsageType,
-  CreditTransactionType,
-  PlanLimits,
-  PricingConfig,
-  UsagePricing,
-  CreateSubscriptionInput,
-  UpdateSubscriptionInput,
-  RecordUsageInput,
-  PurchaseCreditsInput,
-  CheckEntitlementInput,
-} from "./types.js";
-
-// Constants
+// Plan Config (Database-driven)
 export {
-  DEFAULT_PLAN_LIMITS,
-  DEFAULT_PRICING,
-  DEFAULT_USAGE_PRICING,
-} from "./types.js";
-
-// Schemas
-export {
-  CreateSubscriptionSchema,
-  UpdateSubscriptionSchema,
-  RecordUsageSchema,
-  PurchaseCreditsSchema,
-  CheckEntitlementSchema,
-} from "./types.js";
-
-// Errors
-export {
-  BillingError,
-  SubscriptionError,
-  UsageError,
-  EntitlementError,
-  PaymentError,
-} from "./types.js";
-
-// Stripe
-export {
-  initStripe,
-  getStripe,
-  getWebhookSecret,
-  createCustomer,
-  getCustomer,
-  updateCustomer,
-  deleteCustomer,
-  getOrCreateCustomer,
-  createBillingPortalSession,
-  createCheckoutSession,
-} from "./stripe/index.js";
-
-// Subscriptions
-export {
-  createStripeSubscription,
-  getStripeSubscription,
-  updateStripeSubscription,
-  cancelStripeSubscription,
-  resumeStripeSubscription,
-  pauseStripeSubscription,
-  unpauseStripeSubscription,
-  getCustomerSubscriptions,
-  mapStripeStatusToLocal,
-  previewSubscriptionChange,
-} from "./subscriptions/index.js";
-
-// Usage
-export {
-  recordUsage,
-  flushUsageBuffer,
-  checkUsageLimit,
-  getPlanUsageLimit,
-  calculateOverageCost,
-  getCurrentPeriod,
-  formatUsage,
-} from "./usage/index.js";
-
+  type CacheAdapter,
+  type FeatureValue,
+  getPlanConfig,
+  initPlanConfig,
+  type LimitConfig,
+  type PlanConfig,
+  PlanConfigService,
+  type ResolvedConfig,
+} from "./config/index.js";
 // Credits
 export {
-  getCreditBalance,
-  addCredits,
-  deductCredits,
-  hasEnoughCredits,
-  getCreditTransactions,
-  dollarsToCredits,
-  creditsToDollars,
-  formatCredits,
-  refundCredits,
   addBonusCredits,
+  addCredits,
+  creditsToDollars,
+  deductCredits,
+  dollarsToCredits,
+  formatCredits,
+  getCreditBalance,
+  getCreditTransactions,
+  hasEnoughCredits,
+  refundCredits,
 } from "./credits/index.js";
-
 // Entitlements
 export {
   checkEntitlement,
-  requireEntitlement,
-  grantEntitlement,
-  revokeEntitlement,
-  incrementUsage,
-  resetUsage,
+  FEATURES,
   getEntitlements,
+  grantEntitlement,
+  incrementUsage,
   initializePlanEntitlements,
   isPlanFeature,
-  FEATURES,
   PLAN_FEATURES,
+  requireEntitlement,
+  resetUsage,
+  revokeEntitlement,
 } from "./entitlements/index.js";
-
-// Plan Config (Database-driven)
+// Stripe
 export {
-  PlanConfigService,
-  initPlanConfig,
-  getPlanConfig,
-  type PlanConfig,
-  type FeatureValue,
-  type LimitConfig,
-  type ResolvedConfig,
-  type CacheAdapter,
-} from "./config/index.js";
+  createBillingPortalSession,
+  createCheckoutSession,
+  createCustomer,
+  deleteCustomer,
+  getCustomer,
+  getOrCreateCustomer,
+  getStripe,
+  getWebhookSecret,
+  initStripe,
+  updateCustomer,
+} from "./stripe/index.js";
+// Subscriptions
+export {
+  cancelStripeSubscription,
+  createStripeSubscription,
+  getCustomerSubscriptions,
+  getStripeSubscription,
+  mapStripeStatusToLocal,
+  pauseStripeSubscription,
+  previewSubscriptionChange,
+  resumeStripeSubscription,
+  unpauseStripeSubscription,
+  updateStripeSubscription,
+} from "./subscriptions/index.js";
+// Types
+export type {
+  BillingInterval,
+  CheckEntitlementInput,
+  CreateSubscriptionInput,
+  CreditTransactionType,
+  InvoiceStatus,
+  PaymentMethodType,
+  Plan,
+  PlanLimits,
+  PricingConfig,
+  PurchaseCreditsInput,
+  RecordUsageInput,
+  SubscriptionStatus,
+  UpdateSubscriptionInput,
+  UsagePricing,
+  UsageType,
+} from "./types.js";
+// Constants
+// Schemas
+// Errors
+export {
+  BillingError,
+  CheckEntitlementSchema,
+  CreateSubscriptionSchema,
+  DEFAULT_PLAN_LIMITS,
+  DEFAULT_PRICING,
+  DEFAULT_USAGE_PRICING,
+  EntitlementError,
+  PaymentError,
+  PurchaseCreditsSchema,
+  RecordUsageSchema,
+  SubscriptionError,
+  UpdateSubscriptionSchema,
+  UsageError,
+} from "./types.js";
+// Usage
+export {
+  calculateOverageCost,
+  checkUsageLimit,
+  flushUsageBuffer,
+  formatUsage,
+  getCurrentPeriod,
+  getPlanUsageLimit,
+  recordUsage,
+} from "./usage/index.js";

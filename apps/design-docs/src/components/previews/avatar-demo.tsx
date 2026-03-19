@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
 import {
   Avatar,
-  AvatarImage,
   AvatarFallback,
   AvatarGroup,
+  AvatarImage,
+  AvatarWithIcon,
+  BitbucketAvatar,
+  DiceBearAvatar,
   GitHubAvatar,
   GitLabAvatar,
-  BitbucketAvatar,
-  AvatarWithIcon,
-  DiceBearAvatar,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
 
-const va = (seed: string) => `https://avatar.vercel.sh/${seed}`
+const va = (seed: string) => `https://avatar.vercel.sh/${seed}`;
 
 // ─── Size scale ───────────────────────────────────────────────────────────────
 
@@ -30,7 +30,7 @@ export function AvatarSizeDemo() {
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 // ─── Fallback ─────────────────────────────────────────────────────────────────
@@ -45,18 +45,18 @@ export function AvatarFallbackDemo() {
         </Avatar>
       ))}
     </div>
-  )
+  );
 }
 
 // ─── Group ────────────────────────────────────────────────────────────────────
 
-const gh = (u: string) => `https://avatars.githubusercontent.com/${u}?s=64`
+const gh = (u: string) => `https://avatars.githubusercontent.com/${u}?s=64`;
 
 const GROUP_SM = [
   { src: gh("evilrabbit"), alt: "evilrabbit", fallback: "ER" },
   { src: gh("leerob"), alt: "leerob", fallback: "LR" },
   { src: gh("rauchg"), alt: "rauchg", fallback: "RG" },
-]
+];
 
 const GROUP_LG = [
   { src: gh("sambecker"), alt: "sambecker", fallback: "SB" },
@@ -64,7 +64,7 @@ const GROUP_LG = [
   { src: gh("shuding"), alt: "shuding", fallback: "SH" },
   { src: gh("skllcrn"), alt: "skllcrn", fallback: "SK" },
   { src: gh("almonk"), alt: "almonk", fallback: "AL" },
-]
+];
 
 /** Two rows: default limit and with overflow +N */
 export function AvatarGroupDemo() {
@@ -75,7 +75,7 @@ export function AvatarGroupDemo() {
       {/* 5 members, max=4 → shows +2 */}
       <AvatarGroup items={GROUP_LG} max={4} size="sm" />
     </div>
-  )
+  );
 }
 
 // ─── Git Platform Avatars ─────────────────────────────────────────────────────
@@ -97,7 +97,7 @@ export function AvatarGitPlatformDemo() {
         <span className="text-[11px] text-muted-foreground">Bitbucket</span>
       </div>
     </div>
-  )
+  );
 }
 
 // ─── AvatarWithIcon ───────────────────────────────────────────────────────────
@@ -133,16 +133,14 @@ export function AvatarWithIconDemo() {
         <AvatarWithIcon
           src={gh("paco")}
           alt="paco"
-          icon={
-            <span className="h-2 w-2 block rounded-full bg-muted-foreground" />
-          }
+          icon={<span className="h-2 w-2 block rounded-full bg-muted-foreground" />}
           iconBackground="bg-background"
           size="md"
         />
         <span className="text-[11px] text-muted-foreground">Offline</span>
       </div>
     </div>
-  )
+  );
 }
 
 // ─── DiceBearAvatar ───────────────────────────────────────────────────────────
@@ -153,17 +151,10 @@ export function DiceBearAvatarDemo() {
     <div className="gap-6 flex flex-wrap">
       <div className="gap-2 flex flex-col items-center">
         <DiceBearAvatar seed="rauchg" avatarStyle="bottts-neutral" size="md" />
-        <span className="text-[11px] text-muted-foreground">
-          bottts-neutral
-        </span>
+        <span className="text-[11px] text-muted-foreground">bottts-neutral</span>
       </div>
       <div className="gap-2 flex flex-col items-center">
-        <DiceBearAvatar
-          seed="leerob"
-          avatarStyle="pixel-art"
-          options={{ radius: 50 }}
-          size="md"
-        />
+        <DiceBearAvatar seed="leerob" avatarStyle="pixel-art" options={{ radius: 50 }} size="md" />
         <span className="text-[11px] text-muted-foreground">pixel-art</span>
       </div>
       <div className="gap-2 flex flex-col items-center">
@@ -175,5 +166,5 @@ export function DiceBearAvatarDemo() {
         <span className="text-[11px] text-muted-foreground">bottts</span>
       </div>
     </div>
-  )
+  );
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
-import { useTranslations } from "next-intl";
 import { AnimateIn } from "@nebutra/ui/components";
-import { EndorsementDialog } from "@/components/guestbook/endorsement-dialog";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import * as React from "react";
+import { EndorsementDialog } from "@/components/guestbook/endorsement-dialog";
 
 interface GuestbookEntry {
   id: string;
@@ -69,9 +69,7 @@ export function ConstellationSection() {
         </AnimateIn>
 
         <AnimateIn preset="fade" delay={0.2} inView>
-          <p className="text-base text-gray-500 dark:text-gray-400">
-            {t("description")}
-          </p>
+          <p className="text-base text-gray-500 dark:text-gray-400">{t("description")}</p>
         </AnimateIn>
       </div>
 
@@ -167,9 +165,7 @@ export function ConstellationSection() {
       <AnimateIn preset="fade" delay={0.5} inView>
         <div className="mt-16 text-center">
           <EndorsementDialog />
-          <p className="mt-3 text-xs text-gray-300 dark:text-gray-600">
-            {t("cta_hint")}
-          </p>
+          <p className="mt-3 text-xs text-gray-300 dark:text-gray-600">{t("cta_hint")}</p>
         </div>
       </AnimateIn>
     </section>

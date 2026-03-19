@@ -4,9 +4,8 @@ import { MonitorIcon, MoonStarIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import type { JSX } from "react";
 import React from "react";
-
-import { cn } from "@/lib/utils";
 import { useMount } from "@/hooks/useMount";
+import { cn } from "@/lib/utils";
 
 function ThemeOption({
   icon,

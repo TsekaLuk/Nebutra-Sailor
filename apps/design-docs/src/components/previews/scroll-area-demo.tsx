@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { ScrollArea, ScrollBar } from "@/components/mdx-scroll-area"
+import { ScrollArea, ScrollBar } from "@/components/mdx-scroll-area";
 
 export function ScrollAreaDemo() {
   return (
@@ -16,5 +16,5 @@ export function ScrollAreaDemo() {
       </div>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
-  )
+  );
 }

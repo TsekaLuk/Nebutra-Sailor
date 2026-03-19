@@ -35,11 +35,7 @@ export function initSentry(): void {
 }
 
 /** Hono error handler that captures unhandled exceptions to Sentry. */
-export function captureRequestError(
-  err: Error,
-  requestId?: string,
-  tenantId?: string,
-): void {
+export function captureRequestError(err: Error, requestId?: string, tenantId?: string): void {
   Sentry.withScope((scope) => {
     if (requestId) scope.setTag("request_id", requestId);
     if (tenantId) scope.setTag("tenant_id", tenantId);

@@ -1,6 +1,4 @@
-"use client"
-
-import * as React from "react"
+"use client";
 
 import {
   Button,
@@ -11,7 +9,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Drawer2Demo() {
   return (
     <Drawer>
@@ -29,5 +28,5 @@ export function Drawer2Demo() {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  )
+  );
 }

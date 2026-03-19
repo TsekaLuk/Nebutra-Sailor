@@ -1,17 +1,17 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 import * as React from "react";
-import { ReactNode } from "react";
-import { LucideIcon } from "lucide-react";
-import { cn } from "../utils/cn";
 import {
-  FeatureCard,
-  FeatureCardHeader,
-  FeatureCardContent,
-  DualModeImage,
+  type CircleConfig,
   CircularUI,
-  CircleConfig,
+  DualModeImage,
+  FeatureCard,
+  FeatureCardContent,
+  FeatureCardHeader,
 } from "../primitives/feature-card";
+import { cn } from "../utils/cn";
 
 // =============================================================================
 // Types
@@ -86,26 +86,13 @@ export interface FeatureCardsSectionProps {
  * - Bento-style feature grids
  * - Landing page feature sections
  */
-export function FeatureCardsSection({
-  cards,
-  className,
-}: FeatureCardsSectionProps) {
+export function FeatureCardsSection({ cards, className }: FeatureCardsSectionProps) {
   return (
-    <section
-      className={cn(
-        "bg-[var(--neutral-2)] py-16 dark:bg-transparent md:py-32",
-        className
-      )}
-    >
+    <section className={cn("bg-[var(--neutral-2)] py-16 dark:bg-transparent md:py-32", className)}>
       <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl">
         <div className="mx-auto grid gap-4 lg:grid-cols-2">
           {cards.map((card, index) => (
-            <FeatureCard
-              key={index}
-              className={cn(
-                card.fullWidth && "p-6 lg:col-span-2"
-              )}
-            >
+            <FeatureCard key={index} className={cn(card.fullWidth && "p-6 lg:col-span-2")}>
               {/* Standard card with header + image/content */}
               {!card.fullWidth && card.icon && card.title && (
                 <>
@@ -114,7 +101,7 @@ export function FeatureCardsSection({
                     title={card.title}
                     description={card.description}
                   />
-                  {(card.darkImage && card.lightImage) && (
+                  {card.darkImage && card.lightImage && (
                     <div className="relative mb-6 border-t border-dashed sm:mb-0">
                       <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,hsl(var(--muted)),white_125%)]" />
                       <div className="aspect-[76/59] p-1 px-6">

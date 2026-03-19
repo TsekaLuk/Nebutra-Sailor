@@ -1,5 +1,5 @@
-import { Badge } from "@nebutra/ui/primitives"
-import { Bell } from "lucide-react"
+import { Badge } from "@nebutra/ui/primitives";
+import { Bell } from "lucide-react";
 
 export function BadgeNotificationDemo() {
   return (
@@ -12,5 +12,5 @@ export function BadgeNotificationDemo() {
         3
       </Badge>
     </div>
-  )
+  );
 }

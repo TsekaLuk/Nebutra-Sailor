@@ -1,4 +1,4 @@
-import { ShineBorder } from "@nebutra/ui/primitives"
+import { ShineBorder } from "@nebutra/ui/primitives";
 
 export function ShineBorderDemo() {
   return (
@@ -11,11 +11,9 @@ export function ShineBorderDemo() {
       >
         <div className="p-8 text-center">
           <h2 className="text-2xl font-bold tracking-tight mb-2">Shine Card</h2>
-          <p className="text-sm text-muted-foreground">
-            Animated gradient border effect
-          </p>
+          <p className="text-sm text-muted-foreground">Animated gradient border effect</p>
         </div>
       </ShineBorder>
     </div>
-  )
+  );
 }

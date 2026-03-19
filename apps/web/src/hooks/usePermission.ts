@@ -2,11 +2,11 @@
 
 import { useOrganization } from "@clerk/nextjs";
 import {
-  resolveRole,
-  hasPermission,
   hasAllPermissions,
   hasAnyPermission,
+  hasPermission,
   type Role,
+  resolveRole,
   type Scope,
 } from "@/lib/permissions";
 

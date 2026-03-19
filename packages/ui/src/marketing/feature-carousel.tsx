@@ -1,7 +1,6 @@
 "use client";
 
-import * as React from "react";
-import { cn } from "../utils/cn";
+import type * as React from "react";
 import { Badge } from "../primitives/badge";
 import {
   Carousel,
@@ -10,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../primitives/carousel";
+import { cn } from "../utils/cn";
 
 export interface CarouselSlide {
   /** Slide content or image URL */
@@ -66,9 +66,7 @@ export function FeatureCarousel({
     slides ||
     Array.from({ length: slideCount }).map((_, index) => ({
       content: (
-        <span className="text-sm text-muted-foreground">
-          Platform Screenshot {index + 1}
-        </span>
+        <span className="text-sm text-muted-foreground">Platform Screenshot {index + 1}</span>
       ),
     }));
 

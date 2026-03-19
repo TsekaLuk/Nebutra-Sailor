@@ -13,7 +13,7 @@
  * exercising the unauthenticated surface and checking structural invariants.
  */
 
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 const APP_BASE = process.env.APP_BASE_URL ?? "http://localhost:3001";
 
@@ -83,9 +83,7 @@ test.describe("Sign-up page", () => {
   test("renders sign-up form", async ({ page }) => {
     await page.goto(APP_BASE + "/sign-up");
     await expect(page).toHaveTitle(/sign.?up|Nebutra/i);
-    const continueBtn = page
-      .getByRole("button", { name: /continue|sign up|next/i })
-      .first();
+    const continueBtn = page.getByRole("button", { name: /continue|sign up|next/i }).first();
     if (await continueBtn.isVisible()) {
       await expect(continueBtn).toBeEnabled();
     }

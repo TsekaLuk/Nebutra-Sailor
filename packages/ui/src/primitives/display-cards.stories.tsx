@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Zap, Star, Sparkles, TrendingUp } from "lucide-react";
+import { Sparkles, Star, TrendingUp, Zap } from "lucide-react";
 import { DisplayCards } from "./display-cards";
 
 const meta = {
@@ -52,8 +52,7 @@ export const CustomCards: Story = {
         date: "Live",
         iconClassName: "bg-purple-800",
         titleClassName: "text-purple-400",
-        className:
-          "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10",
+        className: "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10",
       },
     ],
   },

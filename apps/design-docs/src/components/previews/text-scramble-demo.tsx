@@ -1,8 +1,8 @@
-import { TextScramble } from "@nebutra/ui/primitives"
-import { useState } from "react"
+import { TextScramble } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export default function TextScrambleDemo() {
-  const [trigger, setTrigger] = useState(false)
+  const [trigger, setTrigger] = useState(false);
 
   return (
     <div className="flex h-[300px] items-center justify-center">
@@ -16,5 +16,5 @@ export default function TextScrambleDemo() {
         Hover over me to scramble
       </TextScramble>
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Button } from "@nebutra/ui/primitives"
-import { Mail, ArrowRight } from "lucide-react"
+import { Button } from "@nebutra/ui/primitives";
+import { ArrowRight, Mail } from "lucide-react";
 
 export function ButtonDemo() {
   return (
@@ -15,5 +15,5 @@ export function ButtonDemo() {
       <Button suffix={<ArrowRight />}>Continue</Button>
       <Button loading>Loading</Button>
     </div>
-  )
+  );
 }

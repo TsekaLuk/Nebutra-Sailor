@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useId, useRef, useState } from "react";
 import { motion } from "motion/react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -143,17 +143,19 @@ export function DotPattern({
           cy={dot.y}
           r={cr}
           fill={glow ? `url(#${id}-gradient)` : "currentColor"}
-          {...(glow ? {
-            initial: { opacity: 0.4, scale: 1 },
-            animate: { opacity: [0.4, 1, 0.4], scale: [1, 1.5, 1] },
-            transition: {
-              duration: dot.duration,
-              repeat: Infinity,
-              repeatType: "reverse" as const,
-              delay: dot.delay,
-              ease: "easeInOut",
-            }
-          } : {})}
+          {...(glow
+            ? {
+                initial: { opacity: 0.4, scale: 1 },
+                animate: { opacity: [0.4, 1, 0.4], scale: [1, 1.5, 1] },
+                transition: {
+                  duration: dot.duration,
+                  repeat: Infinity,
+                  repeatType: "reverse" as const,
+                  delay: dot.delay,
+                  ease: "easeInOut",
+                },
+              }
+            : {})}
         />
       ))}
     </svg>

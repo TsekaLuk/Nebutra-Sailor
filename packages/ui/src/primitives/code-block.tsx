@@ -1,24 +1,10 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useId,
-  useCallback,
-  useRef,
-  useMemo,
-} from "react";
+import { Check, ChevronDown, Copy, File, FileCode, FileText } from "lucide-react";
 import { motion } from "motion/react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/prism";
-import {
-  Check,
-  ChevronDown,
-  Copy,
-  File,
-  FileCode,
-  FileText,
-} from "lucide-react";
 import { cn } from "../utils";
 import {
   DropdownMenu,
@@ -246,9 +232,7 @@ export function CodeBlock({
   languages,
   onLineReference,
 }: CodeBlockProps) {
-  const [activeTitle, setActiveTitle] = useState(
-    defaultTitle || files[0]?.title,
-  );
+  const [activeTitle, setActiveTitle] = useState(defaultTitle || files[0]?.title);
   const [copied, setCopied] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [languageOverride, setLanguageOverride] = useState<string | null>(null);
@@ -295,8 +279,7 @@ export function CodeBlock({
 
   const activeFile = files.find((file) => file.title === activeTitle);
   const code = activeFile?.code || "";
-  const detectedLanguage =
-    activeFile?.language || getLanguageFromFileName(activeTitle || "");
+  const detectedLanguage = activeFile?.language || getLanguageFromFileName(activeTitle || "");
   const effectiveLanguage = languageOverride ?? detectedLanguage;
 
   // Memoized Set lookups for O(1) per-line checks + stable useCallback deps
@@ -304,20 +287,11 @@ export function CodeBlock({
     () => new Set(activeFile?.highlightedLines),
     [activeFile?.highlightedLines],
   );
-  const addedSet = useMemo(
-    () => new Set(activeFile?.addedLines),
-    [activeFile?.addedLines],
-  );
-  const removedSet = useMemo(
-    () => new Set(activeFile?.removedLines),
-    [activeFile?.removedLines],
-  );
+  const addedSet = useMemo(() => new Set(activeFile?.addedLines), [activeFile?.addedLines]);
+  const removedSet = useMemo(() => new Set(activeFile?.removedLines), [activeFile?.removedLines]);
 
   const hasLineFeatures =
-    highlightedSet.size > 0 ||
-    addedSet.size > 0 ||
-    removedSet.size > 0 ||
-    enableLineReferences;
+    highlightedSet.size > 0 || addedSet.size > 0 || removedSet.size > 0 || enableLineReferences;
 
   // Line props for highlighted / diff lines
   const getLineProps = useCallback(
@@ -332,24 +306,18 @@ export function CodeBlock({
       const dataAttrs: Record<string, string> = {};
 
       if (highlightedSet.has(lineNumber)) {
-        styles.backgroundColor = isDark
-          ? "rgba(59, 130, 246, 0.15)"
-          : "rgba(59, 130, 246, 0.08)";
+        styles.backgroundColor = isDark ? "rgba(59, 130, 246, 0.15)" : "rgba(59, 130, 246, 0.08)";
         styles.borderLeft = "2px solid rgba(59, 130, 246, 0.6)";
         styles.paddingLeft = "calc(1rem - 2px)";
       }
 
       if (addedSet.has(lineNumber)) {
-        styles.backgroundColor = isDark
-          ? "rgba(16, 185, 129, 0.15)"
-          : "rgba(16, 185, 129, 0.08)";
+        styles.backgroundColor = isDark ? "rgba(16, 185, 129, 0.15)" : "rgba(16, 185, 129, 0.08)";
         dataAttrs["data-diff"] = "+";
       }
 
       if (removedSet.has(lineNumber)) {
-        styles.backgroundColor = isDark
-          ? "rgba(239, 68, 68, 0.15)"
-          : "rgba(239, 68, 68, 0.08)";
+        styles.backgroundColor = isDark ? "rgba(239, 68, 68, 0.15)" : "rgba(239, 68, 68, 0.08)";
         dataAttrs["data-diff"] = "-";
       }
 
@@ -385,16 +353,14 @@ export function CodeBlock({
       if (!enableLineReferences || !showLineNumbers) return;
 
       const target = e.target as HTMLElement;
-      const lineNumEl = target.closest(
-        ".react-syntax-highlighter-line-number, .linenumber",
-      );
+      const lineNumEl = target.closest(".react-syntax-highlighter-line-number, .linenumber");
       if (!lineNumEl) return;
 
       const lineNumber = parseInt(lineNumEl.textContent?.trim() ?? "", 10);
       if (isNaN(lineNumber)) return;
 
       const anchor = `#L${lineNumber}`;
-      navigator.clipboard.writeText(anchor).catch(() => { });
+      navigator.clipboard.writeText(anchor).catch(() => {});
       onLineReference?.(lineNumber);
       showCopyFeedback();
     },
@@ -481,18 +447,12 @@ export function CodeBlock({
                   <ChevronDown className="h-3 w-3" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="max-h-60 overflow-y-auto"
-              >
+              <DropdownMenuContent align="end" className="max-h-60 overflow-y-auto">
                 {switcherLanguages.map((lang) => (
                   <DropdownMenuItem
                     key={lang}
                     onClick={() => setLanguageOverride(lang)}
-                    className={cn(
-                      "text-xs",
-                      lang === effectiveLanguage && "bg-accent font-medium",
-                    )}
+                    className={cn("text-xs", lang === effectiveLanguage && "bg-accent font-medium")}
                   >
                     {lang}
                   </DropdownMenuItem>
@@ -509,11 +469,7 @@ export function CodeBlock({
             aria-label="Copy code"
           >
             {copied ? (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-              >
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
                 <Check className="h-4 w-4" />
               </motion.div>
             ) : (
@@ -528,8 +484,7 @@ export function CodeBlock({
       <div
         className="overflow-auto"
         style={{
-          maxHeight:
-            typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
+          maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
         }}
         onClick={handleCodeClick}
       >

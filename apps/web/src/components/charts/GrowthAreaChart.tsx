@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
 } from "recharts";
 import type { GrowthSummary } from "@/lib/warehouse/gold";
 
@@ -63,11 +63,7 @@ export function GrowthAreaChart({ series }: Props) {
             <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid
-          strokeDasharray="3 3"
-          stroke="var(--neutral-6)"
-          vertical={false}
-        />
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--neutral-6)" vertical={false} />
         <XAxis
           dataKey="day"
           tick={{ fontSize: 11, fill: "var(--neutral-11)" }}

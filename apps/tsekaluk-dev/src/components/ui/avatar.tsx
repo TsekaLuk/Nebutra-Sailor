@@ -1,1 +1,1 @@
-export { Avatar, AvatarImage, AvatarFallback } from "@nebutra/ui/primitives";
+export { Avatar, AvatarFallback, AvatarImage } from "@nebutra/ui/primitives";

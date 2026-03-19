@@ -6,12 +6,12 @@
  */
 
 export {
-  ScrollSpyProvider,
-  useScrollSpy,
-  useRegisterSection,
-  type SectionInfo,
   type ScrollSpyContextValue,
+  ScrollSpyProvider,
   type ScrollSpyProviderProps,
+  type SectionInfo,
+  useRegisterSection,
+  useScrollSpy,
 } from "./ScrollSpyProvider";
 
 export { StoryProgress, type StoryProgressProps } from "./StoryProgress";

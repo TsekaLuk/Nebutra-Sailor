@@ -3,8 +3,8 @@ import {
   CreditCard,
   FileText,
   LayoutDashboard,
-  Users,
   type LucideIcon,
+  Users,
 } from "lucide-react";
 
 export interface DashboardNavItem {

@@ -6,7 +6,7 @@ import type { StatusPageData, StatusState } from "../types";
 
 export function calculateOverallStatus(
   monitors: { status: StatusState }[],
-  incidents: { impact: string }[]
+  incidents: { impact: string }[],
 ): StatusState {
   // Active incidents take precedence over monitor health
   if (incidents.some((i) => i.impact === "critical")) return "major_outage";

@@ -71,10 +71,7 @@ export const NoPrompt: Story = {
   render: () => (
     <div className="flex flex-col gap-3 w-80">
       <SnippetStatus text="const x = 1" prompt={false} />
-      <SnippetStatus
-        text="NEXT_PUBLIC_API_URL=https://api.example.com"
-        prompt={false}
-      />
+      <SnippetStatus text="NEXT_PUBLIC_API_URL=https://api.example.com" prompt={false} />
     </div>
   ),
 };

@@ -88,10 +88,7 @@ export const MultipleFiles: Story = {
 export const WithLineNumbers: Story = {
   render: () => (
     <div className="w-[600px]">
-      <CodeBlock
-        files={[{ title: "counter.tsx", code: tsCode }]}
-        showLineNumbers
-      />
+      <CodeBlock files={[{ title: "counter.tsx", code: tsCode }]} showLineNumbers />
     </div>
   ),
 };
@@ -99,10 +96,7 @@ export const WithLineNumbers: Story = {
 export const CustomHeight: Story = {
   render: () => (
     <div className="w-[600px]">
-      <CodeBlock
-        files={[{ title: "counter.tsx", code: tsCode }]}
-        maxHeight={200}
-      />
+      <CodeBlock files={[{ title: "counter.tsx", code: tsCode }]} maxHeight={200} />
     </div>
   ),
 };
@@ -110,10 +104,7 @@ export const CustomHeight: Story = {
 export const JsonOnly: Story = {
   render: () => (
     <div className="w-[500px]">
-      <CodeBlock
-        files={[{ title: "package.json", code: jsonCode }]}
-        showLineNumbers
-      />
+      <CodeBlock files={[{ title: "package.json", code: jsonCode }]} showLineNumbers />
     </div>
   ),
 };

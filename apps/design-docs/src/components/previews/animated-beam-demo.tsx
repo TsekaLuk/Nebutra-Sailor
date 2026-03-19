@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import React, { useRef } from "react"
-import { AnimatedBeam } from "@nebutra/ui/primitives"
+import { AnimatedBeam } from "@nebutra/ui/primitives";
+import React, { useRef } from "react";
 
 export function AnimatedBeamDemo() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const fromRef = useRef<HTMLDivElement>(null)
-  const toRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const fromRef = useRef<HTMLDivElement>(null);
+  const toRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -25,11 +25,7 @@ export function AnimatedBeamDemo() {
       >
         B
       </div>
-      <AnimatedBeam
-        containerRef={containerRef}
-        fromRef={fromRef}
-        toRef={toRef}
-      />
+      <AnimatedBeam containerRef={containerRef} fromRef={fromRef} toRef={toRef} />
     </div>
-  )
+  );
 }

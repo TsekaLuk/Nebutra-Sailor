@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { routing, type Locale } from "@/i18n/routing";
+import { type Locale, routing } from "@/i18n/routing";
 
 export async function generateMetadata({
   params,
@@ -22,11 +22,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function CookiePolicyPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function CookiePolicyPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const locale = lang as Locale;
   setRequestLocale(locale);
@@ -43,40 +39,35 @@ export default async function CookiePolicyPage({
       </p>
 
       <p>
-        This Cookie Policy explains how Nebutra, Inc. (&quot;Nebutra,&quot;
-        &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) uses cookies and
-        similar tracking technologies on our website and services.
+        This Cookie Policy explains how Nebutra, Inc. (&quot;Nebutra,&quot; &quot;we,&quot;
+        &quot;us,&quot; or &quot;our&quot;) uses cookies and similar tracking technologies on our
+        website and services.
       </p>
 
       <h2>What Are Cookies?</h2>
       <p>
-        Cookies are small text files placed on your device when you visit a
-        website. They are widely used to make websites work more efficiently and
-        provide information to website owners.
+        Cookies are small text files placed on your device when you visit a website. They are widely
+        used to make websites work more efficiently and provide information to website owners.
       </p>
 
       <h2>How We Use Cookies</h2>
       <p>We use cookies to:</p>
       <ul>
         <li>
-          <strong>Enable Essential Features:</strong> Provide core functionality
-          like user authentication and security
+          <strong>Enable Essential Features:</strong> Provide core functionality like user
+          authentication and security
         </li>
         <li>
-          <strong>Remember Preferences:</strong> Store your language, theme, and
-          other settings
+          <strong>Remember Preferences:</strong> Store your language, theme, and other settings
         </li>
         <li>
-          <strong>Improve Performance:</strong> Understand how visitors interact
-          with our services
+          <strong>Improve Performance:</strong> Understand how visitors interact with our services
         </li>
         <li>
-          <strong>Personalize Experience:</strong> Deliver relevant content and
-          recommendations
+          <strong>Personalize Experience:</strong> Deliver relevant content and recommendations
         </li>
         <li>
-          <strong>Measure Marketing:</strong> Track the effectiveness of our
-          marketing campaigns
+          <strong>Measure Marketing:</strong> Track the effectiveness of our marketing campaigns
         </li>
       </ul>
 
@@ -84,8 +75,7 @@ export default async function CookiePolicyPage({
 
       <h3>Strictly Necessary Cookies</h3>
       <p>
-        These cookies are essential for the website to function properly. They
-        cannot be disabled.
+        These cookies are essential for the website to function properly. They cannot be disabled.
       </p>
       <div className="overflow-x-auto">
         <table>
@@ -127,10 +117,7 @@ export default async function CookiePolicyPage({
       </div>
 
       <h3>Functional Cookies</h3>
-      <p>
-        These cookies enable personalized features and remember your
-        preferences.
-      </p>
+      <p>These cookies enable personalized features and remember your preferences.</p>
       <div className="overflow-x-auto">
         <table>
           <thead>
@@ -163,9 +150,7 @@ export default async function CookiePolicyPage({
       </div>
 
       <h3>Analytics Cookies</h3>
-      <p>
-        These cookies help us understand how visitors interact with our website.
-      </p>
+      <p>These cookies help us understand how visitors interact with our website.</p>
       <div className="overflow-x-auto">
         <table>
           <thead>
@@ -198,10 +183,7 @@ export default async function CookiePolicyPage({
       </div>
 
       <h3>Marketing Cookies</h3>
-      <p>
-        These cookies are used for advertising and tracking ad campaign
-        performance.
-      </p>
+      <p>These cookies are used for advertising and tracking ad campaign performance.</p>
       <div className="overflow-x-auto">
         <table>
           <thead>
@@ -237,68 +219,55 @@ export default async function CookiePolicyPage({
 
       <h3>Cookie Consent Banner</h3>
       <p>
-        When you first visit our website, you will see a cookie consent banner
-        that allows you to:
+        When you first visit our website, you will see a cookie consent banner that allows you to:
       </p>
       <ul>
         <li>
           <strong>Accept All:</strong> Enable all cookie categories
         </li>
         <li>
-          <strong>Reject All:</strong> Disable all optional cookies (necessary
-          cookies remain)
+          <strong>Reject All:</strong> Disable all optional cookies (necessary cookies remain)
         </li>
         <li>
-          <strong>Customize:</strong> Choose specific cookie categories to
-          enable
+          <strong>Customize:</strong> Choose specific cookie categories to enable
         </li>
       </ul>
       <p>
-        You can change your preferences at any time by clicking &quot;Cookie
-        Settings&quot; in the footer.
+        You can change your preferences at any time by clicking &quot;Cookie Settings&quot; in the
+        footer.
       </p>
 
       <h3>Browser Settings</h3>
-      <p>
-        Most web browsers allow you to control cookies through their settings:
-      </p>
+      <p>Most web browsers allow you to control cookies through their settings:</p>
       <ul>
         <li>
-          <strong>Chrome:</strong> Settings {">"} Privacy and security {">"}{" "}
-          Cookies
+          <strong>Chrome:</strong> Settings {">"} Privacy and security {">"} Cookies
         </li>
         <li>
-          <strong>Firefox:</strong> Settings {">"} Privacy & Security {">"}{" "}
-          Cookies
+          <strong>Firefox:</strong> Settings {">"} Privacy & Security {">"} Cookies
         </li>
         <li>
           <strong>Safari:</strong> Preferences {">"} Privacy {">"} Cookies
         </li>
         <li>
-          <strong>Edge:</strong> Settings {">"} Privacy, search, and services{" "}
-          {">"} Cookies
+          <strong>Edge:</strong> Settings {">"} Privacy, search, and services {">"} Cookies
         </li>
       </ul>
       <p>
-        <em>
-          Note: Blocking certain cookies may impact website functionality.
-        </em>
+        <em>Note: Blocking certain cookies may impact website functionality.</em>
       </p>
 
       <h2>Similar Technologies</h2>
       <p>In addition to cookies, we may use:</p>
       <ul>
         <li>
-          <strong>Local Storage:</strong> To store preferences and cache data
-          locally
+          <strong>Local Storage:</strong> To store preferences and cache data locally
         </li>
         <li>
-          <strong>Session Storage:</strong> For temporary data during your
-          browsing session
+          <strong>Session Storage:</strong> For temporary data during your browsing session
         </li>
         <li>
-          <strong>Pixel Tags:</strong> Small images to track email opens and
-          website visits
+          <strong>Pixel Tags:</strong> Small images to track email opens and website visits
         </li>
       </ul>
       <p>
@@ -307,8 +276,8 @@ export default async function CookiePolicyPage({
 
       <h2>Updates to This Policy</h2>
       <p>
-        We may update this Cookie Policy from time to time. We will notify you
-        of material changes by posting the updated policy on our website.
+        We may update this Cookie Policy from time to time. We will notify you of material changes
+        by posting the updated policy on our website.
       </p>
 
       <h2>Contact Us</h2>
@@ -324,8 +293,8 @@ export default async function CookiePolicyPage({
       <hr />
 
       <p>
-        For more information about how we collect and process your data, please
-        see our <Link href="/privacy">Privacy Policy</Link>.
+        For more information about how we collect and process your data, please see our{" "}
+        <Link href="/privacy">Privacy Policy</Link>.
       </p>
     </article>
   );

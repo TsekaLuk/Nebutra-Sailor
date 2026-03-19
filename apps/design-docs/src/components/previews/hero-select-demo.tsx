@@ -1,23 +1,15 @@
-"use client"
+"use client";
 
-import {
-  HeroSelect,
-  HeroSelectItem,
-  HeroSelectSection,
-} from "@nebutra/ui/primitives"
-import { useState } from "react"
+import { HeroSelect, HeroSelectItem, HeroSelectSection } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export function HeroSelectDemo() {
-  const [_value, _setValue] = useState<Set<string>>(new Set(["cat"]))
+  const [_value, _setValue] = useState<Set<string>>(new Set(["cat"]));
 
   return (
     <div className="gap-12 max-w-sm p-4 py-12 mx-auto flex min-h-[400px] w-full flex-col">
       <div className="gap-2 flex flex-col">
-        <HeroSelect
-          label="Favorite Animal"
-          placeholder="Select an animal"
-          className="max-w-xs"
-        >
+        <HeroSelect label="Favorite Animal" placeholder="Select an animal" className="max-w-xs">
           <HeroSelectItem key="cat">Cat</HeroSelectItem>
           <HeroSelectItem key="dog">Dog</HeroSelectItem>
           <HeroSelectItem key="elephant">Elephant</HeroSelectItem>
@@ -50,5 +42,5 @@ export function HeroSelectDemo() {
         </HeroSelect>
       </div>
     </div>
-  )
+  );
 }

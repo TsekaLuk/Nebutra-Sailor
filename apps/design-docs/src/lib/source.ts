@@ -1,7 +1,7 @@
-import { docs } from "@/.source/server";
-import { loader } from "fumadocs-core/source";
-import { i18n } from "./i18n";
 import type { InferPageType } from "fumadocs-core/source";
+import { loader } from "fumadocs-core/source";
+import { docs } from "@/.source/server";
+import { i18n } from "./i18n";
 
 export const source = loader({
   baseUrl: "/docs",
@@ -10,9 +10,9 @@ export const source = loader({
 });
 
 export function getPageImage(page: InferPageType<typeof source>) {
-  const segments = [...(page.slugs || []), 'image.webp'];
+  const segments = [...(page.slugs || []), "image.webp"];
   return {
     segments,
-    url: `/og/docs/${segments.join('/')}`,
+    url: `/og/docs/${segments.join("/")}`,
   };
 }

@@ -28,13 +28,8 @@ export const Default: Story = {
         <p className="text-sm text-muted-foreground">
           Password: <code>SecurePass123!</code>
         </p>
-        <AssistedPasswordConfirmation
-          password="SecurePass123!"
-          onMatch={() => setIsValid(true)}
-        />
-        {isValid && (
-          <p className="text-sm text-green-600">✔ Passwords match!</p>
-        )}
+        <AssistedPasswordConfirmation password="SecurePass123!" onMatch={() => setIsValid(true)} />
+        {isValid && <p className="text-sm text-green-600">✔ Passwords match!</p>}
       </div>
     );
   },

@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
-import { Folder, HeartHandshake, Sparkles, type LucideIcon } from "lucide-react";
+import { Folder, HeartHandshake, type LucideIcon, Sparkles } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 // Inline CSS for offset-path animations (avoids external CSS dependency)
@@ -86,18 +86,13 @@ export function DatabaseRestApi({
     <div
       className={cn(
         "relative flex h-[350px] w-full max-w-[500px] flex-col items-center",
-        className
+        className,
       )}
     >
       <style>{ANIMATION_STYLES}</style>
 
       {/* SVG Paths */}
-      <svg
-        className="h-full sm:w-full text-muted"
-        width="100%"
-        height="100%"
-        viewBox="0 0 200 100"
-      >
+      <svg className="h-full sm:w-full text-muted" width="100%" height="100%" viewBox="0 0 200 100">
         <g
           stroke="currentColor"
           fill="none"
@@ -199,10 +194,18 @@ export function DatabaseRestApi({
             <path d="M 77 10 v 10 q 0 5 5 5 h 13 q 5 0 5 5 v 10" strokeWidth="0.5" stroke="white" />
           </mask>
           <mask id="db-mask-3">
-            <path d="M 124 10 v 10 q 0 5 -5 5 h -14 q -5 0 -5 5 v 10" strokeWidth="0.5" stroke="white" />
+            <path
+              d="M 124 10 v 10 q 0 5 -5 5 h -14 q -5 0 -5 5 v 10"
+              strokeWidth="0.5"
+              stroke="white"
+            />
           </mask>
           <mask id="db-mask-4">
-            <path d="M 170 10 v 15 q 0 5 -5 5 h -60 q -5 0 -5 5 v 10" strokeWidth="0.5" stroke="white" />
+            <path
+              d="M 170 10 v 15 q 0 5 -5 5 h -60 q -5 0 -5 5 v 10"
+              strokeWidth="0.5"
+              stroke="white"
+            />
           </mask>
           <radialGradient id="db-blue-grad" fx="1">
             <stop offset="0%" stopColor={lightColor} />

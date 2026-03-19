@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Progress } from "@nebutra/ui/primitives"
+import { Progress } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Progress2Demo() {
   return (
     <div className="space-y-1 w-full">
@@ -12,5 +11,5 @@ export function Progress2Demo() {
       </div>
       <Progress value={65} />
     </div>
-  )
+  );
 }

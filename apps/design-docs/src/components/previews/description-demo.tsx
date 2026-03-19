@@ -1,4 +1,4 @@
-import { Description } from "@nebutra/ui/primitives"
+import { Description } from "@nebutra/ui/primitives";
 
 export function DescriptionDemo() {
   return (
@@ -7,5 +7,5 @@ export function DescriptionDemo() {
       content="Data about this section."
       tooltip="Additional context about what this section refers to."
     />
-  )
+  );
 }

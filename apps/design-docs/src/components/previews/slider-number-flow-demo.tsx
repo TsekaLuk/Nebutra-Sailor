@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { SliderNumberFlow } from "@nebutra/ui/primitives"
+import { SliderNumberFlow } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export function SliderNumberFlowDemo() {
-  const [value, setValue] = useState([50])
+  const [value, setValue] = useState([50]);
 
   return (
     <div className="py-8 flex w-full items-center justify-center">
@@ -18,5 +18,5 @@ export function SliderNumberFlowDemo() {
         className="w-[60%]"
       />
     </div>
-  )
+  );
 }

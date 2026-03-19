@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Switch } from "@nebutra/ui/primitives"
-import { Moon, Sun } from "lucide-react"
+import { Switch } from "@nebutra/ui/primitives";
+import { Moon, Sun } from "lucide-react";
 
 export function SwitchDemo() {
   return (
@@ -17,12 +17,7 @@ export function SwitchDemo() {
       <div className="gap-2 flex flex-col">
         <h4 className="text-sm font-medium text-muted-foreground">Disabled</h4>
         <Switch name="disabled">
-          <Switch.Control
-            defaultChecked
-            disabled
-            label="List view"
-            value="list"
-          />
+          <Switch.Control defaultChecked disabled label="List view" value="list" />
           <Switch.Control disabled label="Grid view" value="grid" />
         </Switch>
       </div>
@@ -49,15 +44,11 @@ export function SwitchDemo() {
         <h4 className="text-sm font-medium text-muted-foreground">Icons</h4>
         <div className="gap-4 flex">
           <Switch name="theme" size="small">
-            <Switch.Control
-              icon={<Sun className="h-4 w-4" />}
-              value="light"
-              defaultChecked
-            />
+            <Switch.Control icon={<Sun className="h-4 w-4" />} value="light" defaultChecked />
             <Switch.Control icon={<Moon className="h-4 w-4" />} value="dark" />
           </Switch>
         </div>
       </div>
     </div>
-  )
+  );
 }

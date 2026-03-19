@@ -1,13 +1,10 @@
-import { logger } from "@nebutra/logger";
-import { prisma } from "@nebutra/db";
 import type { Plan } from "@nebutra/db";
+import { prisma } from "@nebutra/db";
+import { StripeInvoiceDataSchema, StripeSubscriptionDataSchema } from "@nebutra/event-bus";
+import { logger } from "@nebutra/logger";
 import { OrganizationRepository } from "@nebutra/repositories";
-import {
-  StripeSubscriptionDataSchema,
-  StripeInvoiceDataSchema,
-} from "@nebutra/event-bus";
-import { inngest } from "../client.js";
 import { eventType, type InngestFunction } from "inngest";
+import { inngest } from "../client.js";
 
 const orgRepo = new OrganizationRepository(prisma);
 
@@ -63,8 +60,7 @@ export const processBillingEvent: InngestFunction.Any = inngest.createFunction(
     ) {
       const { organizationId, status } = event.data;
 
-      const resolvedStatus =
-        eventName === "stripe/subscription.deleted" ? "canceled" : status;
+      const resolvedStatus = eventName === "stripe/subscription.deleted" ? "canceled" : status;
       const targetPlan = resolvePlanFromStatus(resolvedStatus);
 
       await step.run("update-organization-plan", async () => {

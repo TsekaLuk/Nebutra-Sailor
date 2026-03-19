@@ -55,9 +55,7 @@ export const WithOverflow: Story = {
 };
 
 export const LargeSize: Story = {
-  render: () => (
-    <AvatarCircles avatarUrls={sampleAvatars} numPeople={50} size={56} />
-  ),
+  render: () => <AvatarCircles avatarUrls={sampleAvatars} numPeople={50} size={56} />,
 };
 
 export const SocialProof: Story = {
@@ -66,16 +64,12 @@ export const SocialProof: Story = {
       <AvatarCircles avatarUrls={sampleAvatars} numPeople={1200} />
       <div>
         <p className="text-sm font-semibold">Join 1,200+ developers</p>
-        <p className="text-xs text-muted-foreground">
-          Building with Nebutra today
-        </p>
+        <p className="text-xs text-muted-foreground">Building with Nebutra today</p>
       </div>
     </div>
   ),
 };
 
 export const FewAvatars: Story = {
-  render: () => (
-    <AvatarCircles avatarUrls={sampleAvatars.slice(0, 2)} numPeople={3} />
-  ),
+  render: () => <AvatarCircles avatarUrls={sampleAvatars.slice(0, 2)} numPeople={3} />,
 };

@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MapPin, Zap, Shield, Globe, Layers } from "lucide-react";
-import {
-  FeatureCard,
-  FeatureCardHeader,
-  FeatureCardContent,
-  CircularUI,
-} from "./feature-card";
+import { Globe, Layers, MapPin, Shield, Zap } from "lucide-react";
+import { CircularUI, FeatureCard, FeatureCardContent, FeatureCardHeader } from "./feature-card";
 
 const meta = {
   title: "Primitives/FeatureCard",
@@ -88,18 +83,9 @@ export const WithCircularUI: Story = {
         description="Fine-grained role-based access control."
       />
       <FeatureCardContent className="flex gap-6 p-6 pb-8">
-        <CircularUI
-          label="Admins"
-          circles={[{ pattern: "primary" }, { pattern: "border" }]}
-        />
-        <CircularUI
-          label="Members"
-          circles={[{ pattern: "border" }, { pattern: "none" }]}
-        />
-        <CircularUI
-          label="Guests"
-          circles={[{ pattern: "blue" }, { pattern: "none" }]}
-        />
+        <CircularUI label="Admins" circles={[{ pattern: "primary" }, { pattern: "border" }]} />
+        <CircularUI label="Members" circles={[{ pattern: "border" }, { pattern: "none" }]} />
+        <CircularUI label="Guests" circles={[{ pattern: "blue" }, { pattern: "none" }]} />
       </FeatureCardContent>
     </FeatureCard>
   ),

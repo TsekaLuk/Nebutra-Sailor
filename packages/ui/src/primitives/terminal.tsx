@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  Children,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { motion, MotionProps, useInView } from "motion/react";
+import { type MotionProps, motion, useInView } from "motion/react";
+import { Children, createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -283,9 +275,7 @@ export function Terminal({
     if (!sequence) return null;
     return {
       completeItem: (index: number) => {
-        setActiveIndex((current) =>
-          index === current ? current + 1 : current,
-        );
+        setActiveIndex((current) => (index === current ? current + 1 : current));
       },
       activeIndex,
       sequenceStarted: sequenceHasStarted,
@@ -327,9 +317,5 @@ export function Terminal({
 
   if (!sequence) return content;
 
-  return (
-    <SequenceContext.Provider value={contextValue}>
-      {content}
-    </SequenceContext.Provider>
-  );
+  return <SequenceContext.Provider value={contextValue}>{content}</SequenceContext.Provider>;
 }

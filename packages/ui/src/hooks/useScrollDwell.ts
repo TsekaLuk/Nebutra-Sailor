@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  type RefObject,
-} from "react";
+import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
 
 export interface DwellConfig {
   /** Time in ms before dwell is triggered (default: 800) */
@@ -62,12 +56,7 @@ export function useScrollDwell(
   ref: RefObject<HTMLElement | null>,
   config: DwellConfig = {},
 ): DwellState {
-  const {
-    threshold = 800,
-    cooldown = 5000,
-    onDwell,
-    requireVisible = true,
-  } = config;
+  const { threshold = 800, cooldown = 5000, onDwell, requireVisible = true } = config;
 
   const [isDwelling, setIsDwelling] = useState(false);
   const [dwellProgress, setDwellProgress] = useState(0);
@@ -107,8 +96,7 @@ export function useScrollDwell(
     const windowHeight = window.innerHeight;
 
     // Element is visible if at least 50% is in viewport
-    const visibleHeight =
-      Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+    const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
     const elementHeight = rect.height;
 
     return visibleHeight / elementHeight > 0.5;
@@ -146,15 +134,7 @@ export function useScrollDwell(
         setDwellProgress(0);
       }, cooldown);
     }, threshold);
-  }, [
-    threshold,
-    cooldown,
-    onDwell,
-    requireVisible,
-    hasTriggered,
-    isElementVisible,
-    clearTimers,
-  ]);
+  }, [threshold, cooldown, onDwell, requireVisible, hasTriggered, isElementVisible, clearTimers]);
 
   const handleScroll = useCallback(() => {
     lastScrollTimeRef.current = Date.now();
@@ -188,13 +168,7 @@ export function useScrollDwell(
         clearTimeout(cooldownTimerRef.current);
       }
     };
-  }, [
-    handleScroll,
-    startDwellTimer,
-    requireVisible,
-    isElementVisible,
-    clearTimers,
-  ]);
+  }, [handleScroll, startDwellTimer, requireVisible, isElementVisible, clearTimers]);
 
   return {
     isDwelling,

@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { Button, Input } from "@nebutra/ui/components";
+import { Label, Separator } from "@nebutra/ui/primitives";
 import Link from "next/link";
-import { Button } from "@nebutra/ui/components";
-import { Input } from "@nebutra/ui/components";
-import { Label } from "@nebutra/ui/primitives";
-import { Separator } from "@nebutra/ui/primitives";
-import { OAuthButtons } from "./oauth-buttons";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { extractClerkErrorMessage } from "@/lib/clerk-errors";
+import { OAuthButtons } from "./oauth-buttons";
 
 type Phase = "details" | "verify";
 
@@ -78,11 +76,9 @@ export function SignUpForm() {
     setError("");
 
     try {
-      const { error: verifyError } = await signUp.verifications.verifyEmailCode(
-        {
-          code,
-        },
-      );
+      const { error: verifyError } = await signUp.verifications.verifyEmailCode({
+        code,
+      });
 
       if (verifyError) {
         setError(verifyError.message ?? "Invalid code. Please try again.");
@@ -94,9 +90,7 @@ export function SignUpForm() {
         router.push("/onboarding");
       }
     } catch (err: unknown) {
-      setError(
-        extractClerkErrorMessage(err, "Invalid code. Please try again."),
-      );
+      setError(extractClerkErrorMessage(err, "Invalid code. Please try again."));
     } finally {
       setLoading(false);
     }
@@ -125,9 +119,7 @@ export function SignUpForm() {
           </h1>
           <p className="mt-1 text-sm text-[var(--neutral-9)]">
             We sent a 6-digit code to{" "}
-            <span className="font-medium text-[var(--neutral-11)]">
-              {email}
-            </span>
+            <span className="font-medium text-[var(--neutral-11)]">{email}</span>
           </p>
         </div>
 
@@ -143,24 +135,16 @@ export function SignUpForm() {
               maxLength={6}
               placeholder="000000"
               value={code}
-              onChange={(e) =>
-                setCode(e.target.value.replace(/\D/g, "").slice(0, 6))
-              }
+              onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
               required
               autoComplete="one-time-code"
               className="text-center text-lg tracking-[0.5em]"
             />
           </div>
 
-          {error && (
-            <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>
-          )}
+          {error && <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>}
 
-          <Button
-            htmlType="submit"
-            className="w-full"
-            disabled={loading || code.length !== 6}
-          >
+          <Button htmlType="submit" className="w-full" disabled={loading || code.length !== 6}>
             {loading ? "Verifying…" : "Verify"}
           </Button>
         </form>
@@ -186,9 +170,7 @@ export function SignUpForm() {
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--neutral-12)]">
           Create your account
         </h1>
-        <p className="mt-1 text-sm text-[var(--neutral-9)]">
-          Start building today
-        </p>
+        <p className="mt-1 text-sm text-[var(--neutral-9)]">Start building today</p>
       </div>
 
       <OAuthButtons mode="signUp" />
@@ -249,15 +231,9 @@ export function SignUpForm() {
           />
         </div>
 
-        {error && (
-          <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>
-        )}
+        {error && <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>}
 
-        <Button
-          htmlType="submit"
-          className="w-full"
-          disabled={loading || !isReady}
-        >
+        <Button htmlType="submit" className="w-full" disabled={loading || !isReady}>
           {loading ? "Creating account…" : "Create account"}
         </Button>
       </form>

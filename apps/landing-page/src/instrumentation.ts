@@ -11,7 +11,9 @@ export async function register() {
       const { initOtel } = await import("@nebutra/logger");
       initOtel({ serviceName: "landing-page" });
     } catch (err) {
-      process.stderr.write(`[landing-page] OTel initialization failed: ${err instanceof Error ? err.message : String(err)}\n`);
+      process.stderr.write(
+        `[landing-page] OTel initialization failed: ${err instanceof Error ? err.message : String(err)}\n`,
+      );
     }
   }
 }

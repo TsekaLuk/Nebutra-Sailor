@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Combobox } from "@nebutra/ui/primitives" // Mock import
+import { Combobox } from "@nebutra/ui/primitives"; // Mock import
+import * as React from "react";
 
 export function ComboboxSizesDemo() {
   return (
@@ -22,5 +22,5 @@ export function ComboboxSizesDemo() {
         placeholder="大尺寸 (Large)"
       />
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { type ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "../utils/cn";
 
 /**

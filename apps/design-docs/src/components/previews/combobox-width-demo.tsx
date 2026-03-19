@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Combobox } from "@nebutra/ui/primitives"
+import { Combobox } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function ComboboxWidthDemo() {
   return (
@@ -15,5 +15,5 @@ export function ComboboxWidthDemo() {
       width="w-96"
       placeholder="选择框架..."
     />
-  )
+  );
 }

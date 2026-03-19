@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
-  BreadcrumbPage,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
   Breadcrumb,
   BreadcrumbItem,
-} from "@nebutra/ui/primitives"
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function BreadcrumbDemo() {
   return (
@@ -27,5 +27,5 @@ export function BreadcrumbDemo() {
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }

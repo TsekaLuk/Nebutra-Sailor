@@ -1,5 +1,5 @@
-import { requireOrg } from "@/lib/auth";
 import { currentUser } from "@clerk/nextjs/server";
+import { requireOrg } from "@/lib/auth";
 
 export const metadata = { title: "Settings" };
 
@@ -10,15 +10,11 @@ export default async function SettingsPage() {
   return (
     <div className="space-y-8">
       <section className="rounded-lg border border-[var(--neutral-7)] bg-[var(--neutral-1)] p-6">
-        <h2 className="mb-4 text-base font-semibold text-[var(--neutral-12)]">
-          Profile
-        </h2>
+        <h2 className="mb-4 text-base font-semibold text-[var(--neutral-12)]">Profile</h2>
         <dl className="space-y-3 text-sm">
           <div className="flex justify-between">
             <dt className="text-[var(--neutral-11)]">Name</dt>
-            <dd className="font-medium text-[var(--neutral-12)]">
-              {user?.fullName ?? "—"}
-            </dd>
+            <dd className="font-medium text-[var(--neutral-12)]">{user?.fullName ?? "—"}</dd>
           </div>
           <div className="flex justify-between">
             <dt className="text-[var(--neutral-11)]">Email</dt>
@@ -30,9 +26,7 @@ export default async function SettingsPage() {
       </section>
 
       <section className="rounded-lg border border-[var(--neutral-7)] bg-[var(--neutral-1)] p-6">
-        <h2 className="mb-4 text-base font-semibold text-[var(--neutral-12)]">
-          Danger Zone
-        </h2>
+        <h2 className="mb-4 text-base font-semibold text-[var(--neutral-12)]">Danger Zone</h2>
         <p className="mb-4 text-sm text-[var(--neutral-11)]">
           These actions are permanent and cannot be undone.
         </p>

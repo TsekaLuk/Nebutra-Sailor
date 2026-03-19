@@ -1,3 +1,3 @@
-export { client, getServerClient, projectId, dataset, apiVersion } from "./client";
-export { urlFor, getImageUrl } from "./image";
+export { apiVersion, client, dataset, getServerClient, projectId } from "./client";
+export { getImageUrl, urlFor } from "./image";
 export * from "./queries";

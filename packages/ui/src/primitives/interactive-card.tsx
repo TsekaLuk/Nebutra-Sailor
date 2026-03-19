@@ -1,13 +1,10 @@
 "use client";
 
+import { type HTMLMotionProps, motion, type Variants } from "framer-motion";
 import * as React from "react";
-import { motion, Variants, HTMLMotionProps } from "framer-motion";
 import { cn } from "../utils/cn";
 
-export interface InteractiveCardProps extends Omit<
-  HTMLMotionProps<"div">,
-  "ref"
-> {
+export interface InteractiveCardProps extends Omit<HTMLMotionProps<"div">, "ref"> {
   /** Step label (e.g., "STEP 1") */
   step: string;
   /** Card title */
@@ -66,11 +63,7 @@ function AnimatedExportIcon() {
         </g>
 
         {/* File (animated) */}
-        <motion.g
-          id="file"
-          variants={fileVariants}
-          style={{ originX: "125px", originY: "60px" }}
-        >
+        <motion.g id="file" variants={fileVariants} style={{ originX: "125px", originY: "60px" }}>
           <path
             d="M185.3,103H64.7a12,12,0,0,1-12-12V50.3a12,12,0,0,1,12-12h83.9l28.7,28.7v24A12,12,0,0,1,185.3,103Z"
             fill="hsl(var(--primary))"
@@ -79,14 +72,7 @@ function AnimatedExportIcon() {
             d="M148.6,38.3h-1.3l28.7,28.7v-1.3A12,12,0,0,0,164,53.7Z"
             fill="hsl(var(--primary) / 0.5)"
           />
-          <text
-            x="125"
-            y="80"
-            textAnchor="middle"
-            fill="#FFFFFF"
-            fontSize="18"
-            fontWeight="bold"
-          >
+          <text x="125" y="80" textAnchor="middle" fill="#FFFFFF" fontSize="18" fontWeight="bold">
             PPT
           </text>
         </motion.g>
@@ -126,37 +112,36 @@ function AnimatedExportIcon() {
  * />
  * ```
  */
-export const InteractiveCard = React.forwardRef<
-  HTMLDivElement,
-  InteractiveCardProps
->(({ className, step, title, description, icon, ...props }, ref) => {
-  return (
-    <motion.div
-      ref={ref}
-      className={cn(
-        "relative w-full max-w-sm overflow-hidden rounded-[var(--radius-2xl)] border bg-card p-8 text-center shadow-sm",
-        className,
-      )}
-      initial="initial"
-      whileHover="hover"
-      aria-label={`${title}: ${description}`}
-      role="group"
-      {...props}
-    >
-      {/* Render provided icon or default animated one */}
-      {icon || <AnimatedExportIcon />}
+export const InteractiveCard = React.forwardRef<HTMLDivElement, InteractiveCardProps>(
+  ({ className, step, title, description, icon, ...props }, ref) => {
+    return (
+      <motion.div
+        ref={ref}
+        className={cn(
+          "relative w-full max-w-sm overflow-hidden rounded-[var(--radius-2xl)] border bg-card p-8 text-center shadow-sm",
+          className,
+        )}
+        initial="initial"
+        whileHover="hover"
+        aria-label={`${title}: ${description}`}
+        role="group"
+        {...props}
+      >
+        {/* Render provided icon or default animated one */}
+        {icon || <AnimatedExportIcon />}
 
-      {/* Text Content */}
-      <div className="flex flex-col items-center gap-2">
-        <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-          {step}
-        </p>
-        <h3 className="text-2xl font-bold text-card-foreground">{title}</h3>
-        <p className="text-base text-muted-foreground">{description}</p>
-      </div>
-    </motion.div>
-  );
-});
+        {/* Text Content */}
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            {step}
+          </p>
+          <h3 className="text-2xl font-bold text-card-foreground">{title}</h3>
+          <p className="text-base text-muted-foreground">{description}</p>
+        </div>
+      </motion.div>
+    );
+  },
+);
 
 InteractiveCard.displayName = "InteractiveCard";
 

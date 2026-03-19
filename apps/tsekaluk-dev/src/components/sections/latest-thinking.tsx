@@ -1,9 +1,9 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { ArrowRight, Calendar, ArrowUpRight } from "lucide-react";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import { ArrowRight, ArrowUpRight, Calendar } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface ArticleMeta {
   slug: string;

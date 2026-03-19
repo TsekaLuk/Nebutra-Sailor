@@ -1,4 +1,4 @@
-import { CheckboxGroup, Checkbox } from "@nebutra/ui/primitives"
+import { Checkbox, CheckboxGroup } from "@nebutra/ui/primitives";
 
 export function CheckboxGroupDemo() {
   return (
@@ -7,5 +7,5 @@ export function CheckboxGroupDemo() {
       <Checkbox>API Access</Checkbox>
       <Checkbox>SSO</Checkbox>
     </CheckboxGroup>
-  )
+  );
 }

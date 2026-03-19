@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -17,14 +17,8 @@ const LogoVue = forwardRef<SVGSVGElement, IconProps>(
       {...props}
     >
       <g clipPath="url(#clip0_872_3155)">
-        <path
-          fill="#41B883"
-          d="m9.72.917-1.848 3.2-1.848-3.2H-.128l8 13.856 8-13.856z"
-        />
-        <path
-          fill="#34495E"
-          d="m9.72.917-1.848 3.2-1.848-3.2H3.072l4.8 8.314 4.8-8.314z"
-        />
+        <path fill="#41B883" d="m9.72.917-1.848 3.2-1.848-3.2H-.128l8 13.856 8-13.856z" />
+        <path fill="#34495E" d="m9.72.917-1.848 3.2-1.848-3.2H3.072l4.8 8.314 4.8-8.314z" />
       </g>
       <defs>
         <clipPath id="clip0_872_3155">
@@ -35,5 +29,6 @@ const LogoVue = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 LogoVue.displayName = "LogoVue";
+
 export { LogoVue };
 export default LogoVue;

@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { cn } from "../utils/cn";
+import Link from "next/link";
+import * as React from "react";
 import { AnimatedGroup } from "../primitives/animated-group";
+import { cn } from "../utils/cn";
 
 const transitionVariants = {
   item: {

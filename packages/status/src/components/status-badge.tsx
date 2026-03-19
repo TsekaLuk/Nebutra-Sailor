@@ -14,8 +14,8 @@
  */
 
 import { useEffect, useState } from "react";
-import type { StatusState, StatusConfig } from "../types";
 import { fetchStatusPage } from "../api";
+import type { StatusConfig, StatusState } from "../types";
 
 interface StatusBadgeProps {
   // Static value — skips fetch
@@ -32,10 +32,7 @@ interface StatusBadgeProps {
   onClick?: () => void;
 }
 
-const STATUS_CONFIG: Record<
-  StatusState,
-  { color: string; bgColor: string; label: string }
-> = {
+const STATUS_CONFIG: Record<StatusState, { color: string; bgColor: string; label: string }> = {
   operational: {
     color: "text-green-600",
     bgColor: "bg-green-500",
@@ -148,9 +145,7 @@ export function StatusBadge({
         )}
       </span>
       {showLabel && (
-        <span className={`${sizeConfig.text} ${cfg.color} font-medium`}>
-          {cfg.label}
-        </span>
+        <span className={`${sizeConfig.text} ${cfg.color} font-medium`}>{cfg.label}</span>
       )}
     </button>
   );

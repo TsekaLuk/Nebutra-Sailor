@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
+import { useState } from "react";
 import { Checkbox } from "./checkbox-group";
 
 const meta = {

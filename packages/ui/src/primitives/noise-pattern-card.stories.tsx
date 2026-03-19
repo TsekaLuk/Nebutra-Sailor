@@ -26,8 +26,8 @@ export const Default: Story = {
       <NoisePatternCardBody>
         <h3 className="text-lg font-semibold text-white">Noise Pattern Card</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          A sophisticated dark card with an organic grain texture that adds
-          depth and visual interest.
+          A sophisticated dark card with an organic grain texture that adds depth and visual
+          interest.
         </p>
       </NoisePatternCardBody>
     </NoisePatternCard>

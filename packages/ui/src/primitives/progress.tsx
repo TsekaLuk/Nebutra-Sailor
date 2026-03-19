@@ -1,35 +1,31 @@
 "use client";
 
-import * as React from "react";
 import { Progress as BaseProgress } from "@base-ui-components/react/progress";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../utils/cn";
 import { motion } from "motion/react";
+import * as React from "react";
+import { cn } from "../utils/cn";
 
-const progressVariants = cva(
-  "relative overflow-hidden rounded-full",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary/20",
-        primary: "bg-primary/20",
-        secondary: "bg-secondary/20",
-        destructive: "bg-destructive/20",
-        outline:
-          "bg-transparent border border-border",
-      },
-      size: {
-        sm: "h-1.5",
-        default: "h-2.5",
-        lg: "h-3",
-      },
+const progressVariants = cva("relative overflow-hidden rounded-full", {
+  variants: {
+    variant: {
+      default: "bg-primary/20",
+      primary: "bg-primary/20",
+      secondary: "bg-secondary/20",
+      destructive: "bg-destructive/20",
+      outline: "bg-transparent border border-border",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
+    size: {
+      sm: "h-1.5",
+      default: "h-2.5",
+      lg: "h-3",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
 
 const progressIndicatorVariants = cva(
   "h-full w-full flex-1 rounded-full transition-all duration-500 ease-out",
@@ -49,33 +45,21 @@ const progressIndicatorVariants = cva(
   },
 );
 
-
-
-export type ProgressProps =
-  Omit<React.ComponentPropsWithoutRef<typeof BaseProgress.Root>, "value"> &
+export type ProgressProps = Omit<
+  React.ComponentPropsWithoutRef<typeof BaseProgress.Root>,
+  "value"
+> &
   VariantProps<typeof progressVariants> & {
     value?: number | null;
     /** Toggle numeric value label */
     showValue?: boolean;
     animated?: boolean;
     label?: string;
-  }
+  };
 
-const Progress = React.forwardRef<
-  React.ElementRef<typeof BaseProgress.Root>,
-  ProgressProps
->(
+const Progress = React.forwardRef<React.ElementRef<typeof BaseProgress.Root>, ProgressProps>(
   (
-    {
-      className,
-      value = 0,
-      variant,
-      size,
-      showValue = false,
-      animated = true,
-      label,
-      ...props
-    },
+    { className, value = 0, variant, size, showValue = false, animated = true, label, ...props },
     ref,
   ) => {
     const isIndeterminate = value === undefined || value === null;
@@ -84,11 +68,7 @@ const Progress = React.forwardRef<
     // Default Linear type
     return (
       <div className="space-y-2 w-full">
-        {label && (
-          <div className="text-sm font-medium text-foreground text-left">
-            {label}
-          </div>
-        )}
+        {label && <div className="text-sm font-medium text-foreground text-left">{label}</div>}
         <BaseProgress.Root
           {...props}
           ref={ref}
@@ -98,7 +78,7 @@ const Progress = React.forwardRef<
           <BaseProgress.Indicator
             className={cn(
               progressIndicatorVariants({ variant: variant === "outline" ? "default" : variant }),
-              isIndeterminate && "animate-pulse"
+              isIndeterminate && "animate-pulse",
             )}
             render={
               <motion.div
@@ -129,4 +109,4 @@ const Progress = React.forwardRef<
 
 Progress.displayName = "Progress";
 
-export { Progress, progressVariants, progressIndicatorVariants };
+export { Progress, progressIndicatorVariants, progressVariants };

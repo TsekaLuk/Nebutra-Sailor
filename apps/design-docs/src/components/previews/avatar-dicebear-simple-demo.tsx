@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { DiceBearAvatar } from "@nebutra/ui/primitives"
+import { DiceBearAvatar } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function AvatarDicebearSimpleDemo() {
   return (
@@ -13,12 +13,8 @@ export function AvatarDicebearSimpleDemo() {
         options={{ radius: 50 }}
         size="md"
       />
-      <DiceBearAvatar
-        seed="guest-session-123"
-        avatarStyle="fun-emoji"
-        size="md"
-      />
+      <DiceBearAvatar seed="guest-session-123" avatarStyle="fun-emoji" size="md" />
       <DiceBearAvatar seed="my-bot-agent" avatarStyle="bottts" size="md" />
     </div>
-  )
+  );
 }

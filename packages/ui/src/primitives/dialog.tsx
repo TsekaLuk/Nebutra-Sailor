@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui-components/react/dialog";
 import { X } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 // We keep these standard export names so the rest of the application using Nebutra UI doesn't break.
@@ -15,7 +15,11 @@ const DialogTrigger = React.forwardRef<
 >(({ asChild, children, ...props }, ref) => {
   if (asChild && React.isValidElement(children)) {
     return (
-      <BaseDialog.Trigger ref={ref} {...props} render={children as React.ReactElement<Record<string, unknown>>} />
+      <BaseDialog.Trigger
+        ref={ref}
+        {...props}
+        render={children as React.ReactElement<Record<string, unknown>>}
+      />
     );
   }
   return (
@@ -32,7 +36,11 @@ const DialogClose = React.forwardRef<
 >(({ asChild, children, ...props }, ref) => {
   if (asChild && React.isValidElement(children)) {
     return (
-      <BaseDialog.Close ref={ref} {...props} render={children as React.ReactElement<Record<string, unknown>>} />
+      <BaseDialog.Close
+        ref={ref}
+        {...props}
+        render={children as React.ReactElement<Record<string, unknown>>}
+      />
     );
   }
   return (
@@ -82,29 +90,14 @@ const DialogContent = React.forwardRef<
 ));
 DialogContent.displayName = "DialogContent";
 
-const DialogHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left",
-      className,
-    )}
-    {...props}
-  />
+const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col space-y-1.5 text-center sm:text-left", className)} {...props} />
 );
 DialogHeader.displayName = "DialogHeader";
 
-const DialogFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-      className,
-    )}
+    className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)}
     {...props}
   />
 );
@@ -116,10 +109,7 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <BaseDialog.Title
     ref={ref}
-    className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
-      className,
-    )}
+    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
     {...props}
   />
 ));
@@ -139,13 +129,13 @@ DialogDescription.displayName = "DialogDescription";
 
 export {
   Dialog,
-  DialogPortal,
-  DialogOverlay,
   DialogClose,
-  DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
   DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
 };

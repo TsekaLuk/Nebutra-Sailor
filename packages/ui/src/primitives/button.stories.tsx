@@ -1,13 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  ArrowRight,
-  Mail,
-  Plus,
-  Search,
-  Settings,
-  Command,
-  ExternalLink,
-} from "lucide-react";
+import { ArrowRight, Command, ExternalLink, Mail, Plus, Search, Settings } from "lucide-react";
 import { Button, ButtonLink } from "./button";
 
 const meta = {
@@ -223,11 +215,7 @@ export const LinkButton: Story = {
       <ButtonLink href="https://nebutra.com" variant="outline">
         Visit Nebutra
       </ButtonLink>
-      <ButtonLink
-        href="https://nebutra.com"
-        variant="default"
-        suffix={<ExternalLink />}
-      >
+      <ButtonLink href="https://nebutra.com" variant="default" suffix={<ExternalLink />}>
         Open Link
       </ButtonLink>
       <ButtonLink href="https://nebutra.com" variant="tertiary" size="sm">

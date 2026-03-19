@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
 import { cva } from "class-variance-authority";
+import { Check, ChevronsUpDown } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import {
   Command,
   CommandEmpty,
@@ -15,6 +14,7 @@ import {
   CommandSeparator,
 } from "./command";
 import { Label } from "./label";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 // =============================================================================
 // Types
@@ -74,17 +74,11 @@ export interface ComboboxOptionProps {
   children?: React.ReactNode;
 }
 
-export type ComboboxInputProps = React.ComponentPropsWithoutRef<
-  typeof CommandInput
->;
+export type ComboboxInputProps = React.ComponentPropsWithoutRef<typeof CommandInput>;
 
-export type ComboboxEmptyProps = React.ComponentPropsWithoutRef<
-  typeof CommandEmpty
->;
+export type ComboboxEmptyProps = React.ComponentPropsWithoutRef<typeof CommandEmpty>;
 
-export type ComboboxGroupProps = React.ComponentPropsWithoutRef<
-  typeof CommandGroup
->;
+export type ComboboxGroupProps = React.ComponentPropsWithoutRef<typeof CommandGroup>;
 
 // =============================================================================
 // CVA Variants
@@ -168,10 +162,7 @@ const ComboboxOptionItem = React.forwardRef<
     >
       <Check
         aria-hidden="true"
-        className={cn(
-          "h-4 w-4 shrink-0",
-          isSelected ? "opacity-100" : "opacity-0",
-        )}
+        className={cn("h-4 w-4 shrink-0", isSelected ? "opacity-100" : "opacity-0")}
       />
       {children ?? label ?? value}
     </CommandItem>
@@ -183,20 +174,18 @@ ComboboxOptionItem.displayName = "Combobox.Option";
 // ComboboxInput (sub-component)
 // =============================================================================
 
-const ComboboxInput = React.forwardRef<
-  React.ElementRef<typeof CommandInput>,
-  ComboboxInputProps
->((props, ref) => <CommandInput ref={ref} {...props} />);
+const ComboboxInput = React.forwardRef<React.ElementRef<typeof CommandInput>, ComboboxInputProps>(
+  (props, ref) => <CommandInput ref={ref} {...props} />,
+);
 ComboboxInput.displayName = "Combobox.Input";
 
 // =============================================================================
 // ComboboxEmpty (sub-component)
 // =============================================================================
 
-const ComboboxEmpty = React.forwardRef<
-  React.ElementRef<typeof CommandEmpty>,
-  ComboboxEmptyProps
->((props, ref) => <CommandEmpty ref={ref} {...props} />);
+const ComboboxEmpty = React.forwardRef<React.ElementRef<typeof CommandEmpty>, ComboboxEmptyProps>(
+  (props, ref) => <CommandEmpty ref={ref} {...props} />,
+);
 ComboboxEmpty.displayName = "Combobox.Empty";
 
 // =============================================================================
@@ -238,8 +227,7 @@ function ComboboxRoot({
 }: ComboboxProps) {
   // Controlled / uncontrolled value management
   const [internalValue, setInternalValue] = React.useState(defaultValue);
-  const selectedValue =
-    controlledValue !== undefined ? controlledValue : internalValue;
+  const selectedValue = controlledValue !== undefined ? controlledValue : internalValue;
 
   // Ref to avoid stale closure in handleSelect toggle logic
   const selectedValueRef = React.useRef(selectedValue);
@@ -261,9 +249,7 @@ function ComboboxRoot({
   // Find label for currently selected value when using options prop
   const selectedLabel = React.useMemo(() => {
     if (!options) return selectedValue;
-    return (
-      options.find((o) => o.value === selectedValue)?.label ?? selectedValue
-    );
+    return options.find((o) => o.value === selectedValue)?.label ?? selectedValue;
   }, [options, selectedValue]);
 
   const labelId = React.useId();
@@ -322,11 +308,7 @@ function ComboboxRoot({
     <ComboboxContext.Provider value={contextValue}>
       <div className={cn("flex flex-col gap-1.5", width, className)}>
         {label && (
-          <Label
-            id={labelId}
-            htmlFor={triggerId}
-            className={cn(hideLabel && "sr-only")}
-          >
+          <Label id={labelId} htmlFor={triggerId} className={cn(hideLabel && "sr-only")}>
             {label}
           </Label>
         )}
@@ -352,16 +334,10 @@ function ComboboxRoot({
               <span className={cn(!selectedValue && "text-muted-foreground")}>
                 {selectedValue ? selectedLabel : placeholder}
               </span>
-              <ChevronsUpDown
-                aria-hidden="true"
-                className="h-4 w-4 shrink-0 opacity-50"
-              />
+              <ChevronsUpDown aria-hidden="true" className="h-4 w-4 shrink-0 opacity-50" />
             </button>
           </PopoverTrigger>
-          <PopoverContent
-            className="p-0"
-            style={{ width: "var(--radix-popover-trigger-width)" }}
-          >
+          <PopoverContent className="p-0" style={{ width: "var(--radix-popover-trigger-width)" }}>
             <Command id={listboxId}>{renderContent()}</Command>
           </PopoverContent>
         </Popover>
@@ -416,10 +392,10 @@ const Combobox = Object.assign(ComboboxRoot, {
 
 export {
   Combobox,
-  ComboboxRoot,
-  ComboboxInput,
-  ComboboxOptionItem,
   ComboboxEmpty,
   ComboboxGroupSub,
-  ComboboxSeparator
+  ComboboxInput,
+  ComboboxOptionItem,
+  ComboboxRoot,
+  ComboboxSeparator,
 };

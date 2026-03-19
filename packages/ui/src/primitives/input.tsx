@@ -1,14 +1,12 @@
 "use client";
 
+import { Loader2, X } from "lucide-react";
 import * as React from "react";
-import { X, Loader2 } from "lucide-react";
 import { cn } from "../utils/cn";
 import { Kbd } from "./kbd";
 
-export interface InputProps extends Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  "prefix" | "size"
-> {
+export interface InputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "prefix" | "size"> {
   /** Visual size variant */
   size?: "sm" | "md" | "lg";
   /** Icon or node rendered inside the left edge. Non-interactive — clicks pass through to the input. */
@@ -77,10 +75,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const shortcutDirty = !!shortcut && currentValue.length > 0;
 
     // Reserve right padding whenever any right adornment is configured
-    const hasRightAdornment =
-      (!!clearable && !disabled) || suffix != null || !!shortcut;
-    const hasWrapper =
-      prefix != null || suffix != null || clearable || !!shortcut;
+    const hasRightAdornment = (!!clearable && !disabled) || suffix != null || !!shortcut;
+    const hasWrapper = prefix != null || suffix != null || clearable || !!shortcut;
 
     const handleChange = React.useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,15 +163,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
         {/* Shortcut badge → loading spinner when dirty */}
         {shortcut && (
-          <span
-            aria-hidden
-            className="pointer-events-none absolute right-2 flex items-center"
-          >
+          <span aria-hidden className="pointer-events-none absolute right-2 flex items-center">
             {shortcutDirty ? (
-              <Loader2
-                size={14}
-                className="animate-spin text-muted-foreground"
-              />
+              <Loader2 size={14} className="animate-spin text-muted-foreground" />
             ) : (
               <Kbd small>{shortcut}</Kbd>
             )}

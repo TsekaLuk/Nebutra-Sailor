@@ -14,11 +14,11 @@ import { z } from "zod";
 export const baseConfigSchema = z.object({
   // Environment
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
-  
+
   // App Info
   APP_NAME: z.string().default("nebutra"),
   APP_URL: z.string().url().optional(),
-  
+
   // Feature Toggles (prefix: FEATURE_FLAG_)
   // These are handled by feature-flags package
 });
@@ -115,7 +115,7 @@ const loadedConfigs = new Map<string, unknown>();
 
 export function loadConfig<T extends ConfigSchema>(
   schema: T,
-  options: { cache?: boolean; prefix?: string } = {}
+  options: { cache?: boolean; prefix?: string } = {},
 ): z.infer<T> {
   const { cache = true, prefix = "" } = options;
   const cacheKey = schema.description || JSON.stringify(schema.shape);
@@ -150,7 +150,7 @@ export function clearConfigCache(): void {
 
 export function safeLoadConfig<T extends ConfigSchema>(
   schema: T,
-  options: { prefix?: string } = {}
+  options: { prefix?: string } = {},
 ): { success: true; data: z.infer<T> } | { success: false; errors: z.ZodError } {
   try {
     const data = loadConfig(schema, { ...options, cache: false });

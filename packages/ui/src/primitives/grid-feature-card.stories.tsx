@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Sparkles, Zap, Shield, Globe, Code, Lock } from "lucide-react";
+import { Code, Globe, Lock, Shield, Sparkles, Zap } from "lucide-react";
 import { GridFeatureCard } from "./grid-feature-card";
 
 const meta = {

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { Providers } from "@/components/providers";
 import { routing } from "@/i18n/routing";
 import { websiteJsonLd } from "@/lib/json-ld";
-import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
   title: {
@@ -70,9 +70,7 @@ export default async function LocaleLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
       />
-      <Providers>
-        {children}
-      </Providers>
+      <Providers>{children}</Providers>
     </NextIntlClientProvider>
   );
 }

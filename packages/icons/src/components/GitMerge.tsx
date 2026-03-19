@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,12 +16,7 @@ const GitMerge = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <path
-        stroke="currentColor"
-        strokeLinecap="square"
-        strokeWidth={1.5}
-        d="M4 6.25v8"
-      />
+      <path stroke="currentColor" strokeLinecap="square" strokeWidth={1.5} d="M4 6.25v8" />
       <path
         fill="currentColor"
         fillRule="evenodd"
@@ -32,5 +27,6 @@ const GitMerge = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 GitMerge.displayName = "GitMerge";
+
 export { GitMerge };
 export default GitMerge;

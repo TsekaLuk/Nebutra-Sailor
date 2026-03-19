@@ -69,26 +69,8 @@ const COLOR_THEMES: Record<CosmicSpectrumColorTheme, string[]> = {
     "#EA580C",
     "#9A3412",
   ],
-  sunset: [
-    "#FEF3C7",
-    "#FCD34D",
-    "#F59E0B",
-    "#D97706",
-    "#B45309",
-    "#92400E",
-    "#78350F",
-    "#451A03",
-  ],
-  purple: [
-    "#F3E8FF",
-    "#E9D5FF",
-    "#D8B4FE",
-    "#C084FC",
-    "#A855F7",
-    "#9333EA",
-    "#7C3AED",
-    "#6B21B6",
-  ],
+  sunset: ["#FEF3C7", "#FCD34D", "#F59E0B", "#D97706", "#B45309", "#92400E", "#78350F", "#451A03"],
+  purple: ["#F3E8FF", "#E9D5FF", "#D8B4FE", "#C084FC", "#A855F7", "#9333EA", "#7C3AED", "#6B21B6"],
   monochrome: [
     "#1A1A1A",
     "#404040",
@@ -131,11 +113,7 @@ const COLOR_THEMES: Record<CosmicSpectrumColorTheme, string[]> = {
   ],
 };
 
-const DARK_THEMES: CosmicSpectrumColorTheme[] = [
-  "blue-black",
-  "beige-black",
-  "monochrome",
-];
+const DARK_THEMES: CosmicSpectrumColorTheme[] = ["blue-black", "beige-black", "monochrome"];
 
 /* -------------------------------------------------------------------------- */
 /*                              GSAP Type Helpers                             */
@@ -161,11 +139,7 @@ declare global {
 }
 
 interface GSAPTimeline {
-  to: (
-    targets: unknown,
-    vars: Record<string, unknown>,
-    position?: number | string,
-  ) => GSAPTimeline;
+  to: (targets: unknown, vars: Record<string, unknown>, position?: number | string) => GSAPTimeline;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -206,16 +180,8 @@ interface SpectrumBarsProps {
 
 function SpectrumBars({ colors, blur }: SpectrumBarsProps) {
   return (
-    <svg
-      className="h-full w-full"
-      viewBox="0 0 1567 584"
-      preserveAspectRatio="none"
-      fill="none"
-    >
-      <g
-        clipPath="url(#spectrum-clip)"
-        filter={blur ? "url(#spectrum-blur)" : undefined}
-      >
+    <svg className="h-full w-full" viewBox="0 0 1567 584" preserveAspectRatio="none" fill="none">
+      <g clipPath="url(#spectrum-clip)" filter={blur ? "url(#spectrum-blur)" : undefined}>
         <path d="M1219 584H1393V184H1219V584Z" fill="url(#grad0)" />
         <path d="M1045 584H1219V104H1045V584Z" fill="url(#grad1)" />
         <path d="M348 584H174L174 184H348L348 584Z" fill="url(#grad2)" />
@@ -223,10 +189,7 @@ function SpectrumBars({ colors, blur }: SpectrumBarsProps) {
         <path d="M697 584H522L522 54H697L697 584Z" fill="url(#grad4)" />
         <path d="M870 584H1045V54H870V584Z" fill="url(#grad5)" />
         <path d="M870 584H697L697 0H870L870 584Z" fill="url(#grad6)" />
-        <path
-          d="M174 585H0.000183105L-3.75875e-06 295H174L174 585Z"
-          fill="url(#grad7)"
-        />
+        <path d="M174 585H0.000183105L-3.75875e-06 295H174L174 585Z" fill="url(#grad7)" />
         <path d="M1393 584H1567V294H1393V584Z" fill="url(#grad8)" />
       </g>
       <defs>
@@ -240,12 +203,7 @@ function SpectrumBars({ colors, blur }: SpectrumBarsProps) {
           colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="BackgroundImageFix"
-            result="shape"
-          />
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="15" result="effect1_foregroundBlur" />
         </filter>
         {Array.from({ length: 9 }, (_, i) => (
@@ -314,12 +272,8 @@ export function CosmicSpectrum({
     const initializeAnimations = async () => {
       try {
         await Promise.all([
-          loadScript(
-            "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
-          ),
-          loadScript(
-            "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
-          ),
+          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"),
+          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"),
         ]);
 
         // Wait for scripts to initialize
@@ -448,10 +402,7 @@ export function CosmicSpectrum({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={cn("relative min-h-screen overflow-x-hidden", className)}
-    >
+    <div ref={containerRef} className={cn("relative min-h-screen overflow-x-hidden", className)}>
       {/* Hero Section */}
       <section className="flex h-screen w-full flex-col justify-center p-8">
         <h1 className="hero-title text-center text-5xl font-bold tracking-tighter transition-colors duration-300 sm:text-7xl">

@@ -1,6 +1,5 @@
-"use client"
-import { GeistTooltip as Tooltip } from "@nebutra/ui/primitives"
-import { Button } from "@nebutra/ui/primitives"
+"use client";
+import { Button, GeistTooltip as Tooltip } from "@nebutra/ui/primitives";
 
 export function TooltipRichContentDemo() {
   return (
@@ -15,5 +14,5 @@ export function TooltipRichContentDemo() {
         <Button variant="outline">Rich Content</Button>
       </Tooltip>
     </div>
-  )
+  );
 }

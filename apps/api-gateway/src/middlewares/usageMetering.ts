@@ -16,8 +16,8 @@
  *   - ClickHouse ETL pipeline  → long-term usage analytics
  */
 
-import type { Context, Next } from "hono";
 import { logger } from "@nebutra/logger";
+import type { Context, Next } from "hono";
 
 // Redis client — Upstash REST API compatible
 // Falls back gracefully when REDIS_URL is not set (local dev).
@@ -109,7 +109,10 @@ export async function usageMeteringMiddleware(c: Context, next: Next) {
         const count = parseInt(tokensUsed, 10);
         if (!isNaN(count) && count > 0) {
           // Upstash Redis supports INCRBY via raw commands
-          const rawRedis = r as unknown as { incrby: (key: string, n: number) => Promise<number>; expire: (key: string, s: number) => Promise<number> };
+          const rawRedis = r as unknown as {
+            incrby: (key: string, n: number) => Promise<number>;
+            expire: (key: string, s: number) => Promise<number>;
+          };
           await rawRedis.incrby(tokenKey, count);
           await rawRedis.expire(tokenKey, TTL_SECONDS);
         }

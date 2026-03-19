@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,18 +16,12 @@ const LogoFigma = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <path
-        fill="#1ABCFE"
-        d="M8.003 8a2.667 2.667 0 1 1 5.334 0 2.667 2.667 0 0 1-5.334 0"
-      />
+      <path fill="#1ABCFE" d="M8.003 8a2.667 2.667 0 1 1 5.334 0 2.667 2.667 0 0 1-5.334 0" />
       <path
         fill="#0ACF83"
         d="M2.67 13.333a2.667 2.667 0 0 1 2.667-2.666h2.666v2.666a2.666 2.666 0 1 1-5.333 0"
       />
-      <path
-        fill="#FF7262"
-        d="M8.003 0v5.333h2.667a2.667 2.667 0 0 0 0-5.333z"
-      />
+      <path fill="#FF7262" d="M8.003 0v5.333h2.667a2.667 2.667 0 0 0 0-5.333z" />
       <path
         fill="#F24E1E"
         d="M2.67 2.667a2.667 2.667 0 0 0 2.667 2.666h2.667V0H5.337A2.667 2.667 0 0 0 2.67 2.667"
@@ -40,5 +34,6 @@ const LogoFigma = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 LogoFigma.displayName = "LogoFigma";
+
 export { LogoFigma };
 export default LogoFigma;

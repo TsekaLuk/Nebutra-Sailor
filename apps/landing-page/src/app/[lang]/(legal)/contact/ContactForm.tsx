@@ -1,18 +1,15 @@
 "use client";
 
-import { useActionState } from "react";
 import { useTranslations } from "next-intl";
+import { useActionState } from "react";
 import { Link } from "@/i18n/navigation";
-import { submitContactForm, type ContactFormState } from "./actions";
+import { type ContactFormState, submitContactForm } from "./actions";
 
 const INITIAL_STATE: ContactFormState = { status: "idle" };
 
 export function ContactForm() {
   const t = useTranslations("legalPages");
-  const [state, action, isPending] = useActionState(
-    submitContactForm,
-    INITIAL_STATE,
-  );
+  const [state, action, isPending] = useActionState(submitContactForm, INITIAL_STATE);
 
   if (state.status === "success") {
     return (
@@ -37,10 +34,7 @@ export function ContactForm() {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-[var(--neutral-11)]"
-          >
+          <label htmlFor="name" className="block text-sm font-medium text-[var(--neutral-11)]">
             {t("contact.form.name")} *
           </label>
           <input
@@ -53,10 +47,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-[var(--neutral-11)]"
-          >
+          <label htmlFor="email" className="block text-sm font-medium text-[var(--neutral-11)]">
             {t("contact.form.email")} *
           </label>
           <input
@@ -72,10 +63,7 @@ export function ContactForm() {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label
-            htmlFor="company"
-            className="block text-sm font-medium text-[var(--neutral-11)]"
-          >
+          <label htmlFor="company" className="block text-sm font-medium text-[var(--neutral-11)]">
             {t("contact.form.company")}
           </label>
           <input
@@ -87,10 +75,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label
-            htmlFor="category"
-            className="block text-sm font-medium text-[var(--neutral-11)]"
-          >
+          <label htmlFor="category" className="block text-sm font-medium text-[var(--neutral-11)]">
             {t("contact.form.category")} *
           </label>
           <select
@@ -100,30 +85,19 @@ export function ContactForm() {
             disabled={isPending}
             className="mt-1 block w-full rounded-[var(--radius-lg)] border border-[var(--neutral-7)] bg-[var(--neutral-1)] px-4 py-2 text-[var(--neutral-12)] focus:border-[color:var(--blue-8)] focus:outline-none focus:ring-1 focus:ring-[color:var(--blue-8)] disabled:opacity-60 dark:text-white"
           >
-            <option value="general">
-              {t("contact.form.categories.general")}
-            </option>
+            <option value="general">{t("contact.form.categories.general")}</option>
             <option value="sales">{t("contact.form.categories.sales")}</option>
-            <option value="support">
-              {t("contact.form.categories.support")}
-            </option>
+            <option value="support">{t("contact.form.categories.support")}</option>
             <option value="legal">{t("contact.form.categories.legal")}</option>
-            <option value="privacy">
-              {t("contact.form.categories.privacy")}
-            </option>
-            <option value="partnership">
-              {t("contact.form.categories.partnership")}
-            </option>
+            <option value="privacy">{t("contact.form.categories.privacy")}</option>
+            <option value="partnership">{t("contact.form.categories.partnership")}</option>
             <option value="press">{t("contact.form.categories.press")}</option>
           </select>
         </div>
       </div>
 
       <div>
-        <label
-          htmlFor="subject"
-          className="block text-sm font-medium text-[var(--neutral-11)]"
-        >
+        <label htmlFor="subject" className="block text-sm font-medium text-[var(--neutral-11)]">
           {t("contact.form.subject")} *
         </label>
         <input
@@ -137,10 +111,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-medium text-[var(--neutral-11)]"
-        >
+        <label htmlFor="message" className="block text-sm font-medium text-[var(--neutral-11)]">
           {t("contact.form.message")} *
         </label>
         <textarea

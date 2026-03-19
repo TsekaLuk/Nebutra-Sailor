@@ -1,4 +1,4 @@
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { aiServiceBreaker, billingServiceBreaker } from "../../services/circuitBreaker.js";
 
 const serviceStatusEnum = z.enum(["available", "unavailable", "unknown"]);
@@ -124,8 +124,7 @@ statusRoutes.openapi(statusRoute, async (c) => {
 
     if (result.status === "fulfilled") {
       checks.push(result.value);
-      serviceStatuses[serviceName] =
-        result.value.status === "pass" ? "available" : "unavailable";
+      serviceStatuses[serviceName] = result.value.status === "pass" ? "available" : "unavailable";
     } else {
       checks.push({
         name: serviceName,
@@ -154,8 +153,7 @@ statusRoutes.openapi(statusRoute, async (c) => {
 
   // Count failures
   const failedServices = checks.filter(
-    (check) =>
-      check.status === "fail" && !["database", "redis"].includes(check.name),
+    (check) => check.status === "fail" && !["database", "redis"].includes(check.name),
   ).length;
 
   if (failedServices >= 3 && overallStatus === "healthy") {
@@ -173,12 +171,7 @@ statusRoutes.openapi(statusRoute, async (c) => {
     checks,
   };
 
-  const statusCode =
-    overallStatus === "healthy"
-      ? 200
-      : overallStatus === "degraded"
-        ? 200
-        : 503;
+  const statusCode = overallStatus === "healthy" ? 200 : overallStatus === "degraded" ? 200 : 503;
 
   return c.json(response, statusCode as 200 | 503);
 });
@@ -329,10 +322,7 @@ async function checkRedis(): Promise<StatusResponse["checks"][0]> {
   }
 }
 
-async function checkService(
-  name: string,
-  url?: string,
-): Promise<StatusResponse["checks"][0]> {
+async function checkService(name: string, url?: string): Promise<StatusResponse["checks"][0]> {
   const start = Date.now();
 
   if (!url) {

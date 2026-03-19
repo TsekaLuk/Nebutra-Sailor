@@ -1,26 +1,23 @@
-export { GridPattern } from "./GridPattern";
+export type { AmbientBackgroundProps, GradientBlurProps } from "./GradientBlur";
+export { AmbientBackground, GradientBlur } from "./GradientBlur";
 export type { GridPatternProps } from "./GridPattern";
-
-export { GradientBlur, AmbientBackground } from "./GradientBlur";
-export type { GradientBlurProps, AmbientBackgroundProps } from "./GradientBlur";
-
-// Micro-Density Patterns
+export { GridPattern } from "./GridPattern";
 export {
-  DotMatrix,
-  CrossPattern,
-  FloatingSpots,
-  type DotMatrixProps,
-  type CrossPatternProps,
-  type FloatingSpotsProps,
-} from "./patterns";
-
+  AnimatedCounter,
+  type AnimatedCounterProps,
+} from "./particles/AnimatedCounter";
+export { CursorTrail, type CursorTrailProps } from "./particles/CursorTrail";
 // Particle Systems
 export {
   TextSparkline,
   type TextSparklineProps,
 } from "./particles/TextSparkline";
-export { CursorTrail, type CursorTrailProps } from "./particles/CursorTrail";
+// Micro-Density Patterns
 export {
-  AnimatedCounter,
-  type AnimatedCounterProps,
-} from "./particles/AnimatedCounter";
+  CrossPattern,
+  type CrossPatternProps,
+  DotMatrix,
+  type DotMatrixProps,
+  FloatingSpots,
+  type FloatingSpotsProps,
+} from "./patterns";

@@ -121,9 +121,7 @@ export function SnippetStatus({
     setAnimation(true);
     animationTimeout.current = setTimeout(() => setAnimation(false), 2000);
 
-    navigator.clipboard.writeText(
-      _text.reduce((prev, curr) => prev + "\n" + curr),
-    );
+    navigator.clipboard.writeText(_text.reduce((prev, curr) => prev + "\n" + curr));
 
     if (onCopy) {
       onCopy();
@@ -143,11 +141,7 @@ export function SnippetStatus({
         {_text.map((item, index) => (
           <div
             key={`${item}-${index}`}
-            className={cn(
-              "font-mono text-[13px]",
-              prompt && "before:content-['$_']",
-              colors.text,
-            )}
+            className={cn("font-mono text-[13px]", prompt && "before:content-['$_']", colors.text)}
           >
             {item}
           </div>

@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import {
-  Home,
-  Settings,
-  Bell,
-  User,
   BarChart,
-  Search,
+  Bell,
   Bookmark,
+  Home,
   MessageCircle,
+  Search,
+  Settings,
+  User,
 } from "lucide-react";
+import { useState } from "react";
 import { ExpandableTabs } from "./expandable-tabs";
 
 const meta = {

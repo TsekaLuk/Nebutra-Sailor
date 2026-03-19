@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { Confetti, ConfettiButton, ConfettiRef } from "@nebutra/ui/primitives"
-import { useRef } from "react"
+import { Confetti, ConfettiButton, type ConfettiRef } from "@nebutra/ui/primitives";
+import { useRef } from "react";
 
 export function ConfettiDemo() {
-  const confettiRef = useRef<ConfettiRef>(null)
+  const confettiRef = useRef<ConfettiRef>(null);
 
   return (
     <div className="gap-8 p-12 relative flex w-full flex-col items-center justify-center overflow-hidden rounded-xl border bg-background">
@@ -33,5 +33,5 @@ export function ConfettiDemo() {
         </ConfettiButton>
       </div>
     </div>
-  )
+  );
 }

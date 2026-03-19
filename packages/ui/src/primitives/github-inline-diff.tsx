@@ -1,20 +1,15 @@
 "use client";
 
+import { CheckCircle2, MessageSquarePlus, X } from "lucide-react";
 import * as React from "react";
-import { useState, useRef, useEffect } from "react";
-import { Button } from "./button";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "../utils/cn";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./tooltip";
-import { Badge } from "./badge";
-import { MessageSquarePlus, CheckCircle2, X } from "lucide-react";
-import { Textarea } from "./textarea";
-import { Separator } from "./separator";
 import { Avatar, AvatarFallback } from "./avatar";
+import { Badge } from "./badge";
+import { Button } from "./button";
+import { Separator } from "./separator";
+import { Textarea } from "./textarea";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip";
 
 // =============================================================================
 // Types
@@ -150,9 +145,7 @@ function InlineThread({
         {comments.map((c) => (
           <li key={c.id} className="flex items-start gap-2">
             <Avatar className="h-5 w-5">
-              <AvatarFallback className="text-[9px]">
-                {c.initials}
-              </AvatarFallback>
+              <AvatarFallback className="text-[9px]">{c.initials}</AvatarFallback>
             </Avatar>
             <div className="min-w-0 flex-1">
               <div className="flex items-center justify-between gap-2">
@@ -184,12 +177,7 @@ function InlineThread({
           className="min-h-[40px] py-1.5 text-[13px]"
         />
         <div className="flex items-center justify-end gap-1.5">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="h-7 px-2 text-[12px]"
-          >
+          <Button variant="ghost" size="sm" onClick={onClose} className="h-7 px-2 text-[12px]">
             Cancel
           </Button>
           <Button
@@ -255,8 +243,7 @@ export function GithubInlineDiff({
 
   const [openThreadAt, setOpenThreadAt] = useState<number | null>(null);
   const [resolvedMap, setResolvedMap] = useState<Record<number, boolean>>({});
-  const [commentsMap, setCommentsMap] =
-    useState<Record<number, DiffComment[]>>(initialComments);
+  const [commentsMap, setCommentsMap] = useState<Record<number, DiffComment[]>>(initialComments);
 
   function toggleResolve(idx: number) {
     const newResolved = !resolvedMap[idx];
@@ -277,19 +264,12 @@ export function GithubInlineDiff({
       <div
         role="table"
         aria-label={`Diff of ${fileName}`}
-        className={cn(
-          "rounded-[var(--radius-md)] border bg-card dark:border-white/10",
-          className,
-        )}
+        className={cn("rounded-[var(--radius-md)] border bg-card dark:border-white/10", className)}
       >
         <div className="flex items-center justify-between border-b px-2 py-1 dark:border-white/10">
           <div className="flex items-center gap-2">
             <span className="text-[13px] font-medium">{fileName}</span>
-            <Badge
-              variant="secondary"
-              aria-label="File status"
-              className="h-5 px-1.5 text-[11px]"
-            >
+            <Badge variant="secondary" aria-label="File status" className="h-5 px-1.5 text-[11px]">
               {fileStatus}
             </Badge>
           </div>
@@ -309,8 +289,7 @@ export function GithubInlineDiff({
                 className={cn(
                   "group relative flex items-stretch text-[13px]",
                   line.kind === "hunk" && "bg-muted/50 text-muted-foreground",
-                  line.kind === "add" &&
-                  "bg-emerald-50/60 dark:bg-emerald-950/20",
+                  line.kind === "add" && "bg-emerald-50/60 dark:bg-emerald-950/20",
                   line.kind === "del" && "bg-rose-50/60 dark:bg-rose-950/20",
                 )}
               >
@@ -340,18 +319,10 @@ export function GithubInlineDiff({
                   )}
                 >
                   <span className="px-2 py-1 text-right tabular-nums">
-                    {line.kind === "add"
-                      ? ""
-                      : line.kind === "hunk"
-                        ? ""
-                        : (line.old ?? "")}
+                    {line.kind === "add" ? "" : line.kind === "hunk" ? "" : (line.old ?? "")}
                   </span>
                   <span className="px-2 py-1 text-right tabular-nums">
-                    {line.kind === "del"
-                      ? ""
-                      : line.kind === "hunk"
-                        ? ""
-                        : (line.new ?? "")}
+                    {line.kind === "del" ? "" : line.kind === "hunk" ? "" : (line.new ?? "")}
                   </span>
                 </div>
 
@@ -371,11 +342,7 @@ export function GithubInlineDiff({
                         line.kind === "del" && "text-rose-600",
                       )}
                     >
-                      {line.kind === "add"
-                        ? "+"
-                        : line.kind === "del"
-                          ? "-"
-                          : " "}
+                      {line.kind === "add" ? "+" : line.kind === "del" ? "-" : " "}
                     </span>
                     {line.content}
                   </pre>
@@ -387,9 +354,7 @@ export function GithubInlineDiff({
                         resolved={isResolved}
                         onToggleResolve={() => toggleResolve(idx)}
                         onClose={() => setOpenThreadAt(null)}
-                        onAddComment={(comment) =>
-                          handleAddComment(idx, comment)
-                        }
+                        onAddComment={(comment) => handleAddComment(idx, comment)}
                         currentUser={currentUser}
                       />
                     </div>

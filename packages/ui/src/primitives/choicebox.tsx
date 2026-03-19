@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { cva } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -97,8 +97,7 @@ export const choiceboxItemVariants = cva(
     variants: {
       selected: {
         true: "border-primary bg-primary/5 dark:bg-primary/10",
-        false:
-          "border-border bg-card hover:border-primary/50 hover:bg-accent/50",
+        false: "border-border bg-card hover:border-primary/50 hover:bg-accent/50",
       },
       isDisabled: {
         true: "opacity-50 cursor-not-allowed",
@@ -158,16 +157,9 @@ function ChoiceboxItem({
 
   // Radio roving tabindex: only selected (or first enabled) item is tabbable
   const isRadio = type === "radio";
-  const hasRadioSelection =
-    isRadio && groupValue !== "" && groupValue !== undefined;
+  const hasRadioSelection = isRadio && groupValue !== "" && groupValue !== undefined;
   const isFirstItem = !hasRadioSelection && value === getFirstItemValue();
-  const tabIndex = isDisabled
-    ? -1
-    : isRadio
-      ? isSelected || isFirstItem
-        ? 0
-        : -1
-      : 0;
+  const tabIndex = isDisabled ? -1 : isRadio ? (isSelected || isFirstItem ? 0 : -1) : 0;
 
   const handleClick = () => {
     if (!isDisabled) onItemSelect(value);
@@ -203,13 +195,9 @@ function ChoiceboxItem({
     <>
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-col gap-1">
-          <span className="text-sm font-medium leading-tight text-foreground">
-            {title}
-          </span>
+          <span className="text-sm font-medium leading-tight text-foreground">{title}</span>
           {description && (
-            <span className="text-xs leading-normal text-muted-foreground">
-              {description}
-            </span>
+            <span className="text-xs leading-normal text-muted-foreground">{description}</span>
           )}
         </div>
 
@@ -235,11 +223,7 @@ function ChoiceboxItem({
                 stroke="currentColor"
                 strokeWidth={3}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             ))}
         </span>
@@ -385,36 +369,30 @@ function ChoiceboxGroupRoot({
   children,
 }: ChoiceboxGroupProps) {
   // Uncontrolled fallback
-  const [internalValue, setInternalValue] = React.useState<string | string[]>(
-    () => {
-      if (controlledValue !== undefined) return controlledValue;
-      if (defaultValue !== undefined) return defaultValue;
-      return type === "checkbox" ? [] : "";
-    },
-  );
+  const [internalValue, setInternalValue] = React.useState<string | string[]>(() => {
+    if (controlledValue !== undefined) return controlledValue;
+    if (defaultValue !== undefined) return defaultValue;
+    return type === "checkbox" ? [] : "";
+  });
 
-  const currentValue =
-    controlledValue !== undefined ? controlledValue : internalValue;
+  const currentValue = controlledValue !== undefined ? controlledValue : internalValue;
 
   // Item ref registry for roving tabindex
   const itemRefs = React.useRef<Map<string, HTMLDivElement>>(new Map());
   const itemOrder = React.useRef<string[]>([]);
 
-  const registerItem = React.useCallback(
-    (itemValue: string, el: HTMLDivElement | null) => {
-      if (el) {
-        itemRefs.current.set(itemValue, el);
-        // Maintain insertion order
-        if (!itemOrder.current.includes(itemValue)) {
-          itemOrder.current.push(itemValue);
-        }
-      } else {
-        itemRefs.current.delete(itemValue);
-        itemOrder.current = itemOrder.current.filter((v) => v !== itemValue);
+  const registerItem = React.useCallback((itemValue: string, el: HTMLDivElement | null) => {
+    if (el) {
+      itemRefs.current.set(itemValue, el);
+      // Maintain insertion order
+      if (!itemOrder.current.includes(itemValue)) {
+        itemOrder.current.push(itemValue);
       }
-    },
-    [],
-  );
+    } else {
+      itemRefs.current.delete(itemValue);
+      itemOrder.current = itemOrder.current.filter((v) => v !== itemValue);
+    }
+  }, []);
 
   const onItemSelect = React.useCallback(
     (itemValue: string) => {
@@ -445,8 +423,7 @@ function ChoiceboxGroupRoot({
         idx = (idx + dir + order.length) % order.length;
         attempts++;
       } while (
-        itemRefs.current.get(order[idx] ?? "")?.getAttribute("aria-disabled") ===
-        "true" &&
+        itemRefs.current.get(order[idx] ?? "")?.getAttribute("aria-disabled") === "true" &&
         attempts < order.length
       );
 
@@ -472,9 +449,7 @@ function ChoiceboxGroupRoot({
       );
     }
     if (type === "radio" && Array.isArray(controlledValue)) {
-      console.warn(
-        '[ChoiceboxGroup] type="radio" expects value to be string, received string[]',
-      );
+      console.warn('[ChoiceboxGroup] type="radio" expects value to be string, received string[]');
     }
   }
 
@@ -488,15 +463,7 @@ function ChoiceboxGroupRoot({
       navigateItem,
       getFirstItemValue,
     }),
-    [
-      type,
-      currentValue,
-      onItemSelect,
-      disabled,
-      registerItem,
-      navigateItem,
-      getFirstItemValue,
-    ],
+    [type, currentValue, onItemSelect, disabled, registerItem, navigateItem, getFirstItemValue],
   );
 
   const labelId = React.useId();

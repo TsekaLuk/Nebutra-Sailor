@@ -1,3 +1,3 @@
-"use client"
+"use client";
 
-export { useAnalytics } from "@nebutra/analytics/posthog"
+export { useAnalytics } from "@nebutra/analytics/posthog";

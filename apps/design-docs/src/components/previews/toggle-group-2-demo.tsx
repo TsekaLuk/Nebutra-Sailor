@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives"
-import { Bold, Italic, Underline } from "lucide-react"
+import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives";
+import { Bold, Italic, Underline } from "lucide-react";
+import * as React from "react";
 export function ToggleGroup2Demo() {
   return (
     <ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
@@ -17,5 +16,5 @@ export function ToggleGroup2Demo() {
         <Underline className="size-4" />
       </ToggleGroupItem>
     </ToggleGroup>
-  )
+  );
 }

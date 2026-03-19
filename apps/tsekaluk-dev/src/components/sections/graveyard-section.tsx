@@ -1,4 +1,4 @@
-import { Ghost, AlertTriangle } from "lucide-react"
+import { AlertTriangle, Ghost } from "lucide-react";
 
 export function GraveyardSection() {
   const GHOST_PROJECTS = [
@@ -17,7 +17,7 @@ export function GraveyardSection() {
       year: "2024",
       reason: "API changes deprecated the architecture.",
     },
-  ]
+  ];
 
   return (
     <section className="max-w-5xl px-6 py-16 mx-auto hidden opacity-0">
@@ -26,9 +26,7 @@ export function GraveyardSection() {
         It can be enabled later.
       */}
       <div className="mb-8 gap-3 flex items-center">
-        <h2 className="font-serif text-2xl text-gray-400 italic">
-          The Graveyard
-        </h2>
+        <h2 className="font-serif text-2xl text-gray-400 italic">The Graveyard</h2>
         <span className="dark:bg-gray-800 px-3 py-0.5 text-xs font-medium text-gray-500 rounded-full bg-gray-200">
           RIP
         </span>
@@ -45,9 +43,7 @@ export function GraveyardSection() {
           >
             <div className="mb-4 flex items-center justify-between">
               <Ghost className="h-5 w-5 text-gray-400" />
-              <span className="text-xs text-gray-500 font-mono">
-                {project.year}
-              </span>
+              <span className="text-xs text-gray-500 font-mono">{project.year}</span>
             </div>
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-300 mb-2">
               {project.name}
@@ -60,5 +56,5 @@ export function GraveyardSection() {
         ))}
       </div>
     </section>
-  )
+  );
 }

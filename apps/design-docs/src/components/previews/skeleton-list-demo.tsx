@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Skeleton } from "@nebutra/ui/primitives"
+import { Skeleton } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function SkeletonListDemo() {
   return (
@@ -16,5 +16,5 @@ export function SkeletonListDemo() {
         </div>
       ))}
     </div>
-  )
+  );
 }

@@ -8,8 +8,7 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "Binary toggle built on HeroUI switch with controlled/uncontrolled support.",
+        component: "Binary toggle built on HeroUI switch with controlled/uncontrolled support.",
       },
     },
   },

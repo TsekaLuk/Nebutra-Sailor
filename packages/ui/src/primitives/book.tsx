@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import { useResponsive } from "../hooks/use-responsive";
 import clsx from "clsx";
+import type React from "react";
+import { useResponsive } from "../hooks/use-responsive";
 
 const DefaultIllustration = (
   <svg fill="none" height="56" viewBox="0 0 36 56" width="36" xmlns="http://www.w3.org/2000/svg">
@@ -51,10 +51,14 @@ export const Book = ({
   color,
   textColor = "var(--ds-gray-1000)",
   illustration,
-  textured = false
+  textured = false,
 }: BookProps) => {
   const _width = useResponsive(width);
-  const _color = color ? color : variant === "simple" ? "var(--ds-background-200)" : "var(--ds-amber-600)";
+  const _color = color
+    ? color
+    : variant === "simple"
+      ? "var(--ds-background-200)"
+      : "var(--ds-amber-600)";
   const _illustration = illustration ? illustration : DefaultIllustration;
 
   return (
@@ -68,66 +72,79 @@ export const Book = ({
           style={{ width: _width, backgroundColor: "var(--ds-background-200)" }}
         >
           <div
-            className={clsx(
-              "w-full relative overflow-hidden",
-              variant === "stripe" && "flex-1"
-            )}
+            className={clsx("w-full relative overflow-hidden", variant === "stripe" && "flex-1")}
             style={{ background: _color }}
           >
             {variant === "stripe" && illustration && (
-              <div className="absolute h-full w-full">
-                {_illustration}
-              </div>
+              <div className="absolute h-full w-full">{_illustration}</div>
             )}
-            <div className="absolute h-full w-[8.2%] mix-blend-overlay" style={{ background: "var(--ds-book-bind)" }} />
+            <div
+              className="absolute h-full w-[8.2%] mix-blend-overlay"
+              style={{ background: "var(--ds-book-bind)" }}
+            />
           </div>
           <div
             className={clsx(
               "relative flex-1",
-              (variant === "stripe" || (variant === "simple" && color === undefined)) && "bg-book-gradient"
+              (variant === "stripe" || (variant === "simple" && color === undefined)) &&
+                "bg-book-gradient",
             )}
             style={{ background: variant === "simple" && color !== undefined ? _color : undefined }}
           >
-            <div className="absolute h-full w-[8.2%] opacity-20" style={{ background: "var(--ds-book-bind)" }} />
+            <div
+              className="absolute h-full w-[8.2%] opacity-20"
+              style={{ background: "var(--ds-book-bind)" }}
+            />
             <div
               className={clsx(
                 "flex flex-col w-full p-[6.1%] pl-[14.3%]",
-                variant === "simple" ? "gap-4" : "justify-between"
+                variant === "simple" ? "gap-4" : "justify-between",
               )}
               style={{ containerType: "inline-size", gap: `calc((24px / 196) * ${_width})` }}
             >
               <span
                 className={clsx(
                   "leading-[1.25em] tracking-[-.02em] text-balance font-semibold",
-                  variant === "simple" ? "text-[12cqw]" : "text-[10.5cqw]"
+                  variant === "simple" ? "text-[12cqw]" : "text-[10.5cqw]",
                 )}
                 style={{ color: textColor }}
               >
                 {title}
               </span>
               {variant === "stripe" ? (
-                <svg className="scale-75 -ml-1 -mb-1" height="24" width="24" style={{ fill: textColor }}>
+                <svg
+                  className="scale-75 -ml-1 -mb-1"
+                  height="24"
+                  width="24"
+                  style={{ fill: textColor }}
+                >
                   <path d="M21,21H3L12,3Z" />
                 </svg>
-              ) : _illustration}
+              ) : (
+                _illustration
+              )}
             </div>
           </div>
           {textured && (
-            <div
-              className="absolute top-0 left-0 inset-0 rotate-180 rounded-l-md rounded-r mix-blend-hard-light pointer-events-none bg-cover bg-no-repeat opacity-50 brightness-110 bg-[url('https://assets.vercel.com/image/upload/v1720554484/front/design/book-texture.avif')]" />
+            <div className="absolute top-0 left-0 inset-0 rotate-180 rounded-l-md rounded-r mix-blend-hard-light pointer-events-none bg-cover bg-no-repeat opacity-50 brightness-110 bg-[url('https://assets.vercel.com/image/upload/v1720554484/front/design/book-texture.avif')]" />
           )}
         </div>
 
         <div
           className="h-[calc(100%_-_2_*_3px)] w-[calc(29cqw_-_2px)] absolute top-[3px]"
           style={{
-            background: "linear-gradient(90deg, #eaeaea, transparent 70%), linear-gradient(#fff, #fafafa)",
-            transform: `translateX(calc(${_width} * 1px - 29cqw / 2 - 3px)) rotateY(90deg) translateX(calc(29cqw / 2))`
+            background:
+              "linear-gradient(90deg, #eaeaea, transparent 70%), linear-gradient(#fff, #fafafa)",
+            transform: `translateX(calc(${_width} * 1px - 29cqw / 2 - 3px)) rotateY(90deg) translateX(calc(29cqw / 2))`,
           }}
         />
         <div
           className="absolute left-0 top-0 rounded-l-md rounded-r h-full"
-          style={{ width: _width, transform: "translateZ(calc(-1 * 29cqw))", backgroundColor: "var(--ds-gray-200)" }}
+          style={{
+            width: _width,
+            transform: "translateZ(calc(-1 * 29cqw))",
+            backgroundColor: "var(--ds-gray-200)",
+          }}
         />
       </div>
     </div>

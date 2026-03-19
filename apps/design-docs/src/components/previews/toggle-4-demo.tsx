@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Toggle } from "@nebutra/ui/primitives"
+import { Toggle } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function Toggle4Demo() {
-  return <Toggle size="normal" aria-label="Toggle normal size" />
+  return <Toggle size="normal" aria-label="Toggle normal size" />;
 }

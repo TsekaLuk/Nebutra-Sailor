@@ -1,12 +1,12 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Command, LogoGithub, LogoGoogle } from "@nebutra/icons";
 import { motion, type Variants } from "framer-motion";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { LogoGithub, LogoGoogle, Command } from "@nebutra/icons";
+import { Link } from "@/i18n/navigation";
 
 export default function SignInPage() {
   const t = useTranslations("auth.signin");
@@ -19,19 +19,22 @@ export default function SignInPage() {
 
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { 
-        type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.1 
-      }
-    }
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } },
   };
 
   return (
@@ -45,9 +48,7 @@ export default function SignInPage() {
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
           {t("title")}
         </h1>
-        <p className="text-gray-500 dark:text-gray-400">
-          {t("subtitle")}
-        </p>
+        <p className="text-gray-500 dark:text-gray-400">{t("subtitle")}</p>
       </motion.div>
 
       <motion.div variants={itemVariants} className="flex flex-col gap-3 mb-8">
@@ -92,8 +93,8 @@ export default function SignInPage() {
       </motion.div>
 
       <motion.div variants={itemVariants}>
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />

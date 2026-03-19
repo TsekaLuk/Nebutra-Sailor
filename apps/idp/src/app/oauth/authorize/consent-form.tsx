@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 /**
  * Consent Form — Client Component
@@ -7,17 +7,17 @@
  * back to the oidc-provider interaction endpoint.
  */
 
-import { useState } from "react"
+import { useState } from "react";
 
 interface ConsentFormProps {
-  uid: string
+  uid: string;
 }
 
 export function ConsentForm({ uid }: ConsentFormProps) {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleConsent(approved: boolean) {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       const response = await fetch(
@@ -25,19 +25,19 @@ export function ConsentForm({ uid }: ConsentFormProps) {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-        }
-      )
+        },
+      );
 
       if (response.redirected) {
-        window.location.href = response.url
+        window.location.href = response.url;
       } else {
-        const data = await response.json()
+        const data = await response.json();
         if (data.redirectTo) {
-          window.location.href = data.redirectTo
+          window.location.href = data.redirectTo;
         }
       }
     } catch {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 
@@ -57,11 +57,7 @@ export function ConsentForm({ uid }: ConsentFormProps) {
       >
         {isLoading ? (
           <span className="gap-2 inline-flex items-center">
-            <svg
-              className="h-4 w-4 animate-spin"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
+            <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
               <circle
                 className="opacity-25"
                 cx="12"
@@ -83,5 +79,5 @@ export function ConsentForm({ uid }: ConsentFormProps) {
         )}
       </button>
     </div>
-  )
+  );
 }

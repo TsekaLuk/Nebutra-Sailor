@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { NeuroNoise, type NeuroNoiseProps } from "@paper-design/shaders-react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -9,8 +9,7 @@ import { cn } from "../utils/cn";
 // =============================================================================
 
 export interface NeuroNoiseBgProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
+  extends React.HTMLAttributes<HTMLDivElement>,
     Partial<Omit<NeuroNoiseProps, "style">> {}
 
 // =============================================================================

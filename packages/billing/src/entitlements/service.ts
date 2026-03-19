@@ -1,8 +1,5 @@
 import type { Plan } from "../types.js";
-import {
-  EntitlementError,
-  DEFAULT_PLAN_LIMITS,
-} from "../types.js";
+import { DEFAULT_PLAN_LIMITS, EntitlementError } from "../types.js";
 
 // ============================================
 // Types
@@ -51,29 +48,35 @@ export const FEATURES = {
   "ai.embeddings": { name: "Embeddings", description: "Generate text embeddings" },
   "ai.images": { name: "Image Generation", description: "Generate images with AI" },
   "ai.reasoning": { name: "AI Reasoning", description: "Access to reasoning models" },
-  
+
   // Content Features
   "content.create": { name: "Content Creation", description: "Create content" },
   "content.publish": { name: "Content Publishing", description: "Publish content" },
   "content.analytics": { name: "Content Analytics", description: "View content analytics" },
-  
+
   // Recommendations
-  "recommendations.basic": { name: "Basic Recommendations", description: "Basic recommendation features" },
-  "recommendations.advanced": { name: "Advanced Recommendations", description: "Advanced ML-based recommendations" },
-  
+  "recommendations.basic": {
+    name: "Basic Recommendations",
+    description: "Basic recommendation features",
+  },
+  "recommendations.advanced": {
+    name: "Advanced Recommendations",
+    description: "Advanced ML-based recommendations",
+  },
+
   // Web3 Features
   "web3.nft": { name: "NFT Features", description: "NFT minting and management" },
   "web3.wallet": { name: "Wallet Integration", description: "Web3 wallet integration" },
-  
+
   // Team Features
   "team.members": { name: "Team Members", description: "Add team members" },
   "team.roles": { name: "Custom Roles", description: "Create custom roles" },
-  
+
   // Platform Features
   "api.access": { name: "API Access", description: "Direct API access" },
-  "webhooks": { name: "Webhooks", description: "Configure webhooks" },
-  "sso": { name: "SSO/SAML", description: "Single sign-on integration" },
-  "audit_logs": { name: "Audit Logs", description: "View audit logs" },
+  webhooks: { name: "Webhooks", description: "Configure webhooks" },
+  sso: { name: "SSO/SAML", description: "Single sign-on integration" },
+  audit_logs: { name: "Audit Logs", description: "View audit logs" },
 } as const;
 
 export type FeatureKey = keyof typeof FEATURES;
@@ -83,11 +86,7 @@ export type FeatureKey = keyof typeof FEATURES;
 // ============================================
 
 export const PLAN_FEATURES: Record<Plan, FeatureKey[]> = {
-  FREE: [
-    "ai.chat",
-    "content.create",
-    "recommendations.basic",
-  ],
+  FREE: ["ai.chat", "content.create", "recommendations.basic"],
   PRO: [
     "ai.chat",
     "ai.embeddings",
@@ -134,7 +133,7 @@ const entitlements: Map<string, Entitlement[]> = new Map();
 export function checkEntitlement(
   organizationId: string,
   feature: string,
-  quantity?: number
+  quantity?: number,
 ): EntitlementCheckResult {
   const orgEntitlements = entitlements.get(organizationId) || [];
   const entitlement = orgEntitlements.find((e) => e.feature === feature);
@@ -186,9 +185,7 @@ export function checkEntitlement(
     feature,
     limit: entitlement.limitValue,
     used: entitlement.usedValue,
-    remaining: entitlement.limitValue
-      ? entitlement.limitValue - entitlement.usedValue
-      : undefined,
+    remaining: entitlement.limitValue ? entitlement.limitValue - entitlement.usedValue : undefined,
   };
 }
 
@@ -198,15 +195,12 @@ export function checkEntitlement(
 export function requireEntitlement(
   organizationId: string,
   feature: string,
-  quantity?: number
+  quantity?: number,
 ): void {
   const result = checkEntitlement(organizationId, feature, quantity);
-  
+
   if (!result.allowed) {
-    throw new EntitlementError(
-      result.reason || "Access denied",
-      "ENTITLEMENT_DENIED"
-    );
+    throw new EntitlementError(result.reason || "Access denied", "ENTITLEMENT_DENIED");
   }
 }
 
@@ -228,23 +222,20 @@ export function grantEntitlement(input: GrantEntitlementInput): Entitlement {
   };
 
   const orgEntitlements = entitlements.get(input.organizationId) || [];
-  
+
   // Remove existing entitlement for this feature
   const filtered = orgEntitlements.filter((e) => e.feature !== input.feature);
   filtered.push(entitlement);
-  
+
   entitlements.set(input.organizationId, filtered);
-  
+
   return entitlement;
 }
 
 /**
  * Revoke an entitlement from an organization
  */
-export function revokeEntitlement(
-  organizationId: string,
-  feature: string
-): void {
+export function revokeEntitlement(organizationId: string, feature: string): void {
   const orgEntitlements = entitlements.get(organizationId) || [];
   const filtered = orgEntitlements.filter((e) => e.feature !== feature);
   entitlements.set(organizationId, filtered);
@@ -256,11 +247,11 @@ export function revokeEntitlement(
 export function incrementUsage(
   organizationId: string,
   feature: string,
-  quantity: number = 1
+  quantity: number = 1,
 ): void {
   const orgEntitlements = entitlements.get(organizationId) || [];
   const entitlement = orgEntitlements.find((e) => e.feature === feature);
-  
+
   if (entitlement) {
     entitlement.usedValue += BigInt(quantity);
   }
@@ -269,13 +260,10 @@ export function incrementUsage(
 /**
  * Reset usage for a feature
  */
-export function resetUsage(
-  organizationId: string,
-  feature: string
-): void {
+export function resetUsage(organizationId: string, feature: string): void {
   const orgEntitlements = entitlements.get(organizationId) || [];
   const entitlement = orgEntitlements.find((e) => e.feature === feature);
-  
+
   if (entitlement) {
     entitlement.usedValue = BigInt(0);
     entitlement.lastResetAt = new Date();
@@ -292,15 +280,12 @@ export function getEntitlements(organizationId: string): Entitlement[] {
 /**
  * Initialize entitlements for a plan
  */
-export function initializePlanEntitlements(
-  organizationId: string,
-  plan: Plan
-): Entitlement[] {
+export function initializePlanEntitlements(organizationId: string, plan: Plan): Entitlement[] {
   const features = PLAN_FEATURES[plan] || [];
   const limits = DEFAULT_PLAN_LIMITS[plan];
-  
+
   const granted: Entitlement[] = [];
-  
+
   for (const feature of features) {
     const entitlement = grantEntitlement({
       organizationId,
@@ -309,7 +294,7 @@ export function initializePlanEntitlements(
     });
     granted.push(entitlement);
   }
-  
+
   // Add usage-based entitlements with limits
   if (limits.apiCalls !== -1) {
     const apiEntitlement = grantEntitlement({
@@ -321,7 +306,7 @@ export function initializePlanEntitlements(
     });
     granted.push(apiEntitlement);
   }
-  
+
   if (limits.aiTokens !== -1) {
     const tokenEntitlement = grantEntitlement({
       organizationId,
@@ -332,7 +317,7 @@ export function initializePlanEntitlements(
     });
     granted.push(tokenEntitlement);
   }
-  
+
   return granted;
 }
 

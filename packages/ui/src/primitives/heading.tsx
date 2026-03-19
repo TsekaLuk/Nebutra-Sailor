@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { type TextColor, textColors, textStyles } from "../tokens/typography";
 import { cn } from "../utils/cn";
-import { textStyles, textColors, type TextColor } from "../tokens/typography";
 
 /**
  * Heading - Semantic heading primitive
@@ -51,36 +51,20 @@ const alignMap = {
 
 export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   (
-    {
-      level = 2,
-      as,
-      color = "default",
-      display = false,
-      align,
-      className,
-      children,
-      ...props
-    },
+    { level = 2, as, color = "default", display = false, align, className, children, ...props },
     ref,
   ) => {
     const Component = as || (`h${level}` as HeadingElement);
 
     const styleClass =
-      display && (level === 1 || level === 2)
-        ? displayStyle[level as 1 | 2]
-        : levelToStyle[level];
+      display && (level === 1 || level === 2) ? displayStyle[level as 1 | 2] : levelToStyle[level];
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const Comp = Component as any;
     return (
       <Comp
         ref={ref}
-        className={cn(
-          styleClass,
-          textColors[color],
-          align && alignMap[align],
-          className,
-        )}
+        className={cn(styleClass, textColors[color], align && alignMap[align], className)}
         {...props}
       >
         {children}

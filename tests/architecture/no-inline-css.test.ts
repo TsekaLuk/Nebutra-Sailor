@@ -1,20 +1,14 @@
-import { describe, it, expect } from "vitest";
-import * as fc from "fast-check";
-import { readFileSync, readdirSync } from "node:fs";
-import { resolve, dirname, extname, join } from "node:path";
+import { readdirSync, readFileSync } from "node:fs";
+import { dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import * as fc from "fast-check";
+import { describe, expect, it } from "vitest";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
 const DESIGN_SYSTEM_SRC = resolve(ROOT, "packages/ui/src/layout");
 
-const EXCLUDED_DIRS = new Set([
-  "node_modules",
-  ".next",
-  "dist",
-  ".turbo",
-  "marketing",
-]);
+const EXCLUDED_DIRS = new Set(["node_modules", ".next", "dist", ".turbo", "marketing"]);
 
 function collectTsFiles(dir: string): string[] {
   const results: string[] = [];

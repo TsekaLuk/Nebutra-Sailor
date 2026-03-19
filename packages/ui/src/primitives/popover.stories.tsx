@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Popover, PopoverTrigger, PopoverContent } from "./popover";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 const meta = {
   title: "Primitives/Popover",
@@ -23,17 +23,12 @@ export const Default: Story = {
   render: () => (
     <Popover>
       <PopoverTrigger asChild>
-        <button
-          type="button"
-          className="rounded-md border border-border px-3 py-2 text-sm"
-        >
+        <button type="button" className="rounded-md border border-border px-3 py-2 text-sm">
           Open popover
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-72 p-4">
-        <p className="text-sm font-medium text-foreground">
-          API key scope
-        </p>
+        <p className="text-sm font-medium text-foreground">API key scope</p>
         <p className="mt-2 text-xs text-muted-foreground">
           Restrict this key to analytics read-only access.
         </p>

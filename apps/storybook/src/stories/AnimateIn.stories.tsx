@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof AnimateIn> = {
   title: "Components/AnimateIn",
@@ -58,9 +58,7 @@ export const StaggeredGroup: Story = {
     <AnimateInGroup stagger="normal" className="grid grid-cols-3 gap-4 p-4">
       {Array.from({ length: 6 }, (_, i) => (
         <AnimateIn key={i} preset="fadeUp">
-          <div className="rounded-lg border p-4 text-center text-sm font-medium">
-            Card {i + 1}
-          </div>
+          <div className="rounded-lg border p-4 text-center text-sm font-medium">Card {i + 1}</div>
         </AnimateIn>
       ))}
     </AnimateInGroup>

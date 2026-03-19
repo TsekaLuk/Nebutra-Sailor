@@ -1,5 +1,5 @@
-import React from "react";
 import clsx from "clsx";
+import type React from "react";
 
 const types = {
   base: "rounded-md shadow-border",
@@ -9,7 +9,7 @@ const types = {
   tooltip: "rounded-md shadow-tooltip",
   menu: "rounded-xl shadow-menu",
   modal: "rounded-xl shadow-modal",
-  fullscreen: "rounded-2xl shadow-fullscreen"
+  fullscreen: "rounded-2xl shadow-fullscreen",
 };
 
 interface SurfaceProps {
@@ -32,11 +32,7 @@ export const Surface = ({ type, children, className, ref, style, onClick }: Surf
           onClick(e as unknown as React.MouseEvent<HTMLDivElement>);
         }
       }}
-      className={clsx(
-        "bg-background-100",
-        types[type],
-        className
-      )}
+      className={clsx("bg-background-100", types[type], className)}
       ref={ref}
       style={style}
       onClick={onClick}

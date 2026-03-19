@@ -53,7 +53,7 @@ export class LazyRefreshCache {
   async getOrSet<T>(
     key: string,
     fetcher: () => Promise<T>,
-    options?: Partial<LazyRefreshOptions>
+    options?: Partial<LazyRefreshOptions>,
   ): Promise<T> {
     const redis = getRedis();
     const cacheKey = this.key(key);
@@ -87,7 +87,7 @@ export class LazyRefreshCache {
     cacheKey: string,
     fetcher: () => Promise<T>,
     ttl: number,
-    softTTL: number
+    softTTL: number,
   ): Promise<T> {
     const redis = getRedis();
     const value = await fetcher();
@@ -115,8 +115,6 @@ export class LazyRefreshCache {
 /**
  * Create a lazy refresh cache
  */
-export function createLazyRefreshCache(
-  options: LazyRefreshOptions
-): LazyRefreshCache {
+export function createLazyRefreshCache(options: LazyRefreshOptions): LazyRefreshCache {
   return new LazyRefreshCache(options);
 }

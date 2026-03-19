@@ -1,8 +1,5 @@
-import type { PrismaClient, Prisma, WebhookEvent } from "@nebutra/db";
-import type {
-  CursorPaginationParams,
-  CursorPaginationResult,
-} from "./pagination.js";
+import type { Prisma, PrismaClient, WebhookEvent } from "@nebutra/db";
+import type { CursorPaginationParams, CursorPaginationResult } from "./pagination.js";
 import { normalizePaginationParams } from "./pagination.js";
 
 /**
@@ -61,10 +58,7 @@ export class WebhookEventRepository {
     return this.prisma.webhookEvent.findUnique({ where: { id } });
   }
 
-  async findByProviderAndEventId(
-    provider: string,
-    eventId: string,
-  ): Promise<WebhookEvent | null> {
+  async findByProviderAndEventId(provider: string, eventId: string): Promise<WebhookEvent | null> {
     return this.prisma.webhookEvent.findUnique({
       where: {
         provider_eventId: { provider, eventId },
@@ -102,10 +96,7 @@ export class WebhookEventRepository {
   /**
    * Mark an event as successfully processed by setting `processedAt` to now.
    */
-  async markProcessed(
-    provider: string,
-    eventId: string,
-  ): Promise<WebhookEvent> {
+  async markProcessed(provider: string, eventId: string): Promise<WebhookEvent> {
     return this.prisma.webhookEvent.update({
       where: {
         provider_eventId: { provider, eventId },
@@ -119,11 +110,7 @@ export class WebhookEventRepository {
   /**
    * Mark an event as failed by recording the error message and incrementing the retry count.
    */
-  async markFailed(
-    provider: string,
-    eventId: string,
-    errorMessage: string,
-  ): Promise<WebhookEvent> {
+  async markFailed(provider: string, eventId: string, errorMessage: string): Promise<WebhookEvent> {
     return this.prisma.webhookEvent.update({
       where: {
         provider_eventId: { provider, eventId },

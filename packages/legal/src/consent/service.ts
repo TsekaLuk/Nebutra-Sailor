@@ -5,13 +5,13 @@
  * Provides client-side utilities for consent management.
  */
 
-import type {
-  CookiePreferences,
-  ConsentStatus,
-  ConsentRequest,
-  CookieConsentRequest,
-} from "../types";
 import { cookieConfig } from "../documents/config";
+import type {
+  ConsentRequest,
+  ConsentStatus,
+  CookieConsentRequest,
+  CookiePreferences,
+} from "../types";
 
 // ============================================
 // Constants
@@ -111,7 +111,7 @@ export function saveCookieConsent(preferences: Omit<CookiePreferences, "necessar
   window.dispatchEvent(
     new CustomEvent("cookieConsentUpdated", {
       detail: fullPreferences,
-    })
+    }),
   );
 }
 
@@ -149,9 +149,7 @@ export function hasCookieConsent(): boolean {
 /**
  * Check if a specific cookie category is allowed
  */
-export function isCookieCategoryAllowed(
-  category: keyof CookiePreferences
-): boolean {
+export function isCookieCategoryAllowed(category: keyof CookiePreferences): boolean {
   if (category === "necessary") {
     return true;
   }
@@ -207,10 +205,7 @@ export function getDocumentConsents(): DocumentConsentCache {
 /**
  * Cache document consent locally (for quick checks before API call)
  */
-export function cacheDocumentConsent(
-  documentSlug: string,
-  version: string
-): void {
+export function cacheDocumentConsent(documentSlug: string, version: string): void {
   if (typeof window === "undefined") {
     return;
   }
@@ -226,10 +221,7 @@ export function cacheDocumentConsent(
 /**
  * Check if document consent is cached locally
  */
-export function hasDocumentConsentCached(
-  documentSlug: string,
-  version?: string
-): boolean {
+export function hasDocumentConsentCached(documentSlug: string, version?: string): boolean {
   const consents = getDocumentConsents();
   const consent = consents[documentSlug];
 
@@ -267,9 +259,7 @@ export function configureConsentApi(config: ConsentApiConfig): void {
 /**
  * Record user consent for a document via API
  */
-export async function recordDocumentConsent(
-  request: ConsentRequest
-): Promise<void> {
+export async function recordDocumentConsent(request: ConsentRequest): Promise<void> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
@@ -292,18 +282,13 @@ export async function recordDocumentConsent(
   }
 
   // Cache locally
-  cacheDocumentConsent(
-    request.documentSlug,
-    request.documentVersion ?? "latest"
-  );
+  cacheDocumentConsent(request.documentSlug, request.documentVersion ?? "latest");
 }
 
 /**
  * Get consent status for a document via API
  */
-export async function getConsentStatus(
-  documentSlug: string
-): Promise<ConsentStatus> {
+export async function getConsentStatus(documentSlug: string): Promise<ConsentStatus> {
   const headers: Record<string, string> = {};
 
   if (apiConfig.getHeaders) {
@@ -313,7 +298,7 @@ export async function getConsentStatus(
   const visitorId = getVisitorId();
   const response = await fetch(
     `${apiConfig.baseUrl}/consent/status?documentSlug=${documentSlug}&visitorId=${visitorId}`,
-    { headers }
+    { headers },
   );
 
   if (!response.ok) {
@@ -327,7 +312,7 @@ export async function getConsentStatus(
  * Record cookie consent via API
  */
 export async function recordCookieConsent(
-  preferences: Omit<CookiePreferences, "necessary">
+  preferences: Omit<CookiePreferences, "necessary">,
 ): Promise<void> {
   // Save locally first
   saveCookieConsent(preferences);
@@ -390,7 +375,8 @@ export function initializeGTMConsentMode(): void {
   }
 
   // Initialize dataLayer if not present
-  (window as unknown as { dataLayer?: unknown[] }).dataLayer = (window as unknown as { dataLayer?: unknown[] }).dataLayer || [];
+  (window as unknown as { dataLayer?: unknown[] }).dataLayer =
+    (window as unknown as { dataLayer?: unknown[] }).dataLayer || [];
 
   const gtag = (...args: unknown[]) => {
     (window as unknown as { dataLayer: unknown[] }).dataLayer.push(args);

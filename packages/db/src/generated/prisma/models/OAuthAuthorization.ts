@@ -7,83 +7,82 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
+import type * as Prisma from "../internal/prismaNamespace";
 
 /**
  * Model OAuthAuthorization
  *
  */
 export type OAuthAuthorizationModel =
-  runtime.Types.Result.DefaultSelection<Prisma.$OAuthAuthorizationPayload>
+  runtime.Types.Result.DefaultSelection<Prisma.$OAuthAuthorizationPayload>;
 
 export type AggregateOAuthAuthorization = {
-  _count: OAuthAuthorizationCountAggregateOutputType | null
-  _min: OAuthAuthorizationMinAggregateOutputType | null
-  _max: OAuthAuthorizationMaxAggregateOutputType | null
-}
+  _count: OAuthAuthorizationCountAggregateOutputType | null;
+  _min: OAuthAuthorizationMinAggregateOutputType | null;
+  _max: OAuthAuthorizationMaxAggregateOutputType | null;
+};
 
 export type OAuthAuthorizationMinAggregateOutputType = {
-  id: string | null
-  userId: string | null
-  clientId: string | null
-  grantedAt: Date | null
-  revokedAt: Date | null
-}
+  id: string | null;
+  userId: string | null;
+  clientId: string | null;
+  grantedAt: Date | null;
+  revokedAt: Date | null;
+};
 
 export type OAuthAuthorizationMaxAggregateOutputType = {
-  id: string | null
-  userId: string | null
-  clientId: string | null
-  grantedAt: Date | null
-  revokedAt: Date | null
-}
+  id: string | null;
+  userId: string | null;
+  clientId: string | null;
+  grantedAt: Date | null;
+  revokedAt: Date | null;
+};
 
 export type OAuthAuthorizationCountAggregateOutputType = {
-  id: number
-  userId: number
-  clientId: number
-  scopes: number
-  grantedAt: number
-  revokedAt: number
-  _all: number
-}
+  id: number;
+  userId: number;
+  clientId: number;
+  scopes: number;
+  grantedAt: number;
+  revokedAt: number;
+  _all: number;
+};
 
 export type OAuthAuthorizationMinAggregateInputType = {
-  id?: true
-  userId?: true
-  clientId?: true
-  grantedAt?: true
-  revokedAt?: true
-}
+  id?: true;
+  userId?: true;
+  clientId?: true;
+  grantedAt?: true;
+  revokedAt?: true;
+};
 
 export type OAuthAuthorizationMaxAggregateInputType = {
-  id?: true
-  userId?: true
-  clientId?: true
-  grantedAt?: true
-  revokedAt?: true
-}
+  id?: true;
+  userId?: true;
+  clientId?: true;
+  grantedAt?: true;
+  revokedAt?: true;
+};
 
 export type OAuthAuthorizationCountAggregateInputType = {
-  id?: true
-  userId?: true
-  clientId?: true
-  scopes?: true
-  grantedAt?: true
-  revokedAt?: true
-  _all?: true
-}
+  id?: true;
+  userId?: true;
+  clientId?: true;
+  scopes?: true;
+  grantedAt?: true;
+  revokedAt?: true;
+  _all?: true;
+};
 
 export type OAuthAuthorizationAggregateArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which OAuthAuthorization to aggregate.
    */
-  where?: Prisma.OAuthAuthorizationWhereInput
+  where?: Prisma.OAuthAuthorizationWhereInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    *
@@ -91,319 +90,269 @@ export type OAuthAuthorizationAggregateArgs<
    */
   orderBy?:
     | Prisma.OAuthAuthorizationOrderByWithRelationInput
-    | Prisma.OAuthAuthorizationOrderByWithRelationInput[]
+    | Prisma.OAuthAuthorizationOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
    * Sets the start position
    */
-  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput
+  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Take `±n` OAuthAuthorizations from the position of the cursor.
    */
-  take?: number
+  take?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Skip the first `n` OAuthAuthorizations.
    */
-  skip?: number
+  skip?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Count returned OAuthAuthorizations
    **/
-  _count?: true | OAuthAuthorizationCountAggregateInputType
+  _count?: true | OAuthAuthorizationCountAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the minimum value
    **/
-  _min?: OAuthAuthorizationMinAggregateInputType
+  _min?: OAuthAuthorizationMinAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the maximum value
    **/
-  _max?: OAuthAuthorizationMaxAggregateInputType
-}
+  _max?: OAuthAuthorizationMaxAggregateInputType;
+};
 
-export type GetOAuthAuthorizationAggregateType<
-  T extends OAuthAuthorizationAggregateArgs,
-> = {
-  [P in keyof T & keyof AggregateOAuthAuthorization]: P extends
-    | "_count"
-    | "count"
+export type GetOAuthAuthorizationAggregateType<T extends OAuthAuthorizationAggregateArgs> = {
+  [P in keyof T & keyof AggregateOAuthAuthorization]: P extends "_count" | "count"
     ? T[P] extends true
       ? number
       : Prisma.GetScalarType<T[P], AggregateOAuthAuthorization[P]>
-    : Prisma.GetScalarType<T[P], AggregateOAuthAuthorization[P]>
-}
+    : Prisma.GetScalarType<T[P], AggregateOAuthAuthorization[P]>;
+};
 
 export type OAuthAuthorizationGroupByArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  where?: Prisma.OAuthAuthorizationWhereInput
+  where?: Prisma.OAuthAuthorizationWhereInput;
   orderBy?:
     | Prisma.OAuthAuthorizationOrderByWithAggregationInput
-    | Prisma.OAuthAuthorizationOrderByWithAggregationInput[]
-  by:
-    | Prisma.OAuthAuthorizationScalarFieldEnum[]
-    | Prisma.OAuthAuthorizationScalarFieldEnum
-  having?: Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput
-  take?: number
-  skip?: number
-  _count?: OAuthAuthorizationCountAggregateInputType | true
-  _min?: OAuthAuthorizationMinAggregateInputType
-  _max?: OAuthAuthorizationMaxAggregateInputType
-}
+    | Prisma.OAuthAuthorizationOrderByWithAggregationInput[];
+  by: Prisma.OAuthAuthorizationScalarFieldEnum[] | Prisma.OAuthAuthorizationScalarFieldEnum;
+  having?: Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput;
+  take?: number;
+  skip?: number;
+  _count?: OAuthAuthorizationCountAggregateInputType | true;
+  _min?: OAuthAuthorizationMinAggregateInputType;
+  _max?: OAuthAuthorizationMaxAggregateInputType;
+};
 
 export type OAuthAuthorizationGroupByOutputType = {
-  id: string
-  userId: string
-  clientId: string
-  scopes: string[]
-  grantedAt: Date
-  revokedAt: Date | null
-  _count: OAuthAuthorizationCountAggregateOutputType | null
-  _min: OAuthAuthorizationMinAggregateOutputType | null
-  _max: OAuthAuthorizationMaxAggregateOutputType | null
-}
+  id: string;
+  userId: string;
+  clientId: string;
+  scopes: string[];
+  grantedAt: Date;
+  revokedAt: Date | null;
+  _count: OAuthAuthorizationCountAggregateOutputType | null;
+  _min: OAuthAuthorizationMinAggregateOutputType | null;
+  _max: OAuthAuthorizationMaxAggregateOutputType | null;
+};
 
-type GetOAuthAuthorizationGroupByPayload<
-  T extends OAuthAuthorizationGroupByArgs,
-> = Prisma.PrismaPromise<
-  Array<
-    Prisma.PickEnumerable<OAuthAuthorizationGroupByOutputType, T["by"]> & {
-      [P in keyof T &
-        keyof OAuthAuthorizationGroupByOutputType]: P extends "_count"
-        ? T[P] extends boolean
-          ? number
-          : Prisma.GetScalarType<T[P], OAuthAuthorizationGroupByOutputType[P]>
-        : Prisma.GetScalarType<T[P], OAuthAuthorizationGroupByOutputType[P]>
-    }
-  >
->
+type GetOAuthAuthorizationGroupByPayload<T extends OAuthAuthorizationGroupByArgs> =
+  Prisma.PrismaPromise<
+    Array<
+      Prisma.PickEnumerable<OAuthAuthorizationGroupByOutputType, T["by"]> & {
+        [P in keyof T & keyof OAuthAuthorizationGroupByOutputType]: P extends "_count"
+          ? T[P] extends boolean
+            ? number
+            : Prisma.GetScalarType<T[P], OAuthAuthorizationGroupByOutputType[P]>
+          : Prisma.GetScalarType<T[P], OAuthAuthorizationGroupByOutputType[P]>;
+      }
+    >
+  >;
 
 export type OAuthAuthorizationWhereInput = {
-  AND?:
-    | Prisma.OAuthAuthorizationWhereInput
-    | Prisma.OAuthAuthorizationWhereInput[]
-  OR?: Prisma.OAuthAuthorizationWhereInput[]
-  NOT?:
-    | Prisma.OAuthAuthorizationWhereInput
-    | Prisma.OAuthAuthorizationWhereInput[]
-  id?: Prisma.StringFilter<"OAuthAuthorization"> | string
-  userId?: Prisma.StringFilter<"OAuthAuthorization"> | string
-  clientId?: Prisma.StringFilter<"OAuthAuthorization"> | string
-  scopes?: Prisma.StringNullableListFilter<"OAuthAuthorization">
-  grantedAt?: Prisma.DateTimeFilter<"OAuthAuthorization"> | Date | string
-  revokedAt?:
-    | Prisma.DateTimeNullableFilter<"OAuthAuthorization">
-    | Date
-    | string
-    | null
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  client?: Prisma.XOR<
-    Prisma.OAuthClientScalarRelationFilter,
-    Prisma.OAuthClientWhereInput
-  >
-}
+  AND?: Prisma.OAuthAuthorizationWhereInput | Prisma.OAuthAuthorizationWhereInput[];
+  OR?: Prisma.OAuthAuthorizationWhereInput[];
+  NOT?: Prisma.OAuthAuthorizationWhereInput | Prisma.OAuthAuthorizationWhereInput[];
+  id?: Prisma.StringFilter<"OAuthAuthorization"> | string;
+  userId?: Prisma.StringFilter<"OAuthAuthorization"> | string;
+  clientId?: Prisma.StringFilter<"OAuthAuthorization"> | string;
+  scopes?: Prisma.StringNullableListFilter<"OAuthAuthorization">;
+  grantedAt?: Prisma.DateTimeFilter<"OAuthAuthorization"> | Date | string;
+  revokedAt?: Prisma.DateTimeNullableFilter<"OAuthAuthorization"> | Date | string | null;
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
+  client?: Prisma.XOR<Prisma.OAuthClientScalarRelationFilter, Prisma.OAuthClientWhereInput>;
+};
 
 export type OAuthAuthorizationOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  scopes?: Prisma.SortOrder
-  grantedAt?: Prisma.SortOrder
-  revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
-  client?: Prisma.OAuthClientOrderByWithRelationInput
-}
+  id?: Prisma.SortOrder;
+  userId?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  scopes?: Prisma.SortOrder;
+  grantedAt?: Prisma.SortOrder;
+  revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
+  user?: Prisma.UserOrderByWithRelationInput;
+  client?: Prisma.OAuthClientOrderByWithRelationInput;
+};
 
 export type OAuthAuthorizationWhereUniqueInput = Prisma.AtLeast<
   {
-    id?: string
-    userId_clientId?: Prisma.OAuthAuthorizationUserIdClientIdCompoundUniqueInput
-    AND?:
-      | Prisma.OAuthAuthorizationWhereInput
-      | Prisma.OAuthAuthorizationWhereInput[]
-    OR?: Prisma.OAuthAuthorizationWhereInput[]
-    NOT?:
-      | Prisma.OAuthAuthorizationWhereInput
-      | Prisma.OAuthAuthorizationWhereInput[]
-    userId?: Prisma.StringFilter<"OAuthAuthorization"> | string
-    clientId?: Prisma.StringFilter<"OAuthAuthorization"> | string
-    scopes?: Prisma.StringNullableListFilter<"OAuthAuthorization">
-    grantedAt?: Prisma.DateTimeFilter<"OAuthAuthorization"> | Date | string
-    revokedAt?:
-      | Prisma.DateTimeNullableFilter<"OAuthAuthorization">
-      | Date
-      | string
-      | null
-    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-    client?: Prisma.XOR<
-      Prisma.OAuthClientScalarRelationFilter,
-      Prisma.OAuthClientWhereInput
-    >
+    id?: string;
+    userId_clientId?: Prisma.OAuthAuthorizationUserIdClientIdCompoundUniqueInput;
+    AND?: Prisma.OAuthAuthorizationWhereInput | Prisma.OAuthAuthorizationWhereInput[];
+    OR?: Prisma.OAuthAuthorizationWhereInput[];
+    NOT?: Prisma.OAuthAuthorizationWhereInput | Prisma.OAuthAuthorizationWhereInput[];
+    userId?: Prisma.StringFilter<"OAuthAuthorization"> | string;
+    clientId?: Prisma.StringFilter<"OAuthAuthorization"> | string;
+    scopes?: Prisma.StringNullableListFilter<"OAuthAuthorization">;
+    grantedAt?: Prisma.DateTimeFilter<"OAuthAuthorization"> | Date | string;
+    revokedAt?: Prisma.DateTimeNullableFilter<"OAuthAuthorization"> | Date | string | null;
+    user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
+    client?: Prisma.XOR<Prisma.OAuthClientScalarRelationFilter, Prisma.OAuthClientWhereInput>;
   },
   "id" | "userId_clientId"
->
+>;
 
 export type OAuthAuthorizationOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  scopes?: Prisma.SortOrder
-  grantedAt?: Prisma.SortOrder
-  revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  _count?: Prisma.OAuthAuthorizationCountOrderByAggregateInput
-  _max?: Prisma.OAuthAuthorizationMaxOrderByAggregateInput
-  _min?: Prisma.OAuthAuthorizationMinOrderByAggregateInput
-}
+  id?: Prisma.SortOrder;
+  userId?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  scopes?: Prisma.SortOrder;
+  grantedAt?: Prisma.SortOrder;
+  revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder;
+  _count?: Prisma.OAuthAuthorizationCountOrderByAggregateInput;
+  _max?: Prisma.OAuthAuthorizationMaxOrderByAggregateInput;
+  _min?: Prisma.OAuthAuthorizationMinOrderByAggregateInput;
+};
 
 export type OAuthAuthorizationScalarWhereWithAggregatesInput = {
   AND?:
     | Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput
-    | Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput[]
-  OR?: Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput[]
+    | Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput[];
+  OR?: Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput[];
   NOT?:
     | Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput
-    | Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"OAuthAuthorization"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"OAuthAuthorization"> | string
-  clientId?: Prisma.StringWithAggregatesFilter<"OAuthAuthorization"> | string
-  scopes?: Prisma.StringNullableListFilter<"OAuthAuthorization">
-  grantedAt?:
-    | Prisma.DateTimeWithAggregatesFilter<"OAuthAuthorization">
-    | Date
-    | string
+    | Prisma.OAuthAuthorizationScalarWhereWithAggregatesInput[];
+  id?: Prisma.StringWithAggregatesFilter<"OAuthAuthorization"> | string;
+  userId?: Prisma.StringWithAggregatesFilter<"OAuthAuthorization"> | string;
+  clientId?: Prisma.StringWithAggregatesFilter<"OAuthAuthorization"> | string;
+  scopes?: Prisma.StringNullableListFilter<"OAuthAuthorization">;
+  grantedAt?: Prisma.DateTimeWithAggregatesFilter<"OAuthAuthorization"> | Date | string;
   revokedAt?:
     | Prisma.DateTimeNullableWithAggregatesFilter<"OAuthAuthorization">
     | Date
     | string
-    | null
-}
+    | null;
+};
 
 export type OAuthAuthorizationCreateInput = {
-  id?: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-  user: Prisma.UserCreateNestedOneWithoutOauthAuthorizationsInput
-  client: Prisma.OAuthClientCreateNestedOneWithoutAuthorizationsInput
-}
+  id?: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+  user: Prisma.UserCreateNestedOneWithoutOauthAuthorizationsInput;
+  client: Prisma.OAuthClientCreateNestedOneWithoutAuthorizationsInput;
+};
 
 export type OAuthAuthorizationUncheckedCreateInput = {
-  id?: string
-  userId: string
-  clientId: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-}
+  id?: string;
+  userId: string;
+  clientId: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+};
 
 export type OAuthAuthorizationUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-  user?: Prisma.UserUpdateOneRequiredWithoutOauthAuthorizationsNestedInput
-  client?: Prisma.OAuthClientUpdateOneRequiredWithoutAuthorizationsNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+  user?: Prisma.UserUpdateOneRequiredWithoutOauthAuthorizationsNestedInput;
+  client?: Prisma.OAuthClientUpdateOneRequiredWithoutAuthorizationsNestedInput;
+};
 
 export type OAuthAuthorizationUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  userId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+};
 
 export type OAuthAuthorizationCreateManyInput = {
-  id?: string
-  userId: string
-  clientId: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-}
+  id?: string;
+  userId: string;
+  clientId: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+};
 
 export type OAuthAuthorizationUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+};
 
 export type OAuthAuthorizationUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  userId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+};
 
 export type OAuthAuthorizationListRelationFilter = {
-  every?: Prisma.OAuthAuthorizationWhereInput
-  some?: Prisma.OAuthAuthorizationWhereInput
-  none?: Prisma.OAuthAuthorizationWhereInput
-}
+  every?: Prisma.OAuthAuthorizationWhereInput;
+  some?: Prisma.OAuthAuthorizationWhereInput;
+  none?: Prisma.OAuthAuthorizationWhereInput;
+};
 
 export type OAuthAuthorizationOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
+  _count?: Prisma.SortOrder;
+};
 
 export type OAuthAuthorizationUserIdClientIdCompoundUniqueInput = {
-  userId: string
-  clientId: string
-}
+  userId: string;
+  clientId: string;
+};
 
 export type OAuthAuthorizationCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  scopes?: Prisma.SortOrder
-  grantedAt?: Prisma.SortOrder
-  revokedAt?: Prisma.SortOrder
-}
+  id?: Prisma.SortOrder;
+  userId?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  scopes?: Prisma.SortOrder;
+  grantedAt?: Prisma.SortOrder;
+  revokedAt?: Prisma.SortOrder;
+};
 
 export type OAuthAuthorizationMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  grantedAt?: Prisma.SortOrder
-  revokedAt?: Prisma.SortOrder
-}
+  id?: Prisma.SortOrder;
+  userId?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  grantedAt?: Prisma.SortOrder;
+  revokedAt?: Prisma.SortOrder;
+};
 
 export type OAuthAuthorizationMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  grantedAt?: Prisma.SortOrder
-  revokedAt?: Prisma.SortOrder
-}
+  id?: Prisma.SortOrder;
+  userId?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  grantedAt?: Prisma.SortOrder;
+  revokedAt?: Prisma.SortOrder;
+};
 
 export type OAuthAuthorizationCreateNestedManyWithoutUserInput = {
   create?:
@@ -412,15 +361,13 @@ export type OAuthAuthorizationCreateNestedManyWithoutUserInput = {
         Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput
       >
     | Prisma.OAuthAuthorizationCreateWithoutUserInput[]
-    | Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput[]
+    | Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput[];
   connectOrCreate?:
     | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput
-    | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.OAuthAuthorizationCreateManyUserInputEnvelope
-  connect?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-}
+    | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput[];
+  createMany?: Prisma.OAuthAuthorizationCreateManyUserInputEnvelope;
+  connect?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
+};
 
 export type OAuthAuthorizationUncheckedCreateNestedManyWithoutUserInput = {
   create?:
@@ -429,15 +376,13 @@ export type OAuthAuthorizationUncheckedCreateNestedManyWithoutUserInput = {
         Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput
       >
     | Prisma.OAuthAuthorizationCreateWithoutUserInput[]
-    | Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput[]
+    | Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput[];
   connectOrCreate?:
     | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput
-    | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.OAuthAuthorizationCreateManyUserInputEnvelope
-  connect?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-}
+    | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput[];
+  createMany?: Prisma.OAuthAuthorizationCreateManyUserInputEnvelope;
+  connect?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
+};
 
 export type OAuthAuthorizationUpdateManyWithoutUserNestedInput = {
   create?:
@@ -446,36 +391,30 @@ export type OAuthAuthorizationUpdateManyWithoutUserNestedInput = {
         Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput
       >
     | Prisma.OAuthAuthorizationCreateWithoutUserInput[]
-    | Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput[]
+    | Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput[];
   connectOrCreate?:
     | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput
-    | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput[]
+    | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput[];
   upsert?:
     | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutUserInput
-    | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.OAuthAuthorizationCreateManyUserInputEnvelope
-  set?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
+    | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutUserInput[];
+  createMany?: Prisma.OAuthAuthorizationCreateManyUserInputEnvelope;
+  set?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
   disconnect?:
     | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-  delete?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-  connect?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
+    | Prisma.OAuthAuthorizationWhereUniqueInput[];
+  delete?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
+  connect?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
   update?:
     | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutUserInput
-    | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutUserInput[]
+    | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutUserInput[];
   updateMany?:
     | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutUserInput
-    | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutUserInput[]
+    | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutUserInput[];
   deleteMany?:
     | Prisma.OAuthAuthorizationScalarWhereInput
-    | Prisma.OAuthAuthorizationScalarWhereInput[]
-}
+    | Prisma.OAuthAuthorizationScalarWhereInput[];
+};
 
 export type OAuthAuthorizationUncheckedUpdateManyWithoutUserNestedInput = {
   create?:
@@ -484,36 +423,30 @@ export type OAuthAuthorizationUncheckedUpdateManyWithoutUserNestedInput = {
         Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput
       >
     | Prisma.OAuthAuthorizationCreateWithoutUserInput[]
-    | Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput[]
+    | Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput[];
   connectOrCreate?:
     | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput
-    | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput[]
+    | Prisma.OAuthAuthorizationCreateOrConnectWithoutUserInput[];
   upsert?:
     | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutUserInput
-    | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.OAuthAuthorizationCreateManyUserInputEnvelope
-  set?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
+    | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutUserInput[];
+  createMany?: Prisma.OAuthAuthorizationCreateManyUserInputEnvelope;
+  set?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
   disconnect?:
     | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-  delete?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-  connect?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
+    | Prisma.OAuthAuthorizationWhereUniqueInput[];
+  delete?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
+  connect?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
   update?:
     | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutUserInput
-    | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutUserInput[]
+    | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutUserInput[];
   updateMany?:
     | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutUserInput
-    | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutUserInput[]
+    | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutUserInput[];
   deleteMany?:
     | Prisma.OAuthAuthorizationScalarWhereInput
-    | Prisma.OAuthAuthorizationScalarWhereInput[]
-}
+    | Prisma.OAuthAuthorizationScalarWhereInput[];
+};
 
 export type OAuthAuthorizationCreateNestedManyWithoutClientInput = {
   create?:
@@ -522,15 +455,13 @@ export type OAuthAuthorizationCreateNestedManyWithoutClientInput = {
         Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput
       >
     | Prisma.OAuthAuthorizationCreateWithoutClientInput[]
-    | Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput[]
+    | Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput[];
   connectOrCreate?:
     | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput
-    | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.OAuthAuthorizationCreateManyClientInputEnvelope
-  connect?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-}
+    | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput[];
+  createMany?: Prisma.OAuthAuthorizationCreateManyClientInputEnvelope;
+  connect?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
+};
 
 export type OAuthAuthorizationUncheckedCreateNestedManyWithoutClientInput = {
   create?:
@@ -539,15 +470,13 @@ export type OAuthAuthorizationUncheckedCreateNestedManyWithoutClientInput = {
         Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput
       >
     | Prisma.OAuthAuthorizationCreateWithoutClientInput[]
-    | Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput[]
+    | Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput[];
   connectOrCreate?:
     | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput
-    | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.OAuthAuthorizationCreateManyClientInputEnvelope
-  connect?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-}
+    | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput[];
+  createMany?: Prisma.OAuthAuthorizationCreateManyClientInputEnvelope;
+  connect?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
+};
 
 export type OAuthAuthorizationUpdateManyWithoutClientNestedInput = {
   create?:
@@ -556,36 +485,30 @@ export type OAuthAuthorizationUpdateManyWithoutClientNestedInput = {
         Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput
       >
     | Prisma.OAuthAuthorizationCreateWithoutClientInput[]
-    | Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput[]
+    | Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput[];
   connectOrCreate?:
     | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput
-    | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput[]
+    | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput[];
   upsert?:
     | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutClientInput
-    | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.OAuthAuthorizationCreateManyClientInputEnvelope
-  set?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
+    | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutClientInput[];
+  createMany?: Prisma.OAuthAuthorizationCreateManyClientInputEnvelope;
+  set?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
   disconnect?:
     | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-  delete?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-  connect?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
+    | Prisma.OAuthAuthorizationWhereUniqueInput[];
+  delete?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
+  connect?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
   update?:
     | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutClientInput
-    | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutClientInput[]
+    | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutClientInput[];
   updateMany?:
     | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutClientInput
-    | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutClientInput[]
+    | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutClientInput[];
   deleteMany?:
     | Prisma.OAuthAuthorizationScalarWhereInput
-    | Prisma.OAuthAuthorizationScalarWhereInput[]
-}
+    | Prisma.OAuthAuthorizationScalarWhereInput[];
+};
 
 export type OAuthAuthorizationUncheckedUpdateManyWithoutClientNestedInput = {
   create?:
@@ -594,407 +517,356 @@ export type OAuthAuthorizationUncheckedUpdateManyWithoutClientNestedInput = {
         Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput
       >
     | Prisma.OAuthAuthorizationCreateWithoutClientInput[]
-    | Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput[]
+    | Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput[];
   connectOrCreate?:
     | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput
-    | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput[]
+    | Prisma.OAuthAuthorizationCreateOrConnectWithoutClientInput[];
   upsert?:
     | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutClientInput
-    | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.OAuthAuthorizationCreateManyClientInputEnvelope
-  set?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
+    | Prisma.OAuthAuthorizationUpsertWithWhereUniqueWithoutClientInput[];
+  createMany?: Prisma.OAuthAuthorizationCreateManyClientInputEnvelope;
+  set?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
   disconnect?:
     | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-  delete?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
-  connect?:
-    | Prisma.OAuthAuthorizationWhereUniqueInput
-    | Prisma.OAuthAuthorizationWhereUniqueInput[]
+    | Prisma.OAuthAuthorizationWhereUniqueInput[];
+  delete?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
+  connect?: Prisma.OAuthAuthorizationWhereUniqueInput | Prisma.OAuthAuthorizationWhereUniqueInput[];
   update?:
     | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutClientInput
-    | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutClientInput[]
+    | Prisma.OAuthAuthorizationUpdateWithWhereUniqueWithoutClientInput[];
   updateMany?:
     | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutClientInput
-    | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutClientInput[]
+    | Prisma.OAuthAuthorizationUpdateManyWithWhereWithoutClientInput[];
   deleteMany?:
     | Prisma.OAuthAuthorizationScalarWhereInput
-    | Prisma.OAuthAuthorizationScalarWhereInput[]
-}
+    | Prisma.OAuthAuthorizationScalarWhereInput[];
+};
 
 export type OAuthAuthorizationCreatescopesInput = {
-  set: string[]
-}
+  set: string[];
+};
 
 export type OAuthAuthorizationUpdatescopesInput = {
-  set?: string[]
-  push?: string | string[]
-}
+  set?: string[];
+  push?: string | string[];
+};
 
 export type OAuthAuthorizationCreateWithoutUserInput = {
-  id?: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-  client: Prisma.OAuthClientCreateNestedOneWithoutAuthorizationsInput
-}
+  id?: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+  client: Prisma.OAuthClientCreateNestedOneWithoutAuthorizationsInput;
+};
 
 export type OAuthAuthorizationUncheckedCreateWithoutUserInput = {
-  id?: string
-  clientId: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-}
+  id?: string;
+  clientId: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+};
 
 export type OAuthAuthorizationCreateOrConnectWithoutUserInput = {
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
   create: Prisma.XOR<
     Prisma.OAuthAuthorizationCreateWithoutUserInput,
     Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput
-  >
-}
+  >;
+};
 
 export type OAuthAuthorizationCreateManyUserInputEnvelope = {
   data:
     | Prisma.OAuthAuthorizationCreateManyUserInput
-    | Prisma.OAuthAuthorizationCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
+    | Prisma.OAuthAuthorizationCreateManyUserInput[];
+  skipDuplicates?: boolean;
+};
 
 export type OAuthAuthorizationUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
   update: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateWithoutUserInput,
     Prisma.OAuthAuthorizationUncheckedUpdateWithoutUserInput
-  >
+  >;
   create: Prisma.XOR<
     Prisma.OAuthAuthorizationCreateWithoutUserInput,
     Prisma.OAuthAuthorizationUncheckedCreateWithoutUserInput
-  >
-}
+  >;
+};
 
 export type OAuthAuthorizationUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
   data: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateWithoutUserInput,
     Prisma.OAuthAuthorizationUncheckedUpdateWithoutUserInput
-  >
-}
+  >;
+};
 
 export type OAuthAuthorizationUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.OAuthAuthorizationScalarWhereInput
+  where: Prisma.OAuthAuthorizationScalarWhereInput;
   data: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateManyMutationInput,
     Prisma.OAuthAuthorizationUncheckedUpdateManyWithoutUserInput
-  >
-}
+  >;
+};
 
 export type OAuthAuthorizationScalarWhereInput = {
-  AND?:
-    | Prisma.OAuthAuthorizationScalarWhereInput
-    | Prisma.OAuthAuthorizationScalarWhereInput[]
-  OR?: Prisma.OAuthAuthorizationScalarWhereInput[]
-  NOT?:
-    | Prisma.OAuthAuthorizationScalarWhereInput
-    | Prisma.OAuthAuthorizationScalarWhereInput[]
-  id?: Prisma.StringFilter<"OAuthAuthorization"> | string
-  userId?: Prisma.StringFilter<"OAuthAuthorization"> | string
-  clientId?: Prisma.StringFilter<"OAuthAuthorization"> | string
-  scopes?: Prisma.StringNullableListFilter<"OAuthAuthorization">
-  grantedAt?: Prisma.DateTimeFilter<"OAuthAuthorization"> | Date | string
-  revokedAt?:
-    | Prisma.DateTimeNullableFilter<"OAuthAuthorization">
-    | Date
-    | string
-    | null
-}
+  AND?: Prisma.OAuthAuthorizationScalarWhereInput | Prisma.OAuthAuthorizationScalarWhereInput[];
+  OR?: Prisma.OAuthAuthorizationScalarWhereInput[];
+  NOT?: Prisma.OAuthAuthorizationScalarWhereInput | Prisma.OAuthAuthorizationScalarWhereInput[];
+  id?: Prisma.StringFilter<"OAuthAuthorization"> | string;
+  userId?: Prisma.StringFilter<"OAuthAuthorization"> | string;
+  clientId?: Prisma.StringFilter<"OAuthAuthorization"> | string;
+  scopes?: Prisma.StringNullableListFilter<"OAuthAuthorization">;
+  grantedAt?: Prisma.DateTimeFilter<"OAuthAuthorization"> | Date | string;
+  revokedAt?: Prisma.DateTimeNullableFilter<"OAuthAuthorization"> | Date | string | null;
+};
 
 export type OAuthAuthorizationCreateWithoutClientInput = {
-  id?: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-  user: Prisma.UserCreateNestedOneWithoutOauthAuthorizationsInput
-}
+  id?: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+  user: Prisma.UserCreateNestedOneWithoutOauthAuthorizationsInput;
+};
 
 export type OAuthAuthorizationUncheckedCreateWithoutClientInput = {
-  id?: string
-  userId: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-}
+  id?: string;
+  userId: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+};
 
 export type OAuthAuthorizationCreateOrConnectWithoutClientInput = {
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
   create: Prisma.XOR<
     Prisma.OAuthAuthorizationCreateWithoutClientInput,
     Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput
-  >
-}
+  >;
+};
 
 export type OAuthAuthorizationCreateManyClientInputEnvelope = {
   data:
     | Prisma.OAuthAuthorizationCreateManyClientInput
-    | Prisma.OAuthAuthorizationCreateManyClientInput[]
-  skipDuplicates?: boolean
-}
+    | Prisma.OAuthAuthorizationCreateManyClientInput[];
+  skipDuplicates?: boolean;
+};
 
 export type OAuthAuthorizationUpsertWithWhereUniqueWithoutClientInput = {
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
   update: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateWithoutClientInput,
     Prisma.OAuthAuthorizationUncheckedUpdateWithoutClientInput
-  >
+  >;
   create: Prisma.XOR<
     Prisma.OAuthAuthorizationCreateWithoutClientInput,
     Prisma.OAuthAuthorizationUncheckedCreateWithoutClientInput
-  >
-}
+  >;
+};
 
 export type OAuthAuthorizationUpdateWithWhereUniqueWithoutClientInput = {
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
   data: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateWithoutClientInput,
     Prisma.OAuthAuthorizationUncheckedUpdateWithoutClientInput
-  >
-}
+  >;
+};
 
 export type OAuthAuthorizationUpdateManyWithWhereWithoutClientInput = {
-  where: Prisma.OAuthAuthorizationScalarWhereInput
+  where: Prisma.OAuthAuthorizationScalarWhereInput;
   data: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateManyMutationInput,
     Prisma.OAuthAuthorizationUncheckedUpdateManyWithoutClientInput
-  >
-}
+  >;
+};
 
 export type OAuthAuthorizationCreateManyUserInput = {
-  id?: string
-  clientId: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-}
+  id?: string;
+  clientId: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+};
 
 export type OAuthAuthorizationUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-  client?: Prisma.OAuthClientUpdateOneRequiredWithoutAuthorizationsNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+  client?: Prisma.OAuthClientUpdateOneRequiredWithoutAuthorizationsNestedInput;
+};
 
 export type OAuthAuthorizationUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+};
 
 export type OAuthAuthorizationUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+};
 
 export type OAuthAuthorizationCreateManyClientInput = {
-  id?: string
-  userId: string
-  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[]
-  grantedAt?: Date | string
-  revokedAt?: Date | string | null
-}
+  id?: string;
+  userId: string;
+  scopes?: Prisma.OAuthAuthorizationCreatescopesInput | string[];
+  grantedAt?: Date | string;
+  revokedAt?: Date | string | null;
+};
 
 export type OAuthAuthorizationUpdateWithoutClientInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-  user?: Prisma.UserUpdateOneRequiredWithoutOauthAuthorizationsNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+  user?: Prisma.UserUpdateOneRequiredWithoutOauthAuthorizationsNestedInput;
+};
 
 export type OAuthAuthorizationUncheckedUpdateWithoutClientInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  userId?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+};
 
 export type OAuthAuthorizationUncheckedUpdateManyWithoutClientInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[]
-  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  revokedAt?:
-    | Prisma.NullableDateTimeFieldUpdateOperationsInput
-    | Date
-    | string
-    | null
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  userId?: Prisma.StringFieldUpdateOperationsInput | string;
+  scopes?: Prisma.OAuthAuthorizationUpdatescopesInput | string[];
+  grantedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+};
 
 export type OAuthAuthorizationSelect<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
-    id?: boolean
-    userId?: boolean
-    clientId?: boolean
-    scopes?: boolean
-    grantedAt?: boolean
-    revokedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-    client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>
+    id?: boolean;
+    userId?: boolean;
+    clientId?: boolean;
+    scopes?: boolean;
+    grantedAt?: boolean;
+    revokedAt?: boolean;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+    client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["oAuthAuthorization"]
->
+>;
 
 export type OAuthAuthorizationSelectCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
-    id?: boolean
-    userId?: boolean
-    clientId?: boolean
-    scopes?: boolean
-    grantedAt?: boolean
-    revokedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-    client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>
+    id?: boolean;
+    userId?: boolean;
+    clientId?: boolean;
+    scopes?: boolean;
+    grantedAt?: boolean;
+    revokedAt?: boolean;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+    client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["oAuthAuthorization"]
->
+>;
 
 export type OAuthAuthorizationSelectUpdateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
-    id?: boolean
-    userId?: boolean
-    clientId?: boolean
-    scopes?: boolean
-    grantedAt?: boolean
-    revokedAt?: boolean
-    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-    client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>
+    id?: boolean;
+    userId?: boolean;
+    clientId?: boolean;
+    scopes?: boolean;
+    grantedAt?: boolean;
+    revokedAt?: boolean;
+    user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+    client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["oAuthAuthorization"]
->
+>;
 
 export type OAuthAuthorizationSelectScalar = {
-  id?: boolean
-  userId?: boolean
-  clientId?: boolean
-  scopes?: boolean
-  grantedAt?: boolean
-  revokedAt?: boolean
-}
+  id?: boolean;
+  userId?: boolean;
+  clientId?: boolean;
+  scopes?: boolean;
+  grantedAt?: boolean;
+  revokedAt?: boolean;
+};
 
 export type OAuthAuthorizationOmit<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
   "id" | "userId" | "clientId" | "scopes" | "grantedAt" | "revokedAt",
   ExtArgs["result"]["oAuthAuthorization"]
->
+>;
 export type OAuthAuthorizationInclude<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>
-}
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+  client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>;
+};
 export type OAuthAuthorizationIncludeCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>
-}
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+  client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>;
+};
 export type OAuthAuthorizationIncludeUpdateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>
-}
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+  client?: boolean | Prisma.OAuthClientDefaultArgs<ExtArgs>;
+};
 
 export type $OAuthAuthorizationPayload<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  name: "OAuthAuthorization"
+  name: "OAuthAuthorization";
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
-    client: Prisma.$OAuthClientPayload<ExtArgs>
-  }
+    user: Prisma.$UserPayload<ExtArgs>;
+    client: Prisma.$OAuthClientPayload<ExtArgs>;
+  };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
-      id: string
-      userId: string
-      clientId: string
-      scopes: string[]
-      grantedAt: Date
-      revokedAt: Date | null
+      id: string;
+      userId: string;
+      clientId: string;
+      scopes: string[];
+      grantedAt: Date;
+      revokedAt: Date | null;
     },
     ExtArgs["result"]["oAuthAuthorization"]
-  >
-  composites: {}
-}
+  >;
+  composites: {};
+};
 
 export type OAuthAuthorizationGetPayload<
   S extends boolean | null | undefined | OAuthAuthorizationDefaultArgs,
-> = runtime.Types.Result.GetResult<Prisma.$OAuthAuthorizationPayload, S>
+> = runtime.Types.Result.GetResult<Prisma.$OAuthAuthorizationPayload, S>;
 
 export type OAuthAuthorizationCountArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = Omit<
-  OAuthAuthorizationFindManyArgs,
-  "select" | "include" | "distinct" | "omit"
-> & {
-  select?: OAuthAuthorizationCountAggregateInputType | true
-}
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = Omit<OAuthAuthorizationFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  select?: OAuthAuthorizationCountAggregateInputType | true;
+};
 
 export interface OAuthAuthorizationDelegate<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
   [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>["model"]["OAuthAuthorization"]
-    meta: { name: "OAuthAuthorization" }
-  }
+    types: Prisma.TypeMap<ExtArgs>["model"]["OAuthAuthorization"];
+    meta: { name: "OAuthAuthorization" };
+  };
   /**
    * Find zero or one OAuthAuthorization that matches the filter.
    * @param {OAuthAuthorizationFindUniqueArgs} args - Arguments to find a OAuthAuthorization
@@ -1007,7 +879,7 @@ export interface OAuthAuthorizationDelegate<
    * })
    */
   findUnique<T extends OAuthAuthorizationFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, OAuthAuthorizationFindUniqueArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthAuthorizationFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthAuthorizationClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1018,7 +890,7 @@ export interface OAuthAuthorizationDelegate<
     null,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Find one OAuthAuthorization that matches the filter or throw an error with `error.code='P2025'`
@@ -1033,10 +905,7 @@ export interface OAuthAuthorizationDelegate<
    * })
    */
   findUniqueOrThrow<T extends OAuthAuthorizationFindUniqueOrThrowArgs>(
-    args: Prisma.SelectSubset<
-      T,
-      OAuthAuthorizationFindUniqueOrThrowArgs<ExtArgs>
-    >
+    args: Prisma.SelectSubset<T, OAuthAuthorizationFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthAuthorizationClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1047,7 +916,7 @@ export interface OAuthAuthorizationDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Find the first OAuthAuthorization that matches the filter.
@@ -1063,7 +932,7 @@ export interface OAuthAuthorizationDelegate<
    * })
    */
   findFirst<T extends OAuthAuthorizationFindFirstArgs>(
-    args?: Prisma.SelectSubset<T, OAuthAuthorizationFindFirstArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, OAuthAuthorizationFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthAuthorizationClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1074,7 +943,7 @@ export interface OAuthAuthorizationDelegate<
     null,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Find the first OAuthAuthorization that matches the filter or
@@ -1091,10 +960,7 @@ export interface OAuthAuthorizationDelegate<
    * })
    */
   findFirstOrThrow<T extends OAuthAuthorizationFindFirstOrThrowArgs>(
-    args?: Prisma.SelectSubset<
-      T,
-      OAuthAuthorizationFindFirstOrThrowArgs<ExtArgs>
-    >
+    args?: Prisma.SelectSubset<T, OAuthAuthorizationFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthAuthorizationClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1105,7 +971,7 @@ export interface OAuthAuthorizationDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Find zero or more OAuthAuthorizations that matches the filter.
@@ -1124,7 +990,7 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   findMany<T extends OAuthAuthorizationFindManyArgs>(
-    args?: Prisma.SelectSubset<T, OAuthAuthorizationFindManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, OAuthAuthorizationFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1132,7 +998,7 @@ export interface OAuthAuthorizationDelegate<
       "findMany",
       GlobalOmitOptions
     >
-  >
+  >;
 
   /**
    * Create a OAuthAuthorization.
@@ -1147,7 +1013,7 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   create<T extends OAuthAuthorizationCreateArgs>(
-    args: Prisma.SelectSubset<T, OAuthAuthorizationCreateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthAuthorizationCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthAuthorizationClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1158,7 +1024,7 @@ export interface OAuthAuthorizationDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Create many OAuthAuthorizations.
@@ -1173,8 +1039,8 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   createMany<T extends OAuthAuthorizationCreateManyArgs>(
-    args?: Prisma.SelectSubset<T, OAuthAuthorizationCreateManyArgs<ExtArgs>>
-  ): Prisma.PrismaPromise<Prisma.BatchPayload>
+    args?: Prisma.SelectSubset<T, OAuthAuthorizationCreateManyArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<Prisma.BatchPayload>;
 
   /**
    * Create many OAuthAuthorizations and returns the data saved in the database.
@@ -1199,10 +1065,7 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   createManyAndReturn<T extends OAuthAuthorizationCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<
-      T,
-      OAuthAuthorizationCreateManyAndReturnArgs<ExtArgs>
-    >
+    args?: Prisma.SelectSubset<T, OAuthAuthorizationCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1210,7 +1073,7 @@ export interface OAuthAuthorizationDelegate<
       "createManyAndReturn",
       GlobalOmitOptions
     >
-  >
+  >;
 
   /**
    * Delete a OAuthAuthorization.
@@ -1225,7 +1088,7 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   delete<T extends OAuthAuthorizationDeleteArgs>(
-    args: Prisma.SelectSubset<T, OAuthAuthorizationDeleteArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthAuthorizationDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthAuthorizationClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1236,7 +1099,7 @@ export interface OAuthAuthorizationDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Update one OAuthAuthorization.
@@ -1254,7 +1117,7 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   update<T extends OAuthAuthorizationUpdateArgs>(
-    args: Prisma.SelectSubset<T, OAuthAuthorizationUpdateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthAuthorizationUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthAuthorizationClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1265,7 +1128,7 @@ export interface OAuthAuthorizationDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Delete zero or more OAuthAuthorizations.
@@ -1280,8 +1143,8 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   deleteMany<T extends OAuthAuthorizationDeleteManyArgs>(
-    args?: Prisma.SelectSubset<T, OAuthAuthorizationDeleteManyArgs<ExtArgs>>
-  ): Prisma.PrismaPromise<Prisma.BatchPayload>
+    args?: Prisma.SelectSubset<T, OAuthAuthorizationDeleteManyArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<Prisma.BatchPayload>;
 
   /**
    * Update zero or more OAuthAuthorizations.
@@ -1301,8 +1164,8 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   updateMany<T extends OAuthAuthorizationUpdateManyArgs>(
-    args: Prisma.SelectSubset<T, OAuthAuthorizationUpdateManyArgs<ExtArgs>>
-  ): Prisma.PrismaPromise<Prisma.BatchPayload>
+    args: Prisma.SelectSubset<T, OAuthAuthorizationUpdateManyArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<Prisma.BatchPayload>;
 
   /**
    * Update zero or more OAuthAuthorizations and returns the data updated in the database.
@@ -1333,10 +1196,7 @@ export interface OAuthAuthorizationDelegate<
    *
    */
   updateManyAndReturn<T extends OAuthAuthorizationUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<
-      T,
-      OAuthAuthorizationUpdateManyAndReturnArgs<ExtArgs>
-    >
+    args: Prisma.SelectSubset<T, OAuthAuthorizationUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1344,7 +1204,7 @@ export interface OAuthAuthorizationDelegate<
       "updateManyAndReturn",
       GlobalOmitOptions
     >
-  >
+  >;
 
   /**
    * Create or update one OAuthAuthorization.
@@ -1364,7 +1224,7 @@ export interface OAuthAuthorizationDelegate<
    * })
    */
   upsert<T extends OAuthAuthorizationUpsertArgs>(
-    args: Prisma.SelectSubset<T, OAuthAuthorizationUpsertArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthAuthorizationUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthAuthorizationClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -1375,7 +1235,7 @@ export interface OAuthAuthorizationDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Count the number of OAuthAuthorizations.
@@ -1391,17 +1251,14 @@ export interface OAuthAuthorizationDelegate<
    * })
    **/
   count<T extends OAuthAuthorizationCountArgs>(
-    args?: Prisma.Subset<T, OAuthAuthorizationCountArgs>
+    args?: Prisma.Subset<T, OAuthAuthorizationCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<"select", any>
       ? T["select"] extends true
         ? number
-        : Prisma.GetScalarType<
-            T["select"],
-            OAuthAuthorizationCountAggregateOutputType
-          >
+        : Prisma.GetScalarType<T["select"], OAuthAuthorizationCountAggregateOutputType>
       : number
-  >
+  >;
 
   /**
    * Allows you to perform aggregations operations on a OAuthAuthorization.
@@ -1428,8 +1285,8 @@ export interface OAuthAuthorizationDelegate<
    * })
    **/
   aggregate<T extends OAuthAuthorizationAggregateArgs>(
-    args: Prisma.Subset<T, OAuthAuthorizationAggregateArgs>
-  ): Prisma.PrismaPromise<GetOAuthAuthorizationAggregateType<T>>
+    args: Prisma.Subset<T, OAuthAuthorizationAggregateArgs>,
+  ): Prisma.PrismaPromise<GetOAuthAuthorizationAggregateType<T>>;
 
   /**
    * Group by OAuthAuthorization.
@@ -1474,12 +1331,7 @@ export interface OAuthAuthorizationDelegate<
               ? never
               : P extends string
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [
-                    Error,
-                    "Field ",
-                    P,
-                    ` in "having" needs to be provided in "by"`,
-                  ]
+                : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
           }[HavingFields]
         : "take" extends Prisma.Keys<T>
           ? "orderBy" extends Prisma.Keys<T>
@@ -1488,7 +1340,7 @@ export interface OAuthAuthorizationDelegate<
               : {
                   [P in OrderFields]: P extends ByFields
                     ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields]
             : 'Error: If you provide "take", you also need to provide "orderBy"'
           : "skip" extends Prisma.Keys<T>
@@ -1498,7 +1350,7 @@ export interface OAuthAuthorizationDelegate<
                 : {
                     [P in OrderFields]: P extends ByFields
                       ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields]
               : 'Error: If you provide "skip", you also need to provide "orderBy"'
             : ByValid extends Prisma.True
@@ -1506,22 +1358,17 @@ export interface OAuthAuthorizationDelegate<
               : {
                   [P in OrderFields]: P extends ByFields
                     ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<
-      T,
-      OAuthAuthorizationGroupByArgs,
-      OrderByArg
-    > &
-      InputErrors
+    args: Prisma.SubsetIntersection<T, OAuthAuthorizationGroupByArgs, OrderByArg> & InputErrors,
   ): {} extends InputErrors
     ? GetOAuthAuthorizationGroupByPayload<T>
-    : Prisma.PrismaPromise<InputErrors>
+    : Prisma.PrismaPromise<InputErrors>;
   /**
    * Fields of the OAuthAuthorization model
    */
-  readonly fields: OAuthAuthorizationFieldRefs
+  readonly fields: OAuthAuthorizationFieldRefs;
 }
 
 /**
@@ -1533,13 +1380,12 @@ export interface OAuthAuthorizationDelegate<
 export interface Prisma__OAuthAuthorizationClient<
   T,
   Null = never,
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
-  readonly [Symbol.toStringTag]: "PrismaPromise"
+  readonly [Symbol.toStringTag]: "PrismaPromise";
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__UserClient<
     | runtime.Types.Result.GetResult<
         Prisma.$UserPayload<ExtArgs>,
@@ -1551,9 +1397,9 @@ export interface Prisma__OAuthAuthorizationClient<
     Null,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
   client<T extends Prisma.OAuthClientDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.OAuthClientDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.OAuthClientDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     | runtime.Types.Result.GetResult<
         Prisma.$OAuthClientPayload<ExtArgs>,
@@ -1565,7 +1411,7 @@ export interface Prisma__OAuthAuthorizationClient<
     Null,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1573,47 +1419,36 @@ export interface Prisma__OAuthAuthorizationClient<
    * @returns A Promise for the completion of which ever callback is executed.
    */
   then<TResult1 = T, TResult2 = never>(
-    onfulfilled?:
-      | ((value: T) => TResult1 | PromiseLike<TResult1>)
-      | undefined
-      | null,
-    onrejected?:
-      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-      | undefined
-      | null
-  ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>
+    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
+  ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
   /**
    * Attaches a callback for only the rejection of the Promise.
    * @param onrejected The callback to execute when the Promise is rejected.
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?:
-      | ((reason: any) => TResult | PromiseLike<TResult>)
-      | undefined
-      | null
-  ): runtime.Types.Utils.JsPromise<T | TResult>
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
+  ): runtime.Types.Utils.JsPromise<T | TResult>;
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
    * resolved value cannot be modified from the callback.
    * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
    * @returns A Promise for the completion of the callback.
    */
-  finally(
-    onfinally?: (() => void) | undefined | null
-  ): runtime.Types.Utils.JsPromise<T>
+  finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
 }
 
 /**
  * Fields of the OAuthAuthorization model
  */
 export interface OAuthAuthorizationFieldRefs {
-  readonly id: Prisma.FieldRef<"OAuthAuthorization", "String">
-  readonly userId: Prisma.FieldRef<"OAuthAuthorization", "String">
-  readonly clientId: Prisma.FieldRef<"OAuthAuthorization", "String">
-  readonly scopes: Prisma.FieldRef<"OAuthAuthorization", "String[]">
-  readonly grantedAt: Prisma.FieldRef<"OAuthAuthorization", "DateTime">
-  readonly revokedAt: Prisma.FieldRef<"OAuthAuthorization", "DateTime">
+  readonly id: Prisma.FieldRef<"OAuthAuthorization", "String">;
+  readonly userId: Prisma.FieldRef<"OAuthAuthorization", "String">;
+  readonly clientId: Prisma.FieldRef<"OAuthAuthorization", "String">;
+  readonly scopes: Prisma.FieldRef<"OAuthAuthorization", "String[]">;
+  readonly grantedAt: Prisma.FieldRef<"OAuthAuthorization", "DateTime">;
+  readonly revokedAt: Prisma.FieldRef<"OAuthAuthorization", "DateTime">;
 }
 
 // Custom InputTypes
@@ -1621,75 +1456,72 @@ export interface OAuthAuthorizationFieldRefs {
  * OAuthAuthorization findUnique
  */
 export type OAuthAuthorizationFindUniqueArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthAuthorization to fetch.
    */
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
-}
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
+};
 
 /**
  * OAuthAuthorization findUniqueOrThrow
  */
 export type OAuthAuthorizationFindUniqueOrThrowArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthAuthorization to fetch.
    */
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
-}
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
+};
 
 /**
  * OAuthAuthorization findFirst
  */
 export type OAuthAuthorizationFindFirstArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthAuthorization to fetch.
    */
-  where?: Prisma.OAuthAuthorizationWhereInput
+  where?: Prisma.OAuthAuthorizationWhereInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    *
@@ -1697,58 +1529,55 @@ export type OAuthAuthorizationFindFirstArgs<
    */
   orderBy?:
     | Prisma.OAuthAuthorizationOrderByWithRelationInput
-    | Prisma.OAuthAuthorizationOrderByWithRelationInput[]
+    | Prisma.OAuthAuthorizationOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
    * Sets the position for searching for OAuthAuthorizations.
    */
-  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput
+  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Take `±n` OAuthAuthorizations from the position of the cursor.
    */
-  take?: number
+  take?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Skip the first `n` OAuthAuthorizations.
    */
-  skip?: number
+  skip?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    *
    * Filter by unique combinations of OAuthAuthorizations.
    */
-  distinct?:
-    | Prisma.OAuthAuthorizationScalarFieldEnum
-    | Prisma.OAuthAuthorizationScalarFieldEnum[]
-}
+  distinct?: Prisma.OAuthAuthorizationScalarFieldEnum | Prisma.OAuthAuthorizationScalarFieldEnum[];
+};
 
 /**
  * OAuthAuthorization findFirstOrThrow
  */
 export type OAuthAuthorizationFindFirstOrThrowArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthAuthorization to fetch.
    */
-  where?: Prisma.OAuthAuthorizationWhereInput
+  where?: Prisma.OAuthAuthorizationWhereInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    *
@@ -1756,58 +1585,55 @@ export type OAuthAuthorizationFindFirstOrThrowArgs<
    */
   orderBy?:
     | Prisma.OAuthAuthorizationOrderByWithRelationInput
-    | Prisma.OAuthAuthorizationOrderByWithRelationInput[]
+    | Prisma.OAuthAuthorizationOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
    * Sets the position for searching for OAuthAuthorizations.
    */
-  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput
+  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Take `±n` OAuthAuthorizations from the position of the cursor.
    */
-  take?: number
+  take?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Skip the first `n` OAuthAuthorizations.
    */
-  skip?: number
+  skip?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    *
    * Filter by unique combinations of OAuthAuthorizations.
    */
-  distinct?:
-    | Prisma.OAuthAuthorizationScalarFieldEnum
-    | Prisma.OAuthAuthorizationScalarFieldEnum[]
-}
+  distinct?: Prisma.OAuthAuthorizationScalarFieldEnum | Prisma.OAuthAuthorizationScalarFieldEnum[];
+};
 
 /**
  * OAuthAuthorization findMany
  */
 export type OAuthAuthorizationFindManyArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthAuthorizations to fetch.
    */
-  where?: Prisma.OAuthAuthorizationWhereInput
+  where?: Prisma.OAuthAuthorizationWhereInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    *
@@ -1815,140 +1641,129 @@ export type OAuthAuthorizationFindManyArgs<
    */
   orderBy?:
     | Prisma.OAuthAuthorizationOrderByWithRelationInput
-    | Prisma.OAuthAuthorizationOrderByWithRelationInput[]
+    | Prisma.OAuthAuthorizationOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
    * Sets the position for listing OAuthAuthorizations.
    */
-  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput
+  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Take `±n` OAuthAuthorizations from the position of the cursor.
    */
-  take?: number
+  take?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Skip the first `n` OAuthAuthorizations.
    */
-  skip?: number
-  distinct?:
-    | Prisma.OAuthAuthorizationScalarFieldEnum
-    | Prisma.OAuthAuthorizationScalarFieldEnum[]
-}
+  skip?: number;
+  distinct?: Prisma.OAuthAuthorizationScalarFieldEnum | Prisma.OAuthAuthorizationScalarFieldEnum[];
+};
 
 /**
  * OAuthAuthorization create
  */
 export type OAuthAuthorizationCreateArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * The data needed to create a OAuthAuthorization.
    */
   data: Prisma.XOR<
     Prisma.OAuthAuthorizationCreateInput,
     Prisma.OAuthAuthorizationUncheckedCreateInput
-  >
-}
+  >;
+};
 
 /**
  * OAuthAuthorization createMany
  */
 export type OAuthAuthorizationCreateManyArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to create many OAuthAuthorizations.
    */
-  data:
-    | Prisma.OAuthAuthorizationCreateManyInput
-    | Prisma.OAuthAuthorizationCreateManyInput[]
-  skipDuplicates?: boolean
-}
+  data: Prisma.OAuthAuthorizationCreateManyInput | Prisma.OAuthAuthorizationCreateManyInput[];
+  skipDuplicates?: boolean;
+};
 
 /**
  * OAuthAuthorization createManyAndReturn
  */
 export type OAuthAuthorizationCreateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelectCreateManyAndReturn<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelectCreateManyAndReturn<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * The data used to create many OAuthAuthorizations.
    */
-  data:
-    | Prisma.OAuthAuthorizationCreateManyInput
-    | Prisma.OAuthAuthorizationCreateManyInput[]
-  skipDuplicates?: boolean
+  data: Prisma.OAuthAuthorizationCreateManyInput | Prisma.OAuthAuthorizationCreateManyInput[];
+  skipDuplicates?: boolean;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationIncludeCreateManyAndReturn<ExtArgs> | null
-}
+  include?: Prisma.OAuthAuthorizationIncludeCreateManyAndReturn<ExtArgs> | null;
+};
 
 /**
  * OAuthAuthorization update
  */
 export type OAuthAuthorizationUpdateArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * The data needed to update a OAuthAuthorization.
    */
   data: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateInput,
     Prisma.OAuthAuthorizationUncheckedUpdateInput
-  >
+  >;
   /**
    * Choose, which OAuthAuthorization to update.
    */
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
-}
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
+};
 
 /**
  * OAuthAuthorization updateMany
  */
 export type OAuthAuthorizationUpdateManyArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to update OAuthAuthorizations.
@@ -1956,151 +1771,146 @@ export type OAuthAuthorizationUpdateManyArgs<
   data: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateManyMutationInput,
     Prisma.OAuthAuthorizationUncheckedUpdateManyInput
-  >
+  >;
   /**
    * Filter which OAuthAuthorizations to update
    */
-  where?: Prisma.OAuthAuthorizationWhereInput
+  where?: Prisma.OAuthAuthorizationWhereInput;
   /**
    * Limit how many OAuthAuthorizations to update.
    */
-  limit?: number
-}
+  limit?: number;
+};
 
 /**
  * OAuthAuthorization updateManyAndReturn
  */
 export type OAuthAuthorizationUpdateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelectUpdateManyAndReturn<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelectUpdateManyAndReturn<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * The data used to update OAuthAuthorizations.
    */
   data: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateManyMutationInput,
     Prisma.OAuthAuthorizationUncheckedUpdateManyInput
-  >
+  >;
   /**
    * Filter which OAuthAuthorizations to update
    */
-  where?: Prisma.OAuthAuthorizationWhereInput
+  where?: Prisma.OAuthAuthorizationWhereInput;
   /**
    * Limit how many OAuthAuthorizations to update.
    */
-  limit?: number
+  limit?: number;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationIncludeUpdateManyAndReturn<ExtArgs> | null
-}
+  include?: Prisma.OAuthAuthorizationIncludeUpdateManyAndReturn<ExtArgs> | null;
+};
 
 /**
  * OAuthAuthorization upsert
  */
 export type OAuthAuthorizationUpsertArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * The filter to search for the OAuthAuthorization to update in case it exists.
    */
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
   /**
    * In case the OAuthAuthorization found by the `where` argument doesn't exist, create a new OAuthAuthorization with this data.
    */
   create: Prisma.XOR<
     Prisma.OAuthAuthorizationCreateInput,
     Prisma.OAuthAuthorizationUncheckedCreateInput
-  >
+  >;
   /**
    * In case the OAuthAuthorization was found with the provided `where` argument, update it with this data.
    */
   update: Prisma.XOR<
     Prisma.OAuthAuthorizationUpdateInput,
     Prisma.OAuthAuthorizationUncheckedUpdateInput
-  >
-}
+  >;
+};
 
 /**
  * OAuthAuthorization delete
  */
 export type OAuthAuthorizationDeleteArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
   /**
    * Filter which OAuthAuthorization to delete.
    */
-  where: Prisma.OAuthAuthorizationWhereUniqueInput
-}
+  where: Prisma.OAuthAuthorizationWhereUniqueInput;
+};
 
 /**
  * OAuthAuthorization deleteMany
  */
 export type OAuthAuthorizationDeleteManyArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which OAuthAuthorizations to delete
    */
-  where?: Prisma.OAuthAuthorizationWhereInput
+  where?: Prisma.OAuthAuthorizationWhereInput;
   /**
    * Limit how many OAuthAuthorizations to delete.
    */
-  limit?: number
-}
+  limit?: number;
+};
 
 /**
  * OAuthAuthorization without action
  */
 export type OAuthAuthorizationDefaultArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
-}
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
+};

@@ -4,13 +4,13 @@
  * @nebutra/marketing - React Hooks
  */
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { AttributionData } from "../types";
 import {
-  initAttribution,
   getAttribution,
-  trackProductHuntVisit,
+  initAttribution,
   trackMarketingEvent,
+  trackProductHuntVisit,
 } from "../utils";
 
 // ============================================
@@ -45,8 +45,7 @@ export function useAttribution() {
     isInitialized,
     refresh,
     isFromProductHunt:
-      attribution?.source === "product-hunt" ||
-      attribution?.source === "producthunt.com",
+      attribution?.source === "product-hunt" || attribution?.source === "producthunt.com",
     source: attribution?.source,
     medium: attribution?.medium,
     campaign: attribution?.campaign,
@@ -87,9 +86,7 @@ const BANNER_DISMISSED_KEY = "nebutra_mkt_banner_dismissed";
  * Hook to manage launch banner dismissal state
  */
 export function useLaunchBannerState(bannerId?: string): LaunchBannerState {
-  const storageKey = bannerId
-    ? `${BANNER_DISMISSED_KEY}_${bannerId}`
-    : BANNER_DISMISSED_KEY;
+  const storageKey = bannerId ? `${BANNER_DISMISSED_KEY}_${bannerId}` : BANNER_DISMISSED_KEY;
 
   const [isDismissed, setIsDismissed] = useState(false);
 
@@ -180,9 +177,7 @@ export function useCountdown(targetDate: string | Date): CountdownState {
       const totalSeconds = Math.floor(difference / 1000);
       setCountdown({
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor(
-          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        ),
+        hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((difference % (1000 * 60)) / 1000),
         isExpired: false,

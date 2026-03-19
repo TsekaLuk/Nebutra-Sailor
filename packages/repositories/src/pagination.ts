@@ -9,9 +9,10 @@ export interface CursorPaginationResult<T> {
   hasNextPage: boolean;
 }
 
-export function normalizePaginationParams(
-  params: CursorPaginationParams,
-): { cursor: string | undefined; take: number } {
+export function normalizePaginationParams(params: CursorPaginationParams): {
+  cursor: string | undefined;
+  take: number;
+} {
   return {
     cursor: params.cursor,
     take: Math.min(params.limit ?? 20, 100),

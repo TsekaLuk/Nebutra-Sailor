@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Label, Input } from "@nebutra/ui/primitives"
+import { Input, Label } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function InputErrorDemo() {
   return (
@@ -19,5 +19,5 @@ export function InputErrorDemo() {
         Please enter a valid email address.
       </div>
     </div>
-  )
+  );
 }

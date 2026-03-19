@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
 import { motion, type Variants } from "framer-motion";
 import { CheckCircle2, PlayCircle } from "lucide-react";
-import { cn } from "../utils/cn";
+import * as React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "../primitives/dialog";
+import { cn } from "../utils/cn";
 
 // =============================================================================
 // Types
@@ -125,11 +125,7 @@ export function OnboardingChecklist({
           <p className="mt-2 text-muted-foreground">{description}</p>
           <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
             {items.map((item) => (
-              <motion.li
-                key={item.id}
-                variants={itemVariants}
-                className="flex flex-col"
-              >
+              <motion.li key={item.id} variants={itemVariants} className="flex flex-col">
                 <div className="flex items-start">
                   <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <span className="ml-3 text-sm font-medium">{item.text}</span>

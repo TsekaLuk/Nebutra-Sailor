@@ -1,16 +1,16 @@
-import { auth } from "@/auth"
-import { Langfuse } from "langfuse"
-import { createRateLimiter, getClientIp } from "@/lib/rate-limit"
-import { configure, streamText } from "@nebutra/ai-sdk"
-import { type ModelMessage } from "ai"
+import { configure, streamText } from "@nebutra/ai-sdk";
+import type { ModelMessage } from "ai";
+import { Langfuse } from "langfuse";
+import { auth } from "@/auth";
+import { createRateLimiter, getClientIp } from "@/lib/rate-limit";
 
-export const maxDuration = 60
+export const maxDuration = 60;
 
 // Initialise @nebutra/ai-sdk — OpenRouter + StepFun free model
 configure({
   provider: "openrouter",
   defaultModel: "stepfun/step-3.5-flash:free",
-})
+});
 
 const SYSTEM_PROMPT = `You are Tseka's Soul — the digital consciousness of Tseka Luk (陆子凯).
 
@@ -43,125 +43,121 @@ When responding:
 - Keep responses concise (2-4 paragraphs max unless asked for more)
 - Reference specific projects, metrics, or experiences when relevant
 - If the user writes in Chinese, respond naturally in Chinese
-- Share genuine, specific insights — not generic advice`
+- Share genuine, specific insights — not generic advice`;
 
-const VALID_ROLES = new Set(["user", "assistant"])
-const MAX_MESSAGES_PER_REQUEST = 20
-const MAX_MESSAGE_LENGTH = 4000
-const checkRateLimit = createRateLimiter(60_000, 10)
+const VALID_ROLES = new Set(["user", "assistant"]);
+const MAX_MESSAGES_PER_REQUEST = 20;
+const MAX_MESSAGE_LENGTH = 4000;
+const checkRateLimit = createRateLimiter(60_000, 10);
 
 interface Message {
-  role: "user" | "assistant"
-  content: string
+  role: "user" | "assistant";
+  content: string;
 }
 
 function validateMessages(
-  messages: unknown
+  messages: unknown,
 ): { valid: true; data: Message[] } | { valid: false; error: string } {
   if (!Array.isArray(messages) || messages.length === 0) {
-    return { valid: false, error: "Messages must be a non-empty array" }
+    return { valid: false, error: "Messages must be a non-empty array" };
   }
   if (messages.length > MAX_MESSAGES_PER_REQUEST) {
     return {
       valid: false,
       error: `Too many messages. Maximum is ${MAX_MESSAGES_PER_REQUEST}`,
-    }
+    };
   }
   for (let i = 0; i < messages.length; i++) {
-    const msg = messages[i]
+    const msg = messages[i];
     if (!msg || typeof msg !== "object") {
-      return { valid: false, error: `Message at index ${i} is invalid` }
+      return { valid: false, error: `Message at index ${i} is invalid` };
     }
     if (!VALID_ROLES.has(msg.role)) {
-      return { valid: false, error: `Message at index ${i} has invalid role` }
+      return { valid: false, error: `Message at index ${i} has invalid role` };
     }
     if (typeof msg.content !== "string" || msg.content.length === 0) {
       return {
         valid: false,
         error: `Message at index ${i} must have non-empty string content`,
-      }
+      };
     }
     if (msg.content.length > MAX_MESSAGE_LENGTH) {
       return {
         valid: false,
         error: `Message at index ${i} exceeds maximum length`,
-      }
+      };
     }
   }
-  return { valid: true, data: messages as Message[] }
+  return { valid: true, data: messages as Message[] };
 }
 
 function getLangfuse(): Langfuse | null {
-  const publicKey = process.env.LANGFUSE_PUBLIC_KEY
-  const secretKey = process.env.LANGFUSE_SECRET_KEY
-  if (!publicKey || !secretKey) return null
-  return new Langfuse({ publicKey, secretKey })
+  const publicKey = process.env.LANGFUSE_PUBLIC_KEY;
+  const secretKey = process.env.LANGFUSE_SECRET_KEY;
+  if (!publicKey || !secretKey) return null;
+  return new Langfuse({ publicKey, secretKey });
 }
 
 export async function POST(req: Request) {
-  const langfuse = getLangfuse()
+  const langfuse = getLangfuse();
 
   try {
-    const session = await auth()
+    const session = await auth();
     if (!session?.user) {
-      return Response.json(
-        { error: "Authentication required" },
-        { status: 401 }
-      )
+      return Response.json({ error: "Authentication required" }, { status: 401 });
     }
 
-    const ip = getClientIp(req)
-    const rl = checkRateLimit(ip)
+    const ip = getClientIp(req);
+    const rl = checkRateLimit(ip);
     if (!rl.allowed) {
       return Response.json(
         { error: "Too many requests. Please try again later." },
-        { status: 429, headers: { "Retry-After": String(rl.retryAfter) } }
-      )
+        { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
+      );
     }
 
-    const contentLength = parseInt(req.headers.get("content-length") ?? "0", 10)
+    const contentLength = parseInt(req.headers.get("content-length") ?? "0", 10);
     if (contentLength > 256 * 1024) {
-      return Response.json({ error: "Payload too large" }, { status: 413 })
+      return Response.json({ error: "Payload too large" }, { status: 413 });
     }
 
-    const body = await req.json()
-    const validation = validateMessages(body.messages)
+    const body = await req.json();
+    const validation = validateMessages(body.messages);
 
     if (!validation.valid) {
-      return Response.json({ error: validation.error }, { status: 400 })
+      return Response.json({ error: validation.error }, { status: 400 });
     }
 
     const trace = langfuse?.trace({
       name: "soul-chat",
       userId: session.user.email ?? session.user.id ?? "unknown",
       metadata: { ip, messageCount: validation.data.length },
-    })
+    });
 
     const generation = trace?.generation({
       name: "soul-response",
       model: "stepfun/step-3.5-flash:free",
       input: validation.data,
       modelParameters: { maxTokens: 1024 },
-    })
+    });
 
     const modelMessages: ModelMessage[] = validation.data.map((m) => ({
       role: m.role,
       content: m.content,
-    }))
+    }));
 
     const result = await streamText(modelMessages, {
       system: SYSTEM_PROMPT,
       maxTokens: 1024,
-    })
+    });
 
-    generation?.end({ output: "[streaming]" })
-    langfuse?.flushAsync().catch(() => {})
+    generation?.end({ output: "[streaming]" });
+    langfuse?.flushAsync().catch(() => {});
 
-    return result.toTextStreamResponse()
+    return result.toTextStreamResponse();
   } catch (error) {
-    langfuse?.flushAsync().catch(() => {})
-    const message =
-      error instanceof Error ? error.message : "Internal server error"
-    return Response.json({ error: message }, { status: 500 })
+    langfuse?.flushAsync().catch(() => {});
+    const message = error instanceof Error ? error.message : "Internal server error";
+    return Response.json({ error: message }, { status: 500 });
   }
 }

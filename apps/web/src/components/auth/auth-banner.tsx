@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { cn } from "@nebutra/ui/utils";
+import Link from "next/link";
 
 interface AuthBannerProps {
   className?: string;
@@ -29,8 +29,7 @@ export function AuthBanner({ className }: AuthBannerProps) {
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-20"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }}
       />
@@ -41,13 +40,7 @@ export function AuthBanner({ className }: AuthBannerProps) {
           href="/"
           className="inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden
-          >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
             <path
               d="M10 12L6 8l4-4"
               stroke="currentColor"

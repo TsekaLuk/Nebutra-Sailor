@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { CreateWorkspaceStep } from "./create-workspace-step";
-import { ConnectIntegrationsStep } from "./connect-integrations-step";
 import { cn } from "@nebutra/ui/utils";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { ConnectIntegrationsStep } from "./connect-integrations-step";
+import { CreateWorkspaceStep } from "./create-workspace-step";
 
 const STEPS = [{ label: "Workspace" }, { label: "Integrations" }] as const;
 
@@ -30,13 +30,7 @@ export function OnboardingWizard() {
                 )}
               >
                 {i < currentStep ? (
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    aria-hidden
-                  >
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
                     <path
                       d="M2 6l3 3 5-5"
                       stroke="currentColor"
@@ -52,9 +46,7 @@ export function OnboardingWizard() {
               <span
                 className={cn(
                   "text-xs",
-                  i === currentStep
-                    ? "font-medium text-foreground"
-                    : "text-muted-foreground",
+                  i === currentStep ? "font-medium text-foreground" : "text-muted-foreground",
                 )}
               >
                 {step.label}
@@ -73,12 +65,8 @@ export function OnboardingWizard() {
 
         {/* Step content */}
         <div className="rounded-[var(--radius-2xl)] border border-border bg-card p-8 shadow-sm">
-          {currentStep === 0 && (
-            <CreateWorkspaceStep onComplete={() => setCurrentStep(1)} />
-          )}
-          {currentStep === 1 && (
-            <ConnectIntegrationsStep onComplete={() => router.push("/")} />
-          )}
+          {currentStep === 0 && <CreateWorkspaceStep onComplete={() => setCurrentStep(1)} />}
+          {currentStep === 1 && <ConnectIntegrationsStep onComplete={() => router.push("/")} />}
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground">

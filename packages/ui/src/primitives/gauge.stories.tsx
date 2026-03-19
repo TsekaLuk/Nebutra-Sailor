@@ -1,5 +1,5 @@
-import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import * as React from "react";
 import { Gauge } from "./gauge";
 
 const meta = {
@@ -69,7 +69,7 @@ export const DefaultColorScale: Story = {
 // =============================================================================
 
 const customColors = [
-  { value: 0,  color: "#ef4444" }, // red
+  { value: 0, color: "#ef4444" }, // red
   { value: 25, color: "#f97316" }, // orange
   { value: 50, color: "#eab308" }, // yellow
   { value: 75, color: "#22c55e" }, // green

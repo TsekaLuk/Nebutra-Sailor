@@ -223,7 +223,7 @@ export function auditUserLogin(
   tenantId: string,
   success: boolean,
   ipAddress?: string,
-  userAgent?: string
+  userAgent?: string,
 ): Promise<void> {
   return audit({
     action: "user.login",
@@ -251,7 +251,7 @@ export function auditRoleChange(
   tenantId: string,
   targetUserId: string,
   oldRole: string,
-  newRole: string
+  newRole: string,
 ): Promise<void> {
   return audit({
     action: "org.role_change",
@@ -267,8 +267,13 @@ export function auditRoleChange(
 
 export function auditBillingEvent(
   tenantId: string,
-  action: "billing.subscription_create" | "billing.subscription_update" | "billing.subscription_cancel" | "billing.payment_success" | "billing.payment_failed",
-  metadata: Record<string, unknown>
+  action:
+    | "billing.subscription_create"
+    | "billing.subscription_update"
+    | "billing.subscription_cancel"
+    | "billing.payment_success"
+    | "billing.payment_failed",
+  metadata: Record<string, unknown>,
 ): Promise<void> {
   return audit({
     action,
@@ -284,7 +289,7 @@ export function auditApiKeyCreate(
   userId: string,
   tenantId: string,
   keyId: string,
-  keyName: string
+  keyName: string,
 ): Promise<void> {
   return audit({
     action: "api.key_create",
@@ -302,7 +307,7 @@ export function auditDataExport(
   userId: string,
   tenantId: string,
   exportType: string,
-  metadata?: Record<string, unknown>
+  metadata?: Record<string, unknown>,
 ): Promise<void> {
   return audit({
     action: "data.export",
@@ -333,4 +338,3 @@ export function auditMiddleware() {
     await next();
   };
 }
-

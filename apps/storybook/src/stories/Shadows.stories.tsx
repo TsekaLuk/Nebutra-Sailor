@@ -28,7 +28,7 @@ export const BrandShadows: StoryObj = {
   render: () => (
     <div className="p-8 bg-gray-900 grid grid-cols-2 gap-8">
       {[
-        { name: "--elevation-brand",    label: "Brand glow (small)" },
+        { name: "--elevation-brand", label: "Brand glow (small)" },
         { name: "--elevation-brand-lg", label: "Brand glow (large)" },
       ].map(({ name, label }) => (
         <div key={name} className="flex flex-col items-center gap-3">

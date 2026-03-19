@@ -1,18 +1,18 @@
 "use client";
 
+import { cn } from "@nebutra/ui/utils";
 import {
+  type ButtonHTMLAttributes,
   Children,
   cloneElement,
   createContext,
   isValidElement,
+  type ReactElement,
+  type ReactNode,
   useContext,
   useMemo,
   useState,
-  type ButtonHTMLAttributes,
-  type ReactElement,
-  type ReactNode,
 } from "react";
-import { cn } from "@nebutra/ui/utils";
 
 type ToggleVariant = "default" | "outline";
 type ToggleSize = "default" | "sm" | "lg";
@@ -59,11 +59,7 @@ function getToggleClassName(variant: ToggleVariant, size: ToggleSize) {
     variant === "outline"
       ? "border-border bg-background hover:bg-accent hover:text-accent-foreground"
       : "border-transparent bg-muted hover:bg-muted/80",
-    size === "sm"
-      ? "h-8 px-2.5"
-      : size === "lg"
-        ? "h-11 px-4"
-        : "h-9 px-3",
+    size === "sm" ? "h-8 px-2.5" : size === "lg" ? "h-11 px-4" : "h-9 px-3",
   );
 }
 

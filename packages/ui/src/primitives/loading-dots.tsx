@@ -35,10 +35,7 @@ const LoadingDots = React.forwardRef<HTMLSpanElement, LoadingDotsProps>(
     return (
       <>
         <style>{KEYFRAMES}</style>
-        <span
-          ref={ref}
-          className={cn("inline-flex items-center gap-1", className)}
-        >
+        <span ref={ref} className={cn("inline-flex items-center gap-1", className)}>
           {children}
           <span className="inline-flex items-center gap-[3px]">
             {[0, 1, 2].map((i) => (

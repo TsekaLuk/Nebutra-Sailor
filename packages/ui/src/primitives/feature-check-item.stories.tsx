@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Star, Sparkles } from "lucide-react";
+import { Sparkles, Star } from "lucide-react";
 import { FeatureCheckItem } from "./feature-check-item";
 
 const meta = {
@@ -54,11 +54,7 @@ export const FeatureList: Story = {
           description: "Connect any tool via API or Zapier.",
         },
       ].map((f) => (
-        <FeatureCheckItem
-          key={f.title}
-          title={f.title}
-          description={f.description}
-        />
+        <FeatureCheckItem key={f.title} title={f.title} description={f.description} />
       ))}
     </div>
   ),

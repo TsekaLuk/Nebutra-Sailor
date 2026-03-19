@@ -2,24 +2,22 @@
 
 // Config schema and types
 export {
-  NebutraConfigSchema,
-  PresetId,
   AppId,
-  FeatureId,
-  ThemeId,
   defineConfig,
-  resolveConfig,
+  FeatureId,
   type NebutraConfig,
-  type ResolvedConfig,
+  NebutraConfigSchema,
   type PresetDefinition,
+  PresetId,
+  type ResolvedConfig,
+  resolveConfig,
+  ThemeId,
 } from "./config";
-
-// Presets
-export { presets, getPreset } from "./presets";
-
 // Feature map
 export {
-  getFeatureEnvVars,
   getActiveApps,
   getActivePackages,
+  getFeatureEnvVars,
 } from "./feature-map";
+// Presets
+export { getPreset, presets } from "./presets";

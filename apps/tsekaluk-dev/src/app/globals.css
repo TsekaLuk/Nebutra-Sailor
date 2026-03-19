@@ -8,16 +8,18 @@
   font-family: "AlibabaCJK";
   src: url("../fonts/AlibabaPuHuiTi-Regular.otf") format("opentype");
   font-display: swap;
-  unicode-range: U+4E00-9FFF, U+3400-4DBF, U+F900-FAFF, U+2F800-2FA1F,
-    U+3000-303F, U+FF00-FFEF, U+2E80-2EFF, U+FE30-FE4F, U+2000-206F;
+  unicode-range:
+    U+4E00-9FFF, U+3400-4DBF, U+F900-FAFF, U+2F800-2FA1F, U+3000-303F, U+FF00-FFEF, U+2E80-2EFF,
+    U+FE30-FE4F, U+2000-206F;
 }
 
 @font-face {
   font-family: "SourceHanSerifCJK";
   src: url("../fonts/SourceHanSerifCN-Regular.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+4E00-9FFF, U+3400-4DBF, U+F900-FAFF, U+2F800-2FA1F,
-    U+3000-303F, U+FF00-FFEF, U+2E80-2EFF, U+FE30-FE4F, U+2000-206F;
+  unicode-range:
+    U+4E00-9FFF, U+3400-4DBF, U+F900-FAFF, U+2F800-2FA1F, U+3000-303F, U+FF00-FFEF, U+2E80-2EFF,
+    U+FE30-FE4F, U+2000-206F;
 }
 
 :root {
@@ -60,12 +62,20 @@ button:focus-visible {
 
 /* Marquee animation */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100% - var(--gap))); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
 }
 @keyframes marquee-vertical {
-  from { transform: translateY(0); }
-  to { transform: translateY(calc(-100% - var(--gap))); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
 }
 
 @utility animate-marquee {
@@ -77,7 +87,7 @@ button:focus-visible {
 
 /* Noise grain overlay */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");

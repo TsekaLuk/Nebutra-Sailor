@@ -1,5 +1,5 @@
-import { FeatureCheckItem } from "@nebutra/ui/primitives"
-import { Star, ShieldCheck } from "lucide-react"
+import { FeatureCheckItem } from "@nebutra/ui/primitives";
+import { ShieldCheck, Star } from "lucide-react";
 
 export function FeatureCheckItemDemo() {
   return (
@@ -43,5 +43,5 @@ export function FeatureCheckItemDemo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

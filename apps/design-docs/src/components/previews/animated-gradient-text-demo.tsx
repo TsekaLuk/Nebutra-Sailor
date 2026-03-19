@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { AnimatedGradientText } from "@nebutra/ui/primitives"
+import { AnimatedGradientText } from "@nebutra/ui/primitives";
 
 export function AnimatedGradientTextDemo() {
   return (
@@ -9,5 +9,5 @@ export function AnimatedGradientTextDemo() {
         <AnimatedGradientText>Animated Gradient Text</AnimatedGradientText>
       </h1>
     </div>
-  )
+  );
 }

@@ -1,10 +1,17 @@
+import { AnimateIn } from "@nebutra/ui/components";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@nebutra/ui/primitives";
+import { ExternalLink, Github, Linkedin, Lock, Mail, Rss } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Github, Linkedin, Mail, Rss, ExternalLink, Lock } from "lucide-react";
-import { AnimateIn } from "@nebutra/ui/components";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription, DialogHeader } from "@nebutra/ui/primitives";
-import React from 'react';
+import type React from "react";
 
 export async function generateMetadata({
   params,
@@ -34,12 +41,7 @@ export async function generateMetadata({
 
 function XIcon({ className }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   );
@@ -80,17 +82,18 @@ const INTERNATIONAL_LINKS = [
 
 const CHINA_LINKS = [
   { name: "微信公众号", description: "超对称轻子", hasQr: true, qrImage: "/images/wx-gzh.jpg" },
-  { name: "企业微信", description: "扫码添加，商务合作优先", hasQr: true, qrImage: "/images/wx-work.jpg" },
+  {
+    name: "企业微信",
+    description: "扫码添加，商务合作优先",
+    hasQr: true,
+    qrImage: "/images/wx-work.jpg",
+  },
   { name: "小红书", description: "产品洞察 & 教程", comingSoon: true },
   { name: "即刻", description: "技术思考 & 日常", comingSoon: true },
   { name: "知识星球", description: "深度内容 & 社区", hasQr: true, qrImage: "/images/zsxq.jpg" },
 ];
 
-export default async function LinksPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function LinksPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.links" });
 
@@ -115,7 +118,7 @@ export default async function LinksPage({
             />
           </div>
         </AnimateIn>
-        
+
         <AnimateIn preset="fadeUp" delay={0.1} duration={800}>
           <h1 className="text-5xl md:text-6xl font-serif italic tracking-tight text-gray-900 dark:text-white mb-3">
             Tseka Luk
@@ -139,7 +142,7 @@ export default async function LinksPage({
             <div className="h-px flex-1 ml-4 bg-gradient-to-r from-gray-200 to-transparent dark:from-gray-800"></div>
           </div>
         </AnimateIn>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {INTERNATIONAL_LINKS.map((link, index) => (
             <AnimateIn key={link.name} preset="scale" delay={0.4 + index * 0.05}>
@@ -194,13 +197,21 @@ export default async function LinksPage({
                     : "border-gray-100 bg-white/60 shadow-sm backdrop-blur-md hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl dark:border-gray-800/60 dark:bg-gray-900/40 dark:hover:border-gray-700 cursor-pointer"
                 }`}
               >
-                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${isComingSoon ? "bg-gray-100/50 text-gray-400 dark:bg-gray-800/30" : "bg-gray-50 text-gray-600 transition-colors group-hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:group-hover:bg-gray-700"}`}>
-                   {isComingSoon ? <Lock className="w-5 h-5" /> : <div className="w-5 h-5 rounded-full bg-current opacity-20" />}
+                <div
+                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${isComingSoon ? "bg-gray-100/50 text-gray-400 dark:bg-gray-800/30" : "bg-gray-50 text-gray-600 transition-colors group-hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:group-hover:bg-gray-700"}`}
+                >
+                  {isComingSoon ? (
+                    <Lock className="w-5 h-5" />
+                  ) : (
+                    <div className="w-5 h-5 rounded-full bg-current opacity-20" />
+                  )}
                 </div>
-                
+
                 <div className="flex-1">
                   <div className="flex items-center gap-3">
-                    <p className={`text-base font-semibold ${isComingSoon ? "text-gray-500 dark:text-gray-500" : "text-gray-900 dark:text-gray-100"}`}>
+                    <p
+                      className={`text-base font-semibold ${isComingSoon ? "text-gray-500 dark:text-gray-500" : "text-gray-900 dark:text-gray-100"}`}
+                    >
                       {link.name as React.ReactNode}
                     </p>
                     {isComingSoon && (
@@ -232,14 +243,17 @@ export default async function LinksPage({
                 {isComingSoon ? (
                   InnerContent
                 ) : hasUrl ? (
-                  <a href={(link as { url: string }).url} target="_blank" rel="noopener noreferrer" className="block h-full">
+                  <a
+                    href={(link as { url: string }).url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full"
+                  >
                     {InnerContent}
                   </a>
                 ) : hasQr ? (
                   <Dialog>
-                    <DialogTrigger asChild>
-                      {InnerContent}
-                    </DialogTrigger>
+                    <DialogTrigger asChild>{InnerContent}</DialogTrigger>
                     <DialogContent className="sm:max-w-md">
                       <DialogHeader>
                         <DialogTitle>{link.name}</DialogTitle>
@@ -250,7 +264,14 @@ export default async function LinksPage({
                       <div className="flex aspect-square w-full items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-900 p-8">
                         {"qrImage" in link && link.qrImage ? (
                           <div className="h-full w-full max-w-[240px] bg-white rounded-lg shadow-sm border p-2 flex items-center justify-center">
-                            <Image src={(link as { qrImage: string }).qrImage} alt={link.name} width={240} height={240} sizes="240px" className="w-full h-auto object-contain" />
+                            <Image
+                              src={(link as { qrImage: string }).qrImage}
+                              alt={link.name}
+                              width={240}
+                              height={240}
+                              sizes="240px"
+                              className="w-full h-auto object-contain"
+                            />
                           </div>
                         ) : (
                           <p className="text-sm text-gray-400 dark:text-gray-600">{link.name}</p>

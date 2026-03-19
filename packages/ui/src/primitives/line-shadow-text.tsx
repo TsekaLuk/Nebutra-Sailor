@@ -1,14 +1,13 @@
 "use client";
 
-import { motion, type MotionProps } from "framer-motion";
+import { type MotionProps, motion } from "framer-motion";
 import { cn } from "../utils/cn";
 
 /**
  * Props for the LineShadowText component
  */
 export interface LineShadowTextProps
-  extends
-    Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps>,
+  extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps>,
     MotionProps {
   /** Color of the shadow effect (default: "black") */
   shadowColor?: string;

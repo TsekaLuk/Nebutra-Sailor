@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,11 +16,7 @@ const LoaderCircle = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <g
-        stroke="currentColor"
-        strokeWidth={1.5}
-        clipPath="url(#clip0_2393_1490)"
-      >
+      <g stroke="currentColor" strokeWidth={1.5} clipPath="url(#clip0_2393_1490)">
         <path d="M8 0v4" />
         <path d="M8 16v-4" opacity={0.5} />
         <path d="m3.298 1.528 2.35 3.236" opacity={0.9} />
@@ -41,5 +37,6 @@ const LoaderCircle = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 LoaderCircle.displayName = "LoaderCircle";
+
 export { LoaderCircle };
 export default LoaderCircle;

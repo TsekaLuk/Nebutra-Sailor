@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
+import type * as React from "react";
 import { useEffect, useState } from "react";
 import { cn } from "../utils/cn";
 
@@ -45,9 +45,7 @@ export function AssistedPasswordConfirmation({
   const [confirmPassword, setConfirmPassword] = useState("");
   const [shake, setShake] = useState(false);
 
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (
       confirmPassword.length >= password.length &&
       e.target.value.length > confirmPassword.length
@@ -76,9 +74,7 @@ export function AssistedPasswordConfirmation({
 
   const getLetterStatus = (letter: string, index: number) => {
     if (!confirmPassword[index]) return "";
-    return confirmPassword[index] === letter
-      ? "bg-emerald-500/20"
-      : "bg-red-500/20";
+    return confirmPassword[index] === letter ? "bg-emerald-500/20" : "bg-red-500/20";
   };
 
   const bounceAnimation = {
@@ -97,16 +93,9 @@ export function AssistedPasswordConfirmation({
   };
 
   return (
-    <div
-      className={cn(
-        "relative flex w-full flex-col items-start justify-center",
-        className
-      )}
-    >
+    <div className={cn("relative flex w-full flex-col items-start justify-center", className)}>
       {showHint && (
-        <span className="text-sm font-semibold text-muted-foreground">
-          → {password}
-        </span>
+        <span className="text-sm font-semibold text-muted-foreground">→ {password}</span>
       )}
       <motion.div
         className="mb-3 mt-1 h-[52px] w-full rounded-[var(--radius-xl)] border-2 border-border bg-background px-2 py-2"
@@ -120,10 +109,7 @@ export function AssistedPasswordConfirmation({
           {/* Password dots display */}
           <div className="z-10 flex h-full items-center justify-center bg-transparent px-0 py-1 tracking-[0.15em]">
             {password.split("").map((_, index) => (
-              <div
-                key={index}
-                className="flex h-full w-4 shrink-0 items-center justify-center"
-              >
+              <div key={index} className="flex h-full w-4 shrink-0 items-center justify-center">
                 <span className="size-[5px] rounded-full bg-foreground" />
               </div>
             ))}
@@ -138,7 +124,7 @@ export function AssistedPasswordConfirmation({
                 key={index}
                 className={cn(
                   "absolute h-full w-4 transition-all duration-300 ease-out",
-                  getLetterStatus(letter, index)
+                  getLetterStatus(letter, index),
                 )}
                 style={{
                   left: `${index * 16}px`,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { createApiKey, type CreateKeyState } from "./actions";
+import { type CreateKeyState, createApiKey } from "./actions";
 
 interface Props {
   orgId: string;

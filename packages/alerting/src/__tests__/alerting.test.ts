@@ -1,23 +1,21 @@
-import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  registerChannel,
-  clearChannels,
-  getRegisteredChannelNames,
-  unregisterChannel,
-  sendAlert,
-  sendAlertTo,
-  trackError,
-  resetErrorCounts,
-  setAlertErrorHandler,
   type AlertChannel,
   type AlertPayload,
+  clearChannels,
+  getRegisteredChannelNames,
+  registerChannel,
+  resetErrorCounts,
+  sendAlert,
+  sendAlertTo,
+  setAlertErrorHandler,
+  trackError,
+  unregisterChannel,
 } from "../index.js";
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
-function makeMockChannel(
-  name: string,
-): AlertChannel & { calls: AlertPayload[] } {
+function makeMockChannel(name: string): AlertChannel & { calls: AlertPayload[] } {
   const calls: AlertPayload[] = [];
   return {
     name,
@@ -104,9 +102,7 @@ describe("sendAlert", () => {
 
     const received = ch.calls[0];
     expect(received.timestamp).toBeDefined();
-    expect(new Date(received.timestamp!).toISOString()).toBe(
-      received.timestamp,
-    );
+    expect(new Date(received.timestamp!).toISOString()).toBe(received.timestamp);
   });
 });
 
@@ -148,10 +144,7 @@ describe("setAlertErrorHandler", () => {
     });
 
     await sendAlert(basePayload);
-    expect(handler).toHaveBeenCalledWith(
-      "Alert channel broken failed",
-      expect.any(Error),
-    );
+    expect(handler).toHaveBeenCalledWith("Alert channel broken failed", expect.any(Error));
 
     // Reset to no-op after test
     setAlertErrorHandler(() => {});
@@ -254,9 +247,7 @@ describe("Convenience Functions", () => {
   it("alertInfo sends info severity", async () => {
     const ch = makeMockChannel("slack");
     registerChannel(ch);
-    await import("../index.js").then((m) =>
-      m.alertInfo("Info", "msg", "svc-info"),
-    );
+    await import("../index.js").then((m) => m.alertInfo("Info", "msg", "svc-info"));
     expect(ch.calls[0].severity).toBe("info");
     expect(ch.calls[0].service).toBe("svc-info");
   });
@@ -264,27 +255,21 @@ describe("Convenience Functions", () => {
   it("alertWarning sends warning severity", async () => {
     const ch = makeMockChannel("slack");
     registerChannel(ch);
-    await import("../index.js").then((m) =>
-      m.alertWarning("Warn", "msg", "svc-warn"),
-    );
+    await import("../index.js").then((m) => m.alertWarning("Warn", "msg", "svc-warn"));
     expect(ch.calls[0].severity).toBe("warning");
   });
 
   it("alertError sends error severity", async () => {
     const ch = makeMockChannel("slack");
     registerChannel(ch);
-    await import("../index.js").then((m) =>
-      m.alertError("Err", "msg", "svc-err"),
-    );
+    await import("../index.js").then((m) => m.alertError("Err", "msg", "svc-err"));
     expect(ch.calls[0].severity).toBe("error");
   });
 
   it("alertCritical sends critical severity", async () => {
     const ch = makeMockChannel("slack");
     registerChannel(ch);
-    await import("../index.js").then((m) =>
-      m.alertCritical("Crit", "msg", "svc-crit"),
-    );
+    await import("../index.js").then((m) => m.alertCritical("Crit", "msg", "svc-crit"));
     expect(ch.calls[0].severity).toBe("critical");
   });
 });
@@ -429,8 +414,7 @@ describe("initializeFromEnv", () => {
     process.env.SLACK_WEBHOOK_URL = "http://slack";
     process.env.DISCORD_WEBHOOK_URL = "http://discord";
 
-    const { initializeFromEnv, getRegisteredChannelNames } =
-      await import("../index.js");
+    const { initializeFromEnv, getRegisteredChannelNames } = await import("../index.js");
     const registered = initializeFromEnv();
 
     expect(registered).toContain("slack");
@@ -442,8 +426,7 @@ describe("initializeFromEnv", () => {
     delete process.env.SLACK_WEBHOOK_URL;
     delete process.env.DISCORD_WEBHOOK_URL;
 
-    const { initializeFromEnv, getRegisteredChannelNames } =
-      await import("../index.js");
+    const { initializeFromEnv, getRegisteredChannelNames } = await import("../index.js");
     const registered = initializeFromEnv();
 
     expect(registered).toHaveLength(0);

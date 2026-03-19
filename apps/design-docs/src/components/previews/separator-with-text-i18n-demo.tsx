@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Separator } from "@nebutra/ui/primitives"
+import { Separator } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function SeparatorWithTextI18nDemo() {
   return (
@@ -11,5 +11,5 @@ export function SeparatorWithTextI18nDemo() {
         或 (OR)
       </span>
     </div>
-  )
+  );
 }

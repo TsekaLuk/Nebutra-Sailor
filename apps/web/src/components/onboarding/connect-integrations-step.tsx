@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@nebutra/ui/components";
 import { cn } from "@nebutra/ui/utils";
+import { useState } from "react";
 
 interface Integration {
   id: string;
@@ -80,9 +80,7 @@ interface ConnectIntegrationsStepProps {
   onComplete: () => void;
 }
 
-export function ConnectIntegrationsStep({
-  onComplete,
-}: ConnectIntegrationsStepProps) {
+export function ConnectIntegrationsStep({ onComplete }: ConnectIntegrationsStepProps) {
   const [connected, setConnected] = useState<Set<string>>(new Set());
 
   function handleConnect(id: string) {
@@ -92,9 +90,7 @@ export function ConnectIntegrationsStep({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-semibold tracking-tight">
-          Connect your tools
-        </h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Connect your tools</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Set up integrations to supercharge your workflow.
         </p>
@@ -114,15 +110,11 @@ export function ConnectIntegrationsStep({
               )}
             >
               <div className="flex items-center gap-2">
-                <div className="flex h-6 w-6 items-center justify-center">
-                  {integration.icon}
-                </div>
+                <div className="flex h-6 w-6 items-center justify-center">{integration.icon}</div>
               </div>
               <div>
                 <p className="text-sm font-medium">{integration.name}</p>
-                <p className="text-xs text-muted-foreground">
-                  {integration.description}
-                </p>
+                <p className="text-xs text-muted-foreground">{integration.description}</p>
               </div>
               <Button
                 htmlType="button"
@@ -134,13 +126,7 @@ export function ConnectIntegrationsStep({
               >
                 {isConnected ? (
                   <span className="flex items-center gap-1.5">
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      aria-hidden
-                    >
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
                       <path
                         d="M2 6l3 3 5-5"
                         stroke="currentColor"

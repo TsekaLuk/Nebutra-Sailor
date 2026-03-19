@@ -1,15 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { InfiniteSlider } from "./infinite-slider";
 
-const logos = [
-  "Vercel",
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Tailwind",
-  "Prisma",
-  "Supabase",
-];
+const logos = ["Vercel", "Next.js", "React", "TypeScript", "Tailwind", "Prisma", "Supabase"];
 
 const meta = {
   title: "Primitives/InfiniteSlider",
@@ -74,10 +66,7 @@ export const Reverse: Story = {
     <div className="w-[500px] space-y-4 overflow-hidden">
       <InfiniteSlider gap={24} duration={20}>
         {logos.slice(0, 5).map((name) => (
-          <div
-            key={name}
-            className="flex h-10 items-center rounded-md border bg-card px-4 text-sm"
-          >
+          <div key={name} className="flex h-10 items-center rounded-md border bg-card px-4 text-sm">
             {name}
           </div>
         ))}
@@ -116,12 +105,7 @@ export const SpeedBased: Story = {
 export const Vertical: Story = {
   render: () => (
     <div className="flex justify-center">
-      <InfiniteSlider
-        direction="vertical"
-        gap={12}
-        duration={10}
-        className="h-48 w-40"
-      >
+      <InfiniteSlider direction="vertical" gap={12} duration={10} className="h-48 w-40">
         {logos.map((name) => (
           <div
             key={name}

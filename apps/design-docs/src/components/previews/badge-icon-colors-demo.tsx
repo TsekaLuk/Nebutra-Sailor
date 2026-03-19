@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Badge } from "@nebutra/ui/primitives"
-import { Shield } from "@nebutra/icons"
+import { Shield } from "@nebutra/icons";
+import { Badge } from "@nebutra/ui/primitives";
 
 export function BadgeIconColorsDemo() {
   return (
@@ -186,5 +186,5 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
     </div>
-  )
+  );
 }

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { routing, type Locale } from "@/i18n/routing";
+import { type Locale, routing } from "@/i18n/routing";
 
 export async function generateMetadata({
   params,
@@ -22,11 +22,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function FAQPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function FAQPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const locale = lang as Locale;
   setRequestLocale(locale);
@@ -47,9 +43,7 @@ export default async function FAQPage({
         <h1 className="text-4xl font-bold tracking-tight text-[var(--neutral-12)] dark:text-white">
           {t("faq.heading")}
         </h1>
-        <p className="mt-4 text-lg text-[var(--neutral-10)]">
-          {t("faq.subheading")}
-        </p>
+        <p className="mt-4 text-lg text-[var(--neutral-10)]">{t("faq.subheading")}</p>
       </section>
 
       {/* FAQ Categories */}
@@ -65,11 +59,7 @@ export default async function FAQPage({
                 className="group rounded-[var(--radius-lg)] border border-[var(--neutral-6)]"
               >
                 <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-[var(--neutral-12)] dark:text-white">
-                  {t(
-                    `faq.categories.${cat}.questions.${qIdx}.q` as Parameters<
-                      typeof t
-                    >[0],
-                  )}
+                  {t(`faq.categories.${cat}.questions.${qIdx}.q` as Parameters<typeof t>[0])}
                   <span className="ml-4 shrink-0 transition group-open:rotate-180">
                     <svg
                       className="h-5 w-5 text-[var(--neutral-9)]"
@@ -88,11 +78,7 @@ export default async function FAQPage({
                 </summary>
                 <div className="border-t border-[var(--neutral-6)] p-4">
                   <p className="text-[var(--neutral-10)]">
-                    {t(
-                      `faq.categories.${cat}.questions.${qIdx}.a` as Parameters<
-                        typeof t
-                      >[0],
-                    )}
+                    {t(`faq.categories.${cat}.questions.${qIdx}.a` as Parameters<typeof t>[0])}
                   </p>
                 </div>
               </details>
@@ -106,9 +92,7 @@ export default async function FAQPage({
         <h2 className="text-xl font-bold text-[var(--neutral-12)] dark:text-white">
           {t("faq.ctaHeading")}
         </h2>
-        <p className="mt-2 text-[var(--neutral-10)]">
-          {t("faq.ctaDescription")}
-        </p>
+        <p className="mt-2 text-[var(--neutral-10)]">{t("faq.ctaDescription")}</p>
         <div className="mt-6 flex justify-center gap-4">
           <Link
             href="/contact"

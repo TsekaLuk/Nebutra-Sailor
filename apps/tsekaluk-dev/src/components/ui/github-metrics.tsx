@@ -1,7 +1,7 @@
-import { getGithubData } from "@/lib/github";
-import { NumberTicker } from "@/components/ui/number-ticker";
-import { GitCommit, Briefcase, CalendarDays, Code2 } from "lucide-react";
 import { AnimateIn } from "@nebutra/ui/components";
+import { Briefcase, CalendarDays, Code2, GitCommit } from "lucide-react";
+import { NumberTicker } from "@/components/ui/number-ticker";
+import { getGithubData } from "@/lib/github";
 
 const METRICS_META = [
   {
@@ -64,7 +64,10 @@ export async function GithubMetrics() {
 
               {/* Label */}
               <div className="flex items-center gap-1.5 mt-4">
-                <Icon className="h-[11px] w-[11px] text-gray-400 dark:text-gray-600 shrink-0" strokeWidth={2} />
+                <Icon
+                  className="h-[11px] w-[11px] text-gray-400 dark:text-gray-600 shrink-0"
+                  strokeWidth={2}
+                />
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase font-semibold text-gray-400 dark:text-gray-600">
                   {label}
                 </span>

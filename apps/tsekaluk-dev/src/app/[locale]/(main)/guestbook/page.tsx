@@ -1,16 +1,16 @@
-import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
-import { AnimateIn } from "@nebutra/ui/components"
-import { GuestbookClient } from "@/components/guestbook/guestbook-client"
-import { prisma } from "@/lib/prisma"
+import { AnimateIn } from "@nebutra/ui/components";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { GuestbookClient } from "@/components/guestbook/guestbook-client";
+import { prisma } from "@/lib/prisma";
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.guestbook" })
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "pages.guestbook" });
   return {
     title: t("metadata_title"),
     description: t("metadata_desc"),
@@ -27,44 +27,42 @@ export async function generateMetadata({
         ja: "https://tsekaluk.dev/ja/guestbook",
       },
     },
-  }
+  };
 }
 
-export default async function GuestbookPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}) {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.guestbook" })
+export default async function GuestbookPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "pages.guestbook" });
 
   const rawEntries = prisma
-    ? await prisma.guestbook.findMany({
-        where: { status: "approved" },
-        orderBy: { createdAt: "desc" },
-        take: 100,
-        select: {
-          id: true,
-          authorName: true,
-          authorImage: true,
-          nickname: true,
-          relationship: true,
-          company: true,
-          title: true,
-          message: true,
-          createdAt: true,
-        },
-      }).catch((err: unknown) => {
-        console.error("[guestbook/page] Failed to fetch entries:", err)
-        return [] as never[]
-      })
-    : []
+    ? await prisma.guestbook
+        .findMany({
+          where: { status: "approved" },
+          orderBy: { createdAt: "desc" },
+          take: 100,
+          select: {
+            id: true,
+            authorName: true,
+            authorImage: true,
+            nickname: true,
+            relationship: true,
+            company: true,
+            title: true,
+            message: true,
+            createdAt: true,
+          },
+        })
+        .catch((err: unknown) => {
+          console.error("[guestbook/page] Failed to fetch entries:", err);
+          return [] as never[];
+        })
+    : [];
 
   // Serialize dates to strings for proper Client Component hydration
   const initialEntries = rawEntries.map((entry) => ({
     ...entry,
     createdAt: entry.createdAt.toISOString(),
-  }))
+  }));
 
   return (
     <section className="mx-auto max-w-4xl px-6 py-24 md:py-32">
@@ -88,5 +86,5 @@ export default async function GuestbookPage({
 
       <GuestbookClient initialEntries={initialEntries} />
     </section>
-  )
+  );
 }

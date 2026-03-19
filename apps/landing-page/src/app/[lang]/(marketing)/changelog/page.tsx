@@ -1,10 +1,10 @@
+import { AnimateIn } from "@nebutra/ui/components";
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { routing, type Locale } from "@/i18n/routing";
-import { Navbar, FooterMinimal } from "@/components/landing";
-import { AnimateIn } from "@nebutra/ui/components";
+import { FooterMinimal, Navbar } from "@/components/landing";
+import { type Locale, routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
@@ -141,11 +141,7 @@ const RELEASES = [
   },
 ] as const;
 
-export default async function ChangelogPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function ChangelogPage({ params }: { params: Promise<{ lang: string }> }) {
   "use cache";
   cacheLife("hours");
 
@@ -207,10 +203,7 @@ export default async function ChangelogPage({
                     >
                       {release.tag}
                     </span>
-                    <time
-                      dateTime={release.date}
-                      className="text-sm text-[var(--neutral-11)]"
-                    >
+                    <time dateTime={release.date} className="text-sm text-[var(--neutral-11)]">
                       {new Date(release.date).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",

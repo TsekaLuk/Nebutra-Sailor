@@ -1,27 +1,26 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useTranslations } from "next-intl"
-import { useSession, signIn, signOut } from "next-auth/react"
-import { Link } from "@/i18n/navigation"
-import { Menu, X, Search } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { LanguageSwitcher } from "@/components/language-switcher"
-import { useCommandPalette } from "@/components/providers/command-palette-provider"
-
-import { TextShimmer } from "@nebutra/ui/primitives"
+import { TextShimmer } from "@nebutra/ui/primitives";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, Search, X } from "lucide-react";
+import Image from "next/image";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import * as React from "react";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useCommandPalette } from "@/components/providers/command-palette-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Link } from "@/i18n/navigation";
 
 function AuthIndicator() {
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
 
   if (status === "loading") {
-    return null
+    return null;
   }
 
   if (session?.user) {
-    const initial = session.user.name?.charAt(0).toUpperCase() ?? "?"
+    const initial = session.user.name?.charAt(0).toUpperCase() ?? "?";
     return (
       <button
         type="button"
@@ -45,7 +44,7 @@ function AuthIndicator() {
           </span>
         )}
       </button>
-    )
+    );
   }
 
   return (
@@ -56,11 +55,11 @@ function AuthIndicator() {
     >
       Sign in
     </button>
-  )
+  );
 }
 
 function DesktopNavItem({ href, label }: { href: string; label: string }) {
-  const isThinking = href === "/thinking"
+  const isThinking = href === "/thinking";
 
   return (
     <Link
@@ -76,13 +75,13 @@ function DesktopNavItem({ href, label }: { href: string; label: string }) {
       )}
       <span className="-bottom-0.5 left-0 w-0 absolute h-px bg-foreground transition-all duration-300 group-hover:w-full" />
     </Link>
-  )
+  );
 }
 
 export function Header() {
-  const t = useTranslations("nav")
-  const [mobileOpen, setMobileOpen] = React.useState(false)
-  const { setOpen: openCommandPalette } = useCommandPalette()
+  const t = useTranslations("nav");
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { setOpen: openCommandPalette } = useCommandPalette();
 
   const NAV_ITEMS = [
     { label: t("work"), href: "/work" },
@@ -93,7 +92,7 @@ export function Header() {
     { label: t("soul"), href: "/soul" },
     { label: t("uses"), href: "/uses" },
     { label: t("guestbook"), href: "/guestbook" },
-  ] as const
+  ] as const;
 
   return (
     <header className="relative z-40">
@@ -104,10 +103,7 @@ export function Header() {
         Skip to content
       </a>
       <div className="max-w-7xl px-6 py-8 mx-auto">
-        <nav
-          aria-label="Main navigation"
-          className="flex items-center justify-between"
-        >
+        <nav aria-label="Main navigation" className="flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
@@ -126,11 +122,7 @@ export function Header() {
           {/* Desktop nav */}
           <div className="gap-6 md:flex hidden items-center">
             {NAV_ITEMS.map((item) => (
-              <DesktopNavItem
-                key={item.href}
-                href={item.href}
-                label={item.label}
-              />
+              <DesktopNavItem key={item.href} href={item.href} label={item.label} />
             ))}
             <div className="gap-2 ml-2 flex items-center">
               <button
@@ -161,11 +153,7 @@ export function Header() {
             className="p-2 md:hidden rounded-md text-muted-foreground transition-colors hover:text-foreground focus:ring-2 focus:ring-[var(--blue-9)] focus:ring-offset-1 focus:outline-none"
             onClick={() => setMobileOpen((prev) => !prev)}
           >
-            {mobileOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </nav>
 
@@ -208,5 +196,5 @@ export function Header() {
         </AnimatePresence>
       </div>
     </header>
-  )
+  );
 }

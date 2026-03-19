@@ -15,16 +15,36 @@ const meta: Meta = {
 export default meta;
 
 const typeScale = [
-  { name: "display-1 / Hero",    classes: "text-5xl md:text-7xl font-bold leading-tight",   sample: "The future of SaaS" },
-  { name: "display-2",           classes: "text-4xl md:text-5xl font-bold leading-tight",    sample: "Build faster, deploy smarter" },
-  { name: "heading-1",           classes: "text-3xl font-bold leading-tight",                sample: "Dashboard Overview" },
-  { name: "heading-2",           classes: "text-2xl font-semibold leading-snug",             sample: "Recent Activity" },
-  { name: "heading-3",           classes: "text-xl font-semibold leading-snug",              sample: "Team Members" },
-  { name: "heading-4",           classes: "text-lg font-semibold",                           sample: "Billing Settings" },
-  { name: "body-lg",             classes: "text-lg leading-relaxed",                         sample: "Configure your integration with full API access and webhook support." },
-  { name: "body",                classes: "text-base leading-relaxed",                       sample: "All events are logged and available in real-time for debugging." },
-  { name: "body-sm",             classes: "text-sm leading-normal",                          sample: "Last updated 3 minutes ago via webhook" },
-  { name: "caption / label",     classes: "text-xs font-medium",                             sample: "ACTIVE · 2.4k events today" },
+  {
+    name: "display-1 / Hero",
+    classes: "text-5xl md:text-7xl font-bold leading-tight",
+    sample: "The future of SaaS",
+  },
+  {
+    name: "display-2",
+    classes: "text-4xl md:text-5xl font-bold leading-tight",
+    sample: "Build faster, deploy smarter",
+  },
+  { name: "heading-1", classes: "text-3xl font-bold leading-tight", sample: "Dashboard Overview" },
+  { name: "heading-2", classes: "text-2xl font-semibold leading-snug", sample: "Recent Activity" },
+  { name: "heading-3", classes: "text-xl font-semibold leading-snug", sample: "Team Members" },
+  { name: "heading-4", classes: "text-lg font-semibold", sample: "Billing Settings" },
+  {
+    name: "body-lg",
+    classes: "text-lg leading-relaxed",
+    sample: "Configure your integration with full API access and webhook support.",
+  },
+  {
+    name: "body",
+    classes: "text-base leading-relaxed",
+    sample: "All events are logged and available in real-time for debugging.",
+  },
+  {
+    name: "body-sm",
+    classes: "text-sm leading-normal",
+    sample: "Last updated 3 minutes ago via webhook",
+  },
+  { name: "caption / label", classes: "text-xs font-medium", sample: "ACTIVE · 2.4k events today" },
 ];
 
 export const TypeScale: StoryObj = {
@@ -50,16 +70,17 @@ export const FontFamilies: StoryObj = {
     <div className="p-8 bg-white space-y-6">
       <div>
         <p className="mb-1 font-mono text-xs text-gray-400">--font-sans / var(--font-sans)</p>
-        <p className="text-3xl text-gray-900" style={{ fontFamily: "var(--font-sans, sans-serif)" }}>
+        <p
+          className="text-3xl text-gray-900"
+          style={{ fontFamily: "var(--font-sans, sans-serif)" }}
+        >
           The quick brown fox jumps over the lazy dog
         </p>
         <p className="mt-1 text-sm text-gray-500">Geist Sans → Inter → system-ui</p>
       </div>
       <div>
         <p className="mb-1 font-mono text-xs text-gray-400">--font-mono / font-mono</p>
-        <p className="font-mono text-2xl text-gray-900">
-          const deploy = () =&gt; ship()
-        </p>
+        <p className="font-mono text-2xl text-gray-900">const deploy = () =&gt; ship()</p>
         <p className="mt-1 text-sm text-gray-500">JetBrains Mono → Fira Code → monospace</p>
       </div>
     </div>

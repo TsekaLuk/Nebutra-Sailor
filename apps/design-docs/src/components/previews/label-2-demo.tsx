@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Input, Label } from "@nebutra/ui/primitives"
+import { Input, Label } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Label2Demo() {
   return (
     <div className="space-y-2 max-w-sm w-full">
@@ -14,5 +13,5 @@ export function Label2Demo() {
       </Label>
       <Input id="name" required aria-required="true" />
     </div>
-  )
+  );
 }

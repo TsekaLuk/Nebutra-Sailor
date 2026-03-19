@@ -1,9 +1,9 @@
 "use client";
 
-import { ComponentPropsWithoutRef, ReactNode, type ElementType } from "react";
 import { ArrowRight } from "lucide-react";
-import { Button } from "./button";
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 import { cn } from "../utils";
+import { Button } from "./button";
 
 // =============================================================================
 // Types
@@ -78,11 +78,7 @@ export interface BentoCardProps extends ComponentPropsWithoutRef<"div"> {
  * </BentoGrid>
  * ```
  */
-export const BentoGrid = ({
-  children,
-  className,
-  ...props
-}: BentoGridProps) => {
+export const BentoGrid = ({ children, className, ...props }: BentoGridProps) => {
   return (
     <div
       className={cn(
@@ -149,12 +145,7 @@ export const BentoCard = ({
         {/* Mobile CTA (always visible) */}
         {href && (
           <div className="pointer-events-none flex w-full translate-y-0 transform-gpu flex-row items-center transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 lg:hidden">
-            <Button
-              variant="link"
-              asChild
-              size="sm"
-              className="pointer-events-auto p-0"
-            >
+            <Button variant="link" asChild size="sm" className="pointer-events-auto p-0">
               <a href={href}>
                 {cta}
                 <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
@@ -167,12 +158,7 @@ export const BentoCard = ({
       {/* Desktop CTA (reveals on hover) */}
       {href && (
         <div className="pointer-events-none absolute bottom-0 hidden w-full translate-y-10 transform-gpu flex-row items-center p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 lg:flex">
-          <Button
-            variant="link"
-            asChild
-            size="sm"
-            className="pointer-events-auto p-0"
-          >
+          <Button variant="link" asChild size="sm" className="pointer-events-auto p-0">
             <a href={href}>
               {cta}
               <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />

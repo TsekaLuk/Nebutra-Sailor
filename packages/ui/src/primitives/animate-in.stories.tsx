@@ -19,9 +19,7 @@ export default meta;
 type Story = StoryObj<typeof AnimateIn>;
 
 const Box = ({ children }: { children: React.ReactNode }) => (
-  <div className="p-6 rounded-lg border bg-white text-gray-900 w-48 text-center">
-    {children}
-  </div>
+  <div className="p-6 rounded-lg border bg-white text-gray-900 w-48 text-center">{children}</div>
 );
 
 export const Emerge: Story = {

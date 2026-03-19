@@ -1,6 +1,6 @@
+import { CalendarDate, now, parseZonedDateTime } from "@internationalized/date";
 import type { Meta, StoryObj } from "@storybook/react";
 import { DateInput } from "./date-input";
-import { CalendarDate, parseZonedDateTime, now } from "@internationalized/date";
 
 const meta = {
   title: "Primitives/DateInput",
@@ -62,13 +62,7 @@ export const WithTimezone: Story = {
 };
 
 export const WithCurrentTime: Story = {
-  render: () => (
-    <DateInput
-      label="Current time"
-      granularity="minute"
-      defaultValue={now("UTC")}
-    />
-  ),
+  render: () => <DateInput label="Current time" granularity="minute" defaultValue={now("UTC")} />,
 };
 
 export const LabelOutside: Story = {

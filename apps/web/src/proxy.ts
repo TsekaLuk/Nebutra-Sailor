@@ -1,6 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher([
   "/sign-in(.*)",
@@ -33,11 +33,7 @@ function buildCsp(nonce: string): string {
     ...(isDev ? ["'unsafe-inline'", "'unsafe-eval'"] : []),
   ].join(" ");
 
-  const styleSrc = [
-    "'self'",
-    `'nonce-${nonce}'`,
-    ...(isDev ? ["'unsafe-inline'"] : []),
-  ].join(" ");
+  const styleSrc = ["'self'", `'nonce-${nonce}'`, ...(isDev ? ["'unsafe-inline'"] : [])].join(" ");
 
   return [
     "default-src 'self'",

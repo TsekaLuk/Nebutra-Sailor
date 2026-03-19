@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
 import {
+  Button,
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  Button,
-} from "@nebutra/ui/primitives"
+  DropdownMenuTrigger,
+} from "@nebutra/ui/primitives";
 
 export function DropdownMenuDemo() {
   return (
@@ -36,5 +36,5 @@ export function DropdownMenuDemo() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

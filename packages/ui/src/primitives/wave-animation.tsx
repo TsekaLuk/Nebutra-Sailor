@@ -174,8 +174,7 @@ export function WaveAnimation({
       // Create wave bars
       let x = 0;
       for (let i = 0; i < barCount; i++) {
-        const waveHeight =
-          2 - (Math.sin(i + time / 200) / 2) * canvas.height * amplitude;
+        const waveHeight = 2 - (Math.sin(i + time / 200) / 2) * canvas.height * amplitude;
 
         ctx.fillStyle = palette[Math.floor(i + time / 200) % palette.length] ?? "#000";
         ctx.fillRect(x, canvas.height / 2, barWidth, waveHeight);
@@ -197,10 +196,7 @@ export function WaveAnimation({
   }, [palette, barCount, barWidth, speed, trailOpacity, amplitude]);
 
   return (
-    <div
-      className={cn("inset-0 h-full w-full", className)}
-      style={{ position, zIndex }}
-    >
+    <div className={cn("inset-0 h-full w-full", className)} style={{ position, zIndex }}>
       <canvas
         ref={canvasRef}
         className="block"

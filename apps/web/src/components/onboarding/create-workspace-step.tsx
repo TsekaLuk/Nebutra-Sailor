@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import { useOrganizationList } from "@clerk/nextjs";
-import { Button } from "@nebutra/ui/components";
-import { Input } from "@nebutra/ui/components";
+import { Button, Input } from "@nebutra/ui/components";
 import { Label } from "@nebutra/ui/primitives";
 import { cn } from "@nebutra/ui/utils";
+import { useEffect, useRef, useState } from "react";
 
 interface CreateWorkspaceStepProps {
   onComplete: () => void;
@@ -40,8 +39,7 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
     workspaceNameRef.current?.focus?.();
   }, []);
 
-  const slugValid =
-    /^[a-z0-9][a-z0-9-]{1,46}[a-z0-9]$/.test(slug) || slug.length >= 3;
+  const slugValid = /^[a-z0-9][a-z0-9-]{1,46}[a-z0-9]$/.test(slug) || slug.length >= 3;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -56,9 +54,7 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
       onComplete();
     } catch (err: unknown) {
       const clerkError = err as { errors?: Array<{ message: string }> };
-      setError(
-        clerkError.errors?.[0]?.message || "Failed to create workspace.",
-      );
+      setError(clerkError.errors?.[0]?.message || "Failed to create workspace.");
     } finally {
       setLoading(false);
     }
@@ -67,9 +63,7 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-semibold tracking-tight">
-          Set up your workspace
-        </h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Set up your workspace</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           This is where your team will collaborate.
         </p>
@@ -103,9 +97,7 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
               placeholder="my-workspace"
               value={slug}
               onChange={(e) => {
-                setSlug(
-                  slugify(e.target.value) || e.target.value.toLowerCase(),
-                );
+                setSlug(slugify(e.target.value) || e.target.value.toLowerCase());
                 setSlugEdited(true);
               }}
               pattern="[a-z0-9][a-z0-9\-]{1,46}[a-z0-9]"
@@ -121,11 +113,7 @@ export function CreateWorkspaceStep({ onComplete }: CreateWorkspaceStepProps) {
 
         {error && <p className="text-sm text-destructive">{error}</p>}
 
-        <Button
-          htmlType="submit"
-          className="w-full"
-          disabled={loading || !name}
-        >
+        <Button htmlType="submit" className="w-full" disabled={loading || !name}>
           {loading ? "Creating…" : "Create Workspace →"}
         </Button>
       </form>

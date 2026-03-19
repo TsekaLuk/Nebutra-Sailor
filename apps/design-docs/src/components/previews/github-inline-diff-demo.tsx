@@ -1,4 +1,4 @@
-import { GithubInlineDiff } from "@nebutra/ui/primitives"
+import { GithubInlineDiff } from "@nebutra/ui/primitives";
 
 export function GithubInlineDiffDemo() {
   const diff = [
@@ -44,7 +44,7 @@ export function GithubInlineDiffDemo() {
     { kind: "add", old: null, new: 18, content: "    return null;" } as const,
     { kind: "add", old: null, new: 19, content: "  }" } as const,
     { kind: "context", old: 15, new: 20, content: "}" } as const,
-  ]
+  ];
 
   const initialComments = {
     6: [
@@ -56,7 +56,7 @@ export function GithubInlineDiffDemo() {
         createdAt: "2d ago",
       },
     ],
-  }
+  };
 
   return (
     <div className="max-w-3xl p-4 md:p-8 mx-auto w-full">
@@ -67,5 +67,5 @@ export function GithubInlineDiffDemo() {
         initialComments={initialComments}
       />
     </div>
-  )
+  );
 }

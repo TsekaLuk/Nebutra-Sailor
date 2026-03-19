@@ -5,8 +5,8 @@
  * using a minimal Hono app with the header-based tenant context fallback.
  */
 
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import { OpenAPIHono } from "@hono/zod-openapi";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // ---------------------------------------------------------------------------
 // Mock @clerk/backend so verifyToken is never invoked during tests.
@@ -26,11 +26,8 @@ vi.mock("@nebutra/logger", () => ({
   },
 }));
 
-import {
-  tenantContextMiddleware,
-  requireRole,
-} from "@/middlewares/tenantContext.js";
-import { ROLES, ADMIN_ROLES } from "@/config/roles.js";
+import { ADMIN_ROLES, ROLES } from "@/config/roles.js";
+import { requireRole, tenantContextMiddleware } from "@/middlewares/tenantContext.js";
 
 // ---------------------------------------------------------------------------
 // Test application factory
@@ -43,9 +40,7 @@ import { ROLES, ADMIN_ROLES } from "@/config/roles.js";
 function makeApp(...allowedRoles: string[]) {
   const app = new OpenAPIHono();
   app.use("*", tenantContextMiddleware);
-  app.get("/protected", requireRole(...allowedRoles), (c) =>
-    c.json({ ok: true }),
-  );
+  app.get("/protected", requireRole(...allowedRoles), (c) => c.json({ ok: true }));
   return app;
 }
 
@@ -58,11 +53,7 @@ const adminApp = makeApp(...ADMIN_ROLES);
 // Helpers
 // ---------------------------------------------------------------------------
 
-function get(
-  app: OpenAPIHono,
-  path: string,
-  headers?: Record<string, string>,
-) {
+function get(app: OpenAPIHono, path: string, headers?: Record<string, string>) {
   return app.request(path, {
     method: "GET",
     headers: headers ?? {},

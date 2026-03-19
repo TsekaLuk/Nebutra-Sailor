@@ -1,10 +1,10 @@
 export {
-  PlanConfigService,
-  initPlanConfig,
-  getPlanConfig,
-  type PlanConfig,
-  type FeatureValue,
-  type LimitConfig,
-  type ResolvedConfig,
   type CacheAdapter,
+  type FeatureValue,
+  getPlanConfig,
+  initPlanConfig,
+  type LimitConfig,
+  type PlanConfig,
+  PlanConfigService,
+  type ResolvedConfig,
 } from "./plan-config.js";

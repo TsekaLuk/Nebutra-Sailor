@@ -7,38 +7,35 @@
  */
 
 // ── AI Model Providers (Lobe) ────────────────────────────────────────────────
-export {
-  Anthropic,
-  Claude,
-  ClaudeCode,
-  Gemini,
-  Google,
-  OpenAI,
-  DeepSeek,
-  Qwen,
-  Ollama,
-  Mistral,
-  Grok,
-  Meta,
-  HuggingFace,
-  Flux,
-  Midjourney,
-  SiliconCloud,
-} from "@lobehub/icons";
-
 // ── Dev Tools & Platforms (Lobe) ─────────────────────────────────────────────
 export {
-  Github,
-  Vercel,
+  Anthropic,
+  Bilibili,
+  Claude,
+  ClaudeCode,
   Cursor,
-  Smithery,
-  MCP,
-  OpenClaw,
+  DeepSeek,
+  Flux,
+  Gemini,
+  Github,
+  Google,
+  Grok,
+  HuggingFace,
   LangChain,
   LangGraph,
+  MCP,
+  Meta,
+  Midjourney,
+  Mistral,
   N8n,
-  Bilibili,
+  Ollama,
+  OpenAI,
+  OpenClaw,
+  Qwen,
   Railway,
+  SiliconCloud,
+  Smithery,
+  Vercel,
 } from "@lobehub/icons";
 
 // ── Lucide UI icons ──────────────────────────────────────────────────────────

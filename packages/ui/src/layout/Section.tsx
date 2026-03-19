@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import { cn } from "../utils";
 
 export interface SectionProps {
@@ -25,10 +25,7 @@ export interface SectionProps {
  */
 export function Section({ children, label, className }: SectionProps) {
   return (
-    <section
-      aria-label={label}
-      className={cn("py-8", className)}
-    >
+    <section aria-label={label} className={cn("py-8", className)}>
       {children}
     </section>
   );

@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
-  DropdownMenuTrigger,
-  DropdownMenu,
-  DropdownMenuRadioGroup,
-  DropdownMenuContent,
-  DropdownMenuSeparator,
   Button,
+  DropdownMenu,
+  DropdownMenuContent,
   DropdownMenuLabel,
+  DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-} from "@nebutra/ui/primitives"
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function DropdownMenuRadioGroupDemo() {
   return (
@@ -22,14 +22,10 @@ export function DropdownMenuRadioGroupDemo() {
         <DropdownMenuLabel>排序顺序 (Sort order)</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value="asc">
-          <DropdownMenuRadioItem value="asc">
-            升序 (Ascending)
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="desc">
-            降序 (Descending)
-          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="asc">升序 (Ascending)</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="desc">降序 (Descending)</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

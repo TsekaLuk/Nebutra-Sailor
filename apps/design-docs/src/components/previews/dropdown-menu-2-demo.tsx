@@ -1,6 +1,4 @@
-"use client"
-
-import * as React from "react"
+"use client";
 
 import {
   Button,
@@ -10,7 +8,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 export function DropdownMenu2Demo() {
   return (
     <DropdownMenu>
@@ -20,13 +19,9 @@ export function DropdownMenu2Demo() {
       <DropdownMenuContent>
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked={true}>
-          Toolbar
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={false}>
-          Sidebar
-        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={true}>Toolbar</DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={false}>Sidebar</DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

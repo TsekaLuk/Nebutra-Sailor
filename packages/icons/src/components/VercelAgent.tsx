@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -24,5 +24,6 @@ const VercelAgent = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 VercelAgent.displayName = "VercelAgent";
+
 export { VercelAgent };
 export default VercelAgent;

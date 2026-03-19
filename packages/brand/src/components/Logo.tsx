@@ -77,9 +77,7 @@ export interface LogoProps {
  */
 function getLogoPath(variant: LogoVariant, edition: LogoEdition): string {
   const dir =
-    edition === "compliant" || COMPLIANT_ONLY_VARIANTS.has(variant)
-      ? "/brand-compliant"
-      : "/brand";
+    edition === "compliant" || COMPLIANT_ONLY_VARIANTS.has(variant) ? "/brand-compliant" : "/brand";
   return `${dir}/logo-${variant}.svg`;
 }
 
@@ -175,9 +173,7 @@ export function Logomark({
 
   // For dark backgrounds, invert black to white (unless using "inverse" variant which is already white)
   const filterStyle =
-    inverted && variant !== "inverse"
-      ? { filter: "brightness(0) invert(1)" }
-      : {};
+    inverted && variant !== "inverse" ? { filter: "brightness(0) invert(1)" } : {};
 
   return (
     <img

@@ -1,5 +1,5 @@
-import { projects } from "@/lib/projects";
 import { getArticles } from "@/lib/articles";
+import { projects } from "@/lib/projects";
 
 const BASE_URL = "https://tsekaluk.dev";
 
@@ -14,11 +14,11 @@ function escapeXml(str: string): string {
 
 export function GET() {
   try {
-  const articles = getArticles();
-  const buildDate = new Date().toUTCString();
+    const articles = getArticles();
+    const buildDate = new Date().toUTCString();
 
-  const articleItems = articles.map(
-    (a) => `
+    const articleItems = articles.map(
+      (a) => `
     <item>
       <title>${escapeXml(a.title)}</title>
       <link>${BASE_URL}/thinking/${a.slug}</link>
@@ -27,21 +27,21 @@ export function GET() {
       <guid isPermaLink="true">${BASE_URL}/thinking/${a.slug}</guid>
       <author>tseka@tsekaluk.dev (Tseka Luk)</author>
       ${a.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join("\n      ")}
-    </item>`
-  );
+    </item>`,
+    );
 
-  const projectItems = projects.slice(0, 5).map(
-    (p) => `
+    const projectItems = projects.slice(0, 5).map(
+      (p) => `
     <item>
       <title>${escapeXml(p.name)} — ${escapeXml(p.tagline)}</title>
       <link>${BASE_URL}/work/${p.slug}</link>
       <description>${escapeXml(p.description)}</description>
       <pubDate>${buildDate}</pubDate>
       <guid isPermaLink="true">${BASE_URL}/work/${p.slug}</guid>
-    </item>`
-  );
+    </item>`,
+    );
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tseka Luk — AI-Native Builder</title>
@@ -55,12 +55,12 @@ export function GET() {
   </channel>
 </rss>`;
 
-  return new Response(xml, {
-    headers: {
-      "Content-Type": "application/rss+xml; charset=utf-8",
-      "Cache-Control": "s-maxage=3600, stale-while-revalidate",
-    },
-  });
+    return new Response(xml, {
+      headers: {
+        "Content-Type": "application/rss+xml; charset=utf-8",
+        "Cache-Control": "s-maxage=3600, stale-while-revalidate",
+      },
+    });
   } catch (err) {
     console.error("[rss] Feed generation failed:", err);
     return new Response("Internal server error", { status: 500 });

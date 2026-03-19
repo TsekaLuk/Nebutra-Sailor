@@ -15,37 +15,22 @@ import { resolve } from "path";
 
 const REQUIRED_VARS = {
   // Core (always required)
-  core: [
-    "NODE_ENV",
-  ],
+  core: ["NODE_ENV"],
 
   // Database
-  database: [
-    "DATABASE_URL",
-  ],
+  database: ["DATABASE_URL"],
 
   // Auth (Clerk)
-  auth: [
-    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
-    "CLERK_SECRET_KEY",
-  ],
+  auth: ["NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "CLERK_SECRET_KEY"],
 
   // Redis
-  redis: [
-    "UPSTASH_REDIS_REST_URL",
-    "UPSTASH_REDIS_REST_TOKEN",
-  ],
+  redis: ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"],
 
   // AI Services
-  ai: [
-    "OPENAI_API_KEY",
-  ],
+  ai: ["OPENAI_API_KEY"],
 
   // Billing
-  billing: [
-    "STRIPE_SECRET_KEY",
-    "STRIPE_WEBHOOK_SECRET",
-  ],
+  billing: ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"],
 
   // Observability (optional in dev)
   observability: [
@@ -156,9 +141,7 @@ function main(): void {
   }
 
   // Determine required vars
-  const requiredVars = appName
-    ? getRequiredVarsForApp(appName)
-    : REQUIRED_VARS.core;
+  const requiredVars = appName ? getRequiredVarsForApp(appName) : REQUIRED_VARS.core;
 
   const result = validateEnvVars(requiredVars);
 

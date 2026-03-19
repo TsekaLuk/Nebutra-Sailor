@@ -3,8 +3,7 @@ import type { PresetDefinition } from "../config";
 export const aiSaas: PresetDefinition = {
   id: "ai-saas",
   name: "AI SaaS",
-  description:
-    "AI-powered SaaS with billing, multi-tenancy, and provider abstraction",
+  description: "AI-powered SaaS with billing, multi-tenancy, and provider abstraction",
   apps: {
     web: true,
     "landing-page": true,

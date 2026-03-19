@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { PlusIcon } from "lucide-react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface LogoCloudGridLogo {
@@ -63,13 +63,7 @@ export function LogoCloudGrid({
   }
 
   return (
-    <div
-      className={cn(
-        "relative grid grid-cols-2 border-x md:grid-cols-4",
-        className
-      )}
-      {...props}
-    >
+    <div className={cn("relative grid grid-cols-2 border-x md:grid-cols-4", className)} {...props}>
       {/* Top border line */}
       <div className="-translate-x-1/2 -top-px pointer-events-none absolute left-1/2 w-screen border-t" />
 
@@ -86,10 +80,7 @@ export function LogoCloudGrid({
         )}
       </LogoCard>
 
-      <LogoCard
-        className="border-b md:border-r"
-        logo={displayLogos[1]}
-      />
+      <LogoCard className="border-b md:border-r" logo={displayLogos[1]} />
 
       <LogoCard
         className="relative border-r border-b md:bg-secondary dark:md:bg-secondary/30"
@@ -132,15 +123,9 @@ export function LogoCloudGrid({
         logo={displayLogos[5]}
       />
 
-      <LogoCard
-        className="border-r"
-        logo={displayLogos[6]}
-      />
+      <LogoCard className="border-r" logo={displayLogos[6]} />
 
-      <LogoCard
-        className="bg-secondary dark:bg-secondary/30"
-        logo={displayLogos[7]}
-      />
+      <LogoCard className="bg-secondary dark:bg-secondary/30" logo={displayLogos[7]} />
 
       {/* Bottom border line */}
       <div className="-translate-x-1/2 -bottom-px pointer-events-none absolute left-1/2 w-screen border-b" />
@@ -158,10 +143,7 @@ function LogoCard({ logo, className, children, ...props }: LogoCardProps) {
   if (!logo.src) {
     return (
       <div
-        className={cn(
-          "flex items-center justify-center bg-background px-4 py-8 md:p-8",
-          className
-        )}
+        className={cn("flex items-center justify-center bg-background px-4 py-8 md:p-8", className)}
         {...props}
       >
         {children}
@@ -171,10 +153,7 @@ function LogoCard({ logo, className, children, ...props }: LogoCardProps) {
 
   return (
     <div
-      className={cn(
-        "flex items-center justify-center bg-background px-4 py-8 md:p-8",
-        className
-      )}
+      className={cn("flex items-center justify-center bg-background px-4 py-8 md:p-8", className)}
       {...props}
     >
       <img

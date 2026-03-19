@@ -35,13 +35,37 @@ const SSR_EXCLUDE = new Set([
  */
 // TypeScript built-in types that can appear with `<` (generics) but are not JSX
 const TS_BUILTINS = new Set([
-  "Array", "Map", "Set", "WeakMap", "WeakSet", "Promise", "Record",
-  "Partial", "Required", "Readonly", "Pick", "Omit", "Exclude", "Extract",
-  "HTMLDivElement", "HTMLSpanElement", "HTMLButtonElement", "HTMLInputElement",
-  "HTMLFormElement", "HTMLAnchorElement", "HTMLElement", "SVGSVGElement",
-  "HTMLParagraphElement", "HTMLHeadingElement", "HTMLImageElement",
-  "HTMLTextAreaElement", "HTMLSelectElement", "HTMLLabelElement",
-  "HTMLTableElement", "HTMLUListElement", "HTMLLIElement",
+  "Array",
+  "Map",
+  "Set",
+  "WeakMap",
+  "WeakSet",
+  "Promise",
+  "Record",
+  "Partial",
+  "Required",
+  "Readonly",
+  "Pick",
+  "Omit",
+  "Exclude",
+  "Extract",
+  "HTMLDivElement",
+  "HTMLSpanElement",
+  "HTMLButtonElement",
+  "HTMLInputElement",
+  "HTMLFormElement",
+  "HTMLAnchorElement",
+  "HTMLElement",
+  "SVGSVGElement",
+  "HTMLParagraphElement",
+  "HTMLHeadingElement",
+  "HTMLImageElement",
+  "HTMLTextAreaElement",
+  "HTMLSelectElement",
+  "HTMLLabelElement",
+  "HTMLTableElement",
+  "HTMLUListElement",
+  "HTMLLIElement",
 ]);
 
 function hasUnresolvedRefs(source) {
@@ -49,7 +73,11 @@ function hasUnresolvedRefs(source) {
   const imported = new Set();
   for (const m of source.matchAll(/import\s+\{([^}]+)\}\s+from/g)) {
     for (const name of m[1].split(",")) {
-      const clean = name.trim().split(/\s+as\s+/).pop().trim();
+      const clean = name
+        .trim()
+        .split(/\s+as\s+/)
+        .pop()
+        .trim();
       if (clean) imported.add(clean);
     }
   }
@@ -77,7 +105,7 @@ function hasUnresolvedRefs(source) {
     if (imported.has(tag)) continue;
     if (TS_BUILTINS.has(tag)) continue;
     // Check if defined locally (function/const) with word boundary
-    const localDef = new RegExp(`(?:function|const|class)\\s+${tag}(?:\\s|\\(|<|=)`)
+    const localDef = new RegExp(`(?:function|const|class)\\s+${tag}(?:\\s|\\(|<|=)`);
     if (localDef.test(source)) continue;
     return true;
   }
@@ -96,7 +124,7 @@ function toKebab(name) {
 /** Extract exported component names from a file's source */
 function extractExports(source, _filename) {
   const names = [];
-  
+
   // Strip out template literals to avoid matching code examples
   const safeSource = source.replace(/`[\s\S]*?`/g, '""');
 
@@ -106,16 +134,12 @@ function extractExports(source, _filename) {
   }
 
   // export default function FooDemo(
-  for (const m of safeSource.matchAll(
-    /^export\s+default\s+function\s+([A-Z]\w*)\s*\(/gm,
-  )) {
+  for (const m of safeSource.matchAll(/^export\s+default\s+function\s+([A-Z]\w*)\s*\(/gm)) {
     names.push(m[1]);
   }
 
   // export const FooDemo =
-  for (const m of safeSource.matchAll(
-    /^export\s+const\s+([A-Z]\w*)\s*[=:]/gm,
-  )) {
+  for (const m of safeSource.matchAll(/^export\s+const\s+([A-Z]\w*)\s*[=:]/gm)) {
     // Skip type aliases, interfaces, non-component constants
     if (m[1].endsWith("Props") || m[1].endsWith("Context")) continue;
     names.push(m[1]);
@@ -146,8 +170,7 @@ for (const file of files) {
   }
 
   // Detect which exports are default
-  const defaultExportPattern =
-    /^export\s+default\s+function\s+([A-Z]\w*)/gm;
+  const defaultExportPattern = /^export\s+default\s+function\s+([A-Z]\w*)/gm;
   const defaultNames = new Set();
   for (const m of source.matchAll(defaultExportPattern)) {
     defaultNames.add(m[1]);
@@ -185,7 +208,7 @@ const lines = [
 // Named exports — so mdx-components.tsx can do:
 //   import { AccordionDemo, ButtonDemo } from "@/components/__registry__"
 for (const { exportName, file, key, isDefault, ssrOff: autoSsrOff } of entries) {
-  const ssrOff = (SSR_EXCLUDE.has(key) || autoSsrOff) ? `, { ssr: false }` : "";
+  const ssrOff = SSR_EXCLUDE.has(key) || autoSsrOff ? `, { ssr: false }` : "";
   const accessor = isDefault ? "m.default" : `m.${exportName}`;
   lines.push(
     `export const ${exportName} = dynamic(() => import("@/components/previews/${file}").then(m => ({ default: ${accessor} }))${ssrOff});`,

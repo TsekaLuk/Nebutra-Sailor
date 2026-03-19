@@ -7,29 +7,27 @@ export const contentType = "image/png";
 
 export default function Icon() {
   return new ImageResponse(
-    (
-      <div
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "linear-gradient(135deg, #0033FE 0%, #0BF1C3 100%)",
+        borderRadius: 100,
+      }}
+    >
+      <span
         style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "linear-gradient(135deg, #0033FE 0%, #0BF1C3 100%)",
-          borderRadius: 100,
+          fontSize: 280,
+          fontWeight: 700,
+          color: "white",
         }}
       >
-        <span
-          style={{
-            fontSize: 280,
-            fontWeight: 700,
-            color: "white",
-          }}
-        >
-          N
-        </span>
-      </div>
-    ),
-    { ...size }
+        N
+      </span>
+    </div>,
+    { ...size },
   );
 }

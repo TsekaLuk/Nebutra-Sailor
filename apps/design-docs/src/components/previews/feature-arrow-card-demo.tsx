@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { FeatureArrowCard } from "@nebutra/ui/primitives"
-import { Zap, Shield, Sparkles } from "lucide-react"
+import { FeatureArrowCard } from "@nebutra/ui/primitives";
+import { Shield, Sparkles, Zap } from "lucide-react";
 
 export function FeatureArrowCardDemo() {
   return (
@@ -52,5 +52,5 @@ export function FeatureArrowCardDemo() {
         className="md:col-span-2 rounded-xl"
       />
     </div>
-  )
+  );
 }

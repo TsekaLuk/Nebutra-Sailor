@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { CodeBlock } from "@nebutra/ui/primitives"
+import { CodeBlock } from "@nebutra/ui/primitives";
 
 export function MermaidDemo() {
   const code = `graph TD;
@@ -8,7 +8,7 @@ export function MermaidDemo() {
     B --> C{Authentication};
     C -->|Valid| D[Service Mesh];
     C -->|Invalid| E[401 Unauthorized];
-    D --> F[Database Cluster];`
+    D --> F[Database Cluster];`;
 
   return (
     <div className="w-full">
@@ -23,5 +23,5 @@ export function MermaidDemo() {
         showLineNumbers={false}
       />
     </div>
-  )
+  );
 }

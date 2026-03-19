@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { ContextMenu as BaseContextMenu } from "@base-ui-components/react/context-menu";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -38,11 +38,12 @@ export interface ContextMenuSeparatorProps {
   className?: string;
 }
 
-export interface ContextMenuContentProps extends React.ComponentPropsWithoutRef<typeof BaseContextMenu.Popup> {
-  align?: React.ComponentProps<typeof BaseContextMenu.Positioner>['align'];
-  sideOffset?: React.ComponentProps<typeof BaseContextMenu.Positioner>['sideOffset'];
-  alignOffset?: React.ComponentProps<typeof BaseContextMenu.Positioner>['alignOffset'];
-  side?: React.ComponentProps<typeof BaseContextMenu.Positioner>['side'];
+export interface ContextMenuContentProps
+  extends React.ComponentPropsWithoutRef<typeof BaseContextMenu.Popup> {
+  align?: React.ComponentProps<typeof BaseContextMenu.Positioner>["align"];
+  sideOffset?: React.ComponentProps<typeof BaseContextMenu.Positioner>["sideOffset"];
+  alignOffset?: React.ComponentProps<typeof BaseContextMenu.Positioner>["alignOffset"];
+  side?: React.ComponentProps<typeof BaseContextMenu.Positioner>["side"];
 }
 
 // =============================================================================
@@ -82,23 +83,33 @@ ContextMenuTrigger.displayName = "ContextMenu.Trigger";
 export const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof BaseContextMenu.Popup>,
   ContextMenuContentProps
->(({ className, alignOffset = 0, align = "start", sideOffset = 4, side = "bottom", ...props }, ref) => (
-  <BaseContextMenu.Portal>
-    <BaseContextMenu.Positioner alignOffset={alignOffset} align={align} sideOffset={sideOffset} side={side}>
-      <BaseContextMenu.Popup
-        ref={ref}
-        className={cn(
-          "z-50 min-w-40 overflow-hidden rounded-xl border bg-background/90 backdrop-blur-md",
-          "p-1 text-popover-foreground shadow-xl transition-all outline-none",
-          "data-[starting-style]:zoom-out-95 data-[ending-style]:zoom-out-95",
-          "data-[starting-style]:fade-out-0 data-[ending-style]:fade-out-0",
-          className,
-        )}
-        {...props}
-      />
-    </BaseContextMenu.Positioner>
-  </BaseContextMenu.Portal>
-));
+>(
+  (
+    { className, alignOffset = 0, align = "start", sideOffset = 4, side = "bottom", ...props },
+    ref,
+  ) => (
+    <BaseContextMenu.Portal>
+      <BaseContextMenu.Positioner
+        alignOffset={alignOffset}
+        align={align}
+        sideOffset={sideOffset}
+        side={side}
+      >
+        <BaseContextMenu.Popup
+          ref={ref}
+          className={cn(
+            "z-50 min-w-40 overflow-hidden rounded-xl border bg-background/90 backdrop-blur-md",
+            "p-1 text-popover-foreground shadow-xl transition-all outline-none",
+            "data-[starting-style]:zoom-out-95 data-[ending-style]:zoom-out-95",
+            "data-[starting-style]:fade-out-0 data-[ending-style]:fade-out-0",
+            className,
+          )}
+          {...props}
+        />
+      </BaseContextMenu.Positioner>
+    </BaseContextMenu.Portal>
+  ),
+);
 ContextMenuContent.displayName = "ContextMenu.Content";
 
 // =============================================================================
@@ -118,10 +129,7 @@ export const ContextMenuLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <BaseContextMenu.GroupLabel
     ref={ref}
-    className={cn(
-      "px-2 py-1 text-xs font-medium text-muted-foreground",
-      className,
-    )}
+    className={cn("px-2 py-1 text-xs font-medium text-muted-foreground", className)}
     {...props}
   />
 ));
@@ -154,15 +162,11 @@ export const ContextMenuItem = React.forwardRef<
   const inner = (
     <>
       {prefix && (
-        <span className="mr-2 flex shrink-0 items-center text-muted-foreground">
-          {prefix}
-        </span>
+        <span className="mr-2 flex shrink-0 items-center text-muted-foreground">{prefix}</span>
       )}
       <span className="flex-1">{children}</span>
       {suffix && (
-        <span className="ml-auto flex shrink-0 items-center text-muted-foreground">
-          {suffix}
-        </span>
+        <span className="ml-auto flex shrink-0 items-center text-muted-foreground">{suffix}</span>
       )}
     </>
   );
@@ -172,7 +176,11 @@ export const ContextMenuItem = React.forwardRef<
       ref={ref}
       {...(disabled !== undefined && { disabled })}
       {...(onSelect && !href ? { onClick: (e) => onSelect(e) } : {})}
-      {...(href ? { render: <a href={href} aria-label={typeof children === 'string' ? children : "Link"} /> } : {})}
+      {...(href
+        ? {
+            render: <a href={href} aria-label={typeof children === "string" ? children : "Link"} />,
+          }
+        : {})}
       className={cn(
         "relative flex cursor-default select-none items-center rounded-[var(--radius-md)] px-2 py-1.5",
         "text-sm outline-none transition-colors",

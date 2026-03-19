@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Input, Label } from "@nebutra/ui/primitives"
+import { Input, Label } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Label4Demo() {
   return (
     <div className="space-y-2 max-w-sm w-full">
@@ -11,5 +10,5 @@ export function Label4Demo() {
       </Label>
       <Input id="disabled-input" disabled />
     </div>
-  )
+  );
 }

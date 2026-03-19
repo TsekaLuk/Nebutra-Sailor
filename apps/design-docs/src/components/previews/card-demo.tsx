@@ -1,15 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import {
-  CardTitle,
-  CardFooter,
-  Button,
-  CardHeader,
-  CardDescription,
-} from "@nebutra/ui/primitives"
-
-import { Card, CardBody } from "@nebutra/ui/patterns"
+import { Card, CardBody } from "@nebutra/ui/patterns";
+import { Button, CardDescription, CardFooter, CardHeader, CardTitle } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function CardDemo() {
   return (
     <Card variant="default" padding="md">
@@ -24,5 +17,5 @@ export function CardDemo() {
         <Button>Create</Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

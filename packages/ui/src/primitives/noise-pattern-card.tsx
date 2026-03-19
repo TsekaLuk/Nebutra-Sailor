@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { cn } from "../utils/cn";
 import { motion } from "framer-motion";
+import type * as React from "react";
+import { cn } from "../utils/cn";
 
 export interface NoisePatternCardProps {
   /** Card content */
@@ -45,7 +45,7 @@ export function NoisePatternCard({
         "w-full overflow-hidden rounded-[var(--radius-md)] border",
         "bg-card",
         "border-border",
-        className
+        className,
       )}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -55,7 +55,7 @@ export function NoisePatternCard({
         className={cn(
           "size-full bg-repeat bg-[length:500px_500px]",
           "bg-noise-pattern",
-          patternClassName
+          patternClassName,
         )}
       >
         <div className={cn("bg-card", overlayClassName)}>{children}</div>
@@ -69,11 +69,6 @@ export type NoisePatternCardBodyProps = React.HTMLAttributes<HTMLDivElement>;
 /**
  * NoisePatternCardBody - Content container for NoisePatternCard
  */
-export function NoisePatternCardBody({
-  className,
-  ...props
-}: NoisePatternCardBodyProps) {
-  return (
-    <div className={cn("p-4 text-left md:p-6", className)} {...props} />
-  );
+export function NoisePatternCardBody({ className, ...props }: NoisePatternCardBodyProps) {
+  return <div className={cn("p-4 text-left md:p-6", className)} {...props} />;
 }

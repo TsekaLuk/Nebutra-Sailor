@@ -25,11 +25,7 @@ export function TestimonialsSection() {
   return (
     <section className="w-full bg-[color:var(--neutral-2)] py-24 md:py-32 dark:bg-black">
       <div className="mx-auto max-w-7xl px-6">
-        <AnimateIn
-          inView
-          preset="emerge"
-          className="mx-auto max-w-3xl text-center"
-        >
+        <AnimateIn inView preset="emerge" className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold tracking-[0.14em] text-[color:var(--blue-11)] uppercase">
             Trusted by operators
           </p>
@@ -38,11 +34,7 @@ export function TestimonialsSection() {
           </h2>
         </AnimateIn>
 
-        <AnimateInGroup
-          inView
-          stagger="normal"
-          className="mt-12 grid gap-5 md:grid-cols-3"
-        >
+        <AnimateInGroup inView stagger="normal" className="mt-12 grid gap-5 md:grid-cols-3">
           {TESTIMONIALS.map((item) => (
             <AnimateIn key={item.author} preset="fadeUp">
               <article className="rounded-[var(--radius-2xl)] border border-[color:var(--neutral-7)] bg-[color:var(--neutral-1)] p-6 dark:border-white/10 dark:bg-white/5">

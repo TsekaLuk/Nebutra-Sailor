@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Zap, Shield, Globe, Sparkles, Lock, BarChart } from "lucide-react";
+import { BarChart, Globe, Lock, Shield, Sparkles, Zap } from "lucide-react";
 import { FeatureIconItem } from "./feature-icon-item";
 
 const meta = {
@@ -33,36 +33,12 @@ export const Default: Story = {
 export const FeatureGrid: Story = {
   render: () => (
     <div className="grid grid-cols-2 gap-6 w-96">
-      <FeatureIconItem
-        icon={Zap}
-        title="Fast"
-        description="Optimized for low latency."
-      />
-      <FeatureIconItem
-        icon={Shield}
-        title="Secure"
-        description="Zero-trust architecture."
-      />
-      <FeatureIconItem
-        icon={Globe}
-        title="Global"
-        description="35+ edge locations."
-      />
-      <FeatureIconItem
-        icon={Sparkles}
-        title="AI-ready"
-        description="Built-in intelligence."
-      />
-      <FeatureIconItem
-        icon={Lock}
-        title="Compliant"
-        description="SOC 2 + GDPR certified."
-      />
-      <FeatureIconItem
-        icon={BarChart}
-        title="Analytics"
-        description="Real-time dashboards."
-      />
+      <FeatureIconItem icon={Zap} title="Fast" description="Optimized for low latency." />
+      <FeatureIconItem icon={Shield} title="Secure" description="Zero-trust architecture." />
+      <FeatureIconItem icon={Globe} title="Global" description="35+ edge locations." />
+      <FeatureIconItem icon={Sparkles} title="AI-ready" description="Built-in intelligence." />
+      <FeatureIconItem icon={Lock} title="Compliant" description="SOC 2 + GDPR certified." />
+      <FeatureIconItem icon={BarChart} title="Analytics" description="Real-time dashboards." />
     </div>
   ),
 };

@@ -1,14 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import {
-  CheckCircle2,
-  Circle,
-  CircleAlert,
-  CircleDotDashed,
-  CircleX,
-} from "lucide-react";
-import { motion, AnimatePresence, LayoutGroup } from "motion/react";
+import { CheckCircle2, Circle, CircleAlert, CircleDotDashed, CircleX } from "lucide-react";
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import type React from "react";
+import { useMemo, useState } from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -18,12 +13,7 @@ import { cn } from "../utils";
 /**
  * Task status types
  */
-export type TaskStatus =
-  | "pending"
-  | "in-progress"
-  | "completed"
-  | "need-help"
-  | "failed";
+export type TaskStatus = "pending" | "in-progress" | "completed" | "need-help" | "failed";
 
 /**
  * Task priority levels
@@ -86,11 +76,7 @@ export interface AgentPlanProps {
   /** Callback when task status changes */
   onTaskStatusChange?: (taskId: string, newStatus: TaskStatus) => void;
   /** Callback when subtask status changes */
-  onSubtaskStatusChange?: (
-    taskId: string,
-    subtaskId: string,
-    newStatus: TaskStatus,
-  ) => void;
+  onSubtaskStatusChange?: (taskId: string, subtaskId: string, newStatus: TaskStatus) => void;
   /** Initially expanded task IDs */
   defaultExpandedTasks?: string[];
   /** Whether to allow status toggling */
@@ -131,12 +117,9 @@ const StatusIcon: React.FC<{ status: TaskStatus; size?: "sm" | "md" }> = ({
 
 const StatusBadge: React.FC<{ status: TaskStatus }> = ({ status }) => {
   const colorClasses = {
-    completed:
-      "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-    "in-progress":
-      "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-    "need-help":
-      "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
+    completed: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+    "in-progress": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    "need-help": "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
     failed: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
     pending: "bg-muted text-muted-foreground",
   };
@@ -193,11 +176,8 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
   toolsLabel = "MCP Servers:",
 }) => {
   const [tasks, setTasks] = useState<AgentTask[]>(initialTasks);
-  const [expandedTasks, setExpandedTasks] =
-    useState<string[]>(defaultExpandedTasks);
-  const [expandedSubtasks, setExpandedSubtasks] = useState<
-    Record<string, boolean>
-  >({});
+  const [expandedTasks, setExpandedTasks] = useState<string[]>(defaultExpandedTasks);
+  const [expandedSubtasks, setExpandedSubtasks] = useState<Record<string, boolean>>({});
 
   // Reduced motion preference
   const prefersReducedMotion = useMemo(() => {
@@ -208,9 +188,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
   // Toggle task expansion
   const toggleTaskExpansion = (taskId: string) => {
     setExpandedTasks((prev) =>
-      prev.includes(taskId)
-        ? prev.filter((id) => id !== taskId)
-        : [...prev, taskId],
+      prev.includes(taskId) ? prev.filter((id) => id !== taskId) : [...prev, taskId],
     );
   };
 
@@ -246,9 +224,9 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
             subtasks:
               newStatus === "completed"
                 ? task.subtasks.map((s) => ({
-                  ...s,
-                  status: "completed" as TaskStatus,
-                }))
+                    ...s,
+                    status: "completed" as TaskStatus,
+                  }))
                 : task.subtasks,
           };
         }
@@ -274,9 +252,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
             return subtask;
           });
 
-          const allCompleted = updatedSubtasks.every(
-            (s) => s.status === "completed",
-          );
+          const allCompleted = updatedSubtasks.every((s) => s.status === "completed");
 
           return {
             ...task,
@@ -327,12 +303,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
   };
 
   return (
-    <div
-      className={cn(
-        "h-full overflow-auto bg-background p-2 text-foreground",
-        className,
-      )}
-    >
+    <div className={cn("h-full overflow-auto bg-background p-2 text-foreground", className)}>
       <motion.div
         className="overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow"
         initial={{ opacity: 0, y: 10 }}
@@ -393,19 +364,18 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                         </span>
 
                         <div className="flex flex-shrink-0 items-center gap-2 text-xs">
-                          {task.dependencies &&
-                            task.dependencies.length > 0 && (
-                              <div className="mr-2 flex gap-1">
-                                {task.dependencies.map((dep, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="rounded bg-secondary/40 px-1.5 py-0.5 text-xs font-medium text-secondary-foreground"
-                                  >
-                                    {dep}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
+                          {task.dependencies && task.dependencies.length > 0 && (
+                            <div className="mr-2 flex gap-1">
+                              {task.dependencies.map((dep, idx) => (
+                                <span
+                                  key={idx}
+                                  className="rounded bg-secondary/40 px-1.5 py-0.5 text-xs font-medium text-secondary-foreground"
+                                >
+                                  {dep}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                           <StatusBadge status={task.status} />
                         </div>
                       </motion.div>
@@ -425,17 +395,14 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                           <ul className="mb-1.5 ml-3 mr-2 mt-1 space-y-0.5">
                             {task.subtasks.map((subtask) => {
                               const subtaskKey = `${task.id}-${subtask.id}`;
-                              const isSubtaskExpanded =
-                                expandedSubtasks[subtaskKey];
+                              const isSubtaskExpanded = expandedSubtasks[subtaskKey];
 
                               return (
                                 <motion.li
                                   key={subtask.id}
                                   className="group flex flex-col py-0.5 pl-6"
                                   variants={subtaskVariants}
-                                  onClick={() =>
-                                    toggleSubtaskExpansion(task.id, subtask.id)
-                                  }
+                                  onClick={() => toggleSubtaskExpansion(task.id, subtask.id)}
                                 >
                                   <motion.div
                                     className="flex flex-1 items-center rounded-[var(--radius-md)] p-1"
@@ -447,10 +414,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                                       className="mr-2 flex-shrink-0 cursor-pointer"
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        toggleSubtaskStatus(
-                                          task.id,
-                                          subtask.id,
-                                        );
+                                        toggleSubtaskStatus(task.id, subtask.id);
                                       }}
                                       whileTap={{ scale: 0.9 }}
                                       whileHover={{ scale: 1.1 }}
@@ -462,10 +426,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                                           animate={{ opacity: 1, scale: 1 }}
                                           exit={{ opacity: 0, scale: 0.8 }}
                                         >
-                                          <StatusIcon
-                                            status={subtask.status}
-                                            size="sm"
-                                          />
+                                          <StatusIcon status={subtask.status} size="sm" />
                                         </motion.div>
                                       </AnimatePresence>
                                     </motion.div>
@@ -474,7 +435,7 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                                       className={cn(
                                         "cursor-pointer text-sm",
                                         subtask.status === "completed" &&
-                                        "text-muted-foreground line-through",
+                                          "text-muted-foreground line-through",
                                       )}
                                     >
                                       {subtask.title}
@@ -489,41 +450,36 @@ export const AgentPlan: React.FC<AgentPlanProps> = ({
                                         animate={{ opacity: 1, height: "auto" }}
                                         exit={{ opacity: 0, height: 0 }}
                                       >
-                                        <p className="py-1">
-                                          {subtask.description}
-                                        </p>
-                                        {subtask.tools &&
-                                          subtask.tools.length > 0 && (
-                                            <div className="mb-1 mt-0.5 flex flex-wrap items-center gap-1.5">
-                                              <span className="font-medium text-muted-foreground">
-                                                {toolsLabel}
-                                              </span>
-                                              <div className="flex flex-wrap gap-1">
-                                                {subtask.tools.map(
-                                                  (tool, idx) => (
-                                                    <motion.span
-                                                      key={idx}
-                                                      className="rounded bg-secondary/40 px-1.5 py-0.5 text-xs font-medium text-secondary-foreground shadow-sm"
-                                                      initial={{
-                                                        opacity: 0,
-                                                        y: -5,
-                                                      }}
-                                                      animate={{
-                                                        opacity: 1,
-                                                        y: 0,
-                                                        transition: {
-                                                          delay: idx * 0.05,
-                                                        },
-                                                      }}
-                                                      whileHover={{ y: -1 }}
-                                                    >
-                                                      {tool}
-                                                    </motion.span>
-                                                  ),
-                                                )}
-                                              </div>
+                                        <p className="py-1">{subtask.description}</p>
+                                        {subtask.tools && subtask.tools.length > 0 && (
+                                          <div className="mb-1 mt-0.5 flex flex-wrap items-center gap-1.5">
+                                            <span className="font-medium text-muted-foreground">
+                                              {toolsLabel}
+                                            </span>
+                                            <div className="flex flex-wrap gap-1">
+                                              {subtask.tools.map((tool, idx) => (
+                                                <motion.span
+                                                  key={idx}
+                                                  className="rounded bg-secondary/40 px-1.5 py-0.5 text-xs font-medium text-secondary-foreground shadow-sm"
+                                                  initial={{
+                                                    opacity: 0,
+                                                    y: -5,
+                                                  }}
+                                                  animate={{
+                                                    opacity: 1,
+                                                    y: 0,
+                                                    transition: {
+                                                      delay: idx * 0.05,
+                                                    },
+                                                  }}
+                                                  whileHover={{ y: -1 }}
+                                                >
+                                                  {tool}
+                                                </motion.span>
+                                              ))}
                                             </div>
-                                          )}
+                                          </div>
+                                        )}
                                       </motion.div>
                                     )}
                                   </AnimatePresence>

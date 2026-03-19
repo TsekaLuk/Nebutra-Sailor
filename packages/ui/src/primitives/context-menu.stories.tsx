@@ -1,6 +1,6 @@
-import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Edit2, Trash2, Copy, Link, Download, MoreHorizontal } from "lucide-react";
+import { Copy, Download, Edit2, Link, MoreHorizontal, Trash2 } from "lucide-react";
+import type * as React from "react";
 import { ContextMenu } from "./context-menu";
 
 const meta = {
@@ -158,8 +158,12 @@ export const DisabledItems: Story = {
       </ContextMenu.Trigger>
       <ContextMenu.Content>
         <ContextMenu.Item onSelect={() => {}}>Edit</ContextMenu.Item>
-        <ContextMenu.Item disabled onSelect={() => {}}>Copy (disabled)</ContextMenu.Item>
-        <ContextMenu.Item disabled onSelect={() => {}}>Paste (disabled)</ContextMenu.Item>
+        <ContextMenu.Item disabled onSelect={() => {}}>
+          Copy (disabled)
+        </ContextMenu.Item>
+        <ContextMenu.Item disabled onSelect={() => {}}>
+          Paste (disabled)
+        </ContextMenu.Item>
         <ContextMenu.Separator />
         <ContextMenu.Item onSelect={() => {}}>Delete</ContextMenu.Item>
       </ContextMenu.Content>

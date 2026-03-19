@@ -12,8 +12,7 @@
 
 import { inngest } from "./client";
 
-const THIRD_PARTY_SERVICE_URL =
-  process.env.THIRD_PARTY_SERVICE_URL || "http://localhost:8007";
+const THIRD_PARTY_SERVICE_URL = process.env.THIRD_PARTY_SERVICE_URL || "http://localhost:8007";
 
 // ===========================================
 // Trending Posts Sync (Every 30 minutes)
@@ -163,10 +162,9 @@ export const phCacheWarm = inngest.createFunction(
     logger.info("Warming Product Hunt cache...");
 
     const result = await step.run("warm-cache", async () => {
-      const response = await fetch(
-        `${THIRD_PARTY_SERVICE_URL}/api/v1/producthunt/cache/warm`,
-        { method: "POST" },
-      );
+      const response = await fetch(`${THIRD_PARTY_SERVICE_URL}/api/v1/producthunt/cache/warm`, {
+        method: "POST",
+      });
 
       if (!response.ok) {
         throw new Error(`Failed to warm cache: ${response.status}`);
@@ -200,10 +198,9 @@ export const phFullSync = inngest.createFunction(
 
     // Step 1: Invalidate existing cache
     await step.run("invalidate-cache", async () => {
-      const response = await fetch(
-        `${THIRD_PARTY_SERVICE_URL}/api/v1/producthunt/cache`,
-        { method: "DELETE" },
-      );
+      const response = await fetch(`${THIRD_PARTY_SERVICE_URL}/api/v1/producthunt/cache`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) {
         logger.warn("Failed to invalidate cache, continuing anyway");
@@ -214,10 +211,9 @@ export const phFullSync = inngest.createFunction(
 
     // Step 2: Warm cache with fresh data
     const warmResult = await step.run("warm-fresh-cache", async () => {
-      const response = await fetch(
-        `${THIRD_PARTY_SERVICE_URL}/api/v1/producthunt/cache/warm`,
-        { method: "POST" },
-      );
+      const response = await fetch(`${THIRD_PARTY_SERVICE_URL}/api/v1/producthunt/cache/warm`, {
+        method: "POST",
+      });
 
       if (!response.ok) {
         throw new Error(`Failed to warm cache: ${response.status}`);

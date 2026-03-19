@@ -1,12 +1,7 @@
 "use client";
 
-import * as React from "react";
-import {
-  motion,
-  useMotionTemplate,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { motion, useMotionTemplate, useScroll, useTransform } from "motion/react";
+import type * as React from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -107,24 +102,12 @@ const SmoothScrollHeroBackground: React.FC<SmoothScrollHeroBackgroundProps> = ({
 }) => {
   const { scrollY } = useScroll();
 
-  const clipStart = useTransform(
-    scrollY,
-    [0, scrollHeight],
-    [initialClipPercentage, 0],
-  );
-  const clipEnd = useTransform(
-    scrollY,
-    [0, scrollHeight],
-    [finalClipPercentage, 100],
-  );
+  const clipStart = useTransform(scrollY, [0, scrollHeight], [initialClipPercentage, 0]);
+  const clipEnd = useTransform(scrollY, [0, scrollHeight], [finalClipPercentage, 100]);
 
   const clipPath = useMotionTemplate`polygon(${clipStart}% ${clipStart}%, ${clipEnd}% ${clipStart}%, ${clipEnd}% ${clipEnd}%, ${clipStart}% ${clipEnd}%)`;
 
-  const backgroundSize = useTransform(
-    scrollY,
-    [0, scrollHeight + 500],
-    [initialZoom, finalZoom],
-  );
+  const backgroundSize = useTransform(scrollY, [0, scrollHeight + 500], [initialZoom, finalZoom]);
 
   return (
     <motion.div

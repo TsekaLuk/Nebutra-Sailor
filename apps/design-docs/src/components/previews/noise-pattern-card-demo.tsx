@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { NoisePatternCard, NoisePatternCardBody } from "@nebutra/ui/primitives"
-import { Sparkles } from "lucide-react"
+import { NoisePatternCard, NoisePatternCardBody } from "@nebutra/ui/primitives";
+import { Sparkles } from "lucide-react";
 
 export function NoisePatternCardDemo() {
   return (
@@ -18,10 +18,9 @@ export function NoisePatternCardDemo() {
                 Organic Grain Texture
               </h3>
               <p className="leading-relaxed text-muted-foreground">
-                Add depth and vintage feel to your interfaces with this animated
-                SVG noise pattern. Perfect for premium cards, feature
-                highlights, and section backgrounds that need that extra touch
-                of analog warmth in a digital world.
+                Add depth and vintage feel to your interfaces with this animated SVG noise pattern.
+                Perfect for premium cards, feature highlights, and section backgrounds that need
+                that extra touch of analog warmth in a digital world.
               </p>
             </div>
 
@@ -40,5 +39,5 @@ export function NoisePatternCardDemo() {
         </NoisePatternCardBody>
       </NoisePatternCard>
     </div>
-  )
+  );
 }

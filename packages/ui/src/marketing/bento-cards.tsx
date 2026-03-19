@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -144,7 +144,7 @@ export const PlusCard: React.FC<PlusCardProps> = ({
   const cardClasses = cn(
     "relative rounded-[var(--radius-lg)] border border-dashed border-border bg-background p-6",
     "flex min-h-[200px] flex-col justify-between",
-    className
+    className,
   );
 
   if (href) {
@@ -201,23 +201,18 @@ export const BentoCards: React.FC<BentoCardsProps> = ({
   showBorder = true,
 }) => {
   return (
-    <section
-      className={cn(
-        showBorder && "border border-border bg-background",
-        className
-      )}
-    >
+    <section className={cn(showBorder && "border border-border bg-background", className)}>
       <div
         className={cn(
           "container mx-auto px-4 py-12",
-          showBorder && "border-x border-b border-border"
+          showBorder && "border-x border-b border-border",
         )}
       >
         {/* Responsive Grid */}
         <div
           className={cn(
             "grid auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6",
-            gridClassName
+            gridClassName,
           )}
         >
           {cards.map((card, index) => (
@@ -229,7 +224,7 @@ export const BentoCards: React.FC<BentoCardsProps> = ({
               className={cn(
                 card.colSpan && `lg:col-span-${card.colSpan}`,
                 card.rowSpan && `lg:row-span-${card.rowSpan}`,
-                card.className
+                card.className,
               )}
             />
           ))}
@@ -244,9 +239,7 @@ export const BentoCards: React.FC<BentoCardsProps> = ({
               </h2>
             )}
             {footerDescription && (
-              <p className="text-lg text-muted-foreground">
-                {footerDescription}
-              </p>
+              <p className="text-lg text-muted-foreground">{footerDescription}</p>
             )}
           </div>
         )}

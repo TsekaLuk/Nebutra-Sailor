@@ -103,8 +103,7 @@ export function Navbar({
 
           {/* TODO: Mobile Menu Toggle */}
           <button data-slot="mobile-toggle" aria-label="Toggle menu">
-            {/* TODO: Hamburger icon */}
-            ☰
+            {/* TODO: Hamburger icon */}☰
           </button>
         </div>
       </nav>

@@ -1,7 +1,7 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
 import * as React from "react";
-import { type LucideIcon } from "lucide-react";
 import { cn } from "../utils/cn";
 
 export interface FeatureIconItemProps {
@@ -36,9 +36,7 @@ export function FeatureIconItem({
         <Icon className={cn("size-4", iconClassName)} />
         <h3 className="text-sm font-medium">{title}</h3>
       </div>
-      {description && (
-        <p className="text-muted-foreground text-sm">{description}</p>
-      )}
+      {description && <p className="text-muted-foreground text-sm">{description}</p>}
     </div>
   );
 }

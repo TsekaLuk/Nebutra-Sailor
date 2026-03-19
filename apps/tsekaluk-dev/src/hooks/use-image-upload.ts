@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB — matches server limit in /api/guestbook/avatar
-const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"]
+const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB — matches server limit in /api/guestbook/avatar
+const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
 interface UseImageUploadProps {
   onUpload?: (url: string) => void;

@@ -1,6 +1,6 @@
-import { visit } from "unist-util-visit"
-import fs from "fs"
-import path from "path"
+import fs from "fs";
+import path from "path";
+import { visit } from "unist-util-visit";
 
 /**
  * Remark plugin that reads preview source files and injects the raw code
@@ -11,17 +11,17 @@ import path from "path"
  * correctly when MDX references "avatar-size-demo".
  */
 
-let _fileMap: Record<string, string> | null = null
+let _fileMap: Record<string, string> | null = null;
 
 function getFileMap(root: string): Record<string, string> {
-  if (_fileMap) return _fileMap
-  const mapPath = path.join(root, "src", "__registry__", "file-map.json")
+  if (_fileMap) return _fileMap;
+  const mapPath = path.join(root, "src", "__registry__", "file-map.json");
   try {
-    _fileMap = JSON.parse(fs.readFileSync(mapPath, "utf8"))
+    _fileMap = JSON.parse(fs.readFileSync(mapPath, "utf8"));
   } catch {
-    _fileMap = {}
+    _fileMap = {};
   }
-  return _fileMap!
+  return _fileMap!;
 }
 
 /**
@@ -31,35 +31,31 @@ function toPascalCase(kebab: string): string {
   return kebab
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join("")
+    .join("");
 }
 
 /**
  * Extract all import statements from source code.
  */
 function extractImports(source: string): string {
-  const importLines: string[] = []
-  const lines = source.split("\n")
-  let i = 0
+  const importLines: string[] = [];
+  const lines = source.split("\n");
+  let i = 0;
   while (i < lines.length) {
-    const line = lines[i]
+    const line = lines[i];
     // Match import statements (including multi-line)
-    if (
-      /^import\s/.test(line) ||
-      /^"use client"/.test(line) ||
-      /^'use client'/.test(line)
-    ) {
-      let importBlock = line
+    if (/^import\s/.test(line) || /^"use client"/.test(line) || /^'use client'/.test(line)) {
+      let importBlock = line;
       // Handle multi-line imports (opening { without closing })
       while (!importBlock.includes(";") && i + 1 < lines.length) {
-        i++
-        importBlock += "\n" + lines[i]
+        i++;
+        importBlock += "\n" + lines[i];
       }
-      importLines.push(importBlock)
+      importLines.push(importBlock);
     }
-    i++
+    i++;
   }
-  return importLines.join("\n")
+  return importLines.join("\n");
 }
 
 /**
@@ -68,91 +64,88 @@ function extractImports(source: string): string {
  * Falls back to the full source if the component cannot be found.
  */
 function extractComponentCode(source: string, componentName: string): string {
-  const pascalName = toPascalCase(componentName)
+  const pascalName = toPascalCase(componentName);
 
   // Patterns that start a component export
   const startPatterns = [
     `export function ${pascalName}`,
     `export default function ${pascalName}`,
     `export const ${pascalName}`,
-  ]
+  ];
 
-  let startIdx = -1
+  let startIdx = -1;
   for (const pattern of startPatterns) {
-    const idx = source.indexOf(pattern)
+    const idx = source.indexOf(pattern);
     if (idx !== -1) {
-      startIdx = idx
-      break
+      startIdx = idx;
+      break;
     }
   }
 
   // Not found → return full file
-  if (startIdx === -1) return source
+  if (startIdx === -1) return source;
 
   // Check if the file has MULTIPLE top-level exports (besides the target)
   // If only one export → return full file (it's already clean)
-  const exportCount = (
-    source.match(/^export\s+(function|const|default)/gm) ?? []
-  ).length
-  if (exportCount <= 1) return source
+  const exportCount = (source.match(/^export\s+(function|const|default)/gm) ?? []).length;
+  if (exportCount <= 1) return source;
 
   // Find the end of the target component using brace counting
-  let braceDepth = 0
-  let foundOpenBrace = false
-  let endIdx = startIdx
+  let braceDepth = 0;
+  let foundOpenBrace = false;
+  let endIdx = startIdx;
 
   for (let i = startIdx; i < source.length; i++) {
-    const ch = source[i]
+    const ch = source[i];
     if (ch === "{") {
-      braceDepth++
-      foundOpenBrace = true
+      braceDepth++;
+      foundOpenBrace = true;
     } else if (ch === "}") {
-      braceDepth--
+      braceDepth--;
       if (foundOpenBrace && braceDepth === 0) {
-        endIdx = i + 1
-        break
+        endIdx = i + 1;
+        break;
       }
     }
   }
 
   // If we couldn't find the end → return full file
-  if (!foundOpenBrace || endIdx === startIdx) return source
+  if (!foundOpenBrace || endIdx === startIdx) return source;
 
-  const componentCode = source.slice(startIdx, endIdx).trimEnd()
-  const imports = extractImports(source)
+  const componentCode = source.slice(startIdx, endIdx).trimEnd();
+  const imports = extractImports(source);
 
   // Combine: imports + blank line + component
-  return `${imports}\n\n${componentCode}`
+  return `${imports}\n\n${componentCode}`;
 }
 
 export function remarkComponent() {
   return (tree: any) => {
     const root = process.cwd().endsWith("apps/design-docs")
       ? process.cwd()
-      : path.join(process.cwd(), "apps/design-docs")
-    const previewsDir = path.join(root, "src", "components", "previews")
-    const fileMap = getFileMap(root)
+      : path.join(process.cwd(), "apps/design-docs");
+    const previewsDir = path.join(root, "src", "components", "previews");
+    const fileMap = getFileMap(root);
 
     visit(tree, (node: any) => {
-      if (node.name !== "ComponentPreview") return
+      if (node.name !== "ComponentPreview") return;
 
-      const nameAttr = node.attributes?.find((a: any) => a.name === "name")
-      const name = nameAttr?.value
-      if (!name) return
+      const nameAttr = node.attributes?.find((a: any) => a.name === "name");
+      const name = nameAttr?.value;
+      if (!name) return;
 
       // Try exact file first, then fall back to registry file-map
-      const candidates = [
-        `${name}.tsx`,
-        fileMap[name] ? `${fileMap[name]}.tsx` : null,
-      ].filter(Boolean) as string[]
+      const candidates = [`${name}.tsx`, fileMap[name] ? `${fileMap[name]}.tsx` : null].filter(
+        Boolean,
+      ) as string[];
 
-      let rawSource: string | null = null
+      let rawSource: string | null = null;
       for (const candidate of candidates) {
-        const sourcePath = path.join(previewsDir, candidate)
+        const sourcePath = path.join(previewsDir, candidate);
         if (fs.existsSync(sourcePath)) {
-          const fullSource = fs.readFileSync(sourcePath, "utf8")
-          rawSource = extractComponentCode(fullSource, name)
-          break
+          const fullSource = fs.readFileSync(sourcePath, "utf8");
+          rawSource = extractComponentCode(fullSource, name);
+          break;
         }
       }
 
@@ -161,10 +154,10 @@ export function remarkComponent() {
           type: "mdxJsxAttribute",
           name: "code",
           value: rawSource,
-        })
+        });
       } else {
-        console.warn(`[remarkComponent] Could not resolve source for "${name}"`)
+        console.warn(`[remarkComponent] Could not resolve source for "${name}"`);
       }
-    })
-  }
+    });
+  };
 }

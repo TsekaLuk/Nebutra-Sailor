@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { Input } from "../primitives/input";
+import { Loader2, Search, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
+import { useMemo, useState } from "react";
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from "../primitives/accordion";
 import { Button } from "../primitives/button";
+import { Input } from "../primitives/input";
 import { Textarea } from "../primitives/textarea";
-import { ThumbsUp, ThumbsDown, Sparkles, Search, Loader2 } from "lucide-react";
 import { cn } from "../utils/cn";
 
 export interface FAQItem {
@@ -99,9 +99,7 @@ export default function FAQBlock({
 }: FAQBlockProps) {
   const [search, setSearch] = useState("");
   const [feedback, setFeedback] = useState<Record<string, "up" | "down">>({});
-  const [showFeedbackInput, setShowFeedbackInput] = useState<
-    Record<string, boolean>
-  >({});
+  const [showFeedbackInput, setShowFeedbackInput] = useState<Record<string, boolean>>({});
   const [feedbackText, setFeedbackText] = useState<Record<string, string>>({});
   const [aiInput, setAiInput] = useState("");
   const [aiResponse, setAiResponse] = useState("");
@@ -167,12 +165,8 @@ export default function FAQBlock({
       {/* Header */}
       {(title || description) && (
         <div className="mb-6">
-          {title && (
-            <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
-          )}
-          {description && (
-            <p className="text-muted-foreground mt-1">{description}</p>
-          )}
+          {title && <h2 className="text-2xl font-bold tracking-tight">{title}</h2>}
+          {description && <p className="text-muted-foreground mt-1">{description}</p>}
         </div>
       )}
 
@@ -222,9 +216,7 @@ export default function FAQBlock({
                   className="self-end"
                   size="sm"
                 >
-                  {aiLoading ? (
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  ) : null}
+                  {aiLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
                   {aiLoading ? "Thinking..." : "Ask AI"}
                 </Button>
                 {aiResponse && (
@@ -249,16 +241,10 @@ export default function FAQBlock({
                   {/* Feedback */}
                   {showFeedback && (
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-muted-foreground">
-                        Was this helpful?
-                      </span>
+                      <span className="text-xs text-muted-foreground">Was this helpful?</span>
                       <Button
                         size="icon"
-                        variant={
-                          feedback[faq.question] === "up"
-                            ? "secondary"
-                            : "ghost"
-                        }
+                        variant={feedback[faq.question] === "up" ? "secondary" : "ghost"}
                         onClick={() => handleFeedback(faq.question, "up")}
                         aria-label="This answer was helpful"
                         className="h-8 w-8"
@@ -267,11 +253,7 @@ export default function FAQBlock({
                       </Button>
                       <Button
                         size="icon"
-                        variant={
-                          feedback[faq.question] === "down"
-                            ? "secondary"
-                            : "ghost"
-                        }
+                        variant={feedback[faq.question] === "down" ? "secondary" : "ghost"}
                         onClick={() => handleFeedback(faq.question, "down")}
                         aria-label="This answer was not helpful"
                         className="h-8 w-8"

@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
+import * as React from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import { cn } from "../utils/cn";
-import { LucideIcon } from "lucide-react";
 
 interface Tab {
   title: string;
@@ -68,11 +68,7 @@ export function ExpandableTabs({
   };
 
   const TabSeparator = () => (
-    <div
-      className="mx-1 h-[24px] w-[1.2px] bg-border"
-      role="presentation"
-      aria-hidden="true"
-    />
+    <div className="mx-1 h-[24px] w-[1.2px] bg-border" role="presentation" aria-hidden="true" />
   );
 
   return (
@@ -153,4 +149,4 @@ export function ExpandableTabs({
   );
 }
 
-export type { TabItem, Tab, Separator };
+export type { Separator, Tab, TabItem };

@@ -1,3 +1,3 @@
-"use client"
+"use client";
 
-export { PostHogProvider } from "@nebutra/analytics/posthog"
+export { PostHogProvider } from "@nebutra/analytics/posthog";

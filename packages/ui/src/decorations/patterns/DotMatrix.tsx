@@ -33,17 +33,7 @@ export interface DotMatrixProps extends React.HTMLAttributes<HTMLDivElement> {
  * <DotMatrix color="hsl(var(--border))" opacity={0.06} />
  */
 export const DotMatrix = React.forwardRef<HTMLDivElement, DotMatrixProps>(
-  (
-    {
-      dotSize = 2,
-      gap = 16,
-      color = "currentColor",
-      opacity = 0.04,
-      className,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ dotSize = 2, gap = 16, color = "currentColor", opacity = 0.04, className, ...props }, ref) => {
     const patternSize = dotSize + gap;
 
     return (

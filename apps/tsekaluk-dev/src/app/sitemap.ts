@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/lib/projects";
 import { getArticles } from "@/lib/articles";
+import { projects } from "@/lib/projects";
 
 const BASE_URL = "https://tsekaluk.dev";
 const LOCALES = ["en", "zh", "ja"] as const;

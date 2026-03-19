@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Button } from "@nebutra/ui/primitives"
+import { Button } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function ButtonLoadingDemo() {
-  return <Button loading>Saving…</Button>
+  return <Button loading>Saving…</Button>;
 }

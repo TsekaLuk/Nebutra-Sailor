@@ -1,4 +1,4 @@
-import { CodeBlock } from "@nebutra/ui/primitives"
+import { CodeBlock } from "@nebutra/ui/primitives";
 
 export function CodeBlockDemo() {
   const codeFiles = [
@@ -40,7 +40,7 @@ export default config`,
       addedLines: [15],
       removedLines: [11],
     },
-  ]
+  ];
 
   return (
     <div className="max-w-3xl p-8 mx-auto w-full">
@@ -51,5 +51,5 @@ export default config`,
         showLanguageSwitcher={true}
       />
     </div>
-  )
+  );
 }

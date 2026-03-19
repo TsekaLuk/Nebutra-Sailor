@@ -1,18 +1,13 @@
 #!/usr/bin/env tsx
+
 /**
  * Sync brand assets to app public directories
  *
  * Usage: pnpm brand:sync
  */
 
-import {
-  cpSync,
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-} from "node:fs";
 import { createHash } from "node:crypto";
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -40,10 +35,7 @@ function md5File(filePath: string): string {
   return createHash("md5").update(data).digest("hex");
 }
 
-function verifyDirectorySync(
-  srcDir: string,
-  destDir: string,
-): { ok: number; mismatch: string[] } {
+function verifyDirectorySync(srcDir: string, destDir: string): { ok: number; mismatch: string[] } {
   const files = readdirSync(srcDir).filter((f) => !f.startsWith("."));
   let ok = 0;
   const mismatch: string[] = [];

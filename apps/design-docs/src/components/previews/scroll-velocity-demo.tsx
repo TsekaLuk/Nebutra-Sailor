@@ -1,17 +1,12 @@
-"use client"
+"use client";
 
-import {
-  ScrollVelocityContainer,
-  ScrollVelocityRow,
-} from "@nebutra/ui/primitives"
+import { ScrollVelocityContainer, ScrollVelocityRow } from "@nebutra/ui/primitives";
 
 export function ScrollVelocityDemo() {
   return (
     <div className="py-12 md:py-24 mx-auto w-full overflow-hidden border-y bg-background font-sans">
       <div className="mb-12 px-4 text-center">
-        <h2 className="text-2xl font-bold tracking-tight mb-2">
-          Scroll Velocity
-        </h2>
+        <h2 className="text-2xl font-bold tracking-tight mb-2">Scroll Velocity</h2>
         <p className="text-muted-foreground">
           Scroll down or up to change the speed and direction.
         </p>
@@ -71,5 +66,5 @@ export function ScrollVelocityDemo() {
         }
       `}</style>
     </div>
-  )
+  );
 }

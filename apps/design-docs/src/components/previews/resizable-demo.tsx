@@ -1,10 +1,6 @@
-"use client"
+"use client";
 
-import {
-  ResizablePanelGroup,
-  ResizablePanel,
-  ResizableHandle,
-} from "@nebutra/ui/primitives"
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@nebutra/ui/primitives";
 
 export function ResizableDemo() {
   return (
@@ -32,5 +28,5 @@ export function ResizableDemo() {
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
-  )
+  );
 }

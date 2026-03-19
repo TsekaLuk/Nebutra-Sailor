@@ -53,11 +53,9 @@ export function BubbleText({
       className={cn("text-center text-5xl font-thin", className)}
     >
       {children.split("").map((char, idx) => {
-        const distance =
-          hoveredIndex !== null ? Math.abs(hoveredIndex - idx) : null;
+        const distance = hoveredIndex !== null ? Math.abs(hoveredIndex - idx) : null;
 
-        let charClasses =
-          "transition-all duration-300 ease-in-out cursor-default";
+        let charClasses = "transition-all duration-300 ease-in-out cursor-default";
 
         if (distance !== null && distance <= rippleDistance) {
           switch (distance) {
@@ -76,11 +74,7 @@ export function BubbleText({
         }
 
         return (
-          <span
-            key={idx}
-            onMouseEnter={() => setHoveredIndex(idx)}
-            className={charClasses}
-          >
+          <span key={idx} onMouseEnter={() => setHoveredIndex(idx)} className={charClasses}>
             {char === " " ? "\u00A0" : char}
           </span>
         );

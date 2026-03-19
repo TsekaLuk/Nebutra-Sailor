@@ -1,9 +1,9 @@
-"use client"
-import { useState } from "react"
-import { Checkbox } from "@nebutra/ui/primitives"
+"use client";
+import { Checkbox } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export function CheckboxDemo() {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
   return (
     <div className="gap-3 flex flex-col">
       <Checkbox checked={checked} onChange={(v: boolean) => setChecked(v)}>
@@ -12,5 +12,5 @@ export function CheckboxDemo() {
       <Checkbox checked>Subscribe to newsletter</Checkbox>
       <Checkbox disabled>Disabled option</Checkbox>
     </div>
-  )
+  );
 }

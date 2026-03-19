@@ -1,18 +1,13 @@
 "use client";
 
 import {
-  Tabs as FumaTabs,
   Tab as FumaTab,
+  Tabs as FumaTabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
 } from "fumadocs-ui/components/tabs";
-import {
-  Children,
-  isValidElement,
-  type ReactNode,
-  type ComponentProps,
-} from "react";
+import { Children, type ComponentProps, isValidElement, type ReactNode } from "react";
 
 // Mintlify-compat Tab: maps `title` → `value` for fumadocs-ui
 export function Tab({
@@ -29,11 +24,7 @@ export function Tab({
 }
 
 // Mintlify-compat Tabs: infers `items` from <Tab title="..."> children
-export function Tabs({
-  children,
-  items,
-  ...props
-}: ComponentProps<typeof FumaTabs>) {
+export function Tabs({ children, items, ...props }: ComponentProps<typeof FumaTabs>) {
   if (items) {
     return (
       <FumaTabs items={items} {...props}>
@@ -58,4 +49,4 @@ export function Tabs({
   );
 }
 
-export { TabsList, TabsTrigger, TabsContent };
+export { TabsContent, TabsList, TabsTrigger };

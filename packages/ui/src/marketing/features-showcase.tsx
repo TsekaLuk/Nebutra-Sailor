@@ -1,9 +1,9 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
 import * as React from "react";
-import { type LucideIcon } from "lucide-react";
-import { cn } from "../utils/cn";
 import { FeatureIconItem } from "../primitives/feature-icon-item";
+import { cn } from "../utils/cn";
 
 export interface ShowcaseFeature {
   /** Feature icon */
@@ -57,9 +57,7 @@ export function FeaturesShowcase({
         <div className="relative z-10 grid items-center gap-4 md:grid-cols-2 md:gap-12">
           <h2 className="text-4xl font-semibold">{title}</h2>
           {description && (
-            <p className="max-w-sm text-muted-foreground sm:ml-auto">
-              {description}
-            </p>
+            <p className="max-w-sm text-muted-foreground sm:ml-auto">{description}</p>
           )}
         </div>
 
@@ -69,11 +67,7 @@ export function FeaturesShowcase({
             <div className="aspect-[88/36] relative">
               <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background to-transparent" />
               {images.foreground && (
-                <img
-                  src={images.foreground}
-                  className="absolute inset-0 z-10"
-                  alt={imageAlt}
-                />
+                <img src={images.foreground} className="absolute inset-0 z-10" alt={imageAlt} />
               )}
               {images.backgroundDark && (
                 <img

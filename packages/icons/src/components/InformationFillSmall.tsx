@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,11 +16,7 @@ const InformationFillSmall = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <path
-        fill="currentColor"
-        fillOpacity={0.08}
-        d="M14 8A6 6 0 1 1 2 8a6 6 0 0 1 12 0"
-      />
+      <path fill="currentColor" fillOpacity={0.08} d="M14 8A6 6 0 1 1 2 8a6 6 0 0 1 12 0" />
       <path
         fill="currentColor"
         fillRule="evenodd"
@@ -31,5 +27,6 @@ const InformationFillSmall = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 InformationFillSmall.displayName = "InformationFillSmall";
+
 export { InformationFillSmall };
 export default InformationFillSmall;

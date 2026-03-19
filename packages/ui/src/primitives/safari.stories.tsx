@@ -34,10 +34,7 @@ export const Default: Story = {
 export const WithImage: Story = {
   render: () => (
     <div className="w-[700px]">
-      <Safari
-        url="https://nebutra.com"
-        imageSrc="https://picsum.photos/1200/700"
-      />
+      <Safari url="https://nebutra.com" imageSrc="https://picsum.photos/1200/700" />
     </div>
   ),
 };
@@ -45,11 +42,7 @@ export const WithImage: Story = {
 export const SimpleMode: Story = {
   render: () => (
     <div className="w-[700px]">
-      <Safari
-        url="https://nebutra.com"
-        imageSrc="https://picsum.photos/1200/700"
-        mode="simple"
-      />
+      <Safari url="https://nebutra.com" imageSrc="https://picsum.photos/1200/700" mode="simple" />
     </div>
   ),
 };
@@ -58,10 +51,7 @@ export const DarkTheme: Story = {
   render: () => (
     <div className="dark bg-background p-8 rounded-xl">
       <div className="w-[700px]">
-        <Safari
-          url="https://app.nebutra.com"
-          imageSrc="https://picsum.photos/1200/700"
-        />
+        <Safari url="https://app.nebutra.com" imageSrc="https://picsum.photos/1200/700" />
       </div>
     </div>
   ),

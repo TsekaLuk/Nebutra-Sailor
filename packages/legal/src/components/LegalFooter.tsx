@@ -7,8 +7,8 @@
  * Commonly placed at the bottom of landing pages and app layouts.
  */
 
-import { CookieSettingsButton } from "./CookieBanner";
 import { companyInfo } from "../documents/config";
+import { CookieSettingsButton } from "./CookieBanner";
 
 // ============================================
 // Types
@@ -82,19 +82,14 @@ export function LegalFooter({
             ))}
             {showCookieSettings && (
               <li>
-                <CookieSettingsButton
-                  onClick={onCookieSettingsClick}
-                  className={linkClassName}
-                >
+                <CookieSettingsButton onClick={onCookieSettingsClick} className={linkClassName}>
                   {translations.cookieSettings}
                 </CookieSettingsButton>
               </li>
             )}
           </ul>
         </nav>
-        <p className="text-sm text-gray-400 dark:text-gray-500">
-          {translations.copyright}
-        </p>
+        <p className="text-sm text-gray-400 dark:text-gray-500">{translations.copyright}</p>
       </div>
     );
   }
@@ -109,17 +104,12 @@ export function LegalFooter({
           </a>
         ))}
         {showCookieSettings && (
-          <CookieSettingsButton
-            onClick={onCookieSettingsClick}
-            className={linkClassName}
-          >
+          <CookieSettingsButton onClick={onCookieSettingsClick} className={linkClassName}>
             {translations.cookieSettings}
           </CookieSettingsButton>
         )}
       </nav>
-      <p className="text-sm text-gray-400 dark:text-gray-500">
-        {translations.copyright}
-      </p>
+      <p className="text-sm text-gray-400 dark:text-gray-500">{translations.copyright}</p>
     </div>
   );
 }
@@ -160,9 +150,7 @@ export function LegalLinks({
         const link = linkMap[linkKey];
         return (
           <span key={linkKey} className="flex items-center gap-2">
-            {index > 0 && (
-              <span className="text-gray-300 dark:text-gray-600">{separator}</span>
-            )}
+            {index > 0 && <span className="text-gray-300 dark:text-gray-600">{separator}</span>}
             <a
               href={link.href}
               className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"

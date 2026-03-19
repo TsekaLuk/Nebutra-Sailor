@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { CanvasRevealEffect } from "@nebutra/ui/primitives"
+import { CanvasRevealEffect } from "@nebutra/ui/primitives";
 
 export function CanvasRevealEffectDemo() {
   return (
@@ -17,5 +17,5 @@ export function CanvasRevealEffectDemo() {
         />
       </div>
     </div>
-  )
+  );
 }

@@ -1,12 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import {
-  PopoverTrigger,
-  PopoverContent,
-  Popover,
-  Button,
-} from "@nebutra/ui/primitives"
+import { Button, Popover, PopoverContent, PopoverTrigger } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function PopoverDemo() {
   return (
@@ -17,11 +12,9 @@ export function PopoverDemo() {
       <PopoverContent className="w-72">
         <div className="space-y-2">
           <h4 className="font-medium leading-none">Dimensions</h4>
-          <p className="text-sm text-muted-foreground">
-            Set the dimensions for the layer.
-          </p>
+          <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
         </div>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

@@ -1,26 +1,23 @@
 // Types
-export * from "./types.js";
 
 // Client
 export { MCPClient, mcpClient } from "./client/index.js";
-
-// Server
-export {
-  INTERNAL_SERVERS,
-  registerInternalServers,
-  getInternalServerIds,
-} from "./server/index.js";
-
-// Registry
-export { MCPServerRegistry, serverRegistry } from "./registry/index.js";
-
 // Middleware
 export {
-  createRateLimitMiddleware,
-  createAuditMiddleware,
-  createAccessControlMiddleware,
+  type AuditLogEntry,
   composeMCPMiddleware,
+  createAccessControlMiddleware,
+  createAuditMiddleware,
+  createRateLimitMiddleware,
   type MCPMiddleware,
   type MCPMiddlewareContext,
-  type AuditLogEntry,
 } from "./middleware/index.js";
+// Registry
+export { MCPServerRegistry, serverRegistry } from "./registry/index.js";
+// Server
+export {
+  getInternalServerIds,
+  INTERNAL_SERVERS,
+  registerInternalServers,
+} from "./server/index.js";
+export * from "./types.js";

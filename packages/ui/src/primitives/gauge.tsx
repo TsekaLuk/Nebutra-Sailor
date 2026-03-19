@@ -52,8 +52,8 @@ export interface GaugeProps {
 // =============================================================================
 
 const DEFAULT_COLOR_STOPS: GaugeColorStop[] = [
-  { value: 0, color: "hsl(220 9% 46%)" },   // muted gray
-  { value: 40, color: "hsl(38 92% 50%)" },  // amber
+  { value: 0, color: "hsl(220 9% 46%)" }, // muted gray
+  { value: 40, color: "hsl(38 92% 50%)" }, // amber
   { value: 75, color: "hsl(142 71% 45%)" }, // emerald
 ];
 
@@ -109,9 +109,7 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
     const offset = circumference * (1 - clampedValue / 100);
 
     const activeColor = resolveColor(clampedValue, colors ?? DEFAULT_COLOR_STOPS);
-    const trackColor =
-      secondaryColor ??
-      "color-mix(in oklch, currentColor 15%, transparent)";
+    const trackColor = secondaryColor ?? "color-mix(in oklch, currentColor 15%, transparent)";
 
     // The SVG circle that draws the colored arc
     const valueArc = (
@@ -166,8 +164,7 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
       labelNode = null; // handled via absolute overlay below
     }
 
-    const customLabel =
-      label !== true && label !== false && label != null ? label : null;
+    const customLabel = label !== true && label !== false && label != null ? label : null;
 
     return (
       <div
@@ -188,12 +185,7 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
           }
         `}</style>
 
-        <svg
-          width={size}
-          height={size}
-          viewBox={`0 0 ${size} ${size}`}
-          overflow="visible"
-        >
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} overflow="visible">
           {arcPriority === "value" ? (
             <>
               {trackArc}

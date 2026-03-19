@@ -15,22 +15,11 @@ export interface SliderProps {
 
 export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
   (
-    {
-      className,
-      min = 0,
-      max = 100,
-      step = 1,
-      value,
-      defaultValue,
-      onValueChange,
-      ...props
-    },
-    ref
+    { className, min = 0, max = 100, step = 1, value, defaultValue, onValueChange, ...props },
+    ref,
   ) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [internalValue, setInternalValue] = useState<number>(
-      defaultValue ?? min
-    );
+    const [internalValue, setInternalValue] = useState<number>(defaultValue ?? min);
 
     const currentValue = value !== undefined ? value : internalValue;
 
@@ -106,15 +95,17 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
           ref={ref}
           className="nebutra-native-slider w-full h-1.5 bg-muted rounded-full appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           style={{
-            background: `linear-gradient(to right, var(--color-primary) ${((currentValue - min) / (max - min)) * 100
-              }%, ${isDarkMode ? "var(--color-neutral-800)" : "var(--color-neutral-200)"} ${((currentValue - min) / (max - min)) * 100
-              }%)`,
+            background: `linear-gradient(to right, var(--color-primary) ${
+              ((currentValue - min) / (max - min)) * 100
+            }%, ${isDarkMode ? "var(--color-neutral-800)" : "var(--color-neutral-200)"} ${
+              ((currentValue - min) / (max - min)) * 100
+            }%)`,
           }}
           {...props}
         />
       </div>
     );
-  }
+  },
 );
 
 Slider.displayName = "Slider";

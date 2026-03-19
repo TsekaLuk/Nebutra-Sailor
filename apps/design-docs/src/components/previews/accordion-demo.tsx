@@ -1,20 +1,18 @@
-"use client"
+"use client";
 
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
 
 export function AccordionDemo() {
   return (
     <Accordion multiple={false} className="max-w-md w-full">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionContent>
+        <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>Is it styled?</AccordionTrigger>
@@ -24,10 +22,8 @@ export function AccordionDemo() {
       </AccordionItem>
       <AccordionItem value="item-3">
         <AccordionTrigger>Is it animated?</AccordionTrigger>
-        <AccordionContent>
-          Yes. Animated by default, but can be disabled with CSS.
-        </AccordionContent>
+        <AccordionContent>Yes. Animated by default, but can be disabled with CSS.</AccordionContent>
       </AccordionItem>
     </Accordion>
-  )
+  );
 }

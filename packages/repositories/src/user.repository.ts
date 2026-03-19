@@ -29,9 +29,7 @@ export class UserRepository {
     return this.prisma.user.findMany();
   }
 
-  async findPaginated(
-    params: CursorPaginationParams = {},
-  ): Promise<CursorPaginationResult<User>> {
+  async findPaginated(params: CursorPaginationParams = {}): Promise<CursorPaginationResult<User>> {
     const { cursor, take } = normalizePaginationParams(params);
 
     const items = await this.prisma.user.findMany({

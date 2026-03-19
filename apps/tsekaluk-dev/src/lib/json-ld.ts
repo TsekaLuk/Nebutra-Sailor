@@ -30,7 +30,8 @@ export function personJsonLd() {
       "https://linkedin.com/in/tsekaluk",
     ],
     image: `${BASE_URL}/images/black.jpeg`,
-    description: "I design and build AI-powered products from zero to one. Shipping fast and iterating in public.",
+    description:
+      "I design and build AI-powered products from zero to one. Shipping fast and iterating in public.",
   };
 }
 
@@ -69,7 +70,12 @@ export function projectJsonLd(project: Project) {
   };
 }
 
-export function articleJsonLd(article: { title: string; slug: string; date: string; excerpt: string }) {
+export function articleJsonLd(article: {
+  title: string;
+  slug: string;
+  date: string;
+  excerpt: string;
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",

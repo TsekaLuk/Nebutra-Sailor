@@ -9,11 +9,7 @@
  */
 
 import type { StatusProvider } from "../provider";
-import type {
-  InternalStatusConfig,
-  StatusPageData,
-  StatusState,
-} from "../types";
+import type { InternalStatusConfig, StatusPageData, StatusState } from "../types";
 import { getDefaultStatusData } from "./shared";
 
 export class InternalStatusProvider implements StatusProvider {
@@ -34,9 +30,10 @@ export class InternalStatusProvider implements StatusProvider {
       }
 
       const data = await response.json();
-      const checks = typeof data.checks === "object" && data.checks !== null
-        ? (data.checks as Record<string, Record<string, unknown>>)
-        : {};
+      const checks =
+        typeof data.checks === "object" && data.checks !== null
+          ? (data.checks as Record<string, Record<string, unknown>>)
+          : {};
 
       const monitors = Object.entries(checks).map(([name, check]) => ({
         id: name,
@@ -52,9 +49,7 @@ export class InternalStatusProvider implements StatusProvider {
         activeIncidents: [],
         scheduledMaintenances: [],
         uptime: { last24h: 100, last7d: 100, last30d: 100 },
-        lastUpdated: typeof data.timestamp === "string"
-          ? data.timestamp
-          : new Date().toISOString(),
+        lastUpdated: typeof data.timestamp === "string" ? data.timestamp : new Date().toISOString(),
       };
     } catch {
       return { ...getDefaultStatusData(), status: "unknown" };

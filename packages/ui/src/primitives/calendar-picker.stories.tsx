@@ -1,8 +1,8 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import type { DateValue } from "@internationalized/date";
 import type { RangeValue } from "@heroui/calendar";
-import { startOfDay, subDays, subWeeks, subMonths } from "date-fns";
+import type { DateValue } from "@internationalized/date";
+import type { Meta, StoryObj } from "@storybook/react";
+import { startOfDay, subDays, subMonths, subWeeks } from "date-fns";
+import { useState } from "react";
 import { CalendarPicker } from "./calendar-picker";
 
 const meta = {
@@ -61,9 +61,7 @@ export const WithPresets: Story = {
   name: "With Presets",
   render: () => {
     const [range, setRange] = useState<RangeValue<DateValue>>();
-    return (
-      <CalendarPicker value={range} onChange={setRange} presets={presets} />
-    );
+    return <CalendarPicker value={range} onChange={setRange} presets={presets} />;
   },
 };
 
@@ -71,14 +69,7 @@ export const WithPresetsAndClear: Story = {
   name: "With Presets + Clear",
   render: () => {
     const [range, setRange] = useState<RangeValue<DateValue>>();
-    return (
-      <CalendarPicker
-        value={range}
-        onChange={setRange}
-        presets={presets}
-        allowClear
-      />
-    );
+    return <CalendarPicker value={range} onChange={setRange} presets={presets} allowClear />;
   },
 };
 
@@ -86,14 +77,7 @@ export const Compact: Story = {
   name: "Compact Layout",
   render: () => {
     const [range, setRange] = useState<RangeValue<DateValue>>();
-    return (
-      <CalendarPicker
-        value={range}
-        onChange={setRange}
-        presets={presets}
-        compact
-      />
-    );
+    return <CalendarPicker value={range} onChange={setRange} presets={presets} compact />;
   },
 };
 
@@ -101,14 +85,7 @@ export const Stacked: Story = {
   name: "Stacked Layout",
   render: () => {
     const [range, setRange] = useState<RangeValue<DateValue>>();
-    return (
-      <CalendarPicker
-        value={range}
-        onChange={setRange}
-        presets={presets}
-        stacked
-      />
-    );
+    return <CalendarPicker value={range} onChange={setRange} presets={presets} stacked />;
   },
 };
 
@@ -116,9 +93,7 @@ export const HorizontalLayout: Story = {
   name: "Horizontal Layout",
   render: () => {
     const [range, setRange] = useState<RangeValue<DateValue>>();
-    return (
-      <CalendarPicker value={range} onChange={setRange} horizontalLayout />
-    );
+    return <CalendarPicker value={range} onChange={setRange} horizontalLayout />;
   },
 };
 
@@ -127,13 +102,7 @@ export const SmallSize: Story = {
   render: () => {
     const [range, setRange] = useState<RangeValue<DateValue>>();
     return (
-      <CalendarPicker
-        value={range}
-        onChange={setRange}
-        presets={presets}
-        size="small"
-        allowClear
-      />
+      <CalendarPicker value={range} onChange={setRange} presets={presets} size="small" allowClear />
     );
   },
 };
@@ -143,13 +112,7 @@ export const WithDefaultPreset: Story = {
   render: () => {
     const [range, setRange] = useState<RangeValue<DateValue>>();
     return (
-      <CalendarPicker
-        value={range}
-        onChange={setRange}
-        presets={presets}
-        presetIndex={2}
-        stacked
-      />
+      <CalendarPicker value={range} onChange={setRange} presets={presets} presetIndex={2} stacked />
     );
   },
 };
@@ -159,16 +122,8 @@ export const WithMinMax: Story = {
   render: () => {
     const [range, setRange] = useState<RangeValue<DateValue>>();
     const now = new Date();
-    const minDate = new Date(
-      now.getFullYear(),
-      now.getMonth() - 2,
-      now.getDate(),
-    );
-    const maxDate = new Date(
-      now.getFullYear(),
-      now.getMonth() + 2,
-      now.getDate(),
-    );
+    const minDate = new Date(now.getFullYear(), now.getMonth() - 2, now.getDate());
+    const maxDate = new Date(now.getFullYear(), now.getMonth() + 2, now.getDate());
 
     return (
       <CalendarPicker

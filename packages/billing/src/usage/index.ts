@@ -1,20 +1,19 @@
 export {
-  recordUsage,
-  flushUsageBuffer,
-  checkUsageLimit,
-  getPlanUsageLimit,
+  type AppendUsageLedgerEntryResult,
+  appendUsageLedgerEntry,
+  buildUsageLedgerIdempotencyKey,
+  type ListUsageLedgerEntriesInput,
+  listUsageLedgerEntries,
+} from "./ledger.js";
+export {
   calculateOverageCost,
-  getCurrentPeriod,
+  checkUsageLimit,
+  flushUsageBuffer,
   formatUsage,
+  getCurrentPeriod,
+  getPlanUsageLimit,
+  recordUsage,
+  type UsageCheckResult,
   type UsageRecord,
   type UsageSummary,
-  type UsageCheckResult,
 } from "./service.js";
-
-export {
-  appendUsageLedgerEntry,
-  listUsageLedgerEntries,
-  buildUsageLedgerIdempotencyKey,
-  type AppendUsageLedgerEntryResult,
-  type ListUsageLedgerEntriesInput,
-} from "./ledger.js";

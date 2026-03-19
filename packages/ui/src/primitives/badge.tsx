@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { Slot, Slottable } from "../utils/slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import type * as React from "react";
 import { cn } from "../utils/cn";
+import { Slot, Slottable } from "../utils/slot";
 
 // ─── Variants ─────────────────────────────────────────────────────────────────
 
@@ -13,23 +13,21 @@ const badgeVariants = cva(
     variants: {
       variant: {
         // ─── Semantic / brand variants ────────────────────────────────────────
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "border-border text-foreground",
-        success:
-          "border-transparent bg-success text-success-foreground hover:bg-success/80",
-        warning:
-          "border-transparent bg-warning text-warning-foreground hover:bg-warning/80",
+        success: "border-transparent bg-success text-success-foreground hover:bg-success/80",
+        warning: "border-transparent bg-warning text-warning-foreground hover:bg-warning/80",
         info: "border-transparent bg-info text-info-foreground hover:bg-info/80",
         error:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         // ─── Geist-style color palette ────────────────────────────────────────
         gray: "bg-geist-gray-700 text-white fill-white",
-        "gray-subtle": "bg-geist-gray-200 text-geist-gray-1000 fill-geist-gray-1000 border-transparent",
+        "gray-subtle":
+          "bg-geist-gray-200 text-geist-gray-1000 fill-geist-gray-1000 border-transparent",
         blue: "bg-blue-700 text-white fill-white",
         "blue-subtle": "bg-blue-200 text-blue-900 fill-blue-900 border-transparent",
         purple: "bg-purple-700 text-white fill-white",
@@ -82,9 +80,8 @@ const dotColorMap: Partial<Record<NonNullable<BadgeProps["variant"]>, string>> =
 };
 
 export interface BadgeProps
-  extends
-  React.HTMLAttributes<HTMLElement>,
-  VariantProps<typeof badgeVariants> {
+  extends React.HTMLAttributes<HTMLElement>,
+    VariantProps<typeof badgeVariants> {
   /** Renders a 6×6px status dot before the badge label */
   dot?: boolean;
   /** Icon element rendered before the label (auto-sized to 12×12px) */
@@ -105,10 +102,7 @@ function Badge({
 }: BadgeProps) {
   const Comp = asChild ? Slot : "div";
   return (
-    <Comp
-      className={cn(badgeVariants({ variant, size }), className)}
-      {...props}
-    >
+    <Comp className={cn(badgeVariants({ variant, size }), className)} {...props}>
       {dot && (
         <span
           aria-hidden="true"

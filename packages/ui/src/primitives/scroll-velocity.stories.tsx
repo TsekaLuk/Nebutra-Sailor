@@ -52,22 +52,18 @@ export const DualRows: Story = {
       </div>
       <ScrollVelocityContainer className="space-y-4 py-8 text-2xl font-semibold">
         <ScrollVelocityRow baseVelocity={8} direction={1}>
-          {["Next.js", "TypeScript", "Tailwind", "Turborepo", "pnpm"].map(
-            (t) => (
-              <span key={t} className="mx-8 text-foreground">
-                {t}
-              </span>
-            ),
-          )}
+          {["Next.js", "TypeScript", "Tailwind", "Turborepo", "pnpm"].map((t) => (
+            <span key={t} className="mx-8 text-foreground">
+              {t}
+            </span>
+          ))}
         </ScrollVelocityRow>
         <ScrollVelocityRow baseVelocity={8} direction={-1}>
-          {["Framer Motion", "ShadCN", "Storybook", "Mintlify", "COBE"].map(
-            (t) => (
-              <span key={t} className="mx-8 text-muted-foreground">
-                {t}
-              </span>
-            ),
-          )}
+          {["Framer Motion", "ShadCN", "Storybook", "Mintlify", "COBE"].map((t) => (
+            <span key={t} className="mx-8 text-muted-foreground">
+              {t}
+            </span>
+          ))}
         </ScrollVelocityRow>
       </ScrollVelocityContainer>
       <div className="h-[200px]" />
@@ -79,17 +75,13 @@ export const StandaloneRow: Story = {
   render: () => (
     <div className="py-4">
       <ScrollVelocityRow baseVelocity={10} className="text-xl font-medium">
-        {[
-          "⭐ Feature 1",
-          "🚀 Feature 2",
-          "💡 Feature 3",
-          "🔒 Feature 4",
-          "⚡ Feature 5",
-        ].map((t) => (
-          <span key={t} className="mx-6 whitespace-nowrap">
-            {t}
-          </span>
-        ))}
+        {["⭐ Feature 1", "🚀 Feature 2", "💡 Feature 3", "🔒 Feature 4", "⚡ Feature 5"].map(
+          (t) => (
+            <span key={t} className="mx-6 whitespace-nowrap">
+              {t}
+            </span>
+          ),
+        )}
       </ScrollVelocityRow>
     </div>
   ),
@@ -98,10 +90,7 @@ export const StandaloneRow: Story = {
 export const FastVelocity: Story = {
   render: () => (
     <div className="py-4">
-      <ScrollVelocityRow
-        baseVelocity={30}
-        className="text-3xl font-bold text-primary"
-      >
+      <ScrollVelocityRow baseVelocity={30} className="text-3xl font-bold text-primary">
         {["FAST", "SCROLL", "MARQUEE", "EFFECT", "TICKER"].map((t) => (
           <span key={t} className="mx-8">
             {t}

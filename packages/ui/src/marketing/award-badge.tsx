@@ -1,6 +1,6 @@
 "use client";
 
-import React, { MouseEvent, useEffect, useRef, useState } from "react";
+import React, { type MouseEvent, useEffect, useRef, useState } from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -28,8 +28,7 @@ export interface AwardBadgeProps {
 // Constants
 // =============================================================================
 
-const IDENTITY_MATRIX =
-  "1, 0, 0, 0, " + "0, 1, 0, 0, " + "0, 0, 1, 0, " + "0, 0, 0, 1";
+const IDENTITY_MATRIX = "1, 0, 0, 0, " + "0, 1, 0, 0, " + "0, 0, 1, 0, " + "0, 0, 0, 1";
 
 const MAX_ROTATE = 0.25;
 const MIN_ROTATE = -0.25;
@@ -90,10 +89,8 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
   const [firstOverlayPosition, setFirstOverlayPosition] = useState<number>(0);
   const [matrix, setMatrix] = useState<string>(IDENTITY_MATRIX);
   const [currentMatrix, setCurrentMatrix] = useState<string>(IDENTITY_MATRIX);
-  const [disableInOutOverlayAnimation, setDisableInOutOverlayAnimation] =
-    useState<boolean>(true);
-  const [disableOverlayAnimation, setDisableOverlayAnimation] =
-    useState<boolean>(false);
+  const [disableInOutOverlayAnimation, setDisableInOutOverlayAnimation] = useState<boolean>(true);
+  const [disableOverlayAnimation, setDisableOverlayAnimation] = useState<boolean>(false);
   const [isTimeoutFinished, setIsTimeoutFinished] = useState<boolean>(false);
 
   const enterTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -116,35 +113,21 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
     const yCenter = (top + bottom) / 2;
 
     const scale = [
+      MAX_SCALE - ((MAX_SCALE - MIN_SCALE) * Math.abs(xCenter - clientX)) / (xCenter - left),
+      MAX_SCALE - ((MAX_SCALE - MIN_SCALE) * Math.abs(yCenter - clientY)) / (yCenter - top),
       MAX_SCALE -
-        ((MAX_SCALE - MIN_SCALE) * Math.abs(xCenter - clientX)) /
-          (xCenter - left),
-      MAX_SCALE -
-        ((MAX_SCALE - MIN_SCALE) * Math.abs(yCenter - clientY)) /
-          (yCenter - top),
-      MAX_SCALE -
-        ((MAX_SCALE - MIN_SCALE) *
-          (Math.abs(xCenter - clientX) + Math.abs(yCenter - clientY))) /
+        ((MAX_SCALE - MIN_SCALE) * (Math.abs(xCenter - clientX) + Math.abs(yCenter - clientY))) /
           (xCenter - left + yCenter - top),
     ];
 
     const rotate = {
-      x1:
-        0.25 * ((yCenter - clientY) / yCenter - (xCenter - clientX) / xCenter),
-      x2:
-        MAX_ROTATE -
-        ((MAX_ROTATE - MIN_ROTATE) * Math.abs(right - clientX)) /
-          (right - left),
+      x1: 0.25 * ((yCenter - clientY) / yCenter - (xCenter - clientX) / xCenter),
+      x2: MAX_ROTATE - ((MAX_ROTATE - MIN_ROTATE) * Math.abs(right - clientX)) / (right - left),
       x3: 0,
       y0: 0,
-      y2:
-        MAX_ROTATE -
-        ((MAX_ROTATE - MIN_ROTATE) * (top - clientY)) / (top - bottom),
+      y2: MAX_ROTATE - ((MAX_ROTATE - MIN_ROTATE) * (top - clientY)) / (top - bottom),
       y3: 0,
-      z0: -(
-        MAX_ROTATE -
-        ((MAX_ROTATE - MIN_ROTATE) * Math.abs(right - clientX)) / (right - left)
-      ),
+      z0: -(MAX_ROTATE - ((MAX_ROTATE - MIN_ROTATE) * Math.abs(right - clientX)) / (right - left)),
       z1: 0.2 - ((0.2 + 0.6) * (top - clientY)) / (top - bottom),
       z3: 0,
     };
@@ -157,11 +140,7 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
     );
   };
 
-  const getOppositeMatrix = (
-    _matrix: string,
-    clientY: number,
-    onMouseEnter?: boolean,
-  ) => {
+  const getOppositeMatrix = (_matrix: string, clientY: number, onMouseEnter?: boolean) => {
     const { top, bottom } = getDimensions();
     const oppositeY = bottom - clientY + top;
     const weakening = onMouseEnter ? 0.7 : 4;
@@ -177,16 +156,12 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
         } else if (index === 6) {
           return (
             (multiplier *
-              (MAX_ROTATE -
-                ((MAX_ROTATE - MIN_ROTATE) * (top - oppositeY)) /
-                  (top - bottom))) /
+              (MAX_ROTATE - ((MAX_ROTATE - MIN_ROTATE) * (top - oppositeY)) / (top - bottom))) /
             weakening
           );
         } else if (index === 9) {
           return (
-            (MAX_ROTATE -
-              ((MAX_ROTATE - MIN_ROTATE) * (top - oppositeY)) /
-                (top - bottom)) /
+            (MAX_ROTATE - ((MAX_ROTATE - MIN_ROTATE) * (top - oppositeY)) / (top - bottom)) /
             weakening
           );
         }
@@ -207,10 +182,7 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
     const yCenter = (top + bottom) / 2;
 
     setDisableInOutOverlayAnimation(false);
-    enterTimeout.current = setTimeout(
-      () => setDisableInOutOverlayAnimation(true),
-      350,
-    );
+    enterTimeout.current = setTimeout(() => setDisableInOutOverlayAnimation(true), 350);
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
@@ -261,10 +233,7 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
           () => setFirstOverlayPosition(-firstOverlayPosition / 4),
           150,
         );
-        leaveTimeout2.current = setTimeout(
-          () => setFirstOverlayPosition(0),
-          300,
-        );
+        leaveTimeout2.current = setTimeout(() => setFirstOverlayPosition(0), 300);
         leaveTimeout3.current = setTimeout(() => {
           setDisableOverlayAnimation(false);
           setDisableInOutOverlayAnimation(true);
@@ -292,8 +261,7 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
     )
     .join(" ");
 
-  const backgroundColor =
-    BACKGROUND_COLORS[(place || 2) - 1] || BACKGROUND_COLORS[1];
+  const backgroundColor = BACKGROUND_COLORS[(place || 2) - 1] || BACKGROUND_COLORS[1];
   const title = AWARD_TITLES[type];
 
   const overlayColors = [
@@ -315,10 +283,7 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        "block w-[180px] sm:w-[260px] h-auto cursor-pointer",
-        className,
-      )}
+      className={cn("block w-[180px] sm:w-[260px] h-auto cursor-pointer", className)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
@@ -397,9 +362,7 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
                 style={{
                   transform: `rotate(${firstOverlayPosition + i * 10}deg)`,
                   transformOrigin: "center center",
-                  transition: !disableInOutOverlayAnimation
-                    ? "transform 200ms ease-out"
-                    : "none",
+                  transition: !disableInOutOverlayAnimation ? "transform 200ms ease-out" : "none",
                   animation: disableOverlayAnimation
                     ? "none"
                     : `phAwardOverlay${i + 1} 5s infinite`,

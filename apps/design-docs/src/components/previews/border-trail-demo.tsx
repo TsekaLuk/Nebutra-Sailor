@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { BorderTrail } from "@nebutra/ui/primitives"
+import { BorderTrail } from "@nebutra/ui/primitives";
 
 export function BorderTrailDemo() {
   return (
@@ -14,5 +14,5 @@ export function BorderTrailDemo() {
         <p className="text-sm text-muted-foreground">With gradient trail</p>
       </div>
     </div>
-  )
+  );
 }

@@ -9,7 +9,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import * as readline from "node:readline";
-import { DEFAULT_BRAND, type BrandConfig } from "./brand-types";
+import { type BrandConfig, DEFAULT_BRAND } from "./brand-types";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 
@@ -40,7 +40,11 @@ function logInfo(message: string) {
   console.log(`${colors.dim}  ${message}${colors.reset}`);
 }
 
-async function prompt(rl: readline.Interface, question: string, defaultValue?: string): Promise<string> {
+async function prompt(
+  rl: readline.Interface,
+  question: string,
+  defaultValue?: string,
+): Promise<string> {
   const defaultHint = defaultValue ? ` ${colors.dim}(${defaultValue})${colors.reset}` : "";
   return new Promise((resolve) => {
     rl.question(`  ${question}${defaultHint}: `, (answer) => {
@@ -49,7 +53,11 @@ async function prompt(rl: readline.Interface, question: string, defaultValue?: s
   });
 }
 
-async function promptBoolean(rl: readline.Interface, question: string, defaultValue: boolean): Promise<boolean> {
+async function promptBoolean(
+  rl: readline.Interface,
+  question: string,
+  defaultValue: boolean,
+): Promise<boolean> {
   const defaultHint = defaultValue ? "Y/n" : "y/N";
   const answer = await prompt(rl, `${question} [${defaultHint}]`);
   if (!answer) return defaultValue;
@@ -71,7 +79,9 @@ ${colors.magenta}╔════════════════════
   const configPath = path.join(ROOT, "brand.config.ts");
   if (fs.existsSync(configPath)) {
     console.log(`${colors.yellow}⚠${colors.reset} brand.config.ts already exists.`);
-    console.log(`  Run ${colors.cyan}pnpm brand:apply${colors.reset} to apply your existing config.`);
+    console.log(
+      `  Run ${colors.cyan}pnpm brand:apply${colors.reset} to apply your existing config.`,
+    );
     console.log(`  Delete brand.config.ts first if you want to start fresh.\n`);
     process.exit(1);
   }
@@ -94,7 +104,11 @@ ${colors.magenta}╔════════════════════
     logStep("Company Information");
     config.company.name = await prompt(rl, "Company name", "My Company Inc.");
     config.company.nameCN = await prompt(rl, "Company name (Chinese, optional)", "");
-    config.company.email = await prompt(rl, "Contact email", `hello@${config.brand.name.toLowerCase()}.com`);
+    config.company.email = await prompt(
+      rl,
+      "Contact email",
+      `hello@${config.brand.name.toLowerCase()}.com`,
+    );
     const yearStr = await prompt(rl, "Founded year", "2024");
     config.company.year = parseInt(yearStr, 10) || 2024;
 
@@ -113,13 +127,21 @@ ${colors.magenta}╔════════════════════
     // Repository
     logStep("GitHub Repository");
     config.repo.owner = await prompt(rl, "GitHub owner/org", config.brand.name.toLowerCase());
-    config.repo.name = await prompt(rl, "Repository name", `${config.brand.name.toLowerCase()}-platform`);
+    config.repo.name = await prompt(
+      rl,
+      "Repository name",
+      `${config.brand.name.toLowerCase()}-platform`,
+    );
 
     // Social
     logStep("Social Links (press Enter to skip)");
     config.social = {
       twitter: await prompt(rl, "Twitter URL", ""),
-      github: await prompt(rl, "GitHub URL", `https://github.com/${config.repo.owner}/${config.repo.name}`),
+      github: await prompt(
+        rl,
+        "GitHub URL",
+        `https://github.com/${config.repo.owner}/${config.repo.name}`,
+      ),
       discord: await prompt(rl, "Discord URL", ""),
       linkedin: await prompt(rl, "LinkedIn URL", ""),
     };
@@ -131,12 +153,20 @@ ${colors.magenta}╔════════════════════
     // Features
     logStep("Feature Toggles");
     config.features.web3 = await promptBoolean(rl, "Enable Web3/blockchain features?", false);
-    config.features.ecommerce = await promptBoolean(rl, "Enable e-commerce (Shopify) integration?", false);
+    config.features.ecommerce = await promptBoolean(
+      rl,
+      "Enable e-commerce (Shopify) integration?",
+      false,
+    );
     config.features.recsys = await promptBoolean(rl, "Enable recommendation system?", false);
 
     // Package scope
     logStep("Package Configuration");
-    config.packageScope = await prompt(rl, "NPM package scope", `@${config.brand.name.toLowerCase()}`);
+    config.packageScope = await prompt(
+      rl,
+      "NPM package scope",
+      `@${config.brand.name.toLowerCase()}`,
+    );
 
     // License
     logStep("License");

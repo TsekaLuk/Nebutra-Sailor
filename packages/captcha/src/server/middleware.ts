@@ -3,8 +3,8 @@
  * Use on routes that require CAPTCHA verification
  */
 
-import type { Context, Next, MiddlewareHandler } from "hono";
-import { verifyTurnstile, getTurnstileErrorMessage } from "./turnstile.js";
+import type { Context, MiddlewareHandler, Next } from "hono";
+import { getTurnstileErrorMessage, verifyTurnstile } from "./turnstile.js";
 
 export interface CaptchaMiddlewareOptions {
   /** Field name in request body containing the CAPTCHA token */
@@ -75,7 +75,8 @@ export function captchaMiddleware(options: CaptchaMiddlewareOptions = {}): Middl
     }
 
     // Get client IP
-    const ip = c.req.header("cf-connecting-ip") ||
+    const ip =
+      c.req.header("cf-connecting-ip") ||
       c.req.header("x-forwarded-for")?.split(",")[0] ||
       c.req.header("x-real-ip");
 
@@ -91,11 +92,14 @@ export function captchaMiddleware(options: CaptchaMiddlewareOptions = {}): Middl
       if (onError) {
         return onError(c, errorMessage);
       }
-      return c.json({
-        error: "CAPTCHA verification failed",
-        code: "CAPTCHA_INVALID",
-        details: errorMessage,
-      }, 403);
+      return c.json(
+        {
+          error: "CAPTCHA verification failed",
+          code: "CAPTCHA_INVALID",
+          details: errorMessage,
+        },
+        403,
+      );
     }
 
     // Store verification result in context for downstream use
@@ -113,12 +117,14 @@ export function captchaMiddleware(options: CaptchaMiddlewareOptions = {}): Middl
 /**
  * Helper to check if request has valid CAPTCHA
  */
-export function getCaptchaResult(c: Context): {
-  verified: boolean;
-  timestamp?: string;
-  hostname?: string;
-  action?: string;
-} | undefined {
+export function getCaptchaResult(c: Context):
+  | {
+      verified: boolean;
+      timestamp?: string;
+      hostname?: string;
+      action?: string;
+    }
+  | undefined {
   return c.get("captcha");
 }
 

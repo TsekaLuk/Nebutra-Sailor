@@ -1,17 +1,12 @@
 "use client";
 
-import React from "react";
-import { Button } from "../primitives/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../primitives/tooltip";
-import { cn } from "../utils/cn";
+import { motion, type Transition } from "framer-motion";
 import { CheckCircleIcon, StarIcon } from "lucide-react";
 import Link from "next/link";
-import { motion, Transition } from "framer-motion";
+import React from "react";
+import { Button } from "../primitives/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../primitives/tooltip";
+import { cn } from "../utils/cn";
 
 type PricingFrequency = "monthly" | "yearly";
 const frequencies: PricingFrequency[] = ["monthly", "yearly"];
@@ -51,10 +46,7 @@ export function PricingSection({
 
   return (
     <div
-      className={cn(
-        "flex w-full flex-col items-center justify-center space-y-5 p-4",
-        className,
-      )}
+      className={cn("flex w-full flex-col items-center justify-center space-y-5 p-4", className)}
       {...props}
     >
       <div className="mx-auto max-w-xl space-y-2">
@@ -62,15 +54,10 @@ export function PricingSection({
           {heading}
         </h2>
         {description && (
-          <p className="text-muted-foreground text-center text-sm md:text-base">
-            {description}
-          </p>
+          <p className="text-muted-foreground text-center text-sm md:text-base">{description}</p>
         )}
       </div>
-      <PricingFrequencyToggle
-        frequency={frequency}
-        setFrequency={setFrequency}
-      />
+      <PricingFrequencyToggle frequency={frequency} setFrequency={setFrequency} />
       <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-3">
         {plans.map((plan) => (
           <PricingCard plan={plan} key={plan.name} frequency={frequency} />
@@ -168,10 +155,7 @@ export function PricingCard({
           {frequency === "yearly" && (
             <p className="bg-primary text-primary-foreground flex items-center gap-1 rounded-[var(--radius-md)] border px-2 py-0.5 text-xs">
               {Math.round(
-                ((plan.price.monthly * 12 - plan.price.yearly) /
-                  plan.price.monthly /
-                  12) *
-                  100,
+                ((plan.price.monthly * 12 - plan.price.yearly) / plan.price.monthly / 12) * 100,
               )}
               % off
             </p>
@@ -183,9 +167,7 @@ export function PricingCard({
         <h3 className="mt-2 flex items-end gap-1">
           <span className="text-3xl font-bold">${plan.price[frequency]}</span>
           <span className="text-muted-foreground">
-            {plan.name !== "Free"
-              ? "/" + (frequency === "monthly" ? "month" : "year")
-              : ""}
+            {plan.name !== "Free" ? "/" + (frequency === "monthly" ? "month" : "year") : ""}
           </span>
         </h3>
       </div>
@@ -226,11 +208,7 @@ export function PricingCard({
           plan.highlighted && "bg-muted/40",
         )}
       >
-        <Button
-          className="w-full"
-          variant={plan.highlighted ? "default" : "outline"}
-          asChild
-        >
+        <Button className="w-full" variant={plan.highlighted ? "default" : "outline"} asChild>
           <Link href={plan.btn.href}>{plan.btn.text}</Link>
         </Button>
       </div>

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Check, Lock, Zap, Building, Star } from "lucide-react";
+import { Building, Check, Lock, Star, Zap } from "lucide-react";
 import { PricingCard } from "./pricing-card";
 
 const meta = {
@@ -20,12 +20,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const features = [
-  "Unlimited projects",
-  "API access",
-  "Priority support",
-  "Custom domain",
-];
+const features = ["Unlimited projects", "API access", "Priority support", "Custom domain"];
 const lockedFeatures = ["SSO", "Advanced analytics", "SLA guarantee"];
 
 export const Default: Story = {
@@ -43,9 +38,7 @@ export const Default: Story = {
           <PricingCard.MainPrice>$29</PricingCard.MainPrice>
           <PricingCard.Period>/month</PricingCard.Period>
         </PricingCard.Price>
-        <PricingCard.Description>
-          Per workspace, billed annually
-        </PricingCard.Description>
+        <PricingCard.Description>Per workspace, billed annually</PricingCard.Description>
       </PricingCard.Header>
       <PricingCard.Body>
         <PricingCard.List>
@@ -167,14 +160,12 @@ export const ThreeTiers: Story = {
           </PricingCard.Header>
           <PricingCard.Body>
             <PricingCard.List>
-              {features
-                .slice(0, name === "Starter" ? 2 : features.length)
-                .map((f) => (
-                  <PricingCard.ListItem key={f}>
-                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-                    {f}
-                  </PricingCard.ListItem>
-                ))}
+              {features.slice(0, name === "Starter" ? 2 : features.length).map((f) => (
+                <PricingCard.ListItem key={f}>
+                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                  {f}
+                </PricingCard.ListItem>
+              ))}
             </PricingCard.List>
           </PricingCard.Body>
         </PricingCard.Card>
@@ -196,9 +187,7 @@ export const NoGlassEffect: Story = {
         </PricingCard.Price>
       </PricingCard.Header>
       <PricingCard.Body>
-        <p className="text-xs text-muted-foreground">
-          Glass effect disabled on header.
-        </p>
+        <p className="text-xs text-muted-foreground">Glass effect disabled on header.</p>
       </PricingCard.Body>
     </PricingCard.Card>
   ),

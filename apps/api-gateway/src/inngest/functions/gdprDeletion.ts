@@ -1,10 +1,8 @@
-import { logger } from "@nebutra/logger";
 import { prisma } from "@nebutra/db";
-import {
-  GdprDeletionRequestDataSchema,
-} from "@nebutra/event-bus";
-import { inngest } from "../client.js";
+import { GdprDeletionRequestDataSchema } from "@nebutra/event-bus";
+import { logger } from "@nebutra/logger";
 import { eventType, type InngestFunction } from "inngest";
+import { inngest } from "../client.js";
 
 /**
  * GDPR / CCPA data deletion Inngest function.
@@ -28,10 +26,14 @@ export const processGdprDeletion: InngestFunction.Any = inngest.createFunction(
   {
     id: "process-gdpr-deletion",
     name: "GDPR / CCPA User Data Deletion",
-    concurrency: { limit: 3 },  // low concurrency — heavy DB writes
+    concurrency: { limit: 3 }, // low concurrency — heavy DB writes
     retries: 5,
     triggers: [
-      { event: eventType("nebutra/gdpr.deletion_requested", { schema: GdprDeletionRequestDataSchema }) },
+      {
+        event: eventType("nebutra/gdpr.deletion_requested", {
+          schema: GdprDeletionRequestDataSchema,
+        }),
+      },
     ],
   },
   async ({ event, step }) => {

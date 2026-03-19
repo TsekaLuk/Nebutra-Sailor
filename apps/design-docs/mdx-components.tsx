@@ -1,162 +1,25 @@
-import defaultComponents from "fumadocs-ui/mdx"
-import * as ObsidianComponents from "fumadocs-obsidian/ui"
-import { APIPage } from "@/components/api-page"
-import * as PythonComponents from "fumadocs-python/components"
-import { Callout } from "fumadocs-ui/components/callout"
-import { Files, Folder, File } from "fumadocs-ui/components/files"
-import { TypeTable } from "fumadocs-ui/components/type-table"
-import { ImageZoom } from "fumadocs-ui/components/image-zoom"
-import { InlineTOC } from "fumadocs-ui/components/inline-toc"
-import { GithubInfo } from "fumadocs-ui/components/github-info"
-import type { MDXComponents } from "mdx/types"
-import Link from "next/link"
-import { ComponentPreview } from "@/components/component-preview"
-import { FeedbackBlock } from "@/components/feedback/client"
-import { onBlockFeedbackAction } from "@/lib/github"
-import { CalendarMinMaxDemo } from "@/components/demos/calendar-min-max-demo"
-import { CalendarUnavailableDemo } from "@/components/demos/calendar-unavailable-demo"
 import {
-  Tab,
-  Tabs as FumadocsTabs,
-  TabsList as FumadocsTabsList,
-  TabsTrigger as FumadocsTabsTrigger,
-  TabsContent as FumadocsTabsContent,
-} from "@/components/mdx-tabs"
-import {
-  Tip,
-  Warning,
-  Info,
-  Note,
-  Check,
-  Step,
-  Steps,
-  Accordion as FumadocsAccordion,
-  Accordions as FumadocsAccordions,
-  AccordionGroup,
-  Card as FumadocsCard,
-  CardGroup as FumadocsCardGroup,
-} from "@/components/mdx-compat"
-// Registry demos: import via @/__registry__ for lazy-loading
-// Direct demos: import directly when used as inline MDX children (not via ComponentPreview name=)
-import {
-  AvatarSizeDemo,
-  AvatarFallbackDemo,
-  AvatarGroupDemo,
-  AvatarGitPlatformDemo,
-  DiceBearAvatarDemo,
-  ButtonDemo,
-  CheckboxDemo,
-  SwitchDemo,
-  DialogDemo,
-  InputBasicDemo,
-  DatePickerDefaultDemo,
-  DatePickerMinMaxDemo,
-  ProgressBasicDemo,
-  AnimatedCircularProgressBarDemo,
-  DotPatternDemo,
-  FlickeringGridDemo,
-} from "@/__registry__"
-import { AvatarSmartGroupDemo } from "@/components/avatar-smart-group-demo"
-import { AvatarWithIconDemo } from "@/components/avatar-with-icon-demo"
-import { InputOTPNumericDemo } from "@/components/demos/input-otp-numeric-demo"
-import { CommandDialogDemo } from "@/components/demos/command-dialog-demo"
-import { ContextMenuDemo } from "@/components/demos/context-menu-demo"
-import { ContextMenuWithIconsDemo } from "@/components/demos/context-menu-with-icons-demo"
-import { MacbookProDemo } from "@/components/demos/macbook-pro-demo"
-import { SheetDemo } from "@/components/demos/sheet-demo"
-import { SheetSideDemo } from "@/components/demos/sheet-side-demo"
-import { SheetMobileDemo } from "@/components/demos/sheet-mobile-demo"
-import { BasePopoverDemo } from "@/components/demos/base-popover-demo"
-import { DialogSuccessDemo } from "@/components/demos/dialog-success-demo"
-import { DialogDeactivateDemo } from "@/components/demos/dialog-deactivate-demo"
-import { DialogPasswordDemo } from "@/components/demos/dialog-password-demo"
-import { DialogShareDemo } from "@/components/demos/dialog-share-demo"
-import {
-  BadgeVariantsDemo,
-  BadgeSizesDemo,
-  BadgeIconDemo,
-  BadgePillDemo,
-  BadgeTableDemo,
-  BadgeNotificationDemo,
-  BadgeFeatureTagDemo,
-} from "@/components/badge-demos"
-import { AvatarSmartGroup } from "@nebutra/ui/primitives"
-import { IconGallery } from "@/components/icon-gallery"
-import { ColorPalette } from "@/components/color-palette"
-import { ColorUsageDemos } from "@/components/color-usage"
-import {
-  TypographyHierarchyDemos,
-  TypeScaleDemo,
-  CJKWeightDemo,
-} from "@/components/typography-demos"
-import { BrandGradientsDemo } from "@/components/gradient-demos"
-import { MotionDemos } from "@/components/motion-demos"
-import { IntroductionHero } from "@/components/introduction-hero"
-import {
-  LogoShowcase,
-  BrandPhilosophyVisual,
-} from "@/components/brand-overview-visuals"
-import {
-  VisuallyHiddenDemo,
-  FocusRingDemo,
-  AriaPatternsDemo,
-  MinTouchTargetDemo,
-  PrefersReducedMotionDemo,
-  ContrastRequirementsDemo,
-  SkipLinkStyleDemo,
-} from "@/components/accessibility-demos"
-import {
-  CopywritingErrorsDemo,
-  CopywritingEmptyStateDemo,
-  CopywritingSuccessDemo,
-  CopywritingDestructiveDemo,
-  CopywritingButtonsDemo,
-  CopywritingProgressDemo,
-  CopywritingCapitalizationDemo,
-} from "@/components/copywriting-demos"
-import { ThemeSwitcherDemo } from "@/components/previews/theme-switcher-demo"
-import {
-  ThemeColorsDemo,
-  BrandOverridesDemo,
-  ZIndexDemo,
-} from "@/components/theming-demos"
-import {
-  StandardGridDemo,
-  DashboardGridDemo,
-  SplitLayoutDemo,
-} from "@/components/grid-layout-demos"
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/mdx-resizable"
-import { ScrollArea, ScrollBar } from "@/components/mdx-scroll-area"
-import { Toggle, ToggleGroup, ToggleGroupItem } from "@/components/mdx-toggle"
-import {
-  HexGridDemo,
-  DotPatternCardDemo,
-  FlickeringGridCardDemo,
-  WarpBackgroundDemo,
-  StarsCanvasDemo,
-  GlassmorphismDemo,
-} from "@/components/pattern-demos"
-import { GridDemo, GridCell } from "@/components/grid-demos"
-import { Mermaid } from "fumadocs-mermaid/ui"
-import { StatusBadge, DeprecatedBanner } from "@/components/status-badge"
-import { FigmaLink } from "@/components/figma-link"
-
+  Card,
+  CardBody,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardIcon,
+  CardTitle,
+  CommandBox,
+  Terminal,
+  TerminalBody,
+  TerminalHeader,
+  TerminalLine,
+} from "@nebutra/ui/patterns";
 // Nebutra UI components (Globally injected into MDX)
 import {
-  Accordion as UIAccordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
   Alert,
-  AlertTitle,
-  AlertDescription,
-  AlertIcon,
   AlertContent,
-  AlertToolbar,
+  AlertDescription,
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -166,255 +29,378 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
+  AlertIcon,
+  AlertTitle,
+  AlertToolbar,
   Avatar,
-  AvatarImage,
   AvatarFallback,
   AvatarGroup,
-  GitHubAvatar,
-  GitLabAvatar,
-  BitbucketAvatar,
+  AvatarImage,
+  AvatarSmartGroup,
   AvatarWithIcon,
-  DiceBearAvatar,
   Badge,
+  BitbucketAvatar,
   Breadcrumb,
-  BreadcrumbList,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
+  BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbEllipsis,
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableRow,
-  TableHead,
-  TableCell,
-  TableCaption,
+  BreadcrumbSeparator,
   Button,
   ButtonLink,
+  Calendar,
+  CardContent,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
   Checkbox,
   CheckboxGroup,
-  ComboboxRoot,
-  ComboboxInput,
-  ComboboxOptionItem,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
   ComboboxEmpty,
   ComboboxGroupSub,
+  ComboboxInput,
+  ComboboxOptionItem,
+  ComboboxRoot,
   ComboboxSeparator as ComboboxSeparatorComp,
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-  DialogOverlay,
-  DialogPortal,
-  Input,
-  Label,
-  Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectLabel,
-  SelectItem,
-  SelectSeparator,
-  Switch,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-  Separator,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-  ContextMenuRoot,
-  ContextMenuTrigger,
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandMenuEmpty,
+  CommandMenuGroup,
+  CommandMenuInput,
+  CommandMenuItem,
+  CommandMenuList,
+  CommandMenuRoot,
+  CommandMenuSeparator,
+  CommandMenuShortcut,
+  CommandSeparator,
+  CommandShortcut,
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuItem,
   ContextMenuLabel,
+  ContextMenuRoot,
   ContextMenuSeparator,
-  Progress,
-  Skeleton,
-  Slider,
-  Textarea,
-  Sheet,
-  SheetPortal,
-  SheetOverlay,
-  SheetTrigger,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
-  SheetDescription,
+  ContextMenuTrigger,
+  DatePicker,
+  DateRangePicker,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+  DiceBearAvatar,
   Drawer,
-  DrawerPortal,
-  DrawerOverlay,
-  DrawerTrigger,
   DrawerClose,
   DrawerContent,
-  DrawerHeader,
-  DrawerFooter,
-  DrawerTitle,
   DrawerDescription,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverAnchor,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger,
   DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuCheckboxItem,
-  DropdownMenuRadioItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuGroup,
-  DropdownMenuPortal,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuRadioGroup,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-  Calendar,
-  RangeCalendar,
-  Command,
-  CommandDialog,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandShortcut,
-  CommandSeparator,
-  CommandMenuRoot,
-  CommandMenuInput,
-  CommandMenuList,
-  CommandMenuEmpty,
-  CommandMenuGroup,
-  CommandMenuItem,
-  CommandMenuShortcut,
-  CommandMenuSeparator,
-  DatePicker,
-  DateRangePicker,
-  Collapsible,
-  CollapsibleTrigger,
-  CollapsibleContent,
+  DropdownMenuTrigger,
+  GitHubAvatar,
+  GitLabAvatar,
   HoverCard,
-  HoverCardTrigger,
   HoverCardContent,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
+  HoverCardTrigger,
+  Input,
   InputOTP,
   InputOTPGroup,
-  InputOTPSlot,
   InputOTPSeparator,
-  CardContent,
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuContent,
-  NavigationMenuTrigger,
-  NavigationMenuLink,
-  NavigationMenuIndicator,
-  NavigationMenuViewport,
-  navigationMenuTriggerStyle,
+  InputOTPSlot,
+  Label,
   Menubar,
-  MenubarMenu,
-  MenubarTrigger,
+  MenubarCheckboxItem,
   MenubarContent,
   MenubarItem,
-  MenubarSeparator,
   MenubarLabel,
-  MenubarCheckboxItem,
+  MenubarMenu,
   MenubarRadioGroup,
   MenubarRadioItem,
+  MenubarSeparator,
   MenubarShortcut,
   MenubarSub,
-  MenubarSubTrigger,
   MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+  Progress,
   RadioGroup,
   RadioGroupItem,
-} from "@nebutra/ui/primitives"
-
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardIcon,
-  CardTitle,
-  CardDescription,
-  Terminal,
-  TerminalHeader,
-  TerminalBody,
-  TerminalLine,
-  CommandBox,
-} from "@nebutra/ui/patterns"
-
+  RangeCalendar,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+  Separator,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetOverlay,
+  SheetPortal,
+  SheetTitle,
+  SheetTrigger,
+  Skeleton,
+  Slider,
+  Switch,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Textarea,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  Accordion as UIAccordion,
+} from "@nebutra/ui/primitives";
+import { Mermaid } from "fumadocs-mermaid/ui";
+import * as ObsidianComponents from "fumadocs-obsidian/ui";
+import * as PythonComponents from "fumadocs-python/components";
+import { Callout } from "fumadocs-ui/components/callout";
+import { File, Files, Folder } from "fumadocs-ui/components/files";
+import { GithubInfo } from "fumadocs-ui/components/github-info";
+import { ImageZoom } from "fumadocs-ui/components/image-zoom";
+import { InlineTOC } from "fumadocs-ui/components/inline-toc";
+import { TypeTable } from "fumadocs-ui/components/type-table";
+import defaultComponents from "fumadocs-ui/mdx";
 // Common Lucide Icons used in documentation examples
 import {
-  User,
-  UserCircle,
-  CheckCircle2,
-  Search,
-  ChevronsUpDown,
-  ChevronDown,
-  ChevronUp,
-  ChevronRight,
-  ChevronLeft,
+  AlertCircle,
   AlignCenter,
   AlignLeft,
   AlignRight,
-  Bold,
-  Italic,
-  Underline,
-  Edit2,
-  Copy,
-  Trash2,
-  Link as LinkIcon,
-  Check as CheckIcon,
-  Lock,
-  Bell,
-  Clock,
-  Mountain,
-  Timer,
-  Map as MapIcon,
-  TrendingUp,
-  Layers,
-  FileCode,
-  BookOpen,
-  LayoutDashboard,
-  Users,
   BarChart,
-  Settings,
-  Volume2,
-  ShieldCheck,
-  XCircle,
-  AlertCircle,
-  Zap,
-  Laptop,
-  Sparkles,
+  Bell,
+  Bold,
+  BookOpen,
+  CheckCircle2,
+  Check as CheckIcon,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsUpDown,
+  ChevronUp,
+  Clock,
   CloudMoon,
-  X,
-  Plus,
+  Copy,
+  Edit2,
+  FileCode,
+  Italic,
+  Laptop,
+  Layers,
+  LayoutDashboard,
+  Link as LinkIcon,
+  Lock,
+  Map as MapIcon,
   Minus,
-} from "lucide-react"
+  Mountain,
+  Plus,
+  Search,
+  Settings,
+  ShieldCheck,
+  Sparkles,
+  Timer,
+  Trash2,
+  TrendingUp,
+  Underline,
+  User,
+  UserCircle,
+  Users,
+  Volume2,
+  X,
+  XCircle,
+  Zap,
+} from "lucide-react";
+import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
+// Registry demos: import via @/__registry__ for lazy-loading
+// Direct demos: import directly when used as inline MDX children (not via ComponentPreview name=)
+import {
+  AnimatedCircularProgressBarDemo,
+  AvatarFallbackDemo,
+  AvatarGitPlatformDemo,
+  AvatarGroupDemo,
+  AvatarSizeDemo,
+  ButtonDemo,
+  CheckboxDemo,
+  DatePickerDefaultDemo,
+  DatePickerMinMaxDemo,
+  DialogDemo,
+  DiceBearAvatarDemo,
+  DotPatternDemo,
+  FlickeringGridDemo,
+  InputBasicDemo,
+  ProgressBasicDemo,
+  SwitchDemo,
+} from "@/__registry__";
+import {
+  AriaPatternsDemo,
+  ContrastRequirementsDemo,
+  FocusRingDemo,
+  MinTouchTargetDemo,
+  PrefersReducedMotionDemo,
+  SkipLinkStyleDemo,
+  VisuallyHiddenDemo,
+} from "@/components/accessibility-demos";
+import { APIPage } from "@/components/api-page";
+import { AvatarSmartGroupDemo } from "@/components/avatar-smart-group-demo";
+import { AvatarWithIconDemo } from "@/components/avatar-with-icon-demo";
+import {
+  BadgeFeatureTagDemo,
+  BadgeIconDemo,
+  BadgeNotificationDemo,
+  BadgePillDemo,
+  BadgeSizesDemo,
+  BadgeTableDemo,
+  BadgeVariantsDemo,
+} from "@/components/badge-demos";
+import { BrandPhilosophyVisual, LogoShowcase } from "@/components/brand-overview-visuals";
+import { ColorPalette } from "@/components/color-palette";
+import { ColorUsageDemos } from "@/components/color-usage";
+import { ComponentPreview } from "@/components/component-preview";
+import {
+  CopywritingButtonsDemo,
+  CopywritingCapitalizationDemo,
+  CopywritingDestructiveDemo,
+  CopywritingEmptyStateDemo,
+  CopywritingErrorsDemo,
+  CopywritingProgressDemo,
+  CopywritingSuccessDemo,
+} from "@/components/copywriting-demos";
+import { BasePopoverDemo } from "@/components/demos/base-popover-demo";
+import { CalendarMinMaxDemo } from "@/components/demos/calendar-min-max-demo";
+import { CalendarUnavailableDemo } from "@/components/demos/calendar-unavailable-demo";
+import { CommandDialogDemo } from "@/components/demos/command-dialog-demo";
+import { ContextMenuDemo } from "@/components/demos/context-menu-demo";
+import { ContextMenuWithIconsDemo } from "@/components/demos/context-menu-with-icons-demo";
+import { DialogDeactivateDemo } from "@/components/demos/dialog-deactivate-demo";
+import { DialogPasswordDemo } from "@/components/demos/dialog-password-demo";
+import { DialogShareDemo } from "@/components/demos/dialog-share-demo";
+import { DialogSuccessDemo } from "@/components/demos/dialog-success-demo";
+import { InputOTPNumericDemo } from "@/components/demos/input-otp-numeric-demo";
+import { MacbookProDemo } from "@/components/demos/macbook-pro-demo";
+import { SheetDemo } from "@/components/demos/sheet-demo";
+import { SheetMobileDemo } from "@/components/demos/sheet-mobile-demo";
+import { SheetSideDemo } from "@/components/demos/sheet-side-demo";
+import { FeedbackBlock } from "@/components/feedback/client";
+import { FigmaLink } from "@/components/figma-link";
+import { BrandGradientsDemo } from "@/components/gradient-demos";
+import { GridCell, GridDemo } from "@/components/grid-demos";
+import {
+  DashboardGridDemo,
+  SplitLayoutDemo,
+  StandardGridDemo,
+} from "@/components/grid-layout-demos";
+import { IconGallery } from "@/components/icon-gallery";
+import { IntroductionHero } from "@/components/introduction-hero";
+import {
+  AccordionGroup,
+  Check,
+  Accordion as FumadocsAccordion,
+  Accordions as FumadocsAccordions,
+  Card as FumadocsCard,
+  CardGroup as FumadocsCardGroup,
+  Info,
+  Note,
+  Step,
+  Steps,
+  Tip,
+  Warning,
+} from "@/components/mdx-compat";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/mdx-resizable";
+import { ScrollArea, ScrollBar } from "@/components/mdx-scroll-area";
+import {
+  Tabs as FumadocsTabs,
+  TabsContent as FumadocsTabsContent,
+  TabsList as FumadocsTabsList,
+  TabsTrigger as FumadocsTabsTrigger,
+  Tab,
+} from "@/components/mdx-tabs";
+import { Toggle, ToggleGroup, ToggleGroupItem } from "@/components/mdx-toggle";
+import { MotionDemos } from "@/components/motion-demos";
+import {
+  DotPatternCardDemo,
+  FlickeringGridCardDemo,
+  GlassmorphismDemo,
+  HexGridDemo,
+  StarsCanvasDemo,
+  WarpBackgroundDemo,
+} from "@/components/pattern-demos";
+import { ThemeSwitcherDemo } from "@/components/previews/theme-switcher-demo";
+import { DeprecatedBanner, StatusBadge } from "@/components/status-badge";
+import { BrandOverridesDemo, ThemeColorsDemo, ZIndexDemo } from "@/components/theming-demos";
+import {
+  CJKWeightDemo,
+  TypeScaleDemo,
+  TypographyHierarchyDemos,
+} from "@/components/typography-demos";
+import { onBlockFeedbackAction } from "@/lib/github";
 
 const CommandMenu = {
   Root: CommandMenuRoot,
@@ -425,7 +411,7 @@ const CommandMenu = {
   Item: CommandMenuItem,
   Shortcut: CommandMenuShortcut,
   Separator: CommandMenuSeparator,
-} as const
+} as const;
 
 const ContextMenu = {
   Root: ContextMenuRoot,
@@ -435,7 +421,7 @@ const ContextMenu = {
   Item: ContextMenuItem,
   Label: ContextMenuLabel,
   Separator: ContextMenuSeparator,
-} as const
+} as const;
 
 // Create a pseudo-Menu object from DropdownMenu primitives for the Docs
 const Menu = {
@@ -451,7 +437,7 @@ const Menu = {
   Sub: DropdownMenuSub,
   SubTrigger: DropdownMenuSubTrigger,
   SubContent: DropdownMenuSubContent,
-} as const
+} as const;
 
 const Combobox = Object.assign(ComboboxRoot, {
   Input: ComboboxInput,
@@ -459,7 +445,7 @@ const Combobox = Object.assign(ComboboxRoot, {
   Empty: ComboboxEmpty,
   Group: ComboboxGroupSub,
   Separator: ComboboxSeparatorComp,
-})
+});
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   const merged = {
@@ -477,9 +463,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     InlineTOC,
     Mermaid,
     GithubInfo,
-    FeedbackBlock: (
-      props: React.ComponentPropsWithoutRef<typeof FeedbackBlock>
-    ) => <FeedbackBlock {...props} onSendAction={onBlockFeedbackAction} />,
+    FeedbackBlock: (props: React.ComponentPropsWithoutRef<typeof FeedbackBlock>) => (
+      <FeedbackBlock {...props} onSendAction={onBlockFeedbackAction} />
+    ),
     // Tabs (Fumadocs specific)
     Tab,
     Tabs: FumadocsTabs,
@@ -712,9 +698,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TooltipTrigger,
     TooltipContent,
     TooltipProvider,
-    ContextMenu: ContextMenu as unknown as React.ComponentType<
-      Record<string, unknown>
-    >,
+    ContextMenu: ContextMenu as unknown as React.ComponentType<Record<string, unknown>>,
     Progress,
     Skeleton,
     Slider,
@@ -774,9 +758,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     CommandItem,
     CommandShortcut,
     CommandSeparator,
-    CommandMenu: CommandMenu as unknown as React.ComponentType<
-      Record<string, unknown>
-    >,
+    CommandMenu: CommandMenu as unknown as React.ComponentType<Record<string, unknown>>,
     DatePicker,
     DateRangePicker,
     Collapsible,
@@ -891,11 +873,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     FigmaLink,
 
     ...components,
-  }
-  return merged
+  };
+  return merged;
 }
 
 // Export a direct getter so MDX remote compiler can inject it without React hooks rules
 export function getMDXComponents(): MDXComponents {
-  return useMDXComponents({})
+  return useMDXComponents({});
 }

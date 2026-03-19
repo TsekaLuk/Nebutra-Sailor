@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import clsx from "clsx";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Surface } from "@/components/ui/surface";
 import { Textarea } from "@/components/ui/textarea";
-import clsx from "clsx";
 import { useClickOutside } from "@/components/ui/use-click-outside";
 import { useAnalytics } from "@/hooks/use-analytics";
 
@@ -12,13 +13,7 @@ interface FeedbackProps {
 }
 
 const MSupportedIcon = () => (
-  <svg
-    fill="none"
-    height="14"
-    viewBox="0 0 22 14"
-    width="22"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg fill="none" height="14" viewBox="0 0 22 14" width="22" xmlns="http://www.w3.org/2000/svg">
     <path
       clipRule="evenodd"
       d="M19.5 1.25H2.5C1.80964 1.25 1.25 1.80964 1.25 2.5V11.5C1.25 12.1904 1.80964 12.75 2.5 12.75H19.5C20.1904 12.75 20.75 12.1904 20.75 11.5V2.5C20.75 1.80964 20.1904 1.25 19.5 1.25ZM2.5 0C1.11929 0 0 1.11929 0 2.5V11.5C0 12.8807 1.11929 14 2.5 14H19.5C20.8807 14 22 12.8807 22 11.5V2.5C22 1.11929 20.8807 0 19.5 0H2.5ZM3 3.5H4H4.25H4.6899L4.98715 3.82428L7 6.02011L9.01285 3.82428L9.3101 3.5H9.75H10H11V4.5V10.5H9V6.79807L7.73715 8.17572L7 8.97989L6.26285 8.17572L5 6.79807V10.5H3V4.5V3.5ZM15 7V3.5H17V7H19.5L17 9.5L16 10.5L15 9.5L12.5 7H15Z"
@@ -29,13 +24,7 @@ const MSupportedIcon = () => (
 );
 
 const LoveItIcon = ({ pathClassName }: { pathClassName?: string }) => (
-  <svg
-    height="16"
-    strokeLinejoin="round"
-    viewBox="0 0 16 16"
-    width="16"
-    fill="currentColor"
-  >
+  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" fill="currentColor">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -51,13 +40,7 @@ const LoveItIcon = ({ pathClassName }: { pathClassName?: string }) => (
 );
 
 const ItsOkayIcon = () => (
-  <svg
-    height="16"
-    strokeLinejoin="round"
-    viewBox="0 0 16 16"
-    width="16"
-    fill="currentColor"
-  >
+  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" fill="currentColor">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -67,13 +50,7 @@ const ItsOkayIcon = () => (
 );
 
 const NotGreaterIcon = () => (
-  <svg
-    height="16"
-    strokeLinejoin="round"
-    viewBox="0 0 16 16"
-    width="16"
-    fill="currentColor"
-  >
+  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" fill="currentColor">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -83,17 +60,8 @@ const NotGreaterIcon = () => (
 );
 
 const HateIcon = () => (
-  <svg
-    height="16"
-    strokeLinejoin="round"
-    viewBox="0 0 16 16"
-    width="16"
-    fill="currentColor"
-  >
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd" d="M4 9V16H5.5V9H4ZM12 9V16H10.5V9H12Z"
-    />
+  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" fill="currentColor">
+    <path fillRule="evenodd" clipRule="evenodd" d="M4 9V16H5.5V9H4ZM12 9V16H10.5V9H12Z" />
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -108,15 +76,18 @@ const Default = ({ label }: { label: string }) => {
   const [message, setMessage] = useState<string>("");
   const [sending, setSending] = useState<boolean>(false);
   const [sent, setSent] = useState<boolean>(false);
-  const [position, setPosition] = useState<{ top?: number, bottom?: number }>();
+  const [position, setPosition] = useState<{ top?: number; bottom?: number }>();
   const inputRef = useRef<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { track } = useAnalytics();
 
-  useEffect(() => () => {
-    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    },
+    [],
+  );
 
   useEffect(() => {
     const getPosition = () => {
@@ -197,7 +168,7 @@ const Default = ({ label }: { label: string }) => {
         type="menu"
         className={clsx(
           "absolute w-[340px] duration-200 font-sans left-1/2 -translate-x-1/2 shadow-xl bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden",
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
         style={{ ...position }}
         ref={menuRef}
@@ -228,7 +199,9 @@ const Default = ({ label }: { label: string }) => {
                   shape="rounded"
                   className={clsx(
                     "hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white !w-8 !h-8 p-0 duration-200 transition-colors",
-                    selectedEmoji === 0 ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white" : "bg-transparent text-gray-400 dark:text-gray-500"
+                    selectedEmoji === 0
+                      ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white"
+                      : "bg-transparent text-gray-400 dark:text-gray-500",
                   )}
                   onClick={(event) => {
                     event.preventDefault();
@@ -243,7 +216,9 @@ const Default = ({ label }: { label: string }) => {
                   shape="rounded"
                   className={clsx(
                     "hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white !w-8 !h-8 p-0 duration-200 transition-colors",
-                    selectedEmoji === 1 ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white" : "bg-transparent text-gray-400 dark:text-gray-500"
+                    selectedEmoji === 1
+                      ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white"
+                      : "bg-transparent text-gray-400 dark:text-gray-500",
                   )}
                   onClick={(event) => {
                     event.preventDefault();
@@ -258,7 +233,9 @@ const Default = ({ label }: { label: string }) => {
                   shape="rounded"
                   className={clsx(
                     "hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white !w-8 !h-8 p-0 duration-200 transition-colors",
-                    selectedEmoji === 2 ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white" : "bg-transparent text-gray-400 dark:text-gray-500"
+                    selectedEmoji === 2
+                      ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white"
+                      : "bg-transparent text-gray-400 dark:text-gray-500",
                   )}
                   onClick={(event) => {
                     event.preventDefault();
@@ -273,7 +250,9 @@ const Default = ({ label }: { label: string }) => {
                   shape="rounded"
                   className={clsx(
                     "hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white !w-8 !h-8 p-0 duration-200 transition-colors",
-                    selectedEmoji === 3 ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white" : "bg-transparent text-gray-400 dark:text-gray-500"
+                    selectedEmoji === 3
+                      ? "bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white"
+                      : "bg-transparent text-gray-400 dark:text-gray-500",
                   )}
                   onClick={(event) => {
                     event.preventDefault();
@@ -283,7 +262,12 @@ const Default = ({ label }: { label: string }) => {
                   <HateIcon />
                 </Button>
               </span>
-              <Button className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200" size="small" onClick={handleSend} disabled={sending}>
+              <Button
+                className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200"
+                size="small"
+                onClick={handleSend}
+                disabled={sending}
+              >
                 {sending ? "Sending..." : "Send"}
               </Button>
             </div>
@@ -356,11 +340,16 @@ const Inline = ({ label }: { label: string }) => {
     <div
       className={clsx(
         "shadow-lg duration-200 overflow-hidden w-fit flex flex-col justify-start bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800",
-        expanded ? "max-h-[243px] rounded-xl" : "max-h-12 rounded-[30px]"
+        expanded ? "max-h-[243px] rounded-xl" : "max-h-12 rounded-[30px]",
       )}
       ref={ref}
     >
-      <div className={clsx("flex items-center justify-center gap-2 py-2 pl-4 pr-2 duration-200", expanded && "!px-[60px]")}>
+      <div
+        className={clsx(
+          "flex items-center justify-center gap-2 py-2 pl-4 pr-2 duration-200",
+          expanded && "!px-[60px]",
+        )}
+      >
         <p className="text-gray-900 text-sm">{label}</p>
         <div className="flex justify-between">
           <span className="flex items-center gap-[1px] cursor-pointer">
@@ -370,7 +359,7 @@ const Inline = ({ label }: { label: string }) => {
               shape="rounded"
               className={clsx(
                 "group hover:!bg-blue-300 hover:fill-blue-900 !w-8 !h-8 p-0 duration-200",
-                selectedEmoji === 0 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900"
+                selectedEmoji === 0 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900",
               )}
               onClick={(event) => {
                 event.preventDefault();
@@ -378,10 +367,12 @@ const Inline = ({ label }: { label: string }) => {
                 setExpanded(selectedEmoji !== 0);
               }}
             >
-              <LoveItIcon pathClassName={clsx(
-                "group-hover:fill-blue-900 duration-200",
-                selectedEmoji === 0 ? "fill-blue-900" : "fill-amber-800"
-              )} />
+              <LoveItIcon
+                pathClassName={clsx(
+                  "group-hover:fill-blue-900 duration-200",
+                  selectedEmoji === 0 ? "fill-blue-900" : "fill-amber-800",
+                )}
+              />
             </Button>
             <Button
               variant="unstyled"
@@ -389,7 +380,7 @@ const Inline = ({ label }: { label: string }) => {
               shape="rounded"
               className={clsx(
                 "hover:!bg-blue-300 hover:fill-blue-900 !w-8 !h-8 p-0 duration-200",
-                selectedEmoji === 1 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900"
+                selectedEmoji === 1 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900",
               )}
               onClick={(event) => {
                 event.preventDefault();
@@ -405,7 +396,7 @@ const Inline = ({ label }: { label: string }) => {
               shape="rounded"
               className={clsx(
                 "hover:!bg-blue-300 hover:fill-blue-900 !w-8 !h-8 p-0 duration-200",
-                selectedEmoji === 2 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900"
+                selectedEmoji === 2 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900",
               )}
               onClick={(event) => {
                 event.preventDefault();
@@ -421,7 +412,7 @@ const Inline = ({ label }: { label: string }) => {
               shape="rounded"
               className={clsx(
                 "hover:!bg-blue-300 hover:fill-blue-900 !w-8 !h-8 p-0 duration-200",
-                selectedEmoji === 3 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900"
+                selectedEmoji === 3 ? "!bg-blue-300 fill-blue-900" : "bg-transparent fill-gray-900",
               )}
               onClick={(event) => {
                 event.preventDefault();
@@ -434,8 +425,8 @@ const Inline = ({ label }: { label: string }) => {
           </span>
         </div>
       </div>
-      {showContent && (
-        sent ? (
+      {showContent &&
+        (sent ? (
           <div className="flex items-center justify-center p-4 text-sm text-gray-600">
             Thanks for the feedback!
           </div>
@@ -460,12 +451,15 @@ const Inline = ({ label }: { label: string }) => {
               </Button>
             </div>
           </form>
-        )
-      )}
+        ))}
     </div>
   );
 };
 
 export const Feedback = ({ type = "default", label }: FeedbackProps) => {
-  return (type === "default" || type === undefined) ? <Default label={label} /> : <Inline label={label} />;
+  return type === "default" || type === undefined ? (
+    <Default label={label} />
+  ) : (
+    <Inline label={label} />
+  );
 };

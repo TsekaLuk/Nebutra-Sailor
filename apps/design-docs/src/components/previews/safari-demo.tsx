@@ -1,4 +1,4 @@
-import { Safari } from "@nebutra/ui/primitives"
+import { Safari } from "@nebutra/ui/primitives";
 
 export function SafariDemo() {
   return (
@@ -9,5 +9,5 @@ export function SafariDemo() {
         imageSrc="https://nebutra.com/og-image.png"
       />
     </div>
-  )
+  );
 }

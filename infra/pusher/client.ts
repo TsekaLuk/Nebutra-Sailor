@@ -1,4 +1,4 @@
-import PusherClient, { Channel, PresenceChannel, Members } from "pusher-js";
+import PusherClient, { type Channel, type Members, type PresenceChannel } from "pusher-js";
 
 /**
  * Client-side Pusher utilities
@@ -29,8 +29,7 @@ export function getPusherClient(): PusherClient {
 
   pusherClientInstance = new PusherClient(key, {
     cluster,
-    authEndpoint:
-      process.env.NEXT_PUBLIC_PUSHER_AUTH_ENDPOINT || "/api/pusher/auth",
+    authEndpoint: process.env.NEXT_PUBLIC_PUSHER_AUTH_ENDPOINT || "/api/pusher/auth",
     forceTLS: process.env.NEXT_PUBLIC_PUSHER_FORCE_TLS !== "false",
     ...(wsHost && { wsHost }),
     ...(wsPort && { wsPort }),
@@ -240,4 +239,4 @@ export const Channels = {
   public: (name: string) => `public-${name}`,
 } as const;
 
-export type { Channel, PresenceChannel, Members };
+export type { Channel, Members, PresenceChannel };

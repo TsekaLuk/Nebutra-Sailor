@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 
 const meta = {
   title: "Primitives/Tabs",
@@ -8,8 +8,7 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "Tabbed navigation surface with default, button, and line variants.",
+        component: "Tabbed navigation surface with default, button, and line variants.",
       },
     },
   },

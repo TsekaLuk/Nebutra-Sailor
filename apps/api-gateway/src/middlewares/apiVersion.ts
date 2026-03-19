@@ -23,10 +23,7 @@ export const apiVersionMiddleware = (config: VersionConfig = {}) =>
     if (config.deprecated?.[version]) {
       c.header("Sunset", config.deprecated[version]);
       c.header("Deprecation", "true");
-      c.header(
-        "Link",
-        `</api/v2/>; rel="successor-version"`,
-      );
+      c.header("Link", `</api/v2/>; rel="successor-version"`);
     }
 
     await next();

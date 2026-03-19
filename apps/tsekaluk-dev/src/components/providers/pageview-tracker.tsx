@@ -1,3 +1,3 @@
-"use client"
+"use client";
 
-export { PageviewTracker } from "@nebutra/analytics/posthog"
+export { PageviewTracker } from "@nebutra/analytics/posthog";

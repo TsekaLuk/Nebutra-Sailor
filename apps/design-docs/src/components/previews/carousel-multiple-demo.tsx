@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import { Card } from "@nebutra/ui/patterns";
 import {
-  CarouselPrevious,
   CardContent,
   Carousel,
   CarouselContent,
-  CarouselNext,
   CarouselItem,
-} from "@nebutra/ui/primitives"
-import { Card } from "@nebutra/ui/patterns"
+  CarouselNext,
+  CarouselPrevious,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function CarouselMultipleDemo() {
   return (
@@ -30,5 +30,5 @@ export function CarouselMultipleDemo() {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-  )
+  );
 }

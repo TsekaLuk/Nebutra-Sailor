@@ -8,11 +8,11 @@
 // Custom Component Wrappers
 // ============================================
 
-export { DesignSystemProvider } from "./DesignSystemProvider";
 export { Card, type CardProps } from "./Card";
 export { Container, type ContainerProps, type ContainerSize } from "./Container";
-export { Section, type SectionProps } from "./Section";
-export { PageHeader, type PageHeaderProps } from "./PageHeader";
+export { DesignSystemProvider } from "./DesignSystemProvider";
 export { EmptyState, type EmptyStateProps } from "./EmptyState";
-export { LoadingState, type LoadingStateProps } from "./LoadingState";
 export { ErrorState, type ErrorStateProps } from "./ErrorState";
+export { LoadingState, type LoadingStateProps } from "./LoadingState";
+export { PageHeader, type PageHeaderProps } from "./PageHeader";
+export { Section, type SectionProps } from "./Section";

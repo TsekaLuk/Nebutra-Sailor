@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { useState, useCallback, useRef, useEffect } from "react";
-import { ArrowLeft, ArrowRight, RotateCw, Copy, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Copy, RotateCw } from "lucide-react";
+import type * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../utils/cn";
 
 const COPIED_FEEDBACK_MS = 1500;
@@ -120,11 +120,7 @@ export function Browser({
                 className="flex-shrink-0 rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label={copied ? "Copied" : "Copy address"}
               >
-                {copied ? (
-                  <Check className="size-3" />
-                ) : (
-                  <Copy className="size-3" />
-                )}
+                {copied ? <Check className="size-3" /> : <Copy className="size-3" />}
               </button>
             </>
           ) : (

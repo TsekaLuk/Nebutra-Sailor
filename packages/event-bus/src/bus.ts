@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { logger } from "@nebutra/logger";
+import { z } from "zod";
 
 // Base event schema
 export const BaseEventSchema = z.object({
@@ -14,9 +14,7 @@ export const BaseEventSchema = z.object({
 
 export type BaseEvent = z.infer<typeof BaseEventSchema>;
 
-type EventHandler<T extends BaseEvent = BaseEvent> = (
-  event: T,
-) => Promise<void>;
+type EventHandler<T extends BaseEvent = BaseEvent> = (event: T) => Promise<void>;
 
 /**
  * In-memory event bus for local development
@@ -29,10 +27,7 @@ export class EventBus {
   /**
    * Subscribe to an event type
    */
-  subscribe<T extends BaseEvent>(
-    eventType: string,
-    handler: EventHandler<T>,
-  ): () => void {
+  subscribe<T extends BaseEvent>(eventType: string, handler: EventHandler<T>): () => void {
     if (!this.handlers.has(eventType)) {
       this.handlers.set(eventType, new Set());
     }

@@ -3,17 +3,17 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
-  ListResourcesRequestSchema,
-  ReadResourceRequestSchema,
   CallToolRequestSchema,
+  ListResourcesRequestSchema,
   ListToolsRequestSchema,
+  ReadResourceRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import path from "path";
 import fs from "fs";
+import path from "path";
 
 /**
  * Nebutra MCP Context Server
- * Exposes core project files and state to Cursor / Windsurf allowing AI Agents 
+ * Exposes core project files and state to Cursor / Windsurf allowing AI Agents
  * to instantly understand the Nebutra-Sailor application structure and routing logic.
  */
 class NebutraContextServer {
@@ -33,12 +33,12 @@ class NebutraContextServer {
           resources: {},
           tools: {},
         },
-      }
+      },
     );
 
     this.setupResourceHandlers();
     this.setupToolHandlers();
-    
+
     this.server.onerror = (error) => console.error("[MCP Error]", error);
   }
 
@@ -49,36 +49,37 @@ class NebutraContextServer {
           uri: "file:///nebutra.config.json",
           name: "Nebutra Configuration",
           mimeType: "application/json",
-          description: "Global configurations for the Nebutra template including enabled features (auth, payments, i18n, db).",
+          description:
+            "Global configurations for the Nebutra template including enabled features (auth, payments, i18n, db).",
         },
         {
           uri: "file:///prisma/schema.prisma",
           name: "Database Schema Overview",
           mimeType: "text/plain",
           description: "The core Prisma schema defining the database tables and relationships.",
-        }
+        },
       ],
     }));
 
     this.server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
       const { uri } = request.params;
-      
-      let filePath = '';
+
+      let filePath = "";
       if (uri === "file:///nebutra.config.json") {
-        filePath = path.join(this.projectRoot, 'nebutra.config.json');
+        filePath = path.join(this.projectRoot, "nebutra.config.json");
       } else if (uri === "file:///prisma/schema.prisma") {
-        filePath = path.join(this.projectRoot, 'packages/db/prisma/schema.prisma');
+        filePath = path.join(this.projectRoot, "packages/db/prisma/schema.prisma");
       } else {
         throw new Error(`Resource not found: ${uri}`);
       }
 
       try {
-        const content = fs.readFileSync(filePath, 'utf-8');
+        const content = fs.readFileSync(filePath, "utf-8");
         return {
           contents: [
             {
               uri,
-              mimeType: uri.endsWith('.json') ? 'application/json' : 'text/plain',
+              mimeType: uri.endsWith(".json") ? "application/json" : "text/plain",
               text: content,
             },
           ],
@@ -107,12 +108,13 @@ class NebutraContextServer {
     this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
       if (request.params.name === "get_project_structure") {
         try {
-          const appsDir = path.join(this.projectRoot, 'apps');
-          if (!fs.existsSync(appsDir)) return { content: [{ type: "text", text: "Apps dir not found." }] };
+          const appsDir = path.join(this.projectRoot, "apps");
+          if (!fs.existsSync(appsDir))
+            return { content: [{ type: "text", text: "Apps dir not found." }] };
           const dirs = fs.readdirSync(appsDir);
-          return { content: [{ type: "text", text: `Apps: ${dirs.join(', ')}` }] };
+          return { content: [{ type: "text", text: `Apps: ${dirs.join(", ")}` }] };
         } catch (error) {
-           return { content: [{ type: "text", text: `Error: ${error}` }], isError: true };
+          return { content: [{ type: "text", text: `Error: ${error}` }], isError: true };
         }
       }
       throw new Error(`Unknown tool: ${request.params.name}`);
@@ -131,6 +133,6 @@ export const startContextServer = () => {
   server.run().catch(console.error);
 };
 
-if (process.argv[1]?.endsWith('contextServer.js') || process.argv[1]?.endsWith('nebutra-mcp')) {
+if (process.argv[1]?.endsWith("contextServer.js") || process.argv[1]?.endsWith("nebutra-mcp")) {
   startContextServer();
 }

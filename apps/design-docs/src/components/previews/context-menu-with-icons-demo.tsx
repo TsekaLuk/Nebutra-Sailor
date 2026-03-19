@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Edit2, Trash2, Copy } from "lucide-react"
-import { ContextMenu } from "@nebutra/ui/primitives"
+import { ContextMenu } from "@nebutra/ui/primitives";
+import { Copy, Edit2, Trash2 } from "lucide-react";
 
 export function ContextMenuWithIconsDemo() {
   return (
@@ -27,5 +27,5 @@ export function ContextMenuWithIconsDemo() {
         </ContextMenu.Item>
       </ContextMenu.Content>
     </ContextMenu.Root>
-  )
+  );
 }

@@ -1,15 +1,15 @@
 "use client";
 
-import * as React from "react";
+import { ChevronDown, ExternalLink, Github, Linkedin, Twitter, Youtube } from "lucide-react";
 import Link from "next/link";
-import { ExternalLink, ChevronDown, Github, Linkedin, Twitter, Youtube } from "lucide-react";
-import { cn } from "../utils/cn";
+import type * as React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../primitives/dropdown-menu";
+import { cn } from "../utils/cn";
 
 /* -------------------------------------------------------------------------- */
 /*                                   Types                                    */
@@ -110,9 +110,7 @@ export function FooterLinkColumn({ group, className }: FooterLinkColumnProps) {
                     rel={item.external ? "noopener noreferrer" : undefined}
                   >
                     {item.title}
-                    {item.external && (
-                      <ExternalLink className="ml-auto h-4 w-4" />
-                    )}
+                    {item.external && <ExternalLink className="ml-auto h-4 w-4" />}
                   </Link>
                 </DropdownMenuItem>
               ) : (
@@ -146,11 +144,7 @@ export interface FooterSocialLinksProps {
 /**
  * FooterSocialLinks - Social media links section
  */
-export function FooterSocialLinks({
-  links,
-  title = "Social",
-  className,
-}: FooterSocialLinksProps) {
+export function FooterSocialLinks({ links, title = "Social", className }: FooterSocialLinksProps) {
   return (
     <div className={cn("space-y-3 text-sm", className)}>
       <span className="block font-medium">{title}</span>
@@ -192,10 +186,7 @@ export interface SystemStatusButtonProps extends React.ButtonHTMLAttributes<HTML
   href?: string;
 }
 
-const STATUS_CONFIG: Record<
-  SystemStatus,
-  { color: string; defaultText: string }
-> = {
+const STATUS_CONFIG: Record<SystemStatus, { color: string; defaultText: string }> = {
   normal: { color: "bg-green-500", defaultText: "All systems normal" },
   degraded: { color: "bg-yellow-500", defaultText: "Degraded performance" },
   outage: { color: "bg-red-500", defaultText: "System outage" },
@@ -217,12 +208,7 @@ export function SystemStatusButton({
 
   const content = (
     <>
-      <span
-        className={cn(
-          "block size-3 rounded-full border border-background",
-          config.color,
-        )}
-      />
+      <span className={cn("block size-3 rounded-full border border-background", config.color)} />
       {displayText}
     </>
   );
@@ -246,11 +232,7 @@ export function SystemStatusButton({
   }
 
   return (
-    <button
-      type="button"
-      className={cn(baseClassName, "cursor-pointer")}
-      {...props}
-    >
+    <button type="button" className={cn(baseClassName, "cursor-pointer")} {...props}>
       {content}
     </button>
   );

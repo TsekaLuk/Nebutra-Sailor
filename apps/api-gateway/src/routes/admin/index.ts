@@ -17,9 +17,9 @@
  *   POST /feature-flags    — set per-tenant feature flag override
  */
 
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { prisma } from "@nebutra/db";
-import { getDeadLetterQueue, ackDeadLetter } from "@nebutra/event-bus";
+import { ackDeadLetter, getDeadLetterQueue } from "@nebutra/event-bus";
 import { logger } from "@nebutra/logger";
 import { env } from "../../config/env.js";
 import { getUsageSnapshot } from "../../middlewares/usageMetering.js";
@@ -115,7 +115,10 @@ adminRoutes.openapi(
       where: { id },
       include: {
         members: { include: { user: { select: { email: true, name: true } } } },
-        apiKeys: { where: { revokedAt: null }, select: { id: true, name: true, keyPrefix: true, createdAt: true, lastUsedAt: true } },
+        apiKeys: {
+          where: { revokedAt: null },
+          select: { id: true, name: true, keyPrefix: true, createdAt: true, lastUsedAt: true },
+        },
         _count: { select: { members: true, apiKeys: true } },
       },
     });

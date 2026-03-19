@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { ContextMenu } from "@nebutra/ui/primitives"
+import { ContextMenu } from "@nebutra/ui/primitives";
 
 export function ContextMenuDemo() {
   return (
@@ -16,5 +16,5 @@ export function ContextMenuDemo() {
         <ContextMenu.Item onSelect={() => {}}>Delete</ContextMenu.Item>
       </ContextMenu.Content>
     </ContextMenu.Root>
-  )
+  );
 }

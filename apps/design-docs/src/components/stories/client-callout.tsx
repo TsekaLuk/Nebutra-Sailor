@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ComponentProps } from 'react';
-import { Callout } from 'fumadocs-ui/components/callout';
+import { Callout } from "fumadocs-ui/components/callout";
+import type { ComponentProps } from "react";
 
 export function ClientCallout(props: ComponentProps<typeof Callout>) {
-    return <Callout {...props} />;
+  return <Callout {...props} />;
 }

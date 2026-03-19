@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Button } from "@nebutra/ui/primitives"
+import { Button } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function ButtonSizesDemo() {
   return (
@@ -13,5 +13,5 @@ export function ButtonSizesDemo() {
       <Button size="default">Default</Button>
       <Button size="lg">Large</Button>
     </div>
-  )
+  );
 }

@@ -9,30 +9,18 @@ function readFromRepo(relativePath: string) {
 
 describe("UI/UX audit remediation invariants", () => {
   it("removes raw indigo Tailwind accents from key landing components", () => {
-    const hero = readFromRepo(
-      "apps/landing-page/src/components/landing/HeroSection.tsx",
-    );
-    const cta = readFromRepo(
-      "apps/landing-page/src/components/landing/FinalCTA.tsx",
-    );
-    const navbar = readFromRepo(
-      "apps/landing-page/src/components/landing/Navbar.tsx",
-    );
-    const features = readFromRepo(
-      "apps/landing-page/src/components/landing/FeatureCards.tsx",
-    );
+    const hero = readFromRepo("apps/landing-page/src/components/landing/HeroSection.tsx");
+    const cta = readFromRepo("apps/landing-page/src/components/landing/FinalCTA.tsx");
+    const navbar = readFromRepo("apps/landing-page/src/components/landing/Navbar.tsx");
+    const features = readFromRepo("apps/landing-page/src/components/landing/FeatureCards.tsx");
 
     const critical = [hero, cta, navbar, features].join("\n");
     expect(critical).not.toMatch(/indigo-\d+/);
   });
 
   it("uses AnimateIn APIs instead of raw framer-motion primitives in hero surfaces", () => {
-    const hero = readFromRepo(
-      "apps/landing-page/src/components/landing/HeroSection.tsx",
-    );
-    const cta = readFromRepo(
-      "apps/landing-page/src/components/landing/FinalCTA.tsx",
-    );
+    const hero = readFromRepo("apps/landing-page/src/components/landing/HeroSection.tsx");
+    const cta = readFromRepo("apps/landing-page/src/components/landing/FinalCTA.tsx");
 
     expect(hero).not.toMatch(/motion\./);
     expect(cta).not.toMatch(/motion\./);
@@ -41,12 +29,8 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("avoids raw framer-motion usage in shared landing controls", () => {
-    const navbar = readFromRepo(
-      "apps/landing-page/src/components/landing/Navbar.tsx",
-    );
-    const themeSwitcher = readFromRepo(
-      "apps/landing-page/src/components/ui/theme-switcher.tsx",
-    );
+    const navbar = readFromRepo("apps/landing-page/src/components/landing/Navbar.tsx");
+    const themeSwitcher = readFromRepo("apps/landing-page/src/components/ui/theme-switcher.tsx");
 
     expect(navbar).not.toMatch(/motion\./);
     expect(themeSwitcher).not.toMatch(/motion\./);
@@ -81,27 +65,21 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("keeps Twitter OG dimensions and branding consistent with OpenGraph", () => {
-    const twitterImage = readFromRepo(
-      "apps/landing-page/src/app/twitter-image.tsx",
-    );
+    const twitterImage = readFromRepo("apps/landing-page/src/app/twitter-image.tsx");
     expect(twitterImage).toContain("width: 1200");
     expect(twitterImage).toContain("height: 630");
     expect(twitterImage).toMatch(/Nebutra Sailor|Sailor/);
   });
 
   it("enables caching and lazy-loaded sections on the localized marketing page", () => {
-    const marketingPage = readFromRepo(
-      "apps/landing-page/src/app/[lang]/(marketing)/page.tsx",
-    );
+    const marketingPage = readFromRepo("apps/landing-page/src/app/[lang]/(marketing)/page.tsx");
     expect(marketingPage).toContain('"use cache"');
     expect(marketingPage).toContain("cacheLife");
     expect(marketingPage).toMatch(/dynamic\(/);
   });
 
   it("defines page-level marketing metadata on localized home route", () => {
-    const marketingPage = readFromRepo(
-      "apps/landing-page/src/app/[lang]/(marketing)/page.tsx",
-    );
+    const marketingPage = readFromRepo("apps/landing-page/src/app/[lang]/(marketing)/page.tsx");
 
     expect(marketingPage).toContain("export async function generateMetadata");
     expect(marketingPage).toContain('namespace: "metadata"');
@@ -109,9 +87,7 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("uses fluid hero typography and tablet-aware product grids", () => {
-    const hero = readFromRepo(
-      "apps/landing-page/src/components/landing/HeroSection.tsx",
-    );
+    const hero = readFromRepo("apps/landing-page/src/components/landing/HeroSection.tsx");
     const productDemo = readFromRepo(
       "apps/landing-page/src/components/landing/ProductDemoSection.tsx",
     );
@@ -130,19 +106,13 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("provides a dashboard sidebar landmark in the app shell", () => {
-    const shell = readFromRepo(
-      "apps/web/src/app/providers/design-system-shell.tsx",
-    );
+    const shell = readFromRepo("apps/web/src/app/providers/design-system-shell.tsx");
     expect(shell).toMatch(/<aside|role="navigation"|aria-label="Sidebar"/);
   });
 
   it("uses real dashboard IA routes with breadcrumb navigation", () => {
-    const shell = readFromRepo(
-      "apps/web/src/app/providers/design-system-shell.tsx",
-    );
-    const navModel = readFromRepo(
-      "apps/web/src/app/providers/dashboard-nav.ts",
-    );
+    const shell = readFromRepo("apps/web/src/app/providers/design-system-shell.tsx");
+    const navModel = readFromRepo("apps/web/src/app/providers/dashboard-nav.ts");
 
     expect(navModel).toContain('href: "/analytics"');
     expect(navModel).toContain('href: "/billing"');
@@ -153,12 +123,8 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("includes a workspace switcher and grouped dashboard navigation", () => {
-    const shell = readFromRepo(
-      "apps/web/src/app/providers/design-system-shell.tsx",
-    );
-    const navModel = readFromRepo(
-      "apps/web/src/app/providers/dashboard-nav.ts",
-    );
+    const shell = readFromRepo("apps/web/src/app/providers/design-system-shell.tsx");
+    const navModel = readFromRepo("apps/web/src/app/providers/dashboard-nav.ts");
 
     expect(shell).toMatch(/aria-label="Workspace switcher"/);
     expect(shell).toContain("./dashboard-nav");
@@ -167,12 +133,8 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("enables View Transition navigation in dashboard shell links", () => {
-    const shell = readFromRepo(
-      "apps/web/src/app/providers/design-system-shell.tsx",
-    );
-    const link = readFromRepo(
-      "apps/web/src/components/navigation/view-transition-link.tsx",
-    );
+    const shell = readFromRepo("apps/web/src/app/providers/design-system-shell.tsx");
+    const link = readFromRepo("apps/web/src/components/navigation/view-transition-link.tsx");
     const globals = readFromRepo("apps/web/src/app/globals.css");
 
     expect(shell).toContain("ViewTransitionLink");
@@ -183,9 +145,7 @@ describe("UI/UX audit remediation invariants", () => {
 
   it("adds container-query based responsive behavior for key landing sections", () => {
     const globals = readFromRepo("apps/landing-page/src/app/globals.css");
-    const featureCards = readFromRepo(
-      "apps/landing-page/src/components/landing/FeatureCards.tsx",
-    );
+    const featureCards = readFromRepo("apps/landing-page/src/components/landing/FeatureCards.tsx");
     const productDemo = readFromRepo(
       "apps/landing-page/src/components/landing/ProductDemoSection.tsx",
     );
@@ -210,12 +170,8 @@ describe("UI/UX audit remediation invariants", () => {
 
   it("enforces UI governance checks in the root build pipeline", () => {
     const rootPackage = readFromRepo("package.json");
-    const validateScript = readFromRepo(
-      "scripts/validate-ui-governance-policy.ts",
-    );
-    const sharedPolicyLoader = readFromRepo(
-      "scripts/lib/ui-governance-policy.ts",
-    );
+    const validateScript = readFromRepo("scripts/validate-ui-governance-policy.ts");
+    const sharedPolicyLoader = readFromRepo("scripts/lib/ui-governance-policy.ts");
     const script = readFromRepo("scripts/verify-ui-governance.ts");
     const pointer = readFromRepo("governance/ui-governance.current.json");
     const policy = readFromRepo("governance/ui-governance.v1.json");
@@ -225,9 +181,7 @@ describe("UI/UX audit remediation invariants", () => {
     expect(rootPackage).toContain("ui:verify-governance");
     expect(rootPackage).toContain("pnpm ui:verify-governance &&");
     expect(rootPackage).toContain("pnpm ui:validate-policy &&");
-    expect(validateScript).toContain(
-      "UI governance policy schema validation passed",
-    );
+    expect(validateScript).toContain("UI governance policy schema validation passed");
     expect(sharedPolicyLoader).toContain("POLICY_SCHEMA_PATH");
     expect(sharedPolicyLoader).toContain("Ajv");
     expect(sharedPolicyLoader).toContain("loadUiGovernancePolicy");
@@ -249,9 +203,7 @@ describe("UI/UX audit remediation invariants", () => {
 
     expect(webTsConfig).toContain('"@nebutra/ui/*"');
     expect(webEnv).toContain("experimental__runtimeEnv: {");
-    expect(webEnv).toContain(
-      "NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL",
-    );
+    expect(webEnv).toContain("NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL");
   });
 
   it("uses parameterized tenant binding for ClickHouse dashboard queries", () => {
@@ -279,9 +231,7 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("avoids index-key rendering in legal about values list", () => {
-    const aboutPage = readFromRepo(
-      "apps/landing-page/src/app/[lang]/(legal)/about/page.tsx",
-    );
+    const aboutPage = readFromRepo("apps/landing-page/src/app/[lang]/(legal)/about/page.tsx");
 
     expect(aboutPage).toContain("VALUE_ITEM_KEYS");
     expect(aboutPage).toContain("key={`about.values.${valueKey}`}");
@@ -301,18 +251,10 @@ describe("UI/UX audit remediation invariants", () => {
   });
 
   it("removes indigo accents and autofocus props from auth/onboarding surfaces", () => {
-    const signIn = readFromRepo(
-      "apps/web/src/components/auth/sign-in-form.tsx",
-    );
-    const signUp = readFromRepo(
-      "apps/web/src/components/auth/sign-up-form.tsx",
-    );
-    const authBanner = readFromRepo(
-      "apps/web/src/components/auth/auth-banner.tsx",
-    );
-    const workspace = readFromRepo(
-      "apps/web/src/components/onboarding/create-workspace-step.tsx",
-    );
+    const signIn = readFromRepo("apps/web/src/components/auth/sign-in-form.tsx");
+    const signUp = readFromRepo("apps/web/src/components/auth/sign-up-form.tsx");
+    const authBanner = readFromRepo("apps/web/src/components/auth/auth-banner.tsx");
+    const workspace = readFromRepo("apps/web/src/components/onboarding/create-workspace-step.tsx");
 
     const authSurface = [signIn, signUp, authBanner].join("\n");
     expect(authSurface).not.toMatch(/indigo-\d+/);

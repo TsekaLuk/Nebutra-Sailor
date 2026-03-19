@@ -48,8 +48,8 @@ export const Default: Story = {
       </Card.Header>
       <Card.Body>
         <Card.Description>
-          The default variant uses a subtle background with a thin border.
-          Suitable for content areas and list items.
+          The default variant uses a subtle background with a thin border. Suitable for content
+          areas and list items.
         </Card.Description>
       </Card.Body>
     </Card>
@@ -64,8 +64,8 @@ export const Elevated: Story = {
       </Card.Header>
       <Card.Body>
         <Card.Description>
-          Box shadow adds depth. Use for dashboard panels and interactive
-          surfaces that need visual hierarchy.
+          Box shadow adds depth. Use for dashboard panels and interactive surfaces that need visual
+          hierarchy.
         </Card.Description>
       </Card.Body>
     </Card>
@@ -80,8 +80,8 @@ export const Bordered: Story = {
       </Card.Header>
       <Card.Body>
         <Card.Description>
-          Prominent border with no shadow. Use for forms, settings panels, and
-          table-adjacent content.
+          Prominent border with no shadow. Use for forms, settings panels, and table-adjacent
+          content.
         </Card.Description>
       </Card.Body>
     </Card>
@@ -96,8 +96,8 @@ export const Ghost: Story = {
       </Card.Header>
       <Card.Body>
         <Card.Description>
-          No border or shadow. Use for inline content groups that need spacing
-          but not visual containment.
+          No border or shadow. Use for inline content groups that need spacing but not visual
+          containment.
         </Card.Description>
       </Card.Body>
     </Card>
@@ -112,8 +112,7 @@ export const Gradient: Story = {
       </Card.Header>
       <Card.Body>
         <Card.Description>
-          Brand gradient border. Use sparingly for featured or promotional
-          content blocks.
+          Brand gradient border. Use sparingly for featured or promotional content blocks.
         </Card.Description>
       </Card.Body>
     </Card>
@@ -147,14 +146,11 @@ export const WithFooter: Story = {
       </Card.Header>
       <Card.Body>
         <Card.Description>
-          You are on the <strong>Pro</strong> plan. Your next billing date is
-          March 1, 2026.
+          You are on the <strong>Pro</strong> plan. Your next billing date is March 1, 2026.
         </Card.Description>
       </Card.Body>
       <Card.Footer>
-        <p className="text-xs text-muted-foreground">
-          Auto-renews unless cancelled
-        </p>
+        <p className="text-xs text-muted-foreground">Auto-renews unless cancelled</p>
       </Card.Footer>
     </Card>
   ),
@@ -173,18 +169,16 @@ export const AllVariants: Story = {
   ],
   render: () => (
     <div className="grid grid-cols-2 gap-4">
-      {(["default", "elevated", "bordered", "ghost", "gradient"] as const).map(
-        (v) => (
-          <Card key={v} variant={v} padding="md">
-            <Card.Header>
-              <Card.Title className="capitalize">{v}</Card.Title>
-            </Card.Header>
-            <Card.Body>
-              <Card.Description>variant="{v}"</Card.Description>
-            </Card.Body>
-          </Card>
-        ),
-      )}
+      {(["default", "elevated", "bordered", "ghost", "gradient"] as const).map((v) => (
+        <Card key={v} variant={v} padding="md">
+          <Card.Header>
+            <Card.Title className="capitalize">{v}</Card.Title>
+          </Card.Header>
+          <Card.Body>
+            <Card.Description>variant="{v}"</Card.Description>
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   ),
 };

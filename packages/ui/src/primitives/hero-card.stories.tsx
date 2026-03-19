@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  HeroCard,
-  HeroCardHeader,
-  HeroCardBody,
-  HeroCardFooter,
-} from "./hero-card";
+import { HeroCard, HeroCardBody, HeroCardFooter, HeroCardHeader } from "./hero-card";
 
 const meta = {
   title: "Primitives/HeroCard",
@@ -44,9 +39,7 @@ export const Default: Story = {
         </p>
       </HeroCardBody>
       <HeroCardFooter>
-        <button className="text-sm text-primary hover:underline">
-          Learn more →
-        </button>
+        <button className="text-sm text-primary hover:underline">Learn more →</button>
       </HeroCardFooter>
     </HeroCard>
   ),
@@ -78,9 +71,7 @@ export const ShadowVariants: Story = {
       {(["none", "sm", "md", "lg"] as const).map((shadow) => (
         <HeroCard key={shadow} shadow={shadow} className="w-40">
           <HeroCardBody>
-            <p className="text-center text-xs text-muted-foreground">
-              shadow={shadow}
-            </p>
+            <p className="text-center text-xs text-muted-foreground">shadow={shadow}</p>
           </HeroCardBody>
         </HeroCard>
       ))}

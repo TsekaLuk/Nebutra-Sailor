@@ -169,8 +169,7 @@ export const primitiveFontFamily = {
   /** English body/UI — Poppins per VI manual */
   sans: '"Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif',
   /** Chinese body/UI — vivo Sans per VI manual */
-  cnSans:
-    '"vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif',
+  cnSans: '"vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif',
   /** Display / hero headlines — pure Poppins per VI manual */
   display: '"Poppins", sans-serif',
   /** Code / monospace */

@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
-  DrawerTitle,
-  DrawerTrigger,
+  Button,
+  Drawer,
   DrawerContent,
   DrawerHeader,
-  Drawer,
-  Button,
-} from "@nebutra/ui/primitives"
+  DrawerTitle,
+  DrawerTrigger,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function DrawerSideRightDemo() {
   return (
@@ -22,5 +22,5 @@ export function DrawerSideRightDemo() {
         </DrawerHeader>
       </DrawerContent>
     </Drawer>
-  )
+  );
 }

@@ -1,41 +1,31 @@
 "use client";
 
-import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "../utils/cn";
 import { Dialog, DialogContent } from "./dialog";
 
-export type CommandProps = React.ComponentPropsWithoutRef<
-  typeof CommandPrimitive
->;
+export type CommandProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive>;
 
-export type CommandDialogProps = React.ComponentPropsWithoutRef<typeof Dialog> & { children?: React.ReactNode; };
+export type CommandDialogProps = React.ComponentPropsWithoutRef<typeof Dialog> & {
+  children?: React.ReactNode;
+};
 
-export type CommandInputProps = React.ComponentPropsWithoutRef<
-  typeof CommandPrimitive.Input
->;
+export type CommandInputProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>;
 
-export type CommandListProps = React.ComponentPropsWithoutRef<
-  typeof CommandPrimitive.List
->;
+export type CommandListProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>;
 
-export type CommandEmptyProps = React.ComponentPropsWithoutRef<
-  typeof CommandPrimitive.Empty
->;
+export type CommandEmptyProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>;
 
-export type CommandGroupProps = React.ComponentPropsWithoutRef<
-  typeof CommandPrimitive.Group
->;
+export type CommandGroupProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>;
 
 export type CommandSeparatorProps = React.ComponentPropsWithoutRef<
   typeof CommandPrimitive.Separator
 >;
 
-export type CommandItemProps = React.ComponentPropsWithoutRef<
-  typeof CommandPrimitive.Item
->;
+export type CommandItemProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>;
 
 export type CommandShortcutProps = React.HTMLAttributes<HTMLSpanElement>;
 
@@ -73,19 +63,18 @@ export type CommandShortcutProps = React.HTMLAttributes<HTMLSpanElement>;
  * </CommandDialog>
  * ```
  */
-const Command = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive>,
-  CommandProps
->(({ className, ...props }, ref) => (
-  <CommandPrimitive
-    ref={ref}
-    className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-[var(--radius-md)] bg-popover text-popover-foreground",
-      className,
-    )}
-    {...props}
-  />
-));
+const Command = React.forwardRef<React.ElementRef<typeof CommandPrimitive>, CommandProps>(
+  ({ className, ...props }, ref) => (
+    <CommandPrimitive
+      ref={ref}
+      className={cn(
+        "flex h-full w-full flex-col overflow-hidden rounded-[var(--radius-md)] bg-popover text-popover-foreground",
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 Command.displayName = CommandPrimitive.displayName;
 
 const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
@@ -134,11 +123,7 @@ const CommandEmpty = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Empty>,
   CommandEmptyProps
 >((props, ref) => (
-  <CommandPrimitive.Empty
-    ref={ref}
-    className="py-6 text-center text-sm"
-    {...props}
-  />
+  <CommandPrimitive.Empty ref={ref} className="py-6 text-center text-sm" {...props} />
 ));
 CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
@@ -187,10 +172,7 @@ CommandItem.displayName = CommandPrimitive.Item.displayName;
 const CommandShortcut = ({ className, ...props }: CommandShortcutProps) => {
   return (
     <span
-      className={cn(
-        "ml-auto text-xs tracking-widest text-muted-foreground",
-        className,
-      )}
+      className={cn("ml-auto text-xs tracking-widest text-muted-foreground", className)}
       {...props}
     />
   );
@@ -200,11 +182,11 @@ CommandShortcut.displayName = "CommandShortcut";
 export {
   Command,
   CommandDialog,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
-  CommandShortcut,
+  CommandList,
   CommandSeparator,
+  CommandShortcut,
 };

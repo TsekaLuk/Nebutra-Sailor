@@ -14,12 +14,12 @@
 
 import {
   primitiveColors,
-  primitiveGradients,
-  primitiveRadius,
-  primitiveShadow,
   primitiveFontFamily,
   primitiveFontSize,
   primitiveFontWeight,
+  primitiveGradients,
+  primitiveRadius,
+  primitiveShadow,
 } from "./tokens/primitive";
 
 // ─── Brand Color Palette ──────────────────────────────────────────────────────

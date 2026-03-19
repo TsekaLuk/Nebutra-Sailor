@@ -1,0 +1,30 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    ".": {
+      "ignoreDependencies": ["turbo"]
+    },
+    "apps/*": {
+      "entry": [
+        "src/app/**/page.{ts,tsx}",
+        "src/app/**/layout.{ts,tsx}",
+        "src/app/api/**/route.ts",
+        "next.config.ts"
+      ],
+      "ignore": ["tailwind.config.ts"]
+    },
+    "packages/*": {
+      "entry": ["src/index.ts", "src/cli.ts", "tsup.config.ts"]
+    }
+  },
+  "ignoreBinaries": ["prisma"],
+  "ignore": [
+    "vitest.workspace.ts",
+    "vitest.config.ts",
+    "playwright.config.ts",
+    "**/tailwind.config.ts",
+    "**/next.config.ts",
+    "postcss.config.js"
+  ],
+  "ignoreExportsUsedInFile": true
+}

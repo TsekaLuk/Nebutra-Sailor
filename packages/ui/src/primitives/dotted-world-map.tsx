@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import DottedMap from "dotted-map";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 // Pre-generate map points (diagonal grid, height 55)
@@ -45,13 +45,7 @@ export function DottedWorldMap({
       {...props}
     >
       {mapPoints.map((point, index) => (
-        <circle
-          key={index}
-          cx={point.x}
-          cy={point.y}
-          r={dotRadius}
-          fill={dotColor}
-        />
+        <circle key={index} cx={point.x} cy={point.y} r={dotRadius} fill={dotColor} />
       ))}
     </svg>
   );

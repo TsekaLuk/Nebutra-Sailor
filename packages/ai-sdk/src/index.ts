@@ -1,25 +1,25 @@
 import {
-  generateText as _generateText,
-  streamText as _streamText,
   embed as _embed,
   embedMany as _embedMany,
-  type ModelMessage,
+  generateText as _generateText,
+  streamText as _streamText,
   type GenerateTextResult,
-  type StreamTextResult,
   type JSONValue,
-} from "ai"
+  type ModelMessage,
+  type StreamTextResult,
+} from "ai";
 import {
-  NebutraAIConfigSchema,
   type NebutraAIConfig,
+  NebutraAIConfigSchema,
   type ResolvedNebutraAIConfig,
-} from "./config.js"
-import { createModel, createEmbeddingModel } from "./provider.js"
+} from "./config.js";
+import { createEmbeddingModel, createModel } from "./provider.js";
 
 // ---------------------------------------------------------------------------
 // Singleton config — call `configure()` once at app startup
 // ---------------------------------------------------------------------------
 
-let _resolved: ResolvedNebutraAIConfig = NebutraAIConfigSchema.parse({})
+let _resolved: ResolvedNebutraAIConfig = NebutraAIConfigSchema.parse({});
 
 /**
  * Initialise the global Nebutra AI configuration.
@@ -34,12 +34,12 @@ let _resolved: ResolvedNebutraAIConfig = NebutraAIConfigSchema.parse({})
  * ```
  */
 export function configure(config: NebutraAIConfig = {}): void {
-  _resolved = NebutraAIConfigSchema.parse(config)
+  _resolved = NebutraAIConfigSchema.parse(config);
 }
 
 /** Returns the current resolved config (read-only). */
 export function getConfig(): Readonly<ResolvedNebutraAIConfig> {
-  return _resolved
+  return _resolved;
 }
 
 // ---------------------------------------------------------------------------
@@ -48,13 +48,13 @@ export function getConfig(): Readonly<ResolvedNebutraAIConfig> {
 
 export interface GenerateOptions {
   /** Model ID or preset alias (e.g. "flagship", "fast", "anthropic/claude-sonnet-4"). */
-  model?: string
+  model?: string;
   /** System prompt prepended to the conversation. */
-  system?: string
-  temperature?: number
-  maxTokens?: number
+  system?: string;
+  temperature?: number;
+  maxTokens?: number;
   /** OpenRouter-specific provider options (reasoning, cacheControl, etc.). */
-  providerOptions?: Record<string, JSONValue | undefined>
+  providerOptions?: Record<string, JSONValue | undefined>;
 }
 
 /**
@@ -70,9 +70,9 @@ export interface GenerateOptions {
  */
 export async function generateText(
   messages: ModelMessage[],
-  options: GenerateOptions = {}
+  options: GenerateOptions = {},
 ): Promise<GenerateTextResult<Record<string, never>, never>> {
-  const model = createModel(options.model ?? _resolved.defaultModel, _resolved)
+  const model = createModel(options.model ?? _resolved.defaultModel, _resolved);
 
   return await _generateText({
     model,
@@ -83,7 +83,7 @@ export async function generateText(
     ...(options.providerOptions
       ? { providerOptions: { openrouter: options.providerOptions } }
       : {}),
-  })
+  });
 }
 
 /**
@@ -102,9 +102,9 @@ export async function generateText(
  */
 export async function streamText(
   messages: ModelMessage[],
-  options: GenerateOptions = {}
+  options: GenerateOptions = {},
 ): Promise<StreamTextResult<Record<string, never>, never>> {
-  const model = createModel(options.model ?? _resolved.defaultModel, _resolved)
+  const model = createModel(options.model ?? _resolved.defaultModel, _resolved);
 
   return _streamText({
     model,
@@ -115,7 +115,7 @@ export async function streamText(
     ...(options.providerOptions
       ? { providerOptions: { openrouter: options.providerOptions } }
       : {}),
-  })
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -124,38 +124,37 @@ export async function streamText(
 
 export interface EmbedOptions {
   /** Embedding model ID or preset alias. Defaults to "embedding". */
-  model?: string
+  model?: string;
 }
 
 /**
  * Generate an embedding vector for a single value.
  */
 export async function embed(value: string, options: EmbedOptions = {}) {
-  const model = createEmbeddingModel(options.model ?? "embedding", _resolved)
-  return await _embed({ model, value })
+  const model = createEmbeddingModel(options.model ?? "embedding", _resolved);
+  return await _embed({ model, value });
 }
 
 /**
  * Generate embedding vectors for multiple values in a single request.
  */
 export async function embedMany(values: string[], options: EmbedOptions = {}) {
-  const model = createEmbeddingModel(options.model ?? "embedding", _resolved)
-  return await _embedMany({ model, values })
+  const model = createEmbeddingModel(options.model ?? "embedding", _resolved);
+  return await _embedMany({ model, values });
 }
 
 // ---------------------------------------------------------------------------
 // Low-level access — for advanced use cases
 // ---------------------------------------------------------------------------
 
-export { createModel, createEmbeddingModel } from "./provider.js"
-export { resolveModel, models } from "./models.js"
-export type { ModelPreset } from "./models.js"
-export {
-  NebutraAIConfigSchema,
-  type NebutraAIConfig,
-  type ResolvedNebutraAIConfig,
-  type ProviderType,
-} from "./config.js"
-
 // Re-export core AI SDK types for downstream consumption
-export type { ModelMessage, GenerateTextResult, StreamTextResult } from "ai"
+export type { GenerateTextResult, ModelMessage, StreamTextResult } from "ai";
+export {
+  type NebutraAIConfig,
+  NebutraAIConfigSchema,
+  type ProviderType,
+  type ResolvedNebutraAIConfig,
+} from "./config.js";
+export type { ModelPreset } from "./models.js";
+export { models, resolveModel } from "./models.js";
+export { createEmbeddingModel, createModel } from "./provider.js";

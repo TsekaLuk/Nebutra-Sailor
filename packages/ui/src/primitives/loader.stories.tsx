@@ -135,11 +135,7 @@ export const InButton: Story = {
         disabled
         className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground opacity-80 cursor-not-allowed"
       >
-        <Loader
-          variant="circular"
-          size="sm"
-          className="text-primary-foreground"
-        />
+        <Loader variant="circular" size="sm" className="text-primary-foreground" />
         Saving...
       </button>
       <button

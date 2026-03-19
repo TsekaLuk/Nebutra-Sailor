@@ -1,21 +1,21 @@
+import { getImageUrl } from "@nebutra/sanity/image";
+import { getPostBySlug, getPosts } from "@nebutra/sanity/queries";
+import { AnimateIn } from "@nebutra/ui/components";
+import { ArrowLeft, Calendar } from "lucide-react";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { routing, type Locale } from "@/i18n/routing";
-import { Navbar, FooterMinimal } from "@/components/landing";
-import { AnimateIn } from "@nebutra/ui/components";
-import { getPostBySlug, getPosts } from "@nebutra/sanity/queries";
-import { getImageUrl } from "@nebutra/sanity/image";
-import { ArrowLeft, Calendar } from "lucide-react";
+import { FooterMinimal, Navbar } from "@/components/landing";
+import { type Locale, routing } from "@/i18n/routing";
 
 type Params = { lang: string; slug: string };
 
 export async function generateStaticParams() {
   const posts = (await getPosts()) as Array<{ slug: { current: string } }>;
-  
+
   if (!posts || posts.length === 0) {
     // Next.js requires returning at least one path if we export generateStaticParams.
     // However, if there are no posts, we don't want to generate a fake 404 page.
@@ -23,7 +23,7 @@ export async function generateStaticParams() {
     // Next 16 explicitly throws EmptyGenerateStaticParamsError.
     // Let's remove generateStaticParams entirely if empty, but we can't do that conditionally.
     // The official workaround is to return a valid path that doesn't 404, or just a dummy.
-    // Instead of a dummy, we'll try to let Next-intl's layout handle the empty state, 
+    // Instead of a dummy, we'll try to let Next-intl's layout handle the empty state,
     // or just pass a known 'empty' slug that the page component intercepts before querying Sanity.
     return routing.locales.map((lang) => ({ lang, slug: "empty-placeholder-do-not-fetch" }));
   }
@@ -33,11 +33,7 @@ export async function generateStaticParams() {
   );
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { lang, slug } = await params;
   if (!hasLocale(routing.locales, lang)) return {};
 
@@ -52,9 +48,7 @@ export async function generateMetadata({
     title: `${post.title} — Nebutra Blog`,
     description: post.excerpt ?? undefined,
     alternates: { canonical: `/${lang}/blog/${slug}` },
-    openGraph: ogImage
-      ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
-      : undefined,
+    openGraph: ogImage ? { images: [{ url: ogImage, width: 1200, height: 630 }] } : undefined,
   };
 }
 
@@ -109,11 +103,7 @@ function renderBody(body: SanityBlock[] | null) {
   );
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
+export default async function BlogPostPage({ params }: { params: Promise<Params> }) {
   const { lang, slug } = await params;
 
   if (!hasLocale(routing.locales, lang)) notFound();
@@ -197,9 +187,7 @@ export default async function BlogPostPage({
         <AnimateIn preset="fadeUp" inView>
           <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-[var(--neutral-11)]">
             {post.author?.name && (
-              <span className="font-medium text-[var(--neutral-12)]">
-                {post.author.name}
-              </span>
+              <span className="font-medium text-[var(--neutral-12)]">{post.author.name}</span>
             )}
             {date && (
               <span className="flex items-center gap-1">
@@ -229,17 +217,13 @@ export default async function BlogPostPage({
         {/* Excerpt */}
         {post.excerpt && (
           <AnimateIn preset="fadeUp" inView>
-            <p className="mt-8 text-lg leading-7 text-[var(--neutral-11)]">
-              {post.excerpt}
-            </p>
+            <p className="mt-8 text-lg leading-7 text-[var(--neutral-11)]">{post.excerpt}</p>
           </AnimateIn>
         )}
 
         {/* Body */}
         <AnimateIn preset="fadeUp" inView>
-          <div className="mt-8">
-            {renderBody(post.body as SanityBlock[] | null)}
-          </div>
+          <div className="mt-8">{renderBody(post.body as SanityBlock[] | null)}</div>
         </AnimateIn>
       </article>
 

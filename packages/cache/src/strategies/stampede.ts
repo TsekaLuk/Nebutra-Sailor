@@ -46,11 +46,7 @@ export class StampedeCache {
   /**
    * Get or set with stampede prevention
    */
-  async getOrSet<T>(
-    key: string,
-    fetcher: () => Promise<T>,
-    ttl?: number
-  ): Promise<T> {
+  async getOrSet<T>(key: string, fetcher: () => Promise<T>, ttl?: number): Promise<T> {
     const redis = getRedis();
     const cacheKey = this.key(key);
 
@@ -62,22 +58,18 @@ export class StampedeCache {
 
     // Cache miss - acquire lock to regenerate
     const lockKey = `${cacheKey}:lock`;
-    const result = await this.lock.withLock<T>(
-      lockKey,
-      { ttl: this.lockTTL },
-      async () => {
-        // Double-check cache (another process might have set it)
-        const rechecked = await redis.get<T>(cacheKey);
-        if (rechecked !== null) {
-          return rechecked;
-        }
-
-        // Fetch and cache
-        const value = await fetcher();
-        await redis.set(cacheKey, value, { ex: ttl || this.ttl });
-        return value;
+    const result = await this.lock.withLock<T>(lockKey, { ttl: this.lockTTL }, async () => {
+      // Double-check cache (another process might have set it)
+      const rechecked = await redis.get<T>(cacheKey);
+      if (rechecked !== null) {
+        return rechecked;
       }
-    );
+
+      // Fetch and cache
+      const value = await fetcher();
+      await redis.set(cacheKey, value, { ex: ttl || this.ttl });
+      return value;
+    });
 
     // If we couldn't get the lock, wait and retry
     if (result === null) {

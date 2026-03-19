@@ -10,45 +10,45 @@
  *   app.use("/oidc", provider.callback());
  */
 
-import Provider, { type AccountClaims } from "oidc-provider"
-import type { PrismaClient } from "@nebutra/db"
-import type { Redis } from "ioredis"
-import { createPrismaAdapter } from "./adapters/prisma-adapter.js"
-import { NEBUTRA_CLAIMS, SUPPORTED_SCOPES } from "./claims.js"
+import type { PrismaClient } from "@nebutra/db";
+import type { Redis } from "ioredis";
+import Provider, { type AccountClaims } from "oidc-provider";
+import { createPrismaAdapter } from "./adapters/prisma-adapter.js";
+import { NEBUTRA_CLAIMS, SUPPORTED_SCOPES } from "./claims.js";
 
 export interface NebutraOIDCConfig {
   /** The issuer URL (e.g., "https://id.nebutra.com") */
-  issuer: string
+  issuer: string;
 
   /** Prisma client instance */
-  prisma: PrismaClient
+  prisma: PrismaClient;
 
   /** Redis client instance */
-  redis: Redis
+  redis: Redis;
 
   /** JWKS (JSON Web Key Set) for signing tokens */
-  jwks?: { keys: Array<Record<string, unknown>> }
+  jwks?: { keys: Array<Record<string, unknown>> };
 
   /**
    * Cookie signing keys (at least 2 for rotation).
    * First key is used for signing, others for verification of old cookies.
    */
-  cookieKeys?: string[]
+  cookieKeys?: string[];
 
   /**
    * URL that oidc-provider redirects to for user login.
    * Defaults to "/oauth/login"
    */
-  loginUrl?: string
+  loginUrl?: string;
 
   /**
    * URL that oidc-provider redirects to for user consent.
    * Defaults to "/oauth/authorize"
    */
-  consentUrl?: string
+  consentUrl?: string;
 
   /** Enable debug mode (verbose logging) */
-  debug?: boolean
+  debug?: boolean;
 }
 
 /**
@@ -73,7 +73,7 @@ export function createNebutraOIDCProvider(config: NebutraOIDCConfig): Provider {
     loginUrl = "/oauth/login",
     consentUrl = "/oauth/authorize",
     debug = false,
-  } = config
+  } = config;
 
   const provider = new Provider(issuer, {
     // Storage adapters
@@ -136,11 +136,11 @@ export function createNebutraOIDCProvider(config: NebutraOIDCConfig): Provider {
       url(_ctx, interaction) {
         switch (interaction.prompt.name) {
           case "login":
-            return `${loginUrl}?uid=${interaction.uid}`
+            return `${loginUrl}?uid=${interaction.uid}`;
           case "consent":
-            return `${consentUrl}?uid=${interaction.uid}`
+            return `${consentUrl}?uid=${interaction.uid}`;
           default:
-            return `${loginUrl}?uid=${interaction.uid}`
+            return `${loginUrl}?uid=${interaction.uid}`;
         }
       },
     },
@@ -157,65 +157,60 @@ export function createNebutraOIDCProvider(config: NebutraOIDCConfig): Provider {
             take: 1, // Primary organization
           },
         },
-      })
+      });
 
-      if (!user) return undefined
+      if (!user) return undefined;
 
-      const primaryMembership = user.organizations[0]
+      const primaryMembership = user.organizations[0];
 
       return {
         accountId: id,
         async claims(_use: string, scope: string): Promise<AccountClaims> {
           const claims: AccountClaims = {
             sub: user.id,
-          }
+          };
 
           if (scope?.includes("profile")) {
-            claims.name = user.name
-            claims.picture = user.avatarUrl
-            claims.updated_at = Math.floor(user.updatedAt.getTime() / 1000)
+            claims.name = user.name;
+            claims.picture = user.avatarUrl;
+            claims.updated_at = Math.floor(user.updatedAt.getTime() / 1000);
           }
 
           if (scope?.includes("email")) {
-            claims.email = user.email
-            claims.email_verified = true // Users are verified at sign-up
+            claims.email = user.email;
+            claims.email_verified = true; // Users are verified at sign-up
           }
 
           if (
             primaryMembership &&
-            (scope?.includes("organization:read") ||
-              scope?.includes("organization:write"))
+            (scope?.includes("organization:read") || scope?.includes("organization:write"))
           ) {
-            claims["nebutra:organization_id"] =
-              primaryMembership.organization.id
-            claims["nebutra:organization_name"] =
-              primaryMembership.organization.name
-            claims["nebutra:organization_slug"] =
-              primaryMembership.organization.slug
-            claims["nebutra:role"] = primaryMembership.role
-            claims["nebutra:plan"] = primaryMembership.organization.plan
+            claims["nebutra:organization_id"] = primaryMembership.organization.id;
+            claims["nebutra:organization_name"] = primaryMembership.organization.name;
+            claims["nebutra:organization_slug"] = primaryMembership.organization.slug;
+            claims["nebutra:role"] = primaryMembership.role;
+            claims["nebutra:plan"] = primaryMembership.organization.plan;
           }
 
           if (primaryMembership && scope?.includes("billing:read")) {
-            claims["nebutra:organization_id"] =
-              primaryMembership.organization.id
-            claims["nebutra:plan"] = primaryMembership.organization.plan
+            claims["nebutra:organization_id"] = primaryMembership.organization.id;
+            claims["nebutra:plan"] = primaryMembership.organization.plan;
           }
 
-          return claims
+          return claims;
         },
-      }
+      };
     },
 
     // Render error responses as JSON (UI handles display)
     renderError: async (ctx, out, _error) => {
-      ctx.type = "application/json"
+      ctx.type = "application/json";
       ctx.body = {
         error: out.error,
         error_description: out.error_description,
-      }
+      };
     },
-  })
+  });
 
-  return provider
+  return provider;
 }

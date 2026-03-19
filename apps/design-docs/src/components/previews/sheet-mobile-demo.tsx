@@ -1,6 +1,4 @@
-"use client"
-
-import * as React from "react"
+"use client";
 
 import {
   Button,
@@ -9,7 +7,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 export function SheetMobileDemo() {
   return (
     <Sheet>
@@ -23,5 +22,5 @@ export function SheetMobileDemo() {
         <div className="py-4">Share options here</div>
       </SheetContent>
     </Sheet>
-  )
+  );
 }

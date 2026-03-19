@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { AuroraText } from "@nebutra/ui/primitives"
+import { AuroraText } from "@nebutra/ui/primitives";
 
 export function AuroraTextDemo() {
   return (
@@ -9,5 +9,5 @@ export function AuroraTextDemo() {
         Build <AuroraText>beautiful</AuroraText> apps
       </h1>
     </div>
-  )
+  );
 }

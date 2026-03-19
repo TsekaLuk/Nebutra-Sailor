@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
+  Button,
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  Button,
-} from "@nebutra/ui/primitives"
+  DropdownMenuTrigger,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function Menu3Demo() {
   return (
@@ -21,5 +21,5 @@ export function Menu3Demo() {
         <DropdownMenuItem disabled>Delete</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

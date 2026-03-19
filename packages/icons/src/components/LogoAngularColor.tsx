@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,10 +16,7 @@ const LogoAngularColor = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <path
-        fill="#DD0031"
-        d="M8 0 .5 2.656l1.144 9.848L8 16l6.356-3.496L15.5 2.656z"
-      />
+      <path fill="#DD0031" d="M8 0 .5 2.656l1.144 9.848L8 16l6.356-3.496L15.5 2.656z" />
       <path fill="#C3002F" d="M8 0v1.776-.008V16l6.356-3.496L15.5 2.656z" />
       <path
         fill="#fff"
@@ -29,5 +26,6 @@ const LogoAngularColor = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 LogoAngularColor.displayName = "LogoAngularColor";
+
 export { LogoAngularColor };
 export default LogoAngularColor;

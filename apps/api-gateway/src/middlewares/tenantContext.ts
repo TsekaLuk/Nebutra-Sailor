@@ -1,6 +1,6 @@
 import { verifyToken } from "@clerk/backend";
-import { Context, Next } from "hono";
 import { logger } from "@nebutra/logger";
+import type { Context, Next } from "hono";
 
 export interface TenantContext {
   userId?: string;
@@ -40,18 +40,15 @@ export async function tenantContextMiddleware(c: Context, next: Next) {
   //   - x-organization-id
   // Legacy compatibility:
   //   - x-tenant-id (mapped to organizationId)
-  const headerUserId =
-    c.req.header("x-user-id") || c.req.header("x_user_id") || undefined;
+  const headerUserId = c.req.header("x-user-id") || c.req.header("x_user_id") || undefined;
   const headerOrganizationId =
     c.req.header("x-organization-id") ||
     c.req.header("x_organization_id") ||
     c.req.header("x-tenant-id") ||
     c.req.header("x_tenant_id") ||
     undefined;
-  const headerRole =
-    c.req.header("x-role") || c.req.header("x_role") || undefined;
-  const headerPlan =
-    c.req.header("x-plan") || c.req.header("x_plan") || undefined;
+  const headerRole = c.req.header("x-role") || c.req.header("x_role") || undefined;
+  const headerPlan = c.req.header("x-plan") || c.req.header("x_plan") || undefined;
 
   if (headerUserId) tenant.userId = headerUserId;
   if (headerOrganizationId) tenant.organizationId = headerOrganizationId;
@@ -59,9 +56,7 @@ export async function tenantContextMiddleware(c: Context, next: Next) {
   if (headerPlan) tenant.plan = headerPlan;
 
   const authHeader = c.req.header("authorization");
-  const token = authHeader?.startsWith("Bearer ")
-    ? authHeader.slice(7)
-    : undefined;
+  const token = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : undefined;
 
   if (token) {
     try {
@@ -70,10 +65,8 @@ export async function tenantContextMiddleware(c: Context, next: Next) {
       });
 
       const userId = payload.sub;
-      const organizationId =
-        typeof payload.org_id === "string" ? payload.org_id : undefined;
-      const role =
-        typeof payload.org_role === "string" ? payload.org_role : undefined;
+      const organizationId = typeof payload.org_id === "string" ? payload.org_id : undefined;
+      const role = typeof payload.org_role === "string" ? payload.org_role : undefined;
 
       if (userId) tenant.userId = userId;
       if (organizationId) tenant.organizationId = organizationId;
@@ -98,10 +91,7 @@ export async function requireAuth(c: Context, next: Next) {
   const tenant = c.get("tenant");
 
   if (!tenant?.userId) {
-    return c.json(
-      { error: "Unauthorized", message: "Authentication required" },
-      401,
-    );
+    return c.json({ error: "Unauthorized", message: "Authentication required" }, 401);
   }
 
   await next();
@@ -114,10 +104,7 @@ export async function requireOrganization(c: Context, next: Next) {
   const tenant = c.get("tenant");
 
   if (!tenant?.organizationId) {
-    return c.json(
-      { error: "Forbidden", message: "Organization membership required" },
-      403,
-    );
+    return c.json({ error: "Forbidden", message: "Organization membership required" }, 403);
   }
 
   await next();
@@ -129,21 +116,15 @@ export async function requireOrganization(c: Context, next: Next) {
  * Clerk org_role values: "org:owner", "org:admin", "org:member", "org:viewer"
  */
 export function requireRole(...allowedRoles: string[]) {
-  return async function (c: Context, next: Next) {
+  return async (c: Context, next: Next) => {
     const tenant = c.get("tenant");
 
     if (!tenant?.userId) {
-      return c.json(
-        { error: "Unauthorized", message: "Authentication required" },
-        401,
-      );
+      return c.json({ error: "Unauthorized", message: "Authentication required" }, 401);
     }
 
     if (!tenant?.organizationId) {
-      return c.json(
-        { error: "Forbidden", message: "Organization membership required" },
-        403,
-      );
+      return c.json({ error: "Forbidden", message: "Organization membership required" }, 403);
     }
 
     if (!tenant?.role || !allowedRoles.includes(tenant.role)) {

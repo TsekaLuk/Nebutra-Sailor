@@ -1,22 +1,21 @@
 export {
+  ConsentCheckbox,
+  type ConsentCheckboxProps,
+  MultiConsentCheckbox,
+  type MultiConsentCheckboxProps,
+} from "./ConsentCheckbox";
+export {
   CookieBanner,
-  CookieSettingsButton,
   type CookieBannerProps,
   type CookieBannerTranslations,
+  CookieSettingsButton,
   type CookieSettingsButtonProps,
 } from "./CookieBanner";
 
 export {
-  ConsentCheckbox,
-  MultiConsentCheckbox,
-  type ConsentCheckboxProps,
-  type MultiConsentCheckboxProps,
-} from "./ConsentCheckbox";
-
-export {
   LegalFooter,
-  LegalLinks,
   type LegalFooterProps,
   type LegalFooterTranslations,
+  LegalLinks,
   type LegalLinksProps,
 } from "./LegalFooter";

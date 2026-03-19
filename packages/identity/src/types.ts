@@ -18,10 +18,7 @@ export class IdentityAdapterRegistry {
     return this.adapters.get(provider);
   }
 
-  map<TInput = unknown>(
-    provider: string,
-    input: TInput,
-  ): CanonicalIdentity | null {
+  map<TInput = unknown>(provider: string, input: TInput): CanonicalIdentity | null {
     const adapter = this.get(provider);
     if (!adapter) {
       return null;

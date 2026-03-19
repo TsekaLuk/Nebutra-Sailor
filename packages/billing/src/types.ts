@@ -17,27 +17,11 @@ export type SubscriptionStatus =
 
 export type BillingInterval = "MONTHLY" | "YEARLY" | "WEEKLY" | "ONE_TIME";
 
-export type InvoiceStatus =
-  | "DRAFT"
-  | "OPEN"
-  | "PAID"
-  | "VOID"
-  | "UNCOLLECTIBLE";
+export type InvoiceStatus = "DRAFT" | "OPEN" | "PAID" | "VOID" | "UNCOLLECTIBLE";
 
-export type PaymentMethodType =
-  | "CARD"
-  | "BANK_TRANSFER"
-  | "ALIPAY"
-  | "WECHAT_PAY"
-  | "CRYPTO";
+export type PaymentMethodType = "CARD" | "BANK_TRANSFER" | "ALIPAY" | "WECHAT_PAY" | "CRYPTO";
 
-export type UsageType =
-  | "API_CALL"
-  | "AI_TOKEN"
-  | "STORAGE"
-  | "COMPUTE"
-  | "BANDWIDTH"
-  | "CUSTOM";
+export type UsageType = "API_CALL" | "AI_TOKEN" | "STORAGE" | "COMPUTE" | "BANDWIDTH" | "CUSTOM";
 
 export type CreditTransactionType =
   | "PURCHASE"
@@ -261,14 +245,7 @@ export const UpdateSubscriptionSchema = z.object({
 export const RecordUsageSchema = z.object({
   organizationId: z.string(),
   userId: z.string().optional(),
-  type: z.enum([
-    "API_CALL",
-    "AI_TOKEN",
-    "STORAGE",
-    "COMPUTE",
-    "BANDWIDTH",
-    "CUSTOM",
-  ]),
+  type: z.enum(["API_CALL", "AI_TOKEN", "STORAGE", "COMPUTE", "BANDWIDTH", "CUSTOM"]),
   quantity: z.number().int().positive(),
   resource: z.string().optional(),
   metadata: z.record(z.string(), z.unknown()).optional(),

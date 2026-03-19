@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { cn } from "../utils/cn";
 
 const SQRT_5000 = Math.sqrt(5000);
@@ -10,32 +11,28 @@ const SQRT_5000 = Math.sqrt(5000);
 const defaultTestimonials = [
   {
     tempId: 0,
-    testimonial:
-      "We ship 5x faster with Nebutra Sailor's monorepo and Turborepo pipelines.",
+    testimonial: "We ship 5x faster with Nebutra Sailor's monorepo and Turborepo pipelines.",
     by: "Alex, CEO at TechCorp",
     imgSrc:
       "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=150&q=60",
   },
   {
     tempId: 1,
-    testimonial:
-      "Multi-tenant auth with Clerk Orgs + Supabase RLS worked out of the box.",
+    testimonial: "Multi-tenant auth with Clerk Orgs + Supabase RLS worked out of the box.",
     by: "Dan, CTO at SecureNet",
     imgSrc:
       "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=150&q=60",
   },
   {
     tempId: 2,
-    testimonial:
-      "Design system with Primer tokens keeps all our apps perfectly consistent.",
+    testimonial: "Design system with Primer tokens keeps all our apps perfectly consistent.",
     by: "Stephanie, COO at InnovateCo",
     imgSrc:
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=60",
   },
   {
     tempId: 3,
-    testimonial:
-      "Inngest workflows replaced our cron zoo—deploys are finally predictable.",
+    testimonial: "Inngest workflows replaced our cron zoo—deploys are finally predictable.",
     by: "Marie, CFO at FuturePlanning",
     imgSrc:
       "https://images.unsplash.com/photo-1546527868-ccb7ee7dfa6a?auto=format&fit=crop&w=150&q=60",
@@ -49,24 +46,21 @@ const defaultTestimonials = [
   },
   {
     tempId: 5,
-    testimonial:
-      "Rate limiting + cache packages saved us months of infra work.",
+    testimonial: "Rate limiting + cache packages saved us months of infra work.",
     by: "Jeremy, Product Manager at TimeWise",
     imgSrc:
       "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&q=60",
   },
   {
     tempId: 6,
-    testimonial:
-      "Vercel AI SDK + our Python AI service made building AI-native features trivial.",
+    testimonial: "Vercel AI SDK + our Python AI service made building AI-native features trivial.",
     by: "Pam, Marketing Director at BrandBuilders",
     imgSrc:
       "https://images.unsplash.com/photo-1541753866388-0b3c701627d3?auto=format&fit=crop&w=150&q=60",
   },
   {
     tempId: 7,
-    testimonial:
-      "Observability with Sentry + OpenTelemetry is wired from day one.",
+    testimonial: "Observability with Sentry + OpenTelemetry is wired from day one.",
     by: "Daniel, Data Scientist at AnalyticsPro",
     imgSrc:
       "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=60",
@@ -130,9 +124,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px)
           rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
         `,
-        boxShadow: isCenter
-          ? "0px 8px 0px 4px hsl(var(--border))"
-          : "0px 0px 0px 0px transparent",
+        boxShadow: isCenter ? "0px 8px 0px 4px hsl(var(--border))" : "0px 0px 0px 0px transparent",
       }}
     >
       <span
@@ -184,9 +176,7 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
   className,
 }) => {
   const [cardSize, setCardSize] = useState(365);
-  const [testimonialsList, setTestimonialsList] = useState<
-    StaggerTestimonialItem[]
-  >(
+  const [testimonialsList, setTestimonialsList] = useState<StaggerTestimonialItem[]>(
     (items ?? defaultTestimonials).map((t, i) => ({
       ...t,
       tempId: t.tempId ?? i,
@@ -225,9 +215,7 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
   // Sync list when external items change
   useEffect(() => {
     if (items) {
-      setTestimonialsList(
-        items.map((t, i) => ({ ...t, tempId: t.tempId ?? i })),
-      );
+      setTestimonialsList(items.map((t, i) => ({ ...t, tempId: t.tempId ?? i })));
     }
   }, [items]);
 

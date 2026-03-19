@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { routing, type Locale } from "@/i18n/routing";
+import { type Locale, routing } from "@/i18n/routing";
 
 const VALUE_ITEM_KEYS = ["0", "1", "2", "3", "4", "5"] as const;
 
@@ -24,11 +24,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function AboutPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const locale = lang as Locale;
   setRequestLocale(locale);
@@ -41,9 +37,7 @@ export default async function AboutPage({
         <h1 className="text-4xl font-bold tracking-tight text-[var(--neutral-12)] dark:text-white sm:text-5xl">
           {t("about.heading")}
         </h1>
-        <p className="mt-4 text-xl text-[var(--neutral-10)]">
-          {t("about.subheading")}
-        </p>
+        <p className="mt-4 text-xl text-[var(--neutral-10)]">{t("about.subheading")}</p>
       </section>
 
       {/* Mission Section */}
@@ -80,9 +74,7 @@ export default async function AboutPage({
         <h2>{t("about.companyInfoTitle")}</h2>
         <dl className="grid gap-4 sm:grid-cols-2">
           <div>
-            <dt className="font-semibold">
-              {t("about.companyInfo.legalName")}
-            </dt>
+            <dt className="font-semibold">{t("about.companyInfo.legalName")}</dt>
             <dd className="text-[var(--neutral-10)]">
               无锡云毓智能科技有限公司
               <span className="ml-2 text-sm text-[var(--neutral-9)]">
@@ -95,20 +87,14 @@ export default async function AboutPage({
             <dd className="text-[var(--neutral-10)]">2024</dd>
           </div>
           <div>
-            <dt className="font-semibold">
-              {t("about.companyInfo.headquarters")}
-            </dt>
+            <dt className="font-semibold">{t("about.companyInfo.headquarters")}</dt>
             <dd className="text-[var(--neutral-10)]">
               无锡市，江苏省，中国
-              <span className="ml-2 text-sm text-[var(--neutral-9)]">
-                (Wuxi, Jiangsu, China)
-              </span>
+              <span className="ml-2 text-sm text-[var(--neutral-9)]">(Wuxi, Jiangsu, China)</span>
             </dd>
           </div>
           <div>
-            <dt className="font-semibold">
-              {t("about.companyInfo.jurisdiction")}
-            </dt>
+            <dt className="font-semibold">{t("about.companyInfo.jurisdiction")}</dt>
             <dd className="text-[var(--neutral-10)]">
               中华人民共和国
               <span className="ml-2 text-sm text-[var(--neutral-9)]">
@@ -124,9 +110,7 @@ export default async function AboutPage({
         <h2 className="text-2xl font-bold text-[var(--neutral-12)] dark:text-white">
           {t("about.ctaHeading")}
         </h2>
-        <p className="mt-2 text-[var(--neutral-10)]">
-          {t("about.ctaDescription")}
-        </p>
+        <p className="mt-2 text-[var(--neutral-10)]">{t("about.ctaDescription")}</p>
         <div className="mt-6 flex justify-center gap-4">
           <Link
             href="/contact"

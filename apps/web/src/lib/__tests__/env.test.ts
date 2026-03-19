@@ -1,11 +1,9 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { z } from "zod";
 
 // Test the Zod schema in isolation (without importing env.ts which validates process.env at load time)
 const envSchema = z.object({
-  NODE_ENV: z
-    .enum(["development", "production", "test"])
-    .default("development"),
+  NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   NEXT_PUBLIC_SITE_URL: z.string().url().default("http://localhost:3000"),
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3001"),
   NEXT_PUBLIC_API_URL: z.string().url().default("http://localhost:3002"),
@@ -54,9 +52,7 @@ describe("web env schema", () => {
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_abc123",
     });
     expect(result.success).toBe(true);
-    expect(result.data?.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY).toBe(
-      "pk_test_abc123",
-    );
+    expect(result.data?.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY).toBe("pk_test_abc123");
   });
 
   it("allows missing optional keys (clerk, stripe, sentry)", () => {

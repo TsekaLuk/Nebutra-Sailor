@@ -1,36 +1,30 @@
+import { remarkFeedbackBlock } from "fumadocs-core/mdx-plugins/remark-feedback-block";
+import { defineConfig, defineDocs, frontmatterSchema } from "fumadocs-mdx/config";
+import { remarkMdxMermaid } from "fumadocs-mermaid";
 import {
-  defineDocs,
-  defineConfig,
-  frontmatterSchema,
-} from "fumadocs-mdx/config"
-import { remarkMdxMermaid } from "fumadocs-mermaid"
-import { remarkFeedbackBlock } from "fumadocs-core/mdx-plugins/remark-feedback-block"
-import {
-  remarkAutoTypeTable,
-  createGenerator,
   createFileSystemGeneratorCache,
-} from "fumadocs-typescript"
-import { remarkComponent } from "./lib/remark-component"
-import { z } from "zod"
+  createGenerator,
+  remarkAutoTypeTable,
+} from "fumadocs-typescript";
+import { z } from "zod";
+import { remarkComponent } from "./lib/remark-component";
 
 const generator = createGenerator({
   cache: createFileSystemGeneratorCache(".next/fumadocs-typescript"),
-})
+});
 
 export const docs = defineDocs({
   dir: "content/docs",
   docs: {
     schema: frontmatterSchema.extend({
-      status: z
-        .enum(["stable", "beta", "deprecated", "experimental"])
-        .optional(),
+      status: z.enum(["stable", "beta", "deprecated", "experimental"]).optional(),
       figma: z.string().optional(),
     }),
     postprocess: {
       includeProcessedMarkdown: true,
     },
   },
-})
+});
 
 export default defineConfig({
   mdxOptions: {
@@ -42,4 +36,4 @@ export default defineConfig({
     ],
     rehypePlugins: [],
   },
-})
+});

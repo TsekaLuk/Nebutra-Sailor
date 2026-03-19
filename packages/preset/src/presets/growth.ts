@@ -3,8 +3,7 @@ import type { PresetDefinition } from "../config";
 export const growth: PresetDefinition = {
   id: "growth",
   name: "Product Hunt Growth",
-  description:
-    "Growth-focused with waitlist, referrals, A/B testing, and community",
+  description: "Growth-focused with waitlist, referrals, A/B testing, and community",
   apps: {
     web: true,
     "landing-page": true,

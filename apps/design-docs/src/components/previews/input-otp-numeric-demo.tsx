@@ -1,5 +1,5 @@
-"use client"
+"use client";
 
 export function InputOTPNumericDemo() {
-  return null
+  return null;
 }

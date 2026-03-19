@@ -1,13 +1,7 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
+import type React from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 export interface SectionInfo {
   id: string;
@@ -65,9 +59,7 @@ export function ScrollSpyProvider({
     setSections((prev) => {
       // Avoid duplicates
       if (prev.some((s) => s.id === section.id)) {
-        return prev.map((s) =>
-          s.id === section.id ? { ...s, ...section } : s,
-        );
+        return prev.map((s) => (s.id === section.id ? { ...s, ...section } : s));
       }
       return [...prev, section];
     });
@@ -142,21 +134,10 @@ export function ScrollSpyProvider({
       scrollToSection,
       scrollProgress,
     }),
-    [
-      activeSection,
-      sections,
-      registerSection,
-      unregisterSection,
-      scrollToSection,
-      scrollProgress,
-    ],
+    [activeSection, sections, registerSection, unregisterSection, scrollToSection, scrollProgress],
   );
 
-  return (
-    <ScrollSpyContext.Provider value={value}>
-      {children}
-    </ScrollSpyContext.Provider>
-  );
+  return <ScrollSpyContext.Provider value={value}>{children}</ScrollSpyContext.Provider>;
 }
 
 /**

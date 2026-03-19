@@ -1,5 +1,5 @@
-import { GridFeatureCard } from "@nebutra/ui/primitives"
-import { Network, Database, Lock, Cpu } from "lucide-react"
+import { GridFeatureCard } from "@nebutra/ui/primitives";
+import { Cpu, Database, Lock, Network } from "lucide-react";
 
 export function GridFeatureCardDemo() {
   return (
@@ -36,5 +36,5 @@ export function GridFeatureCardDemo() {
         className="rounded-xl border"
       />
     </div>
-  )
+  );
 }

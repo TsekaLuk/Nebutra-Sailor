@@ -1,4 +1,4 @@
-import { MultipleSelector } from "@nebutra/ui/primitives"
+import { MultipleSelector } from "@nebutra/ui/primitives";
 
 export function MultipleSelectorDemo() {
   const OPTIONS = [
@@ -10,7 +10,7 @@ export function MultipleSelectorDemo() {
     { label: "Remix", value: "remix" },
     { label: "Astro", value: "astro" },
     { label: "Angular", value: "angular" },
-  ]
+  ];
 
   return (
     <div className="max-w-sm p-8 gap-6 mx-auto flex h-[400px] w-full flex-col">
@@ -41,5 +41,5 @@ export function MultipleSelectorDemo() {
         />
       </div>
     </div>
-  )
+  );
 }

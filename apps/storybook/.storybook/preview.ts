@@ -1,4 +1,4 @@
-import type { Preview, StoryFn, StoryContext } from "@storybook/react";
+import type { Preview, StoryContext, StoryFn } from "@storybook/react";
 import "@nebutra/tokens/styles.css";
 
 const preview: Preview = {

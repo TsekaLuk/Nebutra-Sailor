@@ -1,4 +1,4 @@
-import { RealtimeChannel, RealtimePostgresChangesPayload } from "@supabase/supabase-js";
+import type { RealtimeChannel, RealtimePostgresChangesPayload } from "@supabase/supabase-js";
 import { getSupabaseClient } from "./client";
 
 export type { RealtimeChannel, RealtimePostgresChangesPayload };
@@ -20,10 +20,19 @@ export interface SubscribeOptions<T extends Record<string, unknown>> {
  * Subscribe to table changes
  */
 export function subscribeToTable<T extends Record<string, unknown>>(
-  options: SubscribeOptions<T>
+  options: SubscribeOptions<T>,
 ): RealtimeChannel {
   const client = getSupabaseClient();
-  const { table, schema = "public", event = "*", filter, onInsert, onUpdate, onDelete, onChange } = options;
+  const {
+    table,
+    schema = "public",
+    event = "*",
+    filter,
+    onInsert,
+    onUpdate,
+    onDelete,
+    onChange,
+  } = options;
 
   // Note: postgres_changes config is deprecated in newer Supabase SDK.
   // Use .on() method instead to subscribe to postgres changes.
@@ -42,7 +51,7 @@ export function subscribeToTable<T extends Record<string, unknown>>(
       } else if (payload.eventType === "DELETE" && onDelete) {
         onDelete(payload.old as T);
       }
-    }
+    },
   );
 
   channel.subscribe();
@@ -55,7 +64,7 @@ export function subscribeToTable<T extends Record<string, unknown>>(
 export function subscribeToBroadcast(
   channelName: string,
   eventName: string,
-  callback: (payload: Record<string, unknown>) => void
+  callback: (payload: Record<string, unknown>) => void,
 ): RealtimeChannel {
   const client = getSupabaseClient();
 
@@ -74,7 +83,7 @@ export function subscribeToBroadcast(
 export async function broadcast(
   channelName: string,
   eventName: string,
-  payload: Record<string, unknown>
+  payload: Record<string, unknown>,
 ): Promise<void> {
   const client = getSupabaseClient();
 
@@ -95,7 +104,7 @@ export function subscribeToPresence(
     onSync?: () => void;
     onJoin?: (key: string, currentPresences: unknown[], newPresences: unknown[]) => void;
     onLeave?: (key: string, currentPresences: unknown[], leftPresences: unknown[]) => void;
-  }
+  },
 ): RealtimeChannel {
   const client = getSupabaseClient();
   const channel = client.channel(channelName);
@@ -121,7 +130,7 @@ export function subscribeToPresence(
  */
 export async function trackPresence(
   channel: RealtimeChannel,
-  userState: Record<string, unknown>
+  userState: Record<string, unknown>,
 ): Promise<void> {
   await channel.track(userState);
 }

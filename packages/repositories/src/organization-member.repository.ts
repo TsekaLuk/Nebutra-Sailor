@@ -1,4 +1,4 @@
-import type { PrismaClient, OrganizationMember, Role } from "@nebutra/db";
+import type { OrganizationMember, PrismaClient, Role } from "@nebutra/db";
 import type { CursorPaginationParams, CursorPaginationResult } from "./pagination.js";
 import { normalizePaginationParams } from "./pagination.js";
 
@@ -80,10 +80,7 @@ export class OrganizationMemberRepository {
     await this.prisma.organizationMember.delete({ where: { id } });
   }
 
-  async deleteByOrganizationAndUser(
-    organizationId: string,
-    userId: string,
-  ): Promise<void> {
+  async deleteByOrganizationAndUser(organizationId: string, userId: string): Promise<void> {
     await this.prisma.organizationMember.delete({
       where: {
         organizationId_userId: { organizationId, userId },

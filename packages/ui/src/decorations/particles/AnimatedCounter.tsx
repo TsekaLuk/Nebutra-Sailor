@@ -1,14 +1,11 @@
 "use client";
 
+import { animate, motion, useInView, useMotionValue, useTransform } from "framer-motion";
 import * as React from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useInView } from "framer-motion";
 import { cn } from "../../utils/cn";
 
-export interface AnimatedCounterProps extends Omit<
-  React.HTMLAttributes<HTMLSpanElement>,
-  "children"
-> {
+export interface AnimatedCounterProps
+  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
   /** Target value to count to */
   value: number;
   /** Duration of animation in seconds */
@@ -37,10 +34,7 @@ export interface AnimatedCounterProps extends Omit<
  * <AnimatedCounter value={1000} suffix="+" duration={2} />
  * <AnimatedCounter value={99.9} suffix="%" decimals={1} />
  */
-export const AnimatedCounter = React.forwardRef<
-  HTMLSpanElement,
-  AnimatedCounterProps
->(
+export const AnimatedCounter = React.forwardRef<HTMLSpanElement, AnimatedCounterProps>(
   (
     {
       value,
@@ -69,8 +63,7 @@ export const AnimatedCounter = React.forwardRef<
     } as const;
 
     const rounded = useTransform(count, (latest) => {
-      const rounded =
-        decimals > 0 ? latest.toFixed(decimals) : Math.round(latest).toString();
+      const rounded = decimals > 0 ? latest.toFixed(decimals) : Math.round(latest).toString();
 
       if (formatWithCommas && decimals === 0) {
         return Number(rounded).toLocaleString();
@@ -100,9 +93,7 @@ export const AnimatedCounter = React.forwardRef<
       <span
         ref={(node) => {
           // Handle both refs
-          (
-            containerRef as React.MutableRefObject<HTMLSpanElement | null>
-          ).current = node;
+          (containerRef as React.MutableRefObject<HTMLSpanElement | null>).current = node;
           if (typeof ref === "function") {
             ref(node);
           } else if (ref) {

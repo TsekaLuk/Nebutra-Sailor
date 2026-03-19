@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 
 const staticPaths = [
@@ -13,9 +13,7 @@ const staticPaths = [
 ];
 
 function localizedUrl(base: string, locale: string, path: string): string {
-  return locale === routing.defaultLocale
-    ? `${base}${path}`
-    : `${base}/${locale}${path}`;
+  return locale === routing.defaultLocale ? `${base}${path}` : `${base}/${locale}${path}`;
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {

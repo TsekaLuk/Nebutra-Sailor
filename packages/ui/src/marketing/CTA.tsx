@@ -42,12 +42,7 @@ export function CTA({
   density = "normal",
 }: CTAProps) {
   return (
-    <section
-      id={id}
-      className={className}
-      data-variant={variant}
-      data-density={density}
-    >
+    <section id={id} className={className} data-variant={variant} data-density={density}>
       {/* TODO: Background */}
       <div data-slot="background" data-type={backgroundType}>
         {/* TODO: Implement background based on type */}
@@ -64,11 +59,7 @@ export function CTA({
         {/* TODO: CTA Buttons */}
         <div data-slot="ctas">
           {primaryCTA && (
-            <a
-              href={primaryCTA.href}
-              data-variant="primary"
-              data-analytics="footer-cta-primary"
-            >
+            <a href={primaryCTA.href} data-variant="primary" data-analytics="footer-cta-primary">
               {primaryCTA.text}
             </a>
           )}

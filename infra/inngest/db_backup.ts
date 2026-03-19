@@ -86,7 +86,7 @@ export const dailyDbBackup = inngest.createFunction(
       status: backupResult.success ? "completed" : "failed",
       ...backupResult,
     };
-  }
+  },
 );
 
 /**
@@ -139,5 +139,5 @@ export const onDemandBackup = inngest.createFunction(
     });
 
     return backupResult;
-  }
+  },
 );

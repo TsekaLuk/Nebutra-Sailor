@@ -55,126 +55,120 @@
  * ```
  */
 
+export type { FeaturedInProps } from "./components";
 // ============================================
 // Components
 // ============================================
 export {
+  AnimatedNumber,
+  FeaturedIn,
+  // Launch Banners
+  LaunchBanner,
+  LaunchBannerFloating,
+  LaunchBannerInline,
+  LaunchBannerTop,
   // Product Hunt
   ProductHuntBadge,
   ProductHuntEmbedBadge,
-  ProductHuntUpvoteBadge,
   ProductHuntTextBadge,
-  // Launch Banners
-  LaunchBanner,
-  LaunchBannerTop,
-  LaunchBannerFloating,
-  LaunchBannerInline,
-  // Testimonials
-  TestimonialsWall,
-  TestimonialCard,
+  ProductHuntUpvoteBadge,
   RatingStars,
-  SourceBadge,
   // Social Proof
   SocialProofBar,
-  TrustBadges,
-  FeaturedIn,
-  AnimatedNumber,
+  SourceBadge,
   StatItem,
+  TestimonialCard,
+  // Testimonials
+  TestimonialsWall,
+  TrustBadges,
 } from "./components";
-
-export type { FeaturedInProps } from "./components";
-
-// ============================================
-// Hooks
-// ============================================
-export {
-  useAttribution,
-  useProductHuntSource,
-  useLaunchBannerState,
-  useCountdown,
-  useInView,
-  useMarketingEvents,
-} from "./hooks";
-
-// ============================================
-// Utilities
-// ============================================
-export {
-  // UTM
-  parseUTMParams,
-  hasUTMParams,
-  addUTMParams,
-  removeUTMParams,
-  createProductHuntUTM,
-  // Source Detection
-  detectSourceFromReferrer,
-  detectMedium,
-  // Attribution
-  initAttribution,
-  getAttribution,
-  saveAttribution,
-  getFirstTouchAttribution,
-  generateSessionId,
-  // Event Tracking
-  trackMarketingEvent,
-  getMarketingEvents,
-  clearMarketingEvents,
-  trackProductHuntVisit,
-  trackSignup,
-  trackConversion,
-  // URL Utilities
-  createTrackedLink,
-  createProductHuntLink,
-  cleanUrlForAnalytics,
-} from "./utils";
-
+export type { ShareUrls } from "./config";
 // ============================================
 // Configuration
 // ============================================
 export {
-  // Defaults
-  defaultMarketingConfig,
-  defaultProductHuntConfig,
   // Creators
   createMarketingConfig,
   createProductHuntConfig,
-  // URL Builders
-  getProductHuntUrl,
+  // Defaults
+  defaultMarketingConfig,
+  defaultProductHuntConfig,
+  generateShareUrls,
   getProductHuntBadgeUrl,
   getProductHuntUpvoteUrl,
-  generateShareUrls,
+  // URL Builders
+  getProductHuntUrl,
   // Constants
   PRODUCT_HUNT_COLORS,
   TESTIMONIAL_SOURCE_ICONS,
   TESTIMONIAL_SOURCE_NAMES,
 } from "./config";
-
-export type { ShareUrls } from "./config";
-
+// ============================================
+// Hooks
+// ============================================
+export {
+  useAttribution,
+  useCountdown,
+  useInView,
+  useLaunchBannerState,
+  useMarketingEvents,
+  useProductHuntSource,
+} from "./hooks";
 // ============================================
 // Types
 // ============================================
 export type {
-  // Product Hunt
-  ProductHuntConfig,
-  ProductHuntBadgeTheme,
-  ProductHuntBadgeSize,
-  ProductHuntBadgeProps,
-  // Testimonials
-  TestimonialSource,
-  Testimonial,
-  TestimonialsWallProps,
-  // Social Proof
-  SocialProofStats,
-  SocialProofBarProps,
-  TrustBadge,
-  TrustBadgesProps,
+  AttributionData,
   // Launch Banner
   LaunchBannerProps,
-  // Attribution
-  UTMParams,
-  AttributionData,
-  MarketingEvent,
   // Config
   MarketingConfig,
+  MarketingEvent,
+  ProductHuntBadgeProps,
+  ProductHuntBadgeSize,
+  ProductHuntBadgeTheme,
+  // Product Hunt
+  ProductHuntConfig,
+  SocialProofBarProps,
+  // Social Proof
+  SocialProofStats,
+  Testimonial,
+  // Testimonials
+  TestimonialSource,
+  TestimonialsWallProps,
+  TrustBadge,
+  TrustBadgesProps,
+  // Attribution
+  UTMParams,
 } from "./types";
+// ============================================
+// Utilities
+// ============================================
+export {
+  addUTMParams,
+  cleanUrlForAnalytics,
+  clearMarketingEvents,
+  createProductHuntLink,
+  createProductHuntUTM,
+  // URL Utilities
+  createTrackedLink,
+  detectMedium,
+  // Source Detection
+  detectSourceFromReferrer,
+  generateSessionId,
+  getAttribution,
+  getFirstTouchAttribution,
+  getMarketingEvents,
+  hasUTMParams,
+  // Attribution
+  initAttribution,
+  // UTM
+  parseUTMParams,
+  removeUTMParams,
+  saveAttribution,
+  trackConversion,
+  // Event Tracking
+  trackMarketingEvent,
+  trackProductHuntVisit,
+  trackSignup,
+} from "./utils";

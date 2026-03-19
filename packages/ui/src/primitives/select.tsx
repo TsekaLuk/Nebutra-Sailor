@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { Select as BaseSelect } from "@base-ui-components/react/select";
 import { Check, ChevronDown } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "../utils/cn";
 
@@ -18,14 +18,15 @@ SelectGroup.displayName = "SelectGroup";
 
 const SelectValue = React.forwardRef<
   HTMLSpanElement,
-  React.ComponentPropsWithoutRef<typeof BaseSelect.Value> & { placeholder?: React.ReactNode; }
+  React.ComponentPropsWithoutRef<typeof BaseSelect.Value> & { placeholder?: React.ReactNode }
 >(({ className, placeholder, children, ...props }, ref) => {
   return (
     <BaseSelect.Value ref={ref} className={cn("truncate", className)} {...props}>
-      {children || ((value: string | string[] | null) => {
-        if (Array.isArray(value)) return value.length ? value.join(", ") : placeholder;
-        return value || placeholder;
-      })}
+      {children ||
+        ((value: string | string[] | null) => {
+          if (Array.isArray(value)) return value.length ? value.join(", ") : placeholder;
+          return value || placeholder;
+        })}
     </BaseSelect.Value>
   );
 });
@@ -88,16 +89,11 @@ const SelectContent = React.forwardRef<
 ));
 SelectContent.displayName = "SelectContent";
 
-const SelectLabel = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentPropsWithoutRef<"div">
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("px-2 py-1.5 text-sm font-semibold", className)}
-    {...props}
-  />
-));
+const SelectLabel = React.forwardRef<HTMLDivElement, React.ComponentPropsWithoutRef<"div">>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("px-2 py-1.5 text-sm font-semibold", className)} {...props} />
+  ),
+);
 SelectLabel.displayName = "SelectLabel";
 
 const SelectItem = React.forwardRef<
@@ -136,13 +132,13 @@ SelectSeparator.displayName = "SelectSeparator";
 
 export {
   Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
-  SelectLabel,
+  SelectGroup,
   SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
+  SelectLabel,
   SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
 };

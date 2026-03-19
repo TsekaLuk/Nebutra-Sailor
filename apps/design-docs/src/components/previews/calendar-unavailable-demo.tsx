@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Calendar, isWeekend } from "@nebutra/ui/primitives"
+import { Calendar, isWeekend } from "@nebutra/ui/primitives";
 
 export default function CalendarUnavailableDemo() {
   return (
@@ -10,5 +10,5 @@ export default function CalendarUnavailableDemo() {
         className="rounded-xl border border-border shadow-sm"
       />
     </div>
-  )
+  );
 }

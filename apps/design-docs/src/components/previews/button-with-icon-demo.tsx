@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Button } from "@nebutra/ui/primitives"
+import { Button } from "@nebutra/ui/primitives";
 
 export function ButtonWithIconDemo() {
   return (
@@ -12,5 +12,5 @@ export function ButtonWithIconDemo() {
         Continue <span className="ml-2">➔</span>
       </Button>
     </div>
-  )
+  );
 }

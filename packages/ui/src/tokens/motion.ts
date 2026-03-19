@@ -11,7 +11,7 @@
  * @see apps/landing-page/DESIGN.md Section 10.8
  */
 
-import type { Variants, Transition } from "framer-motion";
+import type { Transition, Variants } from "framer-motion";
 
 /**
  * Duration scale in milliseconds — Geist-aligned.

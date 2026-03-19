@@ -1,7 +1,8 @@
 "use client";
 
-import React, { memo, useId, forwardRef } from "react";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { domAnimation, LazyMotion, motion } from "framer-motion";
+import type React from "react";
+import { forwardRef, memo, useId } from "react";
 import { cn } from "../utils/cn";
 
 type Theme = "light" | "dark" | "neutral";
@@ -74,7 +75,7 @@ const IconContainer = memo(function IconContainer({
           "bg-stone-100 border border-stone-200 group-hover:shadow-xl group-hover:border-stone-300",
         (!theme || theme === "light") &&
           "bg-white border border-[var(--neutral-6)] group-hover:shadow-xl group-hover:border-[var(--neutral-7)]",
-        className
+        className,
       )}
     >
       <div
@@ -82,7 +83,8 @@ const IconContainer = memo(function IconContainer({
           "text-sm transition-colors duration-300",
           theme === "dark" && "text-neutral-400 group-hover:text-neutral-200",
           theme === "neutral" && "text-stone-500 group-hover:text-stone-700",
-          (!theme || theme === "light") && "text-[var(--neutral-9)] group-hover:text-[var(--neutral-11)]"
+          (!theme || theme === "light") &&
+            "text-[var(--neutral-9)] group-hover:text-[var(--neutral-11)]",
         )}
       >
         {children}
@@ -96,10 +98,7 @@ interface MultiIconDisplayProps {
   theme: Theme;
 }
 
-const MultiIconDisplay = memo(function MultiIconDisplay({
-  icons,
-  theme,
-}: MultiIconDisplayProps) {
+const MultiIconDisplay = memo(function MultiIconDisplay({ icons, theme }: MultiIconDisplayProps) {
   if (!icons || icons.length < 3) return null;
 
   return (
@@ -225,7 +224,7 @@ const getTextClasses = (type: "title" | "description", size: Size, theme: Theme)
     sizes[type][size],
     colors[type][theme],
     type === "title" && "font-semibold",
-    "transition-colors duration-200"
+    "transition-colors duration-200",
   );
 };
 
@@ -237,7 +236,8 @@ const getButtonClasses = (size: Size, theme: Theme): string => {
   };
 
   const themeCls: Record<Theme, string> = {
-    light: "border-[var(--neutral-7)] bg-white hover:bg-[var(--neutral-2)] text-[var(--neutral-11)]",
+    light:
+      "border-[var(--neutral-7)] bg-white hover:bg-[var(--neutral-2)] text-[var(--neutral-11)]",
     dark: "border-neutral-600 bg-neutral-800 hover:bg-neutral-700 text-neutral-200",
     neutral: "border-stone-300 bg-stone-100 hover:bg-stone-200 text-stone-700",
   };
@@ -245,7 +245,7 @@ const getButtonClasses = (size: Size, theme: Theme): string => {
   return cn(
     "inline-flex items-center gap-2 border rounded-[var(--radius-md)] font-medium shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group/button disabled:opacity-50 disabled:cursor-not-allowed",
     sizeCls[size],
-    themeCls[theme]
+    themeCls[theme],
   );
 };
 
@@ -279,7 +279,7 @@ export const EmptyState = forwardRef<HTMLElement, EmptyStateProps>(function Empt
     className = "",
     ...props
   },
-  ref
+  ref,
 ) {
   const titleId = useId();
   const descriptionId = useId();
@@ -291,12 +291,7 @@ export const EmptyState = forwardRef<HTMLElement, EmptyStateProps>(function Empt
         role="region"
         aria-labelledby={titleId}
         aria-describedby={description ? descriptionId : undefined}
-        className={cn(
-          baseClasses,
-          sizeClasses[size],
-          getVariantClasses(variant, theme),
-          className
-        )}
+        className={cn(baseClasses, sizeClasses[size], getVariantClasses(variant, theme), className)}
         initial="initial"
         animate="animate"
         whileHover={isIconAnimated ? "hover" : "animate"}
@@ -317,7 +312,10 @@ export const EmptyState = forwardRef<HTMLElement, EmptyStateProps>(function Empt
             {description && (
               <p
                 id={descriptionId}
-                className={cn(getTextClasses("description", size, theme), "max-w-md leading-relaxed")}
+                className={cn(
+                  getTextClasses("description", size, theme),
+                  "max-w-md leading-relaxed",
+                )}
               >
                 {description}
               </p>

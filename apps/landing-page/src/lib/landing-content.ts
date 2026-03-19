@@ -151,10 +151,7 @@ export const techStackLogos: TechLogo[] = [
  * @param logo - TechLogo object
  * @param theme - "light" | "dark" (default: "dark" for dark landing page bg)
  */
-export const getLogoUrl = (
-  logo: TechLogo,
-  theme: "light" | "dark" = "dark",
-): string => {
+export const getLogoUrl = (logo: TechLogo, theme: "light" | "dark" = "dark"): string => {
   if (logo.svgl) {
     return `${SVGL_BASE}/${logo.svgl[theme]}`;
   }

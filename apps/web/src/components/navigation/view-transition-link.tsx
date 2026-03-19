@@ -1,11 +1,10 @@
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import * as React from "react";
 
-interface ViewTransitionLinkProps
-  extends Omit<React.ComponentProps<typeof Link>, "href"> {
+interface ViewTransitionLinkProps extends Omit<React.ComponentProps<typeof Link>, "href"> {
   href: string;
   onNavigate?: () => void;
 }
@@ -15,22 +14,13 @@ type DocumentWithViewTransition = Document & {
 };
 
 function isModifiedEvent(event: React.MouseEvent<HTMLAnchorElement>) {
-  return (
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey ||
-    event.button !== 0
-  );
+  return event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
 }
 
 function supportsViewTransitions() {
   if (typeof window === "undefined") return false;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  return (
-    typeof (document as DocumentWithViewTransition).startViewTransition ===
-    "function"
-  );
+  return typeof (document as DocumentWithViewTransition).startViewTransition === "function";
 }
 
 export function ViewTransitionLink({
@@ -76,13 +66,5 @@ export function ViewTransitionLink({
     [href, onClick, onNavigate, replace, router, scroll],
   );
 
-  return (
-    <Link
-      href={href}
-      replace={replace}
-      scroll={scroll}
-      onClick={handleClick}
-      {...props}
-    />
-  );
+  return <Link href={href} replace={replace} scroll={scroll} onClick={handleClick} {...props} />;
 }

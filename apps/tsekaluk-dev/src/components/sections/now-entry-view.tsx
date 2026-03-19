@@ -77,15 +77,13 @@ export function NowEntryView({
   sections: SectionDef[];
   lastUpdatedLabel?: string;
 }) {
-  const visibleSections = preview
-    ? sections.filter((s) => s.previewOnly)
-    : sections;
+  const visibleSections = preview ? sections.filter((s) => s.previewOnly) : sections;
 
   let globalIndex = 0;
 
   return (
     <div className="relative">
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}

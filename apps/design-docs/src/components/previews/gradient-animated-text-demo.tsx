@@ -1,4 +1,4 @@
-import { GradientAnimatedText } from "@nebutra/ui/primitives"
+import { GradientAnimatedText } from "@nebutra/ui/primitives";
 
 export default function GradientAnimatedTextDemo() {
   return (
@@ -15,5 +15,5 @@ export default function GradientAnimatedTextDemo() {
         </GradientAnimatedText>
       </div>
     </div>
-  )
+  );
 }

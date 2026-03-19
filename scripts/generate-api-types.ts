@@ -31,10 +31,10 @@ if (gatewayUrl) {
   // ── URL mode: fetch from running gateway ───────────────────────────────────
   const specUrl = `${gatewayUrl}/openapi.json`;
   process.stdout.write(`[generate:api-types] Fetching spec from ${specUrl}\n`);
-  execSync(
-    `pnpm exec openapi-typescript ${specUrl} --output ${outFile}`,
-    { stdio: "inherit", cwd: ROOT },
-  );
+  execSync(`pnpm exec openapi-typescript ${specUrl} --output ${outFile}`, {
+    stdio: "inherit",
+    cwd: ROOT,
+  });
 } else {
   // ── File mode: build gateway → export spec → generate types ───────────────
   process.stdout.write("[generate:api-types] Building api-gateway…\n");
@@ -62,10 +62,10 @@ if (gatewayUrl) {
   }
 
   process.stdout.write(`[generate:api-types] Generating types from ${specFile}\n`);
-  execSync(
-    `pnpm exec openapi-typescript ${specFile} --output ${outFile}`,
-    { stdio: "inherit", cwd: ROOT },
-  );
+  execSync(`pnpm exec openapi-typescript ${specFile} --output ${outFile}`, {
+    stdio: "inherit",
+    cwd: ROOT,
+  });
 }
 
 process.stdout.write(`[generate:api-types] Done → ${outFile}\n`);

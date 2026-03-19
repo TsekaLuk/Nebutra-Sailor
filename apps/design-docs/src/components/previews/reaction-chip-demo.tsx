@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-import { MessageWithReactions } from "@nebutra/ui/primitives"
-import { Avatar, AvatarFallback, AvatarImage } from "@nebutra/ui/primitives"
+import { Avatar, AvatarFallback, AvatarImage, MessageWithReactions } from "@nebutra/ui/primitives";
 
 export function ReactionChipDemo() {
   return (
@@ -23,5 +22,5 @@ export function ReactionChipDemo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

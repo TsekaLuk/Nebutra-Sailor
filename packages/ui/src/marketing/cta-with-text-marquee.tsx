@@ -1,7 +1,7 @@
 "use client";
 
+import { type ReactNode, useEffect, useRef } from "react";
 import { cn } from "../utils/cn";
-import { ReactNode, useEffect, useRef } from "react";
 
 interface VerticalMarqueeProps {
   children: ReactNode;

@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Label, Textarea } from "@nebutra/ui/primitives"
+import { Label, Textarea } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Label3Demo() {
   return (
     <div className="space-y-1 max-w-sm w-full">
@@ -12,5 +11,5 @@ export function Label3Demo() {
       </p>
       <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
     </div>
-  )
+  );
 }

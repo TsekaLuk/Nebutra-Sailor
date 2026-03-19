@@ -1,5 +1,5 @@
-import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import type * as React from "react";
 import { Grid } from "./grid-system";
 
 const meta = {
@@ -24,7 +24,9 @@ type Story = StoryObj<typeof meta>;
 
 function Cell({ children, className }: { children?: React.ReactNode; className?: string }) {
   return (
-    <div className={`flex items-center justify-center p-4 text-sm text-muted-foreground ${className ?? ""}`}>
+    <div
+      className={`flex items-center justify-center p-4 text-sm text-muted-foreground ${className ?? ""}`}
+    >
       {children}
     </div>
   );

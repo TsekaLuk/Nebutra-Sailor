@@ -1,8 +1,8 @@
 "use client";
 
-import { Server, Zap, CreditCard } from "lucide-react";
-import { AnimateIn, AnimateInGroup } from "./AnimateIn";
+import { CreditCard, Server, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { AnimateIn, AnimateInGroup } from "./AnimateIn";
 
 const featureCodes = [
   [
@@ -48,10 +48,7 @@ export function FeatureCards() {
   }));
 
   return (
-    <section
-      id="features"
-      className="w-full bg-neutral-2 py-24 md:py-32 dark:bg-black"
-    >
+    <section id="features" className="w-full bg-neutral-2 py-24 md:py-32 dark:bg-black">
       <div className="feature-cards-cq mx-auto max-w-6xl px-6">
         <AnimateIn preset="emerge" inView>
           <h2 className="mb-16 text-center text-3xl font-bold tracking-tight text-neutral-12 md:text-4xl dark:text-white">

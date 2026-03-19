@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
-import { emerge, flow, brandSpring } from "@nebutra/brand";
+import { brandSpring, emerge, flow } from "@nebutra/brand";
+import { domAnimation, LazyMotion, m, useReducedMotion } from "framer-motion";
+import type * as React from "react";
 
 const PRESETS = {
   emerge: {
@@ -92,13 +92,7 @@ export function AnimateIn({
   }
 
   return (
-    <MotionDiv
-      className={className}
-      initial={initial}
-      animate={animate}
-      exit={exit}
-      transition={t}
-    >
+    <MotionDiv className={className} initial={initial} animate={animate} exit={exit} transition={t}>
       {children}
     </MotionDiv>
   );
@@ -140,12 +134,7 @@ export function AnimateInGroup({
   }
 
   return (
-    <MotionDiv
-      className={className}
-      initial="initial"
-      animate="animate"
-      variants={variants}
-    >
+    <MotionDiv className={className} initial="initial" animate="animate" variants={variants}>
       {children}
     </MotionDiv>
   );

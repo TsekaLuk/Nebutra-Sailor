@@ -29,9 +29,7 @@ export const OverlayMode: Story = {
   render: () => (
     <div className="relative rounded-xl border p-8">
       <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
-      <p className="text-center font-medium">
-        Overlay mode — wraps existing element
-      </p>
+      <p className="text-center font-medium">Overlay mode — wraps existing element</p>
     </div>
   ),
 };
@@ -59,12 +57,7 @@ export const RainbowGradient: Story = {
 
 export const FastAnimation: Story = {
   render: () => (
-    <ShineBorder
-      shineColor="#6366f1"
-      duration={5}
-      borderWidth={2}
-      borderRadius={12}
-    >
+    <ShineBorder shineColor="#6366f1" duration={5} borderWidth={2} borderRadius={12}>
       <p className="font-medium">Fast Animation</p>
     </ShineBorder>
   ),

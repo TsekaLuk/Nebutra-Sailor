@@ -1,7 +1,7 @@
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-import Stripe from "stripe";
-import { prisma, Prisma } from "@nebutra/db";
+import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
+import { type Prisma, prisma } from "@nebutra/db";
 import { logger } from "@nebutra/logger";
+import Stripe from "stripe";
 
 const log = logger.child({ service: "stripe-webhook" });
 
@@ -160,9 +160,7 @@ type PrismaSubscriptionStatus =
   | "PAUSED"
   | "INCOMPLETE";
 
-function mapStripeStatus(
-  stripeStatus: Stripe.Subscription.Status,
-): PrismaSubscriptionStatus {
+function mapStripeStatus(stripeStatus: Stripe.Subscription.Status): PrismaSubscriptionStatus {
   const statusMap: Record<string, PrismaSubscriptionStatus> = {
     active: "ACTIVE",
     past_due: "PAST_DUE",
@@ -187,32 +185,19 @@ async function handleStripeEvent(
 ): Promise<void> {
   switch (event.type) {
     case "checkout.session.completed": {
-      await handleCheckoutCompleted(
-        event.data.object as Stripe.Checkout.Session,
-        stripe,
-        db,
-      );
+      await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session, stripe, db);
       break;
     }
     case "customer.subscription.created": {
-      await handleSubscriptionCreated(
-        event.data.object as Stripe.Subscription,
-        db,
-      );
+      await handleSubscriptionCreated(event.data.object as Stripe.Subscription, db);
       break;
     }
     case "customer.subscription.updated": {
-      await handleSubscriptionUpdated(
-        event.data.object as Stripe.Subscription,
-        db,
-      );
+      await handleSubscriptionUpdated(event.data.object as Stripe.Subscription, db);
       break;
     }
     case "customer.subscription.deleted": {
-      await handleSubscriptionDeleted(
-        event.data.object as Stripe.Subscription,
-        db,
-      );
+      await handleSubscriptionDeleted(event.data.object as Stripe.Subscription, db);
       break;
     }
     case "invoice.paid": {
@@ -244,9 +229,7 @@ async function handleCheckoutCompleted(
     return;
   }
 
-  const sub = await stripe.subscriptions.retrieve(
-    session.subscription as string,
-  );
+  const sub = await stripe.subscriptions.retrieve(session.subscription as string);
 
   await db.subscription.updateMany({
     where: { stripeId: sub.id },
@@ -281,12 +264,8 @@ async function handleSubscriptionCreated(
     where: { stripeId: sub.id },
     data: {
       status: mapStripeStatus(sub.status),
-      currentPeriodStart: new Date(
-        (sub.items.data[0]?.current_period_start ?? sub.created) * 1000,
-      ),
-      currentPeriodEnd: new Date(
-        (sub.items.data[0]?.current_period_end ?? sub.created) * 1000,
-      ),
+      currentPeriodStart: new Date((sub.items.data[0]?.current_period_start ?? sub.created) * 1000),
+      currentPeriodEnd: new Date((sub.items.data[0]?.current_period_end ?? sub.created) * 1000),
       cancelAtPeriodEnd: sub.cancel_at_period_end,
     },
   });
@@ -309,12 +288,8 @@ async function handleSubscriptionUpdated(
     data: {
       status,
       cancelAtPeriodEnd: sub.cancel_at_period_end,
-      currentPeriodStart: new Date(
-        (sub.items.data[0]?.current_period_start ?? sub.created) * 1000,
-      ),
-      currentPeriodEnd: new Date(
-        (sub.items.data[0]?.current_period_end ?? sub.created) * 1000,
-      ),
+      currentPeriodStart: new Date((sub.items.data[0]?.current_period_start ?? sub.created) * 1000),
+      currentPeriodEnd: new Date((sub.items.data[0]?.current_period_end ?? sub.created) * 1000),
       ...(sub.trial_start && {
         trialStart: new Date(sub.trial_start * 1000),
       }),
@@ -338,19 +313,14 @@ async function handleSubscriptionDeleted(
     where: { stripeId: sub.id },
     data: {
       status: "CANCELED",
-      canceledAt: sub.canceled_at
-        ? new Date(sub.canceled_at * 1000)
-        : new Date(),
+      canceledAt: sub.canceled_at ? new Date(sub.canceled_at * 1000) : new Date(),
     },
   });
 
   log.info("Subscription deleted/canceled", { subscriptionId: sub.id });
 }
 
-async function handleInvoicePaid(
-  invoice: Stripe.Invoice,
-  db: PrismaClient,
-): Promise<void> {
+async function handleInvoicePaid(invoice: Stripe.Invoice, db: PrismaClient): Promise<void> {
   if (!invoice.id) return;
 
   // Update the local invoice record if it exists

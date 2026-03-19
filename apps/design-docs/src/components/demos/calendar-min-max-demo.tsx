@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { Calendar, today, getLocalTimeZone } from "@nebutra/ui/primitives";
+import { Calendar, getLocalTimeZone, today } from "@nebutra/ui/primitives";
 
 export function CalendarMinMaxDemo() {
-    return (
-        <Calendar
-            minValue={today(getLocalTimeZone()).subtract({ months: 1 })}
-            maxValue={today(getLocalTimeZone()).add({ months: 1 })}
-            className="rounded-xl shadow-sm border border-border"
-        />
-    );
+  return (
+    <Calendar
+      minValue={today(getLocalTimeZone()).subtract({ months: 1 })}
+      maxValue={today(getLocalTimeZone()).add({ months: 1 })}
+      className="rounded-xl shadow-sm border border-border"
+    />
+  );
 }

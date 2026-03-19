@@ -17,14 +17,7 @@
 
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, type ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import { type FeatureFlag, FLAGS } from "./index.js";
 
 // ── Context ────────────────────────────────────────────────────────────────
@@ -90,10 +83,7 @@ export function FeatureFlagProvider({
     }
   }, [fetchFlags, initialFlags]);
 
-  const isEnabled = useCallback(
-    (flag: string) => flags[flag] ?? false,
-    [flags],
-  );
+  const isEnabled = useCallback((flag: string) => flags[flag] ?? false, [flags]);
 
   return (
     <FeatureFlagContext.Provider value={{ flags, isLoading, isEnabled, refetch: fetchFlags }}>
@@ -135,14 +125,10 @@ export function useFeatureFlags(): {
  * @example
  *   const { AI_STREAMING, API_V2 } = useFlags(["AI_STREAMING", "API_V2"]);
  */
-export function useFlags<K extends keyof typeof FLAGS>(
-  keys: K[],
-): Record<K, boolean> {
+export function useFlags<K extends keyof typeof FLAGS>(keys: K[]): Record<K, boolean> {
   const { isEnabled } = useContext(FeatureFlagContext);
-  return Object.fromEntries(
-    keys.map((k) => [k, isEnabled(FLAGS[k])]),
-  ) as Record<K, boolean>;
+  return Object.fromEntries(keys.map((k) => [k, isEnabled(FLAGS[k])])) as Record<K, boolean>;
 }
 
 // Re-export for convenience
-export { FLAGS, type FeatureFlag };
+export { type FeatureFlag, FLAGS };

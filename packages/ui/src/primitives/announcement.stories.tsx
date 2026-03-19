@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ArrowUpRight } from "lucide-react";
-import {
-  Announcement,
-  AnnouncementTag,
-  AnnouncementTitle,
-} from "./announcement";
+import { Announcement, AnnouncementTag, AnnouncementTitle } from "./announcement";
 
 const meta = {
   title: "Primitives/Announcement",
@@ -95,9 +91,7 @@ export const Warning: Story = {
       className="bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
     >
       <AnnouncementTag>Warning</AnnouncementTag>
-      <AnnouncementTitle>
-        Deprecated API detected in dependencies
-      </AnnouncementTitle>
+      <AnnouncementTitle>Deprecated API detected in dependencies</AnnouncementTitle>
     </Announcement>
   ),
 };

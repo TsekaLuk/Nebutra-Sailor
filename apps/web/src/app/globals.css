@@ -31,7 +31,12 @@
   }
 
   /* Headings */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-sans);
     font-weight: 600;
   }
@@ -41,7 +46,9 @@
 @layer utilities {
   /* Sidebar transition */
   .sidebar-transition {
-    transition: width 0.2s ease-in-out, transform 0.2s ease-in-out;
+    transition:
+      width 0.2s ease-in-out,
+      transform 0.2s ease-in-out;
   }
 
   /* Content area */

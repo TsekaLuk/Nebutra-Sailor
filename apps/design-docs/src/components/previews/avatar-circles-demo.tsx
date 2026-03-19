@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { AvatarCircles } from "@nebutra/ui/primitives"
+import { AvatarCircles } from "@nebutra/ui/primitives";
 
 const sampleAvatars = [
   {
@@ -23,7 +23,7 @@ const sampleAvatars = [
     profileUrl: "https://github.com/user4",
     alt: "User 4",
   },
-]
+];
 
 export function AvatarCirclesDemo() {
   return (
@@ -32,11 +32,9 @@ export function AvatarCirclesDemo() {
         <AvatarCircles avatarUrls={sampleAvatars} numPeople={1200} />
         <div>
           <p className="text-sm font-semibold">Join 1,200+ developers</p>
-          <p className="text-xs text-muted-foreground">
-            Building with Nebutra today
-          </p>
+          <p className="text-xs text-muted-foreground">Building with Nebutra today</p>
         </div>
       </div>
     </div>
-  )
+  );
 }

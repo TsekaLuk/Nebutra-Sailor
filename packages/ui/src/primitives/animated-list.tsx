@@ -1,12 +1,7 @@
 "use client";
 
-import React, {
-  ComponentPropsWithoutRef,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { AnimatePresence, motion, MotionProps } from "framer-motion";
+import { AnimatePresence, type MotionProps, motion } from "framer-motion";
+import React, { type ComponentPropsWithoutRef, useEffect, useMemo, useState } from "react";
 
 import { cn } from "../utils/cn";
 
@@ -66,10 +61,7 @@ export interface AnimatedListProps extends ComponentPropsWithoutRef<"div"> {
 export const AnimatedList = React.memo(
   ({ children, className, delay = 1000, ...props }: AnimatedListProps) => {
     const [index, setIndex] = useState(0);
-    const childrenArray = useMemo(
-      () => React.Children.toArray(children),
-      [children],
-    );
+    const childrenArray = useMemo(() => React.Children.toArray(children), [children]);
 
     useEffect(() => {
       if (index < childrenArray.length - 1) {
@@ -87,15 +79,10 @@ export const AnimatedList = React.memo(
     }, [index, childrenArray]);
 
     return (
-      <div
-        className={cn("flex flex-col items-center gap-4", className)}
-        {...props}
-      >
+      <div className={cn("flex flex-col items-center gap-4", className)} {...props}>
         <AnimatePresence>
           {itemsToShow.map((item) => (
-            <AnimatedListItem key={(item as React.ReactElement).key}>
-              {item}
-            </AnimatedListItem>
+            <AnimatedListItem key={(item as React.ReactElement).key}>{item}</AnimatedListItem>
           ))}
         </AnimatePresence>
       </div>

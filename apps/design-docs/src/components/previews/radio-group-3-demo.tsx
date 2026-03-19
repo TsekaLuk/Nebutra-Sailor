@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Label, RadioGroup, RadioGroupItem } from "@nebutra/ui/primitives"
+import { Label, RadioGroup, RadioGroupItem } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function RadioGroup3Demo() {
   return (
     <RadioGroup defaultValue="monthly">
@@ -15,5 +14,5 @@ export function RadioGroup3Demo() {
         <Label htmlFor="annually">Annual billing (save 20%)</Label>
       </div>
     </RadioGroup>
-  )
+  );
 }

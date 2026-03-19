@@ -63,9 +63,7 @@ export function UseCases({
               ))}
             </div>
             {/* TODO: Tab Content */}
-            <div data-slot="tab-content">
-              {/* TODO: Render active use case content */}
-            </div>
+            <div data-slot="tab-content">{/* TODO: Render active use case content */}</div>
           </>
         )}
 

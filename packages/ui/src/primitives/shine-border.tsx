@@ -1,12 +1,9 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
-export interface ShineBorderProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "color"
-> {
+export interface ShineBorderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "color"> {
   /** Width of the border in pixels */
   borderWidth?: number;
   /** Duration of the animation in seconds */

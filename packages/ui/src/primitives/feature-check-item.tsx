@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { Check, type LucideIcon } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface FeatureCheckItemProps {
@@ -32,14 +32,10 @@ export function FeatureCheckItem({
 }: FeatureCheckItemProps) {
   return (
     <div className={cn("flex flex-row gap-6 items-start", className)}>
-      <Icon
-        className={cn("w-4 h-4 mt-2 text-primary shrink-0", iconClassName)}
-      />
+      <Icon className={cn("w-4 h-4 mt-2 text-primary shrink-0", iconClassName)} />
       <div className="flex flex-col gap-1">
         <p className="font-medium">{title}</p>
-        {description && (
-          <p className="text-muted-foreground text-sm">{description}</p>
-        )}
+        {description && <p className="text-muted-foreground text-sm">{description}</p>}
       </div>
     </div>
   );

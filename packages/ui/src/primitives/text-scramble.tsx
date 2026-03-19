@@ -1,13 +1,12 @@
 "use client";
 
+import { type MotionProps, motion } from "framer-motion";
 import { type JSX, useEffect, useState } from "react";
-import { motion, MotionProps } from "framer-motion";
 
 /**
  * Default character set for scramble animation
  */
-const DEFAULT_CHARS =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const DEFAULT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 export interface TextScrambleProps extends MotionProps {
   /** Text content to display and animate */
@@ -74,9 +73,7 @@ export function TextScramble({
   onScrambleComplete,
   ...props
 }: TextScrambleProps) {
-  const MotionComponent = motion.create(
-    Component as keyof JSX.IntrinsicElements,
-  );
+  const MotionComponent = motion.create(Component as keyof JSX.IntrinsicElements);
   const [displayText, setDisplayText] = useState(children);
   const [isAnimating, setIsAnimating] = useState(false);
   const text = children;
@@ -101,8 +98,7 @@ export function TextScramble({
         if (progress * text.length > i) {
           scrambled += text[i];
         } else {
-          scrambled +=
-            characterSet[Math.floor(Math.random() * characterSet.length)];
+          scrambled += characterSet[Math.floor(Math.random() * characterSet.length)];
         }
       }
 

@@ -1,5 +1,5 @@
-import { EmptyState } from "@nebutra/ui/primitives"
-import { Activity } from "lucide-react"
+import { EmptyState } from "@nebutra/ui/primitives";
+import { Activity } from "lucide-react";
 
 export function EmptyStateDemo() {
   return (
@@ -10,5 +10,5 @@ export function EmptyStateDemo() {
         description="A message conveying the state of the product."
       />
     </div>
-  )
+  );
 }

@@ -42,86 +42,78 @@
  * ```
  */
 
-// Types
-export type {
-  ProviderName,
-  ProviderConfig,
-  MessageRole,
-  ChatMessage,
-  Tool,
-  ToolFunction,
-  ToolCall,
-  ChatCompletionRequest,
-  ChatCompletionResponse,
-  ChatCompletionChoice,
-  ChatCompletionUsage,
-  ChatCompletionChunk,
-  EmbeddingRequest,
-  EmbeddingResponse,
-  EmbeddingData,
-  RerankRequest,
-  RerankResponse,
-  RerankResult,
-  ImageGenerationRequest,
-  ImageGenerationResponse,
-  ImageData,
-  TextToSpeechRequest,
-  SpeechToTextRequest,
-  TranscriptionResponse,
-} from "./types.js";
-
-// Error classes
+// Configuration
 export {
-  AIProviderError,
-  RateLimitError,
-  AuthenticationError,
-} from "./types.js";
-
-// Zod schemas for validation
-export {
-  ChatMessageSchema,
-  ChatCompletionRequestSchema,
-  EmbeddingRequestSchema,
-} from "./types.js";
-
+  DEFAULT_MODELS,
+  type EnvironmentConfig,
+  findBestModel,
+  getAllModels,
+  getModel,
+  getModelsForProvider,
+  loadConfigFromEnv,
+  type ProviderSelectionCriteria,
+} from "./config/index.js";
 // Providers
 export {
   BaseAIProvider,
   createProvider,
-  registerProvider,
   getRegisteredProviders,
   type ProviderCapability,
   type ProviderModel,
+  registerProvider,
 } from "./providers/base.js";
-
+export { OPENAI_MODELS, OpenAIProvider } from "./providers/openai.js";
 export {
-  SiliconFlowProvider,
-  SILICONFLOW_MODELS,
-  type SiliconFlowConfig,
-} from "./providers/siliconflow.js";
-
-export { OpenAIProvider, OPENAI_MODELS } from "./providers/openai.js";
-
-export {
-  OpenRouterProvider,
   OPENROUTER_MODELS,
   OPENROUTER_VARIANTS,
-  type OpenRouterConfig,
-  type OpenRouterProviderPreferences,
   type OpenRouterChatRequest,
-  type OpenRouterModelInfo,
+  type OpenRouterConfig,
   type OpenRouterGeneration,
+  type OpenRouterModelInfo,
+  OpenRouterProvider,
+  type OpenRouterProviderPreferences,
   type OpenRouterRateLimit,
 } from "./providers/openrouter.js";
 
-// Configuration
 export {
-  DEFAULT_MODELS,
-  getModelsForProvider,
-  getModel,
-  getAllModels,
-  findBestModel,
-  loadConfigFromEnv,
-  type ProviderSelectionCriteria,
-  type EnvironmentConfig,
-} from "./config/index.js";
+  SILICONFLOW_MODELS,
+  type SiliconFlowConfig,
+  SiliconFlowProvider,
+} from "./providers/siliconflow.js";
+// Types
+export type {
+  ChatCompletionChoice,
+  ChatCompletionChunk,
+  ChatCompletionRequest,
+  ChatCompletionResponse,
+  ChatCompletionUsage,
+  ChatMessage,
+  EmbeddingData,
+  EmbeddingRequest,
+  EmbeddingResponse,
+  ImageData,
+  ImageGenerationRequest,
+  ImageGenerationResponse,
+  MessageRole,
+  ProviderConfig,
+  ProviderName,
+  RerankRequest,
+  RerankResponse,
+  RerankResult,
+  SpeechToTextRequest,
+  TextToSpeechRequest,
+  Tool,
+  ToolCall,
+  ToolFunction,
+  TranscriptionResponse,
+} from "./types.js";
+// Error classes
+// Zod schemas for validation
+export {
+  AIProviderError,
+  AuthenticationError,
+  ChatCompletionRequestSchema,
+  ChatMessageSchema,
+  EmbeddingRequestSchema,
+  RateLimitError,
+} from "./types.js";

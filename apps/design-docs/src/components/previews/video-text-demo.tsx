@@ -1,4 +1,4 @@
-import { VideoText } from "@nebutra/ui/primitives"
+import { VideoText } from "@nebutra/ui/primitives";
 
 export function VideoTextDemo() {
   return (
@@ -13,5 +13,5 @@ export function VideoTextDemo() {
         </VideoText>
       </div>
     </div>
-  )
+  );
 }

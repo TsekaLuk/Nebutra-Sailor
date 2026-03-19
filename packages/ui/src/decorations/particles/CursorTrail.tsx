@@ -1,12 +1,7 @@
 "use client";
 
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import * as React from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useReducedMotion,
-} from "framer-motion";
 import { cn } from "../../utils/cn";
 
 export interface CursorTrailProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -127,10 +122,7 @@ export const CursorTrail = React.forwardRef<HTMLDivElement, CursorTrailProps>(
       return () => {
         window.removeEventListener("mousemove", handleMouseMove);
         if (containerOnly && containerRef.current) {
-          containerRef.current.removeEventListener(
-            "mouseleave",
-            handleMouseLeave,
-          );
+          containerRef.current.removeEventListener("mouseleave", handleMouseLeave);
         }
       };
     }, [enabled, shouldReduceMotion, containerOnly, mouseX, mouseY]);
@@ -158,14 +150,7 @@ export const CursorTrail = React.forwardRef<HTMLDivElement, CursorTrailProps>(
       });
 
       return () => unsubscribeX();
-    }, [
-      enabled,
-      shouldReduceMotion,
-      isHovering,
-      springX,
-      springY,
-      particleCount,
-    ]);
+    }, [enabled, shouldReduceMotion, isHovering, springX, springY, particleCount]);
 
     // Cleanup old particles
     React.useEffect(() => {
@@ -243,10 +228,7 @@ export const CursorTrail = React.forwardRef<HTMLDivElement, CursorTrailProps>(
             if (typeof ref === "function") ref(node);
             else if (ref) ref.current = node;
           }}
-          className={cn(
-            "absolute inset-0 overflow-hidden pointer-events-none z-50",
-            className,
-          )}
+          className={cn("absolute inset-0 overflow-hidden pointer-events-none z-50", className)}
           aria-hidden="true"
           {...props}
         >
@@ -258,10 +240,7 @@ export const CursorTrail = React.forwardRef<HTMLDivElement, CursorTrailProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "fixed inset-0 overflow-hidden pointer-events-none z-50",
-          className,
-        )}
+        className={cn("fixed inset-0 overflow-hidden pointer-events-none z-50", className)}
         aria-hidden="true"
         {...props}
       >

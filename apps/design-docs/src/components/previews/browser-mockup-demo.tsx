@@ -1,4 +1,4 @@
-import { Browser } from "@nebutra/ui/primitives"
+import { Browser } from "@nebutra/ui/primitives";
 
 export function BrowserMockupDemo() {
   return (
@@ -9,5 +9,5 @@ export function BrowserMockupDemo() {
         </div>
       </Browser>
     </div>
-  )
+  );
 }

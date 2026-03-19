@@ -91,16 +91,10 @@ export function Footer({
         {showNewsletter && (
           <div data-slot="newsletter">
             <h4 data-slot="newsletter-title">Subscribe to our newsletter</h4>
-            <p data-slot="newsletter-description">
-              Get the latest updates and news.
-            </p>
+            <p data-slot="newsletter-description">Get the latest updates and news.</p>
             <form data-slot="newsletter-form">
               {/* TODO: Email input + submit button */}
-              <input
-                type="email"
-                placeholder="Enter your email"
-                aria-label="Email address"
-              />
+              <input type="email" placeholder="Enter your email" aria-label="Email address" />
               <button type="submit">Subscribe</button>
             </form>
           </div>
@@ -111,8 +105,7 @@ export function Footer({
       <div data-slot="bottom">
         {/* TODO: Copyright */}
         <p data-slot="copyright">
-          {copyright ||
-            `© ${new Date().getFullYear()} Nebutra. All rights reserved.`}
+          {copyright || `© ${new Date().getFullYear()} Nebutra. All rights reserved.`}
         </p>
 
         {/* TODO: Legal Links */}

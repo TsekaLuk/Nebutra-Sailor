@@ -1,11 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Calendar,
-  RangeCalendar,
-  today,
-  getLocalTimeZone,
-  isWeekend,
-} from "./calendar";
+import { Calendar, getLocalTimeZone, isWeekend, RangeCalendar, today } from "./calendar";
 
 const meta = {
   title: "Primitives/Calendar",
@@ -51,9 +45,7 @@ export const WithConstraints: Story = {
 
 export const WeekendsDisabled: Story = {
   name: "Weekends Unavailable",
-  render: () => (
-    <Calendar isDateUnavailable={(date) => isWeekend(date, "en-US")} />
-  ),
+  render: () => <Calendar isDateUnavailable={(date) => isWeekend(date, "en-US")} />,
 };
 
 // ─── RangeCalendar ────────────────────────────────────────────────────────────

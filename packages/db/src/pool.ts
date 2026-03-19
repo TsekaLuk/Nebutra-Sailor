@@ -1,5 +1,5 @@
-import pg from "pg";
 import { logger } from "@nebutra/logger";
+import pg from "pg";
 
 export interface PgPoolOptions {
   connectionString: string;
@@ -34,8 +34,7 @@ export function createPgPool(options: PgPoolOptions): pg.Pool {
     connectionString: options.connectionString,
     max: options.max ?? parseInt(process.env.DB_POOL_MAX ?? "10", 10),
     idleTimeoutMillis:
-      options.idleTimeoutMillis ??
-      parseInt(process.env.DB_IDLE_TIMEOUT_MS ?? "30000", 10),
+      options.idleTimeoutMillis ?? parseInt(process.env.DB_IDLE_TIMEOUT_MS ?? "30000", 10),
     connectionTimeoutMillis:
       options.connectionTimeoutMillis ??
       parseInt(process.env.DB_CONNECTION_TIMEOUT_MS ?? "5000", 10),

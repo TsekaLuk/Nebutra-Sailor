@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Building2, Home, Settings, Users } from "lucide-react"
+import { Building2, Home, Settings, Users } from "lucide-react";
 
 export function SidebarDemo() {
   return (
@@ -48,5 +48,5 @@ export function SidebarDemo() {
         <div className="h-48 animate-pulse w-full rounded-lg border bg-card shadow-sm" />
       </div>
     </div>
-  )
+  );
 }

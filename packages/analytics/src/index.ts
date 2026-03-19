@@ -1,13 +1,12 @@
 // Types
-export * from "./types";
 
 // Client
+// Re-export handleWebhook for convenience
 export {
   AnalyticsClient,
+  analytics,
+  analytics as default,
   createAnalyticsClient,
   getAnalyticsClient,
-  analytics,
 } from "./client";
-
-// Re-export handleWebhook for convenience
-export { analytics as default } from "./client";
+export * from "./types";

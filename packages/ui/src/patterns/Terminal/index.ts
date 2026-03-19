@@ -1,14 +1,13 @@
+export type {
+  TerminalBodyProps,
+  TerminalHeaderProps,
+  TerminalLineProps,
+  TerminalProps,
+} from "./Terminal";
 export {
   Terminal,
-  TerminalRoot,
-  TerminalHeader,
   TerminalBody,
+  TerminalHeader,
   TerminalLine,
-} from "./Terminal";
-
-export type {
-  TerminalProps,
-  TerminalHeaderProps,
-  TerminalBodyProps,
-  TerminalLineProps,
+  TerminalRoot,
 } from "./Terminal";

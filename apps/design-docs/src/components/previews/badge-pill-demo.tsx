@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Badge } from "@nebutra/ui/primitives"
-import { LogoSlackColor } from "@nebutra/icons"
-import Link from "next/link"
+import { LogoSlackColor } from "@nebutra/icons";
+import { Badge } from "@nebutra/ui/primitives";
+import Link from "next/link";
 
 export function BadgePillDemo() {
   return (
@@ -30,5 +30,5 @@ export function BadgePillDemo() {
         </Badge>
       </div>
     </div>
-  )
+  );
 }

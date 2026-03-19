@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -17,11 +17,7 @@ const PrismColor = forwardRef<SVGSVGElement, IconProps>(
       {...props}
     >
       <path stroke="var(--ds-red-700)" strokeWidth={1.5} d="m9 7 3.5-4.5" />
-      <path
-        stroke="var(--ds-blue-600)"
-        strokeWidth={1.5}
-        d="m10.5 9.5 5.25 1"
-      />
+      <path stroke="var(--ds-blue-600)" strokeWidth={1.5} d="m10.5 9.5 5.25 1" />
       <path stroke="var(--ds-teal-600)" strokeWidth={1.5} d="m10 8 5.75-2" />
       <path
         fill="currentColor"
@@ -33,5 +29,6 @@ const PrismColor = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 PrismColor.displayName = "PrismColor";
+
 export { PrismColor };
 export default PrismColor;

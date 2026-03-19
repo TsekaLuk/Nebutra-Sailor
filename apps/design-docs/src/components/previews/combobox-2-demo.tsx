@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Combobox } from "@nebutra/ui/primitives"
+import { Combobox } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Combobox2Demo() {
   return (
     <Combobox
@@ -15,5 +14,5 @@ export function Combobox2Demo() {
       label="Framework"
       placeholder="Select framework..."
     />
-  )
+  );
 }

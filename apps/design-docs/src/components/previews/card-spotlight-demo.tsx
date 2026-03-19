@@ -1,5 +1,5 @@
-import { CardSpotlight } from "@nebutra/ui/primitives"
-import { ShieldAlert } from "lucide-react"
+import { CardSpotlight } from "@nebutra/ui/primitives";
+import { ShieldAlert } from "lucide-react";
 
 export function CardSpotlightDemo() {
   return (
@@ -8,10 +8,10 @@ export function CardSpotlightDemo() {
         <ShieldAlert className="h-16 w-16 text-white mb-6" />
         <h2 className="text-2xl font-bold text-white mb-2">High Security</h2>
         <p className="text-neutral-300">
-          We use state-of-the-art encryption protocols to keep your data safe
-          and private. Hover to discover more.
+          We use state-of-the-art encryption protocols to keep your data safe and private. Hover to
+          discover more.
         </p>
       </CardSpotlight>
     </div>
-  )
+  );
 }

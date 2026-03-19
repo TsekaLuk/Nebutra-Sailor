@@ -55,13 +55,7 @@ export function getCurrentBreakpoint(): Breakpoint {
  * Responsive value helper
  * Creates array for Primer's responsive prop format
  */
-export function responsive<T>(values: {
-  xs?: T;
-  sm?: T;
-  md?: T;
-  lg?: T;
-  xl?: T;
-}): T[] {
+export function responsive<T>(values: { xs?: T; sm?: T; md?: T; lg?: T; xl?: T }): T[] {
   return [values.xs, values.sm, values.md, values.lg, values.xl].filter(
     (v) => v !== undefined,
   ) as T[];

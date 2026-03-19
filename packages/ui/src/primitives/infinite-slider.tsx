@@ -1,10 +1,10 @@
 "use client";
 
+import { animate, motion, useMotionValue } from "framer-motion";
 import * as React from "react";
-import { cn } from "../utils/cn";
-import { useMotionValue, animate, motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import useMeasure from "react-use-measure";
+import { cn } from "../utils/cn";
 
 export interface InfiniteSliderProps {
   /** Content to scroll infinitely */
@@ -141,9 +141,7 @@ export function InfiniteSlider({
       <motion.div
         className="flex w-max"
         style={{
-          ...(direction === "horizontal"
-            ? { x: translation }
-            : { y: translation }),
+          ...(direction === "horizontal" ? { x: translation } : { y: translation }),
           gap: `${gap}px`,
           flexDirection: direction === "horizontal" ? "row" : "column",
         }}

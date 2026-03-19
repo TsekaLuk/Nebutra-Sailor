@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
   CommandInput,
   CommandItem,
-  CommandDialog,
   CommandList,
-  CommandGroup,
-  CommandEmpty,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function CommandDialogSimpleDemo() {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    setOpen(true)
-  }, [])
+    setOpen(true);
+  }, []);
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
@@ -27,5 +27,5 @@ export function CommandDialogSimpleDemo() {
         </CommandGroup>
       </CommandList>
     </CommandDialog>
-  )
+  );
 }

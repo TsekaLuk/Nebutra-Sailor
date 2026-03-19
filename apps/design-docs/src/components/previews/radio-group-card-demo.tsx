@@ -1,5 +1,5 @@
-import { RadioGroupCard, RadioGroupCardItem } from "@nebutra/ui/primitives"
-import { CreditCard, Landmark, Smartphone } from "lucide-react"
+import { RadioGroupCard, RadioGroupCardItem } from "@nebutra/ui/primitives";
+import { CreditCard, Landmark, Smartphone } from "lucide-react";
 
 export function RadioGroupCardDemo() {
   return (
@@ -8,16 +8,12 @@ export function RadioGroupCardDemo() {
         <RadioGroupCardItem value="card" id="pay-card">
           <CreditCard className="mb-4 h-6 w-6 text-muted-foreground" />
           <div className="font-medium">Card</div>
-          <div className="text-xs mt-1 text-balance text-muted-foreground">
-            Visa, Mastercard
-          </div>
+          <div className="text-xs mt-1 text-balance text-muted-foreground">Visa, Mastercard</div>
         </RadioGroupCardItem>
         <RadioGroupCardItem value="bank" id="pay-bank">
           <Landmark className="mb-4 h-6 w-6 text-muted-foreground" />
           <div className="font-medium">Bank</div>
-          <div className="text-xs mt-1 text-balance text-muted-foreground">
-            Direct transfer
-          </div>
+          <div className="text-xs mt-1 text-balance text-muted-foreground">Direct transfer</div>
         </RadioGroupCardItem>
         <RadioGroupCardItem value="mobile" id="pay-mobile">
           <Smartphone className="mb-4 h-6 w-6 text-muted-foreground" />
@@ -28,5 +24,5 @@ export function RadioGroupCardDemo() {
         </RadioGroupCardItem>
       </RadioGroupCard>
     </div>
-  )
+  );
 }

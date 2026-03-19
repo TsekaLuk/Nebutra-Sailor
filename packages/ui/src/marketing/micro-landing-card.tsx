@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { ArrowRight } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -12,8 +12,7 @@ interface MicroLandingCardContextValue {
   variant: "default" | "primary" | "compact";
 }
 
-const MicroLandingCardContext =
-  React.createContext<MicroLandingCardContextValue | null>(null);
+const MicroLandingCardContext = React.createContext<MicroLandingCardContextValue | null>(null);
 
 // =============================================================================
 // Types
@@ -89,46 +88,44 @@ export interface MicroLandingCardDecoProps extends React.HTMLAttributes<HTMLDivE
  * </MicroLandingCard>
  * ```
  */
-const MicroLandingCardRoot = React.forwardRef<
-  HTMLDivElement,
-  MicroLandingCardProps
->(({ className, variant = "default", children, ...props }, ref) => {
-  return (
-    <MicroLandingCardContext.Provider value={{ variant }}>
-      <div
-        ref={ref}
-        className={cn(
-          "group relative flex flex-col overflow-hidden rounded-[var(--radius-xl)] border border-border bg-card",
-          // Variant styles
-          variant === "primary" && "row-span-2",
-          variant === "compact" && "min-h-[280px]",
-          variant === "default" && "min-h-[320px]",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    </MicroLandingCardContext.Provider>
-  );
-});
+const MicroLandingCardRoot = React.forwardRef<HTMLDivElement, MicroLandingCardProps>(
+  ({ className, variant = "default", children, ...props }, ref) => {
+    return (
+      <MicroLandingCardContext.Provider value={{ variant }}>
+        <div
+          ref={ref}
+          className={cn(
+            "group relative flex flex-col overflow-hidden rounded-[var(--radius-xl)] border border-border bg-card",
+            // Variant styles
+            variant === "primary" && "row-span-2",
+            variant === "compact" && "min-h-[280px]",
+            variant === "default" && "min-h-[320px]",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </div>
+      </MicroLandingCardContext.Provider>
+    );
+  },
+);
 MicroLandingCardRoot.displayName = "MicroLandingCard";
 
 /**
  * Hero - Opinionated tension statement
  */
-const MicroLandingCardHero = React.forwardRef<
-  HTMLDivElement,
-  MicroLandingCardHeroProps
->(({ className, children, ...props }, ref) => {
-  return (
-    <div ref={ref} className={cn("px-5 pt-5", className)} {...props}>
-      <h3 className="text-base font-semibold leading-snug text-foreground md:text-lg">
-        {children}
-      </h3>
-    </div>
-  );
-});
+const MicroLandingCardHero = React.forwardRef<HTMLDivElement, MicroLandingCardHeroProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn("px-5 pt-5", className)} {...props}>
+        <h3 className="text-base font-semibold leading-snug text-foreground md:text-lg">
+          {children}
+        </h3>
+      </div>
+    );
+  },
+);
 MicroLandingCardHero.displayName = "MicroLandingCard.Hero";
 
 /**
@@ -141,10 +138,7 @@ const MicroLandingCardContextComponent = React.forwardRef<
   return (
     <p
       ref={ref}
-      className={cn(
-        "px-5 pt-2 text-sm leading-relaxed text-muted-foreground",
-        className,
-      )}
+      className={cn("px-5 pt-2 text-sm leading-relaxed text-muted-foreground", className)}
       {...props}
     >
       {children}
@@ -156,62 +150,56 @@ MicroLandingCardContextComponent.displayName = "MicroLandingCard.Context";
 /**
  * Proof - Hard evidence layer (code, metrics, diagram)
  */
-const MicroLandingCardProof = React.forwardRef<
-  HTMLDivElement,
-  MicroLandingCardProofProps
->(({ className, children, ...props }, ref) => {
-  return (
-    <div ref={ref} className={cn("flex-1 px-5 pt-4", className)} {...props}>
-      {children}
-    </div>
-  );
-});
+const MicroLandingCardProof = React.forwardRef<HTMLDivElement, MicroLandingCardProofProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn("flex-1 px-5 pt-4", className)} {...props}>
+        {children}
+      </div>
+    );
+  },
+);
 MicroLandingCardProof.displayName = "MicroLandingCard.Proof";
 
 /**
  * Action - Micro CTA
  */
-const MicroLandingCardAction = React.forwardRef<
-  HTMLAnchorElement,
-  MicroLandingCardActionProps
->(({ className, href, children, ...props }, ref) => {
-  return (
-    <a
-      ref={ref}
-      href={href}
-      className={cn(
-        "group/action mx-5 mb-5 mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-primary/80",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/action:translate-x-0.5" />
-    </a>
-  );
-});
+const MicroLandingCardAction = React.forwardRef<HTMLAnchorElement, MicroLandingCardActionProps>(
+  ({ className, href, children, ...props }, ref) => {
+    return (
+      <a
+        ref={ref}
+        href={href}
+        className={cn(
+          "group/action mx-5 mb-5 mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-primary/80",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/action:translate-x-0.5" />
+      </a>
+    );
+  },
+);
 MicroLandingCardAction.displayName = "MicroLandingCard.Action";
 
 /**
  * Deco - Semantic decoration layer (absolute positioned)
  */
-const MicroLandingCardDeco = React.forwardRef<
-  HTMLDivElement,
-  MicroLandingCardDecoProps
->(({ className, children, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "pointer-events-none absolute inset-0 overflow-hidden",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-});
+const MicroLandingCardDeco = React.forwardRef<HTMLDivElement, MicroLandingCardDecoProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 MicroLandingCardDeco.displayName = "MicroLandingCard.Deco";
 
 // =============================================================================
@@ -228,10 +216,10 @@ export const MicroLandingCard = Object.assign(MicroLandingCardRoot, {
 
 // Named exports
 export {
-  MicroLandingCardRoot,
-  MicroLandingCardHero,
-  MicroLandingCardContextComponent as MicroLandingCardContext,
-  MicroLandingCardProof,
   MicroLandingCardAction,
+  MicroLandingCardContextComponent as MicroLandingCardContext,
   MicroLandingCardDeco,
+  MicroLandingCardHero,
+  MicroLandingCardProof,
+  MicroLandingCardRoot,
 };

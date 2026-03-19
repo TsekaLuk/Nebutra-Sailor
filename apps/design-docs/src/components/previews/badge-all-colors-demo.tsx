@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Badge1 } from "@nebutra/ui/primitives"
+import { Badge1 } from "@nebutra/ui/primitives";
 
 export function BadgeAllColorsDemo() {
   return (
@@ -47,5 +47,5 @@ export function BadgeAllColorsDemo() {
         <Badge1 variant="turbo">turborepo</Badge1>
       </div>
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import { cn } from "../utils";
 
 export interface PageHeaderProps {
@@ -41,12 +41,12 @@ export function PageHeader({ title, description, actions, className }: PageHeade
           {title}
         </h1>
         {description && (
-          <p className="mt-1 text-sm text-[color:var(--neutral-11)] dark:text-white/70">{description}</p>
+          <p className="mt-1 text-sm text-[color:var(--neutral-11)] dark:text-white/70">
+            {description}
+          </p>
         )}
       </div>
-      {actions && (
-        <div className="mt-2 flex shrink-0 gap-2 sm:mt-0">{actions}</div>
-      )}
+      {actions && <div className="mt-2 flex shrink-0 gap-2 sm:mt-0">{actions}</div>}
     </div>
   );
 }

@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Clock,
-  Map,
-  TrendingUp,
-  Layers,
-  FileCode,
-  BookOpen,
-} from "lucide-react";
+import { BookOpen, Clock, FileCode, Layers, Map, TrendingUp } from "lucide-react";
 import { AnimatedHikeCard } from "./animated-hike-card";
 
 const meta = {

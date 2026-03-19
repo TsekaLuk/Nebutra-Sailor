@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { SectionContainer } from "@nebutra/ui/layouts"
-import { Button } from "@nebutra/ui/primitives"
+import { SectionContainer } from "@nebutra/ui/layouts";
+import { Button } from "@nebutra/ui/primitives";
 
 export function PageContainerDemo() {
   return (
@@ -13,9 +13,7 @@ export function PageContainerDemo() {
       <div className="inset-0 bg-grid-black/[0.02] dark:bg-grid-white/[0.02] absolute" />
       <SectionContainer.Header>
         <h2 className="text-2xl font-bold tracking-tight">Features</h2>
-        <p className="mt-2 text-muted-foreground">
-          Everything you need to ship faster.
-        </p>
+        <p className="mt-2 text-muted-foreground">Everything you need to ship faster.</p>
       </SectionContainer.Header>
 
       <SectionContainer.Content className="py-12 flex items-center justify-center border-y border-dashed bg-muted/10">
@@ -26,5 +24,5 @@ export function PageContainerDemo() {
         <Button>View all features</Button>
       </SectionContainer.Footer>
     </SectionContainer>
-  )
+  );
 }

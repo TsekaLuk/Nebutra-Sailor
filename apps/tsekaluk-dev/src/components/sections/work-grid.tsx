@@ -1,13 +1,16 @@
 "use client";
 
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
 import type { Project } from "@/lib/projects";
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <Link href={`/work/${project.slug}`} className="group cursor-pointer block w-full h-full relative overflow-hidden rounded-2xl">
+    <Link
+      href={`/work/${project.slug}`}
+      className="group cursor-pointer block w-full h-full relative overflow-hidden rounded-2xl"
+    >
       {/* Image Container */}
       <div className="absolute inset-0 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
         {project.cover ? (
@@ -56,17 +59,17 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
         {projects.map((project, index) => {
           // Create an asymmetric grid structure based on index
           const isFullWidth = index % 3 === 0;
-          const containerClass = isFullWidth 
-            ? "w-full aspect-video md:aspect-[21/9]" 
+          const containerClass = isFullWidth
+            ? "w-full aspect-video md:aspect-[21/9]"
             : "w-full aspect-[4/5] md:aspect-square";
-          
-          const wrapperClass = isFullWidth 
-            ? "flex-col w-full" 
+
+          const wrapperClass = isFullWidth
+            ? "flex-col w-full"
             : "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8";
 
           // If it's the second item in a 2-col layout, we skip wrapping it (it's handled by CSS Grid)
           if (!isFullWidth && index % 3 === 2) {
-             return null; // The previous item rendered both
+            return null; // The previous item rendered both
           }
 
           if (!isFullWidth && index % 3 === 1) {
@@ -74,11 +77,11 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
             return (
               <div key={`row-${index}`} className={wrapperClass}>
                 <AnimateIn preset="fadeUp" inView className={containerClass}>
-                   <ProjectCard project={project} />
+                  <ProjectCard project={project} />
                 </AnimateIn>
                 {nextProject && (
                   <AnimateIn preset="fadeUp" delay={0.1} inView className={containerClass}>
-                     <ProjectCard project={nextProject} />
+                    <ProjectCard project={nextProject} />
                   </AnimateIn>
                 )}
               </div>

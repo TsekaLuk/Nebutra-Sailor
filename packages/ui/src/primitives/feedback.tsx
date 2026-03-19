@@ -1,9 +1,9 @@
 "use client";
 
+import { Frown, Meh, Plus, Smile, X } from "lucide-react";
 import * as React from "react";
-import { Popover, PopoverTrigger, PopoverContent } from "./popover";
-import { Smile, Meh, Frown, Plus, X } from "lucide-react";
 import { cn } from "../utils/cn";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 // =============================================================================
 // Types
@@ -75,9 +75,7 @@ function EmotionButton({ emotion, selected, onClick }: EmotionButtonProps) {
         "flex h-7 w-7 items-center justify-center rounded-[var(--radius-md)] transition-colors",
         "hover:bg-accent hover:text-accent-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        selected
-          ? "bg-accent text-accent-foreground"
-          : "text-muted-foreground",
+        selected ? "bg-accent text-accent-foreground" : "text-muted-foreground",
       )}
     >
       <EmotionIcon value={emotion} />
@@ -160,9 +158,13 @@ function FeedbackForm({
             !topic && "text-muted-foreground",
           )}
         >
-          <option value="" disabled>Select a topic...</option>
+          <option value="" disabled>
+            Select a topic...
+          </option>
           {topics.map((t) => (
-            <option key={t} value={t}>{t}</option>
+            <option key={t} value={t}>
+              {t}
+            </option>
           ))}
         </select>
       )}
@@ -306,15 +308,18 @@ function FeedbackInline({
 
   if (submitted) {
     return (
-      <p className={cn("text-sm text-muted-foreground", className)}>
-        Thank you for your feedback!
-      </p>
+      <p className={cn("text-sm text-muted-foreground", className)}>Thank you for your feedback!</p>
     );
   }
 
   if (expanded) {
     return (
-      <div className={cn("w-80 rounded-[var(--radius-lg)] border bg-background p-4 shadow-md", className)}>
+      <div
+        className={cn(
+          "w-80 rounded-[var(--radius-lg)] border bg-background p-4 shadow-md",
+          className,
+        )}
+      >
         <FeedbackForm
           label={label}
           {...(topics ? { topics } : {})}
@@ -372,10 +377,7 @@ function FeedbackInline({
  *   onSubmit={handleFeedback}
  * />
  */
-export function Feedback({
-  type = "default",
-  ...props
-}: FeedbackProps) {
+export function Feedback({ type = "default", ...props }: FeedbackProps) {
   if (type === "inline") {
     return <FeedbackInline {...props} />;
   }

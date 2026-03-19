@@ -1,13 +1,13 @@
-"use client"
+"use client";
 import {
+  Button,
   Dialog,
-  DialogTrigger,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
-  Button,
-} from "@nebutra/ui/primitives"
+  DialogTrigger,
+} from "@nebutra/ui/primitives";
 export function DialogDemo() {
   return (
     <Dialog>
@@ -23,5 +23,5 @@ export function DialogDemo() {
         </DialogHeader>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

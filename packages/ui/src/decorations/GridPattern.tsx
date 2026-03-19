@@ -41,9 +41,7 @@ export const GridPattern = React.forwardRef<HTMLDivElement, GridPatternProps>(
     const renderPattern = () => {
       switch (variant) {
         case "dots":
-          return (
-            <circle cx={size / 2} cy={size / 2} r={strokeWidth} fill={color} />
-          );
+          return <circle cx={size / 2} cy={size / 2} r={strokeWidth} fill={color} />;
         case "crosses": {
           const crossSize = 6;
           const cx = size / 2;

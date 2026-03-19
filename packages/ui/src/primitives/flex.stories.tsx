@@ -56,29 +56,16 @@ export const Default: Story = {
 
 export const SpaceBetween: Story = {
   render: () => (
-    <Flex
-      justify="between"
-      align="center"
-      className="w-80 border rounded-lg p-4"
-    >
+    <Flex justify="between" align="center" className="w-80 border rounded-lg p-4">
       <span className="font-semibold">Logo</span>
       <Flex gap={4}>
-        <a
-          href="/"
-          className="text-sm text-muted-foreground hover:text-foreground"
-        >
+        <a href="/" className="text-sm text-muted-foreground hover:text-foreground">
           Home
         </a>
-        <a
-          href="/"
-          className="text-sm text-muted-foreground hover:text-foreground"
-        >
+        <a href="/" className="text-sm text-muted-foreground hover:text-foreground">
           About
         </a>
-        <a
-          href="/"
-          className="text-sm text-muted-foreground hover:text-foreground"
-        >
+        <a href="/" className="text-sm text-muted-foreground hover:text-foreground">
           Contact
         </a>
       </Flex>
@@ -89,28 +76,18 @@ export const SpaceBetween: Story = {
 export const Wrapping: Story = {
   render: () => (
     <Flex gap={3} wrap className="w-64 border rounded-lg p-4">
-      {["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta"].map(
-        (label) => (
-          <span
-            key={label}
-            className="rounded-full bg-muted px-3 py-1 text-xs font-medium"
-          >
-            {label}
-          </span>
-        ),
-      )}
+      {["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta"].map((label) => (
+        <span key={label} className="rounded-full bg-muted px-3 py-1 text-xs font-medium">
+          {label}
+        </span>
+      ))}
     </Flex>
   ),
 };
 
 export const Reversed: Story = {
   render: () => (
-    <Flex
-      direction="row-reverse"
-      gap={2}
-      align="center"
-      className="border rounded-lg p-4"
-    >
+    <Flex direction="row-reverse" gap={2} align="center" className="border rounded-lg p-4">
       <span className="text-sm font-medium">Back</span>
       <span className="text-muted-foreground">←</span>
     </Flex>
@@ -119,12 +96,7 @@ export const Reversed: Story = {
 
 export const ColumnDirection: Story = {
   render: () => (
-    <Flex
-      direction="col"
-      gap={2}
-      align="start"
-      className="border rounded-lg p-4 w-64"
-    >
+    <Flex direction="col" gap={2} align="start" className="border rounded-lg p-4 w-64">
       <label className="text-sm font-medium">Username</label>
       <div className="border rounded px-3 py-1.5 w-full text-sm text-muted-foreground">
         john_doe
@@ -135,12 +107,7 @@ export const ColumnDirection: Story = {
 
 export const CenteredRow: Story = {
   render: () => (
-    <Flex
-      justify="center"
-      align="center"
-      gap={6}
-      className="w-80 border rounded-lg py-6"
-    >
+    <Flex justify="center" align="center" gap={6} className="w-80 border rounded-lg py-6">
       {["🎉", "🚀", "✨"].map((emoji) => (
         <span key={emoji} className="text-2xl">
           {emoji}

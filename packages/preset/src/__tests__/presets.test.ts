@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { presets, getPreset } from "../presets";
-import { PresetId, AppId, FeatureId, ThemeId } from "../config";
+import { describe, expect, it } from "vitest";
+import { AppId, FeatureId, PresetId, ThemeId } from "../config";
+import { getPreset, presets } from "../presets";
 
 describe("presets", () => {
   const allPresetIds = PresetId.options;

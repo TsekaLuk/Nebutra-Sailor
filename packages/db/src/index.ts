@@ -1,64 +1,53 @@
-export { prisma, type PrismaClient } from "./client";
-export { Prisma } from "./generated/prisma/client";
-
+export { type PrismaClient, prisma } from "./client";
 // Re-export all Prisma types for convenience
 export type {
-  // Multi-Tenant Core
-  Organization,
-  User,
-  OrganizationMember,
-  Plan,
-  Role,
-
-  // Content
-  Content,
-  ContentTranslation,
-  ContentEmbedding,
-  ContentStatus,
-
-  // E-Commerce
-  Product,
-  Order,
-  OrderItem,
-  Integration,
-  OrderStatus,
-  IntegrationType,
-
-  // Web3
-  Wallet,
-  Nft,
-  NftStatus,
-
-  // User Activity
-  UserActivity,
-  TenantUsage,
-
+  AIProvider,
   // AI Service
   AIRequest,
-  AIProvider,
   AIRequestType,
-
-  // Recommendation System
-  UserPreference,
-  Recommendation,
-
+  AuditAction,
+  // Audit
+  AuditLog,
+  // Content
+  Content,
+  ContentEmbedding,
+  ContentStatus,
+  ContentTranslation,
   // Feature Flags
   FeatureFlag,
   FeatureFlagOverride,
   FeatureFlagType,
-
-  // Webhooks
-  WebhookEvent,
-
-  // Audit
-  AuditLog,
-  AuditAction,
-
+  Integration,
+  IntegrationType,
+  Nft,
+  NftStatus,
+  Order,
+  OrderItem,
+  OrderStatus,
+  // Multi-Tenant Core
+  Organization,
+  OrganizationMember,
+  Plan,
+  // E-Commerce
+  Product,
+  Recommendation,
+  Role,
   // Billing
   Subscription,
-  UsageRecord,
+  TenantUsage,
   UsageAggregate,
   UsageLedgerEntry,
-  UsageType,
   UsageLedgerSource,
+  UsageRecord,
+  UsageType,
+  User,
+  // User Activity
+  UserActivity,
+  // Recommendation System
+  UserPreference,
+  // Web3
+  Wallet,
+  // Webhooks
+  WebhookEvent,
 } from "./generated/prisma/client";
+export { Prisma } from "./generated/prisma/client";

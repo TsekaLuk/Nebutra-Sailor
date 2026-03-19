@@ -1,13 +1,13 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DesignSystemProvider } from "@nebutra/ui/layout";
-import { ThemeShell } from "./providers/theme-provider";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { QueryProvider } from "./providers";
-import { getNonce } from "@/lib/nonce";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { getNonce } from "@/lib/nonce";
+import { QueryProvider } from "./providers";
+import { ThemeShell } from "./providers/theme-provider";
 import "./globals.css";
 
 const inter = Inter({
@@ -39,9 +39,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: "Nebutra - SaaS Platform",
   description: "Enterprise-grade AI-native SaaS platform",
   robots: {
@@ -56,11 +54,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const nonce = await getNonce();
 
   return (

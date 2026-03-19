@@ -52,13 +52,13 @@ import {
   SelectItem as HeroSelectItem,
   SelectSection as HeroSelectSection,
 } from "@heroui/select";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const HeroSelect = HeroSelectBase as any;
 
-export { HeroSelect, HeroSelectItem, HeroSelectSection };
-
 export type {
-  SelectProps as HeroSelectProps,
   SelectItemProps as HeroSelectItemProps,
+  SelectProps as HeroSelectProps,
   SelectSectionProps as HeroSelectSectionProps,
 } from "@heroui/select";
+export { HeroSelect, HeroSelectItem, HeroSelectSection };

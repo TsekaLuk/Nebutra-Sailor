@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useOrganization } from "@clerk/nextjs"
-import { LoadingState, ErrorState } from "@nebutra/ui/layout"
-import { PermissionGate } from "@/components/PermissionGate"
+import { useOrganization } from "@clerk/nextjs";
+import { ErrorState, LoadingState } from "@nebutra/ui/layout";
+import Image from "next/image";
+import { PermissionGate } from "@/components/PermissionGate";
 
 interface Props {
-  orgId: string
+  orgId: string;
 }
 
 export function TeamMemberList({ orgId: _orgId }: Props) {
   const { memberships, isLoaded } = useOrganization({
     memberships: { pageSize: 50, keepPreviousData: true },
-  })
+  });
 
-  if (!isLoaded) return <LoadingState />
-  if (!memberships) return <ErrorState message="Failed to load members." />
+  if (!isLoaded) return <LoadingState />;
+  if (!memberships) return <ErrorState message="Failed to load members." />;
 
-  const members = memberships.data ?? []
+  const members = memberships.data ?? [];
 
   return (
     <ul className="divide-y divide-[var(--neutral-6)]">
@@ -37,9 +37,7 @@ export function TeamMemberList({ orgId: _orgId }: Props) {
               <p className="text-sm font-medium text-[var(--neutral-12)]">
                 {m.publicUserData?.firstName} {m.publicUserData?.lastName}
               </p>
-              <p className="text-xs text-[var(--neutral-11)]">
-                {m.publicUserData?.identifier}
-              </p>
+              <p className="text-xs text-[var(--neutral-11)]">{m.publicUserData?.identifier}</p>
             </div>
           </div>
 
@@ -63,10 +61,8 @@ export function TeamMemberList({ orgId: _orgId }: Props) {
       ))}
 
       {members.length === 0 && (
-        <li className="py-6 text-sm text-center text-[var(--neutral-11)]">
-          No members yet.
-        </li>
+        <li className="py-6 text-sm text-center text-[var(--neutral-11)]">No members yet.</li>
       )}
     </ul>
-  )
+  );
 }

@@ -1,17 +1,17 @@
 import OpenAI from "openai";
 import type {
-  ProviderConfig,
+  ChatCompletionChunk,
   ChatCompletionRequest,
   ChatCompletionResponse,
-  ChatCompletionChunk,
   EmbeddingRequest,
   EmbeddingResponse,
+  ProviderConfig,
 } from "../types.js";
 import {
   BaseAIProvider,
-  registerProvider,
-  type ProviderModel,
   type ProviderCapability,
+  type ProviderModel,
+  registerProvider,
 } from "./base.js";
 
 // ============================================
@@ -139,13 +139,7 @@ export const OPENROUTER_MODELS: ProviderModel[] = [
     id: "openai/gpt-5.4",
     name: "GPT-5.4",
     description: "OpenAI's most capable model",
-    capabilities: [
-      "chat",
-      "chat-stream",
-      "function-calling",
-      "vision",
-      "reasoning",
-    ],
+    capabilities: ["chat", "chat-stream", "function-calling", "vision", "reasoning"],
     contextWindow: 1000000,
     inputPricePerMillion: 2.5,
     outputPricePerMillion: 15.0,
@@ -183,13 +177,7 @@ export const OPENROUTER_MODELS: ProviderModel[] = [
     id: "anthropic/claude-4.6-sonnet",
     name: "Claude 4.6 Sonnet",
     description: "Latest Claude 4.6 model with 1M context",
-    capabilities: [
-      "chat",
-      "chat-stream",
-      "function-calling",
-      "vision",
-      "reasoning",
-    ],
+    capabilities: ["chat", "chat-stream", "function-calling", "vision", "reasoning"],
     contextWindow: 1000000,
     inputPricePerMillion: 3,
     outputPricePerMillion: 15,
@@ -390,13 +378,7 @@ export class OpenRouterProvider extends BaseAIProvider {
       defaultHeaders: this.buildDefaultHeaders(),
     });
 
-    this.capabilities = new Set([
-      "chat",
-      "chat-stream",
-      "function-calling",
-      "vision",
-      "reasoning",
-    ]);
+    this.capabilities = new Set(["chat", "chat-stream", "function-calling", "vision", "reasoning"]);
   }
 
   // ============================================
@@ -607,14 +589,11 @@ export class OpenRouterProvider extends BaseAIProvider {
    * Useful for getting exact token counts and costs
    */
   async getGeneration(generationId: string): Promise<OpenRouterGeneration> {
-    const response = await fetch(
-      `${this.config.baseUrl}/generation?id=${generationId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${this.config.apiKey}`,
-        },
+    const response = await fetch(`${this.config.baseUrl}/generation?id=${generationId}`, {
+      headers: {
+        Authorization: `Bearer ${this.config.apiKey}`,
       },
-    );
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to get generation: ${response.status}`);
@@ -679,10 +658,7 @@ export class OpenRouterProvider extends BaseAIProvider {
   /**
    * Get model with variant suffix
    */
-  getModelVariant(
-    modelId: string,
-    variant: keyof typeof OPENROUTER_VARIANTS,
-  ): string {
+  getModelVariant(modelId: string, variant: keyof typeof OPENROUTER_VARIANTS): string {
     return `${modelId}${OPENROUTER_VARIANTS[variant]}`;
   }
 
@@ -847,9 +823,6 @@ export interface OpenRouterRateLimit {
 }
 
 // Register the provider
-registerProvider(
-  "openrouter",
-  (config) => new OpenRouterProvider(config as OpenRouterConfig),
-);
+registerProvider("openrouter", (config) => new OpenRouterProvider(config as OpenRouterConfig));
 
 export default OpenRouterProvider;

@@ -1,15 +1,8 @@
 "use client";
 
-import {
-  TestimonialsWall,
-} from "@nebutra/marketing";
+import { TestimonialsWall } from "@nebutra/marketing";
 
-type TestimonialSource =
-  | "product-hunt"
-  | "twitter"
-  | "linkedin"
-  | "g2"
-  | "direct";
+type TestimonialSource = "product-hunt" | "twitter" | "linkedin" | "g2" | "direct";
 
 interface Testimonial {
   id: string;
@@ -54,9 +47,7 @@ export function TestimonialsSection({
             {title}
           </h2>
           {subtitle && (
-            <p className="mx-auto max-w-2xl text-lg text-[var(--neutral-10)]">
-              {subtitle}
-            </p>
+            <p className="mx-auto max-w-2xl text-lg text-[var(--neutral-10)]">{subtitle}</p>
           )}
         </div>
 

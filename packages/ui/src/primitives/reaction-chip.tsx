@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
-import { useState, useMemo } from "react";
+import type * as React from "react";
+import { useMemo, useState } from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -144,12 +144,7 @@ export function ReactionChip({
  * <ReactionBadge emoji="👍" count={5} />
  * ```
  */
-export function ReactionBadge({
-  emoji,
-  count,
-  bump = false,
-  className,
-}: ReactionBadgeProps) {
+export function ReactionBadge({ emoji, count, bump = false, className }: ReactionBadgeProps) {
   return (
     <span
       className={cn(
@@ -242,12 +237,7 @@ export function MessageWithReactions({
           aria-atomic="false"
         >
           {activeReactions.map(([emoji, count]) => (
-            <ReactionBadge
-              key={emoji}
-              emoji={emoji}
-              count={count}
-              bump={bump}
-            />
+            <ReactionBadge key={emoji} emoji={emoji} count={count} bump={bump} />
           ))}
         </div>
       )}

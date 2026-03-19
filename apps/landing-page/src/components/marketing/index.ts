@@ -5,9 +5,9 @@
  * with specific landing page needs and configurations.
  */
 
-export { ProductHuntSection } from "./ProductHuntSection";
-export { TestimonialsSection, sampleTestimonials } from "./TestimonialsSection";
 export { LaunchBannerWrapper } from "./LaunchBannerWrapper";
+export { ProductHuntSection } from "./ProductHuntSection";
+export { sampleTestimonials, TestimonialsSection } from "./TestimonialsSection";
 
 export type SocialProofStats = {
   users?: number;

@@ -11,9 +11,7 @@ const APP_PACKAGE_MAP: Record<string, string> = {
   "docs-hub": "@nebutra/docs-hub",
 };
 
-export function getFeatureEnvVars(
-  config: ResolvedConfig,
-): Record<string, string> {
+export function getFeatureEnvVars(config: ResolvedConfig): Record<string, string> {
   const vars: Record<string, string> = {};
 
   for (const [feature, enabled] of Object.entries(config.features)) {

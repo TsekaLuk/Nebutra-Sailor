@@ -153,8 +153,7 @@ export function HexGrid({
       for (let row = 0; row < rows; row++) {
         const cx = col * horizSpacing + offsetX;
         // Even columns are offset vertically by half the hex height
-        const cy =
-          row * vertSpacing + (col % 2 === 0 ? 0 : vertSpacing / 2) + offsetY;
+        const cy = row * vertSpacing + (col % 2 === 0 ? 0 : vertSpacing / 2) + offsetY;
 
         result.push({
           cx,
@@ -167,24 +166,13 @@ export function HexGrid({
     }
 
     return result;
-  }, [
-    dimensions.width,
-    dimensions.height,
-    size,
-    horizSpacing,
-    vertSpacing,
-    hexWidth,
-    hexHeight,
-  ]);
+  }, [dimensions.width, dimensions.height, size, horizSpacing, vertSpacing, hexWidth, hexHeight]);
 
   return (
     <svg
       ref={containerRef}
       aria-hidden="true"
-      className={cn(
-        "pointer-events-none absolute inset-0 h-full w-full",
-        className,
-      )}
+      className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}
       {...props}
     >
       {glow && (
@@ -216,8 +204,8 @@ export function HexGrid({
           style={
             glow
               ? {
-                animation: `hex-glow-${CSS.escape(id)} ${hex.duration}s ease-in-out ${hex.delay}s infinite`,
-              }
+                  animation: `hex-glow-${CSS.escape(id)} ${hex.duration}s ease-in-out ${hex.delay}s infinite`,
+                }
               : undefined
           }
         />

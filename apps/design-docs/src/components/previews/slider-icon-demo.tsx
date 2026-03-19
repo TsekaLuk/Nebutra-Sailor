@@ -1,8 +1,7 @@
-"use client"
-import { Volume2 } from "lucide-react"
-
-import * as React from "react"
-import { Slider } from "@nebutra/ui/primitives"
+"use client";
+import { Slider } from "@nebutra/ui/primitives";
+import { Volume2 } from "lucide-react";
+import * as React from "react";
 
 export function SliderIconDemo() {
   return (
@@ -10,5 +9,5 @@ export function SliderIconDemo() {
       <Volume2 className="h-4 w-4 shrink-0 text-muted-foreground" />
       <Slider defaultValue={70} max={100} step={1} />
     </div>
-  )
+  );
 }

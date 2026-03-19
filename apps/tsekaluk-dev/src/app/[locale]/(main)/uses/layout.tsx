@@ -40,10 +40,6 @@ export async function generateMetadata({
   };
 }
 
-export default function UsesLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function UsesLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

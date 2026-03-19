@@ -5,7 +5,7 @@
  * https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/
  */
 
-import { useEffect, useRef, useCallback, useState, useId } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 declare global {
   interface Window {
@@ -143,14 +143,14 @@ export function Turnstile({
     (token: string) => {
       onSuccess?.(token);
     },
-    [onSuccess]
+    [onSuccess],
   );
 
   const handleError = useCallback(
     (error: string) => {
       onError?.(error);
     },
-    [onError]
+    [onError],
   );
 
   const handleExpire = useCallback(() => {

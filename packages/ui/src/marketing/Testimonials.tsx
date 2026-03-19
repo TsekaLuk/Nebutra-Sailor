@@ -66,9 +66,7 @@ export function Testimonials({
             {testimonials.map((testimonial) => (
               <div key={testimonial.id} data-slot="testimonial-card">
                 {/* TODO: Use TestimonialCard component */}
-                <blockquote data-slot="quote">
-                  "{testimonial.quote}"
-                </blockquote>
+                <blockquote data-slot="quote">"{testimonial.quote}"</blockquote>
                 {testimonial.rating && (
                   <div data-slot="rating">
                     {/* TODO: Star rating component */}
@@ -77,9 +75,7 @@ export function Testimonials({
                 )}
                 <div data-slot="author">
                   {testimonial.author.avatar && (
-                    <div data-slot="avatar">
-                      {/* TODO: Avatar image */}
-                    </div>
+                    <div data-slot="avatar">{/* TODO: Avatar image */}</div>
                   )}
                   <div data-slot="author-info">
                     <span data-slot="name">{testimonial.author.name}</span>
@@ -101,13 +97,9 @@ export function Testimonials({
                 data-slot="testimonial-card"
                 data-featured={testimonial.featured}
               >
-                <blockquote data-slot="quote">
-                  "{testimonial.quote}"
-                </blockquote>
+                <blockquote data-slot="quote">"{testimonial.quote}"</blockquote>
                 {testimonial.rating && (
-                  <div data-slot="rating">
-                    {"★".repeat(testimonial.rating)}
-                  </div>
+                  <div data-slot="rating">{"★".repeat(testimonial.rating)}</div>
                 )}
                 <div data-slot="author">
                   <span data-slot="name">{testimonial.author.name}</span>
@@ -123,9 +115,7 @@ export function Testimonials({
         {layout === "single" && testimonials[0] && (
           <div data-slot="single">
             {/* TODO: Large featured testimonial */}
-            <blockquote data-slot="quote">
-              "{testimonials[0].quote}"
-            </blockquote>
+            <blockquote data-slot="quote">"{testimonials[0].quote}"</blockquote>
             <div data-slot="author">
               <span data-slot="name">{testimonials[0].author.name}</span>
               <span data-slot="title">

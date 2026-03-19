@@ -43,11 +43,7 @@ export const Default: Story = {
 export const WithControlsVisible: Story = {
   render: () => (
     <div className="w-[640px]">
-      <VideoPlayer
-        src={SAMPLE_VIDEO}
-        poster={SAMPLE_POSTER}
-        showControlsOnMount
-      />
+      <VideoPlayer src={SAMPLE_VIDEO} poster={SAMPLE_POSTER} showControlsOnMount />
     </div>
   ),
 };

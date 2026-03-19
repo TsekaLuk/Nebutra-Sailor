@@ -73,8 +73,7 @@ export function buildKey(...segments: string[]): string {
  * "sailor:rate-limit" namespace prefix is always applied.
  */
 export class TokenBucket {
-  private buckets: Map<string, { tokens: number; lastRefill: number }> =
-    new Map();
+  private buckets: Map<string, { tokens: number; lastRefill: number }> = new Map();
 
   constructor(private config: TokenBucketConfig) {}
 
@@ -99,10 +98,7 @@ export class TokenBucket {
     );
 
     if (refillAmount > 0) {
-      bucket.tokens = Math.min(
-        this.config.maxTokens,
-        bucket.tokens + refillAmount,
-      );
+      bucket.tokens = Math.min(this.config.maxTokens, bucket.tokens + refillAmount);
       bucket.lastRefill = now;
     }
 

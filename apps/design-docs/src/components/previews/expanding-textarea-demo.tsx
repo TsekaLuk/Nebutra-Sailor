@@ -1,4 +1,4 @@
-import { ExpandingTextarea } from "@nebutra/ui/primitives"
+import { ExpandingTextarea } from "@nebutra/ui/primitives";
 
 export function ExpandingTextareaDemo() {
   return (
@@ -8,5 +8,5 @@ export function ExpandingTextareaDemo() {
         className="w-full"
       />
     </div>
-  )
+  );
 }

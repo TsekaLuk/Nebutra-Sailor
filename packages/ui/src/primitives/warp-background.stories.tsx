@@ -31,9 +31,7 @@ export const Default: Story = {
     children: (
       <div className="text-center">
         <h2 className="text-2xl font-bold">Welcome to the Future</h2>
-        <p className="mt-2 text-muted-foreground">
-          Experience the next generation.
-        </p>
+        <p className="mt-2 text-muted-foreground">Experience the next generation.</p>
       </div>
     ),
   },

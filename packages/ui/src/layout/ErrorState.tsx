@@ -26,11 +26,7 @@ export interface ErrorStateProps {
  * />
  * ```
  */
-export function ErrorState({
-  title = "Something went wrong",
-  message,
-  onRetry,
-}: ErrorStateProps) {
+export function ErrorState({ title = "Something went wrong", message, onRetry }: ErrorStateProps) {
   return (
     <div className="px-4 py-6">
       <div

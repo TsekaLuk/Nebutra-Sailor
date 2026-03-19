@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import { Link } from "@/i18n/navigation";
-import { Menu, X, Github } from "lucide-react";
 import { Logo, Logomark } from "@nebutra/brand";
-import { cn } from "@/lib/utils";
-import { useMount } from "@/hooks/useMount";
+import { Github, Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { env } from "@/lib/env";
-import { ThemeSwitcher } from "@/components/ui/theme-switcher";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { LocaleSwitcher } from "@/components/ui/locale-switcher";
+import { ThemeSwitcher } from "@/components/ui/theme-switcher";
+import { useMount } from "@/hooks/useMount";
+import { Link } from "@/i18n/navigation";
+import { env } from "@/lib/env";
+import { cn } from "@/lib/utils";
 
 const APP_URL = env.NEXT_PUBLIC_APP_URL;
 
@@ -56,17 +56,8 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
-          <Logomark
-            size={32}
-            variant={isDark ? "inverse" : "color"}
-            className="md:hidden"
-          />
-          <Logo
-            variant="en"
-            size={150}
-            inverted={isDark}
-            className="hidden md:block"
-          />
+          <Logomark size={32} variant={isDark ? "inverse" : "color"} className="md:hidden" />
+          <Logo variant="en" size={150} inverted={isDark} className="hidden md:block" />
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -107,11 +98,7 @@ export function Navbar() {
             className="rounded-lg p-2 text-neutral-11 transition-colors hover:text-neutral-12 dark:text-white/70 dark:hover:text-white"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>

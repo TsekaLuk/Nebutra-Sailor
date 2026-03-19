@@ -1,11 +1,11 @@
 "use client";
 
+import { AnimateIn } from "@nebutra/ui/components";
+import { DotPattern } from "@nebutra/ui/primitives";
+import { ArrowRight, Award } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Award, ArrowRight } from "lucide-react";
-import { AnimateIn } from "@nebutra/ui/components";
-import { DotPattern } from "@nebutra/ui/primitives";
 
 export function Hero() {
   const t = useTranslations("hero");
@@ -49,8 +49,11 @@ export function Hero() {
 
       {/* Central Layout Area Area */}
       <div className="md:mt-0 md:h-[650px] flex flex-col md:block w-full h-auto max-w-7xl mt-8 mr-auto ml-auto relative items-center justify-center">
-
-        <AnimateIn preset="fadeUp" delay={0.3} className="relative z-10 w-full max-w-[85vw] md:max-w-[42vw] lg:max-w-[550px] mx-auto pointer-events-none md:absolute md:-top-16 md:left-1/2 md:-translate-x-1/2">
+        <AnimateIn
+          preset="fadeUp"
+          delay={0.3}
+          className="relative z-10 w-full max-w-[85vw] md:max-w-[42vw] lg:max-w-[550px] mx-auto pointer-events-none md:absolute md:-top-16 md:left-1/2 md:-translate-x-1/2"
+        >
           <Image
             src="/images/black-nobg.webp"
             alt="Portrait of Tseka Luk, CEO & AI-Native Builder"
@@ -63,26 +66,43 @@ export function Hero() {
         </AnimateIn>
 
         {/* Left Mid Badge (Desktop) */}
-        <AnimateIn preset="fade" delay={0.4} className="hidden md:flex absolute top-[25%] left-4 lg:left-12 z-30 items-center gap-3 px-5 py-2.5 bg-white dark:bg-gray-950 rounded-full border border-gray-200 dark:border-gray-800 shadow-sm transition-transform hover:-translate-y-0.5">
+        <AnimateIn
+          preset="fade"
+          delay={0.4}
+          className="hidden md:flex absolute top-[25%] left-4 lg:left-12 z-30 items-center gap-3 px-5 py-2.5 bg-white dark:bg-gray-950 rounded-full border border-gray-200 dark:border-gray-800 shadow-sm transition-transform hover:-translate-y-0.5"
+        >
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#84cc16]"></span>
           </span>
-          <span className="text-sm font-medium text-gray-900 dark:text-white tracking-wide uppercase">AI &amp; System Builder</span>
+          <span className="text-sm font-medium text-gray-900 dark:text-white tracking-wide uppercase">
+            AI &amp; System Builder
+          </span>
         </AnimateIn>
 
         {/* Right Mid Text (Desktop) */}
-        <AnimateIn preset="fade" delay={0.5} className="hidden md:block absolute top-[35%] right-4 lg:right-12 z-30 max-w-[320px]">
+        <AnimateIn
+          preset="fade"
+          delay={0.5}
+          className="hidden md:block absolute top-[35%] right-4 lg:right-12 z-30 max-w-[320px]"
+        >
           <p className="text-xl lg:text-2xl text-gray-900 dark:text-white leading-tight tracking-tight font-normal">
             {t("description")}
           </p>
         </AnimateIn>
 
         {/* Left Bottom Avatars (Desktop) */}
-        <AnimateIn preset="fadeUp" delay={0.6} className="hidden md:flex absolute bottom-8 left-4 lg:left-12 z-30 items-center gap-4 max-w-[380px]">
+        <AnimateIn
+          preset="fadeUp"
+          delay={0.6}
+          className="hidden md:flex absolute bottom-8 left-4 lg:left-12 z-30 items-center gap-4 max-w-[380px]"
+        >
           <div className="flex -space-x-4 shrink-0">
-            {['P', 'E', 'O'].map((initial, i) => (
-              <div key={i} className="w-12 h-12 rounded-full border-[3px] border-white dark:border-gray-900 object-cover shadow-sm bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 font-serif">
+            {["P", "E", "O"].map((initial, i) => (
+              <div
+                key={i}
+                className="w-12 h-12 rounded-full border-[3px] border-white dark:border-gray-900 object-cover shadow-sm bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 font-serif"
+              >
                 {initial}
               </div>
             ))}
@@ -93,12 +113,19 @@ export function Hero() {
         </AnimateIn>
 
         {/* Right Bottom Button (Desktop) */}
-        <AnimateIn preset="fadeUp" delay={0.7} className="hidden md:block absolute bottom-12 right-4 lg:right-12 z-30">
-          <Link href="/now" className="group inline-flex items-center justify-center gap-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-7 py-3.5 rounded-full text-base font-medium transition-all hover:bg-gray-800 dark:hover:bg-gray-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl">
-            {t("cta_primary")} <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        <AnimateIn
+          preset="fadeUp"
+          delay={0.7}
+          className="hidden md:block absolute bottom-12 right-4 lg:right-12 z-30"
+        >
+          <Link
+            href="/now"
+            className="group inline-flex items-center justify-center gap-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-7 py-3.5 rounded-full text-base font-medium transition-all hover:bg-gray-800 dark:hover:bg-gray-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
+          >
+            {t("cta_primary")}{" "}
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </AnimateIn>
-
       </div>
 
       {/* Mobile Layout */}
@@ -108,18 +135,23 @@ export function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#84cc16]"></span>
           </span>
-          <span className="text-xs font-medium text-gray-900 dark:text-white tracking-wide uppercase">AI &amp; System Builder</span>
+          <span className="text-xs font-medium text-gray-900 dark:text-white tracking-wide uppercase">
+            AI &amp; System Builder
+          </span>
         </div>
 
         <p className="text-lg text-gray-900 dark:text-white leading-snug tracking-tight font-normal max-w-sm mx-auto">
           {t("description")}
         </p>
 
-        <Link href="/now" className="group inline-flex items-center justify-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-full text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md mx-auto">
-          {t("cta_primary")} <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        <Link
+          href="/now"
+          className="group inline-flex items-center justify-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-full text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md mx-auto"
+        >
+          {t("cta_primary")}{" "}
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-
     </section>
   );
 }

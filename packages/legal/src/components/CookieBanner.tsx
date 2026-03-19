@@ -7,18 +7,18 @@
  * Follows Silicon Valley best practices for user privacy.
  */
 
-import { useState, useEffect, useCallback } from "react";
-import type { CookiePreferences, CookieCategory } from "../types";
+import { useCallback, useEffect, useState } from "react";
 import {
-  getCookieConsent,
-  saveCookieConsent,
   acceptAllCookies,
-  rejectAllCookies,
+  getCookieConsent,
   hasCookieConsent,
   recordCookieConsent,
+  rejectAllCookies,
+  saveCookieConsent,
   updateGTMConsent,
 } from "../consent/service";
 import { cookieCategories, cookieConfig } from "../documents/config";
+import type { CookieCategory, CookiePreferences } from "../types";
 
 // ============================================
 // Types
@@ -148,7 +148,7 @@ export function CookieBanner({
       // Hide banner
       setIsVisible(false);
     },
-    [persistToServer, onConsentGiven]
+    [persistToServer, onConsentGiven],
   );
 
   const handleAcceptAll = useCallback(() => {
@@ -175,24 +175,18 @@ export function CookieBanner({
     handleSaveConsent(preferences);
   }, [handleSaveConsent, preferences]);
 
-  const toggleCategory = useCallback(
-    (category: keyof Omit<CookiePreferences, "necessary">) => {
-      setPreferences((prev) => ({
-        ...prev,
-        [category]: !prev[category],
-      }));
-    },
-    []
-  );
+  const toggleCategory = useCallback((category: keyof Omit<CookiePreferences, "necessary">) => {
+    setPreferences((prev) => ({
+      ...prev,
+      [category]: !prev[category],
+    }));
+  }, []);
 
   if (!isVisible) {
     return null;
   }
 
-  const positionClasses =
-    position === "top"
-      ? "top-0 border-b"
-      : "bottom-0 border-t";
+  const positionClasses = position === "top" ? "top-0 border-b" : "bottom-0 border-t";
 
   return (
     <div
@@ -214,10 +208,7 @@ export function CookieBanner({
               </h2>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                 {translations.description}{" "}
-                <a
-                  href="/cookies"
-                  className="text-primary-600 hover:text-primary-700 underline"
-                >
+                <a href="/cookies" className="text-primary-600 hover:text-primary-700 underline">
                   {translations.cookiePolicy}
                 </a>
               </p>
@@ -258,12 +249,7 @@ export function CookieBanner({
                 className="text-gray-400 hover:text-gray-500"
                 aria-label="Close details"
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -365,9 +351,7 @@ function CookieCategoryToggle({
         >
           {label}
         </label>
-        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-          {category.description}
-        </p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{category.description}</p>
       </div>
       <div className="ml-3 flex-shrink-0">
         <button

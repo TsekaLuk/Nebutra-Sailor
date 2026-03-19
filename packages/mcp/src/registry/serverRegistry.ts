@@ -1,4 +1,4 @@
-import type { MCPServerConfig, ToolDefinition, MCPContext } from "../types.js";
+import type { MCPContext, MCPServerConfig, ToolDefinition } from "../types.js";
 
 /**
  * Registry for MCP servers and their tools
@@ -98,10 +98,7 @@ export class MCPServerRegistry {
 
     // Check tenant restrictions
     if (server.allowedTenants && server.allowedTenants.length > 0) {
-      if (
-        !context.tenantId ||
-        !server.allowedTenants.includes(context.tenantId)
-      ) {
+      if (!context.tenantId || !server.allowedTenants.includes(context.tenantId)) {
         return false;
       }
     }
@@ -112,9 +109,7 @@ export class MCPServerRegistry {
   /**
    * Get tools accessible by a context
    */
-  getAccessibleTools(
-    context: MCPContext
-  ): Array<ToolDefinition & { serverId: string }> {
+  getAccessibleTools(context: MCPContext): Array<ToolDefinition & { serverId: string }> {
     const tools: Array<ToolDefinition & { serverId: string }> = [];
 
     for (const server of this.servers.values()) {

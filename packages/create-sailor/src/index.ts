@@ -1,27 +1,27 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
-import * as p from '@clack/prompts';
-import pc from 'picocolors';
-import path from 'path';
-import { cloneTemplate } from './utils/git.js';
-import { updatePackageJson } from './utils/npm.js';
-import { writeNebutraConfig, type NebutraConfig } from './utils/config.js';
-import { pruneTemplate } from './utils/prune.js';
+import * as p from "@clack/prompts";
+import { Command } from "commander";
+import path from "path";
+import pc from "picocolors";
+import { type NebutraConfig, writeNebutraConfig } from "./utils/config.js";
+import { cloneTemplate } from "./utils/git.js";
+import { updatePackageJson } from "./utils/npm.js";
+import { pruneTemplate } from "./utils/prune.js";
 
 async function main() {
   const program = new Command();
 
   program
-    .name('create-sailor')
-    .description('CLI to bootstrap Nebutra-Sailor scaffolding')
-    .version('0.1.0')
-    .argument('[dir]', 'Directory to initialize the project in');
+    .name("create-sailor")
+    .description("CLI to bootstrap Nebutra-Sailor scaffolding")
+    .version("0.1.0")
+    .argument("[dir]", "Directory to initialize the project in");
 
   program.parse(process.argv);
   const args = program.args;
 
-  p.intro(pc.bgCyan(pc.black(' create-sailor ')));
+  p.intro(pc.bgCyan(pc.black(" create-sailor ")));
 
   let targetDir = args[0];
 
@@ -30,20 +30,20 @@ async function main() {
       {
         name: () =>
           p.text({
-            message: 'Where should we create your project?',
-            placeholder: './my-saas-app',
-            defaultValue: './my-saas-app',
+            message: "Where should we create your project?",
+            placeholder: "./my-saas-app",
+            defaultValue: "./my-saas-app",
             validate: (value) => {
-              if (value.length === 0) return 'Please enter a path.';
+              if (value.length === 0) return "Please enter a path.";
             },
           }),
       },
       {
         onCancel: () => {
-          p.cancel('Operation cancelled.');
+          p.cancel("Operation cancelled.");
           process.exit(0);
         },
-      }
+      },
     );
     targetDir = project.name;
   }
@@ -53,54 +53,59 @@ async function main() {
   // Ask configuration questions
   const configOutput = await p.group(
     {
-      orm: () => p.select({
-        message: 'Which ORM would you like to use?',
-        options: [
-          { value: 'prisma', label: 'Prisma', hint: 'Recommended' },
-          { value: 'drizzle', label: 'Drizzle ORM' },
-          { value: 'none', label: 'None (I will configure my own)' },
-        ],
-        initialValue: 'prisma'
-      }),
-      database: () => p.select({
-        message: 'Which database provider?',
-        options: [
-          { value: 'postgresql', label: 'PostgreSQL (Supabase, Vercel, Neon, etc)' },
-          { value: 'mysql', label: 'MySQL / PlanetScale' },
-          { value: 'sqlite', label: 'SQLite / Turso' },
-          { value: 'none', label: 'None' },
-        ],
-        initialValue: 'postgresql'
-      }),
-      payment: () => p.select({
-        message: 'Which payment provider?',
-        options: [
-          { value: 'stripe', label: 'Stripe' },
-          { value: 'lemonsqueezy', label: 'Lemon Squeezy' },
-          { value: 'none', label: 'None' },
-        ],
-        initialValue: 'stripe'
-      }),
-      aiProvider: () => p.select({
-        message: 'Default AI Provider?',
-        options: [
-          { value: 'openai', label: 'OpenAI' },
-          { value: 'anthropic', label: 'Anthropic' },
-          { value: 'none', label: 'None' },
-        ],
-        initialValue: 'openai'
-      }),
-      i18n: () => p.confirm({
-        message: 'Enable Internationalization (i18n)?',
-        initialValue: true,
-      })
+      orm: () =>
+        p.select({
+          message: "Which ORM would you like to use?",
+          options: [
+            { value: "prisma", label: "Prisma", hint: "Recommended" },
+            { value: "drizzle", label: "Drizzle ORM" },
+            { value: "none", label: "None (I will configure my own)" },
+          ],
+          initialValue: "prisma",
+        }),
+      database: () =>
+        p.select({
+          message: "Which database provider?",
+          options: [
+            { value: "postgresql", label: "PostgreSQL (Supabase, Vercel, Neon, etc)" },
+            { value: "mysql", label: "MySQL / PlanetScale" },
+            { value: "sqlite", label: "SQLite / Turso" },
+            { value: "none", label: "None" },
+          ],
+          initialValue: "postgresql",
+        }),
+      payment: () =>
+        p.select({
+          message: "Which payment provider?",
+          options: [
+            { value: "stripe", label: "Stripe" },
+            { value: "lemonsqueezy", label: "Lemon Squeezy" },
+            { value: "none", label: "None" },
+          ],
+          initialValue: "stripe",
+        }),
+      aiProvider: () =>
+        p.select({
+          message: "Default AI Provider?",
+          options: [
+            { value: "openai", label: "OpenAI" },
+            { value: "anthropic", label: "Anthropic" },
+            { value: "none", label: "None" },
+          ],
+          initialValue: "openai",
+        }),
+      i18n: () =>
+        p.confirm({
+          message: "Enable Internationalization (i18n)?",
+          initialValue: true,
+        }),
     },
     {
       onCancel: () => {
-        p.cancel('Operation cancelled.');
+        p.cancel("Operation cancelled.");
         process.exit(0);
       },
-    }
+    },
   );
 
   const config = configOutput as NebutraConfig;

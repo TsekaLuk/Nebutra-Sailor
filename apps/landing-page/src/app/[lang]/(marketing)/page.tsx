@@ -1,16 +1,10 @@
-import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
+import dynamic from "next/dynamic";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { routing, type Locale } from "@/i18n/routing";
-import {
-  Navbar,
-  HeroSection,
-  LogoStrip,
-  FeatureCards,
-  FooterMinimal,
-} from "@/components/landing";
+import { FeatureCards, FooterMinimal, HeroSection, LogoStrip, Navbar } from "@/components/landing";
+import { type Locale, routing } from "@/i18n/routing";
 
 const ProductDemoSection = dynamic(
   () => import("@/components/landing").then((mod) => mod.ProductDemoSection),
@@ -40,12 +34,9 @@ const PricingHintSection = dynamic(
   },
 );
 
-const FinalCTA = dynamic(
-  () => import("@/components/landing").then((mod) => mod.FinalCTA),
-  {
-    loading: () => <section className="h-72" aria-hidden />,
-  },
-);
+const FinalCTA = dynamic(() => import("@/components/landing").then((mod) => mod.FinalCTA), {
+  loading: () => <section className="h-72" aria-hidden />,
+});
 
 export async function generateMetadata({
   params,
@@ -69,11 +60,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function LocalizedHomePage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function LocalizedHomePage({ params }: { params: Promise<{ lang: string }> }) {
   "use cache";
   cacheLife("hours");
 

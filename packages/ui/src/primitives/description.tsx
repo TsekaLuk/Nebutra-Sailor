@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { Info } from "lucide-react";
-import { ContextCard } from "./context-card";
+import * as React from "react";
 import { cn } from "../utils/cn";
+import { ContextCard } from "./context-card";
 
 // =============================================================================
 // Types
@@ -40,9 +40,7 @@ export const Description = React.forwardRef<HTMLDivElement, DescriptionProps>(
   ({ title, content, tooltip, className }, ref) => (
     <div ref={ref} className={cn("flex flex-col gap-0.5", className)}>
       <div className="flex items-center gap-1">
-        <span className="text-sm font-medium leading-tight text-foreground">
-          {title}
-        </span>
+        <span className="text-sm font-medium leading-tight text-foreground">{title}</span>
         {tooltip && (
           <ContextCard.Trigger content={tooltip} side="top" sideOffset={6}>
             <Info size={12} aria-hidden="true" className="shrink-0 text-muted-foreground" />
@@ -54,4 +52,3 @@ export const Description = React.forwardRef<HTMLDivElement, DescriptionProps>(
   ),
 );
 Description.displayName = "Description";
-

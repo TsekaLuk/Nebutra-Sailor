@@ -1,5 +1,5 @@
-import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import * as React from "react";
 import { Entity } from "./entity";
 
 const meta = {
@@ -47,15 +47,9 @@ export const Default: Story = {
     <div className="w-96 rounded-lg border bg-background">
       <Entity
         left={<Avatar name="Evil Rabbit" />}
-        right={
-          <p className="text-sm text-muted-foreground">Connected 1h ago</p>
-        }
+        right={<p className="text-sm text-muted-foreground">Connected 1h ago</p>}
       >
-        <Entity.Content
-          title="Evil Rabbit"
-          description="@Glenn Hitchcock (@gin)"
-          fill
-        />
+        <Entity.Content title="Evil Rabbit" description="@Glenn Hitchcock (@gin)" fill />
       </Entity>
     </div>
   ),
@@ -66,9 +60,7 @@ export const Default: Story = {
 // =============================================================================
 
 function Skeleton({ className }: { className?: string }) {
-  return (
-    <div className={`animate-pulse rounded bg-muted ${className ?? ""}`} />
-  );
+  return <div className={`animate-pulse rounded bg-muted ${className ?? ""}`} />;
 }
 
 export const WithSkeleton: Story = {
@@ -125,9 +117,7 @@ export const WithList: Story = {
                 ) : (
                   <button
                     type="button"
-                    onClick={() =>
-                      setDeclined((prev) => ({ ...prev, [session.id]: true }))
-                    }
+                    onClick={() => setDeclined((prev) => ({ ...prev, [session.id]: true }))}
                     className="rounded-md border px-3 py-1 text-xs hover:bg-accent"
                   >
                     Decline
@@ -135,11 +125,7 @@ export const WithList: Story = {
                 )
               }
             >
-              <Entity.Content
-                title={session.title}
-                description={session.description}
-                fill
-              />
+              <Entity.Content title={session.title} description={session.description} fill />
             </Entity>
           ))}
         </Entity.List>
@@ -182,19 +168,12 @@ export const WithIconLeft: Story = {
             as="li"
             left={<KeyIcon />}
             right={
-              <button
-                type="button"
-                className="rounded-md border px-3 py-1 text-xs hover:bg-accent"
-              >
+              <button type="button" className="rounded-md border px-3 py-1 text-xs hover:bg-accent">
                 Revoke
               </button>
             }
           >
-            <Entity.Content
-              title={name}
-              description="sk-proj-••••••••••••••••"
-              fill
-            />
+            <Entity.Content title={name} description="sk-proj-••••••••••••••••" fill />
           </Entity>
         ))}
       </Entity.List>

@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MessageCircle, X } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { MessageCircle, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
 import { ChatInterface } from "@/components/soul/chat-interface";
 
 export function AgentWidget() {
@@ -41,9 +41,7 @@ export function AgentWidget() {
                   <h3 className="text-sm font-medium text-gray-900 dark:text-white">
                     {t("page_headline")}
                   </h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t("status")}
-                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{t("status")}</p>
                 </div>
               </div>
               <button

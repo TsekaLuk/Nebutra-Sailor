@@ -7,9 +7,10 @@
  * Evaluated server-side so sensitive flag logic (plan checks, A/B buckets)
  * never leaks to the client.
  */
-import { type NextRequest, NextResponse } from "next/server";
+
 import { auth } from "@clerk/nextjs/server";
-import { isFeatureEnabled, FLAGS } from "@nebutra/feature-flags";
+import { FLAGS, isFeatureEnabled } from "@nebutra/feature-flags";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(_req: NextRequest) {
   const { userId, orgId } = await auth();

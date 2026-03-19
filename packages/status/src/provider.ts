@@ -9,10 +9,10 @@
  *   const data = await provider.fetchSummary();
  */
 
-import type { StatusPageData, StatusConfig } from "./types";
+import { InternalStatusProvider } from "./providers/internal";
 import { OpenStatusProvider } from "./providers/openstatus";
 import { AtlassianStatuspageProvider } from "./providers/statuspage";
-import { InternalStatusProvider } from "./providers/internal";
+import type { StatusConfig, StatusPageData } from "./types";
 
 // ============================================
 // Abstract interface

@@ -1,14 +1,10 @@
 "use client";
 
+import { Logo } from "@nebutra/brand";
 import { DotPattern } from "@nebutra/ui/primitives";
 import { Link } from "@/i18n/navigation";
-import { Logo } from "@nebutra/brand";
 
-export default function AuthLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative min-h-[100dvh] w-full flex items-center justify-center p-4 sm:p-8 bg-gray-50/50 dark:bg-[#0a0a0a]">
       {/* Background styling */}
@@ -30,9 +26,7 @@ export default function AuthLayout({
         </Link>
       </div>
 
-      <div className="relative z-10 w-full max-w-md">
-        {children}
-      </div>
+      <div className="relative z-10 w-full max-w-md">{children}</div>
     </div>
   );
 }

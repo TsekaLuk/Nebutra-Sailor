@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,10 +16,7 @@ const DataPointLow = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <path
-        fill="currentColor"
-        d="M8.5 10.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0"
-      />
+      <path fill="currentColor" d="M8.5 10.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0" />
       <path
         fill="currentColor"
         fillRule="evenodd"
@@ -31,5 +28,6 @@ const DataPointLow = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 DataPointLow.displayName = "DataPointLow";
+
 export { DataPointLow };
 export default DataPointLow;

@@ -36,23 +36,13 @@ export const Default: Story = {
 
 export const DarkScheme: Story = {
   render: () => (
-    <DitheringShader
-      width={400}
-      height={250}
-      colorBack="#000000"
-      colorFront="#614B00"
-    />
+    <DitheringShader width={400} height={250} colorBack="#000000" colorFront="#614B00" />
   ),
 };
 
 export const BlueTheme: Story = {
   render: () => (
-    <DitheringShader
-      width={400}
-      height={250}
-      colorBack="#F7FAFF"
-      colorFront="#3956A3"
-    />
+    <DitheringShader width={400} height={250} colorBack="#F7FAFF" colorFront="#3956A3" />
   ),
 };
 
@@ -70,24 +60,12 @@ export const WarpShape: Story = {
 
 export const LargePixels: Story = {
   render: () => (
-    <DitheringShader
-      width={400}
-      height={250}
-      pxSize={6}
-      colorBack="#1a1a2e"
-      colorFront="#e94560"
-    />
+    <DitheringShader width={400} height={250} pxSize={6} colorBack="#1a1a2e" colorFront="#e94560" />
   ),
 };
 
 export const Paused: Story = {
   render: () => (
-    <DitheringShader
-      width={400}
-      height={250}
-      speed={0}
-      colorBack="#0f3460"
-      colorFront="#7FA4FF"
-    />
+    <DitheringShader width={400} height={250} speed={0} colorBack="#0f3460" colorFront="#7FA4FF" />
   ),
 };

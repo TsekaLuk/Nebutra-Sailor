@@ -143,8 +143,7 @@ export const DEFAULT_BRAND: BrandConfig = {
       pillars: [
         {
           word: "Nebula",
-          meaning:
-            "Aggregate data, tools, and intelligence into usable products",
+          meaning: "Aggregate data, tools, and intelligence into usable products",
         },
         {
           word: "Nurture",
@@ -241,9 +240,6 @@ export const DEFAULT_BRAND: BrandConfig = {
   packageScope: "@nebutra",
   license: {
     type: "AGPLv3",
-    commercialExempt: [
-      "Wuxi Yunyu Intelligent Technology Co., Ltd.",
-      "Nebutra Intelligence",
-    ],
+    commercialExempt: ["Wuxi Yunyu Intelligent Technology Co., Ltd.", "Nebutra Intelligence"],
   },
 };

@@ -1,7 +1,6 @@
-"use client"
-import { GeistTooltip as Tooltip } from "@nebutra/ui/primitives"
-import { Button } from "@nebutra/ui/primitives"
-import { Plus } from "lucide-react"
+"use client";
+import { Button, GeistTooltip as Tooltip } from "@nebutra/ui/primitives";
+import { Plus } from "lucide-react";
 
 export function TooltipIconButtonDemo() {
   return (
@@ -12,5 +11,5 @@ export function TooltipIconButtonDemo() {
         </Button>
       </Tooltip>
     </div>
-  )
+  );
 }

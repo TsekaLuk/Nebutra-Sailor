@@ -14,12 +14,8 @@ export default function IdPHomePage() {
             N
           </div>
 
-          <h1 className="text-3xl font-bold tracking-tight">
-            Nebutra Identity
-          </h1>
-          <p className="mt-3 text-white/50">
-            OAuth 2.0 / OpenID Connect Identity Provider
-          </p>
+          <h1 className="text-3xl font-bold tracking-tight">Nebutra Identity</h1>
+          <p className="mt-3 text-white/50">OAuth 2.0 / OpenID Connect Identity Provider</p>
 
           {/* OIDC Discovery Endpoint */}
           <div className="mt-8 border-white/5 bg-white/5 p-4 rounded-xl border">
@@ -32,11 +28,10 @@ export default function IdPHomePage() {
           </div>
 
           <div className="mt-6 text-xs text-white/30">
-            This server provides secure authentication for the Nebutra
-            ecosystem.
+            This server provides secure authentication for the Nebutra ecosystem.
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

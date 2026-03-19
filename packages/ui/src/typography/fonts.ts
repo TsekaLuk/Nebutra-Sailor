@@ -53,8 +53,7 @@ export const fonts: Record<string, FontConfig> = {
     italic: true,
     display: "swap",
     variable: true,
-    googleFontsParam:
-      "Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500",
+    googleFontsParam: "Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500",
     license: "OFL",
     licenseUrl: "https://github.com/uswds/public-sans/blob/develop/LICENSE.md",
   },
@@ -67,8 +66,7 @@ export const fonts: Record<string, FontConfig> = {
     variable: true,
     googleFontsParam: "JetBrains+Mono:wght@400;500;700",
     license: "OFL",
-    licenseUrl:
-      "https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt",
+    licenseUrl: "https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt",
   },
 
   sourceHanSans: {
@@ -79,8 +77,7 @@ export const fonts: Record<string, FontConfig> = {
     variable: false,
     googleFontsParam: "Noto+Sans+SC:wght@400;500;700",
     license: "OFL",
-    licenseUrl:
-      "https://github.com/adobe-fonts/source-han-sans/blob/master/LICENSE.txt",
+    licenseUrl: "https://github.com/adobe-fonts/source-han-sans/blob/master/LICENSE.txt",
   },
 };
 
@@ -124,9 +121,7 @@ export const allFonts: (keyof typeof fonts)[] = [...defaultFonts, ...cjkFonts];
 /**
  * Generate preload link elements for critical fonts
  */
-export function getFontPreloadLinks(
-  fontKeys: (keyof typeof fonts)[],
-): string[] {
+export function getFontPreloadLinks(fontKeys: (keyof typeof fonts)[]): string[] {
   return fontKeys
     .map((key) => {
       const font = fonts[key];
@@ -155,9 +150,7 @@ export async function areFontsLoaded(fontFamilies: string[]): Promise<boolean> {
   if (typeof document === "undefined") return false;
 
   try {
-    await Promise.all(
-      fontFamilies.map((family) => document.fonts.load(`16px "${family}"`)),
-    );
+    await Promise.all(fontFamilies.map((family) => document.fonts.load(`16px "${family}"`)));
     return true;
   } catch {
     return false;
@@ -167,10 +160,7 @@ export async function areFontsLoaded(fontFamilies: string[]): Promise<boolean> {
 /**
  * Wait for fonts to load with timeout
  */
-export async function waitForFonts(
-  fontFamilies: string[],
-  timeout = 3000,
-): Promise<boolean> {
+export async function waitForFonts(fontFamilies: string[], timeout = 3000): Promise<boolean> {
   if (typeof document === "undefined") return false;
 
   return new Promise((resolve) => {

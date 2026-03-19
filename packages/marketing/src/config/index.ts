@@ -37,9 +37,7 @@ export const defaultProductHuntConfig: ProductHuntConfig = {
 /**
  * Create a marketing configuration with defaults
  */
-export function createMarketingConfig(
-  config: Partial<MarketingConfig>,
-): MarketingConfig {
+export function createMarketingConfig(config: Partial<MarketingConfig>): MarketingConfig {
   return {
     ...defaultMarketingConfig,
     ...config,
@@ -57,9 +55,7 @@ export function createMarketingConfig(
 /**
  * Create a Product Hunt configuration with defaults
  */
-export function createProductHuntConfig(
-  config: Partial<ProductHuntConfig>,
-): ProductHuntConfig {
+export function createProductHuntConfig(config: Partial<ProductHuntConfig>): ProductHuntConfig {
   return {
     ...defaultProductHuntConfig,
     ...config,
@@ -109,11 +105,7 @@ export interface ShareUrls {
 /**
  * Generate social sharing URLs
  */
-export function generateShareUrls(
-  url: string,
-  title: string,
-  _description?: string,
-): ShareUrls {
+export function generateShareUrls(url: string, title: string, _description?: string): ShareUrls {
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 

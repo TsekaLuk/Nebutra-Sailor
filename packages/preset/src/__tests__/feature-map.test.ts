@@ -1,10 +1,6 @@
-import { describe, it, expect } from "vitest";
-import {
-  getFeatureEnvVars,
-  getActiveApps,
-  getActivePackages,
-} from "../feature-map";
+import { describe, expect, it } from "vitest";
 import type { ResolvedConfig } from "../config";
+import { getActiveApps, getActivePackages, getFeatureEnvVars } from "../feature-map";
 
 const mockConfig: ResolvedConfig = {
   apps: {

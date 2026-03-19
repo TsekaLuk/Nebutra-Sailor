@@ -1,14 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
+import * as React from "react";
 import { cn } from "../utils/cn";
 import { useScrollSpy } from "./ScrollSpyProvider";
 
-export interface StoryProgressProps extends Omit<
-  React.HTMLAttributes<HTMLElement>,
-  "children"
-> {
+export interface StoryProgressProps extends Omit<React.HTMLAttributes<HTMLElement>, "children"> {
   /** Position on the screen (default: "right") */
   position?: "left" | "right";
   /** Whether to show section labels on hover (default: true) */
@@ -29,8 +26,7 @@ export interface StoryProgressProps extends Omit<
  */
 export const StoryProgress = React.forwardRef<HTMLElement, StoryProgressProps>(
   ({ position = "right", showLabels = true, className, ...props }, ref) => {
-    const { sections, activeSection, scrollToSection, scrollProgress } =
-      useScrollSpy();
+    const { sections, activeSection, scrollToSection, scrollProgress } = useScrollSpy();
 
     if (sections.length === 0) return null;
 
@@ -58,8 +54,7 @@ export const StoryProgress = React.forwardRef<HTMLElement, StoryProgressProps>(
         {/* Section nodes */}
         {sections.map((section, index) => {
           const isActive = section.id === activeSection;
-          const isPast =
-            sections.findIndex((s) => s.id === activeSection) > index;
+          const isPast = sections.findIndex((s) => s.id === activeSection) > index;
 
           return (
             <motion.button

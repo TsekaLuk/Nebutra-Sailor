@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const mdxContent = fs.readFileSync('apps/design-docs/mdx-components.tsx', 'utf-8');
+const fs = require("fs");
+const path = require("path");
+const mdxContent = fs.readFileSync("apps/design-docs/mdx-components.tsx", "utf-8");
 const usedComponents = new Set();
 
 function extractJSXTags(content) {
@@ -17,15 +17,21 @@ function traverse(dir) {
     const res = path.resolve(dir, file.name);
     if (file.isDirectory()) {
       traverse(res);
-    } else if (res.endsWith('.mdx')) {
-      extractJSXTags(fs.readFileSync(res, 'utf-8'));
+    } else if (res.endsWith(".mdx")) {
+      extractJSXTags(fs.readFileSync(res, "utf-8"));
     }
   }
 }
 
-traverse('apps/design-docs/content');
+traverse("apps/design-docs/content");
 
 const allUsed = Array.from(usedComponents);
-const missing = allUsed.filter(c => !mdxContent.includes(` ${c},`) && !mdxContent.includes(` ${c} `) && !mdxContent.includes(`${c}: `) && !mdxContent.includes(`<${c}`));
+const missing = allUsed.filter(
+  (c) =>
+    !mdxContent.includes(` ${c},`) &&
+    !mdxContent.includes(` ${c} `) &&
+    !mdxContent.includes(`${c}: `) &&
+    !mdxContent.includes(`<${c}`),
+);
 
 console.log("Missing components in MDX:", missing);

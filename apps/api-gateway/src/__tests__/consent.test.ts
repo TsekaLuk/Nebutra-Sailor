@@ -5,8 +5,8 @@
  * using a wrapper app that mirrors the production middleware mount order.
  */
 
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import { OpenAPIHono } from "@hono/zod-openapi";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock MUST be declared before the route module is imported.
 vi.mock("@nebutra/db", () => ({
@@ -155,12 +155,8 @@ describe("POST /consent", () => {
   };
 
   it("returns 200 with consentId when document exists", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(mockDocument);
-    (prisma.userConsent.create as ReturnType<typeof vi.fn>).mockResolvedValue(
-      mockConsent,
-    );
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(mockDocument);
+    (prisma.userConsent.create as ReturnType<typeof vi.fn>).mockResolvedValue(mockConsent);
 
     const res = await authedJsonRequest("POST", "/consent", validBody);
     const body = await res.json();
@@ -170,16 +166,13 @@ describe("POST /consent", () => {
     expect(body.consentId).toBe("consent-1");
     expect(body.documentSlug).toBe("terms-of-service");
     expect(body.documentVersion).toBe("2024-01");
-    const createCall = (prisma.userConsent.create as ReturnType<typeof vi.fn>)
-      .mock.calls[0]![0];
+    const createCall = (prisma.userConsent.create as ReturnType<typeof vi.fn>).mock.calls[0]![0];
     expect(createCall.data.userId).toBe("user-123");
     expect(createCall.data.organizationId).toBe("org-456");
   });
 
   it("returns 404 when the document is not found", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(null);
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(null);
 
     const res = await authedJsonRequest("POST", "/consent", validBody);
     const body = await res.json();
@@ -208,9 +201,7 @@ describe("POST /consent", () => {
   });
 
   it("returns 500 when Prisma throws on create", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(mockDocument);
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(mockDocument);
     (prisma.userConsent.create as ReturnType<typeof vi.fn>).mockRejectedValue(
       new Error("DB error"),
     );
@@ -226,12 +217,8 @@ describe("POST /consent", () => {
   });
 
   it("forwards optional consentType default correctly", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(mockDocument);
-    (prisma.userConsent.create as ReturnType<typeof vi.fn>).mockResolvedValue(
-      mockConsent,
-    );
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(mockDocument);
+    (prisma.userConsent.create as ReturnType<typeof vi.fn>).mockResolvedValue(mockConsent);
 
     // No consentType provided — Zod default is EXPLICIT
     const res = await authedJsonRequest("POST", "/consent", {
@@ -240,8 +227,7 @@ describe("POST /consent", () => {
     });
 
     expect(res.status).toBe(200);
-    const createCall = (prisma.userConsent.create as ReturnType<typeof vi.fn>)
-      .mock.calls[0]![0];
+    const createCall = (prisma.userConsent.create as ReturnType<typeof vi.fn>).mock.calls[0]![0];
     expect(createCall.data.consentType).toBe("EXPLICIT");
   });
 });
@@ -262,9 +248,7 @@ describe("GET /consent/status", () => {
   });
 
   it("returns 404 when document is not found", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(null);
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(null);
 
     const res = await getRequest("/consent/status?documentSlug=missing-doc");
     const body = await res.json();
@@ -277,12 +261,8 @@ describe("GET /consent/status", () => {
   });
 
   it("returns 200 with hasConsented: false when no consent record exists", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(mockDocument);
-    (
-      prisma.userConsent.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(null);
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(mockDocument);
+    (prisma.userConsent.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(null);
 
     const res = await getRequest(
       "/consent/status?documentSlug=terms-of-service&visitorId=visitor-abc",
@@ -296,12 +276,8 @@ describe("GET /consent/status", () => {
   });
 
   it("returns hasConsented: true and needsReconsent: false when versions match", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(mockDocument);
-    (
-      prisma.userConsent.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(mockConsent);
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(mockDocument);
+    (prisma.userConsent.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(mockConsent);
 
     const res = await getRequest(
       "/consent/status?documentSlug=terms-of-service&visitorId=visitor-abc",
@@ -318,12 +294,10 @@ describe("GET /consent/status", () => {
     const outdatedDocument = { ...mockDocument, version: "2024-02" };
     const oldConsent = { ...mockConsent, documentVersion: "2024-01" };
 
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(outdatedDocument);
-    (
-      prisma.userConsent.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(oldConsent);
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(
+      outdatedDocument,
+    );
+    (prisma.userConsent.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(oldConsent);
 
     const res = await getRequest(
       "/consent/status?documentSlug=terms-of-service&visitorId=visitor-abc",
@@ -338,9 +312,9 @@ describe("GET /consent/status", () => {
   });
 
   it("returns 500 when Prisma throws", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockRejectedValue(new Error("DB error"));
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error("DB error"),
+    );
 
     const res = await getRequest(
       "/consent/status?documentSlug=terms-of-service&visitorId=visitor-abc",
@@ -371,9 +345,7 @@ describe("DELETE /consent", () => {
   });
 
   it("returns 200 with success and withdrawnCount", async () => {
-    (
-      prisma.userConsent.updateMany as ReturnType<typeof vi.fn>
-    ).mockResolvedValue({ count: 2 });
+    (prisma.userConsent.updateMany as ReturnType<typeof vi.fn>).mockResolvedValue({ count: 2 });
 
     const res = await authedDeleteRequest(
       "/consent?documentSlug=terms-of-service&visitorId=visitor-abc",
@@ -386,9 +358,7 @@ describe("DELETE /consent", () => {
   });
 
   it("returns withdrawnCount: 0 when no matching records", async () => {
-    (
-      prisma.userConsent.updateMany as ReturnType<typeof vi.fn>
-    ).mockResolvedValue({ count: 0 });
+    (prisma.userConsent.updateMany as ReturnType<typeof vi.fn>).mockResolvedValue({ count: 0 });
 
     const res = await authedDeleteRequest(
       "/consent?documentSlug=terms-of-service&visitorId=unknown-visitor",
@@ -401,9 +371,9 @@ describe("DELETE /consent", () => {
   });
 
   it("returns 500 when Prisma throws", async () => {
-    (
-      prisma.userConsent.updateMany as ReturnType<typeof vi.fn>
-    ).mockRejectedValue(new Error("DB error"));
+    (prisma.userConsent.updateMany as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error("DB error"),
+    );
 
     const res = await authedDeleteRequest(
       "/consent?documentSlug=terms-of-service&visitorId=visitor-abc",
@@ -434,9 +404,7 @@ describe("POST /cookie-consent", () => {
   };
 
   it("returns 200 with success and preferences on valid body", async () => {
-    (prisma.cookieConsent.upsert as ReturnType<typeof vi.fn>).mockResolvedValue(
-      mockCookieConsent,
-    );
+    (prisma.cookieConsent.upsert as ReturnType<typeof vi.fn>).mockResolvedValue(mockCookieConsent);
 
     const res = await jsonRequest("POST", "/cookie-consent", validCookieBody);
     const body = await res.json();
@@ -475,9 +443,7 @@ describe("POST /cookie-consent", () => {
   });
 
   it("uses boolean defaults for omitted preference fields", async () => {
-    (prisma.cookieConsent.upsert as ReturnType<typeof vi.fn>).mockResolvedValue(
-      mockCookieConsent,
-    );
+    (prisma.cookieConsent.upsert as ReturnType<typeof vi.fn>).mockResolvedValue(mockCookieConsent);
 
     const res = await jsonRequest("POST", "/cookie-consent", {
       visitorId: "visitor-abc",
@@ -518,9 +484,7 @@ describe("GET /cookie-consent", () => {
   });
 
   it("returns hasConsent: false when no consent record exists", async () => {
-    (
-      prisma.cookieConsent.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(null);
+    (prisma.cookieConsent.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(null);
 
     const res = await getRequest("/cookie-consent?visitorId=visitor-abc");
     const body = await res.json();
@@ -531,9 +495,9 @@ describe("GET /cookie-consent", () => {
   });
 
   it("returns hasConsent: true with preferences when consent exists", async () => {
-    (
-      prisma.cookieConsent.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(mockCookieConsent);
+    (prisma.cookieConsent.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(
+      mockCookieConsent,
+    );
 
     const res = await getRequest("/cookie-consent?visitorId=visitor-abc");
     const body = await res.json();
@@ -550,9 +514,9 @@ describe("GET /cookie-consent", () => {
   });
 
   it("returns 500 when Prisma throws", async () => {
-    (
-      prisma.cookieConsent.findFirst as ReturnType<typeof vi.fn>
-    ).mockRejectedValue(new Error("DB error"));
+    (prisma.cookieConsent.findFirst as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error("DB error"),
+    );
 
     const res = await getRequest("/cookie-consent?visitorId=visitor-abc");
     const body = await res.json();
@@ -571,9 +535,7 @@ describe("GET /cookie-consent", () => {
 
 describe("GET /documents", () => {
   it("returns 200 with deduplicated documents list", async () => {
-    (
-      prisma.legalDocument.findMany as ReturnType<typeof vi.fn>
-    ).mockResolvedValue([mockDocument]);
+    (prisma.legalDocument.findMany as ReturnType<typeof vi.fn>).mockResolvedValue([mockDocument]);
 
     const res = await getRequest("/documents");
     const body = await res.json();
@@ -585,9 +547,7 @@ describe("GET /documents", () => {
   });
 
   it("returns an empty array when no documents found", async () => {
-    (
-      prisma.legalDocument.findMany as ReturnType<typeof vi.fn>
-    ).mockResolvedValue([]);
+    (prisma.legalDocument.findMany as ReturnType<typeof vi.fn>).mockResolvedValue([]);
 
     const res = await getRequest("/documents");
     const body = await res.json();
@@ -598,9 +558,10 @@ describe("GET /documents", () => {
 
   it("deduplicates documents with the same slug, keeping only the first (latest)", async () => {
     const olderDoc = { ...mockDocument, id: "doc-2", version: "2023-01" };
-    (
-      prisma.legalDocument.findMany as ReturnType<typeof vi.fn>
-    ).mockResolvedValue([mockDocument, olderDoc]);
+    (prisma.legalDocument.findMany as ReturnType<typeof vi.fn>).mockResolvedValue([
+      mockDocument,
+      olderDoc,
+    ]);
 
     const res = await getRequest("/documents");
     const body = await res.json();
@@ -612,9 +573,9 @@ describe("GET /documents", () => {
   });
 
   it("returns 500 when Prisma throws", async () => {
-    (
-      prisma.legalDocument.findMany as ReturnType<typeof vi.fn>
-    ).mockRejectedValue(new Error("DB error"));
+    (prisma.legalDocument.findMany as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error("DB error"),
+    );
 
     const res = await getRequest("/documents");
     const body = await res.json();
@@ -633,9 +594,7 @@ describe("GET /documents", () => {
 
 describe("GET /documents/:slug", () => {
   it("returns 200 with the document when found", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(mockDocument);
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(mockDocument);
 
     const res = await getRequest("/documents/terms-of-service");
     const body = await res.json();
@@ -646,9 +605,7 @@ describe("GET /documents/:slug", () => {
   });
 
   it("returns 404 when document not found", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockResolvedValue(null);
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockResolvedValue(null);
 
     const res = await getRequest("/documents/nonexistent");
     const body = await res.json();
@@ -661,9 +618,9 @@ describe("GET /documents/:slug", () => {
   });
 
   it("returns 500 when Prisma throws", async () => {
-    (
-      prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>
-    ).mockRejectedValue(new Error("DB error"));
+    (prisma.legalDocument.findFirst as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error("DB error"),
+    );
 
     const res = await getRequest("/documents/terms-of-service");
     const body = await res.json();
@@ -689,9 +646,7 @@ describe("POST /contact", () => {
   };
 
   it("returns 200 with submissionId on valid payload", async () => {
-    (
-      prisma.contactSubmission.create as ReturnType<typeof vi.fn>
-    ).mockResolvedValue({
+    (prisma.contactSubmission.create as ReturnType<typeof vi.fn>).mockResolvedValue({
       id: "sub-1",
       ...validContactBody,
       category: "general",
@@ -725,9 +680,9 @@ describe("POST /contact", () => {
   });
 
   it("returns 500 when Prisma throws", async () => {
-    (
-      prisma.contactSubmission.create as ReturnType<typeof vi.fn>
-    ).mockRejectedValue(new Error("DB error"));
+    (prisma.contactSubmission.create as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error("DB error"),
+    );
 
     const res = await jsonRequest("POST", "/contact", validContactBody);
     const body = await res.json();

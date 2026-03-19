@@ -1,17 +1,13 @@
 "use client";
 
+import { AnimateIn } from "@nebutra/ui/components";
+import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { ArrowRight } from "lucide-react";
-import { AnimateIn } from "@nebutra/ui/components";
 import { projects as defaultProjects, type Project } from "@/lib/projects";
 import { WorkGrid } from "./work-grid";
 
-export function SelectedWorks({
-  projects: projectsProp,
-}: {
-  projects?: Project[];
-}) {
+export function SelectedWorks({ projects: projectsProp }: { projects?: Project[] }) {
   const t = useTranslations("works");
   const allProjects = projectsProp ?? defaultProjects;
   const topProjects = allProjects.slice(0, 4);

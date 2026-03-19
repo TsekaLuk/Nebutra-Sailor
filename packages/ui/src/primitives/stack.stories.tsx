@@ -54,9 +54,7 @@ export const FormLayout: Story = {
       </Stack>
       <Stack gap={1}>
         <label className="text-sm font-medium">Password</label>
-        <div className="border rounded px-3 py-2 text-sm text-muted-foreground">
-          ••••••••
-        </div>
+        <div className="border rounded px-3 py-2 text-sm text-muted-foreground">••••••••</div>
       </Stack>
       <div className="rounded bg-primary px-4 py-2 text-center text-sm text-primary-foreground cursor-pointer">
         Sign in
@@ -73,9 +71,7 @@ export const CenteredCard: Story = {
         <span className="font-semibold text-sm">Jane Doe</span>
         <span className="text-xs text-muted-foreground">Product Designer</span>
       </Stack>
-      <div className="border rounded-full px-4 py-1 text-xs cursor-pointer">
-        Follow
-      </div>
+      <div className="border rounded-full px-4 py-1 text-xs cursor-pointer">Follow</div>
     </Stack>
   ),
 };
@@ -85,10 +81,7 @@ export const TightSpacing: Story = {
     <Stack gap={1} className="w-64 border rounded-lg p-4">
       <span className="text-xs text-muted-foreground">NAVIGATION</span>
       {["Dashboard", "Analytics", "Settings", "Help"].map((item) => (
-        <div
-          key={item}
-          className="rounded px-3 py-1.5 text-sm hover:bg-muted cursor-pointer"
-        >
+        <div key={item} className="rounded px-3 py-1.5 text-sm hover:bg-muted cursor-pointer">
           {item}
         </div>
       ))}

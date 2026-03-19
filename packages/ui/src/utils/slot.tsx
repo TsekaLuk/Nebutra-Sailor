@@ -47,7 +47,7 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>(
     }
 
     return null;
-  }
+  },
 );
 
 Slot.displayName = "Slot";

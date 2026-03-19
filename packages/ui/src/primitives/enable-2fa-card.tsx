@@ -1,17 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { Shield } from "lucide-react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "./card";
-import { Separator } from "./separator";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "./input-otp";
+import type * as React from "react";
 import { cn } from "../utils/cn";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./card";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "./input-otp";
+import { Separator } from "./separator";
 
 export interface Enable2FAStep {
   /** Step title */
@@ -69,8 +63,7 @@ export function Enable2FACard({
     },
     {
       title: "Enter code",
-      description:
-        "Enter the verification code provided by your mobile authentication app.",
+      description: "Enter the verification code provided by your mobile authentication app.",
       content: (
         <InputOTP
           maxLength={otpLength}
@@ -91,10 +84,7 @@ export function Enable2FACard({
 
   return (
     <Card
-      className={cn(
-        "flex w-full max-w-[500px] flex-col gap-6 p-5 shadow-none md:p-8",
-        className,
-      )}
+      className={cn("flex w-full max-w-[500px] flex-col gap-6 p-5 shadow-none md:p-8", className)}
     >
       <CardHeader className="flex flex-col items-center gap-2 p-0">
         {/* Icon */}
@@ -106,9 +96,7 @@ export function Enable2FACard({
 
         {/* Header Text */}
         <div className="flex flex-col space-y-1.5 text-center">
-          <CardTitle className="font-medium md:text-xl">
-            Enable Two-Factor Authentication
-          </CardTitle>
+          <CardTitle className="font-medium md:text-xl">Enable Two-Factor Authentication</CardTitle>
           <CardDescription className="tracking-[-0.006em]">
             Secure your account with an additional layer of protection.
           </CardDescription>

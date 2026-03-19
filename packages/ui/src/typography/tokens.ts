@@ -61,8 +61,7 @@ export const fontFamilies = {
   primaryCJK: `${FONT_FAMILY_PRIMARY}, ${FONT_FAMILY_CJK}`,
 
   /** System font stack (fast fallback, no web fonts) */
-  system:
-    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+  system: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
 } as const;
 
 // ============================================

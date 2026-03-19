@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Shield, Zap, Star, AlertTriangle } from "lucide-react";
+import { AlertTriangle, Shield, Star, Zap } from "lucide-react";
 import { ColorBadge } from "./color-badge";
 
 const meta = {
@@ -150,13 +150,7 @@ export const SubtleVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-2">
       {(
-        [
-          "blue-subtle",
-          "purple-subtle",
-          "green-subtle",
-          "amber-subtle",
-          "red-subtle",
-        ] as const
+        ["blue-subtle", "purple-subtle", "green-subtle", "amber-subtle", "red-subtle"] as const
       ).map((v) => (
         <ColorBadge key={v} variant={v}>
           {v}

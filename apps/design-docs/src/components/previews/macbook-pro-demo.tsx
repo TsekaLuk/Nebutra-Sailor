@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { MacbookPro } from "@nebutra/ui/primitives"
+import { MacbookPro } from "@nebutra/ui/primitives";
 
 export function MacbookProDemo() {
   return (
@@ -10,5 +10,5 @@ export function MacbookProDemo() {
         className="h-auto w-full"
       />
     </div>
-  )
+  );
 }

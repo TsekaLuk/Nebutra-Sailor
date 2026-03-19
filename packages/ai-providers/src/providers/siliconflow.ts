@@ -1,21 +1,21 @@
 import OpenAI from "openai";
 import type {
-  ProviderConfig,
+  ChatCompletionChunk,
   ChatCompletionRequest,
   ChatCompletionResponse,
-  ChatCompletionChunk,
   EmbeddingRequest,
   EmbeddingResponse,
-  RerankRequest,
-  RerankResponse,
   ImageGenerationRequest,
   ImageGenerationResponse,
+  ProviderConfig,
+  RerankRequest,
+  RerankResponse,
 } from "../types.js";
 import {
   BaseAIProvider,
-  registerProvider,
-  type ProviderModel,
   type ProviderCapability,
+  type ProviderModel,
+  registerProvider,
 } from "./base.js";
 
 // ============================================
@@ -160,9 +160,7 @@ export class SiliconFlowProvider extends BaseAIProvider {
   constructor(config: SiliconFlowConfig) {
     const baseUrl =
       config.baseUrl ||
-      (config.useInternational
-        ? SILICONFLOW_BASE_URL_INTL
-        : SILICONFLOW_BASE_URL_CN);
+      (config.useInternational ? SILICONFLOW_BASE_URL_INTL : SILICONFLOW_BASE_URL_CN);
 
     super({
       ...config,
@@ -325,19 +323,12 @@ export class SiliconFlowProvider extends BaseAIProvider {
   // Image Generation
   // ============================================
 
-  async generateImage(
-    request: ImageGenerationRequest,
-  ): Promise<ImageGenerationResponse> {
+  async generateImage(request: ImageGenerationRequest): Promise<ImageGenerationResponse> {
     const response = await this.client.images.generate({
       model: request.model,
       prompt: request.prompt,
       n: request.n,
-      size: request.size as
-        | "256x256"
-        | "512x512"
-        | "1024x1024"
-        | "1792x1024"
-        | "1024x1792",
+      size: request.size as "256x256" | "512x512" | "1024x1024" | "1792x1024" | "1024x1792",
       quality: request.quality,
       style: request.style,
       response_format: request.responseFormat,
@@ -415,15 +406,9 @@ export class SiliconFlowProvider extends BaseAIProvider {
             },
           })),
           // SiliconFlow returns reasoning_content for DeepSeek-R1 models
-          reasoningContent: (c.message as { reasoning_content?: string })
-            .reasoning_content,
+          reasoningContent: (c.message as { reasoning_content?: string }).reasoning_content,
         },
-        finishReason: c.finish_reason as
-          | "stop"
-          | "length"
-          | "tool_calls"
-          | "content_filter"
-          | null,
+        finishReason: c.finish_reason as "stop" | "length" | "tool_calls" | "content_filter" | null,
       })),
       usage: response.usage
         ? {
@@ -458,21 +443,13 @@ export class SiliconFlowProvider extends BaseAIProvider {
             },
           })),
         },
-        finishReason: c.finish_reason as
-          | "stop"
-          | "length"
-          | "tool_calls"
-          | "content_filter"
-          | null,
+        finishReason: c.finish_reason as "stop" | "length" | "tool_calls" | "content_filter" | null,
       })),
     };
   }
 }
 
 // Register the provider
-registerProvider(
-  "siliconflow",
-  (config) => new SiliconFlowProvider(config as SiliconFlowConfig),
-);
+registerProvider("siliconflow", (config) => new SiliconFlowProvider(config as SiliconFlowConfig));
 
 export default SiliconFlowProvider;

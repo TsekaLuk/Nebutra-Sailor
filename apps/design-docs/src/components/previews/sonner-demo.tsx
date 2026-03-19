@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { Button } from "@nebutra/ui/primitives"
-import { useState } from "react"
-import { CheckCircle2 } from "lucide-react"
+import { Button } from "@nebutra/ui/primitives";
+import { CheckCircle2 } from "lucide-react";
+import { useState } from "react";
 
 export function SonnerDemo() {
-  const [showToast, setShowToast] = useState(false)
+  const [showToast, setShowToast] = useState(false);
 
   return (
     <div className="relative flex h-[300px] w-full items-center justify-center overflow-hidden rounded-xl border bg-muted/30">
       <Button
         variant="default"
         onClick={() => {
-          setShowToast(false)
-          setTimeout(() => setShowToast(true), 100)
+          setShowToast(false);
+          setTimeout(() => setShowToast(true), 100);
         }}
       >
         Show Toast Notification
@@ -34,5 +34,5 @@ export function SonnerDemo() {
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
+import { ErrorState, LoadingState } from "@nebutra/ui/layout";
 import type { Meta, StoryObj } from "@storybook/react";
-import { LoadingState, ErrorState } from "@nebutra/ui/layout";
 
 // ── LoadingState ─────────────────────────────────────────────────────────────
 
@@ -55,10 +55,7 @@ export const ErrorExample: StoryObj = {
 
 export const ErrorNoRetry: StoryObj = {
   render: () => (
-    <ErrorState
-      title="Access denied"
-      message="You do not have permission to view this resource."
-    />
+    <ErrorState title="Access denied" message="You do not have permission to view this resource." />
   ),
   name: "ErrorState / No Retry",
 };

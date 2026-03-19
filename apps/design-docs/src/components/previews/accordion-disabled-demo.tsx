@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function AccordionDisabledDemo() {
   return (
@@ -16,5 +16,5 @@ export function AccordionDisabledDemo() {
         <AccordionContent>This will not open.</AccordionContent>
       </AccordionItem>
     </Accordion>
-  )
+  );
 }

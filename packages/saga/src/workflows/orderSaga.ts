@@ -1,4 +1,4 @@
-import { createSaga, SagaStep } from "../orchestrator";
+import { createSaga, type SagaStep } from "../orchestrator";
 
 export interface OrderContext {
   orderId: string;
@@ -85,7 +85,9 @@ export function createOrderSaga() {
 /**
  * Execute an order saga
  */
-export async function executeOrderSaga(order: Omit<OrderContext, "inventoryReserved" | "paymentId" | "orderRecordId" | "emailSent">) {
+export async function executeOrderSaga(
+  order: Omit<OrderContext, "inventoryReserved" | "paymentId" | "orderRecordId" | "emailSent">,
+) {
   const saga = createOrderSaga();
   return saga.execute(order as OrderContext);
 }

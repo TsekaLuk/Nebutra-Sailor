@@ -1,28 +1,27 @@
+export type { ConsentApiConfig } from "./service";
 export {
-  // Visitor ID
-  generateVisitorId,
-  getVisitorId,
+  acceptAllCookies,
+  cacheDocumentConsent,
+  // API client
+  configureConsentApi,
   // Cookie consent
   defaultCookiePreferences,
+  // Visitor ID
+  generateVisitorId,
+  getConsentStatus,
   getCookieConsent,
-  saveCookieConsent,
-  acceptAllCookies,
-  rejectAllCookies,
-  hasCookieConsent,
-  isCookieCategoryAllowed,
   getCookieConsentExpiry,
   // Document consent
   getDocumentConsents,
-  cacheDocumentConsent,
+  getVisitorId,
+  hasCookieConsent,
   hasDocumentConsentCached,
-  // API client
-  configureConsentApi,
-  recordDocumentConsent,
-  getConsentStatus,
+  initializeGTMConsentMode,
+  isCookieCategoryAllowed,
   recordCookieConsent,
+  recordDocumentConsent,
+  rejectAllCookies,
+  saveCookieConsent,
   // GTM integration
   updateGTMConsent,
-  initializeGTMConsentMode,
 } from "./service";
-
-export type { ConsentApiConfig } from "./service";

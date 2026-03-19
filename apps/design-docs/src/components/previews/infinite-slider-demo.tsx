@@ -1,16 +1,7 @@
-"use client"
+"use client";
 
-import { InfiniteSlider } from "@nebutra/ui/primitives"
-import {
-  Cpu,
-  Cloud,
-  Database,
-  Network,
-  Shield,
-  Zap,
-  Lock,
-  Code,
-} from "lucide-react"
+import { InfiniteSlider } from "@nebutra/ui/primitives";
+import { Cloud, Code, Cpu, Database, Lock, Network, Shield, Zap } from "lucide-react";
 
 export function InfiniteSliderDemo() {
   const icons = [
@@ -22,7 +13,7 @@ export function InfiniteSliderDemo() {
     { icon: <Zap className="size-8" />, label: "Serverless" },
     { icon: <Lock className="size-8" />, label: "IAM" },
     { icon: <Code className="size-8" />, label: "DevTools" },
-  ]
+  ];
 
   return (
     <div className="max-w-4xl py-12 gap-16 mx-auto flex w-full flex-col overflow-hidden">
@@ -45,13 +36,7 @@ export function InfiniteSliderDemo() {
         </InfiniteSlider>
 
         {/* Slow left-to-right on hover */}
-        <InfiniteSlider
-          gap={24}
-          speed={40}
-          speedOnHover={10}
-          reverse
-          className="mt-8"
-        >
+        <InfiniteSlider gap={24} speed={40} speedOnHover={10} reverse className="mt-8">
           {icons.reverse().map((item, i) => (
             <div
               key={i}
@@ -64,5 +49,5 @@ export function InfiniteSliderDemo() {
         </InfiniteSlider>
       </div>
     </div>
-  )
+  );
 }

@@ -1,29 +1,19 @@
 "use client";
 
-import type { ComponentProps } from "react";
-import { GripVertical } from "lucide-react";
-import {
-  Group,
-  Panel as ResizablePanel,
-  Separator,
-} from "react-resizable-panels";
 import { cn } from "@nebutra/ui/utils";
+import { GripVertical } from "lucide-react";
+import type { ComponentProps } from "react";
+import { Group, Panel as ResizablePanel, Separator } from "react-resizable-panels";
 
 type ResizablePanelGroupProps = ComponentProps<typeof Group>;
 type ResizableHandleProps = ComponentProps<typeof Separator> & {
   withHandle?: boolean;
 };
 
-export function ResizablePanelGroup({
-  className,
-  ...props
-}: ResizablePanelGroupProps) {
+export function ResizablePanelGroup({ className, ...props }: ResizablePanelGroupProps) {
   return (
     <Group
-      className={cn(
-        "flex h-full w-full data-[panel-group-direction=vertical]:flex-col",
-        className,
-      )}
+      className={cn("flex h-full w-full data-[panel-group-direction=vertical]:flex-col", className)}
       {...props}
     />
   );
@@ -31,11 +21,7 @@ export function ResizablePanelGroup({
 
 export { ResizablePanel };
 
-export function ResizableHandle({
-  className,
-  withHandle = false,
-  ...props
-}: ResizableHandleProps) {
+export function ResizableHandle({ className, withHandle = false, ...props }: ResizableHandleProps) {
   return (
     <Separator
       className={cn(

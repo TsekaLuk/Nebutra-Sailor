@@ -20,7 +20,7 @@ const args = Object.fromEntries(
   process.argv.slice(2).map((arg) => {
     const [key, value] = arg.replace(/^--/, "").split("=");
     return [key, value];
-  })
+  }),
 );
 
 const primary = args.primary ?? "#0033FE";
@@ -39,27 +39,37 @@ function hexToHsl(hex) {
   const b = parseInt(hex.slice(5, 7), 16) / 255;
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
-  let h = 0, s = 0;
+  let h = 0,
+    s = 0;
   const l = (max + min) / 2;
   if (max !== min) {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
-      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-      case g: h = ((b - r) / d + 2) / 6; break;
-      case b: h = ((r - g) / d + 4) / 6; break;
+      case r:
+        h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+        break;
+      case g:
+        h = ((b - r) / d + 2) / 6;
+        break;
+      case b:
+        h = ((r - g) / d + 4) / 6;
+        break;
     }
   }
   return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
 }
 
 function hslToHex(h, s, l) {
-  const sN = s / 100, lN = l / 100;
+  const sN = s / 100,
+    lN = l / 100;
   const a = sN * Math.min(lN, 1 - lN);
   const f = (n) => {
     const k = (n + h / 30) % 12;
     const color = lN - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-    return Math.round(255 * color).toString(16).padStart(2, "0");
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, "0");
   };
   return `#${f(0)}${f(8)}${f(4)}`;
 }
@@ -71,10 +81,22 @@ function hslToHex(h, s, l) {
 function generateScale(hex) {
   const [h, s, l] = hexToHsl(hex);
   // Lightness values for each step (50→950)
-  const lightnesses = [97, 93, 85, 75, 62, l, Math.max(l - 10, 5), Math.max(l - 20, 3), Math.max(l - 30, 2), Math.max(l - 40, 1), Math.max(l - 50, 0)];
+  const lightnesses = [
+    97,
+    93,
+    85,
+    75,
+    62,
+    l,
+    Math.max(l - 10, 5),
+    Math.max(l - 20, 3),
+    Math.max(l - 30, 2),
+    Math.max(l - 40, 1),
+    Math.max(l - 50, 0),
+  ];
   const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
   return Object.fromEntries(
-    steps.map((step, i) => [step, hslToHex(h, Math.min(s, 95), Math.max(lightnesses[i], 1))])
+    steps.map((step, i) => [step, hslToHex(h, Math.min(s, 95), Math.max(lightnesses[i], 1))]),
   );
 }
 
@@ -99,10 +121,14 @@ const output = `/**
 
 :root {
   /* PRIMARY BRAND SCALE (generated from ${primary}) */
-${Object.entries(primaryScale).map(([step, hex]) => `  --nebutra-blue-${pad(step)}: ${hex};`).join("\n")}
+${Object.entries(primaryScale)
+  .map(([step, hex]) => `  --nebutra-blue-${pad(step)}: ${hex};`)
+  .join("\n")}
 
   /* SECONDARY ACCENT SCALE (generated from ${secondary}) */
-${Object.entries(secondaryScale).map(([step, hex]) => `  --nebutra-cyan-${pad(step)}: ${hex};`).join("\n")}
+${Object.entries(secondaryScale)
+  .map(([step, hex]) => `  --nebutra-cyan-${pad(step)}: ${hex};`)
+  .join("\n")}
 
   /* Brand gradients (auto-derived from 500 values above) */
   --brand-gradient: linear-gradient(135deg, var(--nebutra-blue-500) 0%, var(--nebutra-cyan-500) 100%);

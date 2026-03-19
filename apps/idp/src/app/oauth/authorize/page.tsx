@@ -10,35 +10,29 @@
  * Design: Glassmorphism card, brand-consistent, premium UX.
  */
 
-import { SCOPE_DESCRIPTIONS } from "@nebutra/oauth-server"
-import { ConsentForm } from "./consent-form"
+import { SCOPE_DESCRIPTIONS } from "@nebutra/oauth-server";
+import { ConsentForm } from "./consent-form";
 
 // Force dynamic rendering — consent page requires database at runtime
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 interface AuthorizePageProps {
-  searchParams: Promise<{ uid?: string }>
+  searchParams: Promise<{ uid?: string }>;
 }
 
-export default async function AuthorizePage({
-  searchParams,
-}: AuthorizePageProps) {
-  const params = await searchParams
-  const uid = params.uid
+export default async function AuthorizePage({ searchParams }: AuthorizePageProps) {
+  const params = await searchParams;
+  const uid = params.uid;
 
   if (!uid) {
     return (
       <div className="p-4 flex min-h-screen items-center justify-center">
         <div className="border-red-500/20 bg-red-950/30 px-8 py-6 backdrop-blur-xl rounded-2xl border text-center">
-          <h1 className="text-xl font-semibold text-red-400">
-            Invalid Request
-          </h1>
-          <p className="mt-2 text-sm text-red-300/70">
-            Missing interaction ID.
-          </p>
+          <h1 className="text-xl font-semibold text-red-400">Invalid Request</h1>
+          <p className="mt-2 text-sm text-red-300/70">Missing interaction ID.</p>
         </div>
       </div>
-    )
+    );
   }
 
   // In production, this will dynamically import the OIDC provider
@@ -55,24 +49,19 @@ export default async function AuthorizePage({
       scope: "openid profile",
       redirect_uri: "",
     },
-  }
+  };
 
   const requestedScopes = ((interactionDetails.params.scope as string) || "")
     .split(" ")
-    .filter(Boolean)
+    .filter(Boolean);
 
   const scopeItems = requestedScopes.map((scope) => ({
     scope,
-    ...((
-      SCOPE_DESCRIPTIONS as Record<
-        string,
-        { label: string; description: string }
-      >
-    )[scope] || {
+    ...((SCOPE_DESCRIPTIONS as Record<string, { label: string; description: string }>)[scope] || {
       label: scope,
       description: `Access to ${scope}`,
     }),
-  }))
+  }));
 
   return (
     <div className="p-4 flex min-h-screen items-center justify-center">
@@ -92,9 +81,7 @@ export default async function AuthorizePage({
             <div className="mb-4 h-16 w-16 from-blue-500 to-cyan-500 text-2xl font-bold shadow-blue-500/25 mx-auto flex items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg">
               N
             </div>
-            <h1 className="text-xl font-semibold tracking-tight">
-              Authorize Access
-            </h1>
+            <h1 className="text-xl font-semibold tracking-tight">Authorize Access</h1>
             <p className="mt-2 text-sm text-white/60">
               <span className="font-medium text-white/90">
                 {interactionDetails.params.client_id}
@@ -122,11 +109,7 @@ export default async function AuthorizePage({
                       stroke="currentColor"
                       strokeWidth={3}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                   <div>
@@ -143,12 +126,11 @@ export default async function AuthorizePage({
 
           {/* Footer */}
           <p className="mt-6 text-xs text-white/30 text-center">
-            By authorizing, you agree to share the above data with this
-            application. You can revoke access at any time from your Nebutra
-            settings.
+            By authorizing, you agree to share the above data with this application. You can revoke
+            access at any time from your Nebutra settings.
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Combobox } from "@nebutra/ui/primitives"
+import { Combobox } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function ComboboxDefaultValueDemo() {
   return (
@@ -15,5 +15,5 @@ export function ComboboxDefaultValueDemo() {
       defaultValue="next"
       placeholder="选择框架..."
     />
-  )
+  );
 }

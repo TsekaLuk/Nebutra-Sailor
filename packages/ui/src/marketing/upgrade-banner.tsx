@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { X } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface UpgradeBannerProps {
@@ -112,9 +112,7 @@ export function UpgradeBanner({
             >
               {buttonText}
             </button>
-            <span className="text-[0.8125rem] text-primary">
-              {description}
-            </span>
+            <span className="text-[0.8125rem] text-primary">{description}</span>
             {onClose && (
               <button
                 onClick={onClose}

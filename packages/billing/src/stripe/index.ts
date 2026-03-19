@@ -1,19 +1,19 @@
 export {
-  initStripe,
   getStripe,
   getWebhookSecret,
-  type StripeConfig,
+  initStripe,
   type Stripe,
+  type StripeConfig,
 } from "./client.js";
 
 export {
-  createCustomer,
-  getCustomer,
-  updateCustomer,
-  deleteCustomer,
-  getOrCreateCustomer,
+  type CreateCustomerInput,
   createBillingPortalSession,
   createCheckoutSession,
-  type CreateCustomerInput,
+  createCustomer,
+  deleteCustomer,
+  getCustomer,
+  getOrCreateCustomer,
   type UpdateCustomerInput,
+  updateCustomer,
 } from "./customers.js";

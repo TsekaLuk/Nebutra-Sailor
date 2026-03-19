@@ -24,9 +24,7 @@ export const Default: Story = {
     <div className="relative h-[400px] w-full overflow-hidden">
       <GrainGradientBackground />
       <div className="relative z-10 flex h-full items-center justify-center">
-        <p className="text-lg font-semibold text-white drop-shadow">
-          Default grain gradient
-        </p>
+        <p className="text-lg font-semibold text-white drop-shadow">Default grain gradient</p>
       </div>
     </div>
   ),
@@ -59,9 +57,7 @@ export const OceanSunrise: Story = {
         speed={0.3}
       />
       <div className="relative z-10 flex h-full items-center justify-center">
-        <p className="text-2xl font-semibold text-white drop-shadow">
-          Ocean Sunrise
-        </p>
+        <p className="text-2xl font-semibold text-white drop-shadow">Ocean Sunrise</p>
       </div>
     </div>
   ),
@@ -77,9 +73,7 @@ export const EarthTones: Story = {
         speed={0.2}
       />
       <div className="relative z-10 flex h-full items-center justify-center">
-        <p className="text-2xl font-semibold text-amber-100 drop-shadow">
-          Earth Tones
-        </p>
+        <p className="text-2xl font-semibold text-amber-100 drop-shadow">Earth Tones</p>
       </div>
     </div>
   ),

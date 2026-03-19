@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 const CollapsibleContext = React.createContext<{
@@ -30,14 +30,14 @@ const Collapsible = React.forwardRef<
       }
       onOpenChange?.(nextOpen);
     },
-    [isControlled, onOpenChange]
+    [isControlled, onOpenChange],
   );
 
   return (
     <CollapsibleContext.Provider value={{ open, onOpenChange: handleOpenChange, disabled }}>
-      <div 
-        ref={ref} 
-        className={className} 
+      <div
+        ref={ref}
+        className={className}
         data-state={open ? "open" : "closed"}
         data-disabled={disabled ? "" : undefined}
         {...props}
@@ -61,7 +61,7 @@ const CollapsibleTrigger = React.forwardRef<
       onOpenChange?.(!open);
       props.onClick?.(e);
     },
-    [disabled, open, onOpenChange, props]
+    [disabled, open, onOpenChange, props],
   );
 
   if (asChild && React.isValidElement(children)) {
@@ -73,7 +73,7 @@ const CollapsibleTrigger = React.forwardRef<
       "aria-expanded": open,
       "aria-controls": props["aria-controls"],
       disabled: disabled || props.disabled,
-      ...props
+      ...props,
     });
   }
 
@@ -95,40 +95,34 @@ const CollapsibleTrigger = React.forwardRef<
 });
 CollapsibleTrigger.displayName = "CollapsibleTrigger";
 
-const CollapsibleContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => {
-  const { open } = React.useContext(CollapsibleContext);
+const CollapsibleContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => {
+    const { open } = React.useContext(CollapsibleContext);
 
-  return (
-    <AnimatePresence initial={false}>
-      {open && (
-        <motion.div
-          key="content"
-          initial="collapsed"
-          animate="open"
-          exit="collapsed"
-          variants={{
-            open: { opacity: 1, height: "auto" },
-            collapsed: { opacity: 0, height: 0 },
-          }}
-          transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
-          className="overflow-hidden"
-        >
-          <div
-            ref={ref}
-            data-state="open"
-            className={cn("", className)}
-            {...props}
+    return (
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="content"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            variants={{
+              open: { opacity: 1, height: "auto" },
+              collapsed: { opacity: 0, height: 0 },
+            }}
+            transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+            className="overflow-hidden"
           >
-            {children}
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-});
+            <div ref={ref} data-state="open" className={cn("", className)} {...props}>
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  },
+);
 CollapsibleContent.displayName = "CollapsibleContent";
 
-export { Collapsible, CollapsibleTrigger, CollapsibleContent };
+export { Collapsible, CollapsibleContent, CollapsibleTrigger };

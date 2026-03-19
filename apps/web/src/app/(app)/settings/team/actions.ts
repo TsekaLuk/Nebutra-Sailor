@@ -1,7 +1,7 @@
 "use server";
 
-import { z } from "zod";
 import { auth, clerkClient } from "@clerk/nextjs/server";
+import { z } from "zod";
 import { hasPermission, resolveRole } from "@/lib/permissions";
 
 export type InviteState =
@@ -17,7 +17,7 @@ const inviteSchema = z.object({
 
 export async function inviteTeamMember(
   _prev: InviteState,
-  formData: FormData
+  formData: FormData,
 ): Promise<InviteState> {
   const { orgId: sessionOrgId, sessionClaims } = await auth();
 
@@ -58,8 +58,7 @@ export async function inviteTeamMember(
 
     return { status: "success" };
   } catch (err: unknown) {
-    const message =
-      err instanceof Error ? err.message : "Failed to send invitation.";
+    const message = err instanceof Error ? err.message : "Failed to send invitation.";
     return { status: "error", message };
   }
 }

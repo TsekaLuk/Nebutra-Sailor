@@ -1,8 +1,8 @@
 "use client";
 
-import { useId } from "react";
-import Image from "next/image";
 import { OpenAI } from "@lobehub/icons";
+import Image from "next/image";
+import { useId } from "react";
 
 function TechIcon({ src, alt }: { src: string; alt: string }) {
   return (
@@ -23,32 +23,32 @@ const si = (slug: string, alt: string) => (
 
 const TECHNOLOGIES = [
   // AI & Agents
-  { name: "Claude Code",    icon: si("anthropic",      "Claude Code") },
-  { name: "Antigravity",    icon: si("googlegemini",   "Antigravity") },
-  { name: "OpenAI Codex",   icon: <OpenAI size={24} className="w-6 h-6 dark:text-white" /> },
-  { name: "LangChain",      icon: si("langchain",      "LangChain") },
-  { name: "n8n",            icon: si("n8n",            "n8n") },
-  { name: "PyTorch",        icon: si("pytorch",        "PyTorch") },
+  { name: "Claude Code", icon: si("anthropic", "Claude Code") },
+  { name: "Antigravity", icon: si("googlegemini", "Antigravity") },
+  { name: "OpenAI Codex", icon: <OpenAI size={24} className="w-6 h-6 dark:text-white" /> },
+  { name: "LangChain", icon: si("langchain", "LangChain") },
+  { name: "n8n", icon: si("n8n", "n8n") },
+  { name: "PyTorch", icon: si("pytorch", "PyTorch") },
   // Frontend
-  { name: "Next.js",        icon: si("nextdotjs",      "Next.js") },
-  { name: "React 19",       icon: si("react",          "React 19") },
-  { name: "TypeScript",     icon: si("typescript",     "TypeScript") },
-  { name: "Tailwind v4",    icon: si("tailwindcss",    "Tailwind CSS") },
+  { name: "Next.js", icon: si("nextdotjs", "Next.js") },
+  { name: "React 19", icon: si("react", "React 19") },
+  { name: "TypeScript", icon: si("typescript", "TypeScript") },
+  { name: "Tailwind v4", icon: si("tailwindcss", "Tailwind CSS") },
   // Backend & Infra
-  { name: "Python",         icon: si("python",         "Python") },
-  { name: "PostgreSQL",     icon: si("postgresql",     "PostgreSQL") },
-  { name: "Prisma",         icon: si("prisma",         "Prisma") },
-  { name: "Vercel",         icon: si("vercel",         "Vercel") },
-  { name: "Turborepo",      icon: si("turborepo",      "Turborepo") },
+  { name: "Python", icon: si("python", "Python") },
+  { name: "PostgreSQL", icon: si("postgresql", "PostgreSQL") },
+  { name: "Prisma", icon: si("prisma", "Prisma") },
+  { name: "Vercel", icon: si("vercel", "Vercel") },
+  { name: "Turborepo", icon: si("turborepo", "Turborepo") },
   // Design & Product
-  { name: "Figma",          icon: si("figma",          "Figma") },
-  { name: "Framer",         icon: si("framer",         "Framer") },
-  { name: "Storybook",      icon: si("storybook",      "Storybook") },
+  { name: "Figma", icon: si("figma", "Figma") },
+  { name: "Framer", icon: si("framer", "Framer") },
+  { name: "Storybook", icon: si("storybook", "Storybook") },
   // Tools
-  { name: "PostHog",        icon: si("posthog",        "PostHog") },
-  { name: "Notion",         icon: si("notion",         "Notion") },
-  { name: "Linear",         icon: si("linear",         "Linear") },
-  { name: "Stripe",         icon: si("stripe",         "Stripe") },
+  { name: "PostHog", icon: si("posthog", "PostHog") },
+  { name: "Notion", icon: si("notion", "Notion") },
+  { name: "Linear", icon: si("linear", "Linear") },
+  { name: "Stripe", icon: si("stripe", "Stripe") },
 ];
 
 export function TechMarquee({ children }: { children?: React.ReactNode }) {
@@ -69,10 +69,13 @@ export function TechMarquee({ children }: { children?: React.ReactNode }) {
       {/* Marquee Track */}
       <div
         className="group/marquee w-full max-w-[100vw] overflow-hidden relative flex"
-        style={{ maskImage: "linear-gradient(90deg, transparent, black 15%, black 85%, transparent)" }}
+        style={{
+          maskImage: "linear-gradient(90deg, transparent, black 15%, black 85%, transparent)",
+        }}
       >
-        <style dangerouslySetInnerHTML={{
-          __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             @keyframes scrollLogos-${id} {
               0% { transform: translateX(0); }
               100% { transform: translateX(calc(-50% - 1rem)); } /* -1rem adjustment for gap */
@@ -86,7 +89,9 @@ export function TechMarquee({ children }: { children?: React.ReactNode }) {
             .logo-scroll-container-${id}:hover {
               animation-play-state: paused;
             }
-          `}} />
+          `,
+          }}
+        />
 
         <div className={`logo-scroll-container-${id} flex items-center`}>
           {[1, 2].map((set) => (
@@ -118,10 +123,10 @@ export function TechMarquee({ children }: { children?: React.ReactNode }) {
           ))}
         </div>
       </div>
-      
+
       {/* Decorative gradient floor */}
       <div className="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-white/5 to-transparent z-10" />
-      
+
       {children}
     </section>
   );

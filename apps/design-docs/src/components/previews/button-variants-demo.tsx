@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Button } from "@nebutra/ui/primitives"
+import { Button } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function ButtonVariantsDemo() {
   return (
     <div className="gap-3 flex">
@@ -14,5 +13,5 @@ export function ButtonVariantsDemo() {
       <Button variant="warning">Warning</Button>
       <Button variant="link">Learn more</Button>
     </div>
-  )
+  );
 }

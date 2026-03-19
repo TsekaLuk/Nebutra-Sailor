@@ -135,11 +135,7 @@ export function WordFadeIn({
       )}
     >
       {wordArray.map((word, i) => (
-        <motion.span
-          key={`${word}-${i}`}
-          variants={animationVariants}
-          custom={i}
-        >
+        <motion.span key={`${word}-${i}`} variants={animationVariants} custom={i}>
           {word}{" "}
         </motion.span>
       ))}

@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
-import { type LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface FeaturedDashboardSectionProps {
@@ -34,9 +34,7 @@ export function FeaturedDashboardSection({
     <section className={cn("bg-background py-24", className)}>
       <div className="mx-auto grid max-w-7xl grid-cols-1 px-6 md:grid-cols-2 md:grid-rows-2">
         {/* Top Left */}
-        <div className="overflow-hidden rounded-none border bg-muted p-4">
-          {topLeft}
-        </div>
+        <div className="overflow-hidden rounded-none border bg-muted p-4">{topLeft}</div>
 
         {/* Top Right */}
         <div className="flex flex-col justify-between gap-4 rounded-none border bg-card p-6">
@@ -44,14 +42,10 @@ export function FeaturedDashboardSection({
         </div>
 
         {/* Bottom Left */}
-        <div className="space-y-4 rounded-none border bg-muted p-6">
-          {bottomLeft}
-        </div>
+        <div className="space-y-4 rounded-none border bg-muted p-6">{bottomLeft}</div>
 
         {/* Bottom Right */}
-        <div className="grid rounded-none bg-card sm:grid-cols-2">
-          {bottomRight}
-        </div>
+        <div className="grid rounded-none bg-card sm:grid-cols-2">{bottomRight}</div>
       </div>
     </section>
   );
@@ -89,10 +83,7 @@ export function DashboardPanelHeader({
         {label}
       </div>
       <h3 className="text-xl font-normal text-foreground">
-        {title}{" "}
-        {subtitle && (
-          <span className="text-muted-foreground">{subtitle}</span>
-        )}
+        {title} {subtitle && <span className="text-muted-foreground">{subtitle}</span>}
       </h3>
     </div>
   );

@@ -1,19 +1,14 @@
-import Script from "next/script";
-import { hasLocale } from "next-intl";
-import { NextIntlClientProvider } from "next-intl";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import {
-  getMessages,
-  getTranslations,
-  setRequestLocale,
-} from "next-intl/server";
-import { notFound } from "next/navigation";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { routing, type Locale } from "@/i18n/routing";
-import { Providers } from "../providers";
+import { notFound } from "next/navigation";
+import Script from "next/script";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { type Locale, routing } from "@/i18n/routing";
 import { seoContent } from "@/lib/landing-content";
+import { Providers } from "../providers";
 
 interface LangLayoutProps {
   children: React.ReactNode;
@@ -83,8 +78,7 @@ const jsonLd = [
     name: "Nebutra Sailor",
     applicationCategory: "DeveloperApplication",
     url: "https://github.com/Nebutra/Nebutra-Sailor",
-    description:
-      "Production-ready Next.js monorepo template for AI SaaS products",
+    description: "Production-ready Next.js monorepo template for AI SaaS products",
     author: { "@id": "https://nebutra.com/#organization" },
     offers: {
       "@type": "Offer",
@@ -140,8 +134,7 @@ export async function generateMetadata({
   }
   languages["x-default"] = BASE_URL;
 
-  const canonicalPrefix =
-    lang === routing.defaultLocale ? "" : `/${lang}`;
+  const canonicalPrefix = lang === routing.defaultLocale ? "" : `/${lang}`;
 
   return {
     title: t("title"),
@@ -162,10 +155,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function LangLayout({
-  children,
-  params,
-}: LangLayoutProps) {
+export default async function LangLayout({ children, params }: LangLayoutProps) {
   const { lang } = await params;
 
   if (!hasLocale(routing.locales, lang)) {
@@ -177,11 +167,7 @@ export default async function LangLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html
-      lang={locale}
-      className={`min-h-screen antialiased`}
-      suppressHydrationWarning
-    >
+    <html lang={locale} className={`min-h-screen antialiased`} suppressHydrationWarning>
       <body className="antialiased">
         <a
           href="#main-content"
@@ -190,11 +176,7 @@ export default async function LangLayout({
           Skip to content
         </a>
 
-        <Script
-          id="nebutra-jsonld"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-        >
+        <Script id="nebutra-jsonld" type="application/ld+json" strategy="beforeInteractive">
           {toSafeJsonLd(jsonLd)}
         </Script>
 

@@ -1,9 +1,9 @@
 "use client";
 
+import { usePathname, useSearchParams } from "next/navigation";
 import posthog from "posthog-js";
 import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react";
-import { useEffect, useCallback, Suspense, type ReactNode } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { type ReactNode, Suspense, useCallback, useEffect } from "react";
 
 // ============================================================================
 // PostHog Provider
@@ -16,8 +16,7 @@ interface PostHogProviderProps {
 export function PostHogProvider({ children }: PostHogProviderProps) {
   useEffect(() => {
     const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
-    const host =
-      process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
+    const host = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
 
     if (!key) return;
 

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { ThemeSwitcher, ThemeSwitcherValue } from "@nebutra/ui/primitives"
-import { useState } from "react"
+import { ThemeSwitcher, type ThemeSwitcherValue } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export function ThemeSwitcherDemo() {
-  const [theme, setTheme] = useState<ThemeSwitcherValue>("system")
+  const [theme, setTheme] = useState<ThemeSwitcherValue>("system");
 
   return (
     <div className="gap-8 p-8 flex min-h-[300px] w-full flex-col items-center justify-center rounded-xl border bg-card">
@@ -20,11 +20,9 @@ export function ThemeSwitcherDemo() {
 
         <div className="text-sm gap-2 flex items-center text-muted-foreground">
           Current state:{" "}
-          <span className="px-2 py-1 rounded bg-muted font-mono text-foreground">
-            {theme}
-          </span>
+          <span className="px-2 py-1 rounded bg-muted font-mono text-foreground">{theme}</span>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { resolveConfig, defineConfig } from "../config";
+import { describe, expect, it } from "vitest";
+import { defineConfig, resolveConfig } from "../config";
 
 describe("resolveConfig", () => {
   it("resolves minimal config using full preset defaults", () => {

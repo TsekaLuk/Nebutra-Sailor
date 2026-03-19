@@ -34,20 +34,17 @@ export const NEBUTRA_CLAIMS = {
   "content:read": ["nebutra:organization_id"],
   "content:write": ["nebutra:organization_id"],
   "billing:read": ["nebutra:organization_id", "nebutra:plan"],
-}
+};
 
 /**
  * All supported scopes
  */
-export const SUPPORTED_SCOPES = Object.keys(NEBUTRA_CLAIMS)
+export const SUPPORTED_SCOPES = Object.keys(NEBUTRA_CLAIMS);
 
 /**
  * Human-readable scope descriptions for the consent screen.
  */
-export const SCOPE_DESCRIPTIONS: Record<
-  string,
-  { label: string; description: string }
-> = {
+export const SCOPE_DESCRIPTIONS: Record<string, { label: string; description: string }> = {
   openid: {
     label: "OpenID",
     description: "Verify your identity",
@@ -80,4 +77,4 @@ export const SCOPE_DESCRIPTIONS: Record<
     label: "Billing (Read)",
     description: "View your subscription and billing information",
   },
-}
+};

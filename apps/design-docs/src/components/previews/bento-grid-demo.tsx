@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Sparkles, Zap, Lock, Globe } from "lucide-react"
-import { BentoGrid, BentoCard } from "@nebutra/ui/primitives"
+import { BentoCard, BentoGrid } from "@nebutra/ui/primitives";
+import { Globe, Lock, Sparkles, Zap } from "lucide-react";
 
 export function BentoGridDemo() {
   return (
@@ -39,5 +39,5 @@ export function BentoGridDemo() {
         />
       </BentoGrid>
     </div>
-  )
+  );
 }

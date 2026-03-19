@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { AvatarGroup } from "@nebutra/ui/primitives"
+import { AvatarGroup } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function AvatarGroupSimpleDemo() {
   return (
@@ -16,5 +16,5 @@ export function AvatarGroupSimpleDemo() {
       max={4}
       size="sm"
     />
-  )
+  );
 }

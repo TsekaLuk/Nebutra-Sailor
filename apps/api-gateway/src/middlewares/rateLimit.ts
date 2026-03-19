@@ -1,8 +1,5 @@
-import { Context, Next } from "hono";
-import {
-  getRateLimiter,
-  getApiWeight,
-} from "@nebutra/rate-limit";
+import { getApiWeight, getRateLimiter } from "@nebutra/rate-limit";
+import type { Context, Next } from "hono";
 
 /**
  * Rate limiting middleware using token bucket algorithm
@@ -43,7 +40,7 @@ export async function rateLimitMiddleware(c: Context, next: Next) {
         message: "Rate limit exceeded. Please try again later.",
         retryAfter: result.retryAfter,
       },
-      429
+      429,
     );
   }
 
@@ -56,7 +53,7 @@ export async function rateLimitMiddleware(c: Context, next: Next) {
 export function createEndpointRateLimit(maxPerMinute: number) {
   const requests = new Map<string, { count: number; resetAt: number }>();
 
-  return async function (c: Context, next: Next) {
+  return async (c: Context, next: Next) => {
     const tenant = c.get("tenant");
     const key = tenant?.userId || tenant?.ip || "anonymous";
     const now = Date.now();
@@ -79,7 +76,7 @@ export function createEndpointRateLimit(maxPerMinute: number) {
           message: `Maximum ${maxPerMinute} requests per minute exceeded.`,
           retryAfter,
         },
-        429
+        429,
       );
     }
 

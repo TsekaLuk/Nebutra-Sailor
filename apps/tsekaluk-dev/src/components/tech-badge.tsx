@@ -1,82 +1,80 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { cn } from "@nebutra/ui/utils";
-
 // ── Geist icons (tech logos) ─────────────────────────────────────────────────
 import {
-  LogoPython,
-  LogoPythonMonochrome,
-  LogoNext,
-  LogoReact,
-  LogoNode,
-  LogoGoogle,
-  LogoMeta,
-  LogoAzure,
-  LogoCloudflare,
-  LogoFigma,
-  LogoSlack,
-  LogoSanity,
-  LogoRust,
-  LogoBun,
+  AcronymApi,
+  AcronymJs,
+  AcronymMarkdown,
+  AcronymTs,
+  Agent,
+  Agents,
   Analytics,
   BarChart,
-  LineChart,
-  ChartTrendingUp,
+  Brain,
+  BrowserChrome,
   ChartActivity,
-  ChartPie,
   ChartBarMiddle,
   ChartBarPeak,
   ChartBarRandom,
-  Database,
-  DataCache,
-  DataPoint,
+  ChartPie,
+  ChartTrendingUp,
+  Cloud,
   Code,
   CodeBlock,
   CodeBracket,
-  Brain,
-  Agent,
-  Agents,
-  Globe,
-  BrowserChrome,
-  Layers,
-  AcronymMarkdown,
-  AcronymTs,
-  AcronymJs,
-  AcronymApi,
-  FunctionPython,
+  Database,
+  DataCache,
+  DataPoint,
   Email,
-  Cloud,
+  FunctionPython,
+  Globe,
+  Layers,
+  LineChart,
+  LogoAzure,
+  LogoBun,
+  LogoCloudflare,
+  LogoFigma,
+  LogoGoogle,
+  LogoMeta,
+  LogoNext,
+  LogoNode,
+  LogoPython,
+  LogoPythonMonochrome,
+  LogoReact,
+  LogoRust,
+  LogoSanity,
+  LogoSlack,
 } from "@nebutra/icons";
-
 // ── Lobe icons (AI providers & dev tools) ────────────────────────────────────
 import {
   Anthropic,
+  Bilibili,
   Claude,
   ClaudeCode,
-  Gemini,
-  OpenAI,
   DeepSeek,
-  Qwen,
-  Ollama,
-  Mistral,
+  Flux,
+  Gemini,
   Grok,
   HuggingFace,
-  Flux,
-  Midjourney,
-  SiliconCloud,
-  Github as LobeGithub,
-  Vercel as LobeVercel,
-  Cursor as LobeCursor,
-  Smithery,
-  MCP,
-  OpenClaw,
   LangChain,
   LangGraph,
+  Cursor as LobeCursor,
+  Github as LobeGithub,
+  Vercel as LobeVercel,
+  MCP,
+  Midjourney,
+  Mistral,
   N8n,
-  Bilibili,
+  Ollama,
+  OpenAI,
+  OpenClaw,
+  Qwen,
   Railway,
+  SiliconCloud,
+  Smithery,
 } from "@nebutra/ui/icons";
+import { cn } from "@nebutra/ui/utils";
+import type { ReactNode } from "react";
 
 // ── Icon registry ─────────────────────────────────────────────────────────────
 // Keys are normalized tech names (lowercase, no version numbers).
@@ -86,11 +84,7 @@ type RenderIcon = (size: number, colorful: boolean) => ReactNode;
 const ICON_REGISTRY: Record<string, RenderIcon> = {
   // ── Python & data science ──────────────────────────────────────────────────
   python: (s, c) =>
-    c ? (
-      <LogoPython width={s} height={s} />
-    ) : (
-      <LogoPythonMonochrome width={s} height={s} />
-    ),
+    c ? <LogoPython width={s} height={s} /> : <LogoPythonMonochrome width={s} height={s} />,
   "function python": (s) => <FunctionPython width={s} height={s} />,
   pandas: (s) => <LogoPython width={s} height={s} />,
   numpy: (s) => <LogoPython width={s} height={s} />,
@@ -140,17 +134,14 @@ const ICON_REGISTRY: Record<string, RenderIcon> = {
   // ── AI Providers (Lobe) ────────────────────────────────────────────────────
   anthropic: (s) => <Anthropic size={s} />,
   claude: (s, c) => (c ? <Claude.Color size={s} /> : <Claude size={s} />),
-  "claude code": (s, c) =>
-    c ? <ClaudeCode.Color size={s} /> : <ClaudeCode size={s} />,
+  "claude code": (s, c) => (c ? <ClaudeCode.Color size={s} /> : <ClaudeCode size={s} />),
   gemini: (s, c) => (c ? <Gemini.Color size={s} /> : <Gemini size={s} />),
   "gemini 2.5": (s, c) => (c ? <Gemini.Color size={s} /> : <Gemini size={s} />),
-  "gemini 2.5 flash": (s, c) =>
-    c ? <Gemini.Color size={s} /> : <Gemini size={s} />,
+  "gemini 2.5 flash": (s, c) => (c ? <Gemini.Color size={s} /> : <Gemini size={s} />),
   openai: (s) => <OpenAI size={s} />,
   "openai gpt": (s) => <OpenAI size={s} />,
   deepseek: (s, c) => (c ? <DeepSeek.Color size={s} /> : <DeepSeek size={s} />),
-  "deepseek llm": (s, c) =>
-    c ? <DeepSeek.Color size={s} /> : <DeepSeek size={s} />,
+  "deepseek llm": (s, c) => (c ? <DeepSeek.Color size={s} /> : <DeepSeek size={s} />),
   qwen: (s, c) => (c ? <Qwen.Color size={s} /> : <Qwen size={s} />),
   "qwen vl": (s, c) => (c ? <Qwen.Color size={s} /> : <Qwen size={s} />),
   "qwen-vl": (s, c) => (c ? <Qwen.Color size={s} /> : <Qwen size={s} />),
@@ -160,16 +151,12 @@ const ICON_REGISTRY: Record<string, RenderIcon> = {
   mistral: (s, c) => (c ? <Mistral.Color size={s} /> : <Mistral size={s} />),
   grok: (s) => <Grok size={s} />,
   meta: (s) => <LogoMeta width={s} height={s} />,
-  huggingface: (s, c) =>
-    c ? <HuggingFace.Color size={s} /> : <HuggingFace size={s} />,
+  huggingface: (s, c) => (c ? <HuggingFace.Color size={s} /> : <HuggingFace size={s} />),
   flux: (s) => <Flux size={s} />,
   midjourney: (s) => <Midjourney size={s} />,
-  siliconcloud: (s, c) =>
-    c ? <SiliconCloud.Color size={s} /> : <SiliconCloud size={s} />,
-  siliconflow: (s, c) =>
-    c ? <SiliconCloud.Color size={s} /> : <SiliconCloud size={s} />,
-  "siliconflow api": (s, c) =>
-    c ? <SiliconCloud.Color size={s} /> : <SiliconCloud size={s} />,
+  siliconcloud: (s, c) => (c ? <SiliconCloud.Color size={s} /> : <SiliconCloud size={s} />),
+  siliconflow: (s, c) => (c ? <SiliconCloud.Color size={s} /> : <SiliconCloud size={s} />),
+  "siliconflow api": (s, c) => (c ? <SiliconCloud.Color size={s} /> : <SiliconCloud size={s} />),
 
   // ── Dev tools (Lobe) ──────────────────────────────────────────────────────
   cursor: (s) => <LobeCursor size={s} />,
@@ -177,10 +164,8 @@ const ICON_REGISTRY: Record<string, RenderIcon> = {
   smithery: (s, c) => (c ? <Smithery.Color size={s} /> : <Smithery size={s} />),
   mcp: (s) => <MCP size={s} />,
   openclaw: (s, c) => (c ? <OpenClaw.Color size={s} /> : <OpenClaw size={s} />),
-  langchain: (s, c) =>
-    c ? <LangChain.Color size={s} /> : <LangChain size={s} />,
-  langgraph: (s, c) =>
-    c ? <LangGraph.Color size={s} /> : <LangGraph size={s} />,
+  langchain: (s, c) => (c ? <LangChain.Color size={s} /> : <LangChain size={s} />),
+  langgraph: (s, c) => (c ? <LangGraph.Color size={s} /> : <LangGraph size={s} />),
   n8n: (s, c) => (c ? <N8n.Color size={s} /> : <N8n size={s} />),
   bilibili: (s, c) => (c ? <Bilibili.Color size={s} /> : <Bilibili size={s} />),
 
@@ -266,12 +251,7 @@ interface TechBadgeProps {
   className?: string;
 }
 
-export function TechBadge({
-  tech,
-  variant = "tag",
-  colorful = false,
-  className,
-}: TechBadgeProps) {
+export function TechBadge({ tech, variant = "tag", colorful = false, className }: TechBadgeProps) {
   const renderer = getRenderer(tech);
   const isCard = variant === "card";
   const iconSize = isCard ? 28 : 14;

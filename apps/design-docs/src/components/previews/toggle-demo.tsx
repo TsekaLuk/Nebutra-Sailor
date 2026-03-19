@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Toggle } from "@nebutra/ui/primitives"
+import { Toggle } from "@nebutra/ui/primitives";
 
 export function ToggleDemo() {
-  return <Toggle aria-label="Toggle default" />
+  return <Toggle aria-label="Toggle default" />;
 }

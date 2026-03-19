@@ -1,4 +1,4 @@
-import { Grid } from "@nebutra/ui/primitives"
+import { Grid } from "@nebutra/ui/primitives";
 
 export function GridSystemDemo() {
   return (
@@ -66,5 +66,5 @@ export function GridSystemDemo() {
         </Grid.System>
       </div>
     </div>
-  )
+  );
 }

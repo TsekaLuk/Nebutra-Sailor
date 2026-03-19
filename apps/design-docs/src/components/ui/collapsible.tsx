@@ -1,1 +1,1 @@
-export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@nebutra/ui/primitives";
+export { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@nebutra/ui/primitives";

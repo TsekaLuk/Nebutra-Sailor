@@ -4,9 +4,9 @@
 // The component works correctly at runtime
 "use client";
 
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as React from "react";
 import { useMemo, useRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { cn } from "../utils/cn";
 
@@ -67,9 +67,7 @@ export function CanvasRevealEffect({
           center={["x", "y"]}
         />
       </div>
-      {showGradient && (
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-[84%]" />
-      )}
+      {showGradient && <div className="absolute inset-0 bg-gradient-to-t from-gray-950 to-[84%]" />}
     </div>
   );
 }
@@ -94,41 +92,16 @@ function DotMatrix({
   center = ["x", "y"],
 }: DotMatrixProps) {
   const uniforms = useMemo(() => {
-    let colorsArray = [
-      colors[0],
-      colors[0],
-      colors[0],
-      colors[0],
-      colors[0],
-      colors[0],
-    ];
+    let colorsArray = [colors[0], colors[0], colors[0], colors[0], colors[0], colors[0]];
     if (colors.length === 2) {
-      colorsArray = [
-        colors[0],
-        colors[0],
-        colors[0],
-        colors[1],
-        colors[1],
-        colors[1],
-      ];
+      colorsArray = [colors[0], colors[0], colors[0], colors[1], colors[1], colors[1]];
     } else if (colors.length === 3) {
-      colorsArray = [
-        colors[0],
-        colors[0],
-        colors[1],
-        colors[1],
-        colors[2],
-        colors[2],
-      ];
+      colorsArray = [colors[0], colors[0], colors[1], colors[1], colors[2], colors[2]];
     }
 
     return {
       u_colors: {
-        value: colorsArray.map((color) => [
-          color[0] / 255,
-          color[1] / 255,
-          color[2] / 255,
-        ]),
+        value: colorsArray.map((color) => [color[0] / 255, color[1] / 255, color[2] / 255]),
         type: "uniform3fv",
       },
       u_opacities: {
@@ -208,11 +181,7 @@ interface ShaderMaterialProps {
   maxFps?: number;
 }
 
-function ShaderMaterial({
-  source,
-  uniforms,
-  maxFps = 60,
-}: ShaderMaterialProps) {
+function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) {
   const { size } = useThree();
   const ref = useRef<THREE.Mesh>(null);
   let lastFrameTime = 0;
@@ -231,8 +200,7 @@ function ShaderMaterial({
   });
 
   const getUniforms = () => {
-    const preparedUniforms: Record<string, { value: unknown; type?: string }> =
-      {};
+    const preparedUniforms: Record<string, { value: unknown; type?: string }> = {};
 
     for (const uniformName in uniforms) {
       const uniform = uniforms[uniformName];
@@ -252,9 +220,7 @@ function ShaderMaterial({
           break;
         case "uniform3fv":
           preparedUniforms[uniformName] = {
-            value: (uniform.value as number[][]).map((v) =>
-              new THREE.Vector3().fromArray(v),
-            ),
+            value: (uniform.value as number[][]).map((v) => new THREE.Vector3().fromArray(v)),
             type: "3fv",
           };
           break;

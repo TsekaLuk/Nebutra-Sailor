@@ -1,4 +1,4 @@
-import { TextShimmer } from "@nebutra/ui/primitives"
+import { TextShimmer } from "@nebutra/ui/primitives";
 
 export default function TextShimmerDemo() {
   return (
@@ -17,5 +17,5 @@ export default function TextShimmerDemo() {
         </TextShimmer>
       </div>
     </div>
-  )
+  );
 }

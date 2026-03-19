@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import {
-  MessageWithReactions,
-  ReactionBadge,
-  ReactionChip,
-} from "./reaction-chip";
+import { MessageWithReactions, ReactionBadge, ReactionChip } from "./reaction-chip";
 
 const meta = {
   title: "Primitives/ReactionChip",
@@ -57,13 +53,9 @@ export const ChipOnly: Story = {
     const [selected, setSelected] = useState<string | undefined>(undefined);
     return (
       <div className="flex flex-col items-center gap-4">
-        <p className="text-sm text-muted-foreground">
-          Selected: {selected ?? "none"}
-        </p>
+        <p className="text-sm text-muted-foreground">Selected: {selected ?? "none"}</p>
         <ReactionChip
-          onSelect={(emoji) =>
-            setSelected((prev) => (prev === emoji ? undefined : emoji))
-          }
+          onSelect={(emoji) => setSelected((prev) => (prev === emoji ? undefined : emoji))}
           selected={selected}
         />
       </div>
@@ -87,9 +79,7 @@ export const WithChildren: Story = {
     <MessageWithReactions>
       <div className="space-y-1">
         <p className="font-medium">PR #42: Add dark mode support</p>
-        <p className="text-xs text-muted-foreground">
-          3 files changed · +127 −43
-        </p>
+        <p className="text-xs text-muted-foreground">3 files changed · +127 −43</p>
       </div>
     </MessageWithReactions>
   ),

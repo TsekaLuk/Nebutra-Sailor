@@ -95,10 +95,7 @@ export async function updateStripeSubscription(
     const itemId = subscription.items.data[0]?.id;
 
     if (!itemId) {
-      throw new SubscriptionError(
-        "No subscription items found",
-        "NO_SUBSCRIPTION_ITEMS",
-      );
+      throw new SubscriptionError("No subscription items found", "NO_SUBSCRIPTION_ITEMS");
     }
 
     updateParams.items = [
@@ -183,9 +180,7 @@ export async function unpauseStripeSubscription(
 /**
  * Get all subscriptions for a customer
  */
-export async function getCustomerSubscriptions(
-  customerId: string,
-): Promise<Stripe.Subscription[]> {
+export async function getCustomerSubscriptions(customerId: string): Promise<Stripe.Subscription[]> {
   const stripe = getStripe();
 
   const subscriptions = await stripe.subscriptions.list({
@@ -231,10 +226,7 @@ export async function previewSubscriptionChange(
   const itemId = subscription.items.data[0]?.id;
 
   if (!itemId) {
-    throw new SubscriptionError(
-      "No subscription items found",
-      "NO_SUBSCRIPTION_ITEMS",
-    );
+    throw new SubscriptionError("No subscription items found", "NO_SUBSCRIPTION_ITEMS");
   }
 
   return stripe.invoices.createPreview({

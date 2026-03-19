@@ -77,12 +77,7 @@ export const Default: Story = {
   render: () => (
     <AnimatedList delay={800} className="w-72">
       {notifications.map((n) => (
-        <NotificationCard
-          key={n.id}
-          emoji={n.emoji}
-          title={n.title}
-          body={n.body}
-        />
+        <NotificationCard key={n.id} emoji={n.emoji} title={n.title} body={n.body} />
       ))}
     </AnimatedList>
   ),
@@ -92,12 +87,7 @@ export const Fast: Story = {
   render: () => (
     <AnimatedList delay={400} className="w-72">
       {notifications.map((n) => (
-        <NotificationCard
-          key={n.id}
-          emoji={n.emoji}
-          title={n.title}
-          body={n.body}
-        />
+        <NotificationCard key={n.id} emoji={n.emoji} title={n.title} body={n.body} />
       ))}
     </AnimatedList>
   ),
@@ -107,12 +97,7 @@ export const Slow: Story = {
   render: () => (
     <AnimatedList delay={1500} className="w-72">
       {notifications.slice(0, 3).map((n) => (
-        <NotificationCard
-          key={n.id}
-          emoji={n.emoji}
-          title={n.title}
-          body={n.body}
-        />
+        <NotificationCard key={n.id} emoji={n.emoji} title={n.title} body={n.body} />
       ))}
     </AnimatedList>
   ),
@@ -121,16 +106,13 @@ export const Slow: Story = {
 export const SimpleItems: Story = {
   render: () => (
     <AnimatedList delay={600} className="w-48">
-      {[
-        "Step 1: Initialize",
-        "Step 2: Configure",
-        "Step 3: Deploy",
-        "Step 4: Monitor",
-      ].map((step) => (
-        <div key={step} className="rounded-lg border px-4 py-2 text-sm">
-          {step}
-        </div>
-      ))}
+      {["Step 1: Initialize", "Step 2: Configure", "Step 3: Deploy", "Step 4: Monitor"].map(
+        (step) => (
+          <div key={step} className="rounded-lg border px-4 py-2 text-sm">
+            {step}
+          </div>
+        ),
+      )}
     </AnimatedList>
   ),
 };

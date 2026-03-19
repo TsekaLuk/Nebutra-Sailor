@@ -41,11 +41,7 @@ export const SystemMode: Story = {
 export const LightTheme: Story = {
   render: () => (
     <div className="relative h-[400px] w-full overflow-hidden">
-      <DitheringBackground
-        themeMode="light"
-        syncTailwindDark={false}
-        style={containerStyle}
-      />
+      <DitheringBackground themeMode="light" syncTailwindDark={false} style={containerStyle} />
     </div>
   ),
 };
@@ -53,11 +49,7 @@ export const LightTheme: Story = {
 export const DarkTheme: Story = {
   render: () => (
     <div className="relative h-[400px] w-full overflow-hidden">
-      <DitheringBackground
-        themeMode="dark"
-        syncTailwindDark={false}
-        style={containerStyle}
-      />
+      <DitheringBackground themeMode="dark" syncTailwindDark={false} style={containerStyle} />
     </div>
   ),
 };

@@ -7,302 +7,275 @@
  * Note: For typography, use the dedicated `typography/` module instead.
  */
 
-export * from "./layout";
-export * from "./spacing";
 export * from "./accessibility";
-export * from "./responsive";
-export * from "./dropdown-menu";
-
-export * from "./box";
-export * from "./flex";
-export * from "./grid-system";
-export * from "./stack";
-
-// Legacy typography (deprecated - use typography/ module)
-export { textStyles, type TextStyle } from "./typography";
-
 // ─── Radix-based UI components ───────────────────────────────────────────────
 export {
   Accordion,
-  AccordionItem,
-  AccordionTrigger,
   AccordionContent,
+  AccordionItem,
   type AccordionSize,
+  AccordionTrigger,
 } from "./accordion";
-
+export * from "./animated-gradient-text";
 export {
   Avatar,
-  AvatarImage,
   AvatarFallback,
-  AvatarGroup,
-  type AvatarProps,
   type AvatarFallbackProps,
-  type AvatarGroupProps,
+  AvatarGroup,
   type AvatarGroupItem,
+  type AvatarGroupProps,
+  AvatarImage,
+  type AvatarProps,
 } from "./avatar";
-
-export * from "./avatar-smart-group";
-
 export {
-  GitHubAvatar,
-  GitLabAvatar,
-  BitbucketAvatar,
   AvatarWithIcon,
-  DiceBearAvatar,
-  type GitHubAvatarProps,
-  type GitLabAvatarProps,
-  type BitbucketAvatarProps,
   type AvatarWithIconProps,
+  BitbucketAvatar,
+  type BitbucketAvatarProps,
+  DiceBearAvatar,
   type DiceBearAvatarProps,
   type DiceBearStyle,
+  GitHubAvatar,
+  type GitHubAvatarProps,
+  GitLabAvatar,
+  type GitLabAvatarProps,
 } from "./avatar-extended";
-
-export { Badge, badgeVariants, type BadgeProps } from "./badge";
-
+export * from "./avatar-smart-group";
+export { Badge, type BadgeProps, badgeVariants } from "./badge";
+export * from "./box";
 export {
   Button,
   ButtonLink,
-  buttonVariants,
-  type ButtonProps,
   type ButtonLinkProps,
+  type ButtonProps,
+  buttonVariants,
 } from "./button";
-
-export * from "./animated-gradient-text";
-
 export {
   Checkbox,
   CheckboxGroup,
-  type CheckboxProps,
   type CheckboxGroupProps,
+  type CheckboxProps,
 } from "./checkbox-group";
-
+export * from "./choicebox";
 export {
   Combobox,
-  ComboboxRoot,
-  ComboboxInput,
-  ComboboxOptionItem,
   ComboboxEmpty,
   ComboboxGroupSub,
-  ComboboxSeparator,
+  ComboboxInput,
+  type ComboboxOption,
+  ComboboxOptionItem,
   type ComboboxProps,
-  type ComboboxOption
+  ComboboxRoot,
+  ComboboxSeparator,
 } from "./combobox";
-
+export * from "./date-input";
+export * from "./description";
 export {
   Dialog,
-  DialogPortal,
-  DialogOverlay,
   DialogClose,
-  DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
   DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
 } from "./dialog";
-
-export { Input, type InputProps } from "./input";
 export * from "./dithering-shader";
-export * from "./magic-card";
-
-export { Label, labelVariants, type LabelProps } from "./label";
-
-export * from "./choicebox";
-export * from "./date-input";
+export * from "./dropdown-menu";
 export * from "./expanding-textarea";
 export * from "./field";
+export * from "./flex";
 export * from "./form";
 export * from "./geist-tooltip";
+export * from "./grid-system";
+export * from "./heading";
+export { Input, type InputProps } from "./input";
+export { Label, type LabelProps, labelVariants } from "./label";
+export * from "./layout";
+export * from "./magic-card";
 export * from "./multiple-selector";
+export { RadioGroup, RadioGroupItem } from "./radio-group";
 export * from "./radio-group-card";
 export * from "./radio-group-stacked";
+export * from "./responsive";
 
 export {
-
   Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
-  SelectLabel,
+  SelectGroup,
   SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
+  SelectLabel,
   SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
 } from "./select";
-
-export { RadioGroup, RadioGroupItem } from "./radio-group";
-
+export { Separator } from "./separator";
+export * from "./spacing";
+export * from "./stack";
 export { Switch, type SwitchProps } from "./switch";
-export * from "./toggle";
-
 export {
   Tabs,
-  TabsList,
-  TabsTrigger,
   TabsContent,
+  type TabsContentProps,
+  TabsList,
+  type TabsListProps,
+  type TabsProps,
+  TabsTrigger,
+  type TabsTriggerProps,
+  tabsContentVariants,
   tabsListVariants,
   tabsTriggerVariants,
-  tabsContentVariants,
-  type TabsProps,
-  type TabsListProps,
-  type TabsTriggerProps,
-  type TabsContentProps,
 } from "./tabs";
-
-export { Separator } from "./separator";
-export * from "./heading";
 export * from "./text";
-export * from "./description";
-
+export * from "./toggle";
 export {
   Tooltip,
-  TooltipTrigger,
   TooltipContent,
   TooltipProvider,
+  TooltipTrigger,
 } from "./tooltip";
+// Legacy typography (deprecated - use typography/ module)
+export { type TextStyle, textStyles } from "./typography";
+
 // Removed: export * from "./geist-tooltip";
-
-export * from "./alert";
-export * from "./alert-dialog";
-export * from "./empty-state";
-export * from "./error-message";
-export * from "./status-badge";
-export * from "./feedback";
-export * from "./snippet-status";
-export * from "./snippet";
-export * from "./notification-message-list";
-export * from "./gauge";
-export * from "./loader";
-export * from "./spinner";
-export * from "./announcement";
-export * from "./reaction-chip";
-
-export * from "./interactive-card";
-export * from "./feature-card";
-export * from "./hero-card";
-export * from "./pricing-card";
-export * from "./expandable-tabs";
-export * from "./context-card";
-export * from "./animated-beam";
-export * from "./animated-gradient-text";
-export * from "./animated-group";
-export * from "./animated-list";
-export * from "./animated-shiny-text";
-export * from "./magic-card";
-export * from "./aurora-text";
-export * from "./avatar-circles";
-export * from "./bento-grid";
-export * from "./border-trail";
-export * from "./canvas-reveal-effect";
-export * from "./card-spotlight";
-export * from "./bubble-text";
-export * from "./gradient-animated-text";
-export * from "./line-shadow-text";
-export * from "./text-loop";
-export * from "./text-scramble";
-export * from "./text-shimmer";
-export * from "./word-fade-in";
-
-// Remnant Phase 6: Animated & Magic UI Part 2
-export * from "./gauge";
-export * from "./globe";
-export * from "./glowing-effect";
-export * from "./shine-border";
-export * from "./dot-pattern";
-export * from "./confetti";
-
-// Phase 8: Advanced Media & Mockups
-export * from "./iphone-mockup";
-export * from "./macbook-pro";
-export * from "./safari";
-export * from "./terminal";
-export * from "./video-player";
-export * from "./video-text";
-export * from "./browser-mockup";
-
-export * from "./aspect-ratio";
-export * from "./calendar";
-export * from "./flickering-grid";
-export * from "./card";
-export * from "./carousel";
-export * from "./collapsible";
-export * from "./command";
-export * from "./command-menu";
-export * from "./context-menu";
-export * from "./date-picker";
-export * from "./drawer";
-export * from "./hover-card";
-export * from "./input-otp";
-export * from "./menubar";
-
-export * from "./navigation-menu";
-export * from "./popover";
-export * from "./progress";
-export * from "./resizable";
-export * from "./sheet";
-export * from "./skeleton";
-export * from "./slider";
-export * from "./toggle-group";
-export * from "./pagination";
-export * from "./slider-number-flow";
-export * from "./table";
-export * from "./breadcrumb";
-export * from "./textarea";
-export * from "./hex-grid";
-export * from "./warp-background";
-export * from "./stars-canvas";
-export * from "./animated-circular-progress-bar";
-export * from "./theme-switcher";
-export * from "./apple-liquid-glass-switcher";
-export * from "./interactive-frosted-glass-card";
 
 // Phase 9: Specialty Components
 export * from "./agent-plan";
+export * from "./alert";
+export * from "./alert-dialog";
+// Phase 10: Missing root exports
+export * from "./animate-in";
+export * from "./animated-beam";
+export * from "./animated-circular-progress-bar";
+export * from "./animated-gradient-text";
+export * from "./animated-group";
+export * from "./animated-hike-card";
+export * from "./animated-list";
+export * from "./animated-shiny-text";
+export * from "./announcement";
+export * from "./apple-liquid-glass-switcher";
+export * from "./aspect-ratio";
+export * from "./assisted-password-confirmation";
+export * from "./aurora-text";
+export * from "./avatar-circles";
 export * from "./awards";
+export * from "./badge-1";
+export * from "./base-badge";
+export * from "./base-button";
+export * from "./bento-grid";
+export * from "./book";
+export * from "./border-trail";
+export * from "./breadcrumb";
+export * from "./browser-mockup";
+export * from "./bubble-text";
+export * from "./calendar";
+export * from "./calendar-picker";
+export * from "./canvas-reveal-effect";
+export * from "./card";
+export * from "./card-spotlight";
+export * from "./carousel";
+export * from "./chart";
+export * from "./code-block";
+export * from "./collapsible";
+export * from "./color-badge";
+export * from "./command";
+export * from "./command-menu";
+export * from "./confetti";
+export * from "./context-card";
+export * from "./context-menu";
+export * from "./date-picker";
+export * from "./display-cards";
+export * from "./dithering-background";
+export * from "./dot-pattern";
+export * from "./dotted-map";
 export * from "./dotted-world-map";
+export * from "./drawer";
+export * from "./empty-state";
+export * from "./enable-2fa-card";
+export * from "./entity";
+export * from "./error-message";
+export * from "./expandable-tabs";
+export * from "./fallback-card";
 export * from "./feature-arrow-card";
+export * from "./feature-card";
 export * from "./feature-check-item";
 export * from "./feature-icon-item";
+export * from "./feedback";
+export * from "./flickering-grid";
+export * from "./gauge";
+// Remnant Phase 6: Animated & Magic UI Part 2
+export * from "./gauge";
+export * from "./github-calendar";
+export * from "./github-inline-diff";
+export * from "./globe";
+export * from "./glowing-effect";
+export * from "./gradient-animated-text";
 export * from "./grain-gradient-background";
 export * from "./grid-feature-card";
 export * from "./grid-pattern-card";
+export * from "./hero-card";
 export * from "./hero-popover";
 export * from "./hero-select";
 export * from "./hero-skeleton";
-export * from "./animated-hike-card";
-export * from "./assisted-password-confirmation";
-export * from "./book";
-export * from "./calendar-picker";
-export * from "./code-block";
-export * from "./color-badge";
-export * from "./display-cards";
-export * from "./dithering-background";
-export * from "./dotted-map";
-export * from "./entity";
-export * from "./github-calendar";
-export * from "./github-inline-diff";
+export * from "./hex-grid";
 export * from "./highlighter";
+export * from "./hover-card";
 export * from "./infinite-slider";
-export * from "./light-rays";
-export * from "./material";
-export * from "./noise-pattern-card";
-export * from "./progressive-blur";
-export * from "./scroll-velocity";
-export * from "./tree";
-export * from "./wave-animation";
-export * from "./x-post-card";
-export * from "./base-badge";
-export * from "./base-button";
-export * from "./badge-1";
-
-// Phase 10: Missing root exports
-export * from "./animate-in";
-export * from "./chart";
-export * from "./enable-2fa-card";
-export * from "./fallback-card";
+export * from "./input-otp";
+export * from "./interactive-card";
+export * from "./interactive-frosted-glass-card";
+// Phase 8: Advanced Media & Mockups
+export * from "./iphone-mockup";
 export * from "./kbd";
+export * from "./light-rays";
+export * from "./line-shadow-text";
+export * from "./loader";
 export * from "./loading-dots";
+export * from "./macbook-pro";
+export * from "./magic-card";
+export * from "./material";
+export * from "./menubar";
 export * from "./mesh-gradient-bg";
+export * from "./navigation-menu";
 export * from "./neuro-noise-bg";
+export * from "./noise-pattern-card";
+export * from "./notification-message-list";
+export * from "./pagination";
+export * from "./popover";
+export * from "./pricing-card";
+export * from "./progress";
+export * from "./progressive-blur";
+export * from "./reaction-chip";
+export * from "./resizable";
+export * from "./safari";
+export * from "./scroll-velocity";
+export * from "./sheet";
+export * from "./shine-border";
+export * from "./skeleton";
+export * from "./slider";
+export * from "./slider-number-flow";
+export * from "./snippet";
+export * from "./snippet-status";
+export * from "./spinner";
+export * from "./stars-canvas";
+export * from "./status-badge";
+export * from "./table";
+export * from "./terminal";
+export * from "./text-loop";
+export * from "./text-scramble";
+export * from "./text-shimmer";
+export * from "./textarea";
+export * from "./theme-switcher";
+export * from "./toggle-group";
+export * from "./tree";
+export * from "./video-player";
+export * from "./video-text";
+export * from "./warp-background";
+export * from "./wave-animation";
 export * from "./waves-bg";
+export * from "./word-fade-in";
+export * from "./x-post-card";

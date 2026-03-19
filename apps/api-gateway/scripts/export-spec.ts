@@ -32,6 +32,4 @@ const outPath = resolve(import.meta.dirname, "../openapi.json");
 
 writeFileSync(outPath, JSON.stringify(spec, null, 2), "utf-8");
 console.log(`OpenAPI spec written to ${outPath}`);
-console.log(
-  `  Paths: ${Object.keys((spec as { paths: Record<string, unknown> }).paths).length}`,
-);
+console.log(`  Paths: ${Object.keys((spec as { paths: Record<string, unknown> }).paths).length}`);

@@ -43,7 +43,7 @@ export class SagaOrchestrator<TContext = unknown> {
       eventBus.createEvent("saga.started", {
         saga: this.name,
         steps: this.steps.map((s) => s.name),
-      })
+      }),
     );
 
     try {
@@ -57,7 +57,7 @@ export class SagaOrchestrator<TContext = unknown> {
             eventBus.createEvent("saga.step.completed", {
               saga: this.name,
               step: step.name,
-            })
+            }),
           );
         } catch (error) {
           // Step failed, start compensation
@@ -66,7 +66,7 @@ export class SagaOrchestrator<TContext = unknown> {
               saga: this.name,
               step: step.name,
               error: error instanceof Error ? error.message : String(error),
-            })
+            }),
           );
 
           // Compensate in reverse order
@@ -87,7 +87,7 @@ export class SagaOrchestrator<TContext = unknown> {
         eventBus.createEvent("saga.completed", {
           saga: this.name,
           completedSteps,
-        })
+        }),
       );
 
       return {
@@ -108,15 +108,12 @@ export class SagaOrchestrator<TContext = unknown> {
   /**
    * Execute compensation steps in reverse order
    */
-  private async compensate(
-    context: TContext,
-    completedSteps: string[]
-  ): Promise<void> {
+  private async compensate(context: TContext, completedSteps: string[]): Promise<void> {
     await eventBus.publish(
       eventBus.createEvent("saga.compensating", {
         saga: this.name,
         steps: completedSteps,
-      })
+      }),
     );
 
     // Get completed steps in reverse order
@@ -131,7 +128,7 @@ export class SagaOrchestrator<TContext = unknown> {
             eventBus.createEvent("saga.compensation.completed", {
               saga: this.name,
               step: stepName,
-            })
+            }),
           );
         } catch (error) {
           console.error(`Compensation failed for step ${stepName}:`, error);
@@ -140,7 +137,7 @@ export class SagaOrchestrator<TContext = unknown> {
               saga: this.name,
               step: stepName,
               error: error instanceof Error ? error.message : String(error),
-            })
+            }),
           );
         }
       }
@@ -151,8 +148,6 @@ export class SagaOrchestrator<TContext = unknown> {
 /**
  * Create a new saga
  */
-export function createSaga<TContext = unknown>(
-  name: string
-): SagaOrchestrator<TContext> {
+export function createSaga<TContext = unknown>(name: string): SagaOrchestrator<TContext> {
   return new SagaOrchestrator<TContext>(name);
 }

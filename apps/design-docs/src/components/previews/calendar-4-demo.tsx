@@ -1,13 +1,12 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Calendar } from "@nebutra/ui/primitives"
+import { Calendar } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Calendar4Demo() {
   return (
     <Calendar
       visibleMonths={2}
       className="p-4 max-w-full rounded-xl border border-border shadow-sm"
     />
-  )
+  );
 }

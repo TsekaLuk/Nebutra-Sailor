@@ -15,8 +15,8 @@
    ============================================ */
 :root {
   /* Wide-gamut bridge: default to sRGB, upgrade to Display-P3 when available. */
-  --nebutra-brand-blue: #0033FE;
-  --nebutra-brand-cyan: #0BF1C3;
+  --nebutra-brand-blue: #0033fe;
+  --nebutra-brand-cyan: #0bf1c3;
 
   /* ===========================================
      Nebutra Brand Color Scales
@@ -65,10 +65,26 @@
   --nebutra-neutral-950: #020617;
 
   /* Brand Gradients */
-  --brand-gradient: linear-gradient(135deg, var(--nebutra-blue-500) 0%, var(--nebutra-cyan-500) 100%);
-  --brand-gradient-reverse: linear-gradient(135deg, var(--nebutra-cyan-500) 0%, var(--nebutra-blue-500) 100%);
-  --brand-gradient-vertical: linear-gradient(180deg, var(--nebutra-blue-500) 0%, var(--nebutra-cyan-500) 100%);
-  --brand-gradient-radial: radial-gradient(circle, var(--nebutra-cyan-500) 0%, var(--nebutra-blue-500) 100%);
+  --brand-gradient: linear-gradient(
+    135deg,
+    var(--nebutra-blue-500) 0%,
+    var(--nebutra-cyan-500) 100%
+  );
+  --brand-gradient-reverse: linear-gradient(
+    135deg,
+    var(--nebutra-cyan-500) 0%,
+    var(--nebutra-blue-500) 100%
+  );
+  --brand-gradient-vertical: linear-gradient(
+    180deg,
+    var(--nebutra-blue-500) 0%,
+    var(--nebutra-cyan-500) 100%
+  );
+  --brand-gradient-radial: radial-gradient(
+    circle,
+    var(--nebutra-cyan-500) 0%,
+    var(--nebutra-blue-500) 100%
+  );
 
   /* ===========================================
      12-Step Functional Color Scales (Light Mode)
@@ -306,13 +322,13 @@
      Dark mode overrides are in .dark below.
      =========================================== */
   --elevation-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --elevation-sm: 0 1px 3px 0 rgb(0 0 0 / 0.10), 0 1px 2px -1px rgb(0 0 0 / 0.10);
-  --elevation-md: 0 4px 6px -1px rgb(0 0 0 / 0.10), 0 2px 4px -2px rgb(0 0 0 / 0.10);
-  --elevation-lg: 0 10px 15px -3px rgb(0 0 0 / 0.10), 0 4px 6px -4px rgb(0 0 0 / 0.10);
-  --elevation-xl: 0 20px 25px -5px rgb(0 0 0 / 0.10), 0 8px 10px -6px rgb(0 0 0 / 0.10);
+  --elevation-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --elevation-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --elevation-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --elevation-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --elevation-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --elevation-brand: 0 0 0 1px rgb(0 51 254 / 0.15), 0 4px 20px -2px rgb(0 51 254 / 0.20);
-  --elevation-brand-lg: 0 0 0 1px rgb(0 51 254 / 0.20), 0 8px 40px -4px rgb(0 51 254 / 0.30);
+  --elevation-brand: 0 0 0 1px rgb(0 51 254 / 0.15), 0 4px 20px -2px rgb(0 51 254 / 0.2);
+  --elevation-brand-lg: 0 0 0 1px rgb(0 51 254 / 0.2), 0 8px 40px -4px rgb(0 51 254 / 0.3);
 }
 
 /* oklch overrides for --ds-gray-* (light mode) — all modern browsers as of 2024.
@@ -323,9 +339,9 @@
     /* hsla(0, 0%, 95%, 1)  */
     --ds-gray-200: oklch(0.929 0 0);
     /* hsla(0, 0%, 92%, 1)  */
-    --ds-gray-500: oklch(0.810 0 0);
+    --ds-gray-500: oklch(0.81 0 0);
     /* hsla(0, 0%, 79%, 1)  */
-    --ds-gray-600: oklch(0.690 0 0);
+    --ds-gray-600: oklch(0.69 0 0);
     /* hsla(0, 0%, 66%, 1)  */
     --ds-gray-700: oklch(0.598 0 0);
     /* hsla(0, 0%, 56%, 1)  */
@@ -553,14 +569,14 @@
 
   /* Shadow — dark mode (pure black backdrop, higher opacity)
      Brand glow uses 云毓蓝-400 #5c7cfa for visibility on dark background */
-  --elevation-xs: 0 1px 2px 0 rgb(0 0 0 / 0.30);
-  --elevation-sm: 0 1px 3px 0 rgb(0 0 0 / 0.40), 0 1px 2px -1px rgb(0 0 0 / 0.40);
-  --elevation-md: 0 4px 6px -1px rgb(0 0 0 / 0.40), 0 2px 4px -2px rgb(0 0 0 / 0.40);
-  --elevation-lg: 0 10px 15px -3px rgb(0 0 0 / 0.50), 0 4px 6px -4px rgb(0 0 0 / 0.50);
-  --elevation-xl: 0 20px 25px -5px rgb(0 0 0 / 0.60), 0 8px 10px -6px rgb(0 0 0 / 0.60);
-  --elevation-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.80);
-  --elevation-brand: 0 0 0 1px rgb(92 124 250 / 0.25), 0 4px 20px -2px rgb(92 124 250 / 0.30);
-  --elevation-brand-lg: 0 0 0 1px rgb(92 124 250 / 0.30), 0 8px 40px -4px rgb(92 124 250 / 0.40);
+  --elevation-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --elevation-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --elevation-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --elevation-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --elevation-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6);
+  --elevation-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.8);
+  --elevation-brand: 0 0 0 1px rgb(92 124 250 / 0.25), 0 4px 20px -2px rgb(92 124 250 / 0.3);
+  --elevation-brand-lg: 0 0 0 1px rgb(92 124 250 / 0.3), 0 8px 40px -4px rgb(92 124 250 / 0.4);
 }
 
 /* oklch overrides for --ds-gray-* (dark mode) — all modern browsers as of 2024.
@@ -573,11 +589,11 @@
     /* hsla(0, 0%, 12%, 1) */
     --ds-gray-500: oklch(0.409 0 0);
     /* hsla(0, 0%, 27%, 1) */
-    --ds-gray-600: oklch(0.590 0 0);
+    --ds-gray-600: oklch(0.59 0 0);
     /* hsla(0, 0%, 53%, 1) */
     --ds-gray-700: oklch(0.598 0 0);
     /* hsla(0, 0%, 56%, 1) */
-    --ds-gray-1000: oklch(0.940 0 0);
+    --ds-gray-1000: oklch(0.94 0 0);
     /* hsla(0, 0%, 93%, 1) */
     --ds-background-100: oklch(0.143 0 0);
     /* hsla(0, 0%, 4%, 1)  */
@@ -813,16 +829,34 @@
   --duration-slower: 500ms;
 
   /* Font family — VI §Typography: Poppins (EN), vivo Sans (CN) */
-  --font-sans: "Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans:
+    "Poppins", "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system,
+    BlinkMacSystemFont, sans-serif;
   --font-cn: "vivo Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
   --font-display: "Poppins", sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, Consolas, monospace;
 
   /* Brand gradients — VI §Brand Gradients (first-class design assets) */
-  --gradient-brand: linear-gradient(135deg, var(--nebutra-blue-500) 0%, var(--nebutra-cyan-500) 100%);
-  --gradient-brand-hover: linear-gradient(135deg, var(--nebutra-cyan-500) 0%, var(--nebutra-blue-500) 100%);
-  --gradient-section: linear-gradient(180deg, var(--nebutra-blue-500) 0%, var(--nebutra-cyan-500) 100%);
-  --gradient-glow: radial-gradient(circle, var(--nebutra-cyan-500) 0%, var(--nebutra-blue-500) 100%);
+  --gradient-brand: linear-gradient(
+    135deg,
+    var(--nebutra-blue-500) 0%,
+    var(--nebutra-cyan-500) 100%
+  );
+  --gradient-brand-hover: linear-gradient(
+    135deg,
+    var(--nebutra-cyan-500) 0%,
+    var(--nebutra-blue-500) 100%
+  );
+  --gradient-section: linear-gradient(
+    180deg,
+    var(--nebutra-blue-500) 0%,
+    var(--nebutra-cyan-500) 100%
+  );
+  --gradient-glow: radial-gradient(
+    circle,
+    var(--nebutra-cyan-500) 0%,
+    var(--nebutra-blue-500) 100%
+  );
 
   /* Info color mapping */
   --color-info: hsl(var(--info));
@@ -845,7 +879,9 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-sans);
-  font-feature-settings: "rlig" 1, "calt" 1;
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1;
 }
 
 /* Smooth scroll */
@@ -967,7 +1003,6 @@ html {
 }
 
 @keyframes pulse {
-
   0%,
   100% {
     opacity: 1;
@@ -979,7 +1014,6 @@ html {
 }
 
 @keyframes bounce {
-
   0%,
   100% {
     transform: translateY(-25%);
@@ -1493,7 +1527,6 @@ html {
 
 /* ─── Reduced Motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {

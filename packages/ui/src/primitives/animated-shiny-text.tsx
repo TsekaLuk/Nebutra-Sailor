@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentPropsWithoutRef, CSSProperties, useEffect } from "react";
+import { type ComponentPropsWithoutRef, type CSSProperties, useEffect } from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================

@@ -1,4 +1,4 @@
-import { Loader } from "@nebutra/ui/primitives"
+import { Loader } from "@nebutra/ui/primitives";
 
 export function LoaderDemo() {
   return (
@@ -7,5 +7,5 @@ export function LoaderDemo() {
       <Loader variant="dots" size="lg" />
       <Loader variant="loading-dots" text="Processing" />
     </div>
-  )
+  );
 }

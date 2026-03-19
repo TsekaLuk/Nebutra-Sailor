@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import type { LucideIcon } from "lucide-react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
-import { LucideIcon } from "lucide-react";
 
 // =============================================================================
 // Variants
@@ -32,8 +32,7 @@ const statusBadgeVariants = cva(
 // =============================================================================
 
 export interface StatusBadgeProps
-  extends
-    React.HTMLAttributes<HTMLSpanElement>,
+  extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof statusBadgeVariants> {
   /** Icon displayed before left label */
   leftIcon?: LucideIcon;
@@ -109,10 +108,7 @@ export function StatusBadge({
       <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
         {LeftIcon && (
           <LeftIcon
-            className={cn(
-              "-ml-0.5 size-4 shrink-0",
-              iconColorClasses[status || "default"],
-            )}
+            className={cn("-ml-0.5 size-4 shrink-0", iconColorClasses[status || "default"])}
             aria-hidden="true"
           />
         )}
@@ -120,9 +116,7 @@ export function StatusBadge({
       </span>
       <span className="h-4 w-px bg-border" aria-hidden="true" />
       <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-        {RightIcon && (
-          <RightIcon className="-ml-0.5 size-4 shrink-0" aria-hidden="true" />
-        )}
+        {RightIcon && <RightIcon className="-ml-0.5 size-4 shrink-0" aria-hidden="true" />}
         {rightLabel}
       </span>
     </span>

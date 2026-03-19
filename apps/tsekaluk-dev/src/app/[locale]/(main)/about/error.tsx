@@ -1,7 +1,7 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import { AnimateIn } from "@nebutra/ui/components";
+import { Link } from "@/i18n/navigation";
 
 export default function RouteError({
   error: _error,

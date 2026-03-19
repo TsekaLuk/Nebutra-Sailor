@@ -110,9 +110,7 @@ export const AllTypes: Story = {
         ] as const
       ).map((action) => (
         <p key={action} className="text-lg">
-          <span className="mr-3 text-sm text-muted-foreground w-32 inline-block">
-            {action}:
-          </span>
+          <span className="mr-3 text-sm text-muted-foreground w-32 inline-block">{action}:</span>
           <Highlighter action={action}>Sample annotated text</Highlighter>
         </p>
       ))}
@@ -143,9 +141,7 @@ export const RichParagraph: Story = {
 export const ViewportTriggered: Story = {
   render: () => (
     <div className="space-y-4">
-      <p className="text-sm text-muted-foreground">
-        Scroll down to see the annotation trigger
-      </p>
+      <p className="text-sm text-muted-foreground">Scroll down to see the annotation trigger</p>
       <div className="h-32" />
       <p className="text-xl">
         <Highlighter triggerOnView color="#a5f3fc">

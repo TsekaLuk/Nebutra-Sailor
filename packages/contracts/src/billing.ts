@@ -17,9 +17,7 @@ export const UsageLedgerSourceContractSchema = z.enum([
   "SYSTEM",
   "BACKFILL",
 ]);
-export type UsageLedgerSourceContract = z.infer<
-  typeof UsageLedgerSourceContractSchema
->;
+export type UsageLedgerSourceContract = z.infer<typeof UsageLedgerSourceContractSchema>;
 
 export const UsageLedgerEntryInputSchema = z.object({
   organizationId: z.string().min(1),

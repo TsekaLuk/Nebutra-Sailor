@@ -11,112 +11,106 @@
  * @see apps/landing-page/DESIGN.md Section 10
  */
 
+// ─── Layer 3: Component Tokens ────────────────────────────────────────────────
+export {
+  type AvatarSize,
+  avatarTokens,
+  type ButtonSize,
+  badgeTokens,
+  buttonTokens,
+  type CardPadding,
+  cardTokens,
+  inputTokens,
+} from "./components";
+// Motion
+export {
+  type Duration,
+  durations,
+  type Easing,
+  easings,
+  interactiveVariants,
+  type MotionVar,
+  motionVariants,
+  motionVars,
+  sectionMotions,
+  staggerContainers,
+  staggerDelay,
+  transitions,
+  viewportSettings,
+} from "./motion";
 // ─── Layer 1: Primitive Tokens ────────────────────────────────────────────────
 export {
-  primitiveColors,
-  primitiveGradients,
-  primitiveSpacing,
-  primitiveSizing,
-  primitiveRadius,
-  primitiveFontSize,
-  primitiveFontWeight,
-  primitiveFontFamily,
-  primitiveShadow,
-  primitiveTransition,
-  primitiveFocusRing,
   type PrimitiveColor,
-  type PrimitiveGradient,
-  type PrimitiveSpacing,
-  type PrimitiveSizing,
-  type PrimitiveRadius,
+  type PrimitiveFontFamily,
   type PrimitiveFontSize,
   type PrimitiveFontWeight,
-  type PrimitiveFontFamily,
+  type PrimitiveGradient,
+  type PrimitiveRadius,
   type PrimitiveShadow,
+  type PrimitiveSizing,
+  type PrimitiveSpacing,
+  primitiveColors,
+  primitiveFocusRing,
+  primitiveFontFamily,
+  primitiveFontSize,
+  primitiveFontWeight,
+  primitiveGradients,
+  primitiveRadius,
+  primitiveShadow,
+  primitiveSizing,
+  primitiveSpacing,
+  primitiveTransition,
 } from "./primitive";
-
 // ─── Layer 2: Semantic Tokens ─────────────────────────────────────────────────
 export {
-  semanticLight,
-  semanticDark,
-  semanticGradients,
-  semanticGlobals,
   type SemanticColorScale,
   type SemanticGradient,
   type SemanticTheme,
+  semanticDark,
+  semanticGlobals,
+  semanticGradients,
+  semanticLight,
 } from "./semantic";
-
-// ─── Layer 3: Component Tokens ────────────────────────────────────────────────
+// Shadows
 export {
-  buttonTokens,
-  avatarTokens,
-  inputTokens,
-  cardTokens,
-  badgeTokens,
-  type ButtonSize,
-  type AvatarSize,
-  type CardPadding,
-} from "./components";
-
+  type ShadowBrand,
+  type ShadowKey,
+  type ShadowLevel,
+  shadowBrandScale,
+  shadowClasses,
+  shadowScale,
+  shadowVars,
+} from "./shadows";
 // Spacing
 export {
-  spacing,
-  semanticSpacing,
-  containerWidths,
-  type SpacingScale,
-  type SemanticSpacing,
   type ContainerWidth,
+  containerWidths,
+  type SemanticSpacing,
+  type SpacingScale,
+  semanticSpacing,
+  spacing,
 } from "./spacing";
-
 // Typography
 export {
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  textStyles,
-  textColors,
-  // Named scale (Geist-style)
-  headingScale,
+  type ButtonSize as ButtonTextSize,
   buttonScale,
-  labelScale,
+  type CopySize,
+  type CopyVariant,
   copyScale,
   type FontSize,
   type FontWeight,
-  type LineHeight,
-  type TextStyle,
-  type TextColor,
+  fontSizes,
+  fontWeights,
   type HeadingSize,
-  type ButtonSize as ButtonTextSize,
+  // Named scale (Geist-style)
+  headingScale,
   type LabelSize,
-  type CopySize,
   type LabelVariant,
-  type CopyVariant,
+  type LineHeight,
+  labelScale,
+  lineHeights,
+  type TextColor,
+  type TextStyle,
+  textColors,
+  textStyles,
 } from "./typography";
-
-// Shadows
-export {
-  shadowScale,
-  shadowBrandScale,
-  shadowClasses,
-  shadowVars,
-  type ShadowLevel,
-  type ShadowBrand,
-  type ShadowKey,
-} from "./shadows";
-
-// Motion
-export {
-  durations,
-  easings,
-  motionVars,
-  transitions,
-  motionVariants,
-  sectionMotions,
-  staggerContainers,
-  interactiveVariants,
-  viewportSettings,
-  staggerDelay,
-  type Duration,
-  type Easing,
-  type MotionVar,
-} from "./motion";

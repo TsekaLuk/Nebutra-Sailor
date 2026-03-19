@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { format, subDays } from "date-fns";
 import { GitHubCalendar } from "./github-calendar";
-import { subDays, format } from "date-fns";
 
 const meta = {
   title: "Primitives/GitHubCalendar",
@@ -87,9 +87,7 @@ export const CustomTooltip: Story = {
       <GitHubCalendar
         data={sampleData}
         tooltipFormatter={(date, count) =>
-          count === 0
-            ? `${date}: No activity`
-            : `${date}: ${count} commit${count > 1 ? "s" : ""}`
+          count === 0 ? `${date}: No activity` : `${date}: ${count} commit${count > 1 ? "s" : ""}`
         }
         legendLabels={{ less: "Fewer commits", more: "More commits" }}
       />

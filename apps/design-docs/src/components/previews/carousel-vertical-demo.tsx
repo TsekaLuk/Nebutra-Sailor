@@ -1,23 +1,18 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import { Card } from "@nebutra/ui/patterns";
 import {
-  CarouselPrevious,
-  CarouselItem,
   CardContent,
+  Carousel,
   CarouselContent,
+  CarouselItem,
   CarouselNext,
-} from "@nebutra/ui/primitives"
-import { Card } from "@nebutra/ui/patterns"
-
-import { Carousel } from "@nebutra/ui/primitives"
+  CarouselPrevious,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 export function CarouselVerticalDemo() {
   return (
-    <Carousel
-      orientation="vertical"
-      opts={{ align: "start" }}
-      className="max-w-xs w-full"
-    >
+    <Carousel orientation="vertical" opts={{ align: "start" }} className="max-w-xs w-full">
       <CarouselContent className="-mt-1 h-[200px]">
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="pt-1 md:basis-1/2">
@@ -34,5 +29,5 @@ export function CarouselVerticalDemo() {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-  )
+  );
 }

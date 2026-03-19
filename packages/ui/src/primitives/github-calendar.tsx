@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
 import {
-  format,
-  subDays,
   addDays,
-  startOfWeek,
-  endOfWeek,
   eachDayOfInterval,
+  endOfWeek,
+  format,
   isSameDay,
+  startOfWeek,
+  subDays,
 } from "date-fns";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -145,10 +145,7 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
   const [contributions, setContributions] = useState<ContributionDay[]>([]);
 
   const today = useMemo(() => new Date(), []);
-  const startDate = useMemo(
-    () => subDays(today, (weeks - 1) * 7),
-    [today, weeks],
-  );
+  const startDate = useMemo(() => subDays(today, (weeks - 1) * 7), [today, weeks]);
 
   // Process data prop
   useEffect(() => {
@@ -224,10 +221,7 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
 
   return (
     <div
-      className={cn(
-        "rounded-[var(--radius-lg)] border border-border bg-background p-4",
-        className,
-      )}
+      className={cn("rounded-[var(--radius-lg)] border border-border bg-background p-4", className)}
     >
       <div className="flex">
         {/* Day Labels */}
@@ -267,9 +261,7 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
             {weeksArray.map((week, weekIndex) => (
               <div key={weekIndex} className="flex flex-col gap-1" role="row">
                 {week.days.map((day, dayIndex) => {
-                  const contribution = contributions.find((c) =>
-                    isSameDay(new Date(c.date), day),
-                  );
+                  const contribution = contributions.find((c) => isSameDay(new Date(c.date), day));
                   const count = contribution?.count ?? 0;
                   const color = getColor(count);
 

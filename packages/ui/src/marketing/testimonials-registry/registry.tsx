@@ -1,10 +1,10 @@
 "use client";
 
-import type { TestimonialsCommonProps, TestimonialsVariant } from "./types";
 import { cn } from "../../utils/cn";
-import { StaggerTestimonialsAdapter } from "./stagger.adapter";
-import { Marquee3DTestimonials } from "./marquee3d";
 import { GridTestimonials } from "./grid-section";
+import { Marquee3DTestimonials } from "./marquee3d";
+import { StaggerTestimonialsAdapter } from "./stagger.adapter";
+import type { TestimonialsCommonProps, TestimonialsVariant } from "./types";
 
 export type TestimonialsRegistryProps = TestimonialsCommonProps & {
   variant?: TestimonialsVariant;
@@ -27,20 +27,10 @@ export function TestimonialsRegistry({
 }: TestimonialsRegistryProps) {
   switch (variant) {
     case "stagger":
-      return (
-        <StaggerTestimonialsAdapter
-          items={items}
-          className={cn(className)}
-          height={height}
-        />
-      );
+      return <StaggerTestimonialsAdapter items={items} className={cn(className)} height={height} />;
     case "marquee3d":
       return (
-        <Marquee3DTestimonials
-          items={items}
-          className={cn(className)}
-          height={height ?? 384}
-        />
+        <Marquee3DTestimonials items={items} className={cn(className)} height={height ?? 384} />
       );
     case "grid":
       return (
@@ -53,12 +43,6 @@ export function TestimonialsRegistry({
         />
       );
     default:
-      return (
-        <StaggerTestimonialsAdapter
-          items={items}
-          className={cn(className)}
-          height={height}
-        />
-      );
+      return <StaggerTestimonialsAdapter items={items} className={cn(className)} height={height} />;
   }
 }

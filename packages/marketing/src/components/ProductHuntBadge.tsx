@@ -1,13 +1,9 @@
 "use client";
 
-import React from "react";
 import { clsx } from "clsx";
+import React from "react";
+import { getProductHuntBadgeUrl, getProductHuntUrl, PRODUCT_HUNT_COLORS } from "../config";
 import type { ProductHuntBadgeProps } from "../types";
-import {
-  getProductHuntUrl,
-  getProductHuntBadgeUrl,
-  PRODUCT_HUNT_COLORS,
-} from "../config";
 
 // ============================================
 // Size Configuration
@@ -84,9 +80,7 @@ export function ProductHuntEmbedBadge({
   openInNewTab = true,
 }: ProductHuntBadgeProps) {
   if (!postId) {
-    console.warn(
-      "ProductHuntEmbedBadge: postId is required for the official embed badge",
-    );
+    console.warn("ProductHuntEmbedBadge: postId is required for the official embed badge");
     return null;
   }
 
@@ -99,10 +93,7 @@ export function ProductHuntEmbedBadge({
       href={postUrl}
       target={openInNewTab ? "_blank" : undefined}
       rel={openInNewTab ? "noopener noreferrer" : undefined}
-      className={clsx(
-        "inline-block transition-opacity hover:opacity-90",
-        className,
-      )}
+      className={clsx("inline-block transition-opacity hover:opacity-90", className)}
     >
       <img
         src={badgeUrl}
@@ -157,9 +148,7 @@ export function ProductHuntBadge({
     >
       <ProductHuntIcon size={config.iconSize} />
       <div className="flex flex-col items-start">
-        <span className={clsx("font-semibold leading-tight", config.fontSize)}>
-          Featured on
-        </span>
+        <span className={clsx("font-semibold leading-tight", config.fontSize)}>Featured on</span>
         <span
           className={clsx("font-bold leading-tight", config.fontSize)}
           style={{ color: "var(--marketing-ph-primary)" }}
@@ -201,8 +190,7 @@ export function ProductHuntUpvoteBadge({
         color: "var(--marketing-fg-on-emphasis)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor =
-          "var(--marketing-ph-primary-hover)";
+        e.currentTarget.style.backgroundColor = "var(--marketing-ph-primary-hover)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.backgroundColor = "var(--marketing-ph-primary)";

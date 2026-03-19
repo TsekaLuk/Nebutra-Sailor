@@ -17,67 +17,64 @@
  * ```
  */
 
-// Types
-export * from "./types";
-
-// Document configuration
+// React components
 export {
-  companyInfo,
-  cookieCategories,
-  documentConfigs,
-  cookieConfig,
-  contactConfig,
-  legalConfig,
-  getDocumentConfig,
-  getRequiredDocuments,
-  getDocumentsByType,
-  getCookieCategory,
-  getOptionalCookieCategories,
-} from "./documents";
-
+  ConsentCheckbox,
+  type ConsentCheckboxProps,
+  CookieBanner,
+  type CookieBannerProps,
+  type CookieBannerTranslations,
+  CookieSettingsButton,
+  type CookieSettingsButtonProps,
+  LegalFooter,
+  type LegalFooterProps,
+  type LegalFooterTranslations,
+  LegalLinks,
+  type LegalLinksProps,
+  MultiConsentCheckbox,
+  type MultiConsentCheckboxProps,
+} from "./components";
 // Consent service
 export {
-  // Visitor ID
-  generateVisitorId,
-  getVisitorId,
+  acceptAllCookies,
+  type ConsentApiConfig,
+  cacheDocumentConsent,
+  // API client
+  configureConsentApi,
   // Cookie consent
   defaultCookiePreferences,
+  // Visitor ID
+  generateVisitorId,
+  getConsentStatus,
   getCookieConsent,
-  saveCookieConsent,
-  acceptAllCookies,
-  rejectAllCookies,
-  hasCookieConsent,
-  isCookieCategoryAllowed,
   getCookieConsentExpiry,
   // Document consent
   getDocumentConsents,
-  cacheDocumentConsent,
+  getVisitorId,
+  hasCookieConsent,
   hasDocumentConsentCached,
-  // API client
-  configureConsentApi,
-  recordDocumentConsent,
-  getConsentStatus,
+  initializeGTMConsentMode,
+  isCookieCategoryAllowed,
   recordCookieConsent,
+  recordDocumentConsent,
+  rejectAllCookies,
+  saveCookieConsent,
   // GTM integration
   updateGTMConsent,
-  initializeGTMConsentMode,
-  type ConsentApiConfig,
 } from "./consent";
-
-// React components
+// Document configuration
 export {
-  CookieBanner,
-  CookieSettingsButton,
-  ConsentCheckbox,
-  MultiConsentCheckbox,
-  LegalFooter,
-  LegalLinks,
-  type CookieBannerProps,
-  type CookieBannerTranslations,
-  type CookieSettingsButtonProps,
-  type ConsentCheckboxProps,
-  type MultiConsentCheckboxProps,
-  type LegalFooterProps,
-  type LegalFooterTranslations,
-  type LegalLinksProps,
-} from "./components";
+  companyInfo,
+  contactConfig,
+  cookieCategories,
+  cookieConfig,
+  documentConfigs,
+  getCookieCategory,
+  getDocumentConfig,
+  getDocumentsByType,
+  getOptionalCookieCategories,
+  getRequiredDocuments,
+  legalConfig,
+} from "./documents";
+// Types
+export * from "./types";

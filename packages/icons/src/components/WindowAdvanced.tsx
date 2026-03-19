@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -23,11 +23,7 @@ const WindowAdvanced = forwardRef<SVGSVGElement, IconProps>(
         clipRule="evenodd"
       />
       <g clipPath="url(#a)">
-        <path
-          fill="currentColor"
-          stroke="currentColor"
-          d="M9 12.5 12.5 7v3.5H15L11.5 16v-3.5z"
-        />
+        <path fill="currentColor" stroke="currentColor" d="M9 12.5 12.5 7v3.5H15L11.5 16v-3.5z" />
       </g>
       <defs>
         <clipPath id="a">
@@ -38,5 +34,6 @@ const WindowAdvanced = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 WindowAdvanced.displayName = "WindowAdvanced";
+
 export { WindowAdvanced };
 export default WindowAdvanced;

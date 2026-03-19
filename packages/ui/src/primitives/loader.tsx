@@ -4,18 +4,18 @@ import { cn } from "../utils/cn";
 
 export interface LoaderProps {
   variant?:
-  | "circular"
-  | "classic"
-  | "pulse"
-  | "pulse-dot"
-  | "dots"
-  | "typing"
-  | "wave"
-  | "bars"
-  | "terminal"
-  | "text-blink"
-  | "text-shimmer"
-  | "loading-dots";
+    | "circular"
+    | "classic"
+    | "pulse"
+    | "pulse-dot"
+    | "dots"
+    | "typing"
+    | "wave"
+    | "bars"
+    | "terminal"
+    | "text-blink"
+    | "text-shimmer"
+    | "loading-dots";
   size?: "sm" | "md" | "lg";
   text?: string;
   className?: string;
@@ -79,8 +79,7 @@ export function ClassicLoader({ className, size = "md" }: LoaderSizeProps) {
             style={{
               top: "0",
               left: "50%",
-              marginLeft:
-                size === "sm" ? "-0.75px" : size === "lg" ? "-1.25px" : "-1px",
+              marginLeft: size === "sm" ? "-0.75px" : size === "lg" ? "-1.25px" : "-1px",
               transformOrigin: `${size === "sm" ? "0.75px" : size === "lg" ? "1.25px" : "1px"} ${size === "sm" ? "10px" : size === "lg" ? "14px" : "12px"}`,
               transform: `rotate(${i * 30}deg)`,
               opacity: 0,
@@ -154,13 +153,7 @@ export function DotsLoader({ className, size = "md" }: LoaderSizeProps) {
   };
 
   return (
-    <div
-      className={cn(
-        "flex items-center space-x-1",
-        containerSizes[size],
-        className,
-      )}
-    >
+    <div className={cn("flex items-center space-x-1", containerSizes[size], className)}>
       {[...Array(3)].map((_, i) => (
         <div
           key={i}
@@ -195,20 +188,11 @@ export function TypingLoader({ className, size = "md" }: LoaderSizeProps) {
   };
 
   return (
-    <div
-      className={cn(
-        "flex items-center space-x-1",
-        containerSizes[size],
-        className,
-      )}
-    >
+    <div className={cn("flex items-center space-x-1", containerSizes[size], className)}>
       {[...Array(3)].map((_, i) => (
         <div
           key={i}
-          className={cn(
-            "bg-primary animate-[typing_1s_infinite] rounded-full",
-            dotSizes[size],
-          )}
+          className={cn("bg-primary animate-[typing_1s_infinite] rounded-full", dotSizes[size])}
           style={{
             animationDelay: `${i * 250}ms`,
           }}
@@ -242,13 +226,7 @@ export function WaveLoader({ className, size = "md" }: LoaderSizeProps) {
   };
 
   return (
-    <div
-      className={cn(
-        "flex items-center gap-0.5",
-        containerSizes[size],
-        className,
-      )}
-    >
+    <div className={cn("flex items-center gap-0.5", containerSizes[size], className)}>
       {[...Array(5)].map((_, i) => (
         <div
           key={i}
@@ -325,22 +303,9 @@ export function TerminalLoader({ className, size = "md" }: LoaderSizeProps) {
   };
 
   return (
-    <div
-      className={cn(
-        "flex items-center space-x-1",
-        containerSizes[size],
-        className,
-      )}
-    >
-      <span className={cn("text-primary font-mono", textSizes[size])}>
-        {">"}
-      </span>
-      <div
-        className={cn(
-          "bg-primary animate-[blink_1s_step-end_infinite]",
-          cursorSizes[size],
-        )}
-      />
+    <div className={cn("flex items-center space-x-1", containerSizes[size], className)}>
+      <span className={cn("text-primary font-mono", textSizes[size])}>{">"}</span>
+      <div className={cn("bg-primary animate-[blink_1s_step-end_infinite]", cursorSizes[size])} />
       <span className="sr-only">Loading</span>
     </div>
   );
@@ -349,11 +314,7 @@ export function TerminalLoader({ className, size = "md" }: LoaderSizeProps) {
 /**
  * TextBlinkLoader - Blinking text between primary and muted
  */
-export function TextBlinkLoader({
-  text = "Thinking",
-  className,
-  size = "md",
-}: TextLoaderProps) {
+export function TextBlinkLoader({ text = "Thinking", className, size = "md" }: TextLoaderProps) {
   const textSizes = {
     sm: "text-xs",
     md: "text-sm",
@@ -376,11 +337,7 @@ export function TextBlinkLoader({
 /**
  * TextShimmerLoader - Gradient shimmer effect on text
  */
-export function TextShimmerLoader({
-  text = "Thinking",
-  className,
-  size = "md",
-}: TextLoaderProps) {
+export function TextShimmerLoader({ text = "Thinking", className, size = "md" }: TextLoaderProps) {
   const textSizes = {
     sm: "text-xs",
     md: "text-sm",
@@ -405,11 +362,7 @@ export function TextShimmerLoader({
 /**
  * TextDotsLoader - Text with animated trailing dots
  */
-export function TextDotsLoader({
-  className,
-  text = "Thinking",
-  size = "md",
-}: TextLoaderProps) {
+export function TextDotsLoader({ className, text = "Thinking", size = "md" }: TextLoaderProps) {
   const textSizes = {
     sm: "text-xs",
     md: "text-sm",
@@ -418,19 +371,11 @@ export function TextDotsLoader({
 
   return (
     <div className={cn("inline-flex items-center", className)}>
-      <span className={cn("text-primary font-medium", textSizes[size])}>
-        {text}
-      </span>
+      <span className={cn("text-primary font-medium", textSizes[size])}>{text}</span>
       <span className="inline-flex">
-        <span className="text-primary animate-[loading-dots_1.4s_infinite_0.2s]">
-          .
-        </span>
-        <span className="text-primary animate-[loading-dots_1.4s_infinite_0.4s]">
-          .
-        </span>
-        <span className="text-primary animate-[loading-dots_1.4s_infinite_0.6s]">
-          .
-        </span>
+        <span className="text-primary animate-[loading-dots_1.4s_infinite_0.2s]">.</span>
+        <span className="text-primary animate-[loading-dots_1.4s_infinite_0.4s]">.</span>
+        <span className="text-primary animate-[loading-dots_1.4s_infinite_0.6s]">.</span>
       </span>
     </div>
   );
@@ -459,12 +404,7 @@ export function TextDotsLoader({
  * <Loader variant="dots" size="lg" />
  * ```
  */
-export function Loader({
-  variant = "circular",
-  size = "md",
-  text,
-  className,
-}: LoaderProps) {
+export function Loader({ variant = "circular", size = "md", text, className }: LoaderProps) {
   switch (variant) {
     case "circular":
       return <CircularLoader size={size} className={className} />;
@@ -487,9 +427,7 @@ export function Loader({
     case "text-blink":
       return <TextBlinkLoader text={text} size={size} className={className} />;
     case "text-shimmer":
-      return (
-        <TextShimmerLoader text={text} size={size} className={className} />
-      );
+      return <TextShimmerLoader text={text} size={size} className={className} />;
     case "loading-dots":
       return <TextDotsLoader text={text} size={size} className={className} />;
     default:

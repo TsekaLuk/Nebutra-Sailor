@@ -1,4 +1,4 @@
-import { Text } from "@nebutra/ui/primitives"
+import { Text } from "@nebutra/ui/primitives";
 
 export function TextDemo() {
   return (
@@ -9,5 +9,5 @@ export function TextDemo() {
         Label — form labels and metadata
       </Text>
     </div>
-  )
+  );
 }

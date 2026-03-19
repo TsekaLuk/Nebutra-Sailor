@@ -11,13 +11,13 @@
  * 5) Dependency boundaries stay within declared allowlists.
  */
 
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  loadUiGovernancePolicy,
   type AggregateBudgetEntry,
   type GovernancePolicy,
+  loadUiGovernancePolicy,
 } from "./lib/ui-governance-policy";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,8 +26,7 @@ const repoRoot = path.resolve(__dirname, "..");
 
 const RAW_TAILWIND_COLOR_RE =
   /\b(?:bg|text|border|from|to|via|ring|stroke|fill)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950)\b/g;
-const RAW_TAILWIND_BORDER_RADIUS_RE =
-  /\brounded-(?:sm|md|lg|xl|2xl|3xl)\b/g;
+const RAW_TAILWIND_BORDER_RADIUS_RE = /\brounded-(?:sm|md|lg|xl|2xl|3xl)\b/g;
 const FRAMER_MOTION_IMPORT_RE = /from\s+["']framer-motion["']/;
 const IMPORT_SOURCE_RE = /from\s+["']([^"']+)["']/g;
 const HEX_RE = /#[0-9A-Fa-f]{6}\b/g;
@@ -55,9 +54,7 @@ function stripComments(content: string, filePath: string) {
   }
 
   if (ext === ".ts" || ext === ".tsx" || ext === ".js" || ext === ".jsx") {
-    return content
-      .replace(/\/\*[\s\S]*?\*\//g, "")
-      .replace(/(^|[^:])\/\/.*$/gm, "$1");
+    return content.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:])\/\/.*$/gm, "$1");
   }
 
   return content;
@@ -106,10 +103,7 @@ function verifyRawTailwindColorUsage(policy: GovernancePolicy) {
   const stats: Array<{ surface: string; total: number; budget: number }> = [];
 
   for (const budget of policy.rawTailwindColorBudgets) {
-    const files = collectFiles(
-      budget.root,
-      new Set(budget.extensions),
-    );
+    const files = collectFiles(budget.root, new Set(budget.extensions));
 
     let total = 0;
     for (const file of files) {
@@ -222,7 +216,10 @@ function verifyComponentTierCoverage(policy: GovernancePolicy) {
 
     for (const component of tier.components) {
       const componentFile = `${primitivesRoot}/${component}.tsx`;
-      assert(existsSync(path.join(repoRoot, componentFile)), `Tier component missing: ${componentFile}`);
+      assert(
+        existsSync(path.join(repoRoot, componentFile)),
+        `Tier component missing: ${componentFile}`,
+      );
 
       const storyFile = `${primitivesRoot}/${component}.stories.tsx`;
       if (!existsSync(path.join(repoRoot, storyFile))) {
@@ -230,8 +227,7 @@ function verifyComponentTierCoverage(policy: GovernancePolicy) {
       }
     }
 
-    const coverage =
-      (tier.components.length - missingStories.length) / tier.components.length;
+    const coverage = (tier.components.length - missingStories.length) / tier.components.length;
     assert(
       coverage >= tier.requiredCoverage,
       `[${tier.name}] story coverage ${Math.round(coverage * 100)}% < ${Math.round(tier.requiredCoverage * 100)}%.\nMissing:\n${missingStories.map((item) => `- ${item}`).join("\n")}`,
@@ -275,11 +271,14 @@ function verifyDependencyBoundaries(policy: GovernancePolicy) {
     `Dependency boundary violation (deep cross-package import):\n${importViolations.map((item) => `- ${item}`).join("\n")}`,
   );
 
-  const uiPackage = JSON.parse(
-    read("packages/ui/package.json"),
-  ) as { exports?: Record<string, unknown> };
+  const uiPackage = JSON.parse(read("packages/ui/package.json")) as {
+    exports?: Record<string, unknown>;
+  };
   const exportKeys = Object.keys(uiPackage.exports || {});
-  const allowed = new Set(policy.dependencyBoundaries.uiAllowedExports ?? policy.dependencyBoundaries.customUiAllowedExports);
+  const allowed = new Set(
+    policy.dependencyBoundaries.uiAllowedExports ??
+      policy.dependencyBoundaries.customUiAllowedExports,
+  );
 
   const unexpected = exportKeys.filter((key) => !allowed.has(key));
   const missing = [...allowed].filter((key) => !exportKeys.includes(key));
@@ -290,18 +289,13 @@ function verifyDependencyBoundaries(policy: GovernancePolicy) {
   );
 }
 
-function countAggregateBudgetViolations(
-  budget: AggregateBudgetEntry,
-  pattern: RegExp,
-): number {
+function countAggregateBudgetViolations(budget: AggregateBudgetEntry, pattern: RegExp): number {
   const excludeSet = new Set(budget.exclude ?? []);
 
   // Derive roots from paths (strip glob suffix, e.g. "packages/custom-ui/src/**" -> "packages/custom-ui/src")
   const roots = budget.paths.map((p) => p.replace(/\/\*\*$/, "").replace(/\/\*$/, ""));
 
-  const allFiles = roots.flatMap((root) =>
-    collectFiles(root, new Set([".ts", ".tsx", ".css"])),
-  );
+  const allFiles = roots.flatMap((root) => collectFiles(root, new Set([".ts", ".tsx", ".css"])));
 
   let total = 0;
   for (const file of allFiles) {
@@ -359,9 +353,7 @@ function main() {
   console.log("UI governance verification passed");
   console.log(`- policy: ${policy.policyVersion}`);
   for (const stat of rawColorStats) {
-    console.log(
-      `- raw tailwind color utilities [${stat.surface}]: ${stat.total}/${stat.budget}`,
-    );
+    console.log(`- raw tailwind color utilities [${stat.surface}]: ${stat.total}/${stat.budget}`);
   }
   console.log(
     [

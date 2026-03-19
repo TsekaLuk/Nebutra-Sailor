@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { cn } from "../utils/cn";
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -47,8 +47,7 @@ function LetterGlitch({
 
   const getRandomChar = () =>
     lettersAndSymbols[Math.floor(Math.random() * lettersAndSymbols.length)];
-  const getRandomColor = () =>
-    glitchColors[Math.floor(Math.random() * glitchColors.length)];
+  const getRandomColor = () => glitchColors[Math.floor(Math.random() * glitchColors.length)];
 
   const hexToRgb = (hex: string) => {
     const shorthand = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -241,8 +240,7 @@ export function FallbackCard({
       ? ["#78b4ff", "#a0c4ff", "#c7d2fe", "#e0e7ff", "#f0f4ff"]
       : ["#374151", "#6b7280", "#9ca3af", "#d1d5db"];
 
-  const baseBg =
-    theme === "dark" ? "bg-black text-white/90" : "bg-white text-black/80";
+  const baseBg = theme === "dark" ? "bg-black text-white/90" : "bg-white text-black/80";
 
   return (
     <div
@@ -291,5 +289,5 @@ export function FallbackCard({
 
 FallbackCard.displayName = "FallbackCard";
 
-export { LetterGlitch };
 export type { LetterGlitchProps };
+export { LetterGlitch };

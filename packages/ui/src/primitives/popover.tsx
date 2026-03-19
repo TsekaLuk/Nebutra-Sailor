@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Popover as PopoverPrimitive } from '@base-ui-components/react/popover';
-import { cn } from '../utils/cn';
+import { Popover as PopoverPrimitive } from "@base-ui-components/react/popover";
+import * as React from "react";
+import { cn } from "../utils/cn";
 
 function Popover({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Root>) {
   return <PopoverPrimitive.Root data-slot="popover" {...props} />;
@@ -22,28 +22,35 @@ function PopoverTrigger({ asChild, children, render, ...props }: PopoverTriggerP
   );
 }
 
-function PopoverPositioner({ sideOffset = 4, ...props }: React.ComponentProps<typeof PopoverPrimitive.Positioner>) {
+function PopoverPositioner({
+  sideOffset = 4,
+  ...props
+}: React.ComponentProps<typeof PopoverPrimitive.Positioner>) {
   return (
     <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Positioner data-slot="popover-positioner" sideOffset={sideOffset} {...props} />
+      <PopoverPrimitive.Positioner
+        data-slot="popover-positioner"
+        sideOffset={sideOffset}
+        {...props}
+      />
     </PopoverPrimitive.Portal>
   );
 }
 
 export interface PopoverContentProps extends React.ComponentProps<typeof PopoverPrimitive.Popup> {
-  align?: PopoverPrimitive.Positioner.Props['align'];
-  sideOffset?: PopoverPrimitive.Positioner.Props['sideOffset'];
-  alignOffset?: PopoverPrimitive.Positioner.Props['alignOffset'];
-  side?: PopoverPrimitive.Positioner.Props['side'];
+  align?: PopoverPrimitive.Positioner.Props["align"];
+  sideOffset?: PopoverPrimitive.Positioner.Props["sideOffset"];
+  alignOffset?: PopoverPrimitive.Positioner.Props["alignOffset"];
+  side?: PopoverPrimitive.Positioner.Props["side"];
   showArrow?: boolean;
 }
 
 function PopoverContent({
   className,
-  align = 'center',
+  align = "center",
   sideOffset = 8,
   alignOffset = 0,
-  side = 'bottom',
+  side = "bottom",
   children,
   showArrow = false,
   ...props
@@ -79,12 +86,15 @@ function PopoverContent({
   );
 }
 
-function PopoverArrow({ className, ...props }: React.ComponentProps<typeof PopoverPrimitive.Arrow>) {
+function PopoverArrow({
+  className,
+  ...props
+}: React.ComponentProps<typeof PopoverPrimitive.Arrow>) {
   return (
     <PopoverPrimitive.Arrow
       data-slot="popover-arrow"
       className={cn(
-        'z-50 data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180',
+        "z-50 data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
         className,
       )}
       {...props}
@@ -107,4 +117,4 @@ function PopoverAnchor({ ...props }: React.ComponentProps<typeof PopoverPrimitiv
   return <PopoverPrimitive.Arrow data-slot="popover-anchor" {...props} />;
 }
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor, PopoverPositioner };
+export { Popover, PopoverAnchor, PopoverContent, PopoverPositioner, PopoverTrigger };

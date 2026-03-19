@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-import Link from "next/link";
 import { PageHeader } from "@nebutra/ui/layout";
+import Link from "next/link";
+import type { ReactNode } from "react";
 
 const NAV_ITEMS = [
   { href: "/settings", label: "General" },
@@ -13,10 +13,7 @@ const NAV_ITEMS = [
 export default function SettingsLayout({ children }: { children: ReactNode }) {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
-      <PageHeader
-        title="Settings"
-        description="Manage your organization and account settings"
-      />
+      <PageHeader title="Settings" description="Manage your organization and account settings" />
 
       <div className="mt-8 flex gap-8">
         {/* Sidebar nav */}

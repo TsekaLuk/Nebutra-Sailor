@@ -5,9 +5,9 @@
  */
 
 import {
+  primitiveFontSize,
   primitiveRadius,
   primitiveSpacing,
-  primitiveFontSize,
   primitiveTransition,
 } from "../primitive";
 

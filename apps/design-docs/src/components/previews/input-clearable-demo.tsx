@@ -1,14 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Input } from "@nebutra/ui/primitives"
+import { Input } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function InputClearableDemo() {
   return (
-    <Input
-      clearable
-      defaultValue="contact@nebutra.com"
-      placeholder="Type to see the × button…"
-    />
-  )
+    <Input clearable defaultValue="contact@nebutra.com" placeholder="Type to see the × button…" />
+  );
 }

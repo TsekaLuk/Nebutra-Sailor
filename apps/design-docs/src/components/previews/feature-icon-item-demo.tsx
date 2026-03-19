@@ -1,5 +1,5 @@
-import { FeatureIconItem } from "@nebutra/ui/primitives"
-import { Zap, Shield, Smartphone, Globe, Cpu, Cloud } from "lucide-react"
+import { FeatureIconItem } from "@nebutra/ui/primitives";
+import { Cloud, Cpu, Globe, Shield, Smartphone, Zap } from "lucide-react";
 
 export function FeatureIconItemDemo() {
   return (
@@ -48,5 +48,5 @@ export function FeatureIconItemDemo() {
         />
       </div>
     </div>
-  )
+  );
 }

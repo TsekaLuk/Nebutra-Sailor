@@ -1,11 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react"
-import { Button } from "./button"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./tooltip"
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip";
 
 const meta = {
   title: "Primitives/Tooltip",
@@ -27,10 +22,10 @@ const meta = {
       </TooltipProvider>
     ),
   ],
-} satisfies Meta<typeof Tooltip>
+} satisfies Meta<typeof Tooltip>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
@@ -43,7 +38,7 @@ export const Default: Story = {
       </TooltipContent>
     </Tooltip>
   ),
-}
+};
 
 export const Sides: Story = {
   render: () => (
@@ -62,7 +57,7 @@ export const Sides: Story = {
       ))}
     </div>
   ),
-}
+};
 
 export const InstantDelay: Story = {
   render: () => (
@@ -75,4 +70,4 @@ export const InstantDelay: Story = {
       </TooltipContent>
     </Tooltip>
   ),
-}
+};

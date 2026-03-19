@@ -1,5 +1,5 @@
-import { Entity } from "@nebutra/ui/primitives"
-import { User, Mail, Settings, ChevronRight } from "lucide-react"
+import { Entity } from "@nebutra/ui/primitives";
+import { ChevronRight, Mail, Settings, User } from "lucide-react";
 
 export function EntityDemo() {
   return (
@@ -14,10 +14,7 @@ export function EntityDemo() {
           }
           right={<ChevronRight className="size-5 text-muted-foreground" />}
         >
-          <Entity.Content
-            title="Profile Settings"
-            description="Update your personal information"
-          />
+          <Entity.Content title="Profile Settings" description="Update your personal information" />
         </Entity>
 
         <Entity
@@ -29,10 +26,7 @@ export function EntityDemo() {
           }
           right={<ChevronRight className="size-5 text-muted-foreground" />}
         >
-          <Entity.Content
-            title="Email Preferences"
-            description="Manage newsletter subscriptions"
-          />
+          <Entity.Content title="Email Preferences" description="Manage newsletter subscriptions" />
         </Entity>
 
         <Entity
@@ -51,5 +45,5 @@ export function EntityDemo() {
         </Entity>
       </Entity.List>
     </div>
-  )
+  );
 }

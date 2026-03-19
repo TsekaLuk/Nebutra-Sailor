@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/auth"; // Updated path based on auth.ts location
 import crypto from "crypto";
+import { type NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth"; // Updated path based on auth.ts location
 
 // 这里的 Secret 必须和 Discourse 后台设置的 "discourse connect secret" 保持严格一致
 const DISCOURSE_SSO_SECRET = process.env.DISCOURSE_SSO_SECRET || "your_super_secret_key";
@@ -49,9 +49,9 @@ export async function GET(req: NextRequest) {
   // 6. 构造我们要发回给 Discourse 的用户数据 Payload
   const returnPayloadData = new URLSearchParams({
     nonce: nonce,
-    external_id: session.user.id || "",     // 这里务必传用户的唯一 ID
+    external_id: session.user.id || "", // 这里务必传用户的唯一 ID
     email: session.user.email || "",
-    username: session.user.name?.replace(/\s+/g, '_') || `user_${session.user.id}`,
+    username: session.user.name?.replace(/\s+/g, "_") || `user_${session.user.id}`,
     name: session.user.name || "",
     avatar_url: session.user.image || "",
     // 如果想要高级一点，甚至可以传群组：

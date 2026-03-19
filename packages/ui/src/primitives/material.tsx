@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -57,11 +57,7 @@ export interface MaterialProps
 
 export const Material = React.forwardRef<HTMLDivElement, MaterialProps>(
   ({ type, className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(materialVariants({ type }), className)}
-      {...props}
-    >
+    <div ref={ref} className={cn(materialVariants({ type }), className)} {...props}>
       {children}
     </div>
   ),

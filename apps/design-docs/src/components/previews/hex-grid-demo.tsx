@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { HexGrid } from "@nebutra/ui/primitives"
+import { HexGrid } from "@nebutra/ui/primitives";
 
 export function HexGridDemo() {
   return (
@@ -17,9 +17,7 @@ export function HexGridDemo() {
           <div className="md:h-[400px] relative flex h-[300px] w-full items-center justify-center overflow-hidden rounded-xl border bg-card">
             <HexGrid glow color="hsl(var(--primary))" opacity={0.25} />
             <div className="backdrop-blur-md px-6 py-4 relative z-10 rounded-full border bg-background/80 shadow-sm">
-              <span className="font-semibold tracking-tight">
-                Core Infrastructure
-              </span>
+              <span className="font-semibold tracking-tight">Core Infrastructure</span>
             </div>
           </div>
         </div>
@@ -49,5 +47,5 @@ export function HexGridDemo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

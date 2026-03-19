@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { Slot } from "../utils/slot";
 import { ChevronRight, MoreHorizontal } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils";
+import { Slot } from "../utils/slot";
 
 // =============================================================================
 // Types
@@ -88,9 +88,9 @@ export type BreadcrumbEllipsisProps = React.ComponentPropsWithoutRef<"span">;
  * </Breadcrumb>
  * ```
  */
-const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
-  ({ ...props }, ref) => <nav ref={ref} aria-label="breadcrumb" {...props} />,
-);
+const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(({ ...props }, ref) => (
+  <nav ref={ref} aria-label="breadcrumb" {...props} />
+));
 Breadcrumb.displayName = "Breadcrumb";
 
 /**
@@ -115,11 +115,7 @@ BreadcrumbList.displayName = "BreadcrumbList";
  */
 const BreadcrumbItem = React.forwardRef<HTMLLIElement, BreadcrumbItemProps>(
   ({ className, ...props }, ref) => (
-    <li
-      ref={ref}
-      className={cn("inline-flex items-center gap-1.5", className)}
-      {...props}
-    />
+    <li ref={ref} className={cn("inline-flex items-center gap-1.5", className)} {...props} />
   ),
 );
 BreadcrumbItem.displayName = "BreadcrumbItem";
@@ -189,11 +185,7 @@ BreadcrumbPage.displayName = "BreadcrumbPage";
  * <BreadcrumbSeparator>→</BreadcrumbSeparator>
  * ```
  */
-const BreadcrumbSeparator = ({
-  children,
-  className,
-  ...props
-}: BreadcrumbSeparatorProps) => (
+const BreadcrumbSeparator = ({ children, className, ...props }: BreadcrumbSeparatorProps) => (
   <li
     role="presentation"
     aria-hidden="true"
@@ -215,10 +207,7 @@ BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
  * </BreadcrumbItem>
  * ```
  */
-const BreadcrumbEllipsis = ({
-  className,
-  ...props
-}: BreadcrumbEllipsisProps) => (
+const BreadcrumbEllipsis = ({ className, ...props }: BreadcrumbEllipsisProps) => (
   <span
     role="presentation"
     aria-hidden="true"
@@ -233,10 +222,10 @@ BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis";
 
 export {
   Breadcrumb,
-  BreadcrumbList,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  BreadcrumbEllipsis,
 };

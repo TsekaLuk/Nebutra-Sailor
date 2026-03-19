@@ -1,12 +1,5 @@
-import { describe, it, expect } from "vitest";
-import {
-  NebutraConfigSchema,
-  PresetId,
-  AppId,
-  FeatureId,
-  ThemeId,
-  defineConfig,
-} from "../config";
+import { describe, expect, it } from "vitest";
+import { AppId, defineConfig, FeatureId, NebutraConfigSchema, PresetId, ThemeId } from "../config";
 
 describe("NebutraConfigSchema", () => {
   it("parses minimal config with defaults", () => {
@@ -107,15 +100,7 @@ describe("FeatureId", () => {
 
 describe("ThemeId", () => {
   it("accepts all 7 theme IDs", () => {
-    const ids = [
-      "neon",
-      "gradient",
-      "dark-dense",
-      "minimal",
-      "vibrant",
-      "ocean",
-      "custom",
-    ];
+    const ids = ["neon", "gradient", "dark-dense", "minimal", "vibrant", "ocean", "custom"];
     for (const id of ids) {
       expect(ThemeId.parse(id)).toBe(id);
     }

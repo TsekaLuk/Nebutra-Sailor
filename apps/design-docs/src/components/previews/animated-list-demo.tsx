@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { AnimatedList } from "@nebutra/ui/primitives"
+import { AnimatedList } from "@nebutra/ui/primitives";
 
 const notifications = [
   {
@@ -21,7 +21,7 @@ const notifications = [
     title: "Deploy completed",
     body: "v2.1.0 is live in production",
   },
-]
+];
 
 export function AnimatedListDemo() {
   return (
@@ -41,5 +41,5 @@ export function AnimatedListDemo() {
         ))}
       </AnimatedList>
     </div>
-  )
+  );
 }

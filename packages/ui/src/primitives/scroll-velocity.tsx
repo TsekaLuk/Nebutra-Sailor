@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useRef, useState } from "react";
+import type { MotionValue } from "motion/react";
 import {
   motion,
   useAnimationFrame,
@@ -10,7 +10,7 @@ import {
   useTransform,
   useVelocity,
 } from "motion/react";
-import type { MotionValue } from "motion/react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -77,9 +77,7 @@ export const wrap = (min: number, max: number, v: number): number => {
 // Context
 // =============================================================================
 
-const ScrollVelocityContext = React.createContext<MotionValue<number> | null>(
-  null,
-);
+const ScrollVelocityContext = React.createContext<MotionValue<number> | null>(null);
 
 // =============================================================================
 // Container Component
@@ -139,9 +137,7 @@ export function ScrollVelocityRow(props: ScrollVelocityRowProps) {
   const sharedVelocityFactor = useContext(ScrollVelocityContext);
 
   if (sharedVelocityFactor) {
-    return (
-      <ScrollVelocityRowImpl {...props} velocityFactor={sharedVelocityFactor} />
-    );
+    return <ScrollVelocityRowImpl {...props} velocityFactor={sharedVelocityFactor} />;
   }
   return <ScrollVelocityRowLocal {...props} />;
 }
@@ -243,8 +239,7 @@ function ScrollVelocityRowImpl({
     const bw = unitWidth.get() || 0;
     if (bw <= 0) return;
     const pixelsPerSecond = (bw * baseVelocity) / 100;
-    const moveBy =
-      currentDirectionRef.current * pixelsPerSecond * speedMultiplier * dt;
+    const moveBy = currentDirectionRef.current * pixelsPerSecond * speedMultiplier * dt;
     baseX.set(baseX.get() + moveBy);
   });
 
@@ -260,19 +255,11 @@ function ScrollVelocityRowImpl({
       >
         {Array.from({ length: numCopies }).map((_, i) =>
           i === 0 ? (
-            <div
-              key={i}
-              ref={blockRef}
-              className="inline-flex shrink-0 items-center"
-            >
+            <div key={i} ref={blockRef} className="inline-flex shrink-0 items-center">
               {children}
             </div>
           ) : (
-            <div
-              key={i}
-              aria-hidden="true"
-              className="inline-flex shrink-0 items-center"
-            >
+            <div key={i} aria-hidden="true" className="inline-flex shrink-0 items-center">
               {children}
             </div>
           ),
@@ -295,9 +282,7 @@ function ScrollVelocityRowLocal(props: ScrollVelocityRowProps) {
     return sign * magnitude;
   });
 
-  return (
-    <ScrollVelocityRowImpl {...props} velocityFactor={localVelocityFactor} />
-  );
+  return <ScrollVelocityRowImpl {...props} velocityFactor={localVelocityFactor} />;
 }
 
 export default ScrollVelocityContainer;

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Slider } from "@nebutra/ui/primitives"
+import { Slider } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export default function SliderStatefulDemo() {
-  const [value, setValue] = useState<number>(50)
+  const [value, setValue] = useState<number>(50);
 
-  return <Slider onValueChange={setValue} value={value} />
+  return <Slider onValueChange={setValue} value={value} />;
 }

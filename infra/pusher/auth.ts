@@ -160,5 +160,5 @@ pusherRoutes.post("/auth", async (c) => {
 export { pusherRoutes };
 */
 
-export { validateChannelAccess };
 export type { User };
+export { validateChannelAccess };

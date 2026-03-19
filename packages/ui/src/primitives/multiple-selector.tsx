@@ -1,9 +1,9 @@
 "use client";
 
 import { Command as CommandPrimitive, useCommandState } from "cmdk";
+import { XIcon } from "lucide-react";
 import * as React from "react";
 import { forwardRef, useEffect } from "react";
-import { XIcon } from "lucide-react";
 
 import { cn } from "../utils/cn";
 import { Command, CommandGroup, CommandItem, CommandList } from "./command";
@@ -95,10 +95,7 @@ export function useDebounce<T>(value: T, delay?: number): T {
   return debouncedValue;
 }
 
-function transToGroupOption(
-  options: MultipleSelectorOption[],
-  groupBy?: string,
-): GroupOption {
+function transToGroupOption(options: MultipleSelectorOption[], groupBy?: string): GroupOption {
   if (options.length === 0) return {};
   if (!groupBy) return { "": options };
 
@@ -117,21 +114,14 @@ function removePickedOption(
 ): GroupOption {
   const cloneOption = JSON.parse(JSON.stringify(groupOption)) as GroupOption;
   for (const [key, value] of Object.entries(cloneOption)) {
-    cloneOption[key] = value.filter(
-      (val) => !picked.find((p) => p.value === val.value),
-    );
+    cloneOption[key] = value.filter((val) => !picked.find((p) => p.value === val.value));
   }
   return cloneOption;
 }
 
-function isOptionsExist(
-  groupOption: GroupOption,
-  targetOption: MultipleSelectorOption[],
-): boolean {
+function isOptionsExist(groupOption: GroupOption, targetOption: MultipleSelectorOption[]): boolean {
   for (const [, value] of Object.entries(groupOption)) {
-    if (
-      value.some((option) => targetOption.find((p) => p.value === option.value))
-    ) {
+    if (value.some((option) => targetOption.find((p) => p.value === option.value))) {
       return true;
     }
   }
@@ -209,10 +199,7 @@ CommandEmpty.displayName = "CommandEmpty";
  * />
  * ```
  */
-const MultipleSelector = React.forwardRef<
-  MultipleSelectorRef,
-  MultipleSelectorProps
->(
+const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorProps>(
   (
     {
       value,
@@ -247,9 +234,7 @@ const MultipleSelector = React.forwardRef<
     const [isLoading, setIsLoading] = React.useState(false);
     const dropdownRef = React.useRef<HTMLDivElement>(null);
 
-    const [selected, setSelected] = React.useState<MultipleSelectorOption[]>(
-      value || [],
-    );
+    const [selected, setSelected] = React.useState<MultipleSelectorOption[]>(value || []);
     const [options, setOptions] = React.useState<GroupOption>(
       transToGroupOption(arrayDefaultOptions, groupBy),
     );
@@ -347,13 +332,7 @@ const MultipleSelector = React.forwardRef<
       };
 
       void exec();
-    }, [
-      debouncedSearchTerm,
-      groupBy,
-      open,
-      triggerSearchOnFocus,
-      onSearchSync,
-    ]);
+    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus, onSearchSync]);
 
     useEffect(() => {
       const doSearch = async () => {
@@ -447,14 +426,9 @@ const MultipleSelector = React.forwardRef<
           handleKeyDown(e);
           commandProps?.onKeyDown?.(e);
         }}
-        className={cn(
-          "h-auto overflow-visible bg-transparent",
-          commandProps?.className,
-        )}
+        className={cn("h-auto overflow-visible bg-transparent", commandProps?.className)}
         shouldFilter={
-          commandProps?.shouldFilter !== undefined
-            ? commandProps.shouldFilter
-            : !onSearch
+          commandProps?.shouldFilter !== undefined ? commandProps.shouldFilter : !onSearch
         }
         {...(commandFilter() ? { filter: commandFilter() as any } : {})} // eslint-disable-line @typescript-eslint/no-explicit-any
       >
@@ -522,11 +496,7 @@ const MultipleSelector = React.forwardRef<
                 if (triggerSearchOnFocus) onSearch?.(debouncedSearchTerm);
                 inputProps?.onFocus?.(event);
               }}
-              placeholder={
-                hidePlaceholderWhenSelected && selected.length !== 0
-                  ? ""
-                  : placeholder
-              }
+              placeholder={hidePlaceholderWhenSelected && selected.length !== 0 ? "" : placeholder}
               className={cn(
                 "flex-1 bg-transparent outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed",
                 {
@@ -549,7 +519,7 @@ const MultipleSelector = React.forwardRef<
                   disabled ||
                   selected.length < 1 ||
                   selected.filter((s) => s.fixed).length === selected.length) &&
-                "hidden",
+                  "hidden",
               )}
               aria-label="Clear all"
             >
@@ -579,15 +549,9 @@ const MultipleSelector = React.forwardRef<
                   <>
                     {EmptyItem()}
                     {CreatableItem()}
-                    {!selectFirstItem && (
-                      <CommandItem value="-" className="hidden" />
-                    )}
+                    {!selectFirstItem && <CommandItem value="-" className="hidden" />}
                     {Object.entries(selectables).map(([key, dropdowns]) => (
-                      <CommandGroup
-                        key={key}
-                        heading={key}
-                        className="h-full overflow-auto"
-                      >
+                      <CommandGroup key={key} heading={key} className="h-full overflow-auto">
                         {dropdowns.map((option) => (
                           <CommandItem
                             key={option.value}

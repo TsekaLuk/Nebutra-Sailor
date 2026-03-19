@@ -3,9 +3,7 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    NODE_ENV: z
-      .enum(["development", "production", "test"])
-      .default("development"),
+    NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
 
     // Clerk server secret — required for protected API routes and server actions
     CLERK_SECRET_KEY: z.string().min(1),

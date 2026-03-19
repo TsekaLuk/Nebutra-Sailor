@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { useEffect, useMemo, useState } from "react";
 import { Dithering, type DitheringProps } from "@paper-design/shaders-react";
+import type * as React from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "../utils/cn";
 
 /** Linear RGB mix between two hex colors */
@@ -25,10 +25,7 @@ function mixColors(a: string, b: string, t: number): string {
 
 function getSystemPrefersDark(): boolean {
   if (typeof window === "undefined") return false;
-  return (
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
 export type ThemeMode = "light" | "dark" | "system";
@@ -60,10 +57,8 @@ export interface DitheringThemeConfig {
   glow: string;
 }
 
-export interface DitheringBackgroundProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "style"
-> {
+export interface DitheringBackgroundProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "style"> {
   /** Theme mode: "light" | "dark" | "system" */
   themeMode?: ThemeMode;
   /** Visual intensity 0..1 */
@@ -189,8 +184,7 @@ export function DitheringBackground({
 
   // Derived config based on theme and intensity
   const config = useMemo(() => {
-    const clamp = (v: number, min = 0, max = 1) =>
-      Math.max(min, Math.min(max, v));
+    const clamp = (v: number, min = 0, max = 1) => Math.max(min, Math.min(max, v));
     const t = clamp(intensity);
 
     const baseConfig = isDark
@@ -199,11 +193,7 @@ export function DitheringBackground({
 
     return {
       back: baseConfig.back,
-      front: mixColors(
-        baseConfig.frontBase,
-        baseConfig.frontMix,
-        t * baseConfig.mixFactor,
-      ),
+      front: mixColors(baseConfig.frontBase, baseConfig.frontMix, t * baseConfig.mixFactor),
       bg: baseConfig.bg,
       speed: baseConfig.baseSpeed + t * baseConfig.speedMultiplier,
       pxSize: Math.round(baseConfig.basePxSize + t * baseConfig.pxSizeRange),
@@ -222,14 +212,8 @@ export function DitheringBackground({
       const { innerWidth: w, innerHeight: h } = window;
       const x = (e.clientX / w) * 2 - 1;
       const y = (e.clientY / h) * 2 - 1;
-      root.style.setProperty(
-        "--parallax-x",
-        `${(-x * parallaxStrength).toFixed(2)}px`,
-      );
-      root.style.setProperty(
-        "--parallax-y",
-        `${(-y * parallaxStrength).toFixed(2)}px`,
-      );
+      root.style.setProperty("--parallax-x", `${(-x * parallaxStrength).toFixed(2)}px`);
+      root.style.setProperty("--parallax-y", `${(-y * parallaxStrength).toFixed(2)}px`);
     };
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);

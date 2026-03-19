@@ -25,12 +25,7 @@ export const PHConfig = {
     timezone: "America/Los_Angeles", // PT
     launchTime: "00:01", // 12:01 AM PT
     category: "Developer Tools",
-    topics: [
-      "Open Source",
-      "SaaS",
-      "Artificial Intelligence",
-      "Developer Tools",
-    ],
+    topics: ["Open Source", "SaaS", "Artificial Intelligence", "Developer Tools"],
   },
 
   // ===================
@@ -80,13 +75,11 @@ export const PHConfig = {
   tracking: {
     campaign: "ph_launch",
     utmParams: {
-      producthunt:
-        "utm_source=producthunt&utm_medium=referral&utm_campaign=ph_launch",
+      producthunt: "utm_source=producthunt&utm_medium=referral&utm_campaign=ph_launch",
       twitter: "utm_source=twitter&utm_medium=social&utm_campaign=ph_launch",
       linkedin: "utm_source=linkedin&utm_medium=social&utm_campaign=ph_launch",
       email: "utm_source=email&utm_medium=newsletter&utm_campaign=ph_launch",
-      hackernews:
-        "utm_source=hackernews&utm_medium=referral&utm_campaign=ph_launch",
+      hackernews: "utm_source=hackernews&utm_medium=referral&utm_campaign=ph_launch",
     },
   },
 

@@ -1,13 +1,8 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-  useEffect,
-} from "react";
-import { type ThemeMode } from "../theme";
+import type React from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import type { ThemeMode } from "../theme";
 
 // ============================================
 // Context
@@ -20,9 +15,7 @@ interface DesignSystemContextValue {
   resolvedMode: "light" | "dark";
 }
 
-const DesignSystemContext = createContext<DesignSystemContextValue | null>(
-  null,
-);
+const DesignSystemContext = createContext<DesignSystemContextValue | null>(null);
 
 // ============================================
 // Hook
@@ -58,9 +51,7 @@ export function DesignSystemProvider({
   enableSystemPreference = true,
 }: DesignSystemProviderProps) {
   const [mode, setModeState] = useState<ThemeMode>(defaultMode);
-  const [systemPreference, setSystemPreference] = useState<"light" | "dark">(
-    "light",
-  );
+  const [systemPreference, setSystemPreference] = useState<"light" | "dark">("light");
 
   // Detect system preference
   useEffect(() => {
@@ -120,8 +111,6 @@ export function DesignSystemProvider({
   );
 
   return (
-    <DesignSystemContext.Provider value={contextValue}>
-      {children}
-    </DesignSystemContext.Provider>
+    <DesignSystemContext.Provider value={contextValue}>{children}</DesignSystemContext.Provider>
   );
 }

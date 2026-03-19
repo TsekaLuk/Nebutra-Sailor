@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Badge } from "@nebutra/ui/primitives"
+import { Badge } from "@nebutra/ui/primitives";
 
 export function BadgeStatusDotDemo() {
   return (
@@ -18,5 +18,5 @@ export function BadgeStatusDotDemo() {
         Pending
       </Badge>
     </div>
-  )
+  );
 }

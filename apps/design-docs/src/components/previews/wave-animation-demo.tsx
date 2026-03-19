@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
-import { WaveAnimation } from "@nebutra/ui/primitives"
-import { useState } from "react"
-import { Button } from "@nebutra/ui/primitives"
-import { Play, Pause, Activity } from "lucide-react"
+import { Button, WaveAnimation } from "@nebutra/ui/primitives";
+import { Activity, Pause, Play } from "lucide-react";
+import { useState } from "react";
 
 export function WaveAnimationDemo() {
-  const [paused, setPaused] = useState(false)
+  const [paused, setPaused] = useState(false);
 
   return (
     <div className="bg-zinc-950 relative flex h-[400px] w-full flex-col items-center justify-center overflow-hidden rounded-xl border">
@@ -28,14 +27,11 @@ export function WaveAnimationDemo() {
           <div className="p-3 bg-indigo-500/20 text-indigo-400 rounded-full">
             <Activity className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl font-bold tracking-tighter text-white">
-            Audio Visualizer
-          </h2>
+          <h2 className="text-2xl font-bold tracking-tighter text-white">Audio Visualizer</h2>
         </div>
 
         <p className="text-zinc-300 max-w-sm text-sm leading-relaxed">
-          Dynamic HTML5 canvas visualization with trailing effects and
-          customizable color palettes.
+          Dynamic HTML5 canvas visualization with trailing effects and customizable color palettes.
         </p>
 
         <Button
@@ -43,17 +39,11 @@ export function WaveAnimationDemo() {
           size="sm"
           className="bg-zinc-900 border-zinc-700 text-white hover:bg-white hover:text-black transition-colors"
           onClick={() => setPaused(!paused)}
-          prefix={
-            paused ? (
-              <Play className="w-4 h-4" />
-            ) : (
-              <Pause className="w-4 h-4" />
-            )
-          }
+          prefix={paused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
         >
           {paused ? "Resume Feed" : "Pause Feed"}
         </Button>
       </div>
     </div>
-  )
+  );
 }

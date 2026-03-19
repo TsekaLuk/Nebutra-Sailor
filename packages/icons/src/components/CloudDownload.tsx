@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -26,5 +26,6 @@ const CloudDownload = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 CloudDownload.displayName = "CloudDownload";
+
 export { CloudDownload };
 export default CloudDownload;

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { GithubInlineDiff } from "./github-inline-diff";
 import type { DiffLine } from "./github-inline-diff";
+import { GithubInlineDiff } from "./github-inline-diff";
 
 const meta = {
   title: "Primitives/GithubInlineDiff",
@@ -57,11 +57,7 @@ const sampleDiff: DiffLine[] = [
 export const Default: Story = {
   render: () => (
     <div className="w-[750px]">
-      <GithubInlineDiff
-        diff={sampleDiff}
-        fileName="src/App.tsx"
-        fileStatus="Modified"
-      />
+      <GithubInlineDiff diff={sampleDiff} fileName="src/App.tsx" fileStatus="Modified" />
     </div>
   ),
 };

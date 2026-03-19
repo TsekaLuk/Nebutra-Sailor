@@ -1,10 +1,7 @@
 "use client";
 
-import React, {
-  ComponentPropsWithoutRef,
-  useRef,
-  useEffect,
-} from "react";
+import type React from "react";
+import { type ComponentPropsWithoutRef, useEffect, useRef } from "react";
 import { cn } from "../utils/cn";
 
 /**
@@ -29,10 +26,7 @@ const marqueeStyles = `
 function useMarqueeStyles() {
   useEffect(() => {
     // Check if styles already exist
-    if (
-      typeof document !== "undefined" &&
-      !document.getElementById(MARQUEE_STYLE_ID)
-    ) {
+    if (typeof document !== "undefined" && !document.getElementById(MARQUEE_STYLE_ID)) {
       const styleEl = document.createElement("style");
       styleEl.id = MARQUEE_STYLE_ID;
       styleEl.textContent = marqueeStyles;
@@ -82,9 +76,7 @@ export function Marquee({
   useMarqueeStyles();
 
   // Animation name based on direction
-  const animationName = vertical
-    ? "nebutra-marquee-vertical"
-    : "nebutra-marquee";
+  const animationName = vertical ? "nebutra-marquee-vertical" : "nebutra-marquee";
 
   return (
     <div
@@ -112,9 +104,7 @@ export function Marquee({
           key={i}
           className={cn(
             "flex shrink-0 justify-around",
-            vertical
-              ? "flex-col [gap:var(--gap)]"
-              : "flex-row [gap:var(--gap)]",
+            vertical ? "flex-col [gap:var(--gap)]" : "flex-row [gap:var(--gap)]",
             pauseOnHover && "group-hover:[animation-play-state:paused]",
           )}
           style={{

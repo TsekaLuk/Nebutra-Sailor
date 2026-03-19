@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import { cn } from "../utils";
 
 export type ContainerSize = "sm" | "md" | "lg" | "xl" | "full";
@@ -34,15 +34,5 @@ export interface ContainerProps {
  * ```
  */
 export function Container({ children, size = "lg", className }: ContainerProps) {
-  return (
-    <div
-      className={cn(
-        "mx-auto w-full px-4",
-        sizeClasses[size],
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={cn("mx-auto w-full px-4", sizeClasses[size], className)}>{children}</div>;
 }

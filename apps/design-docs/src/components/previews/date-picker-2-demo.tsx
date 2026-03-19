@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { DateRangePicker } from "@nebutra/ui/primitives"
+import { DateRangePicker } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function DatePicker2Demo() {
-  return <DateRangePicker label="Trip dates" />
+  return <DateRangePicker label="Trip dates" />;
 }

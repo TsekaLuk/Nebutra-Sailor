@@ -1,5 +1,5 @@
-import { Material } from "@nebutra/ui/primitives"
-import { User, Settings, LogOut, Bell } from "lucide-react"
+import { Material } from "@nebutra/ui/primitives";
+import { Bell, LogOut, Settings, User } from "lucide-react";
 
 export function MaterialDemo() {
   return (
@@ -8,8 +8,8 @@ export function MaterialDemo() {
       <Material type="card" className="p-6 gap-4 flex w-full flex-1 flex-col">
         <h3 className="font-semibold text-lg">Card Elevation</h3>
         <p className="text-sm w-full text-muted-foreground">
-          Used for page sections and standard container surfaces. Has a subtle
-          lift from the background.
+          Used for page sections and standard container surfaces. Has a subtle lift from the
+          background.
         </p>
         <div className="h-32 mt-4 flex items-center justify-center rounded-md border border-dashed bg-muted/50 text-muted-foreground">
           Content Area
@@ -17,15 +17,10 @@ export function MaterialDemo() {
       </Material>
 
       {/* Menu Material */}
-      <Material
-        type="menu"
-        className="w-64 py-2 flex flex-shrink-0 flex-col border"
-      >
+      <Material type="menu" className="w-64 py-2 flex flex-shrink-0 flex-col border">
         <div className="px-4 py-3 border-b">
           <h3 className="font-medium text-sm">Menu Elevation</h3>
-          <p className="text-xs mt-1 text-muted-foreground">
-            Used for dropdowns
-          </p>
+          <p className="text-xs mt-1 text-muted-foreground">Used for dropdowns</p>
         </div>
         <div className="p-2 space-y-1 flex flex-col">
           <button className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left transition-colors hover:bg-accent hover:text-accent-foreground">
@@ -47,18 +42,12 @@ export function MaterialDemo() {
       {/* Modal Material */}
       <div className="space-y-4 lg:block hidden w-full flex-1">
         <div className="text-sm font-medium">Modal Elevation</div>
-        <p className="text-xs text-muted-foreground">
-          Used for dialogs and floating focus areas.
-        </p>
-        <Material
-          type="modal"
-          className="p-6 relative z-10 w-full border shadow-2xl"
-        >
+        <p className="text-xs text-muted-foreground">Used for dialogs and floating focus areas.</p>
+        <Material type="modal" className="p-6 relative z-10 w-full border shadow-2xl">
           <div className="space-y-4 w-full">
             <h3 className="font-bold text-lg">Confirm Action</h3>
             <p className="text-sm text-muted-foreground">
-              Are you sure you want to proceed with this action? This cannot be
-              undone.
+              Are you sure you want to proceed with this action? This cannot be undone.
             </p>
             <div className="gap-3 pt-4 flex justify-end">
               <button className="px-4 py-2 text-sm font-medium rounded-md border transition-colors hover:bg-accent">
@@ -72,5 +61,5 @@ export function MaterialDemo() {
         </Material>
       </div>
     </div>
-  )
+  );
 }

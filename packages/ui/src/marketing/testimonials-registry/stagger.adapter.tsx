@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import type { TestimonialsCommonProps } from "./types";
 import { StaggerTestimonials } from "../stagger-testimonials";
+import type { TestimonialsCommonProps } from "./types";
 
 export function StaggerTestimonialsAdapter({
   items,
@@ -25,7 +25,5 @@ export function StaggerTestimonialsAdapter({
     [items],
   );
 
-  return (
-    <StaggerTestimonials items={mapped} height={height} className={className} />
-  );
+  return <StaggerTestimonials items={mapped} height={height} className={className} />;
 }

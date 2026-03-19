@@ -1,4 +1,4 @@
-import { TextLoop } from "@nebutra/ui/primitives"
+import { TextLoop } from "@nebutra/ui/primitives";
 
 export default function TextLoopDemo() {
   return (
@@ -12,5 +12,5 @@ export default function TextLoopDemo() {
         </TextLoop>
       </p>
     </div>
-  )
+  );
 }

@@ -7,13 +7,10 @@
  * Used in signup forms, checkout flows, and settings pages.
  */
 
-import { useState, useCallback, useEffect } from "react";
-import type { ConsentType } from "../types";
-import {
-  recordDocumentConsent,
-  hasDocumentConsentCached,
-} from "../consent/service";
+import { useCallback, useEffect, useState } from "react";
+import { hasDocumentConsentCached, recordDocumentConsent } from "../consent/service";
 import { getDocumentConfig } from "../documents/config";
+import type { ConsentType } from "../types";
 
 // ============================================
 // Types
@@ -119,7 +116,7 @@ export function ConsentCheckbox({
       documentVersion,
       context,
       onConsentRecorded,
-    ]
+    ],
   );
 
   // Default label with link to document
@@ -161,9 +158,7 @@ export function ConsentCheckbox({
         </div>
         <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
           {customLabel ?? defaultLabel}
-          {isPersisting && (
-            <span className="ml-2 text-gray-400 text-xs">(saving...)</span>
-          )}
+          {isPersisting && <span className="ml-2 text-gray-400 text-xs">(saving...)</span>}
         </span>
       </label>
       {error && (
@@ -245,8 +240,8 @@ export function MultiConsentCheckbox({
                 documentVersion: doc.version,
                 consentType: "EXPLICIT",
                 context,
-              })
-            )
+              }),
+            ),
           );
         } catch (error) {
           console.error("Failed to record consent:", error);
@@ -255,7 +250,7 @@ export function MultiConsentCheckbox({
         }
       }
     },
-    [disabled, isControlled, onChange, persistOnCheck, documents, context]
+    [disabled, isControlled, onChange, persistOnCheck, documents, context],
   );
 
   // Default label with links to all documents
@@ -283,9 +278,7 @@ export function MultiConsentCheckbox({
           </span>
         );
       })}
-      {documents.some((d) => d.required !== false) && (
-        <span className="text-red-500 ml-1">*</span>
-      )}
+      {documents.some((d) => d.required !== false) && <span className="text-red-500 ml-1">*</span>}
     </>
   );
 
@@ -310,9 +303,7 @@ export function MultiConsentCheckbox({
         </div>
         <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
           {customLabel ?? defaultLabel}
-          {isPersisting && (
-            <span className="ml-2 text-gray-400 text-xs">(saving...)</span>
-          )}
+          {isPersisting && <span className="ml-2 text-gray-400 text-xs">(saving...)</span>}
         </span>
       </label>
       {error && (

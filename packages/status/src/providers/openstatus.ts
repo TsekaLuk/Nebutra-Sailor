@@ -7,11 +7,11 @@
 
 import type { StatusProvider } from "../provider";
 import type {
+  IncidentStatus,
+  MonitorStatus,
   OpenStatusConfig,
   StatusPageData,
   StatusState,
-  MonitorStatus,
-  IncidentStatus,
 } from "../types";
 import { calculateOverallStatus, getDefaultStatusData } from "./shared";
 
@@ -71,9 +71,10 @@ export class OpenStatusProvider implements StatusProvider {
         resolvedAt: typeof i.resolvedAt === "string" ? i.resolvedAt : undefined,
       }));
 
-    const uptime = typeof data.uptime === "object" && data.uptime !== null
-      ? (data.uptime as Record<string, number>)
-      : {};
+    const uptime =
+      typeof data.uptime === "object" && data.uptime !== null
+        ? (data.uptime as Record<string, number>)
+        : {};
 
     return {
       status: calculateOverallStatus(monitors, activeIncidents),

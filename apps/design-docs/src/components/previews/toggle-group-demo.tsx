@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives"
-import { AlignLeft, AlignCenter, AlignRight } from "lucide-react"
+import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives";
+import { AlignCenter, AlignLeft, AlignRight } from "lucide-react";
 
 export function ToggleGroupDemo() {
   return (
@@ -16,5 +16,5 @@ export function ToggleGroupDemo() {
         <AlignRight className="size-4" />
       </ToggleGroupItem>
     </ToggleGroup>
-  )
+  );
 }

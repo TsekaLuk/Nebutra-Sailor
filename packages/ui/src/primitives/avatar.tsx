@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { Avatar as BaseAvatar } from "@base-ui-components/react/avatar";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 // ─── Size Map ─────────────────────────────────────────────────────────────────
@@ -47,11 +47,7 @@ const AvatarImage = React.forwardRef<
   HTMLImageElement,
   React.ComponentPropsWithoutRef<typeof BaseAvatar.Image>
 >(({ className, ...props }, ref) => (
-  <BaseAvatar.Image
-    ref={ref}
-    className={cn("aspect-square h-full w-full", className)}
-    {...props}
-  />
+  <BaseAvatar.Image ref={ref} className={cn("aspect-square h-full w-full", className)} {...props} />
 ));
 AvatarImage.displayName = "AvatarImage";
 
@@ -94,12 +90,7 @@ export interface AvatarGroupProps {
   className?: string;
 }
 
-function AvatarGroup({
-  items,
-  max = 4,
-  size = "sm",
-  className,
-}: AvatarGroupProps) {
+function AvatarGroup({ items, max = 4, size = "sm", className }: AvatarGroupProps) {
   // Show max-1 real avatars; if items.length === max show last one too,
   // if items.length > max show +N badge instead of last slot.
   // Use built-in Tailwind z-index utilities (z-10..z-60) so they are
@@ -117,11 +108,7 @@ function AvatarGroup({
         // relative is required for z-index to take effect on non-flex-item contexts
         <span
           key={item.alt}
-          className={cn(
-            "relative inline-flex items-center",
-            index !== 0 && "-ml-2",
-            Z[index],
-          )}
+          className={cn("relative inline-flex items-center", index !== 0 && "-ml-2", Z[index])}
         >
           <Avatar
             size={size}
@@ -140,9 +127,7 @@ function AvatarGroup({
             size={size}
             className="border border-black/[0.08] dark:border-white/[0.14] bg-background"
           >
-            {lastItem.src && (
-              <AvatarImage src={lastItem.src} alt={lastItem.alt} />
-            )}
+            {lastItem.src && <AvatarImage src={lastItem.src} alt={lastItem.alt} />}
             <AvatarFallback size={size}>{lastItem.fallback}</AvatarFallback>
           </Avatar>
         </span>
@@ -151,10 +136,7 @@ function AvatarGroup({
       {/* Over limit: +N overflow badge */}
       {overflowCount > 0 && (
         <span className={cn("relative inline-flex items-center -ml-2", lastZ)}>
-          <Avatar
-            size={size}
-            className="border border-black/[0.08] dark:border-white/[0.14]"
-          >
+          <Avatar size={size} className="border border-black/[0.08] dark:border-white/[0.14]">
             <AvatarFallback
               size={size}
               className="bg-muted text-[0.625rem] font-semibold leading-none text-muted-foreground"
@@ -168,4 +150,4 @@ function AvatarGroup({
   );
 }
 
-export { Avatar, AvatarImage, AvatarFallback, AvatarGroup };
+export { Avatar, AvatarFallback, AvatarGroup, AvatarImage };

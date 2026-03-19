@@ -1,7 +1,7 @@
 "use client";
 
+import { motion, type Variants } from "framer-motion";
 import * as React from "react";
-import { motion, Variants } from "framer-motion";
 import { cn } from "../utils/cn";
 
 /**
@@ -92,10 +92,7 @@ const itemVariants: Variants = {
  * />
  * ```
  */
-export const HighlightCard = React.forwardRef<
-  HTMLDivElement,
-  HighlightCardProps
->(
+export const HighlightCard = React.forwardRef<HTMLDivElement, HighlightCardProps>(
   (
     {
       title,
@@ -149,32 +146,21 @@ export const HighlightCard = React.forwardRef<
         <div className="flex h-full flex-col justify-between">
           {/* Top section */}
           <div>
-            <motion.h3
-              variants={itemVariants}
-              className="text-2xl font-bold tracking-tight"
-            >
+            <motion.h3 variants={itemVariants} className="text-2xl font-bold tracking-tight">
               {title}
             </motion.h3>
-            <motion.p
-              variants={itemVariants}
-              className="mt-1 max-w-[80%] text-sm opacity-90"
-            >
+            <motion.p variants={itemVariants} className="mt-1 max-w-[80%] text-sm opacity-90">
               {description}
             </motion.p>
           </div>
 
           {/* Divider */}
-          <motion.div
-            variants={itemVariants}
-            className="my-4 h-px w-full bg-white/20"
-          />
+          <motion.div variants={itemVariants} className="my-4 h-px w-full bg-white/20" />
 
           {/* Bottom section */}
           <div className="flex items-end justify-between">
             <motion.div variants={itemVariants}>
-              <p className="text-4xl font-bold tracking-tighter">
-                {metricValue}
-              </p>
+              <p className="text-4xl font-bold tracking-tighter">{metricValue}</p>
               <p className="text-sm opacity-90">{metricLabel}</p>
             </motion.div>
             <motion.button

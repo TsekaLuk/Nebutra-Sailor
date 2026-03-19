@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Separator } from "@nebutra/ui/primitives"
+import { Separator } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Separator4Demo() {
   return (
     <div className="relative w-full">
@@ -11,5 +10,5 @@ export function Separator4Demo() {
         OR
       </span>
     </div>
-  )
+  );
 }

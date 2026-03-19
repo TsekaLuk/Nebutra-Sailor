@@ -1,6 +1,6 @@
-import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
 import { AnimateIn } from "@nebutra/ui/components";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { NowEntry } from "./now-entry";
 
 export async function NowPreview() {

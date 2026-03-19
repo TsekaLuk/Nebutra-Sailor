@@ -19,46 +19,202 @@ const prisma = new PrismaClient();
 const FEATURES = [
   // AI Features
   { key: "ai.chat", name: "AI Chat", category: "ai", valueType: "boolean", defaultValue: true },
-  { key: "ai.embeddings", name: "Embeddings", category: "ai", valueType: "boolean", defaultValue: false },
-  { key: "ai.image", name: "Image Generation", category: "ai", valueType: "boolean", defaultValue: false },
-  { key: "ai.rerank", name: "Reranking", category: "ai", valueType: "boolean", defaultValue: false },
-  { key: "ai.translate", name: "AI Translation", category: "ai", valueType: "boolean", defaultValue: false },
+  {
+    key: "ai.embeddings",
+    name: "Embeddings",
+    category: "ai",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "ai.image",
+    name: "Image Generation",
+    category: "ai",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "ai.rerank",
+    name: "Reranking",
+    category: "ai",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "ai.translate",
+    name: "AI Translation",
+    category: "ai",
+    valueType: "boolean",
+    defaultValue: false,
+  },
 
   // Content Features
-  { key: "content.posts", name: "Posts", category: "content", valueType: "boolean", defaultValue: true },
-  { key: "content.comments", name: "Comments", category: "content", valueType: "boolean", defaultValue: true },
-  { key: "content.media", name: "Media Upload", category: "content", valueType: "boolean", defaultValue: true },
-  { key: "content.moderation", name: "Content Moderation", category: "content", valueType: "boolean", defaultValue: false },
+  {
+    key: "content.posts",
+    name: "Posts",
+    category: "content",
+    valueType: "boolean",
+    defaultValue: true,
+  },
+  {
+    key: "content.comments",
+    name: "Comments",
+    category: "content",
+    valueType: "boolean",
+    defaultValue: true,
+  },
+  {
+    key: "content.media",
+    name: "Media Upload",
+    category: "content",
+    valueType: "boolean",
+    defaultValue: true,
+  },
+  {
+    key: "content.moderation",
+    name: "Content Moderation",
+    category: "content",
+    valueType: "boolean",
+    defaultValue: false,
+  },
 
   // Recommendations
-  { key: "recsys.basic", name: "Basic Recommendations", category: "recsys", valueType: "boolean", defaultValue: false },
-  { key: "recsys.advanced", name: "Advanced ML Recommendations", category: "recsys", valueType: "boolean", defaultValue: false },
-  { key: "recsys.realtime", name: "Real-time Recommendations", category: "recsys", valueType: "boolean", defaultValue: false },
+  {
+    key: "recsys.basic",
+    name: "Basic Recommendations",
+    category: "recsys",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "recsys.advanced",
+    name: "Advanced ML Recommendations",
+    category: "recsys",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "recsys.realtime",
+    name: "Real-time Recommendations",
+    category: "recsys",
+    valueType: "boolean",
+    defaultValue: false,
+  },
 
   // E-commerce
-  { key: "ecommerce.products", name: "Product Catalog", category: "ecommerce", valueType: "boolean", defaultValue: false },
-  { key: "ecommerce.orders", name: "Order Management", category: "ecommerce", valueType: "boolean", defaultValue: false },
-  { key: "ecommerce.shopify", name: "Shopify Integration", category: "ecommerce", valueType: "boolean", defaultValue: false },
+  {
+    key: "ecommerce.products",
+    name: "Product Catalog",
+    category: "ecommerce",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "ecommerce.orders",
+    name: "Order Management",
+    category: "ecommerce",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "ecommerce.shopify",
+    name: "Shopify Integration",
+    category: "ecommerce",
+    valueType: "boolean",
+    defaultValue: false,
+  },
 
   // Web3
-  { key: "web3.contracts", name: "Smart Contracts", category: "web3", valueType: "boolean", defaultValue: false },
-  { key: "web3.indexing", name: "Blockchain Indexing", category: "web3", valueType: "boolean", defaultValue: false },
-  { key: "web3.nft", name: "NFT Support", category: "web3", valueType: "boolean", defaultValue: false },
+  {
+    key: "web3.contracts",
+    name: "Smart Contracts",
+    category: "web3",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "web3.indexing",
+    name: "Blockchain Indexing",
+    category: "web3",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "web3.nft",
+    name: "NFT Support",
+    category: "web3",
+    valueType: "boolean",
+    defaultValue: false,
+  },
 
   // Team & Collaboration
-  { key: "team.members", name: "Team Members", category: "team", valueType: "number", defaultValue: 1 },
-  { key: "team.roles", name: "Custom Roles", category: "team", valueType: "boolean", defaultValue: false },
-  { key: "team.sso", name: "SSO/SAML", category: "team", valueType: "boolean", defaultValue: false },
+  {
+    key: "team.members",
+    name: "Team Members",
+    category: "team",
+    valueType: "number",
+    defaultValue: 1,
+  },
+  {
+    key: "team.roles",
+    name: "Custom Roles",
+    category: "team",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "team.sso",
+    name: "SSO/SAML",
+    category: "team",
+    valueType: "boolean",
+    defaultValue: false,
+  },
 
   // Support
-  { key: "support.email", name: "Email Support", category: "support", valueType: "boolean", defaultValue: true },
-  { key: "support.priority", name: "Priority Support", category: "support", valueType: "boolean", defaultValue: false },
-  { key: "support.dedicated", name: "Dedicated Support", category: "support", valueType: "boolean", defaultValue: false },
+  {
+    key: "support.email",
+    name: "Email Support",
+    category: "support",
+    valueType: "boolean",
+    defaultValue: true,
+  },
+  {
+    key: "support.priority",
+    name: "Priority Support",
+    category: "support",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "support.dedicated",
+    name: "Dedicated Support",
+    category: "support",
+    valueType: "boolean",
+    defaultValue: false,
+  },
 
   // Analytics
-  { key: "analytics.basic", name: "Basic Analytics", category: "analytics", valueType: "boolean", defaultValue: true },
-  { key: "analytics.advanced", name: "Advanced Analytics", category: "analytics", valueType: "boolean", defaultValue: false },
-  { key: "analytics.export", name: "Data Export", category: "analytics", valueType: "boolean", defaultValue: false },
+  {
+    key: "analytics.basic",
+    name: "Basic Analytics",
+    category: "analytics",
+    valueType: "boolean",
+    defaultValue: true,
+  },
+  {
+    key: "analytics.advanced",
+    name: "Advanced Analytics",
+    category: "analytics",
+    valueType: "boolean",
+    defaultValue: false,
+  },
+  {
+    key: "analytics.export",
+    name: "Data Export",
+    category: "analytics",
+    valueType: "boolean",
+    defaultValue: false,
+  },
 ];
 
 // ============================================
@@ -66,12 +222,42 @@ const FEATURES = [
 // ============================================
 
 const USAGE_LIMITS = [
-  { key: "ai_tokens", name: "AI Tokens", unit: "tokens", resetPeriod: "monthly", overageRate: 0.00001 },
+  {
+    key: "ai_tokens",
+    name: "AI Tokens",
+    unit: "tokens",
+    resetPeriod: "monthly",
+    overageRate: 0.00001,
+  },
   { key: "api_calls", name: "API Calls", unit: "calls", resetPeriod: "daily", overageRate: 0.0001 },
-  { key: "storage_bytes", name: "Storage", unit: "bytes", resetPeriod: "never", overageRate: 0.00000001 },
-  { key: "bandwidth_bytes", name: "Bandwidth", unit: "bytes", resetPeriod: "monthly", overageRate: 0.00000001 },
-  { key: "compute_minutes", name: "Compute Time", unit: "minutes", resetPeriod: "monthly", overageRate: 0.001 },
-  { key: "team_members", name: "Team Members", unit: "seats", resetPeriod: "never", overageRate: null },
+  {
+    key: "storage_bytes",
+    name: "Storage",
+    unit: "bytes",
+    resetPeriod: "never",
+    overageRate: 0.00000001,
+  },
+  {
+    key: "bandwidth_bytes",
+    name: "Bandwidth",
+    unit: "bytes",
+    resetPeriod: "monthly",
+    overageRate: 0.00000001,
+  },
+  {
+    key: "compute_minutes",
+    name: "Compute Time",
+    unit: "minutes",
+    resetPeriod: "monthly",
+    overageRate: 0.001,
+  },
+  {
+    key: "team_members",
+    name: "Team Members",
+    unit: "seats",
+    resetPeriod: "never",
+    overageRate: null,
+  },
   { key: "projects", name: "Projects", unit: "projects", resetPeriod: "never", overageRate: null },
 ];
 

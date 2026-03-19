@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 /**
@@ -27,8 +27,7 @@ const colorBadgeVariants = {
   "green-subtle": "bg-green-200 text-green-900 fill-green-900",
   teal: "bg-teal-700 text-white fill-white",
   "teal-subtle": "bg-teal-300 text-teal-900 fill-teal-900",
-  inverted:
-    "bg-muted text-muted-foreground fill-gray-100 dark:fill-gray-900",
+  inverted: "bg-muted text-muted-foreground fill-gray-100 dark:fill-gray-900",
   trial: "bg-gradient-to-br from-blue-500 to-pink-500 text-white fill-white",
   turbo: "bg-gradient-to-br from-rose-500 to-blue-500 text-white fill-white",
   pill: "bg-background text-foreground fill-foreground border border-border",
@@ -125,20 +124,14 @@ export function ColorBadge({
   const content = (
     <>
       {icon && (
-        <span
-          className={cn("flex items-center justify-center", iconSizes[size])}
-        >
+        <span className={cn("flex items-center justify-center", iconSizes[size])}>
           {React.isValidElement(icon)
-            ? React.cloneElement(
-              icon as React.ReactElement<{ className?: string }>,
-              {
+            ? React.cloneElement(icon as React.ReactElement<{ className?: string }>, {
                 className: cn(
                   "size-full",
-                  (icon as React.ReactElement<{ className?: string }>).props
-                    .className,
+                  (icon as React.ReactElement<{ className?: string }>).props.className,
                 ),
-              },
-            )
+              })
             : icon}
         </span>
       )}
@@ -157,4 +150,4 @@ export function ColorBadge({
   return <div className={baseClasses}>{content}</div>;
 }
 
-export { colorBadgeVariants, colorBadgeSizes };
+export { colorBadgeSizes, colorBadgeVariants };

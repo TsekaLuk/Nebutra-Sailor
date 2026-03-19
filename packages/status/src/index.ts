@@ -18,26 +18,25 @@
  *   const data = await provider.fetchSummary()
  */
 
+// Public API
+export { createStatusProvider, fetchStatusPage } from "./api";
 // Components
 export * from "./components/status-badge";
 export * from "./components/status-widget";
-
-// Public API
-export { fetchStatusPage, createStatusProvider } from "./api";
 
 // Provider interface (for custom providers)
 export type { StatusProvider } from "./provider";
 
 // All types
 export type {
-  StatusState,
-  StatusProviderType,
-  StatusConfig,
-  OpenStatusConfig,
-  StatuspageConfig,
-  InternalStatusConfig,
-  StatusPageData,
-  MonitorStatus,
   IncidentStatus,
+  InternalStatusConfig,
+  MonitorStatus,
+  OpenStatusConfig,
   ScheduledMaintenance,
+  StatusConfig,
+  StatusPageData,
+  StatusProviderType,
+  StatuspageConfig,
+  StatusState,
 } from "./types";

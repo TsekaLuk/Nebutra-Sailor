@@ -13,11 +13,11 @@
 
 import {
   primitiveColors,
-  primitiveGradients,
   primitiveFocusRing,
+  primitiveFontFamily,
+  primitiveGradients,
   primitiveRadius,
   primitiveTransition,
-  primitiveFontFamily,
 } from "./primitive";
 
 // ─── Semantic Color Scale Interface ───────────────────────────────────────────

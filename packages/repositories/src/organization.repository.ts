@@ -1,4 +1,4 @@
-import type { PrismaClient, Organization, Plan } from "@nebutra/db";
+import type { Organization, Plan, PrismaClient } from "@nebutra/db";
 import type { CursorPaginationParams, CursorPaginationResult } from "./pagination.js";
 import { normalizePaginationParams } from "./pagination.js";
 
@@ -69,10 +69,7 @@ export class OrganizationRepository {
     return this.prisma.organization.update({ where: { id }, data });
   }
 
-  async updateByClerkId(
-    clerkId: string,
-    data: UpdateOrganizationData,
-  ): Promise<Organization> {
+  async updateByClerkId(clerkId: string, data: UpdateOrganizationData): Promise<Organization> {
     return this.prisma.organization.update({ where: { clerkId }, data });
   }
 

@@ -1,8 +1,8 @@
 "use client";
 
+import { motion, type Variants } from "framer-motion";
+import type { ReactNode } from "react";
 import * as React from "react";
-import { ReactNode } from "react";
-import { motion, Variants } from "framer-motion";
 import { cn } from "../utils/cn";
 
 type PresetType =
@@ -46,10 +46,7 @@ const defaultItemVariants: Variants = {
   visible: { opacity: 1 },
 };
 
-const presetVariants: Record<
-  PresetType,
-  { container: Variants; item: Variants }
-> = {
+const presetVariants: Record<PresetType, { container: Variants; item: Variants }> = {
   fade: {
     container: defaultContainerVariants,
     item: {
@@ -157,12 +154,7 @@ const presetVariants: Record<
  * </AnimatedGroup>
  * ```
  */
-function AnimatedGroup({
-  children,
-  className,
-  variants,
-  preset,
-}: AnimatedGroupProps) {
+function AnimatedGroup({ children, className, variants, preset }: AnimatedGroupProps) {
   const selectedVariants = preset
     ? presetVariants[preset]
     : { container: defaultContainerVariants, item: defaultItemVariants };

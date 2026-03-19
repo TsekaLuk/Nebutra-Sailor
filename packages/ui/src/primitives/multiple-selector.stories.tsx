@@ -44,9 +44,7 @@ export const Default: Story = {
         defaultOptions={frameworks}
         placeholder="Select frameworks..."
         emptyIndicator={
-          <p className="text-sm text-muted-foreground text-center py-2">
-            No frameworks found
-          </p>
+          <p className="text-sm text-muted-foreground text-center py-2">No frameworks found</p>
         }
       />
     </div>

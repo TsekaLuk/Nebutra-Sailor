@@ -1,6 +1,6 @@
-import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Search, Mail, DollarSign, AtSign, Eye, EyeOff } from "lucide-react";
+import { expect, userEvent, within } from "@storybook/test";
+import { AtSign, DollarSign, Eye, EyeOff, Mail, Search } from "lucide-react";
 import { useState } from "react";
 import { Input } from "./input";
 
@@ -93,10 +93,7 @@ export const Disabled: Story = {
 export const WithLabel: Story = {
   render: () => (
     <div className="flex flex-col gap-1.5">
-      <label
-        className="text-sm font-medium text-foreground"
-        htmlFor="email-field"
-      >
+      <label className="text-sm font-medium text-foreground" htmlFor="email-field">
         Email address
       </label>
       <Input id="email-field" type="email" placeholder="contact@nebutra.com" />
@@ -107,10 +104,7 @@ export const WithLabel: Story = {
 export const WithError: Story = {
   render: () => (
     <div className="flex flex-col gap-1.5">
-      <label
-        className="text-sm font-medium text-foreground"
-        htmlFor="error-field"
-      >
+      <label className="text-sm font-medium text-foreground" htmlFor="error-field">
         Email address
       </label>
       <Input
@@ -120,9 +114,7 @@ export const WithError: Story = {
         className="border-destructive focus-visible:ring-destructive"
         aria-invalid="true"
       />
-      <p className="text-xs text-destructive">
-        Please enter a valid email address.
-      </p>
+      <p className="text-xs text-destructive">Please enter a valid email address.</p>
     </div>
   ),
 };
@@ -132,22 +124,14 @@ export const WithError: Story = {
 export const WithPrefix: Story = {
   name: "Prefix — Search icon",
   render: () => (
-    <Input
-      prefix={<Search className="h-4 w-4" />}
-      placeholder="Search…"
-      type="search"
-    />
+    <Input prefix={<Search className="h-4 w-4" />} placeholder="Search…" type="search" />
   ),
 };
 
 export const WithEmailPrefix: Story = {
   name: "Prefix — Mail icon",
   render: () => (
-    <Input
-      prefix={<Mail className="h-4 w-4" />}
-      type="email"
-      placeholder="contact@nebutra.com"
-    />
+    <Input prefix={<Mail className="h-4 w-4" />} type="email" placeholder="contact@nebutra.com" />
   ),
 };
 
@@ -156,18 +140,13 @@ export const WithEmailPrefix: Story = {
 export const WithSuffix: Story = {
   name: "Suffix — Domain text",
   render: () => (
-    <Input
-      suffix={<span className="text-xs">@nebutra.com</span>}
-      placeholder="username"
-    />
+    <Input suffix={<span className="text-xs">@nebutra.com</span>} placeholder="username" />
   ),
 };
 
 export const WithAtSuffix: Story = {
   name: "Suffix — @ icon",
-  render: () => (
-    <Input suffix={<AtSign className="h-4 w-4" />} placeholder="username" />
-  ),
+  render: () => <Input suffix={<AtSign className="h-4 w-4" />} placeholder="username" />,
 };
 
 // ─── Clearable ────────────────────────────────────────────────────────────────
@@ -175,11 +154,7 @@ export const WithAtSuffix: Story = {
 export const Clearable: Story = {
   name: "Clearable (uncontrolled)",
   render: () => (
-    <Input
-      clearable
-      defaultValue="contact@nebutra.com"
-      placeholder="Type to see the × button…"
-    />
+    <Input clearable defaultValue="contact@nebutra.com" placeholder="Type to see the × button…" />
   ),
 };
 
@@ -197,8 +172,7 @@ export const ClearableControlled: Story = {
           placeholder="Controlled clearable…"
         />
         <p className="text-xs text-muted-foreground">
-          Value:{" "}
-          <code className="font-mono">{value === "" ? "(empty)" : value}</code>
+          Value: <code className="font-mono">{value === "" ? "(empty)" : value}</code>
         </p>
       </div>
     );
@@ -209,13 +183,7 @@ export const ClearableControlled: Story = {
 
 export const SearchWithClearable: Story = {
   name: "Prefix + Clearable",
-  render: () => (
-    <Input
-      prefix={<Search className="h-4 w-4" />}
-      clearable
-      placeholder="Search…"
-    />
-  ),
+  render: () => <Input prefix={<Search className="h-4 w-4" />} clearable placeholder="Search…" />,
 };
 
 export const CurrencyInput: Story = {

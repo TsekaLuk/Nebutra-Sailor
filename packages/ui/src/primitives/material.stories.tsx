@@ -1,5 +1,5 @@
-import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import * as React from "react";
 import { Material } from "./material";
 
 const meta = {
@@ -35,11 +35,7 @@ type Story = StoryObj<typeof meta>;
 
 function Placeholder() {
   return (
-    <div
-      style={{ width: "100%", height: 120 }}
-      className="rounded bg-muted"
-      aria-hidden="true"
-    />
+    <div style={{ width: "100%", height: 120 }} className="rounded bg-muted" aria-hidden="true" />
   );
 }
 
@@ -76,8 +72,8 @@ export const Card: Story = {
       <div className="p-6 flex flex-col gap-3">
         <p className="text-sm font-medium text-foreground">Card Surface</p>
         <p className="text-xs text-muted-foreground">
-          Default elevation for content on a page. Uses <code>shadow-sm</code>{" "}
-          and <code>bg-card</code>.
+          Default elevation for content on a page. Uses <code>shadow-sm</code> and{" "}
+          <code>bg-card</code>.
         </p>
         <Placeholder />
       </div>
@@ -118,8 +114,8 @@ export const Modal: Story = {
         <div className="p-6 flex flex-col gap-4">
           <p className="text-sm font-medium text-foreground">Modal Surface</p>
           <p className="text-xs text-muted-foreground">
-            Strong elevation for dialogs and drawers. Uses <code>shadow-lg</code>{" "}
-            and <code>bg-popover</code>.
+            Strong elevation for dialogs and drawers. Uses <code>shadow-lg</code> and{" "}
+            <code>bg-popover</code>.
           </p>
           <div className="flex justify-end gap-2">
             <button
@@ -151,8 +147,8 @@ export const Fullscreen: Story = {
       <div className="p-6 flex flex-col gap-2 h-full">
         <p className="text-sm font-medium text-foreground">Fullscreen Surface</p>
         <p className="text-xs text-muted-foreground">
-          No shadow — used when the material covers the entire viewport.
-          Uses <code>bg-background</code>.
+          No shadow — used when the material covers the entire viewport. Uses{" "}
+          <code>bg-background</code>.
         </p>
       </div>
     </Material>

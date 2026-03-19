@@ -30,15 +30,11 @@ function assert(condition: boolean, message: string) {
 const themesCss = read("packages/theme/themes.css");
 
 assert(
-  themesCss.includes("--color-primary") &&
-    themesCss.includes("--color-secondary"),
+  themesCss.includes("--color-primary") && themesCss.includes("--color-secondary"),
   "Theme CSS is missing primary/secondary color tokens.",
 );
 
-assert(
-  themesCss.includes("@theme"),
-  "Theme CSS is missing Tailwind v4 @theme block.",
-);
+assert(themesCss.includes("@theme"), "Theme CSS is missing Tailwind v4 @theme block.");
 
 assert(colors.primary[500] === "#0033FE", "Brand primary 500 drift detected.");
 assert(colors.accent[500] === "#0BF1C3", "Brand accent 500 drift detected.");

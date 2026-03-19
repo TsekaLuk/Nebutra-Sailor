@@ -1,20 +1,20 @@
-import { ProvideLinksToolSchema } from '../../../lib/inkeep-qa-schema';
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { convertToModelMessages, streamText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { convertToModelMessages, streamText } from "ai";
+import { ProvideLinksToolSchema } from "../../../lib/inkeep-qa-schema";
 
-export const runtime = 'edge';
+export const runtime = "edge";
 
 const openai = createOpenAICompatible({
-  name: 'inkeep',
+  name: "inkeep",
   apiKey: process.env.INKEEP_API_KEY,
-  baseURL: 'https://api.inkeep.com/v1',
+  baseURL: "https://api.inkeep.com/v1",
 });
 
 export async function POST(req: Request) {
   const reqJson = await req.json();
 
   const result = streamText({
-    model: openai('inkeep-qa-sonnet-4'),
+    model: openai("inkeep-qa-sonnet-4"),
     tools: {
       provideLinks: {
         inputSchema: ProvideLinksToolSchema,
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     messages: await convertToModelMessages(reqJson.messages, {
       ignoreIncompleteToolCalls: true,
     }),
-    toolChoice: 'auto',
+    toolChoice: "auto",
   });
 
   return result.toUIMessageStreamResponse();

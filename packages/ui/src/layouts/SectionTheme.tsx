@@ -1,13 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "../utils/cn";
-import {
-  DotMatrix,
-  CrossPattern,
-  FloatingSpots,
-} from "../decorations/patterns";
 import { GridPattern } from "../decorations/GridPattern";
+import { CrossPattern, DotMatrix, FloatingSpots } from "../decorations/patterns";
+import { cn } from "../utils/cn";
 
 /**
  * Section theme configuration.
@@ -73,8 +69,7 @@ export const sectionThemes: Record<string, SectionThemeConfig> = {
     patternColor: "hsl(var(--accent))",
     patternOpacity: 0.04,
     accentColor: "hsl(var(--accent))",
-    gradient:
-      "bg-gradient-to-br from-cyan-500/5 via-transparent to-fuchsia-500/5",
+    gradient: "bg-gradient-to-br from-cyan-500/5 via-transparent to-fuchsia-500/5",
   },
 
   // Features: "Capability Map" - Subtle tech pattern
@@ -109,8 +104,7 @@ export const sectionThemes: Record<string, SectionThemeConfig> = {
   vision: {
     backgroundColor: "bg-background",
     pattern: "none",
-    gradient:
-      "bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent",
+    gradient: "bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent",
   },
 
   // Pricing: "Symmetry Order" - Clean, minimal
@@ -145,10 +139,7 @@ export const sectionThemes: Record<string, SectionThemeConfig> = {
   },
 };
 
-export interface ThemedSectionProps extends Omit<
-  React.HTMLAttributes<HTMLElement>,
-  "children"
-> {
+export interface ThemedSectionProps extends Omit<React.HTMLAttributes<HTMLElement>, "children"> {
   /** Theme preset name or custom config */
   theme: keyof typeof sectionThemes | SectionThemeConfig;
   /** Section content */
@@ -184,10 +175,7 @@ export interface ThemedSectionProps extends Omit<
  * </ThemedSection>
  */
 export const ThemedSection = React.forwardRef<HTMLElement, ThemedSectionProps>(
-  (
-    { theme, children, className, cssVars, showPattern = true, ...props },
-    ref,
-  ) => {
+  ({ theme, children, className, cssVars, showPattern = true, ...props }, ref) => {
     const config = typeof theme === "string" ? sectionThemes[theme] : theme;
 
     const renderPattern = () => {
@@ -221,10 +209,7 @@ export const ThemedSection = React.forwardRef<HTMLElement, ThemedSectionProps>(
             <GridPattern
               {...baseProps}
               color={config.patternColor}
-              className={cn(
-                baseProps.className,
-                `opacity-[${config.patternOpacity}]`,
-              )}
+              className={cn(baseProps.className, `opacity-[${config.patternOpacity}]`)}
               {...(config.patternProps as object)}
             />
           );
@@ -245,11 +230,7 @@ export const ThemedSection = React.forwardRef<HTMLElement, ThemedSectionProps>(
     return (
       <section
         ref={ref}
-        className={cn(
-          "relative overflow-hidden",
-          config.backgroundColor,
-          className,
-        )}
+        className={cn("relative overflow-hidden", config.backgroundColor, className)}
         style={cssVars as React.CSSProperties}
         {...props}
       >
@@ -259,10 +240,7 @@ export const ThemedSection = React.forwardRef<HTMLElement, ThemedSectionProps>(
         {/* Gradient overlay */}
         {config.gradient && (
           <div
-            className={cn(
-              "absolute inset-0 z-0 pointer-events-none",
-              config.gradient,
-            )}
+            className={cn("absolute inset-0 z-0 pointer-events-none", config.gradient)}
             aria-hidden="true"
           />
         )}

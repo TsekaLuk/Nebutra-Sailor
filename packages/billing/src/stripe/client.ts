@@ -28,9 +28,7 @@ export function getStripe(): Stripe {
   if (!stripeClient) {
     const secretKey = process.env.STRIPE_SECRET_KEY;
     if (!secretKey) {
-      throw new Error(
-        "Stripe not initialized. Call initStripe() or set STRIPE_SECRET_KEY",
-      );
+      throw new Error("Stripe not initialized. Call initStripe() or set STRIPE_SECRET_KEY");
     }
     stripeClient = new Stripe(secretKey, {
       apiVersion: STRIPE_API_VERSION,

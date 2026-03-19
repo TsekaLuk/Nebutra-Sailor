@@ -1,4 +1,4 @@
-import { z } from "zod"
+import { z } from "zod";
 
 /**
  * Supported AI provider backends.
@@ -8,13 +8,8 @@ import { z } from "zod"
  * - siliconflow:  SiliconFlow cloud — Qwen, DeepSeek, etc. (OpenAI-compatible, China-optimized)
  * - gateway:      Vercel AI Gateway with OIDC auth (for Vercel-deployed apps)
  */
-export const ProviderType = z.enum([
-  "openrouter",
-  "openai",
-  "siliconflow",
-  "gateway",
-])
-export type ProviderType = z.infer<typeof ProviderType>
+export const ProviderType = z.enum(["openrouter", "openai", "siliconflow", "gateway"]);
+export type ProviderType = z.infer<typeof ProviderType>;
 
 export const NebutraAIConfigSchema = z.object({
   /** Which provider backend to use. Defaults to "openrouter". */
@@ -37,33 +32,33 @@ export const NebutraAIConfigSchema = z.object({
 
   /** Extra body fields merged into every request. */
   extraBody: z.record(z.string(), z.unknown()).optional(),
-})
+});
 
-export type NebutraAIConfig = z.input<typeof NebutraAIConfigSchema>
-export type ResolvedNebutraAIConfig = z.output<typeof NebutraAIConfigSchema>
+export type NebutraAIConfig = z.input<typeof NebutraAIConfigSchema>;
+export type ResolvedNebutraAIConfig = z.output<typeof NebutraAIConfigSchema>;
 
 /**
  * Resolves the API key from explicit config or environment variables.
  */
 export function resolveApiKey(config: ResolvedNebutraAIConfig): string {
-  if (config.apiKey) return config.apiKey
+  if (config.apiKey) return config.apiKey;
 
   const envMap: Record<ProviderType, string> = {
     openrouter: "OPENROUTER_API_KEY",
     openai: "OPENAI_API_KEY",
     siliconflow: "SILICONFLOW_API_KEY",
     gateway: "VERCEL_OIDC_TOKEN",
-  }
+  };
 
-  const envVar = envMap[config.provider]
+  const envVar = envMap[config.provider];
 
-  const value = globalThis.process?.env?.[envVar]
+  const value = globalThis.process?.env?.[envVar];
 
   if (!value) {
     throw new Error(
-      `[nebutra/ai-sdk] Missing API key. Set "${envVar}" in environment or pass "apiKey" in config.`
-    )
+      `[nebutra/ai-sdk] Missing API key. Set "${envVar}" in environment or pass "apiKey" in config.`,
+    );
   }
 
-  return value
+  return value;
 }

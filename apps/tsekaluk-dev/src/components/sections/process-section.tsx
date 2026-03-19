@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import { useTranslations } from "next-intl";
 
 export function ProcessSection() {
   const t = useTranslations("process");

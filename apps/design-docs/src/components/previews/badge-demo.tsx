@@ -1,5 +1,5 @@
-"use client"
-import { Badge } from "@nebutra/ui/primitives"
+"use client";
+import { Badge } from "@nebutra/ui/primitives";
 export function BadgeDemo() {
   return (
     <div className="gap-2 flex flex-wrap">
@@ -8,5 +8,5 @@ export function BadgeDemo() {
       <Badge variant="destructive">Destructive</Badge>
       <Badge variant="outline">Outline</Badge>
     </div>
-  )
+  );
 }

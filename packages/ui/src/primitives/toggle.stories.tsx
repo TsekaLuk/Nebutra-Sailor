@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Lock, LockOpen } from "lucide-react";
 import { Toggle } from "./toggle";
-import { LockOpen, Lock } from "lucide-react";
 
 const meta: Meta<typeof Toggle> = {
   title: "Primitives/Toggle",

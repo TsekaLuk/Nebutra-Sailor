@@ -1,4 +1,4 @@
-import { AgentPlan, AgentTask } from "@nebutra/ui/primitives"
+import { AgentPlan, type AgentTask } from "@nebutra/ui/primitives";
 
 export function AgentPlanDemo() {
   const tasks: AgentTask[] = [
@@ -53,11 +53,11 @@ export function AgentPlanDemo() {
         },
       ],
     },
-  ]
+  ];
 
   return (
     <div className="max-w-lg py-8 mx-auto h-[400px] w-full">
       <AgentPlan tasks={tasks} defaultExpandedTasks={["2"]} />
     </div>
-  )
+  );
 }

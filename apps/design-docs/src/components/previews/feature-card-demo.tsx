@@ -1,11 +1,7 @@
-"use client"
+"use client";
 
-import {
-  FeatureCard,
-  FeatureCardHeader,
-  FeatureCardContent,
-} from "@nebutra/ui/primitives"
-import { Zap } from "lucide-react"
+import { FeatureCard, FeatureCardContent, FeatureCardHeader } from "@nebutra/ui/primitives";
+import { Zap } from "lucide-react";
 
 export function FeatureCardDemo() {
   return (
@@ -21,5 +17,5 @@ export function FeatureCardDemo() {
         </div>
       </FeatureCardContent>
     </FeatureCard>
-  )
+  );
 }

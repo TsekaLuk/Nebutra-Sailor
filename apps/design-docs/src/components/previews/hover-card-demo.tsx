@@ -1,6 +1,4 @@
-"use client"
-
-import * as React from "react"
+"use client";
 
 import {
   Avatar,
@@ -9,7 +7,8 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 export function HoverCardDemo() {
   return (
     <HoverCard>
@@ -32,5 +31,5 @@ export function HoverCardDemo() {
         </div>
       </HoverCardContent>
     </HoverCard>
-  )
+  );
 }

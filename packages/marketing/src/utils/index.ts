@@ -4,7 +4,7 @@
  * UTM parameter handling, attribution tracking, and analytics utilities
  */
 
-import type { UTMParams, AttributionData, MarketingEvent } from "../types";
+import type { AttributionData, MarketingEvent, UTMParams } from "../types";
 
 // ============================================
 // Storage Keys
@@ -23,9 +23,7 @@ const EVENTS_KEY = `${STORAGE_PREFIX}events`;
 /**
  * Parse UTM parameters from URL
  */
-export function parseUTMParams(
-  url: string | URL = window.location.href,
-): UTMParams {
+export function parseUTMParams(url: string | URL = window.location.href): UTMParams {
   const urlObj = typeof url === "string" ? new URL(url) : url;
   const params = urlObj.searchParams;
 
@@ -41,9 +39,7 @@ export function parseUTMParams(
 /**
  * Check if URL has any UTM parameters
  */
-export function hasUTMParams(
-  url: string | URL = window.location.href,
-): boolean {
+export function hasUTMParams(url: string | URL = window.location.href): boolean {
   const params = parseUTMParams(url);
   return Object.values(params).some((v) => v !== undefined);
 }
@@ -74,13 +70,7 @@ export function addUTMParams(
  */
 export function removeUTMParams(url: string): string {
   const urlObj = new URL(url);
-  const utmKeys = [
-    "utm_source",
-    "utm_medium",
-    "utm_campaign",
-    "utm_term",
-    "utm_content",
-  ];
+  const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
 
   utmKeys.forEach((key) => {
     urlObj.searchParams.delete(key);
@@ -92,10 +82,7 @@ export function removeUTMParams(url: string): string {
 /**
  * Create Product Hunt UTM parameters
  */
-export function createProductHuntUTM(
-  campaign?: string,
-  content?: string,
-): UTMParams {
+export function createProductHuntUTM(campaign?: string, content?: string): UTMParams {
   return {
     utm_source: "product_hunt",
     utm_medium: "referral",
@@ -380,10 +367,7 @@ export function clearMarketingEvents(): void {
  */
 export function trackProductHuntVisit(): void {
   const attribution = getAttribution();
-  if (
-    attribution?.source === "product-hunt" ||
-    attribution?.source === "producthunt.com"
-  ) {
+  if (attribution?.source === "product-hunt" || attribution?.source === "producthunt.com") {
     trackMarketingEvent({
       name: "product_hunt_visit",
       properties: {

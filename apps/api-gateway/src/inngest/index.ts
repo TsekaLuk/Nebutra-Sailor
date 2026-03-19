@@ -1,10 +1,10 @@
+import type { InngestFunction } from "inngest";
 import { serve } from "inngest/hono";
 import { inngest } from "./client.js";
-import { syncUserToDB, deleteUserFromDB } from "./functions/userSync.js";
 import { processBillingEvent } from "./functions/billingSync.js";
 import { processGdprDeletion } from "./functions/gdprDeletion.js";
 import { provisionTenant } from "./functions/tenantProvisioning.js";
-import type { InngestFunction } from "inngest";
+import { deleteUserFromDB, syncUserToDB } from "./functions/userSync.js";
 
 export const inngestFunctions: InngestFunction.Any[] = [
   syncUserToDB,

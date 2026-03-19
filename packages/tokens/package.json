@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "description": "Unified theme tokens and theme-provider entry for Nebutra apps",
-  "sideEffects": ["./styles.css"],
+  "sideEffects": [
+    "./styles.css"
+  ],
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {

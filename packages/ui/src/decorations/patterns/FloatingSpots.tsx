@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
+import * as React from "react";
 import { cn } from "../../utils/cn";
 
 export interface FloatingSpotsProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -54,10 +54,7 @@ interface Spot {
  * // Using custom hex colors (for decorative/artistic purposes)
  * <FloatingSpots color="#0BF1C3" />
  */
-export const FloatingSpots = React.forwardRef<
-  HTMLDivElement,
-  FloatingSpotsProps
->(
+export const FloatingSpots = React.forwardRef<HTMLDivElement, FloatingSpotsProps>(
   (
     {
       count = 12,
@@ -90,10 +87,7 @@ export const FloatingSpots = React.forwardRef<
     return (
       <div
         ref={ref}
-        className={cn(
-          "absolute inset-0 overflow-hidden pointer-events-none",
-          className,
-        )}
+        className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}
         aria-hidden="true"
         {...props}
       >

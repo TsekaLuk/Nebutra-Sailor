@@ -1,32 +1,27 @@
 export { inngest } from "./client";
 
 import { autoTranslate } from "./auto_translate";
-import { recsysRefresh, userProfileUpdate } from "./recsys_refresh";
-import { inventorySync, processShopifyOrder } from "./ecommerce_sync";
 import { dailyDigestEmail, weeklyTenantReport } from "./daily_digest_email";
 import { dailyDbBackup, onDemandBackup } from "./db_backup";
-import {
-  phTrendingSync,
-  phTopicsSync,
-  phCacheWarm,
-  phFullSync,
-} from "./producthunt_sync";
+import { inventorySync, processShopifyOrder } from "./ecommerce_sync";
+import { phCacheWarm, phFullSync, phTopicsSync, phTrendingSync } from "./producthunt_sync";
+import { recsysRefresh, userProfileUpdate } from "./recsys_refresh";
 
 // Re-export all functions
 export {
   autoTranslate,
-  recsysRefresh,
-  userProfileUpdate,
-  inventorySync,
-  processShopifyOrder,
-  dailyDigestEmail,
-  weeklyTenantReport,
   dailyDbBackup,
+  dailyDigestEmail,
+  inventorySync,
   onDemandBackup,
-  phTrendingSync,
-  phTopicsSync,
   phCacheWarm,
   phFullSync,
+  phTopicsSync,
+  phTrendingSync,
+  processShopifyOrder,
+  recsysRefresh,
+  userProfileUpdate,
+  weeklyTenantReport,
 };
 
 // Export all functions for Inngest serve

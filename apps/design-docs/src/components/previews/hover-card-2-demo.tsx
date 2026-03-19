@@ -1,10 +1,6 @@
-"use client"
+"use client";
 
-import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-} from "@nebutra/ui/primitives"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@nebutra/ui/primitives";
 
 export function HoverCard2Demo() {
   return (
@@ -21,5 +17,5 @@ export function HoverCard2Demo() {
         </div>
       </HoverCardContent>
     </HoverCard>
-  )
+  );
 }

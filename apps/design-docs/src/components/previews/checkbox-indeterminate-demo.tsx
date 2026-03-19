@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Checkbox, Label } from "@nebutra/ui/primitives"
+import { Checkbox, Label } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function CheckboxIndeterminateDemo() {
   return (
@@ -9,5 +9,5 @@ export function CheckboxIndeterminateDemo() {
       <Checkbox indeterminate id="i1" />
       <Label htmlFor="i1">选项 1 (Option 1)</Label>
     </div>
-  )
+  );
 }

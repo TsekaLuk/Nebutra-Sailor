@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
 import { clsx } from "clsx";
+import React, { useCallback, useEffect, useState } from "react";
 import type { LaunchBannerProps } from "../types";
 
 // ============================================
@@ -47,9 +47,7 @@ function useCountdown(endDate: string | undefined): CountdownTime {
 
       setCountdown({
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor(
-          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        ),
+        hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((difference % (1000 * 60)) / 1000),
         isExpired: false,
@@ -213,9 +211,7 @@ export function LaunchBannerTop({
               🚀
             </span>
             <span className="font-semibold">{title}</span>
-            {subtitle && (
-              <span className="hidden opacity-90 sm:inline">— {subtitle}</span>
-            )}
+            {subtitle && <span className="hidden opacity-90 sm:inline">— {subtitle}</span>}
           </div>
 
           {showCountdown && <CountdownDisplay countdown={countdown} />}
@@ -274,10 +270,7 @@ export function LaunchBannerFloating({
 
   return (
     <div
-      className={clsx(
-        "fixed bottom-4 right-4 z-50 max-w-sm rounded-xl p-4 shadow-2xl",
-        className,
-      )}
+      className={clsx("fixed bottom-4 right-4 z-50 max-w-sm rounded-xl p-4 shadow-2xl", className)}
       style={{
         backgroundColor: styles.background,
         color: styles.text,
@@ -310,17 +303,12 @@ export function LaunchBannerFloating({
           </span>
           <div>
             <h3 className="font-bold">{title}</h3>
-            {subtitle && (
-              <p className="mt-0.5 text-sm opacity-90">{subtitle}</p>
-            )}
+            {subtitle && <p className="mt-0.5 text-sm opacity-90">{subtitle}</p>}
           </div>
         </div>
 
         {showCountdown && (
-          <div
-            className="rounded-lg p-2"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
-          >
+          <div className="rounded-lg p-2" style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}>
             <CountdownDisplay countdown={countdown} />
           </div>
         )}

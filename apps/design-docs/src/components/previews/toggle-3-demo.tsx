@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Toggle } from "@nebutra/ui/primitives"
+import { Toggle } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function Toggle3Demo() {
-  return <Toggle defaultChecked size="large" aria-label="Toggle on" />
+  return <Toggle defaultChecked size="large" aria-label="Toggle on" />;
 }

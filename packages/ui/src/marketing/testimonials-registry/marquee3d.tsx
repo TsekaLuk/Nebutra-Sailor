@@ -1,10 +1,10 @@
 "use client";
 
-import type { TestimonialsCommonProps } from "./types";
+import { Avatar, AvatarFallback, AvatarImage } from "../../primitives/avatar";
+import { Card, CardContent } from "../../primitives/card";
 import { cn } from "../../utils/cn";
 import { Marquee } from "../marquee";
-import { Card, CardContent } from "../../primitives/card";
-import { Avatar, AvatarImage, AvatarFallback } from "../../primitives/avatar";
+import type { TestimonialsCommonProps } from "./types";
 
 /**
  * TestimonialCard - Matches original 3D testimonials design
@@ -35,9 +35,7 @@ function TestimonialCard({
             <figcaption className="text-sm font-medium text-foreground flex items-center gap-1.5">
               {name} {country && <span className="text-xs">{country}</span>}
             </figcaption>
-            <p className="text-xs font-medium text-muted-foreground">
-              {username}
-            </p>
+            <p className="text-xs font-medium text-muted-foreground">{username}</p>
           </div>
         </div>
         <blockquote className="mt-3 text-sm text-secondary-foreground leading-relaxed">
@@ -48,18 +46,12 @@ function TestimonialCard({
   );
 }
 
-export function Marquee3DTestimonials({
-  items,
-  className,
-  height = 384,
-}: TestimonialsCommonProps) {
+export function Marquee3DTestimonials({ items, className, height = 384 }: TestimonialsCommonProps) {
   // map unified items to card props; provide sensible fallbacks
   const mapped = (items ?? []).map((x, i) => ({
     img: x.avatarUrl ?? "https://randomuser.me/api/portraits/women/32.jpg",
     name: x.author,
-    username: x.company
-      ? `@${x.company.toLowerCase().replace(/\s+/g, "")}`
-      : `@user${i}`,
+    username: x.company ? `@${x.company.toLowerCase().replace(/\s+/g, "")}` : `@user${i}`,
     body: x.quote,
     country: undefined,
   }));
@@ -88,24 +80,13 @@ export function Marquee3DTestimonials({
           ))}
         </Marquee>
         {/* Vertical Marquee (upwards) */}
-        <Marquee
-          vertical
-          pauseOnHover
-          reverse
-          repeat={3}
-          className="[--duration:40s]"
-        >
+        <Marquee vertical pauseOnHover reverse repeat={3} className="[--duration:40s]">
           {mapped.map((review) => (
             <TestimonialCard key={`col2-${review.username}`} {...review} />
           ))}
         </Marquee>
         {/* Vertical Marquee (downwards) */}
-        <Marquee
-          vertical
-          pauseOnHover
-          repeat={3}
-          className="[--duration:40s] hidden sm:flex"
-        >
+        <Marquee vertical pauseOnHover repeat={3} className="[--duration:40s] hidden sm:flex">
           {mapped.map((review) => (
             <TestimonialCard key={`col3-${review.username}`} {...review} />
           ))}

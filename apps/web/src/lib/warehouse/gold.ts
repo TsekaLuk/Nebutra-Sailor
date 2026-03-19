@@ -147,10 +147,7 @@ export async function getGrowthSummary(tenantId?: string): Promise<GrowthSummary
 
 // ── Time-series (last N days) ─────────────────────────────────────────────────
 
-async function fetchGrowthTimeSeries(
-  tenantId: string,
-  days: number,
-): Promise<GrowthSummary[]> {
+async function fetchGrowthTimeSeries(tenantId: string, days: number): Promise<GrowthSummary[]> {
   const database = sanitizeDatabaseName(process.env.CLICKHOUSE_DATABASE);
   const clickhouseUrl = buildClickHouseUrl();
   clickhouseUrl.searchParams.set("param_tenant_id", tenantId);
@@ -191,16 +188,12 @@ FORMAT JSON
 }
 
 const getCachedGrowthTimeSeries = unstable_cache(
-  async (tenantId: string, days: number) =>
-    fetchGrowthTimeSeries(tenantId, days),
+  async (tenantId: string, days: number) => fetchGrowthTimeSeries(tenantId, days),
   ["growth-time-series-v1"],
   { revalidate: 300, tags: ["growth-time-series"] },
 );
 
-export async function getGrowthTimeSeries(
-  tenantId?: string,
-  days = 30,
-): Promise<GrowthSummary[]> {
+export async function getGrowthTimeSeries(tenantId?: string, days = 30): Promise<GrowthSummary[]> {
   const rawTenant =
     (tenantId && tenantId.trim()) ||
     process.env.DEFAULT_DASHBOARD_TENANT_ID ||

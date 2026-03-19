@@ -1,8 +1,7 @@
 "use client";
 
-import type React from "react";
-
 import { Award, Star } from "lucide-react";
+import type React from "react";
 
 import { cn } from "../utils/cn";
 
@@ -70,12 +69,7 @@ export function Awards({
       return `M ${centerX - radius} ${centerY} A ${radius} ${radius} 0 0 1 ${centerX + radius} ${centerY}`;
     };
     return (
-      <div
-        className={cn(
-          "relative mx-auto flex h-48 w-48 items-center justify-center",
-          className,
-        )}
-      >
+      <div className={cn("relative mx-auto flex h-48 w-48 items-center justify-center", className)}>
         <svg
           className="absolute inset-0 h-full w-full"
           viewBox="0 0 192 192"
@@ -83,11 +77,7 @@ export function Awards({
         >
           <defs>
             {/* Define paths for curved text */}
-            <path
-              id="top-curve"
-              d={createTextPath(55, "top-curve")}
-              fill="none"
-            />
+            <path id="top-curve" d={createTextPath(55, "top-curve")} fill="none" />
             <path
               id="bottom-curve"
               d={createTextPath(60, "bottom-curve")}
@@ -143,9 +133,7 @@ export function Awards({
               {<Star className="text-primary fill-primary" />}
             </div>
           )}
-          {recipient && (
-            <div className="text-primary mt-2 text-sm">{recipient}</div>
-          )}
+          {recipient && <div className="text-primary mt-2 text-sm">{recipient}</div>}
 
           {date && <div className="text-xs italic">{date}</div>}
         </div>
@@ -157,9 +145,7 @@ export function Awards({
   if (variant === "award") {
     const LaurelWreath = () => (
       <svg
-        className={cn(
-          "fill-primary absolute top-1/2 h-full w-full -translate-y-1/2",
-        )}
+        className={cn("fill-primary absolute top-1/2 h-full w-full -translate-y-1/2")}
         width="892.77"
         height="688.08"
         viewBox="0 0 892.77 688.08"
@@ -198,9 +184,7 @@ export function Awards({
           <h2 className={cn("mb-4 w-60 text-xl font-light")}>{subtitle}</h2>
 
           {/* Recipient */}
-          {recipient && (
-            <p className={cn("text-primary/60 italic")}>{recipient}</p>
-          )}
+          {recipient && <p className={cn("text-primary/60 italic")}>{recipient}</p>}
 
           {/* Date */}
           <div className={cn("text-xl font-bold")}>{date}</div>
@@ -231,26 +215,13 @@ export function Awards({
       >
         <div className="bg-card z-10 rounded-[var(--radius-sm)] border p-6 px-8 text-center">
           <Badge />
-          <h1
-            className={cn(
-              "mt-4 grid text-3xl leading-7 font-bold tracking-tighter uppercase",
-            )}
-          >
+          <h1 className={cn("mt-4 grid text-3xl leading-7 font-bold tracking-tighter uppercase")}>
             Certificate
-            <span className="text-sm font-light tracking-tight">
-              {" "}
-              of {title}
-            </span>
+            <span className="text-sm font-light tracking-tight"> of {title}</span>
           </h1>
 
-          <p className="text-muted-foreground mt-4 mb-1 text-xs">
-            This is to certify that
-          </p>
-          <h1
-            className={cn(
-              "text-primary mb-2 border-b text-xl font-semibold tracking-tight",
-            )}
-          >
+          <p className="text-muted-foreground mt-4 mb-1 text-xs">This is to certify that</p>
+          <h1 className={cn("text-primary mb-2 border-b text-xl font-semibold tracking-tight")}>
             {recipient}
           </h1>
 
@@ -279,19 +250,11 @@ export function Awards({
     );
     return (
       <div className={cn("", className)}>
-        <div
-          className={cn("rounded-[var(--radius-md)] border-4 p-4", "flex justify-start gap-3")}
-        >
+        <div className={cn("rounded-[var(--radius-md)] border-4 p-4", "flex justify-start gap-3")}>
           <Badge />
           <div className={cn("border-l px-3")}>
-            <h1
-              className={cn("text-primary text-4xl font-bold tracking-tight")}
-            >
-              {title}
-            </h1>
-            <h2 className={cn("text-muted-foreground text-md font-light")}>
-              {subtitle}
-            </h2>
+            <h1 className={cn("text-primary text-4xl font-bold tracking-tight")}>{title}</h1>
+            <h2 className={cn("text-muted-foreground text-md font-light")}>{subtitle}</h2>
 
             <div className="mt-1 flex items-center gap-4 text-xs">
               {recipient && <p className={cn("italic")}>by {recipient}</p>}•
@@ -535,9 +498,7 @@ export function Awards({
             <div className="mt-6 flex justify-between px-6">
               <div>
                 <div className="text-xs">VIRTUAL</div>
-                <div className="text-primary text-lg font-semibold">
-                  {description}
-                </div>
+                <div className="text-primary text-lg font-semibold">{description}</div>
               </div>
               <div className="p-3">
                 <svg

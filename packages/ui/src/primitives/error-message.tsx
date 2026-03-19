@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { AlertCircle, ExternalLink } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -65,48 +65,41 @@ const iconSize: Record<NonNullable<ErrorMessageProps["size"]>, number> = {
  * // Structured with action link
  * <ErrorMessage error={{ message: "The request failed.", action: "Contact Us", link: "/contact" }} />
  */
-export const ErrorMessage = React.forwardRef<
-  HTMLSpanElement,
-  ErrorMessageProps
->(({ children, label, size = "medium", error, className }, ref) => {
-  const sz = size;
+export const ErrorMessage = React.forwardRef<HTMLSpanElement, ErrorMessageProps>(
+  ({ children, label, size = "medium", error, className }, ref) => {
+    const sz = size;
 
-  // Resolve content from either `error` prop or `children`
-  const message = error?.message ?? children;
+    // Resolve content from either `error` prop or `children`
+    const message = error?.message ?? children;
 
-  return (
-    <span
-      ref={ref}
-      role="alert"
-      className={cn(
-        "inline-flex items-center gap-1.5 text-destructive",
-        textSize[sz],
-        className,
-      )}
-    >
-      <AlertCircle size={iconSize[sz]} aria-hidden="true" className="shrink-0" />
+    return (
+      <span
+        ref={ref}
+        role="alert"
+        className={cn("inline-flex items-center gap-1.5 text-destructive", textSize[sz], className)}
+      >
+        <AlertCircle size={iconSize[sz]} aria-hidden="true" className="shrink-0" />
 
-      <span>
-        {label && (
-          <span className="font-medium">{label}:&nbsp;</span>
-        )}
-        {message}
-        {error?.action && error.link && (
-          <>
-            {" "}
-            <a
-              href={error.link}
-              className="underline underline-offset-2 hover:no-underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {error.action}
-              <ExternalLink size={10} aria-hidden="true" className="ml-0.5 inline" />
-            </a>
-          </>
-        )}
+        <span>
+          {label && <span className="font-medium">{label}:&nbsp;</span>}
+          {message}
+          {error?.action && error.link && (
+            <>
+              {" "}
+              <a
+                href={error.link}
+                className="underline underline-offset-2 hover:no-underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {error.action}
+                <ExternalLink size={10} aria-hidden="true" className="ml-0.5 inline" />
+              </a>
+            </>
+          )}
+        </span>
       </span>
-    </span>
-  );
-});
+    );
+  },
+);
 ErrorMessage.displayName = "ErrorMessage";

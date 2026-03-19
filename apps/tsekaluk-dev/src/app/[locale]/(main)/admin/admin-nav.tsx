@@ -1,14 +1,22 @@
-"use client"
+"use client";
 
-import { Link } from "@/i18n/navigation"
-import { usePathname } from "next/navigation"
-import { LayoutDashboard, FolderOpen, FileText, MessageSquare, Star, Clock, type LucideIcon } from "lucide-react"
+import {
+  Clock,
+  FileText,
+  FolderOpen,
+  LayoutDashboard,
+  type LucideIcon,
+  MessageSquare,
+  Star,
+} from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Link } from "@/i18n/navigation";
 
 interface NavItem {
-  href: string
-  label: string
-  icon: LucideIcon
-  exact: boolean
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  exact: boolean;
 }
 
 const NAV_ITEMS: NavItem[] = [
@@ -18,10 +26,10 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/admin/guestbook", label: "Guestbook", icon: MessageSquare, exact: false },
   { href: "/admin/feedback", label: "Feedback", icon: Star, exact: false },
   { href: "/admin/now", label: "Now", icon: Clock, exact: false },
-]
+];
 
 export function AdminNav() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav className="flex-1 px-3 py-4">
@@ -29,7 +37,7 @@ export function AdminNav() {
         {NAV_ITEMS.map(({ href, label, icon: Icon, exact }) => {
           const isActive = exact
             ? pathname === href || /^\/[a-z]{2}\/admin$/.test(pathname)
-            : pathname.includes(href)
+            : pathname.includes(href);
 
           return (
             <li key={href}>
@@ -45,9 +53,9 @@ export function AdminNav() {
                 {label}
               </Link>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
+  );
 }

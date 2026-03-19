@@ -1,5 +1,5 @@
-import { MagicCard } from "@nebutra/ui/primitives"
-import { Sparkles, Layers, Zap } from "lucide-react"
+import { MagicCard } from "@nebutra/ui/primitives";
+import { Layers, Sparkles, Zap } from "lucide-react";
 
 export function MagicCardDemo() {
   return (
@@ -9,8 +9,7 @@ export function MagicCardDemo() {
           <Sparkles className="h-8 w-8 text-blue-500 mb-4" />
           <h3 className="text-xl font-bold mb-2">Beautiful Design</h3>
           <p className="text-muted-foreground">
-            Every component is crafted with attention to detail and modern
-            aesthetics.
+            Every component is crafted with attention to detail and modern aesthetics.
           </p>
         </div>
       </MagicCard>
@@ -45,5 +44,5 @@ export function MagicCardDemo() {
         </div>
       </MagicCard>
     </div>
-  )
+  );
 }

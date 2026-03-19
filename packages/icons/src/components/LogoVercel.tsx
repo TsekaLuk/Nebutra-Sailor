@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,15 +16,11 @@ const LogoVercel = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <path
-        fill="currentColor"
-        fillRule="evenodd"
-        d="m8 1 8 14H0z"
-        clipRule="evenodd"
-      />
+      <path fill="currentColor" fillRule="evenodd" d="m8 1 8 14H0z" clipRule="evenodd" />
     </svg>
   ),
 );
 LogoVercel.displayName = "LogoVercel";
+
 export { LogoVercel };
 export default LogoVercel;

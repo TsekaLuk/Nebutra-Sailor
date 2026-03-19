@@ -1,4 +1,4 @@
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 
 export const healthRoutes = new OpenAPIHono();
 
@@ -65,9 +65,7 @@ async function withTimeout(
   try {
     await Promise.race([
       fn(),
-      new Promise<never>((_, r) =>
-        setTimeout(() => r(new Error("timeout")), ms),
-      ),
+      new Promise<never>((_, r) => setTimeout(() => r(new Error("timeout")), ms)),
     ]);
     return { status: "up", latencyMs: Date.now() - start };
   } catch {
@@ -106,11 +104,7 @@ healthRoutes.openapi(healthRoute, async (c) => {
   const downCount = depStatuses.filter((s) => s === "down").length;
 
   const overallStatus: "healthy" | "degraded" | "unhealthy" =
-    downCount === depStatuses.length
-      ? "unhealthy"
-      : downCount > 0
-        ? "degraded"
-        : "healthy";
+    downCount === depStatuses.length ? "unhealthy" : downCount > 0 ? "degraded" : "healthy";
 
   const body = {
     status: overallStatus,

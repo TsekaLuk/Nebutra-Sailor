@@ -76,27 +76,17 @@ export function Hero({
         </h1>
 
         {/* TODO: Subheadline */}
-        <p data-slot="subheadline">
-          {subheadline || "Your value proposition goes here"}
-        </p>
+        <p data-slot="subheadline">{subheadline || "Your value proposition goes here"}</p>
 
         {/* TODO: CTA Buttons */}
         <div data-slot="ctas">
           {primaryCTA && (
-            <a
-              href={primaryCTA.href}
-              data-variant="primary"
-              data-analytics="hero-cta-primary"
-            >
+            <a href={primaryCTA.href} data-variant="primary" data-analytics="hero-cta-primary">
               {primaryCTA.text}
             </a>
           )}
           {secondaryCTA && (
-            <a
-              href={secondaryCTA.href}
-              data-variant="outline"
-              data-analytics="hero-cta-secondary"
-            >
+            <a href={secondaryCTA.href} data-variant="outline" data-analytics="hero-cta-secondary">
               {secondaryCTA.text}
             </a>
           )}
@@ -113,16 +103,11 @@ export function Hero({
 
       {/* TODO: Media (for split variant) */}
       {variant === "split" && media && (
-        <div data-slot="media">
-          {/* TODO: Render image/video/3D based on media.type */}
-        </div>
+        <div data-slot="media">{/* TODO: Render image/video/3D based on media.type */}</div>
       )}
 
       {/* TODO: Scroll Indicator */}
-      <div data-slot="scroll-indicator">
-        {/* TODO: Animated scroll-down indicator */}
-        ↓
-      </div>
+      <div data-slot="scroll-indicator">{/* TODO: Animated scroll-down indicator */}↓</div>
     </section>
   );
 }

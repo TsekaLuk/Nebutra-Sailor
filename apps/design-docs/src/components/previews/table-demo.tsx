@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
-  TableCell,
-  TableBody,
   TableRow,
-  TableFooter,
-  TableCaption,
-  Table,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function TableDemo() {
   return (
@@ -51,5 +51,5 @@ export function TableDemo() {
         </TableRow>
       </TableFooter>
     </Table>
-  )
+  );
 }

@@ -41,9 +41,9 @@ export const models = {
 
   /** SiliconFlow — DeepSeek V3 (fast, capable) */
   "sf-deepseek-v3": "deepseek-ai/DeepSeek-V3",
-} as const
+} as const;
 
-export type ModelPreset = keyof typeof models
+export type ModelPreset = keyof typeof models;
 
 /**
  * Resolves a model preset alias to its full model ID.
@@ -51,7 +51,7 @@ export type ModelPreset = keyof typeof models
  */
 export function resolveModel(modelOrPreset: string): string {
   if (modelOrPreset in models) {
-    return models[modelOrPreset as ModelPreset]
+    return models[modelOrPreset as ModelPreset];
   }
-  return modelOrPreset
+  return modelOrPreset;
 }

@@ -1,7 +1,14 @@
 "use client";
 
+import type {
+  GlobalOptions as ConfettiGlobalOptions,
+  CreateTypes as ConfettiInstance,
+  Options as ConfettiOptions,
+} from "canvas-confetti";
+import confetti from "canvas-confetti";
+import type React from "react";
 import type { ReactNode } from "react";
-import React, {
+import {
   createContext,
   forwardRef,
   useCallback,
@@ -10,14 +17,8 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import type {
-  GlobalOptions as ConfettiGlobalOptions,
-  CreateTypes as ConfettiInstance,
-  Options as ConfettiOptions,
-} from "canvas-confetti";
-import confetti from "canvas-confetti";
-import { Button } from "./button";
 import { cn } from "../utils";
+import { Button } from "./button";
 
 // =============================================================================
 // Types
@@ -70,12 +71,9 @@ export interface ConfettiProps extends React.ComponentPropsWithRef<"canvas"> {
 /**
  * Props for ConfettiButton component
  */
-export interface ConfettiButtonProps extends React.ComponentProps<
-  typeof Button
-> {
+export interface ConfettiButtonProps extends React.ComponentProps<typeof Button> {
   /** Confetti options merged with position origin */
-  options?: ConfettiOptions &
-    ConfettiGlobalOptions & { canvas?: HTMLCanvasElement };
+  options?: ConfettiOptions & ConfettiGlobalOptions & { canvas?: HTMLCanvasElement };
 }
 
 // =============================================================================
@@ -166,11 +164,7 @@ export const Confetti = forwardRef<ConfettiRef, ConfettiProps>((props, ref) => {
 
   return (
     <ConfettiContext.Provider value={api}>
-      <canvas
-        ref={canvasRef}
-        className={cn("pointer-events-none", className)}
-        {...rest}
-      />
+      <canvas ref={canvasRef} className={cn("pointer-events-none", className)} {...rest} />
       {children}
     </ConfettiContext.Provider>
   );

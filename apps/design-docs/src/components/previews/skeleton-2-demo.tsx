@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Skeleton } from "@nebutra/ui/primitives"
+import { Skeleton } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Skeleton2Demo() {
   return (
     <div className="space-y-4 w-80 p-4 flex flex-col rounded-xl border shadow-sm">
@@ -13,5 +12,5 @@ export function Skeleton2Demo() {
         <Skeleton className="h-4 w-5/6" />
       </div>
     </div>
-  )
+  );
 }

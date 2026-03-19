@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion, type HTMLMotionProps } from "framer-motion";
+import { type HTMLMotionProps, motion } from "framer-motion";
+import * as React from "react";
 import { cn } from "../utils";
 
 const toggleVariants = cva(
@@ -22,7 +22,7 @@ const toggleVariants = cva(
       size: "normal",
       color: "default",
     },
-  }
+  },
 );
 
 // Map thumb sizes in pixels to compute framer-motion transformations precisely
@@ -69,11 +69,11 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
       value = "on",
       ...props
     },
-    ref
+    ref,
   ) => {
     const isControlled = controlledChecked !== undefined;
     const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
-    
+
     const isChecked = isControlled ? controlledChecked : internalChecked;
 
     const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -134,13 +134,13 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
           <motion.span
             data-state={state}
             className={cn(
-              "pointer-events-none absolute left-0 flex items-center justify-center rounded-full bg-background shadow-sm ring-0"
+              "pointer-events-none absolute left-0 flex items-center justify-center rounded-full bg-background shadow-sm ring-0",
             )}
             style={{ width: thumbSize, height: thumbSize }}
-            animate={{ 
+            animate={{
               x: xShift,
               // Micro-animation: thumb widens slightly during movement, adding momentum
-              width: thumbSize 
+              width: thumbSize,
             }}
             transition={{
               type: "spring",
@@ -186,7 +186,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
         className={cn(
           "flex items-center gap-3 cursor-pointer",
           disabled && "cursor-not-allowed opacity-50",
-          direction === "switch-first" ? "flex-row" : "flex-row-reverse justify-end"
+          direction === "switch-first" ? "flex-row" : "flex-row-reverse justify-end",
         )}
         style={{ WebkitTapHighlightColor: "transparent" }}
       >
@@ -197,7 +197,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
         {direction === "switch-last" && SwitchElement}
       </label>
     );
-  }
+  },
 );
 
 Toggle.displayName = "Toggle";

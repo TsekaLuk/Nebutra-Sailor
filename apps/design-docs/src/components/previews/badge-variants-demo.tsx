@@ -1,4 +1,4 @@
-import { Badge } from "@nebutra/ui/primitives"
+import { Badge } from "@nebutra/ui/primitives";
 
 export function BadgeVariantsDemo() {
   return (
@@ -12,5 +12,5 @@ export function BadgeVariantsDemo() {
       <Badge variant="green">green</Badge>
       <Badge variant="teal">teal</Badge>
     </div>
-  )
+  );
 }

@@ -8,8 +8,8 @@
  * Usage: npx tsx scripts/codemod-tokens.ts [--dry-run]
  */
 
-import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
-import { join, relative, dirname } from "node:path";
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -39,12 +39,7 @@ function walkDir(dir: string, extensions: string[]): string[] {
     }
     if (stat.isDirectory()) {
       // Skip node_modules, .next, dist, etc.
-      if (
-        entry === "node_modules" ||
-        entry === ".next" ||
-        entry === "dist" ||
-        entry === ".turbo"
-      ) {
+      if (entry === "node_modules" || entry === ".next" || entry === "dist" || entry === ".turbo") {
         continue;
       }
       results.push(...walkDir(fullPath, extensions));
@@ -189,7 +184,7 @@ function buildDarkPrefixedRegex(rawClass: string): RegExp {
   // with optional opacity modifier
   return new RegExp(
     `(?<=[\\s"'\`{])(?:dark:|dark:hover:|hover:dark:|dark:group\\-hover:|group\\-hover:)${escaped}(?:\\/\\d+)?(?=[\\s"'\`}])`,
-    "g"
+    "g",
   );
 }
 
@@ -199,10 +194,7 @@ function buildDarkPrefixedRegex(rawClass: string): RegExp {
  */
 function buildHoverPrefixedRegex(rawClass: string): RegExp {
   const escaped = rawClass.replace(/-/g, "\\-");
-  return new RegExp(
-    `(?<=[\\s"'\`{])hover:${escaped}(?:\\/\\d+)?(?=[\\s"'\`}])`,
-    "g"
-  );
+  return new RegExp(`(?<=[\\s"'\`{])hover:${escaped}(?:\\/\\d+)?(?=[\\s"'\`}])`, "g");
 }
 
 /**
@@ -211,10 +203,7 @@ function buildHoverPrefixedRegex(rawClass: string): RegExp {
  */
 function buildGroupHoverPrefixedRegex(rawClass: string): RegExp {
   const escaped = rawClass.replace(/-/g, "\\-");
-  return new RegExp(
-    `(?<=[\\s"'\`{])group\\-hover:${escaped}(?:\\/\\d+)?(?=[\\s"'\`}])`,
-    "g"
-  );
+  return new RegExp(`(?<=[\\s"'\`{])group\\-hover:${escaped}(?:\\/\\d+)?(?=[\\s"'\`}])`, "g");
 }
 
 interface ReplacementResult {
@@ -229,7 +218,7 @@ function applyReplacements(content: string): ReplacementResult {
   function countAndReplace(
     text: string,
     regex: RegExp,
-    replacement: string
+    replacement: string,
   ): { text: string; count: number } {
     let count = 0;
     const newText = text.replace(regex, () => {
@@ -247,15 +236,14 @@ function applyReplacements(content: string): ReplacementResult {
   // We handle bg-white → bg-[var(--neutral-1)] only when followed by dark:bg-
   // This requires a more nuanced approach: look for lines containing both
   // bg-white and dark:bg-{gray|zinc|slate}-
-  const bgWhitePairedRegex =
-    /(?<=[\s"'`{])bg-white(?=[\s"'`}])/g;
+  const bgWhitePairedRegex = /(?<=[\s"'`{])bg-white(?=[\s"'`}])/g;
   // Check each match location: is there a dark:bg- nearby in the same string?
   result = result.replace(
     /(["'`])([^"'`]*?)(?:bg-white)((?:[^"'`]*?)(?:dark:bg-(?:gray|zinc|slate)-\d+)(?:[^"'`]*))\1/g,
     (_match, quote, before, after) => {
       totalCount++;
       return `${quote}${before}bg-[var(--neutral-1)]${after}${quote}`;
-    }
+    },
   );
   // Also handle: dark:bg-X comes before bg-white
   result = result.replace(
@@ -265,7 +253,7 @@ function applyReplacements(content: string): ReplacementResult {
       if (before.includes("bg-[var(--neutral-1)]")) return _match;
       totalCount++;
       return `${quote}${before}bg-[var(--neutral-1)]${after}${quote}`;
-    }
+    },
   );
 
   // Also handle cn() / clsx() calls with template literals
@@ -274,7 +262,7 @@ function applyReplacements(content: string): ReplacementResult {
     (_match, quote, before, after) => {
       totalCount++;
       return `${quote}${before}bg-[var(--neutral-1)]${after}\``;
-    }
+    },
   );
 
   // -----------------------------------------------------------------------
@@ -327,7 +315,7 @@ function applyReplacements(content: string): ReplacementResult {
       // dark:hover:bg-gray-100, dark:hover:text-gray-200, etc.
       const darkHoverRegex = new RegExp(
         `(?<=[\\s"'\`{])dark:hover:${rawClass.replace(/-/g, "\\-")}(?:\\/\\d+)?(?=[\\s"'\`}])`,
-        "g"
+        "g",
       );
       const r1 = countAndReplace(result, darkHoverRegex, "");
       result = r1.text;
@@ -336,7 +324,7 @@ function applyReplacements(content: string): ReplacementResult {
       // hover:dark:bg-gray-100, etc.
       const hoverDarkRegex = new RegExp(
         `(?<=[\\s"'\`{])hover:dark:${rawClass.replace(/-/g, "\\-")}(?:\\/\\d+)?(?=[\\s"'\`}])`,
-        "g"
+        "g",
       );
       const r2 = countAndReplace(result, hoverDarkRegex, "");
       result = r2.text;
@@ -364,10 +352,7 @@ function applyReplacements(content: string): ReplacementResult {
     // Build regex that matches the exact class, optionally prefixed by
     // Tailwind variants like sm:, md:, lg:, xl:, 2xl:, before:, after:, etc.
     const escaped = rawClass.replace(/-/g, "\\-");
-    const regex = new RegExp(
-      `(?<=[\\s"'\`{])((?:[a-z0-9]+:)*)${escaped}(?=[\\s"'\`}])`,
-      "g"
-    );
+    const regex = new RegExp(`(?<=[\\s"'\`{])((?:[a-z0-9]+:)*)${escaped}(?=[\\s"'\`}])`, "g");
     result = result.replace(regex, (_match, prefix) => {
       totalCount++;
       return `${prefix}${tokenClass}`;
@@ -389,7 +374,7 @@ function applyReplacements(content: string): ReplacementResult {
     }
     // Collapse double spaces and trim trailing whitespace only.
     // Leading spaces are intentional in string concatenation patterns.
-    let cleaned = inner.replace(/  +/g, " ");
+    let cleaned = inner.replace(/ {2,}/g, " ");
     // Trim trailing space (from removed dark: classes at end of string)
     cleaned = cleaned.replace(/\s+$/, "");
     if (cleaned !== inner) {

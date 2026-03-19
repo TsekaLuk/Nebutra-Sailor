@@ -8,8 +8,7 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "Loading placeholders for text, cards, and avatar-led layouts.",
+        component: "Loading placeholders for text, cards, and avatar-led layouts.",
       },
     },
   },

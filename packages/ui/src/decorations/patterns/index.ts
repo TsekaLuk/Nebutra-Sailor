@@ -5,6 +5,6 @@
  * Used for creating subtle texture and atmosphere in sections.
  */
 
-export { DotMatrix, type DotMatrixProps } from "./DotMatrix";
 export { CrossPattern, type CrossPatternProps } from "./CrossPattern";
+export { DotMatrix, type DotMatrixProps } from "./DotMatrix";
 export { FloatingSpots, type FloatingSpotsProps } from "./FloatingSpots";

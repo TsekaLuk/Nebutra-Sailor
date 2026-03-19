@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
-import { cn } from "../utils/cn";
+import type { LucideIcon } from "lucide-react";
+import type * as React from "react";
 import { Badge } from "../primitives/badge";
 import { FeatureCheckItem } from "../primitives/feature-check-item";
-import type { LucideIcon } from "lucide-react";
+import { cn } from "../utils/cn";
 
 export interface FeatureSplitItem {
   /** Feature title */

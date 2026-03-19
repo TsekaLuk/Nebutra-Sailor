@@ -1,4 +1,4 @@
-import { Flex } from "@nebutra/ui/primitives"
+import { Flex } from "@nebutra/ui/primitives";
 
 export function FlexDemo() {
   return (
@@ -14,5 +14,5 @@ export function FlexDemo() {
       </div>
       <div className="h-16 w-16 rounded-lg border border-primary/30 bg-primary/20" />
     </Flex>
-  )
+  );
 }

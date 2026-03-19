@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,15 +16,11 @@ const Minus = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <path
-        fill="currentColor"
-        fillRule="evenodd"
-        d="M2 7.25h12v1.5H2z"
-        clipRule="evenodd"
-      />
+      <path fill="currentColor" fillRule="evenodd" d="M2 7.25h12v1.5H2z" clipRule="evenodd" />
     </svg>
   ),
 );
 Minus.displayName = "Minus";
+
 export { Minus };
 export default Minus;

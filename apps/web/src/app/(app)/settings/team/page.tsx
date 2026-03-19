@@ -1,12 +1,12 @@
-import { requireOrg } from "@/lib/auth"
-import { PermissionGate } from "@/components/PermissionGate"
-import { TeamMemberList } from "./TeamMemberList"
-import { InviteMemberForm } from "./InviteMemberForm"
+import { PermissionGate } from "@/components/PermissionGate";
+import { requireOrg } from "@/lib/auth";
+import { InviteMemberForm } from "./InviteMemberForm";
+import { TeamMemberList } from "./TeamMemberList";
 
-export const metadata = { title: "Team — Settings" }
+export const metadata = { title: "Team — Settings" };
 
 export default async function TeamPage() {
-  const { orgId } = await requireOrg()
+  const { orgId } = await requireOrg();
 
   return (
     <div className="space-y-8">
@@ -25,11 +25,9 @@ export default async function TeamPage() {
 
       {/* Members list */}
       <section className="p-6 rounded-lg border border-[var(--neutral-7)] bg-[var(--neutral-1)]">
-        <h2 className="mb-4 text-base font-semibold text-[var(--neutral-12)]">
-          Members
-        </h2>
+        <h2 className="mb-4 text-base font-semibold text-[var(--neutral-12)]">Members</h2>
         <TeamMemberList orgId={orgId} />
       </section>
     </div>
-  )
+  );
 }

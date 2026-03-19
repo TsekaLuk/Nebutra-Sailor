@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { Menu as BaseMenu } from "@base-ui-components/react/menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 const DropdownMenu = BaseMenu.Root;
@@ -46,7 +46,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     className={cn(
       "flex cursor-default select-none items-center rounded-[var(--radius-md)] px-2 py-1.5 text-sm outline-none focus:bg-accent data-[popup-open]:bg-accent",
       inset && "pl-8",
-      className
+      className,
     )}
     {...props}
   >
@@ -66,7 +66,7 @@ const DropdownMenuSubContent = React.forwardRef<
         ref={ref}
         className={cn(
           "z-50 min-w-32 overflow-hidden rounded-xl border bg-background/90 backdrop-blur-md p-1 text-popover-foreground shadow-xl transition-all data-[starting-style]:zoom-out-95 data-[ending-style]:zoom-out-95 data-[starting-style]:fade-out-0 data-[ending-style]:fade-out-0",
-          className
+          className,
         )}
         {...props}
       />
@@ -75,30 +75,41 @@ const DropdownMenuSubContent = React.forwardRef<
 ));
 DropdownMenuSubContent.displayName = "DropdownMenuSubContent";
 
-export interface DropdownMenuContentProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.Popup> {
-  align?: React.ComponentProps<typeof BaseMenu.Positioner>['align'];
-  sideOffset?: React.ComponentProps<typeof BaseMenu.Positioner>['sideOffset'];
-  alignOffset?: React.ComponentProps<typeof BaseMenu.Positioner>['alignOffset'];
-  side?: React.ComponentProps<typeof BaseMenu.Positioner>['side'];
+export interface DropdownMenuContentProps
+  extends React.ComponentPropsWithoutRef<typeof BaseMenu.Popup> {
+  align?: React.ComponentProps<typeof BaseMenu.Positioner>["align"];
+  sideOffset?: React.ComponentProps<typeof BaseMenu.Positioner>["sideOffset"];
+  alignOffset?: React.ComponentProps<typeof BaseMenu.Positioner>["alignOffset"];
+  side?: React.ComponentProps<typeof BaseMenu.Positioner>["side"];
 }
 
 const DropdownMenuContent = React.forwardRef<
   React.ElementRef<typeof BaseMenu.Popup>,
   DropdownMenuContentProps
->(({ className, sideOffset = 4, align = "center", alignOffset = 0, side = "bottom", ...props }, ref) => (
-  <BaseMenu.Portal>
-    <BaseMenu.Positioner sideOffset={sideOffset} align={align} alignOffset={alignOffset} side={side}>
-      <BaseMenu.Popup
-        ref={ref}
-        className={cn(
-          "z-50 min-w-32 overflow-hidden rounded-xl border bg-background/90 backdrop-blur-md p-1 text-popover-foreground shadow-xl transition-all outline-none data-[starting-style]:zoom-out-95 data-[ending-style]:zoom-out-95 data-[starting-style]:fade-out-0 data-[ending-style]:fade-out-0",
-          className
-        )}
-        {...props}
-      />
-    </BaseMenu.Positioner>
-  </BaseMenu.Portal>
-));
+>(
+  (
+    { className, sideOffset = 4, align = "center", alignOffset = 0, side = "bottom", ...props },
+    ref,
+  ) => (
+    <BaseMenu.Portal>
+      <BaseMenu.Positioner
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        side={side}
+      >
+        <BaseMenu.Popup
+          ref={ref}
+          className={cn(
+            "z-50 min-w-32 overflow-hidden rounded-xl border bg-background/90 backdrop-blur-md p-1 text-popover-foreground shadow-xl transition-all outline-none data-[starting-style]:zoom-out-95 data-[ending-style]:zoom-out-95 data-[starting-style]:fade-out-0 data-[ending-style]:fade-out-0",
+            className,
+          )}
+          {...props}
+        />
+      </BaseMenu.Positioner>
+    </BaseMenu.Portal>
+  ),
+);
 DropdownMenuContent.displayName = "DropdownMenuContent";
 
 const DropdownMenuItem = React.forwardRef<
@@ -112,7 +123,7 @@ const DropdownMenuItem = React.forwardRef<
     className={cn(
       "relative flex cursor-default select-none items-center rounded-[var(--radius-md)] px-2 py-1.5 text-sm outline-none transition-colors data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       inset && "pl-8",
-      className
+      className,
     )}
     {...props}
   />
@@ -127,7 +138,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center rounded-[var(--radius-md)] py-1.5 pl-8 pr-2 text-sm outline-none transition-colors data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
+      className,
     )}
     {...(checked !== undefined && { checked })}
     {...props}
@@ -150,7 +161,7 @@ const DropdownMenuRadioItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center rounded-[var(--radius-md)] py-1.5 pl-8 pr-2 text-sm outline-none transition-colors data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
+      className,
     )}
     {...props}
   >
@@ -172,11 +183,7 @@ const DropdownMenuLabel = React.forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <BaseMenu.GroupLabel
     ref={ref}
-    className={cn(
-      "px-2 py-1.5 text-sm font-semibold",
-      inset && "pl-8",
-      className
-    )}
+    className={cn("px-2 py-1.5 text-sm font-semibold", inset && "pl-8", className)}
     {...props}
   />
 ));
@@ -195,33 +202,27 @@ const DropdownMenuSeparator = React.forwardRef<
 ));
 DropdownMenuSeparator.displayName = "DropdownMenuSeparator";
 
-const DropdownMenuShortcut = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+const DropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => {
   return (
-    <span
-      className={cn("ml-auto text-xs tracking-widest opacity-60", className)}
-      {...props}
-    />
+    <span className={cn("ml-auto text-xs tracking-widest opacity-60", className)} {...props} />
   );
 };
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut";
 
 export {
   DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuCheckboxItem,
-  DropdownMenuRadioItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuGroup,
-  DropdownMenuPortal,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuRadioGroup,
+  DropdownMenuTrigger,
 };

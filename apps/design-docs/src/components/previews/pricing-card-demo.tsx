@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { PricingCard } from "@nebutra/ui/primitives"
-import { Check, Zap } from "lucide-react"
+import { PricingCard } from "@nebutra/ui/primitives";
+import { Check, Zap } from "lucide-react";
 
 export function PricingCardDemo() {
-  const features = ["Unlimited projects", "API access", "Priority support"]
+  const features = ["Unlimited projects", "API access", "Priority support"];
 
   return (
     <PricingCard.Card>
@@ -20,9 +20,7 @@ export function PricingCardDemo() {
           <PricingCard.MainPrice>$29</PricingCard.MainPrice>
           <PricingCard.Period>/month</PricingCard.Period>
         </PricingCard.Price>
-        <PricingCard.Description>
-          Per workspace, billed annually
-        </PricingCard.Description>
+        <PricingCard.Description>Per workspace, billed annually</PricingCard.Description>
       </PricingCard.Header>
       <PricingCard.Body>
         <PricingCard.List>
@@ -35,5 +33,5 @@ export function PricingCardDemo() {
         </PricingCard.List>
       </PricingCard.Body>
     </PricingCard.Card>
-  )
+  );
 }

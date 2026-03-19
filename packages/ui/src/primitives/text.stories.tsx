@@ -39,9 +39,7 @@ export const AllVariants: Story = {
   render: () => (
     <div className="space-y-3 w-80">
       <Text variant="body">Body — Default paragraph text style</Text>
-      <Text variant="body-sm">
-        Body SM — Smaller body for secondary content
-      </Text>
+      <Text variant="body-sm">Body SM — Smaller body for secondary content</Text>
       <Text variant="label">Label — Form labels and metadata</Text>
       <Text variant="label-sm">Label SM — Micro labels and tags</Text>
       <Text variant="code">code — Monospace for inline code</Text>
@@ -62,8 +60,8 @@ export const TruncatedText: Story = {
   render: () => (
     <div className="w-56 space-y-3">
       <Text truncate className="block">
-        This is a very long text that will be truncated with an ellipsis because
-        the container is too narrow
+        This is a very long text that will be truncated with an ellipsis because the container is
+        too narrow
       </Text>
     </div>
   ),
@@ -77,9 +75,9 @@ export const LineClamp: Story = {
           lineClamp=2
         </Text>
         <Text lineClamp={2}>
-          This paragraph will be clamped to exactly two lines. Any content
-          beyond the second line will be hidden and replaced with an ellipsis.
-          Here is more text to demonstrate the effect clearly.
+          This paragraph will be clamped to exactly two lines. Any content beyond the second line
+          will be hidden and replaced with an ellipsis. Here is more text to demonstrate the effect
+          clearly.
         </Text>
       </div>
       <div>
@@ -87,10 +85,9 @@ export const LineClamp: Story = {
           lineClamp=3
         </Text>
         <Text lineClamp={3}>
-          This paragraph will be clamped to exactly three lines. Any content
-          beyond the third line will be hidden and replaced with an ellipsis.
-          Here is more text to demonstrate the effect clearly across multiple
-          lines.
+          This paragraph will be clamped to exactly three lines. Any content beyond the third line
+          will be hidden and replaced with an ellipsis. Here is more text to demonstrate the effect
+          clearly across multiple lines.
         </Text>
       </div>
     </div>

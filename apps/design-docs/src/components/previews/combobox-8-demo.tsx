@@ -1,26 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Combobox } from "@nebutra/ui/primitives"
+import { Combobox } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Combobox8Demo() {
   return (
     <div className="gap-4 flex flex-col items-center justify-center">
-      <Combobox
-        options={[{ value: "1", label: "Option 1" }]}
-        size="sm"
-        placeholder="Small"
-      />
+      <Combobox options={[{ value: "1", label: "Option 1" }]} size="sm" placeholder="Small" />
       <Combobox
         options={[{ value: "1", label: "Option 1" }]}
         size="default"
         placeholder="Default"
       />
-      <Combobox
-        options={[{ value: "1", label: "Option 1" }]}
-        size="lg"
-        placeholder="Large"
-      />
+      <Combobox options={[{ value: "1", label: "Option 1" }]} size="lg" placeholder="Large" />
     </div>
-  )
+  );
 }

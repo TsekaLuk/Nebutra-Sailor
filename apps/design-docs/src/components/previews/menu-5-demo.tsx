@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@nebutra/ui/primitives"
-import { User } from "lucide-react"
+  DropdownMenuTrigger,
+} from "@nebutra/ui/primitives";
+import { User } from "lucide-react";
+import * as React from "react";
 
 export function Menu5Demo() {
   return (
@@ -20,5 +20,5 @@ export function Menu5Demo() {
         <DropdownMenuItem>Preferences</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

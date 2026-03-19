@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { StatusBadge } from "@nebutra/ui/primitives"
-import { ShieldCheck, XCircle } from "lucide-react"
+import { StatusBadge } from "@nebutra/ui/primitives";
+import { ShieldCheck, XCircle } from "lucide-react";
 
 export function StatusBadgeDemo() {
   return (
@@ -12,5 +12,5 @@ export function StatusBadgeDemo() {
       rightLabel="SSO disabled"
       status="success"
     />
-  )
+  );
 }

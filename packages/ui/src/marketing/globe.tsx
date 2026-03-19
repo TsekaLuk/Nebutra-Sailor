@@ -24,10 +24,7 @@ const globeStyles = `
  */
 function useGlobeStyles() {
   useEffect(() => {
-    if (
-      typeof document !== "undefined" &&
-      !document.getElementById(GLOBE_STYLE_ID)
-    ) {
+    if (typeof document !== "undefined" && !document.getElementById(GLOBE_STYLE_ID)) {
       const styleEl = document.createElement("style");
       styleEl.id = GLOBE_STYLE_ID;
       styleEl.textContent = globeStyles;
@@ -79,9 +76,7 @@ export function Globe({
       <div className="pointer-events-none absolute -bottom-40 -left-32 h-80 w-80 rounded-full bg-indigo-400/10 blur-3xl dark:bg-indigo-600/20" />
 
       <div className="relative flex flex-col items-center text-center">
-        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-          {headline}
-        </h2>
+        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">{headline}</h2>
         <p className="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
           {description}
         </p>
@@ -101,13 +96,7 @@ export function Globe({
                 <stop offset="100%" stopColor="rgba(59,130,246,0.1)" />
               </radialGradient>
               {/* Line trail gradients - dark mode */}
-              <linearGradient
-                id="trailBright"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
+              <linearGradient id="trailBright" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.9" />
                 <stop offset="100%" stopColor="#6366f1" stopOpacity="0.3" />
               </linearGradient>
@@ -116,23 +105,11 @@ export function Globe({
                 <stop offset="100%" stopColor="#6366f1" stopOpacity="0.1" />
               </linearGradient>
               {/* Light mode gradients */}
-              <linearGradient
-                id="trailBrightLight"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
+              <linearGradient id="trailBrightLight" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#0891b2" stopOpacity="0.8" />
                 <stop offset="100%" stopColor="#4338ca" stopOpacity="0.6" />
               </linearGradient>
-              <linearGradient
-                id="trailDimLight"
-                x1="0%"
-                y1="100%"
-                x2="100%"
-                y2="0%"
-              >
+              <linearGradient id="trailDimLight" x1="0%" y1="100%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#0891b2" stopOpacity="0.6" />
                 <stop offset="100%" stopColor="#4338ca" stopOpacity="0.3" />
               </linearGradient>

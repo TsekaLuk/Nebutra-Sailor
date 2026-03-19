@@ -197,8 +197,7 @@ export class PlanConfigService {
 
     // Use grandfathered plan if exists and not expired
     const effectivePlan =
-      planVersion?.plan &&
-      (!planVersion.expiresAt || planVersion.expiresAt > new Date())
+      planVersion?.plan && (!planVersion.expiresAt || planVersion.expiresAt > new Date())
         ? planVersion.plan
         : subscription?.pricingPlan;
 
@@ -243,10 +242,7 @@ export class PlanConfigService {
       limits[override.limitDef.key] = {
         limit: Number(override.limitValue),
         unit: override.limitDef.unit,
-        resetPeriod: override.limitDef.resetPeriod as
-          | "monthly"
-          | "daily"
-          | "never",
+        resetPeriod: override.limitDef.resetPeriod as "monthly" | "daily" | "never",
         overageRate: override.overageRate
           ? Number(override.overageRate)
           : (limits[override.limitDef.key]?.overageRate ?? null),
@@ -336,9 +332,7 @@ export class PlanConfigService {
       }
     }
 
-    const configs = Array.from(uniquePlans.values()).map((p) =>
-      this.formatPlanConfig(p),
-    );
+    const configs = Array.from(uniquePlans.values()).map((p) => this.formatPlanConfig(p));
     await this.cache.set(cacheKey, JSON.stringify(configs), this.cacheTTL);
 
     return configs;
@@ -347,10 +341,7 @@ export class PlanConfigService {
   /**
    * Check if organization has feature access
    */
-  async hasFeature(
-    organizationId: string,
-    featureKey: string,
-  ): Promise<boolean> {
+  async hasFeature(organizationId: string, featureKey: string): Promise<boolean> {
     const config = await this.getConfig(organizationId);
     return config.features[featureKey]?.enabled ?? false;
   }
@@ -358,10 +349,7 @@ export class PlanConfigService {
   /**
    * Get usage limit for organization
    */
-  async getLimit(
-    organizationId: string,
-    limitKey: string,
-  ): Promise<LimitConfig | null> {
+  async getLimit(organizationId: string, limitKey: string): Promise<LimitConfig | null> {
     const config = await this.getConfig(organizationId);
     return config.limits[limitKey] ?? null;
   }

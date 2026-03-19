@@ -1,15 +1,19 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { PopoverTrigger, PopoverContent, Popover } from "@nebutra/ui/primitives"
-import { BaseButton as Button } from "@nebutra/ui/primitives"
+import {
+  BaseButton as Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function PopoverControlledDemo() {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    setOpen(true)
-  }, [])
+    setOpen(true);
+  }, []);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -23,5 +27,5 @@ export function PopoverControlledDemo() {
         </Button>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

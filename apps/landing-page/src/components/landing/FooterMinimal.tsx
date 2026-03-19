@@ -1,11 +1,11 @@
 "use client";
 
-import { Github, Twitter, MessageCircle } from "lucide-react";
 import { Logo } from "@nebutra/brand";
-import { footerContent } from "@/lib/landing-content";
+import { Github, MessageCircle, Twitter } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useMount } from "@/hooks/useMount";
+import { footerContent } from "@/lib/landing-content";
 
 const SOCIAL_ICONS = {
   x: Twitter,
@@ -62,9 +62,7 @@ export function FooterMinimal() {
           {/* Social */}
           <div className="flex items-center gap-4">
             {social.map((item) => {
-              const Icon =
-                SOCIAL_ICONS[item.platform as keyof typeof SOCIAL_ICONS] ||
-                Github;
+              const Icon = SOCIAL_ICONS[item.platform as keyof typeof SOCIAL_ICONS] || Github;
               return (
                 <a
                   key={item.platform}

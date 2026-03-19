@@ -62,32 +62,7 @@ jobs:
             db:
               - 'packages/db/**'
 
-  # ── Commit message validation (PRs only) ────────────────────────────────
-  commitlint:
-    name: Lint Commit Messages
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 22
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Validate PR commits
-        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
   # ── Lint & type-check (affected packages only) ──────────────────────────
   lint-typecheck:
@@ -134,8 +109,8 @@ jobs:
           echo "TURBO_BASE_REF=$BASE_SHA" >> "$GITHUB_ENV"
           echo "Using TURBO_BASE_REF=$BASE_SHA"
 
-      - name: Lint (affected)
-        run: pnpm turbo lint --filter="...[${TURBO_BASE_REF}]..."
+      - name: Lint (Biome)
+        run: pnpm biome ci .
 
       - name: Typecheck (affected)
         run: pnpm turbo typecheck --filter="...[${TURBO_BASE_REF}]..."

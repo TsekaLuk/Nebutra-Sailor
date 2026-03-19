@@ -1,14 +1,14 @@
-"use client"
-import { useMemo, type JSX } from "react"
-import { motion } from "framer-motion"
-import { cn } from "../utils"
+"use client";
+import { motion } from "framer-motion";
+import { type JSX, useMemo } from "react";
+import { cn } from "../utils";
 
 export interface TextShimmerProps {
-  children: string
-  as?: React.ElementType
-  className?: string
-  duration?: number
-  spread?: number
+  children: string;
+  as?: React.ElementType;
+  className?: string;
+  duration?: number;
+  spread?: number;
 }
 
 export function TextShimmer({
@@ -25,13 +25,10 @@ export function TextShimmer({
       motion.create
         ? motion.create(Component as keyof JSX.IntrinsicElements)
         : motion(Component as keyof JSX.IntrinsicElements),
-    [Component]
-  )
+    [Component],
+  );
 
-  const dynamicSpread = useMemo(
-    () => children.length * spread,
-    [children, spread]
-  )
+  const dynamicSpread = useMemo(() => children.length * spread, [children, spread]);
 
   return (
     <MotionComponent
@@ -40,7 +37,7 @@ export function TextShimmer({
         "text-transparent [--base-color:#a1a1aa] [--base-gradient-color:#000]",
         "[background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]",
         "dark:[--base-color:#71717a] dark:[--base-gradient-color:#ffffff] dark:[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]",
-        className
+        className,
       )}
       initial={{ backgroundPosition: "100% center" }}
       animate={{ backgroundPosition: "0% center" }}
@@ -58,7 +55,7 @@ export function TextShimmer({
     >
       {children}
     </MotionComponent>
-  )
+  );
 }
 
-export default TextShimmer
+export default TextShimmer;

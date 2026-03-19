@@ -1,4 +1,4 @@
-import { Spinner } from "@nebutra/ui/primitives"
+import { Spinner } from "@nebutra/ui/primitives";
 
 export function SpinnerDemo() {
   return (
@@ -7,5 +7,5 @@ export function SpinnerDemo() {
       <Spinner variant="ring" size={32} />
       <Spinner variant="infinite" className="text-primary" />
     </div>
-  )
+  );
 }

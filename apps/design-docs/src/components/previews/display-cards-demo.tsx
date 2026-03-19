@@ -1,5 +1,5 @@
-import { DisplayCards } from "@nebutra/ui/primitives"
-import { Zap, Shield, Rocket } from "lucide-react"
+import { DisplayCards } from "@nebutra/ui/primitives";
+import { Rocket, Shield, Zap } from "lucide-react";
 
 export function DisplayCardsDemo() {
   const cards = [
@@ -24,7 +24,7 @@ export function DisplayCardsDemo() {
       icon: <Rocket className="size-5 text-indigo-500" />,
       titleClassName: "text-indigo-500",
     },
-  ]
+  ];
 
   return (
     <div className="p-8 flex min-h-[450px] w-full items-center justify-center">
@@ -33,5 +33,5 @@ export function DisplayCardsDemo() {
         <DisplayCards cards={cards} />
       </div>
     </div>
-  )
+  );
 }

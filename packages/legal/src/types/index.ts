@@ -1,6 +1,6 @@
 /**
  * Legal & Compliance Types
- * 
+ *
  * Type definitions for legal documents, consent tracking, and cookie management.
  * Follows GDPR, CCPA, and SOC2 compliance requirements.
  */

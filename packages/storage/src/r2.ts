@@ -4,15 +4,15 @@
  */
 
 import {
-  S3Client,
-  PutObjectCommand,
-  GetObjectCommand,
-  DeleteObjectCommand,
-  ListObjectsV2Command,
-  HeadObjectCommand,
   CopyObjectCommand,
-  type PutObjectCommandInput,
+  DeleteObjectCommand,
+  GetObjectCommand,
   type GetObjectCommandInput,
+  HeadObjectCommand,
+  ListObjectsV2Command,
+  PutObjectCommand,
+  type PutObjectCommandInput,
+  S3Client,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
@@ -75,7 +75,7 @@ export interface UploadResult {
 export async function upload(
   key: string,
   body: Buffer | Blob | ReadableStream,
-  options: UploadOptions = {}
+  options: UploadOptions = {},
 ): Promise<UploadResult> {
   const bucket = config.buckets[options.bucket || "uploads"];
 
@@ -85,14 +85,17 @@ export async function upload(
     Body: body,
     ContentType: options.contentType,
     Metadata: options.metadata,
-    CacheControl: options.cacheControl || (options.bucket === "assets" ? "public, max-age=31536000, immutable" : undefined),
+    CacheControl:
+      options.cacheControl ||
+      (options.bucket === "assets" ? "public, max-age=31536000, immutable" : undefined),
   };
 
   await r2Client.send(new PutObjectCommand(params));
 
-  const url = options.bucket === "assets"
-    ? `${config.publicUrl}/${key}`
-    : await getSignedDownloadUrl(key, { bucket: options.bucket });
+  const url =
+    options.bucket === "assets"
+      ? `${config.publicUrl}/${key}`
+      : await getSignedDownloadUrl(key, { bucket: options.bucket });
 
   return {
     key,
@@ -109,7 +112,7 @@ export async function uploadForTenant(
   tenantId: string,
   filename: string,
   body: Buffer | Blob | ReadableStream,
-  options: UploadOptions = {}
+  options: UploadOptions = {},
 ): Promise<UploadResult> {
   const key = `${tenantId}/${filename}`;
   return upload(key, body, { bucket: "uploads", ...options });
@@ -120,7 +123,7 @@ export async function uploadForTenant(
  */
 export async function download(
   key: string,
-  bucket: Bucket = "uploads"
+  bucket: Bucket = "uploads",
 ): Promise<ReadableStream | null> {
   const params: GetObjectCommandInput = {
     Bucket: config.buckets[bucket],
@@ -142,10 +145,12 @@ export async function download(
  * Delete a file from R2
  */
 export async function remove(key: string, bucket: Bucket = "uploads"): Promise<void> {
-  await r2Client.send(new DeleteObjectCommand({
-    Bucket: config.buckets[bucket],
-    Key: key,
-  }));
+  await r2Client.send(
+    new DeleteObjectCommand({
+      Bucket: config.buckets[bucket],
+      Key: key,
+    }),
+  );
 }
 
 /**
@@ -153,10 +158,12 @@ export async function remove(key: string, bucket: Bucket = "uploads"): Promise<v
  */
 export async function exists(key: string, bucket: Bucket = "uploads"): Promise<boolean> {
   try {
-    await r2Client.send(new HeadObjectCommand({
-      Bucket: config.buckets[bucket],
-      Key: key,
-    }));
+    await r2Client.send(
+      new HeadObjectCommand({
+        Bucket: config.buckets[bucket],
+        Key: key,
+      }),
+    );
     return true;
   } catch {
     return false;
@@ -169,13 +176,15 @@ export async function exists(key: string, bucket: Bucket = "uploads"): Promise<b
 export async function list(
   prefix: string,
   bucket: Bucket = "uploads",
-  maxKeys = 1000
+  maxKeys = 1000,
 ): Promise<string[]> {
-  const response = await r2Client.send(new ListObjectsV2Command({
-    Bucket: config.buckets[bucket],
-    Prefix: prefix,
-    MaxKeys: maxKeys,
-  }));
+  const response = await r2Client.send(
+    new ListObjectsV2Command({
+      Bucket: config.buckets[bucket],
+      Prefix: prefix,
+      MaxKeys: maxKeys,
+    }),
+  );
 
   return response.Contents?.map((item) => item.Key!) || [];
 }
@@ -186,14 +195,16 @@ export async function list(
 export async function copy(
   sourceKey: string,
   destinationKey: string,
-  bucket: Bucket = "uploads"
+  bucket: Bucket = "uploads",
 ): Promise<void> {
   const bucketName = config.buckets[bucket];
-  await r2Client.send(new CopyObjectCommand({
-    Bucket: bucketName,
-    CopySource: `${bucketName}/${sourceKey}`,
-    Key: destinationKey,
-  }));
+  await r2Client.send(
+    new CopyObjectCommand({
+      Bucket: bucketName,
+      CopySource: `${bucketName}/${sourceKey}`,
+      Key: destinationKey,
+    }),
+  );
 }
 
 // ============================================
@@ -205,16 +216,12 @@ export async function copy(
  */
 export async function getSignedDownloadUrl(
   key: string,
-  options: { bucket?: Bucket; expiresIn?: number } = {}
+  options: { bucket?: Bucket; expiresIn?: number } = {},
 ): Promise<string> {
   const bucket = config.buckets[options.bucket || "uploads"];
   const expiresIn = options.expiresIn || 3600; // 1 hour default
 
-  return getSignedUrl(
-    r2Client,
-    new GetObjectCommand({ Bucket: bucket, Key: key }),
-    { expiresIn }
-  );
+  return getSignedUrl(r2Client, new GetObjectCommand({ Bucket: bucket, Key: key }), { expiresIn });
 }
 
 /**
@@ -222,7 +229,7 @@ export async function getSignedDownloadUrl(
  */
 export async function getSignedUploadUrl(
   key: string,
-  options: { bucket?: Bucket; expiresIn?: number; contentType?: string } = {}
+  options: { bucket?: Bucket; expiresIn?: number; contentType?: string } = {},
 ): Promise<string> {
   const bucket = config.buckets[options.bucket || "uploads"];
   const expiresIn = options.expiresIn || 3600; // 1 hour default
@@ -234,7 +241,7 @@ export async function getSignedUploadUrl(
       Key: key,
       ContentType: options.contentType,
     }),
-    { expiresIn }
+    { expiresIn },
   );
 }
 

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { DatePicker, today, getLocalTimeZone } from "@nebutra/ui/primitives"
+import { DatePicker, getLocalTimeZone, today } from "@nebutra/ui/primitives";
 
 export default function DatePickerMinMaxDemo() {
   return (
@@ -11,5 +11,5 @@ export default function DatePickerMinMaxDemo() {
         maxValue={today(getLocalTimeZone()).add({ months: 3 })}
       />
     </div>
-  )
+  );
 }

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { HTMLAttributes, useCallback, useMemo } from "react";
 import { motion } from "motion/react";
+import type React from "react";
+import { type HTMLAttributes, useCallback, useMemo } from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -171,8 +172,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
 
     for (let i = 0; i < beamsPerSide; i++) {
       const x = Math.floor(i * step);
-      const delay =
-        Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin;
+      const delay = Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin;
       beams.push({ x, delay });
     }
     return beams;
@@ -188,10 +188,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
     "[background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [transform-style:preserve-3d]";
 
   return (
-    <div
-      className={cn("relative rounded-[var(--radius-lg)] border p-20", className)}
-      {...props}
-    >
+    <div className={cn("relative rounded-[var(--radius-lg)] border p-20", className)} {...props}>
       {/* 3D Grid Container */}
       <div
         style={

@@ -180,14 +180,16 @@ function buildMarkdown({
   md += "- Throttling: mobile simulate (CPUx4, RTT 150ms, down 1638.4 Kbps, up 675 Kbps)\n\n";
 
   md += "## Category Scores\n\n";
-  md += "| Category | Before Median | After Median | Delta | Before p90 | After p90 | Before Runs | After Runs |\n";
+  md +=
+    "| Category | Before Median | After Median | Delta | Before p90 | After p90 | Before Runs | After Runs |\n";
   md += "|---|---:|---:|---:|---:|---:|---|---|\n";
   for (const row of categoryRows) {
     md += `| ${row.name} | ${formatNumber(row.beforeMedian)} | ${formatNumber(row.afterMedian)} | ${formatDelta(row.afterMedian, row.beforeMedian)} | ${formatNumber(row.beforeP90)} | ${formatNumber(row.afterP90)} | ${listNumbers(row.beforeValues)} | ${listNumbers(row.afterValues)} |\n`;
   }
 
   md += "\n## Core Metrics\n\n";
-  md += "| Metric | Before Median | After Median | Delta (After-Before) | Before p90 | After p90 | Before Runs | After Runs |\n";
+  md +=
+    "| Metric | Before Median | After Median | Delta (After-Before) | Before p90 | After p90 | Before Runs | After Runs |\n";
   md += "|---|---:|---:|---:|---:|---:|---|---|\n";
   for (const row of metricRows) {
     md += `| ${row.label} | ${formatNumber(row.beforeMedian)} | ${formatNumber(row.afterMedian)} | ${formatDelta(row.afterMedian, row.beforeMedian)} | ${formatNumber(row.beforeP90)} | ${formatNumber(row.afterP90)} | ${listNumbers(row.beforeValues)} | ${listNumbers(row.afterValues)} |\n`;
@@ -223,7 +225,9 @@ function main() {
   ];
 
   const categoryRows = categoryIds.map((id) => makeCategoryRow(id, beforeRuns, afterRuns));
-  const metricRows = metricDefs.map(([id, label]) => makeMetricRow(id, label, beforeRuns, afterRuns));
+  const metricRows = metricDefs.map(([id, label]) =>
+    makeMetricRow(id, label, beforeRuns, afterRuns),
+  );
 
   const markdown = buildMarkdown({
     outputDir,

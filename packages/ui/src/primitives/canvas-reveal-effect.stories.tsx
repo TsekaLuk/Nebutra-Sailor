@@ -27,11 +27,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <div className="h-[400px] w-full">
-      <CanvasRevealEffect
-        animationSpeed={0.4}
-        colors={[[0, 255, 255]]}
-        dotSize={3}
-      />
+      <CanvasRevealEffect animationSpeed={0.4} colors={[[0, 255, 255]]} dotSize={3} />
     </div>
   ),
 };

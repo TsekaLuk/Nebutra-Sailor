@@ -32,8 +32,7 @@ export const Default: Story = {
     <MagicCard className="rounded-xl p-8 cursor-pointer w-64 h-48">
       <h3 className="text-lg font-semibold">Hover me</h3>
       <p className="mt-2 text-sm text-muted-foreground">
-        Move your cursor over this card to see the gradient border and
-        spotlight.
+        Move your cursor over this card to see the gradient border and spotlight.
       </p>
     </MagicCard>
   ),
@@ -49,21 +48,16 @@ export const PricingCard: Story = {
         $49
         <span className="text-base font-normal text-muted-foreground">/mo</span>
       </div>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Per workspace, billed monthly
-      </p>
+      <p className="mt-1 text-sm text-muted-foreground">Per workspace, billed monthly</p>
       <div className="mt-6 space-y-3">
-        {[
-          "Unlimited projects",
-          "API access",
-          "Priority support",
-          "Custom integrations",
-        ].map((f) => (
-          <div key={f} className="flex items-center gap-2 text-sm">
-            <Check className="h-4 w-4 text-primary flex-shrink-0" />
-            {f}
-          </div>
-        ))}
+        {["Unlimited projects", "API access", "Priority support", "Custom integrations"].map(
+          (f) => (
+            <div key={f} className="flex items-center gap-2 text-sm">
+              <Check className="h-4 w-4 text-primary flex-shrink-0" />
+              {f}
+            </div>
+          ),
+        )}
       </div>
       <button className="mt-6 w-full rounded-lg bg-primary py-2 text-sm font-medium text-primary-foreground">
         Get started
@@ -81,9 +75,7 @@ export const BlueTheme: Story = {
       className="rounded-xl p-8 cursor-pointer w-64 h-48"
     >
       <h3 className="text-lg font-semibold">Blue Theme</h3>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Custom gradient colors via props.
-      </p>
+      <p className="mt-2 text-sm text-muted-foreground">Custom gradient colors via props.</p>
     </MagicCard>
   ),
 };
@@ -97,9 +89,7 @@ export const GreenTheme: Story = {
       className="rounded-xl p-8 cursor-pointer w-64 h-48"
     >
       <h3 className="text-lg font-semibold">Green Theme</h3>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Emerald gradient border on hover.
-      </p>
+      <p className="mt-2 text-sm text-muted-foreground">Emerald gradient border on hover.</p>
     </MagicCard>
   ),
 };
@@ -129,10 +119,7 @@ export const Grid: Story = {
           <div className="mt-2 text-2xl font-bold">{plan.price}</div>
           <div className="mt-4 space-y-2">
             {plan.features.map((f) => (
-              <div
-                key={f}
-                className="flex items-center gap-1.5 text-xs text-muted-foreground"
-              >
+              <div key={f} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <Check className="h-3 w-3" />
                 {f}
               </div>

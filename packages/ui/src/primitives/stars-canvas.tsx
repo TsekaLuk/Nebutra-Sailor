@@ -145,14 +145,7 @@ export function StarsCanvas({
     canvas2.width = 100;
     canvas2.height = 100;
     const half = canvas2.width / 2;
-    const gradient2 = ctx2.createRadialGradient(
-      half,
-      half,
-      0,
-      half,
-      half,
-      half,
-    );
+    const gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
     gradient2.addColorStop(0.025, "#fff");
     gradient2.addColorStop(0.1, `hsl(${hue}, 61%, 33%)`);
     gradient2.addColorStop(0.25, `hsl(${hue}, 64%, 6%)`);
@@ -210,13 +203,7 @@ export function StarsCanvas({
         }
 
         ctx!.globalAlpha = this.alpha;
-        ctx!.drawImage(
-          canvas2,
-          x - this.radius / 2,
-          y - this.radius / 2,
-          this.radius,
-          this.radius,
-        );
+        ctx!.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
         this.timePassed += this.speed;
       }
     }
@@ -235,9 +222,7 @@ export function StarsCanvas({
 
       ctx.globalCompositeOperation = "source-over";
       ctx.globalAlpha = 0.8;
-      ctx.fillStyle = transparent
-        ? `hsla(${hue}, 64%, 6%, 0)`
-        : `hsla(${hue}, 64%, 6%, 1)`;
+      ctx.fillStyle = transparent ? `hsla(${hue}, 64%, 6%, 0)` : `hsla(${hue}, 64%, 6%, 1)`;
       ctx.fillRect(0, 0, w, h);
 
       ctx.globalCompositeOperation = "lighter";
@@ -274,14 +259,7 @@ export function StarsCanvas({
       }
       resizeObserver.disconnect();
     };
-  }, [
-    transparent,
-    maxStars,
-    hue,
-    brightness,
-    speedMultiplier,
-    twinkleIntensity,
-  ]);
+  }, [transparent, maxStars, hue, brightness, speedMultiplier, twinkleIntensity]);
 
   return (
     <canvas

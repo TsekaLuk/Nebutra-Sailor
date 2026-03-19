@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { RadioGroup, RadioGroupItem } from "@nebutra/ui/primitives"
-import { Label } from "@nebutra/ui/primitives"
+import { Label, RadioGroup, RadioGroupItem } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function RadioGroup2Demo() {
   return (
@@ -16,5 +15,5 @@ export function RadioGroup2Demo() {
         <Label htmlFor="paypal">PayPal</Label>
       </div>
     </RadioGroup>
-  )
+  );
 }

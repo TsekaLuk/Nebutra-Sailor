@@ -79,9 +79,7 @@ export const HeroHeading: Story = {
           Nebutra UI
         </AnimatedGradientText>
       </h1>
-      <p className="text-muted-foreground text-lg">
-        The design system built for scale.
-      </p>
+      <p className="text-muted-foreground text-lg">The design system built for scale.</p>
     </div>
   ),
 };

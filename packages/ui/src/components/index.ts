@@ -10,6 +10,55 @@
  *   - useTheme, useThemeMode — use @nebutra/tokens ThemeProvider instead
  */
 
+export type { FlexboxProps } from "@lobehub/ui";
+// AI components
+// Layout
+// Data Display
+// Feedback
+// Input
+// Navigation
+// Form
+// Theme
+export {
+  ActionIcon,
+  ActionIconGroup,
+  Alert,
+  Avatar,
+  Button,
+  Checkbox,
+  DraggablePanel,
+  DraggablePanelBody,
+  DraggablePanelContainer,
+  DraggablePanelFooter,
+  DraggablePanelHeader,
+  Flexbox,
+  Form,
+  FormGroup,
+  FormItem,
+  Highlighter,
+  Image,
+  Input,
+  List,
+  Markdown,
+  Menu,
+  Modal,
+  SearchBar,
+  Segmented,
+  Select,
+  SideNav,
+  Tag,
+  TextArea,
+  ThemeProvider,
+  Tooltip,
+} from "@lobehub/ui";
+// Spotlight (moved to @lobehub/ui/awesome in v5)
+export { Spotlight } from "@lobehub/ui/awesome";
+// Chat types (moved to @lobehub/ui/chat in v5)
+export type {
+  ChatItemProps,
+  ChatListProps,
+  ChatMessage,
+} from "@lobehub/ui/chat";
 // Chat components (moved to @lobehub/ui/chat in v5)
 export {
   ChatInputArea,
@@ -18,70 +67,15 @@ export {
   MessageInput,
   MessageModal,
 } from "@lobehub/ui/chat";
-
-// Chat types (moved to @lobehub/ui/chat in v5)
-export type {
-  ChatItemProps,
-  ChatListProps,
-  ChatMessage,
-} from "@lobehub/ui/chat";
-
-// AI components
-export { Avatar } from "@lobehub/ui";
-
-// Layout
-export {
-  DraggablePanel,
-  DraggablePanelBody,
-  DraggablePanelContainer,
-  DraggablePanelFooter,
-  DraggablePanelHeader,
-  Flexbox,
-} from "@lobehub/ui";
-
-export type { FlexboxProps } from "@lobehub/ui";
-
-// Data Display
-export { Highlighter, Image, List, Markdown, Tag, Tooltip } from "@lobehub/ui";
-
-// Feedback
-export { Alert, Modal } from "@lobehub/ui";
-
-// Spotlight (moved to @lobehub/ui/awesome in v5)
-export { Spotlight } from "@lobehub/ui/awesome";
-
-// Input
-export {
-  ActionIcon,
-  ActionIconGroup,
-  Button,
-  Checkbox,
-  Input,
-  SearchBar,
-  Select,
-  Segmented,
-  TextArea,
-} from "@lobehub/ui";
-
-// Navigation
-export { Menu, SideNav } from "@lobehub/ui";
-
-// Form
-export { Form, FormGroup, FormItem } from "@lobehub/ui";
-
-// Theme
-export { ThemeProvider } from "@lobehub/ui";
-export * from "./ascii-text";
 export * from "./ai-prompt-box";
-
-// Phase 10: Missing root exports
-export * from "./onboarding-checklist";
-export * from "./team-chat";
-
 // Animation
 export {
   AnimateIn,
   AnimateInGroup,
-  type AnimateInProps,
   type AnimateInGroupProps,
+  type AnimateInProps,
 } from "./animate-in";
+export * from "./ascii-text";
+// Phase 10: Missing root exports
+export * from "./onboarding-checklist";
+export * from "./team-chat";

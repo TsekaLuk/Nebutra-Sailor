@@ -7,12 +7,7 @@ export type TestimonialItem = {
   avatarUrl?: string;
 };
 
-export type TestimonialsVariant =
-  | "stagger"
-  | "marquee3d"
-  | "marquee"
-  | "grid"
-  | "carousel";
+export type TestimonialsVariant = "stagger" | "marquee3d" | "marquee" | "grid" | "carousel";
 
 export type TestimonialsCommonProps = {
   items: TestimonialItem[];

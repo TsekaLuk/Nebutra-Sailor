@@ -15,23 +15,21 @@
 
 // Bento Grid
 export { BentoGrid, type BentoGridProps, type BentoItem } from "./bento-grid";
-
-// Section Theming (Visual Territories)
-export {
-  ThemedSection,
-  sectionThemes,
-  type SectionThemeConfig,
-  type ThemedSectionProps,
-} from "./SectionTheme";
-
 export {
   SectionContainer,
-  SectionContainerRoot,
-  SectionHeader,
-  SectionContent,
-  SectionFooter,
   type SectionContainerProps,
-  type SectionHeaderProps,
+  SectionContainerRoot,
+  SectionContent,
   type SectionContentProps,
+  SectionFooter,
   type SectionFooterProps,
+  SectionHeader,
+  type SectionHeaderProps,
 } from "./SectionContainer";
+// Section Theming (Visual Territories)
+export {
+  type SectionThemeConfig,
+  sectionThemes,
+  ThemedSection,
+  type ThemedSectionProps,
+} from "./SectionTheme";

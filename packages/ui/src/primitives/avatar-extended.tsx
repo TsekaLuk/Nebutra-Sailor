@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { Avatar, AvatarImage, AvatarFallback } from "./avatar";
-import type { AvatarProps } from "./avatar";
+import type * as React from "react";
 import { cn } from "../utils/cn";
+import type { AvatarProps } from "./avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 
 // ─── Shared helper ─────────────────────────────────────────────────────────────
 
@@ -19,11 +19,7 @@ function initials(name: string): string {
 // ─── Platform SVG Icons (exact sizes from reference) ──────────────────────────
 
 const GitHubIcon = () => (
-  <svg
-    className="h-3.5 w-3.5 fill-current"
-    viewBox="0 0 16 16"
-    aria-hidden
-  >
+  <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 16 16" aria-hidden>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -42,8 +38,14 @@ const GitLabIcon = () => (
   >
     <path d="M1.279 8.29L.044 12.294c-.117.367 0 .78.325 1.014l11.323 8.23-.009-.012-.03-.039L1.279 8.29zM22.992 13.308a.905.905 0 00.325-1.014L22.085 8.29 11.693 21.52l11.299-8.212z" />
     <path d="M1.279 8.29l10.374 13.197.03.039.01-.006L22.085 8.29H1.28z" opacity="0.4" />
-    <path d="M15.982 8.29l-4.299 13.236-.004.011.014-.017L22.085 8.29h-6.103zM7.376 8.29H1.279l10.374 13.197L7.376 8.29z" opacity="0.6" />
-    <path d="M18.582.308l-2.6 7.982h6.103L19.48.308c-.133-.41-.764-.41-.897 0zM1.279 8.29L3.88.308c.133-.41.764-.41.897 0l2.6 7.982H1.279z" opacity="0.4" />
+    <path
+      d="M15.982 8.29l-4.299 13.236-.004.011.014-.017L22.085 8.29h-6.103zM7.376 8.29H1.279l10.374 13.197L7.376 8.29z"
+      opacity="0.6"
+    />
+    <path
+      d="M18.582.308l-2.6 7.982h6.103L19.48.308c-.133-.41-.764-.41-.897 0zM1.279 8.29L3.88.308c.133-.41.764-.41.897 0l2.6 7.982H1.279z"
+      opacity="0.4"
+    />
   </svg>
 );
 
@@ -75,17 +77,16 @@ export interface GitHubAvatarProps extends AvatarProps {
   username: string;
 }
 
-export function GitHubAvatar({
-  username,
-  size = "sm",
-  className,
-  ...props
-}: GitHubAvatarProps) {
+export function GitHubAvatar({ username, size = "sm", className, ...props }: GitHubAvatarProps) {
   const px = { xs: 20, sm: 32, md: 40, lg: 56, xl: 80 }[size] ?? 40;
 
   return (
     <div className="relative inline-flex">
-      <Avatar size={size} className={cn("border border-black/[0.08] dark:border-white/[0.14]", className)} {...props}>
+      <Avatar
+        size={size}
+        className={cn("border border-black/[0.08] dark:border-white/[0.14]", className)}
+        {...props}
+      >
         <AvatarImage
           src={`https://github.com/${username}.png?size=${px * 2}`}
           alt={`@${username} on GitHub`}
@@ -106,19 +107,15 @@ export interface GitLabAvatarProps extends AvatarProps {
   username: string;
 }
 
-export function GitLabAvatar({
-  username,
-  size = "sm",
-  className,
-  ...props
-}: GitLabAvatarProps) {
+export function GitLabAvatar({ username, size = "sm", className, ...props }: GitLabAvatarProps) {
   return (
     <div className="relative inline-flex">
-      <Avatar size={size} className={cn("border border-black/[0.08] dark:border-white/[0.14]", className)} {...props}>
-        <AvatarImage
-          src={`https://gitlab.com/${username}.png`}
-          alt={`@${username} on GitLab`}
-        />
+      <Avatar
+        size={size}
+        className={cn("border border-black/[0.08] dark:border-white/[0.14]", className)}
+        {...props}
+      >
+        <AvatarImage src={`https://gitlab.com/${username}.png`} alt={`@${username} on GitLab`} />
         <AvatarFallback size={size}>{initials(username)}</AvatarFallback>
       </Avatar>
       <div className="absolute -left-[3px] -bottom-[5px] flex items-center justify-center rounded-full overflow-hidden bg-[#6b4fbb] border border-background">
@@ -142,7 +139,11 @@ export function BitbucketAvatar({
 }: BitbucketAvatarProps) {
   return (
     <div className="relative inline-flex">
-      <Avatar size={size} className={cn("border border-black/[0.08] dark:border-white/[0.14]", className)} {...props}>
+      <Avatar
+        size={size}
+        className={cn("border border-black/[0.08] dark:border-white/[0.14]", className)}
+        {...props}
+      >
         <AvatarImage
           src={`https://bitbucket.org/account/${username}/avatar`}
           alt={`@${username} on Bitbucket`}
@@ -186,7 +187,11 @@ export function AvatarWithIcon({
 
   return (
     <div className="relative inline-flex">
-      <Avatar size={size} className={cn("border border-black/[0.08] dark:border-white/[0.14]", className)} {...props}>
+      <Avatar
+        size={size}
+        className={cn("border border-black/[0.08] dark:border-white/[0.14]", className)}
+        {...props}
+      >
         {src && <AvatarImage src={src} alt={alt} />}
         <AvatarFallback size={size}>{fallback ?? initials(alt)}</AvatarFallback>
       </Avatar>
@@ -206,17 +211,28 @@ export function AvatarWithIcon({
 // ─── DiceBearAvatar ───────────────────────────────────────────────────────────
 
 export type DiceBearStyle =
-  | "avataaars" | "avataaars-neutral"
-  | "bottts" | "bottts-neutral"
+  | "avataaars"
+  | "avataaars-neutral"
+  | "bottts"
+  | "bottts-neutral"
   | "identicon"
-  | "lorelei" | "lorelei-neutral"
-  | "notionists" | "notionists-neutral"
+  | "lorelei"
+  | "lorelei-neutral"
+  | "notionists"
+  | "notionists-neutral"
   | "open-peeps"
-  | "pixel-art" | "pixel-art-neutral"
-  | "shapes" | "thumbs" | "fun-emoji" | "micah"
-  | "miniavs" | "rings"
-  | "croodles" | "croodles-neutral"
-  | "dylan" | "glass";
+  | "pixel-art"
+  | "pixel-art-neutral"
+  | "shapes"
+  | "thumbs"
+  | "fun-emoji"
+  | "micah"
+  | "miniavs"
+  | "rings"
+  | "croodles"
+  | "croodles-neutral"
+  | "dylan"
+  | "glass";
 
 export interface DiceBearAvatarProps extends Omit<AvatarProps, "style"> {
   seed: string;

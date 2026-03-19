@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Star, Zap, Shield, Rocket } from "lucide-react";
-import { InteractiveCard, AnimatedExportIcon } from "./interactive-card";
+import { Rocket, Shield, Star, Zap } from "lucide-react";
+import { AnimatedExportIcon, InteractiveCard } from "./interactive-card";
 
 const meta = {
   title: "Primitives/InteractiveCard",
@@ -29,8 +29,7 @@ export const Default: Story = {
   args: {
     step: "STEP 1",
     title: "Export Project",
-    description:
-      "Download your project as a PowerPoint presentation ready to share.",
+    description: "Download your project as a PowerPoint presentation ready to share.",
   },
 };
 
@@ -38,8 +37,7 @@ export const CustomStep: Story = {
   args: {
     step: "STEP 2",
     title: "Review & Edit",
-    description:
-      "Make final adjustments to your exported slides before sharing.",
+    description: "Make final adjustments to your exported slides before sharing.",
   },
 };
 
@@ -119,14 +117,10 @@ export const DefaultAnimatedIcon: Story = {
 export const AnimatedIconOnly: Story = {
   render: () => (
     <div className="flex flex-col items-center gap-4">
-      <p className="text-sm text-muted-foreground">
-        AnimatedExportIcon used standalone
-      </p>
+      <p className="text-sm text-muted-foreground">AnimatedExportIcon used standalone</p>
       <div className="w-64 rounded-xl border bg-card p-8">
         <AnimatedExportIcon />
-        <p className="text-center text-sm text-muted-foreground">
-          Hover the card above to animate
-        </p>
+        <p className="text-center text-sm text-muted-foreground">Hover the card above to animate</p>
       </div>
     </div>
   ),

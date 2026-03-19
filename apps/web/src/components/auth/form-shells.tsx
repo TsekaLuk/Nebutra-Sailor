@@ -2,21 +2,15 @@
 
 import dynamic from "next/dynamic";
 
-const SignInForm = dynamic(
-  () => import("./sign-in-form").then((mod) => mod.SignInForm),
-  {
-    ssr: false,
-    loading: () => <AuthFormFallback />,
-  },
-);
+const SignInForm = dynamic(() => import("./sign-in-form").then((mod) => mod.SignInForm), {
+  ssr: false,
+  loading: () => <AuthFormFallback />,
+});
 
-const SignUpForm = dynamic(
-  () => import("./sign-up-form").then((mod) => mod.SignUpForm),
-  {
-    ssr: false,
-    loading: () => <AuthFormFallback />,
-  },
-);
+const SignUpForm = dynamic(() => import("./sign-up-form").then((mod) => mod.SignUpForm), {
+  ssr: false,
+  loading: () => <AuthFormFallback />,
+});
 
 export function SignInFormShell() {
   return <SignInForm />;

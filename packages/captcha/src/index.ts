@@ -33,11 +33,10 @@
  * ```
  */
 
+export type { TurnstileProps, TurnstileRef } from "./react/index.js";
 // Re-export types for convenience
 export type {
+  CaptchaMiddlewareOptions,
   TurnstileVerifyResult,
   VerifyOptions,
-  CaptchaMiddlewareOptions,
 } from "./server/index.js";
-
-export type { TurnstileProps, TurnstileRef } from "./react/index.js";

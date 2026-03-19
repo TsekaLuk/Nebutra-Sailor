@@ -1,5 +1,5 @@
-import { getTranslations } from "next-intl/server";
 import { logger } from "@nebutra/logger";
+import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import { NowEntryView } from "./now-entry-view";
 
@@ -57,5 +57,12 @@ export async function NowEntry({ preview = false }: { preview?: boolean }) {
     return <p className="text-gray-400 dark:text-gray-500">{t("no_updates")}</p>;
   }
 
-  return <NowEntryView data={data} preview={preview} sections={sections} lastUpdatedLabel={t("last_updated")} />;
+  return (
+    <NowEntryView
+      data={data}
+      preview={preview}
+      sections={sections}
+      lastUpdatedLabel={t("last_updated")}
+    />
+  );
 }

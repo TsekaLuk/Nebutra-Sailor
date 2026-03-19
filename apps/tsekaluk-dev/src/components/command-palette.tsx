@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Command } from "cmdk"
-import { useRouter, usePathname } from "@/i18n/navigation"
-import { useTheme } from "next-themes"
-import { useLocale } from "next-intl"
-import { useAnalytics } from "@/hooks/use-analytics"
+import { Command } from "cmdk";
 import {
-  Home,
-  Briefcase,
-  FileText,
-  Clock,
-  User,
-  Link2,
-  Cpu,
-  MessageSquare,
-  Lock,
   Bot,
-  Sun,
-  Moon,
+  Briefcase,
+  Clock,
+  Cpu,
+  FileText,
+  Home,
   Languages,
+  Link2,
+  Lock,
+  MessageSquare,
+  Moon,
   Search,
-} from "lucide-react"
+  Sun,
+  User,
+} from "lucide-react";
+import { useLocale } from "next-intl";
+import { useTheme } from "next-themes";
+import * as React from "react";
+import { useAnalytics } from "@/hooks/use-analytics";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 interface CommandPaletteProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 const NAV_COMMANDS = [
@@ -93,44 +93,44 @@ const NAV_COMMANDS = [
     icon: Lock,
     keywords: "data policy",
   },
-]
+];
 
 const LOCALE_LABELS: Record<string, string> = {
   en: "English",
   zh: "中文",
   ja: "日本語",
-}
+};
 
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
-  const router = useRouter()
-  const pathname = usePathname()
-  const { resolvedTheme, setTheme } = useTheme()
-  const locale = useLocale()
-  const { track } = useAnalytics()
-  const inputRef = React.useRef<HTMLInputElement>(null)
+  const router = useRouter();
+  const pathname = usePathname();
+  const { resolvedTheme, setTheme } = useTheme();
+  const locale = useLocale();
+  const { track } = useAnalytics();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    if (open) inputRef.current?.focus()
-  }, [open])
+    if (open) inputRef.current?.focus();
+  }, [open]);
 
   const navigate = (href: string) => {
-    track("command_palette_navigate", { href })
-    router.push(href as Parameters<typeof router.push>[0])
-    onOpenChange(false)
-  }
+    track("command_palette_navigate", { href });
+    router.push(href as Parameters<typeof router.push>[0]);
+    onOpenChange(false);
+  };
 
   const switchLocale = (newLocale: string) => {
-    track("command_palette_locale_switch", { from: locale, to: newLocale })
-    router.replace(pathname, { locale: newLocale })
-    onOpenChange(false)
-  }
+    track("command_palette_locale_switch", { from: locale, to: newLocale });
+    router.replace(pathname, { locale: newLocale });
+    onOpenChange(false);
+  };
 
   const toggleTheme = () => {
-    const next = resolvedTheme === "dark" ? "light" : "dark"
-    track("command_palette_theme_toggle", { theme: next })
-    setTheme(next)
-    onOpenChange(false)
-  }
+    const next = resolvedTheme === "dark" ? "light" : "dark";
+    track("command_palette_theme_toggle", { theme: next });
+    setTheme(next);
+    onOpenChange(false);
+  };
 
   return (
     <div
@@ -147,7 +147,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
         aria-label="Close command palette"
         onClick={() => onOpenChange(false)}
         onKeyDown={(e) => {
-          if (e.key === "Escape") onOpenChange(false)
+          if (e.key === "Escape") onOpenChange(false);
         }}
       />
 
@@ -207,9 +207,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                 ) : (
                   <Moon className="h-4 w-4 text-gray-400 shrink-0" />
                 )}
-                {resolvedTheme === "dark"
-                  ? "Switch to Light Mode"
-                  : "Switch to Dark Mode"}
+                {resolvedTheme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
               </Command.Item>
 
               {(["en", "zh", "ja"] as const)
@@ -230,5 +228,5 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
         </Command>
       </div>
     </div>
-  )
+  );
 }

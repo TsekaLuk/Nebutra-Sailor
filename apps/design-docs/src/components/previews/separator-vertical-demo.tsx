@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Separator } from "@nebutra/ui/primitives"
+import { Separator } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function SeparatorVerticalDemo() {
   return (
@@ -12,5 +12,5 @@ export function SeparatorVerticalDemo() {
       <Separator orientation="vertical" />
       <span>Contact</span>
     </div>
-  )
+  );
 }

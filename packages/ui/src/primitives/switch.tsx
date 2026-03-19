@@ -1,7 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
 import clsx from "clsx";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 const SwitchContext = createContext<{
@@ -16,7 +16,14 @@ export interface SwitchProps extends Omit<React.ComponentPropsWithoutRef<"div">,
   style?: React.CSSProperties;
 }
 
-export const Switch = ({ children, name = "default", size = "medium", style, className, ...props }: SwitchProps) => {
+export const Switch = ({
+  children,
+  name = "default",
+  size = "medium",
+  style,
+  className,
+  ...props
+}: SwitchProps) => {
   const [value, setValue] = useState<string | null>(null);
 
   return (
@@ -27,13 +34,14 @@ export const Switch = ({ children, name = "default", size = "medium", style, cla
           size === "small" && "h-8 rounded-md",
           size === "medium" && "h-10 rounded-md",
           size === "large" && "h-12 rounded-lg",
-          className
+          className,
         )}
         style={style}
         {...props}
       >
         {React.Children.map(children, (child) =>
-          React.cloneElement(child as React.ReactElement<SwitchControlProps>, { size, name }))}
+          React.cloneElement(child as React.ReactElement<SwitchControlProps>, { size, name }),
+        )}
       </div>
     </SwitchContext.Provider>
   );
@@ -56,7 +64,7 @@ const SwitchControl = ({
   disabled = false,
   name,
   size = "medium",
-  icon
+  icon,
 }: SwitchControlProps) => {
   const context = useContext(SwitchContext);
   const checked = value === context?.value;
@@ -83,17 +91,21 @@ const SwitchControl = ({
         readOnly
       />
       <span
-        className={twMerge(clsx(
-          "flex items-center justify-center flex-1 cursor-pointer font-medium font-sans duration-150",
-          checked ? "bg-muted text-muted-foreground fill-muted-foreground rounded-sm" : "text-foreground hover:text-muted-foreground fill-foreground hover:fill-muted-foreground",
-          disabled && "text-neutral-8 fill-neutral-8",
-          !icon && size === "small" && "text-sm px-3",
-          !icon && size === "medium" && "text-sm px-3",
-          !icon && size === "large" && "text-base px-4",
-          icon && size === "small" && "py-1 px-2",
-          icon && size === "medium" && "py-2 px-3",
-          icon && size === "large" && "p-3"
-        ))}
+        className={twMerge(
+          clsx(
+            "flex items-center justify-center flex-1 cursor-pointer font-medium font-sans duration-150",
+            checked
+              ? "bg-muted text-muted-foreground fill-muted-foreground rounded-sm"
+              : "text-foreground hover:text-muted-foreground fill-foreground hover:fill-muted-foreground",
+            disabled && "text-neutral-8 fill-neutral-8",
+            !icon && size === "small" && "text-sm px-3",
+            !icon && size === "medium" && "text-sm px-3",
+            !icon && size === "large" && "text-base px-4",
+            icon && size === "small" && "py-1 px-2",
+            icon && size === "medium" && "py-2 px-3",
+            icon && size === "large" && "p-3",
+          ),
+        )}
       >
         {icon ? <span className={clsx(size === "large" && "scale-125")}>{icon}</span> : label}
       </span>

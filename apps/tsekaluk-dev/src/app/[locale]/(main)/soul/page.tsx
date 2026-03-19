@@ -30,11 +30,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function SoulPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function SoulPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "soul" });
 

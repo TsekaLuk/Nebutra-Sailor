@@ -1,4 +1,4 @@
-import { Badge } from "@nebutra/ui/primitives"
+import { Badge } from "@nebutra/ui/primitives";
 
 export function BadgeSizesDemo() {
   return (
@@ -7,5 +7,5 @@ export function BadgeSizesDemo() {
       <Badge size="md">Medium</Badge>
       <Badge size="lg">Large</Badge>
     </div>
-  )
+  );
 }

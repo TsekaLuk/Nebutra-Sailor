@@ -1,11 +1,11 @@
+import { AnimateIn } from "@nebutra/ui/components";
+import { Mail } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Mail } from "lucide-react";
-import { AnimateIn } from "@nebutra/ui/components";
-import { personJsonLd } from "@/lib/json-ld";
 import { CountUp } from "@/components/count-up";
 import { ResumeDownloadButton } from "@/components/resume-download-button";
+import { personJsonLd } from "@/lib/json-ld";
 
 export async function generateMetadata({
   params,
@@ -33,11 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.about" });
 
@@ -51,42 +47,118 @@ export default async function AboutPage({
   ];
 
   const AWARDS = [
-    { title: t("award_1_title"), level: t("award_1_level"), detail: t("award_1_detail"), year: "2025" },
-    { title: t("award_2_title"), level: t("award_2_level"), detail: t("award_2_detail"), year: "2025" },
-    { title: t("award_3_title"), level: t("award_3_level"), detail: t("award_3_detail"), year: "2025" },
-    { title: t("award_4_title"), level: t("award_4_level"), detail: t("award_4_detail"), year: "2024" },
-    { title: t("award_5_title"), level: t("award_5_level"), detail: t("award_5_detail"), year: "2024" },
-    { title: t("award_6_title"), level: t("award_6_level"), detail: t("award_6_detail"), year: "2025" },
-    { title: t("award_7_title"), level: t("award_7_level"), detail: t("award_7_detail"), year: "2024" },
-    { title: t("award_8_title"), level: t("award_8_level"), detail: t("award_8_detail"), year: "2024" },
-    { title: t("award_9_title"), level: t("award_9_level"), detail: t("award_9_detail"), year: "2024" },
-    { title: t("award_10_title"), level: t("award_10_level"), detail: t("award_10_detail"), year: "2023" },
+    {
+      title: t("award_1_title"),
+      level: t("award_1_level"),
+      detail: t("award_1_detail"),
+      year: "2025",
+    },
+    {
+      title: t("award_2_title"),
+      level: t("award_2_level"),
+      detail: t("award_2_detail"),
+      year: "2025",
+    },
+    {
+      title: t("award_3_title"),
+      level: t("award_3_level"),
+      detail: t("award_3_detail"),
+      year: "2025",
+    },
+    {
+      title: t("award_4_title"),
+      level: t("award_4_level"),
+      detail: t("award_4_detail"),
+      year: "2024",
+    },
+    {
+      title: t("award_5_title"),
+      level: t("award_5_level"),
+      detail: t("award_5_detail"),
+      year: "2024",
+    },
+    {
+      title: t("award_6_title"),
+      level: t("award_6_level"),
+      detail: t("award_6_detail"),
+      year: "2025",
+    },
+    {
+      title: t("award_7_title"),
+      level: t("award_7_level"),
+      detail: t("award_7_detail"),
+      year: "2024",
+    },
+    {
+      title: t("award_8_title"),
+      level: t("award_8_level"),
+      detail: t("award_8_detail"),
+      year: "2024",
+    },
+    {
+      title: t("award_9_title"),
+      level: t("award_9_level"),
+      detail: t("award_9_detail"),
+      year: "2024",
+    },
+    {
+      title: t("award_10_title"),
+      level: t("award_10_level"),
+      detail: t("award_10_detail"),
+      year: "2023",
+    },
   ];
 
   const CERTS = [
-    t("cred_1"), t("cred_2"), t("cred_3"), t("cred_4"),
-    t("cred_5"), t("cred_6"), t("cred_7"), t("cred_8"),
+    t("cred_1"),
+    t("cred_2"),
+    t("cred_3"),
+    t("cred_4"),
+    t("cred_5"),
+    t("cred_6"),
+    t("cred_7"),
+    t("cred_8"),
   ];
 
-  const beliefs = [
-    { quote: t("belief_1"), credit: t("belief_1_credit") },
-  ];
+  const beliefs = [{ quote: t("belief_1"), credit: t("belief_1_credit") }];
 
   const MUSIC = [
-    "Glass Animals", "NINEONE# 乃万", "Metro Boomin", "Marshmello", "San Holo",
-    "Claude Debussy", "美波", "milet", "法老", "C418", "Troye Sivan",
-    "Juice WRLD", "Rich Brian", "Coi Leray", "Cardi B", "Nicki Minaj",
-    "Lizzo", "Ed Sheeran", "Taylor Swift", "Justin Bieber", "OneOne",
+    "Glass Animals",
+    "NINEONE# 乃万",
+    "Metro Boomin",
+    "Marshmello",
+    "San Holo",
+    "Claude Debussy",
+    "美波",
+    "milet",
+    "法老",
+    "C418",
+    "Troye Sivan",
+    "Juice WRLD",
+    "Rich Brian",
+    "Coi Leray",
+    "Cardi B",
+    "Nicki Minaj",
+    "Lizzo",
+    "Ed Sheeran",
+    "Taylor Swift",
+    "Justin Bieber",
+    "OneOne",
   ];
 
   const PHILOSOPHY = [
-    "Nietzsche", "Sartre", "Schopenhauer", "Kant", "Freud",
-    "Russell", "Maslow", "Thoreau", "周国平",
+    "Nietzsche",
+    "Sartre",
+    "Schopenhauer",
+    "Kant",
+    "Freud",
+    "Russell",
+    "Maslow",
+    "Thoreau",
+    "周国平",
   ];
 
-  const GAMES = [
-    "Minecraft · Deer_Sama", "Detroit: Become Human", "Kingdom Rush", "美丽水世界",
-  ];
+  const GAMES = ["Minecraft · Deer_Sama", "Detroit: Become Human", "Kingdom Rush", "美丽水世界"];
 
   return (
     <section className="mx-auto max-w-4xl px-8 py-24 md:py-32">
@@ -94,7 +166,7 @@ export default async function AboutPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
       />
-      
+
       {/* Header */}
       <AnimateIn preset="fadeUp" className="mb-24">
         <p className="mb-6 text-xs font-mono tracking-widest text-gray-400 uppercase">
@@ -102,9 +174,7 @@ export default async function AboutPage({
         </p>
         <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl max-w-2xl leading-tight">
           {t("headline")}{" "}
-          <span className="text-gray-400 dark:text-gray-500">
-            {t("headline_muted")}
-          </span>
+          <span className="text-gray-400 dark:text-gray-500">{t("headline_muted")}</span>
         </h1>
       </AnimateIn>
 
@@ -188,7 +258,9 @@ export default async function AboutPage({
                 <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
                   {t("personality_intp_desc")}
                 </p>
-                <p className="text-[10px] font-mono text-gray-400/80 uppercase tracking-widest">{t("personality_intp_source")}</p>
+                <p className="text-[10px] font-mono text-gray-400/80 uppercase tracking-widest">
+                  {t("personality_intp_source")}
+                </p>
               </div>
             </div>
 
@@ -210,7 +282,9 @@ export default async function AboutPage({
                 <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
                   {t("personality_4w5_desc")}
                 </p>
-                <p className="text-[10px] font-mono text-gray-400/80 uppercase tracking-widest">{t("personality_4w5_source")}</p>
+                <p className="text-[10px] font-mono text-gray-400/80 uppercase tracking-widest">
+                  {t("personality_4w5_source")}
+                </p>
               </div>
             </div>
           </div>
@@ -224,7 +298,10 @@ export default async function AboutPage({
         </h2>
         <div className="flex flex-col">
           {TIMELINE.map((entry) => (
-            <div key={entry.year} className="group grid gap-4 py-5 md:grid-cols-[120px_1fr] border-b border-gray-100 dark:border-gray-800/50 last:border-0 hover:border-gray-300 dark:hover:border-gray-700 transition-colors">
+            <div
+              key={entry.year}
+              className="group grid gap-4 py-5 md:grid-cols-[120px_1fr] border-b border-gray-100 dark:border-gray-800/50 last:border-0 hover:border-gray-300 dark:hover:border-gray-700 transition-colors"
+            >
               <span className="font-mono text-sm tracking-widest text-gray-400 dark:text-gray-500 transition-colors group-hover:text-foreground">
                 {entry.year}
               </span>
@@ -256,13 +333,13 @@ export default async function AboutPage({
                 <p className="text-base font-medium text-foreground transition-colors group-hover:text-[var(--color-accent)]">
                   {award.title}
                 </p>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  {award.level}
-                </p>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{award.level}</p>
               </div>
               <div className="flex flex-col items-start sm:items-end">
                 <p className="text-sm text-gray-600 dark:text-gray-400">{award.detail}</p>
-                <p className="font-mono text-xs tracking-wider text-gray-400 dark:text-gray-500 mt-1">{award.year}</p>
+                <p className="font-mono text-xs tracking-wider text-gray-400 dark:text-gray-500 mt-1">
+                  {award.year}
+                </p>
               </div>
             </div>
           ))}

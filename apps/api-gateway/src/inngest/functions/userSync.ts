@@ -1,10 +1,8 @@
 import { prisma } from "@nebutra/db";
+import { ClerkUserDataSchema } from "@nebutra/event-bus";
 import { UserRepository } from "@nebutra/repositories";
-import {
-  ClerkUserDataSchema,
-} from "@nebutra/event-bus";
-import { inngest } from "../client.js";
 import { eventType, type InngestFunction } from "inngest";
+import { inngest } from "../client.js";
 
 const userRepo = new UserRepository(prisma);
 
@@ -28,8 +26,7 @@ export const syncUserToDB: InngestFunction.Any = inngest.createFunction(
   async ({ event, step }) => {
     const { userId, email, firstName, lastName, imageUrl } = event.data;
 
-    const fullName =
-      [firstName, lastName].filter(Boolean).join(" ").trim() || null;
+    const fullName = [firstName, lastName].filter(Boolean).join(" ").trim() || null;
 
     await step.run("upsert-user", async () => {
       await userRepo.upsertByClerkId({
@@ -52,9 +49,7 @@ export const deleteUserFromDB: InngestFunction.Any = inngest.createFunction(
     name: "Delete Clerk User from Database",
     concurrency: { limit: 10 },
     retries: 3,
-    triggers: [
-      { event: eventType("clerk/user.deleted", { schema: ClerkUserDataSchema }) },
-    ],
+    triggers: [{ event: eventType("clerk/user.deleted", { schema: ClerkUserDataSchema }) }],
   },
   async ({ event, step }) => {
     const { userId } = event.data;

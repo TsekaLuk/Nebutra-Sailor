@@ -71,22 +71,13 @@ export interface IphoneMockupProps extends HTMLAttributes<HTMLDivElement> {
  * </div>
  * ```
  */
-export function IphoneMockup({
-  src,
-  videoSrc,
-  className,
-  style,
-  ...props
-}: IphoneMockupProps) {
+export function IphoneMockup({ src, videoSrc, className, style, ...props }: IphoneMockupProps) {
   const hasVideo = !!videoSrc;
   const hasMedia = hasVideo || !!src;
 
   return (
     <div
-      className={cn(
-        "relative inline-block w-full align-middle leading-none",
-        className,
-      )}
+      className={cn("relative inline-block w-full align-middle leading-none", className)}
       style={{
         aspectRatio: `${PHONE_WIDTH}/${PHONE_HEIGHT}`,
         ...style,
@@ -129,11 +120,7 @@ export function IphoneMockup({
             borderRadius: `${RADIUS_H}% / ${RADIUS_V}%`,
           }}
         >
-          <img
-            src={src}
-            alt=""
-            className="block size-full object-cover object-top"
-          />
+          <img src={src} alt="" className="block size-full object-cover object-top" />
         </div>
       )}
 
@@ -206,13 +193,7 @@ export function IphoneMockup({
 
         <defs>
           <mask id="iphoneScreenPunch" maskUnits="userSpaceOnUse">
-            <rect
-              x="0"
-              y="0"
-              width={PHONE_WIDTH}
-              height={PHONE_HEIGHT}
-              fill="white"
-            />
+            <rect x="0" y="0" width={PHONE_WIDTH} height={PHONE_HEIGHT} fill="white" />
             <rect
               x={SCREEN_X}
               y={SCREEN_Y}

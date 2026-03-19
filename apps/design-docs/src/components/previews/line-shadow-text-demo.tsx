@@ -1,4 +1,4 @@
-import { LineShadowText } from "@nebutra/ui/primitives"
+import { LineShadowText } from "@nebutra/ui/primitives";
 
 export default function LineShadowTextDemo() {
   return (
@@ -24,5 +24,5 @@ export default function LineShadowTextDemo() {
         Purple Effect
       </LineShadowText>
     </div>
-  )
+  );
 }

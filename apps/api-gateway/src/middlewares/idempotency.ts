@@ -14,9 +14,9 @@
  *  - 24 h TTL per Stripe convention (industry standard for payment idempotency)
  */
 
-import type { Context, Next } from "hono";
 import { getRedis } from "@nebutra/cache";
 import { logger } from "@nebutra/logger";
+import type { Context, Next } from "hono";
 
 // Mutating methods that benefit from idempotency
 const IDEMPOTENT_METHODS = new Set(["POST", "PUT", "PATCH"]);
@@ -47,10 +47,7 @@ function getLockKey(tenantId: string, idempotencyKey: string): string {
  * Usage:
  *   app.use("/api/v1/*", idempotencyMiddleware);
  */
-export async function idempotencyMiddleware(
-  c: Context,
-  next: Next
-): Promise<Response> {
+export async function idempotencyMiddleware(c: Context, next: Next): Promise<Response> {
   const method = c.req.method.toUpperCase();
 
   // Only intercept mutating methods
@@ -75,16 +72,14 @@ export async function idempotencyMiddleware(
   }
 
   // Validate key format (must be UUID v4)
-  const UUID_RE =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
   if (!UUID_RE.test(idempotencyKey)) {
     return c.json(
       {
         error: "Invalid Idempotency-Key",
-        message:
-          "Idempotency-Key must be a valid UUID v4 (xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx).",
+        message: "Idempotency-Key must be a valid UUID v4 (xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx).",
       },
-      400
+      400,
     );
   }
 
@@ -123,7 +118,7 @@ export async function idempotencyMiddleware(
         message:
           "A request with this Idempotency-Key is already being processed. Retry after a moment.",
       },
-      409
+      409,
     );
   }
 

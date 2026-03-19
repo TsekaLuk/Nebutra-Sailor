@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { useId } from "react";
 import { cn } from "../utils/cn";
 
@@ -36,11 +36,7 @@ export interface FeaturesGridProps {
  * />
  * ```
  */
-export function FeaturesGrid({
-  features,
-  gridSize = 20,
-  className,
-}: FeaturesGridProps) {
+export function FeaturesGrid({ features, gridSize = 20, className }: FeaturesGridProps) {
   return (
     <div className={cn("py-20 lg:py-40", className)}>
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-2 lg:grid-cols-4">
@@ -50,9 +46,7 @@ export function FeaturesGrid({
             className="relative overflow-hidden rounded-[var(--radius-3xl)] bg-gradient-to-b from-muted/50 to-background p-6"
           >
             <DecorativeGrid size={gridSize} />
-            <p className="relative z-20 text-base font-bold text-foreground">
-              {feature.title}
-            </p>
+            <p className="relative z-20 text-base font-bold text-foreground">{feature.title}</p>
             <p className="relative z-20 mt-4 text-base font-normal text-muted-foreground">
               {feature.description}
             </p>
@@ -66,13 +60,7 @@ export function FeaturesGrid({
 /**
  * Decorative grid overlay for feature cards
  */
-export function DecorativeGrid({
-  pattern,
-  size,
-}: {
-  pattern?: number[][];
-  size?: number;
-}) {
+export function DecorativeGrid({ pattern, size }: { pattern?: number[][]; size?: number }) {
   const p = pattern ?? [
     [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
     [Math.floor(Math.random() * 4) + 7, Math.floor(Math.random() * 6) + 1],
@@ -111,14 +99,7 @@ interface GridPatternProps extends React.SVGProps<SVGSVGElement> {
 /**
  * SVG grid pattern for decorative backgrounds
  */
-export function GridPattern({
-  width,
-  height,
-  x,
-  y,
-  squares,
-  ...props
-}: GridPatternProps) {
+export function GridPattern({ width, height, x, y, squares, ...props }: GridPatternProps) {
   const patternId = useId();
 
   return (
@@ -135,12 +116,7 @@ export function GridPattern({
           <path d={`M.5 ${height}V.5H${width}`} fill="none" />
         </pattern>
       </defs>
-      <rect
-        width="100%"
-        height="100%"
-        strokeWidth={0}
-        fill={`url(#${patternId})`}
-      />
+      <rect width="100%" height="100%" strokeWidth={0} fill={`url(#${patternId})`} />
       {squares && (
         <svg x={x} y={y} className="overflow-visible">
           {squares.map(([squareX, squareY]) => (

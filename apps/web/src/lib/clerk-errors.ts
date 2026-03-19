@@ -11,9 +11,5 @@ export function extractClerkErrorMessage(
     errors?: Array<{ longMessage?: string; message?: string }>;
   };
 
-  return (
-    clerkError.errors?.[0]?.longMessage ??
-    clerkError.errors?.[0]?.message ??
-    defaultMessage
-  );
+  return clerkError.errors?.[0]?.longMessage ?? clerkError.errors?.[0]?.message ?? defaultMessage;
 }

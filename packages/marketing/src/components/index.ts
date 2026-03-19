@@ -2,37 +2,34 @@
  * @nebutra/marketing - Components
  */
 
+// Launch Banners
+export {
+  LaunchBanner,
+  LaunchBannerFloating,
+  LaunchBannerInline,
+  LaunchBannerTop,
+} from "./LaunchBanner";
 // Product Hunt
 export {
   ProductHuntBadge,
   ProductHuntEmbedBadge,
-  ProductHuntUpvoteBadge,
   ProductHuntTextBadge,
+  ProductHuntUpvoteBadge,
 } from "./ProductHuntBadge";
-
-// Launch Banners
-export {
-  LaunchBanner,
-  LaunchBannerTop,
-  LaunchBannerFloating,
-  LaunchBannerInline,
-} from "./LaunchBanner";
-
-// Testimonials
-export {
-  TestimonialsWall,
-  TestimonialCard,
-  RatingStars,
-  SourceBadge,
-} from "./TestimonialsWall";
+export type { FeaturedInProps } from "./SocialProof";
 
 // Social Proof
 export {
-  SocialProofBar,
-  TrustBadges,
-  FeaturedIn,
   AnimatedNumber,
+  FeaturedIn,
+  SocialProofBar,
   StatItem,
+  TrustBadges,
 } from "./SocialProof";
-
-export type { FeaturedInProps } from "./SocialProof";
+// Testimonials
+export {
+  RatingStars,
+  SourceBadge,
+  TestimonialCard,
+  TestimonialsWall,
+} from "./TestimonialsWall";

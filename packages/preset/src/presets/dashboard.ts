@@ -3,8 +3,7 @@ import type { PresetDefinition } from "../config";
 export const dashboard: PresetDefinition = {
   id: "dashboard",
   name: "B2B DevOps Dashboard",
-  description:
-    "Data-dense dashboard with billing, audit, SSO, and real-time updates",
+  description: "Data-dense dashboard with billing, audit, SSO, and real-time updates",
   apps: {
     web: true,
     "landing-page": false,

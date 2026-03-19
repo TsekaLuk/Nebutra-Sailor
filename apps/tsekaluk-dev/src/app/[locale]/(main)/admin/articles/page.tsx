@@ -1,9 +1,9 @@
-import { getArticles } from "@/lib/articles"
-import { FileText, Plus } from "lucide-react"
-import { AnimateIn } from "@nebutra/ui/components"
+import { AnimateIn } from "@nebutra/ui/components";
+import { FileText, Plus } from "lucide-react";
+import { getArticles } from "@/lib/articles";
 
 export default async function AdminArticlesPage() {
-  const articles = getArticles()
+  const articles = getArticles();
 
   return (
     <div>
@@ -12,9 +12,7 @@ export default async function AdminArticlesPage() {
           <p className="font-serif italic text-gray-400 dark:text-gray-500 text-sm">
             Read-only — articles are MDX files
           </p>
-          <h1 className="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">
-            Articles
-          </h1>
+          <h1 className="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">Articles</h1>
         </div>
         <a
           href="https://github.com/TsekaLuk/tsekaluk-dev/tree/main/content/thinking"
@@ -36,10 +34,23 @@ export default async function AdminArticlesPage() {
         <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">
           .mdx
         </code>{" "}
-        file with frontmatter fields: <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">title</code>,{" "}
-        <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">date</code>,{" "}
-        <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">excerpt</code>,{" "}
-        <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">tags</code>.
+        file with frontmatter fields:{" "}
+        <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">
+          title
+        </code>
+        ,{" "}
+        <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">
+          date
+        </code>
+        ,{" "}
+        <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">
+          excerpt
+        </code>
+        ,{" "}
+        <code className="font-mono text-xs bg-amber-100 dark:bg-amber-900/40 px-1 rounded">
+          tags
+        </code>
+        .
       </div>
 
       {articles.length === 0 ? (
@@ -108,5 +119,5 @@ export default async function AdminArticlesPage() {
         </div>
       )}
     </div>
-  )
+  );
 }

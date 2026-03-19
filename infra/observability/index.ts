@@ -1,7 +1,7 @@
-export { initTracing, sdk } from "./tracing";
-export { initSentry, captureException, setUser, Sentry } from "./sentry";
-export { logger, createTenantLogger, requestLogger, type Logger } from "./logging";
+export { createTenantLogger, type Logger, logger, requestLogger } from "./logging";
 export * from "./metrics";
+export { captureException, initSentry, Sentry, setUser } from "./sentry";
+export { initTracing, sdk } from "./tracing";
 
 /**
  * Initialize all observability components

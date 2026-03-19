@@ -13,7 +13,7 @@ export async function setTenantContext(tenantId: string): Promise<void> {
  */
 export async function withTenant<T>(
   tenantId: string,
-  fn: (client: ReturnType<typeof getSupabaseTenant>) => Promise<T>
+  fn: (client: ReturnType<typeof getSupabaseTenant>) => Promise<T>,
 ): Promise<T> {
   const client = getSupabaseTenant(tenantId);
   return fn(client);
@@ -27,7 +27,7 @@ export async function invokeFunction<T = unknown>(
   options?: {
     body?: Record<string, unknown>;
     headers?: Record<string, string>;
-  }
+  },
 ): Promise<T> {
   const client = getSupabaseServer();
 

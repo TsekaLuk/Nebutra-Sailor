@@ -5,13 +5,8 @@
  * them via Pusher for real-time client updates.
  */
 
-import { eventBus, EventTypes, type BaseEvent } from "@nebutra/event-bus";
-import {
-  broadcastToTenant,
-  notifyUser,
-  triggerEvent,
-  PusherEvents,
-} from "./server";
+import { type BaseEvent, EventTypes, eventBus } from "@nebutra/event-bus";
+import { broadcastToTenant, notifyUser, PusherEvents, triggerEvent } from "./server";
 
 /**
  * Event mapping configuration
@@ -90,8 +85,7 @@ const eventMappings: Record<string, BroadcastConfig> = {
 
   [EventTypes.ORDER_SHIPPED]: {
     pusherEvent: "order:shipped",
-    getChannels: (e) =>
-      e.data.userId ? [`private-user-${e.data.userId}`] : [],
+    getChannels: (e) => (e.data.userId ? [`private-user-${e.data.userId}`] : []),
     transform: (e) => ({
       orderId: e.data.orderId,
       trackingNumber: e.data.trackingNumber,
@@ -102,8 +96,7 @@ const eventMappings: Record<string, BroadcastConfig> = {
   // AI job events → notify requesting user
   [EventTypes.AI_JOB_COMPLETED]: {
     pusherEvent: "ai:completed",
-    getChannels: (e) =>
-      e.data.userId ? [`private-user-${e.data.userId}`] : [],
+    getChannels: (e) => (e.data.userId ? [`private-user-${e.data.userId}`] : []),
     transform: (e) => ({
       jobId: e.data.jobId,
       jobType: e.data.jobType,
@@ -113,8 +106,7 @@ const eventMappings: Record<string, BroadcastConfig> = {
 
   [EventTypes.AI_JOB_FAILED]: {
     pusherEvent: "ai:failed",
-    getChannels: (e) =>
-      e.data.userId ? [`private-user-${e.data.userId}`] : [],
+    getChannels: (e) => (e.data.userId ? [`private-user-${e.data.userId}`] : []),
     transform: (e) => ({
       jobId: e.data.jobId,
       jobType: e.data.jobType,
@@ -125,8 +117,7 @@ const eventMappings: Record<string, BroadcastConfig> = {
   // Web3 events → notify user
   [EventTypes.TX_CONFIRMED]: {
     pusherEvent: "web3:tx:confirmed",
-    getChannels: (e) =>
-      e.data.userId ? [`private-user-${e.data.userId}`] : [],
+    getChannels: (e) => (e.data.userId ? [`private-user-${e.data.userId}`] : []),
     transform: (e) => ({
       txHash: e.data.txHash,
       chain: e.data.chain,
@@ -135,8 +126,7 @@ const eventMappings: Record<string, BroadcastConfig> = {
 
   [EventTypes.NFT_MINTED]: {
     pusherEvent: "web3:nft:minted",
-    getChannels: (e) =>
-      e.data.userId ? [`private-user-${e.data.userId}`] : [],
+    getChannels: (e) => (e.data.userId ? [`private-user-${e.data.userId}`] : []),
     transform: (e) => ({
       tokenId: e.data.tokenId,
       contractAddress: e.data.contractAddress,
@@ -168,9 +158,7 @@ export function initEventBridge(): () => void {
 
         // Broadcast to all target channels
         await Promise.all(
-          channels.map((channel) =>
-            triggerEvent(channel, config.pusherEvent, payload),
-          ),
+          channels.map((channel) => triggerEvent(channel, config.pusherEvent, payload)),
         );
 
         console.log(
@@ -184,9 +172,7 @@ export function initEventBridge(): () => void {
     unsubscribers.push(unsubscribe);
   }
 
-  console.log(
-    `[EventBridge] Initialized with ${Object.keys(eventMappings).length} event mappings`,
-  );
+  console.log(`[EventBridge] Initialized with ${Object.keys(eventMappings).length} event mappings`);
 
   // Return cleanup function
   return () => {
@@ -198,10 +184,7 @@ export function initEventBridge(): () => void {
 /**
  * Add a custom event mapping
  */
-export function addEventMapping(
-  eventType: string,
-  config: BroadcastConfig,
-): void {
+export function addEventMapping(eventType: string, config: BroadcastConfig): void {
   eventMappings[eventType] = config;
 }
 

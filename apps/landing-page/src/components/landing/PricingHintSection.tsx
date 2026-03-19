@@ -18,8 +18,7 @@ export function PricingHintSection() {
                   Start free. Upgrade when your usage demands it.
                 </h2>
                 <p className="mt-4 text-base text-[color:var(--neutral-11)] dark:text-white/70">
-                  The same codebase powers starter projects and enterprise
-                  rollouts.
+                  The same codebase powers starter projects and enterprise rollouts.
                 </p>
               </div>
               <AnimateInGroup

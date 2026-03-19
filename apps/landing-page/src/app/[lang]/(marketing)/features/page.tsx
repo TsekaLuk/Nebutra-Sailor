@@ -1,14 +1,11 @@
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import { BarChart3, Cpu, Database, Globe, Key, Layers, Shield, Workflow, Zap } from "lucide-react";
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { routing, type Locale } from "@/i18n/routing";
-import { Navbar, FooterMinimal } from "@/components/landing";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
-import {
-  Zap, Shield, BarChart3, Globe, Cpu, Key,
-  Workflow, Database, Layers,
-} from "lucide-react";
+import { FooterMinimal, Navbar } from "@/components/landing";
+import { type Locale, routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
@@ -23,8 +20,7 @@ export async function generateMetadata({
   if (!hasLocale(routing.locales, lang)) return {};
   return {
     title: "Features — Nebutra",
-    description:
-      "Everything you need to build, scale, and monetise an AI-native SaaS product.",
+    description: "Everything you need to build, scale, and monetise an AI-native SaaS product.",
     alternates: { canonical: `/${lang}/features` },
   };
 }
@@ -230,11 +226,7 @@ const FEATURE_SECTIONS = [
   },
 ] as const;
 
-export default async function FeaturesPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function FeaturesPage({ params }: { params: Promise<{ lang: string }> }) {
   "use cache";
   cacheLife("days");
 
@@ -260,8 +252,8 @@ export default async function FeaturesPage({
             Everything you need to ship a unicorn
           </h1>
           <p className="mt-6 text-lg text-[var(--neutral-11)]">
-            Nebutra is a full-stack SaaS platform — AI, billing, multi-tenancy,
-            observability, and security baked in from day one.
+            Nebutra is a full-stack SaaS platform — AI, billing, multi-tenancy, observability, and
+            security baked in from day one.
           </p>
         </AnimateIn>
       </section>
@@ -273,10 +265,7 @@ export default async function FeaturesPage({
             <div key={section.category}>
               <AnimateIn preset="fadeUp" inView>
                 <div className="mb-10 flex items-center gap-3">
-                  <div
-                    className="rounded-lg p-2"
-                    style={{ background: "var(--neutral-2)" }}
-                  >
+                  <div className="rounded-lg p-2" style={{ background: "var(--neutral-2)" }}>
                     <section.icon
                       className="h-5 w-5"
                       style={{ color: section.color }}
@@ -289,10 +278,7 @@ export default async function FeaturesPage({
                 </div>
               </AnimateIn>
 
-              <AnimateInGroup
-                stagger="fast"
-                className="grid grid-cols-1 gap-6 md:grid-cols-3"
-              >
+              <AnimateInGroup stagger="fast" className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 {section.features.map((feature) => (
                   <AnimateIn key={feature.title} preset="fadeUp">
                     <div className="rounded-xl border border-[var(--neutral-7)] bg-[var(--neutral-1)] p-6 transition-shadow hover:shadow-md">

@@ -2,16 +2,16 @@
  * Landing Page Section Components
  */
 
-export { Navbar } from "./Navbar";
-export { HeroSection } from "./HeroSection";
-export { LogoStrip } from "./LogoStrip";
-export { ProductDemoSection } from "./ProductDemoSection";
 export { FeatureCards } from "./FeatureCards";
-export { WorkflowSection } from "./WorkflowSection";
-export { TestimonialsSection } from "./TestimonialsSection";
-export { PricingHintSection } from "./PricingHintSection";
 export { FinalCTA } from "./FinalCTA";
 export { FooterMinimal } from "./FooterMinimal";
+export { HeroSection } from "./HeroSection";
+export { LogoStrip } from "./LogoStrip";
+export { Navbar } from "./Navbar";
+export { PricingHintSection } from "./PricingHintSection";
+export { ProductDemoSection } from "./ProductDemoSection";
+export { TestimonialsSection } from "./TestimonialsSection";
+export { WorkflowSection } from "./WorkflowSection";
 
 export const LANDING_SECTIONS = [
   "Navbar",

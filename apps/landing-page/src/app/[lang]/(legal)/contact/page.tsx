@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
-import { routing, type Locale } from "@/i18n/routing";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { type Locale, routing } from "@/i18n/routing";
 import { ContactForm } from "./ContactForm";
 
 export async function generateMetadata({
@@ -22,11 +22,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function ContactPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function ContactPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const locale = lang as Locale;
   setRequestLocale(locale);
@@ -72,9 +68,7 @@ export default async function ContactPage({
         <h1 className="text-4xl font-bold tracking-tight text-[var(--neutral-12)] dark:text-white">
           {t("contact.heading")}
         </h1>
-        <p className="mt-4 text-lg text-[var(--neutral-10)]">
-          {t("contact.subheading")}
-        </p>
+        <p className="mt-4 text-lg text-[var(--neutral-10)]">{t("contact.subheading")}</p>
       </section>
 
       {/* Contact Cards */}
@@ -87,9 +81,7 @@ export default async function ContactPage({
             <h3 className="font-semibold text-[var(--neutral-12)] dark:text-white">
               {contact.title}
             </h3>
-            <p className="mt-1 text-sm text-[var(--neutral-10)]">
-              {contact.description}
-            </p>
+            <p className="mt-1 text-sm text-[var(--neutral-10)]">{contact.description}</p>
             <a
               href={`mailto:${contact.email}`}
               className="mt-4 inline-block text-[color:var(--blue-11)] hover:text-[color:var(--blue-12)] dark:text-[color:var(--blue-9)] dark:hover:text-[color:var(--blue-10)]"

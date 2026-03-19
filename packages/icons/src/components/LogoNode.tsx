@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -77,10 +77,7 @@ const LogoNode = forwardRef<SVGSVGElement, IconProps>(
         />
       </mask>
       <g mask="url(#mask2_872_3158)">
-        <path
-          fill="url(#paint2_linear_872_3158)"
-          d="M1.395.001v15.99h13.592V.002z"
-        />
+        <path fill="url(#paint2_linear_872_3158)" d="M1.395.001v15.99h13.592V.002z" />
       </g>
       <defs>
         <linearGradient
@@ -126,5 +123,6 @@ const LogoNode = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 LogoNode.displayName = "LogoNode";
+
 export { LogoNode };
 export default LogoNode;

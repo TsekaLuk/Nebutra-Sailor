@@ -1,4 +1,4 @@
-import { WordFadeIn } from "@nebutra/ui/primitives"
+import { WordFadeIn } from "@nebutra/ui/primitives";
 
 export default function WordFadeInDemo() {
   return (
@@ -9,5 +9,5 @@ export default function WordFadeInDemo() {
         className="text-4xl font-bold text-center"
       />
     </div>
-  )
+  );
 }

@@ -21,10 +21,7 @@ export interface GradientAnimatedTextProps extends React.HTMLAttributes<HTMLSpan
   duration?: number;
 }
 
-const THEME_COLORS: Record<
-  GradientTheme,
-  Record<GradientVariant, { from: string; to: string }>
-> = {
+const THEME_COLORS: Record<GradientTheme, Record<GradientVariant, { from: string; to: string }>> = {
   neon: {
     1: { from: "#39ff14", to: "#00ffff" }, // green → cyan
     2: { from: "#ff073a", to: "#ff6ec7" }, // red-pink → magenta

@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../utils";
 
 // =============================================================================
@@ -48,15 +48,9 @@ export interface LabelProps
  * </Label>
  * ```
  */
-const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ className, ...props }, ref) => (
-    <label
-      ref={ref}
-      className={cn(labelVariants(), className)}
-      {...props}
-    />
-  ),
-);
+const Label = React.forwardRef<HTMLLabelElement, LabelProps>(({ className, ...props }, ref) => (
+  <label ref={ref} className={cn(labelVariants(), className)} {...props} />
+));
 Label.displayName = "Label";
 
 export { Label, labelVariants };

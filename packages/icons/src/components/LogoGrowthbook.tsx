@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -32,5 +32,6 @@ const LogoGrowthbook = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 LogoGrowthbook.displayName = "LogoGrowthbook";
+
 export { LogoGrowthbook };
 export default LogoGrowthbook;

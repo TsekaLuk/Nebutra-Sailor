@@ -1,12 +1,7 @@
 "use client";
 
+import { Loader, LoaderCircle, LoaderPinwheel, type LucideProps } from "lucide-react";
 import { cn } from "../utils/cn";
-import {
-  LoaderCircle,
-  Loader,
-  LoaderPinwheel,
-  type LucideProps,
-} from "lucide-react";
 
 type SpinnerVariantProps = Omit<SpinnerProps, "variant">;
 
@@ -22,11 +17,7 @@ const Pinwheel = ({ className, ...props }: SpinnerVariantProps) => (
   <LoaderPinwheel className={cn("animate-spin", className)} {...props} />
 );
 
-const CircleFilled = ({
-  className,
-  size = 24,
-  ...props
-}: SpinnerVariantProps) => (
+const CircleFilled = ({ className, size = 24, ...props }: SpinnerVariantProps) => (
   <div className="relative" style={{ width: size, height: size }}>
     <div className="absolute inset-0 rotate-180">
       <LoaderCircle
@@ -35,11 +26,7 @@ const CircleFilled = ({
         {...props}
       />
     </div>
-    <LoaderCircle
-      className={cn("relative animate-spin", className)}
-      size={size}
-      {...props}
-    />
+    <LoaderCircle className={cn("relative animate-spin", className)} size={size} {...props} />
   </div>
 );
 
@@ -149,13 +136,7 @@ const Ring = ({ size = 24, ...props }: SpinnerVariantProps) => (
 );
 
 const Bars = ({ size = 24, ...props }: SpinnerVariantProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    {...props}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
     <title>Loading...</title>
     <style>{`
       .spinner-bar {
@@ -180,14 +161,7 @@ const Bars = ({ size = 24, ...props }: SpinnerVariantProps) => (
         }
       }
     `}</style>
-    <rect
-      className="spinner-bar"
-      x="1"
-      y="1"
-      width="6"
-      height="22"
-      fill="currentColor"
-    />
+    <rect className="spinner-bar" x="1" y="1" width="6" height="22" fill="currentColor" />
     <rect
       className="spinner-bar spinner-bars-2"
       x="9"

@@ -1,12 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import {
-  TabsTrigger,
-  TabsList,
-  Tabs,
-  TabsContent,
-} from "@nebutra/ui/primitives"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function TabsButtonDemo() {
   return (
@@ -26,5 +21,5 @@ export function TabsButtonDemo() {
         已归档内容 (Archived content)
       </TabsContent>
     </Tabs>
-  )
+  );
 }

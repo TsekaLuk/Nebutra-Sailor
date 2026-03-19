@@ -23,66 +23,54 @@
  * ```
  */
 
+// Font configuration and loading
+export {
+  allFonts,
+  // Loading utilities
+  areFontsLoaded,
+  cjkFonts,
+  defaultFonts,
+  type FontConfig,
+  fontFeatureSettings,
+  fontLicenseNotice,
+  // CSS helpers
+  fontSmoothing,
+  // Font configs
+  fonts,
+  // License info
+  getFontLicenses,
+  getFontPreloadLinks,
+  getGoogleFontsLink,
+  // URL builders
+  getGoogleFontsUrl,
+  waitForFonts,
+} from "./fonts";
 // Tokens - Font families, sizes, weights, etc.
 export {
-  // Font families
-  FONT_FAMILY_PRIMARY,
+  FONT_FAMILY_CJK,
   FONT_FAMILY_HEADING,
   FONT_FAMILY_MONO,
-  FONT_FAMILY_CJK,
-  fontFamilies,
-
-  // Type scale
-  fontSizes,
-  fontSizesPx,
-
-  // Line heights
-  lineHeights,
-
-  // Font weights
-  fontWeights,
-
-  // Letter spacing
-  letterSpacing,
-
-  // Combined type styles
-  typeStyles,
-
-  // Fluid typography
-  fluidFontSizes,
-
+  // Font families
+  FONT_FAMILY_PRIMARY,
   // Types
   type FontFamily,
   type FontSize,
-  type LineHeight,
   type FontWeight,
+  // Fluid typography
+  fluidFontSizes,
+  fontFamilies,
+  // Type scale
+  fontSizes,
+  fontSizesPx,
+  // Font weights
+  fontWeights,
   type LetterSpacing,
+  type LineHeight,
+  // Letter spacing
+  letterSpacing,
+  // Line heights
+  lineHeights,
   type TypeStyle,
+  // Combined type styles
+  typeStyles,
 } from "./tokens";
-
-// Font configuration and loading
-export {
-  // Font configs
-  fonts,
-  defaultFonts,
-  cjkFonts,
-  allFonts,
-  type FontConfig,
-
-  // URL builders
-  getGoogleFontsUrl,
-  getGoogleFontsLink,
-  getFontPreloadLinks,
-
-  // Loading utilities
-  areFontsLoaded,
-  waitForFonts,
-
-  // CSS helpers
-  fontSmoothing,
-  fontFeatureSettings,
-
-  // License info
-  getFontLicenses,
-  fontLicenseNotice,
-} from "./fonts";

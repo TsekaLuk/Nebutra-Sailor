@@ -1,12 +1,12 @@
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import { Check } from "lucide-react";
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { routing, type Locale } from "@/i18n/routing";
-import { Navbar, FooterMinimal } from "@/components/landing";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
-import { Check } from "lucide-react";
+import { FooterMinimal, Navbar } from "@/components/landing";
 import { Link } from "@/i18n/navigation";
+import { type Locale, routing } from "@/i18n/routing";
 
 const PLANS = [
   {
@@ -90,11 +90,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function PricingPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function PricingPage({ params }: { params: Promise<{ lang: string }> }) {
   "use cache";
   cacheLife("hours");
 
@@ -127,10 +123,7 @@ export default async function PricingPage({
         </AnimateIn>
 
         {/* Pricing cards */}
-        <AnimateInGroup
-          stagger="normal"
-          className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3"
-        >
+        <AnimateInGroup stagger="normal" className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
           {PLANS.map((plan) => (
             <AnimateIn key={plan.id} preset="fadeUp">
               <div
@@ -162,22 +155,14 @@ export default async function PricingPage({
                   <div className="mb-4 h-6" aria-hidden />
                 )}
 
-                <h2 className="text-xl font-semibold text-[var(--neutral-12)]">
-                  {plan.name}
-                </h2>
+                <h2 className="text-xl font-semibold text-[var(--neutral-12)]">{plan.name}</h2>
                 <div className="mt-4 flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-[var(--neutral-12)]">
-                    {plan.price}
-                  </span>
+                  <span className="text-4xl font-bold text-[var(--neutral-12)]">{plan.price}</span>
                   {plan.period && (
-                    <span className="text-sm text-[var(--neutral-11)]">
-                      {plan.period}
-                    </span>
+                    <span className="text-sm text-[var(--neutral-11)]">{plan.period}</span>
                   )}
                 </div>
-                <p className="mt-3 text-sm text-[var(--neutral-11)]">
-                  {plan.description}
-                </p>
+                <p className="mt-3 text-sm text-[var(--neutral-11)]">{plan.description}</p>
 
                 <a
                   href={plan.ctaHref}
@@ -187,9 +172,7 @@ export default async function PricingPage({
                       ? "text-white"
                       : "border border-[var(--neutral-7)] text-[var(--neutral-12)] hover:bg-[var(--neutral-2)]",
                   ].join(" ")}
-                  style={
-                    plan.highlighted ? { background: "var(--brand-gradient)" } : {}
-                  }
+                  style={plan.highlighted ? { background: "var(--brand-gradient)" } : {}}
                 >
                   {plan.cta}
                 </a>
@@ -200,10 +183,7 @@ export default async function PricingPage({
                       key={feature}
                       className="flex items-start gap-3 text-sm text-[var(--neutral-11)]"
                     >
-                      <Check
-                        className="mt-0.5 h-4 w-4 shrink-0 text-[var(--blue-9)]"
-                        aria-hidden
-                      />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--blue-9)]" aria-hidden />
                       {feature}
                     </li>
                   ))}
@@ -222,8 +202,7 @@ export default async function PricingPage({
               className="font-medium text-[var(--blue-9)] underline-offset-4 hover:underline"
             >
               Check our FAQ
-            </Link>
-            {" "}
+            </Link>{" "}
             or{" "}
             <Link
               href="/contact"

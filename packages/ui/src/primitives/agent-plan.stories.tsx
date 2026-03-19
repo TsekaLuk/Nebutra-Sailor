@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AgentPlan } from "./agent-plan";
 import type { AgentTask } from "./agent-plan";
+import { AgentPlan } from "./agent-plan";
 
 const meta = {
   title: "Primitives/AgentPlan",
@@ -107,14 +107,10 @@ export const Interactive: Story = {
   render: () => (
     <div className="w-[480px]">
       <p className="text-xs text-muted-foreground mb-3 px-2">
-        Click the status icon to cycle statuses. Click a task row to expand
-        subtasks. Click a subtask to expand its description.
+        Click the status icon to cycle statuses. Click a task row to expand subtasks. Click a
+        subtask to expand its description.
       </p>
-      <AgentPlan
-        tasks={simpleTasks}
-        defaultExpandedTasks={["2"]}
-        allowStatusToggle
-      />
+      <AgentPlan tasks={simpleTasks} defaultExpandedTasks={["2"]} allowStatusToggle />
     </div>
   ),
 };
@@ -207,10 +203,7 @@ const mixedStatusTasks: AgentTask[] = [
 export const AllStatuses: Story = {
   render: () => (
     <div className="w-[480px]">
-      <AgentPlan
-        tasks={mixedStatusTasks}
-        defaultExpandedTasks={["b", "c", "d"]}
-      />
+      <AgentPlan tasks={mixedStatusTasks} defaultExpandedTasks={["b", "c", "d"]} />
     </div>
   ),
 };
@@ -218,11 +211,7 @@ export const AllStatuses: Story = {
 export const CustomToolsLabel: Story = {
   render: () => (
     <div className="w-[480px]">
-      <AgentPlan
-        tasks={simpleTasks}
-        defaultExpandedTasks={["1"]}
-        toolsLabel="Tools used:"
-      />
+      <AgentPlan tasks={simpleTasks} defaultExpandedTasks={["1"]} toolsLabel="Tools used:" />
     </div>
   ),
 };

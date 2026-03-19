@@ -1,6 +1,4 @@
-"use client"
-
-import { Menu } from "lucide-react"
+"use client";
 
 import {
   Button,
@@ -10,9 +8,11 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@nebutra/ui/primitives"
-import Link from "next/link"
-;<Sheet>
+} from "@nebutra/ui/primitives";
+import { Menu } from "lucide-react";
+import Link from "next/link";
+
+<Sheet>
   <SheetTrigger asChild>
     <Button variant="ghost" size="icon">
       <Menu className="h-5 w-5" />
@@ -31,8 +31,8 @@ import Link from "next/link"
       </SheetClose>
     </nav>
   </SheetContent>
-</Sheet>
+</Sheet>;
 
 export function SheetSideDemo() {
-  return null // Update this with actual rendering logic
+  return null; // Update this with actual rendering logic
 }

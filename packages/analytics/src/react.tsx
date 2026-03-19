@@ -2,18 +2,13 @@
 
 import React, {
   createContext,
+  type ReactNode,
+  useCallback,
   useContext,
   useEffect,
-  useCallback,
   useRef,
-  type ReactNode,
 } from "react";
-import type {
-  TrackEventInput,
-  PageViewInput,
-  TrackConversionInput,
-  PrivacyOptions,
-} from "./types";
+import type { PageViewInput, PrivacyOptions, TrackConversionInput, TrackEventInput } from "./types";
 
 // ============================================================================
 // Types
@@ -75,9 +70,7 @@ export function AnalyticsProvider({
 
   // Check Do Not Track
   const doNotTrack =
-    options.respectDoNotTrack &&
-    typeof navigator !== "undefined" &&
-    navigator.doNotTrack === "1";
+    options.respectDoNotTrack && typeof navigator !== "undefined" && navigator.doNotTrack === "1";
 
   const canTrack = hasConsent && !doNotTrack;
 
@@ -119,14 +112,14 @@ export function AnalyticsProvider({
         if (debug) console.error("[Analytics] Failed to send event:", error);
       }
     },
-    [canTrack, tenantId, debug]
+    [canTrack, tenantId, debug],
   );
 
   const track = useCallback(
     (name: string, properties?: Record<string, unknown>) => {
       sendEvent("track", { name, properties });
     },
-    [sendEvent]
+    [sendEvent],
   );
 
   const trackPageView = useCallback(
@@ -137,7 +130,7 @@ export function AnalyticsProvider({
         referrer: input?.referrer || (typeof document !== "undefined" ? document.referrer : ""),
       });
     },
-    [sendEvent]
+    [sendEvent],
   );
 
   const trackConversion = useCallback(
@@ -149,7 +142,7 @@ export function AnalyticsProvider({
         metadata: input.metadata,
       });
     },
-    [sendEvent]
+    [sendEvent],
   );
 
   const identify = useCallback(
@@ -162,7 +155,7 @@ export function AnalyticsProvider({
         localStorage.setItem("analytics_user_id", userId);
       }
     },
-    [sendEvent]
+    [sendEvent],
   );
 
   const reset = useCallback(() => {

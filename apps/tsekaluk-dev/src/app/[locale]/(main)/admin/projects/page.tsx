@@ -1,65 +1,63 @@
-"use client"
+"use client";
 
-import { useState, useMemo } from "react"
 import {
-  useReactTable,
-  getCoreRowModel,
-  getSortedRowModel,
-  getFilteredRowModel,
-  flexRender,
   createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
   type SortingState,
-} from "@tanstack/react-table"
-import { projects, type Project } from "@/lib/projects"
-import { Github, ExternalLink, ChevronUp, ChevronDown, ChevronsUpDown, Search } from "lucide-react"
+  useReactTable,
+} from "@tanstack/react-table";
+import { ChevronDown, ChevronsUpDown, ChevronUp, ExternalLink, Github, Search } from "lucide-react";
+import { useMemo, useState } from "react";
+import { type Project, projects } from "@/lib/projects";
 
-const columnHelper = createColumnHelper<Project>()
+const columnHelper = createColumnHelper<Project>();
 
 const STATUS_STYLES: Record<string, string> = {
   live: "bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400",
   building: "bg-yellow-50 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
   shipped: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
-}
+};
 
 function SortIcon({ isSorted }: { isSorted: false | "asc" | "desc" }) {
-  if (isSorted === "asc") return <ChevronUp className="h-3.5 w-3.5" />
-  if (isSorted === "desc") return <ChevronDown className="h-3.5 w-3.5" />
-  return <ChevronsUpDown className="h-3.5 w-3.5 opacity-40" />
+  if (isSorted === "asc") return <ChevronUp className="h-3.5 w-3.5" />;
+  if (isSorted === "desc") return <ChevronDown className="h-3.5 w-3.5" />;
+  return <ChevronsUpDown className="h-3.5 w-3.5 opacity-40" />;
 }
 
 export default function AdminProjectsPage() {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [globalFilter, setGlobalFilter] = useState("")
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = useState("");
 
   const columns = useMemo(
     () => [
       columnHelper.accessor("name", {
         header: "Name",
         cell: (info) => (
-          <span className="font-medium text-gray-900 dark:text-white">
-            {info.getValue()}
-          </span>
+          <span className="font-medium text-gray-900 dark:text-white">{info.getValue()}</span>
         ),
         enableSorting: true,
       }),
       columnHelper.accessor("status", {
         header: "Status",
         cell: (info) => {
-          const status = info.getValue()
+          const status = info.getValue();
           return (
             <span
               className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium capitalize ${STATUS_STYLES[status] ?? ""}`}
             >
               {status}
             </span>
-          )
+          );
         },
         enableSorting: true,
       }),
       columnHelper.accessor("tags", {
         header: "Tags",
         cell: (info) => {
-          const tags = info.getValue().slice(0, 2)
+          const tags = info.getValue().slice(0, 2);
           return (
             <div className="flex gap-1 flex-wrap">
               {tags.map((tag) => (
@@ -71,7 +69,7 @@ export default function AdminProjectsPage() {
                 </span>
               ))}
             </div>
-          )
+          );
         },
         enableSorting: false,
       }),
@@ -79,7 +77,7 @@ export default function AdminProjectsPage() {
         id: "links",
         header: "Links",
         cell: ({ row }) => {
-          const { github, url } = row.original
+          const { github, url } = row.original;
           return (
             <div className="flex items-center gap-2">
               {github && (
@@ -105,12 +103,12 @@ export default function AdminProjectsPage() {
                 </a>
               )}
             </div>
-          )
+          );
         },
       }),
     ],
     [],
-  )
+  );
 
   const table = useReactTable({
     data: projects,
@@ -122,10 +120,10 @@ export default function AdminProjectsPage() {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     globalFilterFn: (row, _columnId, filterValue: string) => {
-      const name = (row.getValue("name") as string).toLowerCase()
-      return name.includes(filterValue.toLowerCase())
+      const name = (row.getValue("name") as string).toLowerCase();
+      return name.includes(filterValue.toLowerCase());
     },
-  })
+  });
 
   return (
     <div>
@@ -133,9 +131,7 @@ export default function AdminProjectsPage() {
         <p className="font-serif italic text-gray-400 dark:text-gray-500 text-sm">
           Read-only — edit in code
         </p>
-        <h1 className="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">
-          Projects
-        </h1>
+        <h1 className="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">Projects</h1>
       </div>
 
       {/* Search */}
@@ -207,5 +203,5 @@ export default function AdminProjectsPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

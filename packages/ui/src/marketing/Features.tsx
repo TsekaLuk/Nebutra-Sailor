@@ -62,11 +62,7 @@ export function Features({
                 {feature.icon}
               </div>
             )}
-            {feature.image && (
-              <div data-slot="image">
-                {/* TODO: Optimized image */}
-              </div>
-            )}
+            {feature.image && <div data-slot="image">{/* TODO: Optimized image */}</div>}
             <h3 data-slot="feature-title">
               {feature.title}
               {feature.badge && <span data-badge>{feature.badge}</span>}

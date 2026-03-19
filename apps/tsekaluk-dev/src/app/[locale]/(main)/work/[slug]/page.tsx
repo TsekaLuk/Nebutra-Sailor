@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
 import { AnimateIn } from "@nebutra/ui/components";
-import { ArrowLeft, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { projects, getLocalizedProjects } from "@/lib/projects";
-import { projectJsonLd } from "@/lib/json-ld";
 import { MermaidDiagram } from "@/components/mermaid-diagram";
 import { TechBadge } from "@/components/tech-badge";
 import { Link as LocaleLink } from "@/i18n/navigation";
+import { projectJsonLd } from "@/lib/json-ld";
+import { getLocalizedProjects, projects } from "@/lib/projects";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -108,12 +108,8 @@ export default async function ProjectDetailPage({
                 key={h.label}
                 className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 text-center"
               >
-                <p className="text-3xl font-bold tracking-tight text-foreground">
-                  {h.value}
-                </p>
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                  {h.label}
-                </p>
+                <p className="text-3xl font-bold tracking-tight text-foreground">{h.value}</p>
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{h.label}</p>
               </div>
             ))}
           </div>

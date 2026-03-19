@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { FileCode2 } from "lucide-react"
-import { useAnalytics } from "@/hooks/use-analytics"
+import { FileCode2 } from "lucide-react";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 interface ResumeDownloadButtonProps {
-  label: string
+  label: string;
 }
 
 export function ResumeDownloadButton({ label }: ResumeDownloadButtonProps) {
-  const { track } = useAnalytics()
+  const { track } = useAnalytics();
 
   return (
     <a
@@ -20,5 +20,5 @@ export function ResumeDownloadButton({ label }: ResumeDownloadButtonProps) {
       <FileCode2 className="h-4 w-4" />
       {label}
     </a>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ThemeSwitcher } from "./theme-switcher";
 import type { ThemeSwitcherValue } from "./theme-switcher";
+import { ThemeSwitcher } from "./theme-switcher";
 
 const meta = {
   title: "Primitives/ThemeSwitcher",

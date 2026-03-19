@@ -10,8 +10,8 @@
  * Docs: https://nextjs.org/docs/app/api-reference/file-conventions/error#global-errorjs
  */
 
-import { useEffect } from "react";
 import * as Sentry from "@sentry/nextjs";
+import { useEffect } from "react";
 
 interface GlobalErrorProps {
   error: Error & { digest?: string };
@@ -56,7 +56,14 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
           <p style={{ color: "#a1a1aa", marginBottom: "2rem", lineHeight: 1.6 }}>
             An unexpected error occurred. Our team has been notified automatically.
             {error.digest && (
-              <span style={{ display: "block", marginTop: "0.5rem", fontSize: "0.75rem", fontFamily: "monospace" }}>
+              <span
+                style={{
+                  display: "block",
+                  marginTop: "0.5rem",
+                  fontSize: "0.75rem",
+                  fontFamily: "monospace",
+                }}
+              >
                 Error ID: {error.digest}
               </span>
             )}

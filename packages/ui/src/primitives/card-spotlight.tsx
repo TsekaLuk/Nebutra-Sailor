@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { useState, MouseEvent as ReactMouseEvent } from "react";
-import { useMotionValue, motion, useMotionTemplate } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import type * as React from "react";
+import { type MouseEvent as ReactMouseEvent, useState } from "react";
 import { cn } from "../utils/cn";
 import { CanvasRevealEffect } from "./canvas-reveal-effect";
 
@@ -41,11 +41,7 @@ export function CardSpotlight({
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  function handleMouseMove({
-    currentTarget,
-    clientX,
-    clientY,
-  }: ReactMouseEvent<HTMLDivElement>) {
+  function handleMouseMove({ currentTarget, clientX, clientY }: ReactMouseEvent<HTMLDivElement>) {
     const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
@@ -59,7 +55,7 @@ export function CardSpotlight({
     <div
       className={cn(
         "group/spotlight p-10 rounded-[var(--radius-md)] relative border bg-card",
-        className
+        className,
       )}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}

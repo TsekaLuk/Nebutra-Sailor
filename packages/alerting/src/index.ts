@@ -186,9 +186,7 @@ export function createWebhookChannel(
   return {
     name,
     send: async (payload: AlertPayload) => {
-      const body = options.transformPayload
-        ? options.transformPayload(payload)
-        : payload;
+      const body = options.transformPayload ? options.transformPayload(payload) : payload;
 
       try {
         const response = await fetch(webhookUrl, {
@@ -215,9 +213,7 @@ export function createWebhookChannel(
 /**
  * Send alert to all registered channels
  */
-export async function sendAlert(
-  payload: AlertPayload,
-): Promise<Map<string, boolean>> {
+export async function sendAlert(payload: AlertPayload): Promise<Map<string, boolean>> {
   const results = new Map<string, boolean>();
   const enrichedPayload = {
     ...payload,
@@ -225,31 +221,25 @@ export async function sendAlert(
     environment: payload.environment || process.env.NODE_ENV,
   };
 
-  const promises = Array.from(channels.entries()).map(
-    async ([name, channel]) => {
-      try {
-        const finalPayload: AlertPayload = {
-          title: enrichedPayload.title,
-          message: enrichedPayload.message,
-          severity: enrichedPayload.severity,
-        };
-        if (enrichedPayload.service)
-          finalPayload.service = enrichedPayload.service;
-        if (enrichedPayload.timestamp)
-          finalPayload.timestamp = enrichedPayload.timestamp;
-        if (enrichedPayload.environment)
-          finalPayload.environment = enrichedPayload.environment;
-        if (enrichedPayload.metadata)
-          finalPayload.metadata = enrichedPayload.metadata;
+  const promises = Array.from(channels.entries()).map(async ([name, channel]) => {
+    try {
+      const finalPayload: AlertPayload = {
+        title: enrichedPayload.title,
+        message: enrichedPayload.message,
+        severity: enrichedPayload.severity,
+      };
+      if (enrichedPayload.service) finalPayload.service = enrichedPayload.service;
+      if (enrichedPayload.timestamp) finalPayload.timestamp = enrichedPayload.timestamp;
+      if (enrichedPayload.environment) finalPayload.environment = enrichedPayload.environment;
+      if (enrichedPayload.metadata) finalPayload.metadata = enrichedPayload.metadata;
 
-        const success = await channel.send(finalPayload);
-        results.set(name, success);
-      } catch (error) {
-        _errorHandler(`Alert channel ${name} failed`, error);
-        results.set(name, false);
-      }
-    },
-  );
+      const success = await channel.send(finalPayload);
+      results.set(name, success);
+    } catch (error) {
+      _errorHandler(`Alert channel ${name} failed`, error);
+      results.set(name, false);
+    }
+  });
 
   await Promise.allSettled(promises);
   return results;
@@ -282,14 +272,10 @@ export async function sendAlertTo(
         message: enrichedPayload.message,
         severity: enrichedPayload.severity,
       };
-      if (enrichedPayload.service)
-        finalPayload.service = enrichedPayload.service;
-      if (enrichedPayload.timestamp)
-        finalPayload.timestamp = enrichedPayload.timestamp;
-      if (enrichedPayload.environment)
-        finalPayload.environment = enrichedPayload.environment;
-      if (enrichedPayload.metadata)
-        finalPayload.metadata = enrichedPayload.metadata;
+      if (enrichedPayload.service) finalPayload.service = enrichedPayload.service;
+      if (enrichedPayload.timestamp) finalPayload.timestamp = enrichedPayload.timestamp;
+      if (enrichedPayload.environment) finalPayload.environment = enrichedPayload.environment;
+      if (enrichedPayload.metadata) finalPayload.metadata = enrichedPayload.metadata;
 
       const success = await channel.send(finalPayload);
       results.set(name, success);
@@ -357,10 +343,7 @@ interface ErrorRateConfig {
   cooldownMs: number;
 }
 
-const errorCounts = new Map<
-  string,
-  { count: number; windowStart: number; lastAlert: number }
->();
+const errorCounts = new Map<string, { count: number; windowStart: number; lastAlert: number }>();
 
 export function trackError(
   service: string,
@@ -382,10 +365,7 @@ export function trackError(
   errorCounts.set(key, data);
 
   // Check if we should alert
-  if (
-    data.count >= config.threshold &&
-    now - data.lastAlert > config.cooldownMs
-  ) {
+  if (data.count >= config.threshold && now - data.lastAlert > config.cooldownMs) {
     data.lastAlert = now;
     errorCounts.set(key, data);
 

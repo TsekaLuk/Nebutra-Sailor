@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
 } from "recharts";
 import type { GrowthSummary } from "@/lib/warehouse/gold";
 
@@ -52,11 +52,7 @@ export function RevenueBarChart({ series }: Props) {
   return (
     <ResponsiveContainer width="100%" height={220}>
       <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-        <CartesianGrid
-          strokeDasharray="3 3"
-          stroke="var(--neutral-6)"
-          vertical={false}
-        />
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--neutral-6)" vertical={false} />
         <XAxis
           dataKey="day"
           tick={{ fontSize: 11, fill: "var(--neutral-11)" }}
@@ -83,10 +79,7 @@ export function RevenueBarChart({ series }: Props) {
         />
         <Bar dataKey="Revenue" radius={[3, 3, 0, 0]}>
           {data.map((_, i) => (
-            <Cell
-              key={i}
-              fill={i === maxIdx ? "#0033FE" : "var(--neutral-5)"}
-            />
+            <Cell key={i} fill={i === maxIdx ? "#0033FE" : "var(--neutral-5)"} />
           ))}
         </Bar>
       </BarChart>

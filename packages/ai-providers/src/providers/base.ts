@@ -1,17 +1,17 @@
 import type {
-  ProviderName,
-  ProviderConfig,
+  ChatCompletionChunk,
   ChatCompletionRequest,
   ChatCompletionResponse,
-  ChatCompletionChunk,
   EmbeddingRequest,
   EmbeddingResponse,
-  RerankRequest,
-  RerankResponse,
   ImageGenerationRequest,
   ImageGenerationResponse,
-  TextToSpeechRequest,
+  ProviderConfig,
+  ProviderName,
+  RerankRequest,
+  RerankResponse,
   SpeechToTextRequest,
+  TextToSpeechRequest,
   TranscriptionResponse,
 } from "../types.js";
 
@@ -65,7 +65,7 @@ export abstract class BaseAIProvider {
    * Stream a chat completion
    */
   async *chatStream(
-    request: ChatCompletionRequest
+    request: ChatCompletionRequest,
   ): AsyncGenerator<ChatCompletionChunk, void, unknown> {
     throw new Error(`Streaming not supported by ${this.name}`);
     // This is just to make TypeScript happy with the generator signature
@@ -169,7 +169,9 @@ export function registerProvider(name: ProviderName, factory: ProviderFactory): 
 export function createProvider(name: ProviderName, config: ProviderConfig): BaseAIProvider {
   const factory = providerRegistry.get(name);
   if (!factory) {
-    throw new Error(`Unknown provider: ${name}. Available: ${[...providerRegistry.keys()].join(", ")}`);
+    throw new Error(
+      `Unknown provider: ${name}. Available: ${[...providerRegistry.keys()].join(", ")}`,
+    );
   }
   return factory(config);
 }

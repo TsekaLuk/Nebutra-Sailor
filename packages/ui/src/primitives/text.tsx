@@ -1,13 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { type TextColor, type TextStyle, textColors, textStyles } from "../tokens/typography";
 import { cn } from "../utils/cn";
-import {
-  textStyles,
-  textColors,
-  type TextStyle,
-  type TextColor,
-} from "../tokens/typography";
 
 /**
  * Text - Typography primitive

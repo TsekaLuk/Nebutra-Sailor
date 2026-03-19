@@ -1,8 +1,8 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { AnimateIn } from "@nebutra/ui/components";
-import { Zap, Sparkles, Droplet, ShieldCheck, Users, Gem } from "lucide-react";
+import { Droplet, Gem, ShieldCheck, Sparkles, Users, Zap } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function FocusSection() {
   const t = useTranslations("focus");

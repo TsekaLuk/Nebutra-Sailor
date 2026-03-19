@@ -1,23 +1,21 @@
-import { auth, currentUser } from "@clerk/nextjs/server"
-import { Shield, Smartphone, Clock, AlertTriangle } from "lucide-react"
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { AlertTriangle, Clock, Shield, Smartphone } from "lucide-react";
 
 export const metadata = {
   title: "Security — Settings",
-}
+};
 
 export default async function SecuritySettingsPage() {
-  const { sessionId } = await auth()
-  const user = await currentUser()
+  const { sessionId } = await auth();
+  const user = await currentUser();
 
-  const hasMfa = user?.twoFactorEnabled ?? false
-  const email = user?.primaryEmailAddress?.emailAddress ?? ""
+  const hasMfa = user?.twoFactorEnabled ?? false;
+  const email = user?.primaryEmailAddress?.emailAddress ?? "";
 
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-semibold text-[var(--neutral-12)]">
-          Security
-        </h2>
+        <h2 className="text-lg font-semibold text-[var(--neutral-12)]">Security</h2>
         <p className="mt-1 text-sm text-[var(--neutral-11)]">
           Manage authentication and session security for your account.
         </p>
@@ -28,10 +26,7 @@ export default async function SecuritySettingsPage() {
         <div className="gap-4 flex items-start justify-between">
           <div className="gap-3 flex items-start">
             <div className="mt-0.5 p-2 rounded-md bg-[var(--neutral-2)]">
-              <Smartphone
-                className="h-4 w-4 text-[var(--neutral-11)]"
-                aria-hidden
-              />
+              <Smartphone className="h-4 w-4 text-[var(--neutral-11)]" aria-hidden />
             </div>
             <div>
               <h3 className="text-sm font-medium text-[var(--neutral-12)]">
@@ -78,15 +73,10 @@ export default async function SecuritySettingsPage() {
             <Clock className="h-4 w-4 text-[var(--neutral-11)]" aria-hidden />
           </div>
           <div className="flex-1">
-            <h3 className="text-sm font-medium text-[var(--neutral-12)]">
-              Active session
-            </h3>
+            <h3 className="text-sm font-medium text-[var(--neutral-12)]">Active session</h3>
             <p className="mt-1 text-sm text-[var(--neutral-11)]">
               You are currently signed in as{" "}
-              <span className="font-medium text-[var(--neutral-12)]">
-                {email}
-              </span>
-              .
+              <span className="font-medium text-[var(--neutral-12)]">{email}</span>.
             </p>
             {sessionId && (
               <p className="mt-1 text-xs font-mono text-[var(--neutral-11)]">
@@ -104,9 +94,7 @@ export default async function SecuritySettingsPage() {
             <Shield className="h-4 w-4 text-[var(--neutral-11)]" aria-hidden />
           </div>
           <div className="flex-1">
-            <h3 className="text-sm font-medium text-[var(--neutral-12)]">
-              Password
-            </h3>
+            <h3 className="text-sm font-medium text-[var(--neutral-12)]">Password</h3>
             <p className="mt-1 text-sm text-[var(--neutral-11)]">
               Update your password or manage linked social accounts.
             </p>
@@ -128,8 +116,8 @@ export default async function SecuritySettingsPage() {
       <section className="bg-red-50/40 p-6 rounded-lg border border-red-200">
         <h3 className="text-sm font-medium text-red-800">Danger zone</h3>
         <p className="mt-1 text-sm text-red-700">
-          Deleting your account is permanent and cannot be undone. All data
-          associated with your account will be removed.
+          Deleting your account is permanent and cannot be undone. All data associated with your
+          account will be removed.
         </p>
         <div className="mt-4">
           <a
@@ -143,5 +131,5 @@ export default async function SecuritySettingsPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

@@ -162,7 +162,7 @@ export async function copy(bucket: string, fromPath: string, toPath: string): Pr
  */
 export async function createBucket(
   name: string,
-  options?: { public?: boolean; fileSizeLimit?: number | string; allowedMimeTypes?: string[] }
+  options?: { public?: boolean; fileSizeLimit?: number | string; allowedMimeTypes?: string[] },
 ): Promise<void> {
   const client = getSupabaseServer();
 

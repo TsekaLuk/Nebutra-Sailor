@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Label, Checkbox, Input } from "@nebutra/ui/primitives"
+import { Checkbox, Input, Label } from "@nebutra/ui/primitives";
 
 export function LabelDemo() {
   return (
@@ -15,5 +15,5 @@ export function LabelDemo() {
         <Label htmlFor="terms">Accept terms and conditions</Label>
       </div>
     </div>
-  )
+  );
 }

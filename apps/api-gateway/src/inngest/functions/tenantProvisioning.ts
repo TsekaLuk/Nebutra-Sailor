@@ -17,13 +17,13 @@
  */
 
 import crypto from "node:crypto";
-import Stripe from "stripe";
-import { logger } from "@nebutra/logger";
 import { prisma } from "@nebutra/db";
 import { sendWelcomeEmail } from "@nebutra/email";
 import { ClerkOrganizationDataSchema } from "@nebutra/event-bus";
-import { inngest } from "../client.js";
+import { logger } from "@nebutra/logger";
 import { eventType, type InngestFunction } from "inngest";
+import Stripe from "stripe";
+import { inngest } from "../client.js";
 
 /** SHA-256 hash of plaintext key (same as API key creation in settings). */
 function hashKey(plaintext: string): string {
@@ -66,9 +66,7 @@ export const provisionTenant: InngestFunction.Any = inngest.createFunction(
       });
 
       if (!found) {
-        throw new Error(
-          `Organization ${organizationId} not yet in DB — Inngest will retry`,
-        );
+        throw new Error(`Organization ${organizationId} not yet in DB — Inngest will retry`);
       }
 
       return found;

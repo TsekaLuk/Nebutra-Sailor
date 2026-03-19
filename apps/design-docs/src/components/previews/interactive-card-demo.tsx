@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { InteractiveCard } from "@nebutra/ui/primitives"
+import { InteractiveCard } from "@nebutra/ui/primitives";
 
 export function InteractiveCardDemo() {
   return (
@@ -9,5 +9,5 @@ export function InteractiveCardDemo() {
       title="Export Project"
       description="Download your project as a PowerPoint presentation ready to share."
     />
-  )
+  );
 }

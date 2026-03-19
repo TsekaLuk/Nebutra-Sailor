@@ -90,11 +90,7 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
                 : "text-[var(--neutral-9)] group-hover:text-[var(--neutral-11)]",
             )}
           >
-            {copied ? (
-              <CopiedIcon className="w-4 h-4" />
-            ) : (
-              <CopyIcon className="w-4 h-4" />
-            )}
+            {copied ? <CopiedIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
           </span>
         )}
 

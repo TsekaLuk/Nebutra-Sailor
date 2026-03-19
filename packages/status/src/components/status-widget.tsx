@@ -15,8 +15,8 @@
  */
 
 import { useEffect, useState } from "react";
-import type { StatusPageData, StatusState, StatusConfig } from "../types";
 import { fetchStatusPage } from "../api";
+import type { StatusConfig, StatusPageData, StatusState } from "../types";
 
 interface StatusWidgetProps {
   // OpenStatus
@@ -169,9 +169,7 @@ export function StatusWidget({
       <div
         className={`rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900 ${className}`}
       >
-        <p className="text-gray-500 dark:text-gray-400">
-          {error ?? "Unable to load status"}
-        </p>
+        <p className="text-gray-500 dark:text-gray-400">{error ?? "Unable to load status"}</p>
       </div>
     );
   }
@@ -187,9 +185,7 @@ export function StatusWidget({
           <div className="flex items-center gap-3">
             <span className={`text-2xl ${style.text}`}>{style.icon}</span>
             <div>
-              <h3 className={`font-semibold ${style.text}`}>
-                {STATUS_LABELS[data.status]}
-              </h3>
+              <h3 className={`font-semibold ${style.text}`}>{STATUS_LABELS[data.status]}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Last updated: {new Date(data.lastUpdated).toLocaleTimeString()}
               </p>
@@ -221,12 +217,8 @@ export function StatusWidget({
                   className="flex items-center justify-between rounded-md bg-gray-50 px-3 py-2 dark:bg-gray-800"
                 >
                   <div className="flex items-center gap-2">
-                    <span
-                      className={`h-2 w-2 rounded-full ${monitorStyle.dot}`}
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">
-                      {monitor.name}
-                    </span>
+                    <span className={`h-2 w-2 rounded-full ${monitorStyle.dot}`} />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{monitor.name}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     {monitor.latency !== undefined && (
@@ -248,9 +240,7 @@ export function StatusWidget({
       {/* Uptime */}
       {showUptime && !compact && (
         <div className="border-t border-gray-100 p-4 dark:border-gray-800">
-          <h4 className="mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">
-            Uptime
-          </h4>
+          <h4 className="mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">Uptime</h4>
           <div className="flex gap-4">
             {(
               [
@@ -278,10 +268,7 @@ export function StatusWidget({
           </h4>
           <ul className="space-y-2">
             {data.activeIncidents.map((incident) => (
-              <li
-                key={incident.id}
-                className="rounded-md bg-white p-2 dark:bg-gray-900"
-              >
+              <li key={incident.id} className="rounded-md bg-white p-2 dark:bg-gray-900">
                 <div className="flex items-start justify-between gap-2">
                   <p className="text-sm font-medium text-gray-900 dark:text-white">
                     {incident.title}
@@ -314,13 +301,8 @@ export function StatusWidget({
           </h4>
           <ul className="space-y-2">
             {data.scheduledMaintenances.map((m) => (
-              <li
-                key={m.id}
-                className="rounded-md bg-white p-2 dark:bg-gray-900"
-              >
-                <p className="text-sm font-medium text-gray-900 dark:text-white">
-                  {m.title}
-                </p>
+              <li key={m.id} className="rounded-md bg-white p-2 dark:bg-gray-900">
+                <p className="text-sm font-medium text-gray-900 dark:text-white">{m.title}</p>
                 <p className="text-xs text-gray-500">
                   {new Date(m.scheduledFor).toLocaleString()} –{" "}
                   {new Date(m.scheduledUntil).toLocaleString()}

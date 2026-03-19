@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { ArrowRightIcon, PlusIcon } from "lucide-react";
-import { cn } from "../utils/cn";
+import * as React from "react";
 import { Button } from "../primitives/button";
+import { cn } from "../utils/cn";
 
 export interface CTASectionProps {
   /** Main headline text */
@@ -55,7 +55,7 @@ export function CTASection({
     <div
       className={cn(
         "relative mx-auto flex w-full max-w-3xl flex-col justify-between gap-y-6 border-y border-border bg-[radial-gradient(35%_80%_at_25%_0%,hsl(var(--foreground)/.08),transparent)] px-4 py-8",
-        className
+        className,
       )}
       role="region"
       aria-label="Call to action"
@@ -100,9 +100,7 @@ export function CTASection({
 
       {/* Content */}
       <div className="space-y-1">
-        <h2 className="text-center text-2xl font-bold text-foreground">
-          {headline}
-        </h2>
+        <h2 className="text-center text-2xl font-bold text-foreground">{headline}</h2>
         <p className="text-center text-muted-foreground">{description}</p>
       </div>
 
@@ -115,9 +113,7 @@ export function CTASection({
         )}
         <Button onClick={onPrimaryClick}>
           {primaryButtonText}
-          {showArrow && (
-            <ArrowRightIcon className="ml-1 size-4" aria-hidden="true" />
-          )}
+          {showArrow && <ArrowRightIcon className="ml-1 size-4" aria-hidden="true" />}
         </Button>
       </div>
     </div>

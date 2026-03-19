@@ -1,22 +1,34 @@
-import { Callout } from "fumadocs-ui/components/callout";
-import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
-import { Card as FumaCard, Cards } from "fumadocs-ui/components/card";
+import { Callout } from "fumadocs-ui/components/callout";
+import { Cards, Card as FumaCard } from "fumadocs-ui/components/card";
+import { Step, Steps } from "fumadocs-ui/components/steps";
 import type { ReactNode } from "react";
 
 // Mintlify <Tip> → fumadocs <Callout type="info">
 export function Tip({ children, title }: { children?: ReactNode; title?: string }) {
-  return <Callout type="info" title={title}>{children}</Callout>;
+  return (
+    <Callout type="info" title={title}>
+      {children}
+    </Callout>
+  );
 }
 
 // Mintlify <Warning> → fumadocs <Callout type="warning">
 export function Warning({ children, title }: { children?: ReactNode; title?: string }) {
-  return <Callout type="warning" title={title}>{children}</Callout>;
+  return (
+    <Callout type="warning" title={title}>
+      {children}
+    </Callout>
+  );
 }
 
 // Mintlify <Info> → fumadocs <Callout type="info">
 export function Info({ children, title }: { children?: ReactNode; title?: string }) {
-  return <Callout type="info" title={title}>{children}</Callout>;
+  return (
+    <Callout type="info" title={title}>
+      {children}
+    </Callout>
+  );
 }
 
 // Mintlify <Note> → fumadocs <Callout>
@@ -36,7 +48,11 @@ export function Check({ children }: { children?: ReactNode }) {
 
 // Mintlify <AccordionGroup> → fumadocs <Accordions>
 export function AccordionGroup({ children }: { children?: ReactNode }) {
-  return <Accordions type="single" collapsible>{children}</Accordions>;
+  return (
+    <Accordions type="single" collapsible>
+      {children}
+    </Accordions>
+  );
 }
 
 // Mintlify <Card> → fumadocs Card (icon string prop is dropped gracefully)
@@ -60,4 +76,4 @@ export function CardGroup({ children }: { children?: ReactNode }) {
 }
 
 // Re-export fumadocs Steps/Step/Accordion/Accordions
-export { Step, Steps, Accordion, Accordions };
+export { Accordion, Accordions, Step, Steps };

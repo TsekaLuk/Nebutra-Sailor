@@ -1,8 +1,8 @@
 "use client";
 
-import { useLocale } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 const LOCALES = [
   { code: "en", label: "EN" },
@@ -45,10 +45,9 @@ export function LanguageSwitcher() {
               />
             )}
             <span
-              className={`relative z-10 transition-colors duration-150 ${isActive
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-                }`}
+              className={`relative z-10 transition-colors duration-150 ${
+                isActive ? "text-foreground" : "text-muted-foreground"
+              }`}
             >
               {loc.label}
             </span>

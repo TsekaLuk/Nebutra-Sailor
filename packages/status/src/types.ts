@@ -98,7 +98,4 @@ export interface InternalStatusConfig {
   refreshInterval?: number;
 }
 
-export type StatusConfig =
-  | OpenStatusConfig
-  | StatuspageConfig
-  | InternalStatusConfig;
+export type StatusConfig = OpenStatusConfig | StatuspageConfig | InternalStatusConfig;

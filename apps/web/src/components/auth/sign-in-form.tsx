@@ -1,15 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { Button, Input } from "@nebutra/ui/components";
+import { Label, Separator } from "@nebutra/ui/primitives";
 import Link from "next/link";
-import { Button } from "@nebutra/ui/components";
-import { Input } from "@nebutra/ui/components";
-import { Label } from "@nebutra/ui/primitives";
-import { Separator } from "@nebutra/ui/primitives";
-import { OAuthButtons } from "./oauth-buttons";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { extractClerkErrorMessage } from "@/lib/clerk-errors";
+import { OAuthButtons } from "./oauth-buttons";
 
 export function SignInForm() {
   const { signIn, fetchStatus } = useSignIn();
@@ -104,15 +102,9 @@ export function SignInForm() {
           />
         </div>
 
-        {error && (
-          <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>
-        )}
+        {error && <p className="text-sm text-[hsl(var(--destructive))]">{error}</p>}
 
-        <Button
-          htmlType="submit"
-          className="w-full"
-          disabled={loading || !isReady}
-        >
+        <Button htmlType="submit" className="w-full" disabled={loading || !isReady}>
           {loading ? "Signing in…" : "Log in"}
         </Button>
       </form>

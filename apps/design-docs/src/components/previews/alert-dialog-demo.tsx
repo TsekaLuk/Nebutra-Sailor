@@ -1,6 +1,5 @@
-"use client"
+"use client";
 
-import { useState } from "react"
 import {
   Button,
   Dialog,
@@ -10,25 +9,24 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export function AlertDialogDemo() {
-  const [deleted, setDeleted] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [deleted, setDeleted] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="destructive">
-          {deleted ? "Account Deleted" : "Delete Account"}
-        </Button>
+        <Button variant="destructive">{deleted ? "Account Deleted" : "Delete Account"}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account and remove your
+            data from our servers.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -38,8 +36,8 @@ export function AlertDialogDemo() {
           <Button
             variant="destructive"
             onClick={() => {
-              setDeleted(true)
-              setOpen(false)
+              setDeleted(true);
+              setOpen(false);
             }}
           >
             Continue
@@ -47,5 +45,5 @@ export function AlertDialogDemo() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

@@ -1,10 +1,10 @@
+import { serverRegistry } from "../registry/serverRegistry.js";
 import type {
   MCPContext,
   MCPServerConfig,
   ToolExecutionRequest,
   ToolExecutionResult,
 } from "../types.js";
-import { serverRegistry } from "../registry/serverRegistry.js";
 
 /**
  * MCP Client for executing tools across registered servers
@@ -18,7 +18,7 @@ export class MCPClient {
   async executeTool(
     toolName: string,
     args: Record<string, unknown>,
-    context: MCPContext
+    context: MCPContext,
   ): Promise<ToolExecutionResult> {
     const startTime = Date.now();
 
@@ -65,7 +65,7 @@ export class MCPClient {
     server: MCPServerConfig,
     toolName: string,
     args: Record<string, unknown>,
-    context: MCPContext
+    context: MCPContext,
   ): Promise<unknown> {
     const requestId = `${context.requestId}-${++this.requestCounter}`;
 
@@ -88,7 +88,7 @@ export class MCPClient {
     server: MCPServerConfig,
     toolName: string,
     args: Record<string, unknown>,
-    requestId: string
+    requestId: string,
   ): Promise<unknown> {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
@@ -144,7 +144,7 @@ export class MCPClient {
     _server: MCPServerConfig,
     _toolName: string,
     _args: Record<string, unknown>,
-    _requestId: string
+    _requestId: string,
   ): Promise<unknown> {
     // WebSocket implementation would maintain persistent connections
     // For now, throw not implemented
@@ -169,9 +169,7 @@ export class MCPClient {
       return undefined;
     }
 
-    return server.tools.find(
-      (t) => t.name === toolName || `${server.id}:${t.name}` === toolName
-    );
+    return server.tools.find((t) => t.name === toolName || `${server.id}:${t.name}` === toolName);
   }
 }
 

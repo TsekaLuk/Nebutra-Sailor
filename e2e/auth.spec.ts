@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("Authentication Flow", () => {
   test("sign-in page is accessible", async ({ page }) => {
@@ -11,13 +11,9 @@ test.describe("Authentication Flow", () => {
     await expect(page).not.toHaveTitle(/404|Not Found/i);
   });
 
-  test("sign-in link from landing page navigates correctly", async ({
-    page,
-  }) => {
+  test("sign-in link from landing page navigates correctly", async ({ page }) => {
     await page.goto("/");
-    const signInLink = page
-      .getByRole("link", { name: /sign in|log in/i })
-      .first();
+    const signInLink = page.getByRole("link", { name: /sign in|log in/i }).first();
     if (await signInLink.isVisible()) {
       await signInLink.click();
       await expect(page).not.toHaveTitle(/Error|404/i);

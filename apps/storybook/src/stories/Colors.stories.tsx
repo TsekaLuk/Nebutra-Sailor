@@ -58,7 +58,7 @@ export const BrandColors: StoryObj = {
       <ColorRow
         label="云毓蓝 — Primary Brand (--nebutra-blue-*)"
         swatches={[
-          { name: "50",  cssVar: "--nebutra-blue-50",  hex: "#f0f4ff" },
+          { name: "50", cssVar: "--nebutra-blue-50", hex: "#f0f4ff" },
           { name: "100", cssVar: "--nebutra-blue-100", hex: "#dbe4ff" },
           { name: "200", cssVar: "--nebutra-blue-200", hex: "#bac8ff" },
           { name: "300", cssVar: "--nebutra-blue-300", hex: "#91a7ff" },
@@ -74,7 +74,7 @@ export const BrandColors: StoryObj = {
       <ColorRow
         label="云毓青 — Secondary Accent (--nebutra-cyan-*)"
         swatches={[
-          { name: "50",  cssVar: "--nebutra-cyan-50",  hex: "#e6fff8" },
+          { name: "50", cssVar: "--nebutra-cyan-50", hex: "#e6fff8" },
           { name: "100", cssVar: "--nebutra-cyan-100", hex: "#b3ffec" },
           { name: "200", cssVar: "--nebutra-cyan-200", hex: "#80ffe0" },
           { name: "300", cssVar: "--nebutra-cyan-300", hex: "#4dfcd4" },
@@ -96,8 +96,8 @@ export const SemanticColors: StoryObj = {
   render: () => (
     <div className="p-6 bg-white">
       <p className="mb-4 text-sm text-gray-500">
-        Geist-style 12-step scales. Steps 1–2 = backgrounds, 3–5 = component states,
-        6–8 = borders, 9–10 = solid fills, 11–12 = text.
+        Geist-style 12-step scales. Steps 1–2 = backgrounds, 3–5 = component states, 6–8 = borders,
+        9–10 = solid fills, 11–12 = text.
       </p>
       {(["blue", "cyan", "neutral"] as const).map((color) => (
         <ColorRow
@@ -121,13 +121,10 @@ export const Gradients: StoryObj = {
         { name: "Default", cssVar: "--brand-gradient" },
         { name: "Reverse", cssVar: "--brand-gradient-reverse" },
         { name: "Vertical", cssVar: "--brand-gradient-vertical" },
-        { name: "Radial",   cssVar: "--brand-gradient-radial" },
+        { name: "Radial", cssVar: "--brand-gradient-radial" },
       ].map(({ name, cssVar }) => (
         <div key={cssVar} className="flex flex-col gap-2">
-          <div
-            className="h-24 rounded-lg"
-            style={{ background: `var(${cssVar})` }}
-          />
+          <div className="h-24 rounded-lg" style={{ background: `var(${cssVar})` }} />
           <p className="text-sm font-medium text-gray-900">{name}</p>
           <p className="font-mono text-[11px] text-gray-500">{cssVar}</p>
         </div>
@@ -145,9 +142,19 @@ export const DarkMode: StoryObj = {
         All semantic tokens switch automatically in dark mode.
       </p>
       <div className="grid grid-cols-4 gap-3">
-        {["--neutral-1","--neutral-2","--neutral-3","--neutral-4",
-          "--neutral-9","--neutral-10","--neutral-11","--neutral-12",
-          "--blue-9","--blue-3","--cyan-9","--cyan-3",
+        {[
+          "--neutral-1",
+          "--neutral-2",
+          "--neutral-3",
+          "--neutral-4",
+          "--neutral-9",
+          "--neutral-10",
+          "--neutral-11",
+          "--neutral-12",
+          "--blue-9",
+          "--blue-3",
+          "--cyan-9",
+          "--cyan-3",
         ].map((cssVar) => (
           <div key={cssVar} className="flex flex-col gap-1">
             <div

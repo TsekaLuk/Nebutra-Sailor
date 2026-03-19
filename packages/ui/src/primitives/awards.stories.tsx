@@ -122,12 +122,7 @@ export const AllVariants: Story = {
         recipient="Jane Smith"
         date="March 2026"
       />
-      <Awards
-        variant="stamp"
-        title="CERTIFIED"
-        subtitle="PROFESSIONAL"
-        date="2026"
-      />
+      <Awards variant="stamp" title="CERTIFIED" subtitle="PROFESSIONAL" date="2026" />
     </div>
   ),
 };

@@ -6,12 +6,12 @@
  */
 
 import type {
-  LegalConfig,
   CompanyInfo,
-  DocumentConfig,
-  CookieConfig,
   ContactConfig,
   CookieCategory,
+  CookieConfig,
+  DocumentConfig,
+  LegalConfig,
 } from "../types";
 
 // ============================================
@@ -113,8 +113,7 @@ export const cookieCategories: CookieCategory[] = [
   {
     id: "analytics",
     name: "Analytics",
-    description:
-      "Cookies that help us understand how visitors interact with our website.",
+    description: "Cookies that help us understand how visitors interact with our website.",
     required: false,
     defaultEnabled: false,
     cookies: [
@@ -182,8 +181,7 @@ export const cookieCategories: CookieCategory[] = [
   {
     id: "thirdParty",
     name: "Third-Party",
-    description:
-      "Cookies from third-party services embedded in our website (videos, maps, etc.).",
+    description: "Cookies from third-party services embedded in our website (videos, maps, etc.).",
     required: false,
     defaultEnabled: false,
     cookies: [
@@ -422,20 +420,14 @@ export function getDocumentConfig(slug: string): DocumentConfig | undefined {
  * Get all required documents
  */
 export function getRequiredDocuments(): DocumentConfig[] {
-  return Object.values(documentConfigs).filter(
-    (doc) => doc.metadata.isRequired,
-  );
+  return Object.values(documentConfigs).filter((doc) => doc.metadata.isRequired);
 }
 
 /**
  * Get documents by type
  */
-export function getDocumentsByType(
-  type: DocumentConfig["metadata"]["type"],
-): DocumentConfig[] {
-  return Object.values(documentConfigs).filter(
-    (doc) => doc.metadata.type === type,
-  );
+export function getDocumentsByType(type: DocumentConfig["metadata"]["type"]): DocumentConfig[] {
+  return Object.values(documentConfigs).filter((doc) => doc.metadata.type === type);
 }
 
 /**

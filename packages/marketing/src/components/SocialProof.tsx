@@ -1,12 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
 import { clsx } from "clsx";
-import type {
-  SocialProofBarProps,
-  TrustBadge,
-  TrustBadgesProps,
-} from "../types";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
+import type { SocialProofBarProps, TrustBadge, TrustBadgesProps } from "../types";
 
 // ============================================
 // Animated Number Counter
@@ -37,7 +34,7 @@ function AnimatedNumber({
             const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
             // Ease out cubic
-            const eased = 1 - Math.pow(1 - progress, 3);
+            const eased = 1 - (1 - progress) ** 3;
             setDisplayValue(Math.floor(eased * value));
 
             if (progress < 1) {
@@ -66,12 +63,7 @@ function AnimatedNumber({
 
 const StatIcons = {
   users: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -81,12 +73,7 @@ const StatIcons = {
     </svg>
   ),
   companies: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -96,12 +83,7 @@ const StatIcons = {
     </svg>
   ),
   countries: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -116,12 +98,7 @@ const StatIcons = {
     </svg>
   ),
   reviews: (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
+    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -183,31 +160,15 @@ interface StatItemProps {
   format?: (n: number) => string;
 }
 
-function StatItem({
-  value,
-  label,
-  icon,
-  animated = true,
-  format = formatNumber,
-}: StatItemProps) {
+function StatItem({ value, label, icon, animated = true, format = formatNumber }: StatItemProps) {
   return (
     <div className="flex items-center gap-2">
       <span style={{ color: "var(--marketing-accent-fg)" }}>{icon}</span>
       <div className="flex flex-col">
-        <span
-          className="text-xl font-bold"
-          style={{ color: "var(--marketing-fg-default)" }}
-        >
-          {animated ? (
-            <AnimatedNumber value={value} format={format} />
-          ) : (
-            format(value)
-          )}
+        <span className="text-xl font-bold" style={{ color: "var(--marketing-fg-default)" }}>
+          {animated ? <AnimatedNumber value={value} format={format} /> : format(value)}
         </span>
-        <span
-          className="text-xs"
-          style={{ color: "var(--marketing-fg-muted)" }}
-        >
+        <span className="text-xs" style={{ color: "var(--marketing-fg-muted)" }}>
           {label}
         </span>
       </div>
@@ -222,11 +183,7 @@ function StatItem({
 /**
  * Minimal variant - Simple inline stats
  */
-function SocialProofBarMinimal({
-  stats,
-  animated = true,
-  className,
-}: SocialProofBarProps) {
+function SocialProofBarMinimal({ stats, animated = true, className }: SocialProofBarProps) {
   const items: {
     value: number;
     label: string;
@@ -234,35 +191,18 @@ function SocialProofBarMinimal({
   }[] = [];
 
   if (stats.users) items.push({ value: stats.users, label: "users" });
-  if (stats.companies)
-    items.push({ value: stats.companies, label: "companies" });
-  if (stats.countries)
-    items.push({ value: stats.countries, label: "countries" });
-  if (stats.rating)
-    items.push({ value: stats.rating, label: "rating", format: formatRating });
+  if (stats.companies) items.push({ value: stats.companies, label: "companies" });
+  if (stats.countries) items.push({ value: stats.countries, label: "countries" });
+  if (stats.rating) items.push({ value: stats.rating, label: "rating", format: formatRating });
   if (stats.reviews) items.push({ value: stats.reviews, label: "reviews" });
-  if (stats.productHuntUpvotes)
-    items.push({ value: stats.productHuntUpvotes, label: "upvotes" });
-  if (stats.githubStars)
-    items.push({ value: stats.githubStars, label: "stars" });
+  if (stats.productHuntUpvotes) items.push({ value: stats.productHuntUpvotes, label: "upvotes" });
+  if (stats.githubStars) items.push({ value: stats.githubStars, label: "stars" });
 
   return (
-    <div
-      className={clsx(
-        "flex flex-wrap items-center justify-center gap-x-8 gap-y-2",
-        className,
-      )}
-    >
+    <div className={clsx("flex flex-wrap items-center justify-center gap-x-8 gap-y-2", className)}>
       {items.map(({ value, label, format }) => (
-        <span
-          key={label}
-          className="text-sm"
-          style={{ color: "var(--marketing-fg-muted)" }}
-        >
-          <span
-            className="font-bold"
-            style={{ color: "var(--marketing-fg-default)" }}
-          >
+        <span key={label} className="text-sm" style={{ color: "var(--marketing-fg-muted)" }}>
+          <span className="font-bold" style={{ color: "var(--marketing-fg-default)" }}>
             {animated ? (
               <AnimatedNumber value={value} format={format || formatNumber} />
             ) : (
@@ -279,18 +219,9 @@ function SocialProofBarMinimal({
 /**
  * Badges variant - Stats as badges
  */
-function SocialProofBarBadges({
-  stats,
-  animated = true,
-  className,
-}: SocialProofBarProps) {
+function SocialProofBarBadges({ stats, animated = true, className }: SocialProofBarProps) {
   return (
-    <div
-      className={clsx(
-        "flex flex-wrap items-center justify-center gap-4",
-        className,
-      )}
-    >
+    <div className={clsx("flex flex-wrap items-center justify-center gap-4", className)}>
       {stats.users && (
         <div
           className="flex items-center gap-2 rounded-full px-4 py-2"
@@ -299,10 +230,7 @@ function SocialProofBarBadges({
           }}
         >
           {StatIcons.users}
-          <span
-            className="font-semibold"
-            style={{ color: "var(--marketing-stat-users-fg)" }}
-          >
+          <span className="font-semibold" style={{ color: "var(--marketing-stat-users-fg)" }}>
             {animated ? (
               <AnimatedNumber value={stats.users} format={formatNumber} />
             ) : (
@@ -320,13 +248,8 @@ function SocialProofBarBadges({
             backgroundColor: "var(--marketing-stat-rating-bg)",
           }}
         >
-          <span style={{ color: "var(--marketing-stat-rating-fg)" }}>
-            {StatIcons.rating}
-          </span>
-          <span
-            className="font-semibold"
-            style={{ color: "var(--marketing-stat-rating-fg)" }}
-          >
+          <span style={{ color: "var(--marketing-stat-rating-fg)" }}>{StatIcons.rating}</span>
+          <span className="font-semibold" style={{ color: "var(--marketing-stat-rating-fg)" }}>
             {formatRating(stats.rating)} rating
           </span>
         </div>
@@ -340,15 +263,9 @@ function SocialProofBarBadges({
           }}
         >
           {StatIcons.productHuntUpvotes}
-          <span
-            className="font-semibold"
-            style={{ color: "var(--marketing-stat-upvotes-fg)" }}
-          >
+          <span className="font-semibold" style={{ color: "var(--marketing-stat-upvotes-fg)" }}>
             {animated ? (
-              <AnimatedNumber
-                value={stats.productHuntUpvotes}
-                format={formatNumber}
-              />
+              <AnimatedNumber value={stats.productHuntUpvotes} format={formatNumber} />
             ) : (
               formatNumber(stats.productHuntUpvotes)
             )}
@@ -365,10 +282,7 @@ function SocialProofBarBadges({
           }}
         >
           {StatIcons.githubStars}
-          <span
-            className="font-semibold"
-            style={{ color: "var(--marketing-stat-stars-fg)" }}
-          >
+          <span className="font-semibold" style={{ color: "var(--marketing-stat-stars-fg)" }}>
             {animated ? (
               <AnimatedNumber value={stats.githubStars} format={formatNumber} />
             ) : (
@@ -385,11 +299,7 @@ function SocialProofBarBadges({
 /**
  * Detailed variant - Full stat cards
  */
-function SocialProofBarDetailed({
-  stats,
-  animated = true,
-  className,
-}: SocialProofBarProps) {
+function SocialProofBarDetailed({ stats, animated = true, className }: SocialProofBarProps) {
   return (
     <div
       className={clsx(
@@ -479,30 +389,12 @@ export function SocialProofBar({
 }: SocialProofBarProps) {
   switch (variant) {
     case "badges":
-      return (
-        <SocialProofBarBadges
-          stats={stats}
-          animated={animated}
-          className={className}
-        />
-      );
+      return <SocialProofBarBadges stats={stats} animated={animated} className={className} />;
     case "detailed":
-      return (
-        <SocialProofBarDetailed
-          stats={stats}
-          animated={animated}
-          className={className}
-        />
-      );
+      return <SocialProofBarDetailed stats={stats} animated={animated} className={className} />;
     case "minimal":
     default:
-      return (
-        <SocialProofBarMinimal
-          stats={stats}
-          animated={animated}
-          className={className}
-        />
-      );
+      return <SocialProofBarMinimal stats={stats} animated={animated} className={className} />;
   }
 }
 
@@ -576,16 +468,10 @@ export interface FeaturedInProps {
   className?: string;
 }
 
-export function FeaturedIn({
-  title = "Featured in",
-  badges,
-  className,
-}: FeaturedInProps) {
+export function FeaturedIn({ title = "Featured in", badges, className }: FeaturedInProps) {
   return (
     <div className={clsx("text-center", className)}>
-      <p className="mb-6 text-sm font-medium uppercase tracking-wider text-gray-500">
-        {title}
-      </p>
+      <p className="mb-6 text-sm font-medium uppercase tracking-wider text-gray-500">{title}</p>
       <TrustBadges badges={badges} variant="row" size="medium" />
     </div>
   );

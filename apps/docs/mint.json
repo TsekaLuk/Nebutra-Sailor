@@ -46,12 +46,7 @@
     },
     {
       "group": "Quickstart",
-      "pages": [
-        "quickstart/nextjs",
-        "quickstart/react",
-        "quickstart/node",
-        "quickstart/python"
-      ]
+      "pages": ["quickstart/nextjs", "quickstart/react", "quickstart/node", "quickstart/python"]
     },
     {
       "group": "Guides",
@@ -83,18 +78,11 @@
     },
     {
       "group": "API Reference",
-      "pages": [
-        "api-reference/overview",
-        "api-reference/authentication",
-        "api-reference/errors"
-      ]
+      "pages": ["api-reference/overview", "api-reference/authentication", "api-reference/errors"]
     },
     {
       "group": "SDKs",
-      "pages": [
-        "sdks/javascript",
-        "sdks/python"
-      ]
+      "pages": ["sdks/javascript", "sdks/python"]
     }
   ],
   "footerSocials": {

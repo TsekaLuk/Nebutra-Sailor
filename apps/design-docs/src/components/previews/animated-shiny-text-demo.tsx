@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { AnimatedShinyText } from "@nebutra/ui/primitives"
+import { AnimatedShinyText } from "@nebutra/ui/primitives";
 
 export function AnimatedShinyTextDemo() {
   return (
@@ -9,5 +9,5 @@ export function AnimatedShinyTextDemo() {
         <AnimatedShinyText>✨ Introducing new features</AnimatedShinyText>
       </div>
     </div>
-  )
+  );
 }

@@ -52,9 +52,7 @@ export const AllVariants: Story = {
       ).map((variant) => (
         <div key={variant} className="flex flex-col items-center gap-2">
           <Spinner variant={variant} size={24} />
-          <span className="text-xs text-muted-foreground text-center">
-            {variant}
-          </span>
+          <span className="text-xs text-muted-foreground text-center">{variant}</span>
         </div>
       ))}
     </div>
@@ -106,11 +104,7 @@ export const InButton: Story = {
         disabled
         className="flex items-center gap-2 rounded-md bg-destructive px-4 py-2 text-sm text-destructive-foreground opacity-80 cursor-not-allowed"
       >
-        <Spinner
-          variant="ellipsis"
-          size={20}
-          className="text-destructive-foreground"
-        />
+        <Spinner variant="ellipsis" size={20} className="text-destructive-foreground" />
         Deleting
       </button>
     </div>
@@ -121,9 +115,7 @@ export const RingPulse: Story = {
   render: () => (
     <div className="flex flex-col items-center gap-4">
       <Spinner variant="ring" size={64} className="text-primary" />
-      <span className="text-sm text-muted-foreground">
-        Ring variant — expanding sonar pulse
-      </span>
+      <span className="text-sm text-muted-foreground">Ring variant — expanding sonar pulse</span>
     </div>
   ),
 };
@@ -132,9 +124,7 @@ export const InfiniteSymbol: Story = {
   render: () => (
     <div className="flex flex-col items-center gap-4">
       <Spinner variant="infinite" size={64} className="text-primary" />
-      <span className="text-sm text-muted-foreground">
-        Infinite variant — traced infinity path
-      </span>
+      <span className="text-sm text-muted-foreground">Infinite variant — traced infinity path</span>
     </div>
   ),
 };

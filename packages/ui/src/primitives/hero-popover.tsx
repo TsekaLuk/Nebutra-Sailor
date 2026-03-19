@@ -2,11 +2,13 @@
 
 import {
   Popover as HeroUIPopoverBase,
-  PopoverTrigger as HeroUIPopoverTrigger,
   PopoverContent as HeroUIPopoverContent,
+  PopoverTrigger as HeroUIPopoverTrigger,
 } from "@heroui/popover";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const HeroUIPopover = HeroUIPopoverBase as any;
+
 import type { PopoverProps as HeroUIPopoverProps } from "@heroui/popover";
 import type { HTMLMotionProps } from "framer-motion";
 
@@ -38,10 +40,7 @@ export type HeroPopoverColor =
 
 export type HeroPopoverBackdrop = "transparent" | "opaque" | "blur";
 
-export interface HeroPopoverProps extends Omit<
-  HeroUIPopoverProps,
-  "children" | "ref"
-> {
+export interface HeroPopoverProps extends Omit<HeroUIPopoverProps, "children" | "ref"> {
   /** Popover trigger and content as children */
   children: React.ReactNode[];
   /** Size of the popover */
@@ -83,9 +82,7 @@ export interface HeroPopoverProps extends Omit<
   /** Custom motion props for animations */
   motionProps?: HTMLMotionProps<"div">;
   /** Custom class names for slots */
-  classNames?: Partial<
-    Record<"base" | "trigger" | "backdrop" | "content", string>
-  >;
+  classNames?: Partial<Record<"base" | "trigger" | "backdrop" | "content", string>>;
   /** Callback when open state changes */
   onOpenChange?: (isOpen: boolean) => void;
   /** Callback when popover closes */
@@ -255,13 +252,6 @@ export function HeroPopoverTrigger({ children }: HeroPopoverTriggerProps) {
  * </HeroPopoverContent>
  * ```
  */
-export function HeroPopoverContent({
-  children,
-  className,
-}: HeroPopoverContentProps) {
-  return (
-    <HeroUIPopoverContent className={className}>
-      {children}
-    </HeroUIPopoverContent>
-  );
+export function HeroPopoverContent({ children, className }: HeroPopoverContentProps) {
+  return <HeroUIPopoverContent className={className}>{children}</HeroUIPopoverContent>;
 }

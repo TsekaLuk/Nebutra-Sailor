@@ -8,8 +8,8 @@
  * a minimal wrapper app that replicates the production mount order.
  */
 
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import { OpenAPIHono } from "@hono/zod-openapi";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // ---------------------------------------------------------------------------
 // Mocks — declared BEFORE any route/middleware imports so Vitest hoists them.
@@ -55,11 +55,7 @@ const AUTH_HEADERS = {
   "x-user-id": "user-123",
 };
 
-function jsonRequest(
-  path: string,
-  body?: unknown,
-  extraHeaders?: Record<string, string>,
-) {
+function jsonRequest(path: string, body?: unknown, extraHeaders?: Record<string, string>) {
   const opts: RequestInit = {
     method: "POST",
     headers: {
@@ -267,9 +263,7 @@ describe("POST /ingest — upstream proxy", () => {
   });
 
   it("returns 502 when fetch throws a network error", async () => {
-    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(
-      new TypeError("Failed to fetch"),
-    );
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new TypeError("Failed to fetch"));
 
     const res = await authedJsonRequest("/ingest", { events: [validEvent] });
 
@@ -280,9 +274,7 @@ describe("POST /ingest — upstream proxy", () => {
   });
 
   it("returns 502 with the original error message when fetch throws an Error", async () => {
-    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(
-      new Error("ECONNREFUSED"),
-    );
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new Error("ECONNREFUSED"));
 
     const res = await authedJsonRequest("/ingest", { events: [validEvent] });
 

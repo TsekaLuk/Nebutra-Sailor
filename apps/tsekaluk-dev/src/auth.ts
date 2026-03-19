@@ -1,20 +1,18 @@
-import NextAuth from "next-auth"
-import GitHub from "next-auth/providers/github"
-import Google from "next-auth/providers/google"
+import NextAuth from "next-auth";
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
+
 interface LinuxDoProfile {
-  id: number
-  username: string
-  name: string | null
-  avatar_url: string
-  active: boolean
-  trust_level: number
-  silenced: boolean
+  id: number;
+  username: string;
+  name: string | null;
+  avatar_url: string;
+  active: boolean;
+  trust_level: number;
+  silenced: boolean;
 }
 
-function LinuxDo(config: {
-  clientId?: string
-  clientSecret?: string
-}) {
+function LinuxDo(config: { clientId?: string; clientSecret?: string }) {
   return {
     id: "linuxdo",
     name: "Linux DO",
@@ -33,9 +31,9 @@ function LinuxDo(config: {
         name: profile.name ?? profile.username,
         email: null,
         image: profile.avatar_url,
-      }
+      };
     },
-  }
+  };
 }
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
@@ -67,9 +65,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             ...session.user,
             id: token.sub,
           },
-        }
+        };
       }
-      return session
+      return session;
     },
   },
-})
+});

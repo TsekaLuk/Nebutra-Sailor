@@ -5,7 +5,7 @@
  * app.request() pattern with a mocked @nebutra/db module.
  */
 
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // ---------------------------------------------------------------------------
 // Mock @nebutra/db BEFORE importing the health route.

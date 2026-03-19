@@ -1,17 +1,17 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import { motion, type Variants } from "framer-motion";
-import { ArrowLeft, AlertTriangle } from "lucide-react";
+import { AlertTriangle, ArrowLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Suspense } from "react";
+import { Link } from "@/i18n/navigation";
 
 function ErrorContent() {
   const t = useTranslations("auth.error");
   const searchParams = useSearchParams();
   const errorType = searchParams.get("error");
-  
+
   let errorMessageStr = t("default");
   if (errorType === "Configuration") {
     errorMessageStr = t("configuration");
@@ -21,19 +21,22 @@ function ErrorContent() {
 
   const containerVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95, filter: "blur(8px)" },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      transition: { 
-        type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.1 
-      }
-    }
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } },
   };
 
   return (
@@ -53,10 +56,8 @@ function ErrorContent() {
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
           {t("title")}
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 mb-6">
-          {t("subtitle")}
-        </p>
-        
+        <p className="text-gray-500 dark:text-gray-400 mb-6">{t("subtitle")}</p>
+
         <div className="bg-red-50 dark:bg-red-950/30 border border-red-100 dark:border-red-900/50 rounded-xl p-4 text-sm text-red-800 dark:text-red-300 text-left">
           {errorMessageStr}
         </div>
@@ -69,8 +70,8 @@ function ErrorContent() {
         >
           {t("try_again")}
         </Link>
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="inline-flex items-center justify-center gap-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors py-2"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -83,7 +84,13 @@ function ErrorContent() {
 
 export default function AuthErrorPage() {
   return (
-    <Suspense fallback={<div className="h-[400px] flex items-center justify-center"><div className="w-8 h-8 border-4 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin"/></div>}>
+    <Suspense
+      fallback={
+        <div className="h-[400px] flex items-center justify-center">
+          <div className="w-8 h-8 border-4 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
       <ErrorContent />
     </Suspense>
   );

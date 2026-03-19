@@ -1,12 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { ArrowRight, type LucideIcon } from "lucide-react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 import { Card } from "./card";
 
-export interface FeatureArrowCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface FeatureArrowCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Feature icon */
   icon: LucideIcon;
   /** Feature title */
@@ -39,10 +38,7 @@ export function FeatureArrowCard({
 }: FeatureArrowCardProps) {
   return (
     <div
-      className={cn(
-        "relative flex flex-col gap-3 border bg-background p-4 transition",
-        className
-      )}
+      className={cn("relative flex flex-col gap-3 border bg-background p-4 transition", className)}
       {...props}
     >
       <div className="flex items-center gap-4">
@@ -52,8 +48,7 @@ export function FeatureArrowCard({
             {title}
           </span>
           <h3 className="text-lg font-normal text-foreground">
-            {subtitle}{" "}
-            <span className="text-muted-foreground">{description}</span>
+            {subtitle} <span className="text-muted-foreground">{description}</span>
           </h3>
         </div>
       </div>

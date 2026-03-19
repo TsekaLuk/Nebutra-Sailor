@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { LightRays, Card } from "@nebutra/ui/primitives"
-import { Sparkles } from "lucide-react"
+import { Card, LightRays } from "@nebutra/ui/primitives";
+import { Sparkles } from "lucide-react";
 
 export function LightRaysDemo() {
   return (
@@ -25,8 +25,8 @@ export function LightRaysDemo() {
           </h2>
 
           <p className="text-blue-100/60 max-w-md text-lg">
-            Discover insights previously hidden in the dark. Our advanced
-            analytics engine brings everything to light.
+            Discover insights previously hidden in the dark. Our advanced analytics engine brings
+            everything to light.
           </p>
 
           <button className="mt-8 px-6 py-2.5 bg-white text-black font-medium hover:bg-blue-50 rounded-full transition-colors">
@@ -35,5 +35,5 @@ export function LightRaysDemo() {
         </div>
       </Card>
     </div>
-  )
+  );
 }

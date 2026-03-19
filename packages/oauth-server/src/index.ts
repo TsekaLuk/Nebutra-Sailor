@@ -16,16 +16,14 @@
  * ```
  */
 
-export { createNebutraOIDCProvider } from "./provider.js"
-export type { NebutraOIDCConfig } from "./provider.js"
-
 export {
   createPrismaAdapter,
   EPHEMERAL_MODELS,
-} from "./adapters/prisma-adapter.js"
-
+} from "./adapters/prisma-adapter.js";
 export {
   NEBUTRA_CLAIMS,
-  SUPPORTED_SCOPES,
   SCOPE_DESCRIPTIONS,
-} from "./claims.js"
+  SUPPORTED_SCOPES,
+} from "./claims.js";
+export type { NebutraOIDCConfig } from "./provider.js";
+export { createNebutraOIDCProvider } from "./provider.js";

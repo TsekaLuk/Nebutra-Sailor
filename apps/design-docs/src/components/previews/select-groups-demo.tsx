@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
-  SelectValue,
-  SelectSeparator,
-  SelectContent,
   Select,
+  SelectContent,
   SelectGroup,
-  SelectLabel,
-  SelectTrigger,
   SelectItem,
-} from "@nebutra/ui/primitives"
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function SelectGroupsDemo() {
   return (
@@ -33,5 +33,5 @@ export function SelectGroupsDemo() {
         </SelectGroup>
       </SelectContent>
     </Select>
-  )
+  );
 }

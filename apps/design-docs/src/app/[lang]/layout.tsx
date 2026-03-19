@@ -1,8 +1,8 @@
-import { RootProvider } from "fumadocs-ui/provider/next";
 import { I18nProvider } from "fumadocs-ui/contexts/i18n";
-import type { ReactNode } from "react";
+import { RootProvider } from "fumadocs-ui/provider/next";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
+import type { ReactNode } from "react";
 import { i18n } from "@/lib/i18n";
 import "../globals.css";
 
@@ -26,9 +26,7 @@ const notoSansSC = Noto_Sans_SC({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: "Nebutra UI",
   description: "The elegant design system powering Nebutra Sailor",
 };

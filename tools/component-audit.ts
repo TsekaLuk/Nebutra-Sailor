@@ -24,9 +24,7 @@ const CONFIG = {
   scanDirs: ["apps", "packages/ui"],
 
   // Approved internal packages
-  approvedPackages: [
-    "@nebutra/ui",
-  ],
+  approvedPackages: ["@nebutra/ui"],
 
   // Pre-approved external libraries
   preApproved: [
@@ -235,11 +233,8 @@ function runAudit(): AuditResult {
     summary: {
       filesScanned,
       externalImports: allImports.length,
-      requiresApproval: allImports.filter(
-        (i) => i.status === "requires-approval",
-      ).length,
-      notRecommended: allImports.filter((i) => i.status === "not-recommended")
-        .length,
+      requiresApproval: allImports.filter((i) => i.status === "requires-approval").length,
+      notRecommended: allImports.filter((i) => i.status === "not-recommended").length,
       deprecatedUsage: allDeprecated.length,
       styleViolations: allStyles.length,
     },
@@ -249,15 +244,9 @@ function runAudit(): AuditResult {
 function formatReport(result: AuditResult): string {
   const lines: string[] = [];
 
-  lines.push(
-    "╔══════════════════════════════════════════════════════════════╗",
-  );
-  lines.push(
-    "║              COMPONENT AUDIT REPORT                          ║",
-  );
-  lines.push(
-    "╚══════════════════════════════════════════════════════════════╝",
-  );
+  lines.push("╔══════════════════════════════════════════════════════════════╗");
+  lines.push("║              COMPONENT AUDIT REPORT                          ║");
+  lines.push("╚══════════════════════════════════════════════════════════════╝");
   lines.push("");
 
   // Summary
@@ -277,12 +266,8 @@ function formatReport(result: AuditResult): string {
     lines.push("─".repeat(60));
 
     const byStatus = {
-      "requires-approval": result.externalImports.filter(
-        (i) => i.status === "requires-approval",
-      ),
-      "not-recommended": result.externalImports.filter(
-        (i) => i.status === "not-recommended",
-      ),
+      "requires-approval": result.externalImports.filter((i) => i.status === "requires-approval"),
+      "not-recommended": result.externalImports.filter((i) => i.status === "not-recommended"),
       unknown: result.externalImports.filter((i) => i.status === "unknown"),
     };
 
@@ -372,7 +357,6 @@ if (jsonOutput) {
 }
 
 // Exit with error if critical issues
-const hasBlockingIssues =
-  result.summary.notRecommended > 0 || result.summary.deprecatedUsage > 0;
+const hasBlockingIssues = result.summary.notRecommended > 0 || result.summary.deprecatedUsage > 0;
 
 process.exit(hasBlockingIssues ? 1 : 0);

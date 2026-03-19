@@ -4,8 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Nebutra — AI-Native SaaS Platform",
     short_name: "Nebutra",
-    description:
-      "Enterprise-grade AI-native SaaS platform for modern businesses",
+    description: "Enterprise-grade AI-native SaaS platform for modern businesses",
     start_url: "/",
     display: "standalone",
     background_color: "#020617",

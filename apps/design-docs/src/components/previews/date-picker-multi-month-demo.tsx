@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { DateRangePicker } from "@nebutra/ui/primitives"
+import { DateRangePicker } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function DatePickerMultiMonthDemo() {
-  return <DateRangePicker label="住宿时间" visibleMonths={2} />
+  return <DateRangePicker label="住宿时间" visibleMonths={2} />;
 }

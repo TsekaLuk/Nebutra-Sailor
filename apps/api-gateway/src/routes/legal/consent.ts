@@ -1,12 +1,9 @@
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-import type { ContentfulStatusCode } from "hono/utils/http-status";
-import { prisma, Prisma } from "@nebutra/db";
-import { logger } from "@nebutra/logger";
+import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
+import { type Prisma, prisma } from "@nebutra/db";
 import { DatabaseError, NotFoundError, toApiError } from "@nebutra/errors";
-import {
-  requireAuth,
-  requireOrganization,
-} from "@/middlewares/tenantContext.js";
+import { logger } from "@nebutra/logger";
+import type { ContentfulStatusCode } from "hono/utils/http-status";
+import { requireAuth, requireOrganization } from "@/middlewares/tenantContext.js";
 
 const log = logger.child({ service: "consent" });
 
@@ -48,9 +45,7 @@ function jsonError(
 const recordConsentSchema = z.object({
   documentSlug: z.string().min(1),
   documentVersion: z.string().optional(),
-  consentType: z
-    .enum(["EXPLICIT", "IMPLICIT", "OPT_IN", "OPT_OUT"])
-    .default("EXPLICIT"),
+  consentType: z.enum(["EXPLICIT", "IMPLICIT", "OPT_IN", "OPT_OUT"]).default("EXPLICIT"),
   context: z.string().optional(),
   visitorId: z.string().min(1),
   metadata: z.record(z.string(), z.unknown()).optional(),
@@ -74,15 +69,7 @@ const contactFormSchema = z.object({
   subject: z.string().min(1).max(200),
   message: z.string().min(1),
   category: z
-    .enum([
-      "general",
-      "sales",
-      "support",
-      "legal",
-      "privacy",
-      "partnership",
-      "press",
-    ])
+    .enum(["general", "sales", "support", "legal", "privacy", "partnership", "press"])
     .default("general"),
 });
 
@@ -104,8 +91,7 @@ const recordConsentRoute = createRoute({
   path: "/consent",
   tags: ["Legal"],
   summary: "Record document consent",
-  description:
-    "Record user consent for a legal document (e.g. terms of service, privacy policy)",
+  description: "Record user consent for a legal document (e.g. terms of service, privacy policy)",
   request: {
     body: {
       content: {
@@ -160,30 +146,24 @@ consentRoutes.openapi(recordConsentRoute, async (c) => {
 
     if (!document) {
       const notFound = new NotFoundError("LegalDocument", data.documentSlug);
-      return jsonError(
-        c,
-        notFound,
-        notFound.statusCode as ContentfulStatusCode,
-      );
+      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
     }
 
-    const consentData: Parameters<typeof prisma.userConsent.create>[0]["data"] =
-      {
-        visitorId: data.visitorId,
-        documentId: document.id,
-        documentSlug: document.slug,
-        documentVersion: document.version,
-        consentType: data.consentType,
-        consentGiven: true,
-        consentContext: data.context ?? null,
-        metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
-      };
+    const consentData: Parameters<typeof prisma.userConsent.create>[0]["data"] = {
+      visitorId: data.visitorId,
+      documentId: document.id,
+      documentSlug: document.slug,
+      documentVersion: document.version,
+      consentType: data.consentType,
+      consentGiven: true,
+      consentContext: data.context ?? null,
+      metadata: (data.metadata ?? {}) as Prisma.InputJsonValue,
+    };
 
     if (userId) consentData.userId = userId;
     if (organizationId) consentData.organizationId = organizationId;
 
-    const ipAddress =
-      c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
+    const ipAddress = c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
     if (ipAddress) consentData.ipAddress = ipAddress;
 
     const userAgent = c.req.header("user-agent");
@@ -202,10 +182,7 @@ consentRoutes.openapi(recordConsentRoute, async (c) => {
       200,
     );
   } catch (error) {
-    const dbError = new DatabaseError(
-      "record consent",
-      error instanceof Error ? error : undefined,
-    );
+    const dbError = new DatabaseError("record consent", error instanceof Error ? error : undefined);
     log.error("Failed to record consent", { error, userId, organizationId });
     return jsonError(c, dbError, dbError.statusCode as ContentfulStatusCode);
   }
@@ -267,11 +244,7 @@ consentRoutes.openapi(consentStatusRoute, async (c) => {
 
     if (!currentDocument) {
       const notFound = new NotFoundError("LegalDocument", documentSlug);
-      return jsonError(
-        c,
-        notFound,
-        notFound.statusCode as ContentfulStatusCode,
-      );
+      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
     }
 
     const consent = await prisma.userConsent.findFirst({
@@ -279,17 +252,13 @@ consentRoutes.openapi(consentStatusRoute, async (c) => {
         documentSlug,
         consentGiven: true,
         withdrawnAt: null,
-        OR: [
-          ...(userId ? [{ userId }] : []),
-          ...(visitorId ? [{ visitorId }] : []),
-        ],
+        OR: [...(userId ? [{ userId }] : []), ...(visitorId ? [{ visitorId }] : [])],
       },
       orderBy: { consentedAt: "desc" },
     });
 
     const hasConsented = !!consent;
-    const needsReconsent =
-      hasConsented && consent.documentVersion !== currentDocument.version;
+    const needsReconsent = hasConsented && consent.documentVersion !== currentDocument.version;
 
     return c.json(
       {
@@ -361,10 +330,7 @@ consentRoutes.openapi(withdrawConsentRoute, async (c) => {
       where: {
         documentSlug,
         withdrawnAt: null,
-        OR: [
-          ...(userId ? [{ userId }] : []),
-          ...(visitorId ? [{ visitorId }] : []),
-        ],
+        OR: [...(userId ? [{ userId }] : []), ...(visitorId ? [{ visitorId }] : [])],
       },
       data: {
         withdrawnAt: new Date(),
@@ -451,9 +417,7 @@ consentRoutes.openapi(recordCookieConsentRoute, async (c) => {
   expiresAt.setFullYear(expiresAt.getFullYear() + 1);
 
   try {
-    const createData: Parameters<
-      typeof prisma.cookieConsent.upsert
-    >[0]["create"] = {
+    const createData: Parameters<typeof prisma.cookieConsent.upsert>[0]["create"] = {
       visitorId: data.visitorId,
       necessary: true,
       functional: data.preferences.functional,
@@ -464,16 +428,13 @@ consentRoutes.openapi(recordCookieConsentRoute, async (c) => {
     };
     if (userId) createData.userId = userId;
 
-    const ipAddress =
-      c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
+    const ipAddress = c.req.header("x-forwarded-for") || c.req.header("x-real-ip");
     if (ipAddress) createData.ipAddress = ipAddress;
 
     const userAgent = c.req.header("user-agent");
     if (userAgent) createData.userAgent = userAgent;
 
-    const updateData: Parameters<
-      typeof prisma.cookieConsent.upsert
-    >[0]["update"] = {
+    const updateData: Parameters<typeof prisma.cookieConsent.upsert>[0]["update"] = {
       functional: data.preferences.functional,
       analytics: data.preferences.analytics,
       marketing: data.preferences.marketing,
@@ -529,8 +490,7 @@ const getCookieConsentRoute = createRoute({
   path: "/cookie-consent",
   tags: ["Legal"],
   summary: "Get cookie consent preferences",
-  description:
-    "Retrieve current cookie consent preferences for a visitor or user",
+  description: "Retrieve current cookie consent preferences for a visitor or user",
   request: {
     query: z.object({
       visitorId: z.string().optional(),
@@ -586,10 +546,7 @@ consentRoutes.openapi(getCookieConsentRoute, async (c) => {
   try {
     const consent = await prisma.cookieConsent.findFirst({
       where: {
-        OR: [
-          ...(visitorId ? [{ visitorId }] : []),
-          ...(userId ? [{ userId }] : []),
-        ],
+        OR: [...(visitorId ? [{ visitorId }] : []), ...(userId ? [{ userId }] : [])],
         expiresAt: { gt: new Date() },
       },
       orderBy: { updatedAt: "desc" },
@@ -640,8 +597,7 @@ const listDocumentsRoute = createRoute({
   path: "/documents",
   tags: ["Legal"],
   summary: "List legal documents",
-  description:
-    "List all active legal documents, optionally filtered by locale and type",
+  description: "List all active legal documents, optionally filtered by locale and type",
   request: {
     query: z.object({
       locale: z.string().default("en").optional(),
@@ -679,10 +635,7 @@ const listDocumentsRoute = createRoute({
 });
 
 consentRoutes.openapi(listDocumentsRoute, async (c) => {
-  c.header(
-    "Cache-Control",
-    "public, max-age=3600, stale-while-revalidate=86400",
-  );
+  c.header("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
 
   const { locale: rawLocale, type } = c.req.valid("query");
   const locale = rawLocale || "en";
@@ -772,10 +725,7 @@ const getDocumentRoute = createRoute({
 });
 
 consentRoutes.openapi(getDocumentRoute, async (c) => {
-  c.header(
-    "Cache-Control",
-    "public, max-age=3600, stale-while-revalidate=86400",
-  );
+  c.header("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
 
   const { slug } = c.req.valid("param");
   const { locale: rawLocale, version } = c.req.valid("query");
@@ -794,11 +744,7 @@ consentRoutes.openapi(getDocumentRoute, async (c) => {
 
     if (!document) {
       const notFound = new NotFoundError("LegalDocument", slug);
-      return jsonError(
-        c,
-        notFound,
-        notFound.statusCode as ContentfulStatusCode,
-      );
+      return jsonError(c, notFound, notFound.statusCode as ContentfulStatusCode);
     }
 
     return c.json({ document }, 200);
@@ -867,8 +813,7 @@ consentRoutes.openapi(contactFormRoute, async (c) => {
         message: data.message,
         category: data.category,
         status: "new",
-        ipAddress:
-          c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? null,
+        ipAddress: c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? null,
         userAgent: c.req.header("user-agent") ?? null,
       },
     });
@@ -879,8 +824,7 @@ consentRoutes.openapi(contactFormRoute, async (c) => {
       {
         success: true as const,
         submissionId: submission.id,
-        message:
-          "Your message has been received. We will respond within 1-2 business days.",
+        message: "Your message has been received. We will respond within 1-2 business days.",
       },
       200,
     );

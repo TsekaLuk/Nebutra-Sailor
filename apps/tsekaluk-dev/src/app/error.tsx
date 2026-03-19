@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { AnimateIn } from "@nebutra/ui/components";
+import Link from "next/link";
 
 export default function GlobalError({
   error: _error,
@@ -13,23 +13,33 @@ export default function GlobalError({
   return (
     <section className="mx-auto grid min-h-[100dvh] max-w-3xl place-items-center px-6 py-32 text-center">
       <AnimateIn preset="fade">
-        <style dangerouslySetInnerHTML={{
-          __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
           @keyframes pulse-gentle { 0%,100% { opacity: 0.4; } 50% { opacity: 0.2; } }
-        `}} />
-        <div className="w-16 h-16 mx-auto mb-4" style={{ animation: "pulse-gentle 3s ease-in-out infinite" }}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-gray-300 dark:text-gray-700">
+        `,
+          }}
+        />
+        <div
+          className="w-16 h-16 mx-auto mb-4"
+          style={{ animation: "pulse-gentle 3s ease-in-out infinite" }}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-full h-full text-gray-300 dark:text-gray-700"
+          >
             <circle cx="12" cy="12" r="10" />
             <path d="M12 8v4" />
             <circle cx="12" cy="16" r="0.5" fill="currentColor" />
           </svg>
         </div>
-        <p className="font-serif italic text-8xl text-gray-200 dark:text-gray-800">
-          Error
-        </p>
-        <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-          Something went wrong.
-        </p>
+        <p className="font-serif italic text-8xl text-gray-200 dark:text-gray-800">Error</p>
+        <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">Something went wrong.</p>
         <div className="mt-8 flex items-center justify-center gap-4">
           <button
             type="button"

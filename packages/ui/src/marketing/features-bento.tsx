@@ -1,12 +1,9 @@
 "use client";
 
+import { type LucideIcon, Shield, Users } from "lucide-react";
 import * as React from "react";
-import { Shield, Users, type LucideIcon } from "lucide-react";
+import { Card, CardContent } from "../primitives/card";
 import { cn } from "../utils/cn";
-import {
-  Card,
-  CardContent,
-} from "../primitives/card";
 
 export interface BentoStatCard {
   /** Stat value (e.g. "100%") */
@@ -100,9 +97,7 @@ export function FeaturesBentoSection({
                     {statCard.value}
                   </span>
                 </div>
-                <h2 className="mt-6 text-center text-3xl font-semibold">
-                  {statCard.title}
-                </h2>
+                <h2 className="mt-6 text-center text-3xl font-semibold">{statCard.title}</h2>
               </CardContent>
             </Card>
 
@@ -128,9 +123,7 @@ export function FeaturesBentoSection({
                   <PerformanceChartSvg />
                 </div>
                 <div className="relative z-10 mt-14 space-y-2 text-center">
-                  <h2 className="text-lg font-medium transition">
-                    {performanceCard.title}
-                  </h2>
+                  <h2 className="text-lg font-medium transition">{performanceCard.title}</h2>
                   <p className="text-foreground">{performanceCard.description}</p>
                 </div>
               </CardContent>
@@ -169,9 +162,7 @@ export function FeaturesBentoSection({
                     <RightIcon className="m-auto size-6" strokeWidth={1} />
                   </div>
                   <div className="space-y-2">
-                    <h2 className="text-lg font-medium transition">
-                      {rightFeatureCard.title}
-                    </h2>
+                    <h2 className="text-lg font-medium transition">{rightFeatureCard.title}</h2>
                     <p className="text-foreground">{rightFeatureCard.description}</p>
                   </div>
                 </div>
@@ -210,9 +201,7 @@ function TeamMemberRow({
   if (position === "right") {
     return (
       <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
-        <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">
-          {name}
-        </span>
+        <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">{name}</span>
         <div className="size-7 ring-4 ring-background">
           <img className="size-full rounded-full" src={avatar} alt={name} />
         </div>
@@ -225,9 +214,7 @@ function TeamMemberRow({
       <div className="size-8 ring-4 ring-background">
         <img className="size-full rounded-full" src={avatar} alt={name} />
       </div>
-      <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">
-        {name}
-      </span>
+      <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">{name}</span>
     </div>
   );
 }

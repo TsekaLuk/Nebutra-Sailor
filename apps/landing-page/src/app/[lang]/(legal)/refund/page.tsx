@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { routing, type Locale } from "@/i18n/routing";
+import { type Locale, routing } from "@/i18n/routing";
 
 export async function generateMetadata({
   params,
@@ -22,11 +22,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function RefundPolicyPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function RefundPolicyPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const locale = lang as Locale;
   setRequestLocale(locale);
@@ -43,9 +39,9 @@ export default async function RefundPolicyPage({
       </p>
 
       <p>
-        At Nebutra, we want you to be completely satisfied with our services.
-        This Refund Policy outlines the circumstances under which refunds are
-        available and the process for requesting them.
+        At Nebutra, we want you to be completely satisfied with our services. This Refund Policy
+        outlines the circumstances under which refunds are available and the process for requesting
+        them.
       </p>
 
       <h2>Subscription Plans</h2>
@@ -53,40 +49,36 @@ export default async function RefundPolicyPage({
       <h3>Monthly Subscriptions</h3>
       <ul>
         <li>
-          <strong>Cancellation:</strong> You may cancel your monthly
-          subscription at any time
+          <strong>Cancellation:</strong> You may cancel your monthly subscription at any time
         </li>
         <li>
-          <strong>Pro-rata Refunds:</strong> We do not offer pro-rata refunds
-          for partial months
+          <strong>Pro-rata Refunds:</strong> We do not offer pro-rata refunds for partial months
         </li>
         <li>
-          <strong>Access:</strong> You retain access to paid features until the
-          end of your billing period
+          <strong>Access:</strong> You retain access to paid features until the end of your billing
+          period
         </li>
         <li>
-          <strong>Automatic Renewal:</strong> Subscriptions automatically renew
-          unless cancelled
+          <strong>Automatic Renewal:</strong> Subscriptions automatically renew unless cancelled
         </li>
       </ul>
 
       <h3>Annual Subscriptions</h3>
       <ul>
         <li>
-          <strong>14-Day Money-Back Guarantee:</strong> New annual subscribers
-          may request a full refund within 14 days of their initial purchase
+          <strong>14-Day Money-Back Guarantee:</strong> New annual subscribers may request a full
+          refund within 14 days of their initial purchase
         </li>
         <li>
-          <strong>After 14 Days:</strong> Refunds are generally not available
-          after the 14-day period
+          <strong>After 14 Days:</strong> Refunds are generally not available after the 14-day
+          period
         </li>
         <li>
-          <strong>Cancellation:</strong> You may cancel at any time, but your
-          subscription will remain active until the end of the annual term
+          <strong>Cancellation:</strong> You may cancel at any time, but your subscription will
+          remain active until the end of the annual term
         </li>
         <li>
-          <strong>No Pro-rata Refunds:</strong> We do not offer partial refunds
-          for unused months
+          <strong>No Pro-rata Refunds:</strong> We do not offer partial refunds for unused months
         </li>
       </ul>
 
@@ -95,14 +87,8 @@ export default async function RefundPolicyPage({
 
       <h3>1. Service Issues</h3>
       <ul>
-        <li>
-          Significant service outages affecting your ability to use core
-          features
-        </li>
-        <li>
-          Technical issues that we are unable to resolve within a reasonable
-          timeframe
-        </li>
+        <li>Significant service outages affecting your ability to use core features</li>
+        <li>Technical issues that we are unable to resolve within a reasonable timeframe</li>
         <li>Features significantly different from what was advertised</li>
       </ul>
 
@@ -124,24 +110,19 @@ export default async function RefundPolicyPage({
       <p>The following are generally not eligible for refunds:</p>
       <ul>
         <li>
-          <strong>Usage-based charges:</strong> API calls, AI token consumption,
-          or storage used
+          <strong>Usage-based charges:</strong> API calls, AI token consumption, or storage used
         </li>
         <li>
-          <strong>Add-ons and extras:</strong> One-time purchases or add-on
-          services
+          <strong>Add-ons and extras:</strong> One-time purchases or add-on services
         </li>
         <li>
-          <strong>Enterprise contracts:</strong> Custom agreements have their
-          own terms
+          <strong>Enterprise contracts:</strong> Custom agreements have their own terms
         </li>
         <li>
-          <strong>Voluntary cancellations:</strong> After the refund eligibility
-          period
+          <strong>Voluntary cancellations:</strong> After the refund eligibility period
         </li>
         <li>
-          <strong>Terms violations:</strong> Accounts terminated for policy
-          violations
+          <strong>Terms violations:</strong> Accounts terminated for policy violations
         </li>
       </ul>
 
@@ -149,8 +130,7 @@ export default async function RefundPolicyPage({
 
       <h3>Step 1: Contact Support</h3>
       <p>
-        Email us at <a href="mailto:billing@nebutra.com">billing@nebutra.com</a>{" "}
-        with:
+        Email us at <a href="mailto:billing@nebutra.com">billing@nebutra.com</a> with:
       </p>
       <ul>
         <li>Your account email address</li>
@@ -179,10 +159,7 @@ export default async function RefundPolicyPage({
       <h3>Upgrades</h3>
       <ul>
         <li>Upgrades take effect immediately</li>
-        <li>
-          You are charged the pro-rated difference for the remainder of your
-          billing period
-        </li>
+        <li>You are charged the pro-rated difference for the remainder of your billing period</li>
         <li>No refund is provided for the previous plan</li>
       </ul>
 
@@ -206,8 +183,7 @@ export default async function RefundPolicyPage({
         <li>Reply to the decision email with additional information</li>
         <li>Request escalation to a supervisor</li>
         <li>
-          Contact us at <a href="mailto:legal@nebutra.com">legal@nebutra.com</a>{" "}
-          for further review
+          Contact us at <a href="mailto:legal@nebutra.com">legal@nebutra.com</a> for further review
         </li>
       </ol>
 
@@ -227,8 +203,8 @@ export default async function RefundPolicyPage({
       <hr />
 
       <p>
-        This policy is part of our <Link href="/terms">Terms of Service</Link>.
-        By using Nebutra, you agree to these refund terms.
+        This policy is part of our <Link href="/terms">Terms of Service</Link>. By using Nebutra,
+        you agree to these refund terms.
       </p>
     </article>
   );

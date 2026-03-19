@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { ScrollArea, ScrollBar } from "@/components/mdx-scroll-area"
+import { ScrollArea, ScrollBar } from "@/components/mdx-scroll-area";
 export function ScrollArea2Demo() {
   return (
     <ScrollArea className="mb-6 w-full max-w-[400px] rounded-md border text-left whitespace-nowrap">
@@ -17,5 +17,5 @@ export function ScrollArea2Demo() {
       </div>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
-  )
+  );
 }

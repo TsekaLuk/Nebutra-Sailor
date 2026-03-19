@@ -1,4 +1,4 @@
-import { Awards } from "@nebutra/ui/primitives"
+import { Awards } from "@nebutra/ui/primitives";
 
 export function AwardsDemo() {
   return (
@@ -33,5 +33,5 @@ export function AwardsDemo() {
         />
       </div>
     </div>
-  )
+  );
 }

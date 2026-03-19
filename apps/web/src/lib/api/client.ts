@@ -21,14 +21,13 @@
 import createClient, { type Middleware } from "openapi-fetch";
 
 // `types.generated.ts` is produced by `pnpm generate:api-types`.
-// The `// @ts-ignore` allows the repo to typecheck cleanly before the first
+// The `// @ts-expect-error` allows the repo to typecheck cleanly before the first
 // generation run — the file will be present in CI after the spec export step.
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore – generated file may not exist yet locally
+// @ts-expect-error – generated file may not exist yet locally
 import type { paths } from "./types.generated";
 
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_GATEWAY_URL ?? "http://localhost:3002";
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_GATEWAY_URL ?? "http://localhost:3002";
 
 // ── Auth middleware ───────────────────────────────────────────────────────────
 

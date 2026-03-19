@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { inviteTeamMember, type InviteState } from "./actions";
+import { type InviteState, inviteTeamMember } from "./actions";
 
 interface Props {
   orgId: string;
@@ -10,10 +10,7 @@ interface Props {
 const INITIAL: InviteState = { status: "idle" };
 
 export function InviteMemberForm({ orgId }: Props) {
-  const [state, action, isPending] = useActionState(
-    inviteTeamMember,
-    INITIAL
-  );
+  const [state, action, isPending] = useActionState(inviteTeamMember, INITIAL);
 
   return (
     <form action={action} className="flex gap-3">

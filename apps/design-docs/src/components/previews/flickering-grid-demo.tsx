@@ -1,4 +1,4 @@
-import { FlickeringGrid } from "@nebutra/ui/primitives"
+import { FlickeringGrid } from "@nebutra/ui/primitives";
 
 export function FlickeringGridDemo() {
   return (
@@ -12,10 +12,8 @@ export function FlickeringGridDemo() {
         flickerChance={0.1}
       />
       <div className="pointer-events-none relative z-10 flex h-full items-center justify-center">
-        <h2 className="text-4xl font-bold text-white tracking-tight">
-          Flickering Grid
-        </h2>
+        <h2 className="text-4xl font-bold text-white tracking-tight">Flickering Grid</h2>
       </div>
     </div>
-  )
+  );
 }

@@ -43,11 +43,7 @@ export const Default: Story = {
 
 export const AsymmetricSpacing: Story = {
   render: () => (
-    <Box
-      px={8}
-      py={2}
-      className="border rounded bg-primary/10 w-64 text-center"
-    >
+    <Box px={8} py={2} className="border rounded bg-primary/10 w-64 text-center">
       px=8 py=2
     </Box>
   ),
@@ -68,11 +64,7 @@ export const NestedBoxes: Story = {
 
 export const AsSection: Story = {
   render: () => (
-    <Box
-      as="section"
-      p={8}
-      className="border rounded-xl max-w-sm bg-background"
-    >
+    <Box as="section" p={8} className="border rounded-xl max-w-sm bg-background">
       <Box as="article" p={4} className="rounded bg-muted/20 text-sm">
         Rendered as &lt;section&gt; containing &lt;article&gt;
       </Box>
@@ -83,17 +75,10 @@ export const AsSection: Story = {
 export const MarginControl: Story = {
   render: () => (
     <div className="border rounded p-2 w-96 bg-muted/10">
-      <Box
-        mt={4}
-        mb={4}
-        mx={8}
-        className="border rounded bg-primary/10 p-2 text-center text-sm"
-      >
+      <Box mt={4} mb={4} mx={8} className="border rounded bg-primary/10 p-2 text-center text-sm">
         mt=4 mb=4 mx=8
       </Box>
-      <Box className="border rounded bg-muted/20 p-2 text-center text-sm">
-        No margin
-      </Box>
+      <Box className="border rounded bg-muted/20 p-2 text-center text-sm">No margin</Box>
     </div>
   ),
 };

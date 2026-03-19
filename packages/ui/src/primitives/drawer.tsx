@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "../utils";
 
@@ -15,25 +15,15 @@ export type DrawerProps = React.ComponentProps<typeof DrawerPrimitive.Root> & {
   direction?: DrawerDirection;
 };
 
-export type DrawerTriggerProps = React.ComponentProps<
-  typeof DrawerPrimitive.Trigger
->;
+export type DrawerTriggerProps = React.ComponentProps<typeof DrawerPrimitive.Trigger>;
 
-export type DrawerPortalProps = React.ComponentProps<
-  typeof DrawerPrimitive.Portal
->;
+export type DrawerPortalProps = React.ComponentProps<typeof DrawerPrimitive.Portal>;
 
-export type DrawerCloseProps = React.ComponentProps<
-  typeof DrawerPrimitive.Close
->;
+export type DrawerCloseProps = React.ComponentProps<typeof DrawerPrimitive.Close>;
 
-export type DrawerOverlayProps = React.ComponentProps<
-  typeof DrawerPrimitive.Overlay
->;
+export type DrawerOverlayProps = React.ComponentProps<typeof DrawerPrimitive.Overlay>;
 
-export type DrawerContentProps = React.ComponentProps<
-  typeof DrawerPrimitive.Content
->;
+export type DrawerContentProps = React.ComponentProps<typeof DrawerPrimitive.Content>;
 
 export type DrawerHeaderProps = React.ComponentProps<"div">;
 
@@ -41,13 +31,9 @@ export type DrawerBodyProps = React.ComponentProps<"div">;
 
 export type DrawerFooterProps = React.ComponentProps<"div">;
 
-export type DrawerTitleProps = React.ComponentProps<
-  typeof DrawerPrimitive.Title
->;
+export type DrawerTitleProps = React.ComponentProps<typeof DrawerPrimitive.Title>;
 
-export type DrawerDescriptionProps = React.ComponentProps<
-  typeof DrawerPrimitive.Description
->;
+export type DrawerDescriptionProps = React.ComponentProps<typeof DrawerPrimitive.Description>;
 
 // =============================================================================
 // Components
@@ -207,14 +193,14 @@ function DrawerDescription({ className, ...props }: DrawerDescriptionProps) {
 
 export {
   Drawer,
-  DrawerPortal,
-  DrawerOverlay,
-  DrawerTrigger,
+  DrawerBody,
   DrawerClose,
   DrawerContent,
-  DrawerHeader,
-  DrawerBody,
-  DrawerFooter,
-  DrawerTitle,
   DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger,
 };

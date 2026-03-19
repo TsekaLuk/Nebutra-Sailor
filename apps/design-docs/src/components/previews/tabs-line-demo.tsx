@@ -1,12 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import {
-  Tabs,
-  TabsTrigger,
-  TabsList,
-  TabsContent,
-} from "@nebutra/ui/primitives"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function TabsLineDemo() {
   return (
@@ -26,5 +21,5 @@ export function TabsLineDemo() {
         Reports content
       </TabsContent>
     </Tabs>
-  )
+  );
 }

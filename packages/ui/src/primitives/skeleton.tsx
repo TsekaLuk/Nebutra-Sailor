@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 /**
@@ -111,10 +111,7 @@ export function SkeletonText({
       {Array.from({ length: lines }).map((_, i) => (
         <Skeleton
           key={i}
-          className={cn(
-            "h-4",
-            i === lines - 1 ? "w-[60%]" : i === 0 ? "w-full" : "w-[80%]",
-          )}
+          className={cn("h-4", i === lines - 1 ? "w-[60%]" : i === 0 ? "w-full" : "w-[80%]")}
         />
       ))}
     </div>
@@ -132,12 +129,7 @@ export function SkeletonAvatar({
     lg: "h-12 w-12",
   };
 
-  return (
-    <Skeleton
-      className={cn("rounded-full", sizeClasses[size], className)}
-      {...props}
-    />
-  );
+  return <Skeleton className={cn("rounded-full", sizeClasses[size], className)} {...props} />;
 }
 
 export function SkeletonCard({ className, ...props }: SkeletonProps) {

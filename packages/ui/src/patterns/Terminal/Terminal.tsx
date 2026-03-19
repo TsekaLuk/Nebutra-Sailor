@@ -82,14 +82,8 @@ const TerminalHeader = React.forwardRef<HTMLDivElement, TerminalHeaderProps>(
         {showControls && (
           <div className="flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-full bg-red-500/80" aria-hidden />
-            <span
-              className="w-3 h-3 rounded-full bg-yellow-500/80"
-              aria-hidden
-            />
-            <span
-              className="w-3 h-3 rounded-full bg-green-500/80"
-              aria-hidden
-            />
+            <span className="w-3 h-3 rounded-full bg-yellow-500/80" aria-hidden />
+            <span className="w-3 h-3 rounded-full bg-green-500/80" aria-hidden />
           </div>
         )}
         {title && <span className="ml-2 text-xs text-[var(--neutral-9)]">{title}</span>}
@@ -124,17 +118,7 @@ export interface TerminalLineProps extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 const TerminalLine = React.forwardRef<HTMLDivElement, TerminalLineProps>(
-  (
-    {
-      className,
-      prompt = "$",
-      output = false,
-      highlight = false,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, prompt = "$", output = false, highlight = false, children, ...props }, ref) => {
     return (
       <div
         ref={ref}
@@ -145,11 +129,7 @@ const TerminalLine = React.forwardRef<HTMLDivElement, TerminalLineProps>(
         )}
         {...props}
       >
-        {!output && (
-          <span className="text-emerald-400 shrink-0 select-none">
-            {prompt}
-          </span>
-        )}
+        {!output && <span className="text-emerald-400 shrink-0 select-none">{prompt}</span>}
         <span
           className={cn("flex-1", output ? "text-[var(--neutral-9)]" : "text-[var(--neutral-11)]")}
         >
@@ -171,4 +151,4 @@ export const Terminal = Object.assign(TerminalRoot, {
 });
 
 // Named exports for direct imports
-export { TerminalRoot, TerminalHeader, TerminalBody, TerminalLine };
+export { TerminalBody, TerminalHeader, TerminalLine, TerminalRoot };

@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { Sparkles } from "lucide-react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface DisplayCardProps {
@@ -39,13 +39,11 @@ function DisplayCard({
         "after:absolute after:-right-1 after:top-[-5%] after:h-[110%] after:w-[20rem] after:bg-gradient-to-l after:from-background after:to-transparent after:content-['']",
         "hover:border-white/20 hover:bg-muted",
         "[&>*]:flex [&>*]:items-center [&>*]:gap-2",
-        className
+        className,
       )}
     >
       <div>
-        <span className="relative inline-block rounded-full bg-blue-800 p-1">
-          {icon}
-        </span>
+        <span className="relative inline-block rounded-full bg-blue-800 p-1">{icon}</span>
         <p className={cn("text-lg font-medium", titleClassName)}>{title}</p>
       </div>
       <p className="whitespace-nowrap text-lg">{description}</p>
@@ -99,7 +97,7 @@ export function DisplayCards({ cards, className }: DisplayCardsProps) {
     <div
       className={cn(
         "grid [grid-template-areas:'stack'] place-items-center opacity-100 animate-in fade-in-0 duration-700",
-        className
+        className,
       )}
     >
       {displayCards.map((cardProps, index) => (

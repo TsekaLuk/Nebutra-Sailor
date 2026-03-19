@@ -18,9 +18,7 @@ export interface UpdateCustomerInput {
 /**
  * Create a Stripe customer
  */
-export async function createCustomer(
-  input: CreateCustomerInput
-): Promise<Stripe.Customer> {
+export async function createCustomer(input: CreateCustomerInput): Promise<Stripe.Customer> {
   const stripe = getStripe();
 
   return stripe.customers.create({
@@ -36,9 +34,7 @@ export async function createCustomer(
 /**
  * Get a Stripe customer by ID
  */
-export async function getCustomer(
-  customerId: string
-): Promise<Stripe.Customer | null> {
+export async function getCustomer(customerId: string): Promise<Stripe.Customer | null> {
   const stripe = getStripe();
 
   try {
@@ -55,9 +51,7 @@ export async function getCustomer(
 /**
  * Update a Stripe customer
  */
-export async function updateCustomer(
-  input: UpdateCustomerInput
-): Promise<Stripe.Customer> {
+export async function updateCustomer(input: UpdateCustomerInput): Promise<Stripe.Customer> {
   const stripe = getStripe();
 
   return stripe.customers.update(input.customerId, {
@@ -70,9 +64,7 @@ export async function updateCustomer(
 /**
  * Delete a Stripe customer
  */
-export async function deleteCustomer(
-  customerId: string
-): Promise<Stripe.DeletedCustomer> {
+export async function deleteCustomer(customerId: string): Promise<Stripe.DeletedCustomer> {
   const stripe = getStripe();
   return stripe.customers.del(customerId);
 }
@@ -83,7 +75,7 @@ export async function deleteCustomer(
 export async function getOrCreateCustomer(
   organizationId: string,
   email: string,
-  name?: string
+  name?: string,
 ): Promise<Stripe.Customer> {
   const stripe = getStripe();
 
@@ -110,7 +102,7 @@ export async function getOrCreateCustomer(
  */
 export async function createBillingPortalSession(
   customerId: string,
-  returnUrl: string
+  returnUrl: string,
 ): Promise<Stripe.BillingPortal.Session> {
   const stripe = getStripe();
 

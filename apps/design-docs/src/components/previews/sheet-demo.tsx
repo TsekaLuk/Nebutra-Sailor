@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
 import {
+  Button,
   Sheet,
-  SheetTrigger,
+  SheetClose,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
   SheetDescription,
   SheetFooter,
-  SheetClose,
-  Button,
-} from "@nebutra/ui/primitives"
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@nebutra/ui/primitives";
 
 export function SheetDemo() {
   return (
@@ -36,5 +36,5 @@ export function SheetDemo() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  )
+  );
 }

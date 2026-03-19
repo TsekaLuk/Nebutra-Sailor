@@ -1,5 +1,5 @@
-import { Redis } from "@upstash/redis";
 import { logger } from "@nebutra/logger";
+import { Redis } from "@upstash/redis";
 
 let redis: Redis | null = null;
 
@@ -76,11 +76,7 @@ export class TTLCache {
   /**
    * Get or set with callback
    */
-  async getOrSet<T>(
-    key: string,
-    fetcher: () => Promise<T>,
-    ttl?: number
-  ): Promise<T> {
+  async getOrSet<T>(key: string, fetcher: () => Promise<T>, ttl?: number): Promise<T> {
     const cached = await this.get<T>(key);
     if (cached !== null) {
       return cached;

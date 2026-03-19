@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Play, Pause, Volume2, Volume1, VolumeX } from "lucide-react";
-import { Button } from "./button";
+import { Pause, Play, Volume1, Volume2, VolumeX } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import type React from "react";
+import { useCallback, useRef, useState } from "react";
 import { cn } from "../utils";
+import { Button } from "./button";
 
 // =============================================================================
 // Types
@@ -77,11 +78,7 @@ const formatTime = (seconds: number): string => {
 /**
  * CustomSlider - Animated progress/volume slider
  */
-const CustomSlider: React.FC<CustomSliderProps> = ({
-  value,
-  onChange,
-  className,
-}) => {
+const CustomSlider: React.FC<CustomSliderProps> = ({ value, onChange, className }) => {
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -91,10 +88,7 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
 
   return (
     <motion.div
-      className={cn(
-        "relative h-1 w-full cursor-pointer rounded-full bg-white/20",
-        className,
-      )}
+      className={cn("relative h-1 w-full cursor-pointer rounded-full bg-white/20", className)}
       onClick={handleClick}
     >
       <motion.div
@@ -178,8 +172,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const handleTimeUpdate = useCallback(() => {
     if (videoRef.current) {
-      const progressValue =
-        (videoRef.current.currentTime / videoRef.current.duration) * 100;
+      const progressValue = (videoRef.current.currentTime / videoRef.current.duration) * 100;
       setProgress(isFinite(progressValue) ? progressValue : 0);
       setCurrentTime(videoRef.current.currentTime);
       setDuration(videoRef.current.duration);
@@ -256,14 +249,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           >
             {/* Progress bar */}
             <div className="mb-2 flex items-center gap-2">
-              <span className="text-sm text-white">
-                {formatTime(currentTime)}
-              </span>
-              <CustomSlider
-                value={progress}
-                onChange={handleSeek}
-                className="flex-1"
-              />
+              <span className="text-sm text-white">{formatTime(currentTime)}</span>
+              <CustomSlider value={progress} onChange={handleSeek} className="flex-1" />
               <span className="text-sm text-white">{formatTime(duration)}</span>
             </div>
 
@@ -271,10 +258,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 {/* Play/Pause */}
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <Button
                     onClick={togglePlay}
                     variant="ghost"
@@ -282,20 +266,13 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     className="text-white hover:bg-white/10 hover:text-white"
                     aria-label={isPlaying ? "Pause" : "Play"}
                   >
-                    {isPlaying ? (
-                      <Pause className="h-5 w-5" />
-                    ) : (
-                      <Play className="h-5 w-5" />
-                    )}
+                    {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                   </Button>
                 </motion.div>
 
                 {/* Volume */}
                 <div className="flex items-center gap-x-1">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <Button
                       onClick={toggleMute}
                       variant="ghost"
@@ -307,10 +284,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     </Button>
                   </motion.div>
                   <div className="w-24">
-                    <CustomSlider
-                      value={volume * 100}
-                      onChange={handleVolumeChange}
-                    />
+                    <CustomSlider value={volume * 100} onChange={handleVolumeChange} />
                   </div>
                 </div>
               </div>
@@ -318,11 +292,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
               {/* Playback speed */}
               <div className="flex items-center gap-1">
                 {speeds.map((speed) => (
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    key={speed}
-                  >
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} key={speed}>
                     <Button
                       onClick={() => setSpeed(speed)}
                       variant="ghost"

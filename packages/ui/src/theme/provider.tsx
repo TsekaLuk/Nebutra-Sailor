@@ -14,7 +14,7 @@
  */
 
 import { ThemeProvider as LobeThemeProvider } from "@lobehub/ui";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export interface NebutraThemeProviderProps {
   children: ReactNode;

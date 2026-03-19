@@ -34,10 +34,7 @@ export class DistributedLock {
   /**
    * Acquire a lock
    */
-  async acquire(
-    lockKey: string,
-    options: LockOptions
-  ): Promise<string | null> {
+  async acquire(lockKey: string, options: LockOptions): Promise<string | null> {
     const redis = getRedis();
     const lockId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const retries = options.retries || 0;
@@ -83,7 +80,7 @@ export class DistributedLock {
   async withLock<T>(
     lockKey: string,
     options: LockOptions,
-    fn: () => Promise<T>
+    fn: () => Promise<T>,
   ): Promise<T | null> {
     const lockId = await this.acquire(lockKey, options);
     if (!lockId) {

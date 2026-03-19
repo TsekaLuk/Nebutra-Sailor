@@ -1,6 +1,6 @@
+import { AnimateIn } from "@nebutra/ui/components";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { AnimateIn } from "@nebutra/ui/components";
 
 export async function generateMetadata({
   params,
@@ -30,14 +30,7 @@ export async function generateMetadata({
   };
 }
 
-const SECTIONS = [
-  "analytics",
-  "auth",
-  "chat",
-  "cookies",
-  "third_party",
-  "contact",
-] as const;
+const SECTIONS = ["analytics", "auth", "chat", "cookies", "third_party", "contact"] as const;
 
 export default async function PrivacyPage() {
   const t = await getTranslations("pages.privacy");

@@ -1,6 +1,4 @@
-"use client"
-
-import * as React from "react"
+"use client";
 
 import {
   Card,
@@ -9,8 +7,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@nebutra/ui/patterns"
-import { Button } from "@nebutra/ui/primitives"
+} from "@nebutra/ui/patterns";
+import { Button } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Card2Demo() {
   return (
     <Card variant="gradient" padding="lg">
@@ -21,14 +20,12 @@ export function Card2Demo() {
       <CardBody>
         <p className="text-3xl font-bold">
           $49
-          <span className="text-base font-normal text-muted-foreground">
-            /mo
-          </span>
+          <span className="text-base font-normal text-muted-foreground">/mo</span>
         </p>
       </CardBody>
       <CardFooter>
         <Button className="w-full">Get started</Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "../utils/cn";
 import type { SpacingScale } from "../tokens/spacing";
+import { cn } from "../utils/cn";
 
 /**
  * Flex - Horizontal layout primitive

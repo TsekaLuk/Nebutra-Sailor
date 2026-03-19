@@ -1,5 +1,5 @@
-import type { MCPServerConfig } from "../types.js";
 import { serverRegistry } from "../registry/serverRegistry.js";
+import type { MCPServerConfig } from "../types.js";
 
 /**
  * Register internal Nebutra services as MCP servers
@@ -30,7 +30,11 @@ export const INTERNAL_SERVERS: MCPServerConfig[] = [
         description: "Create vector embedding for text",
         parameters: {
           text: { type: "string", description: "Text to embed", required: true },
-          model: { type: "string", description: "Embedding model", default: "text-embedding-3-small" },
+          model: {
+            type: "string",
+            description: "Embedding model",
+            default: "text-embedding-3-small",
+          },
         },
         returns: "Vector embedding array",
       },

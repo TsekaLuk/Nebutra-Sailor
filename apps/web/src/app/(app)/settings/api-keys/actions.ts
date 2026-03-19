@@ -1,10 +1,10 @@
 "use server";
 
-import { z } from "zod";
 import { auth } from "@clerk/nextjs/server";
 import { prisma as db } from "@nebutra/db";
+import { createHash, randomBytes } from "crypto";
+import { z } from "zod";
 import { hasPermission, resolveRole } from "@/lib/permissions";
-import { randomBytes, createHash } from "crypto";
 
 export type CreateKeyState =
   | { status: "idle" }
@@ -37,7 +37,7 @@ function generateApiKey(): { raw: string; hash: string; prefix: string } {
 
 export async function createApiKey(
   _prev: CreateKeyState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CreateKeyState> {
   const { orgId: sessionOrgId, sessionClaims } = await auth();
   if (!sessionOrgId) return { status: "error", message: "Not authenticated." };
@@ -78,7 +78,7 @@ export async function createApiKey(
 
 export async function revokeApiKey(
   _prev: RevokeKeyState,
-  formData: FormData
+  formData: FormData,
 ): Promise<RevokeKeyState> {
   const { orgId: sessionOrgId, sessionClaims } = await auth();
   if (!sessionOrgId) return { status: "error", message: "Not authenticated." };

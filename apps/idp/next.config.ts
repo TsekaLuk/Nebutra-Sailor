@@ -1,4 +1,4 @@
-import type { NextConfig } from "next"
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Transpile workspace packages
@@ -9,6 +9,6 @@ const nextConfig: NextConfig = {
     "@nebutra/tokens",
     "@nebutra/ui",
   ],
-}
+};
 
-export default nextConfig
+export default nextConfig;

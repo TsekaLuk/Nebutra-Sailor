@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { Tooltip as BaseTooltip } from "@base-ui-components/react/tooltip";
-import { cn } from "../utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
+import { cn } from "../utils/cn";
 
 export type GeistTooltipType = "default" | "success" | "warning" | "error" | "violet";
 export type GeistTooltipPosition = "top" | "bottom" | "left" | "right";
@@ -71,22 +71,20 @@ export const GeistTooltip = ({
   const [open, setOpen] = React.useState(false);
 
   const delayMs = typeof delay === "number" ? delay : delay ? 500 : 0;
-  
+
   // Custom styles for type
   const colorClasses = typeStyles[type] || typeStyles.default;
 
   return (
     <BaseTooltip.Provider delay={delayMs}>
-      <BaseTooltip.Root
-        open={open}
-        onOpenChange={setOpen}
-        {...rootProps}
-      >
+      <BaseTooltip.Root open={open} onOpenChange={setOpen} {...rootProps}>
         <BaseTooltip.Trigger
           render={
-            React.isValidElement(children) 
-              ? (children as React.ReactElement<Record<string, unknown>>)
-              : <span>{children}</span>
+            React.isValidElement(children) ? (
+              (children as React.ReactElement<Record<string, unknown>>)
+            ) : (
+              <span>{children}</span>
+            )
           }
         />
         <AnimatePresence>
@@ -101,7 +99,12 @@ export const GeistTooltip = ({
                   {...popupProps}
                   render={
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.96, y: position === "top" ? 4 : position === "bottom" ? -4 : 0, x: position === "left" ? 4 : position === "right" ? -4 : 0 }}
+                      initial={{
+                        opacity: 0,
+                        scale: 0.96,
+                        y: position === "top" ? 4 : position === "bottom" ? -4 : 0,
+                        x: position === "left" ? 4 : position === "right" ? -4 : 0,
+                      }}
                       animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
                       exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.1 } }}
                       transition={{
@@ -115,22 +118,23 @@ export const GeistTooltip = ({
                         "flex items-center",
                         colorClasses,
                         center ? "text-center" : "text-left",
-                        className
+                        className,
                       )}
                     >
                       {text}
                       {tip && (
-                        <BaseTooltip.Arrow className={cn(
+                        <BaseTooltip.Arrow
+                          className={cn(
                             "w-2.5 h-2.5 rotate-45 border-none",
                             type === "default" && "bg-primary text-primary",
                             type === "success" && "bg-success text-success",
                             type === "warning" && "bg-warning text-warning",
                             type === "error" && "bg-destructive text-destructive",
                             type === "violet" && "bg-violet text-violet",
-                          )} 
+                          )}
                           style={{
-                             // Base UI naturally positions the arrow, but we add visual flair
-                             boxShadow: "-1px -1px 1px rgba(0,0,0,0.05)"
+                            // Base UI naturally positions the arrow, but we add visual flair
+                            boxShadow: "-1px -1px 1px rgba(0,0,0,0.05)",
                           }}
                         />
                       )}

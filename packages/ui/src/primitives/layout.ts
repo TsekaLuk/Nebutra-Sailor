@@ -6,10 +6,7 @@
 
 import type { CSSProperties } from "react";
 
-type StyleObject = Record<
-  string,
-  string | number | CSSProperties | (string | number)[]
->;
+type StyleObject = Record<string, string | number | CSSProperties | (string | number)[]>;
 
 /**
  * Common flex layouts

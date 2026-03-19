@@ -80,10 +80,7 @@ function makeLogger(base: pino.Logger): Logger {
     },
     error(msg, error, meta) {
       const traceId = getTraceId();
-      base.error(
-        { ...serializeError(error), ...meta, ...(traceId ? { traceId } : {}) },
-        msg,
-      );
+      base.error({ ...serializeError(error), ...meta, ...(traceId ? { traceId } : {}) }, msg);
     },
     child(bindings) {
       return makeLogger(base.child(bindings));

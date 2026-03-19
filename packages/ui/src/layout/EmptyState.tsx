@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 
 export interface EmptyStateProps {
   /** Icon or illustration to display */
@@ -32,9 +32,13 @@ export function EmptyState({ icon, title, description, action }: EmptyStateProps
   return (
     <div className="flex flex-col items-center justify-center px-4 py-10 text-center">
       {icon && <div className="mb-3 text-[color:var(--neutral-10)] dark:text-white/60">{icon}</div>}
-      <h3 className="text-lg font-semibold text-[color:var(--neutral-12)] dark:text-white">{title}</h3>
+      <h3 className="text-lg font-semibold text-[color:var(--neutral-12)] dark:text-white">
+        {title}
+      </h3>
       {description && (
-        <p className="mt-1 max-w-xs text-sm text-[color:var(--neutral-11)] dark:text-white/70">{description}</p>
+        <p className="mt-1 max-w-xs text-sm text-[color:var(--neutral-11)] dark:text-white/70">
+          {description}
+        </p>
       )}
       {action && <div className="mt-4">{action}</div>}
     </div>

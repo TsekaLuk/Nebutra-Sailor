@@ -14,44 +14,38 @@
  * model files in the `model` directory!
  */
 
-import * as runtime from "@prisma/client/runtime/index-browser"
+import * as runtime from "@prisma/client/runtime/index-browser";
 
-export type * from "../models"
-export type * from "./prismaNamespace"
+export type * from "../models";
+export type * from "./prismaNamespace";
 
-export const Decimal = runtime.Decimal
+export const Decimal = runtime.Decimal;
 
 export const NullTypes = {
-  DbNull: runtime.NullTypes.DbNull as new (
-    secret: never
-  ) => typeof runtime.DbNull,
-  JsonNull: runtime.NullTypes.JsonNull as new (
-    secret: never
-  ) => typeof runtime.JsonNull,
-  AnyNull: runtime.NullTypes.AnyNull as new (
-    secret: never
-  ) => typeof runtime.AnyNull,
-}
+  DbNull: runtime.NullTypes.DbNull as new (secret: never) => typeof runtime.DbNull,
+  JsonNull: runtime.NullTypes.JsonNull as new (secret: never) => typeof runtime.JsonNull,
+  AnyNull: runtime.NullTypes.AnyNull as new (secret: never) => typeof runtime.AnyNull,
+};
 /**
  * Helper for filtering JSON entries that have `null` on the database (empty on the db)
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-export const DbNull = runtime.DbNull
+export const DbNull = runtime.DbNull;
 
 /**
  * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-export const JsonNull = runtime.JsonNull
+export const JsonNull = runtime.JsonNull;
 
 /**
  * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
  *
  * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
  */
-export const AnyNull = runtime.AnyNull
+export const AnyNull = runtime.AnyNull;
 
 export const ModelName = {
   Organization: "Organization",
@@ -103,9 +97,9 @@ export const ModelName = {
   OAuthClient: "OAuthClient",
   OAuthAuthorization: "OAuthAuthorization",
   OAuthAccessToken: "OAuthAccessToken",
-} as const
+} as const;
 
-export type ModelName = (typeof ModelName)[keyof typeof ModelName]
+export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 
 /*
  * Enums
@@ -116,10 +110,10 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
   ReadCommitted: "ReadCommitted",
   RepeatableRead: "RepeatableRead",
   Serializable: "Serializable",
-} as const)
+} as const);
 
 export type TransactionIsolationLevel =
-  (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+  (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
 export const OrganizationScalarFieldEnum = {
   id: "id",
@@ -129,10 +123,10 @@ export const OrganizationScalarFieldEnum = {
   plan: "plan",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type OrganizationScalarFieldEnum =
-  (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
+  (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum];
 
 export const APIKeyScalarFieldEnum = {
   id: "id",
@@ -145,10 +139,10 @@ export const APIKeyScalarFieldEnum = {
   revokedAt: "revokedAt",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type APIKeyScalarFieldEnum =
-  (typeof APIKeyScalarFieldEnum)[keyof typeof APIKeyScalarFieldEnum]
+  (typeof APIKeyScalarFieldEnum)[keyof typeof APIKeyScalarFieldEnum];
 
 export const UserScalarFieldEnum = {
   id: "id",
@@ -158,10 +152,9 @@ export const UserScalarFieldEnum = {
   avatarUrl: "avatarUrl",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
-export type UserScalarFieldEnum =
-  (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
 export const OrganizationMemberScalarFieldEnum = {
   id: "id",
@@ -169,10 +162,10 @@ export const OrganizationMemberScalarFieldEnum = {
   userId: "userId",
   role: "role",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type OrganizationMemberScalarFieldEnum =
-  (typeof OrganizationMemberScalarFieldEnum)[keyof typeof OrganizationMemberScalarFieldEnum]
+  (typeof OrganizationMemberScalarFieldEnum)[keyof typeof OrganizationMemberScalarFieldEnum];
 
 export const ContentScalarFieldEnum = {
   id: "id",
@@ -185,10 +178,10 @@ export const ContentScalarFieldEnum = {
   publishedAt: "publishedAt",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type ContentScalarFieldEnum =
-  (typeof ContentScalarFieldEnum)[keyof typeof ContentScalarFieldEnum]
+  (typeof ContentScalarFieldEnum)[keyof typeof ContentScalarFieldEnum];
 
 export const ContentTranslationScalarFieldEnum = {
   id: "id",
@@ -198,20 +191,20 @@ export const ContentTranslationScalarFieldEnum = {
   body: "body",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type ContentTranslationScalarFieldEnum =
-  (typeof ContentTranslationScalarFieldEnum)[keyof typeof ContentTranslationScalarFieldEnum]
+  (typeof ContentTranslationScalarFieldEnum)[keyof typeof ContentTranslationScalarFieldEnum];
 
 export const ContentEmbeddingScalarFieldEnum = {
   id: "id",
   contentId: "contentId",
   model: "model",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type ContentEmbeddingScalarFieldEnum =
-  (typeof ContentEmbeddingScalarFieldEnum)[keyof typeof ContentEmbeddingScalarFieldEnum]
+  (typeof ContentEmbeddingScalarFieldEnum)[keyof typeof ContentEmbeddingScalarFieldEnum];
 
 export const ProductScalarFieldEnum = {
   id: "id",
@@ -227,10 +220,10 @@ export const ProductScalarFieldEnum = {
   isActive: "isActive",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type ProductScalarFieldEnum =
-  (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+  (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum];
 
 export const OrderScalarFieldEnum = {
   id: "id",
@@ -244,10 +237,9 @@ export const OrderScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
-export type OrderScalarFieldEnum =
-  (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
 
 export const OrderItemScalarFieldEnum = {
   id: "id",
@@ -255,10 +247,10 @@ export const OrderItemScalarFieldEnum = {
   productId: "productId",
   quantity: "quantity",
   unitPrice: "unitPrice",
-} as const
+} as const;
 
 export type OrderItemScalarFieldEnum =
-  (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+  (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum];
 
 export const IntegrationScalarFieldEnum = {
   id: "id",
@@ -271,10 +263,10 @@ export const IntegrationScalarFieldEnum = {
   lastSyncAt: "lastSyncAt",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type IntegrationScalarFieldEnum =
-  (typeof IntegrationScalarFieldEnum)[keyof typeof IntegrationScalarFieldEnum]
+  (typeof IntegrationScalarFieldEnum)[keyof typeof IntegrationScalarFieldEnum];
 
 export const WalletScalarFieldEnum = {
   id: "id",
@@ -285,10 +277,10 @@ export const WalletScalarFieldEnum = {
   isPrimary: "isPrimary",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type WalletScalarFieldEnum =
-  (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
+  (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum];
 
 export const NftScalarFieldEnum = {
   id: "id",
@@ -304,10 +296,9 @@ export const NftScalarFieldEnum = {
   status: "status",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
-export type NftScalarFieldEnum =
-  (typeof NftScalarFieldEnum)[keyof typeof NftScalarFieldEnum]
+export type NftScalarFieldEnum = (typeof NftScalarFieldEnum)[keyof typeof NftScalarFieldEnum];
 
 export const UserActivityScalarFieldEnum = {
   id: "id",
@@ -319,10 +310,10 @@ export const UserActivityScalarFieldEnum = {
   ipAddress: "ipAddress",
   userAgent: "userAgent",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type UserActivityScalarFieldEnum =
-  (typeof UserActivityScalarFieldEnum)[keyof typeof UserActivityScalarFieldEnum]
+  (typeof UserActivityScalarFieldEnum)[keyof typeof UserActivityScalarFieldEnum];
 
 export const TenantUsageScalarFieldEnum = {
   id: "id",
@@ -333,10 +324,10 @@ export const TenantUsageScalarFieldEnum = {
   storage: "storage",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type TenantUsageScalarFieldEnum =
-  (typeof TenantUsageScalarFieldEnum)[keyof typeof TenantUsageScalarFieldEnum]
+  (typeof TenantUsageScalarFieldEnum)[keyof typeof TenantUsageScalarFieldEnum];
 
 export const AIRequestScalarFieldEnum = {
   id: "id",
@@ -351,10 +342,10 @@ export const AIRequestScalarFieldEnum = {
   cost: "cost",
   metadata: "metadata",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type AIRequestScalarFieldEnum =
-  (typeof AIRequestScalarFieldEnum)[keyof typeof AIRequestScalarFieldEnum]
+  (typeof AIRequestScalarFieldEnum)[keyof typeof AIRequestScalarFieldEnum];
 
 export const UserPreferenceScalarFieldEnum = {
   id: "id",
@@ -365,10 +356,10 @@ export const UserPreferenceScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type UserPreferenceScalarFieldEnum =
-  (typeof UserPreferenceScalarFieldEnum)[keyof typeof UserPreferenceScalarFieldEnum]
+  (typeof UserPreferenceScalarFieldEnum)[keyof typeof UserPreferenceScalarFieldEnum];
 
 export const RecommendationScalarFieldEnum = {
   id: "id",
@@ -382,10 +373,10 @@ export const RecommendationScalarFieldEnum = {
   clicked: "clicked",
   createdAt: "createdAt",
   expiresAt: "expiresAt",
-} as const
+} as const;
 
 export type RecommendationScalarFieldEnum =
-  (typeof RecommendationScalarFieldEnum)[keyof typeof RecommendationScalarFieldEnum]
+  (typeof RecommendationScalarFieldEnum)[keyof typeof RecommendationScalarFieldEnum];
 
 export const FeatureFlagScalarFieldEnum = {
   id: "id",
@@ -397,10 +388,10 @@ export const FeatureFlagScalarFieldEnum = {
   isEnabled: "isEnabled",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type FeatureFlagScalarFieldEnum =
-  (typeof FeatureFlagScalarFieldEnum)[keyof typeof FeatureFlagScalarFieldEnum]
+  (typeof FeatureFlagScalarFieldEnum)[keyof typeof FeatureFlagScalarFieldEnum];
 
 export const FeatureFlagOverrideScalarFieldEnum = {
   id: "id",
@@ -409,10 +400,10 @@ export const FeatureFlagOverrideScalarFieldEnum = {
   userId: "userId",
   value: "value",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type FeatureFlagOverrideScalarFieldEnum =
-  (typeof FeatureFlagOverrideScalarFieldEnum)[keyof typeof FeatureFlagOverrideScalarFieldEnum]
+  (typeof FeatureFlagOverrideScalarFieldEnum)[keyof typeof FeatureFlagOverrideScalarFieldEnum];
 
 export const FeatureDefinitionScalarFieldEnum = {
   id: "id",
@@ -427,10 +418,10 @@ export const FeatureDefinitionScalarFieldEnum = {
   sortOrder: "sortOrder",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type FeatureDefinitionScalarFieldEnum =
-  (typeof FeatureDefinitionScalarFieldEnum)[keyof typeof FeatureDefinitionScalarFieldEnum]
+  (typeof FeatureDefinitionScalarFieldEnum)[keyof typeof FeatureDefinitionScalarFieldEnum];
 
 export const UsageLimitDefinitionScalarFieldEnum = {
   id: "id",
@@ -445,10 +436,10 @@ export const UsageLimitDefinitionScalarFieldEnum = {
   sortOrder: "sortOrder",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type UsageLimitDefinitionScalarFieldEnum =
-  (typeof UsageLimitDefinitionScalarFieldEnum)[keyof typeof UsageLimitDefinitionScalarFieldEnum]
+  (typeof UsageLimitDefinitionScalarFieldEnum)[keyof typeof UsageLimitDefinitionScalarFieldEnum];
 
 export const PricingPlanScalarFieldEnum = {
   id: "id",
@@ -472,10 +463,10 @@ export const PricingPlanScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type PricingPlanScalarFieldEnum =
-  (typeof PricingPlanScalarFieldEnum)[keyof typeof PricingPlanScalarFieldEnum]
+  (typeof PricingPlanScalarFieldEnum)[keyof typeof PricingPlanScalarFieldEnum];
 
 export const PlanFeatureScalarFieldEnum = {
   id: "id",
@@ -485,10 +476,10 @@ export const PlanFeatureScalarFieldEnum = {
   isEnabled: "isEnabled",
   metadata: "metadata",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type PlanFeatureScalarFieldEnum =
-  (typeof PlanFeatureScalarFieldEnum)[keyof typeof PlanFeatureScalarFieldEnum]
+  (typeof PlanFeatureScalarFieldEnum)[keyof typeof PlanFeatureScalarFieldEnum];
 
 export const PlanUsageLimitScalarFieldEnum = {
   id: "id",
@@ -498,10 +489,10 @@ export const PlanUsageLimitScalarFieldEnum = {
   overageRate: "overageRate",
   metadata: "metadata",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type PlanUsageLimitScalarFieldEnum =
-  (typeof PlanUsageLimitScalarFieldEnum)[keyof typeof PlanUsageLimitScalarFieldEnum]
+  (typeof PlanUsageLimitScalarFieldEnum)[keyof typeof PlanUsageLimitScalarFieldEnum];
 
 export const CustomerPlanVersionScalarFieldEnum = {
   id: "id",
@@ -511,10 +502,10 @@ export const CustomerPlanVersionScalarFieldEnum = {
   approvedBy: "approvedBy",
   expiresAt: "expiresAt",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type CustomerPlanVersionScalarFieldEnum =
-  (typeof CustomerPlanVersionScalarFieldEnum)[keyof typeof CustomerPlanVersionScalarFieldEnum]
+  (typeof CustomerPlanVersionScalarFieldEnum)[keyof typeof CustomerPlanVersionScalarFieldEnum];
 
 export const CustomerFeatureOverrideScalarFieldEnum = {
   id: "id",
@@ -526,10 +517,10 @@ export const CustomerFeatureOverrideScalarFieldEnum = {
   expiresAt: "expiresAt",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type CustomerFeatureOverrideScalarFieldEnum =
-  (typeof CustomerFeatureOverrideScalarFieldEnum)[keyof typeof CustomerFeatureOverrideScalarFieldEnum]
+  (typeof CustomerFeatureOverrideScalarFieldEnum)[keyof typeof CustomerFeatureOverrideScalarFieldEnum];
 
 export const CustomerUsageLimitScalarFieldEnum = {
   id: "id",
@@ -542,10 +533,10 @@ export const CustomerUsageLimitScalarFieldEnum = {
   expiresAt: "expiresAt",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type CustomerUsageLimitScalarFieldEnum =
-  (typeof CustomerUsageLimitScalarFieldEnum)[keyof typeof CustomerUsageLimitScalarFieldEnum]
+  (typeof CustomerUsageLimitScalarFieldEnum)[keyof typeof CustomerUsageLimitScalarFieldEnum];
 
 export const SubscriptionScalarFieldEnum = {
   id: "id",
@@ -562,10 +553,10 @@ export const SubscriptionScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type SubscriptionScalarFieldEnum =
-  (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+  (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum];
 
 export const InvoiceScalarFieldEnum = {
   id: "id",
@@ -588,10 +579,10 @@ export const InvoiceScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type InvoiceScalarFieldEnum =
-  (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
+  (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum];
 
 export const InvoiceItemScalarFieldEnum = {
   id: "id",
@@ -606,10 +597,10 @@ export const InvoiceItemScalarFieldEnum = {
   periodEnd: "periodEnd",
   metadata: "metadata",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type InvoiceItemScalarFieldEnum =
-  (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
+  (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum];
 
 export const PaymentScalarFieldEnum = {
   id: "id",
@@ -626,10 +617,10 @@ export const PaymentScalarFieldEnum = {
   refundedAmount: "refundedAmount",
   metadata: "metadata",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type PaymentScalarFieldEnum =
-  (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+  (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum];
 
 export const PaymentMethodScalarFieldEnum = {
   id: "id",
@@ -645,10 +636,10 @@ export const PaymentMethodScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type PaymentMethodScalarFieldEnum =
-  (typeof PaymentMethodScalarFieldEnum)[keyof typeof PaymentMethodScalarFieldEnum]
+  (typeof PaymentMethodScalarFieldEnum)[keyof typeof PaymentMethodScalarFieldEnum];
 
 export const UsageRecordScalarFieldEnum = {
   id: "id",
@@ -662,10 +653,10 @@ export const UsageRecordScalarFieldEnum = {
   resource: "resource",
   metadata: "metadata",
   recordedAt: "recordedAt",
-} as const
+} as const;
 
 export type UsageRecordScalarFieldEnum =
-  (typeof UsageRecordScalarFieldEnum)[keyof typeof UsageRecordScalarFieldEnum]
+  (typeof UsageRecordScalarFieldEnum)[keyof typeof UsageRecordScalarFieldEnum];
 
 export const UsageLedgerEntryScalarFieldEnum = {
   id: "id",
@@ -686,10 +677,10 @@ export const UsageLedgerEntryScalarFieldEnum = {
   recordedAt: "recordedAt",
   ingestVersion: "ingestVersion",
   metadata: "metadata",
-} as const
+} as const;
 
 export type UsageLedgerEntryScalarFieldEnum =
-  (typeof UsageLedgerEntryScalarFieldEnum)[keyof typeof UsageLedgerEntryScalarFieldEnum]
+  (typeof UsageLedgerEntryScalarFieldEnum)[keyof typeof UsageLedgerEntryScalarFieldEnum];
 
 export const UsageAggregateScalarFieldEnum = {
   id: "id",
@@ -702,10 +693,10 @@ export const UsageAggregateScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type UsageAggregateScalarFieldEnum =
-  (typeof UsageAggregateScalarFieldEnum)[keyof typeof UsageAggregateScalarFieldEnum]
+  (typeof UsageAggregateScalarFieldEnum)[keyof typeof UsageAggregateScalarFieldEnum];
 
 export const CreditBalanceScalarFieldEnum = {
   id: "id",
@@ -713,10 +704,10 @@ export const CreditBalanceScalarFieldEnum = {
   balance: "balance",
   currency: "currency",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type CreditBalanceScalarFieldEnum =
-  (typeof CreditBalanceScalarFieldEnum)[keyof typeof CreditBalanceScalarFieldEnum]
+  (typeof CreditBalanceScalarFieldEnum)[keyof typeof CreditBalanceScalarFieldEnum];
 
 export const CreditTransactionScalarFieldEnum = {
   id: "id",
@@ -729,10 +720,10 @@ export const CreditTransactionScalarFieldEnum = {
   relatedId: "relatedId",
   metadata: "metadata",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type CreditTransactionScalarFieldEnum =
-  (typeof CreditTransactionScalarFieldEnum)[keyof typeof CreditTransactionScalarFieldEnum]
+  (typeof CreditTransactionScalarFieldEnum)[keyof typeof CreditTransactionScalarFieldEnum];
 
 export const EntitlementScalarFieldEnum = {
   id: "id",
@@ -748,10 +739,10 @@ export const EntitlementScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type EntitlementScalarFieldEnum =
-  (typeof EntitlementScalarFieldEnum)[keyof typeof EntitlementScalarFieldEnum]
+  (typeof EntitlementScalarFieldEnum)[keyof typeof EntitlementScalarFieldEnum];
 
 export const StripeCustomerScalarFieldEnum = {
   id: "id",
@@ -764,10 +755,10 @@ export const StripeCustomerScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type StripeCustomerScalarFieldEnum =
-  (typeof StripeCustomerScalarFieldEnum)[keyof typeof StripeCustomerScalarFieldEnum]
+  (typeof StripeCustomerScalarFieldEnum)[keyof typeof StripeCustomerScalarFieldEnum];
 
 export const WebhookEventScalarFieldEnum = {
   id: "id",
@@ -779,10 +770,10 @@ export const WebhookEventScalarFieldEnum = {
   errorMessage: "errorMessage",
   retryCount: "retryCount",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type WebhookEventScalarFieldEnum =
-  (typeof WebhookEventScalarFieldEnum)[keyof typeof WebhookEventScalarFieldEnum]
+  (typeof WebhookEventScalarFieldEnum)[keyof typeof WebhookEventScalarFieldEnum];
 
 export const AuditLogScalarFieldEnum = {
   id: "id",
@@ -800,10 +791,10 @@ export const AuditLogScalarFieldEnum = {
   userAgent: "userAgent",
   metadata: "metadata",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type AuditLogScalarFieldEnum =
-  (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+  (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum];
 
 export const LegalDocumentScalarFieldEnum = {
   id: "id",
@@ -822,10 +813,10 @@ export const LegalDocumentScalarFieldEnum = {
   isRequired: "isRequired",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type LegalDocumentScalarFieldEnum =
-  (typeof LegalDocumentScalarFieldEnum)[keyof typeof LegalDocumentScalarFieldEnum]
+  (typeof LegalDocumentScalarFieldEnum)[keyof typeof LegalDocumentScalarFieldEnum];
 
 export const UserConsentScalarFieldEnum = {
   id: "id",
@@ -843,10 +834,10 @@ export const UserConsentScalarFieldEnum = {
   metadata: "metadata",
   consentedAt: "consentedAt",
   withdrawnAt: "withdrawnAt",
-} as const
+} as const;
 
 export type UserConsentScalarFieldEnum =
-  (typeof UserConsentScalarFieldEnum)[keyof typeof UserConsentScalarFieldEnum]
+  (typeof UserConsentScalarFieldEnum)[keyof typeof UserConsentScalarFieldEnum];
 
 export const CookieConsentScalarFieldEnum = {
   id: "id",
@@ -863,10 +854,10 @@ export const CookieConsentScalarFieldEnum = {
   consentedAt: "consentedAt",
   updatedAt: "updatedAt",
   expiresAt: "expiresAt",
-} as const
+} as const;
 
 export type CookieConsentScalarFieldEnum =
-  (typeof CookieConsentScalarFieldEnum)[keyof typeof CookieConsentScalarFieldEnum]
+  (typeof CookieConsentScalarFieldEnum)[keyof typeof CookieConsentScalarFieldEnum];
 
 export const ContactSubmissionScalarFieldEnum = {
   id: "id",
@@ -883,10 +874,10 @@ export const ContactSubmissionScalarFieldEnum = {
   metadata: "metadata",
   createdAt: "createdAt",
   respondedAt: "respondedAt",
-} as const
+} as const;
 
 export type ContactSubmissionScalarFieldEnum =
-  (typeof ContactSubmissionScalarFieldEnum)[keyof typeof ContactSubmissionScalarFieldEnum]
+  (typeof ContactSubmissionScalarFieldEnum)[keyof typeof ContactSubmissionScalarFieldEnum];
 
 export const OAuthClientScalarFieldEnum = {
   id: "id",
@@ -912,10 +903,10 @@ export const OAuthClientScalarFieldEnum = {
   createdById: "createdById",
   createdAt: "createdAt",
   updatedAt: "updatedAt",
-} as const
+} as const;
 
 export type OAuthClientScalarFieldEnum =
-  (typeof OAuthClientScalarFieldEnum)[keyof typeof OAuthClientScalarFieldEnum]
+  (typeof OAuthClientScalarFieldEnum)[keyof typeof OAuthClientScalarFieldEnum];
 
 export const OAuthAuthorizationScalarFieldEnum = {
   id: "id",
@@ -924,10 +915,10 @@ export const OAuthAuthorizationScalarFieldEnum = {
   scopes: "scopes",
   grantedAt: "grantedAt",
   revokedAt: "revokedAt",
-} as const
+} as const;
 
 export type OAuthAuthorizationScalarFieldEnum =
-  (typeof OAuthAuthorizationScalarFieldEnum)[keyof typeof OAuthAuthorizationScalarFieldEnum]
+  (typeof OAuthAuthorizationScalarFieldEnum)[keyof typeof OAuthAuthorizationScalarFieldEnum];
 
 export const OAuthAccessTokenScalarFieldEnum = {
   id: "id",
@@ -938,52 +929,50 @@ export const OAuthAccessTokenScalarFieldEnum = {
   expiresAt: "expiresAt",
   revokedAt: "revokedAt",
   createdAt: "createdAt",
-} as const
+} as const;
 
 export type OAuthAccessTokenScalarFieldEnum =
-  (typeof OAuthAccessTokenScalarFieldEnum)[keyof typeof OAuthAccessTokenScalarFieldEnum]
+  (typeof OAuthAccessTokenScalarFieldEnum)[keyof typeof OAuthAccessTokenScalarFieldEnum];
 
 export const SortOrder = {
   asc: "asc",
   desc: "desc",
-} as const
+} as const;
 
-export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull,
-} as const
+} as const;
 
 export type NullableJsonNullValueInput =
-  (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+  (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput];
 
 export const JsonNullValueInput = {
   JsonNull: JsonNull,
-} as const
+} as const;
 
-export type JsonNullValueInput =
-  (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput];
 
 export const QueryMode = {
   default: "default",
   insensitive: "insensitive",
-} as const
+} as const;
 
-export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
 
 export const NullsOrder = {
   first: "first",
   last: "last",
-} as const
+} as const;
 
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
 
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
   AnyNull: AnyNull,
-} as const
+} as const;
 
-export type JsonNullValueFilter =
-  (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter];

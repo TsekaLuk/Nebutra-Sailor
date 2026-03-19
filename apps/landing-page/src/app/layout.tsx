@@ -46,10 +46,6 @@ export const metadata: Metadata = {
  * Root layout is a passthrough — the HTML shell lives in [lang]/layout.tsx
  * so that the locale is available from static params (required for cacheComponents).
  */
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

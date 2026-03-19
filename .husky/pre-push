@@ -1,4 +1,0 @@
-# Run tests for affected packages before pushing to catch regressions early.
-# Uses Turbo's affected-only filter to stay fast on large PRs.
-# Skip with: git push --no-verify (use sparingly)
-pnpm turbo test --filter="...[origin/HEAD]..." --concurrency=4

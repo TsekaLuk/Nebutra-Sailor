@@ -54,7 +54,7 @@ const creditTransactions: Map<string, CreditTransaction[]> = new Map();
  */
 export function getCreditBalance(organizationId: string): CreditBalance {
   let balance = creditBalances.get(organizationId);
-  
+
   if (!balance) {
     balance = {
       organizationId,
@@ -63,7 +63,7 @@ export function getCreditBalance(organizationId: string): CreditBalance {
     };
     creditBalances.set(organizationId, balance);
   }
-  
+
   return balance;
 }
 
@@ -73,11 +73,11 @@ export function getCreditBalance(organizationId: string): CreditBalance {
 export function addCredits(input: AddCreditsInput): CreditTransaction {
   const balance = getCreditBalance(input.organizationId);
   const newBalance = balance.balance + input.amount;
-  
+
   // Update balance
   balance.balance = newBalance;
   creditBalances.set(input.organizationId, balance);
-  
+
   // Create transaction
   const transaction: CreditTransaction = {
     id: crypto.randomUUID(),
@@ -91,12 +91,12 @@ export function addCredits(input: AddCreditsInput): CreditTransaction {
     metadata: input.metadata,
     createdAt: new Date(),
   };
-  
+
   // Store transaction
   const transactions = creditTransactions.get(input.organizationId) || [];
   transactions.push(transaction);
   creditTransactions.set(input.organizationId, transactions);
-  
+
   return transaction;
 }
 
@@ -105,21 +105,21 @@ export function addCredits(input: AddCreditsInput): CreditTransaction {
  */
 export function deductCredits(input: DeductCreditsInput): CreditTransaction {
   const balance = getCreditBalance(input.organizationId);
-  
+
   if (balance.balance < input.amount) {
     throw new BillingError(
       `Insufficient credits. Available: ${balance.balance}, Required: ${input.amount}`,
       "INSUFFICIENT_CREDITS",
-      402
+      402,
     );
   }
-  
+
   const newBalance = balance.balance - input.amount;
-  
+
   // Update balance
   balance.balance = newBalance;
   creditBalances.set(input.organizationId, balance);
-  
+
   // Create transaction
   const transaction: CreditTransaction = {
     id: crypto.randomUUID(),
@@ -132,22 +132,19 @@ export function deductCredits(input: DeductCreditsInput): CreditTransaction {
     metadata: input.metadata,
     createdAt: new Date(),
   };
-  
+
   // Store transaction
   const transactions = creditTransactions.get(input.organizationId) || [];
   transactions.push(transaction);
   creditTransactions.set(input.organizationId, transactions);
-  
+
   return transaction;
 }
 
 /**
  * Check if organization has enough credits
  */
-export function hasEnoughCredits(
-  organizationId: string,
-  amount: number
-): boolean {
+export function hasEnoughCredits(organizationId: string, amount: number): boolean {
   const balance = getCreditBalance(organizationId);
   return balance.balance >= amount;
 }
@@ -161,22 +158,22 @@ export function getCreditTransactions(
     limit?: number;
     offset?: number;
     type?: CreditTransactionType;
-  }
+  },
 ): CreditTransaction[] {
   let transactions = creditTransactions.get(organizationId) || [];
-  
+
   // Filter by type
   if (options?.type) {
     transactions = transactions.filter((t) => t.type === options.type);
   }
-  
+
   // Sort by date descending
   transactions.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-  
+
   // Apply pagination
   const offset = options?.offset || 0;
   const limit = options?.limit || 50;
-  
+
   return transactions.slice(offset, offset + limit);
 }
 

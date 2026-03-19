@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { DitheringBackground } from "@nebutra/ui/primitives"
-import { useState } from "react"
+import { DitheringBackground } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export function DitheringBackgroundDemo() {
-  const [theme, setTheme] = useState<"system" | "light" | "dark">("dark")
+  const [theme, setTheme] = useState<"system" | "light" | "dark">("dark");
 
   return (
     <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-xl border">
@@ -21,8 +21,8 @@ export function DitheringBackgroundDemo() {
       <div className="backdrop-blur-md p-6 max-w-sm gap-4 relative z-10 flex flex-col items-center rounded-2xl border bg-background/50 text-center shadow-lg">
         <h3 className="text-2xl font-bold tracking-tight">Dithering Shader</h3>
         <p className="text-sm text-muted-foreground">
-          A WebGL-powered shader background featuring retro dithering patterns
-          and interactive parallax.
+          A WebGL-powered shader background featuring retro dithering patterns and interactive
+          parallax.
         </p>
 
         <div className="gap-2 mt-2 flex">
@@ -41,5 +41,5 @@ export function DitheringBackgroundDemo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { RangeCalendar } from "@nebutra/ui/primitives"
+import { RangeCalendar } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function CalendarRangeMultiMonthDemo() {
   return (
@@ -9,5 +9,5 @@ export function CalendarRangeMultiMonthDemo() {
       visibleMonths={2}
       className="p-4 max-w-full rounded-xl border border-border shadow-sm"
     />
-  )
+  );
 }

@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import type * as React from "react";
 
 // Temporary mock
 function MockDatePicker({
   label,
   variant: _variant,
 }: {
-  label: React.ReactNode
-  variant?: string
+  label: React.ReactNode;
+  variant?: string;
 }) {
   return (
     <div className="px-3 py-2 text-sm rounded-md border border-border text-muted-foreground">
       {label}
     </div>
-  )
+  );
 }
 
 export function DatePickerVariantsDemo() {
@@ -25,5 +25,5 @@ export function DatePickerVariantsDemo() {
       <MockDatePicker label="带下划线 (Underlined)" variant="underlined" />
       <MockDatePicker label="淡出风格 (Faded)" variant="faded" />
     </div>
-  )
+  );
 }

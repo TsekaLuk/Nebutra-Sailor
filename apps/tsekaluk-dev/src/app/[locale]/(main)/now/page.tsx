@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 import { NowEntry } from "@/components/sections/now-entry";
 
 export async function generateMetadata({
@@ -29,11 +29,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function NowPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function NowPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.now" });
 
@@ -51,7 +47,9 @@ export default async function NowPage({
         </p>
       </div>
 
-      <Suspense fallback={<div className="h-32 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800" />}>
+      <Suspense
+        fallback={<div className="h-32 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800" />}
+      >
         <NowEntry />
       </Suspense>
     </section>

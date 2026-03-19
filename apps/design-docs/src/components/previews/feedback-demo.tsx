@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Feedback } from "@nebutra/ui/primitives"
+import { Feedback } from "@nebutra/ui/primitives";
 
 export function FeedbackDemo() {
   return (
@@ -8,9 +8,9 @@ export function FeedbackDemo() {
       <Feedback
         label="my-app"
         onSubmit={async (payload) => {
-          console.warn("Feedback submitted", payload)
+          console.warn("Feedback submitted", payload);
         }}
       />
     </div>
-  )
+  );
 }

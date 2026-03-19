@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("Landing Page", () => {
   test("loads and shows hero section", async ({ page }) => {
@@ -16,9 +16,7 @@ test.describe("Landing Page", () => {
 
   test("CTA button navigates to sign-up", async ({ page }) => {
     await page.goto("/");
-    const cta = page
-      .getByRole("link", { name: /get started|sign up|start/i })
-      .first();
+    const cta = page.getByRole("link", { name: /get started|sign up|start/i }).first();
     if (await cta.isVisible()) {
       const href = await cta.getAttribute("href");
       expect(href).toBeTruthy();
@@ -29,9 +27,7 @@ test.describe("Landing Page", () => {
     await page.goto("/");
     const html = page.locator("html");
     const initialClass = await html.getAttribute("class");
-    const toggle = page
-      .getByRole("button", { name: /toggle theme|dark mode|light mode/i })
-      .first();
+    const toggle = page.getByRole("button", { name: /toggle theme|dark mode|light mode/i }).first();
     if (await toggle.isVisible()) {
       await toggle.click();
       const newClass = await html.getAttribute("class");

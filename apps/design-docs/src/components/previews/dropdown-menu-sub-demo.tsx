@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
-  DropdownMenuTrigger,
+  Button,
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuSubContent,
+  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuSub,
-  Button,
+  DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuItem,
-} from "@nebutra/ui/primitives"
+  DropdownMenuTrigger,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function DropdownMenuSubDemo() {
   return (
@@ -24,9 +24,7 @@ export function DropdownMenuSubDemo() {
         <DropdownMenuItem>复制链接 (Copy Link)</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            邀请用户 (Invite Users)
-          </DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>邀请用户 (Invite Users)</DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-40">
             <DropdownMenuItem>通过电子邮件 (Via Email)</DropdownMenuItem>
             <DropdownMenuItem>从工作区中选择 (From Workspace)</DropdownMenuItem>
@@ -38,5 +36,5 @@ export function DropdownMenuSubDemo() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

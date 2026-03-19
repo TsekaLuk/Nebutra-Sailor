@@ -1,10 +1,7 @@
 "use client";
 
-import * as React from "react";
-import {
-  GrainGradient,
-  type GrainGradientProps,
-} from "@paper-design/shaders-react";
+import { GrainGradient, type GrainGradientProps } from "@paper-design/shaders-react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface GrainGradientBackgroundProps
@@ -30,10 +27,7 @@ export interface GrainGradientBackgroundProps
  * </div>
  * ```
  */
-export function GrainGradientBackground({
-  className,
-  ...props
-}: GrainGradientBackgroundProps) {
+export function GrainGradientBackground({ className, ...props }: GrainGradientBackgroundProps) {
   return (
     <div className={cn("absolute inset-0 -z-10", className)}>
       <GrainGradient style={{ height: "100%", width: "100%" }} {...props} />

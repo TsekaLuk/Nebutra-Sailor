@@ -14,40 +14,31 @@ export const recsysRefresh = inngest.createFunction(
   async ({ step }) => {
     // Step 1: Get list of active tenants
     const tenants = await step.run("get-active-tenants", async () => {
-      const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/api/system/tenants/active`,
-      );
+      const response = await fetch(`${process.env.API_GATEWAY_URL}/api/system/tenants/active`);
       return response.json();
     });
 
     // Step 2: Refresh embeddings for each tenant
     const results = [];
     for (const tenant of tenants) {
-      const result = await step.run(
-        `refresh-embeddings-${tenant.id}`,
-        async () => {
-          const response = await fetch(
-            `${process.env.RECSYS_SERVICE_URL}/refresh/embeddings`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "x-organization-id": tenant.id,
-              },
-            },
-          );
-          return response.json();
-        },
-      );
+      const result = await step.run(`refresh-embeddings-${tenant.id}`, async () => {
+        const response = await fetch(`${process.env.RECSYS_SERVICE_URL}/refresh/embeddings`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-organization-id": tenant.id,
+          },
+        });
+        return response.json();
+      });
       results.push({ tenantId: tenant.id, ...result });
     }
 
     // Step 3: Refresh collaborative filtering model
     await step.run("refresh-cf-model", async () => {
-      const response = await fetch(
-        `${process.env.RECSYS_SERVICE_URL}/refresh/collaborative`,
-        { method: "POST" },
-      );
+      const response = await fetch(`${process.env.RECSYS_SERVICE_URL}/refresh/collaborative`, {
+        method: "POST",
+      });
       return response.json();
     });
 
@@ -69,9 +60,7 @@ export const userProfileUpdate = inngest.createFunction(
   async ({ step }) => {
     // Step 1: Get users with recent activity
     const users = await step.run("get-active-users", async () => {
-      const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/users/recently-active?since=1h`,
-      );
+      const response = await fetch(`${process.env.API_GATEWAY_URL}/users/recently-active?since=1h`);
       return response.json();
     });
 

@@ -39,10 +39,7 @@ type Story = StoryObj<typeof meta>;
 const Items = () => (
   <>
     {["Item 1", "Item 2", "Item 3", "Item 4"].map((label) => (
-      <div
-        key={label}
-        className="rounded-lg border bg-card p-4 text-sm font-medium"
-      >
+      <div key={label} className="rounded-lg border bg-card p-4 text-sm font-medium">
         {label}
       </div>
     ))}
@@ -106,9 +103,7 @@ export const HeroSection: Story = {
         <button className="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground">
           Get started
         </button>
-        <button className="rounded-lg border px-5 py-2 text-sm font-medium">
-          Learn more
-        </button>
+        <button className="rounded-lg border px-5 py-2 text-sm font-medium">Learn more</button>
       </div>
     </AnimatedGroup>
   ),

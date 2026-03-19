@@ -1,4 +1,4 @@
-import { Badge } from "@nebutra/ui/primitives"
+import { Badge } from "@nebutra/ui/primitives";
 
 export function BadgeTableDemo() {
   return (
@@ -14,5 +14,5 @@ export function BadgeTableDemo() {
         </tr>
       </tbody>
     </table>
-  )
+  );
 }

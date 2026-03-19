@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { DitheringShader } from "@nebutra/ui/primitives"
+import { DitheringShader } from "@nebutra/ui/primitives";
 
 export function DitheringShaderDemo() {
   return (
@@ -43,5 +43,5 @@ export function DitheringShaderDemo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

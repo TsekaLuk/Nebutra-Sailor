@@ -1,16 +1,14 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Input } from "@nebutra/ui/primitives" // Usually Input is exported
+import { Input } from "@nebutra/ui/primitives"; // Usually Input is exported
+import * as React from "react";
 
 export function InputWithAddonsDemo() {
   return (
     <div className="gap-4 flex flex-col">
       {/* Domain hint */}
       <Input
-        suffix={
-          <span className="text-xs text-muted-foreground">@nebutra.com</span>
-        }
+        suffix={<span className="text-xs text-muted-foreground">@nebutra.com</span>}
         placeholder="username"
       />
 
@@ -18,13 +16,11 @@ export function InputWithAddonsDemo() {
       <Input
         prefix={<span className="text-xs text-muted-foreground">$</span>}
         suffix={
-          <span className="text-xs font-medium pl-2 border-l text-muted-foreground">
-            USD
-          </span>
+          <span className="text-xs font-medium pl-2 border-l text-muted-foreground">USD</span>
         }
         type="number"
         placeholder="0.00"
       />
     </div>
-  )
+  );
 }

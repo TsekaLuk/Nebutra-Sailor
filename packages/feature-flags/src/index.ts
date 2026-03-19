@@ -40,7 +40,11 @@ const envProvider: FeatureFlagProvider = {
     return false;
   },
 
-  getVariant: async <T>(flag: string, defaultValue: T, _context?: FeatureFlagContext): Promise<T> => {
+  getVariant: async <T>(
+    flag: string,
+    defaultValue: T,
+    _context?: FeatureFlagContext,
+  ): Promise<T> => {
     const envKey = `FEATURE_FLAG_${flag.toUpperCase().replace(/-/g, "_")}_VARIANT`;
     const envValue = process.env[envKey];
 
@@ -105,7 +109,7 @@ export function useMemoryProvider(): void {
  */
 export async function isFeatureEnabled(
   flag: string,
-  context?: FeatureFlagContext
+  context?: FeatureFlagContext,
 ): Promise<boolean> {
   return provider.isEnabled(flag, context);
 }
@@ -116,7 +120,7 @@ export async function isFeatureEnabled(
 export async function getFeatureVariant<T>(
   flag: string,
   defaultValue: T,
-  context?: FeatureFlagContext
+  context?: FeatureFlagContext,
 ): Promise<T> {
   return provider.getVariant(flag, defaultValue, context);
 }
@@ -128,7 +132,7 @@ export async function getFeatureVariant<T>(
 export async function isEnabledForPercentage(
   flag: string,
   userId: string,
-  percentage: number
+  percentage: number,
 ): Promise<boolean> {
   // Simple hash-based percentage check
   const hash = simpleHash(userId + flag);
@@ -201,11 +205,16 @@ export function featureFlagMiddleware(
     onDisabled?: (c: unknown) => unknown;
   } = {},
 ) {
-  return async (c: {
-    get: (key: string) => { userId?: string; organizationId?: string; plan?: string } | undefined;
-    json: (body: unknown, status?: number) => unknown;
-  }, next: () => Promise<void>) => {
-    const tenant = c.get("tenant") as { userId?: string; organizationId?: string; plan?: string } | undefined;
+  return async (
+    c: {
+      get: (key: string) => { userId?: string; organizationId?: string; plan?: string } | undefined;
+      json: (body: unknown, status?: number) => unknown;
+    },
+    next: () => Promise<void>,
+  ) => {
+    const tenant = c.get("tenant") as
+      | { userId?: string; organizationId?: string; plan?: string }
+      | undefined;
 
     const context: FeatureFlagContext = {
       userId: tenant?.userId,

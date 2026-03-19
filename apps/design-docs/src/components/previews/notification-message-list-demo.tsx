@@ -1,5 +1,5 @@
-import { NotificationMessageList } from "@nebutra/ui/primitives"
-import type { NotificationMessage } from "@nebutra/ui/primitives"
+import type { NotificationMessage } from "@nebutra/ui/primitives";
+import { NotificationMessageList } from "@nebutra/ui/primitives";
 
 const messages: NotificationMessage[] = [
   {
@@ -20,12 +20,12 @@ const messages: NotificationMessage[] = [
     content: "You've used 80% of your monthly API quota",
     gradientColor: "from-amber-400 to-orange-500",
   },
-]
+];
 
 export function NotificationMessageListDemo() {
   return (
     <div className="max-w-md px-4 py-8 w-full">
       <NotificationMessageList messages={messages} />
     </div>
-  )
+  );
 }

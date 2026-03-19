@@ -21,14 +21,7 @@ const meta = {
     },
     color: {
       control: "select",
-      options: [
-        "default",
-        "primary",
-        "secondary",
-        "success",
-        "warning",
-        "danger",
-      ],
+      options: ["default", "primary", "secondary", "success", "warning", "danger"],
     },
     size: { control: "select", options: ["sm", "md", "lg"] },
     radius: { control: "select", options: ["none", "sm", "md", "lg", "full"] },
@@ -63,9 +56,7 @@ export const CustomSymbol: Story = {
 
 export const Multiline: Story = {
   render: () => (
-    <Snippet className="w-72">
-      {`npm install package\nyarn add package\npnpm add package`}
-    </Snippet>
+    <Snippet className="w-72">{`npm install package\nyarn add package\npnpm add package`}</Snippet>
   ),
 };
 

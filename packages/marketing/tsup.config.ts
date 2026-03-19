@@ -1,6 +1,6 @@
-import { defineConfig } from "tsup";
-import { copyFileSync, mkdirSync, existsSync } from "fs";
+import { copyFileSync, existsSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
+import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: {

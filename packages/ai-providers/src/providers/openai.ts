@@ -1,22 +1,22 @@
 import OpenAI from "openai";
 import type {
-  ProviderConfig,
+  ChatCompletionChunk,
   ChatCompletionRequest,
   ChatCompletionResponse,
-  ChatCompletionChunk,
   EmbeddingRequest,
   EmbeddingResponse,
   ImageGenerationRequest,
   ImageGenerationResponse,
-  TextToSpeechRequest,
+  ProviderConfig,
   SpeechToTextRequest,
+  TextToSpeechRequest,
   TranscriptionResponse,
 } from "../types.js";
 import {
   BaseAIProvider,
-  registerProvider,
-  type ProviderModel,
   type ProviderCapability,
+  type ProviderModel,
+  registerProvider,
 } from "./base.js";
 
 // ============================================
@@ -29,13 +29,7 @@ export const OPENAI_MODELS: ProviderModel[] = [
     id: "gpt-5.4",
     name: "GPT-5.4",
     description: "Most capable model for professional work and reasoning",
-    capabilities: [
-      "chat",
-      "chat-stream",
-      "function-calling",
-      "vision",
-      "reasoning",
-    ],
+    capabilities: ["chat", "chat-stream", "function-calling", "vision", "reasoning"],
     contextWindow: 1000000,
     maxOutputTokens: 100000,
     inputPricePerMillion: 2.5,
@@ -44,15 +38,8 @@ export const OPENAI_MODELS: ProviderModel[] = [
   {
     id: "gpt-5.2-pro",
     name: "GPT-5.2 Pro",
-    description:
-      "High-end model for complex analysis and deep professional tasks",
-    capabilities: [
-      "chat",
-      "chat-stream",
-      "function-calling",
-      "vision",
-      "reasoning",
-    ],
+    description: "High-end model for complex analysis and deep professional tasks",
+    capabilities: ["chat", "chat-stream", "function-calling", "vision", "reasoning"],
     contextWindow: 200000,
     maxOutputTokens: 100000,
     inputPricePerMillion: 21.0,
@@ -251,19 +238,12 @@ export class OpenAIProvider extends BaseAIProvider {
   // Image Generation
   // ============================================
 
-  async generateImage(
-    request: ImageGenerationRequest,
-  ): Promise<ImageGenerationResponse> {
+  async generateImage(request: ImageGenerationRequest): Promise<ImageGenerationResponse> {
     const response = await this.client.images.generate({
       model: request.model,
       prompt: request.prompt,
       n: request.n,
-      size: request.size as
-        | "256x256"
-        | "512x512"
-        | "1024x1024"
-        | "1792x1024"
-        | "1024x1792",
+      size: request.size as "256x256" | "512x512" | "1024x1024" | "1792x1024" | "1024x1792",
       quality: request.quality,
       style: request.style,
       response_format: request.responseFormat,
@@ -287,13 +267,7 @@ export class OpenAIProvider extends BaseAIProvider {
     const response = await this.client.audio.speech.create({
       model: request.model,
       input: request.input,
-      voice: request.voice as
-        | "alloy"
-        | "echo"
-        | "fable"
-        | "onyx"
-        | "nova"
-        | "shimmer",
+      voice: request.voice as "alloy" | "echo" | "fable" | "onyx" | "nova" | "shimmer",
       speed: request.speed,
       response_format: request.responseFormat,
     });
@@ -301,20 +275,13 @@ export class OpenAIProvider extends BaseAIProvider {
     return response.arrayBuffer();
   }
 
-  async speechToText(
-    request: SpeechToTextRequest,
-  ): Promise<TranscriptionResponse> {
+  async speechToText(request: SpeechToTextRequest): Promise<TranscriptionResponse> {
     const response = await this.client.audio.transcriptions.create({
       model: request.model,
       file: request.file as File,
       language: request.language,
       prompt: request.prompt,
-      response_format: request.responseFormat as
-        | "json"
-        | "text"
-        | "srt"
-        | "verbose_json"
-        | "vtt",
+      response_format: request.responseFormat as "json" | "text" | "srt" | "verbose_json" | "vtt",
       temperature: request.temperature,
     });
 
@@ -370,12 +337,7 @@ export class OpenAIProvider extends BaseAIProvider {
             },
           })),
         },
-        finishReason: c.finish_reason as
-          | "stop"
-          | "length"
-          | "tool_calls"
-          | "content_filter"
-          | null,
+        finishReason: c.finish_reason as "stop" | "length" | "tool_calls" | "content_filter" | null,
       })),
       usage: response.usage
         ? {
@@ -410,11 +372,7 @@ export class OpenAIProvider extends BaseAIProvider {
             },
           })),
         },
-        finishReason: c.finish_reason as
-          | "stop"
-          | "length"
-          | "tool_calls"
-          | null,
+        finishReason: c.finish_reason as "stop" | "length" | "tool_calls" | null,
       })),
     };
   }

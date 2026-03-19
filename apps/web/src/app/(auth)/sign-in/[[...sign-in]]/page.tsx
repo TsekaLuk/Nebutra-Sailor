@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import { connection } from "next/server";
+import { Suspense } from "react";
 import { AuthSplitLayout } from "@/components/auth/auth-split-layout";
 import { SignInForm } from "@/components/auth/sign-in-form";
 

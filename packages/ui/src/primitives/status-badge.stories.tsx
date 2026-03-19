@@ -1,13 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  CheckCircle2,
-  AlertCircle,
-  XCircle,
-  Info,
-  ShieldCheck,
-  Globe,
-  Server,
-} from "lucide-react";
+import { AlertCircle, CheckCircle2, Globe, Info, Server, ShieldCheck, XCircle } from "lucide-react";
 import { StatusBadge } from "./status-badge";
 
 const meta = {
@@ -72,11 +64,7 @@ export const AllStatuses: Story = {
         rightLabel="Maintenance scheduled"
         status="info"
       />
-      <StatusBadge
-        leftLabel="Default"
-        rightLabel="No status set"
-        status="default"
-      />
+      <StatusBadge leftLabel="Default" rightLabel="No status set" status="default" />
     </div>
   ),
 };
@@ -112,11 +100,7 @@ export const WithBothIcons: Story = {
 export const NoIcons: Story = {
   render: () => (
     <div className="flex flex-col gap-3">
-      <StatusBadge
-        leftLabel="Environment"
-        rightLabel="Production"
-        status="success"
-      />
+      <StatusBadge leftLabel="Environment" rightLabel="Production" status="success" />
       <StatusBadge leftLabel="Tier" rightLabel="Enterprise" status="info" />
       <StatusBadge leftLabel="Region" rightLabel="us-east-1" />
     </div>
@@ -134,12 +118,7 @@ export const InDashboard: Story = {
           rightLabel="Healthy"
           status="success"
         />
-        <StatusBadge
-          leftIcon={CheckCircle2}
-          leftLabel="DB"
-          rightLabel="Healthy"
-          status="success"
-        />
+        <StatusBadge leftIcon={CheckCircle2} leftLabel="DB" rightLabel="Healthy" status="success" />
         <StatusBadge
           leftIcon={AlertCircle}
           leftLabel="CDN"

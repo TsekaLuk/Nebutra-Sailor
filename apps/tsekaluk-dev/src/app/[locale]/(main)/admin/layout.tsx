@@ -1,34 +1,28 @@
-import type { Metadata } from "next"
-import { redirect } from "next/navigation"
-import Link from "next/link"
-import { auth } from "@/auth"
-import { AdminNav } from "./admin-nav"
+import type { Metadata } from "next";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
+import { AdminNav } from "./admin-nav";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
-}
+};
 
-export default async function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const session = await auth()
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const session = await auth();
 
   if (!session?.user) {
-    redirect("/auth/signin")
+    redirect("/auth/signin");
   }
 
-  const adminEmail = process.env.ADMIN_EMAIL
-  const userEmail = session.user.email
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const userEmail = session.user.email;
 
   if (!adminEmail || userEmail?.toLowerCase() !== adminEmail.toLowerCase()) {
     return (
       <div className="px-6 flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <p className="font-serif text-5xl text-gray-300 italic dark:text-gray-700">
-            403
-          </p>
+          <p className="font-serif text-5xl text-gray-300 italic dark:text-gray-700">403</p>
           <h1 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
             Access Denied
           </h1>
@@ -43,7 +37,7 @@ export default async function AdminLayout({
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -51,10 +45,7 @@ export default async function AdminLayout({
       {/* Sidebar */}
       <aside className="w-56 dark:border-gray-800 bg-white dark:bg-gray-950 flex shrink-0 flex-col border-r border-gray-100">
         <div className="px-5 py-6 dark:border-gray-800 border-b border-gray-100">
-          <Link
-            href="/admin"
-            className="font-serif text-xl text-gray-900 dark:text-white italic"
-          >
+          <Link href="/admin" className="font-serif text-xl text-gray-900 dark:text-white italic">
             Admin
           </Link>
         </div>
@@ -62,9 +53,7 @@ export default async function AdminLayout({
       </aside>
 
       {/* Main content */}
-      <main className="bg-gray-50 dark:bg-gray-950 p-8 flex-1 overflow-auto">
-        {children}
-      </main>
+      <main className="bg-gray-50 dark:bg-gray-950 p-8 flex-1 overflow-auto">{children}</main>
     </div>
-  )
+  );
 }

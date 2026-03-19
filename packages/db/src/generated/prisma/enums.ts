@@ -12,26 +12,26 @@ export const Plan = {
   FREE: "FREE",
   PRO: "PRO",
   ENTERPRISE: "ENTERPRISE",
-} as const
+} as const;
 
-export type Plan = (typeof Plan)[keyof typeof Plan]
+export type Plan = (typeof Plan)[keyof typeof Plan];
 
 export const Role = {
   OWNER: "OWNER",
   ADMIN: "ADMIN",
   MEMBER: "MEMBER",
   VIEWER: "VIEWER",
-} as const
+} as const;
 
-export type Role = (typeof Role)[keyof typeof Role]
+export type Role = (typeof Role)[keyof typeof Role];
 
 export const ContentStatus = {
   DRAFT: "DRAFT",
   PUBLISHED: "PUBLISHED",
   ARCHIVED: "ARCHIVED",
-} as const
+} as const;
 
-export type ContentStatus = (typeof ContentStatus)[keyof typeof ContentStatus]
+export type ContentStatus = (typeof ContentStatus)[keyof typeof ContentStatus];
 
 export const OrderStatus = {
   PENDING: "PENDING",
@@ -40,19 +40,18 @@ export const OrderStatus = {
   DELIVERED: "DELIVERED",
   CANCELLED: "CANCELLED",
   REFUNDED: "REFUNDED",
-} as const
+} as const;
 
-export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus];
 
 export const IntegrationType = {
   SHOPIFY: "SHOPIFY",
   SHOPLINE: "SHOPLINE",
   STRIPE: "STRIPE",
   CUSTOM: "CUSTOM",
-} as const
+} as const;
 
-export type IntegrationType =
-  (typeof IntegrationType)[keyof typeof IntegrationType]
+export type IntegrationType = (typeof IntegrationType)[keyof typeof IntegrationType];
 
 export const NftStatus = {
   MINTING: "MINTING",
@@ -60,9 +59,9 @@ export const NftStatus = {
   LISTED: "LISTED",
   SOLD: "SOLD",
   BURNED: "BURNED",
-} as const
+} as const;
 
-export type NftStatus = (typeof NftStatus)[keyof typeof NftStatus]
+export type NftStatus = (typeof NftStatus)[keyof typeof NftStatus];
 
 export const AIProvider = {
   OPENAI: "OPENAI",
@@ -70,27 +69,26 @@ export const AIProvider = {
   GOOGLE: "GOOGLE",
   SILICONFLOW: "SILICONFLOW",
   CUSTOM: "CUSTOM",
-} as const
+} as const;
 
-export type AIProvider = (typeof AIProvider)[keyof typeof AIProvider]
+export type AIProvider = (typeof AIProvider)[keyof typeof AIProvider];
 
 export const AIRequestType = {
   GENERATE: "GENERATE",
   EMBED: "EMBED",
   TRANSLATE: "TRANSLATE",
   CHAT: "CHAT",
-} as const
+} as const;
 
-export type AIRequestType = (typeof AIRequestType)[keyof typeof AIRequestType]
+export type AIRequestType = (typeof AIRequestType)[keyof typeof AIRequestType];
 
 export const FeatureFlagType = {
   BOOLEAN: "BOOLEAN",
   PERCENTAGE: "PERCENTAGE",
   JSON: "JSON",
-} as const
+} as const;
 
-export type FeatureFlagType =
-  (typeof FeatureFlagType)[keyof typeof FeatureFlagType]
+export type FeatureFlagType = (typeof FeatureFlagType)[keyof typeof FeatureFlagType];
 
 export const SubscriptionStatus = {
   ACTIVE: "ACTIVE",
@@ -100,20 +98,18 @@ export const SubscriptionStatus = {
   TRIALING: "TRIALING",
   PAUSED: "PAUSED",
   INCOMPLETE: "INCOMPLETE",
-} as const
+} as const;
 
-export type SubscriptionStatus =
-  (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
+export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus];
 
 export const BillingInterval = {
   MONTHLY: "MONTHLY",
   YEARLY: "YEARLY",
   WEEKLY: "WEEKLY",
   ONE_TIME: "ONE_TIME",
-} as const
+} as const;
 
-export type BillingInterval =
-  (typeof BillingInterval)[keyof typeof BillingInterval]
+export type BillingInterval = (typeof BillingInterval)[keyof typeof BillingInterval];
 
 export const InvoiceStatus = {
   DRAFT: "DRAFT",
@@ -121,9 +117,9 @@ export const InvoiceStatus = {
   PAID: "PAID",
   VOID: "VOID",
   UNCOLLECTIBLE: "UNCOLLECTIBLE",
-} as const
+} as const;
 
-export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
+export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus];
 
 export const PaymentMethodType = {
   CARD: "CARD",
@@ -131,10 +127,9 @@ export const PaymentMethodType = {
   ALIPAY: "ALIPAY",
   WECHAT_PAY: "WECHAT_PAY",
   CRYPTO: "CRYPTO",
-} as const
+} as const;
 
-export type PaymentMethodType =
-  (typeof PaymentMethodType)[keyof typeof PaymentMethodType]
+export type PaymentMethodType = (typeof PaymentMethodType)[keyof typeof PaymentMethodType];
 
 export const CreditTransactionType = {
   PURCHASE: "PURCHASE",
@@ -143,10 +138,10 @@ export const CreditTransactionType = {
   ADJUSTMENT: "ADJUSTMENT",
   EXPIRATION: "EXPIRATION",
   BONUS: "BONUS",
-} as const
+} as const;
 
 export type CreditTransactionType =
-  (typeof CreditTransactionType)[keyof typeof CreditTransactionType]
+  (typeof CreditTransactionType)[keyof typeof CreditTransactionType];
 
 export const UsageType = {
   API_CALL: "API_CALL",
@@ -155,9 +150,9 @@ export const UsageType = {
   COMPUTE: "COMPUTE",
   BANDWIDTH: "BANDWIDTH",
   CUSTOM: "CUSTOM",
-} as const
+} as const;
 
-export type UsageType = (typeof UsageType)[keyof typeof UsageType]
+export type UsageType = (typeof UsageType)[keyof typeof UsageType];
 
 export const UsageLedgerSource = {
   API: "API",
@@ -165,10 +160,9 @@ export const UsageLedgerSource = {
   WEBHOOK: "WEBHOOK",
   SYSTEM: "SYSTEM",
   BACKFILL: "BACKFILL",
-} as const
+} as const;
 
-export type UsageLedgerSource =
-  (typeof UsageLedgerSource)[keyof typeof UsageLedgerSource]
+export type UsageLedgerSource = (typeof UsageLedgerSource)[keyof typeof UsageLedgerSource];
 
 export const AuditAction = {
   CREATE: "CREATE",
@@ -179,18 +173,18 @@ export const AuditAction = {
   LOGOUT: "LOGOUT",
   EXPORT: "EXPORT",
   IMPORT: "IMPORT",
-} as const
+} as const;
 
-export type AuditAction = (typeof AuditAction)[keyof typeof AuditAction]
+export type AuditAction = (typeof AuditAction)[keyof typeof AuditAction];
 
 export const ConsentType = {
   EXPLICIT: "EXPLICIT",
   IMPLICIT: "IMPLICIT",
   OPT_IN: "OPT_IN",
   OPT_OUT: "OPT_OUT",
-} as const
+} as const;
 
-export type ConsentType = (typeof ConsentType)[keyof typeof ConsentType]
+export type ConsentType = (typeof ConsentType)[keyof typeof ConsentType];
 
 export const LegalDocumentType = {
   PRIVACY_POLICY: "PRIVACY_POLICY",
@@ -201,24 +195,21 @@ export const LegalDocumentType = {
   DATA_PROCESSING: "DATA_PROCESSING",
   SLA: "SLA",
   CUSTOM: "CUSTOM",
-} as const
+} as const;
 
-export type LegalDocumentType =
-  (typeof LegalDocumentType)[keyof typeof LegalDocumentType]
+export type LegalDocumentType = (typeof LegalDocumentType)[keyof typeof LegalDocumentType];
 
 export const OAuthClientType = {
   CONFIDENTIAL: "CONFIDENTIAL",
   PUBLIC: "PUBLIC",
-} as const
+} as const;
 
-export type OAuthClientType =
-  (typeof OAuthClientType)[keyof typeof OAuthClientType]
+export type OAuthClientType = (typeof OAuthClientType)[keyof typeof OAuthClientType];
 
 export const OAuthClientStatus = {
   ACTIVE: "ACTIVE",
   SUSPENDED: "SUSPENDED",
   REVOKED: "REVOKED",
-} as const
+} as const;
 
-export type OAuthClientStatus =
-  (typeof OAuthClientStatus)[keyof typeof OAuthClientStatus]
+export type OAuthClientStatus = (typeof OAuthClientStatus)[keyof typeof OAuthClientStatus];

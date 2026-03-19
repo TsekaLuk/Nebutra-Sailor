@@ -25,235 +25,204 @@
  * ```
  */
 
-// =============================================================================
-// Types
-// =============================================================================
-export * from "./types";
-
-// =============================================================================
-// Main Sections
-// =============================================================================
-export { Navbar } from "./Navbar";
-export { Hero } from "./Hero";
-export { Features } from "./Features";
-export { UseCases } from "./UseCases";
-export { SocialProof } from "./SocialProof";
-export { Pricing } from "./Pricing";
-export { Testimonials } from "./Testimonials";
-export { FAQ } from "./FAQ";
 export { CTA } from "./CTA";
-export { Footer } from "./Footer";
-
 // =============================================================================
 // Subcomponents
 // =============================================================================
 export { GradientText } from "./components/GradientText";
 export { LogoCloud } from "./components/LogoCloud";
 export { StatsCounter } from "./components/StatsCounter";
+export { FAQ } from "./FAQ";
+export { Features } from "./Features";
+export { Footer } from "./Footer";
+export { Hero } from "./Hero";
+// =============================================================================
+// Main Sections
+// =============================================================================
+export { Navbar } from "./Navbar";
+export { Pricing } from "./Pricing";
+export { SocialProof } from "./SocialProof";
+export { Testimonials } from "./Testimonials";
+// =============================================================================
+// Types
+// =============================================================================
+export * from "./types";
+export { UseCases } from "./UseCases";
 
 // =============================================================================
 // HeroUI/MagicUI Migrated Components
 // =============================================================================
 
-// Decorative
-export { GridPattern } from "./grid-pattern";
-export type { GridPatternProps } from "./grid-pattern";
-
-// Marquee
-export { Marquee } from "./marquee";
-export type { MarqueeProps } from "./marquee";
-
+export type {
+  AnimatedHeadlineProps,
+  AnimatedHeadlineWord,
+} from "./animated-headline";
+// Animated Headline (cycling gradient text)
+export { AnimatedHeadline } from "./animated-headline";
+export type { AuthPageProps } from "./auth-page";
+// Auth Page (requires @clerk/nextjs)
+export { AuthPage } from "./auth-page";
+export type { AwardBadgeProps, AwardBadgeType } from "./award-badge";
+// Award Badge (Product Hunt awards with 3D effect)
+export { AWARD_BADGE_TITLES, AwardBadge } from "./award-badge";
+export type { BannerProps } from "./banner";
+// Banner (with Grid pattern)
+export { Banner } from "./banner";
+export type {
+  BentoCardItem,
+  BentoCardsProps,
+  PlusCardProps,
+} from "./bento-cards";
+// Bento Cards (plus-icon grid)
+export { BentoCards, CornerPlusIcons, PlusCard, PlusIcon } from "./bento-cards";
+export type {
+  CosmicSpectrumColorTheme,
+  CosmicSpectrumProps,
+} from "./cosmic-spectrum";
+// Cosmic Spectrum (scroll-animated spectrum)
+export { COSMIC_SPECTRUM_COLORS, CosmicSpectrum } from "./cosmic-spectrum";
+export type { CTASectionProps } from "./cta-section";
+// CTA Section (with decorative borders)
+export { CTASection } from "./cta-section";
+export type { CTAWithVerticalMarqueeProps } from "./cta-with-text-marquee";
 // CTA with Vertical Marquee
 export {
   default as CTAWithVerticalMarquee,
   VerticalMarquee,
 } from "./cta-with-text-marquee";
-export type { CTAWithVerticalMarqueeProps } from "./cta-with-text-marquee";
-
-// Stagger Testimonials
-export { StaggerTestimonials } from "./stagger-testimonials";
-export type {
-  StaggerTestimonialsProps,
-  StaggerTestimonialItem,
-} from "./stagger-testimonials";
-
-// Testimonials Registry (variant-based system)
-export * from "./testimonials-registry";
-
-// Auth Page (requires @clerk/nextjs)
-export { AuthPage } from "./auth-page";
-export type { AuthPageProps } from "./auth-page";
-
+export type { CustomerLogo, CustomersSectionProps } from "./customers-section";
+// Customers Section (logo cloud with animation)
+export { CustomersSection } from "./customers-section";
+export type { DatabaseRestApiProps } from "./database-rest-api";
+// Database REST API Visualization
+export { DatabaseRestApi } from "./database-rest-api";
+export type { FAQBlockProps, FAQItem } from "./faq-block";
 // FAQ Block
 export {
   default as FAQBlock,
   FAQBlock as FAQBlockComponent,
 } from "./faq-block";
-export type { FAQBlockProps, FAQItem } from "./faq-block";
-
-// Pricing Section
-export {
-  PricingSection,
-  PricingFrequencyToggle,
-  PricingCard,
-  BorderTrail,
-  DEFAULT_PRICING_PLANS,
-} from "./pricing-section";
 export type {
-  PricingSectionProps,
-  PricingFrequencyToggleProps,
-  PricingCardProps,
-  PricingPlan,
-} from "./pricing-section";
-
-// Upgrade Banner
-export { UpgradeBanner } from "./upgrade-banner";
-export type { UpgradeBannerProps } from "./upgrade-banner";
-
-// Banner (with Grid pattern)
-export { Banner } from "./banner";
-export type { BannerProps } from "./banner";
-
-// CTA Section (with decorative borders)
-export { CTASection } from "./cta-section";
-export type { CTASectionProps } from "./cta-section";
-
-// Customers Section (logo cloud with animation)
-export { CustomersSection } from "./customers-section";
-export type { CustomersSectionProps, CustomerLogo } from "./customers-section";
-
-// Logo Cloud Slider (infinite slider)
-export { LogoCloudSlider } from "./logo-cloud";
-export type { LogoCloudSliderProps, Logo } from "./logo-cloud";
-
-// Features Grid (gradient cards)
-export {
-  FeaturesGrid,
-  DecorativeGrid,
-  DEFAULT_FEATURES,
-} from "./features-grid";
-export type { FeaturesGridProps, FeatureItem } from "./features-grid";
-
+  CircularUIRowProps,
+  FeatureCardItem,
+  FeatureCardsSectionProps,
+} from "./feature-cards-section";
+// Feature Cards Section (bento-style with circular UI)
+export { CircularUIRow, FeatureCardsSection } from "./feature-cards-section";
+export type { CarouselSlide, FeatureCarouselProps } from "./feature-carousel";
 // Feature Carousel
 export { FeatureCarousel } from "./feature-carousel";
-export type { FeatureCarouselProps, CarouselSlide } from "./feature-carousel";
-
-// Logo Cloud Grid (decorative grid layout)
-export { LogoCloudGrid } from "./logo-cloud-grid";
-export type { LogoCloudGridProps, LogoCloudGridLogo } from "./logo-cloud-grid";
-
+export type {
+  FeatureSplitItem,
+  FeatureSplitSectionProps,
+} from "./feature-split-section";
 // Feature Split Section (two-column layout)
 export { FeatureSplitSection } from "./feature-split-section";
 export type {
-  FeatureSplitSectionProps,
-  FeatureSplitItem,
-} from "./feature-split-section";
-
-// Database REST API Visualization
-export { DatabaseRestApi } from "./database-rest-api";
-export type { DatabaseRestApiProps } from "./database-rest-api";
-
-// Features Showcase (image + feature grid)
-export { FeaturesShowcase } from "./features-showcase";
+  DashboardPanelHeaderProps,
+  FeaturedDashboardSectionProps,
+} from "./featured-dashboard-section";
+// Featured Dashboard Section (2x2 grid layout)
+export {
+  DashboardPanelHeader,
+  FeaturedDashboardSection,
+} from "./featured-dashboard-section";
+export type {
+  BentoFeatureCard,
+  BentoStatCard,
+  BentoTeamMember,
+  FeaturesBentoSectionProps,
+} from "./features-bento";
+// Features Bento (6-card bento grid)
+export { FeaturesBentoSection } from "./features-bento";
+export type { FeatureItem, FeaturesGridProps } from "./features-grid";
+// Features Grid (gradient cards)
+export {
+  DEFAULT_FEATURES,
+  DecorativeGrid,
+  FeaturesGrid,
+} from "./features-grid";
 export type {
   FeaturesShowcaseProps,
   ShowcaseFeature,
 } from "./features-showcase";
 
-// Features Bento (6-card bento grid)
-export { FeaturesBentoSection } from "./features-bento";
+// Features Showcase (image + feature grid)
+export { FeaturesShowcase } from "./features-showcase";
 export type {
-  FeaturesBentoSectionProps,
-  BentoStatCard,
-  BentoFeatureCard,
-  BentoTeamMember,
-} from "./features-bento";
-
-// Featured Dashboard Section (2x2 grid layout)
-export {
-  FeaturedDashboardSection,
-  DashboardPanelHeader,
-} from "./featured-dashboard-section";
-export type {
-  FeaturedDashboardSectionProps,
-  DashboardPanelHeaderProps,
-} from "./featured-dashboard-section";
-
-// Feature Cards Section (bento-style with circular UI)
-export { FeatureCardsSection, CircularUIRow } from "./feature-cards-section";
-export type {
-  FeatureCardsSectionProps,
-  FeatureCardItem,
-  CircularUIRowProps,
-} from "./feature-cards-section";
-
-// Bento Cards (plus-icon grid)
-export { BentoCards, PlusCard, PlusIcon, CornerPlusIcons } from "./bento-cards";
-export type {
-  BentoCardsProps,
-  BentoCardItem,
-  PlusCardProps,
-} from "./bento-cards";
-
-// Footer Components (atomic footer building blocks)
-export {
-  FooterLinkColumn,
-  FooterSocialLinks,
-  SystemStatusButton,
-  DEFAULT_SOCIAL_LINKS,
-} from "./footer-links";
-
-// Animated Headline (cycling gradient text)
-export { AnimatedHeadline } from "./animated-headline";
-export type {
-  AnimatedHeadlineProps,
-  AnimatedHeadlineWord,
-} from "./animated-headline";
-
-// Cosmic Spectrum (scroll-animated spectrum)
-export { CosmicSpectrum, COSMIC_SPECTRUM_COLORS } from "./cosmic-spectrum";
-export type {
-  CosmicSpectrumProps,
-  CosmicSpectrumColorTheme,
-} from "./cosmic-spectrum";
-export type {
-  FooterLink,
   FooterDropdown,
   FooterDropdownItem,
+  FooterLink,
+  FooterLinkColumnProps,
   FooterLinkGroup,
   FooterSocialLink,
-  FooterLinkColumnProps,
   FooterSocialLinksProps,
   SystemStatus,
   SystemStatusButtonProps,
 } from "./footer-links";
-
+// Footer Components (atomic footer building blocks)
+export {
+  DEFAULT_SOCIAL_LINKS,
+  FooterLinkColumn,
+  FooterSocialLinks,
+  SystemStatusButton,
+} from "./footer-links";
+export type { GlobeProps } from "./globe";
+// Globe (animated SVG illustration)
+export { Globe } from "./globe";
+export type { GridPatternProps } from "./grid-pattern";
+// Decorative
+export { GridPattern } from "./grid-pattern";
+export type { HighlightCardColor, HighlightCardProps } from "./highlight-card";
+// Highlight Card (animated metrics card with color themes)
+export { HIGHLIGHT_CARD_THEMES, HighlightCard } from "./highlight-card";
+export type { Logo, LogoCloudSliderProps } from "./logo-cloud";
+// Logo Cloud Slider (infinite slider)
+export { LogoCloudSlider } from "./logo-cloud";
+export type { LogoCloudGridLogo, LogoCloudGridProps } from "./logo-cloud-grid";
+// Logo Cloud Grid (decorative grid layout)
+export { LogoCloudGrid } from "./logo-cloud-grid";
+export type { MarqueeProps } from "./marquee";
+// Marquee
+export { Marquee } from "./marquee";
+export type {
+  PricingCardProps,
+  PricingFrequencyToggleProps,
+  PricingPlan,
+  PricingSectionProps,
+} from "./pricing-section";
+// Pricing Section
+export {
+  BorderTrail,
+  DEFAULT_PRICING_PLANS,
+  PricingCard,
+  PricingFrequencyToggle,
+  PricingSection,
+} from "./pricing-section";
+export type { SmoothScrollHeroProps } from "./smooth-scroll-hero";
 // Smooth Scroll Hero (parallax clip-path reveal)
 export { SmoothScrollHero } from "./smooth-scroll-hero";
-export type { SmoothScrollHeroProps } from "./smooth-scroll-hero";
-
-// Award Badge (Product Hunt awards with 3D effect)
-export { AwardBadge, AWARD_BADGE_TITLES } from "./award-badge";
-export type { AwardBadgeProps, AwardBadgeType } from "./award-badge";
-
-// Terminal Control Section (animated code diff showcase)
-export {
-  TerminalControlSectionAnimated,
-  CodeDiff,
-  DEFAULT_TERMINAL_ITEMS,
-} from "./terminal-control-section-animated";
 export type {
-  TerminalControlSectionAnimatedProps,
+  StaggerTestimonialItem,
+  StaggerTestimonialsProps,
+} from "./stagger-testimonials";
+// Stagger Testimonials
+export { StaggerTestimonials } from "./stagger-testimonials";
+export type {
+  BulletItem,
   CodeDiffProps,
   DiffBlock,
   DiffLine,
-  BulletItem,
+  TerminalControlSectionAnimatedProps,
 } from "./terminal-control-section-animated";
-
-// Globe (animated SVG illustration)
-export { Globe } from "./globe";
-export type { GlobeProps } from "./globe";
-
-// Highlight Card (animated metrics card with color themes)
-export { HighlightCard, HIGHLIGHT_CARD_THEMES } from "./highlight-card";
-export type { HighlightCardProps, HighlightCardColor } from "./highlight-card";
+// Terminal Control Section (animated code diff showcase)
+export {
+  CodeDiff,
+  DEFAULT_TERMINAL_ITEMS,
+  TerminalControlSectionAnimated,
+} from "./terminal-control-section-animated";
+// Testimonials Registry (variant-based system)
+export * from "./testimonials-registry";
+export type { UpgradeBannerProps } from "./upgrade-banner";
+// Upgrade Banner
+export { UpgradeBanner } from "./upgrade-banner";

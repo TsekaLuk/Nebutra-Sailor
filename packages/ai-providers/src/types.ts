@@ -222,7 +222,7 @@ export class AIProviderError extends Error {
     public readonly provider: ProviderName,
     public readonly statusCode?: number,
     public readonly code?: string,
-    public readonly cause?: unknown
+    public readonly cause?: unknown,
   ) {
     super(message);
     this.name = "AIProviderError";
@@ -235,7 +235,7 @@ export class RateLimitError extends AIProviderError {
       `Rate limit exceeded for ${provider}${retryAfter ? `. Retry after ${retryAfter}s` : ""}`,
       provider,
       429,
-      "rate_limit_exceeded"
+      "rate_limit_exceeded",
     );
     this.name = "RateLimitError";
   }

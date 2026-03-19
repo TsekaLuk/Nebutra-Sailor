@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  LaunchBanner,
-  useLaunchBannerState,
-  getProductHuntUrl,
-} from "@nebutra/marketing";
+import { getProductHuntUrl, LaunchBanner, useLaunchBannerState } from "@nebutra/marketing";
 
 interface LaunchBannerWrapperProps {
   postSlug: string;

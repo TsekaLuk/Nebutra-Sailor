@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Combobox, CommandList } from "@nebutra/ui/primitives"
+import { Combobox, CommandList } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Combobox11Demo() {
   return (
     <Combobox placeholder="Select framework...">
@@ -19,5 +18,5 @@ export function Combobox11Demo() {
         </Combobox.Group>
       </CommandList>
     </Combobox>
-  )
+  );
 }

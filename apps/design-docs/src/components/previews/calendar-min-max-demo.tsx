@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Calendar, today, getLocalTimeZone } from "@nebutra/ui/primitives"
+import { Calendar, getLocalTimeZone, today } from "@nebutra/ui/primitives";
 
 export default function CalendarMinMaxDemo() {
   return (
@@ -11,5 +11,5 @@ export default function CalendarMinMaxDemo() {
         className="rounded-xl border border-border shadow-sm"
       />
     </div>
-  )
+  );
 }

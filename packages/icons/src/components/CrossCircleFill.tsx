@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -26,5 +26,6 @@ const CrossCircleFill = forwardRef<SVGSVGElement, IconProps>(
   ),
 );
 CrossCircleFill.displayName = "CrossCircleFill";
+
 export { CrossCircleFill };
 export default CrossCircleFill;

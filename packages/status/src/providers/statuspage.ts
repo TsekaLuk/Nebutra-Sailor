@@ -22,12 +22,12 @@
 
 import type { StatusProvider } from "../provider";
 import type {
-  StatuspageConfig,
-  StatusPageData,
-  StatusState,
-  MonitorStatus,
   IncidentStatus,
+  MonitorStatus,
   ScheduledMaintenance,
+  StatusPageData,
+  StatuspageConfig,
+  StatusState,
 } from "../types";
 import { calculateOverallStatus, getDefaultStatusData } from "./shared";
 
@@ -91,20 +91,13 @@ export class AtlassianStatuspageProvider implements StatusProvider {
         id: String(c.id),
         name: String(c.name),
         status: mapComponentStatus(String(c.status ?? "")),
-        ...(typeof c.description === "string"
-          ? { description: c.description }
-          : {}),
-        ...(typeof c.updated_at === "string"
-          ? { lastChecked: c.updated_at }
-          : {}),
+        ...(typeof c.description === "string" ? { description: c.description } : {}),
+        ...(typeof c.updated_at === "string" ? { lastChecked: c.updated_at } : {}),
       }));
 
     // Active incidents (not resolved / not postmortem)
     const activeIncidents: IncidentStatus[] = rawIncidents
-      .filter(
-        (i: Record<string, unknown>) =>
-          i.status !== "resolved" && i.status !== "postmortem",
-      )
+      .filter((i: Record<string, unknown>) => i.status !== "resolved" && i.status !== "postmortem")
       .map((i: Record<string, unknown>) => ({
         id: String(i.id),
         title: String(i.name ?? i.title ?? ""),
@@ -112,9 +105,7 @@ export class AtlassianStatuspageProvider implements StatusProvider {
         impact: mapImpact(String(i.impact ?? "none")),
         createdAt: String(i.created_at ?? ""),
         updatedAt: String(i.updated_at ?? ""),
-        ...(typeof i.resolved_at === "string"
-          ? { resolvedAt: i.resolved_at }
-          : {}),
+        ...(typeof i.resolved_at === "string" ? { resolvedAt: i.resolved_at } : {}),
         ...(typeof i.shortlink === "string" ? { shortlink: i.shortlink } : {}),
       }));
 
@@ -150,10 +141,7 @@ export class AtlassianStatuspageProvider implements StatusProvider {
         last7d: 100,
         last30d: 100,
       },
-      lastUpdated:
-        typeof page.updated_at === "string"
-          ? page.updated_at
-          : new Date().toISOString(),
+      lastUpdated: typeof page.updated_at === "string" ? page.updated_at : new Date().toISOString(),
       ...(typeof page.url === "string" ? { pageUrl: page.url } : {}),
     };
   }

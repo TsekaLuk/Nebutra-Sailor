@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
 import {
   Alert,
+  AlertContent,
+  AlertDescription,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
-  AlertContent,
-} from "@nebutra/ui/primitives"
-import { CircleCheck, CircleAlert, TriangleAlert, Info } from "lucide-react"
+} from "@nebutra/ui/primitives";
+import { CircleAlert, CircleCheck, Info, TriangleAlert } from "lucide-react";
 
 export function AlertDemo() {
   return (
@@ -28,9 +28,7 @@ export function AlertDemo() {
         </AlertIcon>
         <AlertContent>
           <AlertTitle>Something went wrong</AlertTitle>
-          <AlertDescription>
-            Please try again or contact support.
-          </AlertDescription>
+          <AlertDescription>Please try again or contact support.</AlertDescription>
         </AlertContent>
       </Alert>
 
@@ -48,5 +46,5 @@ export function AlertDemo() {
         <AlertTitle>New features available</AlertTitle>
       </Alert>
     </div>
-  )
+  );
 }

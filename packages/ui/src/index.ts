@@ -26,51 +26,47 @@
  * ```
  */
 
+export type { NebutraThemeProviderProps, NebutraTokens, ThemeMode } from "./theme";
 // Theme — Lobe UI integration
-export { NebutraThemeProvider } from "./theme";
-export type { NebutraThemeProviderProps, ThemeMode } from "./theme";
-
 /**
  * @deprecated — Use CSS variables from `@nebutra/tokens/styles.css` instead.
  * These JS token objects are an internal Lobe UI bridge and will be removed in v1.0.
  */
 export {
-  tokens,
-  colors,
-  spacing,
   borderRadius,
+  colors,
+  NebutraThemeProvider,
   shadows,
+  spacing,
+  tokens,
   typography,
 } from "./theme";
-export type { NebutraTokens } from "./theme";
 
 // Re-export everything from subpaths for convenience
 // (Users can also import directly from subpaths for smaller bundles)
 
 // Components
 export * from "./components";
-
-// Layout (migrated from @nebutra/design-system)
-export * from "./layout";
-
 // Icons (selective re-export to avoid bundle bloat)
 export {
-  // Most common AI icons
-  OpenAI,
   Anthropic,
-  Google,
+  Bot,
+  Check,
   Claude,
   Gemini,
+  Google,
+  Loader2,
   // Most common UI icons
   Menu,
-  X,
-  Settings,
-  Search,
-  Plus,
-  Check,
-  Loader2,
-  Sun,
   Moon,
-  Bot,
+  // Most common AI icons
+  OpenAI,
+  Plus,
+  Search,
+  Settings,
   Sparkles,
+  Sun,
+  X,
 } from "./icons";
+// Layout (migrated from @nebutra/design-system)
+export * from "./layout";

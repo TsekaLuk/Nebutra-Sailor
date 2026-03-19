@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useId, useRef, useEffect } from "react";
+import { Check, ImagePlus, Loader2, MessageSquarePlus } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useAnalytics } from "@/hooks/use-analytics";
-import { useCharacterLimit } from "@/hooks/use-character-limit";
-import { useImageUpload } from "@/hooks/use-image-upload";
+import { useEffect, useId, useRef, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Dialog,
   DialogClose,
@@ -17,8 +16,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ImagePlus, MessageSquarePlus, Loader2, Check } from "lucide-react";
+import { useAnalytics } from "@/hooks/use-analytics";
+import { useCharacterLimit } from "@/hooks/use-character-limit";
+import { useImageUpload } from "@/hooks/use-image-upload";
 
 const RELATIONSHIPS = [
   { value: "friend", label: "Friend", labelZh: "朋友" },
@@ -80,9 +80,12 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
     dicebearUrl(displayName);
 
   // Clear pending close timer on unmount
-  useEffect(() => () => {
-    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    },
+    [],
+  );
 
   function resetForm() {
     setNickname("");
@@ -98,9 +101,7 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
 
     setSubmitting(true);
     try {
-      let avatarUrl: string | null = isAuthenticated
-        ? (session?.user?.image ?? null)
-        : null;
+      let avatarUrl: string | null = isAuthenticated ? (session?.user?.image ?? null) : null;
 
       if (avatarFile) {
         const formData = new FormData();
@@ -152,7 +153,13 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (!o) resetForm(); }}>
+    <Dialog
+      open={open}
+      onOpenChange={(o) => {
+        setOpen(o);
+        if (!o) resetForm();
+      }}
+    >
       <DialogTrigger asChild>
         <button
           type="button"
@@ -229,7 +236,9 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
                   </Label>
                   <Input
                     id={`${id}-nickname`}
-                    placeholder={isAuthenticated ? session?.user?.name ?? "Your name" : "Your name"}
+                    placeholder={
+                      isAuthenticated ? (session?.user?.name ?? "Your name") : "Your name"
+                    }
                     value={nickname}
                     onChange={(e) => setNickname(e.target.value)}
                   />
@@ -255,7 +264,8 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1 space-y-1.5">
                   <Label htmlFor={`${id}-company`}>
-                    Company/Organization <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
+                    Company/Organization{" "}
+                    <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                   </Label>
                   <Input
                     id={`${id}-company`}
@@ -266,7 +276,8 @@ export function EndorsementDialog({ onSubmitted }: EndorsementDialogProps) {
                 </div>
                 <div className="flex-1 space-y-1.5">
                   <Label htmlFor={`${id}-title`}>
-                    Title/Profession <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
+                    Title/Profession{" "}
+                    <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                   </Label>
                   <Input
                     id={`${id}-title`}

@@ -1,11 +1,6 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "./accordion";
+import { useState } from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion";
 
 const meta = {
   title: "Primitives/Accordion",
@@ -135,15 +130,8 @@ export const Controlled: Story = {
 
     return (
       <div className="w-[480px]">
-        <div className="mb-4 text-sm text-muted-foreground">
-          Active: {value || "none"}
-        </div>
-        <Accordion
-          type="single"
-          collapsible
-          value={value}
-          onValueChange={setValue}
-        >
+        <div className="mb-4 text-sm text-muted-foreground">Active: {value || "none"}</div>
+        <Accordion type="single" collapsible value={value} onValueChange={setValue}>
           <AccordionItem value="item-1">
             <AccordionTrigger>Question A</AccordionTrigger>
             <AccordionContent>

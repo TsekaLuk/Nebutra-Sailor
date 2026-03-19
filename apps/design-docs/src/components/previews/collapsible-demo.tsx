@@ -1,11 +1,7 @@
-"use client"
+"use client";
 
-import {
-  Collapsible,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "@nebutra/ui/primitives"
-import { ChevronsUpDown } from "lucide-react"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@nebutra/ui/primitives";
+import { ChevronsUpDown } from "lucide-react";
 
 export function CollapsibleDemo() {
   return (
@@ -22,5 +18,5 @@ export function CollapsibleDemo() {
         <div className="px-4 py-2 text-sm rounded-md border">Carol White</div>
       </CollapsibleContent>
     </Collapsible>
-  )
+  );
 }

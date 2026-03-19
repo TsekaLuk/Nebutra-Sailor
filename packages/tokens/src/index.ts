@@ -20,8 +20,8 @@
  *   @nebutra/ui     → component library (consumes tokens via CSS variables)
  */
 
-export { ThemeProvider, useTheme } from "next-themes";
 export type { ThemeProviderProps } from "next-themes";
+export { ThemeProvider, useTheme } from "next-themes";
 
 export const THEME_IDS = ["light", "dark"] as const;
 export type ThemeId = (typeof THEME_IDS)[number];

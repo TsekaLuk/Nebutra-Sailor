@@ -1,7 +1,7 @@
 "use client";
 
+import { Check, Copy } from "lucide-react";
 import { useState } from "react";
-import { Copy, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CommandInstallBoxProps {
@@ -33,8 +33,7 @@ export function CommandInstallBox({
       )}
     >
       <code className="flex-1 px-5 py-3.5 font-mono text-sm text-[color:var(--neutral-12)] md:text-base dark:text-white">
-        <span className="text-[color:var(--neutral-9)] dark:text-white/50">$</span>{" "}
-        {command}
+        <span className="text-[color:var(--neutral-9)] dark:text-white/50">$</span> {command}
       </code>
       <button
         type="button"

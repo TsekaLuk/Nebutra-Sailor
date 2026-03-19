@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV === "production";
  */
 export const logger = pino({
   level: process.env.LOG_LEVEL || (isProduction ? "info" : "debug"),
-  
+
   // Production: JSON format for log aggregation
   // Development: Pretty print for readability
   transport: isProduction

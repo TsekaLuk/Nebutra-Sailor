@@ -20,10 +20,10 @@
  * Install k6: https://k6.io/docs/getting-started/installation/
  */
 
-import http from "k6/http";
+import { randomIntBetween, randomItem } from "https://jslib.k6.io/k6-utils/1.4.0/index.js";
 import { check, group, sleep } from "k6";
-import { Rate, Trend, Counter } from "k6/metrics";
-import { randomItem, randomIntBetween } from "https://jslib.k6.io/k6-utils/1.4.0/index.js";
+import http from "k6/http";
+import { Counter, Rate, Trend } from "k6/metrics";
 
 // ── Custom metrics ──────────────────────────────────────────────────────────
 const errorRate = new Rate("custom_error_rate");
@@ -45,21 +45,21 @@ const SCENARIOS = {
     executor: "ramping-vus",
     startVUs: 0,
     stages: [
-      { target: 10, duration: "2m" },   // warm-up
-      { target: 50, duration: "5m" },   // ramp to target
-      { target: 50, duration: "10m" },  // hold at target
-      { target: 0,  duration: "2m" },   // cool-down
+      { target: 10, duration: "2m" }, // warm-up
+      { target: 50, duration: "5m" }, // ramp to target
+      { target: 50, duration: "10m" }, // hold at target
+      { target: 0, duration: "2m" }, // cool-down
     ],
   },
   stress: {
     executor: "ramping-vus",
     startVUs: 0,
     stages: [
-      { target: 50,  duration: "2m" },
+      { target: 50, duration: "2m" },
       { target: 100, duration: "2m" },
       { target: 200, duration: "2m" },
-      { target: 200, duration: "5m" },  // hold at stress peak
-      { target: 0,   duration: "2m" },
+      { target: 200, duration: "5m" }, // hold at stress peak
+      { target: 0, duration: "2m" },
     ],
   },
   soak: {
@@ -89,17 +89,13 @@ export const options = {
 
 // ── Test data ────────────────────────────────────────────────────────────────
 const TEST_PRICE_IDS = ["price_starter_monthly", "price_pro_monthly"];
-const TEST_TENANT_IDS = [
-  "org_test_001",
-  "org_test_002",
-  "org_test_003",
-];
+const TEST_TENANT_IDS = ["org_test_001", "org_test_002", "org_test_003"];
 
 // ── Common headers ───────────────────────────────────────────────────────────
 function getHeaders(tenantId) {
   return {
     "Content-Type": "application/json",
-    "Authorization": `Bearer ${API_TOKEN}`,
+    Authorization: `Bearer ${API_TOKEN}`,
     "X-Tenant-ID": tenantId,
     "X-Request-ID": `k6-${Date.now()}-${Math.random().toString(36).slice(2)}`,
   };
@@ -135,8 +131,7 @@ export default function () {
     });
     requestCount.add(1);
     const ok = check(res, {
-      "billing/subscription: 200 or 404": (r) =>
-        r.status === 200 || r.status === 404,
+      "billing/subscription: 200 or 404": (r) => r.status === 200 || r.status === 404,
       "billing/subscription: <500ms": (r) => r.timings.duration < 500,
     });
     errorRate.add(!ok && res.status !== 404);
@@ -180,9 +175,7 @@ export default function () {
 
     check(second, {
       "idempotency: replay header on duplicate": (r) =>
-        r.headers["Idempotency-Replayed"] === "true" ||
-        r.status === 200 ||
-        r.status === 202,
+        r.headers["Idempotency-Replayed"] === "true" || r.status === 200 || r.status === 202,
     });
   });
 

@@ -1,25 +1,26 @@
-import { PrismaClient } from "../../prisma/generated/client"
-import { PrismaPg } from "@prisma/adapter-pg"
-import { createPgPool } from "@nebutra/db/pool"
+import { createPgPool } from "@nebutra/db/pool";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../../prisma/generated/client";
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient | undefined }
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClient | undefined };
 
 function createClient(): PrismaClient | null {
   if (!process.env.DATABASE_URL) {
-    console.warn("[prisma] DATABASE_URL is not set — database features disabled")
-    return null
+    console.warn("[prisma] DATABASE_URL is not set — database features disabled");
+    return null;
   }
-  const pool = createPgPool({ connectionString: process.env.DATABASE_URL })
-  const adapter = new PrismaPg(pool)
+  const pool = createPgPool({ connectionString: process.env.DATABASE_URL });
+  const adapter = new PrismaPg(pool);
   return new PrismaClient({
     adapter,
     log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-  })
+  });
 }
 
 export const prisma: PrismaClient | null =
-  globalForPrisma.prisma ?? (() => {
-    const client = createClient()
-    if (client) globalForPrisma.prisma = client
-    return client
-  })()
+  globalForPrisma.prisma ??
+  (() => {
+    const client = createClient();
+    if (client) globalForPrisma.prisma = client;
+    return client;
+  })();

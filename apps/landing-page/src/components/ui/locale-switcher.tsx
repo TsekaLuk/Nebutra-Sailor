@@ -3,9 +3,9 @@
 import { Globe } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { locales, type Locale } from "@/i18n/routing";
+import { type Locale, locales } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
 
 const LOCALE_LABELS: Record<Locale, string> = {
   en: "EN",
@@ -49,9 +49,7 @@ export function LocaleSwitcher() {
         aria-haspopup="listbox"
       >
         <Globe className="h-4 w-4" />
-        <span className="font-medium">
-          {LOCALE_LABELS[locale] ?? locale.toUpperCase()}
-        </span>
+        <span className="font-medium">{LOCALE_LABELS[locale] ?? locale.toUpperCase()}</span>
       </button>
 
       {isOpen && (

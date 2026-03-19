@@ -1,13 +1,6 @@
 import { logger } from "@nebutra/logger";
-import type {
-  UsageType,
-  RecordUsageInput,
-  Plan,
-} from "../types.js";
-import {
-  UsageError,
-  DEFAULT_USAGE_PRICING,
-} from "../types.js";
+import type { Plan, RecordUsageInput, UsageType } from "../types.js";
+import { DEFAULT_USAGE_PRICING, UsageError } from "../types.js";
 
 // ============================================
 // Types
@@ -94,9 +87,7 @@ export function recordUsage(input: RecordUsageInput): void {
  * Flush usage buffer to persistent storage
  * In production, this would write to the database
  */
-export async function flushUsageBuffer(
-  organizationId?: string
-): Promise<UsageRecord[]> {
+export async function flushUsageBuffer(organizationId?: string): Promise<UsageRecord[]> {
   const flushed: UsageRecord[] = [];
 
   if (organizationId) {
@@ -122,7 +113,7 @@ export async function flushUsageBuffer(
 export function checkUsageLimit(
   currentUsage: bigint,
   limit: bigint,
-  requestedQuantity: bigint
+  requestedQuantity: bigint,
 ): UsageCheckResult {
   // -1 means unlimited
   if (limit === BigInt(-1)) {
@@ -165,10 +156,7 @@ export function getPlanUsageLimit(plan: Plan, type: UsageType): bigint {
 /**
  * Calculate overage cost
  */
-export function calculateOverageCost(
-  type: UsageType,
-  overageQuantity: bigint
-): number {
+export function calculateOverageCost(type: UsageType, overageQuantity: bigint): number {
   const pricing = DEFAULT_USAGE_PRICING.find((p) => p.type === type);
   if (!pricing) return 0;
 
@@ -187,10 +175,7 @@ export function getCurrentPeriod(): string {
 /**
  * Format usage for display
  */
-export function formatUsage(
-  quantity: bigint,
-  type: UsageType
-): string {
+export function formatUsage(quantity: bigint, type: UsageType): string {
   const pricing = DEFAULT_USAGE_PRICING.find((p) => p.type === type);
   if (!pricing) return quantity.toString();
 

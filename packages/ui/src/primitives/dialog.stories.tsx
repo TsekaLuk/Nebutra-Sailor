@@ -1,14 +1,14 @@
-import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
 import {
   Dialog,
-  DialogTrigger,
+  DialogClose,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
-  DialogClose,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "./dialog";
 
 const meta = {
@@ -49,10 +49,7 @@ export const Default: Story = {
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <button
-              type="button"
-              className="rounded-md border border-border px-3 py-2 text-sm"
-            >
+            <button type="button" className="rounded-md border border-border px-3 py-2 text-sm">
               Cancel
             </button>
           </DialogClose>

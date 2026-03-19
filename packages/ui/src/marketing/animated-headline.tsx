@@ -1,12 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { Plus } from "lucide-react";
+import type * as React from "react";
+import { GradientAnimatedText, type GradientTheme } from "../primitives/gradient-animated-text";
 import { cn } from "../utils/cn";
-import {
-  GradientAnimatedText,
-  type GradientTheme,
-} from "../primitives/gradient-animated-text";
 
 export interface AnimatedHeadlineWord {
   /** Word text (including punctuation) */
@@ -94,30 +91,10 @@ export function AnimatedHeadline({
           {/* Corner icons */}
           {showCornerIcons && (
             <>
-              <Plus
-                className={cn(
-                  "absolute -left-4 -top-4 h-8 w-8",
-                  cornerIconColor,
-                )}
-              />
-              <Plus
-                className={cn(
-                  "absolute -bottom-4 -left-4 h-8 w-8",
-                  cornerIconColor,
-                )}
-              />
-              <Plus
-                className={cn(
-                  "absolute -right-4 -top-4 h-8 w-8",
-                  cornerIconColor,
-                )}
-              />
-              <Plus
-                className={cn(
-                  "absolute -bottom-4 -right-4 h-8 w-8",
-                  cornerIconColor,
-                )}
-              />
+              <Plus className={cn("absolute -left-4 -top-4 h-8 w-8", cornerIconColor)} />
+              <Plus className={cn("absolute -bottom-4 -left-4 h-8 w-8", cornerIconColor)} />
+              <Plus className={cn("absolute -right-4 -top-4 h-8 w-8", cornerIconColor)} />
+              <Plus className={cn("absolute -bottom-4 -right-4 h-8 w-8", cornerIconColor)} />
             </>
           )}
 

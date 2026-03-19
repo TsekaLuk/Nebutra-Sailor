@@ -74,14 +74,9 @@ export function Pricing({
           >
             Monthly
           </button>
-          <button
-            data-active={billingCycle === "yearly"}
-            onClick={() => setBillingCycle("yearly")}
-          >
+          <button data-active={billingCycle === "yearly"} onClick={() => setBillingCycle("yearly")}>
             Yearly
-            {yearlyDiscount && (
-              <span data-badge>Save {yearlyDiscount}%</span>
-            )}
+            {yearlyDiscount && <span data-badge>Save {yearlyDiscount}%</span>}
           </button>
         </div>
       )}
@@ -89,11 +84,7 @@ export function Pricing({
       {/* TODO: Pricing Cards */}
       <div data-slot="plans">
         {plans.map((plan) => (
-          <div
-            key={plan.id}
-            data-slot="plan-card"
-            data-popular={plan.popular}
-          >
+          <div key={plan.id} data-slot="plan-card" data-popular={plan.popular}>
             {/* TODO: Use PricingCard component */}
             {plan.badge && <span data-slot="badge">{plan.badge}</span>}
             <h3 data-slot="plan-name">{plan.name}</h3>
@@ -101,10 +92,8 @@ export function Pricing({
             <div data-slot="price">
               <span data-slot="amount">
                 {formatPrice(
-                  billingCycle === "monthly"
-                    ? plan.price.monthly
-                    : plan.price.yearly / 12,
-                  plan.price.currency
+                  billingCycle === "monthly" ? plan.price.monthly : plan.price.yearly / 12,
+                  plan.price.currency,
                 )}
               </span>
               <span data-slot="period">/month</span>
@@ -119,9 +108,7 @@ export function Pricing({
                 <li key={i} data-included={feature.included}>
                   {/* TODO: Check/X icon */}
                   {feature.text}
-                  {feature.tooltip && (
-                    <span data-slot="tooltip">{feature.tooltip}</span>
-                  )}
+                  {feature.tooltip && <span data-slot="tooltip">{feature.tooltip}</span>}
                 </li>
               ))}
             </ul>
@@ -139,9 +126,7 @@ export function Pricing({
 
       {/* TODO: Comparison Table */}
       {showComparison && (
-        <div data-slot="comparison">
-          {/* TODO: Implement feature comparison table */}
-        </div>
+        <div data-slot="comparison">{/* TODO: Implement feature comparison table */}</div>
       )}
     </section>
   );

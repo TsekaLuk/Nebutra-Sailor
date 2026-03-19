@@ -42,8 +42,7 @@ Sentry.init({
       event.exception?.values?.some((ex) =>
         ex.stacktrace?.frames?.some(
           (f) =>
-            f.filename?.includes("chrome-extension://") ||
-            f.filename?.includes("moz-extension://"),
+            f.filename?.includes("chrome-extension://") || f.filename?.includes("moz-extension://"),
         ),
       ) ?? false;
 

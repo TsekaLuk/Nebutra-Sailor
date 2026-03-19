@@ -6,9 +6,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@nebutra/ui/primitives"
-import { cn } from "@nebutra/ui/utils"
-import React from "react"
+} from "@nebutra/ui/primitives";
+import { cn } from "@nebutra/ui/utils";
+import React from "react";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -20,8 +20,7 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "Hover Card",
     href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
+    description: "For sighted users to preview content available behind a link.",
   },
   {
     title: "Progress",
@@ -46,7 +45,7 @@ const components: { title: string; href: string; description: string }[] = [
     description:
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
-]
+];
 
 export function NavigationMenuDemo() {
   return (
@@ -64,12 +63,9 @@ export function NavigationMenuDemo() {
                         className="p-6 flex h-full w-full flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none select-none focus:shadow-md"
                         href="/"
                       >
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          Nebutra UI
-                        </div>
+                        <div className="mb-2 mt-4 text-lg font-medium">Nebutra UI</div>
                         <p className="text-sm leading-tight text-muted-foreground">
-                          Beautifully designed components built with Radix UI
-                          and Tailwind CSS.
+                          Beautifully designed components built with Radix UI and Tailwind CSS.
                         </p>
                       </a>
                     </NavigationMenuLink>
@@ -80,10 +76,7 @@ export function NavigationMenuDemo() {
                   <ListItem href="/docs/installation" title="Installation">
                     How to install dependencies and structure your app.
                   </ListItem>
-                  <ListItem
-                    href="/docs/primitives/typography"
-                    title="Typography"
-                  >
+                  <ListItem href="/docs/primitives/typography" title="Typography">
                     Styles for headings, paragraphs, lists...etc
                   </ListItem>
                 </ul>
@@ -94,11 +87,7 @@ export function NavigationMenuDemo() {
               <NavigationMenuContent>
                 <ul className="gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] grid w-[400px]">
                   {components.map((component) => (
-                    <ListItem
-                      key={component.title}
-                      title={component.title}
-                      href={component.href}
-                    >
+                    <ListItem key={component.title} title={component.title} href={component.href}>
                       {component.description}
                     </ListItem>
                   ))}
@@ -114,31 +103,28 @@ export function NavigationMenuDemo() {
         </NavigationMenu>
       </div>
     </div>
-  )
+  );
 }
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "space-y-1 p-3 block rounded-md leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  )
-})
-ListItem.displayName = "ListItem"
+const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
+  ({ className, title, children, ...props }, ref) => {
+    return (
+      <li>
+        <NavigationMenuLink asChild>
+          <a
+            ref={ref}
+            className={cn(
+              "space-y-1 p-3 block rounded-md leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+              className,
+            )}
+            {...props}
+          >
+            <div className="text-sm font-medium leading-none">{title}</div>
+            <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">{children}</p>
+          </a>
+        </NavigationMenuLink>
+      </li>
+    );
+  },
+);
+ListItem.displayName = "ListItem";

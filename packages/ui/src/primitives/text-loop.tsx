@@ -1,13 +1,8 @@
 "use client";
 
+import { AnimatePresence, motion, type Transition, type Variants } from "framer-motion";
+import { Children, useEffect, useState } from "react";
 import { cn } from "../utils/cn";
-import {
-  motion,
-  AnimatePresence,
-  type Transition,
-  type Variants,
-} from "framer-motion";
-import { useState, useEffect, Children } from "react";
 
 /**
  * Props for the TextLoop component.

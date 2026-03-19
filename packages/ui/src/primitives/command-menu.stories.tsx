@@ -1,7 +1,7 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { CommandMenu } from "./command-menu";
+import { useState } from "react";
 import { Button } from "./button";
+import { CommandMenu } from "./command-menu";
 
 const meta = {
   title: "Primitives/CommandMenu",
@@ -41,12 +41,8 @@ export const Default: Story = {
               <CommandMenu.Item callback={noop}>Figma Import</CommandMenu.Item>
             </CommandMenu.Group>
             <CommandMenu.Group heading="Commands">
-              <CommandMenu.Item callback={noop}>
-                Import Extension
-              </CommandMenu.Item>
-              <CommandMenu.Item callback={noop}>
-                Manage Extensions
-              </CommandMenu.Item>
+              <CommandMenu.Item callback={noop}>Import Extension</CommandMenu.Item>
+              <CommandMenu.Item callback={noop}>Manage Extensions</CommandMenu.Item>
             </CommandMenu.Group>
             <CommandMenu.Group heading="Collaboration">
               <CommandMenu.Item callback={noop}>Flags Explorer</CommandMenu.Item>
@@ -143,9 +139,7 @@ export const DisabledItems: Story = {
               <CommandMenu.Item disabled callback={noop}>
                 Disabled Action
               </CommandMenu.Item>
-              <CommandMenu.Item callback={noop}>
-                Another Available
-              </CommandMenu.Item>
+              <CommandMenu.Item callback={noop}>Another Available</CommandMenu.Item>
             </CommandMenu.Group>
           </CommandMenu.List>
         </CommandMenu.Root>

@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
 import createGlobe, { type COBEOptions } from "cobe";
+import type * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../utils/cn";
 
 export type GlobeMarker = {
@@ -92,12 +92,7 @@ const DEFAULT_CONFIG: GlobeConfig = {
  * />
  * ```
  */
-export function Globe({
-  className,
-  config,
-  rotationSpeed = 0.005,
-  ...props
-}: GlobeProps) {
+export function Globe({ className, config, rotationSpeed = 0.005, ...props }: GlobeProps) {
   const mergedConfig = { ...DEFAULT_CONFIG, ...config };
   let phi = mergedConfig.phi || 0;
   let width = 0;
@@ -129,7 +124,7 @@ export function Globe({
       state.width = width * 2;
       state.height = width * 2;
     },
-    [r, rotationSpeed]
+    [r, rotationSpeed],
   );
 
   const onResize = () => {
@@ -166,10 +161,7 @@ export function Globe({
 
   return (
     <div
-      className={cn(
-        "absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]",
-        className
-      )}
+      className={cn("absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]", className)}
       {...props}
     >
       <canvas
@@ -181,9 +173,7 @@ export function Globe({
         onPointerUp={() => updatePointerInteraction(null)}
         onPointerOut={() => updatePointerInteraction(null)}
         onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) =>
-          e.touches[0] && updateMovement(e.touches[0].clientX)
-        }
+        onTouchMove={(e) => e.touches[0] && updateMovement(e.touches[0].clientX)}
       />
     </div>
   );

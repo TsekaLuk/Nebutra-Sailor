@@ -1,14 +1,14 @@
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-import { Webhook } from "svix";
+import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { prisma, type Role } from "@nebutra/db";
 import { logger } from "@nebutra/logger";
 import {
-  UserRepository,
-  OrganizationRepository,
-  OrganizationMemberRepository,
-  WebhookEventRepository,
   type JsonValue,
+  OrganizationMemberRepository,
+  OrganizationRepository,
+  UserRepository,
+  WebhookEventRepository,
 } from "@nebutra/repositories";
+import { Webhook } from "svix";
 import { inngest } from "../../inngest/client.js";
 
 const log = logger.child({ service: "clerk-webhook" });
@@ -153,15 +153,12 @@ const clerkWebhookRoute = createRoute({
 // Factory function
 // ============================================
 
-export function createClerkWebhookRoutes(
-  repos?: Partial<ClerkRepos>,
-): OpenAPIHono {
+export function createClerkWebhookRoutes(repos?: Partial<ClerkRepos>): OpenAPIHono {
   const resolvedRepos: ClerkRepos = {
     userRepo: repos?.userRepo ?? new UserRepository(prisma),
     orgRepo: repos?.orgRepo ?? new OrganizationRepository(prisma),
     memberRepo: repos?.memberRepo ?? new OrganizationMemberRepository(prisma),
-    webhookEventRepo:
-      repos?.webhookEventRepo ?? new WebhookEventRepository(prisma),
+    webhookEventRepo: repos?.webhookEventRepo ?? new WebhookEventRepository(prisma),
   };
 
   const app = new OpenAPIHono();
@@ -200,11 +197,10 @@ export function createClerkWebhookRoutes(
     }
 
     // Idempotency check
-    const existingEvent =
-      await resolvedRepos.webhookEventRepo.findByProviderAndEventId(
-        "clerk",
-        svixId,
-      );
+    const existingEvent = await resolvedRepos.webhookEventRepo.findByProviderAndEventId(
+      "clerk",
+      svixId,
+    );
 
     if (existingEvent?.processedAt) {
       log.info("Clerk event already processed, skipping", {
@@ -231,11 +227,7 @@ export function createClerkWebhookRoutes(
       .catch(async (err: unknown) => {
         log.error("Clerk event handler error", err, { type: payload.type });
         await resolvedRepos.webhookEventRepo
-          .markFailed(
-            "clerk",
-            svixId,
-            err instanceof Error ? err.message : "Unknown error",
-          )
+          .markFailed("clerk", svixId, err instanceof Error ? err.message : "Unknown error")
           .catch(() => {
             // Best-effort — do not throw inside catch
           });
@@ -254,10 +246,7 @@ export const clerkWebhookRoutes = createClerkWebhookRoutes();
 // Event dispatcher
 // ============================================
 
-async function handleClerkEvent(
-  event: ClerkWebhookEvent,
-  repos: ClerkRepos,
-): Promise<void> {
+async function handleClerkEvent(event: ClerkWebhookEvent, repos: ClerkRepos): Promise<void> {
   switch (event.type) {
     case "user.created":
       await handleUserCreated(event.data as ClerkUserData, repos.userRepo);
@@ -269,22 +258,13 @@ async function handleClerkEvent(
       await handleUserDeleted(event.data as ClerkUserData, repos.userRepo);
       break;
     case "organization.created":
-      await handleOrganizationCreated(
-        event.data as ClerkOrganizationData,
-        repos.orgRepo,
-      );
+      await handleOrganizationCreated(event.data as ClerkOrganizationData, repos.orgRepo);
       break;
     case "organization.updated":
-      await handleOrganizationUpdated(
-        event.data as ClerkOrganizationData,
-        repos.orgRepo,
-      );
+      await handleOrganizationUpdated(event.data as ClerkOrganizationData, repos.orgRepo);
       break;
     case "organization.deleted":
-      await handleOrganizationDeleted(
-        event.data as ClerkOrganizationData,
-        repos.orgRepo,
-      );
+      await handleOrganizationDeleted(event.data as ClerkOrganizationData, repos.orgRepo);
       break;
     case "organizationMembership.created":
       await handleMembershipCreated(
@@ -317,16 +297,11 @@ function resolveUserName(data: ClerkUserData): string | null {
 }
 
 function resolvePrimaryEmail(data: ClerkUserData): string {
-  const primary = data.email_addresses.find(
-    (e) => e.verification?.status === "verified",
-  );
+  const primary = data.email_addresses.find((e) => e.verification?.status === "verified");
   return primary?.email_address ?? data.email_addresses[0]?.email_address ?? "";
 }
 
-async function handleUserCreated(
-  data: ClerkUserData,
-  repo: UserRepository,
-): Promise<void> {
+async function handleUserCreated(data: ClerkUserData, repo: UserRepository): Promise<void> {
   const email = resolvePrimaryEmail(data);
   const name = resolveUserName(data);
   const avatarUrl = data.image_url ?? data.profile_image_url ?? null;
@@ -341,10 +316,7 @@ async function handleUserCreated(
   log.info("User created", { clerkId: data.id, email });
 }
 
-async function handleUserUpdated(
-  data: ClerkUserData,
-  repo: UserRepository,
-): Promise<void> {
+async function handleUserUpdated(data: ClerkUserData, repo: UserRepository): Promise<void> {
   const email = resolvePrimaryEmail(data);
   const name = resolveUserName(data);
   const avatarUrl = data.image_url ?? data.profile_image_url ?? null;
@@ -354,10 +326,7 @@ async function handleUserUpdated(
   log.info("User updated", { clerkId: data.id, email });
 }
 
-async function handleUserDeleted(
-  data: ClerkUserData,
-  repo: UserRepository,
-): Promise<void> {
+async function handleUserDeleted(data: ClerkUserData, repo: UserRepository): Promise<void> {
   // Cascade deletes on OrganizationMember, Wallet, etc. are handled by DB constraints
   await repo.deleteByClerkId(data.id);
 
@@ -396,15 +365,13 @@ async function handleOrganizationCreated(
     },
   };
 
-  void inngest
-    .send(payload)
-    .catch((err) => {
-      log.warn("Failed to enqueue tenant provisioning event", {
-        clerkId: data.id,
-        orgId: org.id,
-        err,
-      });
+  void inngest.send(payload).catch((err) => {
+    log.warn("Failed to enqueue tenant provisioning event", {
+      clerkId: data.id,
+      orgId: org.id,
+      err,
     });
+  });
 }
 
 async function handleOrganizationUpdated(

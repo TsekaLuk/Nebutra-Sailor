@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "../utils/cn";
 import type { SpacingScale } from "../tokens/spacing";
+import { cn } from "../utils/cn";
 
 /**
  * Box - Fundamental layout primitive
@@ -75,10 +75,7 @@ const spacingMap: Record<SpacingScale, string> = {
   32: "32",
 };
 
-function getSpacingClass(
-  prefix: string,
-  value: SpacingScale | undefined,
-): string {
+function getSpacingClass(prefix: string, value: SpacingScale | undefined): string {
   if (value === undefined) return "";
   return `${prefix}-${spacingMap[value]}`;
 }

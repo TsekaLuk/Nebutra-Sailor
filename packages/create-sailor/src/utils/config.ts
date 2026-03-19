@@ -1,15 +1,15 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
 export interface NebutraConfig {
-  orm: 'prisma' | 'drizzle' | 'none';
-  database: 'postgresql' | 'mysql' | 'sqlite' | 'none';
-  payment: 'stripe' | 'lemonsqueezy' | 'none';
-  aiProvider: 'openai' | 'anthropic' | 'none';
+  orm: "prisma" | "drizzle" | "none";
+  database: "postgresql" | "mysql" | "sqlite" | "none";
+  payment: "stripe" | "lemonsqueezy" | "none";
+  aiProvider: "openai" | "anthropic" | "none";
   i18n: boolean;
 }
 
 export async function writeNebutraConfig(targetDir: string, config: NebutraConfig) {
-  const configPath = path.join(targetDir, 'nebutra.config.json');
-  fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n');
+  const configPath = path.join(targetDir, "nebutra.config.json");
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n");
 }

@@ -1,7 +1,7 @@
 "use client";
 
+import { motion, type Transition } from "framer-motion";
 import { cn } from "../utils/cn";
-import { motion, Transition } from "framer-motion";
 
 export interface BorderTrailProps {
   /** Additional className for the trail element */

@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Combobox } from "@nebutra/ui/primitives"
+import { Combobox } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 const frameworks = [
   { value: "next", label: "Next.js" },
   { value: "remix", label: "Remix" },
   { value: "astro", label: "Astro" },
   { value: "nuxt", label: "Nuxt" },
-]
+];
 
 export function ComboboxDemo() {
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState("");
 
   return (
     <Combobox
@@ -20,5 +20,5 @@ export function ComboboxDemo() {
       onChange={setValue}
       placeholder="Select framework..."
     />
-  )
+  );
 }

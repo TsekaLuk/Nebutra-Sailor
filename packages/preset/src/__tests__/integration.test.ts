@@ -1,24 +1,16 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   defineConfig,
-  resolveConfig,
-  getFeatureEnvVars,
   getActiveApps,
-  presets,
+  getFeatureEnvVars,
   type NebutraConfig,
+  presets,
+  resolveConfig,
 } from "../index";
 
 describe("preset → theme integration", () => {
   it("each preset resolves to a valid theme", () => {
-    const validThemes = [
-      "neon",
-      "gradient",
-      "dark-dense",
-      "minimal",
-      "vibrant",
-      "ocean",
-      "custom",
-    ];
+    const validThemes = ["neon", "gradient", "dark-dense", "minimal", "vibrant", "ocean", "custom"];
     for (const [id, _preset] of Object.entries(presets)) {
       const config = defineConfig({ preset: id as NebutraConfig["preset"] });
       const resolved = resolveConfig(config);

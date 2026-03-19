@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { DatePicker } from "@nebutra/ui/primitives"
+import { DatePicker } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function DatePicker3Demo() {
   return (
     <>
@@ -11,5 +10,5 @@ export function DatePicker3Demo() {
       <DatePicker label="Underlined" variant="underlined" />
       <DatePicker label="Faded" variant="faded" />
     </>
-  )
+  );
 }

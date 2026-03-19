@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui-components/react/dialog";
 import { cva, type VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "../utils/cn";
 
@@ -14,10 +14,18 @@ const SheetTrigger = React.forwardRef<
 >(({ asChild, children, ...props }, ref) => {
   if (asChild && React.isValidElement(children)) {
     return (
-      <BaseDialog.Trigger ref={ref} {...props} render={children as React.ReactElement<Record<string, unknown>>} />
+      <BaseDialog.Trigger
+        ref={ref}
+        {...props}
+        render={children as React.ReactElement<Record<string, unknown>>}
+      />
     );
   }
-  return <BaseDialog.Trigger ref={ref} {...props}>{children}</BaseDialog.Trigger>;
+  return (
+    <BaseDialog.Trigger ref={ref} {...props}>
+      {children}
+    </BaseDialog.Trigger>
+  );
 });
 SheetTrigger.displayName = "SheetTrigger";
 
@@ -27,10 +35,18 @@ const SheetClose = React.forwardRef<
 >(({ asChild, children, ...props }, ref) => {
   if (asChild && React.isValidElement(children)) {
     return (
-      <BaseDialog.Close ref={ref} {...props} render={children as React.ReactElement<Record<string, unknown>>} />
+      <BaseDialog.Close
+        ref={ref}
+        {...props}
+        render={children as React.ReactElement<Record<string, unknown>>}
+      />
     );
   }
-  return <BaseDialog.Close ref={ref} {...props}>{children}</BaseDialog.Close>;
+  return (
+    <BaseDialog.Close ref={ref} {...props}>
+      {children}
+    </BaseDialog.Close>
+  );
 });
 SheetClose.displayName = "SheetClose";
 
@@ -43,7 +59,7 @@ const SheetOverlay = React.forwardRef<
   <BaseDialog.Backdrop
     className={cn(
       "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm data-ending-style:animate-out data-starting-style:animate-in data-ending-style:fade-out-0 data-starting-style:fade-in-0 duration-300 transition-[opacity,display]",
-      className
+      className,
     )}
     {...props}
     ref={ref}
@@ -67,61 +83,41 @@ const sheetVariants = cva(
     defaultVariants: {
       side: "right",
     },
-  }
+  },
 );
 
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof BaseDialog.Popup>,
-  VariantProps<typeof sheetVariants> {
+    VariantProps<typeof sheetVariants> {
   showClose?: boolean;
 }
 
-const SheetContent = React.forwardRef<
-  HTMLDivElement,
-  SheetContentProps
->(({ side = "right", className, children, showClose = true, ...props }, ref) => (
-  <SheetPortal>
-    <SheetOverlay />
-    <BaseDialog.Popup
-      ref={ref}
-      className={cn(sheetVariants({ side }), className)}
-      {...props}
-    >
-      {children}
-      {showClose && (
-        <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[open]:bg-primary/20">
-          <XIcon className="h-4 w-4" />
-          <span className="sr-only">Close</span>
-        </SheetClose>
-      )}
-    </BaseDialog.Popup>
-  </SheetPortal>
-));
+const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
+  ({ side = "right", className, children, showClose = true, ...props }, ref) => (
+    <SheetPortal>
+      <SheetOverlay />
+      <BaseDialog.Popup ref={ref} className={cn(sheetVariants({ side }), className)} {...props}>
+        {children}
+        {showClose && (
+          <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[open]:bg-primary/20">
+            <XIcon className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+          </SheetClose>
+        )}
+      </BaseDialog.Popup>
+    </SheetPortal>
+  ),
+);
 SheetContent.displayName = "SheetContent";
 
-const SheetHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
-      className
-    )}
-    {...props}
-  />
+const SheetHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col space-y-2 text-center sm:text-left", className)} {...props} />
 );
 SheetHeader.displayName = "SheetHeader";
 
-const SheetFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const SheetFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-      className
-    )}
+    className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)}
     {...props}
   />
 );
@@ -153,13 +149,13 @@ SheetDescription.displayName = "SheetDescription";
 
 export {
   Sheet,
-  SheetPortal,
-  SheetOverlay,
-  SheetTrigger,
   SheetClose,
   SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
   SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetOverlay,
+  SheetPortal,
+  SheetTitle,
+  SheetTrigger,
 };

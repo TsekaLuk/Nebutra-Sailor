@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Avatar, AvatarImage, AvatarFallback } from "@nebutra/ui/primitives"
+import { Avatar, AvatarFallback, AvatarImage } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function AvatarGitSimpleDemo() {
   return (
@@ -10,41 +10,32 @@ export function AvatarGitSimpleDemo() {
       <GitLabAvatar username="leerob" />
       <BitbucketAvatar username="evilrabbit" />
     </div>
-  )
+  );
 }
 
 function GitHubAvatar({ username }: { username: string }) {
   return (
     <Avatar>
-      <AvatarImage
-        src={`https://github.com/${username}.png`}
-        alt={`@${username}`}
-      />
+      <AvatarImage src={`https://github.com/${username}.png`} alt={`@${username}`} />
       <AvatarFallback>{username.slice(0, 2).toUpperCase()}</AvatarFallback>
     </Avatar>
-  )
+  );
 }
 
 function GitLabAvatar({ username }: { username: string }) {
   return (
     <Avatar>
-      <AvatarImage
-        src={`https://gitlab.com/${username}.png`}
-        alt={`@${username}`}
-      />
+      <AvatarImage src={`https://gitlab.com/${username}.png`} alt={`@${username}`} />
       <AvatarFallback>{username.slice(0, 2).toUpperCase()}</AvatarFallback>
     </Avatar>
-  )
+  );
 }
 
 function BitbucketAvatar({ username }: { username: string }) {
   return (
     <Avatar>
-      <AvatarImage
-        src={`https://bitbucket.org/${username}.png`}
-        alt={`@${username}`}
-      />
+      <AvatarImage src={`https://bitbucket.org/${username}.png`} alt={`@${username}`} />
       <AvatarFallback>{username.slice(0, 2).toUpperCase()}</AvatarFallback>
     </Avatar>
-  )
+  );
 }

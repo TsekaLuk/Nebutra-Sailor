@@ -37,10 +37,7 @@ export const WithChildren: Story = {
           <div className="h-8 w-48 rounded bg-muted" />
           <div className="grid grid-cols-3 gap-3">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-24 rounded-lg bg-muted"
-              />
+              <div key={i} className="h-24 rounded-lg bg-muted" />
             ))}
           </div>
           <div className="h-4 w-64 rounded bg-muted" />
@@ -78,9 +75,7 @@ export const RichContent: Story = {
     <div className="w-[700px]">
       <Browser address="nebutra.com">
         <div className="bg-gradient-to-b from-blue-50 to-white p-8 dark:from-blue-950 dark:to-background">
-          <h2 className="text-xl font-bold text-foreground">
-            Welcome to Nebutra
-          </h2>
+          <h2 className="text-xl font-bold text-foreground">Welcome to Nebutra</h2>
           <p className="mt-2 text-sm text-muted-foreground">Build fast. Ship faster.</p>
           <div className="mt-6 flex gap-3">
             <span className="rounded-full bg-blue-600 px-4 py-1.5 text-xs font-medium text-white">

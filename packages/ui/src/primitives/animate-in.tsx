@@ -1,20 +1,16 @@
 "use client";
 
-import * as React from "react";
+import { brandSpring, emerge, flow } from "@nebutra/brand";
 import {
-  LazyMotion,
   domAnimation,
+  LazyMotion,
   m,
+  type TargetAndTransition,
   useReducedMotion as useFramerReducedMotion,
-  TargetAndTransition,
-  VariantLabels,
+  type VariantLabels,
 } from "framer-motion";
-import { emerge, flow, brandSpring } from "@nebutra/brand";
-import {
-  motionVariants,
-  staggerContainers,
-  viewportSettings,
-} from "../tokens/motion";
+import type * as React from "react";
+import { motionVariants, staggerContainers, viewportSettings } from "../tokens/motion";
 
 // ─────────────────────────────────────────────────────────────
 // Fallback variant for `fadeIn` (not present in motionVariants)
@@ -102,11 +98,16 @@ export function AnimateIn({
   const base = PRESETS[preset] || PRESETS.emerge;
 
   // Accessibility: honour prefers-reduced-motion
-  const initial = (shouldReduce ? { opacity: 0 } : base.initial) as TargetAndTransition | VariantLabels;
-  const animate = (shouldReduce ? { opacity: 1 } : base.animate) as TargetAndTransition | VariantLabels;
-  const exit = (
-    shouldReduce ? { opacity: 0 } : ("exit" in base ? base.exit : undefined)
-  ) as TargetAndTransition | VariantLabels | undefined;
+  const initial = (shouldReduce ? { opacity: 0 } : base.initial) as
+    | TargetAndTransition
+    | VariantLabels;
+  const animate = (shouldReduce ? { opacity: 1 } : base.animate) as
+    | TargetAndTransition
+    | VariantLabels;
+  const exit = (shouldReduce ? { opacity: 0 } : "exit" in base ? base.exit : undefined) as
+    | TargetAndTransition
+    | VariantLabels
+    | undefined;
   const transition = {
     ...(shouldReduce ? { duration: 0.15 } : base.transition),
     delay,
@@ -189,12 +190,7 @@ export function AnimateInGroup({
   }
 
   return (
-    <MotionDiv
-      className={className}
-      initial="initial"
-      animate="animate"
-      variants={container}
-    >
+    <MotionDiv className={className} initial="initial" animate="animate" variants={container}>
       {children}
     </MotionDiv>
   );

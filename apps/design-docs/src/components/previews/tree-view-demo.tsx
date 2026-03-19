@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
 import {
-  TreeView,
-  TreeProvider,
-  TreeNode,
-  TreeNodeTrigger,
   TreeExpander,
   TreeIcon,
   TreeLabel,
+  TreeNode,
   TreeNodeContent,
-} from "@nebutra/ui/primitives"
+  TreeNodeTrigger,
+  TreeProvider,
+  TreeView,
+} from "@nebutra/ui/primitives";
 
 export function TreeViewDemo() {
   return (
@@ -125,5 +125,5 @@ export function TreeViewDemo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

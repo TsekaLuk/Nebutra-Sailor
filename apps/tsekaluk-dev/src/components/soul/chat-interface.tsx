@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import { useTranslations } from "next-intl";
-import { useSession, signIn } from "next-auth/react";
-import { motion, AnimatePresence } from "framer-motion";
 import { AnimateIn } from "@nebutra/ui/components";
-import { Send, Loader2, LogIn } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Loader2, LogIn, Send } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAnalytics } from "@/hooks/use-analytics";
 
 interface Message {
@@ -17,11 +17,23 @@ interface Message {
 function SoulOrb({ size = "sm", isError = false }: { size?: "sm" | "lg"; isError?: boolean }) {
   const isLg = size === "lg";
   return (
-    <div className={`relative shrink-0 flex items-center justify-center font-mono ${isError ? "text-destructive" : "text-foreground"} ${isLg ? "w-16 h-16 text-4xl" : "w-10 h-10 text-base"}`}>
+    <div
+      className={`relative shrink-0 flex items-center justify-center font-mono ${isError ? "text-destructive" : "text-foreground"} ${isLg ? "w-16 h-16 text-4xl" : "w-10 h-10 text-base"}`}
+    >
       {isLg ? (
         <div className="flex flex-col items-center justify-center leading-none z-10 transition-transform duration-700 ease-in-out hover:scale-110">
-          <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
-            <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM12 4C16.418 4 20 7.582 20 12C20 16.418 16.418 20 12 20C7.582 20 4 16.418 4 12C4 7.582 7.582 4 12 4ZM12 6C8.686 6 6 8.686 6 12C6 15.314 8.686 18 12 18C15.314 18 18 15.314 18 12C18 8.686 15.314 6 12 6Z" fill="currentColor"/>
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="opacity-80"
+          >
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM12 4C16.418 4 20 7.582 20 12C20 16.418 16.418 20 12 20C7.582 20 4 16.418 4 12C4 7.582 7.582 4 12 4ZM12 6C8.686 6 6 8.686 6 12C6 15.314 8.686 18 12 18C15.314 18 18 15.314 18 12C18 8.686 15.314 6 12 6Z"
+              fill="currentColor"
+            />
           </svg>
         </div>
       ) : (
@@ -150,10 +162,7 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
       if ((err as Error).name === "AbortError") return;
       console.error("[chat] Message send failed:", err);
       setIsTyping(false);
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: t("error"), isError: true },
-      ]);
+      setMessages((prev) => [...prev, { role: "assistant", content: t("error"), isError: true }]);
     } finally {
       setIsStreaming(false);
       setIsTyping(false);
@@ -184,19 +193,17 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
 
   if (!session?.user) {
     return (
-      <div className={`flex h-full flex-col items-center justify-center gap-6 text-center ${isWidget ? "px-4 py-6" : "px-6 py-8"}`}>
+      <div
+        className={`flex h-full flex-col items-center justify-center gap-6 text-center ${isWidget ? "px-4 py-6" : "px-6 py-8"}`}
+      >
         <AnimateIn preset="fade">
           <SoulOrb size="lg" />
         </AnimateIn>
 
         <AnimateIn preset="fadeUp" delay={0.1}>
           <div className="space-y-1.5">
-            <p className="text-base font-semibold text-foreground">
-              {t("greeting_title")}
-            </p>
-            <p className="max-w-xs text-sm text-muted-foreground">
-              {t("greeting_desc")}
-            </p>
+            <p className="text-base font-semibold text-foreground">{t("greeting_title")}</p>
+            <p className="max-w-xs text-sm text-muted-foreground">{t("greeting_desc")}</p>
           </div>
         </AnimateIn>
 
@@ -234,7 +241,11 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
   return (
     <div className="flex h-full flex-col">
       {/* Messages */}
-      <div aria-live="polite" role="log" className={`flex-1 overflow-y-auto ${isWidget ? "px-3 py-4" : "px-5 py-6"}`}>
+      <div
+        aria-live="polite"
+        role="log"
+        className={`flex-1 overflow-y-auto ${isWidget ? "px-3 py-4" : "px-5 py-6"}`}
+      >
         {messages.length === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -244,12 +255,8 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
           >
             <SoulOrb size="lg" />
             <div>
-              <p className="text-base font-semibold text-foreground">
-                {t("greeting_title")}
-              </p>
-              <p className="mt-1 max-w-xs text-sm text-muted-foreground">
-                {t("greeting_desc")}
-              </p>
+              <p className="text-base font-semibold text-foreground">{t("greeting_title")}</p>
+              <p className="mt-1 max-w-xs text-sm text-muted-foreground">{t("greeting_desc")}</p>
             </div>
             <div className="flex flex-wrap justify-center gap-2 max-w-sm mt-4">
               {starters.map((s) => (

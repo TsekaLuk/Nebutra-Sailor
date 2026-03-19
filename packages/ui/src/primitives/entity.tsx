@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -57,17 +57,11 @@ function EntityRoot<T extends React.ElementType = "div">({
       )}
       {...props}
     >
-      {left && (
-        <div className="flex shrink-0 items-center">{left}</div>
-      )}
+      {left && <div className="flex shrink-0 items-center">{left}</div>}
 
-      <div className="flex min-w-0 flex-1 items-center gap-3">
-        {children}
-      </div>
+      <div className="flex min-w-0 flex-1 items-center gap-3">{children}</div>
 
-      {right && (
-        <div className="flex shrink-0 items-center">{right}</div>
-      )}
+      {right && <div className="flex shrink-0 items-center">{right}</div>}
     </Comp>
   );
 }
@@ -77,28 +71,11 @@ EntityRoot.displayName = "Entity";
 // Entity.Content
 // =============================================================================
 
-function EntityContent({
-  title,
-  description,
-  fill = false,
-  className,
-}: EntityContentProps) {
+function EntityContent({ title, description, fill = false, className }: EntityContentProps) {
   return (
-    <div
-      className={cn(
-        "flex min-w-0 flex-col gap-0.5",
-        fill && "flex-1",
-        className,
-      )}
-    >
-      <span className="truncate text-sm font-medium text-foreground">
-        {title}
-      </span>
-      {description && (
-        <span className="truncate text-sm text-muted-foreground">
-          {description}
-        </span>
-      )}
+    <div className={cn("flex min-w-0 flex-col gap-0.5", fill && "flex-1", className)}>
+      <span className="truncate text-sm font-medium text-foreground">{title}</span>
+      {description && <span className="truncate text-sm text-muted-foreground">{description}</span>}
     </div>
   );
 }
@@ -110,12 +87,7 @@ EntityContent.displayName = "Entity.Content";
 
 function EntityList({ children, className }: EntityListProps) {
   return (
-    <ul
-      className={cn(
-        "divide-y rounded-[var(--radius-lg)] border bg-background",
-        className,
-      )}
-    >
+    <ul className={cn("divide-y rounded-[var(--radius-lg)] border bg-background", className)}>
       {children}
     </ul>
   );

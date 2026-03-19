@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives"
+import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function ToggleGroupSingleDemo() {
   return (
@@ -10,5 +10,5 @@ export function ToggleGroupSingleDemo() {
       <ToggleGroupItem value="center">中 (Center)</ToggleGroupItem>
       <ToggleGroupItem value="right">右 (Right)</ToggleGroupItem>
     </ToggleGroup>
-  )
+  );
 }

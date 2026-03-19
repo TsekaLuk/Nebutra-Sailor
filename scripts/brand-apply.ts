@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+
 /**
  * Brand Apply Script
  *
@@ -6,10 +7,10 @@
  * Run with: pnpm brand:apply
  */
 
+import { execSync } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { execSync } from "node:child_process";
-import { DEFAULT_BRAND, type BrandConfig } from "./brand-types";
+import { type BrandConfig, DEFAULT_BRAND } from "./brand-types";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 

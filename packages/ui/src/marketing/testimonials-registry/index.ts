@@ -1,8 +1,8 @@
-export * from "./types";
+export { GridTestimonials, type GridTestimonialsProps } from "./grid-section";
+export { Marquee3DTestimonials } from "./marquee3d";
 export {
   TestimonialsRegistry,
   type TestimonialsRegistryProps,
 } from "./registry";
 export { StaggerTestimonialsAdapter } from "./stagger.adapter";
-export { Marquee3DTestimonials } from "./marquee3d";
-export { GridTestimonials, type GridTestimonialsProps } from "./grid-section";
+export * from "./types";

@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { cn } from "../utils/cn";
 
 /**
@@ -79,27 +79,14 @@ function PricingCardHeader({
 }
 
 function PricingCardPlan({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      className={cn("mb-8 flex items-center justify-between", className)}
-      {...props}
-    />
-  );
+  return <div className={cn("mb-8 flex items-center justify-between", className)} {...props} />;
 }
 
-function PricingCardDescription({
-  className,
-  ...props
-}: React.ComponentProps<"p">) {
-  return (
-    <p className={cn("text-muted-foreground text-xs", className)} {...props} />
-  );
+function PricingCardDescription({ className, ...props }: React.ComponentProps<"p">) {
+  return <p className={cn("text-muted-foreground text-xs", className)} {...props} />;
 }
 
-function PricingCardPlanName({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+function PricingCardPlanName({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       className={cn(
@@ -111,10 +98,7 @@ function PricingCardPlanName({
   );
 }
 
-function PricingCardBadge({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
+function PricingCardBadge({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       className={cn(
@@ -126,49 +110,22 @@ function PricingCardBadge({
   );
 }
 
-function PricingCardPrice({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div className={cn("mb-3 flex items-end gap-1", className)} {...props} />
-  );
+function PricingCardPrice({ className, ...props }: React.ComponentProps<"div">) {
+  return <div className={cn("mb-3 flex items-end gap-1", className)} {...props} />;
 }
 
-function PricingCardMainPrice({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
-  return (
-    <span
-      className={cn("text-3xl font-extrabold tracking-tight", className)}
-      {...props}
-    />
-  );
+function PricingCardMainPrice({ className, ...props }: React.ComponentProps<"span">) {
+  return <span className={cn("text-3xl font-extrabold tracking-tight", className)} {...props} />;
 }
 
-function PricingCardPeriod({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
-  return (
-    <span
-      className={cn("text-foreground/80 pb-1 text-sm", className)}
-      {...props}
-    />
-  );
+function PricingCardPeriod({ className, ...props }: React.ComponentProps<"span">) {
+  return <span className={cn("text-foreground/80 pb-1 text-sm", className)} {...props} />;
 }
 
-function PricingCardOriginalPrice({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
+function PricingCardOriginalPrice({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
-      className={cn(
-        "text-muted-foreground mr-1 ml-auto text-lg line-through",
-        className,
-      )}
+      className={cn("text-muted-foreground mr-1 ml-auto text-lg line-through", className)}
       {...props}
     />
   );
@@ -182,16 +139,10 @@ function PricingCardList({ className, ...props }: React.ComponentProps<"ul">) {
   return <ul className={cn("space-y-3", className)} {...props} />;
 }
 
-function PricingCardListItem({
-  className,
-  ...props
-}: React.ComponentProps<"li">) {
+function PricingCardListItem({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
-      className={cn(
-        "text-muted-foreground flex items-start gap-3 text-sm",
-        className,
-      )}
+      className={cn("text-muted-foreground flex items-start gap-3 text-sm", className)}
       {...props}
     />
   );
@@ -207,10 +158,7 @@ function PricingCardSeparator({
 }) {
   return (
     <div
-      className={cn(
-        "text-muted-foreground flex items-center gap-3 text-sm",
-        className,
-      )}
+      className={cn("text-muted-foreground flex items-center gap-3 text-sm", className)}
       {...props}
     >
       <span className="bg-muted-foreground/40 h-[1px] flex-1" />
@@ -240,18 +188,18 @@ export const PricingCard = {
 
 // Also export individual components for flexibility
 export {
-  PricingCardRoot,
-  PricingCardHeader,
-  PricingCardDescription,
-  PricingCardPlan,
-  PricingCardPlanName,
   PricingCardBadge,
-  PricingCardPrice,
-  PricingCardMainPrice,
-  PricingCardPeriod,
-  PricingCardOriginalPrice,
   PricingCardBody,
+  PricingCardDescription,
+  PricingCardHeader,
   PricingCardList,
   PricingCardListItem,
+  PricingCardMainPrice,
+  PricingCardOriginalPrice,
+  PricingCardPeriod,
+  PricingCardPlan,
+  PricingCardPlanName,
+  PricingCardPrice,
+  PricingCardRoot,
   PricingCardSeparator,
 };

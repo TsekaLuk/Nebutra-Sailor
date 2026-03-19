@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { useEffect, useRef } from "react";
 import { cn } from "../utils/cn";
 
@@ -337,9 +337,7 @@ function createProgram(
   gl.linkProgram(program);
 
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    console.error(
-      "Shader program link error: " + gl.getProgramInfoLog(program),
-    );
+    console.error("Shader program link error: " + gl.getProgramInfoLog(program));
     gl.deleteProgram(program);
     return null;
   }
@@ -385,9 +383,7 @@ export function DitheringShader({
   const animationRef = useRef<number | undefined>(undefined);
   const programRef = useRef<WebGLProgram | null>(null);
   const glRef = useRef<WebGL2RenderingContext | null>(null);
-  const uniformLocationsRef = useRef<
-    Record<string, WebGLUniformLocation | null>
-  >({});
+  const uniformLocationsRef = useRef<Record<string, WebGLUniformLocation | null>>({});
   const startTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {
@@ -420,10 +416,7 @@ export function DitheringShader({
     };
 
     // Set up position attribute
-    const positionAttributeLocation = gl.getAttribLocation(
-      program,
-      "a_position",
-    );
+    const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     const positions = [-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1];
@@ -452,16 +445,11 @@ export function DitheringShader({
       const locations = uniformLocationsRef.current;
 
       if (locations.u_time) context.uniform1f(locations.u_time, currentTime);
-      if (locations.u_resolution)
-        context.uniform2f(locations.u_resolution, width, height);
-      if (locations.u_colorBack)
-        context.uniform4fv(locations.u_colorBack, hexToRgba(colorBack));
-      if (locations.u_colorFront)
-        context.uniform4fv(locations.u_colorFront, hexToRgba(colorFront));
-      if (locations.u_shape)
-        context.uniform1f(locations.u_shape, DITHERING_SHAPES[shape]);
-      if (locations.u_type)
-        context.uniform1f(locations.u_type, DITHERING_TYPES[type]);
+      if (locations.u_resolution) context.uniform2f(locations.u_resolution, width, height);
+      if (locations.u_colorBack) context.uniform4fv(locations.u_colorBack, hexToRgba(colorBack));
+      if (locations.u_colorFront) context.uniform4fv(locations.u_colorFront, hexToRgba(colorFront));
+      if (locations.u_shape) context.uniform1f(locations.u_shape, DITHERING_SHAPES[shape]);
+      if (locations.u_type) context.uniform1f(locations.u_type, DITHERING_TYPES[type]);
       if (locations.u_pxSize) context.uniform1f(locations.u_pxSize, pxSize);
 
       context.drawArrays(context.TRIANGLES, 0, 6);

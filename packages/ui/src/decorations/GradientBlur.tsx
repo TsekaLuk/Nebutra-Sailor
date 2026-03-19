@@ -117,60 +117,55 @@ export interface AmbientBackgroundProps extends React.HTMLAttributes<HTMLDivElem
   variant?: "subtle" | "vivid" | "minimal";
 }
 
-export const AmbientBackground = React.forwardRef<
-  HTMLDivElement,
-  AmbientBackgroundProps
->(({ className, variant = "subtle", children, ...props }, ref) => {
-  const gradients = {
-    subtle: [
-      {
-        position: "top-left" as const,
-        color: "primary" as const,
-        size: "lg" as const,
-      },
-      {
-        position: "bottom-right" as const,
-        color: "secondary" as const,
-        size: "md" as const,
-      },
-    ],
-    vivid: [
-      {
-        position: "top-left" as const,
-        color: "primary" as const,
-        size: "xl" as const,
-      },
-      {
-        position: "top-right" as const,
-        color: "accent" as const,
-        size: "lg" as const,
-      },
-      {
-        position: "bottom-center" as const,
-        color: "secondary" as const,
-        size: "lg" as const,
-      },
-    ],
-    minimal: [
-      {
-        position: "center" as const,
-        color: "muted" as const,
-        size: "xl" as const,
-      },
-    ],
-  };
+export const AmbientBackground = React.forwardRef<HTMLDivElement, AmbientBackgroundProps>(
+  ({ className, variant = "subtle", children, ...props }, ref) => {
+    const gradients = {
+      subtle: [
+        {
+          position: "top-left" as const,
+          color: "primary" as const,
+          size: "lg" as const,
+        },
+        {
+          position: "bottom-right" as const,
+          color: "secondary" as const,
+          size: "md" as const,
+        },
+      ],
+      vivid: [
+        {
+          position: "top-left" as const,
+          color: "primary" as const,
+          size: "xl" as const,
+        },
+        {
+          position: "top-right" as const,
+          color: "accent" as const,
+          size: "lg" as const,
+        },
+        {
+          position: "bottom-center" as const,
+          color: "secondary" as const,
+          size: "lg" as const,
+        },
+      ],
+      minimal: [
+        {
+          position: "center" as const,
+          color: "muted" as const,
+          size: "xl" as const,
+        },
+      ],
+    };
 
-  return (
-    <div
-      ref={ref}
-      className={cn("relative overflow-hidden", className)}
-      {...props}
-    >
-      {gradients[variant].map((config, index) => (
-        <GradientBlur key={index} {...config} />
-      ))}
-      {children}
-    </div>
-  );
-});
+    return (
+      <div ref={ref} className={cn("relative overflow-hidden", className)} {...props}>
+        {gradients[variant].map((config, index) => (
+          <GradientBlur key={index} {...config} />
+        ))}
+        {children}
+      </div>
+    );
+  },
+);
 AmbientBackground.displayName = "AmbientBackground";

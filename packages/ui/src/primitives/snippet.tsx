@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { Check, Copy } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 const snippetVariants = {
@@ -15,10 +15,8 @@ const snippetColors = {
   default: "",
   primary: "bg-primary/10 text-primary border-primary/20",
   secondary: "bg-secondary/10 text-secondary border-secondary/20",
-  success:
-    "bg-green-500/10 text-green-600 border-green-500/20 dark:text-green-400",
-  warning:
-    "bg-amber-500/10 text-amber-600 border-amber-500/20 dark:text-amber-400",
+  success: "bg-green-500/10 text-green-600 border-green-500/20 dark:text-green-400",
+  warning: "bg-amber-500/10 text-amber-600 border-amber-500/20 dark:text-amber-400",
   danger: "bg-red-500/10 text-red-600 border-red-500/20 dark:text-red-400",
 } as const;
 
@@ -44,10 +42,7 @@ export type SnippetRadius = keyof typeof snippetRadius;
 /**
  * Props for the Snippet component
  */
-export interface SnippetProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "onCopy"
-> {
+export interface SnippetProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onCopy"> {
   /** Code content (string or array for multiline) */
   children?: React.ReactNode;
   /** Code string for copying (if different from children) */
@@ -143,9 +138,7 @@ export function Snippet({
     if (codeString) return codeString;
     if (typeof children === "string") return children;
     if (Array.isArray(children)) {
-      return children
-        .map((child) => (typeof child === "string" ? child : ""))
-        .join("\n");
+      return children.map((child) => (typeof child === "string" ? child : "")).join("\n");
     }
     return "";
   };
@@ -170,18 +163,14 @@ export function Snippet({
       if (lines.length > 1) {
         return lines.map((line, index) => (
           <div key={index} className="flex items-center gap-2">
-            {!hideSymbol && (
-              <span className="select-none opacity-50">{symbol}</span>
-            )}
+            {!hideSymbol && <span className="select-none opacity-50">{symbol}</span>}
             <span>{line}</span>
           </div>
         ));
       }
       return (
         <div className="flex items-center gap-2">
-          {!hideSymbol && (
-            <span className="select-none opacity-50">{symbol}</span>
-          )}
+          {!hideSymbol && <span className="select-none opacity-50">{symbol}</span>}
           <span>{children}</span>
         </div>
       );
@@ -190,9 +179,7 @@ export function Snippet({
     if (Array.isArray(children)) {
       return children.map((child, index) => (
         <div key={index} className="flex items-center gap-2">
-          {!hideSymbol && (
-            <span className="select-none opacity-50">{symbol}</span>
-          )}
+          {!hideSymbol && <span className="select-none opacity-50">{symbol}</span>}
           <span>{child}</span>
         </div>
       ));
@@ -200,9 +187,7 @@ export function Snippet({
 
     return (
       <div className="flex items-center gap-2">
-        {!hideSymbol && (
-          <span className="select-none opacity-50">{symbol}</span>
-        )}
+        {!hideSymbol && <span className="select-none opacity-50">{symbol}</span>}
         <span>{children}</span>
       </div>
     );
@@ -220,9 +205,7 @@ export function Snippet({
       )}
       {...props}
     >
-      <pre className="m-0 flex flex-col overflow-x-auto whitespace-pre">
-        {renderContent()}
-      </pre>
+      <pre className="m-0 flex flex-col overflow-x-auto whitespace-pre">{renderContent()}</pre>
 
       {!hideCopyButton && (
         <button

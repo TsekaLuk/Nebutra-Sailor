@@ -28,10 +28,7 @@ export const requestContext = new AsyncLocalStorage<RequestContext>();
  * The context is mutable — downstream middleware can add tenantId/userId
  * by calling `requestContext.getStore()` and mutating the object.
  */
-export function runWithContext(
-  initial: RequestContext,
-  fn: () => Promise<void>,
-): Promise<void> {
+export function runWithContext(initial: RequestContext, fn: () => Promise<void>): Promise<void> {
   return requestContext.run({ ...initial }, fn);
 }
 

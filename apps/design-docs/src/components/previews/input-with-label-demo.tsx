@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Label, Input } from "@nebutra/ui/primitives"
+import { Input, Label } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function InputWithLabelDemo() {
   return (
@@ -9,5 +9,5 @@ export function InputWithLabelDemo() {
       <Label htmlFor="email">Email address</Label>
       <Input id="email" type="email" placeholder="contact@nebutra.com" />
     </div>
-  )
+  );
 }

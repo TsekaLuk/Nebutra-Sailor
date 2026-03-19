@@ -1,5 +1,5 @@
-import { AnimatedHikeCard } from "@nebutra/ui/primitives"
-import { Clock, Mountain, MapPin } from "lucide-react"
+import { AnimatedHikeCard } from "@nebutra/ui/primitives";
+import { Clock, MapPin, Mountain } from "lucide-react";
 
 export function AnimatedHikeCardDemo() {
   return (
@@ -20,5 +20,5 @@ export function AnimatedHikeCardDemo() {
         href="#"
       />
     </div>
-  )
+  );
 }

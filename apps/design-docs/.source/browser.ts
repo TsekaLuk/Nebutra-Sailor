@@ -1,39 +1,27 @@
 // @ts-nocheck
-import { browser } from "fumadocs-mdx/runtime/browser"
-import type * as Config from "../source.config"
+import { browser } from "fumadocs-mdx/runtime/browser";
+import type * as Config from "../source.config";
 
 const create = browser<
   typeof Config,
   import("fumadocs-mdx/runtime/types").InternalTypeConfig & {
-    DocData: {}
+    DocData: {};
   }
->()
+>();
 const browserCollections = {
   docs: create.doc("docs", {
-    "zh/contributing.mdx": () =>
-      import("../content/docs/zh/contributing.mdx?collection=docs"),
-    "zh/how-to-use.mdx": () =>
-      import("../content/docs/zh/how-to-use.mdx?collection=docs"),
-    "zh/index.mdx": () =>
-      import("../content/docs/zh/index.mdx?collection=docs"),
-    "zh/introduction.mdx": () =>
-      import("../content/docs/zh/introduction.mdx?collection=docs"),
-    "en/contributing.mdx": () =>
-      import("../content/docs/en/contributing.mdx?collection=docs"),
-    "en/how-to-use.mdx": () =>
-      import("../content/docs/en/how-to-use.mdx?collection=docs"),
-    "en/index.mdx": () =>
-      import("../content/docs/en/index.mdx?collection=docs"),
-    "en/introduction.mdx": () =>
-      import("../content/docs/en/introduction.mdx?collection=docs"),
-    "zh/api/events.mdx": () =>
-      import("../content/docs/zh/api/events.mdx?collection=docs"),
-    "zh/api/index.mdx": () =>
-      import("../content/docs/zh/api/index.mdx?collection=docs"),
-    "zh/api/legal.mdx": () =>
-      import("../content/docs/zh/api/legal.mdx?collection=docs"),
-    "zh/api/system.mdx": () =>
-      import("../content/docs/zh/api/system.mdx?collection=docs"),
+    "zh/contributing.mdx": () => import("../content/docs/zh/contributing.mdx?collection=docs"),
+    "zh/how-to-use.mdx": () => import("../content/docs/zh/how-to-use.mdx?collection=docs"),
+    "zh/index.mdx": () => import("../content/docs/zh/index.mdx?collection=docs"),
+    "zh/introduction.mdx": () => import("../content/docs/zh/introduction.mdx?collection=docs"),
+    "en/contributing.mdx": () => import("../content/docs/en/contributing.mdx?collection=docs"),
+    "en/how-to-use.mdx": () => import("../content/docs/en/how-to-use.mdx?collection=docs"),
+    "en/index.mdx": () => import("../content/docs/en/index.mdx?collection=docs"),
+    "en/introduction.mdx": () => import("../content/docs/en/introduction.mdx?collection=docs"),
+    "zh/api/events.mdx": () => import("../content/docs/zh/api/events.mdx?collection=docs"),
+    "zh/api/index.mdx": () => import("../content/docs/zh/api/index.mdx?collection=docs"),
+    "zh/api/legal.mdx": () => import("../content/docs/zh/api/legal.mdx?collection=docs"),
+    "zh/api/system.mdx": () => import("../content/docs/zh/api/system.mdx?collection=docs"),
     "zh/foundations/accessibility.mdx": () =>
       import("../content/docs/zh/foundations/accessibility.mdx?collection=docs"),
     "zh/foundations/brand-colors.mdx": () =>
@@ -60,68 +48,6 @@ const browserCollections = {
       import("../content/docs/zh/foundations/theming.mdx?collection=docs"),
     "zh/foundations/typography.mdx": () =>
       import("../content/docs/zh/foundations/typography.mdx?collection=docs"),
-    "zh/fragment-components/admonition.mdx": () =>
-      import("../content/docs/zh/fragment-components/admonition.mdx?collection=docs"),
-    "zh/fragment-components/assistant-chat.mdx": () =>
-      import("../content/docs/zh/fragment-components/assistant-chat.mdx?collection=docs"),
-    "zh/fragment-components/confirmation-modal.mdx": () =>
-      import("../content/docs/zh/fragment-components/confirmation-modal.mdx?collection=docs"),
-    "zh/fragment-components/data-input.mdx": () =>
-      import("../content/docs/zh/fragment-components/data-input.mdx?collection=docs"),
-    "zh/fragment-components/empty-state.mdx": () =>
-      import("../content/docs/zh/fragment-components/empty-state.mdx?collection=docs"),
-    "zh/fragment-components/filter-bar.mdx": () =>
-      import("../content/docs/zh/fragment-components/filter-bar.mdx?collection=docs"),
-    "zh/fragment-components/form-item-layout.mdx": () =>
-      import("../content/docs/zh/fragment-components/form-item-layout.mdx?collection=docs"),
-    "zh/fragment-components/info-tooltip.mdx": () =>
-      import("../content/docs/zh/fragment-components/info-tooltip.mdx?collection=docs"),
-    "zh/fragment-components/inner-side-menu.mdx": () =>
-      import("../content/docs/zh/fragment-components/inner-side-menu.mdx?collection=docs"),
-    "zh/fragment-components/introduction.mdx": () =>
-      import("../content/docs/zh/fragment-components/introduction.mdx?collection=docs"),
-    "zh/fragment-components/logs-bar-chart.mdx": () =>
-      import("../content/docs/zh/fragment-components/logs-bar-chart.mdx?collection=docs"),
-    "zh/fragment-components/metric-card.mdx": () =>
-      import("../content/docs/zh/fragment-components/metric-card.mdx?collection=docs"),
-    "zh/fragment-components/modal.mdx": () =>
-      import("../content/docs/zh/fragment-components/modal.mdx?collection=docs"),
-    "zh/fragment-components/multi-select.mdx": () =>
-      import("../content/docs/zh/fragment-components/multi-select.mdx?collection=docs"),
-    "zh/fragment-components/page-container.mdx": () =>
-      import("../content/docs/zh/fragment-components/page-container.mdx?collection=docs"),
-    "zh/fragment-components/page-header.mdx": () =>
-      import("../content/docs/zh/fragment-components/page-header.mdx?collection=docs"),
-    "zh/fragment-components/page-section.mdx": () =>
-      import("../content/docs/zh/fragment-components/page-section.mdx?collection=docs"),
-    "zh/fragment-components/table-of-contents.mdx": () =>
-      import("../content/docs/zh/fragment-components/table-of-contents.mdx?collection=docs"),
-    "zh/fragment-components/text-confirm-dialog.mdx": () =>
-      import("../content/docs/zh/fragment-components/text-confirm-dialog.mdx?collection=docs"),
-    "zh/patterns/charts.mdx": () =>
-      import("../content/docs/zh/patterns/charts.mdx?collection=docs"),
-    "zh/patterns/empty-states.mdx": () =>
-      import("../content/docs/zh/patterns/empty-states.mdx?collection=docs"),
-    "zh/patterns/forms.mdx": () =>
-      import("../content/docs/zh/patterns/forms.mdx?collection=docs"),
-    "zh/patterns/introduction.mdx": () =>
-      import("../content/docs/zh/patterns/introduction.mdx?collection=docs"),
-    "zh/patterns/layout.mdx": () =>
-      import("../content/docs/zh/patterns/layout.mdx?collection=docs"),
-    "zh/patterns/modality.mdx": () =>
-      import("../content/docs/zh/patterns/modality.mdx?collection=docs"),
-    "zh/patterns/navigation.mdx": () =>
-      import("../content/docs/zh/patterns/navigation.mdx?collection=docs"),
-    "zh/patterns/tables.mdx": () =>
-      import("../content/docs/zh/patterns/tables.mdx?collection=docs"),
-    "en/api/events.mdx": () =>
-      import("../content/docs/en/api/events.mdx?collection=docs"),
-    "en/api/index.mdx": () =>
-      import("../content/docs/en/api/index.mdx?collection=docs"),
-    "en/api/legal.mdx": () =>
-      import("../content/docs/en/api/legal.mdx?collection=docs"),
-    "en/api/system.mdx": () =>
-      import("../content/docs/en/api/system.mdx?collection=docs"),
     "zh/components/accordion.mdx": () =>
       import("../content/docs/zh/components/accordion.mdx?collection=docs"),
     "zh/components/agent-plan.mdx": () =>
@@ -164,8 +90,7 @@ const browserCollections = {
       import("../content/docs/zh/components/book.mdx?collection=docs"),
     "zh/components/border-trail.mdx": () =>
       import("../content/docs/zh/components/border-trail.mdx?collection=docs"),
-    "zh/components/box.mdx": () =>
-      import("../content/docs/zh/components/box.mdx?collection=docs"),
+    "zh/components/box.mdx": () => import("../content/docs/zh/components/box.mdx?collection=docs"),
     "zh/components/breadcrumb.mdx": () =>
       import("../content/docs/zh/components/breadcrumb.mdx?collection=docs"),
     "zh/components/browser-mockup.mdx": () =>
@@ -432,6 +357,63 @@ const browserCollections = {
       import("../content/docs/zh/components/word-fade-in.mdx?collection=docs"),
     "zh/components/x-post-card.mdx": () =>
       import("../content/docs/zh/components/x-post-card.mdx?collection=docs"),
+    "zh/fragment-components/admonition.mdx": () =>
+      import("../content/docs/zh/fragment-components/admonition.mdx?collection=docs"),
+    "zh/fragment-components/assistant-chat.mdx": () =>
+      import("../content/docs/zh/fragment-components/assistant-chat.mdx?collection=docs"),
+    "zh/fragment-components/confirmation-modal.mdx": () =>
+      import("../content/docs/zh/fragment-components/confirmation-modal.mdx?collection=docs"),
+    "zh/fragment-components/data-input.mdx": () =>
+      import("../content/docs/zh/fragment-components/data-input.mdx?collection=docs"),
+    "zh/fragment-components/empty-state.mdx": () =>
+      import("../content/docs/zh/fragment-components/empty-state.mdx?collection=docs"),
+    "zh/fragment-components/filter-bar.mdx": () =>
+      import("../content/docs/zh/fragment-components/filter-bar.mdx?collection=docs"),
+    "zh/fragment-components/form-item-layout.mdx": () =>
+      import("../content/docs/zh/fragment-components/form-item-layout.mdx?collection=docs"),
+    "zh/fragment-components/info-tooltip.mdx": () =>
+      import("../content/docs/zh/fragment-components/info-tooltip.mdx?collection=docs"),
+    "zh/fragment-components/inner-side-menu.mdx": () =>
+      import("../content/docs/zh/fragment-components/inner-side-menu.mdx?collection=docs"),
+    "zh/fragment-components/introduction.mdx": () =>
+      import("../content/docs/zh/fragment-components/introduction.mdx?collection=docs"),
+    "zh/fragment-components/logs-bar-chart.mdx": () =>
+      import("../content/docs/zh/fragment-components/logs-bar-chart.mdx?collection=docs"),
+    "zh/fragment-components/metric-card.mdx": () =>
+      import("../content/docs/zh/fragment-components/metric-card.mdx?collection=docs"),
+    "zh/fragment-components/modal.mdx": () =>
+      import("../content/docs/zh/fragment-components/modal.mdx?collection=docs"),
+    "zh/fragment-components/multi-select.mdx": () =>
+      import("../content/docs/zh/fragment-components/multi-select.mdx?collection=docs"),
+    "zh/fragment-components/page-container.mdx": () =>
+      import("../content/docs/zh/fragment-components/page-container.mdx?collection=docs"),
+    "zh/fragment-components/page-header.mdx": () =>
+      import("../content/docs/zh/fragment-components/page-header.mdx?collection=docs"),
+    "zh/fragment-components/page-section.mdx": () =>
+      import("../content/docs/zh/fragment-components/page-section.mdx?collection=docs"),
+    "zh/fragment-components/table-of-contents.mdx": () =>
+      import("../content/docs/zh/fragment-components/table-of-contents.mdx?collection=docs"),
+    "zh/fragment-components/text-confirm-dialog.mdx": () =>
+      import("../content/docs/zh/fragment-components/text-confirm-dialog.mdx?collection=docs"),
+    "zh/patterns/charts.mdx": () =>
+      import("../content/docs/zh/patterns/charts.mdx?collection=docs"),
+    "zh/patterns/empty-states.mdx": () =>
+      import("../content/docs/zh/patterns/empty-states.mdx?collection=docs"),
+    "zh/patterns/forms.mdx": () => import("../content/docs/zh/patterns/forms.mdx?collection=docs"),
+    "zh/patterns/introduction.mdx": () =>
+      import("../content/docs/zh/patterns/introduction.mdx?collection=docs"),
+    "zh/patterns/layout.mdx": () =>
+      import("../content/docs/zh/patterns/layout.mdx?collection=docs"),
+    "zh/patterns/modality.mdx": () =>
+      import("../content/docs/zh/patterns/modality.mdx?collection=docs"),
+    "zh/patterns/navigation.mdx": () =>
+      import("../content/docs/zh/patterns/navigation.mdx?collection=docs"),
+    "zh/patterns/tables.mdx": () =>
+      import("../content/docs/zh/patterns/tables.mdx?collection=docs"),
+    "en/api/events.mdx": () => import("../content/docs/en/api/events.mdx?collection=docs"),
+    "en/api/index.mdx": () => import("../content/docs/en/api/index.mdx?collection=docs"),
+    "en/api/legal.mdx": () => import("../content/docs/en/api/legal.mdx?collection=docs"),
+    "en/api/system.mdx": () => import("../content/docs/en/api/system.mdx?collection=docs"),
     "en/foundations/accessibility.mdx": () =>
       import("../content/docs/en/foundations/accessibility.mdx?collection=docs"),
     "en/foundations/brand-colors.mdx": () =>
@@ -500,8 +482,7 @@ const browserCollections = {
       import("../content/docs/en/patterns/charts.mdx?collection=docs"),
     "en/patterns/empty-states.mdx": () =>
       import("../content/docs/en/patterns/empty-states.mdx?collection=docs"),
-    "en/patterns/forms.mdx": () =>
-      import("../content/docs/en/patterns/forms.mdx?collection=docs"),
+    "en/patterns/forms.mdx": () => import("../content/docs/en/patterns/forms.mdx?collection=docs"),
     "en/patterns/introduction.mdx": () =>
       import("../content/docs/en/patterns/introduction.mdx?collection=docs"),
     "en/patterns/layout.mdx": () =>
@@ -554,8 +535,7 @@ const browserCollections = {
       import("../content/docs/en/components/book.mdx?collection=docs"),
     "en/components/border-trail.mdx": () =>
       import("../content/docs/en/components/border-trail.mdx?collection=docs"),
-    "en/components/box.mdx": () =>
-      import("../content/docs/en/components/box.mdx?collection=docs"),
+    "en/components/box.mdx": () => import("../content/docs/en/components/box.mdx?collection=docs"),
     "en/components/breadcrumb.mdx": () =>
       import("../content/docs/en/components/breadcrumb.mdx?collection=docs"),
     "en/components/browser-mockup.mdx": () =>
@@ -823,5 +803,5 @@ const browserCollections = {
     "en/components/x-post-card.mdx": () =>
       import("../content/docs/en/components/x-post-card.mdx?collection=docs"),
   }),
-}
-export default browserCollections
+};
+export default browserCollections;

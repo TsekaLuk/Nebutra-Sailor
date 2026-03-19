@@ -76,17 +76,11 @@ export function FAQ({
       {/* TODO: FAQ Items */}
       <div data-slot="faq-list" data-layout={layout}>
         {items.map((item, index) => (
-          <div
-            key={index}
-            data-slot="faq-item"
-            data-expanded={expandedIndex === index}
-          >
+          <div key={index} data-slot="faq-item" data-expanded={expandedIndex === index}>
             {/* TODO: Use FAQItem component */}
             <button
               data-slot="question"
-              onClick={() =>
-                setExpandedIndex(expandedIndex === index ? null : index)
-              }
+              onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
               aria-expanded={expandedIndex === index}
               aria-controls={`faq-answer-${index}`}
             >

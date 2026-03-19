@@ -17,14 +17,14 @@ export const brand = {
   description:
     "Production-ready Next.js monorepo template for AI SaaS products. " +
     "Auth, billing, multi-tenancy, AI services, design system, and enterprise infrastructure — pre-configured.",
-  descriptionCn: "面向AI创业者的一体化SaaS基础设施模板，覆盖认证、计费、多租户、AI服务与设计系统，开箱即产品",
+  descriptionCn:
+    "面向AI创业者的一体化SaaS基础设施模板，覆盖认证、计费、多租户、AI服务与设计系统，开箱即产品",
 
   // Brand story
   story: {
     concept:
       "Logo以首字母N的基础造型概念为主要设计框架，通过几何正负空间构建隐形'N'，形成近似六边形的稳定结构",
-    colorMeaning:
-      "蓝绿渐变体现未来感与科技锋芒，'云'代表云端平台，'毓'寓意孕育与转化",
+    colorMeaning: "蓝绿渐变体现未来感与科技锋芒，'云'代表云端平台，'毓'寓意孕育与转化",
     values: ["AI Native", "Ship Fast", "Open by Default", "Global-Ready", "Enterprise-Grade"],
     missionStatement:
       "Help AI founders and SaaS teams go from idea to production 10x faster by providing the infrastructure layer they shouldn't have to build.",

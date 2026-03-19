@@ -1,7 +1,7 @@
-import { PrismaClient } from "./generated/prisma/client";
+import { logger } from "@nebutra/logger";
 import { PrismaPg } from "@prisma/adapter-pg";
 import pg from "pg";
-import { logger } from "@nebutra/logger";
+import { PrismaClient } from "./generated/prisma/client";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -9,9 +9,7 @@ const globalForPrisma = globalThis as unknown as {
 
 function createPrismaClient(): PrismaClient {
   if (!process.env.DATABASE_URL) {
-    throw new Error(
-      "[db] DATABASE_URL is not set. Cannot initialize database connection pool."
-    );
+    throw new Error("[db] DATABASE_URL is not set. Cannot initialize database connection pool.");
   }
 
   // Use connection pool for PostgreSQL with explicit production-ready settings.
@@ -24,10 +22,7 @@ function createPrismaClient(): PrismaClient {
     // Kill idle connections after 30s to free server-side resources.
     idleTimeoutMillis: parseInt(process.env.DB_IDLE_TIMEOUT_MS ?? "30000", 10),
     // Fail fast if we can't get a connection within 5s (avoids hanging requests).
-    connectionTimeoutMillis: parseInt(
-      process.env.DB_CONNECTION_TIMEOUT_MS ?? "5000",
-      10
-    ),
+    connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT_MS ?? "5000", 10),
     // Keep the process alive while there are active connections.
     allowExitOnIdle: false,
   });
@@ -41,26 +36,18 @@ function createPrismaClient(): PrismaClient {
   // Set PostgreSQL statement_timeout on every new connection.
   // This prevents runaway queries from holding locks or exhausting the pool.
   // Override via DB_STATEMENT_TIMEOUT_MS env var (default 30 s).
-  const statementTimeout = parseInt(
-    process.env.DB_STATEMENT_TIMEOUT_MS ?? "30000",
-    10
-  );
+  const statementTimeout = parseInt(process.env.DB_STATEMENT_TIMEOUT_MS ?? "30000", 10);
   pool.on("connect", (client) => {
-    client
-      .query(`SET statement_timeout = ${statementTimeout}`)
-      .catch((err: unknown) => {
-        logger.error("[db] Failed to set statement_timeout", err);
-      });
+    client.query(`SET statement_timeout = ${statementTimeout}`).catch((err: unknown) => {
+      logger.error("[db] Failed to set statement_timeout", err);
+    });
   });
 
   const adapter = new PrismaPg(pool);
 
   return new PrismaClient({
     adapter,
-    log:
-      process.env.NODE_ENV === "development"
-        ? ["query", "error", "warn"]
-        : ["error"],
+    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
   });
 }
 

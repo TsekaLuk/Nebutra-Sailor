@@ -5,38 +5,27 @@ import { AnimateIn, AnimateInGroup } from "./AnimateIn";
 const STEPS = [
   {
     title: "Scaffold",
-    description:
-      "Bootstrap an enterprise-ready monorepo in minutes with multi-tenant defaults.",
+    description: "Bootstrap an enterprise-ready monorepo in minutes with multi-tenant defaults.",
   },
   {
     title: "Wire Providers",
-    description:
-      "Connect auth, billing, and AI providers through stable, typed adapters.",
+    description: "Connect auth, billing, and AI providers through stable, typed adapters.",
   },
   {
     title: "Ship",
-    description:
-      "Deploy a production baseline with observability and operational guardrails.",
+    description: "Deploy a production baseline with observability and operational guardrails.",
   },
   {
     title: "Scale",
-    description:
-      "Grow across tenants and regions using the same architecture without rewrites.",
+    description: "Grow across tenants and regions using the same architecture without rewrites.",
   },
 ] as const;
 
 export function WorkflowSection() {
   return (
-    <section
-      id="workflow"
-      className="w-full bg-neutral-2 py-24 md:py-32 dark:bg-black"
-    >
+    <section id="workflow" className="w-full bg-neutral-2 py-24 md:py-32 dark:bg-black">
       <div className="mx-auto max-w-7xl px-6">
-        <AnimateIn
-          preset="emerge"
-          inView
-          className="mx-auto max-w-3xl text-center"
-        >
+        <AnimateIn preset="emerge" inView className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold tracking-[0.14em] text-blue-11 uppercase">
             Delivery workflow
           </p>

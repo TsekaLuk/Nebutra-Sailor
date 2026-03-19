@@ -6,13 +6,13 @@ import {
   TweetBody,
   TweetContainer,
   TweetHeader,
-  TweetInReplyTo,
   TweetInfo,
+  TweetInReplyTo,
   TweetMedia,
   TweetNotFound,
   TweetReplies,
-  useTweet,
   type TwitterComponents,
+  useTweet,
 } from "react-tweet";
 import type { Tweet } from "react-tweet/api";
 import { cn } from "../utils/cn";
@@ -111,9 +111,7 @@ export function ClientXPostCard({
     return <NotFound error={onError ? onError(error) : error} />;
   }
 
-  return (
-    <MagicXPost tweet={data} {...(components && { components })} className={cn(className)} />
-  );
+  return <MagicXPost tweet={data} {...(components && { components })} className={cn(className)} />;
 }
 
 // =============================================================================

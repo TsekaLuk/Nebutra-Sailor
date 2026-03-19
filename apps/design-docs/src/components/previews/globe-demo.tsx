@@ -1,4 +1,4 @@
-import { Globe } from "@nebutra/ui/primitives"
+import { Globe } from "@nebutra/ui/primitives";
 
 export function GlobeDemo() {
   return (
@@ -20,5 +20,5 @@ export function GlobeDemo() {
         />
       </div>
     </div>
-  )
+  );
 }

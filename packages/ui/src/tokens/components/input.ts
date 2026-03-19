@@ -5,11 +5,7 @@
  * Supports prefix/suffix slots and clearable.
  */
 
-import {
-  primitiveFontSize,
-  primitiveRadius,
-  primitiveSpacing,
-} from "../primitive";
+import { primitiveFontSize, primitiveRadius, primitiveSpacing } from "../primitive";
 
 export const inputTokens = {
   /** Fixed height — aligns with button md for consistent form rows */

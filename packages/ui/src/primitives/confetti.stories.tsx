@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useRef } from "react";
-import { Confetti, ConfettiButton } from "./confetti";
 import type { ConfettiRef } from "./confetti";
+import { Confetti, ConfettiButton } from "./confetti";
 
 const meta = {
   title: "Primitives/Confetti",
@@ -46,16 +46,12 @@ export const ManualControl: Story = {
           className="absolute inset-0 w-full h-full pointer-events-none"
         />
         <button
-          onClick={() =>
-            confettiRef.current?.fire({ particleCount: 100, spread: 80 })
-          }
+          onClick={() => confettiRef.current?.fire({ particleCount: 100, spread: 80 })}
           className="rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
         >
           Fire Confetti!
         </button>
-        <p className="text-xs text-muted-foreground">
-          Click the button to trigger
-        </p>
+        <p className="text-xs text-muted-foreground">Click the button to trigger</p>
       </div>
     );
   },
@@ -65,9 +61,7 @@ export const WithConfettiButton: Story = {
   render: () => (
     <div className="flex flex-col items-center gap-4">
       <ConfettiButton variant="default">🎊 Celebrate</ConfettiButton>
-      <p className="text-xs text-muted-foreground">
-        Click to fire confetti from the button
-      </p>
+      <p className="text-xs text-muted-foreground">Click to fire confetti from the button</p>
     </div>
   ),
 };

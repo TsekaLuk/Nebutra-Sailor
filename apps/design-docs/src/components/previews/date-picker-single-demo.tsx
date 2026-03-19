@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { DatePicker } from "@nebutra/ui/primitives"
+import { DatePicker } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function DatePickerSingleDemo() {
-  return <DatePicker label="Event date" />
+  return <DatePicker label="Event date" />;
 }

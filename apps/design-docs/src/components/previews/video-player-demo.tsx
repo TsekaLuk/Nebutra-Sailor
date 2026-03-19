@@ -1,4 +1,4 @@
-import { VideoPlayer } from "@nebutra/ui/primitives"
+import { VideoPlayer } from "@nebutra/ui/primitives";
 
 export function VideoPlayerDemo() {
   return (
@@ -10,5 +10,5 @@ export function VideoPlayerDemo() {
         className="overflow-hidden rounded-xl border border-border shadow-lg"
       />
     </div>
-  )
+  );
 }

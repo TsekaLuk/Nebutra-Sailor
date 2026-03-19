@@ -5,8 +5,8 @@
  * Run:  pnpm --filter @nebutra/icons generate
  */
 import { transform } from "@svgr/core";
-import { readdir, readFile, writeFile, mkdir } from "fs/promises";
-import { join, basename } from "path";
+import { mkdir, readdir, readFile, writeFile } from "fs/promises";
+import { basename, join } from "path";
 
 const SVG_DIR = join(__dirname, "../src/svg");
 const OUT_DIR = join(__dirname, "../src/components");
@@ -105,9 +105,7 @@ function removeDuplicateStyleKeys(code: string): string {
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
 
-  const svgFiles = (await readdir(SVG_DIR))
-    .filter((f) => f.endsWith(".svg"))
-    .sort();
+  const svgFiles = (await readdir(SVG_DIR)).filter((f) => f.endsWith(".svg")).sort();
 
   const exportLines: string[] = [];
   let skipped = 0;
@@ -119,17 +117,13 @@ async function main() {
 
     let code: string;
     try {
-      code = await transform(
-        svgContent,
-        SVGR_CONFIG as Parameters<typeof transform>[1],
-        { componentName, filePath: join(SVG_DIR, file) },
-      );
+      code = await transform(svgContent, SVGR_CONFIG as Parameters<typeof transform>[1], {
+        componentName,
+        filePath: join(SVG_DIR, file),
+      });
       code = removeDuplicateStyleKeys(code);
     } catch (err) {
-      console.warn(
-        `⚠ Skipping ${file}:`,
-        (err as Error).message.split("\n")[0],
-      );
+      console.warn(`⚠ Skipping ${file}:`, (err as Error).message.split("\n")[0]);
       skipped++;
       continue;
     }
@@ -144,13 +138,10 @@ async function main() {
     "// Auto-generated — do not edit manually.",
     "// Source: vercel.com/geist/icons  |  Run: pnpm --filter @nebutra/icons generate",
     "",
-    'export type { IconProps } from "./components/' +
-      exportLines[0].componentName +
-      '";',
+    'export type { IconProps } from "./components/' + exportLines[0].componentName + '";',
     "",
     ...exportLines.map(
-      ({ componentName }) =>
-        `export { ${componentName} } from "./components/${componentName}";`,
+      ({ componentName }) => `export { ${componentName} } from "./components/${componentName}";`,
     ),
     "",
   ].join("\n");
@@ -160,9 +151,7 @@ async function main() {
   process.stdout.write(
     `✅ Generated ${exportLines.length} components (${skipped} skipped) → src/components/\n`,
   );
-  process.stdout.write(
-    `✅ Wrote src/index.ts with ${exportLines.length} named exports\n`,
-  );
+  process.stdout.write(`✅ Wrote src/index.ts with ${exportLines.length} named exports\n`);
 }
 
 main().catch((e) => {

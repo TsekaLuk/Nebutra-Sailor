@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 /**
@@ -131,14 +131,10 @@ export function AnimatedBeam({
       const svgHeight = containerRect.height;
       setSvgDimensions({ width: svgWidth, height: svgHeight });
 
-      const startX =
-        fromRect.left - containerRect.left + fromRect.width / 2 + startXOffset;
-      const startY =
-        fromRect.top - containerRect.top + fromRect.height / 2 + startYOffset;
-      const endX =
-        toRect.left - containerRect.left + toRect.width / 2 + endXOffset;
-      const endY =
-        toRect.top - containerRect.top + toRect.height / 2 + endYOffset;
+      const startX = fromRect.left - containerRect.left + fromRect.width / 2 + startXOffset;
+      const startY = fromRect.top - containerRect.top + fromRect.height / 2 + startYOffset;
+      const endX = toRect.left - containerRect.left + toRect.width / 2 + endXOffset;
+      const endY = toRect.top - containerRect.top + toRect.height / 2 + endYOffset;
 
       const controlX = (startX + endX) / 2;
       const controlY = (startY + endY) / 2 + curvature;
@@ -162,16 +158,7 @@ export function AnimatedBeam({
     return () => {
       resizeObserver.disconnect();
     };
-  }, [
-    containerRef,
-    fromRef,
-    toRef,
-    curvature,
-    startXOffset,
-    startYOffset,
-    endXOffset,
-    endYOffset,
-  ]);
+  }, [containerRef, fromRef, toRef, curvature, startXOffset, startYOffset, endXOffset, endYOffset]);
 
   return (
     <svg
@@ -179,10 +166,7 @@ export function AnimatedBeam({
       width={svgDimensions.width}
       height={svgDimensions.height}
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(
-        "pointer-events-none absolute left-0 top-0 transform-gpu stroke-2",
-        className,
-      )}
+      className={cn("pointer-events-none absolute left-0 top-0 transform-gpu stroke-2", className)}
       viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
     >
       <path

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Progress } from "@nebutra/ui/primitives"
+import { Progress } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function ProgressWithLabelDemo() {
   return (
@@ -12,5 +12,5 @@ export function ProgressWithLabelDemo() {
       </div>
       <Progress value={65} />
     </div>
-  )
+  );
 }

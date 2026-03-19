@@ -1,4 +1,4 @@
-import { metrics, Counter, Histogram, UpDownCounter } from "@opentelemetry/api";
+import { type Counter, type Histogram, metrics, type UpDownCounter } from "@opentelemetry/api";
 
 const meter = metrics.getMeter("nebutra-sailor");
 
@@ -81,7 +81,7 @@ export function recordHttpRequest(
   path: string,
   status: number,
   duration: number,
-  tenantId?: string
+  tenantId?: string,
 ): void {
   const attributes = {
     method,
@@ -97,11 +97,7 @@ export function recordHttpRequest(
 /**
  * Record API call for billing/usage
  */
-export function recordApiCall(
-  tenantId: string,
-  endpoint: string,
-  weight: number = 1
-): void {
+export function recordApiCall(tenantId: string, endpoint: string, weight: number = 1): void {
   apiCallsTotal.add(weight, {
     tenant_id: tenantId,
     endpoint,
@@ -111,11 +107,7 @@ export function recordApiCall(
 /**
  * Record AI token usage for billing
  */
-export function recordAiTokens(
-  tenantId: string,
-  model: string,
-  tokens: number
-): void {
+export function recordAiTokens(tenantId: string, model: string, tokens: number): void {
   aiTokensUsed.add(tokens, {
     tenant_id: tenantId,
     model,

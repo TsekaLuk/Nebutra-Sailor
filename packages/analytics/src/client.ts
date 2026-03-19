@@ -1,19 +1,19 @@
 import { Dub } from "dub";
 
 import type {
-  MultiTenantConfig,
-  CreateLinkInput,
-  Link,
   AnalyticsQuery,
   AnalyticsResult,
-  TrackConversionInput,
   AttributeConversionInput,
+  CreateLinkInput,
   CreateReferralLinkInput,
-  ReferralStats,
+  GDPRRequest,
+  Link,
+  MultiTenantConfig,
   ProcessRewardInput,
+  ReferralStats,
+  TrackConversionInput,
   WebhookConfig,
   WebhookEvent,
-  GDPRRequest,
 } from "./types";
 
 /**
@@ -61,9 +61,7 @@ export class AnalyticsClient {
      * Create multiple links at once
      */
     createMany: async (inputs: CreateLinkInput[]): Promise<Link[]> => {
-      const links = await Promise.all(
-        inputs.map((input) => this.links.create(input)),
-      );
+      const links = await Promise.all(inputs.map((input) => this.links.create(input)));
       return links;
     },
 
@@ -94,10 +92,7 @@ export class AnalyticsClient {
     /**
      * Update a link
      */
-    update: async (
-      linkId: string,
-      input: Partial<CreateLinkInput>,
-    ): Promise<Link> => {
+    update: async (linkId: string, input: Partial<CreateLinkInput>): Promise<Link> => {
       const response = await this.dub.links.update(linkId, {
         url: input.url,
         domain: input.domain,
@@ -149,9 +144,7 @@ export class AnalyticsClient {
     /**
      * Get analytics for a specific link
      */
-    getAnalytics: async (
-      query: AnalyticsQuery & { linkId: string },
-    ): Promise<AnalyticsResult> => {
+    getAnalytics: async (query: AnalyticsQuery & { linkId: string }): Promise<AnalyticsResult> => {
       return this.getAnalytics(query);
     },
   };
@@ -175,9 +168,7 @@ export class AnalyticsClient {
 
     const params = {
       domain: query.domain,
-      linkId: Array.isArray(query.linkId)
-        ? query.linkId.join(",")
-        : query.linkId,
+      linkId: Array.isArray(query.linkId) ? query.linkId.join(",") : query.linkId,
       interval: mapInterval(query.interval),
       start: query.start?.toString(),
       end: query.end?.toString(),
@@ -244,9 +235,7 @@ export class AnalyticsClient {
     ]);
 
     // Sort by clicks to get top links
-    const topLinks = linksResult.links
-      .sort((a, b) => b.clicks - a.clicks)
-      .slice(0, 10);
+    const topLinks = linksResult.links.sort((a, b) => b.clicks - a.clicks).slice(0, 10);
 
     return {
       totalLinks: linksResult.count,
@@ -311,8 +300,7 @@ export class AnalyticsClient {
      */
     createLink: async (input: CreateReferralLinkInput): Promise<Link> => {
       const destinationUrl =
-        input.destinationUrl ||
-        `${this.config.domains?.default || "https://nebutra.com"}/signup`;
+        input.destinationUrl || `${this.config.domains?.default || "https://nebutra.com"}/signup`;
 
       return this.links.create({
         url: `${destinationUrl}?ref=${input.userId}`,
@@ -330,10 +318,7 @@ export class AnalyticsClient {
     /**
      * Get referral statistics for a user
      */
-    getStats: async (options: {
-      userId: string;
-      tenantId?: string;
-    }): Promise<ReferralStats> => {
+    getStats: async (options: { userId: string; tenantId?: string }): Promise<ReferralStats> => {
       // This would typically query your database for referral data
       // For now, return a placeholder structure
       return {
@@ -367,10 +352,7 @@ export class AnalyticsClient {
   /**
    * Verify and parse a webhook event
    */
-  async handleWebhook(
-    request: Request,
-    config: WebhookConfig,
-  ): Promise<WebhookEvent> {
+  async handleWebhook(request: Request, config: WebhookConfig): Promise<WebhookEvent> {
     const body = await request.text();
     const signature = request.headers.get("x-dub-signature");
 
@@ -389,21 +371,14 @@ export class AnalyticsClient {
     return event;
   }
 
-  private verifyWebhookSignature(
-    body: string,
-    signature: string | null,
-    secret: string,
-  ): boolean {
+  private verifyWebhookSignature(body: string, signature: string | null, secret: string): boolean {
     if (!signature) return false;
 
     // Implement HMAC verification
     // This is a simplified version - use proper crypto in production
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const crypto = require("crypto");
-    const expectedSignature = crypto
-      .createHmac("sha256", secret)
-      .update(body)
-      .digest("hex");
+    const expectedSignature = crypto.createHmac("sha256", secret).update(body).digest("hex");
 
     return signature === expectedSignature;
   }
@@ -462,9 +437,7 @@ export class AnalyticsClient {
 /**
  * Create an analytics client instance
  */
-export function createAnalyticsClient(
-  config: MultiTenantConfig,
-): AnalyticsClient {
+export function createAnalyticsClient(config: MultiTenantConfig): AnalyticsClient {
   return new AnalyticsClient(config);
 }
 

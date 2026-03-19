@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import { usePathname } from "next/navigation";
 import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
+import type React from "react";
+import { useState } from "react";
 
 function HeaderAuthControls() {
   const { isSignedIn } = useAuth();
@@ -38,17 +39,18 @@ function HeaderAuthControls() {
     </div>
   );
 }
+
 import { ChevronRight, Menu, X } from "lucide-react";
+import { ViewTransitionLink } from "@/components/navigation/view-transition-link";
 import {
   buildBreadcrumbs,
   DASHBOARD_NAV_GROUPS,
   DASHBOARD_NAV_ITEMS,
   isActiveRoute,
   isWorkspaceId,
-  type WorkspaceId,
   WORKSPACES,
+  type WorkspaceId,
 } from "./dashboard-nav";
-import { ViewTransitionLink } from "@/components/navigation/view-transition-link";
 
 interface Props {
   children: React.ReactNode;
@@ -121,9 +123,7 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
             className="fixed inset-y-0 left-0 z-60 w-[85vw] max-w-72 border-r border-neutral-7 bg-neutral-1 px-4 py-5 md:hidden dark:border-white/10 dark:bg-black"
           >
             <div className="mb-6 flex items-center justify-between px-2">
-              <span className="text-sm font-semibold tracking-tight">
-                Nebutra Sailor
-              </span>
+              <span className="text-sm font-semibold tracking-tight">Nebutra Sailor</span>
               <button
                 type="button"
                 aria-label="Close mobile navigation"
@@ -157,11 +157,7 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
               </select>
             </div>
 
-            <SidebarNav
-              pathname={pathname}
-              mobile
-              onNavigate={() => setIsMobileNavOpen(false)}
-            />
+            <SidebarNav pathname={pathname} mobile onNavigate={() => setIsMobileNavOpen(false)} />
           </aside>
         </>
       )}
@@ -172,9 +168,7 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
           className="hidden w-72 shrink-0 border-r border-neutral-7 bg-neutral-1 px-4 py-5 md:flex md:flex-col dark:border-white/10 dark:bg-black/30"
         >
           <div className="mb-7 flex items-center px-2">
-            <span className="text-lg font-semibold tracking-tight">
-              Nebutra Sailor
-            </span>
+            <span className="text-lg font-semibold tracking-tight">Nebutra Sailor</span>
           </div>
 
           <div className="mb-5 px-2">
@@ -204,8 +198,7 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
 
           <div className="mt-auto rounded-xl border border-neutral-7 bg-neutral-2 p-3 text-xs text-neutral-11 dark:border-white/10 dark:bg-white/5 dark:text-white/70">
             Workspace mode:{" "}
-            {WORKSPACES.find((item) => item.id === workspace)?.label ??
-              "Starter Workspace"}
+            {WORKSPACES.find((item) => item.id === workspace)?.label ?? "Starter Workspace"}
           </div>
         </aside>
 
@@ -228,21 +221,13 @@ export function DesignSystemShell({ children, hasClerkKey }: Props) {
                   <p className="mt-0.5 truncate text-sm font-medium text-neutral-12 dark:text-white sm:hidden">
                     {currentBreadcrumb?.label ?? "Dashboard"}
                   </p>
-                  <nav
-                    aria-label="Breadcrumb"
-                    className="mt-0.5 hidden sm:block"
-                  >
+                  <nav aria-label="Breadcrumb" className="mt-0.5 hidden sm:block">
                     <ol className="flex items-center gap-1 text-sm text-neutral-11 dark:text-white/70">
                       {breadcrumbs.map((crumb, index) => {
                         const isLast = index === breadcrumbs.length - 1;
                         return (
-                          <li
-                            key={crumb.href}
-                            className="flex items-center gap-1"
-                          >
-                            {index > 0 && (
-                              <ChevronRight className="h-3.5 w-3.5" />
-                            )}
+                          <li key={crumb.href} className="flex items-center gap-1">
+                            {index > 0 && <ChevronRight className="h-3.5 w-3.5" />}
                             {isLast ? (
                               <span className="font-medium text-neutral-12 dark:text-white">
                                 {crumb.label}

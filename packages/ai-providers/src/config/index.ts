@@ -4,20 +4,17 @@
  * Model configurations and recommended defaults
  */
 
-import type { ProviderName } from "../types.js";
-import { SILICONFLOW_MODELS } from "../providers/siliconflow.js";
+import type { ProviderModel } from "../providers/base.js";
 import { OPENAI_MODELS } from "../providers/openai.js";
 import { OPENROUTER_MODELS } from "../providers/openrouter.js";
-import type { ProviderModel } from "../providers/base.js";
+import { SILICONFLOW_MODELS } from "../providers/siliconflow.js";
+import type { ProviderName } from "../types.js";
 
 // ============================================
 // Default Models by Provider
 // ============================================
 
-export const DEFAULT_MODELS: Record<
-  ProviderName,
-  { chat: string; embedding: string }
-> = {
+export const DEFAULT_MODELS: Record<ProviderName, { chat: string; embedding: string }> = {
   siliconflow: {
     chat: "deepseek-ai/DeepSeek-V3",
     embedding: "BAAI/bge-m3",
@@ -62,19 +59,14 @@ export function getModelsForProvider(provider: ProviderName): ProviderModel[] {
 /**
  * Get a specific model by ID
  */
-export function getModel(
-  provider: ProviderName,
-  modelId: string,
-): ProviderModel | undefined {
+export function getModel(provider: ProviderName, modelId: string): ProviderModel | undefined {
   return MODEL_REGISTRY[provider]?.find((m) => m.id === modelId);
 }
 
 /**
  * Get all models across all providers
  */
-export function getAllModels(): Array<
-  ProviderModel & { provider: ProviderName }
-> {
+export function getAllModels(): Array<ProviderModel & { provider: ProviderName }> {
   return Object.entries(MODEL_REGISTRY).flatMap(([provider, models]) =>
     models.map((m) => ({ ...m, provider: provider as ProviderName })),
   );
@@ -126,10 +118,8 @@ export function findBestModel(
   // Sort by preference
   if (criteria.preferCheap) {
     candidates.sort((a, b) => {
-      const priceA =
-        (a.inputPricePerMillion || 0) + (a.outputPricePerMillion || 0);
-      const priceB =
-        (b.inputPricePerMillion || 0) + (b.outputPricePerMillion || 0);
+      const priceA = (a.inputPricePerMillion || 0) + (a.outputPricePerMillion || 0);
+      const priceB = (b.inputPricePerMillion || 0) + (b.outputPricePerMillion || 0);
       return priceA - priceB;
     });
   }
@@ -176,7 +166,6 @@ export function loadConfigFromEnv(): EnvironmentConfig {
       httpReferer: process.env.OPENROUTER_HTTP_REFERER,
       appTitle: process.env.OPENROUTER_APP_TITLE,
     },
-    defaultProvider:
-      (process.env.DEFAULT_AI_PROVIDER as ProviderName) || "siliconflow",
+    defaultProvider: (process.env.DEFAULT_AI_PROVIDER as ProviderName) || "siliconflow",
   };
 }

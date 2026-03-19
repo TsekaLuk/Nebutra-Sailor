@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { createContext, useContext, type HTMLAttributes } from "react";
-import { Badge, type BadgeProps } from "./badge";
+import type * as React from "react";
+import { createContext, type HTMLAttributes, useContext } from "react";
 import { cn } from "../utils";
+import { Badge, type BadgeProps } from "./badge";
 
 // =============================================================================
 // Types
@@ -20,9 +20,7 @@ const AnnouncementContext = createContext<AnnouncementContextType>({
 const useAnnouncementContext = () => {
   const context = useContext(AnnouncementContext);
   if (!context) {
-    throw new Error(
-      "Announcement compound components must be used within Announcement",
-    );
+    throw new Error("Announcement compound components must be used within Announcement");
   }
   return context;
 };
@@ -121,10 +119,7 @@ export const Announcement: React.FC<AnnouncementProps> = ({
 /**
  * AnnouncementTag - Category/type label on the left side
  */
-export const AnnouncementTag: React.FC<AnnouncementTagProps> = ({
-  className,
-  ...props
-}) => {
+export const AnnouncementTag: React.FC<AnnouncementTagProps> = ({ className, ...props }) => {
   const { themed } = useAnnouncementContext();
 
   return (
@@ -142,14 +137,8 @@ export const AnnouncementTag: React.FC<AnnouncementTagProps> = ({
 /**
  * AnnouncementTitle - Main announcement text container
  */
-export const AnnouncementTitle: React.FC<AnnouncementTitleProps> = ({
-  className,
-  ...props
-}) => (
-  <div
-    className={cn("flex items-center gap-1 truncate py-1", className)}
-    {...props}
-  />
+export const AnnouncementTitle: React.FC<AnnouncementTitleProps> = ({ className, ...props }) => (
+  <div className={cn("flex items-center gap-1 truncate py-1", className)} {...props} />
 );
 
 export default Announcement;

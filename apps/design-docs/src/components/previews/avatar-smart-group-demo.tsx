@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { AvatarSmartGroup } from "@nebutra/ui/primitives" // Adjust if necessary
+import { AvatarSmartGroup } from "@nebutra/ui/primitives"; // Adjust if necessary
+import * as React from "react";
 
 export function AvatarSmartGroupDemo() {
   return (
@@ -34,5 +34,5 @@ export function AvatarSmartGroupDemo() {
         tooltipBg="bg-primary text-primary-foreground"
       />
     </div>
-  )
+  );
 }

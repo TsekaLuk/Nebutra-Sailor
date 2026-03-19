@@ -96,8 +96,6 @@ export const TURNSTILE_ERROR_MESSAGES: Record<string, string> = {
 };
 
 export function getTurnstileErrorMessage(errorCodes: string[]): string {
-  const messages = errorCodes
-    .map((code) => TURNSTILE_ERROR_MESSAGES[code] || code)
-    .join(", ");
+  const messages = errorCodes.map((code) => TURNSTILE_ERROR_MESSAGES[code] || code).join(", ");
   return messages || "CAPTCHA verification failed";
 }

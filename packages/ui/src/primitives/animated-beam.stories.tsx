@@ -43,11 +43,7 @@ export const Default: Story = {
         >
           B
         </div>
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={fromRef}
-          toRef={toRef}
-        />
+        <AnimatedBeam containerRef={containerRef} fromRef={fromRef} toRef={toRef} />
       </div>
     );
   },

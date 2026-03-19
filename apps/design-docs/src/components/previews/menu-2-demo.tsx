@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
+  Button,
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "@nebutra/ui/primitives"
-import { Button } from "@nebutra/ui/primitives"
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function Menu2Demo() {
   return (
@@ -26,5 +26,5 @@ export function Menu2Demo() {
         <DropdownMenuItem>Security Logs</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

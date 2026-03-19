@@ -1,10 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import {
-  TokenBucket,
-  getApiWeight,
-  PLAN_LIMITS,
-  API_WEIGHTS,
-} from "../tokenBucket.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { API_WEIGHTS, getApiWeight, PLAN_LIMITS, TokenBucket } from "../tokenBucket.js";
 
 // ---------------------------------------------------------------------------
 // TokenBucket.consume()
@@ -263,15 +258,11 @@ describe("PLAN_LIMITS", () => {
   });
 
   it("PRO.maxTokens is less than ENTERPRISE.maxTokens", () => {
-    expect(PLAN_LIMITS.PRO.maxTokens).toBeLessThan(
-      PLAN_LIMITS.ENTERPRISE.maxTokens,
-    );
+    expect(PLAN_LIMITS.PRO.maxTokens).toBeLessThan(PLAN_LIMITS.ENTERPRISE.maxTokens);
   });
 
   it("FREE.refillRate is less than PRO.refillRate", () => {
-    expect(PLAN_LIMITS.FREE.refillRate).toBeLessThan(
-      PLAN_LIMITS.PRO.refillRate,
-    );
+    expect(PLAN_LIMITS.FREE.refillRate).toBeLessThan(PLAN_LIMITS.PRO.refillRate);
   });
 
   it("all plans have the required TokenBucketConfig fields", () => {

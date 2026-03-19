@@ -1,12 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@nebutra/ui/primitives"
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Resizable2Demo() {
   return (
     <ResizablePanelGroup
@@ -21,9 +16,7 @@ export function Resizable2Demo() {
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={60}>
         <div className="p-6 flex h-full items-center justify-center bg-background">
-          <span className="font-semibold text-lg max-w-[200px] text-center">
-            Main Content Area
-          </span>
+          <span className="font-semibold text-lg max-w-[200px] text-center">Main Content Area</span>
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
@@ -33,5 +26,5 @@ export function Resizable2Demo() {
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
-  )
+  );
 }

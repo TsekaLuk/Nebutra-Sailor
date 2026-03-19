@@ -199,10 +199,7 @@ export function LogoEnSVG({
 
   const children = (
     <>
-      <g
-        transform={`scale(${logomarkW / 535.71}, ${h / 500})`}
-        fill="currentColor"
-      >
+      <g transform={`scale(${logomarkW / 535.71}, ${h / 500})`} fill="currentColor">
         <path d={LOGOMARK_PATH} />
       </g>
       <g

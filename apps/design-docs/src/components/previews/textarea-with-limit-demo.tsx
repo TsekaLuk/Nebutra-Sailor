@@ -1,15 +1,13 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Textarea } from "@nebutra/ui/primitives"
+import { Textarea } from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function TextareaWithLimitDemo() {
   return (
     <div className="gap-1 flex w-full flex-col">
       <Textarea defaultValue="" placeholder="Type here..." maxLength={500} />
-      <span className="text-xs w-full text-right text-muted-foreground">
-        0/500
-      </span>
+      <span className="text-xs w-full text-right text-muted-foreground">0/500</span>
     </div>
-  )
+  );
 }

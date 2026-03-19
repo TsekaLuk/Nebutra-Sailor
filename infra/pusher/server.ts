@@ -31,9 +31,7 @@ export function getPusherServer(): Pusher {
 
   // Check for self-hosted (Soketi) configuration
   const host = process.env.PUSHER_HOST;
-  const port = process.env.PUSHER_PORT
-    ? parseInt(process.env.PUSHER_PORT, 10)
-    : undefined;
+  const port = process.env.PUSHER_PORT ? parseInt(process.env.PUSHER_PORT, 10) : undefined;
 
   pusherServerInstance = new Pusher({
     appId,

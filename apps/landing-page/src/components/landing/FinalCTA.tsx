@@ -1,9 +1,9 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { AnimateIn } from "./AnimateIn";
 import { useTranslations } from "next-intl";
 import { heroContent } from "@/lib/landing-content";
+import { AnimateIn } from "./AnimateIn";
 import { CommandInstallBox } from "./CommandInstallBox";
 
 /**
@@ -24,9 +24,7 @@ export function FinalCTA() {
         </AnimateIn>
 
         <AnimateIn preset="fadeUp" inView className="mt-6">
-          <p className="text-lg text-neutral-11 md:text-xl dark:text-white/70">
-            {t("subheading")}
-          </p>
+          <p className="text-lg text-neutral-11 md:text-xl dark:text-white/70">{t("subheading")}</p>
         </AnimateIn>
 
         <AnimateIn preset="fadeUp" inView className="mx-auto mt-10 max-w-xl">

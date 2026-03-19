@@ -7,22 +7,20 @@
 // Base classes and utilities
 export {
   BaseAIProvider,
-  registerProvider,
   createProvider,
   getRegisteredProviders,
   type ProviderCapability,
-  type ProviderModel,
   type ProviderFactory,
+  type ProviderModel,
+  registerProvider,
 } from "./base.js";
-
+export {
+  OPENAI_MODELS,
+  OpenAIProvider,
+} from "./openai.js";
 // Provider implementations
 export {
-  SiliconFlowProvider,
   SILICONFLOW_MODELS,
   type SiliconFlowConfig,
+  SiliconFlowProvider,
 } from "./siliconflow.js";
-
-export {
-  OpenAIProvider,
-  OPENAI_MODELS,
-} from "./openai.js";

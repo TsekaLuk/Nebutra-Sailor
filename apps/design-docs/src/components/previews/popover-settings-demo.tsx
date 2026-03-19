@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { Settings } from "lucide-react"
 import {
-  PopoverTrigger,
-  Label,
-  PopoverContent,
-  Popover,
   Button,
+  Label,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Toggle,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import { Settings } from "lucide-react";
 
 export function PopoverSettingsDemo() {
   return (
@@ -31,5 +31,5 @@ export function PopoverSettingsDemo() {
         </div>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { EmptyState } from "@nebutra/ui/layout";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Inbox, Key, Users } from "lucide-react";
 
 const meta: Meta<typeof EmptyState> = {

@@ -1,15 +1,15 @@
+import { getImageUrl } from "@nebutra/sanity/image";
+import { getPosts } from "@nebutra/sanity/queries";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import { Calendar } from "lucide-react";
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { routing, type Locale } from "@/i18n/routing";
-import { Navbar, FooterMinimal } from "@/components/landing";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
-import { getPosts } from "@nebutra/sanity/queries";
-import { getImageUrl } from "@nebutra/sanity/image";
-import { Calendar } from "lucide-react";
+import { FooterMinimal, Navbar } from "@/components/landing";
+import { type Locale, routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
@@ -41,13 +41,7 @@ type SanityPost = {
   categories: string[] | null;
 };
 
-function PostCard({
-  post,
-  lang,
-}: {
-  post: SanityPost;
-  lang: string;
-}) {
+function PostCard({ post, lang }: { post: SanityPost; lang: string }) {
   const imageUrl = post.mainImage
     ? getImageUrl(post.mainImage as Parameters<typeof getImageUrl>[0], {
         width: 800,
@@ -81,11 +75,7 @@ function PostCard({
           />
         </div>
       ) : (
-        <div
-          className="h-48 w-full"
-          style={{ background: "var(--brand-gradient)" }}
-          aria-hidden
-        />
+        <div className="h-48 w-full" style={{ background: "var(--brand-gradient)" }} aria-hidden />
       )}
 
       <div className="flex flex-1 flex-col p-5">
@@ -122,9 +112,7 @@ function PostCard({
             </span>
           )}
           {post.author && (
-            <span className="text-xs text-[var(--neutral-10)]">
-              by {post.author}
-            </span>
+            <span className="text-xs text-[var(--neutral-10)]">by {post.author}</span>
           )}
         </div>
       </div>
@@ -132,11 +120,7 @@ function PostCard({
   );
 }
 
-export default async function BlogPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function BlogPage({ params }: { params: Promise<{ lang: string }> }) {
   "use cache";
   cacheLife("hours");
 
@@ -174,9 +158,7 @@ export default async function BlogPage({
         {posts.length === 0 ? (
           <AnimateIn preset="fadeUp" inView>
             <div className="flex flex-col items-center gap-3 py-24 text-center">
-              <p className="text-lg font-medium text-[var(--neutral-12)]">
-                Coming soon
-              </p>
+              <p className="text-lg font-medium text-[var(--neutral-12)]">Coming soon</p>
               <p className="text-sm text-[var(--neutral-11)]">
                 Our first articles are on the way. Follow{" "}
                 <a
@@ -192,10 +174,7 @@ export default async function BlogPage({
             </div>
           </AnimateIn>
         ) : (
-          <AnimateInGroup
-            stagger="fast"
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
+          <AnimateInGroup stagger="fast" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
               <AnimateIn key={post._id} preset="fadeUp" inView>
                 <PostCard post={post} lang={lang} />

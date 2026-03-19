@@ -5,12 +5,12 @@
  * Auth + tenant context applied upstream.
  */
 
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import {
-  createCheckoutSession,
-  createBillingPortalSession,
-  getStripeSubscription,
   checkUsageLimit,
+  createBillingPortalSession,
+  createCheckoutSession,
+  getStripeSubscription,
 } from "@nebutra/billing";
 import { toApiError } from "@nebutra/errors";
 import { getUsageSnapshot } from "../../middlewares/usageMetering.js";
@@ -80,10 +80,7 @@ billingRoutes.openapi(portalRoute, async (c) => {
   const { returnUrl } = c.req.valid("json");
 
   try {
-    const session = await createBillingPortalSession(
-      tenant?.organizationId ?? "",
-      returnUrl,
-    );
+    const session = await createBillingPortalSession(tenant?.organizationId ?? "", returnUrl);
     return c.json({ url: session.url });
   } catch (err) {
     const apiError = toApiError(err);

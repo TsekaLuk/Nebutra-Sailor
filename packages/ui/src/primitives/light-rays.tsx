@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 import { cn } from "../utils/cn";
 
@@ -55,15 +55,7 @@ const createRays = (count: number, cycle: number): LightRay[] => {
   });
 };
 
-const Ray = ({
-  left,
-  rotate,
-  width,
-  swing,
-  delay,
-  duration,
-  intensity,
-}: LightRay) => {
+const Ray = ({ left, rotate, width, swing, delay, duration, intensity }: LightRay) => {
   return (
     <motion.div
       className="pointer-events-none absolute -top-[12%] left-[var(--ray-left)] h-[var(--light-rays-length)] w-[var(--ray-width)] origin-top -translate-x-1/2 rounded-full bg-gradient-to-b from-[color-mix(in_srgb,var(--light-rays-color)_70%,transparent)] to-transparent opacity-0 mix-blend-screen blur-[var(--light-rays-blur)]"

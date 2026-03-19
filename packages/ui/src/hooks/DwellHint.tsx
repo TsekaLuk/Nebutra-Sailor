@@ -1,13 +1,11 @@
 "use client";
 
+import { AnimatePresence, type HTMLMotionProps, motion } from "framer-motion";
 import * as React from "react";
-import { motion, AnimatePresence, type HTMLMotionProps } from "framer-motion";
 import { cn } from "../utils/cn";
 
-export interface DwellHintProps extends Omit<
-  HTMLMotionProps<"div">,
-  "children" | "initial" | "animate" | "exit" | "transition"
-> {
+export interface DwellHintProps
+  extends Omit<HTMLMotionProps<"div">, "children" | "initial" | "animate" | "exit" | "transition"> {
   /** Whether the hint is visible */
   show: boolean;
   /** The hint message to display */

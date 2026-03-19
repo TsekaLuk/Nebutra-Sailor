@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { X } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils/cn";
 
 /**
@@ -22,10 +22,7 @@ function Grid({
 
   return (
     <svg
-      className={cn(
-        "pointer-events-none absolute inset-0 text-foreground/10",
-        className
-      )}
+      className={cn("pointer-events-none absolute inset-0 text-foreground/10", className)}
       width="100%"
       height="100%"
       aria-hidden="true"
@@ -87,7 +84,7 @@ export function Banner({
     <div
       className={cn(
         "relative isolate flex flex-col justify-between gap-3 overflow-hidden rounded-[var(--radius-lg)] border border-emerald-600/15 bg-gradient-to-r from-lime-100/80 to-emerald-100/80 py-3 pl-4 pr-12 sm:flex-row sm:items-center sm:py-2 dark:from-emerald-950/50 dark:to-lime-950/50 dark:border-emerald-500/20",
-        className
+        className,
       )}
       role="banner"
       aria-label="Promotional banner"

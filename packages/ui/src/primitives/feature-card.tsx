@@ -1,14 +1,10 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 import * as React from "react";
-import { ReactNode } from "react";
-import { LucideIcon } from "lucide-react";
 import { cn } from "../utils/cn";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from "./card";
+import { Card, CardContent, CardHeader } from "./card";
 
 // =============================================================================
 // FeatureCard - Container with corner decorators
@@ -45,12 +41,7 @@ export interface FeatureCardProps {
  */
 export function FeatureCard({ children, className }: FeatureCardProps) {
   return (
-    <Card
-      className={cn(
-        "group relative rounded-none shadow-sm",
-        className
-      )}
-    >
+    <Card className={cn("group relative rounded-none shadow-sm", className)}>
       <FeatureCardDecorator />
       {children}
     </Card>
@@ -130,9 +121,7 @@ export function FeatureCardHeader({
           <Icon className="size-4" aria-hidden="true" />
           {title}
         </span>
-        <p className="mt-8 text-2xl font-semibold text-foreground">
-          {description}
-        </p>
+        <p className="mt-8 text-2xl font-semibold text-foreground">{description}</p>
       </div>
     </CardHeader>
   );
@@ -281,9 +270,7 @@ export function CircularUI({ label, circles, className }: CircularUIProps) {
           ))}
         </div>
       </div>
-      <span className="mt-1.5 block text-center text-sm text-muted-foreground">
-        {label}
-      </span>
+      <span className="mt-1.5 block text-center text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }

@@ -44,9 +44,7 @@ type TreeNodeContextType = {
   parentPath: boolean[];
 };
 
-const TreeNodeContext = createContext<TreeNodeContextType | undefined>(
-  undefined,
-);
+const TreeNodeContext = createContext<TreeNodeContextType | undefined>(undefined);
 
 const useTreeNode = () => {
   const context = useContext(TreeNodeContext);
@@ -83,15 +81,10 @@ export const TreeProvider = ({
   animateExpand = true,
   className,
 }: TreeProviderProps) => {
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(
-    new Set(defaultExpandedIds),
-  );
-  const [internalSelectedIds, setInternalSelectedIds] = useState<string[]>(
-    selectedIds ?? [],
-  );
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set(defaultExpandedIds));
+  const [internalSelectedIds, setInternalSelectedIds] = useState<string[]>(selectedIds ?? []);
 
-  const isControlled =
-    selectedIds !== undefined && onSelectionChange !== undefined;
+  const isControlled = selectedIds !== undefined && onSelectionChange !== undefined;
   const currentSelectedIds = isControlled ? selectedIds : internalSelectedIds;
 
   const toggleExpanded = useCallback((nodeId: string) => {
@@ -128,13 +121,7 @@ export const TreeProvider = ({
         setInternalSelectedIds(newSelection);
       }
     },
-    [
-      selectable,
-      multiSelect,
-      currentSelectedIds,
-      isControlled,
-      onSelectionChange,
-    ],
+    [selectable, multiSelect, currentSelectedIds, isControlled, onSelectionChange],
   );
 
   return (
@@ -376,10 +363,7 @@ export const TreeExpander = ({
   return (
     <motion.div
       animate={{ rotate: isExpanded ? 90 : 0 }}
-      className={cn(
-        "mr-1 flex h-4 w-4 cursor-pointer items-center justify-center",
-        className,
-      )}
+      className={cn("mr-1 flex h-4 w-4 cursor-pointer items-center justify-center", className)}
       onClick={(e) => {
         e.stopPropagation();
         toggleExpanded(nodeId);
@@ -398,12 +382,7 @@ export type TreeIconProps = ComponentProps<typeof motion.div> & {
   hasChildren?: boolean;
 };
 
-export const TreeIcon = ({
-  icon,
-  hasChildren = false,
-  className,
-  ...props
-}: TreeIconProps) => {
+export const TreeIcon = ({ icon, hasChildren = false, className, ...props }: TreeIconProps) => {
   const { showIcons, expandedIds } = useTree();
   const { nodeId } = useTreeNode();
   const isExpanded = expandedIds.has(nodeId);

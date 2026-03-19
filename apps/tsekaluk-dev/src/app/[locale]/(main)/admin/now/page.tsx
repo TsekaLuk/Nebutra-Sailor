@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback } from "react"
-import { RefreshCw, Save, Plus } from "lucide-react"
+import { Plus, RefreshCw, Save } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 
 interface NowEntry {
-  id: string
-  date: string
-  building: string[]
-  thinking: string[]
-  shipped: string[]
-  reading: string[]
+  id: string;
+  date: string;
+  building: string[];
+  thinking: string[];
+  shipped: string[];
+  reading: string[];
 }
 
 const SECTIONS = [
@@ -17,63 +17,68 @@ const SECTIONS = [
   { key: "shipped" as const, label: "Shipped" },
   { key: "thinking" as const, label: "Thinking" },
   { key: "reading" as const, label: "Reading" },
-]
+];
 
 function itemsToText(items: string[]) {
-  return items.join("\n")
+  return items.join("\n");
 }
 
 function textToItems(text: string) {
-  return text.split("\n").map((s) => s.trim()).filter(Boolean)
+  return text
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
 }
 
 export default function AdminNowPage() {
-  const [entry, setEntry] = useState<NowEntry | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [saving, setSaving] = useState(false)
-  const [saved, setSaved] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [entry, setEntry] = useState<NowEntry | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const [date, setDate] = useState("")
+  const [date, setDate] = useState("");
   const [fields, setFields] = useState({
     building: "",
     shipped: "",
     thinking: "",
     reading: "",
-  })
+  });
 
   const fetch_ = useCallback(async () => {
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
     try {
-      const res = await fetch("/api/now", { signal: AbortSignal.timeout(15_000) })
-      const json = await res.json()
+      const res = await fetch("/api/now", { signal: AbortSignal.timeout(15_000) });
+      const json = await res.json();
       if (json.success && json.data) {
-        const e: NowEntry = json.data
-        setEntry(e)
-        setDate(e.date)
+        const e: NowEntry = json.data;
+        setEntry(e);
+        setDate(e.date);
         setFields({
           building: itemsToText(e.building),
           shipped: itemsToText(e.shipped),
           thinking: itemsToText(e.thinking),
           reading: itemsToText(e.reading),
-        })
+        });
       } else {
         // No entry yet — set today's date
-        setDate(new Date().toISOString().slice(0, 10))
+        setDate(new Date().toISOString().slice(0, 10));
       }
     } catch {
-      setError("Failed to load entry.")
+      setError("Failed to load entry.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [])
+  }, []);
 
-  useEffect(() => { fetch_() }, [fetch_])
+  useEffect(() => {
+    fetch_();
+  }, [fetch_]);
 
   async function handleSave() {
-    setSaving(true)
-    setError(null)
+    setSaving(true);
+    setError(null);
     try {
       const payload = {
         date,
@@ -81,7 +86,7 @@ export default function AdminNowPage() {
         shipped: textToItems(fields.shipped),
         thinking: textToItems(fields.thinking),
         reading: textToItems(fields.reading),
-      }
+      };
 
       const res = entry
         ? await fetch("/api/now", {
@@ -95,18 +100,18 @@ export default function AdminNowPage() {
             headers: { "Content-Type": "application/json" },
             signal: AbortSignal.timeout(15_000),
             body: JSON.stringify(payload),
-          })
+          });
 
-      const json = await res.json()
-      if (!json.success) throw new Error(json.error ?? "Save failed")
+      const json = await res.json();
+      if (!json.success) throw new Error(json.error ?? "Save failed");
 
-      setEntry(json.data)
-      setSaved(true)
-      setTimeout(() => setSaved(false), 2000)
+      setEntry(json.data);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Save failed.")
+      setError(err instanceof Error ? err.message : "Save failed.");
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
   }
 
@@ -117,9 +122,7 @@ export default function AdminNowPage() {
           <p className="font-serif italic text-gray-400 dark:text-gray-500 text-sm">
             {entry ? "Edit latest entry" : "Create first entry"}
           </p>
-          <h1 className="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">
-            Now
-          </h1>
+          <h1 className="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">Now</h1>
         </div>
         <button
           type="button"
@@ -186,11 +189,9 @@ export default function AdminNowPage() {
             )}
             {saving ? "Saving..." : entry ? "Save changes" : "Create entry"}
           </button>
-          {saved && (
-            <span className="text-sm text-green-600 dark:text-green-400">Saved!</span>
-          )}
+          {saved && <span className="text-sm text-green-600 dark:text-green-400">Saved!</span>}
         </div>
       </div>
     </div>
-  )
+  );
 }

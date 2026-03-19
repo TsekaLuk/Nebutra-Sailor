@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface NotificationMessage {
@@ -14,8 +14,7 @@ export interface NotificationMessage {
   gradientColor?: string;
 }
 
-export interface NotificationMessageListProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface NotificationMessageListProps extends React.HTMLAttributes<HTMLDivElement> {
   /** List of messages */
   messages: NotificationMessage[];
   /** Max height of the container */
@@ -51,10 +50,7 @@ export function NotificationMessageList({
 }: NotificationMessageListProps) {
   return (
     <div
-      className={cn(
-        "relative w-full max-w-sm overflow-hidden bg-background p-2",
-        className
-      )}
+      className={cn("relative w-full max-w-sm overflow-hidden bg-background p-2", className)}
       style={{ height: maxHeight }}
       {...props}
     >
@@ -73,7 +69,7 @@ export function NotificationMessageList({
             <div
               className={cn(
                 "size-8 min-h-[2rem] min-w-[2rem] rounded-[var(--radius-lg)] bg-gradient-to-br",
-                msg.gradientColor || "from-primary to-primary/60"
+                msg.gradientColor || "from-primary to-primary/60",
               )}
             />
             <div className="flex flex-col">
@@ -83,9 +79,7 @@ export function NotificationMessageList({
                   {msg.time}
                 </span>
               </div>
-              <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
-                {msg.content}
-              </p>
+              <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{msg.content}</p>
             </div>
           </div>
         ))}

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Progress } from "@nebutra/ui/primitives"
+import { Progress } from "@nebutra/ui/primitives";
 
 export function ProgressDemo() {
   return (
@@ -34,5 +34,5 @@ export function ProgressDemo() {
         <Progress value={undefined} />
       </div>
     </div>
-  )
+  );
 }

@@ -30,18 +30,10 @@ export const Default: Story = {
   name: "Move Mouse to See Effect",
   render: () => (
     <div className="relative rounded-xl border p-8 w-64">
-      <GlowingEffect
-        spread={40}
-        glow={false}
-        disabled={false}
-        proximity={64}
-        inactiveZone={0.7}
-      />
+      <GlowingEffect spread={40} glow={false} disabled={false} proximity={64} inactiveZone={0.7} />
       <div className="relative z-10 text-center">
         <p className="font-bold">Hover me</p>
-        <p className="text-sm text-muted-foreground">
-          Move mouse around the border
-        </p>
+        <p className="text-sm text-muted-foreground">Move mouse around the border</p>
       </div>
     </div>
   ),
@@ -62,12 +54,7 @@ export const WhiteVariant: Story = {
   render: () => (
     <div className="bg-card p-8 rounded-2xl">
       <div className="relative rounded-xl border border-white/20 bg-black p-8 w-64">
-        <GlowingEffect
-          variant="white"
-          disabled={false}
-          glow={false}
-          spread={30}
-        />
+        <GlowingEffect variant="white" disabled={false} glow={false} spread={30} />
         <div className="relative z-10 text-center text-white">
           <p className="font-bold">White Variant</p>
           <p className="text-sm text-white/60">For dark backgrounds</p>

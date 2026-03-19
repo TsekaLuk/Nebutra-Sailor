@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
-import { Slider } from "@nebutra/ui/primitives"
+import { Slider } from "@nebutra/ui/primitives";
+import * as React from "react";
 export function Slider4Demo() {
   return (
     <div className="space-y-2 w-full">
@@ -12,5 +11,5 @@ export function Slider4Demo() {
       </div>
       <Slider defaultValue={500} min={0} max={1000} step={10} />
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Alert } from "@nebutra/ui/primitives"
-import { Info } from "lucide-react"
+import { Alert } from "@nebutra/ui/primitives";
+import { Info } from "lucide-react";
 
 export function IntroductionDemo() {
   return (
@@ -9,16 +9,13 @@ export function IntroductionDemo() {
       <Alert className="mb-6 gap-4 flex items-start">
         <Info className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
         <div>
-          <h4 className="font-semibold text-foreground">
-            Welcome to Nebutra Sailor
-          </h4>
+          <h4 className="font-semibold text-foreground">Welcome to Nebutra Sailor</h4>
           <p className="text-sm mt-1 text-muted-foreground">
-            This collection of primitives provides a strong foundation for
-            building exceptional SaaS applications. Explore the available
-            components to get started.
+            This collection of primitives provides a strong foundation for building exceptional SaaS
+            applications. Explore the available components to get started.
           </p>
         </div>
       </Alert>
     </div>
-  )
+  );
 }

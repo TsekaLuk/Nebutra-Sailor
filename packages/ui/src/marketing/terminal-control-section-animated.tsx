@@ -1,7 +1,7 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useCallback, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../utils/cn";
 
 type LineKind = "normal" | "added" | "removed" | "comment" | "gap";
@@ -191,9 +191,7 @@ export function CodeDiff({ diff, className }: CodeDiffProps) {
             </motion.div>
             <motion.div
               variants={lineVariants}
-              className={
-                "whitespace-pre px-3 " + (l.kind ? lineStyles[l.kind] : "")
-              }
+              className={"whitespace-pre px-3 " + (l.kind ? lineStyles[l.kind] : "")}
             >
               {l.text}
             </motion.div>
@@ -210,10 +208,9 @@ export function CodeDiff({ diff, className }: CodeDiffProps) {
           <span>Add a follow-up</span>
         </div>
         <div>
-          <span className="font-medium">a</span> to keep ·{" "}
-          <span className="font-medium">z</span> to undo ·{" "}
-          <span className="font-medium">←</span>{" "}
-          <span className="font-medium">→</span> to switch files
+          <span className="font-medium">a</span> to keep · <span className="font-medium">z</span> to
+          undo · <span className="font-medium">←</span> <span className="font-medium">→</span> to
+          switch files
         </div>
       </div>
     </div>
@@ -269,17 +266,9 @@ export function TerminalControlSectionAnimated({
   );
 
   return (
-    <section
-      className={cn(
-        "relative mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8",
-        className,
-      )}
-    >
+    <section className={cn("relative mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8", className)}>
       {/* Decorative background */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-      >
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-10 h-40 w-40 -translate-x-1/2 rounded-full bg-gradient-to-tr from-indigo-400/20 via-fuchsia-400/10 to-cyan-400/20 blur-3xl" />
       </div>
 
@@ -336,9 +325,7 @@ export function TerminalControlSectionAnimated({
                     <div
                       className={cn(
                         "text-sm mt-0.5",
-                        isActive
-                          ? "opacity-90"
-                          : "text-[var(--neutral-9)]",
+                        isActive ? "opacity-90" : "text-[var(--neutral-9)]",
                       )}
                     >
                       {it.desc}

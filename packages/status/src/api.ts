@@ -6,7 +6,7 @@
  */
 
 import { createStatusProvider } from "./provider";
-import type { StatusPageData, StatusConfig, OpenStatusConfig } from "./types";
+import type { OpenStatusConfig, StatusConfig, StatusPageData } from "./types";
 
 /**
  * Fetch status page data using the configured provider.
@@ -24,7 +24,7 @@ import type { StatusPageData, StatusConfig, OpenStatusConfig } from "./types";
  *   await fetchStatusPage({ provider: "internal", healthUrl: "https://api.example.com/health" })
  */
 export async function fetchStatusPage(
-  config: StatusConfig | OpenStatusConfig
+  config: StatusConfig | OpenStatusConfig,
 ): Promise<StatusPageData> {
   const provider = createStatusProvider(config as StatusConfig);
   return provider.fetchSummary();

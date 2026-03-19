@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { WarpBackground } from "@nebutra/ui/primitives"
+import { WarpBackground } from "@nebutra/ui/primitives";
 
 export function WarpBackgroundDemo() {
   return (
@@ -13,8 +13,8 @@ export function WarpBackgroundDemo() {
         <div className="backdrop-blur-md p-8 max-w-md rounded-2xl border bg-background/80 text-center shadow-xl">
           <h2 className="text-3xl font-bold tracking-tight mb-4">Warp Speed</h2>
           <p className="mb-6 text-muted-foreground">
-            Engage your users with immersive 3D perspective grids and animated
-            data beams. Build containers that feel alive and dynamic.
+            Engage your users with immersive 3D perspective grids and animated data beams. Build
+            containers that feel alive and dynamic.
           </p>
           <button className="px-6 py-2 font-medium text-sm rounded-full bg-primary text-primary-foreground transition-colors hover:bg-primary/90">
             Initialize Sequence
@@ -31,9 +31,7 @@ export function WarpBackgroundDemo() {
           className="p-8 h-64 flex flex-col justify-end"
         >
           <div className="p-4 backdrop-blur rounded-xl border bg-background/90">
-            <h3 className="font-bold text-lg text-blue-500">
-              Deep Perspective
-            </h3>
+            <h3 className="font-bold text-lg text-blue-500">Deep Perspective</h3>
             <p className="text-sm mt-1 text-muted-foreground">
               Lower perspective values create dramatic 3D tunneling effects.
             </p>
@@ -50,12 +48,11 @@ export function WarpBackgroundDemo() {
           <div className="p-4 backdrop-blur rounded-xl border bg-background/90">
             <h3 className="font-bold text-lg text-red-500">High Velocity</h3>
             <p className="text-sm mt-1 text-muted-foreground">
-              More beams paired with shorter durations creates hyper-speed
-              motion.
+              More beams paired with shorter durations creates hyper-speed motion.
             </p>
           </div>
         </WarpBackground>
       </div>
     </div>
-  )
+  );
 }

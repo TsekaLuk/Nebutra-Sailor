@@ -1,7 +1,7 @@
 "use client";
 
-import type { ComponentPropsWithoutRef, HTMLAttributes } from "react";
 import { cn } from "@nebutra/ui/utils";
+import type { ComponentPropsWithoutRef, HTMLAttributes } from "react";
 
 type ScrollAreaProps = HTMLAttributes<HTMLDivElement>;
 type ScrollBarProps = ComponentPropsWithoutRef<"div"> & {
@@ -10,20 +10,13 @@ type ScrollBarProps = ComponentPropsWithoutRef<"div"> & {
 
 export function ScrollArea({ className, children, ...props }: ScrollAreaProps) {
   return (
-    <div
-      className={cn("relative overflow-auto", className)}
-      {...props}
-    >
+    <div className={cn("relative overflow-auto", className)} {...props}>
       {children}
     </div>
   );
 }
 
-export function ScrollBar({
-  className,
-  orientation = "vertical",
-  ...props
-}: ScrollBarProps) {
+export function ScrollBar({ className, orientation = "vertical", ...props }: ScrollBarProps) {
   return (
     <div
       aria-hidden="true"

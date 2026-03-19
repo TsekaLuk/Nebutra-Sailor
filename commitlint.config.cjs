@@ -86,8 +86,7 @@ const config = {
     // Body max line length
     "body-max-line-length": [1, "always", 200],
   },
-  helpUrl:
-    "https://github.com/conventional-changelog/commitlint/#what-is-commitlint",
+  helpUrl: "https://github.com/conventional-changelog/commitlint/#what-is-commitlint",
 };
 
 module.exports = config;

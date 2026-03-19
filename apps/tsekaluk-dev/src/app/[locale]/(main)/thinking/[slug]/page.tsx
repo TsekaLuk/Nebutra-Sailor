@@ -1,10 +1,10 @@
+import { AnimateIn } from "@nebutra/ui/components";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { AnimateIn } from "@nebutra/ui/components";
 import { Link } from "@/i18n/navigation";
-import { blog, type BlogFrontmatter, getReadingTime } from "@/lib/articles";
+import { type BlogFrontmatter, blog, getReadingTime } from "@/lib/articles";
 import { articleJsonLd } from "@/lib/json-ld";
 
 export function generateStaticParams() {
@@ -64,13 +64,11 @@ export default async function ArticlePage({
   const MDXContent = data.body;
   const readingTime = getReadingTime(slug);
 
-  const dateStr =
-    date instanceof Date
-      ? date.toISOString().split("T")[0]
-      : String(date);
+  const dateStr = date instanceof Date ? date.toISOString().split("T")[0] : String(date);
 
   // Prev / next navigation
-  const allPages = blog.getPages()
+  const allPages = blog
+    .getPages()
     .map((p) => {
       const d = p.data as unknown as BlogFrontmatter;
       const s = p.slugs[0] ?? p.url.split("/").pop() ?? "";
@@ -87,7 +85,9 @@ export default async function ArticlePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleJsonLd({ title, slug, date: dateStr, excerpt: excerpt ?? "" })),
+          __html: JSON.stringify(
+            articleJsonLd({ title, slug, date: dateStr, excerpt: excerpt ?? "" }),
+          ),
         }}
       />
       {/* Back link */}
@@ -105,10 +105,7 @@ export default async function ArticlePage({
       <AnimateIn preset="fadeUp" delay={0.08}>
         <div className="mb-10">
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <time
-              dateTime={dateStr}
-              className="font-mono text-sm text-gray-400 dark:text-gray-500"
-            >
+            <time dateTime={dateStr} className="font-mono text-sm text-gray-400 dark:text-gray-500">
               {dateStr}
             </time>
             <span className="font-mono text-sm text-gray-400 dark:text-gray-500">
@@ -123,9 +120,7 @@ export default async function ArticlePage({
               </span>
             ))}
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-            {title}
-          </h1>
+          <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">{title}</h1>
           {excerpt && (
             <p className="mt-4 font-serif italic text-lg text-gray-400 dark:text-gray-500 leading-relaxed">
               {excerpt}
@@ -160,7 +155,9 @@ export default async function ArticlePage({
                   {prevPage.title}
                 </span>
               </Link>
-            ) : <div />}
+            ) : (
+              <div />
+            )}
 
             {nextPage ? (
               <Link
@@ -174,7 +171,9 @@ export default async function ArticlePage({
                   {nextPage.title}
                 </span>
               </Link>
-            ) : <div />}
+            ) : (
+              <div />
+            )}
           </nav>
         </AnimateIn>
       )}

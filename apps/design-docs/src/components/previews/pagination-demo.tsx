@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import * as React from "react"
 import {
-  PaginationItem,
-  PaginationEllipsis,
   Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-  PaginationContent,
-} from "@nebutra/ui/primitives"
+} from "@nebutra/ui/primitives";
+import * as React from "react";
 
 export function PaginationDemo() {
   return (
@@ -40,5 +40,5 @@ export function PaginationDemo() {
         </PaginationItem>
       </PaginationContent>
     </Pagination>
-  )
+  );
 }

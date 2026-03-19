@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { Tabs as BaseTabs } from "@base-ui-components/react/tabs";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../utils";
 import { withHtmlProps } from "../utils/primitive-props";
 
@@ -92,8 +92,7 @@ const tabsTriggerVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "text-muted-foreground hover:text-foreground data-[selected]:text-foreground",
+        default: "text-muted-foreground hover:text-foreground data-[selected]:text-foreground",
         button:
           "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-[var(--radius-lg)] text-accent-foreground hover:text-foreground data-[selected]:text-foreground",
         line: "text-muted-foreground hover:text-primary data-[selected]:text-primary",
@@ -248,9 +247,8 @@ export type TabsTriggerProps = React.ComponentPropsWithoutRef<"button"> & {
 };
 
 export interface TabsContentProps
-  extends
-  React.ComponentPropsWithoutRef<"div">,
-  VariantProps<typeof tabsContentVariants> {
+  extends React.ComponentPropsWithoutRef<"div">,
+    VariantProps<typeof tabsContentVariants> {
   value: string;
   forceMount?: true;
 }
@@ -306,9 +304,7 @@ export interface TabsContentProps
  * ```
  */
 function Tabs({ className, ...props }: TabsProps) {
-  return (
-    <RadixRoot data-slot="tabs" className={cn("", className)} {...props} />
-  );
+  return <RadixRoot data-slot="tabs" className={cn("", className)} {...props} />;
 }
 
 /**
@@ -323,9 +319,7 @@ function TabsList({
   ...props
 }: TabsListProps) {
   return (
-    <TabsContext.Provider
-      value={{ variant: variant || "default", size: size || "md" }}
-    >
+    <TabsContext.Provider value={{ variant: variant || "default", size: size || "md" }}>
       <RadixList
         data-slot="tabs-list"
         className={cn(tabsListVariants({ variant, shape, size }), "relative z-0", className)}
@@ -337,7 +331,7 @@ function TabsList({
             variant === "default" && "bg-background shadow-sm rounded-md",
             variant === "button" && "bg-accent rounded-md",
             variant === "line" && "bg-primary rounded-none",
-            shape === "pill" && "rounded-full"
+            shape === "pill" && "rounded-full",
           )}
           style={{
             left: "var(--active-tab-left)",
@@ -386,7 +380,7 @@ export {
   TabsContent,
   TabsList,
   TabsTrigger,
+  tabsContentVariants,
   tabsListVariants,
   tabsTriggerVariants,
-  tabsContentVariants,
 };

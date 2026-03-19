@@ -7,199 +7,197 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
+import type * as Prisma from "../internal/prismaNamespace";
 
 /**
  * Model OAuthClient
  *
  */
-export type OAuthClientModel =
-  runtime.Types.Result.DefaultSelection<Prisma.$OAuthClientPayload>
+export type OAuthClientModel = runtime.Types.Result.DefaultSelection<Prisma.$OAuthClientPayload>;
 
 export type AggregateOAuthClient = {
-  _count: OAuthClientCountAggregateOutputType | null
-  _avg: OAuthClientAvgAggregateOutputType | null
-  _sum: OAuthClientSumAggregateOutputType | null
-  _min: OAuthClientMinAggregateOutputType | null
-  _max: OAuthClientMaxAggregateOutputType | null
-}
+  _count: OAuthClientCountAggregateOutputType | null;
+  _avg: OAuthClientAvgAggregateOutputType | null;
+  _sum: OAuthClientSumAggregateOutputType | null;
+  _min: OAuthClientMinAggregateOutputType | null;
+  _max: OAuthClientMaxAggregateOutputType | null;
+};
 
 export type OAuthClientAvgAggregateOutputType = {
-  rateLimitRpm: number | null
-  accessTokenTtl: number | null
-  refreshTokenTtl: number | null
-}
+  rateLimitRpm: number | null;
+  accessTokenTtl: number | null;
+  refreshTokenTtl: number | null;
+};
 
 export type OAuthClientSumAggregateOutputType = {
-  rateLimitRpm: number | null
-  accessTokenTtl: number | null
-  refreshTokenTtl: number | null
-}
+  rateLimitRpm: number | null;
+  accessTokenTtl: number | null;
+  refreshTokenTtl: number | null;
+};
 
 export type OAuthClientMinAggregateOutputType = {
-  id: string | null
-  clientId: string | null
-  clientSecretHash: string | null
-  type: $Enums.OAuthClientType | null
-  status: $Enums.OAuthClientStatus | null
-  name: string | null
-  description: string | null
-  logoUrl: string | null
-  websiteUrl: string | null
-  privacyPolicyUrl: string | null
-  tosUrl: string | null
-  tokenEndpointAuthMethod: string | null
-  rateLimitRpm: number | null
-  accessTokenTtl: number | null
-  refreshTokenTtl: number | null
-  organizationId: string | null
-  createdById: string | null
-  createdAt: Date | null
-  updatedAt: Date | null
-}
+  id: string | null;
+  clientId: string | null;
+  clientSecretHash: string | null;
+  type: $Enums.OAuthClientType | null;
+  status: $Enums.OAuthClientStatus | null;
+  name: string | null;
+  description: string | null;
+  logoUrl: string | null;
+  websiteUrl: string | null;
+  privacyPolicyUrl: string | null;
+  tosUrl: string | null;
+  tokenEndpointAuthMethod: string | null;
+  rateLimitRpm: number | null;
+  accessTokenTtl: number | null;
+  refreshTokenTtl: number | null;
+  organizationId: string | null;
+  createdById: string | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+};
 
 export type OAuthClientMaxAggregateOutputType = {
-  id: string | null
-  clientId: string | null
-  clientSecretHash: string | null
-  type: $Enums.OAuthClientType | null
-  status: $Enums.OAuthClientStatus | null
-  name: string | null
-  description: string | null
-  logoUrl: string | null
-  websiteUrl: string | null
-  privacyPolicyUrl: string | null
-  tosUrl: string | null
-  tokenEndpointAuthMethod: string | null
-  rateLimitRpm: number | null
-  accessTokenTtl: number | null
-  refreshTokenTtl: number | null
-  organizationId: string | null
-  createdById: string | null
-  createdAt: Date | null
-  updatedAt: Date | null
-}
+  id: string | null;
+  clientId: string | null;
+  clientSecretHash: string | null;
+  type: $Enums.OAuthClientType | null;
+  status: $Enums.OAuthClientStatus | null;
+  name: string | null;
+  description: string | null;
+  logoUrl: string | null;
+  websiteUrl: string | null;
+  privacyPolicyUrl: string | null;
+  tosUrl: string | null;
+  tokenEndpointAuthMethod: string | null;
+  rateLimitRpm: number | null;
+  accessTokenTtl: number | null;
+  refreshTokenTtl: number | null;
+  organizationId: string | null;
+  createdById: string | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+};
 
 export type OAuthClientCountAggregateOutputType = {
-  id: number
-  clientId: number
-  clientSecretHash: number
-  type: number
-  status: number
-  name: number
-  description: number
-  logoUrl: number
-  websiteUrl: number
-  privacyPolicyUrl: number
-  tosUrl: number
-  redirectUris: number
-  allowedScopes: number
-  grantTypes: number
-  responseTypes: number
-  tokenEndpointAuthMethod: number
-  rateLimitRpm: number
-  accessTokenTtl: number
-  refreshTokenTtl: number
-  organizationId: number
-  createdById: number
-  createdAt: number
-  updatedAt: number
-  _all: number
-}
+  id: number;
+  clientId: number;
+  clientSecretHash: number;
+  type: number;
+  status: number;
+  name: number;
+  description: number;
+  logoUrl: number;
+  websiteUrl: number;
+  privacyPolicyUrl: number;
+  tosUrl: number;
+  redirectUris: number;
+  allowedScopes: number;
+  grantTypes: number;
+  responseTypes: number;
+  tokenEndpointAuthMethod: number;
+  rateLimitRpm: number;
+  accessTokenTtl: number;
+  refreshTokenTtl: number;
+  organizationId: number;
+  createdById: number;
+  createdAt: number;
+  updatedAt: number;
+  _all: number;
+};
 
 export type OAuthClientAvgAggregateInputType = {
-  rateLimitRpm?: true
-  accessTokenTtl?: true
-  refreshTokenTtl?: true
-}
+  rateLimitRpm?: true;
+  accessTokenTtl?: true;
+  refreshTokenTtl?: true;
+};
 
 export type OAuthClientSumAggregateInputType = {
-  rateLimitRpm?: true
-  accessTokenTtl?: true
-  refreshTokenTtl?: true
-}
+  rateLimitRpm?: true;
+  accessTokenTtl?: true;
+  refreshTokenTtl?: true;
+};
 
 export type OAuthClientMinAggregateInputType = {
-  id?: true
-  clientId?: true
-  clientSecretHash?: true
-  type?: true
-  status?: true
-  name?: true
-  description?: true
-  logoUrl?: true
-  websiteUrl?: true
-  privacyPolicyUrl?: true
-  tosUrl?: true
-  tokenEndpointAuthMethod?: true
-  rateLimitRpm?: true
-  accessTokenTtl?: true
-  refreshTokenTtl?: true
-  organizationId?: true
-  createdById?: true
-  createdAt?: true
-  updatedAt?: true
-}
+  id?: true;
+  clientId?: true;
+  clientSecretHash?: true;
+  type?: true;
+  status?: true;
+  name?: true;
+  description?: true;
+  logoUrl?: true;
+  websiteUrl?: true;
+  privacyPolicyUrl?: true;
+  tosUrl?: true;
+  tokenEndpointAuthMethod?: true;
+  rateLimitRpm?: true;
+  accessTokenTtl?: true;
+  refreshTokenTtl?: true;
+  organizationId?: true;
+  createdById?: true;
+  createdAt?: true;
+  updatedAt?: true;
+};
 
 export type OAuthClientMaxAggregateInputType = {
-  id?: true
-  clientId?: true
-  clientSecretHash?: true
-  type?: true
-  status?: true
-  name?: true
-  description?: true
-  logoUrl?: true
-  websiteUrl?: true
-  privacyPolicyUrl?: true
-  tosUrl?: true
-  tokenEndpointAuthMethod?: true
-  rateLimitRpm?: true
-  accessTokenTtl?: true
-  refreshTokenTtl?: true
-  organizationId?: true
-  createdById?: true
-  createdAt?: true
-  updatedAt?: true
-}
+  id?: true;
+  clientId?: true;
+  clientSecretHash?: true;
+  type?: true;
+  status?: true;
+  name?: true;
+  description?: true;
+  logoUrl?: true;
+  websiteUrl?: true;
+  privacyPolicyUrl?: true;
+  tosUrl?: true;
+  tokenEndpointAuthMethod?: true;
+  rateLimitRpm?: true;
+  accessTokenTtl?: true;
+  refreshTokenTtl?: true;
+  organizationId?: true;
+  createdById?: true;
+  createdAt?: true;
+  updatedAt?: true;
+};
 
 export type OAuthClientCountAggregateInputType = {
-  id?: true
-  clientId?: true
-  clientSecretHash?: true
-  type?: true
-  status?: true
-  name?: true
-  description?: true
-  logoUrl?: true
-  websiteUrl?: true
-  privacyPolicyUrl?: true
-  tosUrl?: true
-  redirectUris?: true
-  allowedScopes?: true
-  grantTypes?: true
-  responseTypes?: true
-  tokenEndpointAuthMethod?: true
-  rateLimitRpm?: true
-  accessTokenTtl?: true
-  refreshTokenTtl?: true
-  organizationId?: true
-  createdById?: true
-  createdAt?: true
-  updatedAt?: true
-  _all?: true
-}
+  id?: true;
+  clientId?: true;
+  clientSecretHash?: true;
+  type?: true;
+  status?: true;
+  name?: true;
+  description?: true;
+  logoUrl?: true;
+  websiteUrl?: true;
+  privacyPolicyUrl?: true;
+  tosUrl?: true;
+  redirectUris?: true;
+  allowedScopes?: true;
+  grantTypes?: true;
+  responseTypes?: true;
+  tokenEndpointAuthMethod?: true;
+  rateLimitRpm?: true;
+  accessTokenTtl?: true;
+  refreshTokenTtl?: true;
+  organizationId?: true;
+  createdById?: true;
+  createdAt?: true;
+  updatedAt?: true;
+  _all?: true;
+};
 
 export type OAuthClientAggregateArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which OAuthClient to aggregate.
    */
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    *
@@ -207,668 +205,584 @@ export type OAuthClientAggregateArgs<
    */
   orderBy?:
     | Prisma.OAuthClientOrderByWithRelationInput
-    | Prisma.OAuthClientOrderByWithRelationInput[]
+    | Prisma.OAuthClientOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
    * Sets the start position
    */
-  cursor?: Prisma.OAuthClientWhereUniqueInput
+  cursor?: Prisma.OAuthClientWhereUniqueInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Take `±n` OAuthClients from the position of the cursor.
    */
-  take?: number
+  take?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Skip the first `n` OAuthClients.
    */
-  skip?: number
+  skip?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Count returned OAuthClients
    **/
-  _count?: true | OAuthClientCountAggregateInputType
+  _count?: true | OAuthClientCountAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to average
    **/
-  _avg?: OAuthClientAvgAggregateInputType
+  _avg?: OAuthClientAvgAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to sum
    **/
-  _sum?: OAuthClientSumAggregateInputType
+  _sum?: OAuthClientSumAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the minimum value
    **/
-  _min?: OAuthClientMinAggregateInputType
+  _min?: OAuthClientMinAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the maximum value
    **/
-  _max?: OAuthClientMaxAggregateInputType
-}
+  _max?: OAuthClientMaxAggregateInputType;
+};
 
 export type GetOAuthClientAggregateType<T extends OAuthClientAggregateArgs> = {
   [P in keyof T & keyof AggregateOAuthClient]: P extends "_count" | "count"
     ? T[P] extends true
       ? number
       : Prisma.GetScalarType<T[P], AggregateOAuthClient[P]>
-    : Prisma.GetScalarType<T[P], AggregateOAuthClient[P]>
-}
+    : Prisma.GetScalarType<T[P], AggregateOAuthClient[P]>;
+};
 
 export type OAuthClientGroupByArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   orderBy?:
     | Prisma.OAuthClientOrderByWithAggregationInput
-    | Prisma.OAuthClientOrderByWithAggregationInput[]
-  by: Prisma.OAuthClientScalarFieldEnum[] | Prisma.OAuthClientScalarFieldEnum
-  having?: Prisma.OAuthClientScalarWhereWithAggregatesInput
-  take?: number
-  skip?: number
-  _count?: OAuthClientCountAggregateInputType | true
-  _avg?: OAuthClientAvgAggregateInputType
-  _sum?: OAuthClientSumAggregateInputType
-  _min?: OAuthClientMinAggregateInputType
-  _max?: OAuthClientMaxAggregateInputType
-}
+    | Prisma.OAuthClientOrderByWithAggregationInput[];
+  by: Prisma.OAuthClientScalarFieldEnum[] | Prisma.OAuthClientScalarFieldEnum;
+  having?: Prisma.OAuthClientScalarWhereWithAggregatesInput;
+  take?: number;
+  skip?: number;
+  _count?: OAuthClientCountAggregateInputType | true;
+  _avg?: OAuthClientAvgAggregateInputType;
+  _sum?: OAuthClientSumAggregateInputType;
+  _min?: OAuthClientMinAggregateInputType;
+  _max?: OAuthClientMaxAggregateInputType;
+};
 
 export type OAuthClientGroupByOutputType = {
-  id: string
-  clientId: string
-  clientSecretHash: string | null
-  type: $Enums.OAuthClientType
-  status: $Enums.OAuthClientStatus
-  name: string
-  description: string | null
-  logoUrl: string | null
-  websiteUrl: string | null
-  privacyPolicyUrl: string | null
-  tosUrl: string | null
-  redirectUris: string[]
-  allowedScopes: string[]
-  grantTypes: string[]
-  responseTypes: string[]
-  tokenEndpointAuthMethod: string
-  rateLimitRpm: number
-  accessTokenTtl: number
-  refreshTokenTtl: number
-  organizationId: string
-  createdById: string | null
-  createdAt: Date
-  updatedAt: Date
-  _count: OAuthClientCountAggregateOutputType | null
-  _avg: OAuthClientAvgAggregateOutputType | null
-  _sum: OAuthClientSumAggregateOutputType | null
-  _min: OAuthClientMinAggregateOutputType | null
-  _max: OAuthClientMaxAggregateOutputType | null
-}
+  id: string;
+  clientId: string;
+  clientSecretHash: string | null;
+  type: $Enums.OAuthClientType;
+  status: $Enums.OAuthClientStatus;
+  name: string;
+  description: string | null;
+  logoUrl: string | null;
+  websiteUrl: string | null;
+  privacyPolicyUrl: string | null;
+  tosUrl: string | null;
+  redirectUris: string[];
+  allowedScopes: string[];
+  grantTypes: string[];
+  responseTypes: string[];
+  tokenEndpointAuthMethod: string;
+  rateLimitRpm: number;
+  accessTokenTtl: number;
+  refreshTokenTtl: number;
+  organizationId: string;
+  createdById: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  _count: OAuthClientCountAggregateOutputType | null;
+  _avg: OAuthClientAvgAggregateOutputType | null;
+  _sum: OAuthClientSumAggregateOutputType | null;
+  _min: OAuthClientMinAggregateOutputType | null;
+  _max: OAuthClientMaxAggregateOutputType | null;
+};
 
-type GetOAuthClientGroupByPayload<T extends OAuthClientGroupByArgs> =
-  Prisma.PrismaPromise<
-    Array<
-      Prisma.PickEnumerable<OAuthClientGroupByOutputType, T["by"]> & {
-        [P in keyof T & keyof OAuthClientGroupByOutputType]: P extends "_count"
-          ? T[P] extends boolean
-            ? number
-            : Prisma.GetScalarType<T[P], OAuthClientGroupByOutputType[P]>
+type GetOAuthClientGroupByPayload<T extends OAuthClientGroupByArgs> = Prisma.PrismaPromise<
+  Array<
+    Prisma.PickEnumerable<OAuthClientGroupByOutputType, T["by"]> & {
+      [P in keyof T & keyof OAuthClientGroupByOutputType]: P extends "_count"
+        ? T[P] extends boolean
+          ? number
           : Prisma.GetScalarType<T[P], OAuthClientGroupByOutputType[P]>
-      }
-    >
+        : Prisma.GetScalarType<T[P], OAuthClientGroupByOutputType[P]>;
+    }
   >
+>;
 
 export type OAuthClientWhereInput = {
-  AND?: Prisma.OAuthClientWhereInput | Prisma.OAuthClientWhereInput[]
-  OR?: Prisma.OAuthClientWhereInput[]
-  NOT?: Prisma.OAuthClientWhereInput | Prisma.OAuthClientWhereInput[]
-  id?: Prisma.StringFilter<"OAuthClient"> | string
-  clientId?: Prisma.StringFilter<"OAuthClient"> | string
-  clientSecretHash?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFilter<"OAuthClient">
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFilter<"OAuthClient">
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFilter<"OAuthClient"> | string
-  description?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  logoUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  websiteUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  privacyPolicyUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  tosUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  redirectUris?: Prisma.StringNullableListFilter<"OAuthClient">
-  allowedScopes?: Prisma.StringNullableListFilter<"OAuthClient">
-  grantTypes?: Prisma.StringNullableListFilter<"OAuthClient">
-  responseTypes?: Prisma.StringNullableListFilter<"OAuthClient">
-  tokenEndpointAuthMethod?: Prisma.StringFilter<"OAuthClient"> | string
-  rateLimitRpm?: Prisma.IntFilter<"OAuthClient"> | number
-  accessTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number
-  refreshTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number
-  organizationId?: Prisma.StringFilter<"OAuthClient"> | string
-  createdById?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string
-  organization?: Prisma.XOR<
-    Prisma.OrganizationScalarRelationFilter,
-    Prisma.OrganizationWhereInput
-  >
-  authorizations?: Prisma.OAuthAuthorizationListRelationFilter
-  accessTokens?: Prisma.OAuthAccessTokenListRelationFilter
-}
+  AND?: Prisma.OAuthClientWhereInput | Prisma.OAuthClientWhereInput[];
+  OR?: Prisma.OAuthClientWhereInput[];
+  NOT?: Prisma.OAuthClientWhereInput | Prisma.OAuthClientWhereInput[];
+  id?: Prisma.StringFilter<"OAuthClient"> | string;
+  clientId?: Prisma.StringFilter<"OAuthClient"> | string;
+  clientSecretHash?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  type?: Prisma.EnumOAuthClientTypeFilter<"OAuthClient"> | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFilter<"OAuthClient"> | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFilter<"OAuthClient"> | string;
+  description?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  logoUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  websiteUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  privacyPolicyUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  tosUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  redirectUris?: Prisma.StringNullableListFilter<"OAuthClient">;
+  allowedScopes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  grantTypes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  responseTypes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  tokenEndpointAuthMethod?: Prisma.StringFilter<"OAuthClient"> | string;
+  rateLimitRpm?: Prisma.IntFilter<"OAuthClient"> | number;
+  accessTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number;
+  refreshTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number;
+  organizationId?: Prisma.StringFilter<"OAuthClient"> | string;
+  createdById?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  createdAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string;
+  updatedAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string;
+  organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>;
+  authorizations?: Prisma.OAuthAuthorizationListRelationFilter;
+  accessTokens?: Prisma.OAuthAccessTokenListRelationFilter;
+};
 
 export type OAuthClientOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  clientSecretHash?: Prisma.SortOrderInput | Prisma.SortOrder
-  type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  privacyPolicyUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  tosUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  redirectUris?: Prisma.SortOrder
-  allowedScopes?: Prisma.SortOrder
-  grantTypes?: Prisma.SortOrder
-  responseTypes?: Prisma.SortOrder
-  tokenEndpointAuthMethod?: Prisma.SortOrder
-  rateLimitRpm?: Prisma.SortOrder
-  accessTokenTtl?: Prisma.SortOrder
-  refreshTokenTtl?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
-  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  organization?: Prisma.OrganizationOrderByWithRelationInput
-  authorizations?: Prisma.OAuthAuthorizationOrderByRelationAggregateInput
-  accessTokens?: Prisma.OAuthAccessTokenOrderByRelationAggregateInput
-}
+  id?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  clientSecretHash?: Prisma.SortOrderInput | Prisma.SortOrder;
+  type?: Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  name?: Prisma.SortOrder;
+  description?: Prisma.SortOrderInput | Prisma.SortOrder;
+  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder;
+  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder;
+  privacyPolicyUrl?: Prisma.SortOrderInput | Prisma.SortOrder;
+  tosUrl?: Prisma.SortOrderInput | Prisma.SortOrder;
+  redirectUris?: Prisma.SortOrder;
+  allowedScopes?: Prisma.SortOrder;
+  grantTypes?: Prisma.SortOrder;
+  responseTypes?: Prisma.SortOrder;
+  tokenEndpointAuthMethod?: Prisma.SortOrder;
+  rateLimitRpm?: Prisma.SortOrder;
+  accessTokenTtl?: Prisma.SortOrder;
+  refreshTokenTtl?: Prisma.SortOrder;
+  organizationId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrder;
+  organization?: Prisma.OrganizationOrderByWithRelationInput;
+  authorizations?: Prisma.OAuthAuthorizationOrderByRelationAggregateInput;
+  accessTokens?: Prisma.OAuthAccessTokenOrderByRelationAggregateInput;
+};
 
 export type OAuthClientWhereUniqueInput = Prisma.AtLeast<
   {
-    id?: string
-    clientId?: string
-    AND?: Prisma.OAuthClientWhereInput | Prisma.OAuthClientWhereInput[]
-    OR?: Prisma.OAuthClientWhereInput[]
-    NOT?: Prisma.OAuthClientWhereInput | Prisma.OAuthClientWhereInput[]
-    clientSecretHash?:
-      | Prisma.StringNullableFilter<"OAuthClient">
-      | string
-      | null
-    type?:
-      | Prisma.EnumOAuthClientTypeFilter<"OAuthClient">
-      | $Enums.OAuthClientType
-    status?:
-      | Prisma.EnumOAuthClientStatusFilter<"OAuthClient">
-      | $Enums.OAuthClientStatus
-    name?: Prisma.StringFilter<"OAuthClient"> | string
-    description?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-    logoUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-    websiteUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-    privacyPolicyUrl?:
-      | Prisma.StringNullableFilter<"OAuthClient">
-      | string
-      | null
-    tosUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-    redirectUris?: Prisma.StringNullableListFilter<"OAuthClient">
-    allowedScopes?: Prisma.StringNullableListFilter<"OAuthClient">
-    grantTypes?: Prisma.StringNullableListFilter<"OAuthClient">
-    responseTypes?: Prisma.StringNullableListFilter<"OAuthClient">
-    tokenEndpointAuthMethod?: Prisma.StringFilter<"OAuthClient"> | string
-    rateLimitRpm?: Prisma.IntFilter<"OAuthClient"> | number
-    accessTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number
-    refreshTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number
-    organizationId?: Prisma.StringFilter<"OAuthClient"> | string
-    createdById?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-    createdAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string
-    updatedAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string
+    id?: string;
+    clientId?: string;
+    AND?: Prisma.OAuthClientWhereInput | Prisma.OAuthClientWhereInput[];
+    OR?: Prisma.OAuthClientWhereInput[];
+    NOT?: Prisma.OAuthClientWhereInput | Prisma.OAuthClientWhereInput[];
+    clientSecretHash?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+    type?: Prisma.EnumOAuthClientTypeFilter<"OAuthClient"> | $Enums.OAuthClientType;
+    status?: Prisma.EnumOAuthClientStatusFilter<"OAuthClient"> | $Enums.OAuthClientStatus;
+    name?: Prisma.StringFilter<"OAuthClient"> | string;
+    description?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+    logoUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+    websiteUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+    privacyPolicyUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+    tosUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+    redirectUris?: Prisma.StringNullableListFilter<"OAuthClient">;
+    allowedScopes?: Prisma.StringNullableListFilter<"OAuthClient">;
+    grantTypes?: Prisma.StringNullableListFilter<"OAuthClient">;
+    responseTypes?: Prisma.StringNullableListFilter<"OAuthClient">;
+    tokenEndpointAuthMethod?: Prisma.StringFilter<"OAuthClient"> | string;
+    rateLimitRpm?: Prisma.IntFilter<"OAuthClient"> | number;
+    accessTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number;
+    refreshTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number;
+    organizationId?: Prisma.StringFilter<"OAuthClient"> | string;
+    createdById?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+    createdAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string;
     organization?: Prisma.XOR<
       Prisma.OrganizationScalarRelationFilter,
       Prisma.OrganizationWhereInput
-    >
-    authorizations?: Prisma.OAuthAuthorizationListRelationFilter
-    accessTokens?: Prisma.OAuthAccessTokenListRelationFilter
+    >;
+    authorizations?: Prisma.OAuthAuthorizationListRelationFilter;
+    accessTokens?: Prisma.OAuthAccessTokenListRelationFilter;
   },
   "id" | "clientId"
->
+>;
 
 export type OAuthClientOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  clientSecretHash?: Prisma.SortOrderInput | Prisma.SortOrder
-  type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  privacyPolicyUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  tosUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  redirectUris?: Prisma.SortOrder
-  allowedScopes?: Prisma.SortOrder
-  grantTypes?: Prisma.SortOrder
-  responseTypes?: Prisma.SortOrder
-  tokenEndpointAuthMethod?: Prisma.SortOrder
-  rateLimitRpm?: Prisma.SortOrder
-  accessTokenTtl?: Prisma.SortOrder
-  refreshTokenTtl?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
-  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  _count?: Prisma.OAuthClientCountOrderByAggregateInput
-  _avg?: Prisma.OAuthClientAvgOrderByAggregateInput
-  _max?: Prisma.OAuthClientMaxOrderByAggregateInput
-  _min?: Prisma.OAuthClientMinOrderByAggregateInput
-  _sum?: Prisma.OAuthClientSumOrderByAggregateInput
-}
+  id?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  clientSecretHash?: Prisma.SortOrderInput | Prisma.SortOrder;
+  type?: Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  name?: Prisma.SortOrder;
+  description?: Prisma.SortOrderInput | Prisma.SortOrder;
+  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder;
+  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder;
+  privacyPolicyUrl?: Prisma.SortOrderInput | Prisma.SortOrder;
+  tosUrl?: Prisma.SortOrderInput | Prisma.SortOrder;
+  redirectUris?: Prisma.SortOrder;
+  allowedScopes?: Prisma.SortOrder;
+  grantTypes?: Prisma.SortOrder;
+  responseTypes?: Prisma.SortOrder;
+  tokenEndpointAuthMethod?: Prisma.SortOrder;
+  rateLimitRpm?: Prisma.SortOrder;
+  accessTokenTtl?: Prisma.SortOrder;
+  refreshTokenTtl?: Prisma.SortOrder;
+  organizationId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrder;
+  _count?: Prisma.OAuthClientCountOrderByAggregateInput;
+  _avg?: Prisma.OAuthClientAvgOrderByAggregateInput;
+  _max?: Prisma.OAuthClientMaxOrderByAggregateInput;
+  _min?: Prisma.OAuthClientMinOrderByAggregateInput;
+  _sum?: Prisma.OAuthClientSumOrderByAggregateInput;
+};
 
 export type OAuthClientScalarWhereWithAggregatesInput = {
   AND?:
     | Prisma.OAuthClientScalarWhereWithAggregatesInput
-    | Prisma.OAuthClientScalarWhereWithAggregatesInput[]
-  OR?: Prisma.OAuthClientScalarWhereWithAggregatesInput[]
+    | Prisma.OAuthClientScalarWhereWithAggregatesInput[];
+  OR?: Prisma.OAuthClientScalarWhereWithAggregatesInput[];
   NOT?:
     | Prisma.OAuthClientScalarWhereWithAggregatesInput
-    | Prisma.OAuthClientScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string
-  clientId?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string
-  clientSecretHash?:
-    | Prisma.StringNullableWithAggregatesFilter<"OAuthClient">
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeWithAggregatesFilter<"OAuthClient">
-    | $Enums.OAuthClientType
+    | Prisma.OAuthClientScalarWhereWithAggregatesInput[];
+  id?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string;
+  clientId?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string;
+  clientSecretHash?: Prisma.StringNullableWithAggregatesFilter<"OAuthClient"> | string | null;
+  type?: Prisma.EnumOAuthClientTypeWithAggregatesFilter<"OAuthClient"> | $Enums.OAuthClientType;
   status?:
     | Prisma.EnumOAuthClientStatusWithAggregatesFilter<"OAuthClient">
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string
-  description?:
-    | Prisma.StringNullableWithAggregatesFilter<"OAuthClient">
-    | string
-    | null
-  logoUrl?:
-    | Prisma.StringNullableWithAggregatesFilter<"OAuthClient">
-    | string
-    | null
-  websiteUrl?:
-    | Prisma.StringNullableWithAggregatesFilter<"OAuthClient">
-    | string
-    | null
-  privacyPolicyUrl?:
-    | Prisma.StringNullableWithAggregatesFilter<"OAuthClient">
-    | string
-    | null
-  tosUrl?:
-    | Prisma.StringNullableWithAggregatesFilter<"OAuthClient">
-    | string
-    | null
-  redirectUris?: Prisma.StringNullableListFilter<"OAuthClient">
-  allowedScopes?: Prisma.StringNullableListFilter<"OAuthClient">
-  grantTypes?: Prisma.StringNullableListFilter<"OAuthClient">
-  responseTypes?: Prisma.StringNullableListFilter<"OAuthClient">
-  tokenEndpointAuthMethod?:
-    | Prisma.StringWithAggregatesFilter<"OAuthClient">
-    | string
-  rateLimitRpm?: Prisma.IntWithAggregatesFilter<"OAuthClient"> | number
-  accessTokenTtl?: Prisma.IntWithAggregatesFilter<"OAuthClient"> | number
-  refreshTokenTtl?: Prisma.IntWithAggregatesFilter<"OAuthClient"> | number
-  organizationId?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string
-  createdById?:
-    | Prisma.StringNullableWithAggregatesFilter<"OAuthClient">
-    | string
-    | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"OAuthClient"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OAuthClient"> | Date | string
-}
+    | $Enums.OAuthClientStatus;
+  name?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string;
+  description?: Prisma.StringNullableWithAggregatesFilter<"OAuthClient"> | string | null;
+  logoUrl?: Prisma.StringNullableWithAggregatesFilter<"OAuthClient"> | string | null;
+  websiteUrl?: Prisma.StringNullableWithAggregatesFilter<"OAuthClient"> | string | null;
+  privacyPolicyUrl?: Prisma.StringNullableWithAggregatesFilter<"OAuthClient"> | string | null;
+  tosUrl?: Prisma.StringNullableWithAggregatesFilter<"OAuthClient"> | string | null;
+  redirectUris?: Prisma.StringNullableListFilter<"OAuthClient">;
+  allowedScopes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  grantTypes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  responseTypes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  tokenEndpointAuthMethod?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string;
+  rateLimitRpm?: Prisma.IntWithAggregatesFilter<"OAuthClient"> | number;
+  accessTokenTtl?: Prisma.IntWithAggregatesFilter<"OAuthClient"> | number;
+  refreshTokenTtl?: Prisma.IntWithAggregatesFilter<"OAuthClient"> | number;
+  organizationId?: Prisma.StringWithAggregatesFilter<"OAuthClient"> | string;
+  createdById?: Prisma.StringNullableWithAggregatesFilter<"OAuthClient"> | string | null;
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"OAuthClient"> | Date | string;
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OAuthClient"> | Date | string;
+};
 
 export type OAuthClientCreateInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutOauthClientsInput
-  authorizations?: Prisma.OAuthAuthorizationCreateNestedManyWithoutClientInput
-  accessTokens?: Prisma.OAuthAccessTokenCreateNestedManyWithoutClientInput
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  organization: Prisma.OrganizationCreateNestedOneWithoutOauthClientsInput;
+  authorizations?: Prisma.OAuthAuthorizationCreateNestedManyWithoutClientInput;
+  accessTokens?: Prisma.OAuthAccessTokenCreateNestedManyWithoutClientInput;
+};
 
 export type OAuthClientUncheckedCreateInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  organizationId: string
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  authorizations?: Prisma.OAuthAuthorizationUncheckedCreateNestedManyWithoutClientInput
-  accessTokens?: Prisma.OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  organizationId: string;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  authorizations?: Prisma.OAuthAuthorizationUncheckedCreateNestedManyWithoutClientInput;
+  accessTokens?: Prisma.OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput;
+};
 
 export type OAuthClientUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutOauthClientsNestedInput
-  authorizations?: Prisma.OAuthAuthorizationUpdateManyWithoutClientNestedInput
-  accessTokens?: Prisma.OAuthAccessTokenUpdateManyWithoutClientNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutOauthClientsNestedInput;
+  authorizations?: Prisma.OAuthAuthorizationUpdateManyWithoutClientNestedInput;
+  accessTokens?: Prisma.OAuthAccessTokenUpdateManyWithoutClientNestedInput;
+};
 
 export type OAuthClientUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorizations?: Prisma.OAuthAuthorizationUncheckedUpdateManyWithoutClientNestedInput
-  accessTokens?: Prisma.OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  authorizations?: Prisma.OAuthAuthorizationUncheckedUpdateManyWithoutClientNestedInput;
+  accessTokens?: Prisma.OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput;
+};
 
 export type OAuthClientCreateManyInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  organizationId: string
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  organizationId: string;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
 
 export type OAuthClientUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
 
 export type OAuthClientUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
 
 export type OAuthClientListRelationFilter = {
-  every?: Prisma.OAuthClientWhereInput
-  some?: Prisma.OAuthClientWhereInput
-  none?: Prisma.OAuthClientWhereInput
-}
+  every?: Prisma.OAuthClientWhereInput;
+  some?: Prisma.OAuthClientWhereInput;
+  none?: Prisma.OAuthClientWhereInput;
+};
 
 export type OAuthClientOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
+  _count?: Prisma.SortOrder;
+};
 
 export type StringNullableListFilter<$PrismaModel = never> = {
-  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
-  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
-  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  isEmpty?: boolean
-}
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null;
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null;
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>;
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>;
+  isEmpty?: boolean;
+};
 
 export type OAuthClientCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  clientSecretHash?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
-  privacyPolicyUrl?: Prisma.SortOrder
-  tosUrl?: Prisma.SortOrder
-  redirectUris?: Prisma.SortOrder
-  allowedScopes?: Prisma.SortOrder
-  grantTypes?: Prisma.SortOrder
-  responseTypes?: Prisma.SortOrder
-  tokenEndpointAuthMethod?: Prisma.SortOrder
-  rateLimitRpm?: Prisma.SortOrder
-  accessTokenTtl?: Prisma.SortOrder
-  refreshTokenTtl?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
+  id?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  clientSecretHash?: Prisma.SortOrder;
+  type?: Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  name?: Prisma.SortOrder;
+  description?: Prisma.SortOrder;
+  logoUrl?: Prisma.SortOrder;
+  websiteUrl?: Prisma.SortOrder;
+  privacyPolicyUrl?: Prisma.SortOrder;
+  tosUrl?: Prisma.SortOrder;
+  redirectUris?: Prisma.SortOrder;
+  allowedScopes?: Prisma.SortOrder;
+  grantTypes?: Prisma.SortOrder;
+  responseTypes?: Prisma.SortOrder;
+  tokenEndpointAuthMethod?: Prisma.SortOrder;
+  rateLimitRpm?: Prisma.SortOrder;
+  accessTokenTtl?: Prisma.SortOrder;
+  refreshTokenTtl?: Prisma.SortOrder;
+  organizationId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrder;
+};
 
 export type OAuthClientAvgOrderByAggregateInput = {
-  rateLimitRpm?: Prisma.SortOrder
-  accessTokenTtl?: Prisma.SortOrder
-  refreshTokenTtl?: Prisma.SortOrder
-}
+  rateLimitRpm?: Prisma.SortOrder;
+  accessTokenTtl?: Prisma.SortOrder;
+  refreshTokenTtl?: Prisma.SortOrder;
+};
 
 export type OAuthClientMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  clientSecretHash?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
-  privacyPolicyUrl?: Prisma.SortOrder
-  tosUrl?: Prisma.SortOrder
-  tokenEndpointAuthMethod?: Prisma.SortOrder
-  rateLimitRpm?: Prisma.SortOrder
-  accessTokenTtl?: Prisma.SortOrder
-  refreshTokenTtl?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
+  id?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  clientSecretHash?: Prisma.SortOrder;
+  type?: Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  name?: Prisma.SortOrder;
+  description?: Prisma.SortOrder;
+  logoUrl?: Prisma.SortOrder;
+  websiteUrl?: Prisma.SortOrder;
+  privacyPolicyUrl?: Prisma.SortOrder;
+  tosUrl?: Prisma.SortOrder;
+  tokenEndpointAuthMethod?: Prisma.SortOrder;
+  rateLimitRpm?: Prisma.SortOrder;
+  accessTokenTtl?: Prisma.SortOrder;
+  refreshTokenTtl?: Prisma.SortOrder;
+  organizationId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrder;
+};
 
 export type OAuthClientMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  clientId?: Prisma.SortOrder
-  clientSecretHash?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
-  privacyPolicyUrl?: Prisma.SortOrder
-  tosUrl?: Prisma.SortOrder
-  tokenEndpointAuthMethod?: Prisma.SortOrder
-  rateLimitRpm?: Prisma.SortOrder
-  accessTokenTtl?: Prisma.SortOrder
-  refreshTokenTtl?: Prisma.SortOrder
-  organizationId?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
+  id?: Prisma.SortOrder;
+  clientId?: Prisma.SortOrder;
+  clientSecretHash?: Prisma.SortOrder;
+  type?: Prisma.SortOrder;
+  status?: Prisma.SortOrder;
+  name?: Prisma.SortOrder;
+  description?: Prisma.SortOrder;
+  logoUrl?: Prisma.SortOrder;
+  websiteUrl?: Prisma.SortOrder;
+  privacyPolicyUrl?: Prisma.SortOrder;
+  tosUrl?: Prisma.SortOrder;
+  tokenEndpointAuthMethod?: Prisma.SortOrder;
+  rateLimitRpm?: Prisma.SortOrder;
+  accessTokenTtl?: Prisma.SortOrder;
+  refreshTokenTtl?: Prisma.SortOrder;
+  organizationId?: Prisma.SortOrder;
+  createdById?: Prisma.SortOrder;
+  createdAt?: Prisma.SortOrder;
+  updatedAt?: Prisma.SortOrder;
+};
 
 export type OAuthClientSumOrderByAggregateInput = {
-  rateLimitRpm?: Prisma.SortOrder
-  accessTokenTtl?: Prisma.SortOrder
-  refreshTokenTtl?: Prisma.SortOrder
-}
+  rateLimitRpm?: Prisma.SortOrder;
+  accessTokenTtl?: Prisma.SortOrder;
+  refreshTokenTtl?: Prisma.SortOrder;
+};
 
 export type OAuthClientScalarRelationFilter = {
-  is?: Prisma.OAuthClientWhereInput
-  isNot?: Prisma.OAuthClientWhereInput
-}
+  is?: Prisma.OAuthClientWhereInput;
+  isNot?: Prisma.OAuthClientWhereInput;
+};
 
 export type OAuthClientCreateNestedManyWithoutOrganizationInput = {
   create?:
@@ -877,15 +791,13 @@ export type OAuthClientCreateNestedManyWithoutOrganizationInput = {
         Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput
       >
     | Prisma.OAuthClientCreateWithoutOrganizationInput[]
-    | Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput[]
+    | Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput[];
   connectOrCreate?:
     | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput
-    | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput[]
-  createMany?: Prisma.OAuthClientCreateManyOrganizationInputEnvelope
-  connect?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
-}
+    | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput[];
+  createMany?: Prisma.OAuthClientCreateManyOrganizationInputEnvelope;
+  connect?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
+};
 
 export type OAuthClientUncheckedCreateNestedManyWithoutOrganizationInput = {
   create?:
@@ -894,15 +806,13 @@ export type OAuthClientUncheckedCreateNestedManyWithoutOrganizationInput = {
         Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput
       >
     | Prisma.OAuthClientCreateWithoutOrganizationInput[]
-    | Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput[]
+    | Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput[];
   connectOrCreate?:
     | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput
-    | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput[]
-  createMany?: Prisma.OAuthClientCreateManyOrganizationInputEnvelope
-  connect?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
-}
+    | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput[];
+  createMany?: Prisma.OAuthClientCreateManyOrganizationInputEnvelope;
+  connect?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
+};
 
 export type OAuthClientUpdateManyWithoutOrganizationNestedInput = {
   create?:
@@ -911,36 +821,26 @@ export type OAuthClientUpdateManyWithoutOrganizationNestedInput = {
         Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput
       >
     | Prisma.OAuthClientCreateWithoutOrganizationInput[]
-    | Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput[]
+    | Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput[];
   connectOrCreate?:
     | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput
-    | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput[]
+    | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput[];
   upsert?:
     | Prisma.OAuthClientUpsertWithWhereUniqueWithoutOrganizationInput
-    | Prisma.OAuthClientUpsertWithWhereUniqueWithoutOrganizationInput[]
-  createMany?: Prisma.OAuthClientCreateManyOrganizationInputEnvelope
-  set?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
-  disconnect?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
-  delete?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
-  connect?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
+    | Prisma.OAuthClientUpsertWithWhereUniqueWithoutOrganizationInput[];
+  createMany?: Prisma.OAuthClientCreateManyOrganizationInputEnvelope;
+  set?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
+  disconnect?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
+  delete?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
+  connect?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
   update?:
     | Prisma.OAuthClientUpdateWithWhereUniqueWithoutOrganizationInput
-    | Prisma.OAuthClientUpdateWithWhereUniqueWithoutOrganizationInput[]
+    | Prisma.OAuthClientUpdateWithWhereUniqueWithoutOrganizationInput[];
   updateMany?:
     | Prisma.OAuthClientUpdateManyWithWhereWithoutOrganizationInput
-    | Prisma.OAuthClientUpdateManyWithWhereWithoutOrganizationInput[]
-  deleteMany?:
-    | Prisma.OAuthClientScalarWhereInput
-    | Prisma.OAuthClientScalarWhereInput[]
-}
+    | Prisma.OAuthClientUpdateManyWithWhereWithoutOrganizationInput[];
+  deleteMany?: Prisma.OAuthClientScalarWhereInput | Prisma.OAuthClientScalarWhereInput[];
+};
 
 export type OAuthClientUncheckedUpdateManyWithoutOrganizationNestedInput = {
   create?:
@@ -949,894 +849,798 @@ export type OAuthClientUncheckedUpdateManyWithoutOrganizationNestedInput = {
         Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput
       >
     | Prisma.OAuthClientCreateWithoutOrganizationInput[]
-    | Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput[]
+    | Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput[];
   connectOrCreate?:
     | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput
-    | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput[]
+    | Prisma.OAuthClientCreateOrConnectWithoutOrganizationInput[];
   upsert?:
     | Prisma.OAuthClientUpsertWithWhereUniqueWithoutOrganizationInput
-    | Prisma.OAuthClientUpsertWithWhereUniqueWithoutOrganizationInput[]
-  createMany?: Prisma.OAuthClientCreateManyOrganizationInputEnvelope
-  set?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
-  disconnect?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
-  delete?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
-  connect?:
-    | Prisma.OAuthClientWhereUniqueInput
-    | Prisma.OAuthClientWhereUniqueInput[]
+    | Prisma.OAuthClientUpsertWithWhereUniqueWithoutOrganizationInput[];
+  createMany?: Prisma.OAuthClientCreateManyOrganizationInputEnvelope;
+  set?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
+  disconnect?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
+  delete?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
+  connect?: Prisma.OAuthClientWhereUniqueInput | Prisma.OAuthClientWhereUniqueInput[];
   update?:
     | Prisma.OAuthClientUpdateWithWhereUniqueWithoutOrganizationInput
-    | Prisma.OAuthClientUpdateWithWhereUniqueWithoutOrganizationInput[]
+    | Prisma.OAuthClientUpdateWithWhereUniqueWithoutOrganizationInput[];
   updateMany?:
     | Prisma.OAuthClientUpdateManyWithWhereWithoutOrganizationInput
-    | Prisma.OAuthClientUpdateManyWithWhereWithoutOrganizationInput[]
-  deleteMany?:
-    | Prisma.OAuthClientScalarWhereInput
-    | Prisma.OAuthClientScalarWhereInput[]
-}
+    | Prisma.OAuthClientUpdateManyWithWhereWithoutOrganizationInput[];
+  deleteMany?: Prisma.OAuthClientScalarWhereInput | Prisma.OAuthClientScalarWhereInput[];
+};
 
 export type OAuthClientCreateredirectUrisInput = {
-  set: string[]
-}
+  set: string[];
+};
 
 export type OAuthClientCreateallowedScopesInput = {
-  set: string[]
-}
+  set: string[];
+};
 
 export type OAuthClientCreategrantTypesInput = {
-  set: string[]
-}
+  set: string[];
+};
 
 export type OAuthClientCreateresponseTypesInput = {
-  set: string[]
-}
+  set: string[];
+};
 
 export type EnumOAuthClientTypeFieldUpdateOperationsInput = {
-  set?: $Enums.OAuthClientType
-}
+  set?: $Enums.OAuthClientType;
+};
 
 export type EnumOAuthClientStatusFieldUpdateOperationsInput = {
-  set?: $Enums.OAuthClientStatus
-}
+  set?: $Enums.OAuthClientStatus;
+};
 
 export type OAuthClientUpdateredirectUrisInput = {
-  set?: string[]
-  push?: string | string[]
-}
+  set?: string[];
+  push?: string | string[];
+};
 
 export type OAuthClientUpdateallowedScopesInput = {
-  set?: string[]
-  push?: string | string[]
-}
+  set?: string[];
+  push?: string | string[];
+};
 
 export type OAuthClientUpdategrantTypesInput = {
-  set?: string[]
-  push?: string | string[]
-}
+  set?: string[];
+  push?: string | string[];
+};
 
 export type OAuthClientUpdateresponseTypesInput = {
-  set?: string[]
-  push?: string | string[]
-}
+  set?: string[];
+  push?: string | string[];
+};
 
 export type OAuthClientCreateNestedOneWithoutAuthorizationsInput = {
   create?: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutAuthorizationsInput,
     Prisma.OAuthClientUncheckedCreateWithoutAuthorizationsInput
-  >
-  connectOrCreate?: Prisma.OAuthClientCreateOrConnectWithoutAuthorizationsInput
-  connect?: Prisma.OAuthClientWhereUniqueInput
-}
+  >;
+  connectOrCreate?: Prisma.OAuthClientCreateOrConnectWithoutAuthorizationsInput;
+  connect?: Prisma.OAuthClientWhereUniqueInput;
+};
 
 export type OAuthClientUpdateOneRequiredWithoutAuthorizationsNestedInput = {
   create?: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutAuthorizationsInput,
     Prisma.OAuthClientUncheckedCreateWithoutAuthorizationsInput
-  >
-  connectOrCreate?: Prisma.OAuthClientCreateOrConnectWithoutAuthorizationsInput
-  upsert?: Prisma.OAuthClientUpsertWithoutAuthorizationsInput
-  connect?: Prisma.OAuthClientWhereUniqueInput
+  >;
+  connectOrCreate?: Prisma.OAuthClientCreateOrConnectWithoutAuthorizationsInput;
+  upsert?: Prisma.OAuthClientUpsertWithoutAuthorizationsInput;
+  connect?: Prisma.OAuthClientWhereUniqueInput;
   update?: Prisma.XOR<
     Prisma.XOR<
       Prisma.OAuthClientUpdateToOneWithWhereWithoutAuthorizationsInput,
       Prisma.OAuthClientUpdateWithoutAuthorizationsInput
     >,
     Prisma.OAuthClientUncheckedUpdateWithoutAuthorizationsInput
-  >
-}
+  >;
+};
 
 export type OAuthClientCreateNestedOneWithoutAccessTokensInput = {
   create?: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutAccessTokensInput,
     Prisma.OAuthClientUncheckedCreateWithoutAccessTokensInput
-  >
-  connectOrCreate?: Prisma.OAuthClientCreateOrConnectWithoutAccessTokensInput
-  connect?: Prisma.OAuthClientWhereUniqueInput
-}
+  >;
+  connectOrCreate?: Prisma.OAuthClientCreateOrConnectWithoutAccessTokensInput;
+  connect?: Prisma.OAuthClientWhereUniqueInput;
+};
 
 export type OAuthClientUpdateOneRequiredWithoutAccessTokensNestedInput = {
   create?: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutAccessTokensInput,
     Prisma.OAuthClientUncheckedCreateWithoutAccessTokensInput
-  >
-  connectOrCreate?: Prisma.OAuthClientCreateOrConnectWithoutAccessTokensInput
-  upsert?: Prisma.OAuthClientUpsertWithoutAccessTokensInput
-  connect?: Prisma.OAuthClientWhereUniqueInput
+  >;
+  connectOrCreate?: Prisma.OAuthClientCreateOrConnectWithoutAccessTokensInput;
+  upsert?: Prisma.OAuthClientUpsertWithoutAccessTokensInput;
+  connect?: Prisma.OAuthClientWhereUniqueInput;
   update?: Prisma.XOR<
     Prisma.XOR<
       Prisma.OAuthClientUpdateToOneWithWhereWithoutAccessTokensInput,
       Prisma.OAuthClientUpdateWithoutAccessTokensInput
     >,
     Prisma.OAuthClientUncheckedUpdateWithoutAccessTokensInput
-  >
-}
+  >;
+};
 
 export type OAuthClientCreateWithoutOrganizationInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  authorizations?: Prisma.OAuthAuthorizationCreateNestedManyWithoutClientInput
-  accessTokens?: Prisma.OAuthAccessTokenCreateNestedManyWithoutClientInput
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  authorizations?: Prisma.OAuthAuthorizationCreateNestedManyWithoutClientInput;
+  accessTokens?: Prisma.OAuthAccessTokenCreateNestedManyWithoutClientInput;
+};
 
 export type OAuthClientUncheckedCreateWithoutOrganizationInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  authorizations?: Prisma.OAuthAuthorizationUncheckedCreateNestedManyWithoutClientInput
-  accessTokens?: Prisma.OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  authorizations?: Prisma.OAuthAuthorizationUncheckedCreateNestedManyWithoutClientInput;
+  accessTokens?: Prisma.OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput;
+};
 
 export type OAuthClientCreateOrConnectWithoutOrganizationInput = {
-  where: Prisma.OAuthClientWhereUniqueInput
+  where: Prisma.OAuthClientWhereUniqueInput;
   create: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutOrganizationInput,
     Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput
-  >
-}
+  >;
+};
 
 export type OAuthClientCreateManyOrganizationInputEnvelope = {
   data:
     | Prisma.OAuthClientCreateManyOrganizationInput
-    | Prisma.OAuthClientCreateManyOrganizationInput[]
-  skipDuplicates?: boolean
-}
+    | Prisma.OAuthClientCreateManyOrganizationInput[];
+  skipDuplicates?: boolean;
+};
 
 export type OAuthClientUpsertWithWhereUniqueWithoutOrganizationInput = {
-  where: Prisma.OAuthClientWhereUniqueInput
+  where: Prisma.OAuthClientWhereUniqueInput;
   update: Prisma.XOR<
     Prisma.OAuthClientUpdateWithoutOrganizationInput,
     Prisma.OAuthClientUncheckedUpdateWithoutOrganizationInput
-  >
+  >;
   create: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutOrganizationInput,
     Prisma.OAuthClientUncheckedCreateWithoutOrganizationInput
-  >
-}
+  >;
+};
 
 export type OAuthClientUpdateWithWhereUniqueWithoutOrganizationInput = {
-  where: Prisma.OAuthClientWhereUniqueInput
+  where: Prisma.OAuthClientWhereUniqueInput;
   data: Prisma.XOR<
     Prisma.OAuthClientUpdateWithoutOrganizationInput,
     Prisma.OAuthClientUncheckedUpdateWithoutOrganizationInput
-  >
-}
+  >;
+};
 
 export type OAuthClientUpdateManyWithWhereWithoutOrganizationInput = {
-  where: Prisma.OAuthClientScalarWhereInput
+  where: Prisma.OAuthClientScalarWhereInput;
   data: Prisma.XOR<
     Prisma.OAuthClientUpdateManyMutationInput,
     Prisma.OAuthClientUncheckedUpdateManyWithoutOrganizationInput
-  >
-}
+  >;
+};
 
 export type OAuthClientScalarWhereInput = {
-  AND?:
-    | Prisma.OAuthClientScalarWhereInput
-    | Prisma.OAuthClientScalarWhereInput[]
-  OR?: Prisma.OAuthClientScalarWhereInput[]
-  NOT?:
-    | Prisma.OAuthClientScalarWhereInput
-    | Prisma.OAuthClientScalarWhereInput[]
-  id?: Prisma.StringFilter<"OAuthClient"> | string
-  clientId?: Prisma.StringFilter<"OAuthClient"> | string
-  clientSecretHash?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFilter<"OAuthClient">
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFilter<"OAuthClient">
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFilter<"OAuthClient"> | string
-  description?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  logoUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  websiteUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  privacyPolicyUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  tosUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  redirectUris?: Prisma.StringNullableListFilter<"OAuthClient">
-  allowedScopes?: Prisma.StringNullableListFilter<"OAuthClient">
-  grantTypes?: Prisma.StringNullableListFilter<"OAuthClient">
-  responseTypes?: Prisma.StringNullableListFilter<"OAuthClient">
-  tokenEndpointAuthMethod?: Prisma.StringFilter<"OAuthClient"> | string
-  rateLimitRpm?: Prisma.IntFilter<"OAuthClient"> | number
-  accessTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number
-  refreshTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number
-  organizationId?: Prisma.StringFilter<"OAuthClient"> | string
-  createdById?: Prisma.StringNullableFilter<"OAuthClient"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string
-}
+  AND?: Prisma.OAuthClientScalarWhereInput | Prisma.OAuthClientScalarWhereInput[];
+  OR?: Prisma.OAuthClientScalarWhereInput[];
+  NOT?: Prisma.OAuthClientScalarWhereInput | Prisma.OAuthClientScalarWhereInput[];
+  id?: Prisma.StringFilter<"OAuthClient"> | string;
+  clientId?: Prisma.StringFilter<"OAuthClient"> | string;
+  clientSecretHash?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  type?: Prisma.EnumOAuthClientTypeFilter<"OAuthClient"> | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFilter<"OAuthClient"> | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFilter<"OAuthClient"> | string;
+  description?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  logoUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  websiteUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  privacyPolicyUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  tosUrl?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  redirectUris?: Prisma.StringNullableListFilter<"OAuthClient">;
+  allowedScopes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  grantTypes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  responseTypes?: Prisma.StringNullableListFilter<"OAuthClient">;
+  tokenEndpointAuthMethod?: Prisma.StringFilter<"OAuthClient"> | string;
+  rateLimitRpm?: Prisma.IntFilter<"OAuthClient"> | number;
+  accessTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number;
+  refreshTokenTtl?: Prisma.IntFilter<"OAuthClient"> | number;
+  organizationId?: Prisma.StringFilter<"OAuthClient"> | string;
+  createdById?: Prisma.StringNullableFilter<"OAuthClient"> | string | null;
+  createdAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string;
+  updatedAt?: Prisma.DateTimeFilter<"OAuthClient"> | Date | string;
+};
 
 export type OAuthClientCreateWithoutAuthorizationsInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutOauthClientsInput
-  accessTokens?: Prisma.OAuthAccessTokenCreateNestedManyWithoutClientInput
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  organization: Prisma.OrganizationCreateNestedOneWithoutOauthClientsInput;
+  accessTokens?: Prisma.OAuthAccessTokenCreateNestedManyWithoutClientInput;
+};
 
 export type OAuthClientUncheckedCreateWithoutAuthorizationsInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  organizationId: string
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  accessTokens?: Prisma.OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  organizationId: string;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  accessTokens?: Prisma.OAuthAccessTokenUncheckedCreateNestedManyWithoutClientInput;
+};
 
 export type OAuthClientCreateOrConnectWithoutAuthorizationsInput = {
-  where: Prisma.OAuthClientWhereUniqueInput
+  where: Prisma.OAuthClientWhereUniqueInput;
   create: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutAuthorizationsInput,
     Prisma.OAuthClientUncheckedCreateWithoutAuthorizationsInput
-  >
-}
+  >;
+};
 
 export type OAuthClientUpsertWithoutAuthorizationsInput = {
   update: Prisma.XOR<
     Prisma.OAuthClientUpdateWithoutAuthorizationsInput,
     Prisma.OAuthClientUncheckedUpdateWithoutAuthorizationsInput
-  >
+  >;
   create: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutAuthorizationsInput,
     Prisma.OAuthClientUncheckedCreateWithoutAuthorizationsInput
-  >
-  where?: Prisma.OAuthClientWhereInput
-}
+  >;
+  where?: Prisma.OAuthClientWhereInput;
+};
 
 export type OAuthClientUpdateToOneWithWhereWithoutAuthorizationsInput = {
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   data: Prisma.XOR<
     Prisma.OAuthClientUpdateWithoutAuthorizationsInput,
     Prisma.OAuthClientUncheckedUpdateWithoutAuthorizationsInput
-  >
-}
+  >;
+};
 
 export type OAuthClientUpdateWithoutAuthorizationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutOauthClientsNestedInput
-  accessTokens?: Prisma.OAuthAccessTokenUpdateManyWithoutClientNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutOauthClientsNestedInput;
+  accessTokens?: Prisma.OAuthAccessTokenUpdateManyWithoutClientNestedInput;
+};
 
 export type OAuthClientUncheckedUpdateWithoutAuthorizationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessTokens?: Prisma.OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  accessTokens?: Prisma.OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput;
+};
 
 export type OAuthClientCreateWithoutAccessTokensInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutOauthClientsInput
-  authorizations?: Prisma.OAuthAuthorizationCreateNestedManyWithoutClientInput
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  organization: Prisma.OrganizationCreateNestedOneWithoutOauthClientsInput;
+  authorizations?: Prisma.OAuthAuthorizationCreateNestedManyWithoutClientInput;
+};
 
 export type OAuthClientUncheckedCreateWithoutAccessTokensInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  organizationId: string
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  authorizations?: Prisma.OAuthAuthorizationUncheckedCreateNestedManyWithoutClientInput
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  organizationId: string;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  authorizations?: Prisma.OAuthAuthorizationUncheckedCreateNestedManyWithoutClientInput;
+};
 
 export type OAuthClientCreateOrConnectWithoutAccessTokensInput = {
-  where: Prisma.OAuthClientWhereUniqueInput
+  where: Prisma.OAuthClientWhereUniqueInput;
   create: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutAccessTokensInput,
     Prisma.OAuthClientUncheckedCreateWithoutAccessTokensInput
-  >
-}
+  >;
+};
 
 export type OAuthClientUpsertWithoutAccessTokensInput = {
   update: Prisma.XOR<
     Prisma.OAuthClientUpdateWithoutAccessTokensInput,
     Prisma.OAuthClientUncheckedUpdateWithoutAccessTokensInput
-  >
+  >;
   create: Prisma.XOR<
     Prisma.OAuthClientCreateWithoutAccessTokensInput,
     Prisma.OAuthClientUncheckedCreateWithoutAccessTokensInput
-  >
-  where?: Prisma.OAuthClientWhereInput
-}
+  >;
+  where?: Prisma.OAuthClientWhereInput;
+};
 
 export type OAuthClientUpdateToOneWithWhereWithoutAccessTokensInput = {
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   data: Prisma.XOR<
     Prisma.OAuthClientUpdateWithoutAccessTokensInput,
     Prisma.OAuthClientUncheckedUpdateWithoutAccessTokensInput
-  >
-}
+  >;
+};
 
 export type OAuthClientUpdateWithoutAccessTokensInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutOauthClientsNestedInput
-  authorizations?: Prisma.OAuthAuthorizationUpdateManyWithoutClientNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutOauthClientsNestedInput;
+  authorizations?: Prisma.OAuthAuthorizationUpdateManyWithoutClientNestedInput;
+};
 
 export type OAuthClientUncheckedUpdateWithoutAccessTokensInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorizations?: Prisma.OAuthAuthorizationUncheckedUpdateManyWithoutClientNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  authorizations?: Prisma.OAuthAuthorizationUncheckedUpdateManyWithoutClientNestedInput;
+};
 
 export type OAuthClientCreateManyOrganizationInput = {
-  id?: string
-  clientId: string
-  clientSecretHash?: string | null
-  type?: $Enums.OAuthClientType
-  status?: $Enums.OAuthClientStatus
-  name: string
-  description?: string | null
-  logoUrl?: string | null
-  websiteUrl?: string | null
-  privacyPolicyUrl?: string | null
-  tosUrl?: string | null
-  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: string
-  rateLimitRpm?: number
-  accessTokenTtl?: number
-  refreshTokenTtl?: number
-  createdById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
+  id?: string;
+  clientId: string;
+  clientSecretHash?: string | null;
+  type?: $Enums.OAuthClientType;
+  status?: $Enums.OAuthClientStatus;
+  name: string;
+  description?: string | null;
+  logoUrl?: string | null;
+  websiteUrl?: string | null;
+  privacyPolicyUrl?: string | null;
+  tosUrl?: string | null;
+  redirectUris?: Prisma.OAuthClientCreateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientCreateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientCreategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientCreateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: string;
+  rateLimitRpm?: number;
+  accessTokenTtl?: number;
+  refreshTokenTtl?: number;
+  createdById?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
 
 export type OAuthClientUpdateWithoutOrganizationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorizations?: Prisma.OAuthAuthorizationUpdateManyWithoutClientNestedInput
-  accessTokens?: Prisma.OAuthAccessTokenUpdateManyWithoutClientNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  authorizations?: Prisma.OAuthAuthorizationUpdateManyWithoutClientNestedInput;
+  accessTokens?: Prisma.OAuthAccessTokenUpdateManyWithoutClientNestedInput;
+};
 
 export type OAuthClientUncheckedUpdateWithoutOrganizationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  authorizations?: Prisma.OAuthAuthorizationUncheckedUpdateManyWithoutClientNestedInput
-  accessTokens?: Prisma.OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  authorizations?: Prisma.OAuthAuthorizationUncheckedUpdateManyWithoutClientNestedInput;
+  accessTokens?: Prisma.OAuthAccessTokenUncheckedUpdateManyWithoutClientNestedInput;
+};
 
 export type OAuthClientUncheckedUpdateManyWithoutOrganizationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  clientId?: Prisma.StringFieldUpdateOperationsInput | string
-  clientSecretHash?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  type?:
-    | Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput
-    | $Enums.OAuthClientType
-  status?:
-    | Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput
-    | $Enums.OAuthClientStatus
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  privacyPolicyUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null
-  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[]
-  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[]
-  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[]
-  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[]
-  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string
-  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number
-  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientId?: Prisma.StringFieldUpdateOperationsInput | string;
+  clientSecretHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  type?: Prisma.EnumOAuthClientTypeFieldUpdateOperationsInput | $Enums.OAuthClientType;
+  status?: Prisma.EnumOAuthClientStatusFieldUpdateOperationsInput | $Enums.OAuthClientStatus;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  privacyPolicyUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  tosUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  redirectUris?: Prisma.OAuthClientUpdateredirectUrisInput | string[];
+  allowedScopes?: Prisma.OAuthClientUpdateallowedScopesInput | string[];
+  grantTypes?: Prisma.OAuthClientUpdategrantTypesInput | string[];
+  responseTypes?: Prisma.OAuthClientUpdateresponseTypesInput | string[];
+  tokenEndpointAuthMethod?: Prisma.StringFieldUpdateOperationsInput | string;
+  rateLimitRpm?: Prisma.IntFieldUpdateOperationsInput | number;
+  accessTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  refreshTokenTtl?: Prisma.IntFieldUpdateOperationsInput | number;
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
 
 /**
  * Count Type OAuthClientCountOutputType
  */
 
 export type OAuthClientCountOutputType = {
-  authorizations: number
-  accessTokens: number
-}
+  authorizations: number;
+  accessTokens: number;
+};
 
 export type OAuthClientCountOutputTypeSelect<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  authorizations?: boolean | OAuthClientCountOutputTypeCountAuthorizationsArgs
-  accessTokens?: boolean | OAuthClientCountOutputTypeCountAccessTokensArgs
-}
+  authorizations?: boolean | OAuthClientCountOutputTypeCountAuthorizationsArgs;
+  accessTokens?: boolean | OAuthClientCountOutputTypeCountAccessTokensArgs;
+};
 
 /**
  * OAuthClientCountOutputType without action
  */
 export type OAuthClientCountOutputTypeDefaultArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClientCountOutputType
    */
-  select?: Prisma.OAuthClientCountOutputTypeSelect<ExtArgs> | null
-}
+  select?: Prisma.OAuthClientCountOutputTypeSelect<ExtArgs> | null;
+};
 
 /**
  * OAuthClientCountOutputType without action
  */
 export type OAuthClientCountOutputTypeCountAuthorizationsArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  where?: Prisma.OAuthAuthorizationWhereInput
-}
+  where?: Prisma.OAuthAuthorizationWhereInput;
+};
 
 /**
  * OAuthClientCountOutputType without action
  */
 export type OAuthClientCountOutputTypeCountAccessTokensArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  where?: Prisma.OAuthAccessTokenWhereInput
-}
+  where?: Prisma.OAuthAccessTokenWhereInput;
+};
 
 export type OAuthClientSelect<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
-    id?: boolean
-    clientId?: boolean
-    clientSecretHash?: boolean
-    type?: boolean
-    status?: boolean
-    name?: boolean
-    description?: boolean
-    logoUrl?: boolean
-    websiteUrl?: boolean
-    privacyPolicyUrl?: boolean
-    tosUrl?: boolean
-    redirectUris?: boolean
-    allowedScopes?: boolean
-    grantTypes?: boolean
-    responseTypes?: boolean
-    tokenEndpointAuthMethod?: boolean
-    rateLimitRpm?: boolean
-    accessTokenTtl?: boolean
-    refreshTokenTtl?: boolean
-    organizationId?: boolean
-    createdById?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
-    authorizations?: boolean | Prisma.OAuthClient$authorizationsArgs<ExtArgs>
-    accessTokens?: boolean | Prisma.OAuthClient$accessTokensArgs<ExtArgs>
-    _count?: boolean | Prisma.OAuthClientCountOutputTypeDefaultArgs<ExtArgs>
+    id?: boolean;
+    clientId?: boolean;
+    clientSecretHash?: boolean;
+    type?: boolean;
+    status?: boolean;
+    name?: boolean;
+    description?: boolean;
+    logoUrl?: boolean;
+    websiteUrl?: boolean;
+    privacyPolicyUrl?: boolean;
+    tosUrl?: boolean;
+    redirectUris?: boolean;
+    allowedScopes?: boolean;
+    grantTypes?: boolean;
+    responseTypes?: boolean;
+    tokenEndpointAuthMethod?: boolean;
+    rateLimitRpm?: boolean;
+    accessTokenTtl?: boolean;
+    refreshTokenTtl?: boolean;
+    organizationId?: boolean;
+    createdById?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>;
+    authorizations?: boolean | Prisma.OAuthClient$authorizationsArgs<ExtArgs>;
+    accessTokens?: boolean | Prisma.OAuthClient$accessTokensArgs<ExtArgs>;
+    _count?: boolean | Prisma.OAuthClientCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["oAuthClient"]
->
+>;
 
 export type OAuthClientSelectCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
-    id?: boolean
-    clientId?: boolean
-    clientSecretHash?: boolean
-    type?: boolean
-    status?: boolean
-    name?: boolean
-    description?: boolean
-    logoUrl?: boolean
-    websiteUrl?: boolean
-    privacyPolicyUrl?: boolean
-    tosUrl?: boolean
-    redirectUris?: boolean
-    allowedScopes?: boolean
-    grantTypes?: boolean
-    responseTypes?: boolean
-    tokenEndpointAuthMethod?: boolean
-    rateLimitRpm?: boolean
-    accessTokenTtl?: boolean
-    refreshTokenTtl?: boolean
-    organizationId?: boolean
-    createdById?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+    id?: boolean;
+    clientId?: boolean;
+    clientSecretHash?: boolean;
+    type?: boolean;
+    status?: boolean;
+    name?: boolean;
+    description?: boolean;
+    logoUrl?: boolean;
+    websiteUrl?: boolean;
+    privacyPolicyUrl?: boolean;
+    tosUrl?: boolean;
+    redirectUris?: boolean;
+    allowedScopes?: boolean;
+    grantTypes?: boolean;
+    responseTypes?: boolean;
+    tokenEndpointAuthMethod?: boolean;
+    rateLimitRpm?: boolean;
+    accessTokenTtl?: boolean;
+    refreshTokenTtl?: boolean;
+    organizationId?: boolean;
+    createdById?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["oAuthClient"]
->
+>;
 
 export type OAuthClientSelectUpdateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
-    id?: boolean
-    clientId?: boolean
-    clientSecretHash?: boolean
-    type?: boolean
-    status?: boolean
-    name?: boolean
-    description?: boolean
-    logoUrl?: boolean
-    websiteUrl?: boolean
-    privacyPolicyUrl?: boolean
-    tosUrl?: boolean
-    redirectUris?: boolean
-    allowedScopes?: boolean
-    grantTypes?: boolean
-    responseTypes?: boolean
-    tokenEndpointAuthMethod?: boolean
-    rateLimitRpm?: boolean
-    accessTokenTtl?: boolean
-    refreshTokenTtl?: boolean
-    organizationId?: boolean
-    createdById?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+    id?: boolean;
+    clientId?: boolean;
+    clientSecretHash?: boolean;
+    type?: boolean;
+    status?: boolean;
+    name?: boolean;
+    description?: boolean;
+    logoUrl?: boolean;
+    websiteUrl?: boolean;
+    privacyPolicyUrl?: boolean;
+    tosUrl?: boolean;
+    redirectUris?: boolean;
+    allowedScopes?: boolean;
+    grantTypes?: boolean;
+    responseTypes?: boolean;
+    tokenEndpointAuthMethod?: boolean;
+    rateLimitRpm?: boolean;
+    accessTokenTtl?: boolean;
+    refreshTokenTtl?: boolean;
+    organizationId?: boolean;
+    createdById?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["oAuthClient"]
->
+>;
 
 export type OAuthClientSelectScalar = {
-  id?: boolean
-  clientId?: boolean
-  clientSecretHash?: boolean
-  type?: boolean
-  status?: boolean
-  name?: boolean
-  description?: boolean
-  logoUrl?: boolean
-  websiteUrl?: boolean
-  privacyPolicyUrl?: boolean
-  tosUrl?: boolean
-  redirectUris?: boolean
-  allowedScopes?: boolean
-  grantTypes?: boolean
-  responseTypes?: boolean
-  tokenEndpointAuthMethod?: boolean
-  rateLimitRpm?: boolean
-  accessTokenTtl?: boolean
-  refreshTokenTtl?: boolean
-  organizationId?: boolean
-  createdById?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-}
+  id?: boolean;
+  clientId?: boolean;
+  clientSecretHash?: boolean;
+  type?: boolean;
+  status?: boolean;
+  name?: boolean;
+  description?: boolean;
+  logoUrl?: boolean;
+  websiteUrl?: boolean;
+  privacyPolicyUrl?: boolean;
+  tosUrl?: boolean;
+  redirectUris?: boolean;
+  allowedScopes?: boolean;
+  grantTypes?: boolean;
+  responseTypes?: boolean;
+  tokenEndpointAuthMethod?: boolean;
+  rateLimitRpm?: boolean;
+  accessTokenTtl?: boolean;
+  refreshTokenTtl?: boolean;
+  organizationId?: boolean;
+  createdById?: boolean;
+  createdAt?: boolean;
+  updatedAt?: boolean;
+};
 
 export type OAuthClientOmit<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
   | "id"
   | "clientId"
@@ -1862,93 +1666,83 @@ export type OAuthClientOmit<
   | "createdAt"
   | "updatedAt",
   ExtArgs["result"]["oAuthClient"]
->
+>;
 export type OAuthClientInclude<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
-  authorizations?: boolean | Prisma.OAuthClient$authorizationsArgs<ExtArgs>
-  accessTokens?: boolean | Prisma.OAuthClient$accessTokensArgs<ExtArgs>
-  _count?: boolean | Prisma.OAuthClientCountOutputTypeDefaultArgs<ExtArgs>
-}
+  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>;
+  authorizations?: boolean | Prisma.OAuthClient$authorizationsArgs<ExtArgs>;
+  accessTokens?: boolean | Prisma.OAuthClient$accessTokensArgs<ExtArgs>;
+  _count?: boolean | Prisma.OAuthClientCountOutputTypeDefaultArgs<ExtArgs>;
+};
 export type OAuthClientIncludeCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
-}
+  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>;
+};
 export type OAuthClientIncludeUpdateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
-}
+  organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>;
+};
 
 export type $OAuthClientPayload<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
-  name: "OAuthClient"
+  name: "OAuthClient";
   objects: {
-    organization: Prisma.$OrganizationPayload<ExtArgs>
-    authorizations: Prisma.$OAuthAuthorizationPayload<ExtArgs>[]
-    accessTokens: Prisma.$OAuthAccessTokenPayload<ExtArgs>[]
-  }
+    organization: Prisma.$OrganizationPayload<ExtArgs>;
+    authorizations: Prisma.$OAuthAuthorizationPayload<ExtArgs>[];
+    accessTokens: Prisma.$OAuthAccessTokenPayload<ExtArgs>[];
+  };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
-      id: string
-      clientId: string
-      clientSecretHash: string | null
-      type: $Enums.OAuthClientType
-      status: $Enums.OAuthClientStatus
-      name: string
-      description: string | null
-      logoUrl: string | null
-      websiteUrl: string | null
-      privacyPolicyUrl: string | null
-      tosUrl: string | null
-      redirectUris: string[]
-      allowedScopes: string[]
-      grantTypes: string[]
-      responseTypes: string[]
-      tokenEndpointAuthMethod: string
-      rateLimitRpm: number
-      accessTokenTtl: number
-      refreshTokenTtl: number
-      organizationId: string
-      createdById: string | null
-      createdAt: Date
-      updatedAt: Date
+      id: string;
+      clientId: string;
+      clientSecretHash: string | null;
+      type: $Enums.OAuthClientType;
+      status: $Enums.OAuthClientStatus;
+      name: string;
+      description: string | null;
+      logoUrl: string | null;
+      websiteUrl: string | null;
+      privacyPolicyUrl: string | null;
+      tosUrl: string | null;
+      redirectUris: string[];
+      allowedScopes: string[];
+      grantTypes: string[];
+      responseTypes: string[];
+      tokenEndpointAuthMethod: string;
+      rateLimitRpm: number;
+      accessTokenTtl: number;
+      refreshTokenTtl: number;
+      organizationId: string;
+      createdById: string | null;
+      createdAt: Date;
+      updatedAt: Date;
     },
     ExtArgs["result"]["oAuthClient"]
-  >
-  composites: {}
-}
+  >;
+  composites: {};
+};
 
-export type OAuthClientGetPayload<
-  S extends boolean | null | undefined | OAuthClientDefaultArgs,
-> = runtime.Types.Result.GetResult<Prisma.$OAuthClientPayload, S>
+export type OAuthClientGetPayload<S extends boolean | null | undefined | OAuthClientDefaultArgs> =
+  runtime.Types.Result.GetResult<Prisma.$OAuthClientPayload, S>;
 
 export type OAuthClientCountArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = Omit<
-  OAuthClientFindManyArgs,
-  "select" | "include" | "distinct" | "omit"
-> & {
-  select?: OAuthClientCountAggregateInputType | true
-}
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = Omit<OAuthClientFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+  select?: OAuthClientCountAggregateInputType | true;
+};
 
 export interface OAuthClientDelegate<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
   [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>["model"]["OAuthClient"]
-    meta: { name: "OAuthClient" }
-  }
+    types: Prisma.TypeMap<ExtArgs>["model"]["OAuthClient"];
+    meta: { name: "OAuthClient" };
+  };
   /**
    * Find zero or one OAuthClient that matches the filter.
    * @param {OAuthClientFindUniqueArgs} args - Arguments to find a OAuthClient
@@ -1961,7 +1755,7 @@ export interface OAuthClientDelegate<
    * })
    */
   findUnique<T extends OAuthClientFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, OAuthClientFindUniqueArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthClientFindUniqueArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -1972,7 +1766,7 @@ export interface OAuthClientDelegate<
     null,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Find one OAuthClient that matches the filter or throw an error with `error.code='P2025'`
@@ -1987,7 +1781,7 @@ export interface OAuthClientDelegate<
    * })
    */
   findUniqueOrThrow<T extends OAuthClientFindUniqueOrThrowArgs>(
-    args: Prisma.SelectSubset<T, OAuthClientFindUniqueOrThrowArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthClientFindUniqueOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -1998,7 +1792,7 @@ export interface OAuthClientDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Find the first OAuthClient that matches the filter.
@@ -2014,7 +1808,7 @@ export interface OAuthClientDelegate<
    * })
    */
   findFirst<T extends OAuthClientFindFirstArgs>(
-    args?: Prisma.SelectSubset<T, OAuthClientFindFirstArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, OAuthClientFindFirstArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2025,7 +1819,7 @@ export interface OAuthClientDelegate<
     null,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Find the first OAuthClient that matches the filter or
@@ -2042,7 +1836,7 @@ export interface OAuthClientDelegate<
    * })
    */
   findFirstOrThrow<T extends OAuthClientFindFirstOrThrowArgs>(
-    args?: Prisma.SelectSubset<T, OAuthClientFindFirstOrThrowArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, OAuthClientFindFirstOrThrowArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2053,7 +1847,7 @@ export interface OAuthClientDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Find zero or more OAuthClients that matches the filter.
@@ -2072,7 +1866,7 @@ export interface OAuthClientDelegate<
    *
    */
   findMany<T extends OAuthClientFindManyArgs>(
-    args?: Prisma.SelectSubset<T, OAuthClientFindManyArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, OAuthClientFindManyArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2080,7 +1874,7 @@ export interface OAuthClientDelegate<
       "findMany",
       GlobalOmitOptions
     >
-  >
+  >;
 
   /**
    * Create a OAuthClient.
@@ -2095,7 +1889,7 @@ export interface OAuthClientDelegate<
    *
    */
   create<T extends OAuthClientCreateArgs>(
-    args: Prisma.SelectSubset<T, OAuthClientCreateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthClientCreateArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2106,7 +1900,7 @@ export interface OAuthClientDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Create many OAuthClients.
@@ -2121,8 +1915,8 @@ export interface OAuthClientDelegate<
    *
    */
   createMany<T extends OAuthClientCreateManyArgs>(
-    args?: Prisma.SelectSubset<T, OAuthClientCreateManyArgs<ExtArgs>>
-  ): Prisma.PrismaPromise<Prisma.BatchPayload>
+    args?: Prisma.SelectSubset<T, OAuthClientCreateManyArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<Prisma.BatchPayload>;
 
   /**
    * Create many OAuthClients and returns the data saved in the database.
@@ -2147,7 +1941,7 @@ export interface OAuthClientDelegate<
    *
    */
   createManyAndReturn<T extends OAuthClientCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, OAuthClientCreateManyAndReturnArgs<ExtArgs>>
+    args?: Prisma.SelectSubset<T, OAuthClientCreateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2155,7 +1949,7 @@ export interface OAuthClientDelegate<
       "createManyAndReturn",
       GlobalOmitOptions
     >
-  >
+  >;
 
   /**
    * Delete a OAuthClient.
@@ -2170,7 +1964,7 @@ export interface OAuthClientDelegate<
    *
    */
   delete<T extends OAuthClientDeleteArgs>(
-    args: Prisma.SelectSubset<T, OAuthClientDeleteArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthClientDeleteArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2181,7 +1975,7 @@ export interface OAuthClientDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Update one OAuthClient.
@@ -2199,7 +1993,7 @@ export interface OAuthClientDelegate<
    *
    */
   update<T extends OAuthClientUpdateArgs>(
-    args: Prisma.SelectSubset<T, OAuthClientUpdateArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthClientUpdateArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2210,7 +2004,7 @@ export interface OAuthClientDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Delete zero or more OAuthClients.
@@ -2225,8 +2019,8 @@ export interface OAuthClientDelegate<
    *
    */
   deleteMany<T extends OAuthClientDeleteManyArgs>(
-    args?: Prisma.SelectSubset<T, OAuthClientDeleteManyArgs<ExtArgs>>
-  ): Prisma.PrismaPromise<Prisma.BatchPayload>
+    args?: Prisma.SelectSubset<T, OAuthClientDeleteManyArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<Prisma.BatchPayload>;
 
   /**
    * Update zero or more OAuthClients.
@@ -2246,8 +2040,8 @@ export interface OAuthClientDelegate<
    *
    */
   updateMany<T extends OAuthClientUpdateManyArgs>(
-    args: Prisma.SelectSubset<T, OAuthClientUpdateManyArgs<ExtArgs>>
-  ): Prisma.PrismaPromise<Prisma.BatchPayload>
+    args: Prisma.SelectSubset<T, OAuthClientUpdateManyArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<Prisma.BatchPayload>;
 
   /**
    * Update zero or more OAuthClients and returns the data updated in the database.
@@ -2278,7 +2072,7 @@ export interface OAuthClientDelegate<
    *
    */
   updateManyAndReturn<T extends OAuthClientUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, OAuthClientUpdateManyAndReturnArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthClientUpdateManyAndReturnArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2286,7 +2080,7 @@ export interface OAuthClientDelegate<
       "updateManyAndReturn",
       GlobalOmitOptions
     >
-  >
+  >;
 
   /**
    * Create or update one OAuthClient.
@@ -2306,7 +2100,7 @@ export interface OAuthClientDelegate<
    * })
    */
   upsert<T extends OAuthClientUpsertArgs>(
-    args: Prisma.SelectSubset<T, OAuthClientUpsertArgs<ExtArgs>>
+    args: Prisma.SelectSubset<T, OAuthClientUpsertArgs<ExtArgs>>,
   ): Prisma.Prisma__OAuthClientClient<
     runtime.Types.Result.GetResult<
       Prisma.$OAuthClientPayload<ExtArgs>,
@@ -2317,7 +2111,7 @@ export interface OAuthClientDelegate<
     never,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
 
   /**
    * Count the number of OAuthClients.
@@ -2333,14 +2127,14 @@ export interface OAuthClientDelegate<
    * })
    **/
   count<T extends OAuthClientCountArgs>(
-    args?: Prisma.Subset<T, OAuthClientCountArgs>
+    args?: Prisma.Subset<T, OAuthClientCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<"select", any>
       ? T["select"] extends true
         ? number
         : Prisma.GetScalarType<T["select"], OAuthClientCountAggregateOutputType>
       : number
-  >
+  >;
 
   /**
    * Allows you to perform aggregations operations on a OAuthClient.
@@ -2367,8 +2161,8 @@ export interface OAuthClientDelegate<
    * })
    **/
   aggregate<T extends OAuthClientAggregateArgs>(
-    args: Prisma.Subset<T, OAuthClientAggregateArgs>
-  ): Prisma.PrismaPromise<GetOAuthClientAggregateType<T>>
+    args: Prisma.Subset<T, OAuthClientAggregateArgs>,
+  ): Prisma.PrismaPromise<GetOAuthClientAggregateType<T>>;
 
   /**
    * Group by OAuthClient.
@@ -2413,12 +2207,7 @@ export interface OAuthClientDelegate<
               ? never
               : P extends string
                 ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                : [
-                    Error,
-                    "Field ",
-                    P,
-                    ` in "having" needs to be provided in "by"`,
-                  ]
+                : [Error, "Field ", P, ` in "having" needs to be provided in "by"`];
           }[HavingFields]
         : "take" extends Prisma.Keys<T>
           ? "orderBy" extends Prisma.Keys<T>
@@ -2427,7 +2216,7 @@ export interface OAuthClientDelegate<
               : {
                   [P in OrderFields]: P extends ByFields
                     ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields]
             : 'Error: If you provide "take", you also need to provide "orderBy"'
           : "skip" extends Prisma.Keys<T>
@@ -2437,7 +2226,7 @@ export interface OAuthClientDelegate<
                 : {
                     [P in OrderFields]: P extends ByFields
                       ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields]
               : 'Error: If you provide "skip", you also need to provide "orderBy"'
             : ByValid extends Prisma.True
@@ -2445,18 +2234,15 @@ export interface OAuthClientDelegate<
               : {
                   [P in OrderFields]: P extends ByFields
                     ? never
-                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                 }[OrderFields],
   >(
-    args: Prisma.SubsetIntersection<T, OAuthClientGroupByArgs, OrderByArg> &
-      InputErrors
-  ): {} extends InputErrors
-    ? GetOAuthClientGroupByPayload<T>
-    : Prisma.PrismaPromise<InputErrors>
+    args: Prisma.SubsetIntersection<T, OAuthClientGroupByArgs, OrderByArg> & InputErrors,
+  ): {} extends InputErrors ? GetOAuthClientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
   /**
    * Fields of the OAuthClient model
    */
-  readonly fields: OAuthClientFieldRefs
+  readonly fields: OAuthClientFieldRefs;
 }
 
 /**
@@ -2468,13 +2254,12 @@ export interface OAuthClientDelegate<
 export interface Prisma__OAuthClientClient<
   T,
   Null = never,
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
-  readonly [Symbol.toStringTag]: "PrismaPromise"
+  readonly [Symbol.toStringTag]: "PrismaPromise";
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>,
   ): Prisma.Prisma__OrganizationClient<
     | runtime.Types.Result.GetResult<
         Prisma.$OrganizationPayload<ExtArgs>,
@@ -2486,9 +2271,9 @@ export interface Prisma__OAuthClientClient<
     Null,
     ExtArgs,
     GlobalOmitOptions
-  >
+  >;
   authorizations<T extends Prisma.OAuthClient$authorizationsArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.OAuthClient$authorizationsArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.OAuthClient$authorizationsArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$OAuthAuthorizationPayload<ExtArgs>,
@@ -2497,9 +2282,9 @@ export interface Prisma__OAuthClientClient<
         GlobalOmitOptions
       >
     | Null
-  >
+  >;
   accessTokens<T extends Prisma.OAuthClient$accessTokensArgs<ExtArgs> = {}>(
-    args?: Prisma.Subset<T, Prisma.OAuthClient$accessTokensArgs<ExtArgs>>
+    args?: Prisma.Subset<T, Prisma.OAuthClient$accessTokensArgs<ExtArgs>>,
   ): Prisma.PrismaPromise<
     | runtime.Types.Result.GetResult<
         Prisma.$OAuthAccessTokenPayload<ExtArgs>,
@@ -2508,7 +2293,7 @@ export interface Prisma__OAuthClientClient<
         GlobalOmitOptions
       >
     | Null
-  >
+  >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2516,64 +2301,53 @@ export interface Prisma__OAuthClientClient<
    * @returns A Promise for the completion of which ever callback is executed.
    */
   then<TResult1 = T, TResult2 = never>(
-    onfulfilled?:
-      | ((value: T) => TResult1 | PromiseLike<TResult1>)
-      | undefined
-      | null,
-    onrejected?:
-      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-      | undefined
-      | null
-  ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>
+    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
+  ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
   /**
    * Attaches a callback for only the rejection of the Promise.
    * @param onrejected The callback to execute when the Promise is rejected.
    * @returns A Promise for the completion of the callback.
    */
   catch<TResult = never>(
-    onrejected?:
-      | ((reason: any) => TResult | PromiseLike<TResult>)
-      | undefined
-      | null
-  ): runtime.Types.Utils.JsPromise<T | TResult>
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
+  ): runtime.Types.Utils.JsPromise<T | TResult>;
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
    * resolved value cannot be modified from the callback.
    * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
    * @returns A Promise for the completion of the callback.
    */
-  finally(
-    onfinally?: (() => void) | undefined | null
-  ): runtime.Types.Utils.JsPromise<T>
+  finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
 }
 
 /**
  * Fields of the OAuthClient model
  */
 export interface OAuthClientFieldRefs {
-  readonly id: Prisma.FieldRef<"OAuthClient", "String">
-  readonly clientId: Prisma.FieldRef<"OAuthClient", "String">
-  readonly clientSecretHash: Prisma.FieldRef<"OAuthClient", "String">
-  readonly type: Prisma.FieldRef<"OAuthClient", "OAuthClientType">
-  readonly status: Prisma.FieldRef<"OAuthClient", "OAuthClientStatus">
-  readonly name: Prisma.FieldRef<"OAuthClient", "String">
-  readonly description: Prisma.FieldRef<"OAuthClient", "String">
-  readonly logoUrl: Prisma.FieldRef<"OAuthClient", "String">
-  readonly websiteUrl: Prisma.FieldRef<"OAuthClient", "String">
-  readonly privacyPolicyUrl: Prisma.FieldRef<"OAuthClient", "String">
-  readonly tosUrl: Prisma.FieldRef<"OAuthClient", "String">
-  readonly redirectUris: Prisma.FieldRef<"OAuthClient", "String[]">
-  readonly allowedScopes: Prisma.FieldRef<"OAuthClient", "String[]">
-  readonly grantTypes: Prisma.FieldRef<"OAuthClient", "String[]">
-  readonly responseTypes: Prisma.FieldRef<"OAuthClient", "String[]">
-  readonly tokenEndpointAuthMethod: Prisma.FieldRef<"OAuthClient", "String">
-  readonly rateLimitRpm: Prisma.FieldRef<"OAuthClient", "Int">
-  readonly accessTokenTtl: Prisma.FieldRef<"OAuthClient", "Int">
-  readonly refreshTokenTtl: Prisma.FieldRef<"OAuthClient", "Int">
-  readonly organizationId: Prisma.FieldRef<"OAuthClient", "String">
-  readonly createdById: Prisma.FieldRef<"OAuthClient", "String">
-  readonly createdAt: Prisma.FieldRef<"OAuthClient", "DateTime">
-  readonly updatedAt: Prisma.FieldRef<"OAuthClient", "DateTime">
+  readonly id: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly clientId: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly clientSecretHash: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly type: Prisma.FieldRef<"OAuthClient", "OAuthClientType">;
+  readonly status: Prisma.FieldRef<"OAuthClient", "OAuthClientStatus">;
+  readonly name: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly description: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly logoUrl: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly websiteUrl: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly privacyPolicyUrl: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly tosUrl: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly redirectUris: Prisma.FieldRef<"OAuthClient", "String[]">;
+  readonly allowedScopes: Prisma.FieldRef<"OAuthClient", "String[]">;
+  readonly grantTypes: Prisma.FieldRef<"OAuthClient", "String[]">;
+  readonly responseTypes: Prisma.FieldRef<"OAuthClient", "String[]">;
+  readonly tokenEndpointAuthMethod: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly rateLimitRpm: Prisma.FieldRef<"OAuthClient", "Int">;
+  readonly accessTokenTtl: Prisma.FieldRef<"OAuthClient", "Int">;
+  readonly refreshTokenTtl: Prisma.FieldRef<"OAuthClient", "Int">;
+  readonly organizationId: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly createdById: Prisma.FieldRef<"OAuthClient", "String">;
+  readonly createdAt: Prisma.FieldRef<"OAuthClient", "DateTime">;
+  readonly updatedAt: Prisma.FieldRef<"OAuthClient", "DateTime">;
 }
 
 // Custom InputTypes
@@ -2581,75 +2355,72 @@ export interface OAuthClientFieldRefs {
  * OAuthClient findUnique
  */
 export type OAuthClientFindUniqueArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthClient to fetch.
    */
-  where: Prisma.OAuthClientWhereUniqueInput
-}
+  where: Prisma.OAuthClientWhereUniqueInput;
+};
 
 /**
  * OAuthClient findUniqueOrThrow
  */
 export type OAuthClientFindUniqueOrThrowArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthClient to fetch.
    */
-  where: Prisma.OAuthClientWhereUniqueInput
-}
+  where: Prisma.OAuthClientWhereUniqueInput;
+};
 
 /**
  * OAuthClient findFirst
  */
 export type OAuthClientFindFirstArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthClient to fetch.
    */
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    *
@@ -2657,58 +2428,55 @@ export type OAuthClientFindFirstArgs<
    */
   orderBy?:
     | Prisma.OAuthClientOrderByWithRelationInput
-    | Prisma.OAuthClientOrderByWithRelationInput[]
+    | Prisma.OAuthClientOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
    * Sets the position for searching for OAuthClients.
    */
-  cursor?: Prisma.OAuthClientWhereUniqueInput
+  cursor?: Prisma.OAuthClientWhereUniqueInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Take `±n` OAuthClients from the position of the cursor.
    */
-  take?: number
+  take?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Skip the first `n` OAuthClients.
    */
-  skip?: number
+  skip?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    *
    * Filter by unique combinations of OAuthClients.
    */
-  distinct?:
-    | Prisma.OAuthClientScalarFieldEnum
-    | Prisma.OAuthClientScalarFieldEnum[]
-}
+  distinct?: Prisma.OAuthClientScalarFieldEnum | Prisma.OAuthClientScalarFieldEnum[];
+};
 
 /**
  * OAuthClient findFirstOrThrow
  */
 export type OAuthClientFindFirstOrThrowArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthClient to fetch.
    */
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    *
@@ -2716,58 +2484,55 @@ export type OAuthClientFindFirstOrThrowArgs<
    */
   orderBy?:
     | Prisma.OAuthClientOrderByWithRelationInput
-    | Prisma.OAuthClientOrderByWithRelationInput[]
+    | Prisma.OAuthClientOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
    * Sets the position for searching for OAuthClients.
    */
-  cursor?: Prisma.OAuthClientWhereUniqueInput
+  cursor?: Prisma.OAuthClientWhereUniqueInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Take `±n` OAuthClients from the position of the cursor.
    */
-  take?: number
+  take?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Skip the first `n` OAuthClients.
    */
-  skip?: number
+  skip?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    *
    * Filter by unique combinations of OAuthClients.
    */
-  distinct?:
-    | Prisma.OAuthClientScalarFieldEnum
-    | Prisma.OAuthClientScalarFieldEnum[]
-}
+  distinct?: Prisma.OAuthClientScalarFieldEnum | Prisma.OAuthClientScalarFieldEnum[];
+};
 
 /**
  * OAuthClient findMany
  */
 export type OAuthClientFindManyArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * Filter, which OAuthClients to fetch.
    */
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    *
@@ -2775,136 +2540,123 @@ export type OAuthClientFindManyArgs<
    */
   orderBy?:
     | Prisma.OAuthClientOrderByWithRelationInput
-    | Prisma.OAuthClientOrderByWithRelationInput[]
+    | Prisma.OAuthClientOrderByWithRelationInput[];
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    *
    * Sets the position for listing OAuthClients.
    */
-  cursor?: Prisma.OAuthClientWhereUniqueInput
+  cursor?: Prisma.OAuthClientWhereUniqueInput;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Take `±n` OAuthClients from the position of the cursor.
    */
-  take?: number
+  take?: number;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    *
    * Skip the first `n` OAuthClients.
    */
-  skip?: number
-  distinct?:
-    | Prisma.OAuthClientScalarFieldEnum
-    | Prisma.OAuthClientScalarFieldEnum[]
-}
+  skip?: number;
+  distinct?: Prisma.OAuthClientScalarFieldEnum | Prisma.OAuthClientScalarFieldEnum[];
+};
 
 /**
  * OAuthClient create
  */
 export type OAuthClientCreateArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * The data needed to create a OAuthClient.
    */
-  data: Prisma.XOR<
-    Prisma.OAuthClientCreateInput,
-    Prisma.OAuthClientUncheckedCreateInput
-  >
-}
+  data: Prisma.XOR<Prisma.OAuthClientCreateInput, Prisma.OAuthClientUncheckedCreateInput>;
+};
 
 /**
  * OAuthClient createMany
  */
 export type OAuthClientCreateManyArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to create many OAuthClients.
    */
-  data: Prisma.OAuthClientCreateManyInput | Prisma.OAuthClientCreateManyInput[]
-  skipDuplicates?: boolean
-}
+  data: Prisma.OAuthClientCreateManyInput | Prisma.OAuthClientCreateManyInput[];
+  skipDuplicates?: boolean;
+};
 
 /**
  * OAuthClient createManyAndReturn
  */
 export type OAuthClientCreateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelectCreateManyAndReturn<ExtArgs> | null
+  select?: Prisma.OAuthClientSelectCreateManyAndReturn<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * The data used to create many OAuthClients.
    */
-  data: Prisma.OAuthClientCreateManyInput | Prisma.OAuthClientCreateManyInput[]
-  skipDuplicates?: boolean
+  data: Prisma.OAuthClientCreateManyInput | Prisma.OAuthClientCreateManyInput[];
+  skipDuplicates?: boolean;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientIncludeCreateManyAndReturn<ExtArgs> | null
-}
+  include?: Prisma.OAuthClientIncludeCreateManyAndReturn<ExtArgs> | null;
+};
 
 /**
  * OAuthClient update
  */
 export type OAuthClientUpdateArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * The data needed to update a OAuthClient.
    */
-  data: Prisma.XOR<
-    Prisma.OAuthClientUpdateInput,
-    Prisma.OAuthClientUncheckedUpdateInput
-  >
+  data: Prisma.XOR<Prisma.OAuthClientUpdateInput, Prisma.OAuthClientUncheckedUpdateInput>;
   /**
    * Choose, which OAuthClient to update.
    */
-  where: Prisma.OAuthClientWhereUniqueInput
-}
+  where: Prisma.OAuthClientWhereUniqueInput;
+};
 
 /**
  * OAuthClient updateMany
  */
 export type OAuthClientUpdateManyArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to update OAuthClients.
@@ -2912,213 +2664,196 @@ export type OAuthClientUpdateManyArgs<
   data: Prisma.XOR<
     Prisma.OAuthClientUpdateManyMutationInput,
     Prisma.OAuthClientUncheckedUpdateManyInput
-  >
+  >;
   /**
    * Filter which OAuthClients to update
    */
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   /**
    * Limit how many OAuthClients to update.
    */
-  limit?: number
-}
+  limit?: number;
+};
 
 /**
  * OAuthClient updateManyAndReturn
  */
 export type OAuthClientUpdateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelectUpdateManyAndReturn<ExtArgs> | null
+  select?: Prisma.OAuthClientSelectUpdateManyAndReturn<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * The data used to update OAuthClients.
    */
   data: Prisma.XOR<
     Prisma.OAuthClientUpdateManyMutationInput,
     Prisma.OAuthClientUncheckedUpdateManyInput
-  >
+  >;
   /**
    * Filter which OAuthClients to update
    */
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   /**
    * Limit how many OAuthClients to update.
    */
-  limit?: number
+  limit?: number;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientIncludeUpdateManyAndReturn<ExtArgs> | null
-}
+  include?: Prisma.OAuthClientIncludeUpdateManyAndReturn<ExtArgs> | null;
+};
 
 /**
  * OAuthClient upsert
  */
 export type OAuthClientUpsertArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * The filter to search for the OAuthClient to update in case it exists.
    */
-  where: Prisma.OAuthClientWhereUniqueInput
+  where: Prisma.OAuthClientWhereUniqueInput;
   /**
    * In case the OAuthClient found by the `where` argument doesn't exist, create a new OAuthClient with this data.
    */
-  create: Prisma.XOR<
-    Prisma.OAuthClientCreateInput,
-    Prisma.OAuthClientUncheckedCreateInput
-  >
+  create: Prisma.XOR<Prisma.OAuthClientCreateInput, Prisma.OAuthClientUncheckedCreateInput>;
   /**
    * In case the OAuthClient was found with the provided `where` argument, update it with this data.
    */
-  update: Prisma.XOR<
-    Prisma.OAuthClientUpdateInput,
-    Prisma.OAuthClientUncheckedUpdateInput
-  >
-}
+  update: Prisma.XOR<Prisma.OAuthClientUpdateInput, Prisma.OAuthClientUncheckedUpdateInput>;
+};
 
 /**
  * OAuthClient delete
  */
 export type OAuthClientDeleteArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
   /**
    * Filter which OAuthClient to delete.
    */
-  where: Prisma.OAuthClientWhereUniqueInput
-}
+  where: Prisma.OAuthClientWhereUniqueInput;
+};
 
 /**
  * OAuthClient deleteMany
  */
 export type OAuthClientDeleteManyArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which OAuthClients to delete
    */
-  where?: Prisma.OAuthClientWhereInput
+  where?: Prisma.OAuthClientWhereInput;
   /**
    * Limit how many OAuthClients to delete.
    */
-  limit?: number
-}
+  limit?: number;
+};
 
 /**
  * OAuthClient.authorizations
  */
 export type OAuthClient$authorizationsArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAuthorization
    */
-  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null
+  select?: Prisma.OAuthAuthorizationSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAuthorization
    */
-  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAuthorizationOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null
-  where?: Prisma.OAuthAuthorizationWhereInput
+  include?: Prisma.OAuthAuthorizationInclude<ExtArgs> | null;
+  where?: Prisma.OAuthAuthorizationWhereInput;
   orderBy?:
     | Prisma.OAuthAuthorizationOrderByWithRelationInput
-    | Prisma.OAuthAuthorizationOrderByWithRelationInput[]
-  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?:
-    | Prisma.OAuthAuthorizationScalarFieldEnum
-    | Prisma.OAuthAuthorizationScalarFieldEnum[]
-}
+    | Prisma.OAuthAuthorizationOrderByWithRelationInput[];
+  cursor?: Prisma.OAuthAuthorizationWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.OAuthAuthorizationScalarFieldEnum | Prisma.OAuthAuthorizationScalarFieldEnum[];
+};
 
 /**
  * OAuthClient.accessTokens
  */
 export type OAuthClient$accessTokensArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthAccessToken
    */
-  select?: Prisma.OAuthAccessTokenSelect<ExtArgs> | null
+  select?: Prisma.OAuthAccessTokenSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthAccessToken
    */
-  omit?: Prisma.OAuthAccessTokenOmit<ExtArgs> | null
+  omit?: Prisma.OAuthAccessTokenOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAccessTokenInclude<ExtArgs> | null
-  where?: Prisma.OAuthAccessTokenWhereInput
+  include?: Prisma.OAuthAccessTokenInclude<ExtArgs> | null;
+  where?: Prisma.OAuthAccessTokenWhereInput;
   orderBy?:
     | Prisma.OAuthAccessTokenOrderByWithRelationInput
-    | Prisma.OAuthAccessTokenOrderByWithRelationInput[]
-  cursor?: Prisma.OAuthAccessTokenWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?:
-    | Prisma.OAuthAccessTokenScalarFieldEnum
-    | Prisma.OAuthAccessTokenScalarFieldEnum[]
-}
+    | Prisma.OAuthAccessTokenOrderByWithRelationInput[];
+  cursor?: Prisma.OAuthAccessTokenWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.OAuthAccessTokenScalarFieldEnum | Prisma.OAuthAccessTokenScalarFieldEnum[];
+};
 
 /**
  * OAuthClient without action
  */
 export type OAuthClientDefaultArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the OAuthClient
    */
-  select?: Prisma.OAuthClientSelect<ExtArgs> | null
+  select?: Prisma.OAuthClientSelect<ExtArgs> | null;
   /**
    * Omit specific fields from the OAuthClient
    */
-  omit?: Prisma.OAuthClientOmit<ExtArgs> | null
+  omit?: Prisma.OAuthClientOmit<ExtArgs> | null;
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthClientInclude<ExtArgs> | null
-}
+  include?: Prisma.OAuthClientInclude<ExtArgs> | null;
+};

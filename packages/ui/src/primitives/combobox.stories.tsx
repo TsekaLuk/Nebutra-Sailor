@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { within, userEvent, expect } from "@storybook/test";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
+import { useState } from "react";
 import { Combobox } from "./combobox";
 import { CommandList } from "./command";
 
@@ -81,11 +81,7 @@ export const Default: Story = {
 export const Uncontrolled: Story = {
   render: () => (
     <div className="w-64">
-      <Combobox
-        options={FRAMEWORKS}
-        defaultValue="next"
-        placeholder="Select framework..."
-      />
+      <Combobox options={FRAMEWORKS} defaultValue="next" placeholder="Select framework..." />
     </div>
   ),
 };

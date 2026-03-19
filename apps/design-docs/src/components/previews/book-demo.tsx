@@ -1,4 +1,4 @@
-import { Book } from "@nebutra/ui/primitives"
+import { Book } from "@nebutra/ui/primitives";
 
 export function BookDemo() {
   return (
@@ -35,5 +35,5 @@ export function BookDemo() {
         width={{ sm: 140, md: 180 }}
       />
     </div>
-  )
+  );
 }

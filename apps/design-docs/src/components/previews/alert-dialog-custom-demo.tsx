@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
 import {
   AlertDialog,
-  AlertDialogTrigger,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@nebutra/ui/primitives"
-import { Button } from "@nebutra/ui/primitives"
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  Button,
+} from "@nebutra/ui/primitives";
 
 export function AlertDialogCustomDemo() {
   return (
@@ -28,11 +28,9 @@ export function AlertDialogCustomDemo() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Keep Item</AlertDialogCancel>
-          <AlertDialogAction onClick={() => console.warn("Remove items")}>
-            Remove
-          </AlertDialogAction>
+          <AlertDialogAction onClick={() => console.warn("Remove items")}>Remove</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }

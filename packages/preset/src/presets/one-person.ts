@@ -3,8 +3,7 @@ import type { PresetDefinition } from "../config";
 export const onePerson: PresetDefinition = {
   id: "one-person",
   name: "One-Person Company",
-  description:
-    "Full-stack solo founder setup with billing, AI, blog, and admin",
+  description: "Full-stack solo founder setup with billing, AI, blog, and admin",
   apps: {
     web: true,
     "landing-page": true,

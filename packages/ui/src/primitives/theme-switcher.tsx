@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
-import { Monitor, Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
+import { Monitor, Moon, Sun } from "lucide-react";
+import type * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cn } from "../utils/cn";
 
 export type ThemeSwitcherValue = "light" | "dark" | "system";
@@ -77,8 +77,7 @@ export function ThemeSwitcher({
   icons,
   labels,
 }: ThemeSwitcherProps) {
-  const [internalValue, setInternalValue] =
-    useState<ThemeSwitcherValue>(defaultValue);
+  const [internalValue, setInternalValue] = useState<ThemeSwitcherValue>(defaultValue);
   const [mounted, setMounted] = useState(false);
 
   const currentValue = value ?? internalValue;
@@ -91,22 +90,22 @@ export function ThemeSwitcher({
     icon: React.ElementType;
     label: string;
   }> = [
-      {
-        key: "system",
-        icon: mergedIcons.system,
-        label: mergedLabels.system,
-      },
-      {
-        key: "light",
-        icon: mergedIcons.light,
-        label: mergedLabels.light,
-      },
-      {
-        key: "dark",
-        icon: mergedIcons.dark,
-        label: mergedLabels.dark,
-      },
-    ];
+    {
+      key: "system",
+      icon: mergedIcons.system,
+      label: mergedLabels.system,
+    },
+    {
+      key: "light",
+      icon: mergedIcons.light,
+      label: mergedLabels.light,
+    },
+    {
+      key: "dark",
+      icon: mergedIcons.dark,
+      label: mergedLabels.dark,
+    },
+  ];
 
   const handleThemeClick = useCallback(
     (themeKey: ThemeSwitcherValue) => {
@@ -115,7 +114,7 @@ export function ThemeSwitcher({
       }
       onChange?.(themeKey);
     },
-    [value, onChange]
+    [value, onChange],
   );
 
   // Prevent hydration mismatch
@@ -128,7 +127,7 @@ export function ThemeSwitcher({
       <div
         className={cn(
           "relative isolate flex h-7 rounded-full bg-background p-1 ring-1 ring-border",
-          className
+          className,
         )}
       >
         {themes.map(({ key }) => (
@@ -142,7 +141,7 @@ export function ThemeSwitcher({
     <div
       className={cn(
         "relative isolate flex h-7 rounded-full bg-background p-1 ring-1 ring-border",
-        className
+        className,
       )}
     >
       {themes.map(({ key, icon: IconRaw, label }) => {
@@ -168,7 +167,7 @@ export function ThemeSwitcher({
             <Icon
               className={cn(
                 "relative z-10 m-auto h-3.5 w-3.5",
-                isActive ? "text-foreground" : "text-muted-foreground"
+                isActive ? "text-foreground" : "text-muted-foreground",
               )}
             />
           </button>

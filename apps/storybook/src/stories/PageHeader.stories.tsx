@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { PageHeader } from "@nebutra/ui/layout";
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof PageHeader> = {
   title: "Layout/PageHeader",

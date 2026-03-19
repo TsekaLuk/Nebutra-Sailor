@@ -1,11 +1,6 @@
-"use client"
+"use client";
 
-import {
-  HeroCard,
-  HeroCardHeader,
-  HeroCardBody,
-  HeroCardFooter,
-} from "@nebutra/ui/primitives"
+import { HeroCard, HeroCardBody, HeroCardFooter, HeroCardHeader } from "@nebutra/ui/primitives";
 
 export function HeroCardDemo() {
   return (
@@ -19,10 +14,8 @@ export function HeroCardDemo() {
         </p>
       </HeroCardBody>
       <HeroCardFooter>
-        <button className="text-sm text-primary hover:underline">
-          Learn more →
-        </button>
+        <button className="text-sm text-primary hover:underline">Learn more →</button>
       </HeroCardFooter>
     </HeroCard>
-  )
+  );
 }

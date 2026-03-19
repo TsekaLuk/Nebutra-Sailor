@@ -1,12 +1,7 @@
-import React from "react";
+import type React from "react";
 
 const ErrorIcon = () => (
-  <svg
-    height="16"
-    strokeLinejoin="round"
-    viewBox="0 0 16 16"
-    width="16"
-  >
+  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -16,12 +11,7 @@ const ErrorIcon = () => (
 );
 
 const ErrorLinkIcon = () => (
-  <svg
-    height="16"
-    strokeLinejoin="round"
-    viewBox="0 0 16 16"
-    width="16"
-  >
+  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -46,10 +36,8 @@ interface ErrorProps {
 export const Error = ({ error, label, size = "medium", children }: ErrorProps) => {
   return (
     <div
-      className={
-        `flex items-center gap-2 text-[var(--ds-red-900)] fill-[var(--ds-red-900)] font-sans
-      ${size === "small" ? "text-[13px] leading-5" : size === "large" ? "text-base" : "text-sm"}`
-      }
+      className={`flex items-center gap-2 text-[var(--ds-red-900)] fill-[var(--ds-red-900)] font-sans
+      ${size === "small" ? "text-[13px] leading-5" : size === "large" ? "text-base" : "text-sm"}`}
       style={{ "--geist-link-color": "var(--ds-red-900)" } as React.CSSProperties}
     >
       <ErrorIcon />

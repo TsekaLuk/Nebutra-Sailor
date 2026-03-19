@@ -1,8 +1,8 @@
-import type { EmbeddingModel, LanguageModel } from "ai"
-import { createOpenRouter } from "@openrouter/ai-sdk-provider"
-import { createOpenAI } from "@ai-sdk/openai"
-import { type ResolvedNebutraAIConfig, resolveApiKey } from "./config.js"
-import { resolveModel } from "./models.js"
+import { createOpenAI } from "@ai-sdk/openai";
+import { createOpenRouter } from "@openrouter/ai-sdk-provider";
+import type { EmbeddingModel, LanguageModel } from "ai";
+import { type ResolvedNebutraAIConfig, resolveApiKey } from "./config.js";
+import { resolveModel } from "./models.js";
 
 /**
  * Creates a language model instance based on the resolved config.
@@ -13,12 +13,9 @@ import { resolveModel } from "./models.js"
  * - "siliconflow"  → @ai-sdk/openai with SiliconFlow baseURL (OpenAI-compatible)
  * - "gateway"      → Vercel AI Gateway via plain model string (OIDC auth)
  */
-export function createModel(
-  modelOrPreset: string,
-  config: ResolvedNebutraAIConfig
-): LanguageModel {
-  const modelId = resolveModel(modelOrPreset)
-  const apiKey = resolveApiKey(config)
+export function createModel(modelOrPreset: string, config: ResolvedNebutraAIConfig): LanguageModel {
+  const modelId = resolveModel(modelOrPreset);
+  const apiKey = resolveApiKey(config);
 
   switch (config.provider) {
     case "openrouter": {
@@ -26,13 +23,13 @@ export function createModel(
         apiKey,
         ...(config.headers ? { headers: config.headers } : {}),
         ...(config.extraBody ? { extraBody: config.extraBody } : {}),
-      })
-      return provider.chat(modelId)
+      });
+      return provider.chat(modelId);
     }
 
     case "openai": {
-      const provider = createOpenAI({ apiKey })
-      return provider(modelId)
+      const provider = createOpenAI({ apiKey });
+      return provider(modelId);
     }
 
     case "siliconflow": {
@@ -41,8 +38,8 @@ export function createModel(
       const provider = createOpenAI({
         apiKey,
         baseURL: "https://api.siliconflow.cn/v1",
-      })
-      return provider(modelId)
+      });
+      return provider(modelId);
     }
 
     case "gateway": {
@@ -51,8 +48,8 @@ export function createModel(
       const provider = createOpenAI({
         apiKey,
         baseURL: "https://ai-gateway.vercel.sh/v1",
-      })
-      return provider(modelId)
+      });
+      return provider(modelId);
     }
   }
 }
@@ -63,21 +60,21 @@ export function createModel(
  */
 export function createEmbeddingModel(
   modelOrPreset: string,
-  config: ResolvedNebutraAIConfig
+  config: ResolvedNebutraAIConfig,
 ): EmbeddingModel {
-  const modelId = resolveModel(modelOrPreset)
-  const apiKey = resolveApiKey(config)
+  const modelId = resolveModel(modelOrPreset);
+  const apiKey = resolveApiKey(config);
 
   if (config.provider !== "openrouter") {
     throw new Error(
-      `[nebutra/ai-sdk] Embedding models are currently only supported with the "openrouter" provider.`
-    )
+      `[nebutra/ai-sdk] Embedding models are currently only supported with the "openrouter" provider.`,
+    );
   }
 
   const provider = createOpenRouter({
     apiKey,
     ...(config.headers ? { headers: config.headers } : {}),
-  })
+  });
 
-  return provider.textEmbeddingModel(modelId)
+  return provider.textEmbeddingModel(modelId);
 }

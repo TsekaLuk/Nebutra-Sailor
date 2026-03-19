@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { Slot } from "../utils/slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../utils/cn";
+import { Slot } from "../utils/slot";
 
 // ─── Variants ─────────────────────────────────────────────────────────────────
 // Heights: tiny=24px sm=32px md=40px lg=48px (Geist-matching)
@@ -22,12 +22,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         tertiary:
@@ -118,9 +115,7 @@ const SHADOW_CLASSES: Record<string, string> = {
   lg: "shadow-lg",
 };
 
-function resolveShadowClass(
-  shadow: boolean | "sm" | "md" | "lg" | undefined,
-): string | undefined {
+function resolveShadowClass(shadow: boolean | "sm" | "md" | "lg" | undefined): string | undefined {
   if (!shadow) return undefined;
   const level = shadow === true ? "md" : shadow;
   return SHADOW_CLASSES[level];
@@ -136,13 +131,7 @@ interface ButtonContentProps {
   children?: React.ReactNode | undefined;
 }
 
-function ButtonContent({
-  loading,
-  prefix,
-  suffix,
-  size,
-  children,
-}: ButtonContentProps) {
+function ButtonContent({ loading, prefix, suffix, size, children }: ButtonContentProps) {
   const iconSizeClass = getIconSizeClass(size);
 
   return (
@@ -166,8 +155,7 @@ function ButtonContent({
 // ─── Button ───────────────────────────────────────────────────────────────────
 
 export interface ButtonProps
-  extends
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "prefix">,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "prefix">,
     VariantProps<typeof buttonVariants> {
   /** Render as a child element (Radix Slot — polymorphic) */
   asChild?: boolean;
@@ -206,11 +194,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         ref={ref}
-        className={cn(
-          buttonVariants({ variant, size, shape }),
-          shadowClass,
-          className,
-        )}
+        className={cn(buttonVariants({ variant, size, shape }), shadowClass, className)}
         disabled={isDisabled}
         aria-busy={loading || undefined}
         {...props}
@@ -218,12 +202,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {asChild ? (
           children
         ) : (
-          <ButtonContent
-            loading={loading}
-            prefix={prefix}
-            suffix={suffix}
-            size={size}
-          >
+          <ButtonContent loading={loading} prefix={prefix} suffix={suffix} size={size}>
             {children}
           </ButtonContent>
         )}
@@ -236,8 +215,7 @@ Button.displayName = "Button";
 // ─── ButtonLink ───────────────────────────────────────────────────────────────
 
 export interface ButtonLinkProps
-  extends
-    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "prefix">,
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "prefix">,
     VariantProps<typeof buttonVariants> {
   /** Icon or element rendered before children */
   prefix?: React.ReactNode;
@@ -287,12 +265,7 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
         {...loadingProps}
         {...props}
       >
-        <ButtonContent
-          loading={loading}
-          prefix={prefix}
-          suffix={suffix}
-          size={size}
-        >
+        <ButtonContent loading={loading} prefix={prefix} suffix={suffix} size={size}>
           {children}
         </ButtonContent>
       </a>

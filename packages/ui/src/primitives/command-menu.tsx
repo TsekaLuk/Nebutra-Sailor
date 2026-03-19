@@ -1,9 +1,17 @@
 "use client";
 
-import * as React from "react";
 import { Dialog } from "@base-ui-components/react/dialog";
+import * as React from "react";
 import { cn } from "../utils/cn";
-import { DialogPortal, DialogOverlay } from "./dialog";
+import type {
+  CommandEmptyProps,
+  CommandGroupProps,
+  CommandInputProps,
+  CommandItemProps,
+  CommandListProps,
+  CommandSeparatorProps,
+  CommandShortcutProps,
+} from "./command";
 import {
   Command,
   CommandEmpty,
@@ -14,15 +22,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "./command";
-import type {
-  CommandEmptyProps,
-  CommandGroupProps,
-  CommandInputProps,
-  CommandItemProps,
-  CommandListProps,
-  CommandSeparatorProps,
-  CommandShortcutProps,
-} from "./command";
+import { DialogOverlay, DialogPortal } from "./dialog";
 
 // =============================================================================
 // Types
@@ -38,8 +38,7 @@ export interface CommandMenuRootProps {
   children?: React.ReactNode;
 }
 
-export interface CommandMenuItemProps
-  extends Omit<CommandItemProps, "onSelect"> {
+export interface CommandMenuItemProps extends Omit<CommandItemProps, "onSelect"> {
   /** Callback invoked when the item is selected (click or Enter) */
   callback?: () => void;
 }
@@ -99,12 +98,7 @@ export const CommandMenuItem = React.forwardRef<
   React.ElementRef<typeof CommandItem>,
   CommandMenuItemProps
 >(({ callback, className, ...props }, ref) => (
-  <CommandItem
-    ref={ref}
-    onSelect={() => callback?.()}
-    className={className}
-    {...props}
-  />
+  <CommandItem ref={ref} onSelect={() => callback?.()} className={className} {...props} />
 ));
 CommandMenuItem.displayName = "CommandMenu.Item";
 

@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
 import {
   Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
   CardBody,
+  CardDescription,
+  CardHeader,
   CardIcon,
-} from "@nebutra/ui/patterns"
+  CardTitle,
+} from "@nebutra/ui/patterns";
 
 export function CardWithIconDemo() {
   return (
@@ -22,5 +22,5 @@ export function CardWithIconDemo() {
         <CardDescription>Deploy in seconds.</CardDescription>
       </CardBody>
     </Card>
-  )
+  );
 }

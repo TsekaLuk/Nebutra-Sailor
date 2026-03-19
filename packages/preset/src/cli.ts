@@ -1,5 +1,5 @@
-import { resolveConfig, getFeatureEnvVars } from "./index";
 import type { NebutraConfig } from "./index";
+import { getFeatureEnvVars, resolveConfig } from "./index";
 
 async function main() {
   const configModule = (await import("../../../nebutra.config")) as {
@@ -17,8 +17,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  process.stderr.write(
-    `Error: ${err instanceof Error ? err.message : String(err)}\n`,
-  );
+  process.stderr.write(`Error: ${err instanceof Error ? err.message : String(err)}\n`);
   process.exit(1);
 });

@@ -14,9 +14,7 @@ export const dailyDigestEmail = inngest.createFunction(
   async ({ step }) => {
     // Step 1: Get users who opted in for daily digest
     const users = await step.run("get-digest-subscribers", async () => {
-      const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/users?digestEnabled=true`,
-      );
+      const response = await fetch(`${process.env.API_GATEWAY_URL}/users?digestEnabled=true`);
       return response.json();
     });
 
@@ -67,12 +65,8 @@ export const dailyDigestEmail = inngest.createFunction(
           }),
         );
 
-        const batchSent = results.filter(
-          (r) => r.status === "fulfilled",
-        ).length;
-        const batchErrors = results.filter(
-          (r) => r.status === "rejected",
-        ).length;
+        const batchSent = results.filter((r) => r.status === "fulfilled").length;
+        const batchErrors = results.filter((r) => r.status === "rejected").length;
         sent += batchSent;
         errors += batchErrors;
       });
@@ -96,9 +90,7 @@ export const weeklyTenantReport = inngest.createFunction(
   async ({ step }) => {
     // Step 1: Get all tenants
     const tenants = await step.run("get-tenants", async () => {
-      const response = await fetch(
-        `${process.env.API_GATEWAY_URL}/api/system/tenants`,
-      );
+      const response = await fetch(`${process.env.API_GATEWAY_URL}/api/system/tenants`);
       return response.json();
     });
 
@@ -106,24 +98,21 @@ export const weeklyTenantReport = inngest.createFunction(
 
     for (const tenant of tenants) {
       // Step 2: Generate report for each tenant
-      const report = await step.run(
-        `generate-report-${tenant.id}`,
-        async () => {
-          const [usage, analytics, billing] = await Promise.all([
-            fetch(
-              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/usage/weekly`,
-            ).then((r) => r.json()),
-            fetch(
-              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/analytics/weekly`,
-            ).then((r) => r.json()),
-            fetch(
-              `${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/billing/summary`,
-            ).then((r) => r.json()),
-          ]);
+      const report = await step.run(`generate-report-${tenant.id}`, async () => {
+        const [usage, analytics, billing] = await Promise.all([
+          fetch(`${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/usage/weekly`).then((r) =>
+            r.json(),
+          ),
+          fetch(`${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/analytics/weekly`).then((r) =>
+            r.json(),
+          ),
+          fetch(`${process.env.API_GATEWAY_URL}/tenants/${tenant.id}/billing/summary`).then((r) =>
+            r.json(),
+          ),
+        ]);
 
-          return { usage, analytics, billing };
-        },
-      );
+        return { usage, analytics, billing };
+      });
 
       // Step 3: Send report to admin
       await step.run(`send-report-${tenant.id}`, async () => {

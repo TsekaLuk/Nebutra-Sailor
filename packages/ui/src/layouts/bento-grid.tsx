@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface BentoItem {
@@ -56,12 +56,7 @@ export interface BentoGridProps {
  */
 export function BentoGrid({ items, className }: BentoGridProps) {
   return (
-    <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-3 gap-3 p-4 max-w-7xl mx-auto",
-        className
-      )}
-    >
+    <div className={cn("grid grid-cols-1 md:grid-cols-3 gap-3 p-4 max-w-7xl mx-auto", className)}>
       {items.map((item, index) => (
         <BentoCard key={index} item={item} />
       ))}
@@ -87,14 +82,14 @@ function BentoCard({ item }: BentoCardProps) {
         item.hasPersistentHover && [
           "shadow-[0_2px_12px_rgba(0,0,0,0.03)] -translate-y-0.5",
           "dark:shadow-[0_2px_12px_rgba(255,255,255,0.03)]",
-        ]
+        ],
       )}
     >
       {/* Background pattern */}
       <div
         className={cn(
           "absolute inset-0 transition-opacity duration-300",
-          item.hasPersistentHover ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+          item.hasPersistentHover ? "opacity-100" : "opacity-0 group-hover:opacity-100",
         )}
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[length:4px_4px]" />
@@ -110,7 +105,7 @@ function BentoCard({ item }: BentoCardProps) {
             className={cn(
               "text-xs font-medium px-2 py-1 rounded-[var(--radius-lg)] backdrop-blur-sm",
               "bg-black/5 dark:bg-white/10 text-[var(--neutral-10)]",
-              "transition-colors duration-300 group-hover:bg-black/10 dark:group-hover:bg-white/20"
+              "transition-colors duration-300 group-hover:bg-black/10 dark:group-hover:bg-white/20",
             )}
           >
             {item.status || "Active"}
@@ -122,9 +117,7 @@ function BentoCard({ item }: BentoCardProps) {
           <h3 className="font-medium text-[var(--neutral-12)] tracking-tight text-[15px]">
             {item.title}
             {item.meta && (
-              <span className="ml-2 text-xs text-[var(--neutral-9)] font-normal">
-                {item.meta}
-              </span>
+              <span className="ml-2 text-xs text-[var(--neutral-9)] font-normal">{item.meta}</span>
             )}
           </h3>
           <p className="text-sm text-[var(--neutral-10)] leading-snug font-[425]">
@@ -154,7 +147,7 @@ function BentoCard({ item }: BentoCardProps) {
       <div
         className={cn(
           "absolute inset-0 -z-10 rounded-[var(--radius-xl)] p-px bg-gradient-to-br from-transparent via-gray-100/50 to-transparent dark:via-white/10 transition-opacity duration-300",
-          item.hasPersistentHover ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+          item.hasPersistentHover ? "opacity-100" : "opacity-0 group-hover:opacity-100",
         )}
       />
     </div>

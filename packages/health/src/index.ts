@@ -47,10 +47,7 @@ export function registerHealthCheck(checker: HealthChecker): void {
  * Database health check using Prisma
  */
 export function createDatabaseCheck(prisma: {
-  $queryRaw: (
-    query: TemplateStringsArray,
-    ...values: unknown[]
-  ) => Promise<unknown>;
+  $queryRaw: (query: TemplateStringsArray, ...values: unknown[]) => Promise<unknown>;
 }): HealthChecker {
   return {
     name: "database",
@@ -66,10 +63,7 @@ export function createDatabaseCheck(prisma: {
         return {
           status: "fail",
           latency_ms: Date.now() - start,
-          message:
-            error instanceof Error
-              ? error.message
-              : "Database connection failed",
+          message: error instanceof Error ? error.message : "Database connection failed",
         };
       }
     },
@@ -79,9 +73,7 @@ export function createDatabaseCheck(prisma: {
 /**
  * Redis health check using Upstash
  */
-export function createRedisCheck(redis: {
-  ping: () => Promise<string>;
-}): HealthChecker {
+export function createRedisCheck(redis: { ping: () => Promise<string> }): HealthChecker {
   return {
     name: "redis",
     check: async () => {
@@ -104,8 +96,7 @@ export function createRedisCheck(redis: {
         return {
           status: "fail",
           latency_ms: Date.now() - start,
-          message:
-            error instanceof Error ? error.message : "Redis connection failed",
+          message: error instanceof Error ? error.message : "Redis connection failed",
         };
       }
     },
@@ -212,8 +203,7 @@ export async function runHealthChecks(
       } catch (error) {
         results[checker.name] = {
           status: "fail",
-          message:
-            error instanceof Error ? error.message : "Check threw exception",
+          message: error instanceof Error ? error.message : "Check threw exception",
         };
       }
     }),
@@ -257,12 +247,7 @@ interface HonoLike {
 export function healthEndpoint(checkers: HealthChecker[] = []) {
   return async (c: HonoLike) => {
     const result = await runHealthChecks(checkers);
-    const statusCode =
-      result.status === "healthy"
-        ? 200
-        : result.status === "degraded"
-          ? 200
-          : 503;
+    const statusCode = result.status === "healthy" ? 200 : result.status === "degraded" ? 200 : 503;
 
     return c.json(result, statusCode);
   };

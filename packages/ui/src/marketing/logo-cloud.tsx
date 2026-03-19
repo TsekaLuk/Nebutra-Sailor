@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
-import { cn } from "../utils/cn";
+import type * as React from "react";
 import { InfiniteSlider } from "../primitives/infinite-slider";
+import { cn } from "../utils/cn";
 
 export interface Logo {
   /** Logo image source URL */
@@ -60,17 +60,12 @@ export function LogoCloudSlider({
       {...props}
       className={cn(
         "overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black,transparent)]",
-        className
+        className,
       )}
       role="region"
       aria-label="Partner logos"
     >
-      <InfiniteSlider
-        gap={gap}
-        reverse={reverse}
-        speed={speed}
-        speedOnHover={speedOnHover}
-      >
+      <InfiniteSlider gap={gap} reverse={reverse} speed={speed} speedOnHover={speedOnHover}>
         {logos.map((logo) => (
           <img
             alt={logo.alt}

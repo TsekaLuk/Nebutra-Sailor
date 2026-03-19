@@ -1,9 +1,8 @@
-import { AssistedPasswordConfirmation } from "@nebutra/ui/primitives"
-import { useState } from "react"
-import { Badge } from "@nebutra/ui/primitives"
+import { AssistedPasswordConfirmation, Badge } from "@nebutra/ui/primitives";
+import { useState } from "react";
 
 export function AssistedPasswordConfirmationDemo() {
-  const [match, setMatch] = useState(false)
+  const [match, setMatch] = useState(false);
 
   return (
     <div className="max-w-sm p-6 space-y-6 mx-auto w-full">
@@ -31,5 +30,5 @@ export function AssistedPasswordConfirmationDemo() {
         )}
       </div>
     </div>
-  )
+  );
 }

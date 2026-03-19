@@ -1,13 +1,9 @@
 "use client";
 
-import React, { useMemo } from "react";
 import { clsx } from "clsx";
-import type {
-  Testimonial,
-  TestimonialsWallProps,
-  TestimonialSource,
-} from "../types";
+import React, { useMemo } from "react";
 import { TESTIMONIAL_SOURCE_ICONS, TESTIMONIAL_SOURCE_NAMES } from "../config";
+import type { Testimonial, TestimonialSource, TestimonialsWallProps } from "../types";
 
 // ============================================
 // Rating Stars
@@ -19,10 +15,7 @@ function RatingStars({ rating }: { rating: number }) {
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   return (
-    <div
-      className="flex items-center gap-0.5"
-      aria-label={`${rating} out of 5 stars`}
-    >
+    <div className="flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: fullStars }).map((_, i) => (
         <svg
           key={`full-${i}`}
@@ -34,11 +27,7 @@ function RatingStars({ rating }: { rating: number }) {
         </svg>
       ))}
       {hasHalfStar && (
-        <svg
-          className="h-4 w-4 text-yellow-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
+        <svg className="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
           <defs>
             <linearGradient id="half-star">
               <stop offset="50%" stopColor="currentColor" />
@@ -69,13 +58,7 @@ function RatingStars({ rating }: { rating: number }) {
 // Source Badge
 // ============================================
 
-function SourceBadge({
-  source,
-  sourceUrl,
-}: {
-  source: TestimonialSource;
-  sourceUrl?: string;
-}) {
+function SourceBadge({ source, sourceUrl }: { source: TestimonialSource; sourceUrl?: string }) {
   const icon = TESTIMONIAL_SOURCE_ICONS[source];
   const name = TESTIMONIAL_SOURCE_NAMES[source];
 
@@ -176,17 +159,11 @@ function TestimonialCard({
             </div>
           )}
           <div>
-            <p
-              className="font-semibold"
-              style={{ color: "var(--marketing-fg-default)" }}
-            >
+            <p className="font-semibold" style={{ color: "var(--marketing-fg-default)" }}>
               {authorName}
             </p>
             {(authorRole || authorCompany) && (
-              <p
-                className="text-sm"
-                style={{ color: "var(--marketing-fg-muted)" }}
-              >
+              <p className="text-sm" style={{ color: "var(--marketing-fg-muted)" }}>
                 {authorRole}
                 {authorRole && authorCompany && " at "}
                 {authorCompany}
@@ -195,9 +172,7 @@ function TestimonialCard({
           </div>
         </div>
 
-        {showSourceIcon && (
-          <SourceBadge source={source} sourceUrl={sourceUrl} />
-        )}
+        {showSourceIcon && <SourceBadge source={source} sourceUrl={sourceUrl} />}
       </div>
 
       {/* Rating */}
@@ -208,19 +183,13 @@ function TestimonialCard({
       )}
 
       {/* Content */}
-      <blockquote
-        className="flex-1"
-        style={{ color: "var(--marketing-fg-muted)" }}
-      >
+      <blockquote className="flex-1" style={{ color: "var(--marketing-fg-muted)" }}>
         <p className="leading-relaxed">&ldquo;{content}&rdquo;</p>
       </blockquote>
 
       {/* Footer */}
       {date && (
-        <p
-          className="mt-4 text-xs"
-          style={{ color: "var(--marketing-fg-subtle)" }}
-        >
+        <p className="mt-4 text-xs" style={{ color: "var(--marketing-fg-subtle)" }}>
           {new Date(date).toLocaleDateString("en-US", {
             year: "numeric",
             month: "short",
@@ -302,10 +271,7 @@ function TestimonialsMasonry({
   return (
     <div className="flex flex-wrap gap-6">
       {columnedTestimonials.map((colTestimonials, colIndex) => (
-        <div
-          key={colIndex}
-          className={clsx("flex flex-col gap-6", colWidths[columns])}
-        >
+        <div key={colIndex} className={clsx("flex flex-col gap-6", colWidths[columns])}>
           {colTestimonials.map((testimonial) => (
             <TestimonialCard
               key={testimonial.id}
@@ -351,10 +317,7 @@ function TestimonialsMarquee({
       >
         {/* Double the testimonials for seamless loop */}
         {[...testimonials, ...testimonials].map((testimonial, index) => (
-          <div
-            key={`${testimonial.id}-${index}`}
-            className="w-80 flex-shrink-0"
-          >
+          <div key={`${testimonial.id}-${index}`} className="w-80 flex-shrink-0">
             <TestimonialCard
               testimonial={testimonial}
               showSourceIcon={showSourceIcons}
@@ -368,15 +331,13 @@ function TestimonialsMarquee({
       <div
         className="pointer-events-none absolute inset-y-0 left-0 w-20"
         style={{
-          background:
-            "linear-gradient(to right, var(--marketing-canvas-default), transparent)",
+          background: "linear-gradient(to right, var(--marketing-canvas-default), transparent)",
         }}
       />
       <div
         className="pointer-events-none absolute inset-y-0 right-0 w-20"
         style={{
-          background:
-            "linear-gradient(to left, var(--marketing-canvas-default), transparent)",
+          background: "linear-gradient(to left, var(--marketing-canvas-default), transparent)",
         }}
       />
 
@@ -477,6 +438,6 @@ export function TestimonialsWall({
 }
 
 // Export sub-components
-export { TestimonialCard, RatingStars, SourceBadge };
+export { RatingStars, SourceBadge, TestimonialCard };
 
 export default TestimonialsWall;

@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
@@ -8,10 +8,7 @@ interface LegalLayoutProps {
   params: Promise<{ lang: string }>;
 }
 
-export default async function LegalLayout({
-  children,
-  params,
-}: LegalLayoutProps) {
+export default async function LegalLayout({ children, params }: LegalLayoutProps) {
   const { lang } = await params;
   const locale = lang as Locale;
   setRequestLocale(locale);
@@ -23,10 +20,7 @@ export default async function LegalLayout({
       <header className="border-b border-neutral-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <Link
-              href="/"
-              className="text-xl font-bold text-neutral-12 dark:text-white"
-            >
+            <Link href="/" className="text-xl font-bold text-neutral-12 dark:text-white">
               Nebutra
             </Link>
             <nav className="flex items-center space-x-6">
@@ -48,9 +42,7 @@ export default async function LegalLayout({
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        {children}
-      </main>
+      <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">{children}</main>
 
       {/* Legal Footer */}
       <footer className="border-t border-neutral-6">
@@ -82,9 +74,7 @@ export default async function LegalLayout({
                 {t("footer.refund")}
               </Link>
             </nav>
-            <p className="text-sm text-neutral-9">
-              {t("footer.copyright")}
-            </p>
+            <p className="text-sm text-neutral-9">{t("footer.copyright")}</p>
           </div>
         </div>
       </footer>

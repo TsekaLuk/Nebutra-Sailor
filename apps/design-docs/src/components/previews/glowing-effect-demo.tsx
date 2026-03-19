@@ -1,4 +1,4 @@
-import { GlowingEffect } from "@nebutra/ui/primitives"
+import { GlowingEffect } from "@nebutra/ui/primitives";
 
 export function GlowingEffectDemo() {
   return (
@@ -13,11 +13,9 @@ export function GlowingEffectDemo() {
         />
         <div className="relative z-10 flex flex-col items-center justify-center text-center">
           <p className="font-bold">Hover Card</p>
-          <p className="text-sm mt-2 text-muted-foreground">
-            Move mouse to see glow effect
-          </p>
+          <p className="text-sm mt-2 text-muted-foreground">Move mouse to see glow effect</p>
         </div>
       </div>
     </div>
-  )
+  );
 }

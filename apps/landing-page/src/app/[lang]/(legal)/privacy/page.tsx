@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
-import { routing, type Locale } from "@/i18n/routing";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { type Locale, routing } from "@/i18n/routing";
 
 export async function generateMetadata({
   params,
@@ -21,11 +21,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function PrivacyPolicyPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function PrivacyPolicyPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const locale = lang as Locale;
   setRequestLocale(locale);
@@ -42,11 +38,10 @@ export default async function PrivacyPolicyPage({
       </p>
 
       <p>
-        At Nebutra (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or
-        &quot;our&quot;), we are committed to protecting your privacy. This
-        Privacy Policy explains how we collect, use, disclose, and safeguard
-        your information when you use our website, applications, and services
-        (collectively, the &quot;Services&quot;).
+        At Nebutra (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), we are
+        committed to protecting your privacy. This Privacy Policy explains how we collect, use,
+        disclose, and safeguard your information when you use our website, applications, and
+        services (collectively, the &quot;Services&quot;).
       </p>
 
       <h2>1. Information We Collect</h2>
@@ -55,47 +50,44 @@ export default async function PrivacyPolicyPage({
       <p>We collect information you directly provide to us, including:</p>
       <ul>
         <li>
-          <strong>Account Information:</strong> Name, email address, password,
-          and organization details when you create an account.
+          <strong>Account Information:</strong> Name, email address, password, and organization
+          details when you create an account.
         </li>
         <li>
-          <strong>Profile Information:</strong> Profile picture, job title,
-          company name, and other optional information.
+          <strong>Profile Information:</strong> Profile picture, job title, company name, and other
+          optional information.
         </li>
         <li>
-          <strong>Payment Information:</strong> Billing address and payment
-          method details (processed securely through Stripe).
+          <strong>Payment Information:</strong> Billing address and payment method details
+          (processed securely through Stripe).
         </li>
         <li>
-          <strong>Communications:</strong> Messages, feedback, and other
-          communications you send to us.
+          <strong>Communications:</strong> Messages, feedback, and other communications you send to
+          us.
         </li>
         <li>
-          <strong>Content:</strong> Any content you create, upload, or store
-          using our Services.
+          <strong>Content:</strong> Any content you create, upload, or store using our Services.
         </li>
       </ul>
 
       <h3>1.2 Information Collected Automatically</h3>
-      <p>
-        When you use our Services, we automatically collect certain information:
-      </p>
+      <p>When you use our Services, we automatically collect certain information:</p>
       <ul>
         <li>
-          <strong>Device Information:</strong> Device type, operating system,
-          browser type, and unique device identifiers.
+          <strong>Device Information:</strong> Device type, operating system, browser type, and
+          unique device identifiers.
         </li>
         <li>
-          <strong>Usage Information:</strong> Pages viewed, features used,
-          actions taken, and time spent on Services.
+          <strong>Usage Information:</strong> Pages viewed, features used, actions taken, and time
+          spent on Services.
         </li>
         <li>
-          <strong>Log Data:</strong> IP address, access times, referring URLs,
-          and system activity logs.
+          <strong>Log Data:</strong> IP address, access times, referring URLs, and system activity
+          logs.
         </li>
         <li>
-          <strong>Location Information:</strong> General location based on IP
-          address (we do not collect precise geolocation).
+          <strong>Location Information:</strong> General location based on IP address (we do not
+          collect precise geolocation).
         </li>
       </ul>
 
@@ -103,28 +95,25 @@ export default async function PrivacyPolicyPage({
       <p>We use the information we collect to:</p>
       <ul>
         <li>
-          <strong>Provide Services:</strong> Operate, maintain, and improve our
-          Services.
+          <strong>Provide Services:</strong> Operate, maintain, and improve our Services.
         </li>
         <li>
-          <strong>Process Transactions:</strong> Handle payments, billing, and
-          related operations.
+          <strong>Process Transactions:</strong> Handle payments, billing, and related operations.
         </li>
         <li>
-          <strong>Communicate:</strong> Send service announcements, updates, and
-          marketing communications (with consent).
+          <strong>Communicate:</strong> Send service announcements, updates, and marketing
+          communications (with consent).
         </li>
         <li>
-          <strong>Personalize:</strong> Customize your experience and provide
-          relevant recommendations.
+          <strong>Personalize:</strong> Customize your experience and provide relevant
+          recommendations.
         </li>
         <li>
-          <strong>Analyze:</strong> Understand usage patterns and improve our
-          Services.
+          <strong>Analyze:</strong> Understand usage patterns and improve our Services.
         </li>
         <li>
-          <strong>Protect:</strong> Detect, prevent, and respond to fraud,
-          abuse, and security incidents.
+          <strong>Protect:</strong> Detect, prevent, and respond to fraud, abuse, and security
+          incidents.
         </li>
       </ul>
 
@@ -133,70 +122,62 @@ export default async function PrivacyPolicyPage({
 
       <h3>3.1 Service Providers</h3>
       <p>
-        We share information with third-party vendors who provide services on
-        our behalf, including:
+        We share information with third-party vendors who provide services on our behalf, including:
       </p>
       <ul>
         <li>
-          <strong>Infrastructure:</strong> Cloud hosting (Vercel, Supabase),
-          database services
+          <strong>Infrastructure:</strong> Cloud hosting (Vercel, Supabase), database services
         </li>
         <li>
-          <strong>Payment Processing:</strong> Stripe for secure payment
-          handling
+          <strong>Payment Processing:</strong> Stripe for secure payment handling
         </li>
         <li>
           <strong>Authentication:</strong> Clerk for identity management
         </li>
         <li>
-          <strong>Analytics:</strong> PostHog, Vercel Analytics for usage
-          insights
+          <strong>Analytics:</strong> PostHog, Vercel Analytics for usage insights
         </li>
       </ul>
 
       <h3>3.2 Business Transfers</h3>
       <p>
-        If we are involved in a merger, acquisition, or sale of assets, your
-        information may be transferred as part of that transaction.
+        If we are involved in a merger, acquisition, or sale of assets, your information may be
+        transferred as part of that transaction.
       </p>
 
       <h3>3.3 Legal Requirements</h3>
       <p>
-        We may disclose information when required by law, legal process, or
-        government request, or to protect our rights, privacy, safety, or
-        property.
+        We may disclose information when required by law, legal process, or government request, or
+        to protect our rights, privacy, safety, or property.
       </p>
 
       <h2>4. Your Rights and Choices</h2>
 
       <h3>4.1 Access and Portability</h3>
       <p>
-        You can access your personal information through your account settings
-        and request a copy of your data in a portable format.
+        You can access your personal information through your account settings and request a copy of
+        your data in a portable format.
       </p>
 
       <h3>4.2 Correction</h3>
-      <p>
-        You can update your account information at any time through the
-        dashboard.
-      </p>
+      <p>You can update your account information at any time through the dashboard.</p>
 
       <h3>4.3 Deletion</h3>
       <p>
-        You can request deletion of your account and associated data through
-        settings or by contacting us.
+        You can request deletion of your account and associated data through settings or by
+        contacting us.
       </p>
 
       <h3>4.4 Marketing Communications</h3>
       <p>
-        You can opt out of marketing emails by clicking &quot;unsubscribe&quot;
-        in any marketing email or updating your preferences.
+        You can opt out of marketing emails by clicking &quot;unsubscribe&quot; in any marketing
+        email or updating your preferences.
       </p>
 
       <h2>5. Data Security</h2>
       <p>
-        We implement appropriate technical and organizational measures to
-        protect your information, including:
+        We implement appropriate technical and organizational measures to protect your information,
+        including:
       </p>
       <ul>
         <li>Encryption of data in transit (TLS) and at rest</li>
@@ -207,45 +188,40 @@ export default async function PrivacyPolicyPage({
 
       <h2>6. California Privacy Rights (CCPA)</h2>
       <p>
-        If you are a California resident, you have specific rights regarding
-        your personal information:
+        If you are a California resident, you have specific rights regarding your personal
+        information:
       </p>
       <ul>
         <li>
-          <strong>Right to Know:</strong> Request disclosure of information we
-          collect, use, and share.
+          <strong>Right to Know:</strong> Request disclosure of information we collect, use, and
+          share.
         </li>
         <li>
-          <strong>Right to Delete:</strong> Request deletion of your personal
-          information.
+          <strong>Right to Delete:</strong> Request deletion of your personal information.
         </li>
         <li>
-          <strong>Right to Opt-Out:</strong> Opt out of the sale of personal
-          information (we do not sell your data).
+          <strong>Right to Opt-Out:</strong> Opt out of the sale of personal information (we do not
+          sell your data).
         </li>
         <li>
-          <strong>Right to Non-Discrimination:</strong> We will not discriminate
-          against you for exercising your rights.
+          <strong>Right to Non-Discrimination:</strong> We will not discriminate against you for
+          exercising your rights.
         </li>
       </ul>
 
       <h2>7. European Privacy Rights (GDPR)</h2>
-      <p>
-        If you are in the EEA, UK, or Switzerland, you have additional rights
-        under GDPR:
-      </p>
+      <p>If you are in the EEA, UK, or Switzerland, you have additional rights under GDPR:</p>
       <ul>
         <li>
-          <strong>Legal Basis:</strong> We process your data based on contract
-          performance, legitimate interests, or consent.
+          <strong>Legal Basis:</strong> We process your data based on contract performance,
+          legitimate interests, or consent.
         </li>
         <li>
-          <strong>Rights:</strong> Access, rectification, erasure, portability,
-          restriction, and objection.
+          <strong>Rights:</strong> Access, rectification, erasure, portability, restriction, and
+          objection.
         </li>
         <li>
-          <strong>DPO:</strong> You can contact our Data Protection Officer at
-          dpo@nebutra.com.
+          <strong>DPO:</strong> You can contact our Data Protection Officer at dpo@nebutra.com.
         </li>
       </ul>
 

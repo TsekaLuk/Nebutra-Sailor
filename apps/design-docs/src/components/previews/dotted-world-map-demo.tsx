@@ -1,4 +1,4 @@
-import { DottedWorldMap } from "@nebutra/ui/primitives"
+import { DottedWorldMap } from "@nebutra/ui/primitives";
 
 export function DottedWorldMapDemo() {
   return (
@@ -21,5 +21,5 @@ export function DottedWorldMapDemo() {
         <div className="size-3 bg-green-500 blur-xl animate-pulse absolute bottom-[30%] left-[60%] rounded-full opacity-50 delay-500"></div>
       </div>
     </div>
-  )
+  );
 }

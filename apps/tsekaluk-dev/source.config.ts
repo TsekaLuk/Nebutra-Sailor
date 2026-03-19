@@ -1,5 +1,5 @@
-import { defineCollections } from 'fumadocs-mdx/config';
-import { z } from 'zod';
+import { defineCollections } from "fumadocs-mdx/config";
+import { z } from "zod";
 
 const blogSchema = z.object({
   title: z.string(),
@@ -9,7 +9,7 @@ const blogSchema = z.object({
 });
 
 export const blogPosts = defineCollections({
-  type: 'doc',
-  dir: 'content/thinking',
+  type: "doc",
+  dir: "content/thinking",
   schema: blogSchema,
 });

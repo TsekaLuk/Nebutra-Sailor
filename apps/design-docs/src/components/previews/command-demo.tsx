@@ -1,18 +1,17 @@
-"use client"
-import { User, Search } from "lucide-react"
-
-import * as React from "react"
+"use client";
 import {
-  CommandSeparator,
-  Command,
-  CommandList,
-  CommandItem,
   Calendar,
-  CommandShortcut,
-  CommandGroup,
+  Command,
   CommandEmpty,
+  CommandGroup,
   CommandInput,
-} from "@nebutra/ui/primitives"
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@nebutra/ui/primitives";
+import { Search, User } from "lucide-react";
+import * as React from "react";
 
 export function CommandDemo() {
   return (
@@ -41,5 +40,5 @@ export function CommandDemo() {
         </CommandGroup>
       </CommandList>
     </Command>
-  )
+  );
 }

@@ -260,11 +260,7 @@
     "dependencyBoundaries": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "appSurfaces",
-        "forbiddenImportRegexes",
-        "customUiAllowedExports"
-      ],
+      "required": ["appSurfaces", "forbiddenImportRegexes", "customUiAllowedExports"],
       "properties": {
         "appSurfaces": {
           "type": "array",

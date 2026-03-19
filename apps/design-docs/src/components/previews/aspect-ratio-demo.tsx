@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { AspectRatio } from "@nebutra/ui/primitives"
+import { AspectRatio } from "@nebutra/ui/primitives";
 
 export function AspectRatioDemo() {
   return (
@@ -16,5 +16,5 @@ export function AspectRatioDemo() {
         />
       </AspectRatio>
     </div>
-  )
+  );
 }

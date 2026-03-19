@@ -1,45 +1,45 @@
 "use client";
 
-import * as React from "react";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useTranslations } from "next-intl";
-import { AnimateIn } from "@nebutra/ui/components";
-import { DotPattern } from "@nebutra/ui/primitives";
 import {
+  Adobe,
+  Anthropic,
+  ComfyUI,
+  Cursor as CursorIcon,
+  Dify,
+  Figma,
+  Flux,
+  Google,
+  LangChain,
+  Midjourney,
+  N8n,
+  Notion,
+  OpenAI,
+  OpenClaw,
+  V0,
+  Vercel,
+  Zapier,
+} from "@lobehub/icons";
+import {
+  ArrowRight,
+  Brain,
+  Briefcase,
+  CheckCircleFill,
+  Code,
+  Compass,
+  Globe,
+  type IconProps,
+  Layers,
   Message,
   Sparkles,
   Target,
-  Code,
-  Brain,
-  Layers,
-  Globe,
-  Briefcase,
-  Compass,
-  CheckCircleFill,
-  ArrowRight,
-  type IconProps,
 } from "@nebutra/icons";
+import { AnimateIn } from "@nebutra/ui/components";
+import { DotPattern } from "@nebutra/ui/primitives";
+import { AnimatePresence, motion } from "framer-motion";
 import { Coffee } from "lucide-react";
-import {
-  Anthropic,
-  OpenAI,
-  Midjourney,
-  Flux,
-  Cursor as CursorIcon,
-  LangChain,
-  ComfyUI,
-  OpenClaw,
-  N8n,
-  Dify,
-  Figma,
-  Adobe,
-  V0,
-  Google,
-  Notion,
-  Zapier,
-  Vercel,
-} from "@lobehub/icons";
+import { useTranslations } from "next-intl";
+import * as React from "react";
+import { useState } from "react";
 import { NumberTicker } from "@/components/ui/number-ticker";
 
 /* ------------------------------------------------------------------ */
@@ -64,14 +64,7 @@ const SERVICE_ICONS: React.ComponentType<IconProps>[] = [
   Compass,
 ];
 
-const SERVICE_KEYS = [
-  "engineering",
-  "ai",
-  "design",
-  "growth",
-  "consulting",
-  "strategy",
-] as const;
+const SERVICE_KEYS = ["engineering", "ai", "design", "growth", "consulting", "strategy"] as const;
 
 const TIER_KEYS = ["chat", "coffee", "hire", "partner"] as const;
 
@@ -199,9 +192,7 @@ function StatsStrip() {
                 {stat.suffix}
               </span>
             </div>
-            <p className="mt-1 font-mono text-xs text-gray-500 dark:text-gray-400">
-              {stat.label}
-            </p>
+            <p className="mt-1 font-mono text-xs text-gray-500 dark:text-gray-400">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -213,13 +204,7 @@ function StatsStrip() {
 /*  Tier card                                                          */
 /* ------------------------------------------------------------------ */
 
-function TierCard({
-  tierKey,
-  index,
-}: {
-  tierKey: (typeof TIER_KEYS)[number];
-  index: number;
-}) {
+function TierCard({ tierKey, index }: { tierKey: (typeof TIER_KEYS)[number]; index: number }) {
   const t = useTranslations("pricing");
   const isAccent = tierKey === "hire";
   const TierIcon = TIER_ICONS[tierKey];
@@ -251,17 +236,13 @@ function TierCard({
           {/* Icon */}
           <div
             className={`mb-5 flex h-12 w-12 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${
-              isAccent
-                ? "bg-[var(--color-accent)]/15"
-                : "bg-gray-100 dark:bg-gray-800"
+              isAccent ? "bg-[var(--color-accent)]/15" : "bg-gray-100 dark:bg-gray-800"
             }`}
           >
             <TierIcon
               size={24}
               className={
-                isAccent
-                  ? "text-[var(--color-accent-fg)]"
-                  : "text-gray-600 dark:text-gray-300"
+                isAccent ? "text-[var(--color-accent-fg)]" : "text-gray-600 dark:text-gray-300"
               }
             />
           </div>
@@ -278,9 +259,7 @@ function TierCard({
           {/* Price */}
           <p
             className={`mt-3 text-4xl font-extrabold tracking-tight ${
-              isAccent
-                ? "text-white"
-                : "text-gray-900 dark:text-white"
+              isAccent ? "text-white" : "text-gray-900 dark:text-white"
             }`}
           >
             {t(`tiers.${tierKey}.price`)}
@@ -308,9 +287,7 @@ function TierCard({
 
           {/* Divider */}
           <div
-            className={`my-6 h-px ${
-              isAccent ? "bg-gray-700" : "bg-gray-100 dark:bg-gray-800"
-            }`}
+            className={`my-6 h-px ${isAccent ? "bg-gray-700" : "bg-gray-100 dark:bg-gray-800"}`}
           />
 
           {/* Features */}
@@ -319,17 +296,13 @@ function TierCard({
               <li
                 key={i}
                 className={`flex items-start gap-3 text-sm ${
-                  isAccent
-                    ? "text-gray-300"
-                    : "text-gray-600 dark:text-gray-300"
+                  isAccent ? "text-gray-300" : "text-gray-600 dark:text-gray-300"
                 }`}
               >
                 <CheckCircleFill
                   size={16}
                   className={`mt-0.5 shrink-0 ${
-                    isAccent
-                      ? "text-[var(--color-accent-fg)]"
-                      : "text-[var(--color-accent-dark)]"
+                    isAccent ? "text-[var(--color-accent-fg)]" : "text-[var(--color-accent-dark)]"
                   }`}
                 />
                 {f}
@@ -347,10 +320,7 @@ function TierCard({
           }`}
         >
           {t(`tiers.${tierKey}.cta`)}
-          <ArrowRight
-            size={16}
-            className="transition-transform group-hover:translate-x-1"
-          />
+          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
         </div>
       </a>
     </AnimateIn>
@@ -418,7 +388,14 @@ function ServiceCarousel() {
                     : "bg-transparent text-gray-800/70 border-gray-900/10 hover:text-gray-900 hover:border-gray-900/30 dark:text-black/60 dark:border-black/10 dark:hover:text-black dark:hover:border-black/30"
                 }`}
               >
-                <Icon size={14} className={isActive ? "text-[var(--color-accent)] dark:text-[var(--color-accent)]" : "text-gray-800/50 dark:text-black/40"} />
+                <Icon
+                  size={14}
+                  className={
+                    isActive
+                      ? "text-[var(--color-accent)] dark:text-[var(--color-accent)]"
+                      : "text-gray-800/50 dark:text-black/40"
+                  }
+                />
                 {t(`services.${key}.name`)}
               </button>
             );
@@ -459,7 +436,11 @@ function ServiceCarousel() {
                 >
                   <Icon
                     size={16}
-                    className={isActive ? "text-[var(--color-accent)] dark:text-[var(--color-accent)]" : "text-gray-800/40 dark:text-black/40"}
+                    className={
+                      isActive
+                        ? "text-[var(--color-accent)] dark:text-[var(--color-accent)]"
+                        : "text-gray-800/40 dark:text-black/40"
+                    }
                   />
                   <span className="font-medium text-sm tracking-tight whitespace-nowrap uppercase">
                     {t(`services.${key}.name`)}
@@ -500,9 +481,7 @@ function ServiceCarousel() {
             {/* Score bar */}
             <div className="mb-6">
               <div className="flex justify-between items-end mb-2">
-                <span className="text-sm text-gray-500 dark:text-gray-400">
-                  {t("radar_title")}
-                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{t("radar_title")}</span>
                 <motion.span
                   key={`score-${activeIndex}`}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -533,7 +512,10 @@ function ServiceCarousel() {
                     transition={{ delay: i * 0.06 }}
                     className="flex items-start gap-2.5 text-sm text-gray-600 dark:text-gray-300"
                   >
-                    <CheckCircleFill size={14} className="text-[var(--color-accent-dark)] mt-0.5 shrink-0" />
+                    <CheckCircleFill
+                      size={14}
+                      className="text-[var(--color-accent-dark)] mt-0.5 shrink-0"
+                    />
                     {item}
                   </motion.li>
                 ))}

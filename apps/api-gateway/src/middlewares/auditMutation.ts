@@ -12,8 +12,8 @@
  * falls back to structured logging internally).
  */
 
-import { type Context, type Next } from "hono";
-import { audit, type AuditAction } from "@nebutra/audit";
+import { type AuditAction, audit } from "@nebutra/audit";
+import type { Context, Next } from "hono";
 
 /** HTTP methods that mutate state and therefore warrant an audit record. */
 const MUTATION_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"]);

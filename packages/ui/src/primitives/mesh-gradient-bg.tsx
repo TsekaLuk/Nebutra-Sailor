@@ -1,10 +1,7 @@
 "use client";
 
-import * as React from "react";
-import {
-  MeshGradient,
-  type MeshGradientProps,
-} from "@paper-design/shaders-react";
+import { MeshGradient, type MeshGradientProps } from "@paper-design/shaders-react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -24,8 +21,7 @@ const BRAND_COLORS = [
 // =============================================================================
 
 export interface MeshGradientBgProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
+  extends React.HTMLAttributes<HTMLDivElement>,
     Partial<Omit<MeshGradientProps, "style">> {}
 
 // =============================================================================

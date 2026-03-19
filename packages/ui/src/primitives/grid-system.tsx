@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -70,11 +70,7 @@ function GridSystem({
 }: GridSystemProps) {
   return (
     <div
-      className={cn(
-        "grid w-full",
-        showGuides && "gap-px bg-border",
-        className,
-      )}
+      className={cn("grid w-full", showGuides && "gap-px bg-border", className)}
       style={{
         gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
         ...(rowHeight != null ? { gridAutoRows: rowHeight } : {}),

@@ -1,13 +1,10 @@
 "use client";
 
-import * as React from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import * as React from "react";
 import { cn } from "../../utils/cn";
 
-export interface TextSparklineProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "children"
-> {
+export interface TextSparklineProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   /** The text content to display */
   children: React.ReactNode;
   /**
@@ -48,10 +45,7 @@ export interface TextSparklineProps extends Omit<
  *   <span className="text-4xl font-bold">Featured</span>
  * </TextSparkline>
  */
-export const TextSparkline = React.forwardRef<
-  HTMLDivElement,
-  TextSparklineProps
->(
+export const TextSparkline = React.forwardRef<HTMLDivElement, TextSparklineProps>(
   (
     {
       children,
@@ -69,11 +63,7 @@ export const TextSparkline = React.forwardRef<
     const shouldReduceMotion = useReducedMotion();
 
     return (
-      <div
-        ref={ref}
-        className={cn("relative inline-block", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("relative inline-block", className)} {...props}>
         {/* Sparkline glow effect */}
         {showSparkline && !shouldReduceMotion && (
           <motion.div

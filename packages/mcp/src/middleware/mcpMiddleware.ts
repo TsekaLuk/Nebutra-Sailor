@@ -127,9 +127,7 @@ export function createAccessControlMiddleware(options: {
 /**
  * Compose multiple middlewares
  */
-export function composeMCPMiddleware(
-  middlewares: MCPMiddleware[],
-): MCPMiddleware {
+export function composeMCPMiddleware(middlewares: MCPMiddleware[]): MCPMiddleware {
   return async (ctx, finalNext) => {
     let index = -1;
 

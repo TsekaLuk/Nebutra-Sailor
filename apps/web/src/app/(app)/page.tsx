@@ -1,23 +1,10 @@
-import { Suspense } from "react";
-import { connection } from "next/server";
+import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import { Card, EmptyState, ErrorState, LoadingState, PageHeader } from "@nebutra/ui/layout";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-import {
-  BarChart3,
-  Activity,
-  UserPlus,
-  Rocket,
-  Coins,
-  Database,
-} from "lucide-react";
-import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
-import {
-  Card,
-  EmptyState,
-  ErrorState,
-  LoadingState,
-  PageHeader,
-} from "@nebutra/ui/layout";
+import { Activity, BarChart3, Coins, Database, Rocket, UserPlus } from "lucide-react";
+import { connection } from "next/server";
+import { Suspense } from "react";
 import { getAuth, getUser } from "@/lib/auth";
 import { getQueryClient } from "@/lib/query-client";
 import { getGrowthSummary } from "@/lib/warehouse/gold";
@@ -56,9 +43,10 @@ async function DashboardContent() {
     queryFn: () => getGrowthSummary(tenantId),
   });
 
-  const summary = queryClient.getQueryData<
-    Awaited<ReturnType<typeof getGrowthSummary>>
-  >(["growth-summary", tenantId]);
+  const summary = queryClient.getQueryData<Awaited<ReturnType<typeof getGrowthSummary>>>([
+    "growth-summary",
+    tenantId,
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -80,10 +68,7 @@ async function DashboardContent() {
 
       {!summary ? (
         <AnimateIn preset="fadeUp">
-          <ErrorState
-            title="Unable to load dashboard data"
-            message="Please refresh to retry."
-          />
+          <ErrorState title="Unable to load dashboard data" message="Please refresh to retry." />
         </AnimateIn>
       ) : !summary.day ? (
         <AnimateIn preset="fadeUp">
@@ -107,10 +92,7 @@ async function DashboardContent() {
             </Card>
           </AnimateIn>
 
-          <AnimateInGroup
-            stagger="fast"
-            className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
-          >
+          <AnimateInGroup stagger="fast" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {METRICS.map(({ key, label, icon: Icon }) => (
               <AnimateIn key={key} preset="fadeUp">
                 <Card className="p-4 sm:p-6">
@@ -123,9 +105,7 @@ async function DashboardContent() {
                   <p className="mt-3 text-3xl font-semibold text-neutral-12 dark:text-white">
                     {formatValue(summary[key])}
                   </p>
-                  <p className="mt-1 text-xs text-neutral-10 dark:text-white/60">
-                    Latest day
-                  </p>
+                  <p className="mt-1 text-xs text-neutral-10 dark:text-white/60">Latest day</p>
                 </Card>
               </AnimateIn>
             ))}
@@ -144,9 +124,7 @@ async function DashboardContent() {
                     maximumFractionDigits: 2,
                   })}
                 </p>
-                <p className="mt-1 text-xs text-neutral-10 dark:text-white/60">
-                  Latest day (USD)
-                </p>
+                <p className="mt-1 text-xs text-neutral-10 dark:text-white/60">Latest day (USD)</p>
               </Card>
             </AnimateIn>
           </AnimateInGroup>
@@ -157,9 +135,8 @@ async function DashboardContent() {
         <AnimateIn preset="fadeUp">
           <Card className="mt-6 border-[hsl(var(--warning)/0.35)] bg-[hsl(var(--warning)/0.12)] p-4 text-warning-foreground">
             <p className="text-sm">
-              Clerk authentication is not configured. Set
-              `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` to
-              enable auth.
+              Clerk authentication is not configured. Set `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and
+              `CLERK_SECRET_KEY` to enable auth.
             </p>
           </Card>
         </AnimateIn>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { forwardRef } from "react";
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** Icon size in px (default: 16). Overrides width/height props. */
@@ -16,13 +16,11 @@ const SpeakerFill = forwardRef<SVGSVGElement, IconProps>(
       ref={ref}
       {...props}
     >
-      <path
-        fill="currentColor"
-        d="M2 11V5a1 1 0 0 1 1-1h3l8-4v16l-8-4H3a1 1 0 0 1-1-1"
-      />
+      <path fill="currentColor" d="M2 11V5a1 1 0 0 1 1-1h3l8-4v16l-8-4H3a1 1 0 0 1-1-1" />
     </svg>
   ),
 );
 SpeakerFill.displayName = "SpeakerFill";
+
 export { SpeakerFill };
 export default SpeakerFill;

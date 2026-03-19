@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Sparkles, Zap, Lock, Globe, BarChart, Code } from "lucide-react";
-import { BentoGrid, BentoCard } from "./bento-grid";
+import { BarChart, Code, Globe, Lock, Sparkles, Zap } from "lucide-react";
+import { BentoCard, BentoGrid } from "./bento-grid";
 
 const meta = {
   title: "Primitives/BentoGrid",

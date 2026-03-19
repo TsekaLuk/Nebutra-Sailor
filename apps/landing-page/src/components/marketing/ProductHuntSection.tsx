@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ProductHuntBadge,
-  ProductHuntUpvoteBadge,
-  SocialProofBar,
-} from "@nebutra/marketing";
+import { ProductHuntBadge, ProductHuntUpvoteBadge, SocialProofBar } from "@nebutra/marketing";
 
 interface ProductHuntSectionProps {
   postSlug: string;
@@ -21,11 +17,7 @@ interface SocialProofStats {
 /**
  * Product Hunt promotion section for landing page
  */
-export function ProductHuntSection({
-  postSlug,
-  stats,
-  className,
-}: ProductHuntSectionProps) {
+export function ProductHuntSection({ postSlug, stats, className }: ProductHuntSectionProps) {
   const defaultStats: SocialProofStats = {
     users: 1000,
     rating: 4.9,
@@ -37,12 +29,7 @@ export function ProductHuntSection({
     <section className={className}>
       <div className="mx-auto max-w-4xl px-4 py-12 text-center">
         {/* Social Proof Stats */}
-        <SocialProofBar
-          stats={defaultStats}
-          variant="badges"
-          animated
-          className="mb-8"
-        />
+        <SocialProofBar stats={defaultStats} variant="badges" animated className="mb-8" />
 
         {/* Product Hunt Badges */}
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
@@ -53,12 +40,7 @@ export function ProductHuntSection({
             altText="Nebutra on Product Hunt"
             className=""
           />
-          <ProductHuntUpvoteBadge
-            postSlug={postSlug}
-            theme="light"
-            size="medium"
-            className=""
-          />
+          <ProductHuntUpvoteBadge postSlug={postSlug} theme="light" size="medium" className="" />
         </div>
       </div>
     </section>

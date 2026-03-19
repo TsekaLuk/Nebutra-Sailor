@@ -1,7 +1,7 @@
-import * as React from "react";
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
 import { AnimateIn, AnimateInGroup } from "@nebutra/ui/components";
+import type { Meta, StoryObj } from "@storybook/react";
+import type * as React from "react";
+import { useState } from "react";
 
 const meta: Meta = {
   title: "Design Tokens/Motion",
@@ -44,16 +44,14 @@ export const AllPresets: StoryObj = {
     return (
       <div className="p-8 bg-gray-50">
         <div className="flex flex-wrap gap-6">
-          {(["emerge", "flow", "fade", "fadeUp", "scale"] as const).map(
-            (preset, i) => (
-              <div key={`${preset}-${key}`} className="flex flex-col items-center gap-2">
-                <AnimateIn preset={preset} delay={i * 0.1}>
-                  <Card>{preset}</Card>
-                </AnimateIn>
-                <span className="font-mono text-xs text-gray-400">{preset}</span>
-              </div>
-            )
-          )}
+          {(["emerge", "flow", "fade", "fadeUp", "scale"] as const).map((preset, i) => (
+            <div key={`${preset}-${key}`} className="flex flex-col items-center gap-2">
+              <AnimateIn preset={preset} delay={i * 0.1}>
+                <Card>{preset}</Card>
+              </AnimateIn>
+              <span className="font-mono text-xs text-gray-400">{preset}</span>
+            </div>
+          ))}
         </div>
         <ReplayButton onClick={() => setKey((k) => k + 1)} />
       </div>
@@ -85,11 +83,11 @@ export const DurationScale: StoryObj = {
   render: () => (
     <div className="p-8 bg-white space-y-3">
       {[
-        { name: "instant", ms: "0ms",    token: "--duration-instant" },
-        { name: "fast",    ms: "100ms",  token: "--duration-fast" },
-        { name: "normal",  ms: "150ms",  token: "--duration-normal" },
-        { name: "slow",    ms: "300ms",  token: "--duration-slow" },
-        { name: "slower",  ms: "500ms",  token: "--duration-slower" },
+        { name: "instant", ms: "0ms", token: "--duration-instant" },
+        { name: "fast", ms: "100ms", token: "--duration-fast" },
+        { name: "normal", ms: "150ms", token: "--duration-normal" },
+        { name: "slow", ms: "300ms", token: "--duration-slow" },
+        { name: "slower", ms: "500ms", token: "--duration-slower" },
         { name: "slowest", ms: "1000ms", token: "--duration-slowest" },
       ].map(({ name, ms, token }) => (
         <div key={name} className="flex items-center gap-4">

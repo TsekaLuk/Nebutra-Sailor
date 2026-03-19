@@ -1,26 +1,22 @@
-"use client"
+"use client";
 
-import { Suspense, useState, useEffect, useCallback } from "react"
-import type { ReactNode } from "react"
-import { cn } from "@nebutra/ui/utils"
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@nebutra/ui/primitives"
-import { Copy, Check } from "@nebutra/icons"
-import { Sun, Moon, MessageSquare, Terminal } from "lucide-react"
+import { Check, Copy } from "@nebutra/icons";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@nebutra/ui/primitives";
+import { cn } from "@nebutra/ui/utils";
+import { MessageSquare, Moon, Sun, Terminal } from "lucide-react";
+import type { ReactNode } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 
-const REGISTRY_BASE = "https://design.nebutra.com/r"
-import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock"
-import { Index } from "@/__registry__"
+const REGISTRY_BASE = "https://design.nebutra.com/r";
+
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import { Index } from "@/__registry__";
 
 interface ComponentPreviewProps {
-  children?: ReactNode
-  code?: string
-  className?: string
-  name?: string
+  children?: ReactNode;
+  code?: string;
+  className?: string;
+  name?: string;
 }
 
 function PreviewSkeleton() {
@@ -28,7 +24,7 @@ function PreviewSkeleton() {
     <div className="flex min-h-[200px] items-center justify-center">
       <div className="h-6 w-6 animate-spin rounded-full border-2 border-muted-foreground/20 border-t-muted-foreground" />
     </div>
-  )
+  );
 }
 
 function generateIntegrationPrompt(name: string, code: string): string {
@@ -61,44 +57,44 @@ Steps to integrate:
 2. Ensure \`@nebutra/ui\` is installed (\`pnpm add @nebutra/ui @nebutra/tokens\`)
 3. Import and use the component where needed
 4. Pass any required props documented in the component's props interface
-5. Verify the component renders correctly in both light and dark modes`
+5. Verify the component renders correctly in both light and dark modes`;
 }
 
 function useClipboard() {
-  const [hasCopied, setHasCopied] = useState(false)
+  const [hasCopied, setHasCopied] = useState(false);
 
   useEffect(() => {
-    if (!hasCopied) return
-    const t = setTimeout(() => setHasCopied(false), 2000)
-    return () => clearTimeout(t)
-  }, [hasCopied])
+    if (!hasCopied) return;
+    const t = setTimeout(() => setHasCopied(false), 2000);
+    return () => clearTimeout(t);
+  }, [hasCopied]);
 
   const copy = useCallback(async (value: string) => {
     try {
-      await navigator.clipboard.writeText(value)
-      setHasCopied(true)
+      await navigator.clipboard.writeText(value);
+      setHasCopied(true);
     } catch {
       try {
-        const textarea = document.createElement("textarea")
-        textarea.value = value
-        textarea.style.position = "fixed"
-        textarea.style.opacity = "0"
-        document.body.appendChild(textarea)
-        textarea.select()
-        document.execCommand("copy")
-        document.body.removeChild(textarea)
-        setHasCopied(true)
+        const textarea = document.createElement("textarea");
+        textarea.value = value;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        setHasCopied(true);
       } catch {
         // Both methods failed
       }
     }
-  }, [])
+  }, []);
 
-  return { hasCopied, copy }
+  return { hasCopied, copy };
 }
 
 function CopyButton({ value }: { value: string }) {
-  const { hasCopied, copy } = useClipboard()
+  const { hasCopied, copy } = useClipboard();
   return (
     <button
       type="button"
@@ -106,18 +102,14 @@ function CopyButton({ value }: { value: string }) {
       className="p-2 backdrop-blur inline-flex items-center justify-center rounded-md border bg-muted/50 text-muted-foreground transition-opacity hover:bg-muted"
       aria-label="Copy code to clipboard"
     >
-      {hasCopied ? (
-        <Check className="h-4 w-4 text-primary" />
-      ) : (
-        <Copy className="h-4 w-4" />
-      )}
+      {hasCopied ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
     </button>
-  )
+  );
 }
 
 function InstallButton({ name }: { name: string }) {
-  const { hasCopied, copy } = useClipboard()
-  const cmd = `npx shadcn@latest add ${REGISTRY_BASE}/${name}.json`
+  const { hasCopied, copy } = useClipboard();
+  const cmd = `npx shadcn@latest add ${REGISTRY_BASE}/${name}.json`;
   return (
     <button
       type="button"
@@ -126,20 +118,16 @@ function InstallButton({ name }: { name: string }) {
       aria-label="Copy install command"
       title="Copy install command"
     >
-      {hasCopied ? (
-        <Check className="h-4 w-4 text-primary" />
-      ) : (
-        <Terminal className="h-4 w-4" />
-      )}
+      {hasCopied ? <Check className="h-4 w-4 text-primary" /> : <Terminal className="h-4 w-4" />}
     </button>
-  )
+  );
 }
 
 function InstallTab({ name }: { name: string }) {
-  const cmd = `npx shadcn@latest add ${REGISTRY_BASE}/${name}.json`
-  const depCmd = `pnpm add @nebutra/ui @nebutra/tokens @nebutra/icons`
-  const { hasCopied: cmdCopied, copy: copyCmd } = useClipboard()
-  const { hasCopied: depCopied, copy: copyDep } = useClipboard()
+  const cmd = `npx shadcn@latest add ${REGISTRY_BASE}/${name}.json`;
+  const depCmd = `pnpm add @nebutra/ui @nebutra/tokens @nebutra/icons`;
+  const { hasCopied: cmdCopied, copy: copyCmd } = useClipboard();
+  const { hasCopied: depCopied, copy: copyDep } = useClipboard();
   return (
     <div className="space-y-5 p-6 text-sm">
       <div className="space-y-2">
@@ -147,9 +135,7 @@ function InstallTab({ name }: { name: string }) {
           Install via CLI
         </p>
         <div className="gap-2 bg-zinc-950 px-4 py-3 text-xs text-zinc-100 flex items-center rounded-lg border font-mono">
-          <span className="flex-1 overflow-x-auto whitespace-nowrap select-all">
-            {cmd}
-          </span>
+          <span className="flex-1 overflow-x-auto whitespace-nowrap select-all">{cmd}</span>
           <button
             type="button"
             onClick={() => copyCmd(cmd)}
@@ -169,9 +155,7 @@ function InstallTab({ name }: { name: string }) {
           Or install dependencies manually
         </p>
         <div className="gap-2 bg-zinc-950 px-4 py-3 text-xs text-zinc-100 flex items-center rounded-lg border font-mono">
-          <span className="flex-1 overflow-x-auto whitespace-nowrap select-all">
-            {depCmd}
-          </span>
+          <span className="flex-1 overflow-x-auto whitespace-nowrap select-all">{depCmd}</span>
           <button
             type="button"
             onClick={() => copyDep(depCmd)}
@@ -187,11 +171,11 @@ function InstallTab({ name }: { name: string }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function PromptButton({ name, code }: { name: string; code: string }) {
-  const { hasCopied, copy } = useClipboard()
+  const { hasCopied, copy } = useClipboard();
   return (
     <button
       type="button"
@@ -206,22 +190,16 @@ function PromptButton({ name, code }: { name: string; code: string }) {
         <MessageSquare className="h-4 w-4" />
       )}
     </button>
-  )
+  );
 }
 
-export function ComponentPreview({
-  children,
-  name,
-  code,
-  className,
-}: ComponentPreviewProps) {
-  const [previewTheme, setPreviewTheme] = useState<"light" | "dark">("light")
+export function ComponentPreview({ children, name, code, className }: ComponentPreviewProps) {
+  const [previewTheme, setPreviewTheme] = useState<"light" | "dark">("light");
 
   // 1. Resolve component from registry
   const Demo = name
-    ? (Index as Record<string, { component: React.ComponentType }>)[name]
-        ?.component
-    : null
+    ? (Index as Record<string, { component: React.ComponentType }>)[name]?.component
+    : null;
 
   // 2. Determine preview content:
   //    - Registry component takes priority when name matches
@@ -232,9 +210,9 @@ export function ComponentPreview({
     </Suspense>
   ) : (
     (children ?? null)
-  )
+  );
 
-  const hasCode = !!code
+  const hasCode = !!code;
 
   const themeToggle = (
     <>
@@ -245,7 +223,7 @@ export function ComponentPreview({
           "p-1.5 inline-flex items-center justify-center rounded-md transition-colors",
           previewTheme === "light"
             ? "bg-muted text-foreground"
-            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            : "text-muted-foreground hover:bg-muted hover:text-foreground",
         )}
         aria-label="Light theme"
       >
@@ -258,14 +236,14 @@ export function ComponentPreview({
           "p-1.5 inline-flex items-center justify-center rounded-md transition-colors",
           previewTheme === "dark"
             ? "bg-muted text-foreground"
-            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            : "text-muted-foreground hover:bg-muted hover:text-foreground",
         )}
         aria-label="Dark theme"
       >
         <Moon className="h-3.5 w-3.5" />
       </button>
     </>
-  )
+  );
 
   // No code → just show the preview
   if (!hasCode) {
@@ -277,7 +255,7 @@ export function ComponentPreview({
               "not-prose p-10 relative flex min-h-[350px] w-full flex-wrap items-center justify-center",
               "bg-[radial-gradient(var(--neutral-6)_1px,transparent_1px)] [background-size:16px_16px]",
               previewTheme === "dark" ? "dark bg-zinc-950" : "bg-white",
-              className
+              className,
             )}
           >
             {preview}
@@ -285,7 +263,7 @@ export function ComponentPreview({
           <div className="top-2 right-2 gap-1 absolute flex">{themeToggle}</div>
         </div>
       </div>
-    )
+    );
   }
 
   // Preview + Code tabs
@@ -326,17 +304,14 @@ export function ComponentPreview({
             "not-prose p-10 relative flex min-h-[350px] w-full flex-wrap items-center justify-center",
             "bg-[radial-gradient(var(--neutral-6)_1px,transparent_1px)] [background-size:16px_16px]",
             previewTheme === "dark" ? "dark bg-zinc-950" : "bg-white",
-            className
+            className,
           )}
         >
           {preview}
         </div>
       </TabsContent>
 
-      <TabsContent
-        value="code"
-        className="m-0 bg-zinc-950 dark:bg-zinc-950/50 border-none"
-      >
+      <TabsContent value="code" className="m-0 bg-zinc-950 dark:bg-zinc-950/50 border-none">
         <div className="[&_figure]:m-0 max-h-[600px] w-full overflow-hidden overflow-y-auto [&_figure]:rounded-none [&_figure]:border-0 [&_pre]:bg-transparent">
           <DynamicCodeBlock lang="tsx" code={code} />
         </div>
@@ -348,5 +323,5 @@ export function ComponentPreview({
         </TabsContent>
       )}
     </Tabs>
-  )
+  );
 }

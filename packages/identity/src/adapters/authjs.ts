@@ -1,8 +1,5 @@
+import { type CanonicalIdentity, CanonicalIdentitySchema } from "@nebutra/contracts";
 import { z } from "zod";
-import {
-  CanonicalIdentitySchema,
-  type CanonicalIdentity,
-} from "@nebutra/contracts";
 
 import type { IdentityAdapter } from "../types.js";
 

@@ -1,5 +1,5 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { ChoiceboxGroup } from "./choicebox";
 
 const meta = {
@@ -34,16 +34,8 @@ export const RadioDefault: Story = {
         value={value}
         onChange={(v) => setValue(v as string)}
       >
-        <ChoiceboxGroup.Item
-          title="Pro Trial"
-          description="Free for two weeks"
-          value="trial"
-        />
-        <ChoiceboxGroup.Item
-          title="Pro"
-          description="Get started now"
-          value="pro"
-        />
+        <ChoiceboxGroup.Item title="Pro Trial" description="Free for two weeks" value="trial" />
+        <ChoiceboxGroup.Item title="Pro" description="Get started now" value="pro" />
       </ChoiceboxGroup>
     );
   },
@@ -61,16 +53,8 @@ export const CheckboxDefault: Story = {
         value={value}
         onChange={(v) => setValue(v as string[])}
       >
-        <ChoiceboxGroup.Item
-          title="Pro Trial"
-          description="Free for two weeks"
-          value="trial"
-        />
-        <ChoiceboxGroup.Item
-          title="Pro"
-          description="Get started now"
-          value="pro"
-        />
+        <ChoiceboxGroup.Item title="Pro Trial" description="Free for two weeks" value="trial" />
+        <ChoiceboxGroup.Item title="Pro" description="Get started now" value="pro" />
       </ChoiceboxGroup>
     );
   },
@@ -89,16 +73,8 @@ export const ColumnLayout: Story = {
         onChange={(v) => setValue(v as string)}
         className="w-[300px]"
       >
-        <ChoiceboxGroup.Item
-          title="Starter"
-          description="For personal projects"
-          value="starter"
-        />
-        <ChoiceboxGroup.Item
-          title="Team"
-          description="For small teams up to 10"
-          value="team"
-        />
+        <ChoiceboxGroup.Item title="Starter" description="For personal projects" value="starter" />
+        <ChoiceboxGroup.Item title="Team" description="For small teams up to 10" value="team" />
         <ChoiceboxGroup.Item
           title="Enterprise"
           description="Custom solutions for large orgs"
@@ -121,22 +97,14 @@ export const WithCustomContent: Story = {
         value={value}
         onChange={(v) => setValue(v as string)}
       >
-        <ChoiceboxGroup.Item
-          title="Pro Trial"
-          description="Free for two weeks"
-          value="trial"
-        >
+        <ChoiceboxGroup.Item title="Pro Trial" description="Free for two weeks" value="trial">
           <div className="flex justify-center p-2">
             <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
               Trial
             </span>
           </div>
         </ChoiceboxGroup.Item>
-        <ChoiceboxGroup.Item
-          title="Pro"
-          description="Get started now"
-          value="pro"
-        >
+        <ChoiceboxGroup.Item title="Pro" description="Get started now" value="pro">
           <div className="flex justify-center p-2">
             <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
               Pro
@@ -158,16 +126,8 @@ export const DisabledGroup: Story = {
       type="radio"
       disabled
     >
-      <ChoiceboxGroup.Item
-        title="Pro Trial"
-        description="Free for two weeks"
-        value="trial"
-      />
-      <ChoiceboxGroup.Item
-        title="Pro"
-        description="Get started now"
-        value="pro"
-      />
+      <ChoiceboxGroup.Item title="Pro Trial" description="Free for two weeks" value="trial" />
+      <ChoiceboxGroup.Item title="Pro" description="Get started now" value="pro" />
     </ChoiceboxGroup>
   ),
 };
@@ -191,11 +151,7 @@ export const DisabledItem: Story = {
           value="trial"
           disabled
         />
-        <ChoiceboxGroup.Item
-          title="Pro"
-          description="Get started now"
-          value="pro"
-        />
+        <ChoiceboxGroup.Item title="Pro" description="Get started now" value="pro" />
       </ChoiceboxGroup>
     );
   },
@@ -214,16 +170,8 @@ export const WithLabel: Story = {
         value={value}
         onChange={(v) => setValue(v as string)}
       >
-        <ChoiceboxGroup.Item
-          title="Pro Trial"
-          description="Free for two weeks"
-          value="trial"
-        />
-        <ChoiceboxGroup.Item
-          title="Pro"
-          description="Get started now"
-          value="pro"
-        />
+        <ChoiceboxGroup.Item title="Pro Trial" description="Free for two weeks" value="trial" />
+        <ChoiceboxGroup.Item title="Pro" description="Get started now" value="pro" />
       </ChoiceboxGroup>
     );
   },

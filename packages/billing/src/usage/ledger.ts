@@ -1,12 +1,11 @@
 import { createHash } from "node:crypto";
-
-import { prisma, Prisma, type PrismaClient } from "@nebutra/db";
 import {
-  UsageLedgerEntryInputSchema,
   type UsageLedgerEntryInput,
+  UsageLedgerEntryInputSchema,
   type UsageLedgerSourceContract,
   type UsageTypeContract,
 } from "@nebutra/contracts";
+import { Prisma, type PrismaClient, prisma } from "@nebutra/db";
 
 const DEFAULT_TAKE = 100;
 const MAX_TAKE = 500;
@@ -83,27 +82,18 @@ export async function appendUsageLedgerEntry(
         ingestVersion: payload.ingestVersion,
         metadata,
         ...(payload.eventId ? { eventId: payload.eventId } : {}),
-        ...(payload.subscriptionId
-          ? { subscriptionId: payload.subscriptionId }
-          : {}),
+        ...(payload.subscriptionId ? { subscriptionId: payload.subscriptionId } : {}),
         ...(payload.userId ? { userId: payload.userId } : {}),
         ...(payload.resource ? { resource: payload.resource } : {}),
-        ...(payload.unitCost !== undefined
-          ? { unitCost: payload.unitCost }
-          : {}),
-        ...(payload.totalCost !== undefined
-          ? { totalCost: payload.totalCost }
-          : {}),
+        ...(payload.unitCost !== undefined ? { unitCost: payload.unitCost } : {}),
+        ...(payload.totalCost !== undefined ? { totalCost: payload.totalCost } : {}),
       },
       select: { id: true },
     });
 
     return { created: true, entryId: created.id };
   } catch (error) {
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2002"
-    ) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
       const duplicate = await db.usageLedgerEntry.findUnique({
         where: {
           organizationId_idempotencyKey: {

@@ -1,6 +1,5 @@
-"use client"
-import { GeistTooltip as Tooltip } from "@nebutra/ui/primitives"
-import { Button } from "@nebutra/ui/primitives"
+"use client";
+import { Button, GeistTooltip as Tooltip } from "@nebutra/ui/primitives";
 
 export function TooltipInstantDemo() {
   return (
@@ -9,5 +8,5 @@ export function TooltipInstantDemo() {
         <Button variant="outline">No delay</Button>
       </Tooltip>
     </div>
-  )
+  );
 }
