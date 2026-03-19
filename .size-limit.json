@@ -17,12 +17,6 @@
     "import": "*"
   },
   {
-    "name": "@nebutra/billing (entry)",
-    "path": "packages/billing/dist/index.js",
-    "limit": "50 kB",
-    "import": "*"
-  },
-  {
     "name": "@nebutra/errors",
     "path": "packages/errors/src/index.ts",
     "limit": "10 kB",
