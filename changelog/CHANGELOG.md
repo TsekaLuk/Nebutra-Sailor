@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.8](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.7...v1.7.8) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* rate-limit coverage — add tests for factory functions, ignore timer block ([1a76848](https://github.com/Nebutra/Nebutra-Sailor/commit/1a7684811c5b89d57d78eb1177a59a7368d48122))
+
 ## [1.7.7](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.6...v1.7.7) (2026-03-19)
 
 
