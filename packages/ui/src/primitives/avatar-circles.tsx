@@ -1,6 +1,6 @@
-import Image from "next/image";
+"use client";
 
-("use client");
+import Image from "next/image";
 
 import { cn } from "../utils/cn";
 

@@ -1,8 +1,7 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import type { LucideIcon } from "lucide-react";
+import Image from "next/image";
 import { FeatureIconItem } from "../primitives/feature-icon-item";
 import { cn } from "../utils/cn";
 

@@ -1,8 +1,7 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import type { LucideIcon } from "lucide-react";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { Card, CardContent, CardHeader } from "./card";

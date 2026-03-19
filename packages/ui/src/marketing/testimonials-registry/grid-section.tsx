@@ -1,8 +1,7 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { cn } from "../../utils/cn";
 import { GridPattern } from "../grid-pattern";
 import type { TestimonialsCommonProps } from "./types";

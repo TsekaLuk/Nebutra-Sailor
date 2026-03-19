@@ -1,8 +1,7 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import { Check, CheckCheck, MoreHorizontal, Send, SmilePlus, Users } from "lucide-react";
+import Image from "next/image";
 import type React from "react";
 import { useState } from "react";
 import { cn } from "../utils/cn";

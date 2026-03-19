@@ -1,8 +1,7 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import { PlusIcon } from "lucide-react";
+import Image from "next/image";
 import type * as React from "react";
 import { cn } from "../utils/cn";
 

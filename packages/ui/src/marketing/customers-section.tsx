@@ -1,8 +1,7 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import { ChevronRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatedGroup } from "../primitives/animated-group";
 import { cn } from "../utils/cn";

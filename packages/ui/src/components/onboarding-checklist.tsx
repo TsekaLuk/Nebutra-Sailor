@@ -1,9 +1,8 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import { motion, type Variants } from "framer-motion";
 import { CheckCircle2, PlayCircle } from "lucide-react";
+import Image from "next/image";
 import { Dialog, DialogContent, DialogTrigger } from "../primitives/dialog";
 import { cn } from "../utils/cn";
 

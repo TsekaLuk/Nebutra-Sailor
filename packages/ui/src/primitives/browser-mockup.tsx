@@ -1,8 +1,7 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import { ArrowLeft, ArrowRight, Check, Copy, RotateCw } from "lucide-react";
+import Image from "next/image";
 import type * as React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "../utils/cn";

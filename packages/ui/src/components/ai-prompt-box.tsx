@@ -1,6 +1,4 @@
-import Image from "next/image";
-
-("use client");
+"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -14,6 +12,7 @@ import {
   StopCircle,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 import { Dialog, DialogContent, DialogTitle } from "../primitives/dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../primitives/tooltip";
