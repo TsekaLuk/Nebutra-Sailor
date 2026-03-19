@@ -4,9 +4,10 @@
  *
  * Run:  pnpm --filter @nebutra/icons generate
  */
+
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { basename, join } from "node:path";
 import { transform } from "@svgr/core";
-import { mkdir, readdir, readFile, writeFile } from "fs/promises";
-import { basename, join } from "path";
 
 const SVG_DIR = join(__dirname, "../src/svg");
 const OUT_DIR = join(__dirname, "../src/components");
@@ -122,8 +123,7 @@ async function main() {
         filePath: join(SVG_DIR, file),
       });
       code = removeDuplicateStyleKeys(code);
-    } catch (err) {
-      console.warn(`⚠ Skipping ${file}:`, (err as Error).message.split("\n")[0]);
+    } catch (_err) {
       skipped++;
       continue;
     }
@@ -154,7 +154,6 @@ async function main() {
   process.stdout.write(`✅ Wrote src/index.ts with ${exportLines.length} named exports\n`);
 }
 
-main().catch((e) => {
-  console.error(e);
+main().catch((_e) => {
   process.exit(1);
 });

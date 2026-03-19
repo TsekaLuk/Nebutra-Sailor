@@ -59,7 +59,10 @@ export const PricingCard: Story = {
           ),
         )}
       </div>
-      <button className="mt-6 w-full rounded-lg bg-primary py-2 text-sm font-medium text-primary-foreground">
+      <button
+        type="button"
+        className="mt-6 w-full rounded-lg bg-primary py-2 text-sm font-medium text-primary-foreground"
+      >
         Get started
       </button>
     </MagicCard>

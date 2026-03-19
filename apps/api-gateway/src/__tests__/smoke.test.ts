@@ -32,7 +32,7 @@ describe("API Gateway Smoke Tests", () => {
 
       expect(result.status).toBeDefined();
       expect(["healthy", "degraded", "unhealthy"]).toContain(result.status);
-      const memoryCheck = result.checks["memory"];
+      const memoryCheck = result.checks.memory;
       expect(memoryCheck).toBeDefined();
       expect(memoryCheck?.status).toBe("pass");
     });

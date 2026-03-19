@@ -64,8 +64,8 @@ export function initTracing(): void {
   // Graceful shutdown
   process.on("SIGTERM", () => {
     sdk.shutdown().then(
-      () => console.log("Tracing terminated"),
-      (error) => console.error("Error terminating tracing", error),
+      () => {},
+      (_error) => {},
     );
   });
 }

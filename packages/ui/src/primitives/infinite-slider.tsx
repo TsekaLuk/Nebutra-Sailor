@@ -56,7 +56,7 @@ export function InfiniteSlider({
   const [ref, { width, height }] = useMeasure();
   const translation = useMotionValue(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [key, setKey] = useState(0);
+  const [_key, setKey] = useState(0);
 
   // Calculate duration from speed if provided
   const effectiveDuration = React.useMemo(() => {
@@ -110,7 +110,6 @@ export function InfiniteSlider({
 
     return controls?.stop;
   }, [
-    key,
     translation,
     effectiveDuration,
     effectiveDurationOnHover,

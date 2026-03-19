@@ -6,7 +6,7 @@
  */
 
 import { type BaseEvent, EventTypes, eventBus } from "@nebutra/event-bus";
-import { broadcastToTenant, notifyUser, PusherEvents, triggerEvent } from "./server";
+import { PusherEvents, triggerEvent } from "./server";
 
 /**
  * Event mapping configuration
@@ -160,24 +160,15 @@ export function initEventBridge(): () => void {
         await Promise.all(
           channels.map((channel) => triggerEvent(channel, config.pusherEvent, payload)),
         );
-
-        console.log(
-          `[EventBridge] Broadcasted ${eventType} → ${config.pusherEvent} to ${channels.length} channel(s)`,
-        );
-      } catch (error) {
-        console.error(`[EventBridge] Failed to broadcast ${eventType}:`, error);
-      }
+      } catch (_error) {}
     });
 
     unsubscribers.push(unsubscribe);
   }
 
-  console.log(`[EventBridge] Initialized with ${Object.keys(eventMappings).length} event mappings`);
-
   // Return cleanup function
   return () => {
     unsubscribers.forEach((unsub) => unsub());
-    console.log("[EventBridge] Shut down");
   };
 }
 

@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("node:fs");
 
 const path = "apps/design-docs/content/docs/en/components/avatar.mdx";
 const content = fs.readFileSync(path, "utf8");
@@ -7,10 +7,8 @@ const content = fs.readFileSync(path, "utf8");
 // It captures the whitespace+codeblock in group 1.
 const regex = /<\/ComponentPreview>(\s*```[a-z]*\r?\n[\s\S]*?\r?\n```)/g;
 
-const matches = content.match(regex);
-console.log(`Found ${matches ? matches.length : 0} matches in avatar.mdx`);
+const _matches = content.match(regex);
 
 const newContent = content.replace(regex, "$1\n</ComponentPreview>");
 
 fs.writeFileSync("avatar-test.mdx", newContent, "utf8");
-console.log("Wrote to avatar-test.mdx");

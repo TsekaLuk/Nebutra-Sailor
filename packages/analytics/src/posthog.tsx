@@ -42,14 +42,14 @@ export function PostHogProvider({ children }: PostHogProviderProps) {
 // ============================================================================
 
 export function PageviewTracker() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const _pathname = usePathname();
+  const _searchParams = useSearchParams();
 
   useEffect(() => {
     posthog.capture("$pageview", {
       $current_url: window.location.href,
     });
-  }, [pathname, searchParams]);
+  }, []);
 
   return null;
 }

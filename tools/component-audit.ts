@@ -14,9 +14,8 @@
  *   npx tsx tools/component-audit.ts --fix
  */
 
-import { execSync } from "child_process";
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 // Configuration
 const CONFIG = {
@@ -241,7 +240,7 @@ function runAudit(): AuditResult {
   };
 }
 
-function formatReport(result: AuditResult): string {
+function _formatReport(result: AuditResult): string {
   const lines: string[] = [];
 
   lines.push("╔══════════════════════════════════════════════════════════════╗");
@@ -346,14 +345,10 @@ function formatReport(result: AuditResult): string {
 const args = process.argv.slice(2);
 const jsonOutput = args.includes("--json");
 
-console.log("Running component audit...\n");
-
 const result = runAudit();
 
 if (jsonOutput) {
-  console.log(JSON.stringify(result, null, 2));
 } else {
-  console.log(formatReport(result));
 }
 
 // Exit with error if critical issues

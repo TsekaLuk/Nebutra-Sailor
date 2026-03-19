@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const _path = require("node:path");
 
 const reportPath =
   "/Users/tseka_luk/.gemini/antigravity/brain/08ff808e-b8de-401a-9f15-6fd556eb5d8e/demo_audit_report.md";
@@ -28,9 +28,4 @@ for (const line of lines) {
 const existingFiles = fs.readdirSync(previewsPath).filter((f) => f.endsWith("-demo.tsx"));
 const existingNames = existingFiles.map((f) => f.replace("-demo.tsx", ""));
 
-const trulyMissing = missingInReport.filter((r) => !existingNames.includes(r));
-
-console.log("Actually missing TSX files:");
-console.log(trulyMissing.join("\n"));
-
-console.log("\nTotal actually missing: " + trulyMissing.length);
+const _trulyMissing = missingInReport.filter((r) => !existingNames.includes(r));

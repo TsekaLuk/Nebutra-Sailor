@@ -28,7 +28,6 @@
 
 "use client";
 
-import * as React from "react";
 import type { FeaturesProps } from "./types";
 
 export function Features({

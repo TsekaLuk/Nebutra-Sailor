@@ -10,7 +10,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Drawer2Demo() {
   return (
     <Drawer>

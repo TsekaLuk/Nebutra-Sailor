@@ -10,10 +10,7 @@ interface ErrorProps {
 }
 
 export default function TenantsError({ error, reset }: ErrorProps) {
-  useEffect(() => {
-    // Forward to error reporting service when available
-    console.error("[Tenants] Page error:", error);
-  }, [error]);
+  useEffect(() => {}, []);
 
   return (
     <section className="mx-auto w-full max-w-7xl" role="alert" aria-label="Tenants error">

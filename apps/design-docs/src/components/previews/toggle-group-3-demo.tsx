@@ -1,7 +1,6 @@
 "use client";
 
 import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function ToggleGroup3Demo() {
   return (
     <ToggleGroup type="single" defaultValue="center">

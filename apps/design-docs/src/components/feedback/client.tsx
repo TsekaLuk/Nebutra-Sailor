@@ -104,6 +104,7 @@ export function Feedback({
         <div className="flex flex-row items-center gap-2">
           <p className="text-sm font-medium pe-2">How is this guide?</p>
           <button
+            type="button"
             disabled
             className={cn(
               rateButtonVariants({
@@ -115,6 +116,7 @@ export function Feedback({
             Good
           </button>
           <button
+            type="button"
             disabled
             className={cn(
               rateButtonVariants({
@@ -141,6 +143,7 @@ export function Feedback({
       <div className="flex flex-row items-center gap-2">
         <p className="text-sm font-medium pe-2">How is this guide?</p>
         <button
+          type="button"
           disabled={previous !== null}
           className={cn(
             rateButtonVariants({
@@ -155,6 +158,7 @@ export function Feedback({
           Good
         </button>
         <button
+          type="button"
           disabled={previous !== null}
           className={cn(
             rateButtonVariants({
@@ -189,6 +193,7 @@ export function Feedback({
               </a>
 
               <button
+                type="button"
                 className={cn(
                   buttonVariants({
                     color: "secondary",
@@ -207,8 +212,6 @@ export function Feedback({
         ) : (
           <form className="flex flex-col gap-3" onSubmit={submit}>
             <textarea
-              // eslint-disable-next-line jsx-a11y/no-autofocus
-              autoFocus
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -350,6 +353,7 @@ export function FeedbackBlock({
               </a>
 
               <button
+                type="button"
                 className={cn(
                   buttonVariants({
                     color: "secondary",
@@ -367,8 +371,6 @@ export function FeedbackBlock({
         ) : (
           <form className="flex flex-col gap-2" onSubmit={submit}>
             <textarea
-              // eslint-disable-next-line jsx-a11y/no-autofocus
-              autoFocus
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}

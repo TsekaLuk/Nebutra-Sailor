@@ -107,7 +107,7 @@ export async function usageMeteringMiddleware(c: Context, next: Next) {
       if (tokensUsed) {
         const tokenKey = `usage:${orgId}:${period}:ai_tokens`;
         const count = parseInt(tokensUsed, 10);
-        if (!isNaN(count) && count > 0) {
+        if (!Number.isNaN(count) && count > 0) {
           // Upstash Redis supports INCRBY via raw commands
           const rawRedis = r as unknown as {
             incrby: (key: string, n: number) => Promise<number>;

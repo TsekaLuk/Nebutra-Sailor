@@ -3,7 +3,6 @@
 import { MonitorIcon, MoonStarIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import type { JSX } from "react";
-import React from "react";
 import { useMount } from "@/hooks/useMount";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +19,7 @@ function ThemeOption({
 }) {
   return (
     <button
+      type="button"
       className={cn(
         "relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-all [&_svg]:size-4",
         isActive

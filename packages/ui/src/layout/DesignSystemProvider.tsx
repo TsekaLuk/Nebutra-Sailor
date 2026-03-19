@@ -107,7 +107,7 @@ export function DesignSystemProvider({
       toggleMode,
       resolvedMode,
     }),
-    [mode, resolvedMode],
+    [mode, resolvedMode, setMode, toggleMode],
   );
 
   return (

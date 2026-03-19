@@ -1,5 +1,5 @@
-import { copyFileSync, existsSync, mkdirSync } from "fs";
-import { dirname, join } from "path";
+import { copyFileSync, existsSync, mkdirSync } from "node:fs";
+import { join } from "node:path";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -29,7 +29,6 @@ export default defineConfig({
 
     if (existsSync(srcPath)) {
       copyFileSync(srcPath, distPath);
-      console.log("✓ Copied tokens.css to dist/styles/");
     }
   },
 });

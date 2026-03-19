@@ -1,7 +1,6 @@
 "use client";
 
 import { AvatarGroup } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function AvatarGroupSimpleDemo() {
   return (

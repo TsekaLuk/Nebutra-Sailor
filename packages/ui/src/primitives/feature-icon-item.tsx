@@ -1,7 +1,6 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import * as React from "react";
 import { cn } from "../utils/cn";
 
 export interface FeatureIconItemProps {

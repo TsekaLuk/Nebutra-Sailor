@@ -2,7 +2,6 @@
 
 import { motion, type Variants } from "framer-motion";
 import { CheckCircle2, PlayCircle } from "lucide-react";
-import * as React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "../primitives/dialog";
 import { cn } from "../utils/cn";
 

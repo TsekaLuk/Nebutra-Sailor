@@ -22,10 +22,7 @@ export class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error };
   }
 
-  override componentDidCatch(error: Error, info: ErrorInfo): void {
-    // Log to alerting/Sentry here if wired
-    console.error("ErrorBoundary caught:", error, info.componentStack);
-  }
+  override componentDidCatch(_error: Error, _info: ErrorInfo): void {}
 
   override render(): ReactNode {
     if (this.state.hasError) {
@@ -41,6 +38,7 @@ export class ErrorBoundary extends Component<Props, State> {
             persists.
           </p>
           <button
+            type="button"
             onClick={() => this.setState({ hasError: false, error: null })}
             className="rounded-[var(--radius-md)] bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90"
           >

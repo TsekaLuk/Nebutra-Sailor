@@ -17,9 +17,9 @@ export function initSentry(): void {
     beforeSend(event) {
       // Strip auth headers before sending to Sentry
       if (event.request?.headers) {
-        delete event.request.headers["authorization"];
+        delete event.request.headers.authorization;
         delete event.request.headers["x-api-key"];
-        delete event.request.headers["cookie"];
+        delete event.request.headers.cookie;
         delete event.request.headers["x-admin-key"];
       }
       return event;

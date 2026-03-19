@@ -65,7 +65,7 @@ interface CustomSliderProps {
 // =============================================================================
 
 const formatTime = (seconds: number): string => {
-  if (!isFinite(seconds) || isNaN(seconds)) return "0:00";
+  if (!Number.isFinite(seconds) || Number.isNaN(seconds)) return "0:00";
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
@@ -173,16 +173,16 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const handleTimeUpdate = useCallback(() => {
     if (videoRef.current) {
       const progressValue = (videoRef.current.currentTime / videoRef.current.duration) * 100;
-      setProgress(isFinite(progressValue) ? progressValue : 0);
+      setProgress(Number.isFinite(progressValue) ? progressValue : 0);
       setCurrentTime(videoRef.current.currentTime);
       setDuration(videoRef.current.duration);
     }
   }, []);
 
   const handleSeek = useCallback((value: number) => {
-    if (videoRef.current && videoRef.current.duration) {
+    if (videoRef.current?.duration) {
       const time = (value / 100) * videoRef.current.duration;
-      if (isFinite(time)) {
+      if (Number.isFinite(time)) {
         videoRef.current.currentTime = time;
         setProgress(value);
       }

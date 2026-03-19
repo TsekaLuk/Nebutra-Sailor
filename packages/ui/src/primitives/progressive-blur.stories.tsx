@@ -75,7 +75,10 @@ export const WithCTA: Story = {
         ))}
       </div>
       <ProgressiveBlur position="bottom" height="50%">
-        <button className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow">
+        <button
+          type="button"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow"
+        >
           Show more
         </button>
       </ProgressiveBlur>

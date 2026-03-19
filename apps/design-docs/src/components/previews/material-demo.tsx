@@ -23,17 +23,29 @@ export function MaterialDemo() {
           <p className="text-xs mt-1 text-muted-foreground">Used for dropdowns</p>
         </div>
         <div className="p-2 space-y-1 flex flex-col">
-          <button className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left transition-colors hover:bg-accent hover:text-accent-foreground">
+          <button
+            type="button"
+            className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
             <User className="w-4 h-4" /> Profile
           </button>
-          <button className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left transition-colors hover:bg-accent hover:text-accent-foreground">
+          <button
+            type="button"
+            className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
             <Settings className="w-4 h-4" /> Settings
           </button>
-          <button className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left transition-colors hover:bg-accent hover:text-accent-foreground">
+          <button
+            type="button"
+            className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
             <Bell className="w-4 h-4" /> Notifications
           </button>
           <div className="my-1 mx-2 h-px bg-border" />
-          <button className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left text-destructive transition-colors hover:bg-destructive/10">
+          <button
+            type="button"
+            className="gap-3 px-3 py-2 text-sm flex w-full items-center rounded-md text-left text-destructive transition-colors hover:bg-destructive/10"
+          >
             <LogOut className="w-4 h-4" /> Logout
           </button>
         </div>
@@ -50,10 +62,16 @@ export function MaterialDemo() {
               Are you sure you want to proceed with this action? This cannot be undone.
             </p>
             <div className="gap-3 pt-4 flex justify-end">
-              <button className="px-4 py-2 text-sm font-medium rounded-md border transition-colors hover:bg-accent">
+              <button
+                type="button"
+                className="px-4 py-2 text-sm font-medium rounded-md border transition-colors hover:bg-accent"
+              >
                 Cancel
               </button>
-              <button className="px-4 py-2 text-sm font-medium rounded-md bg-primary text-primary-foreground transition-colors hover:bg-primary/90">
+              <button
+                type="button"
+                className="px-4 py-2 text-sm font-medium rounded-md bg-primary text-primary-foreground transition-colors hover:bg-primary/90"
+              >
                 Confirm
               </button>
             </div>

@@ -236,7 +236,7 @@ export function useInView<T extends HTMLElement = HTMLElement>(
     observer.observe(element);
 
     return () => observer.disconnect();
-  }, [threshold, rootMargin, triggerOnce, ref]);
+  }, [threshold, rootMargin, triggerOnce]);
 
   return [ref, isInView];
 }

@@ -305,7 +305,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
         document.removeEventListener("mousedown", handleClickOutside);
         document.removeEventListener("touchend", handleClickOutside);
       };
-    }, [open]);
+    }, [open, handleClickOutside]);
 
     useEffect(() => {
       if (value) setSelected(value);
@@ -317,7 +317,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
       if (JSON.stringify(newOption) !== JSON.stringify(options)) {
         setOptions(newOption);
       }
-    }, [arrayDefaultOptions, arrayOptions, groupBy, onSearch, options]);
+    }, [arrayOptions, groupBy, onSearch, options]);
 
     useEffect(() => {
       const doSearchSync = () => {
@@ -462,6 +462,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                 {option.label}
                 {!option.fixed && (
                   <button
+                    type="button"
                     className="absolute -inset-y-px -end-px flex size-7 items-center justify-center rounded-e-lg border border-transparent p-0 text-muted-foreground/80 outline-0 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70"
                     onKeyDown={(e) => {
                       if (e.key === "Enter") handleUnselect(option);
@@ -544,7 +545,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                 onMouseUp={() => inputRef?.current?.focus()}
               >
                 {isLoading ? (
-                  <>{loadingIndicator}</>
+                  loadingIndicator
                 ) : (
                   <>
                     {EmptyItem()}

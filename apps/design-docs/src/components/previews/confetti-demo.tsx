@@ -16,6 +16,7 @@ export function ConfettiDemo() {
 
       <div className="gap-4 z-10 flex flex-col items-center">
         <button
+          type="button"
           onClick={() =>
             confettiRef.current?.fire({
               particleCount: 150,

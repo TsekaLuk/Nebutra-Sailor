@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import { ScrollArea, ScrollBar } from "@/components/mdx-scroll-area";
 export function ScrollArea2Demo() {
   return (

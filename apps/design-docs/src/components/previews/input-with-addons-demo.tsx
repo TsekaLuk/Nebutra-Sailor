@@ -1,7 +1,6 @@
 "use client";
 
 import { Input } from "@nebutra/ui/primitives"; // Usually Input is exported
-import * as React from "react";
 
 export function InputWithAddonsDemo() {
   return (

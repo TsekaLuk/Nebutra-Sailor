@@ -1,7 +1,6 @@
 "use client";
 
 import { clsx } from "clsx";
-import React from "react";
 import { getProductHuntBadgeUrl, getProductHuntUrl, PRODUCT_HUNT_COLORS } from "../config";
 import type { ProductHuntBadgeProps } from "../types";
 
@@ -80,7 +79,6 @@ export function ProductHuntEmbedBadge({
   openInNewTab = true,
 }: ProductHuntBadgeProps) {
   if (!postId) {
-    console.warn("ProductHuntEmbedBadge: postId is required for the official embed badge");
     return null;
   }
 

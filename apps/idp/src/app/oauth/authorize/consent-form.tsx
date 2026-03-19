@@ -44,6 +44,7 @@ export function ConsentForm({ uid }: ConsentFormProps) {
   return (
     <div className="gap-3 flex">
       <button
+        type="button"
         onClick={() => handleConsent(false)}
         disabled={isLoading}
         className="border-white/10 bg-white/5 py-3 text-sm font-medium text-white/70 hover:bg-white/10 hover:text-white flex-1 rounded-xl border transition-all disabled:opacity-50"
@@ -51,13 +52,19 @@ export function ConsentForm({ uid }: ConsentFormProps) {
         Deny
       </button>
       <button
+        type="button"
         onClick={() => handleConsent(true)}
         disabled={isLoading}
         className="from-blue-600 to-cyan-600 py-3 text-sm font-semibold text-white shadow-blue-500/25 hover:shadow-blue-500/40 flex-1 rounded-xl bg-gradient-to-r shadow-lg transition-all disabled:opacity-50"
       >
         {isLoading ? (
           <span className="gap-2 inline-flex items-center">
-            <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+            <svg
+              aria-hidden="true"
+              className="h-4 w-4 animate-spin"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
               <circle
                 className="opacity-25"
                 cx="12"

@@ -1,7 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { LaunchBannerProps } from "../types";
 
 // ============================================
@@ -285,7 +285,7 @@ export function LaunchBannerFloating({
           className="absolute right-2 top-2 rounded-full p-1 opacity-70 transition-opacity hover:opacity-100"
           aria-label="Dismiss banner"
         >
-          <svg width={14} height={14} viewBox="0 0 16 16" fill="none">
+          <svg aria-hidden="true" width={14} height={14} viewBox="0 0 16 16" fill="none">
             <path
               d="M4 4L12 12M12 4L4 12"
               stroke="currentColor"
@@ -409,7 +409,6 @@ export function LaunchBanner({ variant = "top", ...props }: LaunchBannerProps) {
       return <LaunchBannerFloating {...props} />;
     case "inline":
       return <LaunchBannerInline {...props} />;
-    case "top":
     default:
       return <LaunchBannerTop {...props} />;
   }

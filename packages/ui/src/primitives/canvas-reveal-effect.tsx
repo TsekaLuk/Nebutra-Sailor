@@ -5,7 +5,6 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import * as React from "react";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { cn } from "../utils/cn";
@@ -231,13 +230,12 @@ function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) 
           };
           break;
         default:
-          console.error(`Invalid uniform type for '${uniformName}'.`);
           break;
       }
     }
 
-    preparedUniforms["u_time"] = { value: 0, type: "1f" };
-    preparedUniforms["u_resolution"] = {
+    preparedUniforms.u_time = { value: 0, type: "1f" };
+    preparedUniforms.u_resolution = {
       value: new THREE.Vector2(size.width * 2, size.height * 2),
     };
     return preparedUniforms;
@@ -265,7 +263,7 @@ function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) 
       blendSrc: THREE.SrcAlphaFactor,
       blendDst: THREE.OneFactor,
     });
-  }, [size.width, size.height, source]);
+  }, [source, getUniforms]);
 
   return (
     <mesh ref={ref}>

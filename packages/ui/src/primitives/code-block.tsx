@@ -256,7 +256,7 @@ export function CodeBlock({
   // Reset language override when switching files
   useEffect(() => {
     setLanguageOverride(null);
-  }, [activeTitle]);
+  }, []);
 
   // Detect dark mode
   useEffect(() => {
@@ -357,7 +357,7 @@ export function CodeBlock({
       if (!lineNumEl) return;
 
       const lineNumber = parseInt(lineNumEl.textContent?.trim() ?? "", 10);
-      if (isNaN(lineNumber)) return;
+      if (Number.isNaN(lineNumber)) return;
 
       const anchor = `#L${lineNumber}`;
       navigator.clipboard.writeText(anchor).catch(() => {});

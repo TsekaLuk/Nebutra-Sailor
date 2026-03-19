@@ -25,6 +25,7 @@ export default function LocaleError({
           style={{ animation: "pulse-gentle 3s ease-in-out infinite" }}
         >
           <svg
+            aria-hidden="true"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

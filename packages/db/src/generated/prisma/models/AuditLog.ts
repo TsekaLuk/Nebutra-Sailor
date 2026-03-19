@@ -665,10 +665,7 @@ export interface AuditLogDelegate<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
-  [K: symbol]: {
-    types: Prisma.TypeMap<ExtArgs>["model"]["AuditLog"];
-    meta: { name: "AuditLog" };
-  };
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["AuditLog"]; meta: { name: "AuditLog" } };
   /**
    * Find zero or one AuditLog that matches the filter.
    * @param {AuditLogFindUniqueArgs} args - Arguments to find a AuditLog

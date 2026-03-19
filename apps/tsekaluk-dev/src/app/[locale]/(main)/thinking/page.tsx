@@ -75,6 +75,7 @@ export default async function ThinkingPage({ params }: { params: Promise<{ local
               style={{ animation: "float 4s ease-in-out infinite" }}
             >
               <svg
+                aria-hidden="true"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

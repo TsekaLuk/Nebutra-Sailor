@@ -28,7 +28,7 @@ export function AlertDialogCustomDemo() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Keep Item</AlertDialogCancel>
-          <AlertDialogAction onClick={() => console.warn("Remove items")}>Remove</AlertDialogAction>
+          <AlertDialogAction onClick={() => {}}>Remove</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

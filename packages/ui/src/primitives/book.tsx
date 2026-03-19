@@ -5,7 +5,14 @@ import type React from "react";
 import { useResponsive } from "../hooks/use-responsive";
 
 const DefaultIllustration = (
-  <svg fill="none" height="56" viewBox="0 0 36 56" width="36" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    aria-hidden="true"
+    fill="none"
+    height="56"
+    viewBox="0 0 36 56"
+    width="36"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       clipRule="evenodd"
       d="M3.03113 28.0005C6.26017 23.1765 11.7592 20.0005 18 20.0005C24.2409 20.0005 29.7399 23.1765 32.9689 28.0005C29.7399 32.8244 24.2409 36.0005 18 36.0005C11.7592 36.0005 6.26017 32.8244 3.03113 28.0005Z"
@@ -113,6 +120,7 @@ export const Book = ({
               </span>
               {variant === "stripe" ? (
                 <svg
+                  aria-hidden="true"
                   className="scale-75 -ml-1 -mb-1"
                   height="24"
                   width="24"

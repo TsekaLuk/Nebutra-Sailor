@@ -2,7 +2,6 @@
 
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
 import { AnimatedGroup } from "../primitives/animated-group";
 import { cn } from "../utils/cn";
 

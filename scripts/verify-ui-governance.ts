@@ -345,35 +345,15 @@ function main() {
   const policy = loadUiGovernancePolicy();
   const rawColorStats = verifyRawTailwindColorUsage(policy);
   verifyMotionImports(policy);
-  const tokenStats = verifyTokenFormatPolicy(policy);
+  const _tokenStats = verifyTokenFormatPolicy(policy);
   const tierStats = verifyComponentTierCoverage(policy);
   verifyDependencyBoundaries(policy);
   const budgetStats = verifyAggregateBudgets(policy);
-
-  console.log("UI governance verification passed");
-  console.log(`- policy: ${policy.policyVersion}`);
-  for (const stat of rawColorStats) {
-    console.log(`- raw tailwind color utilities [${stat.surface}]: ${stat.total}/${stat.budget}`);
+  for (const _stat of rawColorStats) {
   }
-  console.log(
-    [
-      `- token hex literals: ${tokenStats.hexTotal}/${policy.tokenFormatBudget.maxHexLiterals}`,
-      `- token hsl literals: ${tokenStats.hslTotal}/${policy.tokenFormatBudget.maxHslLiterals}`,
-      `- token oklch literals: ${tokenStats.oklchTotal} (min ${policy.tokenFormatBudget.minOklchLiterals})`,
-    ].join("\n"),
-  );
-  for (const tier of tierStats) {
-    console.log(
-      `- component stories [${tier.tier}]: ${Math.round(tier.coverage * 100)}%/${Math.round(tier.required * 100)}%`,
-    );
+  for (const _tier of tierStats) {
   }
   if (budgetStats && policy.budgets) {
-    console.log(
-      `- aggregate raw tailwind colors: ${budgetStats.colorCount}/${policy.budgets.rawTailwindColors.max}`,
-    );
-    console.log(
-      `- aggregate raw tailwind border-radius: ${budgetStats.radiusCount}/${policy.budgets.rawTailwindBorderRadius.max}`,
-    );
   }
 }
 

@@ -49,8 +49,7 @@ export async function GET(req: Request) {
       orderBy: { createdAt: "desc" },
     });
     return Response.json({ success: true, data: entry });
-  } catch (err) {
-    console.error("[now/get] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }
@@ -79,8 +78,7 @@ export async function POST(req: Request) {
 
     const entry = await prisma.nowEntry.create({ data: parsed.data });
     return Response.json({ success: true, data: entry }, { status: 201 });
-  } catch (err) {
-    console.error("[now/post] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }
@@ -110,8 +108,7 @@ export async function PATCH(req: Request) {
     const { id, ...data } = parsed.data;
     const entry = await prisma.nowEntry.update({ where: { id }, data });
     return Response.json({ success: true, data: entry });
-  } catch (err) {
-    console.error("[now/patch] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }

@@ -10,7 +10,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function SelectGroupsDemo() {
   return (

@@ -71,7 +71,11 @@ export function InteractiveFrostedGlassCard({
       <div
         className={`pointer-events-none absolute inset-0 z-0 mix-blend-overlay ${isElevated ? "opacity-15" : "opacity-10"}`}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 h-full w-full">
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute inset-0 h-full w-full"
+        >
           <filter id={noiseFilterId}>
             <feTurbulence
               type="fractalNoise"

@@ -2,7 +2,6 @@
 
 import { Badge } from "@nebutra/ui/primitives";
 import { LayoutDashboard, LayoutPanelLeft, Rocket } from "lucide-react";
-import React from "react";
 import { GridCell, GridDemo } from "@/components/grid-demos";
 
 export function StandardGridDemo() {
@@ -250,6 +249,7 @@ export function DashboardGridDemo() {
           {/* Fake Chart Lines */}
           <div className="w-full h-48 border-b border-l border-zinc-200 dark:border-zinc-800 relative">
             <svg
+              aria-hidden="true"
               className="absolute inset-0 w-full h-full"
               preserveAspectRatio="none"
               viewBox="0 0 100 100"

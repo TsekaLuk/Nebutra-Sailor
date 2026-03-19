@@ -61,8 +61,7 @@ export function GET() {
         "Cache-Control": "s-maxage=3600, stale-while-revalidate",
       },
     });
-  } catch (err) {
-    console.error("[rss] Feed generation failed:", err);
+  } catch (_err) {
     return new Response("Internal server error", { status: 500 });
   }
 }

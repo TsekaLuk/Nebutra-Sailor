@@ -8,7 +8,6 @@ import {
   DropdownMenuTrigger,
 } from "@nebutra/ui/primitives";
 import { ChevronRight } from "lucide-react";
-import * as React from "react";
 
 export function Menu4Demo() {
   return (

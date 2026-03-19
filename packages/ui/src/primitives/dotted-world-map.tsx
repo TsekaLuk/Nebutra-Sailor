@@ -39,6 +39,7 @@ export function DottedWorldMap({
 }: DottedWorldMapProps) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 120 60"
       className={cn("w-full", className)}
       style={{ background: backgroundColor }}

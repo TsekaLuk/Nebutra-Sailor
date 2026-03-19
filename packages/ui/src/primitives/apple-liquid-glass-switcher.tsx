@@ -60,7 +60,7 @@ export function AppleLiquidGlassSwitcher({
 
       {/* SVG noise filter overlay to emulate the frosted liquid glass texture */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.15] mix-blend-overlay">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <filter id="noise">
             <feTurbulence
               type="fractalNoise"

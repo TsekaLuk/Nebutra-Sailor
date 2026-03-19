@@ -12,8 +12,6 @@ async function exportSchema() {
 
   const outPath = path.resolve(process.cwd(), "apps/design-docs/openapi.json");
   fs.writeFileSync(outPath, JSON.stringify(schema, null, 2));
-  console.warn(`[OpenAPI] Exported schema to ${outPath}`);
-  console.warn(`[OpenAPI] Found ${Object.keys(schema.paths || {}).length} paths`);
 }
 
 void exportSchema();

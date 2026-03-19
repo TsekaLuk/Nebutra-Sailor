@@ -10,7 +10,7 @@ import { Link } from "@/i18n/navigation";
 
 function XIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <svg aria-hidden="true" className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   );
@@ -18,7 +18,7 @@ function XIcon({ className }: { className?: string }) {
 
 function GitHubIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <svg aria-hidden="true" className={className} viewBox="0 0 24 24" fill="currentColor">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -30,7 +30,7 @@ function GitHubIcon({ className }: { className?: string }) {
 
 function LinkedInIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <svg aria-hidden="true" className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
     </svg>
   );
@@ -38,7 +38,7 @@ function LinkedInIcon({ className }: { className?: string }) {
 
 function WeChatIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <svg aria-hidden="true" className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M8.281 2.457c4.542 0 8.267 3.018 8.267 6.762 0 .408-.05.803-.133 1.181a9.588 9.588 0 00-5.485-1.71c-4.996 0-9.102 3.42-9.102 7.854 0 .376.036.745.105 1.107C.797 16.324 0 14.636 0 12.753c0-4.04 4.048-7.319 9.043-7.319h.034zM15.424 9.9c4.116 0 7.458 2.768 7.458 6.182s-3.342 6.181-7.458 6.181c-1.026 0-2.001-.19-2.894-.531l-3.328 1.637.893-2.964c-1.229-1.03-2.129-2.525-2.129-4.323C8.077 12.668 11.42 9.9 15.536 9.9z" />
     </svg>
   );

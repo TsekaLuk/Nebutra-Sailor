@@ -205,7 +205,6 @@ export function WaveAnimation({
           padding: 0,
           display: "block",
         }}
-        aria-hidden="true"
       />
     </div>
   );

@@ -87,7 +87,7 @@ export const AnimatedCounter = React.forwardRef<HTMLSpanElement, AnimatedCounter
 
         return controls.stop;
       }
-    }, [count, value, duration, easing, isInView, startOnView]);
+    }, [count, value, duration, easing, isInView, startOnView, easings]);
 
     return (
       <span

@@ -2,7 +2,6 @@
 
 import { Card, CardBody } from "@nebutra/ui/patterns";
 import { Button, CardDescription, CardFooter, CardHeader, CardTitle } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function CardDemo() {
   return (
     <Card variant="default" padding="md">

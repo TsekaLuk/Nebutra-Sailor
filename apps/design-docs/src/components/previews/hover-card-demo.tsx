@@ -8,7 +8,6 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function HoverCardDemo() {
   return (
     <HoverCard>

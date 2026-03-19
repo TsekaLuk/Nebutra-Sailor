@@ -9,7 +9,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function PaginationDemo() {
   return (

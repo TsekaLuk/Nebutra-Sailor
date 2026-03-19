@@ -22,7 +22,7 @@ const reserveInventory: SagaStep<OrderContext> = {
     // TODO: Call ecommerce service to reserve inventory
     return { ...ctx, inventoryReserved: true };
   },
-  async compensate(ctx) {
+  async compensate(_ctx) {
     // TODO: Call ecommerce service to release inventory
   },
 };

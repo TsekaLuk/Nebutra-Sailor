@@ -6,7 +6,6 @@ const globalForPrisma = globalThis as unknown as { prisma: PrismaClient | undefi
 
 function createClient(): PrismaClient | null {
   if (!process.env.DATABASE_URL) {
-    console.warn("[prisma] DATABASE_URL is not set — database features disabled");
     return null;
   }
   const pool = createPgPool({ connectionString: process.env.DATABASE_URL });

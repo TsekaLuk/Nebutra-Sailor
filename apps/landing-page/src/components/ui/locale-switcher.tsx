@@ -42,6 +42,7 @@ export function LocaleSwitcher() {
   return (
     <div ref={ref} className="relative">
       <button
+        type="button"
         onClick={() => setIsOpen((v) => !v)}
         className="flex items-center gap-1.5 rounded-[var(--radius-lg)] px-2.5 py-1.5 text-sm text-[var(--neutral-9)] transition-colors hover:text-[var(--neutral-12)] dark:text-white/60 dark:hover:text-white"
         aria-label="Switch language"
@@ -60,6 +61,7 @@ export function LocaleSwitcher() {
         >
           {locales.map((l) => (
             <button
+              type="button"
               key={l}
               role="option"
               aria-selected={l === locale}

@@ -1,7 +1,6 @@
 "use client";
 
 import { Separator } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function SeparatorVerticalDemo() {
   return (

@@ -1,6 +1,6 @@
-const fs = require("fs");
+const fs = require("node:fs");
 
-function fixAccordion(filePath) {
+function _fixAccordion(filePath) {
   let content = fs.readFileSync(filePath, "utf8");
 
   // Fix corrupted en/components/accordion.mdx

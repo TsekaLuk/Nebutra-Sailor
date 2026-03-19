@@ -25,7 +25,7 @@ function mixColors(a: string, b: string, t: number): string {
 
 function getSystemPrefersDark(): boolean {
   if (typeof window === "undefined") return false;
-  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches;
 }
 
 export type ThemeMode = "light" | "dark" | "system";

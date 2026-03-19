@@ -10,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function DropdownMenu3Demo() {
   return (
     <DropdownMenu>

@@ -1,10 +1,5 @@
 import { serverRegistry } from "../registry/serverRegistry.js";
-import type {
-  MCPContext,
-  MCPServerConfig,
-  ToolExecutionRequest,
-  ToolExecutionResult,
-} from "../types.js";
+import type { MCPContext, MCPServerConfig, ToolExecutionResult } from "../types.js";
 
 /**
  * MCP Client for executing tools across registered servers
@@ -100,7 +95,7 @@ export class MCPClient {
       // In production, get token from secure storage
       const token = process.env[`MCP_${server.id.toUpperCase()}_TOKEN`];
       if (token) {
-        headers["Authorization"] = `Bearer ${token}`;
+        headers.Authorization = `Bearer ${token}`;
       }
     } else if (server.authentication?.type === "api-key") {
       const apiKey = process.env[`MCP_${server.id.toUpperCase()}_KEY`];

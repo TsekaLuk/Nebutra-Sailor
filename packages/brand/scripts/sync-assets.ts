@@ -64,26 +64,20 @@ function verifyDirectorySync(srcDir: string, destDir: string): { ok: number; mis
 
 /* eslint-disable no-console -- CLI script with intentional stdout logging */
 function syncAssets() {
-  console.log("🎨 Syncing brand assets...\n");
-
   let totalErrors = 0;
 
   for (const app of apps) {
     const appPath = join(monorepoRoot, app);
 
     if (!existsSync(appPath)) {
-      console.log(`⚠️  Skipping ${app} (not found)`);
       continue;
     }
-
-    console.log(`📦 ${app}`);
 
     for (const mapping of assetMappings) {
       const srcPath = join(brandRoot, mapping.src);
       const destPath = join(appPath, mapping.dest);
 
       if (!existsSync(srcPath)) {
-        console.log(`   ⚠️  Source not found: ${mapping.src}`);
         continue;
       }
 
@@ -99,37 +93,25 @@ function syncAssets() {
         } else {
           cpSync(srcPath, destPath);
         }
-        console.log(`   ✓ ${mapping.src} → ${mapping.dest}`);
 
         // MD5 verification for directory syncs
         if (mapping.isDir) {
           const result = verifyDirectorySync(srcPath, destPath);
           if (result.mismatch.length > 0) {
-            console.log(`   ⚠️  MD5 mismatches:`);
-            for (const m of result.mismatch) {
-              console.log(`      ✗ ${m}`);
+            for (const _m of result.mismatch) {
             }
             totalErrors += result.mismatch.length;
           } else {
-            console.log(`   🔒 MD5 verified: ${result.ok} files match`);
           }
         }
-      } catch (error) {
-        console.error(`   ✗ Failed: ${error}`);
+      } catch (_error) {
         totalErrors++;
       }
     }
-
-    console.log();
   }
 
   if (totalErrors > 0) {
-    console.warn(
-      `⚠️ Sync completed with ${totalErrors} error(s), continuing anyway because of concurrent build writes`,
-    );
   }
-
-  console.log("✨ Brand assets synced successfully!");
 }
 
 syncAssets();

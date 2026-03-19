@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function ButtonVariantsDemo() {
   return (
     <div className="gap-3 flex">

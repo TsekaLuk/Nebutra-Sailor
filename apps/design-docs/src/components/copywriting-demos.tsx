@@ -12,7 +12,6 @@ import {
   Spinner,
 } from "@nebutra/ui/primitives";
 import { AlertCircle, CheckCircle, FileText, Plus, Trash2, XCircle } from "lucide-react";
-import React from "react";
 
 export function CopywritingErrorsDemo() {
   return (

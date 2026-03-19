@@ -26,7 +26,6 @@
 
 "use client";
 
-import * as React from "react";
 import type { UseCasesProps } from "./types";
 
 export function UseCases({
@@ -57,7 +56,7 @@ export function UseCases({
             {/* TODO: Tab Navigation */}
             <div data-slot="tab-nav">
               {useCases.map((useCase) => (
-                <button key={useCase.id} data-slot="tab-button">
+                <button type="button" key={useCase.id} data-slot="tab-button">
                   {useCase.title}
                 </button>
               ))}

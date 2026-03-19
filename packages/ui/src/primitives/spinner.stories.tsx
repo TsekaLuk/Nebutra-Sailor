@@ -87,6 +87,7 @@ export const InButton: Story = {
   render: () => (
     <div className="flex gap-4 flex-wrap">
       <button
+        type="button"
         disabled
         className="flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground opacity-80 cursor-not-allowed"
       >
@@ -94,6 +95,7 @@ export const InButton: Story = {
         Loading...
       </button>
       <button
+        type="button"
         disabled
         className="flex items-center gap-2 rounded-md border px-4 py-2 text-sm cursor-not-allowed"
       >
@@ -101,6 +103,7 @@ export const InButton: Story = {
         Saving
       </button>
       <button
+        type="button"
         disabled
         className="flex items-center gap-2 rounded-md bg-destructive px-4 py-2 text-sm text-destructive-foreground opacity-80 cursor-not-allowed"
       >

@@ -15,6 +15,7 @@ function CopyButton({ text, label }: { text: string; label?: string }) {
 
   return (
     <button
+      type="button"
       onClick={handleCopy}
       className="group flex items-center justify-between gap-2 px-3 py-2 w-full rounded-md bg-transparent hover:bg-muted transition-colors text-left"
       title="Click to copy CSS variable"

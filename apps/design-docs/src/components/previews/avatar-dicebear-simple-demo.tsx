@@ -1,7 +1,6 @@
 "use client";
 
 import { DiceBearAvatar } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function AvatarDicebearSimpleDemo() {
   return (

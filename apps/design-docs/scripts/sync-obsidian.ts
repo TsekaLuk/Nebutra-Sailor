@@ -1,5 +1,5 @@
+import * as path from "node:path";
 import { fromVault } from "fumadocs-obsidian";
-import * as path from "path";
 
 const vaultDir = path.resolve(process.cwd(), "obsidian-vault");
 

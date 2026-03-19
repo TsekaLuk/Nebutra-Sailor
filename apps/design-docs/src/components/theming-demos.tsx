@@ -2,7 +2,6 @@
 
 import { Badge, Button } from "@nebutra/ui/primitives";
 import { Box, LayoutDashboard, Palette, Zap } from "lucide-react";
-import React from "react";
 
 export function ThemeColorsDemo() {
   return (

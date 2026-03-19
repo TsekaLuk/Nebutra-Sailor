@@ -7,7 +7,6 @@
  * Run with: pnpm brand:apply
  */
 
-import { execSync } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { type BrandConfig, DEFAULT_BRAND } from "./brand-types";
@@ -15,7 +14,7 @@ import { type BrandConfig, DEFAULT_BRAND } from "./brand-types";
 const ROOT = path.resolve(import.meta.dirname, "..");
 
 // ANSI colors
-const c = {
+const _c = {
   reset: "\x1b[0m",
   bright: "\x1b[1m",
   dim: "\x1b[2m",
@@ -25,21 +24,13 @@ const c = {
   red: "\x1b[31m",
 };
 
-function logStep(step: string) {
-  console.log(`\n${c.cyan}▸${c.reset} ${c.bright}${step}${c.reset}`);
-}
+function logStep(_step: string) {}
 
-function logSuccess(message: string) {
-  console.log(`  ${c.green}✓${c.reset} ${message}`);
-}
+function logSuccess(_message: string) {}
 
-function logSkip(message: string) {
-  console.log(`  ${c.yellow}○${c.reset} ${c.dim}${message}${c.reset}`);
-}
+function logSkip(_message: string) {}
 
-function logError(message: string) {
-  console.log(`  ${c.red}✗${c.reset} ${message}`);
-}
+function _logError(_message: string) {}
 
 /**
  * Load brand config or use defaults
@@ -48,8 +39,6 @@ async function loadConfig(): Promise<BrandConfig> {
   const configPath = path.join(ROOT, "brand.config.ts");
 
   if (!fs.existsSync(configPath)) {
-    console.log(`${c.yellow}⚠${c.reset} No brand.config.ts found. Using default Nebutra branding.`);
-    console.log(`  Run ${c.cyan}pnpm brand:init${c.reset} to create a custom brand config.\n`);
     return DEFAULT_BRAND;
   }
 
@@ -57,8 +46,7 @@ async function loadConfig(): Promise<BrandConfig> {
     // Dynamic import of the config
     const configModule = await import(configPath);
     return configModule.default as BrandConfig;
-  } catch (error) {
-    console.error(`${c.red}Error loading brand.config.ts:${c.reset}`, error);
+  } catch (_error) {
     process.exit(1);
   }
 }
@@ -90,7 +78,7 @@ function replaceInFile(filePath: string, replacements: Array<[string | RegExp, s
 /**
  * Copy custom assets if they exist
  */
-function copyCustomAssets(config: BrandConfig): void {
+function copyCustomAssets(_config: BrandConfig): void {
   logStep("Copying custom assets");
 
   const customAssetsDir = path.join(ROOT, "brand.config", "assets");
@@ -376,18 +364,7 @@ function updateEnvTemplate(config: BrandConfig): void {
  * Main
  */
 async function main() {
-  console.log(`
-${c.cyan}╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║   ${c.bright}🎨 Applying Brand Configuration${c.reset}${c.cyan}                        ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝${c.reset}
-`);
-
   const config = await loadConfig();
-
-  console.log(`Brand: ${c.bright}${config.brand.name}${c.reset}`);
-  console.log(`Scope: ${c.dim}${config.packageScope}${c.reset}`);
 
   // Apply changes
   copyCustomAssets(config);
@@ -395,23 +372,6 @@ ${c.cyan}╔══════════════════════�
   updatePackageScopes(config);
   updateREADMEs(config);
   updateEnvTemplate(config);
-
-  // Summary
-  console.log(`
-${c.green}═══════════════════════════════════════════════════════════${c.reset}
-${c.bright}✨ Brand applied successfully!${c.reset}
-
-${c.cyan}Next steps:${c.reset}
-
-1. Review the changes:
-   ${c.dim}git diff${c.reset}
-
-2. Build the project:
-   ${c.cyan}pnpm build${c.reset}
-
-3. Start development:
-   ${c.cyan}pnpm dev${c.reset}
-`);
 }
 
 main().catch(console.error);

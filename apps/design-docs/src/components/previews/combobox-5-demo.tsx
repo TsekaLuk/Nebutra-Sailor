@@ -1,7 +1,6 @@
 "use client";
 
 import { Combobox, CommandList } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Combobox5Demo() {
   return (
     <Combobox placeholder="Select framework...">

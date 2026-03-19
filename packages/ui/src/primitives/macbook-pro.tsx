@@ -9,6 +9,7 @@ export interface MacbookProProps extends SVGProps<SVGSVGElement> {
 export function MacbookPro({ width = 650, height = 400, src, ...props }: MacbookProProps) {
   return (
     <svg
+      aria-hidden="true"
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}

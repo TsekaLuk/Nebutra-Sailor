@@ -236,7 +236,7 @@ function applyReplacements(content: string): ReplacementResult {
   // We handle bg-white → bg-[var(--neutral-1)] only when followed by dark:bg-
   // This requires a more nuanced approach: look for lines containing both
   // bg-white and dark:bg-{gray|zinc|slate}-
-  const bgWhitePairedRegex = /(?<=[\s"'`{])bg-white(?=[\s"'`}])/g;
+  const _bgWhitePairedRegex = /(?<=[\s"'`{])bg-white(?=[\s"'`}])/g;
   // Check each match location: is there a dark:bg- nearby in the same string?
   result = result.replace(
     /(["'`])([^"'`]*?)(?:bg-white)((?:[^"'`]*?)(?:dark:bg-(?:gray|zinc|slate)-\d+)(?:[^"'`]*))\1/g,

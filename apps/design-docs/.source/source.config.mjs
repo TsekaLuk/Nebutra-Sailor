@@ -1,7 +1,8 @@
 // source.config.ts
 
 // lib/remark-component.ts
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import { remarkFeedbackBlock } from "fumadocs-core/mdx-plugins/remark-feedback-block";
 import { defineConfig, defineDocs, frontmatterSchema } from "fumadocs-mdx/config";
 import { remarkMdxMermaid } from "fumadocs-mermaid";
@@ -10,7 +11,6 @@ import {
   createGenerator,
   remarkAutoTypeTable,
 } from "fumadocs-typescript";
-import path from "path";
 import { visit } from "unist-util-visit";
 import { z } from "zod";
 
@@ -121,7 +121,6 @@ function remarkComponent() {
           value: rawSource,
         });
       } else {
-        console.warn(`[remarkComponent] Could not resolve source for "${name}"`);
       }
     });
   };

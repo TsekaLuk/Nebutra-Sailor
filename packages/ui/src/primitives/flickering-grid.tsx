@@ -266,7 +266,6 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
           width: canvasSize.width,
           height: canvasSize.height,
         }}
-        aria-hidden="true"
       />
     </div>
   );

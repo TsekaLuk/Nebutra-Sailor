@@ -152,9 +152,7 @@ export function Snippet({
       setCopied(true);
       onCopy?.(text);
       setTimeout(() => setCopied(false), timeout);
-    } catch (err) {
-      console.error("Failed to copy:", err);
-    }
+    } catch (_err) {}
   };
 
   const renderContent = () => {

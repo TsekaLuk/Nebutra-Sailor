@@ -18,7 +18,10 @@ export function GrainGradientBackgroundDemo() {
             A beautiful, animated grain gradient background powered by WebGL shaders. Perfect for
             hero sections and distinctive landing pages.
           </p>
-          <button className="px-6 py-2 font-medium rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 hover:shadow-xl">
+          <button
+            type="button"
+            className="px-6 py-2 font-medium rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+          >
             Get Started Focus
           </button>
         </div>

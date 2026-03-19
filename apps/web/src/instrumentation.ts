@@ -30,8 +30,8 @@ export async function register() {
           beforeSend(event) {
             // Strip PII from server-side errors before sending to Sentry
             if (event.request?.headers) {
-              delete event.request.headers["cookie"];
-              delete event.request.headers["authorization"];
+              delete event.request.headers.cookie;
+              delete event.request.headers.authorization;
             }
             return event;
           },

@@ -137,9 +137,7 @@ const getCachedGrowthSummary = unstable_cache(
 
 export async function getGrowthSummary(tenantId?: string): Promise<GrowthSummary> {
   const rawTenant =
-    (tenantId && tenantId.trim()) ||
-    process.env.DEFAULT_DASHBOARD_TENANT_ID ||
-    DEFAULT_DASHBOARD_TENANT;
+    tenantId?.trim() || process.env.DEFAULT_DASHBOARD_TENANT_ID || DEFAULT_DASHBOARD_TENANT;
 
   const resolvedTenant = sanitizeTenantId(rawTenant);
   return getCachedGrowthSummary(resolvedTenant);
@@ -195,9 +193,7 @@ const getCachedGrowthTimeSeries = unstable_cache(
 
 export async function getGrowthTimeSeries(tenantId?: string, days = 30): Promise<GrowthSummary[]> {
   const rawTenant =
-    (tenantId && tenantId.trim()) ||
-    process.env.DEFAULT_DASHBOARD_TENANT_ID ||
-    DEFAULT_DASHBOARD_TENANT;
+    tenantId?.trim() || process.env.DEFAULT_DASHBOARD_TENANT_ID || DEFAULT_DASHBOARD_TENANT;
 
   const resolvedTenant = sanitizeTenantId(rawTenant);
   return getCachedGrowthTimeSeries(resolvedTenant, days);

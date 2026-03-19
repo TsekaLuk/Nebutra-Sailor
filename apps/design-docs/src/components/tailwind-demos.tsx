@@ -51,7 +51,7 @@ function Swatch({
   hex: string;
   className?: string;
 }) {
-  const isLightBg = parseInt(shade) < 400 || shade === "50" || shade === "foreground";
+  const isLightBg = parseInt(shade, 10) < 400 || shade === "50" || shade === "foreground";
   const contrastClass = isLightBg ? "text-neutral-900" : "text-white";
 
   const twClass = `bg-${name}-${shade === "DEFAULT" ? name : shade}`;
@@ -60,6 +60,7 @@ function Swatch({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
+          type="button"
           className={`group relative flex h-24 w-full flex-col items-start justify-between p-3 text-left transition-transform hover:z-10 focus:z-10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 hover:scale-105 rounded-md mx-0.5 ${className} ${contrastClass}`}
           style={{ backgroundColor: hex }}
         >
@@ -265,6 +266,7 @@ export function TailwindAnimationsDemo() {
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
       {animations.map(([key, value]) => (
         <button
+          type="button"
           key={key}
           onClick={() => handlePlay(key)}
           className="flex flex-col items-center justify-center p-6 border border-[var(--neutral-6)] bg-card rounded-xl shadow-sm hover:border-primary/50 transition-colors group relative h-32"

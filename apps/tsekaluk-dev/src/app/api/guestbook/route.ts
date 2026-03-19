@@ -130,8 +130,7 @@ export async function GET(req: Request) {
     });
 
     return Response.json({ success: true, data });
-  } catch (err) {
-    console.error("[guestbook/get] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }
@@ -196,14 +195,11 @@ export async function POST(req: Request) {
         company: company?.trim(),
         title: title?.trim(),
         message: trimmed,
-      }).catch((err: unknown) => {
-        console.error("[guestbook] Admin notification failed:", err);
-      });
+      }).catch((_err: unknown) => {});
     }
 
     return Response.json({ success: true, data }, { status: 201 });
-  } catch (err) {
-    console.error("[guestbook/post] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }
@@ -243,8 +239,7 @@ export async function PATCH(req: Request) {
     });
 
     return Response.json({ success: true });
-  } catch (err) {
-    console.error("[guestbook/patch] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }
@@ -279,8 +274,7 @@ export async function DELETE(req: Request) {
     });
 
     return Response.json({ success: true });
-  } catch (err) {
-    console.error("[guestbook/delete] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }

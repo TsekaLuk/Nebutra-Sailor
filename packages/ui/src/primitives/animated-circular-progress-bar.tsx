@@ -44,7 +44,13 @@ export function AnimatedCircularProgressBar({
         } as React.CSSProperties
       }
     >
-      <svg fill="none" className="size-full" strokeWidth="2" viewBox="0 0 100 100">
+      <svg
+        aria-hidden="true"
+        fill="none"
+        className="size-full"
+        strokeWidth="2"
+        viewBox="0 0 100 100"
+      >
         {currentPercent <= 90 && currentPercent >= 0 && (
           <circle
             cx="50"

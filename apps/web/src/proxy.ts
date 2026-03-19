@@ -51,7 +51,7 @@ function buildCsp(nonce: string): string {
   ].join("; ");
 }
 
-function withNonce(request: NextRequest, response: NextResponse): NextResponse {
+function withNonce(_request: NextRequest, response: NextResponse): NextResponse {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const csp = buildCsp(nonce);
 
@@ -75,10 +75,6 @@ export const proxy = hasClerkKey
       return function devNoopProxy(req: NextRequest) {
         if (!devWarned) {
           devWarned = true;
-          console.warn(
-            "[Nebutra] Running without Clerk authentication. " +
-              "This is only allowed in development.",
-          );
         }
         const response = NextResponse.next();
         return withNonce(req, response);

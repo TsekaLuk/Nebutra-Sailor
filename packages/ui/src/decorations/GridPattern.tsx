@@ -67,7 +67,6 @@ export const GridPattern = React.forwardRef<HTMLDivElement, GridPatternProps>(
             </>
           );
         }
-        case "lines":
         default:
           return (
             <path
@@ -128,7 +127,7 @@ export const GridPattern = React.forwardRef<HTMLDivElement, GridPatternProps>(
         aria-hidden="true"
         {...props}
       >
-        <svg className="absolute inset-0 h-full w-full">
+        <svg aria-hidden="true" className="absolute inset-0 h-full w-full">
           <defs>
             <pattern
               id={patternId}

@@ -103,6 +103,7 @@ export default async function AuthorizePage({ searchParams }: AuthorizePageProps
                 >
                   <div className="mt-0.5 h-5 w-5 bg-blue-500/20 text-blue-400 flex shrink-0 items-center justify-center rounded-full">
                     <svg
+                      aria-hidden="true"
                       className="h-3 w-3"
                       fill="none"
                       viewBox="0 0 24 24"

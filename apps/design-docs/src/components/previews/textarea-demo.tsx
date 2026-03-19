@@ -1,7 +1,6 @@
 "use client";
 
 import { Label, Textarea } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function TextareaDemo() {
   return (

@@ -305,7 +305,7 @@ const PromptInputTextarea: React.FC<
       typeof maxHeight === "number"
         ? `${Math.min(textareaRef.current.scrollHeight, maxHeight)}px`
         : `min(${textareaRef.current.scrollHeight}px, ${maxHeight})`;
-  }, [value, maxHeight, disableAutosize]);
+  }, [maxHeight, disableAutosize]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -421,11 +421,9 @@ export const PromptInputBox = React.forwardRef(
 
     const processFile = (file: File) => {
       if (!isImageFile(file)) {
-        console.warn("Only image files are allowed");
         return;
       }
       if (file.size > 10 * 1024 * 1024) {
-        console.warn("File too large (max 10MB)");
         return;
       }
       setFiles([file]);
@@ -444,14 +442,17 @@ export const PromptInputBox = React.forwardRef(
       e.stopPropagation();
     }, []);
 
-    const handleDrop = React.useCallback((e: React.DragEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const files = Array.from(e.dataTransfer.files);
-      const imageFiles = files.filter((file) => isImageFile(file));
-      const firstFile = imageFiles[0];
-      if (firstFile) processFile(firstFile);
-    }, []);
+    const handleDrop = React.useCallback(
+      (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const files = Array.from(e.dataTransfer.files);
+        const imageFiles = files.filter((file) => isImageFile(file));
+        const firstFile = imageFiles[0];
+        if (firstFile) processFile(firstFile);
+      },
+      [isImageFile, processFile],
+    );
 
     const handleRemoveFile = (index: number) => {
       const fileToRemove = files[index];
@@ -503,10 +504,9 @@ export const PromptInputBox = React.forwardRef(
       }
     };
 
-    const handleStartRecording = () => console.warn("Started recording");
+    const handleStartRecording = () => {};
 
     const handleStopRecording = (duration: number) => {
-      console.warn(`Stopped recording after ${duration} seconds`);
       setIsRecording(false);
       onSend(`[Voice message - ${duration} seconds]`, []);
     };
@@ -558,6 +558,7 @@ export const PromptInputBox = React.forwardRef(
                         className="h-full w-full object-cover"
                       />
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleRemoveFile(index);
@@ -610,6 +611,7 @@ export const PromptInputBox = React.forwardRef(
             >
               <PromptInputAction tooltip="Upload image">
                 <button
+                  type="button"
                   onClick={() => uploadInputRef.current?.click()}
                   className="flex h-8 w-8 text-muted-foreground cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-accent hover:text-foreground"
                   disabled={isRecording}

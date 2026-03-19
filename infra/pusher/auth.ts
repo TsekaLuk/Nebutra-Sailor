@@ -6,8 +6,6 @@
  * - BFF: apps/api-gateway/src/routes/pusher/auth.ts
  */
 
-import { authorizeChannel } from "./server";
-
 /**
  * Channel access validation
  * Implement your own access control logic here

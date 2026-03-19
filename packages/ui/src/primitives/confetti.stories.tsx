@@ -46,6 +46,7 @@ export const ManualControl: Story = {
           className="absolute inset-0 w-full h-full pointer-events-none"
         />
         <button
+          type="button"
           onClick={() => confettiRef.current?.fire({ particleCount: 100, spread: 80 })}
           className="rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
         >
@@ -77,6 +78,7 @@ export const CustomColors: Story = {
           className="absolute inset-0 w-full h-full pointer-events-none"
         />
         <button
+          type="button"
           onClick={() =>
             confettiRef.current?.fire({
               particleCount: 150,

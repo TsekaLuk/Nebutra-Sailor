@@ -388,8 +388,6 @@ const PLANS = [
 // ============================================
 
 async function seedFeatureDefinitions() {
-  console.log("Seeding feature definitions...");
-
   for (let i = 0; i < FEATURES.length; i++) {
     const feature = FEATURES[i];
     await prisma.featureDefinition.upsert({
@@ -411,13 +409,9 @@ async function seedFeatureDefinitions() {
       },
     });
   }
-
-  console.log(`  ✓ Seeded ${FEATURES.length} feature definitions`);
 }
 
 async function seedUsageLimitDefinitions() {
-  console.log("Seeding usage limit definitions...");
-
   for (let i = 0; i < USAGE_LIMITS.length; i++) {
     const limit = USAGE_LIMITS[i];
     await prisma.usageLimitDefinition.upsert({
@@ -439,13 +433,9 @@ async function seedUsageLimitDefinitions() {
       },
     });
   }
-
-  console.log(`  ✓ Seeded ${USAGE_LIMITS.length} usage limit definitions`);
 }
 
 async function seedPricingPlans() {
-  console.log("Seeding pricing plans...");
-
   // Get feature and limit definitions
   const featureDefs = await prisma.featureDefinition.findMany();
   const limitDefs = await prisma.usageLimitDefinition.findMany();
@@ -479,7 +469,6 @@ async function seedPricingPlans() {
     for (const [featureKey, value] of Object.entries(planConfig.features)) {
       const featureId = featureMap.get(featureKey);
       if (!featureId) {
-        console.warn(`  ⚠ Feature not found: ${featureKey}`);
         continue;
       }
 
@@ -502,7 +491,6 @@ async function seedPricingPlans() {
     for (const [limitKey, limitValue] of Object.entries(planConfig.limits)) {
       const limitId = limitMap.get(limitKey);
       if (!limitId) {
-        console.warn(`  ⚠ Limit not found: ${limitKey}`);
         continue;
       }
 
@@ -518,11 +506,7 @@ async function seedPricingPlans() {
         },
       });
     }
-
-    console.log(`  ✓ Seeded plan: ${planConfig.name}`);
   }
-
-  console.log(`  ✓ Seeded ${PLANS.length} pricing plans with features and limits`);
 }
 
 // ============================================
@@ -530,23 +514,13 @@ async function seedPricingPlans() {
 // ============================================
 
 async function main() {
-  console.log("\n🌱 Starting database seed...\n");
-
-  try {
-    await seedFeatureDefinitions();
-    await seedUsageLimitDefinitions();
-    await seedPricingPlans();
-
-    console.log("\n✅ Database seed completed successfully!\n");
-  } catch (error) {
-    console.error("\n❌ Seed failed:", error);
-    throw error;
-  }
+  await seedFeatureDefinitions();
+  await seedUsageLimitDefinitions();
+  await seedPricingPlans();
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
+  .catch((_e) => {
     process.exit(1);
   })
   .finally(async () => {

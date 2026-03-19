@@ -73,6 +73,7 @@ export const WithLoadedState: Story = {
           </HeroSkeleton>
         </div>
         <button
+          type="button"
           onClick={() => setIsLoaded((p) => !p)}
           className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground"
         >

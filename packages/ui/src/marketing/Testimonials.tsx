@@ -28,7 +28,6 @@
 
 "use client";
 
-import * as React from "react";
 import type { TestimonialsProps } from "./types";
 
 export function Testimonials({

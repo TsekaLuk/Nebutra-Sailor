@@ -52,8 +52,7 @@ export default async function GuestbookPage({ params }: { params: Promise<{ loca
             createdAt: true,
           },
         })
-        .catch((err: unknown) => {
-          console.error("[guestbook/page] Failed to fetch entries:", err);
+        .catch((_err: unknown) => {
           return [] as never[];
         })
     : [];

@@ -137,9 +137,7 @@ export function CookieBanner({
       if (persistToServer) {
         try {
           await recordCookieConsent(prefs);
-        } catch (error) {
-          console.error("Failed to persist cookie consent:", error);
-        }
+        } catch (_error) {}
       }
 
       // Callback
@@ -215,18 +213,21 @@ export function CookieBanner({
             </div>
             <div className="flex flex-wrap gap-2">
               <button
+                type="button"
                 onClick={() => setShowDetails(true)}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               >
                 {translations.customize}
               </button>
               <button
+                type="button"
                 onClick={handleRejectAll}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 {translations.rejectAll}
               </button>
               <button
+                type="button"
                 onClick={handleAcceptAll}
                 className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-colors"
               >
@@ -245,11 +246,18 @@ export function CookieBanner({
                 {translations.title}
               </h2>
               <button
+                type="button"
                 onClick={() => setShowDetails(false)}
                 className="text-gray-400 hover:text-gray-500"
                 aria-label="Close details"
               >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -298,18 +306,21 @@ export function CookieBanner({
 
             <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-200 dark:border-gray-700">
               <button
+                type="button"
                 onClick={handleRejectAll}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 {translations.rejectAll}
               </button>
               <button
+                type="button"
                 onClick={handleAcceptAll}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 {translations.acceptAll}
               </button>
               <button
+                type="button"
                 onClick={handleSaveCustom}
                 className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-colors"
               >
@@ -407,6 +418,7 @@ export function CookieSettingsButton({
 
   return (
     <button
+      type="button"
       onClick={handleClick}
       className={`text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors ${className}`}
     >

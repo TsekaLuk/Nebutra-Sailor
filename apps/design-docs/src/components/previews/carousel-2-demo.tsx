@@ -10,8 +10,6 @@ import {
   CarouselPrevious,
 } from "@nebutra/ui/primitives";
 
-import * as React from "react";
-
 export function Carousel2Demo() {
   return (
     <Carousel opts={{ align: "start" }} className="max-w-sm w-full">

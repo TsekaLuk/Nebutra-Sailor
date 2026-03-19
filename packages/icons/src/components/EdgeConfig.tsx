@@ -7,6 +7,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
 const EdgeConfig = forwardRef<SVGSVGElement, IconProps>(
   ({ size = 16, width, height, ...props }, ref) => (
     <svg
+      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width={width ?? size}
       height={height ?? size}
@@ -17,6 +18,7 @@ const EdgeConfig = forwardRef<SVGSVGElement, IconProps>(
       {...props}
     >
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width={width ?? size}
         height={height ?? size}

@@ -217,6 +217,7 @@ function ChoiceboxItem({
               <span className="h-1.5 w-1.5 rounded-full bg-current" />
             ) : (
               <svg
+                aria-hidden="true"
                 className="h-2.5 w-2.5"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -444,12 +445,8 @@ function ChoiceboxGroupRoot({
   // Dev warning for type/value mismatch
   if (process.env.NODE_ENV !== "production") {
     if (type === "checkbox" && typeof controlledValue === "string") {
-      console.warn(
-        '[ChoiceboxGroup] type="checkbox" expects value to be string[], received string',
-      );
     }
     if (type === "radio" && Array.isArray(controlledValue)) {
-      console.warn('[ChoiceboxGroup] type="radio" expects value to be string, received string[]');
     }
   }
 

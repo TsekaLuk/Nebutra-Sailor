@@ -1,7 +1,6 @@
 "use client";
 
 import { Slider } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Slider4Demo() {
   return (
     <div className="space-y-2 w-full">

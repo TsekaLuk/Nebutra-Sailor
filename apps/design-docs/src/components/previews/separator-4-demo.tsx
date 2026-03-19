@@ -1,7 +1,6 @@
 "use client";
 
 import { Separator } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Separator4Demo() {
   return (
     <div className="relative w-full">

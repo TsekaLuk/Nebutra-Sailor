@@ -2,7 +2,6 @@
 
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import * as React from "react";
 import { cn } from "../utils/cn";
 import { Card, CardContent, CardHeader } from "./card";
 

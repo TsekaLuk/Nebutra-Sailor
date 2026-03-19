@@ -53,6 +53,7 @@ export default function SignInPage() {
 
       <motion.div variants={itemVariants} className="flex flex-col gap-3 mb-8">
         <button
+          type="button"
           onClick={() => handleSignIn("github")}
           disabled={loadingProvider !== null}
           className="relative flex items-center justify-center gap-3 w-full py-3 px-4 rounded-xl font-medium transition-all duration-200 bg-gray-900 text-white hover:bg-gray-800 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
@@ -66,6 +67,7 @@ export default function SignInPage() {
         </button>
 
         <button
+          type="button"
           onClick={() => handleSignIn("google")}
           disabled={loadingProvider !== null}
           className="relative flex items-center justify-center gap-3 w-full py-3 px-4 rounded-xl font-medium transition-all duration-200 bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:shadow disabled:opacity-50 disabled:cursor-not-allowed dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700"
@@ -79,6 +81,7 @@ export default function SignInPage() {
         </button>
 
         <button
+          type="button"
           onClick={() => handleSignIn("linuxdo")}
           disabled={loadingProvider !== null}
           className="relative flex items-center justify-center gap-3 w-full py-3 px-4 rounded-xl font-medium transition-all duration-200 bg-[#34A853]/10 text-[#34A853] border border-[#34A853]/20 hover:bg-[#34A853]/20 disabled:opacity-50 disabled:cursor-not-allowed"

@@ -69,12 +69,17 @@ export function Pricing({
       {showBillingToggle && (
         <div data-slot="billing-toggle">
           <button
+            type="button"
             data-active={billingCycle === "monthly"}
             onClick={() => setBillingCycle("monthly")}
           >
             Monthly
           </button>
-          <button data-active={billingCycle === "yearly"} onClick={() => setBillingCycle("yearly")}>
+          <button
+            type="button"
+            data-active={billingCycle === "yearly"}
+            onClick={() => setBillingCycle("yearly")}
+          >
             Yearly
             {yearlyDiscount && <span data-badge>Save {yearlyDiscount}%</span>}
           </button>

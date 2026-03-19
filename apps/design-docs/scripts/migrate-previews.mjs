@@ -1,4 +1,4 @@
-import fs from "fs/promises";
+import fs from "node:fs/promises";
 import { glob } from "glob";
 
 /**
@@ -12,11 +12,10 @@ import { glob } from "glob";
  * node scripts/migrate-previews.mjs
  */
 async function main() {
-  console.log("🔍 Scanning for MDX files...");
   // Find all component documentation files
   const files = await glob("content/docs/components/**/*.mdx");
 
-  let modifiedCount = 0;
+  let _modifiedCount = 0;
 
   for (const file of files) {
     const originalContent = await fs.readFile(file, "utf8");
@@ -51,15 +50,9 @@ async function main() {
 
     if (content !== originalContent) {
       await fs.writeFile(file, content, "utf8");
-      console.log(`✅ Migrated: ${file}`);
-      modifiedCount++;
+      _modifiedCount++;
     }
   }
-
-  console.log(`\n🎉 Migration complete! Modified ${modifiedCount} files.`);
-  console.log(
-    "Note: Please review the changes manually as complex component wrappers might need styling adjustments.",
-  );
 }
 
 // Run the script

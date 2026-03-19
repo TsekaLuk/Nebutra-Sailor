@@ -15,22 +15,34 @@ export function SidebarDemo() {
         </div>
 
         <div className="p-3 space-y-1 flex-1">
-          <button className="gap-3 px-3 py-2 text-sm font-medium flex w-full items-center rounded-md bg-secondary text-secondary-foreground">
+          <button
+            type="button"
+            className="gap-3 px-3 py-2 text-sm font-medium flex w-full items-center rounded-md bg-secondary text-secondary-foreground"
+          >
             <Home className="w-4 h-4" />
             Dashboard
           </button>
-          <button className="gap-3 px-3 py-2 text-sm font-medium flex w-full items-center rounded-md text-muted-foreground transition-colors hover:bg-muted">
+          <button
+            type="button"
+            className="gap-3 px-3 py-2 text-sm font-medium flex w-full items-center rounded-md text-muted-foreground transition-colors hover:bg-muted"
+          >
             <Users className="w-4 h-4" />
             Team
           </button>
-          <button className="gap-3 px-3 py-2 text-sm font-medium flex w-full items-center rounded-md text-muted-foreground transition-colors hover:bg-muted">
+          <button
+            type="button"
+            className="gap-3 px-3 py-2 text-sm font-medium flex w-full items-center rounded-md text-muted-foreground transition-colors hover:bg-muted"
+          >
             <Building2 className="w-4 h-4" />
             Projects
           </button>
         </div>
 
         <div className="p-3 border-t">
-          <button className="gap-3 px-3 py-2 text-sm font-medium flex w-full items-center rounded-md text-muted-foreground transition-colors hover:bg-muted">
+          <button
+            type="button"
+            className="gap-3 px-3 py-2 text-sm font-medium flex w-full items-center rounded-md text-muted-foreground transition-colors hover:bg-muted"
+          >
             <Settings className="w-4 h-4" />
             Settings
           </button>

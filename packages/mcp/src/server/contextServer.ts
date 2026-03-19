@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import fs from "node:fs";
+import path from "node:path";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -8,8 +10,6 @@ import {
   ListToolsRequestSchema,
   ReadResourceRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import fs from "fs";
-import path from "path";
 
 /**
  * Nebutra MCP Context Server
@@ -39,7 +39,7 @@ class NebutraContextServer {
     this.setupResourceHandlers();
     this.setupToolHandlers();
 
-    this.server.onerror = (error) => console.error("[MCP Error]", error);
+    this.server.onerror = (_error) => {};
   }
 
   private setupResourceHandlers() {

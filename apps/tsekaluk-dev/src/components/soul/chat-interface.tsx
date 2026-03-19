@@ -23,6 +23,7 @@ function SoulOrb({ size = "sm", isError = false }: { size?: "sm" | "lg"; isError
       {isLg ? (
         <div className="flex flex-col items-center justify-center leading-none z-10 transition-transform duration-700 ease-in-out hover:scale-110">
           <svg
+            aria-hidden="true"
             width="1em"
             height="1em"
             viewBox="0 0 24 24"
@@ -71,7 +72,7 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping]);
+  }, []);
 
   // Abort any in-flight request on unmount
   useEffect(() => {
@@ -153,14 +154,11 @@ export function ChatInterface({ isWidget = false }: { isWidget?: boolean }) {
                 return updated;
               });
             }
-          } catch (parseErr) {
-            console.warn("[chat] Malformed SSE chunk:", { raw, error: parseErr });
-          }
+          } catch (_parseErr) {}
         }
       }
     } catch (err) {
       if ((err as Error).name === "AbortError") return;
-      console.error("[chat] Message send failed:", err);
       setIsTyping(false);
       setMessages((prev) => [...prev, { role: "assistant", content: t("error"), isError: true }]);
     } finally {

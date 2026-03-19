@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import type { NebutraConfig } from "./config.js";
 
 function walkDir(dir: string, callback: (filepath: string) => void) {
@@ -35,7 +35,7 @@ export async function pruneTemplate(targetDir: string, config: NebutraConfig) {
           delete dbPkg.dependencies["@prisma/client"];
         }
         if (dbPkg.devDependencies) {
-          delete dbPkg.devDependencies["prisma"];
+          delete dbPkg.devDependencies.prisma;
         }
         fs.writeFileSync(dbPkgPath, JSON.stringify(dbPkg, null, 2) + "\n");
       }
@@ -93,7 +93,7 @@ export type UsageLedgerSource = any;
       }
     }
 
-    if (rootPkg.scripts && rootPkg.scripts.postinstall) {
+    if (rootPkg.scripts?.postinstall) {
       rootPkg.scripts.postinstall = rootPkg.scripts.postinstall.replace(
         /prisma generate/g,
         'echo "ORM Disabled"',

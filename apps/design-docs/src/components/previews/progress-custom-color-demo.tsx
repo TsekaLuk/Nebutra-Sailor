@@ -1,7 +1,6 @@
 "use client";
 
 import { Progress } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function ProgressCustomColorDemo() {
   return (

@@ -38,7 +38,6 @@
 
 "use client";
 
-import * as React from "react";
 import type { HeroProps } from "./types";
 
 export function Hero({

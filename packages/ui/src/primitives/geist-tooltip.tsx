@@ -49,7 +49,6 @@ const getBaseAlign = (boxAlign: GeistTooltipBoxAlign): "start" | "center" | "end
       return "start";
     case "right":
       return "end";
-    case "center":
     default:
       return "center";
   }

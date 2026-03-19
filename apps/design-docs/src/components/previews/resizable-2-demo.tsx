@@ -1,7 +1,6 @@
 "use client";
 
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Resizable2Demo() {
   return (
     <ResizablePanelGroup

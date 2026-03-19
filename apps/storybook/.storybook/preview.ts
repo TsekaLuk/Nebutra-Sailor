@@ -49,7 +49,7 @@ const preview: Preview = {
 
   decorators: [
     (Story: StoryFn, context: StoryContext) => {
-      const theme = context.globals["theme"] as string;
+      const theme = context.globals.theme as string;
       if (typeof document !== "undefined") {
         document.documentElement.classList.toggle("dark", theme === "dark");
       }

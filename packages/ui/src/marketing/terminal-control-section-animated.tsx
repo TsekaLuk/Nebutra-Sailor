@@ -287,17 +287,13 @@ export function TerminalControlSectionAnimated({
             className="absolute left-3 top-2 h-[168px] w-px bg-gradient-to-b from-zinc-300 to-transparent dark:from-zinc-700"
           />
 
-          <ul
-            className="space-y-3 pl-8"
-            role="tablist"
-            aria-label="Ways to control the agent"
-            onKeyDown={onKey}
-          >
+          <ul className="space-y-3 pl-8" aria-label="Ways to control the agent" onKeyDown={onKey}>
             {items.map((it, i) => {
               const isActive = i === active;
               return (
                 <li key={it.title} role="presentation" className="relative">
                   <button
+                    type="button"
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => setActive(i)}

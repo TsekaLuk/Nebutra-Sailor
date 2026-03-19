@@ -100,8 +100,7 @@ export function ConsentCheckbox({
             context,
           });
           onConsentRecorded?.();
-        } catch (error) {
-          console.error("Failed to record consent:", error);
+        } catch (_error) {
         } finally {
           setIsPersisting(false);
         }
@@ -243,8 +242,7 @@ export function MultiConsentCheckbox({
               }),
             ),
           );
-        } catch (error) {
-          console.error("Failed to record consent:", error);
+        } catch (_error) {
         } finally {
           setIsPersisting(false);
         }

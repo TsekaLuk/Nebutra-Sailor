@@ -150,7 +150,7 @@ export function StatusWidget({
     const interval = setInterval(load, 60_000);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageSlug, provider, pageId]);
+  }, [config]);
 
   if (loading) {
     return (

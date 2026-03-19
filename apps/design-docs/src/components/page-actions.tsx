@@ -41,6 +41,7 @@ export function LLMCopyButton({
 
   return (
     <button
+      type="button"
       disabled={isLoading}
       className={cn(
         buttonVariants({
@@ -220,6 +221,7 @@ export function ViewOptions({
   if (!mounted) {
     return (
       <button
+        type="button"
         disabled
         className={cn(
           buttonVariants({

@@ -1,6 +1,6 @@
 import { logger } from "@nebutra/logger";
 import type { Plan, RecordUsageInput, UsageType } from "../types.js";
-import { DEFAULT_USAGE_PRICING, UsageError } from "../types.js";
+import { DEFAULT_USAGE_PRICING } from "../types.js";
 
 // ============================================
 // Types

@@ -270,7 +270,6 @@ export function StarsCanvas({
         position,
         zIndex,
       }}
-      aria-hidden="true"
     />
   );
 }

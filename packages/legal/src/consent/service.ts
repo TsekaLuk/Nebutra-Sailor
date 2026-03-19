@@ -337,8 +337,6 @@ export async function recordCookieConsent(
   });
 
   if (!response.ok) {
-    // Don't throw - local storage already has consent
-    console.error("Failed to record cookie consent to server");
   }
 }
 

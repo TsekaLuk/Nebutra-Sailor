@@ -14,7 +14,6 @@
 
 "use client";
 
-import * as React from "react";
 import type { Logo } from "../types";
 
 export interface LogoCloudProps {

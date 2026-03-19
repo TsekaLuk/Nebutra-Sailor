@@ -1,7 +1,6 @@
 "use client";
 
 import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function ToggleGroupSingleDemo() {
   return (

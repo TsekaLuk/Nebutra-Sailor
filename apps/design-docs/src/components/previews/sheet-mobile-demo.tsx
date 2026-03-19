@@ -8,7 +8,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function SheetMobileDemo() {
   return (
     <Sheet>

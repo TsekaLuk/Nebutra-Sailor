@@ -73,7 +73,7 @@ const SwitchControl = ({
     if (defaultChecked) {
       context?.setValue(value);
     }
-  }, []);
+  }, [context?.setValue, defaultChecked, value]);
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions

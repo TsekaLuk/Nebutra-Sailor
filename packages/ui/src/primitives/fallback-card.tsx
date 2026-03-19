@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { cn } from "../utils/cn";
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -51,7 +51,7 @@ function LetterGlitch({
 
   const hexToRgb = (hex: string) => {
     const shorthand = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthand, (m, r, g, b) => r + r + g + g + b + b);
+    hex = hex.replace(shorthand, (_m, r, g, b) => r + r + g + g + b + b);
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
@@ -180,7 +180,7 @@ function LetterGlitch({
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       window.removeEventListener("resize", handleResize);
     };
-  }, [glitchSpeed, smooth]);
+  }, [animate, resizeCanvas]);
 
   return (
     <div className={cn("relative h-full w-full overflow-hidden", className)}>

@@ -1,7 +1,6 @@
 "use client";
 
 import { Combobox } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Combobox8Demo() {
   return (
     <div className="gap-4 flex flex-col items-center justify-center">

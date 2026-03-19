@@ -11,7 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function DialogDestructiveDemo() {
   return (

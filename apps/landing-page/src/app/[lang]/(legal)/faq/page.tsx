@@ -62,6 +62,7 @@ export default async function FAQPage({ params }: { params: Promise<{ lang: stri
                   {t(`faq.categories.${cat}.questions.${qIdx}.q` as Parameters<typeof t>[0])}
                   <span className="ml-4 shrink-0 transition group-open:rotate-180">
                     <svg
+                      aria-hidden="true"
                       className="h-5 w-5 text-[var(--neutral-9)]"
                       fill="none"
                       viewBox="0 0 24 24"

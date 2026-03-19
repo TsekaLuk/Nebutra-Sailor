@@ -39,7 +39,9 @@ export const Default: Story = {
         </p>
       </HeroCardBody>
       <HeroCardFooter>
-        <button className="text-sm text-primary hover:underline">Learn more →</button>
+        <button type="button" className="text-sm text-primary hover:underline">
+          Learn more →
+        </button>
       </HeroCardFooter>
     </HeroCard>
   ),
@@ -93,7 +95,9 @@ export const WithImage: Story = {
       </HeroCardBody>
       <HeroCardFooter className="flex justify-between text-xs text-muted-foreground">
         <span>March 2026</span>
-        <button className="text-primary hover:underline">Read more</button>
+        <button type="button" className="text-primary hover:underline">
+          Read more
+        </button>
       </HeroCardFooter>
     </HeroCard>
   ),

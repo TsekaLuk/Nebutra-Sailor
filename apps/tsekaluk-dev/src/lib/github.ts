@@ -60,8 +60,7 @@ export async function getGithubData() {
       years,
       languages,
     };
-  } catch (err) {
-    console.error("[github] Failed to fetch metrics:", err);
+  } catch (_err) {
     return FALLBACK;
   }
 }

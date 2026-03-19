@@ -239,9 +239,6 @@ export function CalendarPicker({
   if (process.env.NODE_ENV !== "production") {
     const exclusiveCount = [compact, stacked, horizontalLayout].filter(Boolean).length;
     if (exclusiveCount > 1) {
-      console.warn(
-        "[CalendarPicker] compact, stacked, and horizontalLayout are mutually exclusive. Only one should be set.",
-      );
     }
   }
 

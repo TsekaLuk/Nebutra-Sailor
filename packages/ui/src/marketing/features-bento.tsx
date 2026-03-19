@@ -1,7 +1,6 @@
 "use client";
 
 import { type LucideIcon, Shield, Users } from "lucide-react";
-import * as React from "react";
 import { Card, CardContent } from "../primitives/card";
 import { cn } from "../utils/cn";
 
@@ -223,6 +222,7 @@ function TeamMemberRow({
 function StatDecorativeSvg() {
   return (
     <svg
+      aria-hidden="true"
       className="absolute inset-0 size-full text-muted"
       viewBox="0 0 254 104"
       fill="none"
@@ -240,6 +240,7 @@ function StatDecorativeSvg() {
 function SecurityDecorativeSvg() {
   return (
     <svg
+      aria-hidden="true"
       className="m-auto h-fit w-24"
       viewBox="0 0 212 143"
       fill="none"
@@ -265,6 +266,7 @@ function SecurityDecorativeSvg() {
 function PerformanceChartSvg() {
   return (
     <svg
+      aria-hidden="true"
       className="w-full dark:text-muted-foreground"
       viewBox="0 0 386 123"
       fill="none"
@@ -335,6 +337,7 @@ function PerformanceChartSvg() {
 function FeatureChartSvg() {
   return (
     <svg
+      aria-hidden="true"
       className="w-full sm:w-[150%]"
       viewBox="0 0 366 231"
       fill="none"

@@ -159,7 +159,6 @@ export function Turnstile({
 
   useEffect(() => {
     if (!effectiveSiteKey) {
-      console.error("Turnstile: siteKey is required");
       return;
     }
 
@@ -220,7 +219,7 @@ export function Turnstile({
   /**
    * Reset the widget
    */
-  const reset = useCallback(() => {
+  const _reset = useCallback(() => {
     if (widgetIdRef.current && window.turnstile) {
       window.turnstile.reset(widgetIdRef.current);
     }
@@ -229,7 +228,7 @@ export function Turnstile({
   /**
    * Get the current response token
    */
-  const getResponse = useCallback((): string | undefined => {
+  const _getResponse = useCallback((): string | undefined => {
     if (widgetIdRef.current && window.turnstile) {
       return window.turnstile.getResponse(widgetIdRef.current);
     }

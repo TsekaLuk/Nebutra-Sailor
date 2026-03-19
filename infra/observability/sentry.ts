@@ -6,7 +6,6 @@ import { nodeProfilingIntegration } from "@sentry/profiling-node";
  */
 export function initSentry(): void {
   if (!process.env.SENTRY_DSN) {
-    console.warn("SENTRY_DSN not set, Sentry disabled");
     return;
   }
 
@@ -35,9 +34,9 @@ export function initSentry(): void {
     beforeSend(event) {
       // Remove sensitive headers
       if (event.request?.headers) {
-        delete event.request.headers["authorization"];
+        delete event.request.headers.authorization;
         delete event.request.headers["x-api-key"];
-        delete event.request.headers["cookie"];
+        delete event.request.headers.cookie;
       }
       return event;
     },

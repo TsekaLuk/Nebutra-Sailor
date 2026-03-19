@@ -1,7 +1,7 @@
 import type React from "react";
 
 const ErrorIcon = () => (
-  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
+  <svg aria-hidden="true" height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -11,7 +11,7 @@ const ErrorIcon = () => (
 );
 
 const ErrorLinkIcon = () => (
-  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
+  <svg aria-hidden="true" height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16">
     <path
       fillRule="evenodd"
       clipRule="evenodd"

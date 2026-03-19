@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Folder, HeartHandshake, type LucideIcon, Sparkles } from "lucide-react";
-import * as React from "react";
 import { cn } from "../utils/cn";
 
 // Inline CSS for offset-path animations (avoids external CSS dependency)
@@ -92,7 +91,13 @@ export function DatabaseRestApi({
       <style>{ANIMATION_STYLES}</style>
 
       {/* SVG Paths */}
-      <svg className="h-full sm:w-full text-muted" width="100%" height="100%" viewBox="0 0 200 100">
+      <svg
+        aria-hidden="true"
+        className="h-full sm:w-full text-muted"
+        width="100%"
+        height="100%"
+        viewBox="0 0 200 100"
+      >
         <g
           stroke="currentColor"
           fill="none"
@@ -270,6 +275,7 @@ DatabaseRestApi.displayName = "DatabaseRestApi";
 function DatabaseIcon({ x = "0", y = "0" }: { x: string; y: string }) {
   return (
     <svg
+      aria-hidden="true"
       x={x}
       y={y}
       xmlns="http://www.w3.org/2000/svg"

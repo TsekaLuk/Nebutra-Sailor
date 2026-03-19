@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { visit } from "unist-util-visit";
 
 /**
@@ -156,7 +156,6 @@ export function remarkComponent() {
           value: rawSource,
         });
       } else {
-        console.warn(`[remarkComponent] Could not resolve source for "${name}"`);
       }
     });
   };

@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@nebutra/ui/patterns";
 import { Button } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Card2Demo() {
   return (
     <Card variant="gradient" padding="lg">

@@ -101,7 +101,10 @@ export function ColorUsageDemos() {
         </div>
         <ComponentPreview className="py-20">
           <div className="flex gap-6">
-            <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border-2 border-[#91a7ff] text-[#0021ab] hover:bg-[#f0f4ff] hover:border-[#5c7cfa] h-10 py-2 px-6">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border-2 border-[#91a7ff] text-[#0021ab] hover:bg-[#f0f4ff] hover:border-[#5c7cfa] h-10 py-2 px-6"
+            >
               Outlined Action
             </button>
           </div>
@@ -131,7 +134,10 @@ export function ColorUsageDemos() {
         </div>
         <ComponentPreview className="py-20">
           <div className="flex gap-6">
-            <button className="inline-flex items-center justify-center rounded-md text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none bg-[#0033FE] text-white hover:bg-[#002ad4] h-10 py-2 px-6">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none bg-[#0033FE] text-white hover:bg-[#002ad4] h-10 py-2 px-6"
+            >
               Primary Button
             </button>
           </div>
@@ -164,6 +170,7 @@ export function ColorUsageDemos() {
             </p>
             <div className="mt-4 flex gap-3 text-[#0033FE]">
               <svg
+                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -179,6 +186,7 @@ export function ColorUsageDemos() {
                 <line x1="12" x2="12" y1="3" y2="15" />
               </svg>
               <svg
+                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -194,6 +202,7 @@ export function ColorUsageDemos() {
                 <line x1="12" x2="16.5" y1="12" y2="12" />
               </svg>
               <svg
+                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"

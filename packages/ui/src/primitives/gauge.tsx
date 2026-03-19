@@ -185,7 +185,13 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
           }
         `}</style>
 
-        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} overflow="visible">
+        <svg
+          aria-hidden="true"
+          width={size}
+          height={size}
+          viewBox={`0 0 ${size} ${size}`}
+          overflow="visible"
+        >
           {arcPriority === "value" ? (
             <>
               {trackArc}

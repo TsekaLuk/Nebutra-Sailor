@@ -2,7 +2,6 @@
 
 import { Slider } from "@nebutra/ui/primitives";
 import { Volume2 } from "lucide-react";
-import * as React from "react";
 export function Slider3Demo() {
   return (
     <div className="gap-3 flex w-full items-center">

@@ -145,9 +145,7 @@ export const Confetti = forwardRef<ConfettiRef, ConfettiProps>((props, ref) => {
     async (opts: ConfettiOptions = {}) => {
       try {
         await instanceRef.current?.({ ...options, ...opts });
-      } catch (error) {
-        console.error("Confetti error:", error);
-      }
+      } catch (_error) {}
     },
     [options],
   );
@@ -218,9 +216,7 @@ export const ConfettiButton: React.FC<ConfettiButtonProps> = ({
 
       // Call original onClick if provided
       onClick?.(event);
-    } catch (error) {
-      console.error("Confetti button error:", error);
-    }
+    } catch (_error) {}
   };
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { type MouseEvent, useEffect, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 import { cn } from "../utils/cn";
 
 // =============================================================================
@@ -297,6 +297,7 @@ export function AwardBadge({ type, place, link, className }: AwardBadgeProps) {
         }}
       >
         <svg
+          aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 260 54"
           className="w-[180px] sm:w-[260px] h-auto"

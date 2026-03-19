@@ -1,7 +1,6 @@
 "use client";
 
 import { Checkbox, Label } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function CheckboxIndeterminateDemo() {
   return (

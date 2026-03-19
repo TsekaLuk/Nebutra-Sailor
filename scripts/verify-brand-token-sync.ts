@@ -38,5 +38,3 @@ assert(themesCss.includes("@theme"), "Theme CSS is missing Tailwind v4 @theme bl
 
 assert(colors.primary[500] === "#0033FE", "Brand primary 500 drift detected.");
 assert(colors.accent[500] === "#0BF1C3", "Brand accent 500 drift detected.");
-
-console.log("Token sync verification passed");

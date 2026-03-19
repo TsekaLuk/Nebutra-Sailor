@@ -1,6 +1,6 @@
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { NextResponse } from "next/server";
-import path from "path";
 import { createRateLimiter, getClientIp } from "@/lib/rate-limit";
 
 const checkRateLimit = createRateLimiter(60_000, 10);
@@ -32,7 +32,6 @@ export async function GET(req: Request) {
     if (isNotFound) {
       return new NextResponse("Resume not found", { status: 404 });
     }
-    console.error("[resume] File read failed:", err);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

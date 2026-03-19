@@ -1,7 +1,6 @@
 "use client";
 
 import { Label, Textarea } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Label3Demo() {
   return (
     <div className="space-y-1 max-w-sm w-full">

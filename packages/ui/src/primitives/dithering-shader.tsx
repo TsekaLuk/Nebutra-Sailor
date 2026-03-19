@@ -311,7 +311,6 @@ function createShader(
   gl.compileShader(shader);
 
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    console.error("Shader compile error: " + gl.getShaderInfoLog(shader));
     gl.deleteShader(shader);
     return null;
   }
@@ -337,7 +336,6 @@ function createProgram(
   gl.linkProgram(program);
 
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    console.error("Shader program link error: " + gl.getProgramInfoLog(program));
     gl.deleteProgram(program);
     return null;
   }
@@ -392,7 +390,6 @@ export function DitheringShader({
 
     const gl = canvas.getContext("webgl2");
     if (!gl) {
-      console.error("WebGL2 not supported");
       return;
     }
 

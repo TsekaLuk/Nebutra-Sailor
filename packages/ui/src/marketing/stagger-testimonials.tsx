@@ -241,6 +241,7 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
       })}
       <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
         <button
+          type="button"
           onClick={() => handleMove(-1)}
           className={cn(
             "flex h-14 w-14 items-center justify-center text-2xl transition-colors",
@@ -252,6 +253,7 @@ export const StaggerTestimonials: React.FC<StaggerTestimonialsProps> = ({
           <ChevronLeft />
         </button>
         <button
+          type="button"
           onClick={() => handleMove(1)}
           className={cn(
             "flex h-14 w-14 items-center justify-center text-2xl transition-colors",

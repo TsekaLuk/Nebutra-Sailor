@@ -548,10 +548,10 @@ html {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
 }
 @layer theme, base, components, utilities;
@@ -761,7 +761,7 @@ html {
     height: auto;
   }
   [hidden]:where(:not([hidden="until-found"])) {
-    display: none !important;
+    display: none;
   }
 }
 @layer utilities {

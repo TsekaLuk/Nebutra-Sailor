@@ -11,7 +11,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function DropdownMenu4Demo() {
   return (
     <DropdownMenu>

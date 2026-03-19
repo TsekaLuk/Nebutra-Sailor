@@ -2,7 +2,6 @@
 
 import { ToggleGroup, ToggleGroupItem } from "@nebutra/ui/primitives";
 import { Bold, Italic, Underline } from "lucide-react";
-import * as React from "react";
 export function ToggleGroup2Demo() {
   return (
     <ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>

@@ -119,7 +119,7 @@ export function StatusBadge({
     return () => clearInterval(interval);
     // config is stable within a render cycle — serialise to string for effect dep
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [propStatus, pageSlug, provider, pageId]);
+  }, [propStatus, config]);
 
   const cfg = STATUS_CONFIG[status];
   const sizeConfig = SIZE_CONFIG[size];

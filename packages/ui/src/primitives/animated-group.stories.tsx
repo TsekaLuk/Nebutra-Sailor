@@ -100,10 +100,15 @@ export const HeroSection: Story = {
         The platform for modern teams to move fast without breaking things.
       </p>
       <div className="flex gap-3">
-        <button className="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground">
+        <button
+          type="button"
+          className="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground"
+        >
           Get started
         </button>
-        <button className="rounded-lg border px-5 py-2 text-sm font-medium">Learn more</button>
+        <button type="button" className="rounded-lg border px-5 py-2 text-sm font-medium">
+          Learn more
+        </button>
       </div>
     </AnimatedGroup>
   ),

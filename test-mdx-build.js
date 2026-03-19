@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const mdxContent = fs.readFileSync("apps/design-docs/mdx-components.tsx", "utf-8");
 const usedComponents = new Set();
 
@@ -26,12 +26,10 @@ function traverse(dir) {
 traverse("apps/design-docs/content");
 
 const allUsed = Array.from(usedComponents);
-const missing = allUsed.filter(
+const _missing = allUsed.filter(
   (c) =>
     !mdxContent.includes(` ${c},`) &&
     !mdxContent.includes(` ${c} `) &&
     !mdxContent.includes(`${c}: `) &&
     !mdxContent.includes(`<${c}`),
 );
-
-console.log("Missing components in MDX:", missing);

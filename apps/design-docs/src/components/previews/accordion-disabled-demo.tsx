@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function AccordionDisabledDemo() {
   return (

@@ -43,9 +43,7 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
         setCopied(true);
         onCopy?.();
         setTimeout(() => setCopied(false), 2000);
-      } catch (err) {
-        console.error("Failed to copy:", err);
-      }
+      } catch (_err) {}
     }, [command, onCopy]);
 
     const variantStyles = {
@@ -115,6 +113,7 @@ CommandBox.displayName = "CommandBox";
 function CopyIcon({ className }: { className?: string }) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -133,6 +132,7 @@ function CopyIcon({ className }: { className?: string }) {
 function CopiedIcon({ className }: { className?: string }) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"

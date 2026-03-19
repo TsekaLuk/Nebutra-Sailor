@@ -24,21 +24,13 @@ const colors = {
   magenta: "\x1b[35m",
 };
 
-function log(message: string) {
-  console.log(message);
-}
+function _log(_message: string) {}
 
-function logStep(step: string) {
-  console.log(`\n${colors.cyan}▸${colors.reset} ${colors.bright}${step}${colors.reset}`);
-}
+function logStep(_step: string) {}
 
-function logSuccess(message: string) {
-  console.log(`${colors.green}✓${colors.reset} ${message}`);
-}
+function logSuccess(_message: string) {}
 
-function logInfo(message: string) {
-  console.log(`${colors.dim}  ${message}${colors.reset}`);
-}
+function logInfo(_message: string) {}
 
 async function prompt(
   rl: readline.Interface,
@@ -65,24 +57,8 @@ async function promptBoolean(
 }
 
 async function main() {
-  console.log(`
-${colors.magenta}╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║   ${colors.bright}🎨 Brand Configuration Wizard${colors.reset}${colors.magenta}                          ║
-║                                                           ║
-║   This will generate a brand.config.ts file for your      ║
-║   white-label deployment.                                 ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝${colors.reset}
-`);
-
   const configPath = path.join(ROOT, "brand.config.ts");
   if (fs.existsSync(configPath)) {
-    console.log(`${colors.yellow}⚠${colors.reset} brand.config.ts already exists.`);
-    console.log(
-      `  Run ${colors.cyan}pnpm brand:apply${colors.reset} to apply your existing config.`,
-    );
-    console.log(`  Delete brand.config.ts first if you want to start fresh.\n`);
     process.exit(1);
   }
 
@@ -207,38 +183,8 @@ export default config;
       fs.mkdirSync(path.join(assetsDir, "assets", "favicon"), { recursive: true });
       logSuccess(`Created brand.config/assets/ directory`);
     }
-
-    // Summary
-    console.log(`
-${colors.green}═══════════════════════════════════════════════════════════${colors.reset}
-${colors.bright}✨ Brand configuration complete!${colors.reset}
-
-${colors.cyan}Next steps:${colors.reset}
-
-1. ${colors.bright}Add your logo assets${colors.reset}
-   Copy your logos to: ${colors.dim}brand.config/assets/logo/${colors.reset}
-   Required files:
-   - logo-color.svg (main logo)
-   - logo-inverse.svg (white version)
-   - logo-mono.svg (monochrome)
-   
-2. ${colors.bright}Add favicons${colors.reset}
-   Copy to: ${colors.dim}brand.config/assets/favicon/${colors.reset}
-   - favicon.ico
-   - favicon.svg
-   - apple-touch-icon.png
-
-3. ${colors.bright}Review the config${colors.reset}
-   Edit ${colors.dim}brand.config.ts${colors.reset} to fine-tune colors and settings.
-
-4. ${colors.bright}Apply the branding${colors.reset}
-   ${colors.cyan}pnpm brand:apply${colors.reset}
-
-${colors.dim}See WHITELABEL.md for detailed instructions.${colors.reset}
-`);
-  } catch (error) {
+  } catch (_error) {
     rl.close();
-    console.error("Error:", error);
     process.exit(1);
   }
 }

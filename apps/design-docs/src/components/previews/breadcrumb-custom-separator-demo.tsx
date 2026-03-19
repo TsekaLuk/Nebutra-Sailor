@@ -9,7 +9,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function BreadcrumbCustomSeparatorDemo() {
   return (

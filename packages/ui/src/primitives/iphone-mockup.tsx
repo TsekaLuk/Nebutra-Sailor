@@ -126,6 +126,7 @@ export function IphoneMockup({ src, videoSrc, className, style, ...props }: Ipho
 
       {/* SVG Frame */}
       <svg
+        aria-hidden="true"
         viewBox={`0 0 ${PHONE_WIDTH} ${PHONE_HEIGHT}`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

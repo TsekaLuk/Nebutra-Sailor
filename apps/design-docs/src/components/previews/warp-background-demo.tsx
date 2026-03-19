@@ -16,7 +16,10 @@ export function WarpBackgroundDemo() {
             Engage your users with immersive 3D perspective grids and animated data beams. Build
             containers that feel alive and dynamic.
           </p>
-          <button className="px-6 py-2 font-medium text-sm rounded-full bg-primary text-primary-foreground transition-colors hover:bg-primary/90">
+          <button
+            type="button"
+            className="px-6 py-2 font-medium text-sm rounded-full bg-primary text-primary-foreground transition-colors hover:bg-primary/90"
+          >
             Initialize Sequence
           </button>
         </div>

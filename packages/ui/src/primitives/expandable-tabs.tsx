@@ -125,6 +125,7 @@ export function ExpandableTabs({
 
         return isSelected ? (
           <button
+            type="button"
             key={tab.title}
             onClick={() => handleSelect(index)}
             role="tab"
@@ -135,6 +136,7 @@ export function ExpandableTabs({
           </button>
         ) : (
           <button
+            type="button"
             key={tab.title}
             onClick={() => handleSelect(index)}
             role="tab"

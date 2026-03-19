@@ -27,7 +27,7 @@ function PreviewSkeleton() {
   );
 }
 
-function generateIntegrationPrompt(name: string, code: string): string {
+function generateIntegrationPrompt(_name: string, code: string): string {
   return `You are given a task to integrate an existing Nebutra UI component into a React codebase.
 
 The codebase uses:

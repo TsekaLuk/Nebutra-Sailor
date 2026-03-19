@@ -17,8 +17,6 @@ async function generate() {
   try {
     await fs.access(jsonPath);
   } catch {
-    console.warn(`[Python Docgen] Skipping: Could not find Python api docs at ${jsonPath}`);
-    console.warn(`[Python Docgen] Have you run 'fumapy-generate' yet?`);
     return;
   }
 
@@ -34,8 +32,6 @@ async function generate() {
   await Python.write(converted, {
     outDir: out,
   });
-
-  console.warn(`[Python Docgen] Successfully generated Python documentation to ${out}`);
 }
 
 void generate();

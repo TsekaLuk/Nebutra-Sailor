@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRightIcon, PlusIcon } from "lucide-react";
-import * as React from "react";
 import { Button } from "../primitives/button";
 import { cn } from "../utils/cn";
 

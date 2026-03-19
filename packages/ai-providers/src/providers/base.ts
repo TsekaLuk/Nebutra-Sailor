@@ -65,7 +65,7 @@ export abstract class BaseAIProvider {
    * Stream a chat completion
    */
   async *chatStream(
-    request: ChatCompletionRequest,
+    _request: ChatCompletionRequest,
   ): AsyncGenerator<ChatCompletionChunk, void, unknown> {
     throw new Error(`Streaming not supported by ${this.name}`);
     // This is just to make TypeScript happy with the generator signature
@@ -107,7 +107,7 @@ export abstract class BaseAIProvider {
   /**
    * Check if provider supports a specific capability
    */
-  supportsCapability(capability: ProviderCapability): boolean {
+  supportsCapability(_capability: ProviderCapability): boolean {
     return false;
   }
 

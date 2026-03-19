@@ -413,7 +413,7 @@ function BaseButton({
           Record<string, unknown>,
           string | React.JSXElementConstructor<unknown>
         >)
-      : render || <button />;
+      : render || <button type="button" />;
 
   const finalProps =
     asChild && React.isValidElement(children)

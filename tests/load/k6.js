@@ -88,7 +88,7 @@ export const options = {
 };
 
 // ── Test data ────────────────────────────────────────────────────────────────
-const TEST_PRICE_IDS = ["price_starter_monthly", "price_pro_monthly"];
+const _TEST_PRICE_IDS = ["price_starter_monthly", "price_pro_monthly"];
 const TEST_TENANT_IDS = ["org_test_001", "org_test_002", "org_test_003"];
 
 // ── Common headers ───────────────────────────────────────────────────────────
@@ -163,7 +163,7 @@ export default function () {
     const idempotencyKey = `k6-${__VU}-${__ITER}`;
     const payload = JSON.stringify({ event: "test.load", data: {} });
 
-    const first = http.post(`${BASE_URL}/api/v1/events`, payload, {
+    const _first = http.post(`${BASE_URL}/api/v1/events`, payload, {
       headers: { ...headers, "Idempotency-Key": idempotencyKey },
       tags: { type: "api" },
     });

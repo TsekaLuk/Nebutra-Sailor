@@ -11,7 +11,6 @@ import {
   CommandShortcut,
 } from "@nebutra/ui/primitives";
 import { Search, User } from "lucide-react";
-import * as React from "react";
 
 export function CommandDemo() {
   return (

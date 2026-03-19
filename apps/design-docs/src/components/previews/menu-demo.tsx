@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@nebutra/ui/primitives";
 import { Command, LogOut, Settings, User } from "lucide-react";
-import * as React from "react";
 
 export function MenuDemo() {
   return (

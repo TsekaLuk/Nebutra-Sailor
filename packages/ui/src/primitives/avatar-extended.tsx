@@ -50,7 +50,7 @@ const GitLabIcon = () => (
 );
 
 const BitbucketIcon = () => (
-  <svg height="14" viewBox="-2 -2 65 59" width="14" className="scale-[65%]">
+  <svg aria-hidden="true" height="14" viewBox="-2 -2 65 59" width="14" className="scale-[65%]">
     <defs>
       <linearGradient id="bbGrad" x1="104.953%" x2="46.569%" y1="21.921%" y2="75.234%">
         <stop offset="7%" stopColor="white" stopOpacity=".4" />

@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 export interface ErrorStateProps {
   /** Error title */
   title?: string;

@@ -97,7 +97,7 @@ export function AnimatedSpan({
     if (sequence.activeIndex === itemIndex) {
       setHasStarted(true);
     }
-  }, [sequence?.activeIndex, sequence?.sequenceStarted, hasStarted, itemIndex]);
+  }, [sequence?.activeIndex, sequence?.sequenceStarted, hasStarted, itemIndex, sequence]);
 
   const shouldAnimate = sequence ? hasStarted : startOnView ? isInView : true;
 
@@ -191,6 +191,7 @@ export function TypingAnimation({
     sequence?.activeIndex,
     sequence?.sequenceStarted,
     itemIndex,
+    sequence,
   ]);
 
   useEffect(() => {

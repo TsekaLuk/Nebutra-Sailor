@@ -180,6 +180,7 @@ export function TeamChat({
           </div>
         </div>
         <button
+          type="button"
           aria-label="More options"
           onClick={onMoreOptions}
           className="p-2 rounded-[var(--radius-lg)] hover:bg-[var(--neutral-3)] transition"
@@ -196,6 +197,7 @@ export function TeamChat({
             const isSelected = selectedSender === sender.name;
             return (
               <button
+                type="button"
                 key={sender.name}
                 onClick={() => setSelectedSender(isSelected ? null : sender.name)}
                 className={cn(
@@ -241,6 +243,7 @@ export function TeamChat({
                   <div className="flex gap-2">
                     {message.reactions?.map((reaction) => (
                       <button
+                        type="button"
                         key={reaction.emoji}
                         onClick={() => onReactionClick?.(message.id, reaction.emoji)}
                         className={cn(
@@ -265,6 +268,7 @@ export function TeamChat({
       {/* Footer */}
       <footer className="mt-6 flex items-center gap-4 border-t border-[var(--neutral-7)] pt-4">
         <button
+          type="button"
           aria-label="Add emoji"
           className="p-3 rounded-full bg-[var(--neutral-3)] hover:bg-[var(--neutral-4)] transition"
         >
@@ -283,6 +287,7 @@ export function TeamChat({
           )}
         />
         <button
+          type="button"
           aria-label="Send message"
           onClick={handleSend}
           className="p-3 rounded-full bg-black dark:bg-white text-white dark:text-black hover:brightness-90 transition"

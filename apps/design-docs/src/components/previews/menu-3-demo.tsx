@@ -7,7 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function Menu3Demo() {
   return (

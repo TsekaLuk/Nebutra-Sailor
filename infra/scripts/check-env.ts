@@ -6,8 +6,8 @@
  * Usage: npx tsx infra/scripts/check-env.ts [--app=web|api-gateway|...]
  */
 
-import { existsSync, readFileSync } from "fs";
-import { resolve } from "path";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 // ============================================
 // Required Environment Variables by Context
@@ -124,11 +124,8 @@ function main(): void {
   const skipValidation = process.env.SKIP_ENV_VALIDATION === "true";
 
   if (skipValidation) {
-    console.log("⏭️  Skipping environment validation (SKIP_ENV_VALIDATION=true)");
     process.exit(0);
   }
-
-  console.log("🔍 Validating environment variables...\n");
 
   // Load .env files
   const rootDir = resolve(__dirname, "../..");
@@ -147,35 +144,27 @@ function main(): void {
 
   // Output results
   if (result.valid.length > 0) {
-    console.log(`✅ Valid (${result.valid.length}):`);
-    result.valid.forEach((v) => console.log(`   ${v}`));
+    result.valid.forEach((_v) => {});
   }
 
   if (result.empty.length > 0) {
-    console.log(`\n⚠️  Empty (${result.empty.length}):`);
-    result.empty.forEach((v) => console.log(`   ${v}`));
+    result.empty.forEach((_v) => {});
   }
 
   if (result.missing.length > 0) {
-    console.log(`\n❌ Missing (${result.missing.length}):`);
-    result.missing.forEach((v) => console.log(`   ${v}`));
+    result.missing.forEach((_v) => {});
   }
 
   // Exit with error if critical vars are missing
   const hasCriticalMissing = result.missing.length > 0 || result.empty.length > 0;
 
   if (hasCriticalMissing && !isCI) {
-    console.log("\n💡 Tip: Copy .env.example to .env.local and fill in the values");
-    console.log("   cp .env.example .env.local\n");
     process.exit(1);
   }
 
   if (hasCriticalMissing && isCI) {
-    console.log("\n⚠️  Missing env vars in CI - check GitHub Secrets configuration\n");
     // Don't exit with error in CI - let the build fail naturally
   }
-
-  console.log("\n✨ Environment validation complete!\n");
 }
 
 main();

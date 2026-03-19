@@ -82,9 +82,6 @@ export const WithMetadata: Story = {
 export const WithSubmitHandler: Story = {
   args: {
     label: "my-app",
-    onSubmit: (payload) => {
-      // eslint-disable-next-line no-console
-      console.log("Feedback submitted:", payload);
-    },
+    onSubmit: (_payload) => {},
   },
 };

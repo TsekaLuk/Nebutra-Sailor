@@ -26,6 +26,7 @@ export function GridPatternCardDemo() {
         <GridPatternCardBody className="gap-4 flex h-[250px] flex-col items-center justify-center text-center">
           <div className="p-4 mb-2 rounded-full bg-primary/10 text-primary">
             <svg
+              aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"

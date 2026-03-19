@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from "@nebutra/ui/primitives";
 import { User } from "lucide-react";
-import * as React from "react";
 
 export function Menu5Demo() {
   return (

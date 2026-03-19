@@ -14,7 +14,6 @@ import {
   SheetTrigger,
 } from "@nebutra/ui/primitives";
 import { cn } from "@nebutra/ui/utils";
-import React from "react";
 
 export function SheetDemo() {
   return (

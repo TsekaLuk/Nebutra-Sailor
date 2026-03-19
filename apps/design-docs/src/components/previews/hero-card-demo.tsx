@@ -14,7 +14,9 @@ export function HeroCardDemo() {
         </p>
       </HeroCardBody>
       <HeroCardFooter>
-        <button className="text-sm text-primary hover:underline">Learn more →</button>
+        <button type="button" className="text-sm text-primary hover:underline">
+          Learn more →
+        </button>
       </HeroCardFooter>
     </HeroCard>
   );

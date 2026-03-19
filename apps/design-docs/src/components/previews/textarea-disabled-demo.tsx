@@ -1,7 +1,6 @@
 "use client";
 
 import { Textarea } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function TextareaDisabledDemo() {
   return (

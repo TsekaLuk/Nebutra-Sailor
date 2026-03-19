@@ -1,7 +1,6 @@
 "use client";
 
 import { Combobox } from "@nebutra/ui/primitives"; // Mock import
-import * as React from "react";
 
 export function ComboboxSizesDemo() {
   return (

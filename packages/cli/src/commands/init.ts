@@ -1,6 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
 import * as p from "@clack/prompts";
-import fs from "fs";
-import path from "path";
 import pc from "picocolors";
 
 export async function initCommand() {

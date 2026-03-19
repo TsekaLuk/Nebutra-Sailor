@@ -10,10 +10,7 @@ interface ErrorProps {
 }
 
 export default function AnalyticsError({ error, reset }: ErrorProps) {
-  useEffect(() => {
-    // Forward to error reporting service when available
-    console.error("[Analytics] Page error:", error);
-  }, [error]);
+  useEffect(() => {}, []);
 
   return (
     <section className="mx-auto w-full max-w-7xl" role="alert" aria-label="Analytics error">

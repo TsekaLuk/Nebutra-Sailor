@@ -12,8 +12,6 @@
  *   <LogoEnSVG className="text-white" width={160} />
  */
 
-import * as React from "react";
-
 interface SVGProps {
   className?: string;
   width?: number;

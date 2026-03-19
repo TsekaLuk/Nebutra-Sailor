@@ -1,7 +1,6 @@
 "use client";
 
 import { Skeleton } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Skeleton3Demo() {
   return (
     <div className="space-y-3 w-80 p-4 rounded-xl border shadow-sm">

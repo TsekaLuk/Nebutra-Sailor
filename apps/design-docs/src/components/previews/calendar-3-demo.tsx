@@ -1,7 +1,6 @@
 "use client";
 
 import { Calendar } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Calendar3Demo() {
   return <Calendar showMonthAndYearPickers className="rounded-xl border border-border shadow-sm" />;
 }

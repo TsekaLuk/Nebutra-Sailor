@@ -49,18 +49,6 @@
         "noEmptyInterface": "off",
         "noConsole": "warn",
         "noGlobalIsNan": "warn"
-      },
-      "correctness": {
-        "useExhaustiveDependencies": "warn",
-        "noUnusedVariables": "warn",
-        "noUnusedImports": "warn"
-      },
-      "performance": {
-        "noImgElement": "warn"
-      },
-      "a11y": {
-        "noNoninteractiveTabindex": "warn",
-        "useButtonType": "warn"
       }
     }
   },

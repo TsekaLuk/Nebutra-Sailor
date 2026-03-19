@@ -7,6 +7,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
 const LogoSolid = forwardRef<SVGSVGElement, IconProps>(
   ({ size = 16, width, height, ...props }, ref) => (
     <svg
+      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width={width ?? size}
       height={height ?? size}
@@ -49,7 +50,7 @@ const LogoSolid = forwardRef<SVGSVGElement, IconProps>(
           id="paint0_linear_872_3153"
           x1={2.365}
           x2={14.929}
-          y1={0.434}
+          y1={Math.LOG10E}
           y2={6.494}
           gradientUnits="userSpaceOnUse"
         >

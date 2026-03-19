@@ -48,8 +48,7 @@ export async function GET() {
     });
 
     return Response.json({ success: true, data });
-  } catch (err) {
-    console.error("[feedback/get] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }
@@ -116,14 +115,11 @@ export async function POST(req: Request) {
           </div>
         `,
         })
-        .catch((err: unknown) => {
-          console.error("[feedback] Email send failed:", err);
-        });
+        .catch((_err: unknown) => {});
     }
 
     return Response.json({ success: true });
-  } catch (err) {
-    console.error("[feedback/post] Unexpected error:", err);
+  } catch (_err) {
     return Response.json({ success: false, error: "Failed to send feedback" }, { status: 500 });
   }
 }

@@ -116,7 +116,7 @@ export const Checkbox = ({
         className="sr-only"
       />
       <span className={getInputClasses(checked, disabled, indeterminate)}>
-        <svg className="shrink-0" height="16" viewBox="0 0 20 20" width="16">
+        <svg aria-hidden="true" className="shrink-0" height="16" viewBox="0 0 20 20" width="16">
           {indeterminate ? (
             <line
               strokeLinecap="round"

@@ -347,7 +347,7 @@ function ServiceCarousel() {
 
   const nextStep = React.useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % len);
-  }, [len]);
+  }, []);
 
   React.useEffect(() => {
     if (isPaused) return;
@@ -380,6 +380,7 @@ function ServiceCarousel() {
             const isActive = idx === activeIndex;
             return (
               <button
+                type="button"
                 key={key}
                 onClick={() => setActiveIndex(idx)}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider whitespace-nowrap transition-all duration-300 border shrink-0 ${
@@ -427,6 +428,7 @@ function ServiceCarousel() {
                 className="absolute flex items-center justify-start"
               >
                 <button
+                  type="button"
                   onClick={() => setActiveIndex(idx)}
                   className={`relative flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-500 text-left border ${
                     isActive

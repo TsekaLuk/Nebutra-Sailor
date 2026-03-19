@@ -1,7 +1,6 @@
 "use client";
 
 import { Slider } from "@nebutra/ui/primitives";
-import * as React from "react";
 
 export function SliderDemo() {
   return (

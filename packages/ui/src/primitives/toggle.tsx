@@ -111,7 +111,6 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
             value={value}
             checked={isChecked}
             readOnly
-            aria-hidden="true"
             className="hidden"
           />
         )}

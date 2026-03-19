@@ -2,7 +2,6 @@
 
 import { LogomarkSVG, WordmarkEnSVG } from "@nebutra/brand";
 import { MagicCard } from "@nebutra/ui/primitives";
-import React from "react";
 
 export function LogoShowcase() {
   return (

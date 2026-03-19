@@ -1,7 +1,6 @@
 "use client";
 
 import { Combobox } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Combobox6Demo() {
   return (
     <Combobox

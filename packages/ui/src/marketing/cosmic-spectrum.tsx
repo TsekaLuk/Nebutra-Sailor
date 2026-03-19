@@ -180,7 +180,13 @@ interface SpectrumBarsProps {
 
 function SpectrumBars({ colors, blur }: SpectrumBarsProps) {
   return (
-    <svg className="h-full w-full" viewBox="0 0 1567 584" preserveAspectRatio="none" fill="none">
+    <svg
+      aria-hidden="true"
+      className="h-full w-full"
+      viewBox="0 0 1567 584"
+      preserveAspectRatio="none"
+      fill="none"
+    >
       <g clipPath="url(#spectrum-clip)" filter={blur ? "url(#spectrum-blur)" : undefined}>
         <path d="M1219 584H1393V184H1219V584Z" fill="url(#grad0)" />
         <path d="M1045 584H1219V104H1045V584Z" fill="url(#grad1)" />
@@ -283,9 +289,7 @@ export function CosmicSpectrum({
           window.gsap.registerPlugin(window.ScrollTrigger);
           cleanup = setupAnimations();
         }
-      } catch (error) {
-        console.error("Failed to load GSAP:", error);
-      }
+      } catch (_error) {}
     };
 
     initializeAnimations();
@@ -293,7 +297,7 @@ export function CosmicSpectrum({
     return () => {
       cleanup?.();
     };
-  }, []);
+  }, [setupAnimations]);
 
   const setupAnimations = (): (() => void) | undefined => {
     const gsap = window.gsap;

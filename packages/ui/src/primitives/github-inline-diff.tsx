@@ -1,7 +1,6 @@
 "use client";
 
 import { CheckCircle2, MessageSquarePlus, X } from "lucide-react";
-import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "../utils/cn";
 import { Avatar, AvatarFallback } from "./avatar";
@@ -285,7 +284,6 @@ export function GithubInlineDiff({
             return (
               <li
                 key={idx}
-                role="row"
                 className={cn(
                   "group relative flex items-stretch text-[13px]",
                   line.kind === "hunk" && "bg-muted/50 text-muted-foreground",

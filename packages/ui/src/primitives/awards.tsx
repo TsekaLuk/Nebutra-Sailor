@@ -63,7 +63,7 @@ export function Awards({
 
     // Create curved text path
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const createTextPath = (radius: number, id: string) => {
+    const createTextPath = (radius: number, _id: string) => {
       const centerX = 96;
       const centerY = 96;
       return `M ${centerX - radius} ${centerY} A ${radius} ${radius} 0 0 1 ${centerX + radius} ${centerY}`;
@@ -71,6 +71,7 @@ export function Awards({
     return (
       <div className={cn("relative mx-auto flex h-48 w-48 items-center justify-center", className)}>
         <svg
+          aria-hidden="true"
           className="absolute inset-0 h-full w-full"
           viewBox="0 0 192 192"
           xmlns="http://www.w3.org/2000/svg"
@@ -145,6 +146,7 @@ export function Awards({
   if (variant === "award") {
     const LaurelWreath = () => (
       <svg
+        aria-hidden="true"
         className={cn("fill-primary absolute top-1/2 h-full w-full -translate-y-1/2")}
         width="892.77"
         height="688.08"
@@ -196,6 +198,7 @@ export function Awards({
   if (variant === "certificate") {
     const Badge = () => (
       <svg
+        aria-hidden="true"
         className={cn("fill-primary -mt-12 h-18 w-full overflow-hidden")}
         width="24"
         height="24"
@@ -238,6 +241,7 @@ export function Awards({
   if (variant === "badge") {
     const Badge = () => (
       <svg
+        aria-hidden="true"
         className={cn("fill-primary h-full w-18 overflow-hidden")}
         width="500.15"
         height="620.78"
@@ -502,6 +506,7 @@ export function Awards({
               </div>
               <div className="p-3">
                 <svg
+                  aria-hidden="true"
                   width="24"
                   height="24"
                   viewBox="0 0 392.02 324.6"

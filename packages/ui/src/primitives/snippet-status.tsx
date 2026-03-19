@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { cn } from "../utils/cn";
 
 export type SnippetStatusType = "success" | "warning" | "error";
@@ -150,6 +150,7 @@ export function SnippetStatus({
       <div className="ml-auto cursor-pointer relative">
         {/* Copy icon */}
         <svg
+          aria-hidden="true"
           height="16"
           strokeLinejoin="round"
           viewBox="0 0 16 16"
@@ -170,6 +171,7 @@ export function SnippetStatus({
         </svg>
         {/* Check icon */}
         <svg
+          aria-hidden="true"
           height="16"
           strokeLinejoin="round"
           viewBox="0 0 16 16"

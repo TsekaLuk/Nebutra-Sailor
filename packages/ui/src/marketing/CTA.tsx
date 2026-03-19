@@ -25,7 +25,6 @@
 
 "use client";
 
-import * as React from "react";
 import type { CTAProps } from "./types";
 
 export function CTA({

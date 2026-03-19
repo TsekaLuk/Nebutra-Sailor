@@ -54,6 +54,7 @@ export function FocusRingDemo() {
             <Checkbox>Focus me</Checkbox>
           </div>
           <button
+            type="button"
             className="rounded-md border border-fd-border p-3 text-sm focus:outline-none"
             style={focusRing as React.CSSProperties}
           >
@@ -165,6 +166,7 @@ export function MinTouchTargetDemo() {
               </div>
 
               <button
+                type="button"
                 className="flex items-center justify-center hover:bg-fd-accent rounded-md transition-colors relative z-10 mx-auto"
                 style={minTouchTarget}
                 aria-label="Close"
@@ -182,6 +184,7 @@ export function MinTouchTargetDemo() {
               </div>
 
               <button
+                type="button"
                 className="flex items-center justify-center hover:bg-fd-accent rounded-md transition-colors relative z-10 mx-auto"
                 aria-label="Close"
                 // No minTouchTarget style applied
@@ -295,7 +298,6 @@ export function SkipLinkStyleDemo() {
           className="w-full h-[150px] border border-dashed border-fd-border rounded-lg bg-fd-muted/30 relative flex items-center justify-center p-4 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all overflow-hidden"
           role="tabpanel"
           aria-label="Skip link demo container"
-          tabIndex={0}
         >
           <span className="text-xs text-fd-muted-foreground absolute bottom-4">
             Interactive Area Container
@@ -308,7 +310,10 @@ export function SkipLinkStyleDemo() {
             Skip to main content
           </a>
 
-          <button className="opacity-0 focus:opacity-100 absolute bottom-4 right-4 text-xs underline">
+          <button
+            type="button"
+            className="opacity-0 focus:opacity-100 absolute bottom-4 right-4 text-xs underline"
+          >
             Next focusable element
           </button>
         </div>

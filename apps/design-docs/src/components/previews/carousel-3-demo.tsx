@@ -10,8 +10,6 @@ import {
   CarouselPrevious,
 } from "@nebutra/ui/primitives";
 
-import * as React from "react";
-
 export function Carousel3Demo() {
   return (
     <Carousel orientation="vertical" opts={{ align: "start" }} className="max-w-xs w-full">

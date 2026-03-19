@@ -30,7 +30,6 @@
 
 "use client";
 
-import * as React from "react";
 import type { NavbarProps } from "./types";
 
 export function Navbar({
@@ -102,7 +101,7 @@ export function Navbar({
           )}
 
           {/* TODO: Mobile Menu Toggle */}
-          <button data-slot="mobile-toggle" aria-label="Toggle menu">
+          <button type="button" data-slot="mobile-toggle" aria-label="Toggle menu">
             {/* TODO: Hamburger icon */}☰
           </button>
         </div>

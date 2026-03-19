@@ -41,6 +41,7 @@ function ColorSwatch({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
+          type="button"
           className={`group relative flex h-24 flex-col items-start justify-between p-3 text-left transition-all hover:z-10 focus:z-10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${className}`}
           style={{ backgroundColor: hex, color: contrastForeground }}
         >
@@ -104,7 +105,7 @@ function ColorScale({
       </div>
       <div className="flex flex-wrap w-full sm:flex-nowrap">
         {Object.entries(scale).map(([step, hex]) => {
-          const isLightBg = parseInt(step) < 500 || step === "0" || step === "50";
+          const isLightBg = parseInt(step, 10) < 500 || step === "0" || step === "50";
           const contrast = isLightBg ? "#000000" : "#ffffff";
 
           return (

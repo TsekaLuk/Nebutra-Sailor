@@ -27,7 +27,6 @@ const primary = args.primary ?? "#0033FE";
 const secondary = args.secondary ?? "#0BF1C3";
 
 if (!primary.match(/^#[0-9A-Fa-f]{6}$/) || !secondary.match(/^#[0-9A-Fa-f]{6}$/)) {
-  console.error("Error: Colors must be 6-digit hex values, e.g. --primary=#0033FE");
   process.exit(1);
 }
 

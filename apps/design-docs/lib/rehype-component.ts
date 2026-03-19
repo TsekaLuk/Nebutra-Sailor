@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import type { Node } from "unist";
 import { visit } from "unist-util-visit";
 
@@ -44,7 +44,6 @@ export function rehypeComponent() {
 
           if (fs.existsSync(sourcePath)) {
             const rawSource = fs.readFileSync(sourcePath, "utf8");
-            console.warn(`[rehypeComponent] Found source for ${name}, injecting code attribute...`);
 
             // Inject the raw source string as a property called `code` into the React component
             // For mdxJsxFlowElement, properties are in 'attributes' array
@@ -57,13 +56,8 @@ export function rehypeComponent() {
             // We do NOT inject node.children here, because FumaDocs MDX will compile it to a weird React node
             // that bypasses our ComponentPreview filters. We'll let ComponentPreview render the `code` string securely.
           } else {
-            console.warn(
-              `[rehypeComponent] Could not find file for component preview: ${name} at ${sourcePath}`,
-            );
           }
-        } catch (error) {
-          console.error(`[rehypeComponent] Error reading component source for ${name}: `, error);
-        }
+        } catch (_error) {}
       }
     });
   };

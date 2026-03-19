@@ -42,7 +42,7 @@ function GridPattern({
       </defs>
       <rect width="100%" height="100%" strokeWidth={0} fill={`url(#${id})`} />
       {squares && (
-        <svg x={x} y={y} className="overflow-visible">
+        <svg aria-hidden="true" x={x} y={y} className="overflow-visible">
           {squares.map(([sx, sy]) => (
             <rect
               strokeWidth="0"

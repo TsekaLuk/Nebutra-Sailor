@@ -1,7 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { TESTIMONIAL_SOURCE_ICONS, TESTIMONIAL_SOURCE_NAMES } from "../config";
 import type { Testimonial, TestimonialSource, TestimonialsWallProps } from "../types";
 
@@ -18,6 +18,7 @@ function RatingStars({ rating }: { rating: number }) {
     <div className="flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: fullStars }).map((_, i) => (
         <svg
+          aria-hidden="true"
           key={`full-${i}`}
           className="h-4 w-4 text-yellow-400"
           fill="currentColor"
@@ -27,7 +28,12 @@ function RatingStars({ rating }: { rating: number }) {
         </svg>
       ))}
       {hasHalfStar && (
-        <svg className="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+        <svg
+          aria-hidden="true"
+          className="h-4 w-4 text-yellow-400"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
           <defs>
             <linearGradient id="half-star">
               <stop offset="50%" stopColor="currentColor" />
@@ -42,6 +48,7 @@ function RatingStars({ rating }: { rating: number }) {
       )}
       {Array.from({ length: emptyStars }).map((_, i) => (
         <svg
+          aria-hidden="true"
           key={`empty-${i}`}
           className="h-4 w-4 text-gray-300"
           fill="currentColor"

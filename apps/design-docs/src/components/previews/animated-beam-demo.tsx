@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatedBeam } from "@nebutra/ui/primitives";
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 export function AnimatedBeamDemo() {
   const containerRef = useRef<HTMLDivElement>(null);

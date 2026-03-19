@@ -29,7 +29,10 @@ export function LightRaysDemo() {
             everything to light.
           </p>
 
-          <button className="mt-8 px-6 py-2.5 bg-white text-black font-medium hover:bg-blue-50 rounded-full transition-colors">
+          <button
+            type="button"
+            className="mt-8 px-6 py-2.5 bg-white text-black font-medium hover:bg-blue-50 rounded-full transition-colors"
+          >
             Get Started
           </button>
         </div>

@@ -37,7 +37,7 @@ describe("presets", () => {
   });
 
   it("full preset enables all apps and features", () => {
-    const full = presets["full"]!;
+    const full = presets.full!;
     for (const appId of allAppIds) {
       expect(full.apps[appId]).toBe(true);
     }
@@ -71,7 +71,7 @@ describe("presets", () => {
     });
 
     it("marketing enables landing-page, blog, studio; disables web", () => {
-      const p = presets["marketing"]!;
+      const p = presets.marketing!;
       expect(p.apps["landing-page"]).toBe(true);
       expect(p.apps.blog).toBe(true);
       expect(p.apps.studio).toBe(true);
@@ -80,7 +80,7 @@ describe("presets", () => {
     });
 
     it("dashboard enables web, admin, api-gateway; enables sso", () => {
-      const p = presets["dashboard"]!;
+      const p = presets.dashboard!;
       expect(p.apps.web).toBe(true);
       expect(p.apps.admin).toBe(true);
       expect(p.apps["api-gateway"]).toBe(true);

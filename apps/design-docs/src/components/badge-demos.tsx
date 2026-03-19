@@ -3,7 +3,6 @@
 import { Badge, type BadgeProps } from "@nebutra/ui/primitives";
 import { Bell, Shield, Slack } from "lucide-react";
 import { usePathname } from "next/navigation";
-import React from "react";
 
 // --- Variants Demo ---
 const CONCOLORS = [

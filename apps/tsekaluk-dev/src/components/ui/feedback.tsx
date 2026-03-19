@@ -13,7 +13,14 @@ interface FeedbackProps {
 }
 
 const MSupportedIcon = () => (
-  <svg fill="none" height="14" viewBox="0 0 22 14" width="22" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    aria-hidden="true"
+    fill="none"
+    height="14"
+    viewBox="0 0 22 14"
+    width="22"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       clipRule="evenodd"
       d="M19.5 1.25H2.5C1.80964 1.25 1.25 1.80964 1.25 2.5V11.5C1.25 12.1904 1.80964 12.75 2.5 12.75H19.5C20.1904 12.75 20.75 12.1904 20.75 11.5V2.5C20.75 1.80964 20.1904 1.25 19.5 1.25ZM2.5 0C1.11929 0 0 1.11929 0 2.5V11.5C0 12.8807 1.11929 14 2.5 14H19.5C20.8807 14 22 12.8807 22 11.5V2.5C22 1.11929 20.8807 0 19.5 0H2.5ZM3 3.5H4H4.25H4.6899L4.98715 3.82428L7 6.02011L9.01285 3.82428L9.3101 3.5H9.75H10H11V4.5V10.5H9V6.79807L7.73715 8.17572L7 8.97989L6.26285 8.17572L5 6.79807V10.5H3V4.5V3.5ZM15 7V3.5H17V7H19.5L17 9.5L16 10.5L15 9.5L12.5 7H15Z"
@@ -24,7 +31,14 @@ const MSupportedIcon = () => (
 );
 
 const LoveItIcon = ({ pathClassName }: { pathClassName?: string }) => (
-  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" fill="currentColor">
+  <svg
+    aria-hidden="true"
+    height="16"
+    strokeLinejoin="round"
+    viewBox="0 0 16 16"
+    width="16"
+    fill="currentColor"
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -40,7 +54,14 @@ const LoveItIcon = ({ pathClassName }: { pathClassName?: string }) => (
 );
 
 const ItsOkayIcon = () => (
-  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" fill="currentColor">
+  <svg
+    aria-hidden="true"
+    height="16"
+    strokeLinejoin="round"
+    viewBox="0 0 16 16"
+    width="16"
+    fill="currentColor"
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -50,7 +71,14 @@ const ItsOkayIcon = () => (
 );
 
 const NotGreaterIcon = () => (
-  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" fill="currentColor">
+  <svg
+    aria-hidden="true"
+    height="16"
+    strokeLinejoin="round"
+    viewBox="0 0 16 16"
+    width="16"
+    fill="currentColor"
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -60,7 +88,14 @@ const NotGreaterIcon = () => (
 );
 
 const HateIcon = () => (
-  <svg height="16" strokeLinejoin="round" viewBox="0 0 16 16" width="16" fill="currentColor">
+  <svg
+    aria-hidden="true"
+    height="16"
+    strokeLinejoin="round"
+    viewBox="0 0 16 16"
+    width="16"
+    fill="currentColor"
+  >
     <path fillRule="evenodd" clipRule="evenodd" d="M4 9V16H5.5V9H4ZM12 9V16H10.5V9H12Z" />
     <path
       fillRule="evenodd"
@@ -91,7 +126,7 @@ const Default = ({ label }: { label: string }) => {
 
   useEffect(() => {
     const getPosition = () => {
-      if (isOpen && inputRef && inputRef.current && menuRef.current) {
+      if (isOpen && inputRef?.current && menuRef.current) {
         const buttonRect = inputRef.current.getBoundingClientRect();
         const menuHeight = menuRef.current.offsetHeight;
         const viewportHeight = window.innerHeight;

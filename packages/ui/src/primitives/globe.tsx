@@ -124,7 +124,7 @@ export function Globe({ className, config, rotationSpeed = 0.005, ...props }: Gl
       state.width = width * 2;
       state.height = width * 2;
     },
-    [r, rotationSpeed],
+    [r, rotationSpeed, phi, width],
   );
 
   const onResize = () => {
@@ -157,7 +157,7 @@ export function Globe({ className, config, rotationSpeed = 0.005, ...props }: Gl
       globe.destroy();
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [mergedConfig, onRender, onResize, width]);
 
   return (
     <div

@@ -66,9 +66,13 @@ export function FAQ({
       {/* TODO: Category Filter */}
       {showCategories && categories.length > 0 && (
         <div data-slot="categories">
-          <button data-active={true}>All</button>
+          <button type="button" data-active={true}>
+            All
+          </button>
           {categories.map((category) => (
-            <button key={category}>{category}</button>
+            <button type="button" key={category}>
+              {category}
+            </button>
           ))}
         </div>
       )}
@@ -79,6 +83,7 @@ export function FAQ({
           <div key={index} data-slot="faq-item" data-expanded={expandedIndex === index}>
             {/* TODO: Use FAQItem component */}
             <button
+              type="button"
               data-slot="question"
               onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
               aria-expanded={expandedIndex === index}

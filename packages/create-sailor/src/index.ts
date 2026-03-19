@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
+import path from "node:path";
 import * as p from "@clack/prompts";
 import { Command } from "commander";
-import path from "path";
 import pc from "picocolors";
 import { type NebutraConfig, writeNebutraConfig } from "./utils/config.js";
 import { cloneTemplate } from "./utils/git.js";

@@ -131,7 +131,6 @@ export class SagaOrchestrator<TContext = unknown> {
             }),
           );
         } catch (error) {
-          console.error(`Compensation failed for step ${stepName}:`, error);
           await eventBus.publish(
             eventBus.createEvent("saga.compensation.failed", {
               saga: this.name,

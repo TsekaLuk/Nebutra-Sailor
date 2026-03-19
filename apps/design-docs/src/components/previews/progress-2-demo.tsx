@@ -1,7 +1,6 @@
 "use client";
 
 import { Progress } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Progress2Demo() {
   return (
     <div className="space-y-1 w-full">

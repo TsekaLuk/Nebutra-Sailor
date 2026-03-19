@@ -1,7 +1,6 @@
 "use client";
 
 import { Input, Label } from "@nebutra/ui/primitives";
-import * as React from "react";
 export function Label2Demo() {
   return (
     <div className="space-y-2 max-w-sm w-full">

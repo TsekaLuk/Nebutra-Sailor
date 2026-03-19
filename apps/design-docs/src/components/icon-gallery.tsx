@@ -74,6 +74,7 @@ function IconCard({
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <button
+          type="button"
           className="group relative flex flex-col items-center justify-center p-4 border-r border-b border-border bg-card/10 hover:bg-card focus-visible:bg-card focus-visible:outline-none focus-visible:relative focus-visible:ring-1 focus-visible:ring-ring focus-visible:z-10 transition-colors h-[120px] outline-none"
           aria-label={`Copy options for ${name}`}
         >

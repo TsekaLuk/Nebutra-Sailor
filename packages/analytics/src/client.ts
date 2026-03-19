@@ -377,7 +377,7 @@ export class AnalyticsClient {
     // Implement HMAC verification
     // This is a simplified version - use proper crypto in production
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const crypto = require("crypto");
+    const crypto = require("node:crypto");
     const expectedSignature = crypto.createHmac("sha256", secret).update(body).digest("hex");
 
     return signature === expectedSignature;

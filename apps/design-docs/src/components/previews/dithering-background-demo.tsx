@@ -27,12 +27,14 @@ export function DitheringBackgroundDemo() {
 
         <div className="gap-2 mt-2 flex">
           <button
+            type="button"
             className={`px-3 py-1 text-xs rounded-full border ${theme === "dark" ? "bg-primary text-primary-foreground" : "bg-background hover:bg-muted"}`}
             onClick={() => setTheme("dark")}
           >
             Dark
           </button>
           <button
+            type="button"
             className={`px-3 py-1 text-xs rounded-full border ${theme === "light" ? "bg-primary text-primary-foreground" : "bg-background hover:bg-muted"}`}
             onClick={() => setTheme("light")}
           >
