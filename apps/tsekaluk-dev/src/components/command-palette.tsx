@@ -30,15 +30,69 @@ interface CommandPaletteProps {
 
 const NAV_COMMANDS = [
   { id: "home", label: "Home", href: "/", icon: Home, keywords: "index main" },
-  { id: "work", label: "Work", href: "/work", icon: Briefcase, keywords: "projects portfolio" },
-  { id: "thinking", label: "Thinking", href: "/thinking", icon: FileText, keywords: "blog articles essays writing" },
-  { id: "now", label: "Now", href: "/now", icon: Clock, keywords: "current status update" },
-  { id: "about", label: "About", href: "/about", icon: User, keywords: "bio background" },
-  { id: "soul", label: "Soul", href: "/soul", icon: Bot, keywords: "ai chat clone digital" },
-  { id: "uses", label: "Uses", href: "/uses", icon: Cpu, keywords: "tools stack setup gear" },
-  { id: "links", label: "Links", href: "/links", icon: Link2, keywords: "social bookmarks" },
-  { id: "guestbook", label: "Guestbook", href: "/guestbook", icon: MessageSquare, keywords: "endorse comments" },
-  { id: "privacy", label: "Privacy", href: "/privacy", icon: Lock, keywords: "data policy" },
+  {
+    id: "work",
+    label: "Work",
+    href: "/work",
+    icon: Briefcase,
+    keywords: "projects portfolio",
+  },
+  {
+    id: "thinking",
+    label: "Thinking",
+    href: "/thinking",
+    icon: FileText,
+    keywords: "blog articles essays writing",
+  },
+  {
+    id: "now",
+    label: "Now",
+    href: "/now",
+    icon: Clock,
+    keywords: "current status update",
+  },
+  {
+    id: "about",
+    label: "About",
+    href: "/about",
+    icon: User,
+    keywords: "bio background",
+  },
+  {
+    id: "soul",
+    label: "Soul",
+    href: "/soul",
+    icon: Bot,
+    keywords: "ai chat clone digital",
+  },
+  {
+    id: "uses",
+    label: "Uses",
+    href: "/uses",
+    icon: Cpu,
+    keywords: "tools stack setup gear",
+  },
+  {
+    id: "links",
+    label: "Links",
+    href: "/links",
+    icon: Link2,
+    keywords: "social bookmarks",
+  },
+  {
+    id: "guestbook",
+    label: "Guestbook",
+    href: "/guestbook",
+    icon: MessageSquare,
+    keywords: "endorse comments",
+  },
+  {
+    id: "privacy",
+    label: "Privacy",
+    href: "/privacy",
+    icon: Lock,
+    keywords: "data policy",
+  },
 ]
 
 const LOCALE_LABELS: Record<string, string> = {
@@ -53,6 +107,11 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   const { resolvedTheme, setTheme } = useTheme()
   const locale = useLocale()
   const { track } = useAnalytics()
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
+  React.useEffect(() => {
+    if (open) inputRef.current?.focus()
+  }, [open])
 
   const navigate = (href: string) => {
     track("command_palette_navigate", { href })
@@ -78,71 +137,79 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       role="dialog"
       aria-modal="true"
       aria-label="Command palette"
-      className={`fixed inset-0 z-50 ${open ? "flex" : "hidden"} items-start justify-center pt-[20vh]`}
+      className={`inset-0 fixed z-50 ${open ? "flex" : "hidden"} items-start justify-center pt-[20vh]`}
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        className="inset-0 bg-black/40 backdrop-blur-sm absolute"
+        role="button"
+        tabIndex={-1}
+        aria-label="Close command palette"
         onClick={() => onOpenChange(false)}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") onOpenChange(false)
+        }}
       />
 
       {/* Panel */}
-      <div className="relative z-10 w-full max-w-xl mx-4">
+      <div className="max-w-xl mx-4 relative z-10 w-full">
         <Command
-          className="overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 shadow-2xl"
+          className="dark:border-gray-800 bg-white dark:bg-gray-950 overflow-hidden rounded-2xl border border-gray-200 shadow-2xl"
           loop
         >
-          <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-800/80">
-            <Search className="h-4 w-4 shrink-0 text-gray-400" />
+          <div className="gap-3 px-4 py-3 dark:border-gray-800/80 flex items-center border-b border-gray-100">
+            <Search className="h-4 w-4 text-gray-400 shrink-0" />
             <Command.Input
-              autoFocus
+              ref={inputRef}
               placeholder="Search pages, actions..."
-              className="flex-1 bg-transparent text-sm text-gray-900 dark:text-white placeholder:text-gray-400 outline-none"
+              className="text-sm text-gray-900 dark:text-white placeholder:text-gray-400 flex-1 bg-transparent outline-none"
             />
-            <kbd className="hidden sm:inline-flex items-center rounded border border-gray-200 dark:border-gray-700 px-1.5 py-0.5 text-[10px] text-gray-400 font-mono">
+            <kbd className="sm:inline-flex rounded px-1.5 py-0.5 text-gray-400 hidden items-center border border-gray-200 font-mono text-[10px] dark:border-gray-700">
               ESC
             </kbd>
           </div>
 
-          <Command.List className="max-h-80 overflow-y-auto overscroll-contain py-2">
-            <Command.Empty className="py-10 text-center text-sm text-gray-400">
+          <Command.List className="max-h-80 py-2 overflow-y-auto overscroll-contain">
+            <Command.Empty className="py-10 text-sm text-gray-400 text-center">
               No results found.
             </Command.Empty>
 
             <Command.Group
               heading="Pages"
-              className="[&>[cmdk-group-heading]]:px-4 [&>[cmdk-group-heading]]:py-1.5 [&>[cmdk-group-heading]]:text-[11px] [&>[cmdk-group-heading]]:font-medium [&>[cmdk-group-heading]]:uppercase [&>[cmdk-group-heading]]:tracking-wider [&>[cmdk-group-heading]]:text-gray-400"
+              className="[&>[cmdk-group-heading]]:px-4 [&>[cmdk-group-heading]]:py-1.5 [&>[cmdk-group-heading]]:font-medium [&>[cmdk-group-heading]]:tracking-wider [&>[cmdk-group-heading]]:text-gray-400 [&>[cmdk-group-heading]]:text-[11px] [&>[cmdk-group-heading]]:uppercase"
             >
               {NAV_COMMANDS.map(({ id, label, href, icon: Icon, keywords }) => (
                 <Command.Item
                   key={id}
                   value={`${label} ${keywords}`}
                   onSelect={() => navigate(href)}
-                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 cursor-pointer rounded-none data-[selected=true]:bg-gray-100 dark:data-[selected=true]:bg-gray-800 transition-colors"
+                  className="gap-3 px-4 py-2.5 text-sm dark:data-[selected=true]:bg-gray-800 flex cursor-pointer items-center rounded-none text-gray-700 transition-colors data-[selected=true]:bg-gray-100 dark:text-gray-200"
                 >
-                  <Icon className="h-4 w-4 shrink-0 text-gray-400" />
+                  <Icon className="h-4 w-4 text-gray-400 shrink-0" />
                   {label}
                 </Command.Item>
               ))}
             </Command.Group>
 
-            <Command.Separator className="my-1 h-px bg-gray-100 dark:bg-gray-800" />
+            <Command.Separator className="my-1 dark:bg-gray-800 h-px bg-gray-100" />
 
             <Command.Group
               heading="Actions"
-              className="[&>[cmdk-group-heading]]:px-4 [&>[cmdk-group-heading]]:py-1.5 [&>[cmdk-group-heading]]:text-[11px] [&>[cmdk-group-heading]]:font-medium [&>[cmdk-group-heading]]:uppercase [&>[cmdk-group-heading]]:tracking-wider [&>[cmdk-group-heading]]:text-gray-400"
+              className="[&>[cmdk-group-heading]]:px-4 [&>[cmdk-group-heading]]:py-1.5 [&>[cmdk-group-heading]]:font-medium [&>[cmdk-group-heading]]:tracking-wider [&>[cmdk-group-heading]]:text-gray-400 [&>[cmdk-group-heading]]:text-[11px] [&>[cmdk-group-heading]]:uppercase"
             >
               <Command.Item
                 value={`theme toggle ${resolvedTheme === "dark" ? "light" : "dark"}`}
                 onSelect={toggleTheme}
-                className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 cursor-pointer rounded-none data-[selected=true]:bg-gray-100 dark:data-[selected=true]:bg-gray-800 transition-colors"
+                className="gap-3 px-4 py-2.5 text-sm dark:data-[selected=true]:bg-gray-800 flex cursor-pointer items-center rounded-none text-gray-700 transition-colors data-[selected=true]:bg-gray-100 dark:text-gray-200"
               >
                 {resolvedTheme === "dark" ? (
-                  <Sun className="h-4 w-4 shrink-0 text-gray-400" />
+                  <Sun className="h-4 w-4 text-gray-400 shrink-0" />
                 ) : (
-                  <Moon className="h-4 w-4 shrink-0 text-gray-400" />
+                  <Moon className="h-4 w-4 text-gray-400 shrink-0" />
                 )}
-                {resolvedTheme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                {resolvedTheme === "dark"
+                  ? "Switch to Light Mode"
+                  : "Switch to Dark Mode"}
               </Command.Item>
 
               {(["en", "zh", "ja"] as const)
@@ -152,9 +219,9 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                     key={l}
                     value={`language ${l} ${LOCALE_LABELS[l]}`}
                     onSelect={() => switchLocale(l)}
-                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 cursor-pointer rounded-none data-[selected=true]:bg-gray-100 dark:data-[selected=true]:bg-gray-800 transition-colors"
+                    className="gap-3 px-4 py-2.5 text-sm dark:data-[selected=true]:bg-gray-800 flex cursor-pointer items-center rounded-none text-gray-700 transition-colors data-[selected=true]:bg-gray-100 dark:text-gray-200"
                   >
-                    <Languages className="h-4 w-4 shrink-0 text-gray-400" />
+                    <Languages className="h-4 w-4 text-gray-400 shrink-0" />
                     Switch to {LOCALE_LABELS[l]}
                   </Command.Item>
                 ))}

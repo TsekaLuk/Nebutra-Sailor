@@ -36,7 +36,7 @@ interface DependencyRule {
  *
  * After architecture correction (Phase 1–2):
  *   @nebutra/ui             (packages/ui):              none (design-system merged in)
- *   @nebutra/web            (apps/web):                 @nebutra/ui, @nebutra/tokens, @nebutra/feature-flags
+ *   @nebutra/web            (apps/web):                 @nebutra/ui, @nebutra/tokens, @nebutra/feature-flags, @nebutra/logger
  *   @nebutra/landing-page   (apps/landing-page):        @nebutra/ui, @nebutra/tokens
  *   @nebutra/design-docs    (apps/design-docs):         @nebutra/ui, @nebutra/tokens
  */
@@ -49,8 +49,13 @@ const DEPENDENCY_RULES: DependencyRule[] = [
   {
     name: "@nebutra/web",
     packageJsonPath: "apps/web/package.json",
-    // @nebutra/feature-flags is a cross-cutting infrastructure package for feature gating
-    allowedDeps: ["@nebutra/ui", "@nebutra/tokens", "@nebutra/feature-flags"],
+    // @nebutra/feature-flags and @nebutra/logger are cross-cutting infrastructure packages
+    allowedDeps: [
+      "@nebutra/ui",
+      "@nebutra/tokens",
+      "@nebutra/feature-flags",
+      "@nebutra/logger",
+    ],
   },
   {
     name: "@nebutra/landing-page",

@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { LayoutDashboard, FolderOpen, FileText, MessageSquare } from "lucide-react"
 import { auth } from "@/auth"
 import { AdminNav } from "./admin-nav"
 
@@ -25,9 +24,11 @@ export default async function AdminLayout({
 
   if (!adminEmail || userEmail?.toLowerCase() !== adminEmail.toLowerCase()) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-6">
+      <div className="px-6 flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <p className="font-serif italic text-5xl text-gray-300 dark:text-gray-700">403</p>
+          <p className="font-serif text-5xl text-gray-300 italic dark:text-gray-700">
+            403
+          </p>
           <h1 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
             Access Denied
           </h1>
@@ -36,7 +37,7 @@ export default async function AdminLayout({
           </p>
           <Link
             href="/"
-            className="mt-6 inline-block text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white underline"
+            className="mt-6 text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white inline-block underline"
           >
             Go home
           </Link>
@@ -48,9 +49,12 @@ export default async function AdminLayout({
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <aside className="w-56 shrink-0 border-r border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 flex flex-col">
-        <div className="px-5 py-6 border-b border-gray-100 dark:border-gray-800">
-          <Link href="/admin" className="font-serif italic text-xl text-gray-900 dark:text-white">
+      <aside className="w-56 dark:border-gray-800 bg-white dark:bg-gray-950 flex shrink-0 flex-col border-r border-gray-100">
+        <div className="px-5 py-6 dark:border-gray-800 border-b border-gray-100">
+          <Link
+            href="/admin"
+            className="font-serif text-xl text-gray-900 dark:text-white italic"
+          >
             Admin
           </Link>
         </div>
@@ -58,7 +62,7 @@ export default async function AdminLayout({
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-950 p-8">
+      <main className="bg-gray-50 dark:bg-gray-950 p-8 flex-1 overflow-auto">
         {children}
       </main>
     </div>
