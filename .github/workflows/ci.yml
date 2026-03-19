@@ -172,24 +172,24 @@ jobs:
           .venv/bin/pip install -r requirements.txt ruff pytest pytest-asyncio mypy bandit
 
       - name: Lint (ruff)
-        run: uv run ruff check . --output-format=github
+        run: .venv/bin/ruff check . --output-format=github
 
       - name: Format check (ruff)
-        run: uv run ruff format --check .
+        run: .venv/bin/ruff format --check .
 
       - name: Type check (mypy)
-        run: uv run mypy . --ignore-missing-imports --no-error-summary || true
+        run: .venv/bin/mypy . --ignore-missing-imports --no-error-summary || true
 
       - name: Security check (bandit)
         run: |
-          uv run bandit -r . -x ./tests -f json -o bandit-report.json --severity-level medium || true
+          .venv/bin/bandit -r . -x ./tests -f json -o bandit-report.json --severity-level medium || true
           # Fail only on high-severity findings
-          uv run bandit -r . -x ./tests --severity-level high -q
+          .venv/bin/bandit -r . -x ./tests --severity-level high -q
 
       - name: Run tests
         run: |
           if [ -d "tests" ]; then
-            uv run pytest --tb=short -q --cov --cov-report=term-missing --cov-fail-under=70
+            .venv/bin/pytest --tb=short -q --cov --cov-report=term-missing --cov-fail-under=70
           else
             echo "No tests directory — skipping"
           fi

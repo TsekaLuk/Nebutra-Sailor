@@ -1,19 +1,18 @@
-import { requireOrg } from "@/lib/auth";
-import { auth } from "@clerk/nextjs/server";
-import { PermissionGate } from "@/components/PermissionGate";
-import { TeamMemberList } from "./TeamMemberList";
-import { InviteMemberForm } from "./InviteMemberForm";
+import { requireOrg } from "@/lib/auth"
+import { PermissionGate } from "@/components/PermissionGate"
+import { TeamMemberList } from "./TeamMemberList"
+import { InviteMemberForm } from "./InviteMemberForm"
 
-export const metadata = { title: "Team — Settings" };
+export const metadata = { title: "Team — Settings" }
 
 export default async function TeamPage() {
-  const { orgId } = await requireOrg();
+  const { orgId } = await requireOrg()
 
   return (
     <div className="space-y-8">
       {/* Invite section — admins only */}
       <PermissionGate require="team:invite">
-        <section className="rounded-lg border border-[var(--neutral-7)] bg-[var(--neutral-1)] p-6">
+        <section className="p-6 rounded-lg border border-[var(--neutral-7)] bg-[var(--neutral-1)]">
           <h2 className="mb-1 text-base font-semibold text-[var(--neutral-12)]">
             Invite a team member
           </h2>
@@ -25,12 +24,12 @@ export default async function TeamPage() {
       </PermissionGate>
 
       {/* Members list */}
-      <section className="rounded-lg border border-[var(--neutral-7)] bg-[var(--neutral-1)] p-6">
+      <section className="p-6 rounded-lg border border-[var(--neutral-7)] bg-[var(--neutral-1)]">
         <h2 className="mb-4 text-base font-semibold text-[var(--neutral-12)]">
           Members
         </h2>
         <TeamMemberList orgId={orgId} />
       </section>
     </div>
-  );
+  )
 }
