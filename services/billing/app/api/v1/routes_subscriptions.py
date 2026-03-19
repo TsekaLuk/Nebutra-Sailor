@@ -4,20 +4,19 @@ Subscription Routes
 Subscription management, plan changes, cancellations.
 """
 
-from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel
-from typing import Optional
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
+
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
 
 from services.subscription_service import SubscriptionService
-
 
 router = APIRouter()
 
 
 # Enums
-class SubscriptionStatus(str, Enum):
+class SubscriptionStatus(StrEnum):
     ACTIVE = "ACTIVE"
     PAST_DUE = "PAST_DUE"
     CANCELED = "CANCELED"
@@ -26,7 +25,7 @@ class SubscriptionStatus(str, Enum):
     PAUSED = "PAUSED"
 
 
-class Plan(str, Enum):
+class Plan(StrEnum):
     FREE = "FREE"
     PRO = "PRO"
     ENTERPRISE = "ENTERPRISE"
@@ -36,8 +35,8 @@ class Plan(str, Enum):
 class CreateSubscriptionRequest(BaseModel):
     organization_id: str
     price_id: str
-    payment_method_id: Optional[str] = None
-    trial_days: Optional[int] = None
+    payment_method_id: str | None = None
+    trial_days: int | None = None
 
 
 class SubscriptionResponse(BaseModel):
@@ -48,18 +47,18 @@ class SubscriptionResponse(BaseModel):
     current_period_start: datetime
     current_period_end: datetime
     cancel_at_period_end: bool
-    canceled_at: Optional[datetime] = None
-    trial_end: Optional[datetime] = None
+    canceled_at: datetime | None = None
+    trial_end: datetime | None = None
 
 
 class UpdateSubscriptionRequest(BaseModel):
     price_id: str
-    proration_behavior: Optional[str] = "create_prorations"
+    proration_behavior: str | None = "create_prorations"
 
 
 class CancelSubscriptionRequest(BaseModel):
     cancel_at_period_end: bool = True
-    reason: Optional[str] = None
+    reason: str | None = None
 
 
 class PreviewChangeResponse(BaseModel):
@@ -89,9 +88,7 @@ async def create_subscription(
         )
         return subscription
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.get("/{organization_id}", response_model=SubscriptionResponse)
 async def get_subscription(
     organization_id: str,
@@ -106,9 +103,7 @@ async def get_subscription(
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.patch("/{organization_id}", response_model=SubscriptionResponse)
 async def update_subscription(
     organization_id: str,
@@ -124,9 +119,7 @@ async def update_subscription(
         )
         return subscription
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/{organization_id}/cancel", response_model=SubscriptionResponse)
 async def cancel_subscription(
     organization_id: str,
@@ -142,9 +135,7 @@ async def cancel_subscription(
         )
         return subscription
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/{organization_id}/resume", response_model=SubscriptionResponse)
 async def resume_subscription(
     organization_id: str,
@@ -155,9 +146,7 @@ async def resume_subscription(
         subscription = await service.resume_subscription(organization_id)
         return subscription
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/{organization_id}/pause", response_model=SubscriptionResponse)
 async def pause_subscription(
     organization_id: str,
@@ -168,9 +157,7 @@ async def pause_subscription(
         subscription = await service.pause_subscription(organization_id)
         return subscription
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/{organization_id}/preview-change", response_model=PreviewChangeResponse)
 async def preview_subscription_change(
     organization_id: str,
@@ -185,4 +172,4 @@ async def preview_subscription_change(
         )
         return preview
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e

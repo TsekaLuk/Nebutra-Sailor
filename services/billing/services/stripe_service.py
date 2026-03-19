@@ -5,7 +5,7 @@ Low-level Stripe API interactions.
 """
 
 import stripe
-from typing import Optional
+
 from app.config import settings
 
 
@@ -19,8 +19,8 @@ class StripeService:
         self,
         organization_id: str,
         email: str,
-        name: Optional[str] = None,
-        metadata: Optional[dict] = None,
+        name: str | None = None,
+        metadata: dict | None = None,
     ) -> dict:
         """Create a new Stripe customer"""
         customer_metadata = {"organization_id": organization_id}
@@ -34,7 +34,7 @@ class StripeService:
         )
         return dict(customer)
 
-    async def get_customer(self, customer_id: str) -> Optional[dict]:
+    async def get_customer(self, customer_id: str) -> dict | None:
         """Get a Stripe customer by ID"""
         try:
             customer = stripe.Customer.retrieve(customer_id)
@@ -42,7 +42,7 @@ class StripeService:
         except stripe.InvalidRequestError:
             return None
 
-    async def get_customer_by_organization(self, organization_id: str) -> Optional[dict]:
+    async def get_customer_by_organization(self, organization_id: str) -> dict | None:
         """Get Stripe customer by organization ID"""
         customers = stripe.Customer.search(
             query=f"metadata['organization_id']:'{organization_id}'",
@@ -55,9 +55,9 @@ class StripeService:
     async def update_customer(
         self,
         customer_id: str,
-        email: Optional[str] = None,
-        name: Optional[str] = None,
-        metadata: Optional[dict] = None,
+        email: str | None = None,
+        name: str | None = None,
+        metadata: dict | None = None,
     ) -> dict:
         """Update a Stripe customer"""
         update_params = {}
@@ -85,12 +85,12 @@ class StripeService:
         price_id: str,
         success_url: str,
         cancel_url: str,
-        trial_days: Optional[int] = None,
+        trial_days: int | None = None,
     ) -> dict:
         """Create a Stripe checkout session"""
         # Get or create customer
         customer = await self.get_customer_by_organization(organization_id)
-        
+
         session_params = {
             "mode": "subscription",
             "line_items": [{"price": price_id, "quantity": 1}],
@@ -132,8 +132,8 @@ class StripeService:
         self,
         amount: int,  # In cents
         currency: str = "usd",
-        customer_id: Optional[str] = None,
-        metadata: Optional[dict] = None,
+        customer_id: str | None = None,
+        metadata: dict | None = None,
     ) -> dict:
         """Create a payment intent for one-time payments"""
         intent_params = {

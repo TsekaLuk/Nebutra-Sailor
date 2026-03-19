@@ -4,12 +4,10 @@ Billing Routes
 Customer management, checkout sessions, and billing portal.
 """
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, EmailStr
-from typing import Optional
 
 from services.stripe_service import StripeService
-
 
 router = APIRouter()
 
@@ -18,14 +16,14 @@ router = APIRouter()
 class CreateCustomerRequest(BaseModel):
     organization_id: str
     email: EmailStr
-    name: Optional[str] = None
-    metadata: Optional[dict] = None
+    name: str | None = None
+    metadata: dict | None = None
 
 
 class CreateCustomerResponse(BaseModel):
     customer_id: str
     email: str
-    name: Optional[str]
+    name: str | None
 
 
 class CreateCheckoutRequest(BaseModel):
@@ -33,7 +31,7 @@ class CreateCheckoutRequest(BaseModel):
     price_id: str
     success_url: str
     cancel_url: str
-    trial_days: Optional[int] = None
+    trial_days: int | None = None
 
 
 class CreateCheckoutResponse(BaseModel):
@@ -79,9 +77,7 @@ async def create_customer(
             name=customer.get("name"),
         )
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.get("/customers/{organization_id}")
 async def get_customer(
     organization_id: str,
@@ -96,9 +92,7 @@ async def get_customer(
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/checkout", response_model=CreateCheckoutResponse)
 async def create_checkout_session(
     request: CreateCheckoutRequest,
@@ -118,9 +112,7 @@ async def create_checkout_session(
             session_id=session["id"],
         )
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/portal", response_model=CreatePortalResponse)
 async def create_billing_portal(
     request: CreatePortalRequest,
@@ -134,9 +126,7 @@ async def create_billing_portal(
         )
         return CreatePortalResponse(portal_url=session["url"])
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.get("/pricing", response_model=GetPricingResponse)
 async def get_pricing():
     """Get available pricing plans"""

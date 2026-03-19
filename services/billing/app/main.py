@@ -5,8 +5,8 @@ FastAPI service for billing, subscriptions, usage tracking, and credits manageme
 """
 
 import logging
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -18,7 +18,13 @@ from _shared.errors import generic_exception_handler
 from _shared.health import router as health_router
 from _shared.middleware import RequestLoggingMiddleware
 from _shared.otel import instrument_app
-from app.api.v1 import routes_billing, routes_subscriptions, routes_usage, routes_credits, routes_webhooks
+from app.api.v1 import (
+    routes_billing,
+    routes_credits,
+    routes_subscriptions,
+    routes_usage,
+    routes_webhooks,
+)
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -48,7 +54,9 @@ app.add_exception_handler(Exception, generic_exception_handler)
 
 app.include_router(health_router)
 app.include_router(routes_billing.router, prefix="/api/v1/billing", tags=["billing"])
-app.include_router(routes_subscriptions.router, prefix="/api/v1/subscriptions", tags=["subscriptions"])
+app.include_router(
+    routes_subscriptions.router, prefix="/api/v1/subscriptions", tags=["subscriptions"]
+)
 app.include_router(routes_usage.router, prefix="/api/v1/usage", tags=["usage"])
 app.include_router(routes_credits.router, prefix="/api/v1/credits", tags=["credits"])
 app.include_router(routes_webhooks.router, prefix="/api/v1/webhooks", tags=["webhooks"])
@@ -66,6 +74,7 @@ async def root():
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(
         "app.main:app",
         host=settings.HOST,

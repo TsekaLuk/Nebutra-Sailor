@@ -4,7 +4,6 @@ Webhook Service
 Handle Stripe webhook events.
 """
 
-from typing import Any
 import structlog
 
 logger = structlog.get_logger()
@@ -84,7 +83,7 @@ class WebhookService:
     async def _handle_subscription_created(self, data: dict) -> dict:
         """Handle new subscription"""
         subscription_id = data.get("id")
-        customer_id = data.get("customer")
+        data.get("customer")
         status = data.get("status")
         organization_id = data.get("metadata", {}).get("organization_id")
 
@@ -177,7 +176,7 @@ class WebhookService:
         invoice_id = data.get("id")
         subscription_id = data.get("subscription")
         amount_paid = data.get("amount_paid")
-        customer_id = data.get("customer")
+        data.get("customer")
 
         logger.info(
             "invoice_paid",

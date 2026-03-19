@@ -4,12 +4,13 @@ Subscription Service
 Subscription lifecycle management.
 """
 
-import stripe
-from typing import Optional
 from datetime import datetime
-from app.config import settings
-from .stripe_service import StripeService
 
+import stripe
+
+from app.config import settings
+
+from .stripe_service import StripeService
 
 # Plan to price ID mapping
 PRICE_MAP = {
@@ -52,11 +53,13 @@ class SubscriptionService:
         self,
         organization_id: str,
         price_id: str,
-        payment_method_id: Optional[str] = None,
-        trial_days: Optional[int] = None,
+        payment_method_id: str | None = None,
+        trial_days: int | None = None,
     ) -> dict:
         """Create a new subscription"""
-        customer = await self.stripe_service.get_customer_by_organization(organization_id)
+        customer = await self.stripe_service.get_customer_by_organization(
+            organization_id
+        )
         if not customer:
             raise ValueError(f"No customer found for organization {organization_id}")
 
@@ -75,9 +78,11 @@ class SubscriptionService:
         subscription = stripe.Subscription.create(**sub_params)
         return self._format_subscription(subscription, organization_id)
 
-    async def get_subscription(self, organization_id: str) -> Optional[dict]:
+    async def get_subscription(self, organization_id: str) -> dict | None:
         """Get subscription for an organization"""
-        customer = await self.stripe_service.get_customer_by_organization(organization_id)
+        customer = await self.stripe_service.get_customer_by_organization(
+            organization_id
+        )
         if not customer:
             return None
 
@@ -100,15 +105,19 @@ class SubscriptionService:
         """Update subscription (change plan)"""
         subscription = await self._get_stripe_subscription(organization_id)
         if not subscription:
-            raise ValueError(f"No subscription found for organization {organization_id}")
+            raise ValueError(
+                f"No subscription found for organization {organization_id}"
+            )
 
         # Update the subscription with new price
         updated = stripe.Subscription.modify(
             subscription.id,
-            items=[{
-                "id": subscription["items"]["data"][0]["id"],
-                "price": price_id,
-            }],
+            items=[
+                {
+                    "id": subscription["items"]["data"][0]["id"],
+                    "price": price_id,
+                }
+            ],
             proration_behavior=proration_behavior,
         )
         return self._format_subscription(updated, organization_id)
@@ -117,12 +126,14 @@ class SubscriptionService:
         self,
         organization_id: str,
         cancel_at_period_end: bool = True,
-        reason: Optional[str] = None,
+        reason: str | None = None,
     ) -> dict:
         """Cancel subscription"""
         subscription = await self._get_stripe_subscription(organization_id)
         if not subscription:
-            raise ValueError(f"No subscription found for organization {organization_id}")
+            raise ValueError(
+                f"No subscription found for organization {organization_id}"
+            )
 
         if cancel_at_period_end:
             updated = stripe.Subscription.modify(
@@ -139,7 +150,9 @@ class SubscriptionService:
         """Resume a canceled subscription"""
         subscription = await self._get_stripe_subscription(organization_id)
         if not subscription:
-            raise ValueError(f"No subscription found for organization {organization_id}")
+            raise ValueError(
+                f"No subscription found for organization {organization_id}"
+            )
 
         if not subscription.cancel_at_period_end:
             raise ValueError("Subscription is not scheduled for cancellation")
@@ -154,7 +167,9 @@ class SubscriptionService:
         """Pause a subscription"""
         subscription = await self._get_stripe_subscription(organization_id)
         if not subscription:
-            raise ValueError(f"No subscription found for organization {organization_id}")
+            raise ValueError(
+                f"No subscription found for organization {organization_id}"
+            )
 
         updated = stripe.Subscription.modify(
             subscription.id,
@@ -170,15 +185,19 @@ class SubscriptionService:
         """Preview subscription change (proration preview)"""
         subscription = await self._get_stripe_subscription(organization_id)
         if not subscription:
-            raise ValueError(f"No subscription found for organization {organization_id}")
+            raise ValueError(
+                f"No subscription found for organization {organization_id}"
+            )
 
         invoice = stripe.Invoice.upcoming(
             customer=subscription.customer,
             subscription=subscription.id,
-            subscription_items=[{
-                "id": subscription["items"]["data"][0]["id"],
-                "price": price_id,
-            }],
+            subscription_items=[
+                {
+                    "id": subscription["items"]["data"][0]["id"],
+                    "price": price_id,
+                }
+            ],
         )
 
         return {
@@ -189,7 +208,9 @@ class SubscriptionService:
 
     async def _get_stripe_subscription(self, organization_id: str):
         """Get raw Stripe subscription object"""
-        customer = await self.stripe_service.get_customer_by_organization(organization_id)
+        customer = await self.stripe_service.get_customer_by_organization(
+            organization_id
+        )
         if not customer:
             return None
 
@@ -204,15 +225,23 @@ class SubscriptionService:
     def _format_subscription(self, subscription, organization_id: str) -> dict:
         """Format subscription for API response"""
         price_id = subscription["items"]["data"][0]["price"]["id"]
-        
+
         return {
             "id": subscription.id,
             "organization_id": organization_id,
             "plan": self._get_plan_from_price(price_id),
             "status": self._map_stripe_status(subscription.status),
-            "current_period_start": datetime.fromtimestamp(subscription.current_period_start),
-            "current_period_end": datetime.fromtimestamp(subscription.current_period_end),
+            "current_period_start": datetime.fromtimestamp(
+                subscription.current_period_start
+            ),
+            "current_period_end": datetime.fromtimestamp(
+                subscription.current_period_end
+            ),
             "cancel_at_period_end": subscription.cancel_at_period_end,
-            "canceled_at": datetime.fromtimestamp(subscription.canceled_at) if subscription.canceled_at else None,
-            "trial_end": datetime.fromtimestamp(subscription.trial_end) if subscription.trial_end else None,
+            "canceled_at": datetime.fromtimestamp(subscription.canceled_at)
+            if subscription.canceled_at
+            else None,
+            "trial_end": datetime.fromtimestamp(subscription.trial_end)
+            if subscription.trial_end
+            else None,
         }

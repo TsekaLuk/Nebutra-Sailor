@@ -4,20 +4,19 @@ Credits Routes
 Credit balance, transactions, and purchases.
 """
 
-from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel
-from typing import Optional
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
+
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
 
 from services.credits_service import CreditsService
-
 
 router = APIRouter()
 
 
 # Enums
-class CreditTransactionType(str, Enum):
+class CreditTransactionType(StrEnum):
     PURCHASE = "PURCHASE"
     USAGE = "USAGE"
     REFUND = "REFUND"
@@ -37,7 +36,7 @@ class GetBalanceResponse(BaseModel):
 class PurchaseCreditsRequest(BaseModel):
     organization_id: str
     amount_dollars: float
-    payment_method_id: Optional[str] = None
+    payment_method_id: str | None = None
 
 
 class PurchaseCreditsResponse(BaseModel):
@@ -45,14 +44,14 @@ class PurchaseCreditsResponse(BaseModel):
     credits_added: int
     new_balance: int
     transaction_id: str
-    payment_intent_id: Optional[str] = None
+    payment_intent_id: str | None = None
 
 
 class DeductCreditsRequest(BaseModel):
     organization_id: str
     credits: int
     reason: str
-    metadata: Optional[dict] = None
+    metadata: dict | None = None
 
 
 class DeductCreditsResponse(BaseModel):
@@ -69,7 +68,7 @@ class CreditTransaction(BaseModel):
     balance_after: int
     description: str
     created_at: datetime
-    metadata: Optional[dict] = None
+    metadata: dict | None = None
 
 
 class GetTransactionsResponse(BaseModel):
@@ -81,7 +80,7 @@ class GetTransactionsResponse(BaseModel):
 class RefundCreditsRequest(BaseModel):
     organization_id: str
     transaction_id: str
-    credits: Optional[int] = None  # Partial refund
+    credits: int | None = None  # Partial refund
     reason: str
 
 
@@ -89,7 +88,7 @@ class AddBonusRequest(BaseModel):
     organization_id: str
     credits: int
     reason: str
-    expires_at: Optional[datetime] = None
+    expires_at: datetime | None = None
 
 
 # Dependencies
@@ -108,9 +107,7 @@ async def get_credit_balance(
         balance = await service.get_balance(organization_id)
         return balance
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/purchase", response_model=PurchaseCreditsResponse)
 async def purchase_credits(
     request: PurchaseCreditsRequest,
@@ -125,9 +122,7 @@ async def purchase_credits(
         )
         return result
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/deduct", response_model=DeductCreditsResponse)
 async def deduct_credits(
     request: DeductCreditsRequest,
@@ -143,13 +138,11 @@ async def deduct_credits(
         )
         return result
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.get("/{organization_id}/transactions", response_model=GetTransactionsResponse)
 async def get_credit_transactions(
     organization_id: str,
-    type: Optional[CreditTransactionType] = None,
+    type: CreditTransactionType | None = None,
     limit: int = 50,
     offset: int = 0,
     service: CreditsService = Depends(get_credits_service),
@@ -164,9 +157,7 @@ async def get_credit_transactions(
         )
         return result
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/refund", response_model=DeductCreditsResponse)
 async def refund_credits(
     request: RefundCreditsRequest,
@@ -182,9 +173,7 @@ async def refund_credits(
         )
         return result
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.post("/bonus", response_model=DeductCreditsResponse)
 async def add_bonus_credits(
     request: AddBonusRequest,
@@ -200,9 +189,7 @@ async def add_bonus_credits(
         )
         return result
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
+        raise HTTPException(status_code=400, detail=str(e)) from e
 @router.get("/{organization_id}/check/{credits}")
 async def check_credits(
     organization_id: str,
@@ -220,4 +207,4 @@ async def check_credits(
             "remaining_after": balance["balance"] - credits if has_enough else 0,
         }
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e

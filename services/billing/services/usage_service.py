@@ -4,11 +4,10 @@ Usage Service
 Usage tracking, metering, and limits.
 """
 
-from typing import Optional
-from datetime import datetime, timezone
-from dateutil.relativedelta import relativedelta
 import uuid
+from datetime import UTC, datetime
 
+from dateutil.relativedelta import relativedelta
 
 # Default plan limits
 PLAN_LIMITS = {
@@ -38,7 +37,7 @@ PLAN_LIMITS = {
 # Overage pricing per unit
 OVERAGE_PRICING = {
     "AI_TOKEN": 0.00001,  # $0.01 per 1000 tokens
-    "API_CALL": 0.0001,   # $0.10 per 1000 calls
+    "API_CALL": 0.0001,  # $0.10 per 1000 calls
     "STORAGE": 0.00000001,  # $0.01 per GB
     "BANDWIDTH": 0.00000001,
     "COMPUTE": 0.001,  # $0.06 per minute
@@ -57,8 +56,8 @@ class UsageService:
         organization_id: str,
         usage_type: str,
         quantity: int,
-        resource: Optional[str] = None,
-        metadata: Optional[dict] = None,
+        resource: str | None = None,
+        metadata: dict | None = None,
     ) -> dict:
         """Record usage for an organization"""
         usage_id = str(uuid.uuid4())
@@ -85,9 +84,9 @@ class UsageService:
     async def get_usage(
         self,
         organization_id: str,
-        usage_type: Optional[str] = None,
-        start_date: Optional[datetime] = None,
-        end_date: Optional[datetime] = None,
+        usage_type: str | None = None,
+        start_date: datetime | None = None,
+        end_date: datetime | None = None,
     ) -> dict:
         """Get usage summary for an organization"""
         period = self._get_current_period()
@@ -97,7 +96,9 @@ class UsageService:
         usage_summaries = []
         total_cost = 0.0
 
-        types_to_check = [usage_type] if usage_type else list(PLAN_LIMITS["FREE"].keys())
+        types_to_check = (
+            [usage_type] if usage_type else list(PLAN_LIMITS["FREE"].keys())
+        )
 
         for utype in types_to_check:
             key = f"{organization_id}:{period}:{utype}"
@@ -110,16 +111,18 @@ class UsageService:
 
             percentage = (current / limit * 100) if limit > 0 else 0
 
-            usage_summaries.append({
-                "type": utype,
-                "current": current,
-                "limit": limit,
-                "percentage": min(percentage, 100),
-                "overage": overage,
-                "overage_cost": overage_cost,
-            })
+            usage_summaries.append(
+                {
+                    "type": utype,
+                    "current": current,
+                    "limit": limit,
+                    "percentage": min(percentage, 100),
+                    "overage": overage,
+                    "overage_cost": overage_cost,
+                }
+            )
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         period_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
         period_end = period_start + relativedelta(months=1)
 
@@ -188,7 +191,7 @@ class UsageService:
     async def reset_usage(
         self,
         organization_id: str,
-        usage_type: Optional[str] = None,
+        usage_type: str | None = None,
     ) -> None:
         """Reset usage counters"""
         period = self._get_current_period()
@@ -204,7 +207,7 @@ class UsageService:
 
     def _get_current_period(self) -> str:
         """Get current billing period string"""
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         return now.strftime("%Y-%m")
 
     async def _get_organization_plan(self, organization_id: str) -> str:

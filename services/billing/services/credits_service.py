@@ -4,14 +4,14 @@ Credits Service
 Credit balance, transactions, and purchases.
 """
 
-import stripe
-from typing import Optional
-from datetime import datetime, timezone
 import uuid
+from datetime import UTC, datetime
+
+import stripe
 
 from app.config import settings
-from .stripe_service import StripeService
 
+from .stripe_service import StripeService
 
 # Credits per dollar
 CREDITS_PER_DOLLAR = 100
@@ -34,21 +34,23 @@ class CreditsService:
             "organization_id": organization_id,
             "balance": balance,
             "dollar_value": balance / CREDITS_PER_DOLLAR,
-            "last_updated": datetime.now(timezone.utc),
+            "last_updated": datetime.now(UTC),
         }
 
     async def purchase_credits(
         self,
         organization_id: str,
         amount_dollars: float,
-        payment_method_id: Optional[str] = None,
+        payment_method_id: str | None = None,
     ) -> dict:
         """Purchase credits"""
         credits_to_add = int(amount_dollars * CREDITS_PER_DOLLAR)
         amount_cents = int(amount_dollars * 100)
 
         # Get customer
-        customer = await self.stripe_service.get_customer_by_organization(organization_id)
+        customer = await self.stripe_service.get_customer_by_organization(
+            organization_id
+        )
         customer_id = customer["id"] if customer else None
 
         # Create payment intent
@@ -86,13 +88,15 @@ class CreditsService:
         organization_id: str,
         credits: int,
         reason: str,
-        metadata: Optional[dict] = None,
+        metadata: dict | None = None,
     ) -> dict:
         """Deduct credits from balance"""
         current_balance = self._balances.get(organization_id, 0)
 
         if current_balance < credits:
-            raise ValueError(f"Insufficient credits. Balance: {current_balance}, Required: {credits}")
+            raise ValueError(
+                f"Insufficient credits. Balance: {current_balance}, Required: {credits}"
+            )
 
         transaction_id = await self._add_credits(
             organization_id=organization_id,
@@ -119,7 +123,7 @@ class CreditsService:
     async def get_transactions(
         self,
         organization_id: str,
-        transaction_type: Optional[str] = None,
+        transaction_type: str | None = None,
         limit: int = 50,
         offset: int = 0,
     ) -> dict:
@@ -131,7 +135,7 @@ class CreditsService:
         else:
             filtered = all_transactions
 
-        paginated = filtered[offset:offset + limit]
+        paginated = filtered[offset : offset + limit]
 
         return {
             "organization_id": organization_id,
@@ -143,7 +147,7 @@ class CreditsService:
         self,
         organization_id: str,
         transaction_id: str,
-        credits: Optional[int] = None,
+        credits: int | None = None,
         reason: str = "Refund",
     ) -> dict:
         """Refund credits"""
@@ -178,7 +182,7 @@ class CreditsService:
         organization_id: str,
         credits: int,
         reason: str,
-        expires_at: Optional[datetime] = None,
+        expires_at: datetime | None = None,
     ) -> dict:
         """Add bonus credits"""
         transaction_id = await self._add_credits(
@@ -204,7 +208,7 @@ class CreditsService:
         credits: int,
         transaction_type: str,
         description: str,
-        metadata: Optional[dict] = None,
+        metadata: dict | None = None,
     ) -> str:
         """Internal method to add/deduct credits and record transaction"""
         transaction_id = str(uuid.uuid4())
@@ -218,14 +222,17 @@ class CreditsService:
         if organization_id not in self._transactions:
             self._transactions[organization_id] = []
 
-        self._transactions[organization_id].insert(0, {
-            "id": transaction_id,
-            "type": transaction_type,
-            "credits": credits,
-            "balance_after": new_balance,
-            "description": description,
-            "created_at": datetime.now(timezone.utc),
-            "metadata": metadata,
-        })
+        self._transactions[organization_id].insert(
+            0,
+            {
+                "id": transaction_id,
+                "type": transaction_type,
+                "credits": credits,
+                "balance_after": new_balance,
+                "description": description,
+                "created_at": datetime.now(UTC),
+                "metadata": metadata,
+            },
+        )
 
         return transaction_id

@@ -51,6 +51,8 @@ ignore = [
     "S101",  # assert statements OK in tests
     "S603",  # subprocess call — needed for service scripts
     "S607",  # partial executable path OK
+    "B008",  # FastAPI Depends() as default argument is idiomatic
+    "S104",  # 0.0.0.0 binding is intentional in containerized services
 ]
 
 [tool.ruff.lint.isort]

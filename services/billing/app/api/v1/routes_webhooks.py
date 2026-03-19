@@ -4,13 +4,11 @@ Webhook Routes
 Stripe webhook handling.
 """
 
-from fastapi import APIRouter, HTTPException, Request, Header
-from typing import Optional
 import stripe
+from fastapi import APIRouter, Header, HTTPException, Request
 
 from app.config import settings
 from services.webhook_service import WebhookService
-
 
 router = APIRouter()
 
@@ -18,14 +16,13 @@ router = APIRouter()
 @router.post("/stripe")
 async def stripe_webhook(
     request: Request,
-    stripe_signature: Optional[str] = Header(None, alias="Stripe-Signature"),
+    stripe_signature: str | None = Header(None, alias="Stripe-Signature"),
 ):
     """Handle Stripe webhook events"""
     if not stripe_signature:
         raise HTTPException(status_code=400, detail="Missing Stripe signature")
-    
     payload = await request.body()
-    
+
     try:
         # Verify webhook signature
         event = stripe.Webhook.construct_event(
@@ -34,13 +31,12 @@ async def stripe_webhook(
             secret=settings.STRIPE_WEBHOOK_SECRET,
         )
     except ValueError:
-        raise HTTPException(status_code=400, detail="Invalid payload")
+        raise HTTPException(status_code=400, detail="Invalid payload") from None
     except stripe.SignatureVerificationError:
-        raise HTTPException(status_code=400, detail="Invalid signature")
-    
+        raise HTTPException(status_code=400, detail="Invalid signature") from None
     # Process the event
     webhook_service = WebhookService()
-    
+
     try:
         result = await webhook_service.handle_event(event)
         return {"received": True, "type": event["type"], "result": result}
@@ -54,7 +50,7 @@ async def stripe_webhook(
 @router.get("/stripe/events")
 async def list_webhook_events(
     limit: int = 10,
-    starting_after: Optional[str] = None,
+    starting_after: str | None = None,
 ):
     """List recent webhook events (for debugging)"""
     try:
@@ -75,4 +71,4 @@ async def list_webhook_events(
             "has_more": events.has_more,
         }
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
