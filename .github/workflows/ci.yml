@@ -164,27 +164,28 @@ jobs:
         run: uv python install 3.11
 
       - name: Install dependencies (including dev)
-        run: uv pip install --system -r requirements.txt ruff pytest pytest-asyncio mypy bandit
+        # uv sync creates an isolated venv — avoids PEP 668 externally-managed error
+        run: uv sync --dev
 
       - name: Lint (ruff)
-        run: ruff check . --output-format=github
+        run: uv run ruff check . --output-format=github
 
       - name: Format check (ruff)
-        run: ruff format --check .
+        run: uv run ruff format --check .
 
       - name: Type check (mypy)
-        run: mypy . --ignore-missing-imports --no-error-summary || true
+        run: uv run mypy . --ignore-missing-imports --no-error-summary || true
 
       - name: Security check (bandit)
         run: |
-          bandit -r . -x ./tests -f json -o bandit-report.json --severity-level medium || true
+          uv run bandit -r . -x ./tests -f json -o bandit-report.json --severity-level medium || true
           # Fail only on high-severity findings
-          bandit -r . -x ./tests --severity-level high -q
+          uv run bandit -r . -x ./tests --severity-level high -q
 
       - name: Run tests
         run: |
           if [ -d "tests" ]; then
-            pytest --tb=short -q --cov --cov-report=term-missing --cov-fail-under=70
+            uv run pytest --tb=short -q --cov --cov-report=term-missing --cov-fail-under=70
           else
             echo "No tests directory — skipping"
           fi
