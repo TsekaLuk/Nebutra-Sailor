@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { PlusIcon } from "lucide-react";
 import type * as React from "react";
@@ -156,12 +158,14 @@ function LogoCard({ logo, className, children, ...props }: LogoCardProps) {
       className={cn("flex items-center justify-center bg-background px-4 py-8 md:p-8", className)}
       {...props}
     >
-      <img
+      <Image
         alt={logo.alt}
         className="pointer-events-none h-4 select-none md:h-5 dark:brightness-0 dark:invert"
         height={logo.height || 20}
         src={logo.src}
         width={logo.width || "auto"}
+        width={400}
+        height={400}
       />
       {children}
     </div>

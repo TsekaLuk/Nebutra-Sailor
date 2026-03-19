@@ -257,8 +257,10 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
           )}
 
           {/* Calendar Grid */}
+          {/* biome-ignore lint/a11y/useSemanticElements: ARIA semantic rendering */}
           <div className="flex gap-1" role="grid">
             {weeksArray.map((week, weekIndex) => (
+              // biome-ignore lint/a11y/useSemanticElements: ARIA semantic rendering
               <div key={weekIndex} className="flex flex-col gap-1" role="row">
                 {week.days.map((day, dayIndex) => {
                   const contribution = contributions.find((c) => isSameDay(new Date(c.date), day));
@@ -266,6 +268,7 @@ export const GitHubCalendar: React.FC<GitHubCalendarProps> = ({
                   const color = getColor(count);
 
                   return (
+                    // biome-ignore lint/a11y/useSemanticElements: ARIA semantic rendering
                     <div
                       key={dayIndex}
                       className={cn(

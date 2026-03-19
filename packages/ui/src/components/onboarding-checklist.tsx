@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { motion, type Variants } from "framer-motion";
 import { CheckCircle2, PlayCircle } from "lucide-react";
@@ -156,10 +158,11 @@ export function OnboardingChecklist({
                 type="button"
                 className="w-full h-full focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-[var(--radius-lg)]"
               >
-                <img
+                <Image
                   src={videoThumbnailUrl}
                   alt="Video guide thumbnail"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  fill
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                   <PlayCircle className="h-16 w-16 text-white/80 transform transition-all duration-300 group-hover:scale-110 group-hover:text-white" />

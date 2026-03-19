@@ -1,8 +1,6 @@
 "use client";
-
 import * as React from "react";
 import { cn } from "../utils/cn";
-
 /* ─────────────────────────────────────────────────────────────────────────────
  * CommandBox Component
  *
@@ -13,7 +11,6 @@ import { cn } from "../utils/cn";
  * <CommandBox command="npm install @nebutra/ui" />
  * <CommandBox command="pnpm add @nebutra/ui" prefix="$" />
  * ───────────────────────────────────────────────────────────────────────────── */
-
 export interface CommandBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   command: string;
   prefix?: string;
@@ -21,7 +18,6 @@ export interface CommandBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "minimal" | "pill";
   onCopy?: () => void;
 }
-
 export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
   (
     {
@@ -36,7 +32,6 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
     ref,
   ) => {
     const [copied, setCopied] = React.useState(false);
-
     const handleCopy = React.useCallback(async () => {
       try {
         await navigator.clipboard.writeText(command);
@@ -45,14 +40,13 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
         setTimeout(() => setCopied(false), 2000);
       } catch (_err) {}
     }, [command, onCopy]);
-
     const variantStyles = {
       default: "bg-[var(--neutral-2)] border border-[var(--neutral-7)] rounded-[var(--radius-lg)]",
       minimal: "bg-[var(--neutral-1)] border border-[var(--neutral-7)] rounded-[var(--radius-md)]",
       pill: "bg-[var(--neutral-2)] border border-[var(--neutral-7)] rounded-full",
     };
-
     return (
+      // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
       <div
         ref={ref}
         className={cn(
@@ -74,10 +68,8 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
       >
         {/* Prefix */}
         <span className="text-emerald-400 shrink-0 select-none">{prefix}</span>
-
         {/* Command text */}
         <span className="flex-1 text-[var(--neutral-11)] truncate">{command}</span>
-
         {/* Copy indicator */}
         {showCopyButton && (
           <span
@@ -91,7 +83,6 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
             {copied ? <CopiedIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
           </span>
         )}
-
         {/* Copy tooltip */}
         <span
           className={cn(
@@ -107,9 +98,7 @@ export const CommandBox = React.forwardRef<HTMLDivElement, CommandBoxProps>(
   },
 );
 CommandBox.displayName = "CommandBox";
-
 /* ─────────────────────────────────────────────────────────────────────────── */
-
 function CopyIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -128,7 +117,6 @@ function CopyIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function CopiedIcon({ className }: { className?: string }) {
   return (
     <svg

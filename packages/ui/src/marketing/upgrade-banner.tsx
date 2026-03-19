@@ -1,10 +1,8 @@
 "use client";
-
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import * as React from "react";
 import { cn } from "../utils/cn";
-
 export interface UpgradeBannerProps {
   /** Button text for the upgrade CTA */
   buttonText?: string;
@@ -17,7 +15,6 @@ export interface UpgradeBannerProps {
   /** Additional className for the container */
   className?: string;
 }
-
 const SettingsFilled = ({ className }: { className?: string }) => (
   <svg
     className={className}
@@ -35,7 +32,6 @@ const SettingsFilled = ({ className }: { className?: string }) => (
     />
   </svg>
 );
-
 export function UpgradeBanner({
   buttonText = "Upgrade to Pro",
   description = "for 2x more CPUs and faster builds",
@@ -44,7 +40,6 @@ export function UpgradeBanner({
   className,
 }: UpgradeBannerProps) {
   const [isHovered, setIsHovered] = React.useState(false);
-
   const iconVariants = {
     hidden: { x: 0, y: 0, opacity: 0, rotate: 0 },
     visible: (custom: { x: number; y: number }) => ({
@@ -65,8 +60,8 @@ export function UpgradeBanner({
       },
     }),
   };
-
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       className={cn("mx-auto flex items-center justify-center", className)}
       role="banner"
@@ -100,7 +95,6 @@ export function UpgradeBanner({
           >
             <SettingsFilled className="text-primary" />
           </motion.div>
-
           {/* Banner container */}
           <div className="relative flex h-9 items-center gap-1 rounded-[var(--radius-md)] border border-primary/20 bg-primary/5 pl-2.5 pr-1 text-sm">
             <button

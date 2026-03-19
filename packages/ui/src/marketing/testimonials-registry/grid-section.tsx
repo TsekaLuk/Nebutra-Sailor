@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { motion } from "framer-motion";
 import { cn } from "../../utils/cn";
@@ -165,11 +167,12 @@ export function GridTestimonials({
               </div>
 
               {/* Avatar */}
-              <img
+              <Image
                 alt={name}
                 src={image}
-                loading="lazy"
                 className="size-9 rounded-full object-cover"
+                width={400}
+                height={400}
               />
 
               {/* Content */}

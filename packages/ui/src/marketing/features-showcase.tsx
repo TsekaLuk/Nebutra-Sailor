@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import type { LucideIcon } from "lucide-react";
 import { FeatureIconItem } from "../primitives/feature-icon-item";
@@ -66,20 +68,29 @@ export function FeaturesShowcase({
             <div className="aspect-[88/36] relative">
               <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background to-transparent" />
               {images.foreground && (
-                <img src={images.foreground} className="absolute inset-0 z-10" alt={imageAlt} />
+                <Image
+                  src={images.foreground}
+                  className="absolute inset-0 z-10"
+                  alt={imageAlt}
+                  fill
+                />
               )}
               {images.backgroundDark && (
-                <img
+                <Image
                   src={images.backgroundDark}
                   className="hidden dark:block"
                   alt={`${imageAlt} (dark)`}
+                  width={400}
+                  height={400}
                 />
               )}
               {images.backgroundLight && (
-                <img
+                <Image
                   src={images.backgroundLight}
                   className="dark:hidden"
                   alt={`${imageAlt} (light)`}
+                  width={400}
+                  height={400}
                 />
               )}
             </div>

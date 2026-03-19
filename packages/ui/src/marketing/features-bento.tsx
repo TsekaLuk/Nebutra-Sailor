@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { type LucideIcon, Shield, Users } from "lucide-react";
 import { Card, CardContent } from "../primitives/card";
@@ -202,7 +204,7 @@ function TeamMemberRow({
       <div className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2">
         <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">{name}</span>
         <div className="size-7 ring-4 ring-background">
-          <img className="size-full rounded-full" src={avatar} alt={name} />
+          <Image className="size-full rounded-full" src={avatar} alt={name} fill />
         </div>
       </div>
     );
@@ -211,7 +213,7 @@ function TeamMemberRow({
   return (
     <div className="relative ml-[calc(50%-1rem)] flex items-center gap-2">
       <div className="size-8 ring-4 ring-background">
-        <img className="size-full rounded-full" src={avatar} alt={name} />
+        <Image className="size-full rounded-full" src={avatar} alt={name} fill />
       </div>
       <span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">{name}</span>
     </div>

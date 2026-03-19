@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import * as React from "react";
 import { cn } from "../utils/cn";
 
@@ -88,10 +89,11 @@ export const AnimatedHikeCard = React.forwardRef<HTMLAnchorElement, AnimatedHike
                   } as React.CSSProperties
                 }
               >
-                <img
+                <Image
                   src={src}
                   alt={`${title} view ${index + 1}`}
                   className="h-full w-full object-cover"
+                  fill
                 />
               </div>
             ))}

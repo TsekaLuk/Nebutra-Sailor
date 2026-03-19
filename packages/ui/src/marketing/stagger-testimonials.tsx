@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type React from "react";
@@ -136,13 +138,15 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           height: 2,
         }}
       />
-      <img
+      <Image
         src={testimonial.imgSrc}
         alt={`${testimonial.by.split(",")[0]}`}
         className="mb-4 h-14 w-12 bg-muted object-cover object-top"
         style={{
           boxShadow: "3px 3px 0px hsl(var(--background))",
         }}
+        width={400}
+        height={400}
       />
       <h3
         className={cn(

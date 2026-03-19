@@ -5,7 +5,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { cn } from "../utils/cn";
 
@@ -198,7 +198,7 @@ function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) 
     timeLocation.value = timestamp;
   });
 
-  const getUniforms = () => {
+  const getUniforms = React.useCallback(() => {
     const preparedUniforms: Record<string, { value: unknown; type?: string }> = {};
 
     for (const uniformName in uniforms) {
@@ -239,7 +239,7 @@ function ShaderMaterial({ source, uniforms, maxFps = 60 }: ShaderMaterialProps) 
       value: new THREE.Vector2(size.width * 2, size.height * 2),
     };
     return preparedUniforms;
-  };
+  }, [uniforms, size]);
 
   const material = useMemo(() => {
     return new THREE.ShaderMaterial({

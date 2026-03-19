@@ -1,5 +1,4 @@
 "use client";
-
 import { X } from "lucide-react";
 import * as React from "react";
 import { cn } from "../utils/cn";
@@ -19,7 +18,6 @@ function Grid({
   className?: string;
 }) {
   const id = React.useId();
-
   return (
     <svg
       className={cn("pointer-events-none absolute inset-0 text-foreground/10", className)}
@@ -48,7 +46,6 @@ function Grid({
     </svg>
   );
 }
-
 export interface BannerProps {
   /** Whether the banner is visible */
   show: boolean;
@@ -68,7 +65,6 @@ export interface BannerProps {
   /** Additional className */
   className?: string;
 }
-
 export function Banner({
   show,
   onHide,
@@ -79,8 +75,8 @@ export function Banner({
   className,
 }: BannerProps) {
   if (!show) return null;
-
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       className={cn(
         "relative isolate flex flex-col justify-between gap-3 overflow-hidden rounded-[var(--radius-lg)] border border-emerald-600/15 bg-gradient-to-r from-lime-100/80 to-emerald-100/80 py-3 pl-4 pr-12 sm:flex-row sm:items-center sm:py-2 dark:from-emerald-950/50 dark:to-lime-950/50 dark:border-emerald-500/20",
@@ -95,7 +91,6 @@ export function Banner({
         patternOffset={[0, -1]}
         className="text-foreground/30 mix-blend-overlay [mask-image:linear-gradient(to_right,black,transparent)] md:[mask-image:linear-gradient(to_right,black_60%,transparent)]"
       />
-
       <div className="flex items-center gap-3">
         {icon && (
           <div
@@ -122,7 +117,6 @@ export function Banner({
           )}
         </p>
       </div>
-
       <div className="flex items-center sm:-my-1">
         <button
           type="button"
@@ -132,7 +126,6 @@ export function Banner({
           {action.label}
         </button>
       </div>
-
       <button
         type="button"
         className="absolute inset-y-0 right-2.5 p-1 text-sm text-emerald-700 transition-colors hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-[var(--radius-sm)]"

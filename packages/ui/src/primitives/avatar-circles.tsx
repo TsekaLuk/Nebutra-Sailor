@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { cn } from "../utils/cn";
 
@@ -95,7 +97,7 @@ export function AvatarCircles({
           rel="noopener noreferrer"
           className="transition-transform hover:z-10 hover:scale-110"
         >
-          <img
+          <Image
             className="rounded-full border-2 border-white"
             src={avatar.imageUrl}
             width={size}

@@ -1,6 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
+import Image from "next/image";
 import { useMemo } from "react";
 import { TESTIMONIAL_SOURCE_ICONS, TESTIMONIAL_SOURCE_NAMES } from "../config";
 import type { Testimonial, TestimonialSource, TestimonialsWallProps } from "../types";
@@ -148,9 +149,11 @@ function TestimonialCard({
       <div className="mb-4 flex items-start justify-between">
         <div className="flex items-center gap-3">
           {authorAvatar ? (
-            <img
+            <Image
               src={authorAvatar}
               alt={authorName}
+              width={40}
+              height={40}
               className="h-10 w-10 rounded-full object-cover"
             />
           ) : (

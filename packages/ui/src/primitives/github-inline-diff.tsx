@@ -260,6 +260,7 @@ export function GithubInlineDiff({
 
   return (
     <TooltipProvider delayDuration={150}>
+      {/* biome-ignore lint/a11y/useSemanticElements: ARIA custom grid */}
       <div
         role="table"
         aria-label={`Diff of ${fileName}`}
@@ -274,6 +275,7 @@ export function GithubInlineDiff({
           </div>
         </div>
 
+        {/* biome-ignore lint/a11y/useSemanticElements: ARIA custom grid */}
         <ol role="rowgroup" className="divide-y dark:divide-white/10">
           {rows.map((line, idx) => {
             const isChange = line.kind === "add" || line.kind === "del";
@@ -310,6 +312,7 @@ export function GithubInlineDiff({
                   )}
                 </div>
 
+                {/* biome-ignore lint/a11y/useSemanticElements: ARIA custom grid */}
                 <div
                   role="cell"
                   className={cn(
@@ -324,6 +327,7 @@ export function GithubInlineDiff({
                   </span>
                 </div>
 
+                {/* biome-ignore lint/a11y/useSemanticElements: ARIA custom grid */}
                 <div role="cell" className="flex-1">
                   <pre
                     className={cn(

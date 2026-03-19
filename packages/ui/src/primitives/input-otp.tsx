@@ -97,6 +97,7 @@ export type InputOTPSeparatorProps = React.ComponentPropsWithoutRef<"div">;
 
 const InputOTPSeparator = React.forwardRef<React.ElementRef<"div">, InputOTPSeparatorProps>(
   ({ ...props }, ref) => (
+    // biome-ignore lint/a11y/useSemanticElements: Semantic structure is managed by headless/custom ARIA patterns
     <div ref={ref} role="separator" {...props}>
       <Minus className="h-4 w-4" />
     </div>

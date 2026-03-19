@@ -1,9 +1,10 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import type * as React from "react";
 import { InfiniteSlider } from "../primitives/infinite-slider";
 import { cn } from "../utils/cn";
-
 export interface Logo {
   /** Logo image source URL */
   src: string;
@@ -14,7 +15,6 @@ export interface Logo {
   /** Optional height */
   height?: number;
 }
-
 export interface LogoCloudSliderProps extends React.ComponentProps<"div"> {
   /** Array of logos to display */
   logos: Logo[];
@@ -27,7 +27,6 @@ export interface LogoCloudSliderProps extends React.ComponentProps<"div"> {
   /** Reverse scroll direction */
   reverse?: boolean;
 }
-
 /**
  * LogoCloud - Infinite scrolling logo carousel
  *
@@ -56,6 +55,7 @@ export function LogoCloudSlider({
   ...props
 }: LogoCloudSliderProps) {
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       {...props}
       className={cn(
@@ -67,14 +67,15 @@ export function LogoCloudSlider({
     >
       <InfiniteSlider gap={gap} reverse={reverse} speed={speed} speedOnHover={speedOnHover}>
         {logos.map((logo) => (
-          <img
+          <Image
             alt={logo.alt}
             className="pointer-events-none h-4 select-none dark:brightness-0 dark:invert md:h-5"
             height={logo.height || "auto"}
             key={`logo-${logo.alt}`}
-            loading="lazy"
             src={logo.src}
             width={logo.width || "auto"}
+            width={400}
+            height={400}
           />
         ))}
       </InfiniteSlider>

@@ -252,7 +252,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
       [selected],
     );
 
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+    const handleClickOutside = React.useCallback((event: MouseEvent | TouchEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node) &&
@@ -262,7 +262,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
         setOpen(false);
         inputRef.current.blur();
       }
-    };
+    }, []);
 
     const handleUnselect = React.useCallback(
       (option: MultipleSelectorOption) => {

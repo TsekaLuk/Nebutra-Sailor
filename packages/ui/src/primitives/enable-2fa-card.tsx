@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { Shield } from "lucide-react";
 import type * as React from "react";
@@ -57,7 +59,13 @@ export function Enable2FACard({
         "Scan this QR code using a mobile authentication app. This will generate a verification code.",
       content: (
         <div className="inline-block rounded-[var(--radius-lg)] border p-1">
-          <img src={qrCodeUrl} alt="QR Code" className="size-32 dark:invert" />
+          <Image
+            src={qrCodeUrl}
+            alt="QR Code"
+            className="size-32 dark:invert"
+            width={128}
+            height={128}
+          />
         </div>
       ),
     },

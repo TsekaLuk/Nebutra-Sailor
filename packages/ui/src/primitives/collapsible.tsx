@@ -61,7 +61,7 @@ const CollapsibleTrigger = React.forwardRef<
       onOpenChange?.(!open);
       props.onClick?.(e);
     },
-    [disabled, open, onOpenChange, props],
+    [disabled, open, onOpenChange, props.onClick],
   );
 
   if (asChild && React.isValidElement(children)) {

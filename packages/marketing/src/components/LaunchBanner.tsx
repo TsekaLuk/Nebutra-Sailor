@@ -1,5 +1,4 @@
 "use client";
-
 import { clsx } from "clsx";
 import { useCallback, useEffect, useState } from "react";
 import type { LaunchBannerProps } from "../types";
@@ -7,7 +6,6 @@ import type { LaunchBannerProps } from "../types";
 // ============================================
 // Countdown Hook
 // ============================================
-
 interface CountdownTime {
   days: number;
   hours: number;
@@ -15,7 +13,6 @@ interface CountdownTime {
   seconds: number;
   isExpired: boolean;
 }
-
 function useCountdown(endDate: string | undefined): CountdownTime {
   const [countdown, setCountdown] = useState<CountdownTime>({
     days: 0,
@@ -24,16 +21,12 @@ function useCountdown(endDate: string | undefined): CountdownTime {
     seconds: 0,
     isExpired: true,
   });
-
   useEffect(() => {
     if (!endDate) return;
-
     const targetDate = new Date(endDate).getTime();
-
     const calculateCountdown = () => {
       const now = Date.now();
       const difference = targetDate - now;
-
       if (difference <= 0) {
         setCountdown({
           days: 0,
@@ -44,7 +37,6 @@ function useCountdown(endDate: string | undefined): CountdownTime {
         });
         return;
       }
-
       setCountdown({
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -53,25 +45,19 @@ function useCountdown(endDate: string | undefined): CountdownTime {
         isExpired: false,
       });
     };
-
     calculateCountdown();
     const timer = setInterval(calculateCountdown, 1000);
-
     return () => clearInterval(timer);
   }, [endDate]);
-
   return countdown;
 }
-
 // ============================================
 // Countdown Display
 // ============================================
-
 function CountdownDisplay({ countdown }: { countdown: CountdownTime }) {
   if (countdown.isExpired) {
     return <span className="font-bold">🚀 Live Now!</span>;
   }
-
   const TimeUnit = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
       <span className="font-mono text-lg font-bold leading-none sm:text-xl">
@@ -80,7 +66,6 @@ function CountdownDisplay({ countdown }: { countdown: CountdownTime }) {
       <span className="text-[10px] uppercase opacity-80">{label}</span>
     </div>
   );
-
   return (
     <div className="flex items-center gap-2">
       <span className="mr-2 text-sm font-medium opacity-90">Launching in:</span>
@@ -100,11 +85,9 @@ function CountdownDisplay({ countdown }: { countdown: CountdownTime }) {
     </div>
   );
 }
-
 // ============================================
 // Close Button
 // ============================================
-
 function CloseButton({ onClick }: { onClick: () => void }) {
   return (
     <button
@@ -132,11 +115,9 @@ function CloseButton({ onClick }: { onClick: () => void }) {
     </button>
   );
 }
-
 // ============================================
 // Theme Styles (using CSS variables)
 // ============================================
-
 const getThemeStyles = (theme: "product-hunt" | "brand" | "neutral") => {
   const styles = {
     "product-hunt": {
@@ -163,11 +144,9 @@ const getThemeStyles = (theme: "product-hunt" | "brand" | "neutral") => {
   };
   return styles[theme];
 };
-
 // ============================================
 // Banner Variants
 // ============================================
-
 /**
  * Top Banner - Fixed at top of viewport
  */
@@ -186,15 +165,13 @@ export function LaunchBannerTop({
   const [isDismissed, setIsDismissed] = useState(false);
   const countdown = useCountdown(showCountdown ? countdownEndDate : undefined);
   const styles = getThemeStyles(theme);
-
   const handleDismiss = useCallback(() => {
     setIsDismissed(true);
     onDismiss?.();
   }, [onDismiss]);
-
   if (isDismissed) return null;
-
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       className={clsx("fixed inset-x-0 top-0 z-50", className)}
       style={{
@@ -213,9 +190,7 @@ export function LaunchBannerTop({
             <span className="font-semibold">{title}</span>
             {subtitle && <span className="hidden opacity-90 sm:inline">— {subtitle}</span>}
           </div>
-
           {showCountdown && <CountdownDisplay countdown={countdown} />}
-
           <a
             href={ctaLink}
             target="_blank"
@@ -235,13 +210,11 @@ export function LaunchBannerTop({
             {ctaText}
           </a>
         </div>
-
         {dismissible && <CloseButton onClick={handleDismiss} />}
       </div>
     </div>
   );
 }
-
 /**
  * Floating Banner - Positioned at bottom-right
  */
@@ -260,15 +233,13 @@ export function LaunchBannerFloating({
   const [isDismissed, setIsDismissed] = useState(false);
   const countdown = useCountdown(showCountdown ? countdownEndDate : undefined);
   const styles = getThemeStyles(theme);
-
   const handleDismiss = useCallback(() => {
     setIsDismissed(true);
     onDismiss?.();
   }, [onDismiss]);
-
   if (isDismissed) return null;
-
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       className={clsx("fixed bottom-4 right-4 z-50 max-w-sm rounded-xl p-4 shadow-2xl", className)}
       style={{
@@ -295,7 +266,6 @@ export function LaunchBannerFloating({
           </svg>
         </button>
       )}
-
       <div className="flex flex-col gap-3">
         <div className="flex items-start gap-3">
           <span className="text-2xl" aria-hidden="true">
@@ -306,13 +276,11 @@ export function LaunchBannerFloating({
             {subtitle && <p className="mt-0.5 text-sm opacity-90">{subtitle}</p>}
           </div>
         </div>
-
         {showCountdown && (
           <div className="rounded-lg p-2" style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}>
             <CountdownDisplay countdown={countdown} />
           </div>
         )}
-
         <a
           href={ctaLink}
           target="_blank"
@@ -335,7 +303,6 @@ export function LaunchBannerFloating({
     </div>
   );
 }
-
 /**
  * Inline Banner - For embedding in page content
  */
@@ -351,8 +318,8 @@ export function LaunchBannerInline({
 }: LaunchBannerProps) {
   const countdown = useCountdown(showCountdown ? countdownEndDate : undefined);
   const styles = getThemeStyles(theme);
-
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       className={clsx("rounded-xl p-6", className)}
       style={{
@@ -366,15 +333,12 @@ export function LaunchBannerInline({
         <span className="text-4xl" aria-hidden="true">
           🚀
         </span>
-
         <div className="flex-1">
           <h3 className="text-xl font-bold">{title}</h3>
           {subtitle && <p className="mt-1 opacity-90">{subtitle}</p>}
         </div>
-
         <div className="flex flex-col items-center gap-3 sm:items-end">
           {showCountdown && <CountdownDisplay countdown={countdown} />}
-
           <a
             href={ctaLink}
             target="_blank"
@@ -398,11 +362,9 @@ export function LaunchBannerInline({
     </div>
   );
 }
-
 // ============================================
 // Main Export - Auto-selects variant
 // ============================================
-
 export function LaunchBanner({ variant = "top", ...props }: LaunchBannerProps) {
   switch (variant) {
     case "floating":
@@ -413,5 +375,4 @@ export function LaunchBanner({ variant = "top", ...props }: LaunchBannerProps) {
       return <LaunchBannerTop {...props} />;
   }
 }
-
 export default LaunchBanner;

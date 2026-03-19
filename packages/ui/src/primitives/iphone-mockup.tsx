@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import type { HTMLAttributes } from "react";
 import { cn } from "../utils/cn";
@@ -120,7 +122,7 @@ export function IphoneMockup({ src, videoSrc, className, style, ...props }: Ipho
             borderRadius: `${RADIUS_H}% / ${RADIUS_V}%`,
           }}
         >
-          <img src={src} alt="" className="block size-full object-cover object-top" />
+          <Image src={src} alt="" className="block size-full object-cover object-top" fill />
         </div>
       )}
 

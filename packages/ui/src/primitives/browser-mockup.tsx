@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { ArrowLeft, ArrowRight, Check, Copy, RotateCw } from "lucide-react";
 import type * as React from "react";
@@ -133,13 +135,7 @@ export function Browser({
       <div className="bg-background">
         {children ??
           (imageSrc ? (
-            <img
-              src={imageSrc}
-              alt={imageAlt}
-              loading="lazy"
-              decoding="async"
-              className="block w-full"
-            />
+            <Image src={imageSrc} alt={imageAlt} decoding="async" className="block w-full" fill />
           ) : (
             <div className="flex aspect-video items-center justify-center bg-muted text-sm text-muted-foreground">
               No content

@@ -1,5 +1,4 @@
 "use client";
-
 /**
  * Checkbox — 21st.dev Geist implementation
  * Source: https://21st.dev / Geist Design System
@@ -7,14 +6,11 @@
  * Uses --ds-gray-* / --ds-background-* CSS variables (registered in globals.css)
  * mapped to Tailwind via `geist-gray-*` / `geist-background-*` theme colors.
  */
-
 import React from "react";
 import { cn } from "../utils/cn";
-
 // =============================================================================
 // Types
 // =============================================================================
-
 export interface CheckboxProps {
   checked?: boolean;
   defaultChecked?: boolean;
@@ -26,7 +22,6 @@ export interface CheckboxProps {
   id?: string;
   name?: string;
 }
-
 export interface CheckboxGroupProps {
   /** Accessible group label */
   label?: string;
@@ -35,15 +30,12 @@ export interface CheckboxGroupProps {
   children: React.ReactNode;
   className?: string;
 }
-
 // =============================================================================
 // Checkbox indicator styles (Geist DS color logic)
 // =============================================================================
-
 const getInputClasses = (checked: boolean, disabled: boolean, indeterminate: boolean) => {
   let className =
     "relative border w-4 h-4 duration-200 rounded inline-flex items-center justify-center";
-
   if (disabled) {
     if (!checked || indeterminate) {
       className += " bg-geist-gray-100 border-geist-gray-500";
@@ -65,14 +57,11 @@ const getInputClasses = (checked: boolean, disabled: boolean, indeterminate: boo
         " bg-geist-gray-1000 border-geist-gray-1000 fill-geist-gray-1000 stroke-geist-gray-100";
     }
   }
-
   return className;
 };
-
 // =============================================================================
 // Checkbox
 // =============================================================================
-
 export const Checkbox = ({
   checked: controlledChecked,
   defaultChecked = false,
@@ -87,7 +76,6 @@ export const Checkbox = ({
   const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
   const isControlled = controlledChecked !== undefined;
   const checked = isControlled ? controlledChecked : internalChecked;
-
   return (
     <label
       className={cn(
@@ -141,11 +129,9 @@ export const Checkbox = ({
     </label>
   );
 };
-
 // =============================================================================
 // CheckboxGroup — simple layout wrapper
 // =============================================================================
-
 export function CheckboxGroup({
   label,
   orientation = "vertical",
@@ -153,6 +139,7 @@ export function CheckboxGroup({
   className,
 }: CheckboxGroupProps) {
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       role="group"
       aria-label={label}
@@ -168,5 +155,4 @@ export function CheckboxGroup({
   );
 }
 CheckboxGroup.displayName = "CheckboxGroup";
-
 export default CheckboxGroup;

@@ -439,6 +439,7 @@ export function TrustBadges({
 
   const BadgeImage = ({ badge }: { badge: TrustBadge }) => {
     const img = (
+      // biome-ignore lint/performance/noImgElement: Trust badges frequently use external SVG URLs without fixed dimensions
       <img
         src={badge.imageUrl}
         alt={badge.altText}

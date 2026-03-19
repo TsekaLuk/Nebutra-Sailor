@@ -95,6 +95,7 @@ export function FAQ({
                 {expandedIndex === index ? "−" : "+"}
               </span>
             </button>
+            {/* biome-ignore lint/a11y/useSemanticElements: ARIA pattern */}
             <div
               id={`faq-answer-${index}`}
               data-slot="answer"

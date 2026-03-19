@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
@@ -9,18 +8,16 @@ const LOCALES = [
   { code: "zh", label: "中文" },
   { code: "ja", label: "日本語" },
 ] as const;
-
 export function LanguageSwitcher() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-
   const switchLocale = (newLocale: string) => {
     if (newLocale === locale) return;
     router.replace(pathname, { locale: newLocale });
   };
-
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       role="group"
       aria-label="Language switcher"

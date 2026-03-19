@@ -272,34 +272,7 @@ export function CosmicSpectrum({
   const currentColors = COLOR_THEMES[colorTheme];
   const isDarkTheme = DARK_THEMES.includes(colorTheme);
 
-  useEffect(() => {
-    let cleanup: (() => void) | undefined;
-
-    const initializeAnimations = async () => {
-      try {
-        await Promise.all([
-          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"),
-          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"),
-        ]);
-
-        // Wait for scripts to initialize
-        await new Promise((resolve) => setTimeout(resolve, 100));
-
-        if (window.gsap && window.ScrollTrigger) {
-          window.gsap.registerPlugin(window.ScrollTrigger);
-          cleanup = setupAnimations();
-        }
-      } catch (_error) {}
-    };
-
-    initializeAnimations();
-
-    return () => {
-      cleanup?.();
-    };
-  }, [setupAnimations]);
-
-  const setupAnimations = (): (() => void) | undefined => {
+  const setupAnimations = React.useCallback((): (() => void) | undefined => {
     const gsap = window.gsap;
     const ScrollTrigger = window.ScrollTrigger;
 
@@ -403,7 +376,34 @@ export function CosmicSpectrum({
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  };
+  }, [currentColors, isDarkTheme, subtitle]);
+
+  useEffect(() => {
+    let cleanup: (() => void) | undefined;
+
+    const initializeAnimations = async () => {
+      try {
+        await Promise.all([
+          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"),
+          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"),
+        ]);
+
+        // Wait for scripts to initialize
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        if (window.gsap && window.ScrollTrigger) {
+          window.gsap.registerPlugin(window.ScrollTrigger);
+          cleanup = setupAnimations();
+        }
+      } catch (_error) {}
+    };
+
+    initializeAnimations();
+
+    return () => {
+      cleanup?.();
+    };
+  }, [setupAnimations]);
 
   return (
     <div ref={containerRef} className={cn("relative min-h-screen overflow-x-hidden", className)}>

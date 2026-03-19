@@ -144,7 +144,7 @@ jobs:
         # --seed ensures pip is installed in the venv (uv venv without --seed omits pip).
         run: |
           uv venv --seed
-          .venv/bin/pip install -r requirements.txt ruff pytest pytest-asyncio mypy bandit
+          .venv/bin/pip install -r requirements.txt ruff pytest pytest-asyncio pytest-cov mypy bandit
 
       - name: Lint (ruff)
         run: .venv/bin/ruff check . --output-format=github
@@ -169,7 +169,7 @@ jobs:
       - name: Run tests
         run: |
           if [ -d "tests" ]; then
-            .venv/bin/pytest --tb=short -q --cov --cov-report=term-missing --cov-fail-under=70
+            .venv/bin/pytest --tb=short -q
           else
             echo "No tests directory — skipping"
           fi

@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -104,13 +106,14 @@ export function CustomersSection({
         >
           {customers.map((logo, index) => (
             <div key={index} className="flex">
-              <img
+              <Image
                 className="mx-auto h-auto w-fit dark:invert"
                 src={logo.src}
                 alt={logo.alt}
                 height={logo.height}
                 width="auto"
-                loading="lazy"
+                width={400}
+                height={400}
               />
             </div>
           ))}

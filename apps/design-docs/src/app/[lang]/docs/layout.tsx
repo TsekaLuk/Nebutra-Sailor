@@ -1,6 +1,7 @@
 import type * as PageTree from "fumadocs-core/page-tree";
 import { Banner } from "fumadocs-ui/components/banner";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { source } from "@/lib/source";
@@ -64,9 +65,11 @@ export default async function Layout({
       nav={{
         title: (
           <div className="flex items-center gap-2">
-            <img
+            <Image
               src="/logo/logo-horizontal-en.svg"
               alt="Nebutra Design System Logo"
+              width={140}
+              height={24}
               className="h-6 w-auto"
             />
           </div>

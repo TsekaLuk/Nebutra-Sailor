@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import type { ThemeMode } from "../theme";
 
 // ============================================
@@ -87,17 +87,20 @@ export function DesignSystemProvider({
   }, [mode, systemPreference]);
 
   // Set mode with persistence
-  const setMode = (newMode: ThemeMode) => {
-    setModeState(newMode);
-    if (typeof window !== "undefined") {
-      localStorage.setItem(storageKey, newMode);
-    }
-  };
+  const setMode = useCallback(
+    (newMode: ThemeMode) => {
+      setModeState(newMode);
+      if (typeof window !== "undefined") {
+        localStorage.setItem(storageKey, newMode);
+      }
+    },
+    [storageKey],
+  );
 
   // Toggle between light and dark
-  const toggleMode = () => {
+  const toggleMode = useCallback(() => {
     setMode(resolvedMode === "light" ? "dark" : "light");
-  };
+  }, [resolvedMode, setMode]);
 
   // Context value
   const contextValue = useMemo(

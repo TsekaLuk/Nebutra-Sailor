@@ -1,19 +1,15 @@
 "use client";
-
 import * as React from "react";
 import { cn } from "../utils/cn";
-
 // =============================================================================
 // Types
 // =============================================================================
-
 export interface GaugeColorStop {
   /** Value threshold (0–100). The stop applies when value >= this threshold. */
   value: number;
   /** CSS color string */
   color: string;
 }
-
 export interface GaugeProps {
   /** Current value, 0–100 */
   value?: number;
@@ -46,17 +42,14 @@ export interface GaugeProps {
   /** Additional CSS classes on the root `<div>` */
   className?: string;
 }
-
 // =============================================================================
 // Default color scale
 // =============================================================================
-
 const DEFAULT_COLOR_STOPS: GaugeColorStop[] = [
   { value: 0, color: "hsl(220 9% 46%)" }, // muted gray
   { value: 40, color: "hsl(38 92% 50%)" }, // amber
   { value: 75, color: "hsl(142 71% 45%)" }, // emerald
 ];
-
 function resolveColor(value: number, stops: GaugeColorStop[]): string {
   const sorted = [...stops].sort((a, b) => a.value - b.value);
   let color = sorted[0]?.color ?? "currentColor";
@@ -65,11 +58,9 @@ function resolveColor(value: number, stops: GaugeColorStop[]): string {
   }
   return color;
 }
-
 // =============================================================================
 // Gauge
 // =============================================================================
-
 /**
  * Gauge — a circular visual for conveying a percentage.
  *
@@ -107,10 +98,8 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
     const circumference = 2 * Math.PI * radius;
     const clampedValue = Math.min(100, Math.max(0, value));
     const offset = circumference * (1 - clampedValue / 100);
-
     const activeColor = resolveColor(clampedValue, colors ?? DEFAULT_COLOR_STOPS);
     const trackColor = secondaryColor ?? "color-mix(in oklch, currentColor 15%, transparent)";
-
     // The SVG circle that draws the colored arc
     const valueArc = (
       <circle
@@ -131,7 +120,6 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
         }
       />
     );
-
     const trackArc = (
       <circle
         cx={size / 2}
@@ -142,7 +130,6 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
         strokeWidth={sw}
       />
     );
-
     // Resolve label content
     let labelNode: React.ReactNode = null;
     if (label === true) {
@@ -163,10 +150,9 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
       // Custom ReactNode label — rendered as foreign object
       labelNode = null; // handled via absolute overlay below
     }
-
     const customLabel = label !== true && label !== false && label != null ? label : null;
-
     return (
+      // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
       <div
         ref={ref}
         className={cn("relative inline-flex items-center justify-center", className)}
@@ -184,7 +170,6 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
             to   { transform: rotate(270deg); }
           }
         `}</style>
-
         <svg
           aria-hidden="true"
           width={size}
@@ -205,7 +190,6 @@ export const Gauge = React.forwardRef<HTMLDivElement, GaugeProps>(
           )}
           {labelNode}
         </svg>
-
         {/* Custom label overlay */}
         {customLabel && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">

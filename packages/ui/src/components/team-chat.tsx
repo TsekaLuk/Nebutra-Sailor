@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import { Check, CheckCheck, MoreHorizontal, Send, SmilePlus, Users } from "lucide-react";
 import type React from "react";
@@ -77,13 +79,15 @@ function Avatar({ src, alt, isOnline, size = "md" }: AvatarProps) {
 
   return (
     <div className="relative">
-      <img
+      <Image
         src={src}
         alt={alt}
         className={cn(
           sizeClasses,
           "rounded-full ring-1 ring-gray-400 dark:ring-gray-600 object-cover",
         )}
+        width={400}
+        height={400}
       />
       {isOnline !== undefined && (
         <span

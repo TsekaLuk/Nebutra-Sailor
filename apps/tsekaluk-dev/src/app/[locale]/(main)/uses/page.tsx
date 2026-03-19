@@ -22,6 +22,7 @@ import Trae from "@lobehub/icons/es/Trae";
 import LogoColor from "@nebutra/brand/assets/logo/logo-color.svg";
 import { AnimateIn } from "@nebutra/ui/components";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
 // ── Metadata ───────────────────────────────────────────────────────────────
@@ -226,7 +227,7 @@ export default async function UsesPage({ params }: { params: Promise<{ locale: s
               <div className="group relative overflow-hidden rounded-[2rem] border border-[var(--color-accent)]/20 bg-gradient-to-br from-[var(--color-accent)]/5 to-transparent p-8 md:p-10 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_var(--color-accent)] dark:hover:shadow-[0_0_40px_rgba(var(--color-accent-rgb),0.1)] hover:-translate-y-1">
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white dark:bg-gray-800 shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.2)] ring-1 ring-gray-950/5 dark:ring-white/10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
-                    <img src={LogoColor.src} alt="Nebutra Logo" width={36} height={36} />
+                    <Image src={LogoColor.src} alt="Nebutra Logo" width={36} height={36} />
                   </div>
                   <h3 className="mb-2 text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-[var(--color-accent)]">
                     Nebutra-Sailor

@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import type * as React from "react";
 import { Badge } from "../primitives/badge";
@@ -97,11 +99,11 @@ export function FeatureCarousel({
                   <CarouselItem key={index}>
                     <div className="flex aspect-video items-center justify-center rounded-[var(--radius-md)] bg-muted p-6">
                       {slide.image ? (
-                        <img
+                        <Image
                           src={slide.image}
                           alt={slide.alt || `Slide ${index + 1}`}
                           className="h-full w-full object-cover rounded-[var(--radius-md)]"
-                          loading="lazy"
+                          fill
                         />
                       ) : (
                         slide.content

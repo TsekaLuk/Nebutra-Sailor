@@ -2,6 +2,7 @@
 
 import { LogomarkSVG, WordmarkEnSVG } from "@nebutra/brand";
 import { MagicCard } from "@nebutra/ui/primitives";
+import Image from "next/image";
 
 export function LogoShowcase() {
   return (
@@ -18,10 +19,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-40 w-full flex items-center justify-center p-8 bg-zinc-50 dark:bg-black relative">
-              <img
+              <Image
                 src="/logo/logo-color.svg"
                 alt="Nebutra Color Logo"
                 className="h-full w-full object-contain relative z-10 drop-shadow-sm"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-card">
@@ -38,10 +41,12 @@ export function LogoShowcase() {
             gradientTo="#0BF1C3"
           >
             <div className="h-40 w-full flex items-center justify-center p-8 bg-[#0a0a0a] relative">
-              <img
+              <Image
                 src="/logo/logo-inverse.svg"
                 alt="Nebutra Inverse Logo"
                 className="h-full w-full object-contain relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.08)]"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 border-t border-zinc-800 flex justify-between items-center bg-zinc-950">
@@ -56,10 +61,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-40 w-full flex items-center justify-center p-8 bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--neutral-5)]">
-              <img
+              <Image
                 src="/logo/logo-mono.svg"
                 alt="Nebutra Mono Logo"
                 className="h-full w-full object-contain relative z-10 opacity-80"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 bg-card border-t border-[var(--neutral-5)] flex justify-between items-center">
@@ -82,10 +89,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-32 w-full flex items-center justify-center p-6 bg-card">
-              <img
+              <Image
                 src="/logo/logo-en.svg"
                 alt="Nebutra EN Logo"
                 className="h-full w-full object-contain"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-2)]">
@@ -100,10 +109,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-32 w-full flex items-center justify-center p-6 bg-card">
-              <img
+              <Image
                 src="/logo/logo-zh.svg"
                 alt="Nebutra ZH Logo"
                 className="h-full w-full object-contain"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-2)]">
@@ -118,10 +129,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-32 w-full flex items-center justify-center p-6 bg-card">
-              <img
+              <Image
                 src="/logo/logo-zh-en.svg"
                 alt="Nebutra ZH-EN Logo"
                 className="h-full w-full object-contain"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-2)]">
@@ -144,10 +157,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-24 w-full flex items-center justify-center p-4">
-              <img
+              <Image
                 src="/logo/logo-horizontal-en.svg"
                 alt="Horizontal EN Logo"
                 className="h-full w-[80%] object-contain"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-1)]">
@@ -161,10 +176,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-24 w-full flex items-center justify-center p-4">
-              <img
+              <Image
                 src="/logo/logo-horizontal-zh.svg"
                 alt="Horizontal ZH Logo"
                 className="h-full w-[80%] object-contain"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 border-t border-[var(--neutral-5)] flex justify-between items-center bg-[var(--neutral-1)]">
@@ -178,10 +195,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-32 w-full flex items-center justify-center p-4 border-b border-[var(--neutral-5)]">
-              <img
+              <Image
                 src="/logo/logo-vertical-en.svg"
                 alt="Vertical EN Logo"
                 className="h-full w-[60%] object-contain"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 flex justify-between items-center bg-[var(--neutral-1)]">
@@ -195,10 +214,12 @@ export function LogoShowcase() {
             gradientColor="var(--neutral-3)"
           >
             <div className="h-32 w-full flex items-center justify-center p-4 border-b border-[var(--neutral-5)]">
-              <img
+              <Image
                 src="/logo/logo-vertical-zh.svg"
                 alt="Vertical ZH Logo"
                 className="h-full w-[60%] object-contain"
+                fill
+                unoptimized
               />
             </div>
             <div className="p-3 flex justify-between items-center bg-[var(--neutral-1)]">

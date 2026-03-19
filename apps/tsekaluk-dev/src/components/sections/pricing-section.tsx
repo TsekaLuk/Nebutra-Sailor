@@ -37,6 +37,7 @@ import { AnimateIn } from "@nebutra/ui/components";
 import { DotPattern } from "@nebutra/ui/primitives";
 import { AnimatePresence, motion } from "framer-motion";
 import { Coffee } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useState } from "react";
@@ -150,13 +151,12 @@ function TechBadge({ item }: { item: TechItem }) {
       {item.Icon ? (
         <item.Icon size={14} />
       ) : item.slug ? (
-        <img
+        <Image
           src={`https://cdn.simpleicons.org/${item.slug}`}
           alt=""
           width={14}
           height={14}
           className="h-3.5 w-3.5 brightness-0 dark:invert"
-          loading="lazy"
         />
       ) : null}
       <span className="text-xs font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap">

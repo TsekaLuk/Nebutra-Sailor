@@ -1,13 +1,10 @@
 "use client";
-
 import type * as React from "react";
 import { useMemo, useState } from "react";
 import { cn } from "../utils/cn";
-
 // =============================================================================
 // Types
 // =============================================================================
-
 export interface ReactionChipProps {
   /** Callback when an emoji is selected */
   onSelect: (emoji: string) => void;
@@ -18,7 +15,6 @@ export interface ReactionChipProps {
   /** Additional CSS classes */
   className?: string;
 }
-
 export interface ReactionBadgeProps {
   /** Emoji to display */
   emoji: string;
@@ -29,7 +25,6 @@ export interface ReactionBadgeProps {
   /** Additional CSS classes */
   className?: string;
 }
-
 export interface MessageWithReactionsProps {
   /** Message text content */
   text: string;
@@ -40,11 +35,9 @@ export interface MessageWithReactionsProps {
   /** Children to render instead of text */
   children?: React.ReactNode;
 }
-
 // =============================================================================
 // ReactionChip Component
 // =============================================================================
-
 /**
  * ReactionChip - Floating emoji reaction picker
  *
@@ -74,6 +67,7 @@ export function ReactionChip({
   selected,
 }: ReactionChipProps) {
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ARIA pattern
     <div
       className={cn(
         "pointer-events-auto flex items-center gap-1 rounded-full",
@@ -99,7 +93,6 @@ export function ReactionChip({
           setTimeout(() => btn.blur(), 0);
         };
         const label = `React with ${em}`;
-
         return isActive ? (
           <button
             key={em}
@@ -131,11 +124,9 @@ export function ReactionChip({
     </div>
   );
 }
-
 // =============================================================================
 // ReactionBadge Component
 // =============================================================================
-
 /**
  * ReactionBadge - Display a single reaction with count
  *
@@ -162,11 +153,9 @@ export function ReactionBadge({ emoji, count, bump = false, className }: Reactio
     </span>
   );
 }
-
 // =============================================================================
 // MessageWithReactions Component
 // =============================================================================
-
 /**
  * MessageWithReactions - Message card with hover reaction picker
  *
@@ -202,7 +191,6 @@ export function MessageWithReactions({
 }: MessageWithReactionsProps) {
   const [selectedReaction, setSelectedReaction] = useState<string | null>(null);
   const [bump, setBump] = useState(false);
-
   function handleSelect(emoji: string) {
     setSelectedReaction((prev) => {
       const next = prev === emoji ? null : emoji;
@@ -213,11 +201,9 @@ export function MessageWithReactions({
       return next;
     });
   }
-
   const activeReactions = useMemo(() => {
     return selectedReaction ? [[selectedReaction, 1] as const] : [];
   }, [selectedReaction]);
-
   return (
     <div
       className={cn(
@@ -228,7 +214,6 @@ export function MessageWithReactions({
       )}
     >
       {children || <p className="text-pretty">{text}</p>}
-
       {/* Reactions row */}
       {activeReactions.length > 0 && (
         <div
@@ -241,7 +226,6 @@ export function MessageWithReactions({
           ))}
         </div>
       )}
-
       {/* Hover reaction chip */}
       <div
         className={cn(

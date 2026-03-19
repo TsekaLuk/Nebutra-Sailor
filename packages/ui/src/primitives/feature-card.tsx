@@ -1,4 +1,6 @@
-"use client";
+import Image from "next/image";
+
+("use client");
 
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
@@ -27,7 +29,7 @@ export interface FeatureCardProps {
  * <FeatureCard>
  *   <FeatureCardHeader icon={MapIcon} title="Tracking" description="Real-time location" />
  *   <FeatureCardContent>
- *     <img src="/screenshot.png" alt="Feature" />
+ *     <Image src="/screenshot.png" alt="Feature"  width={400} height={400} />
  *   </FeatureCardContent>
  * </FeatureCard>
  * ```
@@ -184,21 +186,19 @@ export function DualModeImage({
 }: DualModeImageProps) {
   return (
     <>
-      <img
+      <Image
         src={darkSrc}
         className={cn("hidden dark:block", className)}
         alt={alt}
-        width={width}
-        height={height}
-        loading="lazy"
+        {...(width !== undefined ? { width } : {})}
+        {...(height !== undefined ? { height } : {})}
       />
-      <img
+      <Image
         src={lightSrc}
         className={cn("shadow dark:hidden", className)}
         alt={alt}
-        width={width}
-        height={height}
-        loading="lazy"
+        {...(width !== undefined ? { width } : {})}
+        {...(height !== undefined ? { height } : {})}
       />
     </>
   );

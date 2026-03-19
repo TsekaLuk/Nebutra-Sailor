@@ -1,6 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
+import Image from "next/image";
 import { getProductHuntBadgeUrl, getProductHuntUrl, PRODUCT_HUNT_COLORS } from "../config";
 import type { ProductHuntBadgeProps } from "../types";
 
@@ -93,14 +94,7 @@ export function ProductHuntEmbedBadge({
       rel={openInNewTab ? "noopener noreferrer" : undefined}
       className={clsx("inline-block transition-opacity hover:opacity-90", className)}
     >
-      <img
-        src={badgeUrl}
-        alt={alt}
-        width={250}
-        height={54}
-        loading="lazy"
-        style={{ width: 250, height: 54 }}
-      />
+      <Image src={badgeUrl} alt={alt} width={250} height={54} style={{ width: 250, height: 54 }} />
     </a>
   );
 }

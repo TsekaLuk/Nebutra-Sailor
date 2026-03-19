@@ -1,6 +1,7 @@
 "use client";
 
 import { AspectRatio } from "@nebutra/ui/primitives";
+import Image from "next/image";
 
 export function AspectRatioDemo() {
   return (
@@ -9,10 +10,11 @@ export function AspectRatioDemo() {
         ratio={16 / 9}
         className="overflow-hidden rounded-md bg-muted ring-1 ring-border"
       >
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?q=80&w=2070&auto=format&fit=crop"
           alt="Example landscape from Unsplash"
-          className="h-full w-full object-cover"
+          fill
+          className="object-cover"
         />
       </AspectRatio>
     </div>
