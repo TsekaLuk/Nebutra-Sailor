@@ -54,7 +54,8 @@ const DEPENDENCY_RULES: DependencyRule[] = [
   {
     name: "@nebutra/landing-page",
     packageJsonPath: "apps/landing-page/package.json",
-    allowedDeps: ["@nebutra/ui", "@nebutra/tokens"],
+    // @nebutra/logger is a cross-cutting infrastructure package, not a UI dep
+    allowedDeps: ["@nebutra/ui", "@nebutra/tokens", "@nebutra/logger"],
   },
   {
     name: "@nebutra/design-docs",

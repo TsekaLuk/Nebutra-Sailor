@@ -163,9 +163,12 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
 
-      - name: Install dependencies (including dev)
-        # uv sync creates an isolated venv — avoids PEP 668 externally-managed error
-        run: uv sync --dev
+      - name: Create virtual environment and install dependencies
+        # uv venv + uv pip install: isolated venv avoids PEP 668 (externally managed)
+        # and skips project build, so hatchling is not required
+        run: |
+          uv venv
+          uv pip install -r requirements.txt ruff pytest pytest-asyncio mypy bandit
 
       - name: Lint (ruff)
         run: uv run ruff check . --output-format=github
@@ -650,14 +653,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Download all shard reports
+        id: download
         uses: actions/download-artifact@v4
         with:
           pattern: playwright-report-shard-*-${{ github.run_id }}
           path: all-blob-reports
           merge-multiple: true
+        continue-on-error: true
       - name: Merge into single HTML report
+        if: steps.download.outcome == 'success'
         run: pnpm exec playwright merge-reports --reporter html ./all-blob-reports
       - name: Upload merged report
+        if: steps.download.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report-merged-${{ github.run_id }}
