@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.5](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.4...v1.7.5) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* coverage gate, bundle size, openapi build, and e2e ci failures ([4f05a9b](https://github.com/Nebutra/Nebutra-Sailor/commit/4f05a9b4746d2f311995edf0497ad1a09a42d82b))
+
 ## [1.7.4](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.3...v1.7.4) (2026-03-19)
 
 
