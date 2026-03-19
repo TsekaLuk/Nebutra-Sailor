@@ -157,9 +157,14 @@ jobs:
 
       - name: Security check (bandit)
         run: |
-          .venv/bin/bandit -r . -x .venv,./tests -f json -o bandit-report.json --severity-level medium || true
+          # Collect Python source directories (avoid scanning .venv installed packages)
+          SCAN_DIRS=""
+          for d in app providers services utils adapters sync features rank recall indexer listener producers subscribers; do
+            [ -d "$d" ] && SCAN_DIRS="$SCAN_DIRS $d"
+          done
+          .venv/bin/bandit -r $SCAN_DIRS -f json -o bandit-report.json --severity-level medium || true
           # Fail only on high-severity findings
-          .venv/bin/bandit -r . -x .venv,./tests --severity-level high -q
+          .venv/bin/bandit -r $SCAN_DIRS --severity-level high -q
 
       - name: Run tests
         run: |
