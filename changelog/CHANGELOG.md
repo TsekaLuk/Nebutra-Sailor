@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.10](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.9...v1.7.10) (2026-03-19)
+
+
+### 🐛 Bug Fixes
+
+* redocly validation and e2e broken-image test ([a09f118](https://github.com/Nebutra/Nebutra-Sailor/commit/a09f118ea1958664e068bb9e9f9281d564576c94))
+
 ## [1.7.9](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.8...v1.7.9) (2026-03-19)
 
 
