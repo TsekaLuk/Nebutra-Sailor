@@ -167,7 +167,7 @@ jobs:
       # ── Build & push ─────────────────────────────────────────────────────────
       - name: Build and push image
         id: build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: apps/${{ matrix.app }}/Dockerfile
@@ -326,7 +326,7 @@ jobs:
       # the correct service directory inside services/<SERVICE>/
       - name: Build and push image
         id: build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: infra/docker/Dockerfile.python
