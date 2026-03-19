@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { CheckboxGroup, Checkbox } from "@nebutra/ui/primitives";
+import { CheckboxGroup, Checkbox } from "@nebutra/ui/primitives"
 
 export function CheckboxGroupDemo() {
-    return (
-        <CheckboxGroup label="Select features">
-            <Checkbox>Analytics</Checkbox>
-            <Checkbox>API Access</Checkbox>
-            <Checkbox>SSO</Checkbox>
-        </CheckboxGroup>
-    );
+  return (
+    <CheckboxGroup label="Select features">
+      <Checkbox>Analytics</Checkbox>
+      <Checkbox>API Access</Checkbox>
+      <Checkbox>SSO</Checkbox>
+    </CheckboxGroup>
+  )
 }

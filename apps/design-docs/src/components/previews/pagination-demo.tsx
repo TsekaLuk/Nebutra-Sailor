@@ -1,36 +1,44 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { PaginationItem, PaginationEllipsis, Pagination, PaginationLink, PaginationNext, PaginationPrevious, PaginationContent } from "@nebutra/ui/primitives";
+import * as React from "react"
+import {
+  PaginationItem,
+  PaginationEllipsis,
+  Pagination,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationContent,
+} from "@nebutra/ui/primitives"
 
 export function PaginationDemo() {
   return (
     <Pagination>
-    <PaginationContent>
-      <PaginationItem>
-        <PaginationPrevious href="#prev" />
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href="#1">1</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href="#2" isActive>2</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href="#3">3</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationEllipsis />
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href="#10">10</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationNext href="#next" />
-      </PaginationItem>
-    </PaginationContent>
-  </Pagination>
-  );
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious href="#prev" />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#1">1</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#2" isActive>
+            2
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#3">3</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationEllipsis />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#10">10</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext href="#next" />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  )
 }

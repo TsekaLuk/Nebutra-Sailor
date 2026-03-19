@@ -1,23 +1,30 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { Input } from "@nebutra/ui/primitives"; // Usually Input is exported
+import * as React from "react"
+import { Input } from "@nebutra/ui/primitives" // Usually Input is exported
 
 export function InputWithAddonsDemo() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="gap-4 flex flex-col">
       {/* Domain hint */}
-      <Input suffix={<span className="text-xs text-muted-foreground">@nebutra.com</span>} placeholder="username" />
+      <Input
+        suffix={
+          <span className="text-xs text-muted-foreground">@nebutra.com</span>
+        }
+        placeholder="username"
+      />
 
       {/* Currency */}
       <Input
         prefix={<span className="text-xs text-muted-foreground">$</span>}
-        suffix={<span className="text-xs font-medium border-l pl-2 text-muted-foreground">USD</span>}
+        suffix={
+          <span className="text-xs font-medium pl-2 border-l text-muted-foreground">
+            USD
+          </span>
+        }
         type="number"
         placeholder="0.00"
       />
     </div>
-  );
+  )
 }

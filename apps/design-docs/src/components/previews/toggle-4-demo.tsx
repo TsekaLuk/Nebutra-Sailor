@@ -1,15 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
+import { Toggle } from "@nebutra/ui/primitives"
 
 export function Toggle4Demo() {
-  return (
-    <>
-<Toggle aria-label="Toggle underline" size="sm">
-  Underline
-</Toggle>
-    </>
-  );
+  return <Toggle size="normal" aria-label="Toggle normal size" />
 }

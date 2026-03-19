@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { DatePicker } from "@nebutra/ui/primitives";
+import * as React from "react"
+import { DatePicker } from "@nebutra/ui/primitives"
 
 export function DatePickerDemo() {
-  return (
-    <DatePicker label="活动日期" />
-  );
+  return <DatePicker label="活动日期" />
 }

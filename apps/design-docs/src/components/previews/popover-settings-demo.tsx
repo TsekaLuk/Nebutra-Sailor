@@ -1,9 +1,14 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import { Settings } from "lucide-react"
-import { PopoverTrigger, Label, PopoverContent, Popover, Button, Toggle } from "@nebutra/ui/primitives"
+import {
+  PopoverTrigger,
+  Label,
+  PopoverContent,
+  Popover,
+  Button,
+  Toggle,
+} from "@nebutra/ui/primitives"
 
 export function PopoverSettingsDemo() {
   return (
@@ -26,5 +31,5 @@ export function PopoverSettingsDemo() {
         </div>
       </PopoverContent>
     </Popover>
-  );
+  )
 }

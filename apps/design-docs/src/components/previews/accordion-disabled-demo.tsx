@@ -1,19 +1,20 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { AccordionTrigger, AccordionContent, AccordionItem } from "@nebutra/ui/primitives";
+import * as React from "react"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@nebutra/ui/primitives"
 
 export function AccordionDisabledDemo() {
   return (
-    <NebutraAccordion type="single" className="w-full">
+    <Accordion multiple={false} className="w-full">
       <AccordionItem value="item-1" disabled>
         <AccordionTrigger>Disabled Section</AccordionTrigger>
         <AccordionContent>This will not open.</AccordionContent>
       </AccordionItem>
-    </NebutraAccordion>
-  );
+    </Accordion>
+  )
 }

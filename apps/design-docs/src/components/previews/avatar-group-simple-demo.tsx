@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { AvatarGroup } from "@nebutra/ui/primitives";
+import * as React from "react"
+import { AvatarGroup } from "@nebutra/ui/primitives"
 
 export function AvatarGroupSimpleDemo() {
   return (
@@ -18,5 +16,5 @@ export function AvatarGroupSimpleDemo() {
       max={4}
       size="sm"
     />
-  );
+  )
 }

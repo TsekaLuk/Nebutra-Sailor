@@ -1,13 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
+import { DateRangePicker } from "@nebutra/ui/primitives"
 export function DatePicker4Demo() {
-  return (
-    <>
-<DateRangePicker label="Stay" visibleMonths={2} />
-    </>
-  );
+  return <DateRangePicker label="Stay" visibleMonths={2} />
 }

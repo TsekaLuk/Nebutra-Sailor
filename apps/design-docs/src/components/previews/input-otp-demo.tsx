@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
   InputOTPSeparator,
-} from "@nebutra/ui/primitives";
+} from "@nebutra/ui/primitives"
 
 export function InputOtpDemo() {
   return (
@@ -24,5 +22,5 @@ export function InputOtpDemo() {
         <InputOTPSlot index={5} />
       </InputOTPGroup>
     </InputOTP>
-  );
+  )
 }

@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@nebutra/ui/primitives";
+} from "@nebutra/ui/primitives"
 
 export function AccordionDemo() {
   return (
-    <Accordion multiple={false} className="w-full max-w-md">
+    <Accordion multiple={false} className="max-w-md w-full">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -31,5 +29,5 @@ export function AccordionDemo() {
         </AccordionContent>
       </AccordionItem>
     </Accordion>
-  );
+  )
 }

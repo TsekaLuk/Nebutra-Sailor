@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
-import { Input } from "@nebutra/ui/primitives";
+"use client"
+import { Input } from "@nebutra/ui/primitives"
 export function InputDemo() {
   return (
-    <div className="flex flex-col gap-3 max-w-sm">
+    <div className="gap-3 max-w-sm flex flex-col">
       <Input placeholder="Default input" />
       <Input placeholder="Disabled input" disabled />
     </div>
-  );
+  )
 }

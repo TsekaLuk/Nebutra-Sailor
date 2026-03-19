@@ -1,114 +1,49 @@
-"use client";
+"use client"
+import { useMemo, type JSX } from "react"
+import { motion } from "framer-motion"
+import { cn } from "../utils"
 
-import React, { useMemo, type JSX } from "react";
-import { motion } from "motion/react";
-import { cn } from "../utils";
-
-// =============================================================================
-// Types
-// =============================================================================
-
-/**
- * Props for TextShimmer component
- *
- * @description
- * An animated text effect with a shimmer/glint passing through the text.
- * Uses CSS gradients and motion animation for the sweep effect.
- *
- * **UX Scenarios:**
- * - Loading state indicators ("Generating...", "Processing...")
- * - Premium/highlight text treatment
- * - AI typing indicators
- * - Call-to-action emphasis
- * - Brand name highlights
- *
- * **Customization:**
- * - Override colors via CSS variables in className:
- *   - `--base-color`: Default text color
- *   - `--base-gradient-color`: Shimmer highlight color
- */
 export interface TextShimmerProps {
-  /** Text content to display with shimmer effect */
-  children: string;
-  /**
-   * HTML element to render as
-   * @default "p"
-   */
-  as?: React.ElementType;
-  /** Additional CSS classes */
-  className?: string;
-  /**
-   * Animation duration in seconds
-   * @default 2
-   */
-  duration?: number;
-  /**
-   * Spread of the shimmer gradient (multiplied by text length)
-   * @default 2
-   */
-  spread?: number;
-  /**
-   * Whether to pause the animation
-   * @default false
-   */
-  paused?: boolean;
+  children: string
+  as?: React.ElementType
+  className?: string
+  duration?: number
+  spread?: number
 }
 
-// =============================================================================
-// Component
-// =============================================================================
-
-/**
- * TextShimmer - Animated shimmer text effect
- *
- * @example
- * ```tsx
- * // Basic loading text
- * <TextShimmer duration={1}>
- *   Generating code...
- * </TextShimmer>
- *
- * // Custom colors via CSS variables
- * <TextShimmer
- *   duration={1.2}
- *   className="text-xl [--base-color:theme(colors.blue.600)] [--base-gradient-color:theme(colors.blue.200)]"
- * >
- *   Premium Feature
- * </TextShimmer>
- *
- * // As heading
- * <TextShimmer as="h1" className="text-4xl font-bold">
- *   Welcome
- * </TextShimmer>
- * ```
- */
 export function TextShimmer({
   children,
   as: Component = "p",
   className,
   duration = 2,
   spread = 2,
-  paused = false,
 }: TextShimmerProps) {
-  const MotionComponent = motion.create(
-    Component as keyof JSX.IntrinsicElements,
-  );
+  // Memoize by Component so React doesn't see a new type on every render
+  // (which would unmount/remount and reset the animation).
+  const MotionComponent = useMemo(
+    () =>
+      motion.create
+        ? motion.create(Component as keyof JSX.IntrinsicElements)
+        : motion(Component as keyof JSX.IntrinsicElements),
+    [Component]
+  )
 
-  const dynamicSpread = useMemo(() => {
-    return children.length * spread;
-  }, [children, spread]);
+  const dynamicSpread = useMemo(
+    () => children.length * spread,
+    [children, spread]
+  )
 
   return (
     <MotionComponent
       className={cn(
         "relative inline-block bg-[length:250%_100%,auto] bg-clip-text",
         "text-transparent [--base-color:#a1a1aa] [--base-gradient-color:#000]",
-        "[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))] [background-repeat:no-repeat,padding-box]",
-        "dark:[--base-color:#71717a] dark:[--base-gradient-color:#ffffff]",
-        className,
+        "[background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]",
+        "dark:[--base-color:#71717a] dark:[--base-gradient-color:#ffffff] dark:[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]",
+        className
       )}
       initial={{ backgroundPosition: "100% center" }}
-      {...(paused ? {} : { animate: { backgroundPosition: "0% center" } })}
+      animate={{ backgroundPosition: "0% center" }}
       transition={{
         repeat: Infinity,
         duration,
@@ -123,7 +58,7 @@ export function TextShimmer({
     >
       {children}
     </MotionComponent>
-  );
+  )
 }
 
-export default TextShimmer;
+export default TextShimmer

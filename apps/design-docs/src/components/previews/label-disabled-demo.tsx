@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { Label, Input } from "@nebutra/ui/primitives";
+import * as React from "react"
+import { Label, Input } from "@nebutra/ui/primitives"
 
 export function LabelDisabledDemo() {
   return (
-    <div className="space-y-2 w-full max-w-sm">
-    <Label htmlFor="disabled-input" className="opacity-50 cursor-not-allowed">
-      禁用的字段 (Disabled field)
-    </Label>
-    <Input id="disabled-input" disabled />
-  </div>
-  );
+    <div className="space-y-2 max-w-sm w-full">
+      <Label htmlFor="disabled-input" className="cursor-not-allowed opacity-50">
+        禁用的字段 (Disabled field)
+      </Label>
+      <Input id="disabled-input" disabled />
+    </div>
+  )
 }

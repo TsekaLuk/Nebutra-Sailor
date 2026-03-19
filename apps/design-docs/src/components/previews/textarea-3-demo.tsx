@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
+import { Textarea } from "@nebutra/ui/primitives"
 export function Textarea3Demo() {
   return (
-    <>
-<div className="w-full">
-  <Textarea disabled value="This field is read-only" />
-</div>
-    </>
-  );
+    <div className="w-full">
+      <Textarea disabled value="This field is read-only" />
+    </div>
+  )
 }

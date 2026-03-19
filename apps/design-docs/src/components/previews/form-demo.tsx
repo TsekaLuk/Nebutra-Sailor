@@ -1,29 +1,27 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Button, Input, Label } from "@nebutra/ui/primitives";
+import { useState } from "react"
+import { Button, Input, Label } from "@nebutra/ui/primitives"
 
 export function FormDemo() {
-  const [username, setUsername] = useState("");
-  const [submitted, setSubmitted] = useState<string | null>(null);
+  const [username, setUsername] = useState("")
+  const [submitted, setSubmitted] = useState<string | null>(null)
 
-  const trimmed = username.trim();
+  const trimmed = username.trim()
   const error =
     trimmed.length === 0
       ? "Username is required."
       : trimmed.length < 2
         ? "Username must be at least 2 characters."
-        : null;
+        : null
 
   return (
     <form
-      className="w-full max-w-sm space-y-4 rounded-xl border bg-background p-6 text-left shadow-sm"
+      className="max-w-sm space-y-4 p-6 w-full rounded-xl border bg-background text-left shadow-sm"
       onSubmit={(event) => {
-        event.preventDefault();
-        if (error) return;
-        setSubmitted(trimmed);
+        event.preventDefault()
+        if (error) return
+        setSubmitted(trimmed)
       }}
     >
       <div className="space-y-2">
@@ -35,14 +33,11 @@ export function FormDemo() {
           aria-invalid={Boolean(error)}
           aria-describedby="form-demo-description form-demo-message"
           onChange={(event) => {
-            setUsername(event.target.value);
-            if (submitted) setSubmitted(null);
+            setUsername(event.target.value)
+            if (submitted) setSubmitted(null)
           }}
         />
-        <p
-          id="form-demo-description"
-          className="text-sm text-muted-foreground"
-        >
+        <p id="form-demo-description" className="text-sm text-muted-foreground">
           This is your public display name.
         </p>
         <p
@@ -53,7 +48,7 @@ export function FormDemo() {
           {error ?? ""}
         </p>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="gap-3 flex items-center">
         <Button type="submit" disabled={Boolean(error)}>
           Submit
         </Button>
@@ -64,5 +59,5 @@ export function FormDemo() {
         ) : null}
       </div>
     </form>
-  );
+  )
 }

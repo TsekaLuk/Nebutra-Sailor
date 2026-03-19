@@ -1,21 +1,15 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { Textarea } from "@nebutra/ui/primitives";
+import * as React from "react"
+import { Textarea } from "@nebutra/ui/primitives"
 
 export function TextareaWithLimitDemo() {
   return (
-    <div className="flex flex-col gap-1 w-full">
-    <Textarea
-      defaultValue=""
-      placeholder="Type here..."
-      maxLength={500}
-    />
-    <span className="text-xs text-muted-foreground text-right w-full">
-      0/500
-    </span>
-  </div>
-  );
+    <div className="gap-1 flex w-full flex-col">
+      <Textarea defaultValue="" placeholder="Type here..." maxLength={500} />
+      <span className="text-xs w-full text-right text-muted-foreground">
+        0/500
+      </span>
+    </div>
+  )
 }

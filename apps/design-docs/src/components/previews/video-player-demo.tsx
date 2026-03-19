@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { VideoPlayer } from "@nebutra/ui/primitives";
+import { VideoPlayer } from "@nebutra/ui/primitives"
 
 export function VideoPlayerDemo() {
-    return (
-        <div className="w-full max-w-4xl px-4 py-8">
-            <VideoPlayer
-                src="https://www.w3schools.com/html/mov_bbb.mp4"
-                autoPlay={false}
-                loop={true}
-                className="rounded-xl overflow-hidden shadow-lg border border-border"
-            />
-        </div>
-    )
+  return (
+    <div className="max-w-4xl px-4 py-8 w-full">
+      <VideoPlayer
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        autoPlay={false}
+        loop={true}
+        className="overflow-hidden rounded-xl border border-border shadow-lg"
+      />
+    </div>
+  )
 }

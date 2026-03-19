@@ -11,7 +11,7 @@
   "arrowParens": "always",
   "endOfLine": "lf",
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindConfig": "./packages/tokens/tailwind.config.ts",
+  "tailwindStylesheet": "./packages/tokens/styles.css",
   "overrides": [
     {
       "files": "*.json",

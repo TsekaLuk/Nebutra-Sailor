@@ -1,22 +1,50 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { Avatar } from "@nebutra/ui/primitives";
+import * as React from "react"
+import { Avatar, AvatarImage, AvatarFallback } from "@nebutra/ui/primitives"
 
 export function AvatarGitSimpleDemo() {
   return (
-    <div className="flex gap-4 items-center">
-      <GitHubAvatar username="rauchg" size="md" />
-      <GitLabAvatar username="leerob" size="md" />
-      <BitbucketAvatar username="evilrabbit" size="md" />
+    <div className="gap-4 flex items-center">
+      <GitHubAvatar username="rauchg" />
+      <GitLabAvatar username="leerob" />
+      <BitbucketAvatar username="evilrabbit" />
     </div>
-  );
+  )
 }
 
-function GitHubAvatar({ username, size: _size }: { username: string; size: string }) { return <Avatar src={`https://github.com/${username}.png`} fallback={username} /> }
-function GitLabAvatar({ username, size: _size }: { username: string; size: string }) { return <Avatar src={`https://gitlab.com/${username}.png`} fallback={username} /> }
-function BitbucketAvatar({ username, size: _size }: { username: string; size: string }) { return <Avatar src={`https://bitbucket.org/${username}.png`} fallback={username} /> }
+function GitHubAvatar({ username }: { username: string }) {
+  return (
+    <Avatar>
+      <AvatarImage
+        src={`https://github.com/${username}.png`}
+        alt={`@${username}`}
+      />
+      <AvatarFallback>{username.slice(0, 2).toUpperCase()}</AvatarFallback>
+    </Avatar>
+  )
+}
+
+function GitLabAvatar({ username }: { username: string }) {
+  return (
+    <Avatar>
+      <AvatarImage
+        src={`https://gitlab.com/${username}.png`}
+        alt={`@${username}`}
+      />
+      <AvatarFallback>{username.slice(0, 2).toUpperCase()}</AvatarFallback>
+    </Avatar>
+  )
+}
+
+function BitbucketAvatar({ username }: { username: string }) {
+  return (
+    <Avatar>
+      <AvatarImage
+        src={`https://bitbucket.org/${username}.png`}
+        alt={`@${username}`}
+      />
+      <AvatarFallback>{username.slice(0, 2).toUpperCase()}</AvatarFallback>
+    </Avatar>
+  )
+}

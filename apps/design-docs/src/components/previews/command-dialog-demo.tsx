@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import * as React from "react"
 import {
@@ -31,7 +29,7 @@ export function CommandDialogDemo() {
     <>
       <p className="text-sm text-muted-foreground">
         Press{" "}
-        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+        <kbd className="h-5 gap-1 rounded px-1.5 font-medium pointer-events-none inline-flex items-center border bg-muted font-mono text-[10px] text-muted-foreground opacity-100 select-none">
           <span className="text-xs">⌘</span>J
         </kbd>
       </p>
@@ -40,13 +38,25 @@ export function CommandDialogDemo() {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem onSelect={() => console.log("Calendar")}>
+            <CommandItem
+              onSelect={() => {
+                /* Calendar selected */
+              }}
+            >
               Calendar
             </CommandItem>
-            <CommandItem onSelect={() => console.log("Search Emoji")}>
+            <CommandItem
+              onSelect={() => {
+                /* Search Emoji selected */
+              }}
+            >
               Search Emoji
             </CommandItem>
-            <CommandItem onSelect={() => console.log("Calculator")}>
+            <CommandItem
+              onSelect={() => {
+                /* Calculator selected */
+              }}
+            >
               Calculator
             </CommandItem>
           </CommandGroup>

@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { DateRangePicker } from "@nebutra/ui/primitives";
+import * as React from "react"
+import { DateRangePicker } from "@nebutra/ui/primitives"
 
 export function DatePickerMultiMonthDemo() {
-  return (
-    <DateRangePicker label="住宿时间" visibleMonths={2} />
-  );
+  return <DateRangePicker label="住宿时间" visibleMonths={2} />
 }

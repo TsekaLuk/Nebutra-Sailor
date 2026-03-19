@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import {
   DropdownMenu,
@@ -10,8 +8,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  Button
-} from "@nebutra/ui/primitives";
+  Button,
+} from "@nebutra/ui/primitives"
 
 export function DropdownMenuDemo() {
   return (
@@ -38,5 +36,5 @@ export function DropdownMenuDemo() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

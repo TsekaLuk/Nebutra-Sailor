@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "animated-list-demo",
+  "type": "registry:example",
+  "dependencies": ["@nebutra/ui"],
+  "registryDependencies": ["@nebutra/ui"],
+  "files": [
+    {
+      "path": "registry/examples/animated-list-demo.tsx",
+      "content": "\"use client\";\n\nimport { AnimatedList } from \"@nebutra/ui/primitives\";\n\nconst notifications = [\n    { id: \"1\", emoji: \"👤\", title: \"New signup\", body: \"john@example.com joined\" },\n    { id: \"2\", emoji: \"💳\", title: \"Payment received\", body: \"$49/mo plan activated\" },\n    { id: \"3\", emoji: \"🚀\", title: \"Deploy completed\", body: \"v2.1.0 is live in production\" },\n];\n\nexport function AnimatedListDemo() {\n    return (\n        <div className=\"flex h-[300px] w-full items-center justify-center overflow-hidden p-8\">\n            <AnimatedList delay={1500} className=\"w-72 bottom-0 absolute\">\n                {notifications.map((n) => (\n                    <div key={n.id} className=\"flex items-center gap-3 rounded-xl border bg-background px-4 py-3 shadow-sm w-72\">\n                        <span className=\"text-xl\">{n.emoji}</span>\n                        <div>\n                            <p className=\"text-sm font-medium\">{n.title}</p>\n                            <p className=\"text-xs text-muted-foreground\">{n.body}</p>\n                        </div>\n                    </div>\n                ))}\n            </AnimatedList>\n        </div>\n    );\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

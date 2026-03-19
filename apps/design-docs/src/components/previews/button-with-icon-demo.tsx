@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import { Button } from "@nebutra/ui/primitives";
+import { Button } from "@nebutra/ui/primitives"
 
 export function ButtonWithIconDemo() {
   return (
-    <div className="flex gap-4 items-center flex-wrap">
+    <div className="gap-4 flex flex-wrap items-center">
       <Button>
         <span className="mr-2">✉️</span> Login with Email
       </Button>
@@ -14,5 +12,5 @@ export function ButtonWithIconDemo() {
         Continue <span className="ml-2">➔</span>
       </Button>
     </div>
-  );
+  )
 }

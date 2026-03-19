@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import { ChevronDown } from "lucide-react"
 import {
@@ -11,19 +9,21 @@ import {
 
 export function Collapsible2Demo() {
   return (
-    <Collapsible className="w-80 border rounded-md p-4 bg-background shadow-sm">
-      <CollapsibleTrigger className="flex w-full items-center justify-between font-medium">
+    <Collapsible className="w-80 p-4 rounded-md border bg-background shadow-sm">
+      <CollapsibleTrigger className="font-medium flex w-full items-center justify-between">
         Advanced Options
         <ChevronDown className="h-4 w-4" />
       </CollapsibleTrigger>
       <CollapsibleContent>
         <div className="space-y-2 pt-4">
-          <p className="text-sm text-muted-foreground">Advanced configuration here.</p>
-          <div className="rounded-md border p-3 font-mono text-xs text-muted-foreground bg-muted/50">
-            {"{ \"debug\": true, \"level\": \"verbose\" }"}
+          <p className="text-sm text-muted-foreground">
+            Advanced configuration here.
+          </p>
+          <div className="p-3 text-xs rounded-md border bg-muted/50 font-mono text-muted-foreground">
+            {'{ "debug": true, "level": "verbose" }'}
           </div>
         </div>
       </CollapsibleContent>
     </Collapsible>
-  );
+  )
 }

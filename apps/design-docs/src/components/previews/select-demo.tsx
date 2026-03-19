@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import {
   Select,
@@ -10,7 +8,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@nebutra/ui/primitives";
+} from "@nebutra/ui/primitives"
 
 export function SelectDemo() {
   return (
@@ -28,5 +26,5 @@ export function SelectDemo() {
         </SelectGroup>
       </SelectContent>
     </Select>
-  );
+  )
 }

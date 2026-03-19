@@ -1,13 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
+import { RangeCalendar } from "@nebutra/ui/primitives"
 export function Calendar5Demo() {
-  return (
-    <>
-<RangeCalendar className="rounded-xl shadow-sm border border-border" />
-    </>
-  );
+  return <RangeCalendar className="rounded-xl border border-border shadow-sm" />
 }

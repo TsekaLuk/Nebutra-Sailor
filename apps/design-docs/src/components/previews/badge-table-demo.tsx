@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { Badge } from "@nebutra/ui/primitives";
+import { Badge } from "@nebutra/ui/primitives"
 
 export function BadgeTableDemo() {
   return (
@@ -9,10 +7,12 @@ export function BadgeTableDemo() {
         <tr>
           <td>Status</td>
           <td>
-            <Badge variant="success" dot>Paid</Badge>
+            <Badge variant="success" dot>
+              Paid
+            </Badge>
           </td>
         </tr>
       </tbody>
     </table>
-  );
+  )
 }

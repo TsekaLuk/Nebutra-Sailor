@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 import {
   Button,
   Dialog,
@@ -12,11 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@nebutra/ui/primitives";
+} from "@nebutra/ui/primitives"
 
 export function AlertDialogDemo() {
-  const [deleted, setDeleted] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [deleted, setDeleted] = useState(false)
+  const [open, setOpen] = useState(false)
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -34,17 +32,14 @@ export function AlertDialogDemo() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button
-            variant="outline"
-            onClick={() => setOpen(false)}
-          >
+          <Button variant="outline" onClick={() => setOpen(false)}>
             Cancel
           </Button>
           <Button
             variant="destructive"
             onClick={() => {
-              setDeleted(true);
-              setOpen(false);
+              setDeleted(true)
+              setOpen(false)
             }}
           >
             Continue
@@ -52,5 +47,5 @@ export function AlertDialogDemo() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

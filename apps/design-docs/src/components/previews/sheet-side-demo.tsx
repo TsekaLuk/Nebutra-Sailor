@@ -1,10 +1,18 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import { Menu } from "lucide-react"
 
-<Sheet>
+import {
+  Button,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@nebutra/ui/primitives"
+import Link from "next/link"
+;<Sheet>
   <SheetTrigger asChild>
     <Button variant="ghost" size="icon">
       <Menu className="h-5 w-5" />
@@ -14,7 +22,7 @@ import { Menu } from "lucide-react"
     <SheetHeader>
       <SheetTitle>Navigation</SheetTitle>
     </SheetHeader>
-    <nav className="flex flex-col gap-2 mt-4">
+    <nav className="gap-2 mt-4 flex flex-col">
       <SheetClose asChild>
         <Link href="/docs/components/sheet">Dashboard</Link>
       </SheetClose>
@@ -26,5 +34,5 @@ import { Menu } from "lucide-react"
 </Sheet>
 
 export function SheetSideDemo() {
-  return null; // Update this with actual rendering logic
+  return null // Update this with actual rendering logic
 }

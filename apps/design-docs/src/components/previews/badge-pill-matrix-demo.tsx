@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-"use client";
+"use client"
 
-import { Badge } from "@nebutra/ui/primitives";
-import { LogoSlackColor } from "@nebutra/icons";
-import Link from "next/link";
+import { Badge } from "@nebutra/ui/primitives"
+import { LogoSlackColor } from "@nebutra/icons"
+import Link from "next/link"
 
 export function BadgePillMatrixDemo() {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 w-full">
-      <div className="flex flex-row items-center justify-center gap-2 flex-initial">
+    <div className="gap-4 flex w-full flex-col items-center justify-center">
+      <div className="gap-2 flex flex-initial flex-row items-center justify-center">
         <Badge asChild size="sm" variant="pill">
           <Link href="#badge-pill">Label</Link>
         </Badge>
@@ -22,32 +20,17 @@ export function BadgePillMatrixDemo() {
           <Link href="#badge-pill">Label</Link>
         </Badge>
       </div>
-      <div className="flex flex-row items-center justify-center gap-2 flex-initial">
-        <Badge
-          asChild
-          icon={<LogoSlackColor />}
-          size="sm"
-          variant="pill"
-        >
+      <div className="gap-2 flex flex-initial flex-row items-center justify-center">
+        <Badge asChild icon={<LogoSlackColor />} size="sm" variant="pill">
           <Link href="#badge-pill">Label</Link>
         </Badge>
-        <Badge
-          asChild
-          icon={<LogoSlackColor />}
-          size="md"
-          variant="pill"
-        >
+        <Badge asChild icon={<LogoSlackColor />} size="md" variant="pill">
           <Link href="#badge-pill">Label</Link>
         </Badge>
-        <Badge
-          asChild
-          icon={<LogoSlackColor />}
-          size="lg"
-          variant="pill"
-        >
+        <Badge asChild icon={<LogoSlackColor />} size="lg" variant="pill">
           <Link href="#badge-pill">Label</Link>
         </Badge>
       </div>
     </div>
-  );
+  )
 }

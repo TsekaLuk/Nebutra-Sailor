@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { Loader } from "@nebutra/ui/primitives";
+import { Loader } from "@nebutra/ui/primitives"
 
 export function LoaderDemo() {
-    return (
-        <div className="w-full max-w-sm px-4 py-8 flex items-center justify-center space-x-4">
-            <Loader />
-            <Loader variant="dots" size="lg" />
-            <Loader variant="loading-dots" text="Processing" />
-        </div>
-    )
+  return (
+    <div className="max-w-sm px-4 py-8 space-x-4 flex w-full items-center justify-center">
+      <Loader />
+      <Loader variant="dots" size="lg" />
+      <Loader variant="loading-dots" text="Processing" />
+    </div>
+  )
 }

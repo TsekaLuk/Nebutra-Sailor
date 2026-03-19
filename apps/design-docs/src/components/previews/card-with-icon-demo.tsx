@@ -1,36 +1,26 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
-import { CardTitle, Card, CardHeader, CardDescription } from "@nebutra/ui/primitives";
+"use client"
 
-import { Zap } from "lucide-react"
-
-<Card variant="bordered" padding="md">
-  <CardHeader>
-    <CardIcon size="md">
-      <Zap className="h-5 w-5" />
-    </CardIcon>
-    <CardTitle>Fast Deployments</CardTitle>
-  </CardHeader>
-  <CardBody>
-    <CardDescription>Deploy in seconds.</CardDescription>
-  </CardBody>
-</Card>
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardBody,
+  CardIcon,
+} from "@nebutra/ui/patterns"
 
 export function CardWithIconDemo() {
   return (
-    <NebutraCard variant="bordered" padding="md">
-    <CardHeader>
-      <CardIcon size="md">
-        <span>⚡️</span>
-      </CardIcon>
-      <CardTitle>Fast Deployments</CardTitle>
-    </CardHeader>
-    <CardBody>
-      <CardDescription>Deploy in seconds.</CardDescription>
-    </CardBody>
-  </NebutraCard>
-  );
+    <Card variant="bordered" padding="md">
+      <CardHeader>
+        <CardIcon size="md">
+          <span>⚡️</span>
+        </CardIcon>
+        <CardTitle>Fast Deployments</CardTitle>
+      </CardHeader>
+      <CardBody>
+        <CardDescription>Deploy in seconds.</CardDescription>
+      </CardBody>
+    </Card>
+  )
 }

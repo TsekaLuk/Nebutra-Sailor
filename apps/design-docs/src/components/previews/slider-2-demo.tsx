@@ -1,20 +1,12 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
+import { Slider } from "@nebutra/ui/primitives"
 export function Slider2Demo() {
   return (
-    <>
-<div className="w-full">
-  <Slider
-    defaultValue={[20, 80]}
-    min={0}
-    max={100}
-    step={5}
-  />
-</div>
-    </>
-  );
+    <div className="w-full">
+      <Slider defaultValue={50} min={0} max={100} step={5} />
+    </div>
+  )
 }

@@ -1,30 +1,38 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { CarouselPrevious, CarouselItem, CardContent, CarouselContent, CarouselNext } from "@nebutra/ui/primitives";
+import * as React from "react"
+import {
+  CarouselPrevious,
+  CarouselItem,
+  CardContent,
+  CarouselContent,
+  CarouselNext,
+} from "@nebutra/ui/primitives"
+import { Card } from "@nebutra/ui/patterns"
 
+import { Carousel } from "@nebutra/ui/primitives"
 export function CarouselVerticalDemo() {
   return (
-    <Carousel orientation="vertical" opts={{ align: "start" }} className="w-full max-w-xs">
-    <CarouselContent className="-mt-1 h-[200px]">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <CarouselItem key={index} className="pt-1 md:basis-1/2">
-          <div className="p-1">
-            <NebutraCard>
-              <CardContent className="flex items-center justify-center p-6">
-                <span className="text-3xl font-semibold">{index + 1}</span>
-              </CardContent>
-            </NebutraCard>
-          </div>
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-    <CarouselPrevious />
-    <CarouselNext />
-  </Carousel>
-  );
+    <Carousel
+      orientation="vertical"
+      opts={{ align: "start" }}
+      className="max-w-xs w-full"
+    >
+      <CarouselContent className="-mt-1 h-[200px]">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index} className="pt-1 md:basis-1/2">
+            <div className="p-1">
+              <Card>
+                <CardContent className="p-6 flex items-center justify-center">
+                  <span className="text-3xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  )
 }

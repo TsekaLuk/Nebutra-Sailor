@@ -1,23 +1,30 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+} from "@nebutra/ui/primitives"
+import { Button } from "@nebutra/ui/primitives"
 
 export function Menu2Demo() {
   return (
-    <>
-<Menu.Root>
-    <Menu.Trigger chevron>Workspace</Menu.Trigger>
-    <Menu.Content align="center" className="w-[220px]">
-      <Menu.Item>General</Menu.Item>
-      <Menu.Item>Members</Menu.Item>
-      <Menu.Separator />
-      <Menu.Label>Admin Settings</Menu.Label>
-      <Menu.Item locked>Billing & Plans</Menu.Item>
-      <Menu.Item locked>Security Logs</Menu.Item>
-    </Menu.Content>
-  </Menu.Root>
-    </>
-  );
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Workspace</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="center" className="w-[220px]">
+        <DropdownMenuItem>General</DropdownMenuItem>
+        <DropdownMenuItem>Members</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>Admin Settings</DropdownMenuLabel>
+        <DropdownMenuItem>Billing &amp; Plans</DropdownMenuItem>
+        <DropdownMenuItem>Security Logs</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 }

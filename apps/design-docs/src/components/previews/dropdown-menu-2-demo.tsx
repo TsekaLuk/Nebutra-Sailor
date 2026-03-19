@@ -1,27 +1,32 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@nebutra/ui/primitives"
 export function DropdownMenu2Demo() {
   return (
-    <>
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">Appearance</Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuCheckboxItem checked={true}>
-      Toolbar
-    </DropdownMenuCheckboxItem>
-    <DropdownMenuCheckboxItem checked={false}>
-      Sidebar
-    </DropdownMenuCheckboxItem>
-  </DropdownMenuContent>
-</DropdownMenu>
-    </>
-  );
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Appearance</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem checked={true}>
+          Toolbar
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={false}>
+          Sidebar
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 }

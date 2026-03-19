@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { Input } from "@nebutra/ui/primitives";
+import * as React from "react"
+import { Input } from "@nebutra/ui/primitives"
 
 export function InputBasicDemo() {
-  return (
-    <Input placeholder="Enter value…" />
-  );
+  return <Input placeholder="Enter value…" />
 }

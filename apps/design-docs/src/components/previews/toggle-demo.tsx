@@ -1,16 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-;
-import { Bold } from "lucide-react";
+import { Toggle } from "@nebutra/ui/primitives"
 
 export function ToggleDemo() {
-  return (
-    <Toggle aria-label="Toggle bold" size="lg">
-      <Bold className="size-4" />
-    </Toggle>
-  );
+  return <Toggle aria-label="Toggle default" />
 }

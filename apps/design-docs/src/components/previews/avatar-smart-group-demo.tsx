@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { AvatarSmartGroup } from "@nebutra/ui/primitives"; // Adjust if necessary
+import * as React from "react"
+import { AvatarSmartGroup } from "@nebutra/ui/primitives" // Adjust if necessary
 
 export function AvatarSmartGroupDemo() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="gap-8 flex flex-col">
       <AvatarSmartGroup
         users={[
           { name: "Olivia Anderson", role: "UI/UX Designer", image: "" },
@@ -36,5 +34,5 @@ export function AvatarSmartGroupDemo() {
         tooltipBg="bg-primary text-primary-foreground"
       />
     </div>
-  );
+  )
 }

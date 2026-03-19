@@ -1,15 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
+import { Toggle } from "@nebutra/ui/primitives"
 
 export function Toggle3Demo() {
-  return (
-    <>
-<Toggle aria-pressed="true" defaultPressed size="lg" className="w-[80px]">
-  On
-</Toggle>
-    </>
-  );
+  return <Toggle defaultChecked size="large" aria-label="Toggle on" />
 }

@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-import { Badge } from "@nebutra/ui/primitives";
+import { Badge } from "@nebutra/ui/primitives"
 
 export function BadgeVariantsDemo() {
   return (
-    <div className="flex gap-4 flex-wrap">
+    <div className="gap-4 flex flex-wrap">
       <Badge variant="gray">gray</Badge>
       <Badge variant="blue">blue</Badge>
       <Badge variant="purple">purple</Badge>
@@ -14,5 +12,5 @@ export function BadgeVariantsDemo() {
       <Badge variant="green">green</Badge>
       <Badge variant="teal">teal</Badge>
     </div>
-  );
+  )
 }

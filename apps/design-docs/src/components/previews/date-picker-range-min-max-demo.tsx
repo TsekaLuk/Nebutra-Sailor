@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { DateRangePicker } from "@nebutra/ui/primitives";
-import { getLocalTimeZone, today } from "@internationalized/date";
+import * as React from "react"
+import { DateRangePicker } from "@nebutra/ui/primitives"
+import { getLocalTimeZone, today } from "@internationalized/date"
 
 export function DatePickerRangeMinMaxDemo() {
   return (
@@ -13,5 +11,5 @@ export function DatePickerRangeMinMaxDemo() {
       minValue={today(getLocalTimeZone())}
       maxValue={today(getLocalTimeZone()).add({ months: 3 })}
     />
-  );
+  )
 }

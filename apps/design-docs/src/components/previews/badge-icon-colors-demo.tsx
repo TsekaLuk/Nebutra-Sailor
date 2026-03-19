@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import { Badge } from "@nebutra/ui/primitives";
-import { Shield } from "@nebutra/icons";
+import { Badge } from "@nebutra/ui/primitives"
+import { Shield } from "@nebutra/icons"
 
 export function BadgeIconColorsDemo() {
   return (
-    <div className="flex flex-col items-stretch justify-start gap-2 flex-initial overflow-x-auto pb-4 max-w-full">
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+    <div className="gap-2 pb-4 flex max-w-full flex-initial flex-col items-stretch justify-start overflow-x-auto">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="gray">
           gray
         </Badge>
@@ -29,7 +27,7 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
 
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="blue">
           blue
         </Badge>
@@ -50,7 +48,7 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
 
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="purple">
           purple
         </Badge>
@@ -71,7 +69,7 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
 
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="amber">
           amber
         </Badge>
@@ -92,7 +90,7 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
 
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="red">
           red
         </Badge>
@@ -113,7 +111,7 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
 
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="pink">
           pink
         </Badge>
@@ -134,7 +132,7 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
 
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="green">
           green
         </Badge>
@@ -155,7 +153,7 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
 
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="teal">
           teal
         </Badge>
@@ -176,7 +174,7 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
 
-      <div className="flex flex-row items-center justify-start gap-1 flex-initial">
+      <div className="gap-1 flex flex-initial flex-row items-center justify-start">
         <Badge icon={<Shield />} size="lg" variant="inverted">
           inverted
         </Badge>
@@ -188,5 +186,5 @@ export function BadgeIconColorsDemo() {
         </Badge>
       </div>
     </div>
-  );
+  )
 }

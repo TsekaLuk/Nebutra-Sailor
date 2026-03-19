@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import { Button } from "@nebutra/ui/primitives";
-import { Mail, ArrowRight } from "lucide-react";
+import { Button } from "@nebutra/ui/primitives"
+import { Mail, ArrowRight } from "lucide-react"
 
 export function ButtonDemo() {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="gap-3 flex flex-wrap">
       <Button variant="default">Default</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="secondary">Secondary</Button>
@@ -17,5 +15,5 @@ export function ButtonDemo() {
       <Button suffix={<ArrowRight />}>Continue</Button>
       <Button loading>Loading</Button>
     </div>
-  );
+  )
 }

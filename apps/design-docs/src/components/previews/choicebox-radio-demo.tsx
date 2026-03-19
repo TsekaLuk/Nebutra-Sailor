@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { ChoiceboxGroup } from "@nebutra/ui/primitives";
+import * as React from "react"
+import { ChoiceboxGroup } from "@nebutra/ui/primitives"
 
 export function ChoiceboxRadioDemo() {
-  const [value, setValue] = React.useState("trial");
+  const [value, setValue] = React.useState("trial")
 
   return (
     <ChoiceboxGroup
@@ -27,5 +25,5 @@ export function ChoiceboxRadioDemo() {
         value="pro"
       />
     </ChoiceboxGroup>
-  );
+  )
 }

@@ -1,18 +1,16 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
-import { useState } from "react";
-import { Checkbox } from "@nebutra/ui/primitives";
+"use client"
+import { useState } from "react"
+import { Checkbox } from "@nebutra/ui/primitives"
 
 export function CheckboxDemo() {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false)
   return (
-    <div className="flex flex-col gap-3">
+    <div className="gap-3 flex flex-col">
       <Checkbox checked={checked} onChange={(v: boolean) => setChecked(v)}>
         Accept terms and conditions
       </Checkbox>
       <Checkbox checked>Subscribe to newsletter</Checkbox>
       <Checkbox disabled>Disabled option</Checkbox>
     </div>
-  );
+  )
 }

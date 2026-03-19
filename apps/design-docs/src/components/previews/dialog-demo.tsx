@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 import {
   Dialog,
   DialogTrigger,
@@ -9,7 +7,7 @@ import {
   DialogTitle,
   DialogDescription,
   Button,
-} from "@nebutra/ui/primitives";
+} from "@nebutra/ui/primitives"
 export function DialogDemo() {
   return (
     <Dialog>
@@ -25,5 +23,5 @@ export function DialogDemo() {
         </DialogHeader>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

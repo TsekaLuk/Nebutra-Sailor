@@ -14,6 +14,7 @@ export default tseslint.config(
       "**/out/**",
       "**/.turbo/**",
       "**/coverage/**",
+      "**/.source/**",
     ],
   },
   {

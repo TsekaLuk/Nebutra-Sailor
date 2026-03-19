@@ -1,19 +1,26 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
-import { Combobox } from "@nebutra/ui/primitives"; // Mock import
-
+import * as React from "react"
+import { Combobox } from "@nebutra/ui/primitives" // Mock import
 
 export function ComboboxSizesDemo() {
   return (
-    <div className="flex gap-4 items-center flex-wrap">
-      <Combobox options={[{ value: "1", label: "选项 1" }]} size="sm" placeholder="小尺寸 (Small)" />
-      <Combobox options={[{ value: "1", label: "选项 1" }]} size="default" placeholder="默认 (Default)" />
-      <Combobox options={[{ value: "1", label: "选项 1" }]} size="lg" placeholder="大尺寸 (Large)" />
+    <div className="gap-4 flex flex-wrap items-center">
+      <Combobox
+        options={[{ value: "1", label: "选项 1" }]}
+        size="sm"
+        placeholder="小尺寸 (Small)"
+      />
+      <Combobox
+        options={[{ value: "1", label: "选项 1" }]}
+        size="default"
+        placeholder="默认 (Default)"
+      />
+      <Combobox
+        options={[{ value: "1", label: "选项 1" }]}
+        size="lg"
+        placeholder="大尺寸 (Large)"
+      />
     </div>
-  );
+  )
 }

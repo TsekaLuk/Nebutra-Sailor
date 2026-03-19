@@ -1,18 +1,16 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import { Feedback } from "@nebutra/ui/primitives";
+import { Feedback } from "@nebutra/ui/primitives"
 
 export function FeedbackDemo() {
-    return (
-        <div className="flex h-40 w-full items-center justify-center px-4 py-8">
-            <Feedback
-                label="my-app"
-                onSubmit={async (payload) => {
-                    console.warn("Feedback submitted", payload)
-                }}
-            />
-        </div>
-    )
+  return (
+    <div className="h-40 px-4 py-8 flex w-full items-center justify-center">
+      <Feedback
+        label="my-app"
+        onSubmit={async (payload) => {
+          console.warn("Feedback submitted", payload)
+        }}
+      />
+    </div>
+  )
 }

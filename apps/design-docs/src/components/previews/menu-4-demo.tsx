@@ -1,23 +1,31 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  Button,
+} from "@nebutra/ui/primitives"
+import { ChevronRight } from "lucide-react"
 
 export function Menu4Demo() {
   return (
-    <>
-<Menu.Root>
-    <Menu.Trigger chevron>External Links</Menu.Trigger>
-    <Menu.Content align="center" className="w-[180px]">
-      <Menu.Item href="https://github.com/cloud-orion" suffix={<ChevronRight className="h-4 w-4" />}>
-        GitHub Repo
-      </Menu.Item>
-      <Menu.Item href="https://nebutra.dev" suffix={<ChevronRight className="h-4 w-4" />}>
-        Documentation
-      </Menu.Item>
-    </Menu.Content>
-  </Menu.Root>
-    </>
-  );
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">External Links</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="center" className="w-[180px]">
+        <DropdownMenuItem>
+          GitHub Repo
+          <ChevronRight className="h-4 w-4 ml-auto" />
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          Documentation
+          <ChevronRight className="h-4 w-4 ml-auto" />
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 }

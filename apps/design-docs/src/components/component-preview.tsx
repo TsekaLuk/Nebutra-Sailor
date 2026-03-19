@@ -1,175 +1,352 @@
-"use client";
+"use client"
 
-import React, { useState, isValidElement, useEffect, useCallback } from "react";
-import type { ReactNode, ReactElement } from "react";
-import { cn } from "@nebutra/ui/utils";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@nebutra/ui/primitives";
-import { Copy, Check } from "@nebutra/icons";
+import { Suspense, useState, useEffect, useCallback } from "react"
+import type { ReactNode } from "react"
+import { cn } from "@nebutra/ui/utils"
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@nebutra/ui/primitives"
+import { Copy, Check } from "@nebutra/icons"
+import { Sun, Moon, MessageSquare, Terminal } from "lucide-react"
+
+const REGISTRY_BASE = "https://design.nebutra.com/r"
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock"
+import { Index } from "@/__registry__"
 
 interface ComponentPreviewProps {
-  children: ReactNode;
-  code?: string;
-  className?: string;
-  name?: string; // Kept for backwards compatibility with any remaining usages
+  children?: ReactNode
+  code?: string
+  className?: string
+  name?: string
 }
 
-function extractTextFromReactNode(node: ReactNode): string {
-  if (typeof node === "string" || typeof node === "number") {
-    return String(node);
-  }
-  if (!node) {
-    return "";
-  }
-  if (Array.isArray(node)) {
-    return node.map(extractTextFromReactNode).join("");
-  }
-  if (isValidElement(node)) {
-    // Some implementations attach __rawString__ or raw directly as a prop
-    const props = node.props as Record<string, unknown>;
-    if (typeof props.__rawString__ === "string") {
-      return props.__rawString__;
+function PreviewSkeleton() {
+  return (
+    <div className="flex min-h-[200px] items-center justify-center">
+      <div className="h-6 w-6 animate-spin rounded-full border-2 border-muted-foreground/20 border-t-muted-foreground" />
+    </div>
+  )
+}
+
+function generateIntegrationPrompt(name: string, code: string): string {
+  return `You are given a task to integrate an existing Nebutra UI component into a React codebase.
+
+The codebase uses:
+- @nebutra/ui component library (Radix UI primitives + Nebutra design system)
+- Tailwind CSS v4 with semantic CSS variable tokens
+- TypeScript
+- Next.js 16 App Router
+
+If the project is not set up yet, run:
+  pnpm add @nebutra/ui @nebutra/tokens @nebutra/icons
+
+Copy-paste this component to the appropriate location in your project:
+\`\`\`tsx
+${code}
+\`\`\`
+
+Key integration notes:
+- Import UI primitives from \`@nebutra/ui/primitives\`
+- Import icons from \`@nebutra/icons\` (Geist) or \`lucide-react\` (generic)
+- Use \`cn()\` from \`@nebutra/ui/utils\` for class merging
+- Use CSS variable tokens for colors: \`var(--neutral-1)\`, \`var(--blue-9)\`, \`var(--brand-gradient)\`
+- Add \`"use client"\` directive for interactive components
+- Wrap with \`<ThemeProvider>\` from \`@nebutra/tokens\` at your app root if not already present
+
+Steps to integrate:
+1. Copy the component code above to your project
+2. Ensure \`@nebutra/ui\` is installed (\`pnpm add @nebutra/ui @nebutra/tokens\`)
+3. Import and use the component where needed
+4. Pass any required props documented in the component's props interface
+5. Verify the component renders correctly in both light and dark modes`
+}
+
+function useClipboard() {
+  const [hasCopied, setHasCopied] = useState(false)
+
+  useEffect(() => {
+    if (!hasCopied) return
+    const t = setTimeout(() => setHasCopied(false), 2000)
+    return () => clearTimeout(t)
+  }, [hasCopied])
+
+  const copy = useCallback(async (value: string) => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setHasCopied(true)
+    } catch {
+      try {
+        const textarea = document.createElement("textarea")
+        textarea.value = value
+        textarea.style.position = "fixed"
+        textarea.style.opacity = "0"
+        document.body.appendChild(textarea)
+        textarea.select()
+        document.execCommand("copy")
+        document.body.removeChild(textarea)
+        setHasCopied(true)
+      } catch {
+        // Both methods failed
+      }
     }
-    if (typeof props.raw === "string") {
-      return props.raw;
-    }
-    return extractTextFromReactNode(props.children as ReactNode);
-  }
-  return "";
+  }, [])
+
+  return { hasCopied, copy }
 }
 
 function CopyButton({ value }: { value: string }) {
-  const [hasCopied, setHasCopied] = useState(false);
-
-  useEffect(() => {
-    if (hasCopied) {
-      const timeout = setTimeout(() => setHasCopied(false), 2000);
-      return () => clearTimeout(timeout);
-    }
-  }, [hasCopied]);
-
-  const copyToClipboard = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setHasCopied(true);
-    } catch (err) {
-      console.error("Failed to copy!", err);
-    }
-  }, [value]);
-
+  const { hasCopied, copy } = useClipboard()
   return (
     <button
-      onClick={copyToClipboard}
-      className="absolute right-4 top-4 z-10 hidden items-center justify-center rounded-md border bg-muted/50 p-2 text-muted-foreground backdrop-blur opacity-0 transition-opacity hover:bg-muted group-hover:opacity-100 sm:flex"
+      type="button"
+      onClick={() => copy(value)}
+      className="p-2 backdrop-blur inline-flex items-center justify-center rounded-md border bg-muted/50 text-muted-foreground transition-opacity hover:bg-muted"
       aria-label="Copy code to clipboard"
     >
-      <span className="sr-only">Copy</span>
-      {hasCopied ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
+      {hasCopied ? (
+        <Check className="h-4 w-4 text-primary" />
+      ) : (
+        <Copy className="h-4 w-4" />
+      )}
     </button>
-  );
+  )
+}
+
+function InstallButton({ name }: { name: string }) {
+  const { hasCopied, copy } = useClipboard()
+  const cmd = `npx shadcn@latest add ${REGISTRY_BASE}/${name}.json`
+  return (
+    <button
+      type="button"
+      onClick={() => copy(cmd)}
+      className="p-2 backdrop-blur inline-flex items-center justify-center rounded-md border bg-muted/50 text-muted-foreground transition-opacity hover:bg-muted"
+      aria-label="Copy install command"
+      title="Copy install command"
+    >
+      {hasCopied ? (
+        <Check className="h-4 w-4 text-primary" />
+      ) : (
+        <Terminal className="h-4 w-4" />
+      )}
+    </button>
+  )
+}
+
+function InstallTab({ name }: { name: string }) {
+  const cmd = `npx shadcn@latest add ${REGISTRY_BASE}/${name}.json`
+  const depCmd = `pnpm add @nebutra/ui @nebutra/tokens @nebutra/icons`
+  const { hasCopied: cmdCopied, copy: copyCmd } = useClipboard()
+  const { hasCopied: depCopied, copy: copyDep } = useClipboard()
+  return (
+    <div className="space-y-5 p-6 text-sm">
+      <div className="space-y-2">
+        <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+          Install via CLI
+        </p>
+        <div className="gap-2 bg-zinc-950 px-4 py-3 text-xs text-zinc-100 flex items-center rounded-lg border font-mono">
+          <span className="flex-1 overflow-x-auto whitespace-nowrap select-all">
+            {cmd}
+          </span>
+          <button
+            type="button"
+            onClick={() => copyCmd(cmd)}
+            className="ml-2 text-zinc-400 hover:text-zinc-100 shrink-0 transition-colors"
+            aria-label="Copy install command"
+          >
+            {cmdCopied ? (
+              <Check className="h-3.5 w-3.5 text-green-400" />
+            ) : (
+              <Copy className="h-3.5 w-3.5" />
+            )}
+          </button>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+          Or install dependencies manually
+        </p>
+        <div className="gap-2 bg-zinc-950 px-4 py-3 text-xs text-zinc-100 flex items-center rounded-lg border font-mono">
+          <span className="flex-1 overflow-x-auto whitespace-nowrap select-all">
+            {depCmd}
+          </span>
+          <button
+            type="button"
+            onClick={() => copyDep(depCmd)}
+            className="ml-2 text-zinc-400 hover:text-zinc-100 shrink-0 transition-colors"
+            aria-label="Copy dependency install command"
+          >
+            {depCopied ? (
+              <Check className="h-3.5 w-3.5 text-green-400" />
+            ) : (
+              <Copy className="h-3.5 w-3.5" />
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function PromptButton({ name, code }: { name: string; code: string }) {
+  const { hasCopied, copy } = useClipboard()
+  return (
+    <button
+      type="button"
+      onClick={() => copy(generateIntegrationPrompt(name, code))}
+      className="p-2 backdrop-blur inline-flex items-center justify-center rounded-md border bg-muted/50 text-muted-foreground transition-opacity hover:bg-muted"
+      aria-label="Copy integration prompt for AI"
+      title="Copy prompt"
+    >
+      {hasCopied ? (
+        <Check className="h-4 w-4 text-primary" />
+      ) : (
+        <MessageSquare className="h-4 w-4" />
+      )}
+    </button>
+  )
 }
 
 export function ComponentPreview({
   children,
-  code: externalCode,
+  name,
+  code,
   className,
 }: ComponentPreviewProps) {
-  // Extract <pre> tags from children (which Fumadocs MDX passes for code blocks)
-  const previewContent: ReactNode[] = [];
-  let codeElement: ReactElement | null = null;
-  let codeRawString = externalCode || "";
+  const [previewTheme, setPreviewTheme] = useState<"light" | "dark">("light")
 
-  React.Children.forEach(children, (child) => {
-    if (isValidElement(child)) {
-      const isCodeBlock =
-        child.type === "pre" ||
-        child.type === "figure" ||
-        (typeof child.type === "function" && child.type.name === "CodeBlock") ||
-        (child.props as Record<string, unknown>).mdxType === "pre" ||
-        (child.props as Record<string, unknown>).mdxType === "CodeBlock" ||
-        "allowCopy" in (child.props as Record<string, unknown>) ||
-        "viewportProps" in (child.props as Record<string, unknown>) ||
-        ((child.props as Record<string, unknown>).className as string)?.includes("shiki"); // FumaDocs / Rehype Pretty Code
+  // 1. Resolve component from registry
+  const Demo = name
+    ? (Index as Record<string, { component: React.ComponentType }>)[name]
+        ?.component
+    : null
 
-      if (isCodeBlock) {
-        codeElement = child;
-        if (!codeRawString) {
-          codeRawString = extractTextFromReactNode(child);
-        }
-      } else {
-        previewContent.push(child);
-      }
-    } else {
-      previewContent.push(child);
-    }
-  });
+  // 2. Determine preview content:
+  //    - Registry component takes priority when name matches
+  //    - Children are fallback for inline preview content in MDX
+  const preview = Demo ? (
+    <Suspense fallback={<PreviewSkeleton />}>
+      <Demo />
+    </Suspense>
+  ) : (
+    (children ?? null)
+  )
 
-  const hasCode = !!codeElement || !!externalCode;
+  const hasCode = !!code
 
+  const themeToggle = (
+    <>
+      <button
+        type="button"
+        onClick={() => setPreviewTheme("light")}
+        className={cn(
+          "p-1.5 inline-flex items-center justify-center rounded-md transition-colors",
+          previewTheme === "light"
+            ? "bg-muted text-foreground"
+            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+        )}
+        aria-label="Light theme"
+      >
+        <Sun className="h-3.5 w-3.5" />
+      </button>
+      <button
+        type="button"
+        onClick={() => setPreviewTheme("dark")}
+        className={cn(
+          "p-1.5 inline-flex items-center justify-center rounded-md transition-colors",
+          previewTheme === "dark"
+            ? "bg-muted text-foreground"
+            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+        )}
+        aria-label="Dark theme"
+      >
+        <Moon className="h-3.5 w-3.5" />
+      </button>
+    </>
+  )
+
+  // No code → just show the preview
   if (!hasCode) {
     return (
-      <div className="my-8 overflow-hidden rounded-xl border border-[var(--neutral-6)] bg-card shadow-sm">
-        <div
-          className={cn(
-            "not-prose relative flex min-h-[350px] w-full flex-wrap items-center justify-center p-10",
-            "bg-[radial-gradient(var(--neutral-6)_1px,transparent_1px)] [background-size:16px_16px]",
-            className
-          )}
-        >
-          {previewContent}
+      <div className="my-8 overflow-hidden rounded-xl border border-border/80 bg-background shadow-sm">
+        <div className="relative">
+          <div
+            className={cn(
+              "not-prose p-10 relative flex min-h-[350px] w-full flex-wrap items-center justify-center",
+              "bg-[radial-gradient(var(--neutral-6)_1px,transparent_1px)] [background-size:16px_16px]",
+              previewTheme === "dark" ? "dark bg-zinc-950" : "bg-white",
+              className
+            )}
+          >
+            {preview}
+          </div>
+          <div className="top-2 right-2 gap-1 absolute flex">{themeToggle}</div>
         </div>
       </div>
-    );
+    )
   }
 
+  // Preview + Code tabs
   return (
-    <Tabs defaultValue="preview" className="my-8 relative w-full group">
-      <div className="flex items-center justify-between pb-3">
-        <TabsList variant="line" size="sm" className="w-full justify-start rounded-none border-b bg-transparent p-0">
-          <TabsTrigger
-            value="preview"
-            className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-medium text-muted-foreground shadow-none transition-none data-[selected]:border-b-primary data-[selected]:text-foreground"
-          >
+    <Tabs
+      defaultValue="preview"
+      className="my-8 relative w-full overflow-hidden rounded-xl border border-border/80 bg-background shadow-sm ring-1 ring-ring/10"
+    >
+      <div className="px-4 h-13 flex items-center justify-between border-b border-border/80 bg-muted/30">
+        <TabsList
+          variant="default"
+          size="sm"
+          className="bg-accent/50 transition-colors hover:bg-accent/80"
+        >
+          <TabsTrigger value="preview" className="px-3">
             Preview
           </TabsTrigger>
-          <TabsTrigger
-            value="code"
-            className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-medium text-muted-foreground shadow-none transition-none data-[selected]:border-b-primary data-[selected]:text-foreground"
-          >
+          <TabsTrigger value="code" className="px-3">
             Code
           </TabsTrigger>
+          {name && (
+            <TabsTrigger value="install" className="px-3">
+              Install
+            </TabsTrigger>
+          )}
         </TabsList>
+        <div className="gap-2 flex items-center">
+          {themeToggle}
+          {name && <InstallButton name={name} />}
+          {name && code && <PromptButton name={name} code={code} />}
+          <CopyButton value={code} />
+        </div>
       </div>
 
-      <TabsContent value="preview" className="m-0 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+      <TabsContent value="preview" className="m-0 border-none">
         <div
           className={cn(
-            "not-prose relative flex min-h-[350px] w-full flex-wrap items-center justify-center p-10",
+            "not-prose p-10 relative flex min-h-[350px] w-full flex-wrap items-center justify-center",
             "bg-[radial-gradient(var(--neutral-6)_1px,transparent_1px)] [background-size:16px_16px]",
+            previewTheme === "dark" ? "dark bg-zinc-950" : "bg-white",
             className
           )}
         >
-          {previewContent}
+          {preview}
         </div>
       </TabsContent>
 
-      <TabsContent value="code" className="m-0 relative group">
-        <div className="w-full overflow-hidden rounded-xl border border-border bg-muted/50">
-          {codeRawString && <CopyButton value={codeRawString} />}
-          {codeElement ? (
-            <div className="w-full [&_figure]:m-0 [&_figure]:border-0 [&_figure]:rounded-none [&_code]:text-[13px] [&_code]:leading-relaxed [&_pre]:max-h-[600px] [&_pre]:overflow-auto">
-              {codeElement}
-            </div>
-          ) : (
-            <pre className="p-4 text-sm bg-transparent overflow-x-auto text-muted-foreground w-full max-h-[600px]">
-              <code>
-                {externalCode?.split('\n').map((line, i) => (
-                  <span key={i} className="block">{line || " "}</span>
-                ))}
-              </code>
-            </pre>
-          )}
+      <TabsContent
+        value="code"
+        className="m-0 bg-zinc-950 dark:bg-zinc-950/50 border-none"
+      >
+        <div className="[&_figure]:m-0 max-h-[600px] w-full overflow-hidden overflow-y-auto [&_figure]:rounded-none [&_figure]:border-0 [&_pre]:bg-transparent">
+          <DynamicCodeBlock lang="tsx" code={code} />
         </div>
       </TabsContent>
+
+      {name && (
+        <TabsContent value="install" className="m-0 border-none">
+          <InstallTab name={name} />
+        </TabsContent>
+      )}
     </Tabs>
-  );
+  )
 }

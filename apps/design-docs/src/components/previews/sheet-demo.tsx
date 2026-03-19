@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
 import {
   Sheet,
@@ -11,8 +9,8 @@ import {
   SheetDescription,
   SheetFooter,
   SheetClose,
-  Button
-} from "@nebutra/ui/primitives";
+  Button,
+} from "@nebutra/ui/primitives"
 
 export function SheetDemo() {
   return (
@@ -23,7 +21,9 @@ export function SheetDemo() {
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>Make changes to your profile here. Click save when done.</SheetDescription>
+          <SheetDescription>
+            Make changes to your profile here. Click save when done.
+          </SheetDescription>
         </SheetHeader>
         <div className="py-6">
           <p className="text-sm text-muted-foreground">Sheet body content.</p>
@@ -36,5 +36,5 @@ export function SheetDemo() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  );
+  )
 }

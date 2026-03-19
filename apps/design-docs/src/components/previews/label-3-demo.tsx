@@ -1,19 +1,16 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
+import { Label, Textarea } from "@nebutra/ui/primitives"
 export function Label3Demo() {
   return (
-    <>
-<div className="space-y-1 w-full max-w-sm">
-  <Label htmlFor="bio">Bio</Label>
-  <p id="bio-hint" className="text-xs text-muted-foreground mb-2">
-    Tell us a bit about yourself. Max 200 characters.
-  </p>
-  <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
-</div>
-    </>
-  );
+    <div className="space-y-1 max-w-sm w-full">
+      <Label htmlFor="bio">Bio</Label>
+      <p id="bio-hint" className="text-xs mb-2 text-muted-foreground">
+        Tell us a bit about yourself. Max 200 characters.
+      </p>
+      <Textarea id="bio" aria-describedby="bio-hint" maxLength={200} />
+    </div>
+  )
 }
