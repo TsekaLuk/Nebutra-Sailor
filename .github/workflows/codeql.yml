@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # ── TypeScript: initialize CodeQL ─────────────────────────────────────
       - name: Initialize CodeQL
@@ -68,7 +68,7 @@ jobs:
 
       - name: Setup Node.js
         if: matrix.language == 'javascript-typescript'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: pnpm
@@ -86,7 +86,7 @@ jobs:
 
       - name: Install uv
         if: matrix.language == 'python'
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7.6.0
 
       # CodeQL auto-builds Python; no explicit build needed for interpreted language
 
@@ -97,11 +97,3 @@ jobs:
           category: "/language:${{ matrix.language }}"
           # Upload results as SARIF to GitHub Security tab
           upload: true
-
-      # ── Upload SARIF for non-PR runs (already done above, explicit for PRs) ─
-      - name: Upload SARIF to GitHub Security
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: ${{ runner.temp }}/codeql_databases
-        continue-on-error: true

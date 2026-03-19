@@ -35,9 +35,9 @@ concurrency:
 
 permissions:
   contents: read
-  packages: write        # push to ghcr.io
+  packages: write # push to ghcr.io
   security-events: write # upload Trivy SARIF
-  id-token: write        # OIDC token for AWS role assumption (keyless auth)
+  id-token: write # OIDC token for AWS role assumption (keyless auth)
 
 env:
   # ── Turborepo remote cache ──────────────────────────────────────────────────
@@ -72,7 +72,7 @@ jobs:
     steps:
       # ── Checkout ─────────────────────────────────────────────────────────────
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Docker registry names must be all-lowercase; bash ,, expansion lowercases.
       - name: Set lowercase owner
@@ -240,7 +240,7 @@ jobs:
     steps:
       # ── Checkout ─────────────────────────────────────────────────────────────
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set lowercase owner
         id: lowercase

@@ -13,7 +13,9 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # Cancel in-flight runs on PR branches to save runner minutes;
+  # never cancel on main/develop to avoid interrupting deployments.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -154,9 +156,9 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Install uv
-        uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c6ebb0acf3c7 # v5
+        uses: astral-sh/setup-uv@v7.6.0
         with:
-          version: "0.5.x"
+          enable-cache: true
 
       - name: Set up Python
         run: uv python install 3.11
