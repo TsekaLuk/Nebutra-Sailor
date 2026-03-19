@@ -1,34 +1,36 @@
-"use client";
+"use client"
 
-import { useOrganization } from "@clerk/nextjs";
-import { LoadingState, ErrorState } from "@nebutra/ui/layout";
-import { PermissionGate } from "@/components/PermissionGate";
+import Image from "next/image"
+import { useOrganization } from "@clerk/nextjs"
+import { LoadingState, ErrorState } from "@nebutra/ui/layout"
+import { PermissionGate } from "@/components/PermissionGate"
 
 interface Props {
-  orgId: string;
+  orgId: string
 }
 
-export function TeamMemberList({ orgId }: Props) {
+export function TeamMemberList({ orgId: _orgId }: Props) {
   const { memberships, isLoaded } = useOrganization({
     memberships: { pageSize: 50, keepPreviousData: true },
-  });
+  })
 
-  if (!isLoaded) return <LoadingState />;
-  if (!memberships) return <ErrorState message="Failed to load members." />;
+  if (!isLoaded) return <LoadingState />
+  if (!memberships) return <ErrorState message="Failed to load members." />
 
-  const members = memberships.data ?? [];
+  const members = memberships.data ?? []
 
   return (
     <ul className="divide-y divide-[var(--neutral-6)]">
       {members.map((m) => (
-        <li key={m.id} className="flex items-center justify-between py-3">
-          <div className="flex items-center gap-3">
+        <li key={m.id} className="py-3 flex items-center justify-between">
+          <div className="gap-3 flex items-center">
             {m.publicUserData?.imageUrl && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <Image
                 src={m.publicUserData.imageUrl}
                 alt=""
-                className="h-8 w-8 rounded-full object-cover"
+                width={32}
+                height={32}
+                className="rounded-full object-cover"
               />
             )}
             <div>
@@ -41,8 +43,8 @@ export function TeamMemberList({ orgId }: Props) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="rounded-full bg-[var(--neutral-3)] px-2 py-0.5 text-xs font-medium capitalize text-[var(--neutral-11)]">
+          <div className="gap-3 flex items-center">
+            <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-[var(--neutral-3)] text-[var(--neutral-11)] capitalize">
               {m.role.replace("org:", "")}
             </span>
 
@@ -61,10 +63,10 @@ export function TeamMemberList({ orgId }: Props) {
       ))}
 
       {members.length === 0 && (
-        <li className="py-6 text-center text-sm text-[var(--neutral-11)]">
+        <li className="py-6 text-sm text-center text-[var(--neutral-11)]">
           No members yet.
         </li>
       )}
     </ul>
-  );
+  )
 }
