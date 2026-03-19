@@ -5,6 +5,105 @@ All notable changes to Nebutra-Sailor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [1.7.0](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.6.0...v1.7.0) (2026-03-19)
+
+
+### 🆕 Features
+
+* add oauthclient schema, generated prisma types, and identity adapter ([65a44ff](https://github.com/Nebutra/Nebutra-Sailor/commit/65a44fff065c7b50afaf2f3a2159a3881d14a013))
+* add tooltip storybook stories for tier-1 coverage ([b9b8cfb](https://github.com/Nebutra/Nebutra-Sailor/commit/b9b8cfb012d9919df2c514ad842e2579fe9da051))
+* add TsekaLuk.dev personal brand platform ([2900e49](https://github.com/Nebutra/Nebutra-Sailor/commit/2900e49b74eb209fa8a1fb8f41e73bc15fc59f6e))
+* **ai:** multi-provider architecture with openrouter + siliconflow support ([e5a2ecb](https://github.com/Nebutra/Nebutra-Sailor/commit/e5a2ecb05fe86474602f2b310e35a2e4d062441d))
+* complete nebutra A2A AI ecosystem (mcp, ai-sdk, up) ([43e60db](https://github.com/Nebutra/Nebutra-Sailor/commit/43e60dbf18aaa36011aad1a24c2cfc2440d3a505))
+* **create-sailor:** implement zero-error deep clean pruning for ORM & i18n ([8f87f52](https://github.com/Nebutra/Nebutra-Sailor/commit/8f87f52ab42ca8d38b922ead032fb1853235964b))
+* **design-docs:** governance audit, registry, status badges, install snippets, text-shimmer fix ([a050181](https://github.com/Nebutra/Nebutra-Sailor/commit/a0501816ac8ad75bbdf97cc2727c012bbe7833c4))
+* enhance portfolio ui components and add visual elements ([ccfd639](https://github.com/Nebutra/Nebutra-Sailor/commit/ccfd639849a91e3b43828779a74677464e62e640))
+* **infra:** phase 1 mvp nebutra identity provider ([b5ecacc](https://github.com/Nebutra/Nebutra-Sailor/commit/b5ecacce7fb750e27b093e33ecee31328c6479ab))
+* redesign capabilities section as interactive service carousel ([3f1f654](https://github.com/Nebutra/Nebutra-Sailor/commit/3f1f654aaf882a5aef8af8b323d2def668f5d351))
+* redesign NextAuth signin and error pages ([1273a12](https://github.com/Nebutra/Nebutra-Sailor/commit/1273a1248f373ed43d79addc80644d44c6ab7231))
+* **tseka-dev:** add /about page with timeline ([9655a58](https://github.com/Nebutra/Nebutra-Sailor/commit/9655a582972c059bb436af9407cb3228f2ccbf3f))
+* **tseka-dev:** add /now and /thinking content pages ([881f9b7](https://github.com/Nebutra/Nebutra-Sailor/commit/881f9b781734a441731a9d2b1a1d124ff57c3e71))
+* **tseka-dev:** add /work page with project grid ([0796a68](https://github.com/Nebutra/Nebutra-Sailor/commit/0796a68b746b546efcab18fcb07b882b131d1eb7))
+* **tseka-dev:** add site shell and hero section ([df11761](https://github.com/Nebutra/Nebutra-Sailor/commit/df1176104edfb486a1315369ed10f7ff27da1f51))
+* **tseka-dev:** add vercel deployment config ([e56c362](https://github.com/Nebutra/Nebutra-Sailor/commit/e56c36253a804646bc3e49a110b87a4f43d7be45))
+* **tseka-dev:** bootstrap app with lime tokens and font system ([d779f97](https://github.com/Nebutra/Nebutra-Sailor/commit/d779f97fecbb2ed270d72e737102c4f8256d2589))
+* **tseka-dev:** wire now-preview into homepage ([935ab00](https://github.com/Nebutra/Nebutra-Sailor/commit/935ab002e1b7a1a9fb7253e5dd473605eeb59f31))
+* **tsekaluk-dev:** add semantic icons and visual polish ([e89cf21](https://github.com/Nebutra/Nebutra-Sailor/commit/e89cf2100fd1f27015effde5f87b1585dfc5f1d6))
+* **tsekaluk-dev:** complete portfolio deep content + 6 new projects ([e9207c5](https://github.com/Nebutra/Nebutra-Sailor/commit/e9207c5040797caa52b0f8f7eec8353f922d6881))
+* **tsekaluk-dev:** deep content mining with metrics and storytelling ([ac8cb95](https://github.com/Nebutra/Nebutra-Sailor/commit/ac8cb95c9dc6a938a3608fa9bb68a8f4e094960f))
+* **tsekaluk-dev:** enrich portfolio with photos, awards, and projects ([4c6a7f7](https://github.com/Nebutra/Nebutra-Sailor/commit/4c6a7f71fc3eb378967f8c5cc573748ea908298c))
+* **ui:** integrate 21st.dev badge-1 with tailored semantic color variants ([c71c032](https://github.com/Nebutra/Nebutra-Sailor/commit/c71c0323b10e43238dc1bab59121540f279a65db))
+* upgrade inngest v3 → v4 beta with native Zod v4 Standard Schema support ([4511e74](https://github.com/Nebutra/Nebutra-Sailor/commit/4511e743c7180f3af0b6aadcf6cb11a6d29f81a2))
+* use multi-provider sign-in for Soul chat ([43a3dbd](https://github.com/Nebutra/Nebutra-Sailor/commit/43a3dbd605ad7fb082e53e3ed57505e5fa98e082))
+* **web:** add i18n with animated language switcher to tsekaluk-dev ([a3b1d8f](https://github.com/Nebutra/Nebutra-Sailor/commit/a3b1d8fe687eb5041509a866a18d17d38d8e8d47))
+
+
+### 🐛 Bug Fixes
+
+* add biome/lefthook/knip to package.json devDependencies, fix ai-prompt-box type ([03dd327](https://github.com/Nebutra/Nebutra-Sailor/commit/03dd32709fff0e13b933751419ac8be13835a1ea))
+* add missing @nebutra/icons dependency to tsekaluk-dev ([bb4d35c](https://github.com/Nebutra/Nebutra-Sailor/commit/bb4d35ccd1ede15524e626e707c90ea06e6038e2))
+* add oauth-server to lockfile, disable dts until v9 types resolved ([ef2ae2c](https://github.com/Nebutra/Nebutra-Sailor/commit/ef2ae2cd21117c103c3c6013392e39c15869e690))
+* add qemu for arm64 docker builds and update governance baseline ([9315802](https://github.com/Nebutra/Nebutra-Sailor/commit/9315802e6b34bc0dbd8d7828d4726e39bdd4844f))
+* add structlog to ai service and generate .source before tsekaluk-dev typecheck ([9c61fe4](https://github.com/Nebutra/Nebutra-Sailor/commit/9c61fe46b02aaea6473e57ec9a45525d72dd5f00))
+* bandit scans only source dirs, reset next-env.d.ts CI breakage ([072e9e5](https://github.com/Nebutra/Nebutra-Sailor/commit/072e9e5ca1b28a31b74b81870caeb8544841b384))
+* **ci:** fix @nebutra/web audit-remediation test failures ([41fb052](https://github.com/Nebutra/Nebutra-Sailor/commit/41fb0525648041b4578c74c977b5400e93d07525))
+* **ci:** resolve all biome CI errors to achieve 0-error lint baseline ([95cf92b](https://github.com/Nebutra/Nebutra-Sailor/commit/95cf92bea329017d662bf705fb3abdf45532b07c))
+* **ci:** resolve lint, esm, security, and turbopack issues ([344d44e](https://github.com/Nebutra/Nebutra-Sailor/commit/344d44ed2b960e6d0848cb7a439177e80cdb8885))
+* **config:** add --no-frozen-lockfile to vercel install commands ([6c8857f](https://github.com/Nebutra/Nebutra-Sailor/commit/6c8857f535e71e2ba4fc1b35841d9c9431c42fe7))
+* **config:** resolve remaining ci failures across all checks ([6599132](https://github.com/Nebutra/Nebutra-Sailor/commit/65991321e8998343164e0aacd9ba5b260602621d))
+* **config:** update arch tests and workflows after design-system removal ([313e343](https://github.com/Nebutra/Nebutra-Sailor/commit/313e343ff3d8d11f49fd84fada892fb59ce32481))
+* **content:** replace fabricated appen sop with real warehouse drone project ([4201735](https://github.com/Nebutra/Nebutra-Sailor/commit/42017354f51da6c97b758325870054944b23f7b6))
+* **content:** use precise numbers from source docs, add cdtmp project ([22f6f05](https://github.com/Nebutra/Nebutra-Sailor/commit/22f6f05545730de6eae1a93d076a222f2b111d9a))
+* correct import paths from @nebutra/ui/primitives → @nebutra/ui/components ([de17d7f](https://github.com/Nebutra/Nebutra-Sailor/commit/de17d7fb5a968683019c55cddf7d23a75ae7aa98))
+* correct python-ci install, arch test deps, and audit scope ([5b06f4d](https://github.com/Nebutra/Nebutra-Sailor/commit/5b06f4d5f58f87b890a7b8053e912f21140c4567))
+* **docs:** inject missing Menubar component in mdx-components ([ac6d03e](https://github.com/Nebutra/Nebutra-Sailor/commit/ac6d03e7b9b9e926d5d087ee44306c29a577032b))
+* downgrade httpx in billing service to satisfy supabase constraint ([ebb1efc](https://github.com/Nebutra/Nebutra-Sailor/commit/ebb1efcd29b8e927db7497cee7e607b85db24f7f))
+* **infra:** regenerate lockfile and remove stale tsup step ([a8e0aa0](https://github.com/Nebutra/Nebutra-Sailor/commit/a8e0aa0a6f53c5bd40cf4c94bb963c7443317a4d))
+* **landing-page:** i18n type safety, hreflang, and ppr compatibility ([35534c7](https://github.com/Nebutra/Nebutra-Sailor/commit/35534c7bcc134e7c219c0e126de7244fc637fb85))
+* make all env vars optional with graceful degradation ([b33fe23](https://github.com/Nebutra/Nebutra-Sailor/commit/b33fe2394d7ddeb1539ad37eba8b4c6310dafc05))
+* make prisma client lazy to avoid DATABASE_URL crash during SSG ([a87c751](https://github.com/Nebutra/Nebutra-Sailor/commit/a87c7512c18eb1b468e48b9ed96adc577a05872b))
+* **mcp:** update z.record to zod v4 two-arg form ([4e25129](https://github.com/Nebutra/Nebutra-Sailor/commit/4e25129378403d48de0ac7578debf765fd78a40b))
+* migrate Clerk to v7 signals API and fix Python CI pytest-cov ([964c149](https://github.com/Nebutra/Nebutra-Sailor/commit/964c149f91236464f772151a54b06f9970b9fbe1))
+* pass --pass-with-no-tests for oauth-server (no tests yet) ([12ebc98](https://github.com/Nebutra/Nebutra-Sailor/commit/12ebc980a3aa6797453efaa488502461f4335377))
+* python ci venv approach, landing-page arch rule, e2e guard ([d7ff463](https://github.com/Nebutra/Nebutra-Sailor/commit/d7ff463618be8af3227d09238a2d60c7b41b69d9))
+* remove hallucinated nebutra up & fix api-gateway CI ([9769844](https://github.com/Nebutra/Nebutra-Sailor/commit/97698442ace04d07df9a7fc482f23bcfff9212f4))
+* remove remaining @nebutra/design-system references from live code ([f55e675](https://github.com/Nebutra/Nebutra-Sailor/commit/f55e67571ba87150d76696c3e4fdee84ae7c73c7))
+* reorder exports to put types before import/require in analytics ([9ebaeaf](https://github.com/Nebutra/Nebutra-Sailor/commit/9ebaeaf8e3ccf2da08dd817e39b4b3e1020f224d))
+* repair 290+ broken MDX component preview tags in design-docs ([24a9f2c](https://github.com/Nebutra/Nebutra-Sailor/commit/24a9f2c956a223a3cdd6a1b96b773ac2f7213192))
+* replace img with next/image in teammemberlist and fix unused orgid param ([3070d8b](https://github.com/Nebutra/Nebutra-Sailor/commit/3070d8b7e5c4d7d6b7af03096d091d35ae63b014))
+* resolve jsx-a11y accessibility errors and fix badge variants styling ([8590a1e](https://github.com/Nebutra/Nebutra-Sailor/commit/8590a1e7a89fddfac74a8db64856ceba78b37749))
+* resolve monorepo build failures and turbopack resolution errors ([a3cfb71](https://github.com/Nebutra/Nebutra-Sailor/commit/a3cfb715f214eca43c96e4db85a6b98daf4ab0bb))
+* resolve python ci, architecture test, and hex token violations ([5f1b35e](https://github.com/Nebutra/Nebutra-Sailor/commit/5f1b35ebf0fdeaccfdcaf5b8b74373dd4a4b0440))
+* resolve remaining ci failures in python-ci, e2e, ui-governance ([3635920](https://github.com/Nebutra/Nebutra-Sailor/commit/3635920a0dbdc9c4f3ec859aebb682a43f066364))
+* resolve ruff lint errors in billing service and add email tsconfig ([9a6d38e](https://github.com/Nebutra/Nebutra-Sailor/commit/9a6d38e5c86da642764c77c52e71e5f2a1fdaf8e))
+* resolve ruff lint errors in ecommerce, recsys and web3 services ([fd06d23](https://github.com/Nebutra/Nebutra-Sailor/commit/fd06d2381e6e7bad47415a43acc078cc9cbbba61))
+* resolve ruff/typecheck failures in ai, content, event-ingest services ([3c4a158](https://github.com/Nebutra/Nebutra-Sailor/commit/3c4a1585fb23040360b054e07213dd3741e899ef))
+* resolve web lint errors and use venv binaries in python ci ([c4eff29](https://github.com/Nebutra/Nebutra-Sailor/commit/c4eff296674f8a6c4cb2d0f7470810fd4cf4eba8))
+* revert Proxy prisma — use build-phase null guard instead ([67f008a](https://github.com/Nebutra/Nebutra-Sailor/commit/67f008a2cd5961b9e6ae53ac9a3c87df56f14ee0))
+* security overrides, arch test web deps, tsekaluk-dev lint ([e33077e](https://github.com/Nebutra/Nebutra-Sailor/commit/e33077edb1dd7c340ab6e52cc074f68953918d0b))
+* skip env validation during Next.js build phase ([e1e50b1](https://github.com/Nebutra/Nebutra-Sailor/commit/e1e50b10784f9574ec64af361b2f552061e8b55e))
+* **tseka-dev:** address code review findings ([93d7e27](https://github.com/Nebutra/Nebutra-Sailor/commit/93d7e2730a1cd1d62821991250ff79de77efce26))
+* **ui:** enforce strict generics for animate-in and chart payloads ([a54a722](https://github.com/Nebutra/Nebutra-Sailor/commit/a54a722559645ef3edaec595a8d569878a394002))
+* **ui:** resolve typing errors in primitives and complete module exports ([397ac7a](https://github.com/Nebutra/Nebutra-Sailor/commit/397ac7a918617e796efd2020b36cc89c37c250c6))
+* use uv venv --seed so pip exists in venv for python ci ([168f797](https://github.com/Nebutra/Nebutra-Sailor/commit/168f797e6b705492c690be5a82fbad2a9dc97f56))
+* zod v4 record compat and chromatic brand build step ([c0fe4df](https://github.com/Nebutra/Nebutra-Sailor/commit/c0fe4dfb51a9c965c78abd231de76fbaa2826039))
+
+
+### ♻️ Code Refactoring
+
+* auto-fix high-frequency a11y violations (SVG aria-hidden, Button explicit types) to adhere to strict biome rules ([e21edcd](https://github.com/Nebutra/Nebutra-Sailor/commit/e21edcd7b04c370c76f63ab04cc43887b4eedeef))
+* rename numerical demo components to semantic names for documentation and previews ([f9a0a5b](https://github.com/Nebutra/Nebutra-Sailor/commit/f9a0a5b6dd71efdbb066a240c2b31fa4a47edeb2))
+* rename numerical preview demo components to semantic names ([65d9140](https://github.com/Nebutra/Nebutra-Sailor/commit/65d9140f1e5194fa9241d9ba48bfcbac0399975c))
+* rename tseka-dev to tsekaluk-dev ([e0d16e1](https://github.com/Nebutra/Nebutra-Sailor/commit/e0d16e1b734a98c17836588c79123ae470e6fbc4))
+* **ui:** consolidate UI components into @nebutra/ui ([650f1a0](https://github.com/Nebutra/Nebutra-Sailor/commit/650f1a0dc9fc6f9b1b1029eebbe51ffd8a20baec))
+
+
+### 📚 Documentation
+
+* add tseka-dev implementation plan ([542aef3](https://github.com/Nebutra/Nebutra-Sailor/commit/542aef35d5e1d3429a2406ab1c02d95eeaa6c3b6))
+* add tseka-dev portfolio design document ([d12ba8d](https://github.com/Nebutra/Nebutra-Sailor/commit/d12ba8d4ca8ea1f754c023c36dc08d9a9b2e48af))
+
 ## [1.6.0](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.5.8...v1.6.0) (2026-03-07)
 
 ### 🆕 Features
