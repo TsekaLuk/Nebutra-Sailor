@@ -164,12 +164,12 @@ jobs:
         run: uv python install 3.11
 
       - name: Create virtual environment and install dependencies
-        # uv --no-project: prevents uv from detecting pyproject.toml and doing an
-        # editable install of the service itself (which would require hatchling).
+        # Use .venv/bin/pip directly (not uv pip) to avoid uv's project detection
+        # which would trigger an editable install of the service (requiring hatchling).
         # We only need the packages from requirements.txt to run lint/test.
         run: |
           uv venv
-          uv --no-project pip install -r requirements.txt ruff pytest pytest-asyncio mypy bandit
+          .venv/bin/pip install -r requirements.txt ruff pytest pytest-asyncio mypy bandit
 
       - name: Lint (ruff)
         run: uv run ruff check . --output-format=github
@@ -415,7 +415,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Audit dependencies (high severity)
-        run: pnpm audit --audit-level=high
+        run: pnpm audit --prod --audit-level=high
 
   # ── Deploy jobs ──────────────────────────────────────────────────────────
   # Add a deploy job per app here, gated by detect-changes output.
