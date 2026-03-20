@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.7.12](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.11...v1.7.12) (2026-03-20)
+
+
+### 🐛 Bug Fixes
+
+* e2e broken brand images — run brand:sync in CI before e2e tests ([1139027](https://github.com/Nebutra/Nebutra-Sailor/commit/113902786378b5c40189052d1f16eff68833eeda))
+
 ## [1.7.11](https://github.com/Nebutra/Nebutra-Sailor/compare/v1.7.10...v1.7.11) (2026-03-19)
 
 
