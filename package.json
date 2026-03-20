@@ -1,6 +1,6 @@
 {
   "name": "nebutra-sailor",
-  "version": "1.7.13",
+  "version": "1.7.14",
   "private": true,
   "description": "Enterprise-grade SaaS monorepo for AI-native, multi-tenant platforms",
   "scripts": {
