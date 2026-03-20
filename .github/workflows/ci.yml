@@ -654,10 +654,11 @@ jobs:
         continue-on-error: true
       - name: Merge into single HTML report
         if: steps.download.outcome == 'success'
-        # Guard against download-artifact succeeding with 0 artifacts (empty dir / no dir)
+        # Multi-path upload preserves directory structure, so blob files land in
+        # all-blob-reports/blob-report/ (not directly in all-blob-reports/).
         run: |
-          if [ -d ./all-blob-reports ] && [ -n "$(ls -A ./all-blob-reports 2>/dev/null)" ]; then
-            pnpm exec playwright merge-reports --reporter html ./all-blob-reports
+          if [ -d ./all-blob-reports/blob-report ] && [ -n "$(ls -A ./all-blob-reports/blob-report 2>/dev/null)" ]; then
+            pnpm exec playwright merge-reports --reporter html ./all-blob-reports/blob-report
           else
             echo "No shard blob reports found — skipping merge"
           fi
