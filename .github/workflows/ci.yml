@@ -509,7 +509,7 @@ jobs:
         with:
           name: playwright-report-shard-${{ matrix.shard }}-${{ github.run_id }}
           path: |
-            **/playwright-report/
+            blob-report/
             **/test-results/
           retention-days: 14
 
